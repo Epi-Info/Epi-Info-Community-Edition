@@ -645,13 +645,6 @@ namespace Epi.Data.Services
         /// <param name="view">View</param>
         /// <returns>A DataTable containing [ColumnNames.NAME],[ColumnNames.FIELD_TYPE_ID],[ColumnNames.DATA_TABLE_NAME]</returns>
         DataTable GetFieldMetadataSync(int pageId);
-        //---123
-        /// <summary>
-        ///Makes table current needed for synchronizing the view's metafieldtypes tables
-        /// </summary>
-        /// <param name="view">View</param>
-         void  SynchronizeMetaFieldtypes(View view);
-        //---
 
         /// <summary>
         /// Get Field As Data Row

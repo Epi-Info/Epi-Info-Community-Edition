@@ -676,66 +676,7 @@ namespace Epi
                 return Fields.RecStatusField;
             }
         }
-        //---123
-        /// <summary>
-        /// Returns the FirstSavetime field.
-        /// </summary>
-        ///
-        public FirstSaveTimeField FirstSaveTimeField
-        {
-            get
-            {
-                return Fields.FirstSaveTimeField;
-            }
-        }
-        /// <summary>
-        /// Returns the LastSavetime field.
-        /// </summary>
-        public LastSaveTimeField LastSaveTimeField
-        {
-            get
-            {
-                return Fields.LastSaveTimeField;
-            }
-        }
-        /// <summary>
-        /// Checks and adds records metafieldtype and Metafield tables and also adds fields to datatable
-        /// </summary>
-        private void VerifyandUpdateViewSystemVars()
-        {
-            //DataTable fieldSysVars = GetMetadata().GetSystemFields(this.id);
-            //bool FlagColumnExists = false;
-            //GetMetadata().SynchronizeMetaFieldtypes(this);
-            ////check table for fields
-            //foreach (DataRow row in fieldSysVars.Rows)
-            //{
-            //    if (row[ColumnNames.NAME].ToString() == ColumnNames.RECORD_FIRST_SAVE_TIME)
-            //    {
-            //        FlagColumnExists = true;
-            //        return;
-            //    }
-            //}
-            //if (FlagColumnExists == false)
-            //{               
-            //    FirstSaveTimeField firstsavetimeField = new FirstSaveTimeField(this);
-            //    firstsavetimeField.SaveToDb();
-            //    LastSaveTimeField lastsavetimeField = new LastSaveTimeField(this);
-            //    lastsavetimeField.SaveToDb();
-            //}
 
-            try
-            {
-                GetMetadata().GetFieldIdByNameAsDataRow(name, ColumnNames.RECORD_FIRST_SAVE_TIME);
-            }
-            catch
-            {
-                GetMetadata().SynchronizeMetaFieldtypes(this);
-                FirstSaveTimeField firstsavetimeField = new FirstSaveTimeField(this);
-                firstsavetimeField.SaveToDb();
-                LastSaveTimeField lastsavetimeField = new LastSaveTimeField(this);
-                lastsavetimeField.SaveToDb();
-            }
-         }
          //----
         /// <summary>
         /// Returns the foreign key field of the unique key.

@@ -962,24 +962,7 @@ namespace Epi.Data.Services
                     Util.InsertIn("max" + Util.InsertInParantheses(dbDriver.InsertInEscape(ColumnNames.UNIQUE_KEY)), StringLiterals.SPACE) +
                     "from" + StringLiterals.SPACE + dbDriver.InsertInEscape(view.TableName) +
                     relatedViewFilter);
-
-                //----123
-                  string viewFilter = " where ";
-                  viewFilter += dbDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID);
-                  viewFilter +=  StringLiterals.EQUAL + "'" + view.GlobalRecordIdField.CurrentRecordValueString +"'";
-                  if (view.IsRelatedView) { viewFilter = relatedViewFilter; }
-
-                  Query selectFirstSaveTimeQuery = dbDriver.CreateQuery("select" + 
-                     Util.InsertIn( Util.InsertInParantheses(dbDriver.InsertInEscape(ColumnNames.RECORD_FIRST_SAVE_TIME)) , StringLiterals.SPACE) +
-                     "from" + StringLiterals.SPACE + dbDriver.InsertInEscape(view.TableName) + viewFilter) ;
-                 view.FirstSaveTimeField.CurrentRecordValueObject = dbDriver.ExecuteScalar(selectFirstSaveTimeQuery);
-
-                 Query selectLastSaveTimeQuery = dbDriver.CreateQuery("select" +
-                    Util.InsertIn(Util.InsertInParantheses(dbDriver.InsertInEscape(ColumnNames.RECORD_LAST_SAVE_TIME)), StringLiterals.SPACE) +
-                    "from" + StringLiterals.SPACE + dbDriver.InsertInEscape(view.TableName) + viewFilter);
-                 view.LastSaveTimeField.CurrentRecordValueObject = dbDriver.ExecuteScalar(selectLastSaveTimeQuery);  
-                //----
-
+                
                 foreach (Epi.Page page in view.Pages)
                 {
                     this.SaveRecord(page);
@@ -1123,17 +1106,6 @@ namespace Epi.Data.Services
                     gridField.DataSource = null;
                 }
 
-                //---123
-                string viewFilter = " where ";
-                viewFilter += dbDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID);
-                viewFilter += StringLiterals.EQUAL + "'" + view.GlobalRecordIdField.CurrentRecordValueString + "'";
-                            
-                Query selectLastSaveTimeQuery = dbDriver.CreateQuery("select" +
-                Util.InsertIn(Util.InsertInParantheses(dbDriver.InsertInEscape(ColumnNames.RECORD_LAST_SAVE_TIME)), StringLiterals.SPACE) +
-                "from" + StringLiterals.SPACE + dbDriver.InsertInEscape(view.TableName) + viewFilter);
-                view.LastSaveTimeField.CurrentRecordValueObject = dbDriver.ExecuteScalar(selectLastSaveTimeQuery);  
-                
-                //--
                 return recordID;
             }
             finally
@@ -1553,13 +1525,6 @@ namespace Epi.Data.Services
                    // view.RecStatusField.CurrentRecordValueObject = dataRow["RecStatus"];
                     view.RecStatusField.CurrentRecordValueObject = dataRow["RECSTATUS"];//To support differnet locales such as Hungarian,Turkish.
                     view.CurrentGlobalRecordId = dataRow["GlobalRecordId"].ToString();
-                    //--123
-                    if (view.Fields.Contains(ColumnNames.RECORD_FIRST_SAVE_TIME) == true) 
-                    {
-                    view.FirstSaveTimeField.CurrentRecordValueObject= dataRow["FirstSaveTime"];
-                    view.LastSaveTimeField.CurrentRecordValueObject = dataRow["LastSaveTime"];
-                    }
-                    //---
                 }
 
                 foreach (Page page in view.Pages)
