@@ -1449,7 +1449,7 @@ namespace Epi.Windows.MakeView.Forms
                         case "DateTime":
                         case "Mirror":
                         case "Grid":
-                        case "Relate":
+                        //case "Relate":
                             invalidFields += field.Name + "(" + field.FieldType + ");";
                             break;
                     }
