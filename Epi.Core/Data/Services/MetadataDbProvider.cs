@@ -2480,79 +2480,6 @@ namespace Epi.Data.Services
 
             }
         }
-        //---123
-        /// <summary>
-        /// Insert a FirstSaveTimeField record into the metaFields table.
-        /// </summary>
-        /// <param name="field">FirstSaveTime field.</param>
-        /// <returns>Returns the Id of the last FirstSaveTimeField added.</returns>
-        public int CreateField(FirstSaveTimeField field)
-        {
-            try
-            {
-                #region InputValidation
-                if (field == null)
-                {
-                    throw new ArgumentNullException("FirstSaveTimeField");
-                }
-                #endregion
-                Query insertQuery = db.CreateQuery("insert into metaFields([DataTableName], [ViewId], [FieldTypeId], [Name]) " +
-                  "values (@DataTableName, @ViewId, @FieldTypeId, @Name)");
-
-                insertQuery.Parameters.Add(new QueryParameter("@DataTableName", DbType.String, field.TableName));
-                insertQuery.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, field.GetView().Id));
-                insertQuery.Parameters.Add(new QueryParameter("@FieldTypeId", DbType.Int32, (int)field.FieldType));
-                insertQuery.Parameters.Add(new QueryParameter("@Name", DbType.String, field.Name));
-
-
-                db.ExecuteNonQuery(insertQuery);                             
-                return GetMaxFieldId(field.GetView().Id);
-            }
-            catch (Exception ex)
-            {
-                throw new GeneralException("Unable to get FirstSaveTime field from the database", ex);
-            }
-            finally
-            {
-
-            }
-        }
-        /// <summary>
-        /// Insert a FirstSaveTimeField record into the metaFields table.
-        /// </summary>
-        /// <param name="field">LastSaveTime field.</param>
-        /// <returns>Returns the Id of the lastSaveTime Field added.</returns>
-        public int CreateField(LastSaveTimeField field)
-        {
-            try
-            {
-                #region InputValidation
-                if (field == null)
-                {
-                    throw new ArgumentNullException("LastSaveTimeField");
-                }
-                #endregion
-                Query insertQuery = db.CreateQuery("insert into metaFields([DataTableName], [ViewId], [FieldTypeId], [Name]) " +
-                  "values (@DataTableName, @ViewId, @FieldTypeId, @Name)");
-
-                insertQuery.Parameters.Add(new QueryParameter("@DataTableName", DbType.String, field.TableName));
-                insertQuery.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, field.GetView().Id));
-                insertQuery.Parameters.Add(new QueryParameter("@FieldTypeId", DbType.Int32, (int)field.FieldType));
-                insertQuery.Parameters.Add(new QueryParameter("@Name", DbType.String, field.Name));
-
-
-                db.ExecuteNonQuery(insertQuery);
-                return GetMaxFieldId(field.GetView().Id);
-            }
-            catch (Exception ex)
-            {
-                throw new GeneralException("Unable to get LastSaveTime field from the database", ex);
-            }
-            finally
-            {
-
-            }
-        }
 
         /// <summary>
         /// Insert a ForeignKeyField record into the metaFields table.
@@ -9793,24 +9720,6 @@ namespace Epi.Data.Services
         public void GetFieldData(UniqueKeyField field, XmlNode fieldNode)
         {
         }
-        //--123
-        /// <summary>
-        /// Retrieves data for FirstSaveTime field from xml metadata.
-        /// </summary>
-        /// <param name="field">A FirstSaveTime field.</param>
-        /// <param name="fieldNode">XML node for FirstSaveTime field.</param>
-        public void GetFieldData(FirstSaveTimeField field, XmlNode fieldNode)
-        {
-        }
-        /// <summary>
-        /// Retrieves data for LastSaveTime field from xml metadata.
-        /// </summary>
-        /// <param name="field">A LastSaveTime field.</param>
-        /// <param name="fieldNode">XML node for LastSaveTime field.</param>
-        public void GetFieldData(LastSaveTimeField field, XmlNode fieldNode)
-        {
-        }
-        //---
         /// <summary>
         /// Retrieves data for UniqueKeyField field 
         /// </summary>

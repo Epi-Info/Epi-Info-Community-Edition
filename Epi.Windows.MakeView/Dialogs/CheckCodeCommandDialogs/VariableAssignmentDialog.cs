@@ -64,9 +64,6 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
                         cbxAvailVariables.Items.Add(var.Name);
                         cbxAssignVariable.Items.Add(var.Name);
                     }
-                    //--EI-99
-                    if (var is Fields.FirstSaveTimeField || var is Fields.LastSaveTimeField)
-                    { cbxAvailVariables.Items.Add(var.Name); }
                 }  
                               
                 /*

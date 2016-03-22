@@ -1258,8 +1258,6 @@ namespace EpiDashboard.Controls.GadgetProperties
                         field is DateField || 
                         field is TimeField || 
                         field is DateTimeField ||
-                        field is FirstSaveTimeField || 
-                        field is LastSaveTimeField || 
                         field is TimeField))
                         {
                             checkboxIncludeMissing.IsChecked = false;

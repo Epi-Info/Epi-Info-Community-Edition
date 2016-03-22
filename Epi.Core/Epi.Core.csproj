@@ -308,8 +308,6 @@
     <Compile Include="ServiceClient\EWEConfigValues.cs" />
     <Compile Include="ServiceClient\EWEServiceClient.cs" />
     <Compile Include="ServiceClient\ServiceClient.cs" />
-    <Compile Include="Services\Fields\FirstSaveTime.cs" />
-    <Compile Include="Services\Fields\LastSaveTime.cs" />
     <Compile Include="Services\Fields\YesNoColumn.cs" />
     <Compile Include="Services\Fields\Grid Columns\CheckBoxColumn.cs" />
     <Compile Include="Services\Fields\Grid Columns\TimeColumn.cs" />

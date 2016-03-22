@@ -222,20 +222,6 @@ namespace Epi.Data.Services
         /// <param name="field">RecStatusField field object reference.</param>
         /// <returns>Returns a new RecStatusField field.</returns>
         int CreateField(Epi.Fields.RecStatusField field);
-        //----------Id -123
-        /// <summary>
-        /// Create a new FirstsaveTime field.
-        /// </summary>
-        /// <param name="field">FirstSaveTime field object reference.</param>
-        /// <returns>Returns a new FirstSaveTimeField field.</returns>
-        int CreateField(Epi.Fields.FirstSaveTimeField field);
-        /// <summary>
-        /// Create a new LastsaveTime field.
-        /// </summary>
-        /// <param name="field">LastSaveTime field object reference.</param>
-        /// <returns>Returns a new FirstSaveTimeField field.</returns>
-        int CreateField(Epi.Fields.LastSaveTimeField field);
-        //--------
         /// <summary>
         /// Create a new ForeignKeyField field.
         /// </summary>
@@ -769,21 +755,6 @@ namespace Epi.Data.Services
         /// <param name="field">field with data to get.</param>
         /// <param name="fieldNode">Xml representation of field.</param>
         void GetFieldData(Epi.Fields.RecStatusField field, XmlNode fieldNode);
-
-        //--123
-        /// <summary>
-        /// Get Field Data for field.
-        /// </summary>
-        /// <param name="field">field with data to get.</param>
-        /// <param name="fieldNode">Xml representation of field.</param>
-        void GetFieldData(Epi.Fields.FirstSaveTimeField field, XmlNode fieldNode);
-        /// <summary>
-        /// Get Field Data for field.
-        /// </summary>
-        /// <param name="field">field with data to get.</param>
-        /// <param name="fieldNode">Xml representation of field.</param>
-        void GetFieldData(Epi.Fields.LastSaveTimeField field, XmlNode fieldNode);
-        //----
         /// <summary>
         /// Get Field Data for field.
         /// </summary>

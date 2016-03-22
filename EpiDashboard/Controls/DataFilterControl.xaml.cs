@@ -708,7 +708,7 @@ namespace EpiDashboard.Controls
                 cbxOperator.Items.Clear();
 
                 // Set operator drop-down values
-                if (field is NumberField || field is DateField || field is DateTimeField || field is TimeField || field is LastSaveTimeField|| field is FirstSaveTimeField)
+                if (field is NumberField || field is DateField || field is DateTimeField || field is TimeField )
                 {
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_EQUAL_TO);
