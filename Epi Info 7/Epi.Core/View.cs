@@ -140,7 +140,7 @@ namespace Epi
             }
             this.fieldLockToken = new ArrayList();
             //--123
-            //VerifyandUpdateViewSystemVars();
+            VerifyandUpdateViewSystemVars();
             //--
         }
 
