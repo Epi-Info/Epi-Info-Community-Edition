@@ -21,7 +21,10 @@ namespace EpiDashboard.Mapping
         public ChoroplethLayerProvider(Map myMap)
         {
             arcGIS_Map = myMap;
-            _layerId = Guid.NewGuid();
+            if (_layerId == Guid.Empty)
+            {
+                _layerId = Guid.NewGuid();
+            }
             _graphicsLayers = new List<GraphicsLayer>();
         }
 
@@ -37,7 +40,7 @@ namespace EpiDashboard.Mapping
         public bool AreRangesSet { get; set; }
         public List<GraphicsLayer> _graphicsLayers;
 
-        Guid _layerId { get; set; }
+        private Guid _layerId;
         public Guid LayerId 
         {
             get { return _layerId; }
