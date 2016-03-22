@@ -2285,7 +2285,11 @@ namespace EpiDashboard.Controls
         {
             try
             {
-                LayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                if (LayerProvider == null)
+                {
+                    LayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                }
+                
                 string message = GetMessage(txtMapSeverpath.Text + "?f=json");
                 System.Web.Script.Serialization.JavaScriptSerializer ser = new System.Web.Script.Serialization.JavaScriptSerializer();
                 Rest rest = ser.Deserialize<Rest>(message);
