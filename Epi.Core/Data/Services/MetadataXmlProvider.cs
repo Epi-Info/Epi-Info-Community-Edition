@@ -2496,10 +2496,6 @@ namespace Epi.Data.Services
             {
             }
         }
-        public void  SynchronizeMetaFieldtypes(View view)
-        {
-
-        }
 
         ///---------- 
         /// <summary>

@@ -95,9 +95,6 @@ namespace Epi.Windows.Enter.PresentationLogic
         {
             if (e.View != null)
             {
-
-                e.View.Project.Metadata.SynchronizeMetaFieldtypes(e.View);
-
                 this.Reset();
                 this.canvas.ResetControlFactoryFields();
 
