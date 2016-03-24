@@ -1253,23 +1253,26 @@ namespace Epi.Windows.MakeView.Forms
         private void GetPublishedViewKeys()
         {
             DataTable table = this.mainForm.mediator.Project.Metadata.GetPublishedViewKeys(this.view.Id);
-            DataRow ViewRow = table.Rows[0];
-            string EWEFormId = ViewRow.ItemArray[3].ToString();
-            this.view.EWEFormId = EWEFormId;
-            string OrganizationKey=null;
-            if (!string.IsNullOrEmpty(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
-            {
-                Guid guid;
-                bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
-                if (!isValid)
-                    OrganizationKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
-                else
-                    OrganizationKey = ViewRow.ItemArray[2].ToString();
-            }
-            if (OrganizationKey != null)
-            {
-            this.view.EWEOrganizationKey = OrganizationKey;
-            }
+            if (table != null)
+              {
+                DataRow ViewRow = table.Rows[0];
+                string EWEFormId = ViewRow.ItemArray[3].ToString();
+                this.view.EWEFormId = EWEFormId;
+                string OrganizationKey=null;
+                if (!string.IsNullOrEmpty(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
+                {
+                    Guid guid;
+                    bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
+                    if (!isValid)
+                        OrganizationKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
+                    else
+                        OrganizationKey = ViewRow.ItemArray[2].ToString();
+                }
+                if (OrganizationKey != null)
+                {
+                this.view.EWEOrganizationKey = OrganizationKey;
+                }
+              }
         }
 
         #endregion  //Event Handlers
