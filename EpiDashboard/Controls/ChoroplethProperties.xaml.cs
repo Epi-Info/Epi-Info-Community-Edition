@@ -2352,7 +2352,10 @@ namespace EpiDashboard.Controls
             if (float.TryParse(newText, out newValue) == false)
             {
                 System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(name);
-                found.Text = LayerProvider.ClassRangesDictionary.RangeDictionary[name];
+                if (LayerProvider.ClassRangesDictionary.RangeDictionary.ContainsKey(name))
+                {
+                    found.Text = LayerProvider.ClassRangesDictionary.RangeDictionary[name];
+                }
                 return;
             }
 
