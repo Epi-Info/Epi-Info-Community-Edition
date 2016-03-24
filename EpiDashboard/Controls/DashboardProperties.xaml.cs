@@ -526,7 +526,8 @@ namespace EpiDashboard.Controls
             if (dlg.ShowDialog().Value)
             {
                 txtProjectPath.Text = dlg.FileName;
-            }
+                btnOK.IsEnabled = false;
+            }          
         }
 
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
@@ -614,6 +615,8 @@ namespace EpiDashboard.Controls
             if (cmbFormName.SelectedIndex >= 0)
             {
                 cmbFormName.Text = cmbFormName.SelectedItem.ToString();
+                if (!string.IsNullOrEmpty(cmbFormName.Text))
+                btnOK.IsEnabled = true;
             }
         }
 
