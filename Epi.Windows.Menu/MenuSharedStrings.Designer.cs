@@ -187,6 +187,24 @@ namespace Epi.Windows.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ABOUT EPI INFO™.
+        /// </summary>
+        public static string MENU_FOOTER_ABOUTEPIINFO {
+            get {
+                return ResourceManager.GetString("MENU_FOOTER_ABOUTEPIINFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EPI INFO™ WEBSITE.
+        /// </summary>
+        public static string MENU_FOOTER_EPIINFOWEBSITE {
+            get {
+                return ResourceManager.GetString("MENU_FOOTER_EPIINFOWEBSITE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HOW TO&apos; VIDEOS.
         /// </summary>
         public static string MENU_HOW_TO_VIDEOS {

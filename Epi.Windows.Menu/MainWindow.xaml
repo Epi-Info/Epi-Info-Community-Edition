@@ -287,14 +287,14 @@
                                         <Button.ToolTip>
                                             <ToolTip Visibility="Hidden">EPI INFO™ WEBSITE</ToolTip>
                                         </Button.ToolTip>
-                                        EPI INFO™ WEBSITE
+                                        <TextBlock x:Name="epiInfoWebsite"> EPI INFO™ WEBSITE</TextBlock>
                                     </Button>
                                     <TextBlock Foreground="#d2dfee" Padding="10 0 10 0">|</TextBlock>
                                     <Button Style="{StaticResource buttonfooterLinks}" TabIndex="7" KeyUp="aboutEpiInfo_Keydown" Cursor="Hand" Click="aboutEpiInfo_click">
                                         <Button.ToolTip>
                                             <ToolTip Visibility="Hidden">ABOUT EPI INFO™</ToolTip>
                                         </Button.ToolTip>
-                                        <TextBlock Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
+                                        <TextBlock x:Name="aboutEpiInfo" Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
                                     </Button>
                                 </StackPanel>
                                 <StackPanel x:Name="LangandVer"  HorizontalAlignment="Right" Orientation="Horizontal" Margin="245 0 0 0">

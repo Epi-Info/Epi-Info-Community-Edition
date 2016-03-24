@@ -209,7 +209,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockComposition.Text = DashboardSharedStrings.GADGET_COMPOSITION;
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
-
+            tblockY2AxisSubheader.Content = DashboardSharedStrings.GADGETS_YAXIS_HEADER;
             #endregion // Translation
 
         }

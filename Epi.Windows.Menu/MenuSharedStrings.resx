@@ -159,6 +159,12 @@
   <data name="MENU_EXIT" xml:space="preserve">
     <value>EXIT</value>
   </data>
+  <data name="MENU_FOOTER_ABOUTEPIINFO" xml:space="preserve">
+    <value>ABOUT EPI INFO™</value>
+  </data>
+  <data name="MENU_FOOTER_EPIINFOWEBSITE" xml:space="preserve">
+    <value>EPI INFO™ WEBSITE</value>
+  </data>
   <data name="MENU_HOW_TO_VIDEOS" xml:space="preserve">
     <value>HOW TO' VIDEOS</value>
   </data>
