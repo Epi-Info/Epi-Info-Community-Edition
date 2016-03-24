@@ -5056,8 +5056,60 @@ namespace Epi.Data.Services
         {
             try
             {
-            string queryString = "update metaViews set [CheckCodeVariableDefinitions] = @CheckCodeVariableDefinitions, [CheckCode] = @CheckCode, [CheckCodeBefore] = @CheckCodeBefore, [CheckCodeAfter] = @CheckCodeAfter, [RecordCheckCodeBefore] = @RecordCheckCodeBefore, [RecordCheckCodeAfter] = @RecordCheckCodeAfter, [IsRelatedView] = @IsRelatedView, [Width] = @Width, [Height] = @Height, [Orientation] = @Orientation, [LabelAlign] = @LabelAlign ,[EIWSOrganizationKey]= @EIWSOrganizationKey,[EIWSFormId]= @EIWSFormId,[EWEOrganizationKey]= @EWEOrganizationKey,[EWEFormId]= @EWEFormId where [ViewId] = @ViewId";
-                Query query = db.CreateQuery(queryString);
+                StringBuilder queryString = new StringBuilder();
+
+                queryString.Append("update metaViews set [CheckCodeVariableDefinitions] = @CheckCodeVariableDefinitions, [CheckCode] = @CheckCode, [CheckCodeBefore] = @CheckCodeBefore, [CheckCodeAfter] = @CheckCodeAfter, [RecordCheckCodeBefore] = @RecordCheckCodeBefore, [RecordCheckCodeAfter] = @RecordCheckCodeAfter, [IsRelatedView] = @IsRelatedView, [Width] = @Width, [Height] = @Height, [Orientation] = @Orientation, [LabelAlign] = @LabelAlign");
+               
+
+                if (db.ColumnExists("metaViews", "EIWSOrganizationKey") != false)
+                {
+                    queryString.Append(",[EIWSOrganizationKey]= @EIWSOrganizationKey");
+                }
+                else
+                {
+                    TableColumn tableColumn = new TableColumn("EIWSOrganizationKey", GenericDbColumnType.String , true);
+                    db.AddColumn("metaViews", tableColumn);
+                    queryString.Append(",[EIWSOrganizationKey]= @EIWSOrganizationKey");
+                }
+                ///
+                if (db.ColumnExists("metaViews", "EIWSFormId") != false)
+                {
+                    queryString.Append(",[EIWSFormId]= @EIWSFormId");
+                }
+                else
+                {
+                    TableColumn tableColumn = new TableColumn("EIWSFormId", GenericDbColumnType.String, true);
+                    db.AddColumn("metaViews", tableColumn);
+                    queryString.Append(",[EIWSFormId]= @EIWSFormId");
+                }
+                ///
+                if (db.ColumnExists("metaViews", "EWEOrganizationKey") != false)
+                {
+                    queryString.Append(",[EWEOrganizationKey]= @EWEOrganizationKey");
+                }
+                else
+                {
+                    TableColumn tableColumn = new TableColumn("EWEOrganizationKey", GenericDbColumnType.String, true);
+                    db.AddColumn("metaViews", tableColumn);
+                    queryString.Append(",[EWEOrganizationKey]= @EWEOrganizationKey");
+                }
+                ///
+                if (db.ColumnExists("metaViews", "EWEFormId") != false)
+                {
+                    queryString.Append(",[EWEFormId]= @EWEFormId");
+                }
+                else
+                {
+                    TableColumn tableColumn = new TableColumn("EWEFormId", GenericDbColumnType.String, true);
+                    db.AddColumn("metaViews", tableColumn);
+                    queryString.Append(",[EWEFormId]= @EWEFormId");
+                }
+
+               
+                queryString.Append(" where [ViewId] = @ViewId");
+
+                Query query = db.CreateQuery(queryString.ToString());
+
                 query.Parameters.Add(new QueryParameter("@CheckCodeVariableDefinitions", DbType.String, view.CheckCodeVariableDefinitions));
                 query.Parameters.Add(new QueryParameter("@CheckCode", DbType.String, view.CheckCode));
                 query.Parameters.Add(new QueryParameter("@CheckCodeBefore", DbType.String, view.CheckCodeBefore));
@@ -5069,10 +5121,27 @@ namespace Epi.Data.Services
                 query.Parameters.Add(new QueryParameter("@Height", DbType.Int32, view.PageHeight));
                 query.Parameters.Add(new QueryParameter("@Orientation", DbType.String, view.PageOrientation));
                 query.Parameters.Add(new QueryParameter("@LabelAlign", DbType.String, view.PageLabelAlign));
-                query.Parameters.Add(new QueryParameter("@EIWSOrganizationKey", DbType.String, view.EIWSOrganizationKey));
+              //
+                if (db.ColumnExists("metaViews", "EIWSOrganizationKey") != false)
+                {
+                    query.Parameters.Add(new QueryParameter("@EIWSOrganizationKey", DbType.String, view.EIWSOrganizationKey));
+                }
+                
+                ///
+                if (db.ColumnExists("metaViews", "EIWSFormId") != false){
                 query.Parameters.Add(new QueryParameter("@EIWSFormId", DbType.String, view.EIWSFormId));
+                }
+                 
+                ///
+                if (db.ColumnExists("metaViews", "EWEOrganizationKey") != false){
                 query.Parameters.Add(new QueryParameter("@EWEOrganizationKey", DbType.String, view.EWEOrganizationKey));
+                }
+               
+                ///
+                if (db.ColumnExists("metaViews", "EWEFormId") != false){
                 query.Parameters.Add(new QueryParameter("@EWEFormId", DbType.String, view.EWEFormId));
+                  }
+                 
                 query.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, view.Id));
                 
                 int i = db.ExecuteNonQuery(query);
@@ -5086,6 +5155,8 @@ namespace Epi.Data.Services
 
             }
         }
+
+        
 
         /// <summary>
         /// Create variable check code in the database
