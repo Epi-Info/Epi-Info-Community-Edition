@@ -461,12 +461,14 @@ namespace EpiDashboard.Controls
                 {
                     Addfilters();
                     RenderMap();
+                    layerprop.SetdashboardHelper(this.dashboardHelper);
                     layerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
                 }
                 else if (radMapServer.IsChecked == true && Mapprovider != null)
                 {
                     Addfilters();
                     RenderMap();
+                    serverlayerprop.SetdashboardHelper(this.dashboardHelper);
                     serverlayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
                     serverlayerprop.txtMapserverText = txtMapSeverpath.Text;
                     serverlayerprop.cbxMapFeatureText = cbxmapfeature.Text;
@@ -475,6 +477,7 @@ namespace EpiDashboard.Controls
                 {
                     Addfilters();
                     RenderMap();
+                    kmllayerprop.SetdashboardHelper(this.dashboardHelper);
                     kmllayerprop.SetValues(cmbShapeKey.Text, cmbDataKey.Text, cmbValue.Text, txtDotValue.Text, ((SolidColorBrush)rctDotColor.Fill));
                 }
                 if (ChangesAccepted != null)

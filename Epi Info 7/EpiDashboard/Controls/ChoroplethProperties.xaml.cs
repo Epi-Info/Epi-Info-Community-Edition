@@ -476,6 +476,7 @@ namespace EpiDashboard.Controls
 
                     if (radShapeFile.IsChecked == true && LayerProvider != null)
                     {
+                        choroplethShapeLayerProperties.SetdashboardHelper(this.DashboardHelper);
                         choroplethShapeLayerProperties.SetValues(
                             txtShapePath.Text,
                             cmbShapeKey.Text,
@@ -493,6 +494,7 @@ namespace EpiDashboard.Controls
                     }
                     else if ((radMapServer.IsChecked == true && LayerProvider != null) || (LayerProvider is ChoroplethServerLayerProvider))
                     {
+                        choroplethServerLayerProperties.SetdashboardHelper(this.DashboardHelper);
                         choroplethServerLayerProperties.SetValues(
                             cmbShapeKey.Text,
                             cmbDataKey.Text,
@@ -513,6 +515,7 @@ namespace EpiDashboard.Controls
 
                     else if (radKML.IsChecked == true && LayerProvider != null)
                     {
+                        choroplethKmlLayerProperties.SetdashboardHelper(this.DashboardHelper);
                         choroplethKmlLayerProperties.SetValues(
                             cmbShapeKey.Text, 
                             cmbDataKey.Text, 
