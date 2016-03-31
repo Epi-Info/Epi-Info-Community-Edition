@@ -111,7 +111,7 @@
                         <ComboBox x:Name="cbxOperator"  HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="2" MaxWidth="110" MinWidth="110" SelectionChanged="cbxOperator_SelectionChanged" />
 
                         <TextBlock x:Name="txtValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="3"  />
-                        <ComboBox IsTextSearchEnabled="True" IsEditable="False" x:Name="cbxValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="110" MinWidth="110" Grid.ColumnSpan="3"/>
+                        <ComboBox IsTextSearchEnabled="True" IsEditable="True" x:Name="cbxValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="110" MinWidth="110" Grid.ColumnSpan="3"/>
 
                         <DatePicker x:Name="dateValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" >
                             <DatePicker.Resources>
