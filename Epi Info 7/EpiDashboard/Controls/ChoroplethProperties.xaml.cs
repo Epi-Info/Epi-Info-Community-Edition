@@ -208,7 +208,10 @@ namespace EpiDashboard.Controls
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
 
-        public DashboardHelper DashboardHelper { get; private set; }
+        public DashboardHelper DashboardHelper { 
+            get{ return _dashboardHelper; } 
+            private set{ _dashboardHelper = value; }
+        }
 
         public string DataSource { get; set; }
 
