@@ -32,7 +32,7 @@ namespace Updater
         }
 
 
-        public void IterateFileSystem<T,R>(System.IO.DirectoryInfo directoryInfo, Func<string, T> apply, List<T> result)
+        public void IterateFileSystem<T>(System.IO.DirectoryInfo directoryInfo, Func<string, T> apply, List<T> result)
         {
             foreach (System.IO.FileInfo fileInfo in directoryInfo.GetFiles())
             {
@@ -41,9 +41,33 @@ namespace Updater
 
             foreach (System.IO.DirectoryInfo sub_directory_Info in directoryInfo.GetDirectories())
             {
-                IterateFileSystem<T, R>(sub_directory_Info, apply, result);
+                IterateFileSystem<T>(sub_directory_Info, apply, result);
             }
             
+        }
+
+        public System.Collections.Generic.Dictionary<string,string> create_file_hash_dictionary(string root_directory)
+        {
+            System.Collections.Generic.Dictionary<string, string> result = new Dictionary<string,string>(StringComparer.OrdinalIgnoreCase);
+
+            System.Text.StringBuilder output = new StringBuilder();
+
+            System.IO.DirectoryInfo root_directory_info = new System.IO.DirectoryInfo(root_directory);
+            List<KeyValuePair<string, string>> kvp_list = new List<KeyValuePair<string, string>>();
+            IterateFileSystem<KeyValuePair<string, string>>(root_directory_info, x => { return CreateHashPairFromFilePath(x); }, kvp_list);
+
+            foreach (KeyValuePair<string, string> kvp in kvp_list)
+            {
+                string file_path = kvp.Key.Replace(root_directory,"");
+                if( file_path.StartsWith("\\"))
+                {
+                    file_path = file_path.Substring(1,file_path.Length - 1);
+                }
+
+                result.Add(file_path, kvp.Value);
+            }
+
+            return result;
         }
     }
 }
