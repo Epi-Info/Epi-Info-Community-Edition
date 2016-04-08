@@ -123,10 +123,7 @@ namespace Updater
                     background_worker.ReportProgress(pctint, fileName);
                     failedDownloadCounter = 0;
                     //Download("ftp://ftp.cdc.gov/pub/software/epi_info/update_files/" + fileName, AppDomain.CurrentDomain.BaseDirectory + destination + fileName);
-                    Download("ftp://ftp.cdc.gov/pub/software/epi_info/update_files/" + fileName, "c:\\temp\\" + fileName);
-
-
-
+                    Download(System.Configuration.ConfigurationManager.AppSettings["latest_file_set_url"] + fileName, "c:\\temp\\" + fileName);
                 }
             }
             catch (Exception ex)
@@ -171,6 +168,26 @@ namespace Updater
                     }
                 }
             }
+        }
+
+        private void CreateLocalHashButton_Click(object sender, EventArgs e)
+        {
+            OutputTextBox.Clear();
+            System.Text.StringBuilder output = new StringBuilder();
+            Updater.Lib lib = new Lib();
+
+            System.Collections.Generic.Dictionary<string,string> file_list = lib.create_file_hash_dictionary(@"C:\work-space-set\epi-info-set\epiinfo\Epi Info 7\build\debug");
+
+            int File_Count = file_list.Count;
+
+            foreach (KeyValuePair<string, string> kvp in file_list)
+            {
+                output.Append(kvp.Key);
+                output.Append(":");
+                output.AppendLine(kvp.Value);
+            }
+
+            OutputTextBox.Text = "NumberOfFiles: " + File_Count.ToString() + "\r\n" + output.ToString();
         }
     }
 }
