@@ -15,22 +15,29 @@ namespace Updater
 {
     public partial class Form1 : Form
     {
-        private BackgroundWorker worker;
+        private BackgroundWorker background_worker;
+
         private int failedDownloadCounter;
 
         public Form1()
         {
             InitializeComponent();
-            worker = new BackgroundWorker();
-            worker.WorkerReportsProgress = true;
-            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
-            worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
+            background_worker = new BackgroundWorker();
+            background_worker.WorkerReportsProgress = true;
+            background_worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+            background_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+            background_worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            worker.RunWorkerAsync();
+            
+        }
+
+        private void ExecuteDownload()
+        {
+            //worker = new BackgroundWorker();
+            background_worker.RunWorkerAsync();
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -113,9 +120,13 @@ namespace Updater
                     counter++;
                     double pct = (100.0 * counter) / doc.DocumentElement.ChildNodes.Count;
                     int pctint = (int)Math.Truncate(pct);
-                    worker.ReportProgress(pctint, fileName);
+                    background_worker.ReportProgress(pctint, fileName);
                     failedDownloadCounter = 0;
-                    Download("ftp://ftp.cdc.gov/pub/software/epi_info/update_files/" + fileName, AppDomain.CurrentDomain.BaseDirectory + destination + fileName);
+                    //Download("ftp://ftp.cdc.gov/pub/software/epi_info/update_files/" + fileName, AppDomain.CurrentDomain.BaseDirectory + destination + fileName);
+                    Download("ftp://ftp.cdc.gov/pub/software/epi_info/update_files/" + fileName, "c:\\temp\\" + fileName);
+
+
+
                 }
             }
             catch (Exception ex)
