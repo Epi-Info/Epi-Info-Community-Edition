@@ -221,6 +221,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (cbxFieldCrosstab.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldCrosstab.SelectedItem.ToString()))
             {
                 Parameters.CrosstabVariableName = cbxFieldCrosstab.SelectedItem.ToString();
+                Parameters.ColumnNames.Add(Parameters.CrosstabVariableName.ToString());
             }
             else
             {
