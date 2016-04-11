@@ -435,7 +435,7 @@ namespace EpiDashboard
                     {
                         this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
                     }
-                    //this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
+                   // this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
                 }
                 catch (Exception ex)
                 {
@@ -468,45 +468,52 @@ namespace EpiDashboard
         /// </summary>
         private void ShowHideOutputColumns()
         {
-            if (!LoadingCombos)
+            try
             {
-                if (this.StrataGridList != null && this.StrataGridList.Count > 0)
+                if (!LoadingCombos)
                 {
-                    List<int> columnsToShow = new List<int>();
-                    if (!lbxColumns.SelectedItems.Contains("Observations")) columnsToShow.Add(1);
-                    if (!lbxColumns.SelectedItems.Contains("Total")) columnsToShow.Add(2);
-                    if (!lbxColumns.SelectedItems.Contains("Mean")) columnsToShow.Add(3);
-                    if (!lbxColumns.SelectedItems.Contains("Variance")) columnsToShow.Add(4);
-                    if (!lbxColumns.SelectedItems.Contains("Std. Dev.")) columnsToShow.Add(5);
-                    if (!lbxColumns.SelectedItems.Contains("Minimum")) columnsToShow.Add(6);
-                    if (!lbxColumns.SelectedItems.Contains("25%")) columnsToShow.Add(7);
-                    if (!lbxColumns.SelectedItems.Contains("Median")) columnsToShow.Add(8);
-                    if (!lbxColumns.SelectedItems.Contains("75%")) columnsToShow.Add(9);
-                    if (!lbxColumns.SelectedItems.Contains("Maximum")) columnsToShow.Add(10);
-                    if (!lbxColumns.SelectedItems.Contains("Mode")) columnsToShow.Add(11);
-
-                    foreach (Grid grid in this.StrataGridList)
+                    if (this.StrataGridList != null && this.StrataGridList.Count > 0)
                     {
-                        for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
+                        List<int> columnsToShow = new List<int>();
+                        if (!lbxColumns.SelectedItems.Contains("Observations")) columnsToShow.Add(1);
+                        if (!lbxColumns.SelectedItems.Contains("Total")) columnsToShow.Add(2);
+                        if (!lbxColumns.SelectedItems.Contains("Mean")) columnsToShow.Add(3);
+                        if (!lbxColumns.SelectedItems.Contains("Variance")) columnsToShow.Add(4);
+                        if (!lbxColumns.SelectedItems.Contains("Std. Dev.")) columnsToShow.Add(5);
+                        if (!lbxColumns.SelectedItems.Contains("Minimum")) columnsToShow.Add(6);
+                        if (!lbxColumns.SelectedItems.Contains("25%")) columnsToShow.Add(7);
+                        if (!lbxColumns.SelectedItems.Contains("Median")) columnsToShow.Add(8);
+                        if (!lbxColumns.SelectedItems.Contains("75%")) columnsToShow.Add(9);
+                        if (!lbxColumns.SelectedItems.Contains("Maximum")) columnsToShow.Add(10);
+                        if (!lbxColumns.SelectedItems.Contains("Mode")) columnsToShow.Add(11);
+
+                        foreach (Grid grid in this.StrataGridList)
                         {
-                            if (((MeansParameters)Parameters).columnsToHide.Contains(i))
+                            for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
                             {
-                                grid.ColumnDefinitions[i].Width = new GridLength(0);
-                            }
-                            else
-                            {
-                                //if (i == 6)
-                                //{
-                                //    grid.ColumnDefinitions[i].Width = new GridLength(100);
-                                //}
-                                //else
-                                //{
+                                if (((MeansParameters)Parameters).columnsToHide.Contains(i))
+                                {
+                                    grid.ColumnDefinitions[i].Width = new GridLength(0);
+                                }
+                                else
+                                {
+                                    //if (i == 6)
+                                    //{
+                                    //    grid.ColumnDefinitions[i].Width = new GridLength(100);
+                                    //}
+                                    //else
+                                    //{
                                     grid.ColumnDefinitions[i].Width = new GridLength(1, GridUnitType.Auto);
-                                //}
+                                    //}
+                                }
                             }
                         }
                     }
                 }
+            }
+            catch (Exception ex){
+                throw ex;
+            
             }
         }
 
@@ -2519,13 +2526,27 @@ namespace EpiDashboard
 
 
             WordBuilder wb = new WordBuilder(",");
-            if (meansParameters.columnsToHide.Count > 0)
-            {
-                foreach (int x in meansParameters.columnsToHide)
+            
+            List<int> columnsToShowList = new List<int>();
+            columnsToShowList.Add(1);
+            columnsToShowList.Add(2);
+            columnsToShowList.Add(3);
+            columnsToShowList.Add(4);
+            columnsToShowList.Add(5);
+            columnsToShowList.Add(6);
+            columnsToShowList.Add(7);
+            columnsToShowList.Add(8);
+            columnsToShowList.Add(9);
+            columnsToShowList.Add(10);
+            columnsToShowList.Add(11);
+            foreach (int x in columnsToShowList)
                 {
-                    wb.Add(x.ToString());
+                    if (!meansParameters.columnsToHide.Contains(x))
+                    {
+                        wb.Add(x.ToString());
+                    }
                 }
-            }
+ 
             XmlElement columnsToShowElement = doc.CreateElement("columnsToShow");
             columnsToShowElement.InnerText = wb.ToString();
             element.AppendChild(columnsToShowElement);
