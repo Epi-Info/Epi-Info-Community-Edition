@@ -90,7 +90,15 @@ namespace Updater
                 process.Kill();
             }
 
-            DownloadUpdates();
+            //DownloadUpdates();
+            //DownloadDescription();
+
+            string fileName = "release-7.1.5.txt";
+            string destination = "c:\\temp\\" + fileName;
+
+            DownloadFile(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"], System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + System.Configuration.ConfigurationManager.AppSettings["ftp_directory"] + fileName, destination);
+
+
         }
 
         private void DownloadUpdates()
@@ -133,6 +141,26 @@ namespace Updater
             }            
         }
 
+        private void DownloadDescription()
+        {
+            try
+            {
+
+                string fileName = "release-7.1.5.txt";
+                string destination = "c:\\temp\\" + fileName;
+
+                DownloadFile(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"], System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + System.Configuration.ConfigurationManager.AppSettings["ftp_directory"] + fileName, destination);
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not update Epi Info. Please ensure that you have Read/Write/Execute privileges on your Epi Info folder or request your Administrator to download and install the new version for you.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
+
+
         private void Download(string url, string destination)
         {            
             using (WebClient wcDownload = new WebClient())
@@ -142,7 +170,9 @@ namespace Updater
                 try
                 {
                     webRequest = (FtpWebRequest)WebRequest.Create(url);
+
                     webResponse = (FtpWebResponse)webRequest.GetResponse();
+                    
                     wcDownload.DownloadFile(url, destination);
                     wcDownload.Dispose();
                 }
@@ -170,14 +200,55 @@ namespace Updater
             }
         }
 
+        //http://stackoverflow.com/questions/12519290/downloading-files-using-ftpwebrequest
+        private void DownloadFile(string userName, string password, string ftpSourceFilePath, string localDestinationFilePath)
+        {
+            int bytesRead = 0;
+            byte[] buffer = new byte[2048];
+
+            FtpWebRequest request = CreateFtpWebRequest(ftpSourceFilePath, userName, password, true);
+            request.Method = WebRequestMethods.Ftp.DownloadFile;
+
+            Stream reader = request.GetResponse().GetResponseStream();
+            FileStream fileStream = new FileStream(localDestinationFilePath, FileMode.Create);
+
+            while (true)
+            {
+                bytesRead = reader.Read(buffer, 0, buffer.Length);
+
+                if (bytesRead == 0)
+                    break;
+
+                fileStream.Write(buffer, 0, bytesRead);
+            }
+            fileStream.Close();
+        }
+
+        private FtpWebRequest CreateFtpWebRequest(string ftpDirectoryPath, string userName, string password, bool keepAlive = false)
+        {
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(ftpDirectoryPath));
+
+            //Set proxy to null. Under current configuration if this option is not set then the proxy that is used will get an html response from the web content gateway (firewall monitoring system)
+            request.Proxy = null;
+
+            request.UsePassive = true;
+            request.UseBinary = true;
+            request.KeepAlive = keepAlive;
+
+            request.Credentials = new NetworkCredential(userName, password);
+
+            return request;
+        }
+
         private void CreateLocalHashButton_Click(object sender, EventArgs e)
         {
             OutputTextBox.Clear();
             System.Text.StringBuilder output = new StringBuilder();
             Updater.Lib lib = new Lib();
-
+            
             System.Collections.Generic.Dictionary<string,string> file_list = lib.create_file_hash_dictionary(@"C:\work-space-set\epi-info-set\epiinfo\Epi Info 7\build\debug");
 
+            //System.Collections.Generic.Dictionary<string, string> file_list = lib.create_file_hash_dictionary(@"C:\work-space-set\Epi_Info_7-1-5");
             int File_Count = file_list.Count;
 
             foreach (KeyValuePair<string, string> kvp in file_list)
@@ -188,6 +259,11 @@ namespace Updater
             }
 
             OutputTextBox.Text = "NumberOfFiles: " + File_Count.ToString() + "\r\n" + output.ToString();
+        }
+
+        private void ExecuteDownloadButton_Click(object sender, EventArgs e)
+        {
+            background_worker.RunWorkerAsync();
         }
     }
 }
