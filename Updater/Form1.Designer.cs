@@ -33,6 +33,7 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.CreateLocalHashButton = new System.Windows.Forms.Button();
             this.OutputTextBox = new System.Windows.Forms.TextBox();
+            this.ExecuteDownloadButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // progressBar1
@@ -76,11 +77,22 @@
             this.OutputTextBox.TabIndex = 3;
             this.OutputTextBox.WordWrap = false;
             // 
+            // ExecuteDownloadButton
+            // 
+            this.ExecuteDownloadButton.Location = new System.Drawing.Point(331, 145);
+            this.ExecuteDownloadButton.Name = "ExecuteDownloadButton";
+            this.ExecuteDownloadButton.Size = new System.Drawing.Size(155, 32);
+            this.ExecuteDownloadButton.TabIndex = 4;
+            this.ExecuteDownloadButton.Text = "Execute Download";
+            this.ExecuteDownloadButton.UseVisualStyleBackColor = true;
+            this.ExecuteDownloadButton.Click += new System.EventHandler(this.ExecuteDownloadButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 363);
+            this.Controls.Add(this.ExecuteDownloadButton);
             this.Controls.Add(this.OutputTextBox);
             this.Controls.Add(this.CreateLocalHashButton);
             this.Controls.Add(this.lblStatus);
@@ -102,6 +114,7 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button CreateLocalHashButton;
         private System.Windows.Forms.TextBox OutputTextBox;
+        private System.Windows.Forms.Button ExecuteDownloadButton;
     }
 }
 
