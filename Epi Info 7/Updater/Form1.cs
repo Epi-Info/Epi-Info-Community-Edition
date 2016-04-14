@@ -98,12 +98,44 @@ namespace Updater
 
             //DownloadUpdates();
             //DownloadDescription();
-
+            Lib lib = new Lib();
             string file_name = System.Configuration.ConfigurationManager.AppSettings["selected_release"];
-            string destination = System.Configuration.ConfigurationManager.AppSettings["download_directory"] + "/" + file_name;
+            
+            string ftp_user_id  = System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"];
+            string ftp_password = System.Configuration.ConfigurationManager.AppSettings["ftp_password"];
+            string[] file_list = System.Configuration.ConfigurationManager.AppSettings["release_text"].Split('\n');
 
-            DownloadFile(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"], System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "m/" + file_name, destination);
 
+            
+            string download_directory = System.Configuration.ConfigurationManager.AppSettings["download_directory"];
+            string root_directory = file_name.Substring(0, file_name.LastIndexOf('.'));
+
+            string ftp_site = System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "s/" + root_directory;
+
+            for (int i = 1; i < file_list.Length; i++)
+            {
+                string[] pair = file_list[i].Split(':');
+                string source = ftp_site + pair[0];
+                string destination = download_directory + root_directory + "/" + pair[0];
+
+
+                if (i == 0)
+                {
+                    root_directory = pair[0] + "/";
+                    System.IO.Directory.CreateDirectory(download_directory + root_directory);
+
+                }
+                else
+                {
+                    string target_directory = destination.Substring(0, destination.LastIndexOf('/'));
+                    if (!System.IO.Directory.Exists(target_directory))
+                    {
+                        System.IO.Directory.CreateDirectory(target_directory);
+                    }
+
+                    lib.DownloadFile(ftp_user_id, ftp_password, source, destination);
+                }
+            }
 
         }
 
@@ -147,25 +179,6 @@ namespace Updater
             }            
         }
 
-        private void DownloadDescription()
-        {
-            try
-            {
-
-                string fileName = "release-7.1.5.txt";
-                string destination = "c:\\temp\\" + fileName;
-
-                DownloadFile(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"], System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + System.Configuration.ConfigurationManager.AppSettings["ftp_directory"] + fileName, destination);
-
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not update Epi Info. Please ensure that you have Read/Write/Execute privileges on your Epi Info folder or request your Administrator to download and install the new version for you.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-            }
-        }
-
 
         private void Download(string url, string destination)
         {            
@@ -206,49 +219,7 @@ namespace Updater
             }
         }
 
-        //http://stackoverflow.com/questions/12519290/downloading-files-using-ftpwebrequest
-        private void DownloadFile(string userName, string password, string ftpSourceFilePath, string localDestinationFilePath)
-        {
-            int bytesRead = 0;
-            byte[] buffer = new byte[2048];
 
-            FtpWebRequest request = CreateFtpWebRequest(ftpSourceFilePath, userName, password, true);
-            request.Method = WebRequestMethods.Ftp.DownloadFile;
-
-            Stream reader = request.GetResponse().GetResponseStream();
-            if (File.Exists(localDestinationFilePath))
-            {
-                File.Delete(localDestinationFilePath);
-            }
-            FileStream fileStream = new FileStream(localDestinationFilePath, FileMode.Create);
-
-            while (true)
-            {
-                bytesRead = reader.Read(buffer, 0, buffer.Length);
-
-                if (bytesRead == 0)
-                    break;
-
-                fileStream.Write(buffer, 0, bytesRead);
-            }
-            fileStream.Close();
-        }
-
-        private FtpWebRequest CreateFtpWebRequest(string ftpDirectoryPath, string userName, string password, bool keepAlive = false)
-        {
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(ftpDirectoryPath));
-
-            //Set proxy to null. Under current configuration if this option is not set then the proxy that is used will get an html response from the web content gateway (firewall monitoring system)
-            request.Proxy = null;
-
-            request.UsePassive = true;
-            request.UseBinary = true;
-            request.KeepAlive = keepAlive;
-
-            request.Credentials = new NetworkCredential(userName, password);
-
-            return request;
-        }
 
         private void CreateLocalHashButton_Click(object sender, EventArgs e)
         {
@@ -305,6 +276,8 @@ namespace Updater
                 {
                     System.Configuration.ConfigurationManager.AppSettings["selected_release"] = selected_file_name;
                     this.VersionDetailTextBox.Text = lib.GetTextFileContent(selected_file_name);
+                    System.Configuration.ConfigurationManager.AppSettings["release_text"] = this.VersionDetailTextBox.Text;
+                    
                 }
             }
         }
