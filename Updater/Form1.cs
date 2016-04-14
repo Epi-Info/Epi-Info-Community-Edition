@@ -31,7 +31,7 @@ namespace Updater
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            AvailableVersionSetGroupBox.Text = "Available Versions: [" + System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "//" + System.Configuration.ConfigurationManager.AppSettings["ftp_directory"] + "]";
         }
 
         private void ExecuteDownload()
@@ -94,7 +94,7 @@ namespace Updater
             //DownloadDescription();
 
             string fileName = "release-7.1.5.txt";
-            string destination = "c:\\temp\\" + fileName;
+            string destination = System.Configuration.ConfigurationManager.AppSettings["download_directory"] + fileName;
 
             DownloadFile(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"], System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + System.Configuration.ConfigurationManager.AppSettings["ftp_directory"] + fileName, destination);
 
@@ -210,6 +210,10 @@ namespace Updater
             request.Method = WebRequestMethods.Ftp.DownloadFile;
 
             Stream reader = request.GetResponse().GetResponseStream();
+            if (File.Exists(localDestinationFilePath))
+            {
+                File.Delete(localDestinationFilePath);
+            }
             FileStream fileStream = new FileStream(localDestinationFilePath, FileMode.Create);
 
             while (true)
@@ -264,6 +268,21 @@ namespace Updater
         private void ExecuteDownloadButton_Click(object sender, EventArgs e)
         {
             background_worker.RunWorkerAsync();
+        }
+
+        private void SearchForFolderDialogButton_Click(object sender, EventArgs e)
+        {
+            this.DownloadFolderBrowserDialog.ShowNewFolderButton = false;
+            this.DownloadFolderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            DialogResult result = this.DownloadFolderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                // the code here will be executed if the user presses Open in
+                // the dialog.
+                string foldername = this.DownloadFolderBrowserDialog.SelectedPath;
+                SelectedDownloadFolderTextBox.Text = foldername;
+                System.Configuration.ConfigurationManager.AppSettings["download_directory"] = foldername;
+            }
         }
     }
 }
