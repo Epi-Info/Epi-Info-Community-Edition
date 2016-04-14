@@ -39,8 +39,8 @@
             this.SearchForFolderDialogButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.AvailableVersionSetGroupBox = new System.Windows.Forms.GroupBox();
-            this.AvailableVersionSetListBox = new System.Windows.Forms.ListBox();
             this.VersionDetailTextBox = new System.Windows.Forms.TextBox();
+            this.AvailableVersionSetListBox = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.AvailableVersionSetGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -144,15 +144,6 @@
             this.AvailableVersionSetGroupBox.TabStop = false;
             this.AvailableVersionSetGroupBox.Text = "Availabe Versions";
             // 
-            // AvailableVersionSetListBox
-            // 
-            this.AvailableVersionSetListBox.FormattingEnabled = true;
-            this.AvailableVersionSetListBox.ItemHeight = 16;
-            this.AvailableVersionSetListBox.Location = new System.Drawing.Point(6, 21);
-            this.AvailableVersionSetListBox.Name = "AvailableVersionSetListBox";
-            this.AvailableVersionSetListBox.Size = new System.Drawing.Size(254, 116);
-            this.AvailableVersionSetListBox.TabIndex = 0;
-            // 
             // VersionDetailTextBox
             // 
             this.VersionDetailTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -164,6 +155,16 @@
             this.VersionDetailTextBox.Size = new System.Drawing.Size(565, 122);
             this.VersionDetailTextBox.TabIndex = 1;
             this.VersionDetailTextBox.WordWrap = false;
+            // 
+            // AvailableVersionSetListBox
+            // 
+            this.AvailableVersionSetListBox.FormattingEnabled = true;
+            this.AvailableVersionSetListBox.ItemHeight = 16;
+            this.AvailableVersionSetListBox.Location = new System.Drawing.Point(6, 21);
+            this.AvailableVersionSetListBox.Name = "AvailableVersionSetListBox";
+            this.AvailableVersionSetListBox.Size = new System.Drawing.Size(254, 116);
+            this.AvailableVersionSetListBox.TabIndex = 0;
+            this.AvailableVersionSetListBox.SelectedValueChanged += new System.EventHandler(this.AvailableVersionSetListBox_SelectedValueChanged);
             // 
             // Form1
             // 
