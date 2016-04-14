@@ -110,30 +110,33 @@ namespace Updater
             string download_directory = System.Configuration.ConfigurationManager.AppSettings["download_directory"];
             string root_directory = file_name.Substring(0, file_name.LastIndexOf('.'));
 
-            string ftp_site = System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "s/" + root_directory;
+            string ftp_site = System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "s/" + root_directory + "/";
 
             for (int i = 1; i < file_list.Length; i++)
             {
                 string[] pair = file_list[i].Split(':');
-                string source = ftp_site + pair[0];
-                string destination = download_directory + root_directory + "/" + pair[0];
-
-
-                if (i == 0)
+                if (!string.IsNullOrWhiteSpace(pair[0]))
                 {
-                    root_directory = pair[0] + "/";
-                    System.IO.Directory.CreateDirectory(download_directory + root_directory);
-
-                }
-                else
-                {
-                    string target_directory = destination.Substring(0, destination.LastIndexOf('/'));
-                    if (!System.IO.Directory.Exists(target_directory))
+                    string source = ftp_site + pair[0];
+                    string destination = download_directory + root_directory + "/" + pair[0];
+                    destination = destination.Replace("\\", "/");
+                    source = source.Replace("\\", "/");
+                    if (i == 0)
                     {
-                        System.IO.Directory.CreateDirectory(target_directory);
-                    }
+                        root_directory = pair[0] + "/";
+                        System.IO.Directory.CreateDirectory(download_directory + root_directory);
 
-                    lib.DownloadFile(ftp_user_id, ftp_password, source, destination);
+                    }
+                    else
+                    {
+                        string target_directory = destination.Substring(0, destination.LastIndexOf('/'));
+                        if (!System.IO.Directory.Exists(target_directory))
+                        {
+                            System.IO.Directory.CreateDirectory(target_directory);
+                        }
+
+                        lib.DownloadFile(ftp_user_id, ftp_password, source, destination);
+                    }
                 }
             }
 
