@@ -142,5 +142,49 @@ namespace Updater
 
             return result;
         }
+
+        //http://stackoverflow.com/questions/12519290/downloading-files-using-ftpwebrequest
+        public void DownloadFile(string userName, string password, string ftpSourceFilePath, string localDestinationFilePath)
+        {
+            int bytesRead = 0;
+            byte[] buffer = new byte[2048];
+
+            System.Net.FtpWebRequest request = CreateFtpWebRequest(ftpSourceFilePath, userName, password, true);
+            request.Method = System.Net.WebRequestMethods.Ftp.DownloadFile;
+
+            System.IO.Stream reader = request.GetResponse().GetResponseStream();
+            if (System.IO.File.Exists(localDestinationFilePath))
+            {
+                System.IO.File.Delete(localDestinationFilePath);
+            }
+            System.IO.FileStream fileStream = new System.IO.FileStream(localDestinationFilePath, System.IO.FileMode.Create);
+
+            while (true)
+            {
+                bytesRead = reader.Read(buffer, 0, buffer.Length);
+
+                if (bytesRead == 0)
+                    break;
+
+                fileStream.Write(buffer, 0, bytesRead);
+            }
+            fileStream.Close();
+        }
+
+        private System.Net.FtpWebRequest CreateFtpWebRequest(string ftpDirectoryPath, string userName, string password, bool keepAlive = false)
+        {
+            System.Net.FtpWebRequest request = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(new Uri(ftpDirectoryPath));
+
+            //Set proxy to null. Under current configuration if this option is not set then the proxy that is used will get an html response from the web content gateway (firewall monitoring system)
+            request.Proxy = null;
+
+            request.UsePassive = true;
+            request.UseBinary = true;
+            request.KeepAlive = keepAlive;
+
+            request.Credentials = new System.Net.NetworkCredential(userName, password);
+
+            return request;
+        }
     }
 }
