@@ -31,7 +31,13 @@ namespace Updater
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Lib lib = new Lib();
             AvailableVersionSetGroupBox.Text = "Available Versions: [" + System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "//" + System.Configuration.ConfigurationManager.AppSettings["ftp_directory"] + "]";
+
+            foreach (string fileName in lib.GetManifestFileList())
+            {
+                this.AvailableVersionSetListBox.Items.Add(fileName);
+            }
         }
 
         private void ExecuteDownload()
@@ -93,10 +99,10 @@ namespace Updater
             //DownloadUpdates();
             //DownloadDescription();
 
-            string fileName = "release-7.1.5.txt";
-            string destination = System.Configuration.ConfigurationManager.AppSettings["download_directory"] + fileName;
+            string file_name = System.Configuration.ConfigurationManager.AppSettings["selected_release"];
+            string destination = System.Configuration.ConfigurationManager.AppSettings["download_directory"] + "/" + file_name;
 
-            DownloadFile(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"], System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + System.Configuration.ConfigurationManager.AppSettings["ftp_directory"] + fileName, destination);
+            DownloadFile(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"], System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "m/" + file_name, destination);
 
 
         }
@@ -284,5 +290,24 @@ namespace Updater
                 System.Configuration.ConfigurationManager.AppSettings["download_directory"] = foldername;
             }
         }
+
+       
+
+
+        private void AvailableVersionSetListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ListBox lb = (System.Windows.Forms.ListBox)sender;
+            if (lb.SelectedItem != null)
+            {
+                Lib lib = new Lib();
+                string selected_file_name = lb.SelectedItem.ToString();
+                if (!string.IsNullOrWhiteSpace(selected_file_name))
+                {
+                    System.Configuration.ConfigurationManager.AppSettings["selected_release"] = selected_file_name;
+                    this.VersionDetailTextBox.Text = lib.GetTextFileContent(selected_file_name);
+                }
+            }
+        }
+
     }
 }

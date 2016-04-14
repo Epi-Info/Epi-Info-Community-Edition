@@ -69,5 +69,78 @@ namespace Updater
 
             return result;
         }
+
+        public List<string> GetManifestFileList()
+        {
+            List<string> result = new List<string>();
+
+            // Get the object used to communicate with the server.
+            System.Net.FtpWebRequest request = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "/m");
+            request.Method = System.Net.WebRequestMethods.Ftp.ListDirectoryDetails;
+
+            // This example assumes the FTP site uses anonymous logon.
+            request.Credentials = new System.Net.NetworkCredential(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"]);
+
+            System.Net.FtpWebResponse response = (System.Net.FtpWebResponse)request.GetResponse();
+
+            System.IO.Stream responseStream = response.GetResponseStream();
+            System.IO.StreamReader reader = new System.IO.StreamReader(responseStream);
+
+
+            string line = reader.ReadLine();
+            while (!string.IsNullOrEmpty(line))
+            {
+                if (line.StartsWith("-"))
+                {
+                    int start_index = line.LastIndexOf(' ');
+                    result.Add(line.Substring(start_index).Trim());
+                }
+                line = reader.ReadLine();
+            }
+
+            /*
+            drwxrwxrwx   1 user     group           0 Apr 12 11:10 .
+            drwxrwxrwx   1 user     group           0 Apr 12 11:10 ..
+            drwxrwxrwx   1 user     group           0 Apr 12 10:42 Epi_Info_7-1-5
+            -rw-rw-rw-   1 user     group       10193 Apr 12 11:10 release-7.1.5.txt
+
+            */
+
+
+            // Console.WriteLine("Directory List Complete, status {0}", response.StatusDescription);
+
+
+
+            reader.Close();
+            response.Close();
+
+            return result;
+        }
+
+
+        public string GetTextFileContent(string file_name)
+        {
+            string result = null;
+
+            // Get the object used to communicate with the server.
+            System.Net.FtpWebRequest request = (System.Net.FtpWebRequest)System.Net.WebRequest.Create(System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "/m/" + file_name);
+            request.Method = System.Net.WebRequestMethods.Ftp.DownloadFile;
+
+            // This example assumes the FTP site uses anonymous logon.
+            request.Credentials = new System.Net.NetworkCredential(System.Configuration.ConfigurationManager.AppSettings["ftp_user_id"], System.Configuration.ConfigurationManager.AppSettings["ftp_password"]);
+
+            System.Net.FtpWebResponse response = (System.Net.FtpWebResponse)request.GetResponse();
+
+            System.IO.Stream responseStream = response.GetResponseStream();
+            System.IO.StreamReader reader = new System.IO.StreamReader(responseStream);
+
+
+            result = reader.ReadToEnd();
+
+            reader.Close();
+            response.Close();
+
+            return result;
+        }
     }
 }
