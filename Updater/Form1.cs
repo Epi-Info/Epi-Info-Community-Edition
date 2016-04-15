@@ -136,6 +136,11 @@ namespace Updater
                         }
 
                         lib.DownloadFile(ftp_user_id, ftp_password, source, destination);
+                        string validation_compare = lib.GetHash(destination);
+                        if(!validation_compare.Equals(pair[1], StringComparison.OrdinalIgnoreCase))
+                        {
+                            // todo what happens when downloaded file is corrupt.
+                        }
                     }
                 }
             }
