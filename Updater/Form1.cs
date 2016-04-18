@@ -190,10 +190,11 @@ namespace Updater
             OutputTextBox.Clear();
             System.Text.StringBuilder output = new StringBuilder();
             Updater.Lib lib = new Lib();
-            
-            System.Collections.Generic.Dictionary<string,string> file_list = lib.create_file_hash_dictionary(@"C:\work-space-set\epi-info-set\epiinfo\Epi Info 7\build\debug");
 
-            //System.Collections.Generic.Dictionary<string, string> file_list = lib.create_file_hash_dictionary(@"C:\work-space-set\Epi_Info_7-1-5");
+            OutputTextBox.Text = lib.create_manifest_file(@"C:\work-space-set\epi-info-set\epiinfo\Epi Info 7\build\debug");
+
+            /*
+            System.Collections.Generic.Dictionary<string,string> file_list = lib.create_file_hash_dictionary(@"C:\work-space-set\epi-info-set\epiinfo\Epi Info 7\build\debug");
             int File_Count = file_list.Count;
 
             foreach (KeyValuePair<string, string> kvp in file_list)
@@ -204,6 +205,7 @@ namespace Updater
             }
 
             OutputTextBox.Text = "NumberOfFiles: " + File_Count.ToString() + "\r\n" + output.ToString();
+            */
         }
 
         private void ExecuteDownloadButton_Click(object sender, EventArgs e)

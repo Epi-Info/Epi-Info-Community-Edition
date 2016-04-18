@@ -46,6 +46,24 @@ namespace Updater
             
         }
 
+
+
+        public string create_manifest_file(string root_directory)
+        {
+            System.Text.StringBuilder result = new StringBuilder();
+
+            System.Collections.Generic.Dictionary<string, string> file_list = create_file_hash_dictionary(root_directory);
+
+            foreach (KeyValuePair<string, string> kvp in file_list)
+            {
+                result.Append(kvp.Key);
+                result.Append(":");
+                result.AppendLine(kvp.Value);
+            }
+
+            return result.ToString();
+        }
+
         public System.Collections.Generic.Dictionary<string,string> create_file_hash_dictionary(string root_directory)
         {
             System.Collections.Generic.Dictionary<string, string> result = new Dictionary<string,string>(StringComparer.OrdinalIgnoreCase);
