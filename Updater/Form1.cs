@@ -185,88 +185,6 @@ namespace Updater
             }
         }
 
-        private void DownloadUpdates()
-        {
-            try
-            {
-                System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
-                doc.Load("ftp://ftp.cdc.gov/pub/software/epi_info/updates.xml");
-                List<System.Xml.XmlElement> elements = new List<System.Xml.XmlElement>();
-
-                int counter = 0;
-                foreach (System.Xml.XmlElement element in doc.DocumentElement.ChildNodes)
-                {
-                    string fileName = string.Empty;
-                    string destination = string.Empty;
-                    foreach (System.Xml.XmlElement downloadElement in element.ChildNodes)
-                    {
-                        if (downloadElement.Name.Equals("fileName"))
-                        {
-                            fileName = downloadElement.InnerText.Trim();
-                        }
-                        if (downloadElement.Name.Equals("destination"))
-                        {
-                            destination = downloadElement.InnerText.Trim();
-                        }
-                    }
-                    counter++;
-                    double pct = (100.0 * counter) / doc.DocumentElement.ChildNodes.Count;
-                    int pctint = (int)Math.Truncate(pct);
-                    background_worker.ReportProgress(pctint, fileName);
-                    failedDownloadCounter = 0;
-                    //Download("ftp://ftp.cdc.gov/pub/software/epi_info/update_files/" + fileName, AppDomain.CurrentDomain.BaseDirectory + destination + fileName);
-                    Download(System.Configuration.ConfigurationManager.AppSettings["latest_file_set_url"] + fileName, "c:\\temp\\" + fileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not update Epi Info. Please ensure that you have Read/Write/Execute privileges on your Epi Info folder or request your Administrator to download and install the new version for you.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-            }            
-        }
-
-
-        private void Download(string url, string destination)
-        {            
-            using (WebClient wcDownload = new WebClient())
-            {
-                FtpWebRequest webRequest;
-                FtpWebResponse webResponse = null;
-                try
-                {
-                    webRequest = (FtpWebRequest)WebRequest.Create(url);
-
-                    webResponse = (FtpWebResponse)webRequest.GetResponse();
-                    
-                    wcDownload.DownloadFile(url, destination);
-                    wcDownload.Dispose();
-                }
-                catch (Exception ex)
-                {
-                    failedDownloadCounter++;
-                    if (failedDownloadCounter < 20)
-                    {
-                        webResponse.Close();
-                        Thread.Sleep(5000);
-                        Download(url, destination);
-                    }
-                    else
-                    {
-                        throw ex;
-                    }
-                }
-                finally
-                {
-                    if (webResponse != null)
-                    {
-                        webResponse.Close();
-                    }
-                }
-            }
-        }
-
-
-
         private void CreateLocalHashButton_Click(object sender, EventArgs e)
         {
             OutputTextBox.Clear();
@@ -290,12 +208,23 @@ namespace Updater
 
         private void ExecuteDownloadButton_Click(object sender, EventArgs e)
         {
-            background_worker.RunWorkerAsync();
+            if(
+                    !string.IsNullOrWhiteSpace(this.VersionDetailTextBox.Text) &&
+                    !string.IsNullOrWhiteSpace(this.SelectedDownloadFolderTextBox.Text)
+                )
+            {
+                background_worker.RunWorkerAsync();
+            }
+            else
+            {
+                OutputTextBox.ForeColor = Color.Red;
+                OutputTextBox.Text = "Please select a version and a Download location.";
+            }
         }
 
         private void SearchForFolderDialogButton_Click(object sender, EventArgs e)
         {
-            this.DownloadFolderBrowserDialog.ShowNewFolderButton = false;
+            this.DownloadFolderBrowserDialog.ShowNewFolderButton = true;
             this.DownloadFolderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
             DialogResult result = this.DownloadFolderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK)

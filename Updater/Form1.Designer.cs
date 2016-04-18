@@ -66,12 +66,13 @@
             // 
             // CreateLocalHashButton
             // 
-            this.CreateLocalHashButton.Location = new System.Drawing.Point(14, 322);
+            this.CreateLocalHashButton.Location = new System.Drawing.Point(14, 532);
             this.CreateLocalHashButton.Name = "CreateLocalHashButton";
-            this.CreateLocalHashButton.Size = new System.Drawing.Size(187, 23);
+            this.CreateLocalHashButton.Size = new System.Drawing.Size(187, 32);
             this.CreateLocalHashButton.TabIndex = 2;
             this.CreateLocalHashButton.Text = "CreateLocalHashButton";
             this.CreateLocalHashButton.UseVisualStyleBackColor = true;
+            this.CreateLocalHashButton.Visible = false;
             this.CreateLocalHashButton.Click += new System.EventHandler(this.CreateLocalHashButton_Click);
             // 
             // OutputTextBox
@@ -80,17 +81,17 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputTextBox.HideSelection = false;
-            this.OutputTextBox.Location = new System.Drawing.Point(12, 371);
+            this.OutputTextBox.Location = new System.Drawing.Point(14, 322);
             this.OutputTextBox.Multiline = true;
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(863, 188);
+            this.OutputTextBox.Size = new System.Drawing.Size(861, 188);
             this.OutputTextBox.TabIndex = 3;
             this.OutputTextBox.WordWrap = false;
             // 
             // ExecuteDownloadButton
             // 
-            this.ExecuteDownloadButton.Location = new System.Drawing.Point(327, 322);
+            this.ExecuteDownloadButton.Location = new System.Drawing.Point(720, 532);
             this.ExecuteDownloadButton.Name = "ExecuteDownloadButton";
             this.ExecuteDownloadButton.Size = new System.Drawing.Size(155, 32);
             this.ExecuteDownloadButton.TabIndex = 4;
