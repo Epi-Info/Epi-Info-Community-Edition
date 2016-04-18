@@ -161,13 +161,13 @@ namespace Updater
                             {
                                 download_not_attempted = false;
                             }
-
-
-                            
-
                         }
                         while(download_not_attempted);
                     }
+
+                    double pct = (100.0 * i) / file_list.Length;
+                    int pctint = (int)Math.Truncate(pct);
+                    background_worker.ReportProgress(pctint, download_file_name);
                 }
             }
 
