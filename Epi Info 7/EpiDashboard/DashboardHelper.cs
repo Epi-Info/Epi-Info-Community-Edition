@@ -2562,7 +2562,20 @@ namespace EpiDashboard
                         columnNames.Add(gadgetParameters.WeightVariableName);
                     }
                 }
-                
+                if (((EpiDashboard.GadgetParametersBase)(inputs)) is GadgetParametersBase)
+                {
+                    object GadgetParameters = ((EpiDashboard.GadgetParametersBase)(inputs));
+                    object MeanParameters = ((EpiDashboard.FrequencyParametersBase)(((EpiDashboard.MeansParameters)(GadgetParameters))));
+                   
+                    if (MeanParameters != null )
+                    {
+                     string CrosstabVariableName = ((EpiDashboard.FrequencyParametersBase)(MeanParameters)).CrosstabVariableName;
+                     if (!string.IsNullOrEmpty(CrosstabVariableName) && !columnNames.Contains(CrosstabVariableName))
+                     {
+                         columnNames.Add(CrosstabVariableName);
+                     }
+                    }
+                }
                 foreach (string strataVariableName in inputs.StrataVariableNames)
                 {
                     if (!columnNames.Contains(strataVariableName, caseInsensitiveEqualityComparer) && !string.IsNullOrEmpty(strataVariableName.Trim()))
@@ -4777,7 +4790,7 @@ namespace EpiDashboard
                                 filter = filter.Remove(0, 4);
                             }
                             inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CALCULATING_DESCRIPTIVE_STATISTICS);
-                            DataTable filteredTable = GenerateTable(inputs);
+                            DataTable filteredTable = GenerateTable(inputs );
                             DescriptiveStatistics means = DoMeans(inputs, filteredTable, freqTable, filter, outerFilter);
                             //if (means.observations > -1)
                             //{
