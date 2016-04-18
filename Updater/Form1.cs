@@ -106,24 +106,28 @@ namespace Updater
             string[] file_list = System.Configuration.ConfigurationManager.AppSettings["release_text"].Split('\n');
 
 
-            
-            string download_directory = System.Configuration.ConfigurationManager.AppSettings["download_directory"];
-            string root_directory = file_name.Substring(0, file_name.LastIndexOf('.'));
 
-            string ftp_site = System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "s/" + root_directory + "/";
+            string download_directory = EnsureTrailingSlash(System.Configuration.ConfigurationManager.AppSettings["download_directory"]);
+            string root_directory = EnsureTrailingSlash(file_name.Substring(0, file_name.LastIndexOf('.')));
+
+            string ftp_site = System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "s/" + root_directory;
 
             for (int i = 1; i < file_list.Length; i++)
             {
                 string[] pair = file_list[i].Split(':');
-                if (!string.IsNullOrWhiteSpace(pair[0]))
+
+                if (!string.IsNullOrWhiteSpace(pair[0]) && pair.Length == 2)
                 {
+
+                    string download_file_name = pair[0].Trim();
+                    string download_file_hash = pair[1].Trim();
                     string source = ftp_site + pair[0];
-                    string destination = download_directory + root_directory + "/" + pair[0];
+                    string destination = download_directory + root_directory + download_file_name;
                     destination = destination.Replace("\\", "/");
                     source = source.Replace("\\", "/");
                     if (i == 0)
                     {
-                        root_directory = pair[0] + "/";
+                        root_directory = download_file_name + "/";
                         System.IO.Directory.CreateDirectory(download_directory + root_directory);
 
                     }
@@ -135,16 +139,50 @@ namespace Updater
                             System.IO.Directory.CreateDirectory(target_directory);
                         }
 
-                        lib.DownloadFile(ftp_user_id, ftp_password, source, destination);
-                        string validation_compare = lib.GetHash(destination);
-                        if(!validation_compare.Equals(pair[1], StringComparison.OrdinalIgnoreCase))
+                        int try_download_count = 0;
+                        string validation_compare = "";
+                        bool download_not_attempted = true;
+                        do
                         {
-                            // todo what happens when downloaded file is corrupt.
+                            lib.DownloadFile(ftp_user_id, ftp_password, source, destination);
+                            validation_compare = lib.GetHash(destination);
+                            try_download_count = try_download_count + 1;
+
+                            if (!System.IO.File.Exists(destination) && try_download_count > 1)
+                            {
+                                download_not_attempted = false;
+                            }
+
+                            if (validation_compare.Equals(download_file_hash, StringComparison.OrdinalIgnoreCase))
+                            {
+                                download_not_attempted = false;
+                            }
+                            else if (try_download_count > 1)
+                            {
+                                download_not_attempted = false;
+                            }
+
+
+                            
+
                         }
+                        while(download_not_attempted);
                     }
                 }
             }
 
+        }
+
+        private string EnsureTrailingSlash(string directory_name)
+        {
+            if(directory_name.EndsWith("/"))
+            {
+                return directory_name;
+            }
+            else
+            {
+                return directory_name + "/";
+            }
         }
 
         private void DownloadUpdates()
