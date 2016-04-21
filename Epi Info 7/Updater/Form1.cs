@@ -112,7 +112,7 @@ namespace Updater
 
             string ftp_site = System.Configuration.ConfigurationManager.AppSettings["ftp_site"] + "s/" + root_directory;
 
-            for (int i = 1; i < file_list.Length; i++)
+            for (int i = 0; i < file_list.Length; i++)
             {
                 string[] pair = file_list[i].Split(':');
 
