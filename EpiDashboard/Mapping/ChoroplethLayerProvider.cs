@@ -20,7 +20,7 @@ namespace EpiDashboard.Mapping
     {
         public ChoroplethLayerProvider(Map myMap)
         {
-            arcGIS_Map = myMap;
+            ArcGIS_Map = myMap;
             if (_layerId == Guid.Empty)
             {
                 _layerId = Guid.NewGuid();
@@ -181,23 +181,23 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            Layer layer = arcGIS_Map.Layers[_layerId.ToString()];
-            int currentIndex = arcGIS_Map.Layers.IndexOf(layer);
-            if (currentIndex < arcGIS_Map.Layers.Count - 1)
+            Layer layer = ArcGIS_Map.Layers[_layerId.ToString()];
+            int currentIndex = ArcGIS_Map.Layers.IndexOf(layer);
+            if (currentIndex < ArcGIS_Map.Layers.Count - 1)
             {
-                arcGIS_Map.Layers.Remove(layer);
-                arcGIS_Map.Layers.Insert(currentIndex + 1, layer);
+                ArcGIS_Map.Layers.Remove(layer);
+                ArcGIS_Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = arcGIS_Map.Layers[_layerId.ToString()];
-            int currentIndex = arcGIS_Map.Layers.IndexOf(layer);
+            Layer layer = ArcGIS_Map.Layers[_layerId.ToString()];
+            int currentIndex = ArcGIS_Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                arcGIS_Map.Layers.Remove(layer);
-                arcGIS_Map.Layers.Insert(currentIndex - 1, layer);
+                ArcGIS_Map.Layers.Remove(layer);
+                ArcGIS_Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -859,18 +859,8 @@ namespace EpiDashboard.Mapping
                 }
                 else
                 {
-                    //_thematicItem.RangeStarts = new List<double>() { classCount };
                     PopulateRangeValues();
                 }
-
-                ClassBreaksRenderer renderer = new ClassBreaksRenderer();
-                renderer.Field = "EpiInfoValCol";
-                renderer.DefaultSymbol = new SimpleFillSymbol()
-                {
-                    Fill = new SolidColorBrush(Colors.Transparent),
-                    BorderBrush = new SolidColorBrush(Colors.Black),
-                    BorderThickness = 1
-                };
 
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
@@ -929,12 +919,6 @@ namespace EpiDashboard.Mapping
                             symbol.BorderThickness = 1;
 
                             graphicFeature.Symbol = symbol;
-
-                            ClassBreakInfo classBreakInfo = new ClassBreakInfo();
-                            classBreakInfo.MinimumValue = double.Parse(RangeValues[brushIndex, 0]);
-                            classBreakInfo.MaximumValue = double.Parse(RangeValues[brushIndex, 1]);
-                            classBreakInfo.Symbol = symbol;
-                            renderer.Classes.Add(classBreakInfo);
                         }
 
                         TextBlock t = new TextBlock();
@@ -971,6 +955,34 @@ namespace EpiDashboard.Mapping
 
                     if (graphicsLayer is FeatureLayer)
                     {
+                        ClassBreaksRenderer renderer = new ClassBreaksRenderer();
+                        renderer.Field = "EpiInfoValCol";
+
+                        Color color = ((SolidColorBrush)brushList[brushList.Count - 1]).Color;
+
+                        renderer.DefaultSymbol = new SimpleFillSymbol()
+                        {
+                            Fill = new SolidColorBrush(color),
+                            BorderBrush = new SolidColorBrush(Colors.Black),
+                            BorderThickness = 1
+                        };
+
+                        for(int i = 0;  i < _thematicItem.RangeStarts.Count; i++)
+                        {
+                            ClassBreakInfo classBreakInfo = new ClassBreakInfo();
+                            classBreakInfo.MinimumValue = double.Parse(RangeValues[i, 0]);
+                            classBreakInfo.MaximumValue = double.Parse(RangeValues[i, 1]);
+
+                            classBreakInfo.Symbol = new SimpleFillSymbol()
+                            {
+                                Fill = brushList[i],
+                                BorderBrush = new SolidColorBrush(Colors.Black),
+                                BorderThickness = 1
+                            };
+
+                            renderer.Classes.Add(classBreakInfo);
+                        }
+
                         graphicsLayer.Renderer = renderer;
                     }
                 }
