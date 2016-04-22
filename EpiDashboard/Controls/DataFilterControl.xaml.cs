@@ -424,6 +424,10 @@ namespace EpiDashboard.Controls
                 }
                 else
                 {
+                    if (dashboardHelper.TableColumnNames.ContainsKey(columnName))
+                    {
+                        columnType = dashboardHelper.TableColumnNames[columnName];
+                    }
                     ShowValueSelector(columnType);
                 }
             }
