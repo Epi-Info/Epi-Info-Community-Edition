@@ -493,7 +493,8 @@ namespace EpiDashboard.Controls
                             ClassAttribList,
                             flagquintiles,
                             numclasses,
-                            legTitle.Text);
+                            legTitle.Text,
+                            Opacity);
                     }
                     else if ((radMapServer.IsChecked == true && LayerProvider != null) || (LayerProvider is ChoroplethServerLayerProvider))
                     {
@@ -529,8 +530,9 @@ namespace EpiDashboard.Controls
                             rctMissingColor.Fill, 
                             shapeAttributes,
                             ClassAttribList, 
-                            flagquintiles, 
-                            numclasses);
+                            flagquintiles,
+                            numclasses,
+                            Opacity);
                     }
 
                     if (ChangesAccepted != null)

@@ -959,10 +959,11 @@ namespace EpiDashboard.Mapping
                         renderer.Field = "EpiInfoValCol";
 
                         Color color = ((SolidColorBrush)brushList[brushList.Count - 1]).Color;
+                        Brush fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
 
                         renderer.DefaultSymbol = new SimpleFillSymbol()
                         {
-                            Fill = new SolidColorBrush(color),
+                            Fill = fill,
                             BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = 1
                         };
@@ -973,9 +974,12 @@ namespace EpiDashboard.Mapping
                             classBreakInfo.MinimumValue = double.Parse(RangeValues[i, 0]);
                             classBreakInfo.MaximumValue = double.Parse(RangeValues[i, 1]);
 
+                            color = ((SolidColorBrush)brushList[i]).Color;
+                            fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
+
                             classBreakInfo.Symbol = new SimpleFillSymbol()
                             {
-                                Fill = brushList[i],
+                                Fill = fill,
                                 BorderBrush = new SolidColorBrush(Colors.Black),
                                 BorderThickness = 1
                             };

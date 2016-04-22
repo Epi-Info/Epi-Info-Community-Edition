@@ -156,6 +156,13 @@ namespace EpiDashboard.Mapping
                     {
                         cbxMapFeatureText = child.InnerText;
                     }
+
+                    if (child.Name.Equals("opacity"))
+                    {
+                        byte opacity = 115;
+                        byte.TryParse(child.InnerText, out opacity);
+                        Opacity = opacity;
+                    }
                 }
                 
                ChoroplethProperties_RenderMap();
@@ -371,7 +378,7 @@ namespace EpiDashboard.Mapping
             string value = cbxValue.SelectedItem.ToString();
             SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
             SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
-            string xmlString = "<shapeFile>" + boundryFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><classes>" + legacyClassCountIndex + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>" + "<selectMapFeature>" + cbxMapFeatureText + "</selectMapFeature> ";
+            string xmlString = "<shapeFile>" + boundryFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><classes>" + legacyClassCountIndex + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>" + "<selectMapFeature>" + cbxMapFeatureText + "</selectMapFeature> " + "<opacity>" + Opacity.ToString() + "</opacity> ";
             System.Xml.XmlElement element = doc.CreateElement("dataLayer");
             element.InnerXml = xmlString;
             element.AppendChild(dashboardHelper.Serialize(doc));
