@@ -235,7 +235,7 @@ namespace EpiDashboard.Mapping
 
         public void SetValues(string shapefilepath, string shapekey, string datakey, string val,
             string classes, Brush Highcolor, Brush Lowcolor, Brush Missingcolor, IDictionary<string, object> shapeAttributes,
-            Dictionary<int, object> classAttrib, bool quintilesChecked, int numclasses, string LegendText)
+            Dictionary<int, object> classAttrib, bool quintilesChecked, int numclasses, string LegendText, byte opacity)
         {
             FillComboBoxes();
             
@@ -261,6 +261,7 @@ namespace EpiDashboard.Mapping
             cbxValue.Text = val;
             grdMain.Width = 700;
             Provider.LegendText = LegendText;
+            Opacity = opacity;
         }
 
         public XmlNode Serialize(System.Xml.XmlDocument doc)
@@ -292,7 +293,8 @@ namespace EpiDashboard.Mapping
                     missingColor,
                     xmlString,
                     dashboardHelper,
-                    type);
+                    type,
+                    Opacity);
             }
             catch (Exception e)
             {

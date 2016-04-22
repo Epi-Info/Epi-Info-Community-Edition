@@ -63,6 +63,13 @@ namespace EpiDashboard.Mapping
                     provider._classCount = legacyClassCountIndex + 3;
                 }
 
+                if (child.Name.Equals("opacity"))
+                {
+                    byte opacity = 115;
+                    byte.TryParse(child.InnerText, out opacity);
+                    provider.Opacity = opacity;
+                }
+
                 if (child.Name.Equals("customColors"))
                 {
                     provider.UseCustomColors = true;
@@ -126,7 +133,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public static XmlNode Serialize(System.Xml.XmlDocument doc, ChoroplethLayerProvider provider, string dataKey, string shapeKey, string value, string legacyClassCountIndex, SolidColorBrush highColor, SolidColorBrush lowColor, SolidColorBrush missingColor, string uniqueXmlString, DashboardHelper dashboardHelper, XmlAttribute type)
+        public static XmlNode Serialize(System.Xml.XmlDocument doc, ChoroplethLayerProvider provider, string dataKey, string shapeKey, string value, string legacyClassCountIndex, SolidColorBrush highColor, SolidColorBrush lowColor, SolidColorBrush missingColor, string uniqueXmlString, DashboardHelper dashboardHelper, XmlAttribute type, double opacity)
         {
             try
             {
@@ -195,7 +202,8 @@ namespace EpiDashboard.Mapping
                                    "<classes>" + legacyClassCountIndex + "</classes>" + Environment.NewLine +
                                    "<dataKey>" + dataKey + "</dataKey>" + Environment.NewLine +
                                    "<shapeKey>" + shapeKey + "</shapeKey>" + Environment.NewLine +
-                                   "<value>" + value + "</value>" + Environment.NewLine;
+                                   "<value>" + value + "</value>" + Environment.NewLine +
+                                   "<opacity>" + opacity.ToString() + "</opacity>" + Environment.NewLine; ;
 
                 doc.PreserveWhitespace = true;
 
