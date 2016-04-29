@@ -105,8 +105,6 @@ namespace Updater
             string ftp_password = System.Configuration.ConfigurationManager.AppSettings["ftp_password"];
             string[] file_list = System.Configuration.ConfigurationManager.AppSettings["release_text"].Split('\n');
 
-
-
             string download_directory = EnsureTrailingSlash(System.Configuration.ConfigurationManager.AppSettings["download_directory"]);
             string root_directory = EnsureTrailingSlash(file_name.Substring(0, file_name.LastIndexOf('.')));
 
@@ -125,45 +123,38 @@ namespace Updater
                     string destination = download_directory + root_directory + download_file_name;
                     destination = destination.Replace("\\", "/");
                     source = source.Replace("\\", "/");
-                    if (i == 0)
+                    
+                    string target_directory = destination.Substring(0, destination.LastIndexOf('/'));
+                    if (!System.IO.Directory.Exists(target_directory))
                     {
-                        root_directory = download_file_name + "/";
-                        System.IO.Directory.CreateDirectory(download_directory + root_directory);
-
+                        System.IO.Directory.CreateDirectory(target_directory);
                     }
-                    else
+
+                    int try_download_count = 0;
+                    string validation_compare = "";
+                    bool download_not_attempted = true;
+                    do
                     {
-                        string target_directory = destination.Substring(0, destination.LastIndexOf('/'));
-                        if (!System.IO.Directory.Exists(target_directory))
+                        lib.DownloadFile(ftp_user_id, ftp_password, source, destination);
+                        validation_compare = lib.GetHash(destination);
+                        try_download_count = try_download_count + 1;
+
+                        if (!System.IO.File.Exists(destination) && try_download_count > 1)
                         {
-                            System.IO.Directory.CreateDirectory(target_directory);
+                            download_not_attempted = false;
                         }
 
-                        int try_download_count = 0;
-                        string validation_compare = "";
-                        bool download_not_attempted = true;
-                        do
+                        if (validation_compare.Equals(download_file_hash, StringComparison.OrdinalIgnoreCase))
                         {
-                            lib.DownloadFile(ftp_user_id, ftp_password, source, destination);
-                            validation_compare = lib.GetHash(destination);
-                            try_download_count = try_download_count + 1;
-
-                            if (!System.IO.File.Exists(destination) && try_download_count > 1)
-                            {
-                                download_not_attempted = false;
-                            }
-
-                            if (validation_compare.Equals(download_file_hash, StringComparison.OrdinalIgnoreCase))
-                            {
-                                download_not_attempted = false;
-                            }
-                            else if (try_download_count > 1)
-                            {
-                                download_not_attempted = false;
-                            }
+                            download_not_attempted = false;
                         }
-                        while(download_not_attempted);
+                        else if (try_download_count > 1)
+                        {
+                            download_not_attempted = false;
+                        }
                     }
+                    while(download_not_attempted);
+                    
 
                     double pct = (100.0 * i) / file_list.Length;
                     int pctint = (int)Math.Truncate(pct);
