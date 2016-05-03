@@ -418,8 +418,11 @@ namespace EpiDashboard
                 {
                     dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
                 }
-                if(((LineListParameters)Parameters).ShowNullLabels)
+                
+                 if(((LineListParameters)Parameters).ShowNullLabels)
+                {
                     dataGridTextColumn.Binding.TargetNullValue = DashboardHelper.Config.Settings.RepresentationOfMissing;
+                }
             }
         }
 
@@ -527,7 +530,7 @@ namespace EpiDashboard
                             }
                         }
 
-                   //    SetGadgetStatusMessage(SharedStrings.DASHBOARD_GADGET_STATUS_DISPLAYING_OUTPUT);
+                      //    SetGadgetStatusMessage(SharedStrings.DASHBOARD_GADGET_STATUS_DISPLAYING_OUTPUT);
 
                         foreach (DataTable listTable in lineListTables)
                         {
@@ -639,7 +642,7 @@ namespace EpiDashboard
                 headerPanel.IsOutputCollapseButtonAvailable = false;
             }
 
-            this.IsProcessing = false;
+            this.IsProcessing = true;
 
             this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
@@ -1422,10 +1425,12 @@ namespace EpiDashboard
                                 int dgtcindex = 0;
                                 foreach (DataColumn dc in dgItemSource.Table.Columns)
                                 {
-                                    dc.ColumnName = dg.Columns[dgtcindex].Header.ToString();
+                                    if (dg.Columns.Count > dgtcindex)
+                                    { 
+                                        dc.ColumnName = dg.Columns[dgtcindex].Header.ToString();
+                                    }
                                     dgtcindex++;
                                 }
-//                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView));
                             }
                             htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
                         }
