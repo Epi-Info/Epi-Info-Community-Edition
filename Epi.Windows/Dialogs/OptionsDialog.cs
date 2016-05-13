@@ -435,6 +435,8 @@ namespace Epi.Windows.Dialogs
 
             Epi.DataSets.Config.SettingsRow settings = config.Settings;
 
+            autoTouchKeyboard.Checked = settings.AutoTouchKeyboard;
+
             // Representation of boolean values ...
             cmbYesAs.SelectedItem = settings.RepresentationOfYes;
             cmbNoAs.SelectedItem = settings.RepresentationOfNo;
@@ -669,6 +671,8 @@ namespace Epi.Windows.Dialogs
         public void GetSettings(Configuration newConfig)
         {
             Epi.DataSets.Config.SettingsRow settings = newConfig.Settings;
+
+            settings.AutoTouchKeyboard = autoTouchKeyboard.Checked;
 
             // Representation of boolean values ...
             settings.RepresentationOfYes = cmbYesAs.Text;
