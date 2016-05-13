@@ -278,6 +278,7 @@
               <xs:element name="EWEServiceReaderMaxDepth" msprop:Generator_ColumnVarNameInTable="columnEWEServiceReaderMaxDepth" msprop:Generator_ColumnPropNameInRow="EWEServiceReaderMaxDepth" msprop:Generator_ColumnPropNameInTable="EWEServiceReaderMaxDepthColumn" msprop:Generator_UserColumnName="EWEServiceReaderMaxDepth" type="xs:int" minOccurs="0" />
               <xs:element name="EWEServiceReaderMaxStringContentLength" msprop:Generator_ColumnVarNameInTable="columnEWEServiceReaderMaxStringContentLength" msprop:Generator_ColumnPropNameInRow="EWEServiceReaderMaxStringContentLength" msprop:Generator_ColumnPropNameInTable="EWEServiceReaderMaxStringContentLengthColumn" msprop:Generator_UserColumnName="EWEServiceReaderMaxStringContentLength" type="xs:int" minOccurs="0" />
               <xs:element name="IsVariableValidationEnable" msprop:Generator_ColumnVarNameInTable="columnIsVariableValidationEnable" msprop:Generator_ColumnPropNameInRow="IsVariableValidationEnable" msprop:Generator_ColumnPropNameInTable="IsVariableValidationEnableColumn" msprop:Generator_UserColumnName="IsVariableValidationEnable" type="xs:boolean" minOccurs="0" />
+              <xs:element name="AutoTouchKeyboard" msprop:Generator_ColumnVarNameInTable="columnAutoTouchKeyboard" msprop:Generator_ColumnPropNameInRow="AutoTouchKeyboard" msprop:Generator_ColumnPropNameInTable="AutoTouchKeyboardColumn" msprop:Generator_UserColumnName="AutoTouchKeyboard" type="xs:boolean" default="false" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

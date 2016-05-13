@@ -119,6 +119,7 @@ namespace Epi.Windows.Dialogs
             this.btnApply = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.openFileDialogDataDriver = new System.Windows.Forms.OpenFileDialog();
+            this.autoTouchKeyboard = new System.Windows.Forms.CheckBox();
             this.tabControlDateTime.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -163,6 +164,7 @@ namespace Epi.Windows.Dialogs
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.autoTouchKeyboard);
             this.tabGeneral.Controls.Add(this.groupBox5);
             this.tabGeneral.Controls.Add(this.groupBox1);
             this.tabGeneral.Controls.Add(this.label7);
@@ -770,6 +772,12 @@ namespace Epi.Windows.Dialogs
             // 
             resources.ApplyResources(this.openFileDialogDataDriver, "openFileDialogDataDriver");
             // 
+            // autoTouchKeyboard
+            // 
+            resources.ApplyResources(this.autoTouchKeyboard, "autoTouchKeyboard");
+            this.autoTouchKeyboard.Name = "autoTouchKeyboard";
+            this.autoTouchKeyboard.UseVisualStyleBackColor = true;
+            // 
             // OptionsDialog
             // 
             resources.ApplyResources(this, "$this");
@@ -911,5 +919,6 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.RadioButton rdbNormal;
         private System.Windows.Forms.Button Ping;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox autoTouchKeyboard;
     }
 }

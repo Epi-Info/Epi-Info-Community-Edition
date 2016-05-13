@@ -125,6 +125,33 @@
     <value>16, 14</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="autoTouchKeyboard.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autoTouchKeyboard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 352</value>
+  </data>
+  <data name="autoTouchKeyboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 17</value>
+  </data>
+  <data name="autoTouchKeyboard.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="autoTouchKeyboard.Text" xml:space="preserve">
+    <value>Open Touch Keyboard on field enter.</value>
+  </data>
+  <data name="&gt;&gt;autoTouchKeyboard.Name" xml:space="preserve">
+    <value>autoTouchKeyboard</value>
+  </data>
+  <data name="&gt;&gt;autoTouchKeyboard.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoTouchKeyboard.Parent" xml:space="preserve">
+    <value>tabGeneral</value>
+  </data>
+  <data name="&gt;&gt;autoTouchKeyboard.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -246,7 +273,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 62</value>
@@ -364,7 +391,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 296</value>
@@ -391,7 +418,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnEllipse.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
@@ -419,7 +446,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;btnEllipse.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="txtWorkingDirectory.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 315</value>
@@ -440,7 +467,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;txtWorkingDirectory.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="btnUserInterfaceSettings.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
@@ -518,7 +545,7 @@
     <value>tabGeneral</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="tabGeneral.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -3668,6 +3695,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.5917.27948, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.5977.27127, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

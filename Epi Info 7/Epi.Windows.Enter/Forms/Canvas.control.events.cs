@@ -29,6 +29,7 @@ namespace Epi.Windows.Enter
         public bool IsGotoPageField = false;
         public Field GotoPageField = null;
         public Control GotoPageControl = null;
+        System.Diagnostics.Process keyboardProcess = new System.Diagnostics.Process();
 
         public bool EnableTabToNextControl
         {
@@ -468,8 +469,7 @@ namespace Epi.Windows.Enter
         /// <param name="e">.NET supplied event parameters</param>
         private void control_Enter(object sender, EventArgs e)
         {          
-                          
-             ControlFactory factory = ControlFactory.Instance;
+            ControlFactory factory = ControlFactory.Instance;
             if (factory.IsPopup)
             {
                 for (int ix = ((Control)sender).Parent.Controls.Count - 1; ix >= 0; ix--)
@@ -484,6 +484,35 @@ namespace Epi.Windows.Enter
                 Field field = ControlFactory.Instance.GetAssociatedField((Control)sender);
                 GoToFieldEventArgs args = new GoToFieldEventArgs(field);
                 this.GotoFieldEvent(sender, args);
+                
+                //KeyboardCapabilities keyboardCapabilities = System.Windows.Input.Keyboard.I Windows.Devices.Input.KeyboardCapabilities();
+                //KeyboardPresent.Text = keyboardCapabilities.KeyboardPresent != 0 ? "Yes" : "No";
+
+                config = Configuration.GetNewInstance();
+                
+                if (config.Settings.AutoTouchKeyboard)
+                {
+                    if (field is MultilineTextField ||
+                        field is NumberField ||
+                        field is PhoneNumberField ||
+                        field is SingleLineTextField ||
+                        field is TextField ||
+                        field is TimeField ||
+                        field is DateField ||
+                        field is DateTimeField ||
+                        field is UpperCaseTextField ||
+                        field is GridField)
+                    {
+                        try
+                        {
+                            string progFiles = @"C:\Program Files\Common Files\Microsoft Shared\ink";
+                            string keyboardPath = System.IO.Path.Combine(progFiles, "TabTip.exe");
+
+                            keyboardProcess = System.Diagnostics.Process.Start(keyboardPath);
+                        }
+                        catch { }
+                    }
+                }
             }
                     
         }
@@ -495,6 +524,12 @@ namespace Epi.Windows.Enter
         /// <param name="e">.NET supplied event parameters</param>
         private void control_Leave(object sender, EventArgs e)
         {
+            try 
+            { 
+                keyboardProcess.Kill(); 
+            }
+            catch { }
+            
             ControlFactory factory = ControlFactory.Instance;          
             Field field = factory.GetAssociatedField((Control)sender);
             if (field is NumberField)
