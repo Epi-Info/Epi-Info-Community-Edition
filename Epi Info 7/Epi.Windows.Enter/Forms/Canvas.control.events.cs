@@ -526,7 +526,10 @@ namespace Epi.Windows.Enter
         {
             try 
             { 
-                keyboardProcess.Kill(); 
+                if(keyboardProcess.HasExited == false)
+                { 
+                    keyboardProcess.Kill();
+                }
             }
             catch { }
             

@@ -663,6 +663,8 @@ namespace Epi.Windows.Dialogs
             {
                 this.ApplyChanges(this, new EventArgs());
             }
+
+            Configuration.Load(config.ConfigFilePath);
 		}
 
         /// <summary>
