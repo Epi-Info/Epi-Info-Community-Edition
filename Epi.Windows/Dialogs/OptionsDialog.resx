@@ -132,13 +132,13 @@
     <value>17, 352</value>
   </data>
   <data name="autoTouchKeyboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 17</value>
+    <value>196, 17</value>
   </data>
   <data name="autoTouchKeyboard.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
   </data>
   <data name="autoTouchKeyboard.Text" xml:space="preserve">
-    <value>Open Touch Keyboard on field enter.</value>
+    <value>Open touch keyboard on field enter.</value>
   </data>
   <data name="&gt;&gt;autoTouchKeyboard.Name" xml:space="preserve">
     <value>autoTouchKeyboard</value>
@@ -3695,6 +3695,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.5977.27127, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.5981.24137, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

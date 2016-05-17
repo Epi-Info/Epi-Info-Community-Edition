@@ -32,6 +32,7 @@ namespace Epi.Windows.Dialogs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsDialog));
             this.tabControlDateTime = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.autoTouchKeyboard = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label9 = new System.Windows.Forms.Label();
@@ -119,7 +120,6 @@ namespace Epi.Windows.Dialogs
             this.btnApply = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.openFileDialogDataDriver = new System.Windows.Forms.OpenFileDialog();
-            this.autoTouchKeyboard = new System.Windows.Forms.CheckBox();
             this.tabControlDateTime.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -174,6 +174,12 @@ namespace Epi.Windows.Dialogs
             resources.ApplyResources(this.tabGeneral, "tabGeneral");
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // autoTouchKeyboard
+            // 
+            resources.ApplyResources(this.autoTouchKeyboard, "autoTouchKeyboard");
+            this.autoTouchKeyboard.Name = "autoTouchKeyboard";
+            this.autoTouchKeyboard.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -771,12 +777,6 @@ namespace Epi.Windows.Dialogs
             // openFileDialogDataDriver
             // 
             resources.ApplyResources(this.openFileDialogDataDriver, "openFileDialogDataDriver");
-            // 
-            // autoTouchKeyboard
-            // 
-            resources.ApplyResources(this.autoTouchKeyboard, "autoTouchKeyboard");
-            this.autoTouchKeyboard.Name = "autoTouchKeyboard";
-            this.autoTouchKeyboard.UseVisualStyleBackColor = true;
             // 
             // OptionsDialog
             // 
