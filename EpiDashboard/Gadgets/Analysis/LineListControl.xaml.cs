@@ -439,8 +439,7 @@ namespace EpiDashboard
                     Field field = DashboardHelper.GetAssociatedField(column.ColumnName);
                     if (field != null && field is RenderableField)
                     {
-                        if (Parameters.InputVariableList.ContainsKey("usepromptsforcolumnnames") &&
-                            Parameters.InputVariableList["usepromptsforcolumnnames"] == "true")
+                        if (((LineListParameters)Parameters).UsePromptsForColumnNames)
                         {
                             dg.Columns[columnCount].Header = (((RenderableField)field).PromptText);
                         }
@@ -1163,7 +1162,7 @@ namespace EpiDashboard
                         bool.TryParse(child.InnerText, out sortByTabs);
                         ((LineListParameters)Parameters).SortColumnsByTabOrder = sortByTabs;
                         break;
-                    case "usefieldprompts":
+                    case "usepromptsforcolumnnames":
                         bool usePrompts = false;
                         bool.TryParse(child.InnerText, out usePrompts);
                         ((LineListParameters)Parameters).UsePromptsForColumnNames = usePrompts;
