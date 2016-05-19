@@ -127,7 +127,7 @@ namespace EpiDashboard.Mapping
 
         private void RenderMap()
         {
-            if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1)
+            if (cbxDataKey.SelectedIndex != -1 && cbxShapeKey.SelectedIndex != -1 && cbxValue.SelectedIndex != -1 && cbxClasses.SelectedIndex != -1)
             {
                 Provider.SetShapeRangeValues(
                     dashboardHelper,
