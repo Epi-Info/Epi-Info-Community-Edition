@@ -40,8 +40,8 @@
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
             <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title="Data Source" Description="Choose data source." IsChecked="True" Checked="tbtnDataSource_Checked" />
             <Controls:SettingsToggleButton  x:Name="tbtnVariables" Title="Variables" Description="Choose map boundaries." IsEnabled="False" IsChecked="False" Checked="tbtnVariables_Checked" />
-            <Controls:SettingsToggleButton  x:Name="tbtnDisplay" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsEnabled="False" IsChecked="False" Checked="tbtnDisplay_Checked" />
             <Controls:SettingsToggleButton  x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsEnabled="False" IsChecked="False" Checked="tbtnFilters_Checked" />
+            <Controls:SettingsToggleButton  x:Name="tbtnDisplay" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsEnabled="False" IsChecked="False" Checked="tbtnDisplay_Checked" />
         </StackPanel>
 
         <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">

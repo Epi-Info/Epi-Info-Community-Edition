@@ -468,6 +468,12 @@ namespace EpiDashboard.Controls
         {
             try
             {
+                if (tbtnDisplay.IsChecked == false)
+                {
+                    PropertyChanged_EnableDisable();
+                    return;
+                }
+                
                 if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
                 {
                     Addfilters();
@@ -1292,7 +1298,6 @@ namespace EpiDashboard.Controls
             if (cmbShapeKey.SelectedItem != null && cmbDataKey.SelectedItem != null && cmbValue.SelectedItem != null)
             {
                 LayerProvider.UseCustomColors = false;
-
                 SetRangeUISection();
             }
 
@@ -1570,11 +1575,7 @@ namespace EpiDashboard.Controls
             int widthMinMax = 75;
             int widthCompare = 50;
 
-            if (quintilesOption.IsChecked == false)
-            {
-
-            }
-            else
+            if (quintilesOption.IsChecked == true)
             {
                 Reset_Legend();
             }
@@ -2470,10 +2471,12 @@ namespace EpiDashboard.Controls
                         {
                             btnOK.IsEnabled = false;
                         }
-
+                        
                         tbtnDisplay.IsEnabled = true;
                         tbtnFilters.IsEnabled = true;
                         tbtnFilters.Visibility = Visibility.Visible;
+
+                        tbtnDisplay.IsChecked = true;
                     }
 
                     return;

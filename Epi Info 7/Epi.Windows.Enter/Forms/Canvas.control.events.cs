@@ -29,7 +29,7 @@ namespace Epi.Windows.Enter
         public bool IsGotoPageField = false;
         public Field GotoPageField = null;
         public Control GotoPageControl = null;
-        System.Diagnostics.Process keyboardProcess = new System.Diagnostics.Process();
+        System.Diagnostics.Process keyboardProcess = null;
 
         public bool EnableTabToNextControl
         {
@@ -526,7 +526,7 @@ namespace Epi.Windows.Enter
         {
             try 
             { 
-                if(keyboardProcess.HasExited == false)
+                if(keyboardProcess != null && keyboardProcess.HasExited == false)
                 { 
                     keyboardProcess.Kill();
                 }
