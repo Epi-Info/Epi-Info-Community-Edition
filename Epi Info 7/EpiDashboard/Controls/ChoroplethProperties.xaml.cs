@@ -476,7 +476,7 @@ namespace EpiDashboard.Controls
                 
                 if (cmbDataKey.SelectedIndex > -1 && cmbShapeKey.SelectedIndex > -1 && cmbValue.SelectedIndex > -1)
                 {
-                    Addfilters();
+
                     RenderMap();
                     AddClassAttributes();
 
