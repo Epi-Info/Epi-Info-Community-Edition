@@ -10227,7 +10227,10 @@ namespace EpiDashboard
             string parentKeyDataType = parentTable.Columns[parentKey].DataType.ToString();
             string childKeyDataType = childTable.Columns[childKey].DataType.ToString();
 
-            if (toMany == false && parentTable.PrimaryKey.Contains(parentTable.Columns[parentKey]) && parentTable.PrimaryKey.Length == 1 && parentKeyDataType == childKeyDataType)
+            if (toMany == false && 
+                parentTable.PrimaryKey.Contains(parentTable.Columns[parentKey]) && 
+                parentTable.PrimaryKey.Length == 1 && 
+                parentKeyDataType == childKeyDataType)
             {
                 int counter = 0;
                 int total = childTable.Rows.Count;
@@ -10264,6 +10267,30 @@ namespace EpiDashboard
                         {
                             return;
                         }
+                    }
+                }
+
+                if (false == useUnmatched) // ALL
+                {
+                    List<DataRow> rowsToRemove = new List<DataRow>();
+                    
+                    foreach (DataRow parentRow in parentTable.Rows)
+                    {
+                        var RHO = parentRow[parentKey];
+                        var LHO = parentRow[childKey];
+
+                        if (false == RHO.ToString().Equals(LHO.ToString()))
+                        {
+                            if (!rowsToRemove.Contains(parentRow))
+                            {
+                                rowsToRemove.Add(parentRow);
+                            }
+                        }
+                    }
+
+                    foreach (DataRow row in rowsToRemove)
+                    {
+                        parentTable.Rows.Remove(row);
                     }
                 }
             }
@@ -10332,16 +10359,16 @@ namespace EpiDashboard
 
                     counter = 0;
 
-                    if (!useUnmatched)
-                    {
-                        parentTable.Rows.Clear();
-                    }
-                    else
+                    if (useUnmatched) // ALL
                     {
                         foreach (DataRow row in rowsToRemove)
                         {
                             parentTable.Rows.Remove(row);
                         }
+                    }
+                    else
+                    {
+                        parentTable.Rows.Clear();
                     }
 
                     foreach (KeyValuePair<string, object[]> kvp in objects)
