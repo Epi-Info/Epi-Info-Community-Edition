@@ -2006,14 +2006,17 @@ namespace Epi.Windows.MakeView
                 {
                     View relatedView = null;
 
-                    if (relatedViewName == string.Empty)
+                    if (relatedViewName == string.Empty && row.Table.Columns.Contains("RelatedViewId"))
                     {
-                        int relatedViewId = (int)row["RelatedViewId"];
-
-                        if (viewIdViewNamePairs.ContainsKey(relatedViewId))
+                        if (row["RelatedViewId"] is int)
                         {
-                            relatedViewName = viewIdViewNamePairs[relatedViewId];
-                            relatedView = metadata.GetViewByFullName(relatedViewName);
+                            int relatedViewId = (int)row["RelatedViewId"];
+
+                            if (viewIdViewNamePairs.ContainsKey(relatedViewId))
+                            {
+                                relatedViewName = viewIdViewNamePairs[relatedViewId];
+                                relatedView = metadata.GetViewByFullName(relatedViewName);
+                            }
                         }
                     }
                     else
