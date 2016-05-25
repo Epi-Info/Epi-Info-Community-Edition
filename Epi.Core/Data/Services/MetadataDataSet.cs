@@ -8712,7 +8712,7 @@ namespace Epi.Data.Services
             columns.Add(new TableColumn("ShowTextOnRight", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("CheckCodeBefore", GenericDbColumnType.StringLong, true));
             columns.Add(new TableColumn("CheckCodeAfter", GenericDbColumnType.StringLong, true));
-            columns.Add(new TableColumn("RelateCondition", GenericDbColumnType.String, 255, true));
+            columns.Add(new TableColumn("RelateCondition", GenericDbColumnType.StringLong, true));
             columns.Add(new TableColumn("ShouldReturnToParent", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("SourceTableName", GenericDbColumnType.String, 255, true));
             columns.Add(new TableColumn("CodeColumnName", GenericDbColumnType.String, 255, true));
