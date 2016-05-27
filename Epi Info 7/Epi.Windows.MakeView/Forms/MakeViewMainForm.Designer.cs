@@ -271,8 +271,8 @@ namespace Epi.Windows.MakeView.Forms
             // 
             // MainToolStripContainer.TopToolStripPanel
             // 
-            this.MainToolStripContainer.TopToolStripPanel.Controls.Add(this.MainToolStrip);
             this.MainToolStripContainer.TopToolStripPanel.Controls.Add(this.MainMenu);
+            this.MainToolStripContainer.TopToolStripPanel.Controls.Add(this.MainToolStrip);
             // 
             // dockManager1
             // 

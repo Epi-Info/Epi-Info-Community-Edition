@@ -8809,7 +8809,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Publish form as a web survey.
+        ///   Looks up a localized string similar to Publish Form to Web Survey.
         /// </summary>
         public static string WEBFORM_MENU_PUB_WEB {
             get {
@@ -8818,7 +8818,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Publish form for cloud data capture.
+        ///   Looks up a localized string similar to Publish Form to Cloud Data Capture.
         /// </summary>
         public static string WEBFORM_MENU_PUB_WEBENTER {
             get {
@@ -8827,7 +8827,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Republish form as a web survey.
+        ///   Looks up a localized string similar to Republish Form to Web Survey.
         /// </summary>
         public static string WEBFORM_MENU_REPUB_WEB {
             get {
@@ -8836,7 +8836,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Republish form for cloud data capture.
+        ///   Looks up a localized string similar to Republish Form to Cloud Data Capture.
         /// </summary>
         public static string WEBFORM_MENU_REPUB_WEBENTER {
             get {
