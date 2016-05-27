@@ -66,7 +66,7 @@ namespace EpiDashboard
             Y2ShowAnnotations = false;
             ShowGridLines = true;
             Composition = CompositionKind.SideBySide;
-            BarSpace = BarSpacing.Default;
+            BarSpace = BarSpacing.None;
             Orientation = Orientation.Vertical;
             Palette = 12;
             BarType = BarKind.Block;
