@@ -110,7 +110,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             listboxFieldStrata.ItemsSource = strataItems;
             cmbFieldCrosstab.ItemsSource = strataItems;
 
-            cmbBarSpacing.SelectedIndex = 0;
+            cmbBarSpacing.SelectedIndex = 1;
             txtYAxisLabelValue.Text = "Count";
             txtXAxisLabelValue.Text = String.Empty;
             cmbLegendDock.SelectedIndex = 1;

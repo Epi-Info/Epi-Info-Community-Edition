@@ -328,7 +328,7 @@
                         </StackPanel>
                         <StackPanel>
                             <TextBlock x:Name="tblockBarSpacing" HorizontalAlignment="Left" TextAlignment="Center" Text="Space between bars:__xfe" Margin="0,12,0,0"  />
-                            <ComboBox x:Name="cmbBarSpacing" Width="216" HorizontalAlignment="Left" Height="28" >
+                            <ComboBox x:Name="cmbBarSpacing" Width="216" HorizontalAlignment="Left" Height="28" SelectedIndex="1">
                                 <ComboBox.Items>
                                     <ComboBoxItem>Default</ComboBoxItem>
                                     <ComboBoxItem>None</ComboBoxItem>

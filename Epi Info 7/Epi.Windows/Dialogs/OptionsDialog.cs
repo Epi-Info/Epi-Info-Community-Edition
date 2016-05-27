@@ -435,7 +435,11 @@ namespace Epi.Windows.Dialogs
 
             Epi.DataSets.Config.SettingsRow settings = config.Settings;
 
-            autoTouchKeyboard.Checked = settings.AutoTouchKeyboard;
+            try
+            {
+                autoTouchKeyboard.Checked = settings.AutoTouchKeyboard;
+            }
+            catch { }
 
             // Representation of boolean values ...
             cmbYesAs.SelectedItem = settings.RepresentationOfYes;
