@@ -1411,6 +1411,8 @@ namespace EpiDashboard
                     return DbType.Int64;
                 case "System.DateTime":
                     return DbType.DateTime;
+                case "System.DateTimeOffset":
+                    return DbType.DateTimeOffset;
                 case "System.Int16":
                     return DbType.Int16;
                 case "System.Int32":
