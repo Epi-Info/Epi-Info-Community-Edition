@@ -104,11 +104,11 @@
                             <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values__xfe" Visibility="Visible" IsEnabled="true" />
                             <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" Visibility="Visible" IsEnabled="true" />
                             <CheckBox x:Name="checkboxSortHighLow" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort high to low__xfe" HorizontalAlignment="Left" IsChecked="true"/>
-                            <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values__xfe" IsChecked="True" />
                             <CheckBox x:Name="checkboxAnnotations" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotations__xfe" HorizontalAlignment="Left" IsChecked="False" />
                             <CheckBox x:Name="checkboxAnnotationLabel" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotation label__xfe" HorizontalAlignment="Left" IsChecked="False" />
                             <CheckBox x:Name="checkboxAnnotationValue" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotation value__xfe" HorizontalAlignment="Left" IsChecked="False" />
                             <CheckBox x:Name="checkboxAnnotationPercent" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show annotation percent__xfe" HorizontalAlignment="Left" IsChecked="False" />
+                            <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values__xfe" IsChecked="True" Visibility="Collapsed" />
                         </WrapPanel>
                     </StackPanel>
                 </StackPanel>
