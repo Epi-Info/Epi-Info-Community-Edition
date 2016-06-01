@@ -1501,7 +1501,10 @@ namespace EpiDashboard
         public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             if (IsCollapsed) return string.Empty;
+
             ComplexSampleMeansParameters csmeansParameters = (ComplexSampleMeansParameters)Parameters;
+            if (csmeansParameters.ColumnNames.Count < 1) return string.Empty;
+
             StringBuilder htmlBuilder = new StringBuilder();
 
             CustomOutputHeading = headerPanel.Text;

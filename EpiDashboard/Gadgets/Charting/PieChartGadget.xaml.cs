@@ -1038,7 +1038,9 @@ namespace EpiDashboard.Gadgets.Charting
         /// <returns></returns>
         public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
-            PieChartParameters chtParameters = (PieChartParameters)Parameters; 
+            PieChartParameters chtParameters = (PieChartParameters)Parameters;
+            if (chtParameters.ColumnNames.Count < 1) return string.Empty;	
+
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("<h2>" + chtParameters.ChartTitle + "</h2>");

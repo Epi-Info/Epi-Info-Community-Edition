@@ -3808,6 +3808,7 @@ namespace EpiDashboard
         {
             if (IsCollapsed) return string.Empty;
             CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
+            if (crosstabParameters.ColumnNames.Count < 1) return string.Empty;
 
             StringWriter stringWriter = new StringWriter();
             //using (HTMTextWriter writer = new HTMTextWriter(stringWriter))
