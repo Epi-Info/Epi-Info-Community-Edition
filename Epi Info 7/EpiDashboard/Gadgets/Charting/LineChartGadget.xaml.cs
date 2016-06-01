@@ -1324,6 +1324,8 @@ namespace EpiDashboard.Gadgets.Charting
         public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             LineChartParameters LineChartParameters = (LineChartParameters)Parameters;
+            if (LineChartParameters.ColumnNames.Count < 1) return string.Empty;	
+
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("<h2>" + LineChartParameters.ChartTitle + "</h2>");

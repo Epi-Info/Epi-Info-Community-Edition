@@ -1796,7 +1796,10 @@ namespace EpiDashboard
             if (IsCollapsed) return string.Empty;
 
             StringBuilder htmlBuilder = new StringBuilder();
+
             ComplexSampleCrosstabParameters cscrossParameters = (ComplexSampleCrosstabParameters)Parameters;
+            if (cscrossParameters.ColumnNames.Count < 1) return string.Empty;	
+
             CustomOutputHeading = headerPanel.Text;
             CustomOutputDescription = descriptionPanel.Text;
 

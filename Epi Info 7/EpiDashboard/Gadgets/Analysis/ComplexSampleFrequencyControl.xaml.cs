@@ -1435,7 +1435,9 @@ namespace EpiDashboard
         public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             if (IsCollapsed) return string.Empty;
+
             ComplexSampleFrequencyParameters csfreqParameters = (ComplexSampleFrequencyParameters)Parameters;
+            if (csfreqParameters.ColumnNames.Count < 1) return string.Empty;
 
             StringBuilder htmlBuilder = new StringBuilder();
 

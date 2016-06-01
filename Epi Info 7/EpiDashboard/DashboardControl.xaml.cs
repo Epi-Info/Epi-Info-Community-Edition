@@ -3929,11 +3929,19 @@ namespace EpiDashboard
                         else
                         {
                             double d = 0;
-                            while (sortedGadgets.ContainsKey(top - d))
+                            if (double.IsNaN(top) == false)
                             {
-                                d = d + 0.0001;
+                                while (sortedGadgets.ContainsKey(top - d))
+                                {
+                                    d = d + 0.0001;
+                                    if (double.IsNaN(top)) break;
+                                }
                             }
-                            sortedGadgets.Add(top - d, control as IGadget);
+
+                            if (sortedGadgets.ContainsKey(top - d) == false)
+                            {
+                                sortedGadgets.Add(top - d, control as IGadget);
+                            }
                         }
                     }
                 }

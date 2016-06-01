@@ -1387,8 +1387,12 @@ namespace EpiDashboard
                 encoder = new JpegBitmapEncoder();
             }
 
-            encoder.Frames.Add(BitmapFrame.Create(img));
-            encoder.Save(stream);
+            if (img != null)
+            {
+                encoder.Frames.Add(BitmapFrame.Create(img));
+                encoder.Save(stream);
+            }
+            
             stream.Close();
         }
 
@@ -1427,7 +1431,7 @@ namespace EpiDashboard
             }
             else
             {
-                throw new ApplicationException();
+                return null;
             }
             
         }

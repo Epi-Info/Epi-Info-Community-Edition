@@ -1771,6 +1771,8 @@ namespace EpiDashboard.Gadgets.Charting
         public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
         {
             HistogramChartParameters chtParameters = (HistogramChartParameters)Parameters;
+            if (chtParameters.ColumnNames.Count < 1) return string.Empty;	
+
             StringBuilder sb = new StringBuilder();
             CustomOutputHeading = headerPanel.Text;
             CustomOutputDescription = descriptionPanel.Text;
