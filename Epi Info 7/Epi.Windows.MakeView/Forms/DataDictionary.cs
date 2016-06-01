@@ -249,37 +249,53 @@ namespace Epi.Windows.MakeView.Forms
                     {
                         dr["Variable Type"] = "Image";
 
-                         //--2365
-                        Boolean bshouldretainImage = (Boolean) dr[Constants.SHOULDRETAINIMAGESIZE];
+                        Boolean bshouldretainImage = false;
+                        if (dr[Constants.SHOULDRETAINIMAGESIZE] is bool)
+                        {
+                            bshouldretainImage = (Boolean)dr[Constants.SHOULDRETAINIMAGESIZE];
+                        }
                         if (bshouldretainImage == true)
                         {
                             dr[Constants.SPECIALINFO] =  dr[Constants.SPECIALINFO].ToString() + Constants.VARRETAINIMAGESIZE;
                         }
-                        //--
 	                }
-                    //--2365
-                    Boolean bshouldRepeatLast = (Boolean)dr[ColumnNames.SHOULD_REPEAT_LAST];
+
+                    Boolean bshouldRepeatLast = false;
+                    if (dr[ColumnNames.SHOULD_REPEAT_LAST] is bool)
+                    {
+                        bshouldRepeatLast = (Boolean)dr[ColumnNames.SHOULD_REPEAT_LAST];
+                    }
                     if (bshouldRepeatLast == true)
                     {
                         dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] .ToString() + Constants.VARREPEATLAST;
                     }
-                    Boolean bIsRequired = (Boolean)dr[ColumnNames.IS_REQUIRED];
+
+                    Boolean bIsRequired = false;
+                    if (dr[ColumnNames.IS_REQUIRED] is bool)
+                    {
+                        bIsRequired = (Boolean)dr[ColumnNames.IS_REQUIRED];
+                    }
                     if (bIsRequired == true)
                     {
                         dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] .ToString() + Constants.VARREQUIRED;
                     }
-                    Boolean bIsReadOnly = (Boolean)dr[ColumnNames.IS_READ_ONLY];
+
+                    Boolean bIsReadOnly = false;
+                    if (dr[ColumnNames.IS_READ_ONLY] is bool)
+                    {
+                        bIsReadOnly = (Boolean)dr[ColumnNames.IS_READ_ONLY];
+                    }
                     if (bIsReadOnly == true)
                     {
                         dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] + Constants.VARREADONLY;
                     }
+                    
                     if (dr[ColumnNames.UPPER].ToString().Length > 0 && dr[ColumnNames.LOWER].ToString().Length > 0)
                    {
                        dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] + Constants.VARRANGE + CharLiterals.LEFT_SQUARE_BRACKET + dr[ColumnNames.LOWER].ToString() + CharLiterals.COMMA + dr[ColumnNames.UPPER].ToString() + CharLiterals.RIGHT_SQUARE_BRACKET;
                    }
-                    //---- 
                 }
-                //-- 2365
+
                 displayTable.Columns.Remove(ColumnNames.IS_REQUIRED);
                 displayTable.Columns.Remove(ColumnNames.SHOULD_REPEAT_LAST);
                 displayTable.Columns.Remove(ColumnNames.IS_READ_ONLY);
@@ -287,8 +303,7 @@ namespace Epi.Windows.MakeView.Forms
                 displayTable.Columns.Remove(ColumnNames.UPPER);
                 displayTable.Columns.Remove(ColumnNames.LOWER);
 
-                //--
-               ((MakeViewMainForm)this.mainForm).EpiInterpreter.Context.ClearState();
+                ((MakeViewMainForm)this.mainForm).EpiInterpreter.Context.ClearState();
                 ((MakeViewMainForm)this.mainForm).EpiInterpreter.Execute(this.view.CheckCode);
 
                 EpiInfo.Plugin.VariableScope variableScope =
