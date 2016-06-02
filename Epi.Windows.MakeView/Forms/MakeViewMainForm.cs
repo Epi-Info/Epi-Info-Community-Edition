@@ -1482,6 +1482,7 @@ namespace Epi.Windows.MakeView.Forms
                         case "Image":
                         case "Mirror":
                         case "Grid":
+                        case "CommandButton":
                         case "Relate":
                             if (PublishingToWebSurvey)
                             {
