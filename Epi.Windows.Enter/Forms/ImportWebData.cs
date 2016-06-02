@@ -660,6 +660,7 @@ namespace Epi.Enter.Forms
             if (destinationView.Fields.Contains(fieldName))
             {
                 Field field = destinationView.Fields[fieldName];
+                
 
                 if (field is CheckBoxField || field is YesNoField)
                 {
@@ -680,6 +681,16 @@ namespace Epi.Enter.Forms
                     {
                         value = result;
                     }
+                }
+                if (field is OptionField && !string.IsNullOrEmpty(value.ToString()))
+                {
+                    
+                    var Options = ((Epi.Fields.OptionField)(field)).Options.Select(x=>x.Trim()).ToList();
+                    if (Options.Contains(value.ToString()))
+                    {
+                        value =  Options.IndexOf(value.ToString());
+                    }
+                   
                 }
             }
             return value;
@@ -772,6 +783,7 @@ namespace Epi.Enter.Forms
             foreach (XmlNode docElement in doc.SelectNodes("//ResponseDetail"))
             {
                 string fieldName = docElement.Attributes.GetNamedItem("QuestionName").Value;
+              
                 object fieldValue = FormatWebFieldData(fieldName, docElement.InnerText);
 
                 WebFieldData wfData = new WebFieldData();
@@ -1480,7 +1492,7 @@ namespace Epi.Enter.Forms
                                     {
                                         this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
                                         e.Result = ex;
-                                        return;
+                                      //  return;
                                     }
                                 }
                             }
