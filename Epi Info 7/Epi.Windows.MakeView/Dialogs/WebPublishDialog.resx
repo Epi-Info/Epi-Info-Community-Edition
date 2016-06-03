@@ -802,7 +802,7 @@
     <value>10, 198</value>
   </data>
   <data name="lblSurveyType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 25</value>
+    <value>825, 25</value>
   </data>
   <data name="lblSurveyType.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -2154,7 +2154,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>30</value>
+    <value>69</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
