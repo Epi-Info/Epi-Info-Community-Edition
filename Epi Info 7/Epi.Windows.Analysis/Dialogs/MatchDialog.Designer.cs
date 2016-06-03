@@ -243,7 +243,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.lblWeight);
             this.Controls.Add(this.cmbExpVar);
             this.Controls.Add(this.lblExpVar);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MatchDialog";

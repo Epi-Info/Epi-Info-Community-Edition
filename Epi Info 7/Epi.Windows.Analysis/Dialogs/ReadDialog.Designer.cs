@@ -172,6 +172,7 @@ namespace Epi.Windows.Analysis.Dialogs
             // 
             resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnCancel
             // 
@@ -264,7 +265,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.lblDataSource);
             this.Controls.Add(this.lblDataSourceDrivers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReadDialog";

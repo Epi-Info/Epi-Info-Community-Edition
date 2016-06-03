@@ -235,8 +235,8 @@ namespace Epi.Windows.Analysis.Dialogs
             mnuMap.Enabled = false;
             mnuMap.Click += new EventHandler(mnuMap_Click);
 
-            ToolStripMenuItem mnuMatch = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_MATCH);
-            mnuMatch.Click += new EventHandler(mnuMatch_Click);
+            //ToolStripMenuItem mnuMatch = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_MATCH);
+            //mnuMatch.Click += new EventHandler(mnuMatch_Click);
 
             ToolStripMenuItem mnuMeans = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_MEANS);
             mnuMeans.Click += new EventHandler(mnuMeans_Click);
@@ -311,7 +311,8 @@ namespace Epi.Windows.Analysis.Dialogs
             mnuData.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuRead, mnuRelate, mnuWrite, mnuMerge, mnuDeleteFileTable, mnuDeleteRecords, mnuUndeleteRecords });
             mnuVariables.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuAssign, mnuRecode, mnuDisplay });
             mnuSelectIf.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuSelect, mnuCancelSelect, mnuIf, mnuSort, mnuCancelSort });
-            mnuStatistics.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuList, mnuFrequencies, mnuTables, mnuMatch, mnuMeans, mnuSummarize, mnuGraph, mnuMap });
+            //mnuStatistics.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuList, mnuFrequencies, mnuTables, mnuMatch, mnuMeans, mnuSummarize, mnuGraph, mnuMap });  //Include mnuMatch when MATCH command is working
+            mnuStatistics.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuList, mnuFrequencies, mnuTables, mnuMeans, mnuSummarize, mnuGraph, mnuMap });
             mnuAdvancedStatistics.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuLinearRegression, mnuLogisticRegression, mnuKaplanMeierSurvival, mnuCoxProportionalHazards, mnuComplexSampleFrequencies, mnuComplexSampleMeans, mnuComplexSampleTables });
             mnuOutput.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuHeader, mnuType, mnuRouteOut, mnuCloseOut, mnuPrintOut, mnuReports, mnuStoringOutput });
             mnuUserDefinedCommands.DropDownItems.AddRange(new ToolStripMenuItem[] { mnuUserCommand, mnuRunSavedProgram, mnuExecuteFile });

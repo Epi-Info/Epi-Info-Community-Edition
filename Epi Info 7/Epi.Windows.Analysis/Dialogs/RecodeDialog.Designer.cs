@@ -273,7 +273,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.lblTo);
             this.Controls.Add(this.lblFrom);
             this.Controls.Add(this.btnFillRanges);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RecodeDialog";
