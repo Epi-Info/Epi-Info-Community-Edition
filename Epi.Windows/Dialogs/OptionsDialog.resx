@@ -2461,9 +2461,6 @@
   <data name="&gt;&gt;btnApply.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btnHelp.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
     <value>435, 490</value>
   </data>
@@ -3695,6 +3692,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.5981.24137, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.5998.28376, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

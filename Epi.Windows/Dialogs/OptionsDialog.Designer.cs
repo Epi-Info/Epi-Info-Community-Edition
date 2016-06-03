@@ -773,6 +773,7 @@ namespace Epi.Windows.Dialogs
             resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // openFileDialogDataDriver
             // 
