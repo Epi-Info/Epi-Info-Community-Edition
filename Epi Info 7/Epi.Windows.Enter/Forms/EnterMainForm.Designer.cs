@@ -88,10 +88,6 @@ namespace Epi.Windows.Enter
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutEpiInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.btnHome = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnBack = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btiOpen = new System.Windows.Forms.ToolStripButton();
             this.btiSave = new System.Windows.Forms.ToolStripButton();
@@ -120,6 +116,10 @@ namespace Epi.Windows.Enter
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.btiEditView = new System.Windows.Forms.ToolStripButton();
             this.btiHelp = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnHome = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnBack = new System.Windows.Forms.ToolStripButton();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -129,8 +129,8 @@ namespace Epi.Windows.Enter
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -247,8 +247,8 @@ namespace Epi.Windows.Enter
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
             // 
             // enterDockManager
             // 
@@ -544,35 +544,6 @@ namespace Epi.Windows.Enter
             resources.ApplyResources(this.aboutEpiInfoToolStripMenuItem, "aboutEpiInfoToolStripMenuItem");
             this.aboutEpiInfoToolStripMenuItem.Click += new System.EventHandler(this.aboutEpiInfoToolStripMenuItem_Click);
             // 
-            // toolStrip2
-            // 
-            resources.ApplyResources(this.toolStrip2, "toolStrip2");
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnHome,
-            this.toolStripSeparator9,
-            this.btnBack});
-            this.toolStrip2.Name = "toolStrip2";
-            // 
-            // btnHome
-            // 
-            this.btnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.btnHome, "btnHome");
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
-            // 
-            // btnBack
-            // 
-            this.btnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.btnBack, "btnBack");
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // toolStrip1
             // 
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
@@ -771,6 +742,36 @@ namespace Epi.Windows.Enter
             // 
             resources.ApplyResources(this.btiHelp, "btiHelp");
             this.btiHelp.Name = "btiHelp";
+            this.btiHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
+            // toolStrip2
+            // 
+            resources.ApplyResources(this.toolStrip2, "toolStrip2");
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnHome,
+            this.toolStripSeparator9,
+            this.btnBack});
+            this.toolStrip2.Name = "toolStrip2";
+            // 
+            // btnHome
+            // 
+            this.btnHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.btnHome, "btnHome");
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // btnBack
+            // 
+            this.btnBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.btnBack, "btnBack");
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // BottomToolStripPanel
             // 
@@ -823,10 +824,10 @@ namespace Epi.Windows.Enter
             this.toolStripContainer1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1010,6 +1010,20 @@ namespace Epi.Windows.Enter
         }
         #endregion Protected Methods
 
+        #region Protected Events
+        /// <summary>
+        /// Opens a process to show the related help topic
+        /// </summary>
+        /// <param name="sender">Object that fired the event.</param>
+        /// <param name="e">.NET supplied event args.</param>
+        protected override void btnHelp_Click(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/enter-data/introduction.html");
+        }
+
+        #endregion Protected Events
+
+
         #region Private Methods
 
         /// <summary>
