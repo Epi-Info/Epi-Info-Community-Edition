@@ -167,6 +167,7 @@ namespace Epi.Windows.Dialogs
             // 
             resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnCancel
             // 

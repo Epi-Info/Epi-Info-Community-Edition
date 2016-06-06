@@ -69,6 +69,7 @@ namespace Epi.Windows.Dialogs
         private string savedConnectionStringDescription = string.Empty;
         private string sqlQuery = string.Empty;
         private Configuration config;
+        private object module;
         #endregion Private Attributes
 
         #region Constructor
@@ -79,15 +80,24 @@ namespace Epi.Windows.Dialogs
             Construct();
         }
 
-        public BaseReadDialog(IDbDriver database)
+        public BaseReadDialog(object Module)
         {
+            module = Module;
+            InitializeComponent();
+            Construct();
+        }
+
+        public BaseReadDialog(object Module, IDbDriver database)
+        {
+            module = Module;
             InitializeComponent();
             Construct();
             selectedDataSource = database;
         }
 
-        public BaseReadDialog(Project project)
+        public BaseReadDialog(object Module, Project project)
         {
+            module = Module;
             InitializeComponent();
             Construct();
             selectedDataSource = project;
@@ -790,6 +800,46 @@ namespace Epi.Windows.Dialogs
                 {
                     this.DialogResult = System.Windows.Forms.DialogResult.None;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Opens a process to show the related help topic
+        /// </summary>
+        /// <param name="sender">Object that fired the event.</param>
+        /// <param name="e">.NET supplied event args.</param>
+        protected override void btnHelp_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (module != null)
+                {
+                    string key = module.ToString();
+
+                    if (key.Contains("Text: Map"))
+                    {
+                        System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/maps/introduction.html");
+                    }
+                    else
+                        if (key.Contains("Text: Dashboard"))
+                        {
+                            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/visual-dashboard/VisualDashboardIntro.html");
+                        }
+                        else
+                            if (key.Contains("Text: Table-to-Form"))
+                            {
+                                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/form-designer/how-to-make-form-from-table.html");
+                            }
+
+                            else
+                            {
+                                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
+                            }
+                }
+            }
+            catch
+            {
+
             }
         }
     }

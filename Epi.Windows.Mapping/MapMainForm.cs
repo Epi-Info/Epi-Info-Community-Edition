@@ -68,7 +68,7 @@ namespace Epi.Windows.Mapping
 
         List<object> mapControl_DataSourceRequested()
         {
-            Epi.Windows.Dialogs.BaseReadDialog dlg = new Dialogs.BaseReadDialog();
+            Epi.Windows.Dialogs.BaseReadDialog dlg = new Dialogs.BaseReadDialog(this);
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 List<object> resultsArray = new List<object>();
