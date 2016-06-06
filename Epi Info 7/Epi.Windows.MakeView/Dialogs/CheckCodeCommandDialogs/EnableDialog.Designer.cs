@@ -116,6 +116,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // btnCancel
             // 
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -135,7 +136,9 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             // EnableDialog
             // 
+            this.AcceptButton = this.btnOk;
             resources.ApplyResources(this, "$this");
+            this.CancelButton = this.btnCancel;
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -144,7 +147,6 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EnableDialog";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);
 

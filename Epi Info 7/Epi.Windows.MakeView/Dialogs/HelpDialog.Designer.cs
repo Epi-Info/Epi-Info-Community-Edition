@@ -239,6 +239,8 @@ namespace Epi.Windows.MakeView.Dialogs
             // 
             // HelpDialog
             // 
+            this.AcceptButton = this.btnOK;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(520, 155);
             this.Controls.Add(this.btnSaveOnly);
             this.Controls.Add(this.btnHelp);
@@ -253,7 +255,6 @@ namespace Epi.Windows.MakeView.Dialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HelpDialog";
-            this.ShowIcon = false;
             this.Text = "Help";
             this.Load += new System.EventHandler(this.HelpDialog_Load);
             this.ResumeLayout(false);
