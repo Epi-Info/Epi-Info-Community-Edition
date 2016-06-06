@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABS
-        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAFMAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAFUAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/CEAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         FwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf+XAAH/AQABgAEAAf8BAAGA
         AQAB/wMAGf8DAAH/FwAl/wMAAf+XAAH/AQABgAEAAf8BAAGAAQAB/wMAGf8DAAH/FwAl/wMAAf+LAAH/
@@ -1429,51 +1429,6 @@
   <metadata name="cmsFunction.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>146, 17</value>
   </metadata>
-  <data name="cmsFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 164</value>
-  </data>
-  <data name="&gt;&gt;cmsFunction.Name" xml:space="preserve">
-    <value>cmsFunction</value>
-  </data>
-  <data name="&gt;&gt;cmsFunction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnFunction.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Times New Roman, 8.25pt, style=Italic</value>
-  </data>
-  <data name="btnFunction.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 163</value>
-  </data>
-  <data name="btnFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 23</value>
-  </data>
-  <data name="btnFunction.TabIndex" type="System.Int32, mscorlib">
-    <value>86</value>
-  </data>
-  <data name="btnFunction.Text" xml:space="preserve">
-    <value>f(x)</value>
-  </data>
-  <data name="&gt;&gt;btnFunction.Name" xml:space="preserve">
-    <value>btnFunction</value>
-  </data>
-  <data name="&gt;&gt;btnFunction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnFunction.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnFunction.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="operatorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="operatorsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Operators</value>
-  </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 22</value>
   </data>
@@ -1555,14 +1510,14 @@
   <data name="lIKEToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>LIKE</value>
   </data>
-  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
-  </data>
-  <data name="booleanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="operatorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="booleanToolStripMenuItem.Text" xml:space="preserve">
-    <value>Boolean Functions</value>
+  <data name="operatorsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Operators</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 6</value>
   </data>
   <data name="aNDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
@@ -1600,11 +1555,11 @@
   <data name="nOTToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>NOT</value>
   </data>
-  <data name="numericToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="booleanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="numericToolStripMenuItem.Text" xml:space="preserve">
-    <value>Numeric Functions</value>
+  <data name="booleanToolStripMenuItem.Text" xml:space="preserve">
+    <value>Boolean Functions</value>
   </data>
   <data name="aBSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
@@ -1750,11 +1705,11 @@
   <data name="zSCOREToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>ZSCORE( &lt;reference&gt;, &lt;metric&gt;, &lt;measurement&gt;, &lt;co_metric&gt;, &lt;sex&gt; )</value>
   </data>
-  <data name="dateFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="numericToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="dateFunctionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Date Functions</value>
+  <data name="numericToolStripMenuItem.Text" xml:space="preserve">
+    <value>Numeric Functions</value>
   </data>
   <data name="yEARSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 22</value>
@@ -1819,11 +1774,11 @@
   <data name="EPIWEEKToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>EPIWEEK( &lt;date_time&gt;, &lt;first_day_of_the_week&gt; )</value>
   </data>
-  <data name="systemFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dateFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="systemFunctionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>System Functions</value>
+  <data name="dateFunctionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Date Functions</value>
   </data>
   <data name="cURRENTUSERToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 22</value>
@@ -1879,11 +1834,11 @@
   <data name="sYSTEMTIMEToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>SYSTEMTIME</value>
   </data>
-  <data name="timeFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="systemFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="timeFunctionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Time Functions</value>
+  <data name="systemFunctionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>System Functions</value>
   </data>
   <data name="hOURSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 22</value>
@@ -1939,11 +1894,11 @@
   <data name="sECONDToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>SECOND( &lt;date_time&gt; )</value>
   </data>
-  <data name="textFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="timeFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="textFunctionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Text Functions</value>
+  <data name="timeFunctionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Time Functions</value>
   </data>
   <data name="fINDTEXTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
@@ -1953,21 +1908,6 @@
   </data>
   <data name="fINDTEXTToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>FINDTEXT( &lt;letters_to_find&gt;, &lt;text_to_search&gt; )</value>
-  </data>
-  <data name="fORMATToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
-  </data>
-  <data name="fORMATToolStripMenuItem.Text" xml:space="preserve">
-    <value>FORMAT</value>
-  </data>
-  <data name="fORMATToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>FORMAT( &lt;variable&gt; )</value>
-  </data>
-  <data name="dateFormatsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
-  </data>
-  <data name="dateFormatsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Date Formats</value>
   </data>
   <data name="generalDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 22</value>
@@ -2032,11 +1972,11 @@
   <data name="shortTimeToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>FORMAT( &lt;variable&gt;, "Short Time" )</value>
   </data>
-  <data name="numberFormatsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dateFormatsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
-  <data name="numberFormatsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Number Formats</value>
+  <data name="dateFormatsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Date Formats</value>
   </data>
   <data name="generalNumberToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 22</value>
@@ -2119,6 +2059,21 @@
   <data name="onOff01ToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>FORMAT( &lt;variable&gt;, "On/Off" )</value>
   </data>
+  <data name="numberFormatsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 22</value>
+  </data>
+  <data name="numberFormatsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Number Formats</value>
+  </data>
+  <data name="fORMATToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 22</value>
+  </data>
+  <data name="fORMATToolStripMenuItem.Text" xml:space="preserve">
+    <value>FORMAT</value>
+  </data>
+  <data name="fORMATToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>FORMAT( &lt;variable&gt; )</value>
+  </data>
   <data name="lINEBREAKToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
   </data>
@@ -2173,6 +2128,51 @@
   <data name="uPPERCASEToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>UPPERCASE( &lt;variable&gt; )</value>
   </data>
+  <data name="textFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="textFunctionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Text Functions</value>
+  </data>
+  <data name="cmsFunction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 164</value>
+  </data>
+  <data name="&gt;&gt;cmsFunction.Name" xml:space="preserve">
+    <value>cmsFunction</value>
+  </data>
+  <data name="&gt;&gt;cmsFunction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnFunction.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 8.25pt, style=Italic</value>
+  </data>
+  <data name="btnFunction.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnFunction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>550, 163</value>
+  </data>
+  <data name="btnFunction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 23</value>
+  </data>
+  <data name="btnFunction.TabIndex" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <data name="btnFunction.Text" xml:space="preserve">
+    <value>f(x)</value>
+  </data>
+  <data name="&gt;&gt;btnFunction.Name" xml:space="preserve">
+    <value>btnFunction</value>
+  </data>
+  <data name="&gt;&gt;btnFunction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnFunction.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnFunction.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2184,9 +2184,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>591, 222</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>WindowsDefaultLocation</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Assign</value>
@@ -2693,6 +2690,6 @@
     <value>AssignDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5866.22846, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.2.6001.25461, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

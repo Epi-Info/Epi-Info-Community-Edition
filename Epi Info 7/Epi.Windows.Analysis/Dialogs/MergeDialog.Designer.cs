@@ -279,7 +279,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.cmbDataFormats);
             this.Controls.Add(this.lblDataSource);
             this.Controls.Add(this.lblDataFormats);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MergeDialog";

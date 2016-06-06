@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADY
-        pgAAAk1TRnQBSQFMAgEBTwEAAVQBAAFkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        pgAAAk1TRnQBSQFMAgEBTwEAAVQBAAFsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQFgAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         AwAB/wgAA98B/wEdAYIBtQH/ARsBgQGzAf8BGAF+AbAB/wEWAXwBrgH/ARMBeQGrAf8BEAF2AagB/wEN
         AXMBpQH/AQsBcQGjAf8BCAFuAaAB/wEGAWwBngH/AQQBagGcAf8BAgFoAZoB/wEBAWcBmQH/A0sB/wOC
@@ -1076,53 +1076,17 @@
   <data name="&gt;&gt;btnEllipse.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;tabPageViews.Name" xml:space="preserve">
-    <value>tabPageViews</value>
+  <data name="lbxShowViews.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="&gt;&gt;tabPageViews.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbxShowViews.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;tabPageViews.Parent" xml:space="preserve">
-    <value>tabctrlShow</value>
+  <data name="lbxShowViews.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 134</value>
   </data>
-  <data name="&gt;&gt;tabPageViews.ZOrder" xml:space="preserve">
+  <data name="lbxShowViews.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabPageAll.Name" xml:space="preserve">
-    <value>tabPageAll</value>
-  </data>
-  <data name="&gt;&gt;tabPageAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageAll.Parent" xml:space="preserve">
-    <value>tabctrlShow</value>
-  </data>
-  <data name="&gt;&gt;tabPageAll.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabctrlShow.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="tabctrlShow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 103</value>
-  </data>
-  <data name="tabctrlShow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>513, 160</value>
-  </data>
-  <data name="tabctrlShow.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;tabctrlShow.Name" xml:space="preserve">
-    <value>tabctrlShow</value>
-  </data>
-  <data name="&gt;&gt;tabctrlShow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabctrlShow.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabctrlShow.ZOrder" xml:space="preserve">
-    <value>11</value>
   </data>
   <data name="&gt;&gt;lbxShowViews.Name" xml:space="preserve">
     <value>lbxShowViews</value>
@@ -1163,28 +1127,16 @@
   <data name="&gt;&gt;tabPageViews.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lbxShowViews.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="lbxShowAll.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="lbxShowViews.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lbxShowAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="lbxShowViews.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lbxShowAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>505, 134</value>
   </data>
-  <data name="lbxShowViews.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lbxShowViews.Name" xml:space="preserve">
-    <value>lbxShowViews</value>
-  </data>
-  <data name="&gt;&gt;lbxShowViews.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbxShowViews.Parent" xml:space="preserve">
-    <value>tabPageViews</value>
-  </data>
-  <data name="&gt;&gt;lbxShowViews.ZOrder" xml:space="preserve">
+  <data name="lbxShowAll.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;lbxShowAll.Name" xml:space="preserve">
@@ -1229,29 +1181,29 @@
   <data name="&gt;&gt;tabPageAll.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lbxShowAll.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="tabctrlShow.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="lbxShowAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="tabctrlShow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 103</value>
   </data>
-  <data name="lbxShowAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 134</value>
+  <data name="tabctrlShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>513, 160</value>
   </data>
-  <data name="lbxShowAll.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="tabctrlShow.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="&gt;&gt;lbxShowAll.Name" xml:space="preserve">
-    <value>lbxShowAll</value>
+  <data name="&gt;&gt;tabctrlShow.Name" xml:space="preserve">
+    <value>tabctrlShow</value>
   </data>
-  <data name="&gt;&gt;lbxShowAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tabctrlShow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbxShowAll.Parent" xml:space="preserve">
-    <value>tabPageAll</value>
+  <data name="&gt;&gt;tabctrlShow.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;lbxShowAll.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;tabctrlShow.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="btnClear.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
@@ -1467,6 +1419,6 @@
     <value>MergeDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.1.5869.18195, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.2.6001.25264, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
