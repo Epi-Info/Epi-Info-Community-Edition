@@ -96,9 +96,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
 
-
-
-
             #region Translation
 
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_LINE_LIST;
@@ -295,18 +292,12 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (cmbGroupField.SelectedIndex >= 0)
             {
-                if (!string.IsNullOrEmpty(cmbGroupField.SelectedItem.ToString()))
-                {
-                    Parameters.PrimaryGroupField = cmbGroupField.SelectedItem.ToString();
-                }
+                Parameters.PrimaryGroupField = cmbGroupField.SelectedItem.ToString();
             }
 
             if (cmbSecondaryGroupField.SelectedIndex >= 0)
             {
-                if (!string.IsNullOrEmpty(cmbSecondaryGroupField.SelectedItem.ToString()))
-                {
-                    Parameters.SecondaryGroupField = cmbSecondaryGroupField.SelectedItem.ToString();
-                }
+                Parameters.SecondaryGroupField = cmbSecondaryGroupField.SelectedItem.ToString();
             }
 
             if (StrataGridList.Count >= 1)
