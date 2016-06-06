@@ -39,6 +39,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             List<FieldInfo> items = new List<FieldInfo>();
             List<string> fields = new List<string>();
+            fields.Add(string.Empty);
 
             foreach (string fieldName in DashboardHelper.GetFieldsAsList())
             {
