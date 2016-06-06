@@ -215,6 +215,11 @@ namespace Epi.Windows.MakeView.Forms
 
                 displayTable = this.view.Project.Metadata.GetDataDictionary(this.view);
 
+                foreach(DataColumn column in displayTable.Columns)
+                {
+                    column.AllowDBNull = true;
+                }
+
                 foreach (DataRow dr in displayTable.Rows)
                 {
                     if (dr["Special Info"] is string)
