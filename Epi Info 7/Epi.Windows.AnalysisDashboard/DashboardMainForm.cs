@@ -189,11 +189,11 @@ namespace Epi.Windows.AnalysisDashboard
 
         EpiDashboard.DashboardHelper dashboard_DashboardHelperRequested()
         {
-            Epi.Windows.Dialogs.BaseReadDialog dlg = new Dialogs.BaseReadDialog();
+            Epi.Windows.Dialogs.BaseReadDialog dlg = new Dialogs.BaseReadDialog(this);
 
             if (dashboardHelper != null && dashboardHelper.Database != null && !dashboardHelper.IsUsingEpiProject)
             {
-                dlg = new Dialogs.BaseReadDialog(dashboardHelper.Database);
+                dlg = new Dialogs.BaseReadDialog(this, dashboardHelper.Database);
                 if (dashboardHelper.CustomQuery != null && !string.IsNullOrEmpty(dashboardHelper.CustomQuery.Trim()))
                 {
                     dlg.SQLQuery = dashboardHelper.CustomQuery;
@@ -201,7 +201,7 @@ namespace Epi.Windows.AnalysisDashboard
             }
             else if (dashboardHelper != null && dashboardHelper.Database != null && dashboardHelper.IsUsingEpiProject)
             {
-                dlg = new Dialogs.BaseReadDialog(dashboardHelper.View.Project);
+                dlg = new Dialogs.BaseReadDialog(this, dashboardHelper.View.Project);
             }
 
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -257,7 +257,7 @@ namespace Epi.Windows.AnalysisDashboard
 
         List<object> mapControl_DataSourceRequested()
         {
-            Epi.Windows.Dialogs.BaseReadDialog dlg = new Dialogs.BaseReadDialog();
+            Epi.Windows.Dialogs.BaseReadDialog dlg = new Dialogs.BaseReadDialog(this);
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 List<object> resultsArray = new List<object>();

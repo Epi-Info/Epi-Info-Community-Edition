@@ -351,7 +351,7 @@ namespace Epi.ImportExport.Dialogs
 
         private void btnImportListValues_Click(object sender, EventArgs e)
         {            
-            Epi.Windows.Dialogs.BaseReadDialog dlg = new Epi.Windows.Dialogs.BaseReadDialog();
+            Epi.Windows.Dialogs.BaseReadDialog dlg = new Epi.Windows.Dialogs.BaseReadDialog(this);
 
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

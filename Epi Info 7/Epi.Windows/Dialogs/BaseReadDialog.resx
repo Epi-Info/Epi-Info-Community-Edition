@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
-        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAFUAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        hwAAAk1TRnQBSQFMAgEBTAEAAU8BAAFkAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABGAEBAgABAQEAASAGAAEYAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wAgAAF1AYQBjwH/
         AWYBgAGPAf8BYAF5AYcB/wFXAW4BewH/AU4BYgFvAf8BRAFWAWEB/wE5AUgBUgH/AS4BOgFDAf8BJQEu
         ATUB/wEbASIBKQH/ARQBGQEeAf8BDgESARYB/wEOARMBGAH/DAABdQGEAY8B/wFsAXoBhQH/AWABbQF3
@@ -855,9 +855,6 @@
   <data name="&gt;&gt;btnFindDataSource.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="btnHelp.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="btnHelp.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
@@ -945,6 +942,24 @@
   <data name="gbxExplorer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="lvDataSourceObjects.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="columnHeaderItem.Text" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="columnHeaderItem.Width" type="System.Int32, mscorlib">
+    <value>300</value>
+  </data>
+  <data name="lvDataSourceObjects.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 16</value>
+  </data>
+  <data name="lvDataSourceObjects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>483, 218</value>
+  </data>
+  <data name="lvDataSourceObjects.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;lvDataSourceObjects.Name" xml:space="preserve">
     <value>lvDataSourceObjects</value>
   </data>
@@ -983,36 +998,6 @@
   </data>
   <data name="&gt;&gt;gbxExplorer.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="lvDataSourceObjects.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="lvDataSourceObjects.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 16</value>
-  </data>
-  <data name="lvDataSourceObjects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 218</value>
-  </data>
-  <data name="lvDataSourceObjects.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lvDataSourceObjects.Name" xml:space="preserve">
-    <value>lvDataSourceObjects</value>
-  </data>
-  <data name="&gt;&gt;lvDataSourceObjects.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lvDataSourceObjects.Parent" xml:space="preserve">
-    <value>gbxExplorer</value>
-  </data>
-  <data name="&gt;&gt;lvDataSourceObjects.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="columnHeaderItem.Text" xml:space="preserve">
-    <value>Item</value>
-  </data>
-  <data name="columnHeaderItem.Width" type="System.Int32, mscorlib">
-    <value>300</value>
   </data>
   <data name="btnAdvanced.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1071,57 +1056,6 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;chkTables.Name" xml:space="preserve">
-    <value>chkTables</value>
-  </data>
-  <data name="&gt;&gt;chkTables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkTables.Parent" xml:space="preserve">
-    <value>gbxShow</value>
-  </data>
-  <data name="&gt;&gt;chkTables.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;chkViews.Name" xml:space="preserve">
-    <value>chkViews</value>
-  </data>
-  <data name="&gt;&gt;chkViews.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkViews.Parent" xml:space="preserve">
-    <value>gbxShow</value>
-  </data>
-  <data name="&gt;&gt;chkViews.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="gbxShow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 132</value>
-  </data>
-  <data name="gbxShow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 38</value>
-  </data>
-  <data name="gbxShow.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="gbxShow.Text" xml:space="preserve">
-    <value>&amp;Show</value>
-  </data>
-  <data name="gbxShow.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;gbxShow.Name" xml:space="preserve">
-    <value>gbxShow</value>
-  </data>
-  <data name="&gt;&gt;gbxShow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxShow.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxShow.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="chkTables.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1178,6 +1112,33 @@
   </data>
   <data name="&gt;&gt;chkViews.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="gbxShow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 132</value>
+  </data>
+  <data name="gbxShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>493, 38</value>
+  </data>
+  <data name="gbxShow.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="gbxShow.Text" xml:space="preserve">
+    <value>&amp;Show</value>
+  </data>
+  <data name="gbxShow.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;gbxShow.Name" xml:space="preserve">
+    <value>gbxShow</value>
+  </data>
+  <data name="&gt;&gt;gbxShow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxShow.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxShow.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="cmbRecentSources.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1248,9 +1209,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>517, 474</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>440, 440</value>
   </data>
@@ -1276,6 +1234,6 @@
     <value>BaseReadDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5771.23458, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.6001.17627, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

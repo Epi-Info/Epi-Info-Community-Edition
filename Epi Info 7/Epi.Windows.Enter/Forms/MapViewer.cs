@@ -62,7 +62,7 @@ namespace Epi.Windows.Enter
         {
             if (MessageBox.Show("Use external data?", "Data source", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
-                Epi.Windows.Dialogs.BaseReadDialog dlg = new Epi.Windows.Dialogs.BaseReadDialog();
+                Epi.Windows.Dialogs.BaseReadDialog dlg = new Epi.Windows.Dialogs.BaseReadDialog(this);
                 if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     List<object> resultsArray = new List<object>();
