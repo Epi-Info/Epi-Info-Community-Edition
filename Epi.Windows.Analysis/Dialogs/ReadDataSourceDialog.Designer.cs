@@ -281,7 +281,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.txtDataSource);
             this.Controls.Add(this.lblDataSource);
             this.Controls.Add(this.lblDataSourceDrivers);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReadDataSourceDialog";

@@ -271,7 +271,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.lbxVariables);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbxAllExcept);
-            this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WriteDialog";
