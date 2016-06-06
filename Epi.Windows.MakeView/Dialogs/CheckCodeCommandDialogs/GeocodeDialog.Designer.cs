@@ -122,6 +122,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // btnCancel
             // 
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -172,7 +173,9 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             // 
             // GeocodeDialog
             // 
+            this.AcceptButton = this.btnOk;
             resources.ApplyResources(this, "$this");
+            this.CancelButton = this.btnCancel;
             this.Controls.Add(this.cbxLongitude);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbxLatitude);
@@ -186,7 +189,6 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GeocodeDialog";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.ResumeLayout(false);
             this.PerformLayout();
