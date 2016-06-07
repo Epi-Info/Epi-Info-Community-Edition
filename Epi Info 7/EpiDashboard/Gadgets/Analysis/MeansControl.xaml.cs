@@ -2647,9 +2647,9 @@ namespace EpiDashboard
                         case "stratavariable":
                             //cbxFieldStrata.Text = child.InnerText.Replace("&lt;", "<");
                             //lbxFieldStrata.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
-                            if (string.IsNullOrEmpty(child.InnerText))
+                            if (!string.IsNullOrEmpty(child.InnerText))
                             {
-                                ((MeansParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
+                                ((MeansParameters)Parameters).StrataVariableNames.Add( child.InnerText.Replace("&lt;", "<"));
                             }
 
                             break;
