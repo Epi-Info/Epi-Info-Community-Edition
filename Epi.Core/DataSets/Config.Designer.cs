@@ -8632,6 +8632,7 @@ namespace Epi.DataSets {
                 this.columnDashboardLineListRowLimit.AllowDBNull = false;
                 this.columnRepublish_IsRepbulishable.DefaultValue = ((bool)(false));
                 this.columnRepublish_RequireSecurityKey.DefaultValue = ((bool)(false));
+                this.columnIsVariableValidationEnable.DefaultValue = ((bool)(false));
                 this.columnAutoTouchKeyboard.DefaultValue = ((bool)(false));
             }
             

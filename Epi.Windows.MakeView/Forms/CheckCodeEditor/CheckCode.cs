@@ -350,7 +350,16 @@ namespace Epi.Windows.MakeView.Forms
             DockManager.FastMoveDraw = false;
             DockManager.Style = DockVisualStyle.VS2005;
             Configuration config = Configuration.GetNewInstance();
-            if (config.Settings.IsVariableValidationEnable  == true)
+
+            bool validationEnabled = false;
+
+            try
+            {
+                validationEnabled = config.Settings.IsVariableValidationEnable;
+            }
+            catch { }
+
+            if (validationEnabled)
             {
                 this.enableVariableValidationToolStripMenuItem.Checked = true;
                 enableVariableValidationToolStripMenuItem.CheckState = CheckState.Checked;
