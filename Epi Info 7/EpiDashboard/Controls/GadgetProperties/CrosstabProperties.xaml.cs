@@ -764,6 +764,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (Parameters.ColumnNames.Count > 0 && !String.IsNullOrEmpty(Parameters.ColumnNames[0])) GetValueLists(Parameters.ColumnNames[0]);
             if (!String.IsNullOrEmpty(Parameters.CrosstabVariableName)) GetValueLists(Parameters.CrosstabVariableName);
 
+            if (cbxExposureField.SelectedIndex > -1)
+                if (!String.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
+                    GetValueLists(cbxExposureField.SelectedItem.ToString());
+            if (cbxOutcomeField.SelectedIndex > -1)
+                if (!String.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
+                    GetValueLists(cbxOutcomeField.SelectedItem.ToString());
+
             foreach (string YesItem in Parameters.YesValues)
             {
                 if (lbxAllValues.Items.Contains(YesItem))
@@ -846,35 +853,35 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void cbxExposureField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (panelVariables == null) return;
-           /* if (cbxExposureField.SelectedIndex > -1)
+            if (cbxExposureField.SelectedIndex > -1)
             {
                 if (!String.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
                 {
                     if (Parameters.ColumnNames.Count > 0)
                     {
-                        Parameters.ColumnNames[0] = cbxExposureField.SelectedItem.ToString();
+//                        Parameters.ColumnNames[0] = cbxExposureField.SelectedItem.ToString();
                     }
                     else
                     {
-                        Parameters.ColumnNames.Add(cbxExposureField.SelectedItem.ToString());
+//                        Parameters.ColumnNames.Add(cbxExposureField.SelectedItem.ToString());
                     }
                    Update2x2ValueMappings();
                 }
-            }*/
+            }
             CheckVariables();
         }
 
         private void cbxOutcomeField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (panelVariables == null) return;
-          /*  if (cbxOutcomeField.SelectedIndex > -1)
+            if (cbxOutcomeField.SelectedIndex > -1)
             {
                 if (!String.IsNullOrEmpty(cbxOutcomeField.SelectedItem.ToString()))
                 {
-                    Parameters.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
+//                    Parameters.CrosstabVariableName = cbxOutcomeField.SelectedItem.ToString();
                     Update2x2ValueMappings();
                 }
-            }*/
+            }
         }
 
         private void btnAddYes_Click(object sender, RoutedEventArgs e)
