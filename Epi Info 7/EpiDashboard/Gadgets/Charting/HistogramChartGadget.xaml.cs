@@ -54,8 +54,6 @@ namespace EpiDashboard.Gadgets.Charting
         #region Properties
 
         //MOVED TO CHART PROPERTIES
-        DateTime? StartDate { get; set; }
-        DateTime? EndDate { get; set; }
         System.Drawing.Font AxisLabelFont { get; set; }
         System.Drawing.Font ChartTitleFont { get; set; }
         System.Drawing.Font ChartSubtitleFont { get; set; }
@@ -178,21 +176,21 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void CalculateByMinute(DataTable sourceDt, DataTable curveDt, int step)
         {
+            HistogramChartParameters settings = (HistogramChartParameters)Parameters;
+
             DateTime startDt = (DateTime)(sourceDt.Rows[0][0]);
+            if (settings.StartDate is DateTime)
+            {
+                startDt = (DateTime)settings.StartDate;
+            }
             startDt = new DateTime(startDt.Year, startDt.Month, startDt.Day, startDt.Hour, startDt.Minute, 0);
 
             DateTime endDt = (DateTime)(sourceDt.Rows[sourceDt.Rows.Count - 1][0]);
+            if (settings.EndDate is DateTime)
+            {
+                endDt = (DateTime)settings.EndDate;
+            }
             endDt = new DateTime(endDt.Year, endDt.Month, endDt.Day, endDt.Hour, endDt.Minute, 59);
-
-            if (StartDate.HasValue)
-            {
-                startDt = StartDate.Value;
-            }
-
-            if (EndDate.HasValue)
-            {
-                endDt = EndDate.Value;
-            }
 
             DateTime incDt = new DateTime(startDt.Ticks);
 
@@ -233,21 +231,21 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void CalculateByHour(DataTable sourceDt, DataTable curveDt, int step)
         {
+            HistogramChartParameters settings = (HistogramChartParameters)Parameters;
+
             DateTime startDt = (DateTime)(sourceDt.Rows[0][0]);
+            if (settings.StartDate is DateTime)
+            {
+                startDt = (DateTime)settings.StartDate;
+            }
             startDt = new DateTime(startDt.Year, startDt.Month, startDt.Day, startDt.Hour, 0, 0);
 
             DateTime endDt = (DateTime)(sourceDt.Rows[sourceDt.Rows.Count - 1][0]);
+            if (settings.EndDate is DateTime)
+            {
+                endDt = (DateTime)settings.EndDate;
+            } 
             endDt = new DateTime(endDt.Year, endDt.Month, endDt.Day, endDt.Hour, 59, 59);
-
-            if (StartDate.HasValue)
-            {
-                startDt = StartDate.Value;
-            }
-
-            if (EndDate.HasValue)
-            {
-                endDt = EndDate.Value;
-            }
 
             DateTime incDt = new DateTime(startDt.Ticks);
 
@@ -288,21 +286,21 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void CalculateByDay(DataTable sourceDt, DataTable curveDt, int step)
         {
+            HistogramChartParameters settings = (HistogramChartParameters)Parameters;
+            
             DateTime startDt = (DateTime)(sourceDt.Rows[0][0]);
+            if(settings.StartDate is DateTime)
+            {
+                startDt = (DateTime)settings.StartDate;
+            }
             startDt = new DateTime(startDt.Year, startDt.Month, startDt.Day, 0, 0, 0);
 
             DateTime endDt = (DateTime)(sourceDt.Rows[sourceDt.Rows.Count - 1][0]);
+            if (settings.EndDate is DateTime)
+            {
+                endDt = (DateTime)settings.EndDate;
+            }
             endDt = new DateTime(endDt.Year, endDt.Month, endDt.Day, 23, 59, 59);
-
-            if (StartDate.HasValue)
-            {
-                startDt = StartDate.Value;
-            }
-
-            if (EndDate.HasValue)
-            {
-                endDt = EndDate.Value;
-            }
 
             DateTime incDt = new DateTime(startDt.Ticks);
 
@@ -343,33 +341,23 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void CalculateByMonth(DataTable sourceDt, DataTable curveDt, int step)
         {
+            HistogramChartParameters settings = (HistogramChartParameters)Parameters;
+
             DateTime startDt = (DateTime)(sourceDt.Rows[0][0]);
+            if (settings.StartDate is DateTime)
+            {
+                startDt = (DateTime)settings.StartDate;
+            }
             startDt = new DateTime(startDt.Year, startDt.Month, 1, 0, 0, 0);
 
             DateTime endDt = (DateTime)(sourceDt.Rows[sourceDt.Rows.Count - 1][0]);
+            if (settings.EndDate is DateTime)
+            {
+                endDt = (DateTime)settings.EndDate;
+            }
             endDt = new DateTime(endDt.Year, endDt.Month, endDt.Day, 23, 59, 59);
 
-            if (StartDate.HasValue)
-            {
-                startDt = StartDate.Value;
-            }
-
-            if (EndDate.HasValue)
-            {
-                endDt = EndDate.Value;
-            }
-
             DateTime incDt = new DateTime(startDt.Ticks);
-
-            if (StartDate.HasValue)
-            {
-                startDt = StartDate.Value;
-            }
-
-            if (EndDate.HasValue)
-            {
-                endDt = EndDate.Value;
-            }
 
             while (incDt < endDt)
             {
@@ -408,33 +396,23 @@ namespace EpiDashboard.Gadgets.Charting
 
         private void CalculateByYear(DataTable sourceDt, DataTable curveDt, int step)
         {
+            HistogramChartParameters settings = (HistogramChartParameters)Parameters;
+            
             DateTime startDt = (DateTime)(sourceDt.Rows[0][0]);
+            if (settings.StartDate is DateTime)
+            {
+                startDt = (DateTime)settings.StartDate;
+            } 
             startDt = new DateTime(startDt.Year, 1, 1, 0, 0, 0);
 
             DateTime endDt = (DateTime)(sourceDt.Rows[sourceDt.Rows.Count - 1][0]);
+            if (settings.EndDate is DateTime)
+            {
+                endDt = (DateTime)settings.EndDate;
+            }
             endDt = new DateTime(endDt.Year, endDt.Month, endDt.Day, 23, 59, 59);
 
-            if (StartDate.HasValue)
-            {
-                startDt = StartDate.Value;
-            }
-
-            if (EndDate.HasValue)
-            {
-                endDt = EndDate.Value;
-            }
-
             DateTime incDt = new DateTime(startDt.Ticks);
-
-            if (StartDate.HasValue)
-            {
-                startDt = StartDate.Value;
-            }
-
-            if (EndDate.HasValue)
-            {
-                endDt = EndDate.Value;
-            }
 
             while (incDt < endDt)
             {
