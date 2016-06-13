@@ -807,7 +807,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;
 
             //Display settings
-            scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
+            scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
             txtWidth.Text = Parameters.ChartWidth.ToString();
@@ -818,7 +818,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxIncludeMissing.IsChecked = Parameters.IncludeMissing;
 
             //Display Colors and Styles settings
-            scrollViewerPropertiesColors.Height = scrollViewerPropertiesColors.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
+            scrollViewerPropertiesColors.Height = scrollViewerPropertiesColors.Height + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
             checkboxUseRefValues.IsChecked = Parameters.UseRefValues;
             checkboxAnnotationsY2.IsChecked = Parameters.Y2ShowAnnotations;
             checkboxShowSeriesLine.IsChecked = Parameters.ShowSeriesLine;
@@ -896,7 +896,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             cmbLineThicknessY2.SelectedIndex = (int)Parameters.Y2LineThickness - 1;
 
             //Display Labels settings
-            scrollViewerPropertiesLabels.MaxHeight = scrollViewerPropertiesLabels.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 768.0);
+            scrollViewerPropertiesLabels.MaxHeight = scrollViewerPropertiesLabels.MaxHeight + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
 
             txtYAxisLabelValue.Text = Parameters.YAxisLabel;
             txtYAxisFormatString.Text = Parameters.YAxisFormat;
