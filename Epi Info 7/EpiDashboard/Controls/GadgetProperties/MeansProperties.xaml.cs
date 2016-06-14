@@ -274,8 +274,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxShowANOVA.IsChecked = Parameters.ShowANOVA;
             checkboxListLabels.IsChecked = Parameters.ShowCommentLegalLabels;
             cbxFieldPrecision.SelectedIndex = Convert.ToInt32(Parameters.Precision);
-            lvFieldStrata.MaxHeight = lvFieldStrata.MaxHeight + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
-            scrollViewerDisplay.Height = scrollViewerDisplay.Height + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
+            lvFieldStrata.MaxHeight = lvFieldStrata.MaxHeight + (Math.Max(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
+            scrollViewerDisplay.Height = scrollViewerDisplay.Height + (Math.Max(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
             if (Parameters.StrataVariableNames.Count > 0)
             {
                 foreach (string s in Parameters.StrataVariableNames)
