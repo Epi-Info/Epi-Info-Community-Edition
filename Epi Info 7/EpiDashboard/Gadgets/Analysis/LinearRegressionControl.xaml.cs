@@ -1302,7 +1302,7 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("<p><small><strong>" + messagePanel.Text + "</strong></small></p>");
             }
 
-            if (!string.IsNullOrEmpty(txtFilterString.Text) && txtFilterString.Visibility == Visibility.Visible)
+            if (txtFilterString != null && !string.IsNullOrEmpty(txtFilterString.Text) && txtFilterString.Visibility == Visibility.Visible)
             {
                 htmlBuilder.AppendLine("<p><small><strong>" + txtFilterString.Text + "</strong></small></p>");
             }
