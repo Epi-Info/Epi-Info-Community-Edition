@@ -430,7 +430,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
             //Display settings
-            scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
+            scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (Math.Max(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
             txtWidth.Text = Parameters.ChartWidth.ToString();
@@ -438,7 +438,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
 
             //Display Labels settings
-            scrollViewerPropertiesLabels.MaxHeight = scrollViewerPropertiesLabels.MaxHeight + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
+            scrollViewerPropertiesLabels.MaxHeight = scrollViewerPropertiesLabels.MaxHeight + (Math.Max(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
 
             txtYAxisLabelValue.Text = Parameters.YAxisLabel;
             cmbXAxisLabelType.SelectedIndex = Parameters.XAxisLabelType;

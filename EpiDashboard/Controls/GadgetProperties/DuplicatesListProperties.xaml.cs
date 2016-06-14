@@ -378,7 +378,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 txtMaxWidth.Text = Parameters.Width.ToString();
             }
 
-            svVariables.Height = svVariables.Height + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
+            svVariables.Height = svVariables.Height + (Math.Max(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
 
             lbxAvailableVariables.Height = lbxAvailableVariables.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
             lbxSortOrder.Height = lbxSortOrder.Height + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);

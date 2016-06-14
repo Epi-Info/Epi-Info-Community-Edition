@@ -217,7 +217,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 cbxFieldStrata.SelectedItem = Parameters.StrataVariableNames[0].ToString();
             }
 
-            scrollViewerDisplay.Height = scrollViewerDisplay.Height + (Math.Min(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
+            scrollViewerDisplay.Height = scrollViewerDisplay.Height + (Math.Max(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
