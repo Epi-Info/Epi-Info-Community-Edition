@@ -397,6 +397,8 @@ namespace EpiDashboard
                         {
                             StatisticsRepository.LogisticRegression logisticRegression = new StatisticsRepository.LogisticRegression();
 
+//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
+
                             results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
 
                             results.casesIncluded = results.regressionResults.casesIncluded;
@@ -1439,7 +1441,7 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("<p><small><strong>" + messagePanel.Text + "</strong></small></p>");
             }
 
-            if (!string.IsNullOrEmpty(txtFilterString.Text) && txtFilterString.Visibility == Visibility.Visible)
+            if (txtFilterString != null && !string.IsNullOrEmpty(txtFilterString.Text) && txtFilterString.Visibility == Visibility.Visible)
             {
                 htmlBuilder.AppendLine("<p><small><strong>" + txtFilterString.Text + "</strong></small></p>");
             }
