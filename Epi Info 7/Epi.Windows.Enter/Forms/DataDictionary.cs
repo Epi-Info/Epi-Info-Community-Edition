@@ -213,6 +213,11 @@ namespace Epi.Windows.Enter.Forms
 
                 displayTable = this.view.Project.Metadata.GetDataDictionary(this.view);
 
+                foreach(DataColumn column in displayTable.Columns)
+	            {
+	                column.AllowDBNull = true;
+                }
+
                 foreach (DataRow dr in displayTable.Rows)
                 {
                     if (dr["Special Info"] is string)
@@ -343,6 +348,12 @@ namespace Epi.Windows.Enter.Forms
             else
             {
                 displayTable = this.view.Project.GetCodeTableData((string)viewSelect.SelectedItem);
+
+                foreach (DataColumn column in displayTable.Columns)
+                {
+                    column.AllowDBNull = true;
+                }
+
                 BindingSource source = new BindingSource();
                 source.DataSource = displayTable;
                 this.dataGridView.DataSource = source;

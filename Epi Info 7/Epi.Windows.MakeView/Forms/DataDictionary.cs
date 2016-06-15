@@ -344,6 +344,12 @@ namespace Epi.Windows.MakeView.Forms
             else
             {
                 displayTable = this.view.Project.GetCodeTableData((string)viewSelect.SelectedItem);
+
+                foreach (DataColumn column in displayTable.Columns)
+                {
+                    column.AllowDBNull = true;
+                }
+
                 BindingSource source = new BindingSource();
                 source.DataSource = displayTable;
                 this.dataGridView.DataSource = source;
