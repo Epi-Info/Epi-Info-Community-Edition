@@ -2706,7 +2706,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>Invalid page name;  reserved word.</value>
   </data>
   <data name="WARNING_CHILD_VIEW_NOT_SET" xml:space="preserve">
-    <value>The selected Related View button is not currently associated with a view. The button can be assigned a child view by changing the properties of the button in the from designer.</value>
+    <value>The selected Related View button is not currently associated with a view. The button can be assigned a child view by changing the properties of the button in the Form Designer tool.</value>
   </data>
   <data name="CNTXT_FXN_SYSFXN_CURRUSER" xml:space="preserve">
     <value>CURRENTUSER</value>
