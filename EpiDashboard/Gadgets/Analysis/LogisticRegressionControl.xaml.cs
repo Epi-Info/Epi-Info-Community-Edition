@@ -1443,7 +1443,7 @@ namespace EpiDashboard
 
             if (txtFilterString != null && !string.IsNullOrEmpty(txtFilterString.Text) && txtFilterString.Visibility == Visibility.Visible)
             {
-                htmlBuilder.AppendLine("<p><small><strong>" + txtFilterString.Text + "</strong></small></p>");
+                htmlBuilder.AppendLine("<p><small><strong>" + txtFilterString.Text + "</strong></small></p> ");
             }
 
                 htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
