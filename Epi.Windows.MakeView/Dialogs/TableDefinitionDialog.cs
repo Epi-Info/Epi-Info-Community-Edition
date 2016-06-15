@@ -270,11 +270,23 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 string uniqueId = txtUniqueId.Text.Trim().Substring(i, 1);
                 Match m = Regex.Match(uniqueId, "[0-9]");
+
                 if (!m.Success)
                 {
                     MsgBox.Show(SharedStrings.INVALID_STARTING_UNIQUE_ID, "Invalid Unique Id", MessageBoxButtons.OK);
                     valid = false;
                     txtUniqueId.Clear();
+                    txtUniqueId.Focus();
+                    return valid;
+                }
+
+                Int32 maxValue = (Int32)(Int32.MaxValue - Int16.MaxValue);
+                Int32 givenValue = int.Parse(txtUniqueId.Text.Trim());
+
+                if (givenValue > maxValue)
+                {
+                    MsgBox.Show(SharedStrings.INVALID_STARTING_UNIQUE_ID_TOO_LONG, "Invalid Unique Id", MessageBoxButtons.OK);
+                    valid = false;
                     txtUniqueId.Focus();
                     return valid;
                 }

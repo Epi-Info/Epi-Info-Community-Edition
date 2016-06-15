@@ -3194,4 +3194,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="DASHBOARD_MATCHED_PAIR_CASE_CONTROL" xml:space="preserve">
     <value>Matched pair case control</value>
   </data>
+  <data name="INVALID_STARTING_UNIQUE_ID_TOO_LONG" xml:space="preserve">
+    <value>The starting value given must be less than 2,147,450,880</value>
+  </data>
 </root>
