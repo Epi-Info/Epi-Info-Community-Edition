@@ -948,12 +948,6 @@ namespace EpiDashboard
 
                     String precisionFormat = "N4";
 
-                    if (Convert.ToInt32(((MeansParameters)Parameters).Precision) >= 0)
-                    {
-                        precisionFormat = "N" + ((MeansParameters)Parameters).Precision;
-                    }
-
-
                     TextBlock txtMeanP = new TextBlock();
                     txtMeanP.Text = stats.meansDiff.ToString(precisionFormat);
                     txtMeanP.Margin = new Thickness(4, 0, 4, 0);
@@ -1417,11 +1411,6 @@ namespace EpiDashboard
             Grid.SetColumn(lblF, 4);
 
             String roundingFormat = "N4";
-
-            if (Convert.ToInt32(((MeansParameters)Parameters).Precision) >= 0)
-            {
-                roundingFormat = "N" + ((MeansParameters)Parameters).Precision;
-            }
 
             TextBlock txtSSBetween = new TextBlock();
             txtSSBetween.Text = stats.ssBetween.Value.ToString(roundingFormat);
