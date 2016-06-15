@@ -108,7 +108,7 @@ namespace EpiDashboard.Gadgets.StatCalc
         /// <returns>XmlNode</returns>
         public override XmlNode Serialize(XmlDocument doc)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         /// <summary>
