@@ -117,7 +117,7 @@ namespace Epi.Data.Services
         #endregion //Public Properties
 
         #region Public Methods
-        
+
         /// <summary>
         /// Is there a column in collected data for each field in metadata with matching [Name] and [Type].
         /// </summary>
@@ -153,20 +153,20 @@ namespace Epi.Data.Services
                     fieldType = (int)row["FieldTypeId"];
                     query = string.Format("FieldTypeId = {0}", (int)row["FieldTypeId"]);
                     fieldTypesRows = fieldTypesTable.Select(query);
-                
+
                     if (fieldTypesRows.Length == 0)
                     {
                         continue;
                     }
-                
+
                     dataTypeId = (int)fieldTypesRows[0]["DataTypeId"];
-                
+
                     if ((fieldType == (int)MetaFieldType.LabelTitle) ||
                         (fieldType == (int)MetaFieldType.Group) ||
                         (fieldType == (int)MetaFieldType.CommandButton) ||
                         (fieldType == (int)MetaFieldType.Mirror))
                     {
-                        continue; 
+                        continue;
                     }
 
                     if (fieldType == (int)MetaFieldType.Grid)
@@ -177,7 +177,7 @@ namespace Epi.Data.Services
                     if (columnNames.Contains((string)row[ColumnNames.NAME]) == false &&
                         columnNames.Contains(((string)row[ColumnNames.NAME]).ToUpper()) == false)
                     {
-                        return false; 
+                        return false;
                     }
                 }
             }
@@ -201,7 +201,7 @@ namespace Epi.Data.Services
         {
             dbDriver.AlterColumnType(tableName, columnName, columnType);
         }
-        
+
         /// <summary>
         /// dpb - consider deprecating this method. While it may work with
         /// other databases, it may fail to return a valid bool when using
@@ -211,7 +211,7 @@ namespace Epi.Data.Services
         /// <returns></returns>
         public bool isViewTableFull(string tableName)
         {
-            if ( GetTableColumnCount(tableName) >= TableColumnMax)
+            if (GetTableColumnCount(tableName) >= TableColumnMax)
             {
                 return true;
             }
@@ -245,7 +245,7 @@ namespace Epi.Data.Services
 
         public void SuggestRenameFieldInCollectedData(Field field, string nameBeforeEdit)
         {
-            if(TableExists(field.GetView().TableName))
+            if (TableExists(field.GetView().TableName))
             {
                 if (dbDriver.ColumnExists(field.GetView().TableName, nameBeforeEdit))
                 {
@@ -253,7 +253,7 @@ namespace Epi.Data.Services
                 }
             }
         }
-       
+
         /// <summary>
         /// Synchronizes metadata and data table 
         /// [drops and/or inserts data columns in the view table]
@@ -264,7 +264,7 @@ namespace Epi.Data.Services
             {
                 if (isWebMode)
                 {
-                    return; 
+                    return;
                 }
 
                 Boolean noDataTable = dbDriver.TableExists(view.TableName) == false;
@@ -290,7 +290,7 @@ namespace Epi.Data.Services
                             {
                                 string insertStatement = string.Format("insert into {0}([UniqueKey], [GlobalRecordId]) values (@UniqueKey, @GlobalRecordId)", view.TableName);
                                 Query insertQuery = dbDriver.CreateQuery(insertStatement);
-                                insertQuery.Parameters.Add(new QueryParameter("@UniqueKey", DbType.Int16, StartingId - 1));
+                                insertQuery.Parameters.Add(new QueryParameter("@UniqueKey", DbType.Int32, StartingId - 1));
                                 insertQuery.Parameters.Add(new QueryParameter("@GlobalRecordId", DbType.String, ""));
                                 dbDriver.ExecuteNonQuery(insertQuery);
 
@@ -303,7 +303,7 @@ namespace Epi.Data.Services
                     }
 
                     view.SetTableName(view.TableName);
-                    
+
                     foreach (Page page in view.Pages)
                     {
                         SynchronizePageTable(page);
@@ -344,9 +344,9 @@ namespace Epi.Data.Services
                             columnsToDrop.Add(columnName);
                         }
                     }
-                    
+
                     // << drop all the fields in the view table that are not defined in metadata >>
-                    foreach(string drop in columnsToDrop)
+                    foreach (string drop in columnsToDrop)
                     {
                         if (dbDriver.DeleteColumn(view.Name, drop))
                         {
@@ -528,7 +528,7 @@ namespace Epi.Data.Services
             Page Page = new Page();
             foreach (Page page in view.Pages)
             {
-                if (page.Fields.Contains(columnName)) 
+                if (page.Fields.Contains(columnName))
                 {
                     Page = page;
                     break;
@@ -569,7 +569,7 @@ namespace Epi.Data.Services
 
             return true;
         }
-        
+
         /// <summary>
         /// Deletes a specific table in the database.
         /// </summary>
@@ -676,7 +676,7 @@ namespace Epi.Data.Services
             {
                 if (publishTable.Rows[0]["EWEOrganizationKey"] == DBNull.Value || publishTable.Rows[0]["EWEFormId"] == DBNull.Value)
                 { return ""; }
-                
+
                 organizationKey = (string)publishTable.Rows[0]["EWEOrganizationKey"];
                 formId = (string)publishTable.Rows[0]["EWEFormId"];
             }
@@ -701,7 +701,7 @@ namespace Epi.Data.Services
 
             return statusMessage;
         }
-        
+
         private static void worker_SaveAsResponse(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
@@ -712,7 +712,7 @@ namespace Epi.Data.Services
                 string statusMessage = (string)((Dictionary<string, object>)(e.Argument))["StatusMessage"];
                 Guid responseId = (Guid)((Dictionary<string, object>)(e.Argument))["ResponseId"];
 
-               var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
                 Epi.EWEManagerService.PreFilledAnswerRequest Request = new Epi.EWEManagerService.PreFilledAnswerRequest();
                 Dictionary<string, string> responseDictionary = new Dictionary<string, string>();
 
@@ -730,7 +730,7 @@ namespace Epi.Data.Services
                         {
                             value = dataField.CurrentRecordValueObject.ToString();
                         }
-                        
+
                         responseDictionary.Add(((Epi.INamedObject)dataField).Name, value);
                     }
                 }
@@ -775,7 +775,7 @@ namespace Epi.Data.Services
             catch { }
         }
 
-        protected  void worker_SaveAsResponseCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        protected void worker_SaveAsResponseCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
 
         }
@@ -882,7 +882,7 @@ namespace Epi.Data.Services
                 List<QueryParameter> fieldValueParams = new List<QueryParameter>();
                 foreach (IDataField dataField in view.Fields.DataFields)
                 {
-                    if (dataField is GlobalRecordIdField || dataField is ForeignKeyField )
+                    if (dataField is GlobalRecordIdField || dataField is ForeignKeyField)
                     {
                         fieldNames.Append(dbDriver.InsertInEscape(((Epi.INamedObject)dataField).Name));
 
@@ -916,12 +916,12 @@ namespace Epi.Data.Services
                 sb.Append(" insert into ");
                 sb.Append(dbDriver.InsertInEscape(view.TableName));
                 sb.Append(StringLiterals.SPACE);
-                
+
                 if (hasSaveColumns)
                 {
                     sb.Append(Util.InsertInParantheses(fieldNames.ToString() + ", [" + ColumnNames.RECORD_FIRST_SAVE_LOGON_NAME + "], [" + ColumnNames.RECORD_FIRST_SAVE_TIME + "]"));
                     sb.Append(" values (");
-                    sb.Append(fieldValues.ToString() + ", @" + ColumnNames.RECORD_FIRST_SAVE_LOGON_NAME +", @" + ColumnNames.RECORD_FIRST_SAVE_TIME );
+                    sb.Append(fieldValues.ToString() + ", @" + ColumnNames.RECORD_FIRST_SAVE_LOGON_NAME + ", @" + ColumnNames.RECORD_FIRST_SAVE_TIME);
                 }
                 else
                 {
@@ -962,13 +962,13 @@ namespace Epi.Data.Services
                     Util.InsertIn("max" + Util.InsertInParantheses(dbDriver.InsertInEscape(ColumnNames.UNIQUE_KEY)), StringLiterals.SPACE) +
                     "from" + StringLiterals.SPACE + dbDriver.InsertInEscape(view.TableName) +
                     relatedViewFilter);
-                
+
                 foreach (Epi.Page page in view.Pages)
                 {
                     this.SaveRecord(page);
                 }
 
-                int recordID; 
+                int recordID;
                 int.TryParse(dbDriver.ExecuteScalar(selectQuery).ToString(), out recordID);
                 foreach (GridField grid in view.Fields.GridFields)
                 {
@@ -993,7 +993,7 @@ namespace Epi.Data.Services
             {
                 return 0;
             }
-            
+
             Configuration config = Configuration.GetNewInstance();
 
             try
@@ -1087,7 +1087,7 @@ namespace Epi.Data.Services
                 {
                     throw new ArgumentOutOfRangeException("Record ID");
                 }
-                #endregion 
+                #endregion
 
                 UpdateBaseTable(view);
 
@@ -1112,7 +1112,7 @@ namespace Epi.Data.Services
             {
             }
         }
-        
+
         void UpdateBaseTable(View view)
         {
             bool hasColumns = dbDriver.ColumnExists(view.TableName, ColumnNames.RECORD_LAST_SAVE_LOGON_NAME);
@@ -1121,11 +1121,11 @@ namespace Epi.Data.Services
             {
                 System.Security.Principal.WindowsIdentity winId = System.Security.Principal.WindowsIdentity.GetCurrent();
                 String winIdName = winId.Name;
-            
+
                 StringBuilder sbUpdate = new StringBuilder();
                 sbUpdate.Append("update " + view.TableName);
                 sbUpdate.Append(Util.InsertIn("set", StringLiterals.SPACE));
-                
+
                 sbUpdate.Append(StringLiterals.LEFT_SQUARE_BRACKET);
                 sbUpdate.Append(ColumnNames.RECORD_LAST_SAVE_LOGON_NAME);
                 sbUpdate.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
@@ -1250,7 +1250,7 @@ namespace Epi.Data.Services
                                 sb.Append(StringLiterals.COMMERCIAL_AT);
                                 sb.Append(((Epi.INamedObject)dataField).Name);
 
-                                if (   dataField.FieldType == MetaFieldType.Time 
+                                if (dataField.FieldType == MetaFieldType.Time
                                     || dataField.FieldType == MetaFieldType.DateTime
                                     || dataField.FieldType == MetaFieldType.Date)
                                 {
@@ -1308,7 +1308,7 @@ namespace Epi.Data.Services
                     sb.Remove(0, sb.ToString().Length);
                     fieldValueParams.Clear();
                 }
-                
+
                 return 0;
             }
             finally
@@ -1355,26 +1355,26 @@ namespace Epi.Data.Services
 
             string relatedViewFilter = string.Empty;
             int count;
-            
+
             try
             {
                 if (view.IsRelatedView)
                 {
                     relatedViewFilter = " where "
-                        + dbDriver.InsertInEscape(ColumnNames.FOREIGN_KEY) 
+                        + dbDriver.InsertInEscape(ColumnNames.FOREIGN_KEY)
                         + StringLiterals.EQUAL
                         + "'" + view.ForeignKeyField.CurrentRecordValueString + "'";
                 }
 
-                string qryString = " select count(*) from " 
-                    + dbDriver.InsertInEscape(view.TableName) 
+                string qryString = " select count(*) from "
+                    + dbDriver.InsertInEscape(view.TableName)
                     + relatedViewFilter;
-                
+
                 Query query = dbDriver.CreateQuery(qryString);
 
                 object queryObject = dbDriver.ExecuteScalar(query);
                 string countAsString = queryObject.ToString();
-                
+
                 count = Int32.Parse(countAsString);
                 return count;
             }
@@ -1403,21 +1403,21 @@ namespace Epi.Data.Services
                 }
                 #endregion Input Validation
                 string relatedViewFilter = string.Empty;
-                
+
                 if (view.IsRelatedView)
                 {
                     relatedViewFilter = " where "
                         + dbDriver.InsertInEscape(ColumnNames.FOREIGN_KEY)
-                        + StringLiterals.EQUAL 
+                        + StringLiterals.EQUAL
                         + "'" + view.ForeignKeyField.CurrentRecordValueString + "'";
                 }
-                
-                string qryString = " select min(" 
-                    + dbDriver.InsertInEscape(ColumnNames.UNIQUE_KEY) 
-                    + ") from " 
-                    + dbDriver.InsertInEscape(view.TableName) 
+
+                string qryString = " select min("
+                    + dbDriver.InsertInEscape(ColumnNames.UNIQUE_KEY)
+                    + ") from "
+                    + dbDriver.InsertInEscape(view.TableName)
                     + relatedViewFilter;
-                
+
                 Query query = dbDriver.CreateQuery(qryString);
 
                 object result = dbDriver.ExecuteScalar(query);
@@ -1461,10 +1461,10 @@ namespace Epi.Data.Services
                         + "'" + view.ForeignKeyField.CurrentRecordValueString + "'";
                 }
 
-                string qryString = " select max(" 
-                    + dbDriver.InsertInEscape(ColumnNames.UNIQUE_KEY) 
+                string qryString = " select max("
+                    + dbDriver.InsertInEscape(ColumnNames.UNIQUE_KEY)
                     + ") from "
-                    + dbDriver.InsertInEscape(view.TableName) 
+                    + dbDriver.InsertInEscape(view.TableName)
                     + relatedViewFilter;
 
                 Query query = dbDriver.CreateQuery(qryString);
@@ -1522,7 +1522,7 @@ namespace Epi.Data.Services
                 {
                     DataRow dataRow = dataTable.Rows[0];
                     view.UniqueKeyField.CurrentRecordValueString = dataRow["UniqueKey"].ToString();
-                   // view.RecStatusField.CurrentRecordValueObject = dataRow["RecStatus"];
+                    // view.RecStatusField.CurrentRecordValueObject = dataRow["RecStatus"];
                     view.RecStatusField.CurrentRecordValueObject = dataRow["RECSTATUS"];//To support differnet locales such as Hungarian,Turkish.
                     view.CurrentGlobalRecordId = dataRow["GlobalRecordId"].ToString();
                 }
@@ -1567,8 +1567,8 @@ namespace Epi.Data.Services
                 StringBuilder sb = new StringBuilder();
                 sb.Append(" select ");
                 List<string> columnNames = new List<string>();
-                
-                foreach(string name in page.Fields.Names)
+
+                foreach (string name in page.Fields.Names)
                 {
                     if (page.Fields[name] is GridField || page.Fields[name] is GroupField)
                     {
@@ -1766,7 +1766,7 @@ namespace Epi.Data.Services
         /// <param name="comparisonTypes"></param>
         /// <returns>Records found meeting search criteria</returns>
         //        public DataTable GetSearchRecords(View view, Collection<string> searchFields, Collection<string> searchFieldValues)        
-        public DataTable GetSearchRecords(View view, Dictionary<string,int> OrFieldCount, Collection<string> searchFields, Collection<string> searchFieldItemTypes, Collection<string> comparisonTypes, ArrayList searchFieldValues)
+        public DataTable GetSearchRecords(View view, Dictionary<string, int> OrFieldCount, Collection<string> searchFields, Collection<string> searchFieldItemTypes, Collection<string> comparisonTypes, ArrayList searchFieldValues)
         {
             #region Input Validation
 
@@ -1825,14 +1825,14 @@ namespace Epi.Data.Services
                         Pages.Add(NewPage);
                     }
                 }
-                
+
                 //foreach (Page page in view.Pages)
                 //{
                 foreach (Page page in Pages)
                 {
                     //////////EI-674 End
                     string tableVarName = " pageTable" + page.Id.ToString();
-                    
+
                     string join = "("
                         + joinText
                         + " INNER JOIN "
@@ -1860,12 +1860,12 @@ namespace Epi.Data.Services
                         }
                         else
                         {
-                            sb.Append(" And ("); 
+                            sb.Append(" And (");
                         }
                     }
                     else
                     {
-                            sb.Append(" OR ");
+                        sb.Append(" OR ");
                     }
 
                     paramName = "@param" + ParameterCount.ToString();
@@ -1876,7 +1876,7 @@ namespace Epi.Data.Services
                         {
                             sb.Append(searchFields[i]);
                             sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.IS);  
+                            sb.Append(SqlKeyWords.IS);
                             sb.Append(StringLiterals.SPACE);
                             sb.Append(SqlKeyWords.NULL);
                         }
@@ -1907,7 +1907,7 @@ namespace Epi.Data.Services
                             sb.Append(SqlKeyWords.NULL);
                         }
                         else
-                        {                            
+                        {
                             if (searchFieldValues[i].Equals(config.Settings.RepresentationOfYes) || searchFieldValues[i].Equals("1") || searchFieldValues[i].Equals("(+)"))
                             {
                                 sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + paramName));
@@ -1920,7 +1920,7 @@ namespace Epi.Data.Services
                             }
                         }
                     }
-                    else if (searchFieldItemTypes[i].Equals("Number"))                    
+                    else if (searchFieldItemTypes[i].Equals("Number"))
                     {
                         if (searchFieldValues[i] == null)
                         {
@@ -1956,7 +1956,7 @@ namespace Epi.Data.Services
                         {
                             sb.Append("basetable." + searchFields[i] + " " + comparisonTypes[i] + " " + Util.InsertInSingleQuotes(searchFieldValues[i].ToString()));
                         }
-                     }
+                    }
                     else if (searchFieldItemTypes[i].Equals("LastSaveTime") || searchFieldItemTypes[i].Equals("FirstSaveTime"))
                     {
                         if (searchFieldValues[i] == null || string.IsNullOrEmpty(searchFieldValues[i].ToString()))
@@ -1988,7 +1988,7 @@ namespace Epi.Data.Services
                                 sb.Append(StringLiterals.SPACE);
                                 sb.Append(SqlKeyWords.NULL);
                             }
-                           
+
                         }
                     }
                     //--
@@ -2027,19 +2027,19 @@ namespace Epi.Data.Services
                                 if (isDate)
                                 {
                                     if (searchFieldItemTypes[i].Equals("Time"))
-                                    {   
+                                    {
                                         sb.Append(searchFields[i]);
                                         sb.Append(StringLiterals.SPACE);
                                         sb.Append(SqlKeyWords.LIKE);
                                         sb.Append(StringLiterals.SPACE);
-                                        sb.Append(Util.InsertInSingleQuotes(StringLiterals.PERCENT + date.ToLongTimeString() + StringLiterals.PERCENT));                                        
+                                        sb.Append(Util.InsertInSingleQuotes(StringLiterals.PERCENT + date.ToLongTimeString() + StringLiterals.PERCENT));
                                     }
                                     else
                                     {
-                                        sb.Append(searchFields[i] + 
-                                            StringLiterals.SPACE + 
-                                            comparisonTypes[i] + 
-                                            StringLiterals.SPACE + 
+                                        sb.Append(searchFields[i] +
+                                            StringLiterals.SPACE +
+                                            comparisonTypes[i] +
+                                            StringLiterals.SPACE +
                                             paramName);
                                         parameters.Add(new QueryParameter(paramName, DbType.DateTime, date));
                                     }
@@ -2079,7 +2079,7 @@ namespace Epi.Data.Services
                                 sb.Append(StringLiterals.SPACE);
                                 sb.Append(SqlKeyWords.LIKE);
                                 sb.Append(StringLiterals.SPACE);
-                                sb.Append(string.Format("'{0}'", searchFieldValues[i].ToString().Replace("*", "%").Replace("'","")));
+                                sb.Append(string.Format("'{0}'", searchFieldValues[i].ToString().Replace("*", "%").Replace("'", "")));
                                 ParameterCount--;
                             }
                             else
@@ -2141,9 +2141,9 @@ namespace Epi.Data.Services
                         RecordBuilder.Append("',");
 
                     }
-                
+
                     RecordBuilder.Length = RecordBuilder.Length - 1;
-                
+
 
                     sb.Append(RecordBuilder);
                     sb.Append(")");
@@ -2423,7 +2423,7 @@ namespace Epi.Data.Services
 
         #region Create Statements
 
-       
+
         /// <summary>
         /// Creates a datatable corresponding to a view.
         /// </summary>
@@ -2448,17 +2448,17 @@ namespace Epi.Data.Services
                 " ("
 
                 + Util.InsertIn(ColumnNames.UNIQUE_KEY, StringLiterals.SPACE)
-                + SqlDataTypes.INTEGER32 
+                + SqlDataTypes.INTEGER32
                 + " IDENTITY(" + startingId + ",1) primary key not null, "
-                
-                + Util.InsertIn(ColumnNames.REC_STATUS, StringLiterals.SPACE) 
-                + SqlDataTypes.INTEGER16 
+
+                + Util.InsertIn(ColumnNames.REC_STATUS, StringLiterals.SPACE)
+                + SqlDataTypes.INTEGER16
                 + " not null default 1,"
 
                 + Util.InsertIn(ColumnNames.GLOBAL_RECORD_ID, StringLiterals.SPACE)
                 + SqlDataTypes.NVARCHAR
                 + "(255) not null,"
-                
+
                 + Util.InsertIn(ColumnNames.RECORD_FIRST_SAVE_LOGON_NAME, StringLiterals.SPACE)
                 + SqlDataTypes.NVARCHAR
                 + "(255),"
@@ -2477,16 +2477,16 @@ namespace Epi.Data.Services
                 + SqlDataTypes.NVARCHAR
                 + "(255)"
 
-                +")");
+                + ")");
 
             dbDriver.ExecuteNonQuery(createQuery);
 
-            
+
             if (dbDriver.FullName.Contains("[MS Access]"))
             {
                 string insertStatement = string.Format("insert into {0}([UniqueKey], [GlobalRecordId]) values (@UniqueKey, @GlobalRecordId)", tableName);
                 Query insertQuery = dbDriver.CreateQuery(insertStatement);
-                insertQuery.Parameters.Add(new QueryParameter("@UniqueKey", DbType.Int16, startingId - 1));
+                insertQuery.Parameters.Add(new QueryParameter("@UniqueKey", DbType.Int32, startingId - 1));
                 insertQuery.Parameters.Add(new QueryParameter("@GlobalRecordId", DbType.String, ""));
                 dbDriver.ExecuteNonQuery(insertQuery);
 
@@ -2521,7 +2521,7 @@ namespace Epi.Data.Services
                 " ("
                 + Util.InsertIn(ColumnNames.GLOBAL_RECORD_ID, StringLiterals.SPACE)
                 + SqlDataTypes.NVARCHAR
-                + "(255) primary key not null)"); 
+                + "(255) primary key not null)");
 
             dbDriver.ExecuteNonQuery(createQuery);
 
@@ -2776,13 +2776,13 @@ namespace Epi.Data.Services
             }
 
             Query createQuery = dbDriver.CreateQuery
-            ( "create table " + dbDriver.InsertInEscape(tableName) +
+            ("create table " + dbDriver.InsertInEscape(tableName) +
                 Util.InsertInParantheses
                 (
                     Util.InsertIn(ColumnNames.UNIQUE_KEY, StringLiterals.SPACE) +
-                    "INT identity (" + 
-                    startingId + 
-                    ",1) primary key not null" + 
+                    "INT identity (" +
+                    startingId +
+                    ",1) primary key not null" +
                     StringLiterals.COMMA +
 
                     Util.InsertIn(ColumnNames.UNIQUE_ROW_ID, StringLiterals.SPACE) +
@@ -2793,11 +2793,11 @@ namespace Epi.Data.Services
                     SqlDataTypes.NVARCHAR +
                     "(255)," +
 
-                    Util.InsertIn(ColumnNames.REC_STATUS, StringLiterals.SPACE) + 
-                    "INT not null default 1" + 
+                    Util.InsertIn(ColumnNames.REC_STATUS, StringLiterals.SPACE) +
+                    "INT not null default 1" +
                     StringLiterals.COMMA +
-                            
-                    Util.InsertIn(ColumnNames.FOREIGN_KEY, StringLiterals.SPACE) + 
+
+                    Util.InsertIn(ColumnNames.FOREIGN_KEY, StringLiterals.SPACE) +
                     SqlDataTypes.NVARCHAR +
                     "(255)"
                 )
@@ -2850,7 +2850,7 @@ namespace Epi.Data.Services
                     Util.InsertInParantheses
                     (
                         Util.InsertIn(ColumnNames.UNIQUE_KEY, StringLiterals.SPACE) +
-                        "INT identity (1,1) primary key not null" + 
+                        "INT identity (1,1) primary key not null" +
                         StringLiterals.COMMA +
 
                         Util.InsertIn(ColumnNames.UNIQUE_ROW_ID, StringLiterals.SPACE) +
@@ -2861,11 +2861,11 @@ namespace Epi.Data.Services
                         SqlDataTypes.NVARCHAR +
                         "(255)," +
 
-                        Util.InsertIn(ColumnNames.REC_STATUS, StringLiterals.SPACE) + 
-                        "INT default 1" + 
+                        Util.InsertIn(ColumnNames.REC_STATUS, StringLiterals.SPACE) +
+                        "INT default 1" +
                         StringLiterals.COMMA +
 
-                        Util.InsertIn(ColumnNames.FOREIGN_KEY, StringLiterals.SPACE) + 
+                        Util.InsertIn(ColumnNames.FOREIGN_KEY, StringLiterals.SPACE) +
                         SqlDataTypes.NVARCHAR +
                         "(255)"
                     )
@@ -2956,9 +2956,9 @@ namespace Epi.Data.Services
             if (existingGridRowTable.Rows.Count > 0)
             {
                 gridLevelGlobalRecordId = existingGridRowTable.Rows[0][ColumnNames.GLOBAL_RECORD_ID].ToString();
-                
+
                 DataRow[] deleteRowCandidates = existingGridRowTable.Select(
-                    string.Format("GlobalRecordId='{0}'", 
+                    string.Format("GlobalRecordId='{0}'",
                     gridLevelGlobalRecordId));
 
                 foreach (DataRow row in deleteRowCandidates)
@@ -2995,13 +2995,13 @@ namespace Epi.Data.Services
                         if (isInsert)
                         {
                             uniqueRowId = Guid.NewGuid().ToString();
-                            
+
                             iRowsAffected += InsertGridRecord(
-                                view.CurrentGlobalRecordId, 
-                                gridLevelGlobalRecordId, 
-                                uniqueRowId, 
-                                field, 
-                                row, 
+                                view.CurrentGlobalRecordId,
+                                gridLevelGlobalRecordId,
+                                uniqueRowId,
+                                field,
+                                row,
                                 tableName);
                         }
                         else
@@ -3028,14 +3028,14 @@ namespace Epi.Data.Services
                                             sbUpdate.Append(row[column.Name].ToString());
                                         }
                                     }
-                                    else if (column is DateColumn 
-                                        || column is TimeColumn 
+                                    else if (column is DateColumn
+                                        || column is TimeColumn
                                         || column is DateTimeColumn
                                         )
                                     {
                                         sbUpdate.Append((string.IsNullOrEmpty(row[column.Name].ToString()) ? "null" : Util.InsertInSingleQuotes(row[column.Name].ToString())));
                                     }
-                                    else if ( column is CheckboxColumn)
+                                    else if (column is CheckboxColumn)
                                     {
                                         string valueString = "0";
 
@@ -3068,7 +3068,7 @@ namespace Epi.Data.Services
                                     sbUpdate.Append(", ");
                                 }
                             }
-                            
+
                             sbUpdate.Remove(sbUpdate.Length - 2, 2);
                             sbUpdate.Append(Util.InsertIn("where", StringLiterals.SPACE));
                             sbUpdate.Append(ColumnNames.UNIQUE_ROW_ID + StringLiterals.EQUAL);
@@ -3116,7 +3116,7 @@ namespace Epi.Data.Services
                         fieldNames.Append(dbDriver.InsertInEscape(column.Name));
                     }
                 }
-                
+
                 sbInsert.Append(Util.InsertInParantheses(fieldNames.ToString()));
                 sbInsert.Append(Util.InsertIn("values", StringLiterals.SPACE));
 
@@ -3149,17 +3149,17 @@ namespace Epi.Data.Services
                             {
                                 fieldValues.Append(Util.InsertInSingleQuotes(uniqueRowId));
                             }
-                            else if (column is TimeColumn 
-                                || column is DateColumn 
-                                || column is DateTimeColumn )
+                            else if (column is TimeColumn
+                                || column is DateColumn
+                                || column is DateTimeColumn)
                             {
                                 string valueString = "null";
 
-                                if(string.IsNullOrEmpty(dRow[column.Name].ToString()) == false)
+                                if (string.IsNullOrEmpty(dRow[column.Name].ToString()) == false)
                                 {
                                     valueString = Util.InsertInSingleQuotes(dRow[column.Name].ToString());
                                 }
-                                
+
                                 fieldValues.Append(valueString);
                             }
                             else if (column is CheckboxColumn)
@@ -3199,7 +3199,7 @@ namespace Epi.Data.Services
                         }
                     }
                 }
-                
+
                 sbInsert.Append(Util.InsertInParantheses(fieldValues.ToString()));
                 Query insertQuery = dbDriver.CreateQuery(sbInsert.ToString());
                 return dbDriver.ExecuteNonQuery(insertQuery);
@@ -3690,7 +3690,7 @@ namespace Epi.Data.Services
             return dbDriver.CreateQuery(ansiSqlStatement);
         }
 
-        
+
         #endregion  //IDbDriver Members
 
     }

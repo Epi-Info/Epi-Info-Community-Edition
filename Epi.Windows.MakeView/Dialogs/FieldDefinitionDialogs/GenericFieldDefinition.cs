@@ -306,11 +306,15 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
         /// <returns>Randomly-generated word from the string array</returns>
         private string AddGarbage()
         {
-            string[] words = { "man", "the", "for", "and", "a", "with", "bird", "fox", "HAL9000", "tree", "is", "at", "she", "he", "has", "no", "yes", "butterfly", "rabbit", "pavement", "automobile", "dictionary", "output", "influenza", "spigot", "periwinkle", "osculate", "skullduggery", "moved", "ate", "late", "early", "time", "hepatitis", "name", "age", "DOB", "rival", "country", "city", "county", "help", "yell", "reward", "instant", "every", "cap", "sugar", "zero", "gremlin", "tan", "cold", "tape", "covered", "slime", "mud", "dirt", "rock", "sand", "grass", "concrete", "vaccinated", "vaccine", "tremble", "arm", "leg", "look", "looked", "ensorcell", "drizzle", "finagled", "drove", "salad" };
+            string wordString = "omnis qui bill transisse camera repraesentantum et senatus et antequam fiat praeceptum deferat praeses civitatum foederatarum si ipse probat signant sin ille reddit obiectiones penates in quibus nata erit qui intrábunt in latitudine obiecta eorum journal et transiens retracto eam si post talem recogitatio duas partes domus illius conveniat bill transeat erit misit primum ad aliam domum qua similiter in relata si probari quod duas partes domus erit Law sed in omnibus casibus et sententiis houses dirimatur et nays yeas et nomina personarum et rogandis bill in ingressus fuerit acta singulis domibus respective si non praeses reversus intra decem dominica exceptis postquam fuerit oblata ille sit lex non secus acsi signavi nisi per dilationem congress ne reditum in hoc casu non lege protinus convenerunt ipsi ob primam electionem erunt aeque divisi ut in tria genera sedibus senatorum primi generis investigationes erunt in elapso anno secundo classis ad elapso anno quarto et tertium genus in elapso anno ut sit tertia omnis electus anno secundo et si contingat vacancies renuntiatione vel aliter per sinum cuiuslibet legifero publicae earum executive appointments temporariam sequenti sessionem legifero qui talia sic imple Ti quisque domo iudex comitia redit neu propriis alumnis ac pars maior constituunt quisque facere quorum business sed ut paucioribus dimitti diem et simus auctores cogere ministrorum absentis membra ita et sub talibus vt efficiantur singulis domibus";
+            string[] words = wordString.Split(' ');
 
             Random rnd = new Random(Convert.ToInt32(DateTime.Now.Millisecond));
             int num = rnd.Next(words.Length);
-            return words[num] + " ";
+
+            string word = words[num];
+            word = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(word.ToLower());
+            return word + " ";
         }
 
         private void txtFieldName_KeyDown(object sender, KeyEventArgs e)
