@@ -256,24 +256,42 @@ namespace Epi.Windows.Enter.Forms
                         //--
                     }
                     //--2365
-                    Boolean bshouldRepeatLast = (Boolean)dr[ColumnNames.SHOULD_REPEAT_LAST];
-                    if (bshouldRepeatLast == true)
+                    Boolean bshouldRepeatLast = false;
+                    if (dr[ColumnNames.SHOULD_REPEAT_LAST] != DBNull.Value)
                     {
-                        dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO].ToString() + Constants.VARREPEATLAST;
+                        bshouldRepeatLast = (Boolean)dr[ColumnNames.SHOULD_REPEAT_LAST];
+                        if (bshouldRepeatLast == true)
+                        {
+                            dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO].ToString() + Constants.VARREPEATLAST;
+                        }
                     }
-                    Boolean bIsRequired = (Boolean)dr[ColumnNames.IS_REQUIRED];
-                    if (bIsRequired == true)
+
+                    Boolean bIsRequired = false;
+                    if (dr[ColumnNames.IS_REQUIRED] != DBNull.Value)
                     {
-                        dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO].ToString() + Constants.VARREQUIRED;
+                        bIsRequired = (Boolean)dr[ColumnNames.IS_REQUIRED];
+                        if (bIsRequired == true)
+                        {
+                            dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO].ToString() + Constants.VARREQUIRED;
+                        }
                     }
-                    Boolean bIsReadOnly = (Boolean)dr[ColumnNames.IS_READ_ONLY];
-                    if (bIsReadOnly == true)
+
+                    Boolean bIsReadOnly = false;
+                    if (dr[ColumnNames.IS_READ_ONLY] != DBNull.Value)
                     {
-                        dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] + Constants.VARREADONLY;
+                        bIsReadOnly = (Boolean)dr[ColumnNames.IS_READ_ONLY];
+                        if (bIsReadOnly == true)
+                        {
+                            dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] + Constants.VARREADONLY;
+                        }
                     }
-                    if (dr[ColumnNames.UPPER].ToString().Length > 0 && dr[ColumnNames.LOWER].ToString().Length > 0)
-                    {
-                        dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] + Constants.VARRANGE + CharLiterals.LEFT_SQUARE_BRACKET + dr[ColumnNames.LOWER].ToString() + CharLiterals.COMMA + dr[ColumnNames.UPPER].ToString() + CharLiterals.RIGHT_SQUARE_BRACKET;
+
+                    if (dr[ColumnNames.UPPER] != DBNull.Value && dr[ColumnNames.LOWER] != DBNull.Value)
+                    { 
+                        if (dr[ColumnNames.UPPER].ToString().Length > 0 && dr[ColumnNames.LOWER].ToString().Length > 0)
+                        {
+                            dr[Constants.SPECIALINFO] = dr[Constants.SPECIALINFO] + Constants.VARRANGE + CharLiterals.LEFT_SQUARE_BRACKET + dr[ColumnNames.LOWER].ToString() + CharLiterals.COMMA + dr[ColumnNames.UPPER].ToString() + CharLiterals.RIGHT_SQUARE_BRACKET;
+                        }
                     }
                     //---- 
                                        
