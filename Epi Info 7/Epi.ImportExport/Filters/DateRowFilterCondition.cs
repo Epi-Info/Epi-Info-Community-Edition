@@ -13,6 +13,9 @@ namespace Epi.ImportExport
     {
         #region Constructors
 
+        public DateRowFilterCondition()
+        {
+        }
         /// <summary>
         /// Constructor
         /// </summary>

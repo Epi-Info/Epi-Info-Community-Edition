@@ -926,9 +926,10 @@ namespace Epi.Windows.ImportExport.Dialogs
                             {
                                 string strType = grandChildElement.Attributes["filterType"].Value + ",Epi.ImportExport";
                                 Type filterType = Type.GetType(strType, false, true);
+                                
                                 if (filterType != null)
                                 {
-                                    IRowFilterCondition condition = (IRowFilterCondition)Activator.CreateInstance(filterType, new object[] { });
+                                    IRowFilterCondition condition = (IRowFilterCondition)Activator.CreateInstance(filterType);
                                     condition.CreateFromXml(grandChildElement);
                                     conditions.Add(condition);
                                 }
