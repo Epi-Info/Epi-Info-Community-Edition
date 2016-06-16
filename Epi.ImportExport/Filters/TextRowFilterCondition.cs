@@ -14,6 +14,9 @@ namespace Epi.ImportExport
     {
         #region Constructors
 
+        public TextRowFilterCondition()
+        {
+        }
         /// <summary>
         /// Constructor
         /// </summary>

@@ -13,6 +13,9 @@ namespace Epi.ImportExport
     {
         #region Constructors
 
+        public YesNoRowFilterCondition()
+        {
+        }
         /// <summary>
         /// Constructor
         /// </summary>
