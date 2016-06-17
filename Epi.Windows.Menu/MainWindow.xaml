@@ -86,13 +86,17 @@
                             <ToolTip Visibility="Hidden">OTHER EPI RESOURCES</ToolTip>
                         </Button.ToolTip>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource setting_buttons}"><TextBlock x:Name="txtOtherEpiResources">x_OTHER EPI RESOURCES</TextBlock>
-                                            <Image HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="11" Margin="5 0 0 -1">
-                                                <Image.Source>
-                                                    <BitmapImage UriSource="images/showandhide_arrow.png"/>
-                                                </Image.Source>
-                                            </Image>
+                            <TextBlock x:Name="txtOtherEpiResources"  Style="{StaticResource setting_buttons}">
+                                
+                               x_OTHER EPI RESOURCES
+                                
+                                           
                             </TextBlock>
+                            <Image HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="11" Margin="-20 0 0 -1">
+                                <Image.Source>
+                                    <BitmapImage UriSource="images/showandhide_arrow.png"/>
+                                </Image.Source>
+                            </Image>
                         </StackPanel>
                     </Button>
                     <StackPanel x:Name="submenuEpiResouces" Height="0" >
@@ -100,16 +104,16 @@
                             <Button.ToolTip>
                                 <ToolTip Visibility="Hidden">ACTIVEEPI.com</ToolTip>
                             </Button.ToolTip>
-                            <StackPanel Background="#e6e7e8">
-                                <TextBlock Style="{StaticResource setting_buttons}"><TextBlock Margin="5 0 0 0">ACTIVEEPI.com</TextBlock></TextBlock>
-                            </StackPanel>
+
+                            <TextBlock Background="#e6e7e8" Style="{StaticResource setting_buttons}">ACTIVEEPI.com</TextBlock>
+                          
                         </Button>
                         <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="17" KeyUp="openEpi_Keydown" Click="openEpi_Click">
                             <Button.ToolTip>
                                 <ToolTip Visibility="Hidden">OPENEPI.com</ToolTip>
                             </Button.ToolTip>
                             <StackPanel  >
-                                <TextBlock Background="#e6e7e8" Style="{StaticResource setting_buttons}" ><TextBlock Margin="5 0 0 0">OPENEPI.com</TextBlock></TextBlock>
+                                <TextBlock Background="#e6e7e8" Style="{StaticResource setting_buttons}" >OPENEPI.com</TextBlock>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -139,7 +143,7 @@
                         <ColumnDefinition Width="60" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Background="Transparent" Grid.Column="0" Margin="15 0 0 0" Orientation="Horizontal">
-                        <Image  ToolTip="Epi Info Logo" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="225" Margin="0 0 0 0">
+                        <Image ToolTip="Epi Info Logo" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="225" Margin="0 0 0 0">
                             <Image.Source>
                                 <BitmapImage UriSource="images/epi_info_logo_full.png"/>
                             </Image.Source>
@@ -157,6 +161,7 @@
                             <StackPanel>
                                 <Path Panel.ZIndex="1"  Margin="4 0 0 0" Cursor="Hand" Data="M15.8,20.4H34.2L25,29.6Z" Fill="White" Height="6" Stretch="Fill" Width="11"/>
                                 <Path Panel.ZIndex="0" Margin="4 0 0 0" Cursor="Hand" Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm0,27.6-9.2-9.2H34.2Z " Fill="#58595b" Height="25" Stretch="Fill" Width="25"/>
+                                <TextBlock Foreground="White"  x:Name="txtMenuOptions" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200" ><Run Text="Additional Menu Options"/></TextBlock>
                             </StackPanel>
                         </Button>
 
