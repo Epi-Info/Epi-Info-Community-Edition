@@ -266,30 +266,38 @@ namespace Epi.Windows.MakeView.Dialogs
         private bool ValidateStartingId()
         {
             bool valid = true;
-            for (int i = 0; i < txtUniqueId.Text.Trim().Length; i++)
+
+            string uniqueId = txtUniqueId.Text.Trim();
+            Match m = Regex.Match(uniqueId, "[0-9]");
+
+            if (!m.Success)
             {
-                string uniqueId = txtUniqueId.Text.Trim().Substring(i, 1);
-                Match m = Regex.Match(uniqueId, "[0-9]");
+                MsgBox.Show(SharedStrings.INVALID_STARTING_UNIQUE_ID, "Invalid Unique Id", MessageBoxButtons.OK);
+                valid = false;
+                txtUniqueId.Clear();
+                txtUniqueId.Focus();
+                return valid;
+            }
 
-                if (!m.Success)
-                {
-                    MsgBox.Show(SharedStrings.INVALID_STARTING_UNIQUE_ID, "Invalid Unique Id", MessageBoxButtons.OK);
-                    valid = false;
-                    txtUniqueId.Clear();
-                    txtUniqueId.Focus();
-                    return valid;
-                }
+            Int32 maxValue = (Int32)(Int32.MaxValue - Int16.MaxValue);
+            Int32 givenValue = 1;
 
-                Int32 maxValue = (Int32)(Int32.MaxValue - Int16.MaxValue);
-                Int32 givenValue = int.Parse(txtUniqueId.Text.Trim());
+            bool couldParse = int.TryParse(txtUniqueId.Text.Trim(), out givenValue);
 
-                if (givenValue > maxValue)
-                {
-                    MsgBox.Show(SharedStrings.INVALID_STARTING_UNIQUE_ID_TOO_LONG, "Invalid Unique Id", MessageBoxButtons.OK);
-                    valid = false;
-                    txtUniqueId.Focus();
-                    return valid;
-                }
+            if (false == couldParse)
+            {
+                valid = false;
+                txtUniqueId.Clear();
+                txtUniqueId.Focus();
+                return valid;
+            }
+
+            if (givenValue > maxValue)
+            {
+                MsgBox.Show(SharedStrings.INVALID_STARTING_UNIQUE_ID_TOO_LONG, "Invalid Unique Id", MessageBoxButtons.OK);
+                valid = false;
+                txtUniqueId.Focus();
+                return valid;
             }
 
             if (valid)
