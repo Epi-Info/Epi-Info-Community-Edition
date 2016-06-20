@@ -3630,10 +3630,7 @@ namespace EpiDashboard
                 {
                     root.AppendChild(gadget.Serialize(doc));
                 }
-                catch (NotImplementedException)
-                {
-                    // to avoid problems with the StatCalc gadgets
-                }
+                catch {}
             }
             return root;
         }
