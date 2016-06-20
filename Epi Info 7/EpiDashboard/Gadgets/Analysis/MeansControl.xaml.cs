@@ -2891,7 +2891,7 @@ namespace EpiDashboard
                 if (!(anovaPanel == null))
                 {
                     string precision = "4";
-                    Parameters.InputVariableList.TryGetValue("precision", out precision);
+
                     // check for t-test
                     if (grid.RowDefinitions.Count == 3)
                     {
