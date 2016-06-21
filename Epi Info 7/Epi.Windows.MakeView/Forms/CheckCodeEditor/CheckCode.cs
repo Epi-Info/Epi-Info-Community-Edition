@@ -137,10 +137,11 @@ namespace Epi.Windows.MakeView.Forms
             if (currentview != null)
                 currentview.MustRefreshFieldCollection = true;
             view = currentview;
-            Construct();
+            
             EpiInfo.Plugin.IEnterInterpreter MR = mainForm.EpiInterpreter;
             MR.Context.RemoveVariablesInScope(VariableScope.Standard);
-
+            SetFieldLists(MR);
+            Construct();
             if (!string.IsNullOrEmpty(view.CheckCode))
             {
                 try
@@ -154,6 +155,20 @@ namespace Epi.Windows.MakeView.Forms
 
                 }
             }
+           
+            BuildComboBox();
+            if (iserrcheckcode)
+            {
+                this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
+                iserrcheckcode = false;
+            }
+
+            this.codeText.SelectionStart = 0;
+            this.codeText.SelectionLength = 0;
+        }
+
+        private void SetFieldLists(EpiInfo.Plugin.IEnterInterpreter MR)
+        {
             List<string> CommandButtonFieldList = new List<string>();
             List<string> MerrorFieldList = new List<string>();
             List<string> GroupFieldList = new List<string>();
@@ -176,7 +191,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
                 else if (field is Epi.Fields.CommandButtonField || field is Epi.Fields.RelatedViewField)
                 {
-                   
+
                     CommandButtonFieldList.Add(field.Name);
                 }
                 else if (field is Epi.Fields.GroupField)
@@ -189,22 +204,13 @@ namespace Epi.Windows.MakeView.Forms
 
                     MerrorFieldList.Add(field.Name);
                 }
-                else if ( field is Epi.Fields.GridField)
+                else if (field is Epi.Fields.GridField)
                 {
 
                     GridFieldList.Add(field.Name);
                 }
             }
             MR.Context.AddToFieldList(CommandButtonFieldList, GroupFieldList, MerrorFieldList, GridFieldList);
-            BuildComboBox();
-            if (iserrcheckcode)
-            {
-                this.AddStatusInformationMessage(string.Format(SharedStrings.ERROR + ":\n{0}", "The Check Code does not compile."));
-                iserrcheckcode = false;
-            }
-
-            this.codeText.SelectionStart = 0;
-            this.codeText.SelectionLength = 0;
         }
 
         /// <summary>

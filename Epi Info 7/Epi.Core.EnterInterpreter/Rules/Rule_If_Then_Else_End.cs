@@ -24,23 +24,73 @@ namespace Epi.Core.EnterInterpreter.Rules
              */
 
             IfClause = EnterRule.BuildStatments(pContext, pToken.Tokens[1]);
-
+           
             if (pContext.IsVariableValidationEnable)
             {
                 var IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
 
                 IdentifierList = RemoveOp(IdentifierList);
-
+                List<string> NewList = new List<string>();
                 if (IdentifierList.Length > 0)
-                {
-                    foreach (var item in IdentifierList)
+                {//if 1
+                    try
                     {
-                        if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                        for (int i = 0; IdentifierList.Length > i ; i++)
+                        { // for 2
+                            int IndexStart = 0;
+                            int IndexEnd = 0;
+                            bool StartsAndEnds = false;
+                            if (IdentifierList[i].StartsWith("\"") && IdentifierList[i].EndsWith("\"")) {
+                                NewList.Add(IdentifierList[i]);
+                                StartsAndEnds = true; 
+                            }
+                            if (!StartsAndEnds)
+                            {
+                                if (IdentifierList[i].Contains("\""))
+                                {// if 2
+                                    IndexStart = i;
+                                    for (int j = i + 1; IdentifierList.Length > j; j++)
+                                    {
+                                        if (IdentifierList[j].Contains("\""))
+                                        {
+                                            IndexEnd = j;
+                                            break;
+                                        }
+
+                                    }
+                                    
+
+                                    i = IndexEnd;
+
+                                }//if 2
+                                if (IndexEnd > 0)
+                                {
+                                    for (int k = IndexStart; IdentifierList.Length > k; k++)
+                                    {
+                                        if (IndexEnd >= k)
+                                        {
+                                            NewList.Add(IdentifierList[k]);
+                                        }
+                                    }
+
+                                }
+                            }
+                        }// for 2
+                        foreach (var item in IdentifierList)
                         {
-                            this.Context.CommandVariableCheck.Add(item, "If");
+                            if (IdentifierList.Length > 0)
+                            {
+                                if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()) && !NewList.Contains(item))
+                                {
+                                    this.Context.CommandVariableCheck.Add(item, "If");
+                                }
+                            }
                         }
                     }
-                }
+                    catch(Exception ex){
+                        throw ex;
+                    }
+                }//if 1
             }
 
 
