@@ -86,6 +86,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.rNDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rOUNDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sTEPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQRTtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sINToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tANToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -536,6 +537,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.rNDToolStripMenuItem,
             this.rOUNDToolStripMenuItem,
             this.sTEPToolStripMenuItem,
+            this.sQRTtoolStripMenuItem,
             this.sINToolStripMenuItem,
             this.cOSToolStripMenuItem,
             this.tANToolStripMenuItem,
@@ -604,6 +606,12 @@ namespace Epi.Windows.Analysis.Dialogs
             this.sTEPToolStripMenuItem.Name = "sTEPToolStripMenuItem";
             resources.ApplyResources(this.sTEPToolStripMenuItem, "sTEPToolStripMenuItem");
             this.sTEPToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
+            // 
+            // sQRTtoolStripMenuItem
+            // 
+            this.sQRTtoolStripMenuItem.Name = "sQRTtoolStripMenuItem";
+            resources.ApplyResources(this.sQRTtoolStripMenuItem, "sQRTtoolStripMenuItem");
+            this.sQRTtoolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
             // 
             // sINToolStripMenuItem
             // 
@@ -1139,5 +1147,6 @@ namespace Epi.Windows.Analysis.Dialogs
         private System.Windows.Forms.ToolStripMenuItem lINEBREAKToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sTRLENToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rECORDCOUNTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sQRTtoolStripMenuItem;
     }
 }
