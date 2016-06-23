@@ -69,7 +69,7 @@ namespace EpiDashboard
             BarSpace = BarSpacing.None;
             Orientation = Orientation.Vertical;
             Palette = 12;
-            BarType = BarKind.Block;
+            BarType = BarKind.Rectangle;
             Step = 1;
             Interval = "Day";
             StartValue = string.Empty;
@@ -93,7 +93,7 @@ namespace EpiDashboard
 			//EI-98
             XAxisLabelFontSize = 12.0;
             XAxisFontSize = 12.0;
-            XAxisAngle = 0;
+            XAxisAngle = -45;
             ChartTitle = String.Empty;
             ChartSubTitle = String.Empty;
             //  Legend
