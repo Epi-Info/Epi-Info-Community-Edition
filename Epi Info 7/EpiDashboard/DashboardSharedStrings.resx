@@ -905,7 +905,7 @@ of records or select fewer fields for the group.</value>
     <value>Gadget Description</value>
   </data>
   <data name="GADGET_DISPLAY_LIST_LABELS" xml:space="preserve">
-    <value>Display list Labels</value>
+    <value>Display list labels</value>
   </data>
   <data name="GADGET_DISPLAY_LIST_VALUE" xml:space="preserve">
     <value>Display all list values</value>
