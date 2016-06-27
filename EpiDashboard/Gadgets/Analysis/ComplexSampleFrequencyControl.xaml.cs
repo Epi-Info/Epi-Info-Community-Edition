@@ -691,7 +691,7 @@ namespace EpiDashboard
         /// <returns>string</returns>
         public override string ToString()
         {
-            return "Complex Sample Frequency Gadget";
+            return "Complex Sample Frequencies Gadget";
         }
         #endregion
 
@@ -1446,7 +1446,7 @@ namespace EpiDashboard
 
             if (CustomOutputHeading == null || (string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)")))
             {
-                htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Complex Sample Frequency</h2>");
+                htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Complex Sample Frequencies</h2>");
             }
             else if(CustomOutputHeading != "(none)")
             {

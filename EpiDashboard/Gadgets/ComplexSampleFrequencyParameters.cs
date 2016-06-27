@@ -39,7 +39,7 @@ namespace EpiDashboard
             Show95CIUpperCol = true;
             ShowPercentBarsCol = true;
             IncludeFullSummaryStatistics = false;
-            GadgetTitle = "Complex Sample Frequency";
+            GadgetTitle = "Complex Sample Frequencies";
             PSUVariableName = string.Empty;
         }
 
