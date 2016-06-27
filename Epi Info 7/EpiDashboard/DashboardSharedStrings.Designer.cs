@@ -2283,7 +2283,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confidence Limits:.
+        ///   Looks up a localized string similar to Confidence limits:.
         /// </summary>
         public static string GADGET_CONFIDENCE_LIMITS {
             get {
@@ -2391,7 +2391,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Complex Sample Frequency.
+        ///   Looks up a localized string similar to Complex Sample Frequencies.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_COMPLEX_SAMPLE {
             get {
@@ -3030,7 +3030,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Independent Variables:.
+        ///   Looks up a localized string similar to Independent variables:.
         /// </summary>
         public static string GADGET_INDEPENDENT_VARIABLES {
             get {
@@ -3750,7 +3750,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Match Variable:.
+        ///   Looks up a localized string similar to Match variable:.
         /// </summary>
         public static string GADGET_MATCH_VARIABLE {
             get {
@@ -4713,7 +4713,7 @@ namespace EpiDashboard {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the variables for the Complex Sample Frequency..
+        ///   Looks up a localized string similar to Select the variables for the Complex Sample Frequencies..
         /// </summary>
         public static string GADGET_TABDESC_COMPLEX_SAMPLE {
             get {

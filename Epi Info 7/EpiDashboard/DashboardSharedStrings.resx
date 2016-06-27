@@ -1328,7 +1328,7 @@ of records or select fewer fields for the group.</value>
     <value>Clear Terms</value>
   </data>
   <data name="GADGET_CONFIDENCE_LIMITS" xml:space="preserve">
-    <value>Confidence Limits:</value>
+    <value>Confidence limits:</value>
   </data>
   <data name="GADGET_CONFIG_TITLE_ABERRATION_CHART" xml:space="preserve">
     <value>Aberration Detection Chart</value>
@@ -1340,7 +1340,7 @@ of records or select fewer fields for the group.</value>
     <value>Complex Sample Means</value>
   </data>
   <data name="GADGET_CONFIG_TITLE_COMPLEX_SAMPLE" xml:space="preserve">
-    <value>Complex Sample Frequency</value>
+    <value>Complex Sample Frequencies</value>
   </data>
   <data name="GADGET_CONFIG_TITLE_COMPLEX_TABLES" xml:space="preserve">
     <value>Complex Sample Tables</value>
@@ -1388,7 +1388,7 @@ of records or select fewer fields for the group.</value>
     <value>High value:</value>
   </data>
   <data name="GADGET_INDEPENDENT_VARIABLES" xml:space="preserve">
-    <value>Independent Variables:</value>
+    <value>Independent variables:</value>
   </data>
   <data name="GADGET_INTERACTION_TERMS" xml:space="preserve">
     <value>Interaction terms:</value>
@@ -1412,7 +1412,7 @@ of records or select fewer fields for the group.</value>
     <value>Marker type:</value>
   </data>
   <data name="GADGET_MATCH_VARIABLE" xml:space="preserve">
-    <value>Match Variable:</value>
+    <value>Match variable:</value>
   </data>
   <data name="GADGET_NO_INTERCEPT" xml:space="preserve">
     <value>No intercept</value>
@@ -1463,7 +1463,7 @@ of records or select fewer fields for the group.</value>
     <value>Select the variables for the Complex Sample Means.</value>
   </data>
   <data name="GADGET_TABDESC_COMPLEX_SAMPLE" xml:space="preserve">
-    <value>Select the variables for the Complex Sample Frequency.</value>
+    <value>Select the variables for the Complex Sample Frequencies.</value>
   </data>
   <data name="GADGET_TABDESC_COMPLEX_TABLES" xml:space="preserve">
     <value>Select the variables for the Complex Sample Tables.</value>

@@ -45,7 +45,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False" Text="Complex Sample Frequency" />
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False" Text="Complex Sample Frequencies" />
                 <Controls:GadgetMessagePanel Margin="5" x:Name="messagePanel" Grid.Row="2" Text="" />
                 <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
 
@@ -69,7 +69,7 @@
                               Data="M 5 0 L 10 10 0 10 Z" Fill="{DynamicResource gadgetBackgroundBrush}" IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Top" Height="7" />
                         
                             <StackPanel Orientation="Vertical" Margin="25, 10, 25, 25" HorizontalAlignment="Center" VerticalAlignment="Top" >
-                            <TextBlock x:Name="ConfigExpandedTitle" HorizontalAlignment="Center" TextAlignment="Center" Text="Complex Sample Frequency Properties" Margin="5" FontWeight="Bold" />
+                            <TextBlock x:Name="ConfigExpandedTitle" HorizontalAlignment="Center" TextAlignment="Center" Text="Complex Sample Frequencies Properties" Margin="5" FontWeight="Bold" />
                             <TextBlock x:Name="tblockMainVariable" HorizontalAlignment="Left" TextAlignment="Center" Text="Frequency of:" Margin="0,5,0,0"  />
                             <ComboBox x:Name="cbxField" HorizontalAlignment="Stretch" SelectedIndex="0" />
 
