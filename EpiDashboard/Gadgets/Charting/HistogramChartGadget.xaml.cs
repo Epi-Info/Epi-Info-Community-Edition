@@ -479,13 +479,13 @@ namespace EpiDashboard.Gadgets.Charting
 
                     if(!string.IsNullOrEmpty(startDate))
                     {
-                        string filterExp = table.Columns[0].ColumnName + " > '" + startDate + "'";
+                        string filterExp = table.Columns[0].ColumnName + " >= '" + startDate + "'";
                         table = table.Select(filterExp).CopyToDataTable();
                     }
 
                     if (!string.IsNullOrEmpty(endDate))
                     {
-                        string filterExp = table.Columns[0].ColumnName + " < '" + endDate + "'";
+                        string filterExp = table.Columns[0].ColumnName + " <= '" + endDate + "'";
                         table = table.Select(filterExp).CopyToDataTable();
                     }
 
