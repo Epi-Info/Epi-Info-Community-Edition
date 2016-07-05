@@ -546,6 +546,7 @@ namespace EpiDashboard.Mapping
                 inputVariableList.Add("maxrows", "500");
 
                 gadgetOptions.InputVariableList = inputVariableList;
+                gadgetOptions.ShouldIgnoreRowLimits = true;
                 loadedData = dashboardHelper.GenerateFrequencyTableforMap(gadgetOptions).First().Key;
 
                 foreach (DataRow dr in loadedData.Rows)
