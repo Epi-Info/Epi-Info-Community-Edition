@@ -4228,6 +4228,8 @@ namespace EpiDashboard
                             x = (double)row[0];
                             freqValues.Add(x.ToString("G17").TrimEnd());
                         }
+                        else
+                            freqValues.Add(string.Empty);
                     }
                     else
                     freqValues.Add(row[0].ToString().TrimEnd());                    
