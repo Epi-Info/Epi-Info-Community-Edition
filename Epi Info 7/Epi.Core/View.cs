@@ -139,6 +139,8 @@ namespace Epi
                 this.GetParent(Id);
             }
             this.fieldLockToken = new ArrayList();
+
+            UpdateMetaViewFields();
         }
 
         #endregion Constructors
@@ -1617,7 +1619,12 @@ namespace Epi
         #endregion Public Methods
 
         #region Private Methods
-        
+
+        private void UpdateMetaViewFields()
+        {
+            GetMetadata().UpdateMetaViewFields(this);
+        }
+
         private View GetParent(int relatedViewId)
         {
             parentView = this.GetMetadata().GetParentView(relatedViewId);

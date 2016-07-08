@@ -9093,6 +9093,37 @@ namespace Epi.Data.Services
             InsertProject();
         }
 
+        public void UpdateMetaViewFields(View view)
+        {
+            try
+            {
+                if (db.ColumnExists("metaViews", ColumnNames.EWEOrganization_KEY) == false)
+                {
+                    TableColumn tableEWEOrganizationColumn = new TableColumn(ColumnNames.EWEOrganization_KEY, GenericDbColumnType.StringLong, true);
+                    db.AddColumn("metaViews", tableEWEOrganizationColumn);
+                }
+                if (db.ColumnExists("metaViews", ColumnNames.EiWSOrganization_KEY) == false)
+                {
+                    TableColumn tableEWEOrganizationKeyColumn = new TableColumn(ColumnNames.EiWSOrganization_KEY, GenericDbColumnType.StringLong, true);
+                    db.AddColumn("metaViews", tableEWEOrganizationKeyColumn);
+                }
+                if (db.ColumnExists("metaViews", ColumnNames.EIWsForm_ID) == false)
+                {
+                    TableColumn tableEIWSFormIdColumn = new TableColumn(ColumnNames.EIWsForm_ID, GenericDbColumnType.StringLong, true);
+                    db.AddColumn("metaViews", tableEIWSFormIdColumn);
+                }
+                if (db.ColumnExists("metaViews", ColumnNames.EWEForm_ID) == false)
+                {
+                    TableColumn tableEWEFormIdColumn = new TableColumn(ColumnNames.EWEForm_ID, GenericDbColumnType.StringLong, true);
+                    db.AddColumn("metaViews", tableEWEFormIdColumn);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new GeneralException("Unable to update metaViews Table", ex);
+            }
+        }
+
         #endregion Public Methods
 
         #region Static Methods
