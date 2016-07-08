@@ -196,6 +196,9 @@ namespace Epi.Data.Services
             }
         }
 
+        public void UpdateMetaViewFields(View view)
+        {
+        }
 
         #region Select Statements
 

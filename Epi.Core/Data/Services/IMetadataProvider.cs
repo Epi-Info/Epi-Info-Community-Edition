@@ -651,8 +651,11 @@ namespace Epi.Data.Services
         /// <param name="fieldID">Id of field</param>
         /// <returns></returns>
         System.Data.DataTable GetFieldCheckCode_Before(int fieldID);
-
-
+        /// <summary>
+        /// Adds fields to metaView if not present.
+        /// </summary>
+        /// <param name="view">View</param>
+        void UpdateMetaViewFields(View view);
         /// <summary>
         /// Get Field Data for field.
         /// </summary>
