@@ -48,7 +48,7 @@ namespace Epi.Windows.Analysis.Dialogs
 		{
 			StringBuilder sb = new StringBuilder();
             //DEFECT 1136 .SELECT to .CANCELSELECT
-			sb.Append((CommandNames.CANCELSELECT).ToUpper());
+			sb.Append((CommandNames.CANCELSELECT).ToUpperInvariant());
 			CommandText = sb.ToString();
 		}
 		#endregion //Protected Methods

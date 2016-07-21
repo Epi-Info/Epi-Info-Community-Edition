@@ -236,7 +236,7 @@ namespace Epi.Core.EnterInterpreter
             }
             catch(InvalidOperationException ex)
             {
-                if (!ex.Message.ToUpper().Contains("STACK EMPTY"))
+                if (!ex.Message.ToUpperInvariant().Contains("STACK EMPTY"))
                 {
                     throw ex;
                 }
@@ -260,7 +260,7 @@ namespace Epi.Core.EnterInterpreter
                 }
                 catch (InvalidOperationException ex)
                 {
-                    if (!ex.Message.ToUpper().Contains("STACK EMPTY"))
+                    if (!ex.Message.ToUpperInvariant().Contains("STACK EMPTY"))
                     {
                         IsExecuteError = true;
                         if (this.host.IsSuppressErrorsEnabled)

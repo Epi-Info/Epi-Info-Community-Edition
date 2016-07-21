@@ -499,13 +499,13 @@ namespace EpiDashboard
                 booleanValues.Add("f", "t");
                 booleanValues.Add("n", "y");
 
-                if (!booleanValues.ContainsKey(DashboardHelper.Config.Settings.RepresentationOfNo.ToLower()))
+                if (!booleanValues.ContainsKey(DashboardHelper.Config.Settings.RepresentationOfNo.ToLowerInvariant()))
                 {
-                    booleanValues.Add(DashboardHelper.Config.Settings.RepresentationOfNo.ToLower(), DashboardHelper.Config.Settings.RepresentationOfYes.ToLower());
+                    booleanValues.Add(DashboardHelper.Config.Settings.RepresentationOfNo.ToLowerInvariant(), DashboardHelper.Config.Settings.RepresentationOfYes.ToLowerInvariant());
                 }
 
-                string firstColumnName = table.Columns[1].ColumnName.ToLower();
-                string secondColumnName = table.Columns[2].ColumnName.ToLower();
+                string firstColumnName = table.Columns[1].ColumnName.ToLowerInvariant();
+                string secondColumnName = table.Columns[2].ColumnName.ToLowerInvariant();
 
                 if (booleanValues.ContainsKey(firstColumnName) && secondColumnName.Equals(booleanValues[firstColumnName]))
                 {
@@ -2890,7 +2890,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                     case "exposurevariable": // added to work with the old 2x2 gadget
@@ -2924,7 +2924,7 @@ namespace EpiDashboard
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("stratavariable"))
+                            if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                             {
                                 ((PMCCParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                             }
@@ -2941,7 +2941,7 @@ namespace EpiDashboard
                         ((PMCCParameters)Parameters).MaxColumnNameLength = maxColumnLength.ToString();
                         break;
                     case "allvalues":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxAllValues.IsChecked = true;
                             ((PMCCParameters)Parameters).ShowAllListValues = true;
@@ -2953,7 +2953,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "showlistlabels":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxCommentLegalLabels.IsChecked = true;
                             ((PMCCParameters)Parameters).ShowCommentLegalLabels = true;
@@ -2965,7 +2965,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "includemissing":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxIncludeMissing.IsChecked = true;
                             ((PMCCParameters)Parameters).IncludeMissing = true;
@@ -2977,7 +2977,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "showstratasummaryonly":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxStrataSummaryOnly.IsChecked = true;
                             ((PMCCParameters)Parameters).StrataSummaryOnly = true;
@@ -2989,7 +2989,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "treatoutcomeascontinuous":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxOutcomeContinuous.IsChecked = true;
                             ((PMCCParameters)Parameters).TreatOutcomeAsContinuous = true;
@@ -3001,7 +3001,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "rowcolpercents":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxRowColPercents.IsChecked = true;
                             ((PMCCParameters)Parameters).RowColPercents = true;
@@ -3046,7 +3046,7 @@ namespace EpiDashboard
                     //    foreach (XmlElement field in child.ChildNodes)
                     //    {
                     //        List<string> fields = new List<string>();
-                    //        if (field.Name.ToLower().Equals("stratavariable"))
+                    //        if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                     //        {
                     //            lbxFieldStrata.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
                     //        }
@@ -3062,7 +3062,7 @@ namespace EpiDashboard
                     case "valueremappings":
                         foreach (XmlNode node in child.ChildNodes)
                         {
-                            switch (node.Name.ToLower())
+                            switch (node.Name.ToLowerInvariant())
                             {
                                 case "yesvalues":
                                     foreach (XmlNode valueNode in node.ChildNodes)

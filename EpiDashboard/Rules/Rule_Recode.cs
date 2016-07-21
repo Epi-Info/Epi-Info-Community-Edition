@@ -75,13 +75,13 @@ namespace EpiDashboard.Rules
 
             if (this.variableType.Equals(DashboardVariableType.YesNo))
             {
-                string val = elseValue.ToLower();
+                string val = elseValue.ToLowerInvariant();
 
-                if(val == "true" || val == "(+)" || val == dashboardHelper.Config.Settings.RepresentationOfYes.ToLower())
+                if(val == "true" || val == "(+)" || val == dashboardHelper.Config.Settings.RepresentationOfYes.ToLowerInvariant())
                 {
                     this.elseValue = "true";
                 }
-                else if (val == "false" || val == "(-)" || val == dashboardHelper.Config.Settings.RepresentationOfNo.ToLower())
+                else if (val == "false" || val == "(-)" || val == dashboardHelper.Config.Settings.RepresentationOfNo.ToLowerInvariant())
                 {
                     this.elseValue = "false";
                 }
@@ -560,13 +560,13 @@ namespace EpiDashboard.Rules
                 {
                     foreach (XmlElement recodeRow in child.ChildNodes)
                     {
-                        if (recodeRow.Name.ToLower().Equals("recodetablerow"))
+                        if (recodeRow.Name.ToLowerInvariant().Equals("recodetablerow"))
                         {
                             string[] itemArray = new string[columns];
                             int count = 0;
                             foreach (XmlElement recodeCell in recodeRow.ChildNodes)
                             {
-                                if (recodeCell.Name.ToLower().Equals("recodetabledata"))
+                                if (recodeCell.Name.ToLowerInvariant().Equals("recodetabledata"))
                                 {
                                     itemArray[count] = recodeCell.InnerText.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&");
                                     count++;

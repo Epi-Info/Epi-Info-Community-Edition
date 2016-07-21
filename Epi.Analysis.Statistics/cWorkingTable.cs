@@ -44,7 +44,7 @@ namespace Epi.Analysis.Statistics
                 {
                     if (R[0] == DBNull.Value || string.IsNullOrEmpty(R[0].ToString()))
                     {
-                        if (config["include-missing"].ToUpper() != "FALSE")
+                        if (config["include-missing"].ToUpperInvariant() != "FALSE")
                         {
                             DataColumn dataColumn = new DataColumn(config["RepresentationOfMissing"], typeof(double));
                             dataColumn.ExtendedProperties.Add("Value", R[0]);
@@ -201,7 +201,7 @@ namespace Epi.Analysis.Statistics
                         }
                         else
                         {
-                            if (config["include-missing"].ToUpper() != "FALSE")
+                            if (config["include-missing"].ToUpperInvariant() != "FALSE")
                             {
                                 Dest["__Count__"] = (double)Dest["__Count__"] + 1;
                             }
@@ -235,7 +235,7 @@ namespace Epi.Analysis.Statistics
                         }
                         else
                         {
-                            if (config["include-missing"].ToUpper() != "FALSE")
+                            if (config["include-missing"].ToUpperInvariant() != "FALSE")
                             {
                                rowCrossTabValue =  (double) Dest[config["RepresentationOfMissing"]];
                             }
@@ -252,7 +252,7 @@ namespace Epi.Analysis.Statistics
                         }
                         else
                         {
-                            if (config["include-missing"].ToUpper() != "FALSE")
+                            if (config["include-missing"].ToUpperInvariant() != "FALSE")
                             {
                                 Dest[config["RepresentationOfMissing"]] = rowCrossTabValue + 1;
                             }
@@ -267,7 +267,7 @@ namespace Epi.Analysis.Statistics
                         }
                         else
                         {
-                            if (config["include-missing"].ToUpper() != "FALSE")
+                            if (config["include-missing"].ToUpperInvariant() != "FALSE")
                             {
                                 Dest["__Count__"] = (double)Dest["__Count__"] + rowWeightValue;
                             }
@@ -286,7 +286,7 @@ namespace Epi.Analysis.Statistics
                         }
                         else
                         {
-                            if (config["include-missing"].ToUpper() != "FALSE")
+                            if (config["include-missing"].ToUpperInvariant() != "FALSE")
                             {
                                 Dest[config["RepresentationOfMissing"]] = rowCrossTabValue + 1;
                             }

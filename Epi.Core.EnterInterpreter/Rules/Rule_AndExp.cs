@@ -38,8 +38,8 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
                 // dpb: this needs to be fixed to work with more then just strings
                 
-                string LHS = this.NotExp.Execute().ToString().ToLower();
-                string RHS = this.AndExp.Execute().ToString().ToLower();
+                string LHS = this.NotExp.Execute().ToString().ToLowerInvariant();
+                string RHS = this.AndExp.Execute().ToString().ToLowerInvariant();
 
                 result = "true" == LHS && LHS == RHS;
             }

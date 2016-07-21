@@ -28,7 +28,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             if(result != null)
             {
-                result = result.ToString().ToUpper();
+                result = result.ToString().ToUpperInvariant();
             }
 
             return result;

@@ -46,12 +46,12 @@ namespace Epi.Core.EnterInterpreter.Rules
                 object LHSO = this.PowExp.Execute();
                 object RHSO = this.MultExp.Execute();
 
-                if (this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpper()))
+                if (this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpperInvariant()))
                 {
                     LHSO = Convert.ToDouble(LHSO);
                 }
 
-                if (this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpper()))
+                if (this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpperInvariant()))
                 {
                     RHSO = Convert.ToDouble(RHSO);
                 }

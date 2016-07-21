@@ -85,8 +85,8 @@ namespace Epi.Epi2000
                 //    {                        
                 //        dao.TableDef table = dbDao.TableDefs[sName];
                 //        if(table.Name.StartsWith("meta")) { continue; }
-                //        if(table.Name.ToLower().StartsWith("view") == false) { continue; }
-                //        string s = table.Properties["EpiTable"].Value.ToString().ToLower();
+                //        if(table.Name.ToLowerInvariant().StartsWith("view") == false) { continue; }
+                //        string s = table.Properties["EpiTable"].Value.ToString().ToLowerInvariant();
                 //        //Zack and EJ
                 //        //temporaryly, filter out grid view for now 9/17/2008
                 //        //when importing, we need to check if it is a grid view.
@@ -633,7 +633,7 @@ namespace Epi.Epi2000
             string fieldType = fieldRow[ColumnNames.TYPE].ToString();
             string list = fieldRow[ColumnNames.LISTS].ToString();
 
-            switch (fieldType.ToLower())
+            switch (fieldType.ToLowerInvariant())
             {
                 case "autoidnum":
                     return MetaFieldType.Number;
@@ -644,11 +644,11 @@ namespace Epi.Epi2000
                 case "combo":
                     if (!string.IsNullOrEmpty(list))
                     {
-                        if (list.ToLower().StartsWith("w"))
+                        if (list.ToLowerInvariant().StartsWith("w"))
                         {
                             return MetaFieldType.LegalValues;
                         }
-                        else if (list.ToLower().StartsWith("c"))
+                        else if (list.ToLowerInvariant().StartsWith("c"))
                         {
                             return MetaFieldType.Codes;
                         }

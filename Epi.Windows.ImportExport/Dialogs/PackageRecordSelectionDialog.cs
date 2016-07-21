@@ -488,7 +488,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                     string friendlyOp = cmbFieldOperator.SelectedItem.ToString();
 
                     condition = cmbFieldName.SelectedItem.ToString();
-                    if (friendlyOp.ToLower().Contains("is less than n days"))
+                    if (friendlyOp.ToLowerInvariant().Contains("is less than n days"))
                     {
                         condition = condition + StringLiterals.SPACE + friendlyOp.Replace(" N ", " " + txtFieldValue.Text + " ");
                     }

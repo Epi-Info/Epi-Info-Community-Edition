@@ -334,7 +334,7 @@ namespace EpiDashboard
 
                 foreach (KeyValuePair<string, string> kvp in inputVariableList)
                 {   
-                    if (kvp.Key.ToLower().Equals("includemissing"))
+                    if (kvp.Key.ToLowerInvariant().Equals("includemissing"))
                     {
                         includeMissing = bool.Parse(kvp.Value);
                     }
@@ -342,15 +342,15 @@ namespace EpiDashboard
 
                 foreach (KeyValuePair<string, string> kvp in inputVariableList)
                 {
-                    if (kvp.Value.ToLower().Equals("unsorted") || kvp.Value.ToLower().Equals("dependvar") || kvp.Value.ToLower().Equals("weightvar") || kvp.Value.ToLower().Equals("matchvar"))
+                    if (kvp.Value.ToLowerInvariant().Equals("unsorted") || kvp.Value.ToLowerInvariant().Equals("dependvar") || kvp.Value.ToLowerInvariant().Equals("weightvar") || kvp.Value.ToLowerInvariant().Equals("matchvar"))
                     {
                         columnNames.Add(kvp.Key);
-                        if (!kvp.Value.ToLower().Equals("dependvar"))
+                        if (!kvp.Value.ToLowerInvariant().Equals("dependvar"))
                         {
                             customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Key + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
                         }
                     }
-                    else if (kvp.Value.ToLower().Equals("discrete"))
+                    else if (kvp.Value.ToLowerInvariant().Equals("discrete"))
                     {
                         columnNames.Add(kvp.Key);
                         customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Key + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
@@ -1237,7 +1237,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         cbxFieldOutcome.Text = child.InnerText;
@@ -1254,20 +1254,20 @@ namespace EpiDashboard
                         if (child.InnerText.Equals("99")) { cbxConf.SelectedIndex = 3; }
                         break;
                     case "intercept":
-                        if (child.InnerText.ToLower().Equals("false")) { checkboxNoIntercept.IsChecked = true; }
+                        if (child.InnerText.ToLowerInvariant().Equals("false")) { checkboxNoIntercept.IsChecked = true; }
                         break;
                     case "covariates":
                         foreach (XmlElement covariate in child.ChildNodes)
                         {
-                            if (covariate.Name.ToLower().Equals("covariate"))
+                            if (covariate.Name.ToLowerInvariant().Equals("covariate"))
                             {
                                 lbxOtherFields.Items.Add(covariate.InnerText);
                             }
-                            if (covariate.Name.ToLower().Equals("dummy"))
+                            if (covariate.Name.ToLowerInvariant().Equals("dummy"))
                             {
                                 lbxDummyTerms.Items.Add(covariate.InnerText);
                             }
-                            if (covariate.Name.ToLower().Equals("interactionterm"))
+                            if (covariate.Name.ToLowerInvariant().Equals("interactionterm"))
                             {
                                 lbxInteractionTerms.Items.Add(covariate.InnerText);
                             }
@@ -1300,7 +1300,7 @@ namespace EpiDashboard
 
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "top":
                         Canvas.SetTop(this, double.Parse(attribute.Value));

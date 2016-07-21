@@ -272,13 +272,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             string temp = this.ExtractTokens(((NonterminalToken)T.Tokens[j]).Tokens);
                             string[] tmp = temp.Split('=');
 
-                            if (tmp[0].ToUpper().Contains("NOINTERCEPT"))
+                            if (tmp[0].ToUpperInvariant().Contains("NOINTERCEPT"))
                             {
                                 this.nointercept = true;
-                                tmp[0] = tmp[0].ToUpper().Replace("NOINTERCEPT", string.Empty);
+                                tmp[0] = tmp[0].ToUpperInvariant().Replace("NOINTERCEPT", string.Empty);
                             }
 
-                            switch (tmp[0].ToUpper().Trim())
+                            switch (tmp[0].ToUpperInvariant().Trim())
                             {                                
                                 case "WEIGHTVAR":
                                     this.WeightVar = tmp[1].Trim();

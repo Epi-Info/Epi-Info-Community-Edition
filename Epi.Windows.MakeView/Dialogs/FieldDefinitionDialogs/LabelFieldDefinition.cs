@@ -187,7 +187,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             }
             sentence = sentence.TrimEnd(' ');
             sentence = sentence + ". ";
-            latinSentence = sentence[0].ToString().ToUpper() + sentence.Substring(1);
+            latinSentence = sentence[0].ToString().ToUpperInvariant() + sentence.Substring(1);
 
             return latinSentence;
         }

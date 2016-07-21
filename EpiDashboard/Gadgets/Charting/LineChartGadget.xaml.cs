@@ -355,10 +355,10 @@ namespace EpiDashboard.Gadgets.Charting
         {
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "allvalues":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             ((LineChartParameters)Parameters).ShowAllListValues = true;
                         }
@@ -368,7 +368,7 @@ namespace EpiDashboard.Gadgets.Charting
                         }
                         break;
                     //case "horizontalgridlines":
-                    //    if (child.InnerText.ToLower().Equals("true"))
+                    //    if (child.InnerText.ToLowerInvariant().Equals("true"))
                     //    {
                     //        checkboxShowHorizontalGridLines.IsChecked = true;
                     //    }
@@ -504,7 +504,7 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -525,7 +525,7 @@ namespace EpiDashboard.Gadgets.Charting
                 {
                     if (!string.IsNullOrEmpty(child.InnerText))
                     {
-                        switch (child.Name.ToLower())
+                        switch (child.Name.ToLowerInvariant())
                         {
                             case "mainvariable":
                                 if (this.Parameters.ColumnNames.Count > 0)
@@ -551,7 +551,7 @@ namespace EpiDashboard.Gadgets.Charting
                                 foreach (XmlElement field in child.ChildNodes)
                                 {
                                     List<string> fields = new List<string>();
-                                    if (field.Name.ToLower().Equals("stratavariable"))
+                                    if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                                     {
                                         ((LineChartParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                                     }
@@ -580,28 +580,28 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((LineChartParameters)Parameters).Y2AxisType = int.Parse("0");
                                 break;
                             case "sort":
-                                if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
+                                if (child.InnerText.ToLowerInvariant().Equals("highlow") || child.InnerText.ToLowerInvariant().Equals("hightolow"))
                                 {
                                     ((LineChartParameters)Parameters).SortHighToLow = true;
                                 }
 
                                 break;
                             case "allvalues":
-                                if (child.InnerText.ToLower().Equals("true"))
+                                if (child.InnerText.ToLowerInvariant().Equals("true"))
                                 {
                                     ((LineChartParameters)Parameters).ShowAllListValues = true;
                                 }
                                 else { ((LineChartParameters)Parameters).ShowAllListValues = false; }
                                 break;
                             case "showlistlabels":
-                                if (child.InnerText.ToLower().Equals("true"))
+                                if (child.InnerText.ToLowerInvariant().Equals("true"))
                                 {
                                     ((LineChartParameters)Parameters).ShowCommentLegalLabels = true;
                                 }
                                 else { ((LineChartParameters)Parameters).ShowCommentLegalLabels = false; }
                                 break;
                             case "includemissing":
-                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).IncludeMissing = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((LineChartParameters)Parameters).IncludeMissing = true; }
                                 else { ((LineChartParameters)Parameters).IncludeMissing = false; }
                                 break;
                             case "customheading":
@@ -640,19 +640,19 @@ namespace EpiDashboard.Gadgets.Charting
                                 this.DataFilters.CreateFromXml(child);
                                 break;
                             case "userefvalues":
-                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).UseRefValues = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((LineChartParameters)Parameters).UseRefValues = true; }
                                 else { ((LineChartParameters)Parameters).UseRefValues = false; }
                                 break;
                             case "showannotations":
-                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowAnnotations = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((LineChartParameters)Parameters).ShowAnnotations = true; }
                                 else { ((LineChartParameters)Parameters).ShowAnnotations = false; }
                                 break;
                             case "y2showannotations":
-                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).Y2ShowAnnotations = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((LineChartParameters)Parameters).Y2ShowAnnotations = true; }
                                 else { ((LineChartParameters)Parameters).Y2ShowAnnotations = false; }
                                 break;
                             case "showgridlines":
-                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowGridLines = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((LineChartParameters)Parameters).ShowGridLines = true; }
                                 else { ((LineChartParameters)Parameters).ShowGridLines = false; }
                                 break;
                             case "palettecolor1":
@@ -805,15 +805,15 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((LineChartParameters)Parameters).ChartSubTitle = child.InnerText;
                                 break;
                             case "showlegend":
-                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegend = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((LineChartParameters)Parameters).ShowLegend = true; }
                                 else { ((LineChartParameters)Parameters).ShowLegend = false; }
                                 break;
                             case "showlegendborder":
-                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegendBorder = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((LineChartParameters)Parameters).ShowLegendBorder = true; }
                                 else { ((LineChartParameters)Parameters).ShowLegendBorder = false; }
                                 break;
                             case "showlegendvarnames":
-                                if (child.InnerText.ToLower().Equals("true")) { ((LineChartParameters)Parameters).ShowLegendVarNames = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((LineChartParameters)Parameters).ShowLegendVarNames = true; }
                                 else { ((LineChartParameters)Parameters).ShowLegendVarNames = false; }
                                 break;
                             case "legendfontsize":

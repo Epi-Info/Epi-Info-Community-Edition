@@ -202,7 +202,7 @@ namespace Epi.Data.Office.Forms
                 }
                 else if (Path.HasExtension(filename))
                 {
-                    if (!(Path.GetExtension(filename).ToLower() == ".mdb"))
+                    if (!(Path.GetExtension(filename).ToLowerInvariant() == ".mdb"))
                     {
                         MessageBox.Show(this, "Invalid database type. Please enter correct database extension name .mdb.", "Input Correct Extension Name", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -223,7 +223,7 @@ namespace Epi.Data.Office.Forms
                 if (valid == true)
                 {
                     Regex filenameRegex = new Regex(@"^[$#%A-Za-z0-9_-]*?\.mdb$");
-                    if (!filenameRegex.IsMatch(filename.ToLower()))
+                    if (!filenameRegex.IsMatch(filename.ToLowerInvariant()))
                     {
                         MessageBox.Show(this, "Invalid database name. Please enter a valid database name.", "Invalid database name", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         valid = false;

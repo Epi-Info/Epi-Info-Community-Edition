@@ -190,7 +190,7 @@ namespace Epi
 
                 string[] Driver = this.CollectedDataDriver.Split(',');
 
-                if (Driver[1].Trim().ToLower() == Configuration.WebDriver.ToLower())
+                if (Driver[1].Trim().ToLowerInvariant() == Configuration.WebDriver.ToLowerInvariant())
                 {
                     this.collectedData.IsWebMode = true;
                     switch (Driver[0].Trim())
@@ -877,7 +877,7 @@ namespace Epi
         public bool IsView(string name)
         {
             // dcs0 If it's not in MetaViews - it's not a view - period!
-            //if (name.ToLower().StartsWith("view"))
+            //if (name.ToLowerInvariant().StartsWith("view"))
             //{
             //    return true;
             //}

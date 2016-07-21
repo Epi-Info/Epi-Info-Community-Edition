@@ -179,7 +179,7 @@ namespace EpiDashboard.Rules
                 {
                     foreach (XmlElement recodeRow in child.ChildNodes)
                     {
-                        if (recodeRow.Name.ToLower().Equals("variable"))
+                        if (recodeRow.Name.ToLowerInvariant().Equals("variable"))
                         {
                             variables.Add(recodeRow.InnerText.Replace("&lt;", "<").Replace("&gt;", ">"));
                         }

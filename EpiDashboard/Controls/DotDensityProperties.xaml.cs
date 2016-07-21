@@ -232,12 +232,12 @@ namespace EpiDashboard.Controls
             List<string> numericFields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
             foreach (string field in fields)
             {
-                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "FKEY" || field.ToUpper() == "GLOBALRECORDID" || field.ToUpper() == "UNIQUEKEY" || field.ToUpper()== "FIRSTSAVETIME" || field.ToUpper() == "LASTSAVETIME" || field.ToUpper() == "SYSTEMDATE"))
+                if (!(field.ToUpperInvariant() == "RECSTATUS" || field.ToUpperInvariant() == "FKEY" || field.ToUpperInvariant() == "GLOBALRECORDID" || field.ToUpperInvariant() == "UNIQUEKEY" || field.ToUpperInvariant()== "FIRSTSAVETIME" || field.ToUpperInvariant() == "LASTSAVETIME" || field.ToUpperInvariant() == "SYSTEMDATE"))
                 { cmbDataKey.Items.Add(field);}
             }
             foreach (string field in numericFields)
             {
-                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
+                if (!(field.ToUpperInvariant() == "RECSTATUS" || field.ToUpperInvariant() == "UNIQUEKEY"))
                 { cmbValue.Items.Add(field); }
             }
             cmbValue.Items.Insert(0, "{Record Count}");
@@ -251,7 +251,7 @@ namespace EpiDashboard.Controls
 
             foreach (string field in numericFields)
             {
-                if (!(field.ToUpper() == "RECSTATUS" || field.ToUpper() == "UNIQUEKEY"))
+                if (!(field.ToUpperInvariant() == "RECSTATUS" || field.ToUpperInvariant() == "UNIQUEKEY"))
                 { cmbValue.Items.Add(field); }
             }
             cmbValue.Items.Insert(0, "{Record Count}");

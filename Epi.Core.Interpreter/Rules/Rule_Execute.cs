@@ -36,7 +36,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             //<Execute_Url_Statement> ::= EXECUTE Url
 
             firstParam = this.GetCommandElement(pToken.Tokens, 1);
-            if (firstParam.ToUpper() == CommandNames.NOWAITFOREXIT.ToUpper() || firstParam.ToUpper() == CommandNames.WAITFOREXIT.ToUpper())
+            if (firstParam.ToUpperInvariant() == CommandNames.NOWAITFOREXIT.ToUpperInvariant() || firstParam.ToUpperInvariant() == CommandNames.WAITFOREXIT.ToUpperInvariant())
             {
                 executeOption = firstParam;
                 commandlineString = this.GetCommandElement(pToken.Tokens, 2);
@@ -81,7 +81,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 Process process;
 
-                switch (executeOption.ToUpper())
+                switch (executeOption.ToUpperInvariant())
                 {
 
                     case "WAITFOREXIT":

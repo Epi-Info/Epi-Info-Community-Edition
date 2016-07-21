@@ -98,11 +98,11 @@ namespace Utilities.AppDataExtractor
         }
         private static string ToCamelCase(string str)
         {
-            return (str.Substring(0, 1).ToLower() + str.Substring(1, str.Length - 1));
+            return (str.Substring(0, 1).ToLowerInvariant() + str.Substring(1, str.Length - 1));
         }
         private static string ToPascalCase(string str)
         {
-            return (str.Substring(0, 1).ToUpper() + str.Substring(1, str.Length - 1));
+            return (str.Substring(0, 1).ToUpperInvariant() + str.Substring(1, str.Length - 1));
         }
     }
 }

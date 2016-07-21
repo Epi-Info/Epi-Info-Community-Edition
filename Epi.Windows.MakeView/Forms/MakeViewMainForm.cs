@@ -1615,14 +1615,14 @@ namespace Epi.Windows.MakeView.Forms
                     }
 
                     string filePath = openFileDialog.FileName.Trim();
-                    if (filePath.ToLower(System.Globalization.CultureInfo.CurrentCulture).EndsWith(FileExtensions.EPI_PROJ))
+                    if (filePath.ToLowerInvariant(System.Globalization.CultureInfo.CurrentCulture).EndsWith(FileExtensions.EPI_PROJ))
                     {
                         // This is an Epi 7 project. Open it.
                         Project project = new Project(filePath);
 
                         if (project.CollectedData.FullName.Contains("MS Access"))
                         {
-                            string databaseFileName = project.CollectedData.DataSource.Replace("Data Source=".ToLower(), string.Empty);
+                            string databaseFileName = project.CollectedData.DataSource.Replace("Data Source=".ToLowerInvariant(), string.Empty);
                             if (System.IO.File.Exists(databaseFileName) == false)
                             {
                                 MsgBox.ShowError(string.Format(SharedStrings.DATASOURCE_NOT_FOUND, databaseFileName));
@@ -2513,7 +2513,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
 
                 string filePath = openFileDialog.FileName.Trim();
-                if (filePath.ToLower(System.Globalization.CultureInfo.CurrentCulture).EndsWith(FileExtensions.MDB))
+                if (filePath.ToLowerInvariant(System.Globalization.CultureInfo.CurrentCulture).EndsWith(FileExtensions.MDB))
                 {
                     Type UpgradeAssistant = Type.GetType("Epi.Windows.ImportExport.UpgradeAssistant, Epi.Windows.ImportExport", true, true);
                     Project project = null;
@@ -2715,8 +2715,8 @@ namespace Epi.Windows.MakeView.Forms
                             }
                             else
                             {
-                                string programFilesDirectoryName = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles).ToLower();
-                                string installFolder = AppDomain.CurrentDomain.BaseDirectory.ToLower();
+                                string programFilesDirectoryName = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles).ToLowerInvariant();
+                                string installFolder = AppDomain.CurrentDomain.BaseDirectory.ToLowerInvariant();
 
                                 Configuration config = Configuration.GetNewInstance();
                                 string configPath = config.Directories.Templates;
@@ -2725,7 +2725,7 @@ namespace Epi.Windows.MakeView.Forms
                                 {
                                     templatePath = Path.Combine(configPath, targetFolderName);
                                 }
-                                else if (installFolder.ToLower().StartsWith(programFilesDirectoryName))
+                                else if (installFolder.ToLowerInvariant().StartsWith(programFilesDirectoryName))
                                 {
                                     templatePath = Path.Combine(installFolder, "Templates\\" + targetFolderName);
                                 }
@@ -4126,7 +4126,7 @@ namespace Epi.Windows.MakeView.Forms
             try
             {
                 Template template = new Template(this.mediator);
-                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
 
 
                 if (!string.IsNullOrEmpty(ServiceVersion) && ServiceVersion.Contains(Epi.Constants.surveyManagerservicev2))

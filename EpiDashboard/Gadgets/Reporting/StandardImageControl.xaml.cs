@@ -179,7 +179,7 @@ namespace EpiDashboard.Gadgets.Reporting
         {
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "filepath":
                         try
@@ -224,7 +224,7 @@ namespace EpiDashboard.Gadgets.Reporting
 
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "top":
                         string top = attribute.Value.Replace(',', '.');

@@ -171,10 +171,10 @@ namespace Epi.Windows.ImportExport.Dialogs
 
                 foreach (GridColumnBase gc in gridField.Columns)
                 {
-                    if(!(gc.Name.ToLower().Equals("recstatus") ||
-                        gc.Name.ToLower().Equals("fkey") ||
-                        gc.Name.ToLower().Equals("uniquekey") ||
-                        gc.Name.ToLower().Equals("globalrecordid")
+                    if(!(gc.Name.ToLowerInvariant().Equals("recstatus") ||
+                        gc.Name.ToLowerInvariant().Equals("fkey") ||
+                        gc.Name.ToLowerInvariant().Equals("uniquekey") ||
+                        gc.Name.ToLowerInvariant().Equals("globalrecordid")
                         ))
                     lbxGridColumns.Items.Add(gc.Name);
                 }

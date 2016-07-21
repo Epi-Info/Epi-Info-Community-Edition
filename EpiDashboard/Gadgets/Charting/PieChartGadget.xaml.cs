@@ -377,10 +377,10 @@ namespace EpiDashboard.Gadgets.Charting
             {
                 if(!String.IsNullOrEmpty(child.InnerText.Trim()))
                 {
-                    switch (child.Name.ToLower())
+                    switch (child.Name.ToLowerInvariant())
                     {
                         case "allvalues":
-                            if (child.InnerText.ToLower().Equals("true"))
+                            if (child.InnerText.ToLowerInvariant().Equals("true"))
                             {
                                 ((PieChartParameters)Parameters).ShowAllListValues = true;
                             }
@@ -478,7 +478,7 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -500,7 +500,7 @@ namespace EpiDashboard.Gadgets.Charting
                     if (!String.IsNullOrEmpty(child.InnerText.Trim()))
                     {
 
-                        switch (child.Name.ToLower())
+                        switch (child.Name.ToLowerInvariant())
                         {
                             case "mainvariable":
                                 if (this.Parameters.ColumnNames.Count > 0)
@@ -526,7 +526,7 @@ namespace EpiDashboard.Gadgets.Charting
                                 foreach (XmlElement field in child.ChildNodes)
                                 {
                                     List<string> fields = new List<string>();
-                                    if (field.Name.ToLower().Equals("stratavariable"))
+                                    if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                                     {
                                         ((PieChartParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                                     }
@@ -539,21 +539,21 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((PieChartParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
                                 break;
                             case "sort":
-                                if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
+                                if (child.InnerText.ToLowerInvariant().Equals("highlow") || child.InnerText.ToLowerInvariant().Equals("hightolow"))
                                 {
                                     ((PieChartParameters)Parameters).SortHighToLow = true;
                                 }
                                 break;
                             case "allvalues":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowAllListValues = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowAllListValues = true; }
                                 else { ((PieChartParameters)Parameters).ShowAllListValues = false; }
                                 break;
                             case "showlistlabels":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowCommentLegalLabels = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowCommentLegalLabels = true; }
                                 else { ((PieChartParameters)Parameters).ShowCommentLegalLabels = false; }
                                 break;
                             case "includemissing":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).IncludeMissing = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).IncludeMissing = true; }
                                 else { ((PieChartParameters)Parameters).IncludeMissing = false; }
                                 break;
                             case "customheading":
@@ -587,19 +587,19 @@ namespace EpiDashboard.Gadgets.Charting
                                 this.DataFilters.CreateFromXml(child);
                                 break;
                             case "showannotations":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowAnnotations = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowAnnotations = true; }
                                 else { ((PieChartParameters)Parameters).ShowAnnotations = false; }
                                 break;
                             case "showannotationlabel":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowAnnotationLabel = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowAnnotationLabel = true; }
                                 else { ((PieChartParameters)Parameters).ShowAnnotationLabel = false; }
                                 break;
                             case "showannotationvalue":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowAnnotationValue = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowAnnotationValue = true; }
                                 else { ((PieChartParameters)Parameters).ShowAnnotationValue = false; }
                                 break;
                             case "showannotationpercent":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowAnnotationPercent = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowAnnotationPercent = true; }
                                 else { ((PieChartParameters)Parameters).ShowAnnotationPercent = false; }
                                 break;
                             case "annotationpercent":
@@ -670,15 +670,15 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((PieChartParameters)Parameters).ChartSubTitle = child.InnerText;
                                 break;
                             case "showlegend":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowLegend = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowLegend = true; }
                                 else { ((PieChartParameters)Parameters).ShowLegend = false; }
                                 break;
                             case "showlegendborder":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowLegendBorder = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowLegendBorder = true; }
                                 else { ((PieChartParameters)Parameters).ShowLegendBorder = false; }
                                 break;
                             case "showlegendvarnames":
-                                if (child.InnerText.ToLower().Equals("true")) { ((PieChartParameters)Parameters).ShowLegendVarNames = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((PieChartParameters)Parameters).ShowLegendVarNames = true; }
                                 else { ((PieChartParameters)Parameters).ShowLegendVarNames = false; }
                                 break;
                             case "legendfontsize":

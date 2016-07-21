@@ -46,11 +46,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             break;
                         case "Boolean":
                             string string_temp = this.GetCommandElement(T.Tokens, 0);
-                            if (string_temp == "(+)" || string_temp.ToLower() == "true" || string_temp.ToLower() == "yes")
+                            if (string_temp == "(+)" || string_temp.ToLowerInvariant() == "true" || string_temp.ToLowerInvariant() == "yes")
                             {
                                 this.value = true;
                             }
-                            else if (string_temp == "(-)" || string_temp.ToLower() == "false" || string_temp.ToLower() == "no")
+                            else if (string_temp == "(-)" || string_temp.ToLowerInvariant() == "false" || string_temp.ToLowerInvariant() == "no")
                             {
                                 this.value = false;
                             }
@@ -139,11 +139,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         break;
                     case "Boolean":
                         string string_temp = TT.Text;
-                        if (string_temp == "(+)" || string_temp.ToLower() == "true" || string_temp.ToLower() == "yes")
+                        if (string_temp == "(+)" || string_temp.ToLowerInvariant() == "true" || string_temp.ToLowerInvariant() == "yes")
                         {
                             this.value = true;
                         }
-                        else if (string_temp == "(-)" || string_temp.ToLower() == "false" || string_temp.ToLower() == "no")
+                        else if (string_temp == "(-)" || string_temp.ToLowerInvariant() == "false" || string_temp.ToLowerInvariant() == "no")
                         {
                             this.value = false;
                         }
@@ -308,9 +308,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     case DataType.Boolean:
                     case DataType.YesNo:
                         result = new Boolean();
-                        if (dataValue == "(+)" || dataValue.ToLower() == "true" || dataValue == "1")
+                        if (dataValue == "(+)" || dataValue.ToLowerInvariant() == "true" || dataValue == "1")
                             result = true;
-                        else if (dataValue == "(-)" || dataValue.ToLower() == "false" || dataValue == "0")
+                        else if (dataValue == "(-)" || dataValue.ToLowerInvariant() == "false" || dataValue == "0")
                             result = false;
                         else
                             result = null;
@@ -401,14 +401,14 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                 result = ((String)subject).Trim('\"');
                 //removing the "1" and "0" conditions here because an expression like 1 + 0 was evaluating as two booleans
-                //if ((String)subject == "1" || (String)subject == "(+)" || ((String)subject).ToLower() == "true")
-                if ((String)subject == "(+)" || ((String)subject).ToLower() == "true")
+                //if ((String)subject == "1" || (String)subject == "(+)" || ((String)subject).ToLowerInvariant() == "true")
+                if ((String)subject == "(+)" || ((String)subject).ToLowerInvariant() == "true")
                 {
                     result = new Boolean();
                     result = true;
                 }
-                //else if ((String)subject == "0" || (String)subject == "(-)" || ((String)subject).ToLower() == "false")
-                else if ((String)subject == "(-)" || ((String)subject).ToLower() == "false")
+                //else if ((String)subject == "0" || (String)subject == "(-)" || ((String)subject).ToLowerInvariant() == "false")
+                else if ((String)subject == "(-)" || ((String)subject).ToLowerInvariant() == "false")
                 {
                     result = new Boolean();
                     result = false;

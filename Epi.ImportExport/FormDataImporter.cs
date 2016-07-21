@@ -137,7 +137,7 @@ namespace Epi.ImportExport
             }
             set
             {
-                if (!value.SqlStatement.ToLower().Trim().StartsWith("select"))
+                if (!value.SqlStatement.ToLowerInvariant().Trim().StartsWith("select"))
                 {
                     throw new ArgumentException(ImportExportSharedStrings.ERROR_INVALID_SELECT_QUERY);
                 }
@@ -369,7 +369,7 @@ namespace Epi.ImportExport
                     throw new ApplicationException(string.Format(ImportExportSharedStrings.ERROR_FIELD_NAME_INVALID, sourceField.Name));
                     //errorCount++;
                 }
-                if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLower() != "uniquekey" && sourceField.Name.ToLower() != "recstatus" && sourceField.Name.ToLower() != "fkey"))
+                if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLowerInvariant() != "uniquekey" && sourceField.Name.ToLowerInvariant() != "recstatus" && sourceField.Name.ToLowerInvariant() != "fkey"))
                 {
                     //AddWarningMessage("The field name for " + sourceField.Name + " in the source form is a reserved word. Problems may be encountered during the import.");
                     throw new ApplicationException(string.Format(ImportExportSharedStrings.ERROR_FIELD_NAME_RESERVED_WORD, sourceField.Name));
@@ -527,7 +527,7 @@ namespace Epi.ImportExport
                     throw new ApplicationException(string.Format(ImportExportSharedStrings.ERROR_FIELD_NAME_INVALID, sourceField.Name));
                     //errorCount++;
                 }
-                if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLower() != "uniquekey" && sourceField.Name.ToLower() != "recstatus" && sourceField.Name.ToLower() != "fkey"))
+                if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLowerInvariant() != "uniquekey" && sourceField.Name.ToLowerInvariant() != "recstatus" && sourceField.Name.ToLowerInvariant() != "fkey"))
                 {
                     //AddWarningMessage("The field name for " + sourceField.Name + " in the source form is a reserved word. Problems may be encountered during the import.");
                     throw new ApplicationException(string.Format(ImportExportSharedStrings.ERROR_FIELD_NAME_RESERVED_WORD, sourceField.Name));
@@ -868,7 +868,7 @@ namespace Epi.ImportExport
                         bool found = false;
                         foreach (Field destinationField in destinationView.Fields)
                         {
-                            if (destinationField.Name.ToLower().Equals(sourceField.Name.ToLower()))
+                            if (destinationField.Name.ToLowerInvariant().Equals(sourceField.Name.ToLowerInvariant()))
                             {
                                 found = true;
                             }
@@ -1282,7 +1282,7 @@ namespace Epi.ImportExport
                             bool found = false;
                             foreach (GridColumnBase destinationGridColumn in destinationGridField.Columns)
                             {
-                                if (destinationGridColumn.Name.ToLower().Equals(gridColumn.Name.ToLower()))
+                                if (destinationGridColumn.Name.ToLowerInvariant().Equals(gridColumn.Name.ToLowerInvariant()))
                                 {
                                     found = true;
                                 }

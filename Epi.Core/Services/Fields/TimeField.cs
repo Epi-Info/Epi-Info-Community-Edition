@@ -74,7 +74,7 @@ namespace Epi.Fields
             get 
             {
                 System.Globalization.DateTimeFormatInfo formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo;
-                return formatInfo.LongTimePattern.ToUpper();
+                return formatInfo.LongTimePattern.ToUpperInvariant();
             }
         }
         

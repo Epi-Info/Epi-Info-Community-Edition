@@ -538,7 +538,7 @@ erroRHandler:
             'As long as the value for uncensored is not null, then when it is null, return a zero.
 
             'lStrataA(lintIndex).dblaData(i - lintOffset, 2) = lconRS.Fields(1).Value
-            lStrataA(lintIndex).dblaData(currentRow - lintOffset, 1) = IIf(StrComp(mstrUncensoredVal.ToUpper, rows(currentRow)(mstrCensoredVar).ToString.ToUpper) = 0, 1, 0)
+            lStrataA(lintIndex).dblaData(currentRow - lintOffset, 1) = IIf(StrComp(mstrUncensoredVal.ToUpperInvariant, rows(currentRow)(mstrCensoredVar).ToString.ToUpperInvariant) = 0, 1, 0)
             If mintWeight = 1 Then
                 'lvarCurData = lconRS.Fields(2).Value
                 lvarCurData = rows(currentRow)(mstrWeightVar)

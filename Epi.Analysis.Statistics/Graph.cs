@@ -68,7 +68,7 @@ namespace Epi.Analysis.Statistics
             }
             if (Context.InputVariableList.ContainsKey("Graph_Type"))
             {
-                _graphType = Context.InputVariableList["Graph_Type"].ToUpper().Replace(" ", "").Replace("\"", "");
+                _graphType = Context.InputVariableList["Graph_Type"].ToUpperInvariant().Replace(" ", "").Replace("\"", "");
             }
             if (Context.InputVariableList.ContainsKey("Graph_Title"))
             {
@@ -574,11 +574,11 @@ namespace Epi.Analysis.Statistics
                                 if (string.IsNullOrEmpty(_weightVar))
                                 {
                                     //
-                                    if (independentValue.ToString().ToUpper() == "TRUE")
+                                    if (independentValue.ToString().ToUpperInvariant() == "TRUE")
                                     {
                                         independentValue = config["RepresentationOfYes"];
                                     }
-                                    if (independentValue.ToString().ToUpper() == "FALSE")
+                                    if (independentValue.ToString().ToUpperInvariant() == "FALSE")
                                     {
 
                                         independentValue = config["RepresentationOfNo"]; 
@@ -597,11 +597,11 @@ namespace Epi.Analysis.Statistics
                                 else
                                 {
                                     //
-                                    if (independentValue.ToString().ToUpper() == "TRUE")
+                                    if (independentValue.ToString().ToUpperInvariant() == "TRUE")
                                     {
                                         independentValue = config["RepresentationOfYes"];
                                     }
-                                    if (independentValue.ToString().ToUpper() == "FALSE")
+                                    if (independentValue.ToString().ToUpperInvariant() == "FALSE")
                                     {
 
                                         independentValue = config["RepresentationOfNo"]; 
@@ -686,7 +686,7 @@ namespace Epi.Analysis.Statistics
 
             double dependentVal;
 
-            switch (_aggregateFunction.ToUpper())
+            switch (_aggregateFunction.ToUpperInvariant())
             {
                 case SilverlightStatics.AVG:
                     dependentVal = statStruct.Average;

@@ -40,7 +40,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             //DEFINE Identifier '=' <Expression>
 
             Identifier = GetCommandElement(pToken.Tokens, 1);
-            Context.DefineVarList.Add(Identifier.ToUpper());
+            Context.DefineVarList.Add(Identifier.ToUpperInvariant());
             if (GetCommandElement(pToken.Tokens, 2) == "=")
             {
                 this.Expression = new Rule_Expression(pContext, (NonterminalToken)pToken.Tokens[3]);
@@ -75,7 +75,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 /*
                 if (appdata.IsReservedWord(Identifier))
                 {
-                    throw new GeneralException(string.Format(SharedStrings.RESERVED_WORD, Identifier.ToUpper()));
+                    throw new GeneralException(string.Format(SharedStrings.RESERVED_WORD, Identifier.ToUpperInvariant()));
                 }*/
 
                 if (this.Context.MemoryRegion.IsVariableInScope(Identifier))
@@ -102,9 +102,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 #endregion Preconditions
 
                 CommandProcessorResults results = new CommandProcessorResults();
-                string dataTypeName = VariableTypeIndicator.Trim().ToUpper();
+                string dataTypeName = VariableTypeIndicator.Trim().ToUpperInvariant();
                 DataType type = GetDataType(dataTypeName);
-                string variableScope = Variable_Scope.Trim().ToUpper();
+                string variableScope = Variable_Scope.Trim().ToUpperInvariant();
                 VariableType vt = VariableType.Standard;
                 if (!string.IsNullOrEmpty(variableScope))
                 {
@@ -123,9 +123,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                 if (var.VarType == VariableType.Standard || var.VarType == VariableType.Global)
                 {
-                    if (this.Context.VariableValueList.ContainsKey(var.Name.ToUpper()))
+                    if (this.Context.VariableValueList.ContainsKey(var.Name.ToUpperInvariant()))
                     {
-                        this.Context.VariableValueList.Remove(var.Name.ToUpper());
+                        this.Context.VariableValueList.Remove(var.Name.ToUpperInvariant());
                     }
                     
                         
@@ -145,20 +145,20 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         case DataType.Boolean:
                         case DataType.YesNo:
                             C.DataType = typeof(bool);
-                            this.Context.VariableValueList.Add(var.Name.ToUpper(), false);
+                            this.Context.VariableValueList.Add(var.Name.ToUpperInvariant(), false);
                             break;
                         case DataType.Date:
                         case DataType.DateTime:
                             C.DataType = typeof(DateTime);
-                            this.Context.VariableValueList.Add(var.Name.ToUpper(), DateTime.Now);
+                            this.Context.VariableValueList.Add(var.Name.ToUpperInvariant(), DateTime.Now);
                             break;
                         case DataType.Number:
                             C.DataType = typeof(double);
-                            this.Context.VariableValueList.Add(var.Name.ToUpper(), 0.0);
+                            this.Context.VariableValueList.Add(var.Name.ToUpperInvariant(), 0.0);
                             break;
                         case DataType.Time:
                             C.DataType = typeof(System.TimeSpan);
-                            this.Context.VariableValueList.Add(var.Name.ToUpper(), new TimeSpan());
+                            this.Context.VariableValueList.Add(var.Name.ToUpperInvariant(), new TimeSpan());
                             break;
 
                         case DataType.PhoneNumber:
@@ -167,7 +167,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         case DataType.Object:
                         default:
                             C.DataType = typeof(string);
-                            this.Context.VariableValueList.Add(var.Name.ToUpper(), "");
+                            this.Context.VariableValueList.Add(var.Name.ToUpperInvariant(), "");
                             break;
                     }
 
@@ -182,13 +182,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     if (this.Expression != null)
                     {
                         object vresult = null;
-                        if (this.Context.VariableExpressionList.ContainsKey(this.Identifier.ToUpper()))
+                        if (this.Context.VariableExpressionList.ContainsKey(this.Identifier.ToUpperInvariant()))
                         {
-                            this.Context.VariableExpressionList[this.Identifier.ToUpper()] = this.Expression;
+                            this.Context.VariableExpressionList[this.Identifier.ToUpperInvariant()] = this.Expression;
                         }
                         else
                         {
-                            this.Context.VariableExpressionList.Add(this.Identifier.ToUpper(), this.Expression);
+                            this.Context.VariableExpressionList.Add(this.Identifier.ToUpperInvariant(), this.Expression);
                         }
 
                         if (this.Context.CurrentDataRow != null)

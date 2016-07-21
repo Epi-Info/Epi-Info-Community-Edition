@@ -75,7 +75,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                     for (int i = 0; i < effectList.Length; i++)
                     {
-                        switch(effectList[i].Trim().ToUpper())
+                        switch(effectList[i].Trim().ToUpperInvariant())
                         {
                             case "BOLD":
                                 shouldBold = true;
@@ -89,7 +89,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                     }
 
-                    if (textAndEffects.ToUpper().EndsWith("APPEND"))
+                    if (textAndEffects.ToUpperInvariant().EndsWith("APPEND"))
                     {
                         shouldAppend = true;
                     }

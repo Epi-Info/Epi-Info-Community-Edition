@@ -226,7 +226,7 @@ namespace Epi.Windows.Analysis.Dialogs
 		protected override void GenerateCommand()
 		{
 			WordBuilder command = new WordBuilder();
-			command.Append((CommandNames.SELECT).ToUpper());
+			command.Append((CommandNames.SELECT).ToUpperInvariant());
 			command.Append(txtSelectCriteria.Text.Trim());
 			CommandText = command.ToString() ;
 		}

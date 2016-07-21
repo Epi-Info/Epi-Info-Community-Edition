@@ -1566,7 +1566,7 @@ namespace EpiDashboard.Mapping
                                 catch (ApplicationException ex)
                                 {
                                     string message = ex.Message;
-                                    if (message.ToLower().Equals("error executing select query against the database."))
+                                    if (message.ToLowerInvariant().Equals("error executing select query against the database."))
                                     {
                                         message = DashboardSharedStrings.ERROR_DATA_SOURCE_PERMISSIONS;
                                     }
@@ -2178,19 +2178,19 @@ namespace EpiDashboard.Mapping
             //if (string.IsNullOrEmpty(choroplethLayerProperties.boundryFilePath) == false)
             //{
             //    choroplethproperties.radMapServer.IsChecked = true;
-            //    if (choroplethLayerProperties.boundryFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && string.IsNullOrEmpty(choroplethLayerProperties.cbxMapFeatureText) == true)
+            //    if (choroplethLayerProperties.boundryFilePath.ToLowerInvariant() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && string.IsNullOrEmpty(choroplethLayerProperties.cbxMapFeatureText) == true)
             //    {
             //        choroplethLayerProperties.cbxMapserverText = "NationalMap.gov - New York County Boundaries";
             //    }
-            //    else if (choroplethLayerProperties.boundryFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && string.IsNullOrEmpty(choroplethLayerProperties.cbxMapFeatureText) == true)
+            //    else if (choroplethLayerProperties.boundryFilePath.ToLowerInvariant() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && string.IsNullOrEmpty(choroplethLayerProperties.cbxMapFeatureText) == true)
             //    {
             //        choroplethLayerProperties.cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
             //    }
-            //    else if (choroplethLayerProperties.boundryFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && string.IsNullOrEmpty(choroplethLayerProperties.cbxMapFeatureText) == true)
+            //    else if (choroplethLayerProperties.boundryFilePath.ToLowerInvariant() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && string.IsNullOrEmpty(choroplethLayerProperties.cbxMapFeatureText) == true)
             //    {
             //        choroplethLayerProperties.cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
             //    }
-            //    else if (choroplethLayerProperties.boundryFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && string.IsNullOrEmpty(choroplethLayerProperties.cbxMapFeatureText) == true)
+            //    else if (choroplethLayerProperties.boundryFilePath.ToLowerInvariant() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && string.IsNullOrEmpty(choroplethLayerProperties.cbxMapFeatureText) == true)
             //    {
             //        choroplethLayerProperties.cbxMapserverText = "NationalMap.gov - World Boundaries";
             //    }
@@ -2475,13 +2475,13 @@ namespace EpiDashboard.Mapping
             if (string.IsNullOrEmpty(densitylayerprop.shapeFilePath) == false)
             {
                 dotdensityproperties.radMapServer.IsChecked = true;
-                if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
+                if (densitylayerprop.shapeFilePath.ToLowerInvariant() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/13" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
                     densitylayerprop.cbxMapserverText = "NationalMap.gov - New York County Boundaries";
-                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
+                else if (densitylayerprop.shapeFilePath.ToLowerInvariant() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/19" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
                     densitylayerprop.cbxMapserverText = "NationalMap.gov - Rhode Island Zip Code Boundaries";
-                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
+                else if (densitylayerprop.shapeFilePath.ToLowerInvariant() == "http://services.nationalmap.gov/arcgis/rest/services/govunits/mapserver/17" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
                     densitylayerprop.cbxMapserverText = "NationalMap.gov - U.S. State Boundaries";
-                else if (densitylayerprop.shapeFilePath.ToLower() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
+                else if (densitylayerprop.shapeFilePath.ToLowerInvariant() == "http://services.nationalmap.gov/arcgis/rest/services/tnm_blank_us/mapserver/17" && string.IsNullOrEmpty(densitylayerprop.cbxMapFeatureText) == true)
                     densitylayerprop.cbxMapserverText = "NationalMap.gov - World Boundaries";
                 else
                 {

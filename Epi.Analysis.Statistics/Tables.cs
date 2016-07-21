@@ -525,7 +525,7 @@ namespace Epi.Analysis.Statistics
             DataRow[] ROWS;
             string SelectedStatement;
 
-            if (config["include-missing"].ToUpper() == "FALSE")
+            if (config["include-missing"].ToUpperInvariant() == "FALSE")
             {
                 if (DT.Columns.Contains(config["RepresentationOfMissing"]))
                 {
@@ -625,7 +625,7 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                      //  double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                      //  double.TryParse(R[C.ColumnName.ToUpperInvariant()].ToString(), out ColVal);
                         double.TryParse(R[C.ColumnName].ToString(), out ColVal);
 
                         if (ColumnTotalSet.ContainsKey(C.ColumnName))
@@ -649,7 +649,7 @@ namespace Epi.Analysis.Statistics
             /*if (
                 DT.Columns.Count == 4 && ROWS.Length == 2 ||
                 (DT.Columns.Count == 4 && ROWS.Length == 2 && (this.Context.Columns[this.Outcome].DataType.ToString() == "System.Byte" || this.Context.Columns[this.Outcome].DataType.ToString() == "System.Boolean")) ||
-                ((DT.Columns.Count == 4 || DT.Columns.Count == 5) && (ROWS.Length == 2 || ROWS.Length == 3) && (this.Context.Columns[this.Outcome].DataType.ToString() == "System.Byte" || this.Context.Columns[this.Outcome].DataType.ToString() == "System.Boolean")) && (config["include-missing"].ToUpper() == "TRUE" && this.Context.EpiViewVariableList.Count > 0)
+                ((DT.Columns.Count == 4 || DT.Columns.Count == 5) && (ROWS.Length == 2 || ROWS.Length == 3) && (this.Context.Columns[this.Outcome].DataType.ToString() == "System.Byte" || this.Context.Columns[this.Outcome].DataType.ToString() == "System.Boolean")) && (config["include-missing"].ToUpperInvariant() == "TRUE" && this.Context.EpiViewVariableList.Count > 0)
                 )*/
             if (DT.Columns.Count == 4 && ROWS.Length == 2 )
             {
@@ -672,7 +672,7 @@ namespace Epi.Analysis.Statistics
                     SelectOrder = "__Values__ desc";
                 }
             }
-            else if ((DT.Columns.Count == 4 || DT.Columns.Count == 5) && (ROWS.Length == 2 || ROWS.Length == 3) && (config["include-missing"].ToUpper() == "TRUE" && this.Context.EpiViewVariableList.Count > 0))
+            else if ((DT.Columns.Count == 4 || DT.Columns.Count == 5) && (ROWS.Length == 2 || ROWS.Length == 3) && (config["include-missing"].ToUpperInvariant() == "TRUE" && this.Context.EpiViewVariableList.Count > 0))
             {
                 int colOffset = DT.Columns.Count;
 
@@ -821,7 +821,7 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                       // double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                       // double.TryParse(R[C.ColumnName.ToUpperInvariant()].ToString(), out ColVal);
                         double.TryParse(R[C.ColumnName].ToString(), out ColVal);
                         RowTotal += ColVal;
                         pHTMLString.Append("<td align=\"right\">");
@@ -837,7 +837,7 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                       // double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                       // double.TryParse(R[C.ColumnName.ToUpperInvariant()].ToString(), out ColVal);
                         double.TryParse(R[C.ColumnName].ToString(), out ColVal);
                         if (this.config.Settings.ShowPercents)
                         {
@@ -2032,7 +2032,7 @@ namespace Epi.Analysis.Statistics
                 {
                     for (int j = 0; j < allVariables.Count; j++)
                     {
-                        if ((dr.Table.Columns[i].ToString().ToUpper()).Equals(allVariables[j].ToUpper()))
+                        if ((dr.Table.Columns[i].ToString().ToUpperInvariant()).Equals(allVariables[j].ToUpperInvariant()))
                         {
                             if (!dr[i].Equals(StratValueList[0]))
                             {

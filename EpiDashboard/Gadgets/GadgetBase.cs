@@ -229,7 +229,7 @@ namespace EpiDashboard
         {
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "anchorleft":
                         Guid guidL = new System.Guid(child.InnerText);
@@ -778,7 +778,7 @@ namespace EpiDashboard
 
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "top":
                         string top = attribute.Value.Replace(',', '.');
@@ -809,7 +809,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "collapsed":
-                        if (attribute.Value.ToLower().Equals("true"))
+                        if (attribute.Value.ToLowerInvariant().Equals("true"))
                         {
                             IsCollapsed = true;
                             CollapseOutput();

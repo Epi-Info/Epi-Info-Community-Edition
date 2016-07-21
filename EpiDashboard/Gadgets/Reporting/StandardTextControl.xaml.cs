@@ -180,7 +180,7 @@ namespace EpiDashboard.Gadgets.Reporting
         {
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "text":
                         standardTextBox.Text = child.InnerText.Replace("&lt;", "<").Replace("&amp;", "&");
@@ -189,7 +189,7 @@ namespace EpiDashboard.Gadgets.Reporting
                         standardTextBox.FontSize = int.Parse(child.InnerText);
                         break;
                     case "fontweight":
-                        switch (child.InnerText.ToLower())
+                        switch (child.InnerText.ToLowerInvariant())
                         {
                             case "semibold":
                                 standardTextBox.FontWeight = FontWeights.SemiBold;
@@ -319,7 +319,7 @@ namespace EpiDashboard.Gadgets.Reporting
 
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "top":
                         string top = attribute.Value.Replace(',', '.');

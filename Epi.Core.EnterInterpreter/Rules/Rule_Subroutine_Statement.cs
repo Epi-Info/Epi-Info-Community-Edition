@@ -35,7 +35,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Identifier = this.Identifier.ToLower();
+            this.Identifier = this.Identifier.ToLowerInvariant();
 
             if (this.Context.Subroutine.ContainsKey(this.Identifier))
             {

@@ -72,7 +72,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 if (pToken.Tokens.Length > 2)
                 {
-                    this.deleteOptions.AddRange(this.GetCommandElement(pToken.Tokens, 2).ToUpper().Split(StringLiterals.SPACE.ToCharArray()));
+                    this.deleteOptions.AddRange(this.GetCommandElement(pToken.Tokens, 2).ToUpperInvariant().Split(StringLiterals.SPACE.ToCharArray()));
                     this.runSilent = deleteOptions.Contains("RUNSILENT");
                     this.saveData = deleteOptions.Contains("SAVEDATA");
                     this.permanent = deleteOptions.Contains("PERMANENT");
@@ -584,7 +584,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             this.compareExp = this.GetCommandElement(pToken.Tokens, i);
                             break;
                         case "<DeleteOpts>":
-                            this.deleteOptions.AddRange(this.GetCommandElement(pToken.Tokens, i).ToUpper().Split(StringLiterals.SPACE.ToCharArray()));
+                            this.deleteOptions.AddRange(this.GetCommandElement(pToken.Tokens, i).ToUpperInvariant().Split(StringLiterals.SPACE.ToCharArray()));
                             this.runSilent = deleteOptions.Contains("RUNSILENT");
                             this.saveData = deleteOptions.Contains("SAVEDATA");
                             this.permanent = deleteOptions.Contains("PERMANENT");
@@ -667,7 +667,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             if (isEpiView)
             {
                 //whereClause = this.Context.DataInfo.GetSqlStatementPartWhere();
-                if (!whereClause.ToUpper().Contains("[RECSTATUS]"))
+                if (!whereClause.ToUpperInvariant().Contains("[RECSTATUS]"))
                 {
                     if (whereClause.Length > 0)
                     {
@@ -679,9 +679,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                 }
                 //---EI-108
-                if (whereClause.ToLower().Contains(ColumnNames.GLOBAL_RECORD_ID.ToLower()))
+                if (whereClause.ToLowerInvariant().Contains(ColumnNames.GLOBAL_RECORD_ID.ToLowerInvariant()))
                  {
-                    whereClause = whereClause.ToLower().Replace(ColumnNames.GLOBAL_RECORD_ID.ToLower(), "t." + ColumnNames.GLOBAL_RECORD_ID.ToLower());
+                    whereClause = whereClause.ToLowerInvariant().Replace(ColumnNames.GLOBAL_RECORD_ID.ToLowerInvariant(), "t." + ColumnNames.GLOBAL_RECORD_ID.ToLowerInvariant());
                  }
                 //---
                 FromClause = EpiView.FromViewSQL;
@@ -1117,7 +1117,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             filePath = GetCommandElement(pToken.Tokens, 1).Trim(trimChars.ToCharArray());
             if (pToken.Tokens.Length > 2)
             {
-                deleteOptions.AddRange(GetCommandElement(pToken.Tokens, 2).ToUpper().Split(StringLiterals.SPACE.ToCharArray()));
+                deleteOptions.AddRange(GetCommandElement(pToken.Tokens, 2).ToUpperInvariant().Split(StringLiterals.SPACE.ToCharArray()));
                 runSilent = deleteOptions.Contains("RUNSILENT");
             }
         }
@@ -1201,7 +1201,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             identifier = GetCommandElement(pToken.Tokens, 2);
             if (pToken.Tokens.Length > 3)
             {
-                deleteOptions.AddRange(GetCommandElement(pToken.Tokens, 3).ToUpper().Split(StringLiterals.SPACE.ToCharArray()));
+                deleteOptions.AddRange(GetCommandElement(pToken.Tokens, 3).ToUpperInvariant().Split(StringLiterals.SPACE.ToCharArray()));
                 runSilent = deleteOptions.Contains("RUNSILENT");
                 saveData = deleteOptions.Contains("SAVEDATA");
             }
@@ -1251,7 +1251,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             if (pToken.Tokens.Length > 3)
             {
-                deleteOptions.AddRange(GetCommandElement(pToken.Tokens, 3).ToUpper().Split(StringLiterals.SPACE.ToCharArray()));
+                deleteOptions.AddRange(GetCommandElement(pToken.Tokens, 3).ToUpperInvariant().Split(StringLiterals.SPACE.ToCharArray()));
             }
         }
 
@@ -1273,7 +1273,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             identifier = GetCommandElement(pToken.Tokens, 4).Trim(new char[] { '[',']'});
             if (pToken.Tokens.Length > 5)
             {
-                deleteOptions.AddRange(GetCommandElement(pToken.Tokens, 5).ToUpper().Split(StringLiterals.SPACE.ToCharArray()));
+                deleteOptions.AddRange(GetCommandElement(pToken.Tokens, 5).ToUpperInvariant().Split(StringLiterals.SPACE.ToCharArray()));
                 runSilent = deleteOptions.Contains("RUNSILENT");
             }
         }

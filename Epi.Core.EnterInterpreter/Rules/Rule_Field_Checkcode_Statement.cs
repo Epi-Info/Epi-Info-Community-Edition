@@ -28,16 +28,16 @@ namespace Epi.Core.EnterInterpreter.Rules
                 if (!string.IsNullOrEmpty(Identifier))
                 {
 
-                    if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                     {
                         this.Context.CommandVariableCheck.Add(Identifier, "Field");
                     }
 
                 }
             }
-            if (Context.ParsedFieldNames.Contains(Identifier.ToLower()) == false)
+            if (Context.ParsedFieldNames.Contains(Identifier.ToLowerInvariant()) == false)
             {
-                Context.ParsedFieldNames.Add(Identifier.ToLower());
+                Context.ParsedFieldNames.Add(Identifier.ToLowerInvariant());
                 
             }
             
@@ -69,7 +69,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Identifier = this.Identifier.ToLower();
+            this.Identifier = this.Identifier.ToLowerInvariant();
 
             if (this.Context.Field_Checkcode.ContainsKey(this.Identifier))
             {

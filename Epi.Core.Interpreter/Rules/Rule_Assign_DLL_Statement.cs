@@ -22,9 +22,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             this.ClassName = this.GetCommandElement(pToken.Tokens, 3);
             this.MethodName  = this.GetCommandElement(pToken.Tokens, 5);
             this.ParameterList = new Rule_FunctionParameterList(pContext, (NonterminalToken)pToken.Tokens[7]);
-            if (!this.Context.AssignVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+            if (!this.Context.AssignVariableCheck.ContainsKey(this.QualifiedId.ToLowerInvariant()))
             {
-                this.Context.AssignVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                this.Context.AssignVariableCheck.Add(this.QualifiedId.ToLowerInvariant(), this.QualifiedId.ToLowerInvariant());
             }
         }
 
@@ -41,7 +41,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 // this is a dll call
                 // and is NOT implemented as of 11/05/2010
-                if (this.Context.DLLClassList.ContainsKey(this.ClassName.ToLower()))
+                if (this.Context.DLLClassList.ContainsKey(this.ClassName.ToLowerInvariant()))
                 {
                     if (this.ParameterList.paramList != null)
                     {
@@ -58,7 +58,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                     
 
-                    object DLLObject = this.Context.DLLClassList[this.ClassName.ToLower()];
+                    object DLLObject = this.Context.DLLClassList[this.ClassName.ToLowerInvariant()];
 
                     result = Microsoft.VisualBasic.Interaction.CallByName(DLLObject, this.MethodName, Microsoft.VisualBasic.CallType.Method, args);
                 }

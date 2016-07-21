@@ -717,7 +717,7 @@ namespace Epi.Windows.Dialogs
                     mruSelectedDatabaseName = name;
                     selectedDataProvider = provider;
 
-                    if (name.ToLower().EndsWith(".prj"))
+                    if (name.ToLowerInvariant().EndsWith(".prj"))
                     {
                         Project project = new Project(connectionString);
 

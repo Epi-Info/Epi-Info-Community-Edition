@@ -71,11 +71,11 @@ namespace Epi.Core.EnterInterpreter.Rules
                             break;
                         case "Boolean":
                             string string_temp = this.GetCommandElement(T.Tokens, 0);
-                            if (string_temp == "(+)" || string_temp.ToLower() == "true" || string_temp.ToLower() == "yes")
+                            if (string_temp == "(+)" || string_temp.ToLowerInvariant() == "true" || string_temp.ToLowerInvariant() == "yes")
                             {
                                 this.value = true;
                             }
-                            else if (string_temp == "(-)" || string_temp.ToLower() == "false" || string_temp.ToLower() == "no")
+                            else if (string_temp == "(-)" || string_temp.ToLowerInvariant() == "false" || string_temp.ToLowerInvariant() == "no")
                             {
                                 this.value = false;
                             }
@@ -214,11 +214,11 @@ namespace Epi.Core.EnterInterpreter.Rules
                         break;
                     case "Boolean":
                         string string_temp = TT.Text;
-                        if (string_temp == "(+)" || string_temp.ToLower() == "true" || string_temp.ToLower() == "yes")
+                        if (string_temp == "(+)" || string_temp.ToLowerInvariant() == "true" || string_temp.ToLowerInvariant() == "yes")
                         {
                             this.value = true;
                         }
-                        else if (string_temp == "(-)" || string_temp.ToLower() == "false" || string_temp.ToLower() == "no")
+                        else if (string_temp == "(-)" || string_temp.ToLowerInvariant() == "false" || string_temp.ToLowerInvariant() == "no")
                         {
                             this.value = false;
                         }
@@ -358,9 +358,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case EpiInfo.Plugin.DataType.Boolean:
                     case EpiInfo.Plugin.DataType.YesNo:
                         result = new Boolean();
-                        if (dataValue == "(+)" || dataValue.ToLower() == "true" || dataValue == "1" || dataValue.ToLower() == "yes")
+                        if (dataValue == "(+)" || dataValue.ToLowerInvariant() == "true" || dataValue == "1" || dataValue.ToLowerInvariant() == "yes")
                             result = true;
-                        else if (dataValue == "(-)" || dataValue.ToLower() == "false" || dataValue == "0" || dataValue.ToLower() == "no")
+                        else if (dataValue == "(-)" || dataValue.ToLowerInvariant() == "false" || dataValue == "0" || dataValue.ToLowerInvariant() == "no")
                             result = false;
                         else
                             result = null;
@@ -450,14 +450,14 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                 result = ((String)subject).Trim('\"');
                 //removing the "1" and "0" conditions here because an expression like 1 + 0 was evaluating as two booleans
-                //if ((String)subject == "1" || (String)subject == "(+)" || ((String)subject).ToLower() == "true")
-                if ((String)subject == "(+)" || ((String)subject).ToLower() == "true" || ((String)subject).ToLower() == "yes")
+                //if ((String)subject == "1" || (String)subject == "(+)" || ((String)subject).ToLowerInvariant() == "true")
+                if ((String)subject == "(+)" || ((String)subject).ToLowerInvariant() == "true" || ((String)subject).ToLowerInvariant() == "yes")
                 {
                     result = new Boolean();
                     result = true;
                 }
-                //else if ((String)subject == "0" || (String)subject == "(-)" || ((String)subject).ToLower() == "false")
-                else if ((String)subject == "(-)" || ((String)subject).ToLower() == "false" || ((String)subject).ToLower() == "no")
+                //else if ((String)subject == "0" || (String)subject == "(-)" || ((String)subject).ToLowerInvariant() == "false")
+                else if ((String)subject == "(-)" || ((String)subject).ToLowerInvariant() == "false" || ((String)subject).ToLowerInvariant() == "no")
                 {
                     result = new Boolean();
                     result = false;

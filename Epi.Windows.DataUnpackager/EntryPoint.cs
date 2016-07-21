@@ -38,7 +38,7 @@ namespace Epi.Windows.DataUnpackager
 
                     if (!string.IsNullOrEmpty(merge))
                     {
-                        switch (merge.ToLower())
+                        switch (merge.ToLowerInvariant())
                         {                            
                             case "1":
                                 mergeType = Epi.ImportExport.DataMergeType.UpdateOnly;
@@ -72,7 +72,7 @@ namespace Epi.Windows.DataUnpackager
                         M = new Epi.Windows.ImportExport.Dialogs.ImportEncryptedDataPackageDialog(destinationView, mergeType);
                     }
 
-                    if (!string.IsNullOrEmpty(autorun) && autorun.ToLower().Equals("true") && M != null)
+                    if (!string.IsNullOrEmpty(autorun) && autorun.ToLowerInvariant().Equals("true") && M != null)
                     {
                         M.CloseOnFinish = true;
                         M.StartImportPackage();

@@ -43,8 +43,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 // dpb: this needs to be fixed to work with more then just strings
 
-                string LHS = this.ParameterList[0].Execute().ToString().ToLower(); // this.NotExp.Execute().ToString().ToLower();
-                string RHS = this.ParameterList[1].Execute().ToString().ToLower(); //this.AndExp.Execute().ToString().ToLower();
+                string LHS = this.ParameterList[0].Execute().ToString().ToLowerInvariant(); // this.NotExp.Execute().ToString().ToLowerInvariant();
+                string RHS = this.ParameterList[1].Execute().ToString().ToLowerInvariant(); //this.AndExp.Execute().ToString().ToLowerInvariant();
 
                 result = "true" == LHS && LHS == RHS;
             }

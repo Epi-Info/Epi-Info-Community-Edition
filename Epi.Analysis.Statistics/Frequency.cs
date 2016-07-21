@@ -204,7 +204,7 @@ namespace Epi.Analysis.Statistics
                         foreach (System.Data.DataColumn C in DT.Columns)
                         {
                             string ColumnKey = C.ColumnName;
-                            if (ColumnKey.ToUpper() == Key.ToUpper())
+                            if (ColumnKey.ToUpperInvariant() == Key.ToUpperInvariant())
                             {
                                 bool RowIsFound = false;
 
@@ -296,11 +296,11 @@ namespace Epi.Analysis.Statistics
 
                         if (variableExists && (isByte || isBool))
                         {
-                            if (tmpString[1].ToUpper().Contains("FALSE"))
+                            if (tmpString[1].ToUpperInvariant().Contains("FALSE"))
                             {
                                 tmpString[1] = this.config.Settings.RepresentationOfNo;
                             }
-                            else if (tmpString[1].ToUpper().Contains("TRUE"))
+                            else if (tmpString[1].ToUpperInvariant().Contains("TRUE"))
                             {
                                 tmpString[1] = this.config.Settings.RepresentationOfYes;
                             }
@@ -313,7 +313,7 @@ namespace Epi.Analysis.Statistics
                             {
                                 tmpString[1] = this.config.Settings.RepresentationOfNo;
                             }
-                            else if (tmpString[1].ToLower().Contains("null"))
+                            else if (tmpString[1].ToLowerInvariant().Contains("null"))
                             {
                                 tmpString[1] = this.config.Settings.RepresentationOfMissing;
                             }
@@ -347,7 +347,7 @@ namespace Epi.Analysis.Statistics
 
                     System.Data.DataRow[] tempRows = Key.Value.Select("", "value");
 
-                    if (config["include-missing"].ToUpper() == "FALSE")
+                    if (config["include-missing"].ToUpperInvariant() == "FALSE")
                     {
                         tempRows = Key.Value.Select(string.Format(" varname='{0}' and [value] is NOT NULL ", Key.Key), "value");
                     }
@@ -644,7 +644,7 @@ namespace Epi.Analysis.Statistics
 
             foreach (System.Data.DataColumn column in this.Context.Columns)
             {
-                if (column.ColumnName.Trim().ToUpper() == pColumnName.Trim().ToUpper())
+                if (column.ColumnName.Trim().ToUpperInvariant() == pColumnName.Trim().ToUpperInvariant())
                 {
                     result = column.DataType;
                     break;

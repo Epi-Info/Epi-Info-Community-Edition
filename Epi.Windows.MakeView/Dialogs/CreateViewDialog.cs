@@ -91,14 +91,14 @@ namespace Epi.Windows.MakeView.Dialogs
 
             foreach (View view in project.Views)
             {
-                if (ViewName.ToLower() == view.Name.ToLower())
+                if (ViewName.ToLowerInvariant() == view.Name.ToLowerInvariant())
                 {
                     validationMessage = SharedStrings.INVALID_VIEW_NAME_DUPLICATE;
                     valid = false;
                     break;
                 }
 
-                if (trimmedFormNameCandidate.ToLower() == view.Name.ToLower())
+                if (trimmedFormNameCandidate.ToLowerInvariant() == view.Name.ToLowerInvariant())
                 {
                     validationMessage = SharedStrings.INVALID_VIEW_NAME_DUPLICATE_PREFIX;
                     valid = false;

@@ -127,9 +127,9 @@ namespace Epi.Windows.MakeView.Dialogs
 
             foreach (Page page in parentView.Pages)
             {
-                if (PageName.ToLower().Trim().Equals(page.Name.ToLower()) || PageName.ToLower().Equals(page.Name.ToLower()))
+                if (PageName.ToLowerInvariant().Trim().Equals(page.Name.ToLowerInvariant()) || PageName.ToLowerInvariant().Equals(page.Name.ToLowerInvariant()))
                 {
-                  if (!(PageNode != null && PageNode.Text.ToLower() == PageName.ToLower()) )
+                  if (!(PageNode != null && PageNode.Text.ToLowerInvariant() == PageName.ToLowerInvariant()) )
                     
                     {
                         validationMessage = SharedStrings.INVALID_PAGE_NAME_DUPLICATE;
@@ -139,7 +139,7 @@ namespace Epi.Windows.MakeView.Dialogs
                   
                 }
             }
-            if (PageName.ToLower() == "page" && string.IsNullOrEmpty(validationMessage))
+            if (PageName.ToLowerInvariant() == "page" && string.IsNullOrEmpty(validationMessage))
             {
                 validationMessage = SharedStrings.INVALID_PAGE_NAME_IS_RESERVED;
                 valid = false;

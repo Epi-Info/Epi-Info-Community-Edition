@@ -59,15 +59,15 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     foreach (string part in _effectList)
                     {
-                        if (part.ToUpper().Equals("BOLD"))
+                        if (part.ToUpperInvariant().Equals("BOLD"))
                         {
                             style = string.Format(style, "<B>{0}</B>");
                         }
-                        if (part.ToUpper().Equals("ITALIC"))
+                        if (part.ToUpperInvariant().Equals("ITALIC"))
                         {
                             style = string.Format(style, "<I>{0}</I>");
                         }
-                        if (part.ToUpper().Equals("UNDERLINE"))
+                        if (part.ToUpperInvariant().Equals("UNDERLINE"))
                         {
                             style = string.Format(style, "<U>{0}</U>");
                         }
@@ -127,7 +127,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     Token token = (Token)nonterminalToken.Tokens[i];
 
-                    switch (token.ToString().ToUpper())
+                    switch (token.ToString().ToUpperInvariant())
                     {
                         case "TEXTFONT":
                             break;

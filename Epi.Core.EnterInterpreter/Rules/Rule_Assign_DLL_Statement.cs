@@ -26,9 +26,9 @@ namespace Epi.Core.EnterInterpreter.Rules
             this.ParameterList = EnterRule.GetFunctionParameters(pContext, (NonterminalToken)pToken.Tokens[7]);
             if (pContext.IsVariableValidationEnable)
             {
-                if (!string.IsNullOrEmpty(this.QualifiedId) && !this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                if (!string.IsNullOrEmpty(this.QualifiedId) && !this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLowerInvariant()))
                 {
-                    this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                    this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLowerInvariant(), this.QualifiedId.ToLowerInvariant());
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
                 // this is a dll call
                 // and is NOT implemented as of 11/05/2010
-                if (this.Context.DLLClassList.ContainsKey(this.ClassName.ToLower()))
+                if (this.Context.DLLClassList.ContainsKey(this.ClassName.ToLowerInvariant()))
                 {
                     if (this.ParameterList.Count > 0)
                     {
@@ -63,7 +63,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                     }
 
 
-                    IDLLClass DLLObject = this.Context.DLLClassList[this.ClassName.ToLower()];
+                    IDLLClass DLLObject = this.Context.DLLClassList[this.ClassName.ToLowerInvariant()];
 
                     result = DLLObject.Execute (this.MethodName, args);
                 }

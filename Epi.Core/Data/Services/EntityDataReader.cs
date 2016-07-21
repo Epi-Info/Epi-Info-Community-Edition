@@ -314,7 +314,7 @@ namespace Microsoft.Samples.EntityDataReader
       {
         var q = (from cp in completeConstructor.GetParameters()
                  join p in allProperties
-                   on new { n = cp.Name.ToLower(), t = cp.ParameterType } equals new { n = p.Name.ToLower(), t = p.PropertyType }
+                   on new { n = cp.Name.ToLowerInvariant(), t = cp.ParameterType } equals new { n = p.Name.ToLowerInvariant(), t = p.PropertyType }
                  select new { cp, p }).ToList();
 
         if (q.Count() == allProperties.Count()) //all constructor parameters matched by name and type to properties

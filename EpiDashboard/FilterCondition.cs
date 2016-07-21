@@ -349,8 +349,8 @@ namespace EpiDashboard
             "<friendlyHighValue>" + friendlyHighValue + "</friendlyHighValue>" +
             "<lowValue>" + lowValue + "</lowValue>" +
             "<friendlyLowValue>" + friendlyLowValue + "</friendlyLowValue>" +
-            "<isBetween>" + isBetween.ToString().ToLower() + "</isBetween>" +
-            "<isEnabled>" + isEnabled.ToString().ToLower() + "</isEnabled>" +
+            "<isBetween>" + isBetween.ToString().ToLowerInvariant() + "</isBetween>" +
+            "<isEnabled>" + isEnabled.ToString().ToLowerInvariant() + "</isEnabled>" +
             "<joinType>" + joinType.ToString() + "</joinType>";
 
             System.Xml.XmlElement element = doc.CreateElement("filterCondition");

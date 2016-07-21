@@ -313,7 +313,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             int num = rnd.Next(words.Length);
 
             string word = words[num];
-            word = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(word.ToLower());
+            word = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(word.ToLowerInvariant());
             return word + " ";
         }
 

@@ -99,7 +99,7 @@ namespace Epi.Fields
             get
             {
                 System.Globalization.DateTimeFormatInfo formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo;
-                return string.Format("{0} {1}", formatInfo.ShortDatePattern.ToUpper(), formatInfo.LongTimePattern.ToUpper());
+                return string.Format("{0} {1}", formatInfo.ShortDatePattern.ToUpperInvariant(), formatInfo.LongTimePattern.ToUpperInvariant());
             }
             set { ;}
         }

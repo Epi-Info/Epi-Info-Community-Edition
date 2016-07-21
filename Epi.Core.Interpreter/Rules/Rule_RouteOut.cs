@@ -34,7 +34,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             if( pToken.Tokens.Length >= 3)
             {
-                if( GetCommandElement(pToken.Tokens, 2).ToUpper().Equals("REPLACE"))
+                if( GetCommandElement(pToken.Tokens, 2).ToUpperInvariant().Equals("REPLACE"))
                 {
                     isReplace = true;    
                 }

@@ -24,9 +24,9 @@ namespace Epi.Core.EnterInterpreter.Rules
             //        if (item is Rule_Value)
             //        {
             //            var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
-            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLowerInvariant()))
             //            {
-            //                this.Context.CommandVariableCheck.Add(id.ToLower(), "uppercase");
+            //                this.Context.CommandVariableCheck.Add(id.ToLowerInvariant(), "uppercase");
             //            }
             //        }
             //    }
@@ -43,7 +43,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             if(result != null)
             {
-                result = result.ToString().ToUpper();
+                result = result.ToString().ToUpperInvariant();
             }
 
             return result;

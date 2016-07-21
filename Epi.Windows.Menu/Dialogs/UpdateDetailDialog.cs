@@ -36,8 +36,8 @@ namespace Epi.Windows.Menu.Dialogs
         {
             try
             {
-                string programFilesDirectoryName = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles).ToLower();
-                string installFolder = AppDomain.CurrentDomain.BaseDirectory.ToLower();
+                string programFilesDirectoryName = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles).ToLowerInvariant();
+                string installFolder = AppDomain.CurrentDomain.BaseDirectory.ToLowerInvariant();
                 if (installFolder.StartsWith(programFilesDirectoryName))
                 {
                     System.Xml.XmlDocument doc = new System.Xml.XmlDocument();

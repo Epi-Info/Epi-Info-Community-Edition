@@ -27,7 +27,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 if (!string.IsNullOrEmpty(address_field_name))
                 {
 
-                    if (!this.Context.CommandVariableCheck.ContainsKey(address_field_name.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(address_field_name.ToLowerInvariant()))
                     {
                         this.Context.CommandVariableCheck.Add(address_field_name, "Geocode");
                     }
@@ -36,7 +36,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 if (!string.IsNullOrEmpty(latitude_field_name))
                 {
 
-                    if (!this.Context.CommandVariableCheck.ContainsKey(latitude_field_name.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(latitude_field_name.ToLowerInvariant()))
                     {
                         this.Context.CommandVariableCheck.Add(latitude_field_name, "Geocode");
                     }
@@ -45,7 +45,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 if (!string.IsNullOrEmpty(longitude_field_name))
                 {
 
-                    if (!this.Context.CommandVariableCheck.ContainsKey(longitude_field_name.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(longitude_field_name.ToLowerInvariant()))
                     {
                         this.Context.CommandVariableCheck.Add(longitude_field_name, "Geocode");
                     }

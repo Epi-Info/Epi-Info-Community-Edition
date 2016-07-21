@@ -155,7 +155,7 @@ namespace Epi.Data.Office
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            if ((connectionString.ToLower().Contains(".xls") && !(connectionString.ToLower().Contains(".xlsx"))) || (connectionString.ToLower().Contains("provider=microsoft.jet.oledb.4.0") && connectionString.ToLower().Contains("excel") && !connectionString.ToLower().Contains("fmt=delimited")))
+            if ((connectionString.ToLowerInvariant().Contains(".xls") && !(connectionString.ToLowerInvariant().Contains(".xlsx"))) || (connectionString.ToLowerInvariant().Contains("provider=microsoft.jet.oledb.4.0") && connectionString.ToLowerInvariant().Contains("excel") && !connectionString.ToLowerInvariant().Contains("fmt=delimited")))
             {
                 return true;
             }
@@ -172,11 +172,11 @@ namespace Epi.Data.Office
             string Test = fileString.Trim(new char[] { '\'' });
 
 
-            if (Test.ToLower().EndsWith(".xls") && !Test.ToLower().Contains("provider=microsoft.jet.oledb.4.0"))
+            if (Test.ToLowerInvariant().EndsWith(".xls") && !Test.ToLowerInvariant().Contains("provider=microsoft.jet.oledb.4.0"))
             {
                 result = string.Format(Excel, Test);
             }
-            else if (Test.ToLower().IndexOf("provider=microsoft.jet.oledb.4.0") > -1)
+            else if (Test.ToLowerInvariant().IndexOf("provider=microsoft.jet.oledb.4.0") > -1)
             {
                 result = Test;
             }
@@ -191,7 +191,7 @@ namespace Epi.Data.Office
             // columns
             foreach (DataColumn column in table.Columns)
             {
-                if (column.ColumnName.ToLower() == "uniquekey")
+                if (column.ColumnName.ToLowerInvariant() == "uniquekey")
                 {
                     HasUniqueKey = true;
                     sql += "[" + column.ColumnName + "] " + SQLGetType(column) + ",\n";

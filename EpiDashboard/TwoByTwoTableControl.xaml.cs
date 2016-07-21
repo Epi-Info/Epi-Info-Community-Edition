@@ -923,7 +923,7 @@ namespace EpiDashboard
                     List<string> exposureVars = new List<string>();
                     foreach (KeyValuePair<string, string> kvp in gadgetOptions.InputVariableList)
                     {
-                        if (kvp.Value.ToLower().Equals("groupfield"))
+                        if (kvp.Value.ToLowerInvariant().Equals("groupfield"))
                         {
                             exposureVars.Add(kvp.Key);
                         }
@@ -1184,13 +1184,13 @@ namespace EpiDashboard
             booleanValues.Add("f", "t");
             //booleanValues.Add("no", "yes");
             booleanValues.Add("n", "y");
-            if (!booleanValues.ContainsKey(dashboardHelper.Config.Settings.RepresentationOfNo.ToLower()))
+            if (!booleanValues.ContainsKey(dashboardHelper.Config.Settings.RepresentationOfNo.ToLowerInvariant()))
             {
-                booleanValues.Add(dashboardHelper.Config.Settings.RepresentationOfNo.ToLower(), dashboardHelper.Config.Settings.RepresentationOfYes.ToLower());
+                booleanValues.Add(dashboardHelper.Config.Settings.RepresentationOfNo.ToLowerInvariant(), dashboardHelper.Config.Settings.RepresentationOfYes.ToLowerInvariant());
             }
 
-            string firstColumnName = table.Columns[1].ColumnName.ToLower();
-            string secondColumnName = table.Columns[2].ColumnName.ToLower();
+            string firstColumnName = table.Columns[1].ColumnName.ToLowerInvariant();
+            string secondColumnName = table.Columns[2].ColumnName.ToLowerInvariant();
 
             if (booleanValues.ContainsKey(firstColumnName) && secondColumnName.Equals(booleanValues[firstColumnName]))
             {
@@ -2495,7 +2495,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "exposurevariable":
                         cbxExposureField.Text = child.InnerText.Replace("&lt;", "<");
@@ -2513,7 +2513,7 @@ namespace EpiDashboard
                         this.CustomOutputCaption = child.InnerText;
                         break;
                     case "smarttable":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             checkboxSmartTable.IsChecked = true;
                         }
@@ -2527,7 +2527,7 @@ namespace EpiDashboard
 
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "top":
                         Canvas.SetTop(this, double.Parse(attribute.Value));

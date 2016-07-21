@@ -115,7 +115,7 @@ namespace Epi.Windows.MakeView.Forms
             catch (Exception ex)
             {
                 iserrcheckcode = true;
-                if (ex.Message.ToUpper().Contains("WARNING"))
+                if (ex.Message.ToUpperInvariant().Contains("WARNING"))
                 {
                 this.AddStatusInformationMessage(string.Format( "\n{0}", ex.Message));
                 }
@@ -639,7 +639,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             string[] Parameters = this.ConvertParameters(e.Node.Tag.ToString());
 
-            switch (Parameters[0].ToLower())
+            switch (Parameters[0].ToLowerInvariant())
             {
                 case "view":
                 case "form":
@@ -1375,12 +1375,12 @@ namespace Epi.Windows.MakeView.Forms
 
             foreach (string token in tokens)
             {
-                if (this.keywords.Contains(token.Trim().ToLower()))
+                if (this.keywords.Contains(token.Trim().ToLowerInvariant()))
                 {
                     codeText.SelectionColor = Color.Blue;
                     codeText.SelectionFont = printFont;
                 }
-                else if (this.operators.Contains(token.Trim().ToLower()))
+                else if (this.operators.Contains(token.Trim().ToLowerInvariant()))
                 {
                     codeText.SelectionColor = Color.Brown;
                     codeText.SelectionFont = printFont;
@@ -2126,7 +2126,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             try
             {
-                switch (commandName.ToLower())
+                switch (commandName.ToLowerInvariant())
                 {
                     case "clear":
                         DesignFieldCommand(Enums.FieldCommands.Clear);
@@ -2295,7 +2295,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
             }
 
-            string caseKey = pLevel.ToLower() + "_" + pEvent.ToLower();
+            string caseKey = pLevel.ToLowerInvariant() + "_" + pEvent.ToLowerInvariant();
 
             switch (caseKey)
             {
@@ -2809,7 +2809,7 @@ namespace Epi.Windows.MakeView.Forms
                         this.ParseText(CheckCodeBlock.ToString());
                         for (int i = 0; i < tvCodeBlocks.Nodes.Count; i++)
                         {
-                            if (tvCodeBlocks.Nodes[i].Text.Trim().ToLower() == "subroutine(s)")
+                            if (tvCodeBlocks.Nodes[i].Text.Trim().ToLowerInvariant() == "subroutine(s)")
                             {
                                 TreeNode treeNode = new TreeNode(Identifier);
                                 treeNode.Tag = "level=sub&event=&identifier=" + Identifier;
@@ -2872,15 +2872,15 @@ namespace Epi.Windows.MakeView.Forms
             if (string.IsNullOrEmpty(Parameters[1]))
             {
                 if (
-                    Parameters[0].ToLower() != "definevariables"
-                    && Parameters[0].ToLower() != "sub"
+                    Parameters[0].ToLowerInvariant() != "definevariables"
+                    && Parameters[0].ToLowerInvariant() != "sub"
                 )
                 {
 
                     return;
                 }
 
-                if (Parameters[0].ToLower() == "sub" && string.IsNullOrEmpty(Parameters[2]))
+                if (Parameters[0].ToLowerInvariant() == "sub" && string.IsNullOrEmpty(Parameters[2]))
                 {
                     return;
                 }
@@ -2922,7 +2922,7 @@ namespace Epi.Windows.MakeView.Forms
                     MC = re.Matches(this.codeText.Text);
                     if (MC.Count > 0)
                     {
-                        index2 = this.codeText.Text.ToLower().IndexOf(pEvent, MC[0].Index);
+                        index2 = this.codeText.Text.ToLowerInvariant().IndexOf(pEvent, MC[0].Index);
                         if (index2 > -1)
                         {
                             result = index2;
@@ -2981,7 +2981,7 @@ namespace Epi.Windows.MakeView.Forms
                             if (MC[i].ToString().IndexOf('[') > 0 && pIdentifier.IndexOf(']') > 0)
                             {
                                 index1 = MC[i].Index;
-                                index2 = this.codeText.Text.ToLower().IndexOf("end-" + pLevel, index1);
+                                index2 = this.codeText.Text.ToLowerInvariant().IndexOf("end-" + pLevel, index1);
                                 re = new Regex(string.Format("\\b{0}\\b", pEvent), RegexOptions.IgnoreCase);
                                 MC = re.Matches(this.codeText.Text.Substring(index1, index2 - index1));
                                 if (MC.Count > 0)
@@ -2990,7 +2990,7 @@ namespace Epi.Windows.MakeView.Forms
                             else if (MC[i].ToString().IndexOf('[') < 0 && pIdentifier.IndexOf(']') < 0)
                             {
                                 index1 = MC[i].Index;
-                                index2 = this.codeText.Text.ToLower().IndexOf("end-" + pLevel, index1);
+                                index2 = this.codeText.Text.ToLowerInvariant().IndexOf("end-" + pLevel, index1);
                                 re = new Regex(string.Format("\\b{0}\\b", pEvent), RegexOptions.IgnoreCase);
                                 if (index2 > 0)
                                 {
@@ -3030,7 +3030,7 @@ namespace Epi.Windows.MakeView.Forms
             }
 
 
-            switch (pLevel.ToLower())
+            switch (pLevel.ToLowerInvariant())
             {
                 /*
             case "definevariables":
@@ -3039,79 +3039,79 @@ namespace Epi.Windows.MakeView.Forms
                 break;*/
 
                 case "view":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "":
                             break;
                         case "before":
-                            start = this.codeText.Text.ToLower().IndexOf("after", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("after", start) - 2;
                             break;
                         case "after":
-                            start = this.codeText.Text.ToLower().IndexOf("end-view", start);
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-view", start);
                             break;
                     }
                     break;
                 case "form":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "":
                             break;
                         case "before":
-                            start = this.codeText.Text.ToLower().IndexOf("after", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("after", start) - 2;
                             break;
                         case "after":
-                            start = this.codeText.Text.ToLower().IndexOf("end-form", start);
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-form", start);
                             break;
                     }
                     break;
                 case "record":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "":
                             break;
                         case "before":
-                            start = this.codeText.Text.ToLower().IndexOf("after", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("after", start) - 2;
                             break;
                         case "after":
-                            start = this.codeText.Text.ToLower().IndexOf("end-record", start);
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-record", start);
                             break;
                     }
                     break;
 
 
                 case "page":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "":
                             break;
                         case "before":
                             //suggest upping this to -2
                             OldStart = start;
-                            start = this.codeText.Text.ToLower().IndexOf("after", start) - 2;
-                            if (start < 0 || start > this.codeText.Text.ToLower().IndexOf("end-page", OldStart))
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("after", start) - 2;
+                            if (start < 0 || start > this.codeText.Text.ToLowerInvariant().IndexOf("end-page", OldStart))
                             {
                                 start = this.codeText.Text.IndexOf(pIdentifier, OldStart) + pIdentifier.Length;
                             }
                             break;
                         case "after":
                             OldStart = start;
-                            start = this.codeText.Text.ToLower().IndexOf("end-page", start);
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-page", start);
                             break;
                     }
                     break;
                 case "field":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "before":
                             OldStart = start;
-                            //start = this.codeText.Text.ToLower().IndexOf("after", start) - 2;
-                            start = this.codeText.Text.ToLower().IndexOf("after", start);
-                            if (start < 0 || start > this.codeText.Text.ToLower().IndexOf("end-field", OldStart))
+                            //start = this.codeText.Text.ToLowerInvariant().IndexOf("after", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("after", start);
+                            if (start < 0 || start > this.codeText.Text.ToLowerInvariant().IndexOf("end-field", OldStart))
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("click", OldStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("click", OldStart) - 2;
                             }
 
-                            if (start < 0 || start > this.codeText.Text.ToLower().IndexOf("end-field", OldStart))
+                            if (start < 0 || start > this.codeText.Text.ToLowerInvariant().IndexOf("end-field", OldStart))
                             {
                                 start = this.codeText.Text.IndexOf(pIdentifier, OldStart) + pIdentifier.Length;
                             }
@@ -3119,12 +3119,12 @@ namespace Epi.Windows.MakeView.Forms
                             break;
                         case "after":
                             OldStart = start;
-                            start = this.codeText.Text.ToLower().IndexOf("end-before", start);
-                            if (start < 0 || start > this.codeText.Text.ToLower().IndexOf("end-field", OldStart))
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-before", start);
+                            if (start < 0 || start > this.codeText.Text.ToLowerInvariant().IndexOf("end-field", OldStart))
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("click", OldStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("click", OldStart) - 2;
 
-                                if (start < 0 || start > this.codeText.Text.ToLower().IndexOf("end-field", OldStart))
+                                if (start < 0 || start > this.codeText.Text.ToLowerInvariant().IndexOf("end-field", OldStart))
                                 {
                                     start = this.codeText.Text.IndexOf(pIdentifier, OldStart) + pIdentifier.Length;
                                 }
@@ -3135,7 +3135,7 @@ namespace Epi.Windows.MakeView.Forms
                             }
                             break;
                         case "click":
-                            start = this.codeText.Text.ToLower().IndexOf("end-field", start);
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-field", start);
                             break;
                     }
                     break;
@@ -3361,7 +3361,7 @@ namespace Epi.Windows.MakeView.Forms
                 return;
             }
 
-            string BlockType = Parameters[0].ToLower();
+            string BlockType = Parameters[0].ToLowerInvariant();
             switch (BlockType)
             {
                 case "view":
@@ -3385,7 +3385,7 @@ namespace Epi.Windows.MakeView.Forms
                             Identifier = Parameters[2].Trim();
                         }
                     }
-                    else if (Parameters[0].ToLower() == "sub")
+                    else if (Parameters[0].ToLowerInvariant() == "sub")
                     {
                         Identifier = "NewSubroutine";
 
@@ -3474,23 +3474,23 @@ namespace Epi.Windows.MakeView.Forms
             System.Text.RegularExpressions.Regex re = null;
             re = new Regex("\\ssub\\s+[\\w_\\[\\]\\.]*\\b|^sub\\s+[\\w_\\[\\]\\.]*\\b", RegexOptions.IgnoreCase);
             Dictionary<string, string> IdList = new Dictionary<string, string>();
-            MatchCollection MC = re.Matches(this.codeText.Text.ToLower());
+            MatchCollection MC = re.Matches(this.codeText.Text.ToLowerInvariant());
 
 
             for (int i = 0; i < MC.Count; i++)
             {
 
-                int index2 = this.codeText.Text.ToLower().IndexOf(' ', MC[i].Index);
+                int index2 = this.codeText.Text.ToLowerInvariant().IndexOf(' ', MC[i].Index);
 
                 if (index2 > -1)
                 {
-                    int index3 = this.codeText.Text.ToLower().IndexOf('\n', index2);
+                    int index3 = this.codeText.Text.ToLowerInvariant().IndexOf('\n', index2);
                     if (index3 > -1)
                     {
                         string id = this.codeText.Text.Substring(index2, index3 - index2).Trim();
-                        if (!IdList.ContainsKey(id.ToUpper()))
+                        if (!IdList.ContainsKey(id.ToUpperInvariant()))
                         {
-                            IdList.Add(id.ToUpper(), id);
+                            IdList.Add(id.ToUpperInvariant(), id);
                         }
                     }
                 }
@@ -3524,55 +3524,55 @@ namespace Epi.Windows.MakeView.Forms
                 return start;
             }
 
-            switch (pLevel.ToLower())
+            switch (pLevel.ToLowerInvariant())
             {
 
                 case "definevariables":
-                    start = this.codeText.Text.ToLower().IndexOf("end-definevariables", start) - 1;
+                    start = this.codeText.Text.ToLowerInvariant().IndexOf("end-definevariables", start) - 1;
                     break;
                 case "sub":
-                    start = this.codeText.Text.ToLower().IndexOf("end-sub", start) - 2;
+                    start = this.codeText.Text.ToLowerInvariant().IndexOf("end-sub", start) - 2;
                     break;
 
                 case "view":
                 case "form":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "":
                             break;
                         case "before":
-                            start = this.codeText.Text.ToLower().IndexOf("end-before", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-before", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-view", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-view", SearchStart) - 2;
                             }
                             break;
                         case "after":
-                            start = this.codeText.Text.ToLower().IndexOf("end-after", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-after", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-view", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-view", SearchStart) - 2;
                             }
                             break;
                     }
                     break;
                 case "record":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "":
                             break;
                         case "before":
-                            start = this.codeText.Text.ToLower().IndexOf("end-before", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-before", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-record", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-record", SearchStart) - 2;
                             }
                             break;
                         case "after":
-                            start = this.codeText.Text.ToLower().IndexOf("end-after", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-after", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-record", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-record", SearchStart) - 2;
                             }
                             break;
                     }
@@ -3580,49 +3580,49 @@ namespace Epi.Windows.MakeView.Forms
 
 
                 case "page":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "":
                             break;
                         case "before":
-                            start = this.codeText.Text.ToLower().IndexOf("end-before", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-before", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-page", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-page", SearchStart) - 2;
                             }
                             break;
                         case "after":
-                            start = this.codeText.Text.ToLower().IndexOf("end-after", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-after", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-page", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-page", SearchStart) - 2;
                             }
                             break;
                     }
                     break;
                 case "field":
-                    switch (pEvent.ToLower())
+                    switch (pEvent.ToLowerInvariant())
                     {
                         case "before":
-                            start = this.codeText.Text.ToLower().IndexOf("end-before", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-before", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-field", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-field", SearchStart) - 2;
                             }
 
                             break;
                         case "after":
-                            start = this.codeText.Text.ToLower().IndexOf("end-after", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-after", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-field", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-field", SearchStart) - 2;
                             }
                             break;
                         case "click":
-                            start = this.codeText.Text.ToLower().IndexOf("end-click", start) - 2;
+                            start = this.codeText.Text.ToLowerInvariant().IndexOf("end-click", start) - 2;
                             if (start < 0)
                             {
-                                start = this.codeText.Text.ToLower().IndexOf("end-field", SearchStart) - 2;
+                                start = this.codeText.Text.ToLowerInvariant().IndexOf("end-field", SearchStart) - 2;
                             }
                             break;
                     }

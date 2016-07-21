@@ -475,7 +475,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                     edDt = edDt.AddDays(edInt);
                     Parameters.EndDate = edDt;
                 }
-                else if (txtEndValue.Text.ToUpper() == "SYSTEMDATE" || txtEndValue.Text == "SYSTEMDATE")
+                else if (txtEndValue.Text.ToUpperInvariant() == "SYSTEMDATE" || txtEndValue.Text == "SYSTEMDATE")
                 {
                     Parameters.EndDate = DateTime.Now;
                 }
@@ -1037,7 +1037,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             txtStep.Text = Parameters.Step.ToString();
 
-            switch (Parameters.Interval.ToLower())
+            switch (Parameters.Interval.ToLowerInvariant())
             {
                 case "minute":
                     cmbInterval.SelectedIndex = 0;
@@ -1096,7 +1096,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 //    edDt = edDt.AddDays(edInt);
                 //    Parameters.EndDate = edDt;
                 //}
-                //else if (Parameters.EndValue.ToUpper() == "SYSTEMDATE" || Parameters.EndValue == "SYSTEMDATE")
+                //else if (Parameters.EndValue.ToUpperInvariant() == "SYSTEMDATE" || Parameters.EndValue == "SYSTEMDATE")
                 //{
                 //    Parameters.EndDate = DateTime.Now;
                 //}

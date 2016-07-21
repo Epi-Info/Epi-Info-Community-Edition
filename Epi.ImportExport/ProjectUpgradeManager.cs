@@ -283,7 +283,7 @@ namespace Epi.ImportExport
                         for (int i = 0; i < destinationString.Length; i++)
                         {
                             string[] fieldValue = destinationString[i].Split('=');
-                            if (fieldValue[0].ToUpper() == "DATA SOURCE")
+                            if (fieldValue[0].ToUpperInvariant() == "DATA SOURCE")
                             {
                                 destinationDB = fieldValue[1];
                                 destinationDB = destinationDB.Trim('"');
@@ -502,7 +502,7 @@ namespace Epi.ImportExport
                             }
                             foreach (Field field in view.Fields.TableColumnFields)
                             {
-                                if (field.Name.ToLower().Equals("fkey"))
+                                if (field.Name.ToLowerInvariant().Equals("fkey"))
                                 {
                                     Object fieldValue = reader[field.Name];
                                     string fieldValueString = string.Empty;
@@ -540,7 +540,7 @@ namespace Epi.ImportExport
 
                     foreach (Epi.Epi2000.View epi2000View in sourceProject.Views)
                     {
-                        if (epi2000View.NameWithoutPrefix.ToLower().Equals(view.Name.ToLower()))
+                        if (epi2000View.NameWithoutPrefix.ToLowerInvariant().Equals(view.Name.ToLowerInvariant()))
                         {
                             sourceView = epi2000View;
                             break;
@@ -1243,7 +1243,7 @@ namespace Epi.ImportExport
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
                     // skip internal columns like 'uniquekey', but add the rest
-                    if (!(reader.GetName(i).ToLower() == "uniquekey" || reader.GetName(i).ToLower() == "globalrecordid" || reader.GetName(i).ToLower() == "fkey" || reader.GetName(i).ToLower() == "recstatus" || reader.GetName(i).ToLower() == "oldfkey" || reader.GetName(i).ToLower() == "olduniquekey"))
+                    if (!(reader.GetName(i).ToLowerInvariant() == "uniquekey" || reader.GetName(i).ToLowerInvariant() == "globalrecordid" || reader.GetName(i).ToLowerInvariant() == "fkey" || reader.GetName(i).ToLowerInvariant() == "recstatus" || reader.GetName(i).ToLowerInvariant() == "oldfkey" || reader.GetName(i).ToLowerInvariant() == "olduniquekey"))
                     {
                         tableColumnNames.Add(reader.GetName(i));
                     }
@@ -1254,7 +1254,7 @@ namespace Epi.ImportExport
                 // for each column in the table, see if there's a matching field in metaFields
                 foreach (string s in tableColumnNames)
                 {
-                    if (!(s.ToLower().Equals("globalrecordid") || s.ToLower().Equals("fkey") || s.ToLower().Equals("uniquekey") || s.ToLower().Equals("recstatus") || s.ToLower().Equals("oldfkey") || s.ToLower().Equals("olduniquekey")))
+                    if (!(s.ToLowerInvariant().Equals("globalrecordid") || s.ToLowerInvariant().Equals("fkey") || s.ToLowerInvariant().Equals("uniquekey") || s.ToLowerInvariant().Equals("recstatus") || s.ToLowerInvariant().Equals("oldfkey") || s.ToLowerInvariant().Equals("olduniquekey")))
                     {                        
                         try
                         {
@@ -1285,7 +1285,7 @@ namespace Epi.ImportExport
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
                             // skip internal columns like 'uniquekey', but add the rest
-                            if (!(reader.GetName(i).ToLower() == "uniquekey" || reader.GetName(i).ToLower() == "globalrecordid" || reader.GetName(i).ToLower() == "fkey" || reader.GetName(i).ToLower() == "recstatus"))
+                            if (!(reader.GetName(i).ToLowerInvariant() == "uniquekey" || reader.GetName(i).ToLowerInvariant() == "globalrecordid" || reader.GetName(i).ToLowerInvariant() == "fkey" || reader.GetName(i).ToLowerInvariant() == "recstatus"))
                             {
                                 tableColumnNames.Add(reader.GetName(i));
                             }
@@ -1300,7 +1300,7 @@ namespace Epi.ImportExport
                             foreach (Field field in page.Fields)
                             {
                                 // if there's a match, and the field that is matched is a data field, then set 'found' to true
-                                if (field.Name.ToLower() == s.ToLower() &&
+                                if (field.Name.ToLowerInvariant() == s.ToLowerInvariant() &&
                                     !(field is CommandButtonField) &&
                                     !(field is MirrorField) &&
                                     !(field is LabelField) &&
@@ -2150,7 +2150,7 @@ namespace Epi.ImportExport
                     {
                         parenPos = lists.Length;
                     }
-                    lists = lists.Substring(0, parenPos).ToUpper().Trim();
+                    lists = lists.Substring(0, parenPos).ToUpperInvariant().Trim();
                     if (!string.IsNullOrEmpty(lists))
                     {
                         ((IInputField)field).IsRequired = lists.Contains("M");

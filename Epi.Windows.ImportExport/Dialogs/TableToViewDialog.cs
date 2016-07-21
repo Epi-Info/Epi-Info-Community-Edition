@@ -210,7 +210,7 @@ namespace Epi.ImportExport.Dialogs
 
                 dgvc.Items.Clear();
                 
-                switch(dgvt.FormattedValue.ToString().ToLower()) 
+                switch(dgvt.FormattedValue.ToString().ToLowerInvariant()) 
                 {
                     case "string":                        
                         dgvc.Items.Add("Text");

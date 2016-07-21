@@ -25,9 +25,9 @@ namespace Epi.Core.EnterInterpreter.Rules
             //        if (item is Rule_Value)
             //        {
             //            var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
-            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLowerInvariant()))
             //            {
-            //                this.Context.CommandVariableCheck.Add(id.ToLower(), "zscore");
+            //                this.Context.CommandVariableCheck.Add(id.ToLowerInvariant(), "zscore");
             //            }
             //        }
             //    }
@@ -68,10 +68,10 @@ namespace Epi.Core.EnterInterpreter.Rules
             short gender = short.Parse(p5);
             double flag = 0; // unused
 
-            switch (p1.ToLower())
+            switch (p1.ToLowerInvariant())
             {
                 case "cdc 2000":
-                    switch (p2.ToLower())
+                    switch (p2.ToLowerInvariant())
                     {
                         case "bodymassindex":
                         case "bmi":
@@ -157,7 +157,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 case "who child growth standards": // 0-5 years
                 case "who growth standards": // 0-5 years
                 case "who 2006": // 0-5 years
-                    switch (p2.ToLower())
+                    switch (p2.ToLowerInvariant())
                     {
                         case "bodymassindex":
                         case "bmi":
@@ -272,7 +272,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                     break;
                 case "who growth reference": // 5-19 years
                 case "who 2007": // 5-19 years
-                    switch (p2.ToLower())
+                    switch (p2.ToLowerInvariant())
                     {
                         case "bodymassindex":
                         case "bmi":
@@ -313,7 +313,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 case "who 1977":
                 case "who 1978":
                 case "cdc/who 1978":
-                    switch (p2.ToLower())
+                    switch (p2.ToLowerInvariant())
                     {
                         case "heightage":
                         case "htage":

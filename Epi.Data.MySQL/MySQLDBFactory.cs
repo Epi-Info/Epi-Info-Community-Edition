@@ -200,7 +200,7 @@ namespace Epi.Data.MySQL
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            string conn = connectionString.ToLower();
+            string conn = connectionString.ToLowerInvariant();
             if (conn.Contains("database") && conn.Contains("server") && !conn.Contains("syncnotification"))
             {
                 return true;

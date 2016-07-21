@@ -60,7 +60,7 @@ namespace Epi.Analysis.Dialogs
                 {
                     count++;
 
-                    if (identifierList.Contains(dataColumn.ColumnName.ToUpper()) == false || count > maxColumnCount)
+                    if (identifierList.Contains(dataColumn.ColumnName.ToUpperInvariant()) == false || count > maxColumnCount)
                     {
                         remove.Add(dataColumn.ColumnName);
                     }
@@ -118,7 +118,7 @@ namespace Epi.Analysis.Dialogs
                     {
                         if (epiView.Fields.TableColumnFields.Contains(currentColumn))
                          {
-                            switch(epiView.Fields.TableColumnFields[column.Name].FieldType.ToString().ToUpper())
+                            switch(epiView.Fields.TableColumnFields[column.Name].FieldType.ToString().ToUpperInvariant())
                             {
                                 case "TIME":
                                     this.dataGridView1.Columns[column.Name].DefaultCellStyle.Format = "t";
@@ -152,7 +152,7 @@ namespace Epi.Analysis.Dialogs
                 {
                     count++;
 
-                    if (identifierList.Contains(dataColumn.ColumnName.ToUpper()) == false || count > maxColumnCount)
+                    if (identifierList.Contains(dataColumn.ColumnName.ToUpperInvariant()) == false || count > maxColumnCount)
                     {
                         remove.Add(dataColumn.ColumnName);
                     }
@@ -211,7 +211,7 @@ namespace Epi.Analysis.Dialogs
                         {
                             if (epiView.Fields.TableColumnFields.Contains(currentColumn))
                             {
-                                switch (epiView.Fields.TableColumnFields[column.Name].FieldType.ToString().ToUpper())
+                                switch (epiView.Fields.TableColumnFields[column.Name].FieldType.ToString().ToUpperInvariant())
                                 {
                                     case "TIME":
                                         this.dataGridView1.Columns[column.Name].DefaultCellStyle.Format = "t";

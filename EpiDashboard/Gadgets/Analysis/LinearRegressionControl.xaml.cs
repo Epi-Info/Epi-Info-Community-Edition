@@ -325,11 +325,11 @@ namespace EpiDashboard
 
                 foreach (KeyValuePair<string, string> kvp in GadgetOptions.InputVariableList)
                 {
-                    if (kvp.Value.ToLower().Equals("unsorted") || kvp.Value.ToLower().Equals("dependvar") || kvp.Value.ToLower().Equals("weightvar") || kvp.Value.ToLower().Equals("matchvar"))
+                    if (kvp.Value.ToLowerInvariant().Equals("unsorted") || kvp.Value.ToLowerInvariant().Equals("dependvar") || kvp.Value.ToLowerInvariant().Equals("weightvar") || kvp.Value.ToLowerInvariant().Equals("matchvar"))
                     {
                         columnNames.Add(kvp.Key);
                     }
-                    else if (kvp.Value.ToLower().Equals("discrete"))
+                    else if (kvp.Value.ToLowerInvariant().Equals("discrete"))
                     {
                         columnNames.Add(kvp.Key);
                     }
@@ -1124,7 +1124,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         cbxFieldOutcome.Text = child.InnerText.Replace("&lt;", "<");
@@ -1160,20 +1160,20 @@ namespace EpiDashboard
                         }
                         break;
                     case "intercept":
-                        if (child.InnerText.ToLower().Equals("false")) { checkboxNoIntercept.IsChecked = true; }
+                        if (child.InnerText.ToLowerInvariant().Equals("false")) { checkboxNoIntercept.IsChecked = true; }
                         break;
                     case "covariates":
                         foreach (XmlElement covariate in child.ChildNodes)
                         {   
-                            if (covariate.Name.ToLower().Equals("covariate"))
+                            if (covariate.Name.ToLowerInvariant().Equals("covariate"))
                             {
                                 lbxOtherFields.Items.Add(covariate.InnerText);
                             }
-                            if (covariate.Name.ToLower().Equals("dummy"))
+                            if (covariate.Name.ToLowerInvariant().Equals("dummy"))
                             {
                                 lbxDummy.Items.Add(covariate.InnerText);
                             }
-                            if (covariate.Name.ToLower().Equals("interactionterm"))
+                            if (covariate.Name.ToLowerInvariant().Equals("interactionterm"))
                             {
                                 lbxInteractionTerms.Items.Add(covariate.InnerText);
                             }

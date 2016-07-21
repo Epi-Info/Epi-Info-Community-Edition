@@ -44,7 +44,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             object result = null;
 
-            if (Expression.Execute().ToString().ToLower() == "true")
+            if (Expression.Execute().ToString().ToLowerInvariant() == "true")
             {
                 result = Statements1.Execute();
             }

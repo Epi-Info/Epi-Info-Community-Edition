@@ -17,7 +17,7 @@ namespace Updater
             using (System.IO.FileStream fs = System.IO.File.OpenRead(file_path))
             {
                 foreach (Byte b in md5Hasher.ComputeHash(fs))
-                    sb.Append(b.ToString("X2").ToLower());
+                    sb.Append(b.ToString("X2").ToLowerInvariant());
             }
 
             result = sb.ToString();

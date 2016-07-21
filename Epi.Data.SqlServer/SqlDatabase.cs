@@ -502,7 +502,7 @@ namespace Epi.Data.SqlServer
 
             foreach (DataRow row in schemaTable.Rows)
             {
-                if (row[ColumnNames.SCHEMA_NAME].ToString().ToLower().Equals("dbo"))
+                if (row[ColumnNames.SCHEMA_NAME].ToString().ToLowerInvariant().Equals("dbo"))
                 {
                     tableNames.Add(row[ColumnNames.SCHEMA_TABLE_NAME].ToString());
                 }
@@ -2557,7 +2557,7 @@ namespace Epi.Data.SqlServer
                 P.ParameterName = temp[1].Trim();
                 foreach (DataColumn C in pDataTable.Columns)
                 {
-                    if (P.ParameterName.ToLower() == C.ColumnName.ToLower())
+                    if (P.ParameterName.ToLowerInvariant() == C.ColumnName.ToLowerInvariant())
                     {
                         switch (C.DataType.Name)
                         {

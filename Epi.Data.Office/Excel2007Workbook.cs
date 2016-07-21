@@ -141,7 +141,7 @@ namespace Epi.Data.Office
             sb.Append(" ( ");
             foreach (TableColumn column in columns)
             {
-                //if (column.Name.ToLower() != "uniquekey")
+                //if (column.Name.ToLowerInvariant() != "uniquekey")
                 //{
                     if (column.IsIdentity)
                     {

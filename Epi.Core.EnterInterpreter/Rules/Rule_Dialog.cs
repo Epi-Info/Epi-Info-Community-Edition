@@ -134,7 +134,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (pContext.IsVariableValidationEnable && !string.IsNullOrEmpty(Identifier))
             {
 
-                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -162,7 +162,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (pContext.IsVariableValidationEnable && !string.IsNullOrEmpty(Identifier))
             {
 
-                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -189,7 +189,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -222,7 +222,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (pContext.IsVariableValidationEnable && !string.IsNullOrEmpty(Identifier))
             {
 
-                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -248,7 +248,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -278,7 +278,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             foreach (string name in tableNames)
             {
-                if (name.ToUpper().StartsWith("VIEW"))
+                if (name.ToUpperInvariant().StartsWith("VIEW"))
                 {
                     viewNames.Add(name);
                 }
@@ -299,7 +299,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -326,7 +326,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -361,7 +361,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -397,7 +397,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -427,7 +427,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -457,7 +457,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -487,7 +487,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -515,7 +515,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -541,7 +541,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable &&  !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable &&  !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -567,7 +567,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }
@@ -593,7 +593,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (!string.IsNullOrEmpty(Identifier))
             {
 
-                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                if (pContext.IsVariableValidationEnable && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                 {
                     this.Context.CommandVariableCheck.Add(Identifier, "dialog");
                 }

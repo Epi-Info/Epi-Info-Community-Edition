@@ -1332,7 +1332,7 @@ namespace EpiDashboard
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -1345,7 +1345,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         {
@@ -1376,7 +1376,7 @@ namespace EpiDashboard
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("stratavariable"))
+                            if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                             {
                                 //lbxFieldStrata.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
                                 ((ComplexSampleFrequencyParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));

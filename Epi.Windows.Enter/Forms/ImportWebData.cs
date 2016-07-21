@@ -118,9 +118,9 @@ namespace Epi.Enter.Forms
             
             rdbSubmittedIncremental.Checked = true;
 
-            if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.ToLower()) && (
-                config.Settings.WebServiceEndpointAddress.ToLower().Contains(Epi.Constants.surveyManagerservice) ||
-                config.Settings.WebServiceEndpointAddress.ToLower().Contains(Epi.Constants.surveyManagerservicev2)))
+            if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.ToLowerInvariant()) && (
+                config.Settings.WebServiceEndpointAddress.ToLowerInvariant().Contains(Epi.Constants.surveyManagerservice) ||
+                config.Settings.WebServiceEndpointAddress.ToLowerInvariant().Contains(Epi.Constants.surveyManagerservicev2)))
             {
                 lblIncrementalImport.Visible = false;
                 rdbSubmittedIncremental.Visible = false;
@@ -517,7 +517,7 @@ namespace Epi.Enter.Forms
                     QueryParameter paramGUID = new QueryParameter("@GlobalRecordId", DbType.String, GUID);
                     fieldValueParams.Add(paramGUID);
 
-                    if (destinationGUIDList.Contains(GUID.ToUpper()))
+                    if (destinationGUIDList.Contains(GUID.ToUpperInvariant()))
                     {
                     update = true;
                     append = false;
@@ -664,11 +664,11 @@ namespace Epi.Enter.Forms
 
                 if (field is CheckBoxField || field is YesNoField)
                 {
-                    if (value.ToString().ToLower().Equals("yes"))
+                    if (value.ToString().ToLowerInvariant().Equals("yes"))
                     {
                         value = true;
                     }
-                    else if (value.ToString().ToLower().Equals("no"))
+                    else if (value.ToString().ToLowerInvariant().Equals("no"))
                     {
                         value = false;
                     }
@@ -861,15 +861,15 @@ namespace Epi.Enter.Forms
 
                 foreach (XmlElement docElement in doc.ChildNodes)
                 {
-                    if (docElement.Name.ToLower().Equals("surveyresponse"))
+                    if (docElement.Name.ToLowerInvariant().Equals("surveyresponse"))
                     {
                         foreach (XmlElement surveyElement in docElement.ChildNodes)
                         {
-                            if (surveyElement.Name.ToLower().Equals("page") && surveyElement.Attributes.Count > 0 && surveyElement.Attributes[0].Name.ToLower().Equals("pagenumber"))
+                            if (surveyElement.Name.ToLowerInvariant().Equals("page") && surveyElement.Attributes.Count > 0 && surveyElement.Attributes[0].Name.ToLowerInvariant().Equals("pagenumber"))
                             {
                                 foreach (XmlElement pageElement in surveyElement.ChildNodes)
                                 {
-                                    if (pageElement.Name.ToLower().Equals("responsedetail"))
+                                    if (pageElement.Name.ToLowerInvariant().Equals("responsedetail"))
                                     {
                                         if (wfData.Status == 3)
                                         {
@@ -1014,7 +1014,7 @@ namespace Epi.Enter.Forms
                 }
             }
           //  var tempClient = this.client;
-            var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+            var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
             if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev3)))
             {
                 if (GUIDList.Count > 0)
@@ -1144,7 +1144,7 @@ namespace Epi.Enter.Forms
             //        AddErrorStatusMessage("The field name for " + sourceField.Name + " in the source form is invalid.");
             //        errorCount++;
             //    }
-            //    if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLower() != "uniquekey" && sourceField.Name.ToLower() != "recstatus" && sourceField.Name.ToLower() != "fkey"))
+            //    if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLowerInvariant() != "uniquekey" && sourceField.Name.ToLowerInvariant() != "recstatus" && sourceField.Name.ToLowerInvariant() != "fkey"))
             //    {
             //        AddWarningMessage("The field name for " + sourceField.Name + " in the source form is a reserved word. Problems may be encountered during the import.");
             //    }
@@ -1234,9 +1234,9 @@ namespace Epi.Enter.Forms
                 //    2.  Completed records in final mode
                 //    3.  All records in final mode
                 IsDraftMode = rdbDraftMode.Checked;
-                if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.ToLower()) && (
-                config.Settings.WebServiceEndpointAddress.ToLower().Contains(Epi.Constants.surveyManagerservice) ||
-                config.Settings.WebServiceEndpointAddress.ToLower().Contains(Epi.Constants.surveyManagerservicev2)))
+                if (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.ToLowerInvariant()) && (
+                config.Settings.WebServiceEndpointAddress.ToLowerInvariant().Contains(Epi.Constants.surveyManagerservice) ||
+                config.Settings.WebServiceEndpointAddress.ToLowerInvariant().Contains(Epi.Constants.surveyManagerservicev2)))
                 {
                     SurveyStatus = 3;
 
@@ -1270,7 +1270,7 @@ namespace Epi.Enter.Forms
         {
             if (e.Result != null && (e.Result is SurveyManagerService.SurveyAnswerRequest || e.Result is SurveyManagerServiceV2.SurveyAnswerRequest || e.Result is SurveyManagerServiceV3.SurveyAnswerRequest))
             {
-                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
                 if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservice)))
                 {
                     SurveyManagerService.SurveyAnswerRequest Request = (SurveyManagerService.SurveyAnswerRequest)e.Result;
@@ -1309,7 +1309,7 @@ namespace Epi.Enter.Forms
                 try
                 {
 
-                    var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+                    var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
                     if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservice)))
                     {
                         SurveyManagerService.SurveyAnswerRequest Request = SetMessageObject(true);
@@ -1449,7 +1449,7 @@ namespace Epi.Enter.Forms
             {
                 if (e.Argument is SurveyManagerService.SurveyAnswerRequest || e.Argument is SurveyManagerServiceV2.SurveyAnswerRequest || e.Argument is SurveyManagerServiceV3.SurveyAnswerRequest)
                 {
-                    var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+                    var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
                   
 
                     //List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();                    
@@ -1478,7 +1478,7 @@ namespace Epi.Enter.Forms
                                         List<string> destinationGUIDList = new List<string>();
                                         while (destReader.Read())
                                         {
-                                            destinationGUIDList.Add(destReader[0].ToString().ToUpper());
+                                            destinationGUIDList.Add(destReader[0].ToString().ToUpperInvariant());
                                         }
 
                                         wfList = ParseXML(Result);
@@ -1515,7 +1515,7 @@ namespace Epi.Enter.Forms
                                        List<string> destinationGUIDList = new List<string>();
                                        while (destReader.Read())
                                        {
-                                           destinationGUIDList.Add(destReader[0].ToString().ToUpper());
+                                           destinationGUIDList.Add(destReader[0].ToString().ToUpperInvariant());
                                        }
 
                                        wfList = ParseXMLV2(Result);
@@ -1552,7 +1552,7 @@ namespace Epi.Enter.Forms
                                         List<string> destinationGUIDList = new List<string>();
                                         while (destReader.Read())
                                         {
-                                            destinationGUIDList.Add(destReader[0].ToString().ToUpper());
+                                            destinationGUIDList.Add(destReader[0].ToString().ToUpperInvariant());
                                         }
 
                                         wfList = ParseXMLV3(Result);

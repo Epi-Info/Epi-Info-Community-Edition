@@ -165,7 +165,7 @@ namespace Epi.Epi2000
             if (PageHasBeforeCheckCode || PageHasAfterCheckCode)
             {
                 CheckCode.Append("\nPage ");
-                if (this.name.Trim().IndexOf(' ') > -1 || this.name.ToLower().Equals("page"))
+                if (this.name.Trim().IndexOf(' ') > -1 || this.name.ToLowerInvariant().Equals("page"))
                 {
                     CheckCode.Append("[");
                     CheckCode.Append(this.name.Trim().Replace("&", string.Empty)); // Imported page names can't have & symbol

@@ -365,13 +365,13 @@ ERROR_PROC:
         discrete = 0
 
         For Each kvp As KeyValuePair(Of String, String) In inputVariableList
-            If kvp.Value.ToLower().Equals("term") Then
+            If kvp.Value.ToLowerInvariant().Equals("term") Then
                 ReDim Preserve mstraTerms(terms)
                 mstraTerms(terms) = kvp.Key
                 terms = terms + 1
             End If
 
-            If kvp.Value.ToLower().Equals("discrete") Then
+            If kvp.Value.ToLowerInvariant().Equals("discrete") Then
                 ReDim Preserve mStrADiscrete(discrete)
                 mStrADiscrete(discrete) = kvp.Key
                 discrete = discrete + 1
@@ -381,19 +381,19 @@ ERROR_PROC:
                 terms = terms + 1
             End If
 
-            If kvp.Value.ToLower().Equals("matchvar") Then
+            If kvp.Value.ToLowerInvariant().Equals("matchvar") Then
                 mstrMatchVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("weightvar") Then
+            If kvp.Value.ToLowerInvariant().Equals("weightvar") Then
                 mstrWeightVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("dependvar") Then
+            If kvp.Value.ToLowerInvariant().Equals("dependvar") Then
                 mstrDependVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("unsorted") Then
+            If kvp.Value.ToLowerInvariant().Equals("unsorted") Then
                 Dim type As String
                 type = currentTable.Columns(kvp.Key).DataType.ToString()
                 If type.Equals("System.Byte") Then
@@ -407,14 +407,14 @@ ERROR_PROC:
 
             End If
 
-            If kvp.Key.ToLower().Equals("intercept") Then
+            If kvp.Key.ToLowerInvariant().Equals("intercept") Then
                 Dim success As Boolean
                 success = Boolean.TryParse(kvp.Value, mboolIntercept) ' TODO: Test
             End If
 
-            If kvp.Key.ToLower().Equals("P") Then
+            If kvp.Key.ToLowerInvariant().Equals("P") Then
                 Dim success As Boolean
-                success = Double.TryParse(kvp.Value.ToLower(), mdblP)
+                success = Double.TryParse(kvp.Value.ToLowerInvariant(), mdblP)
                 If success = True Then
                     mdblC = 1 - mdblP
                     mstrC = Str(mdblP * 100)
@@ -846,10 +846,10 @@ ERROR_PROC:
         columnNames = New List(Of String)
 
         For Each kvp As KeyValuePair(Of String, String) In context.InputVariableList
-            If kvp.Value.ToLower().Equals("term") Then
+            If kvp.Value.ToLowerInvariant().Equals("term") Then
 
-                If Not kvp.Key.ToLower().Contains("*") Then
-                    columnNames.Add(kvp.Key.ToLower())
+                If Not kvp.Key.ToLowerInvariant().Contains("*") Then
+                    columnNames.Add(kvp.Key.ToLowerInvariant())
                 End If
 
                 ReDim Preserve mstraTerms(terms)
@@ -857,8 +857,8 @@ ERROR_PROC:
                 terms = terms + 1
             End If
 
-            If kvp.Value.ToLower().Equals("discrete") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("discrete") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 ReDim Preserve mStrADiscrete(discrete)
                 mStrADiscrete(discrete) = kvp.Key
                 discrete = discrete + 1
@@ -868,22 +868,22 @@ ERROR_PROC:
                 terms = terms + 1
             End If
 
-            If kvp.Value.ToLower().Equals("matchvar") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("matchvar") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 mstrMatchVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("weightvar") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("weightvar") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 mstrWeightVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("dependvar") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("dependvar") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 mstrDependVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("unsorted") Then
+            If kvp.Value.ToLowerInvariant().Equals("unsorted") Then
                 Dim type As String
                 type = context.Columns(kvp.Key).DataType.ToString()
                 If type.Equals("System.Byte") Then
@@ -891,21 +891,21 @@ ERROR_PROC:
                     mStrADiscrete(discrete) = kvp.Key
                     discrete = discrete + 1
                 End If
-                columnNames.Add(kvp.Key.ToLower())
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 ReDim Preserve mstraTerms(terms)
                 mstraTerms(terms) = kvp.Key
                 terms = terms + 1
 
             End If
 
-            If kvp.Key.ToLower().Equals("intercept") Then
+            If kvp.Key.ToLowerInvariant().Equals("intercept") Then
                 Dim success As Boolean
                 success = Boolean.TryParse(kvp.Value, mboolIntercept) ' TODO: Test
             End If
 
-            If kvp.Key.ToLower().Equals("P") Then
+            If kvp.Key.ToLowerInvariant().Equals("P") Then
                 Dim success As Boolean
-                success = Double.TryParse(kvp.Value.ToLower(), mdblP)
+                success = Double.TryParse(kvp.Value.ToLowerInvariant(), mdblP)
                 If success = True Then
                     mdblC = 1 - mdblP
                     mstrC = Str(mdblP * 100)

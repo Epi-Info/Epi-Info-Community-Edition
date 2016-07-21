@@ -165,7 +165,7 @@ namespace Epi.Windows.Globalization.Forms
         {
             // TODO: installed languages must be read from configuration
 
-            string searchPath = installPath.Trim().ToLower();
+            string searchPath = installPath.Trim().ToLowerInvariant();
 
             if (searchPath[searchPath.Length - 1] != Path.DirectorySeparatorChar)
                 searchPath += Path.DirectorySeparatorChar;
@@ -185,7 +185,7 @@ namespace Epi.Windows.Globalization.Forms
                 List<string> index = new List<string>();
                 foreach (string file in files)
                 {
-                    string path = Path.GetDirectoryName(file).ToLower();
+                    string path = Path.GetDirectoryName(file).ToLowerInvariant();
                     if (!index.Contains(path))
                     {
                         index.Add(path);

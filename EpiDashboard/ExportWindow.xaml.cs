@@ -131,7 +131,7 @@ namespace EpiDashboard
 
             if (cmbDataFormats.SelectedIndex >= 0)
             {
-                if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLower().Contains("csv file")) // CSV File
+                if (cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("csv file")) // CSV File
                 {
                     tblockDestinationTable.Text = DashboardSharedStrings.EXPORT_DEST_FILENAME;
                 }
@@ -380,7 +380,7 @@ namespace EpiDashboard
                         DbDriverInfo dbInfo = new DbDriverInfo();
                         dbInfo.DBCnnStringBuilder = dbFactory.RequestNewConnection(db.DataSource);
 
-                        if (db.ConnectionDescription.ToLower().Contains("csv file:"))
+                        if (db.ConnectionDescription.ToLowerInvariant().Contains("csv file:"))
                         {
                             isFlatFile = true;
                         }
@@ -721,7 +721,7 @@ namespace EpiDashboard
                     SetGadgetStatusHandler requestUpdateStatus = new SetGadgetStatusHandler(RequestUpdateStatusMessage);
                     CheckForCancellationHandler checkForCancellation = new CheckForCancellationHandler(IsCancelled);
 
-                    if (db.TableExists(tableName) && !db.ConnectionDescription.ToLower().Contains("excel"))
+                    if (db.TableExists(tableName) && !db.ConnectionDescription.ToLowerInvariant().Contains("excel"))
                     {
                         db.DeleteTable(tableName);
                     }
@@ -985,7 +985,7 @@ namespace EpiDashboard
                 foreach (DataRow row in dt.Rows)
                 {
                     string rowDataTable = row["Name"].ToString();
-                    if (rowDataTable.StartsWith(tableName) || rowDataTable.ToLower().StartsWith(tableName.ToLower()))
+                    if (rowDataTable.StartsWith(tableName) || rowDataTable.ToLowerInvariant().StartsWith(tableName.ToLowerInvariant()))
                     {
                         Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_EXPORT_CANNOT_USE_EXISTING_FORM_NAME);
                         return;
@@ -999,7 +999,7 @@ namespace EpiDashboard
                 foreach (DataRow row in dt.Rows)
                 {
                     string rowDataTable = row["DataTableName"].ToString();
-                    if (!string.IsNullOrEmpty(rowDataTable) && (tableName.StartsWith(rowDataTable) || tableName.ToLower().StartsWith(rowDataTable.ToLower())))
+                    if (!string.IsNullOrEmpty(rowDataTable) && (tableName.StartsWith(rowDataTable) || tableName.ToLowerInvariant().StartsWith(rowDataTable.ToLowerInvariant())))
                     {
                         string diff = tableName.Replace(rowDataTable, "");
                         int num = -1;
@@ -1025,7 +1025,7 @@ namespace EpiDashboard
 
                 foreach (string protectedTableName in protectedTableNames)
                 {
-                    if (protectedTableName.Equals(tableName) || protectedTableName.ToLower().Equals(tableName.ToLower()))
+                    if (protectedTableName.Equals(tableName) || protectedTableName.ToLowerInvariant().Equals(tableName.ToLowerInvariant()))
                     {
                         Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_EXPORT_CANNOT_OVERWRITE_META);
                         return;
@@ -1044,13 +1044,13 @@ namespace EpiDashboard
 
             string fileName = db.DataSource + "\\" + tableName;
             
-            if (!fileName.ToLower().EndsWith(".csv") && !fileName.ToLower().EndsWith(".txt"))
+            if (!fileName.ToLowerInvariant().EndsWith(".csv") && !fileName.ToLowerInvariant().EndsWith(".txt"))
             {
                 fileName = fileName + ".csv";
             }
 
             bool writeToFlatFile = false;
-            if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLower().Contains("csv file"))
+            if (cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("csv file"))
             {
                 writeToFlatFile = true;
             }

@@ -544,11 +544,11 @@ namespace EpiDashboard
             measurementColumnName = gadgetOptions.InputVariableList["measurementcolumnname"];
 
             string genderStr = dt.Rows[0][genderColumnName].ToString();
-            if (genderStr.ToLower().Equals("f"))
+            if (genderStr.ToLowerInvariant().Equals("f"))
             {
                 this.gender = Gender.Female;
             }
-            else if (genderStr.ToLower().Equals("m"))
+            else if (genderStr.ToLowerInvariant().Equals("m"))
             {
                 this.gender = Gender.Male;
             }
@@ -1894,7 +1894,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "measurement":
                         measurement = ((GrowthMeasurement)Int32.Parse(child.InnerText));
@@ -1924,7 +1924,7 @@ namespace EpiDashboard
                         cbxMeasurementField.Text = child.InnerText;
                         break;
                     case "showlegend":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {                            
                             checkboxShowLegend.IsChecked = true;
                         }
@@ -1934,7 +1934,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "showtallchart":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             checkboxShowTallChart.IsChecked = true;
                         }
@@ -1944,7 +1944,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "blackandwhitecurves":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             checkboxBlackAndWhite.IsChecked = true;
                         }
@@ -1958,7 +1958,7 @@ namespace EpiDashboard
 
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "top":
                         Canvas.SetTop(this, double.Parse(attribute.Value));

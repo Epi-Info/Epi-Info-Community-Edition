@@ -533,7 +533,7 @@ namespace EpiDashboard.Controls
         private void txtProjectPath_TextChanged(object sender, TextChangedEventArgs e)
         {
             cmbFormName.Items.Clear();
-            if (System.IO.File.Exists(txtProjectPath.Text) && txtProjectPath.Text.ToLower().EndsWith("prj"))
+            if (System.IO.File.Exists(txtProjectPath.Text) && txtProjectPath.Text.ToLowerInvariant().EndsWith("prj"))
             {
                 Project project = new Project(txtProjectPath.Text);
                 cmbFormName.Items.Clear();
@@ -576,7 +576,7 @@ namespace EpiDashboard.Controls
             string fileExten = System.IO.Path.GetExtension(DashboardHelper.Database.DataSource);
             openFileDialog.DefaultExt = fileExten;
 
-            switch (fileExten.ToLower())
+            switch (fileExten.ToLowerInvariant())
             {
                 case ".xlsx":
                     openFileDialog.Filter = "Microsoft Excel 2007 (*.xlsx)|*.xlsx";

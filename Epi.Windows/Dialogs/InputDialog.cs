@@ -167,15 +167,15 @@ namespace Epi.Windows.Dialogs
 
             if (dataType == EpiInfo.Plugin.DataType.Date)
             {
-                watermark = string.Format("{0}", formatInfo.ShortDatePattern.ToUpper());
+                watermark = string.Format("{0}", formatInfo.ShortDatePattern.ToUpperInvariant());
             }
             else if (dataType == EpiInfo.Plugin.DataType.Time)
             {
-                watermark = string.Format("{0}", formatInfo.LongTimePattern.ToUpper());
+                watermark = string.Format("{0}", formatInfo.LongTimePattern.ToUpperInvariant());
             }
             else
             {
-                watermark = string.Format("{0} {1}", formatInfo.ShortDatePattern.ToUpper(), formatInfo.LongTimePattern.ToUpper());
+                watermark = string.Format("{0} {1}", formatInfo.ShortDatePattern.ToUpperInvariant(), formatInfo.LongTimePattern.ToUpperInvariant());
             }
 
             return watermark;

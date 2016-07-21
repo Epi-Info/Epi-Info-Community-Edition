@@ -236,13 +236,13 @@ Option Compare Text
         discrete = 0
 
         For Each kvp As KeyValuePair(Of String, String) In inputVariableList
-            If kvp.Value.ToLower().Equals("term") Then
+            If kvp.Value.ToLowerInvariant().Equals("term") Then
                 ReDim Preserve mstraTerms(terms)
                 mstraTerms(terms) = kvp.Key
                 terms = terms + 1
             End If
 
-            If kvp.Value.ToLower().Equals("discrete") Then
+            If kvp.Value.ToLowerInvariant().Equals("discrete") Then
                 ReDim Preserve mStrADiscrete(discrete)
                 mStrADiscrete(discrete) = kvp.Key
                 discrete = discrete + 1
@@ -252,19 +252,19 @@ Option Compare Text
                 terms = terms + 1
             End If
 
-            If kvp.Value.ToLower().Equals("matchvar") Then
+            If kvp.Value.ToLowerInvariant().Equals("matchvar") Then
                 mstrMatchVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("weightvar") Then
+            If kvp.Value.ToLowerInvariant().Equals("weightvar") Then
                 mstrWeightVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("dependvar") Then
+            If kvp.Value.ToLowerInvariant().Equals("dependvar") Then
                 mstrDependVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("unsorted") Then
+            If kvp.Value.ToLowerInvariant().Equals("unsorted") Then
                 Dim type As String
                 type = currentTable.Columns(kvp.Key).DataType.ToString()
                 If Not MoreThanTwoValues(currentTable.Columns(kvp.Key)) Or type.Equals("System.String") Then
@@ -278,14 +278,14 @@ Option Compare Text
 
             End If
 
-            If kvp.Key.ToLower().Equals("intercept") Then
+            If kvp.Key.ToLowerInvariant().Equals("intercept") Then
                 Dim success As Boolean
                 success = Boolean.TryParse(kvp.Value, mboolIntercept) ' TODO: Test
             End If
 
-            If kvp.Key.ToLower().Equals("p") Then
+            If kvp.Key.ToLowerInvariant().Equals("p") Then
                 Dim success As Boolean
-                success = Double.TryParse(kvp.Value.ToLower(), mdblP)
+                success = Double.TryParse(kvp.Value.ToLowerInvariant(), mdblP)
                 If success = True Then
                     mdblC = 1 - mdblP
                     mstrC = Str(mdblP * 100)
@@ -539,18 +539,18 @@ Option Compare Text
         customFilter = String.Empty
 
         For Each kvp As KeyValuePair(Of String, String) In context.InputVariableList
-            If kvp.Value.ToLower().Equals("term") Then
-                If Not kvp.Key.ToLower().Contains("*") Then
-                    columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("term") Then
+                If Not kvp.Key.ToLowerInvariant().Contains("*") Then
+                    columnNames.Add(kvp.Key.ToLowerInvariant())
                 End If
             End If
 
-            If kvp.Value.ToLower().Equals("discrete") Or kvp.Value.ToLower().Equals("matchvar") Or kvp.Value.ToLower().Equals("weightvar") Or kvp.Value.ToLower().Equals("dependvar") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("discrete") Or kvp.Value.ToLowerInvariant().Equals("matchvar") Or kvp.Value.ToLowerInvariant().Equals("weightvar") Or kvp.Value.ToLowerInvariant().Equals("dependvar") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
             End If
 
-            If kvp.Value.ToLower().Equals("unsorted") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("unsorted") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
             End If
         Next
 
@@ -562,10 +562,10 @@ Option Compare Text
         columnNames = New List(Of String)
 
         For Each kvp As KeyValuePair(Of String, String) In context.InputVariableList
-            If kvp.Value.ToLower().Equals("term") Then
+            If kvp.Value.ToLowerInvariant().Equals("term") Then
 
-                If Not kvp.Key.ToLower().Contains("*") Then
-                    columnNames.Add(kvp.Key.ToLower())
+                If Not kvp.Key.ToLowerInvariant().Contains("*") Then
+                    columnNames.Add(kvp.Key.ToLowerInvariant())
                 End If
 
                 ReDim Preserve mstraTerms(terms)
@@ -573,8 +573,8 @@ Option Compare Text
                 terms = terms + 1
             End If
 
-            If kvp.Value.ToLower().Equals("discrete") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("discrete") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 ReDim Preserve mStrADiscrete(discrete)
                 mStrADiscrete(discrete) = kvp.Key
                 discrete = discrete + 1
@@ -584,24 +584,24 @@ Option Compare Text
                 terms = terms + 1
             End If
 
-            If kvp.Value.ToLower().Equals("matchvar") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("matchvar") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 customFilter = customFilter + "(" + "[" + kvp.Key + "]" + " " + "is not null" + ")" + " AND "
                 mstrMatchVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("weightvar") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("weightvar") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 customFilter = customFilter + "(" + "[" + kvp.Key + "]" + " " + "is not null" + ")" + " AND "
                 mstrWeightVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("dependvar") Then
-                columnNames.Add(kvp.Key.ToLower())
+            If kvp.Value.ToLowerInvariant().Equals("dependvar") Then
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 mstrDependVar = kvp.Key
             End If
 
-            If kvp.Value.ToLower().Equals("unsorted") Then
+            If kvp.Value.ToLowerInvariant().Equals("unsorted") Then
                 Dim type As String
                 type = context.Columns(kvp.Key).DataType.ToString()
                 If Not MoreThanTwoValues(currentTable.Columns(kvp.Key)) Or type.Equals("System.String") Then
@@ -611,20 +611,20 @@ Option Compare Text
                     discrete = discrete + 1
                 End If
                 customFilter = customFilter + "(" + "[" + kvp.Key + "]" + " " + "is not null" + ")" + " AND "
-                columnNames.Add(kvp.Key.ToLower())
+                columnNames.Add(kvp.Key.ToLowerInvariant())
                 ReDim Preserve mstraTerms(terms)
                 mstraTerms(terms) = kvp.Key
                 terms = terms + 1
             End If
 
-            If kvp.Key.ToLower().Equals("intercept") Then
+            If kvp.Key.ToLowerInvariant().Equals("intercept") Then
                 Dim success As Boolean
                 success = Boolean.TryParse(kvp.Value, mboolIntercept) ' TODO: Test
             End If
 
-            If kvp.Value.ToLower().Equals("p") Then
+            If kvp.Value.ToLowerInvariant().Equals("p") Then
                 Dim success As Boolean
-                success = Double.TryParse(kvp.Key.ToLower(), mdblP)
+                success = Double.TryParse(kvp.Key.ToLowerInvariant(), mdblP)
                 If success = True Then
                     'mdblC = 1 - mdblP
                     'mstrC = Str(mdblP * 100)

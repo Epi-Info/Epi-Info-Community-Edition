@@ -41,9 +41,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                 //        foreach (var item in IdentifierList)
                 //        {
 
-                //            if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                //            if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLowerInvariant()))
                 //            {
-                //                this.Context.CommandVariableCheck.Add(item.ToLower(), "isunique");
+                //                this.Context.CommandVariableCheck.Add(item.ToLowerInvariant(), "isunique");
                 //            }
                 //        }
                 //    }

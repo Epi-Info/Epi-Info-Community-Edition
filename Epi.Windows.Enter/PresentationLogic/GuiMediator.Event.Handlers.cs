@@ -424,7 +424,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                 display.Append(string.Format("[ {0}:{1} {2} ] ",
                     SharedStrings.TYPE, 
                     field.FieldType,
-                    formatInfo.ShortDatePattern.ToUpper()));
+                    formatInfo.ShortDatePattern.ToUpperInvariant()));
 
                 if (((DateField)field).LowerDate.Ticks > 0)
                 {

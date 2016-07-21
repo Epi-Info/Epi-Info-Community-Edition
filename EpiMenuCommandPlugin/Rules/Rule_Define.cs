@@ -69,9 +69,9 @@ namespace EpiMenu.CommandPlugin
                 IVariable var = null;
 
                 CommandProcessorResults results = new CommandProcessorResults();
-                string dataTypeName = VariableTypeIndicator.Trim().ToUpper();
+                string dataTypeName = VariableTypeIndicator.Trim().ToUpperInvariant();
                 DataType type = GetDataType(dataTypeName);
-                string variableScope = Variable_Scope.Trim().ToUpper();
+                string variableScope = Variable_Scope.Trim().ToUpperInvariant();
                 VariableType vt = VariableType.Standard;
                 if (!string.IsNullOrEmpty(variableScope))
                 {

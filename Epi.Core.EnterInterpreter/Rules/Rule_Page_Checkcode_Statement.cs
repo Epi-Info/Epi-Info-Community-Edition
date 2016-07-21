@@ -46,7 +46,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Identifier = this.Identifier.ToLower();
+            this.Identifier = this.Identifier.ToLowerInvariant();
 
 
             if (this.Context.Page_Checkcode.ContainsKey(this.Identifier))

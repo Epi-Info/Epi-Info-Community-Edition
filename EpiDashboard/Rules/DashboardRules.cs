@@ -275,7 +275,7 @@ namespace EpiDashboard.Rules
                         //}
 
 
-                        //if (assignRule.DestinationColumnName.ToLower().Equals(destinationColumnName.ToLower()))
+                        //if (assignRule.DestinationColumnName.ToLowerInvariant().Equals(destinationColumnName.ToLowerInvariant()))
                         //{
                         //    rules.Add(assignRule);
                         //}
@@ -371,7 +371,7 @@ namespace EpiDashboard.Rules
                 if (rule is DataAssignmentRule)
                 {
                     DataAssignmentRule assignRule = rule as DataAssignmentRule;
-                    if (assignRule.DestinationColumnName.ToLower().Equals(destinationColumnName.ToLower()))
+                    if (assignRule.DestinationColumnName.ToLowerInvariant().Equals(destinationColumnName.ToLowerInvariant()))
                     {
                         rules.Add(assignRule);
                     }
@@ -462,7 +462,7 @@ namespace EpiDashboard.Rules
                     string type = string.Empty;
                     foreach (XmlAttribute attribute in iChild.Attributes)
                     {
-                        switch (attribute.Name.ToLower())
+                        switch (attribute.Name.ToLowerInvariant())
                         {
                             case "ruletype":
                                 type = attribute.Value;

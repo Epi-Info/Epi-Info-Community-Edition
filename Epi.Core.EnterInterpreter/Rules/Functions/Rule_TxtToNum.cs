@@ -22,9 +22,9 @@ namespace Epi.Core.EnterInterpreter.Rules
             //        if (item is Rule_Value)
             //        {
             //            var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
-            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLowerInvariant()))
             //            {
-            //                this.Context.CommandVariableCheck.Add(id.ToLower(), "txttonumber");
+            //                this.Context.CommandVariableCheck.Add(id.ToLowerInvariant(), "txttonumber");
             //            }
             //        }
             //    }
@@ -44,9 +44,9 @@ namespace Epi.Core.EnterInterpreter.Rules
             double doubleValue;
             if (!Util.IsEmpty(result))
             {
-                if (result.ToString().ToLower().Equals("true") || result.ToString().ToLower().Equals("false"))
+                if (result.ToString().ToLowerInvariant().Equals("true") || result.ToString().ToLowerInvariant().Equals("false"))
                 {
-                    result = (result.ToString().ToLower() == "true" ? 1 : 0);
+                    result = (result.ToString().ToLowerInvariant() == "true" ? 1 : 0);
                 }
 
                 if (Double.TryParse(result.ToString(), out doubleValue))

@@ -315,24 +315,24 @@ namespace EpiDashboard.Rules
         {
             foreach (XmlElement child in element.ChildNodes)
             {
-                if (child.Name.ToLower().Equals("friendlyrule"))
+                if (child.Name.ToLowerInvariant().Equals("friendlyrule"))
                 {
                     this.friendlyRule = child.InnerText.Replace("&amp;", "&").Replace("&lt;", "<").Replace("&gt;", ">");
                 }
-                else if (child.Name.ToLower().Equals("destinationcolumnname"))
+                else if (child.Name.ToLowerInvariant().Equals("destinationcolumnname"))
                 {
                     this.destinationColumnName = child.InnerText;
                 }
-                else if (child.Name.ToLower().Equals("destinationcolumntype"))
+                else if (child.Name.ToLowerInvariant().Equals("destinationcolumntype"))
                 {
                     this.destinationColumnType = child.InnerText;
                 }
-                else if (child.Name.ToLower().Equals("datafilters"))
+                else if (child.Name.ToLowerInvariant().Equals("datafilters"))
                 {
                     this.DataFilters = new DataFilters(this.dashboardHelper);
                     this.DataFilters.CreateFromXml(child);
                 }
-                else if (child.Name.ToLower().Equals("useelse"))
+                else if (child.Name.ToLowerInvariant().Equals("useelse"))
                 {
                     this.UseElse = bool.Parse(child.InnerText);
                 }
@@ -353,7 +353,7 @@ namespace EpiDashboard.Rules
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                if (child.Name.ToLower().Equals("assignvalue"))
+                if (child.Name.ToLowerInvariant().Equals("assignvalue"))
                 {
                     if (child.InnerText.Equals("&#xA0;"))
                     {
@@ -380,7 +380,7 @@ namespace EpiDashboard.Rules
                         }
                     }
                 }
-                else if (child.Name.ToLower().Equals("elsevalue"))
+                else if (child.Name.ToLowerInvariant().Equals("elsevalue"))
                 {
                     if (child.InnerText.Equals("&#xA0;"))
                     {

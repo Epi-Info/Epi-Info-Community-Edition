@@ -307,7 +307,7 @@ namespace Epi.Windows.MakeView.Dialogs
         #region Private Methods
         private void SetDgCodes(DataGridView dgCodes, string fieldName)
         {
-            //dgCodes.CaptionText = "Codes for: " + fieldName.ToLower();
+            //dgCodes.CaptionText = "Codes for: " + fieldName.ToLowerInvariant();
             //dgCodes.PreferredColumnWidth = Convert.ToInt32(dgCodes.Width * MULTICOLUMN_WIDTH_MULTIPLE);
         }
 
@@ -410,7 +410,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             else
             {
-                project.CreateCodeTable(cleanedCodeTableName, fieldName.ToLower());
+                project.CreateCodeTable(cleanedCodeTableName, fieldName.ToLowerInvariant());
             }
 
             codeTable = project.GetTableData(cleanedCodeTableName);

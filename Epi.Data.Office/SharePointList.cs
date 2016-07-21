@@ -65,7 +65,7 @@ namespace Epi.Data.Office
             sb.Append(" ( ");
             foreach (TableColumn column in columns)
             {
-                if (column.Name.ToLower() != "uniquekey")
+                if (column.Name.ToLowerInvariant() != "uniquekey")
                 {
                     if (column.IsIdentity)
                     {
@@ -218,7 +218,7 @@ namespace Epi.Data.Office
         /// </summary>
         public override string ConnectionDescription
         {
-            get { return ConnectionString.ToUpper(); }
+            get { return ConnectionString.ToUpperInvariant(); }
         }
         /// <summary>
         /// Connection String attribute
@@ -231,7 +231,7 @@ namespace Epi.Data.Office
             }
             set
             {
-                base.ConnectionString = value.ToUpper();
+                base.ConnectionString = value.ToUpperInvariant();
             }
         }
 

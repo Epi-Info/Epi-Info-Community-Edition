@@ -327,7 +327,7 @@ namespace EpiDashboard
         {
             if (dashboardHelper.IsUsingEpiProject)
             {                
-                if (cmbTableName.Text.ToLower() != dashboardHelper.View.Name.ToLower() || dashboardHelper.View.Project.FilePath != txtProjectPath.Text)
+                if (cmbTableName.Text.ToLowerInvariant() != dashboardHelper.View.Name.ToLowerInvariant() || dashboardHelper.View.Project.FilePath != txtProjectPath.Text)
                 {
                     pnlWarning.Visibility = System.Windows.Visibility.Visible;
                     txtWarning.Text = "Warning: Changing projects or forms within a project may cause some or all of the dashboard's gadgets and filters to fail.";
@@ -410,7 +410,7 @@ namespace EpiDashboard
 
                 if (dashboardHelper.IsUsingEpiProject)
                 {
-                    if (cmbTableName.Text.ToLower() == dashboardHelper.View.Name.ToLower() && dashboardHelper.View.Project.FilePath == txtProjectPath.Text)
+                    if (cmbTableName.Text.ToLowerInvariant() == dashboardHelper.View.Name.ToLowerInvariant() && dashboardHelper.View.Project.FilePath == txtProjectPath.Text)
                     {
                         pnlWarning.Visibility = System.Windows.Visibility.Collapsed;
                         txtWarning.Text = string.Empty;

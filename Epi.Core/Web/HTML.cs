@@ -256,9 +256,9 @@ namespace Epi.Web
         /// <returns>Well-formed HTML Tag with attribute.</returns>
         public static string Tag(string text, string HTMLTag, string attributeName, string attributeValue)
         {
-            return StringLiterals.LESS_THAN + HTMLTag.ToLower() + Attribute(attributeName, attributeValue) + StringLiterals.GREATER_THAN
+            return StringLiterals.LESS_THAN + HTMLTag.ToLowerInvariant() + Attribute(attributeName, attributeValue) + StringLiterals.GREATER_THAN
                 + text
-                + StringLiterals.LESS_THAN + StringLiterals.FORWARD_SLASH + HTMLTag.ToLower() + StringLiterals.GREATER_THAN;
+                + StringLiterals.LESS_THAN + StringLiterals.FORWARD_SLASH + HTMLTag.ToLowerInvariant() + StringLiterals.GREATER_THAN;
         }
 
         /// <summary>
@@ -274,11 +274,11 @@ namespace Epi.Web
         /// <returns>Well-formed HTML Tag with attribute.</returns>
         public static string Tag(string text, string HTMLTag, string attributeName1, string attributeValue1, string attributeName2, string attributeValue2)
         {
-            return StringLiterals.LESS_THAN + HTMLTag.ToLower()
+            return StringLiterals.LESS_THAN + HTMLTag.ToLowerInvariant()
                 + Attribute(attributeName1, attributeValue1) + StringLiterals.SPACE
                 + Attribute(attributeName2, attributeValue2) + StringLiterals.SPACE
                 + StringLiterals.GREATER_THAN + text
-                + StringLiterals.LESS_THAN + StringLiterals.FORWARD_SLASH + HTMLTag.ToLower() + StringLiterals.GREATER_THAN;
+                + StringLiterals.LESS_THAN + StringLiterals.FORWARD_SLASH + HTMLTag.ToLowerInvariant() + StringLiterals.GREATER_THAN;
         }
         /// <summary>
         /// Create a well-formed HTML Tag without an attribute.
@@ -301,7 +301,7 @@ namespace Epi.Web
         /// <returns>Well-formed HTML Tag.</returns>
         public static string Tag(string HTMLTag)
         {
-            return StringLiterals.LESS_THAN + HTMLTag.ToLower() + StringLiterals.FORWARD_SLASH + StringLiterals.GREATER_THAN;
+            return StringLiterals.LESS_THAN + HTMLTag.ToLowerInvariant() + StringLiterals.FORWARD_SLASH + StringLiterals.GREATER_THAN;
         }
         #endregion Public Methods
         #endregion Public Interface
@@ -342,7 +342,7 @@ namespace Epi.Web
             string attribute = string.Empty;
             if ((attributeName.Length != 0) && (attributeValue.Length != 0))
             {
-                attribute = StringLiterals.SPACE + attributeName.ToLower() + StringLiterals.EQUAL + Util.InsertInDoubleQuotes(attributeValue);
+                attribute = StringLiterals.SPACE + attributeName.ToLowerInvariant() + StringLiterals.EQUAL + Util.InsertInDoubleQuotes(attributeValue);
             }
             return attribute;
         }

@@ -38,7 +38,7 @@ namespace EpiMenu.CommandPlugin
         {
             object result = null;
 
-            if (IfClause.Execute().ToString().ToLower() == "true")
+            if (IfClause.Execute().ToString().ToLowerInvariant() == "true")
             {
                 result = ThenClause.Execute();
             }

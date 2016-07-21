@@ -164,7 +164,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             //<List_Identifier_List>::= Identifier | Identifier <List_Identifier_List>
 
-            this.IdentifierList.Add(this.GetCommandElement(pT.Tokens, 0).ToUpper().Trim( new char[] { '[', ']'}) );
+            this.IdentifierList.Add(this.GetCommandElement(pT.Tokens, 0).ToUpperInvariant().Trim( new char[] { '[', ']'}) );
             if (pT.Tokens.Length > 1)
             {
                 this.SetIdentifierList((NonterminalToken)pT.Tokens[1]);
@@ -204,14 +204,14 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                     foreach (DataColumn C in this.Context.DataSet.Tables["Output"].Columns)
                     {
-                        this.IdentifierList.Add(C.ColumnName.ToUpper());
+                        this.IdentifierList.Add(C.ColumnName.ToUpperInvariant());
                     }
                 }
 
                 this.Context.ExpandGroupVariables(this.IdentifierList, ref this.IsExceptionList);
 
                 StringBuilder builder = new StringBuilder();
-                if (!string.IsNullOrEmpty(this.ListOption) && this.ListOption.ToLower().Equals("gridtable"))
+                if (!string.IsNullOrEmpty(this.ListOption) && this.ListOption.ToLowerInvariant().Equals("gridtable"))
                 {
                     this.Context.AnalysisCheckCodeInterface.ShowGridTable(DR, IdentifierList, this.CurrentView);
                 }
@@ -251,7 +251,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     System.Drawing.Imaging.ImageFormat formatClass = (System.Drawing.Imaging.ImageFormat)imageFormatList[i].GetValue(null, null);
                     if (formatClass.Guid.Equals(image.RawFormat.Guid))
                     {
-                        result =  imageFormatList[i].Name.ToLower();
+                        result =  imageFormatList[i].Name.ToLowerInvariant();
                     }
                 }
             }
@@ -428,7 +428,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             if (this.IsExceptionList)
             {
-                return !this.IdentifierList.Contains(pName.ToUpper());
+                return !this.IdentifierList.Contains(pName.ToUpperInvariant());
             }
             else
             {
@@ -439,7 +439,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
                 else
                 {
-                    return this.IdentifierList.Contains(pName.ToUpper());
+                    return this.IdentifierList.Contains(pName.ToUpperInvariant());
                 }
             }
 

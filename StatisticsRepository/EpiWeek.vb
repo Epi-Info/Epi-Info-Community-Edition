@@ -72,7 +72,7 @@
         Dim sdp As String
         sdp = System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern
 
-        If sdp.ToLower().StartsWith("d") Then
+        If sdp.ToLowerInvariant().StartsWith("d") Then
             dteEndOfQYr = CDate("31/12/" & strYear)
         Else
             dteEndOfQYr = CDate("12/31/" & strYear)

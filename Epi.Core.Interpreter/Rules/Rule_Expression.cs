@@ -26,7 +26,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             this.ParameterList.Add(AnalysisRule.BuildStatments(pContext, pToken.Tokens[0]));
             if(pToken.Tokens.Length > 1)
             {
-                    op = pToken.Tokens[1].ToString().ToUpper();
+                    op = pToken.Tokens[1].ToString().ToUpperInvariant();
                     //Expression = new Rule_Expression(pContext, (NonterminalToken)pTokens.Tokens[2]);
                     this.ParameterList.Add(AnalysisRule.BuildStatments(pContext, pToken.Tokens[2]));
             }

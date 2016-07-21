@@ -115,7 +115,7 @@ namespace Epi.ImportExport.Epi2000
                         errorList.Add(ImportExportMessageType.Error, "1000", ImportExportSharedStrings.UPGRADE_PROBLEM_CHECK_ERROR_E1000);
                     }
 
-                    if (!view.Name.ToLower().StartsWith("view"))
+                    if (!view.Name.ToLowerInvariant().StartsWith("view"))
                     {
                         errorList.Add(ImportExportMessageType.Error, "1021", string.Format(ImportExportSharedStrings.UPGRADE_PROBLEM_CHECK_ERROR_E1021, view.Name));
                     }
@@ -219,7 +219,7 @@ namespace Epi.ImportExport.Epi2000
                         reservedTableNames.Add("metaviews");
 
                         // Check #5 - Does the view's table name conflict with Epi Info 7 meta table names?
-                        if (reservedTableNames.Contains(view.TableName.ToLower()))
+                        if (reservedTableNames.Contains(view.TableName.ToLowerInvariant()))
                         {
                             errorList.Add(ImportExportMessageType.Error, "1008", string.Format(ImportExportSharedStrings.UPGRADE_PROBLEM_CHECK_ERROR_E1008, view.Name, view.TableName));
                         }
@@ -475,7 +475,7 @@ namespace Epi.ImportExport.Epi2000
                                             string tableName = codeTableCheck.Rows[0]["Datatable"].ToString();
                                             foreach (Epi.Epi2000.View sView in sourceProject.Views)
                                             {
-                                                if (!string.IsNullOrEmpty(sView.TableName) && sView.TableName.ToLower() == tableName.ToLower())
+                                                if (!string.IsNullOrEmpty(sView.TableName) && sView.TableName.ToLowerInvariant() == tableName.ToLowerInvariant())
                                                 {
                                                     errorList.Add(ImportExportMessageType.Error, "3013", string.Format(ImportExportSharedStrings.UPGRADE_PROBLEM_CHECK_ERROR_E3013, fieldName, view.Name));
                                                 }
@@ -514,7 +514,7 @@ namespace Epi.ImportExport.Epi2000
 
                                 foreach (Epi.Epi2000.View sView in sourceProject.Views)
                                 {
-                                    if (!string.IsNullOrEmpty(sView.TableName) && sView.TableName.ToLower() == tableName.ToLower())
+                                    if (!string.IsNullOrEmpty(sView.TableName) && sView.TableName.ToLowerInvariant() == tableName.ToLowerInvariant())
                                     {
                                         errorList.Add(ImportExportMessageType.Error, "3004", string.Format(ImportExportSharedStrings.UPGRADE_PROBLEM_CHECK_ERROR_E3004, fieldName, view.Name));
                                     }

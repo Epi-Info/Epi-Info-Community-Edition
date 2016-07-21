@@ -641,13 +641,13 @@ namespace EpiDashboard
                 //booleanValues.Add("f", "t");
                 //booleanValues.Add("n", "y");
                 CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
-                // if (!booleanValues.ContainsKey(DashboardHelper.Config.Settings.RepresentationOfNo.ToLower()))
+                // if (!booleanValues.ContainsKey(DashboardHelper.Config.Settings.RepresentationOfNo.ToLowerInvariant()))
                 // {
-                //  booleanValues.Add(DashboardHelper.Config.Settings.RepresentationOfNo.ToLower(), DashboardHelper.Config.Settings.RepresentationOfYes.ToLower());
+                //  booleanValues.Add(DashboardHelper.Config.Settings.RepresentationOfNo.ToLowerInvariant(), DashboardHelper.Config.Settings.RepresentationOfYes.ToLowerInvariant());
                 //}
 
-                string firstColumnName = table.Columns[1].ColumnName.ToLower();
-                string secondColumnName = table.Columns[2].ColumnName.ToLower();
+                string firstColumnName = table.Columns[1].ColumnName.ToLowerInvariant();
+                string secondColumnName = table.Columns[2].ColumnName.ToLowerInvariant();
 
                 //  if (booleanValues.ContainsKey(firstColumnName) && secondColumnName.Equals(booleanValues[firstColumnName]))
                 if (crosstabParameters.OutcomeSwap)
@@ -3327,7 +3327,7 @@ namespace EpiDashboard
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -3344,7 +3344,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                     case "exposurevariable": // added to work with the old 2x2 gadget
@@ -3378,7 +3378,7 @@ namespace EpiDashboard
                     //    foreach (XmlElement field in child.ChildNodes)
                     //    {
                     //        List<string> fields = new List<string>();
-                    //        if (field.Name.ToLower().Equals("stratavariable"))
+                    //        if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                     //        {
                     //            lbxFieldStrata.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
                     //        }
@@ -3388,7 +3388,7 @@ namespace EpiDashboard
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("stratavariable"))
+                            if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                             {
                                 ((CrosstabParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                             }
@@ -3409,7 +3409,7 @@ namespace EpiDashboard
                         ((CrosstabParameters)Parameters).MaxColumnNameLength = maxColumnLength.ToString();
                         break;
                     case "allvalues":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxAllValues.IsChecked = true;
                             ((CrosstabParameters)Parameters).ShowAllListValues = true;
@@ -3421,7 +3421,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "showlistlabels":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxCommentLegalLabels.IsChecked = true;
                             ((CrosstabParameters)Parameters).ShowCommentLegalLabels = true;
@@ -3442,7 +3442,7 @@ namespace EpiDashboard
                         break;
                     //--
                     case "includemissing":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxIncludeMissing.IsChecked = true;
                             ((CrosstabParameters)Parameters).IncludeMissing = true;
@@ -3454,7 +3454,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "treatoutcomeascontinuous":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxOutcomeContinuous.IsCheckead = true;
                             ((CrosstabParameters)Parameters).TreatOutcomeAsContinuous = true;
@@ -3466,7 +3466,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "smarttable":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             ((CrosstabParameters)Parameters).SmartTable = true;
                         }
@@ -3476,7 +3476,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "showstratasummaryonly":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxStrataSummaryOnly.IsChecked = true;
                             ((CrosstabParameters)Parameters).StrataSummaryOnly = true;
@@ -3489,7 +3489,7 @@ namespace EpiDashboard
                         break;
                     //EI-146
                     case "displaychisquare":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             ((CrosstabParameters)Parameters).DisplayChiSq = true;
                         }
@@ -3499,7 +3499,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "rowcolpercents":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxRowColPercents.IsChecked = true;
                             ((CrosstabParameters)Parameters).ShowPercents = true;
@@ -3542,7 +3542,7 @@ namespace EpiDashboard
                         this.DataFilters.CreateFromXml(child);
                         break;
                     case "layoutmode":
-                        if (child.InnerText.ToLower().Equals("horizontal"))
+                        if (child.InnerText.ToLowerInvariant().Equals("horizontal"))
                         {
                             //checkboxHorizontal.IsChecked = false;
                             ((CrosstabParameters)Parameters).HorizontalDisplayMode = false;
@@ -3554,7 +3554,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "showheatmap":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxConditionalShading.IsChecked = true;
                             ((CrosstabParameters)Parameters).ConditionalShading = true;
@@ -3626,17 +3626,17 @@ namespace EpiDashboard
                         ((CrosstabParameters)Parameters).HiColorFill = new SolidColorBrush(Color.FromRgb(red, green, blue));
                         //MOVE TO CONTROL
                         //SolidColorBrush brush = new SolidColorBrush(Color.FromRgb(red, green, blue));
-                        //if (child.Name.ToLower() == "startcolor")
+                        //if (child.Name.ToLowerInvariant() == "startcolor")
                         //{
                         //    rctLowColor.Fill = brush;
                         //}
-                        //else if (child.Name.ToLower() == "endcolor")
+                        //else if (child.Name.ToLowerInvariant() == "endcolor")
                         //{
                         //    rctHighColor.Fill = brush;
                         //}
                         break;
                     case "outcomeswap":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxConditionalShading.IsChecked = true;
                             ((CrosstabParameters)Parameters).OutcomeSwap = true;
@@ -3648,7 +3648,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "exposureswap":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             //checkboxConditionalShading.IsChecked = true;
                             ((CrosstabParameters)Parameters).ExposureSwap = true;
@@ -3662,7 +3662,7 @@ namespace EpiDashboard
                     case "valueremappings":
                         foreach (XmlNode node in child.ChildNodes)
                         {
-                            switch (node.Name.ToLower())
+                            switch (node.Name.ToLowerInvariant())
                             {
                                 case "yesvalues":
                                     foreach (XmlNode valueNode in node.ChildNodes)

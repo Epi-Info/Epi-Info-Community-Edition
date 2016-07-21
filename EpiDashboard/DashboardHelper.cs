@@ -444,7 +444,7 @@ namespace EpiDashboard
 
             foreach (System.Xml.XmlElement child in element.ChildNodes)
             {
-                string name = child.Name.ToLower();
+                string name = child.Name.ToLowerInvariant();
 
                 switch (name)
                 {
@@ -481,7 +481,7 @@ namespace EpiDashboard
                     case "relateddataconnections":
                         foreach (System.Xml.XmlElement grandChild in child.ChildNodes)
                         {
-                            if (grandChild.Name.ToLower().Equals("relateddataconnection"))
+                            if (grandChild.Name.ToLowerInvariant().Equals("relateddataconnection"))
                             {
                                 string rel_projectPath = string.Empty;
                                 string rel_viewName = string.Empty;
@@ -494,7 +494,7 @@ namespace EpiDashboard
 
                                 foreach (XmlElement rChild in grandChild.ChildNodes)
                                 {
-                                    switch (rChild.Name.ToLower())
+                                    switch (rChild.Name.ToLowerInvariant())
                                     {
                                         case "projectpath":
                                             rel_projectPath = rChild.InnerText;
@@ -534,7 +534,7 @@ namespace EpiDashboard
                                             FileInfo fiMainProject = new FileInfo(projectPath);
                                             Project mainProject = new Project(projectPath);
 
-                                            if (rel_connectionString.ToLower().StartsWith("provider=microsoft.ace") || rel_connectionString.ToLower().StartsWith("provider=microsoft.jet.oledb"))
+                                            if (rel_connectionString.ToLowerInvariant().StartsWith("provider=microsoft.ace") || rel_connectionString.ToLowerInvariant().StartsWith("provider=microsoft.jet.oledb"))
                                             {
                                                 string filePath = string.Empty;
 
@@ -732,11 +732,11 @@ namespace EpiDashboard
 
             if (IsColumnBoolean(columnName))
             {
-                if (data.ToString().ToLower().Equals("true"))
+                if (data.ToString().ToLowerInvariant().Equals("true"))
                 {
                     displayValue = this.Config.Settings.RepresentationOfYes;
                 }
-                else if (data.ToString().ToLower().Equals("false"))
+                else if (data.ToString().ToLowerInvariant().Equals("false"))
                 {
                     displayValue = this.Config.Settings.RepresentationOfNo;
                 }
@@ -1364,8 +1364,8 @@ namespace EpiDashboard
             // For a better matching method where the field name doesn't match the column name in terms of case, e.g. TimeSupper and TIMESUPPER
             foreach (KeyValuePair<string, string> kvp in TableColumnNames)
             {
-                string kvpColumnName = kvp.Key.ToLower();
-                if (columnName.ToLower().Equals(kvpColumnName))
+                string kvpColumnName = kvp.Key.ToLowerInvariant();
+                if (columnName.ToLowerInvariant().Equals(kvpColumnName))
                 {
                     columnType = kvp.Value;
                     break;
@@ -1781,7 +1781,7 @@ namespace EpiDashboard
                 string dataValue = row.DataValue.ToString();
                 string variableName = row.Name.ToString();
 
-                if (!dataValue.ToLower().Equals("null") && !dt.Columns.Contains(variableName))
+                if (!dataValue.ToLowerInvariant().Equals("null") && !dt.Columns.Contains(variableName))
                 {
                     switch (dataType)
                     {
@@ -1833,7 +1833,7 @@ namespace EpiDashboard
 
             foreach (KeyValuePair<string, string> kvp in TableColumnNames)
             {
-                if (!string.IsNullOrEmpty(kvp.Value) && !kvp.Value.ToLower().StartsWith("epi"))
+                if (!string.IsNullOrEmpty(kvp.Value) && !kvp.Value.ToLowerInvariant().StartsWith("epi"))
                 {
                     columnNames.Add(kvp.Key);
                 }
@@ -1856,7 +1856,7 @@ namespace EpiDashboard
             {
                 if (kvp.Value != null)
                 {
-                    switch (kvp.Value.ToLower())
+                    switch (kvp.Value.ToLowerInvariant())
                     {
                         case "system.string":
                             if ((fieldFilterOptions & ColumnDataType.Text) == ColumnDataType.Text) columnNames.Add(kvp.Key);
@@ -2684,7 +2684,7 @@ namespace EpiDashboard
                             }
                         }
                     }
-                    else if (IsUsingEpiProject && listFieldName.ToLower().StartsWith("page "))
+                    else if (IsUsingEpiProject && listFieldName.ToLowerInvariant().StartsWith("page "))
                     {
                         // add fields on a specific page
                         int pageNumber = -1;
@@ -3155,7 +3155,7 @@ namespace EpiDashboard
                             }
                         }
                     }
-                    else if (IsUsingEpiProject && listFieldName.ToLower().StartsWith("page "))
+                    else if (IsUsingEpiProject && listFieldName.ToLowerInvariant().StartsWith("page "))
                     {
                         // add fields on a specific page
                         int pageNumber = -1;
@@ -3198,7 +3198,7 @@ namespace EpiDashboard
 
             //foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
             //{
-            //    if (kvp.Value.ToLower().Equals("listfield") && !columnsToSelect.Contains(kvp.Key))
+            //    if (kvp.Value.ToLowerInvariant().Equals("listfield") && !columnsToSelect.Contains(kvp.Key))
             //    {
             //        if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(kvp.Key, caseInsensitiveEqualityComparer))
             //        {
@@ -3232,7 +3232,7 @@ namespace EpiDashboard
             //                }
             //            }
             //        }
-            //        else if (IsUsingEpiProject && kvp.Key.ToLower().StartsWith("page "))
+            //        else if (IsUsingEpiProject && kvp.Key.ToLowerInvariant().StartsWith("page "))
             //        {
             //            // add fields on a specific page
             //            int pageNumber = -1;
@@ -3385,7 +3385,7 @@ namespace EpiDashboard
 
             //            foreach (string s in originalColumnsToSelect)
             //            {
-            //                if (column.ColumnName.ToLower().Equals(s.ToLower()))
+            //                if (column.ColumnName.ToLowerInvariant().Equals(s.ToLowerInvariant()))
             //                {
             //                    found = true;
             //                }
@@ -3450,7 +3450,7 @@ namespace EpiDashboard
 
                 foreach (string s in originalColumnsToSelect)
                 {
-                    if (column.ColumnName.ToLower().Equals(s.ToLower()))
+                    if (column.ColumnName.ToLowerInvariant().Equals(s.ToLowerInvariant()))
                     {
                         found = true;
                     }
@@ -3517,11 +3517,11 @@ namespace EpiDashboard
                     DataColumn newDc = kvp.Key;
                     DataColumn oldDc = kvp.Value;
 
-                    if (row[oldDc].ToString() == "1" || row[oldDc].ToString().ToLower() == "true")
+                    if (row[oldDc].ToString() == "1" || row[oldDc].ToString().ToLowerInvariant() == "true")
                     {
                         row[newDc] = Config.Settings.RepresentationOfYes;
                     }
-                    else if (row[oldDc].ToString() == "0" || row[oldDc].ToString().ToLower() == "false")
+                    else if (row[oldDc].ToString() == "0" || row[oldDc].ToString().ToLowerInvariant() == "false")
                     {
                         row[newDc] = Config.Settings.RepresentationOfNo;
                     }
@@ -3562,7 +3562,7 @@ namespace EpiDashboard
             //foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
             foreach (string listFieldName in parameters.ColumnNames)
             {
-                //if (kvp.Value.ToLower().Equals("listfield") && !columnsToSelect.Contains(kvp.Key))
+                //if (kvp.Value.ToLowerInvariant().Equals("listfield") && !columnsToSelect.Contains(kvp.Key))
                 if (!columnsToSelect.Contains(listFieldName))
                 {
                     if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
@@ -3597,7 +3597,7 @@ namespace EpiDashboard
                             }
                         }
                     }
-                    else if (IsUsingEpiProject && listFieldName.ToLower().StartsWith("page "))
+                    else if (IsUsingEpiProject && listFieldName.ToLowerInvariant().StartsWith("page "))
                     {
                         // add fields on a specific page
                         int pageNumber = -1;
@@ -3640,13 +3640,13 @@ namespace EpiDashboard
 
             //foreach (KeyValuePair<string, string> kvp in inputs.InputVariableList)
             //{
-            //    if (kvp.Value.ToLower().Equals("sortfield"))
+            //    if (kvp.Value.ToLowerInvariant().Equals("sortfield"))
             //    {
             //        sortOrder = sortOrder + kvp.Key + ",";
 
             //        string sortFieldName = kvp.Key;
 
-            //        if (sortFieldName.ToLower().EndsWith("desc"))
+            //        if (sortFieldName.ToLowerInvariant().EndsWith("desc"))
             //        {
             //            sortFieldName = sortFieldName.Remove(sortFieldName.Length - 5);
             //        }
@@ -3761,7 +3761,7 @@ namespace EpiDashboard
 
                         foreach (string s in originalColumnsToSelect)
                         {
-                            if (column.ColumnName.ToLower().Equals(s.ToLower()))
+                            if (column.ColumnName.ToLowerInvariant().Equals(s.ToLowerInvariant()))
                             {
                                 found = true;
                             }
@@ -3826,7 +3826,7 @@ namespace EpiDashboard
 
                     foreach (string s in originalColumnsToSelect)
                     {
-                        if (column.ColumnName.ToLower().Equals(s.ToLower()))
+                        if (column.ColumnName.ToLowerInvariant().Equals(s.ToLowerInvariant()))
                         {
                             found = true;
                         }
@@ -4009,7 +4009,7 @@ namespace EpiDashboard
                 List<string> dataColumnNames = GetFieldsAsList(columnDataType);
                 foreach (string name in dataColumnNames)
                 {
-                    if (inputs.CustomFilter.ToLower().Contains(name.ToLower()) && !columnNames.Contains(name, caseInsensitiveEqualityComparer))
+                    if (inputs.CustomFilter.ToLowerInvariant().Contains(name.ToLowerInvariant()) && !columnNames.Contains(name, caseInsensitiveEqualityComparer))
                     {
                         // Adding filter variables to columnNames causes Frequency to list the filter variables
                         // among the frequency variables when the properties panel is re-opened.
@@ -4490,7 +4490,7 @@ namespace EpiDashboard
 
                     if (doStratification)
                     {
-                        if (columnType.Equals("System.String") && value.ToLower().Equals("is null"))
+                        if (columnType.Equals("System.String") && value.ToLowerInvariant().Equals("is null"))
                         {
                             filter = filter + " and " + "(" + AddBracketsToString(freqVar) + StringLiterals.SPACE + "= ''" + " or " + AddBracketsToString(freqVar) + StringLiterals.SPACE + operand + value + ")";
                         }
@@ -4501,7 +4501,7 @@ namespace EpiDashboard
                     }
                     else
                     {
-                        if (columnType.Equals("System.String") && value.ToLower().Equals("is null"))
+                        if (columnType.Equals("System.String") && value.ToLowerInvariant().Equals("is null"))
                         {
                             filter = "(" + AddBracketsToString(freqVar) + StringLiterals.SPACE + "= ''" + " or " + AddBracketsToString(freqVar) + StringLiterals.SPACE + operand + value + ")";
                         }
@@ -4545,7 +4545,7 @@ namespace EpiDashboard
                                         sum = sumTotal - sumNotMissing;
                                     }
                                 }
-                                //else if (filter.ToLower().EndsWith("is null)"))
+                                //else if (filter.ToLowerInvariant().EndsWith("is null)"))
                                 //{
                                 //    // safe replacement in case column name includes "is null"
                                 //    string originalFilter = filter;
@@ -5171,7 +5171,7 @@ namespace EpiDashboard
                 List<string> dataColumnNames = GetFieldsAsList(columnDataType);
                 foreach (string name in dataColumnNames)
                 {
-                    if (inputs.CustomFilter.ToLower().Contains(name.ToLower()) && !columnNames.Contains(name, caseInsensitiveEqualityComparer))
+                    if (inputs.CustomFilter.ToLowerInvariant().Contains(name.ToLowerInvariant()) && !columnNames.Contains(name, caseInsensitiveEqualityComparer))
                     {
                         columnNames.Add(name);
                     }
@@ -5615,7 +5615,7 @@ namespace EpiDashboard
 
                     if (doStratification)
                     {
-                        if (columnType.Equals("System.String") && value.ToLower().Equals("is null"))
+                        if (columnType.Equals("System.String") && value.ToLowerInvariant().Equals("is null"))
                         {
                             filter = filter + " and " + "(" + AddBracketsToString(freqVar) + StringLiterals.SPACE + "= ''" + " or " + AddBracketsToString(freqVar) + StringLiterals.SPACE + operand + value + ")";
                         }
@@ -5626,7 +5626,7 @@ namespace EpiDashboard
                     }
                     else
                     {
-                        if (columnType.Equals("System.String") && value.ToLower().Equals("is null"))
+                        if (columnType.Equals("System.String") && value.ToLowerInvariant().Equals("is null"))
                         {
                             filter = "(" + AddBracketsToString(freqVar) + StringLiterals.SPACE + "= ''" + " or " + AddBracketsToString(freqVar) + StringLiterals.SPACE + operand + value + ")";
                         }
@@ -5670,7 +5670,7 @@ namespace EpiDashboard
                                         sum = sumTotal - sumNotMissing;
                                     }
                                 }
-                                //else if (filter.ToLower().EndsWith("is null)"))
+                                //else if (filter.ToLowerInvariant().EndsWith("is null)"))
                                 //{
                                 //    // safe replacement in case column name includes "is null"
                                 //    string originalFilter = filter;
@@ -6424,7 +6424,7 @@ namespace EpiDashboard
             columnType = filteredTable.Columns[exposure].DataType.ToString();
             if (columnType.Equals("System.Boolean") || (exposureField != null && exposureField is YesNoField))
             {
-                if (exposureValue1.Equals("0") || exposureValue1.ToLower().Equals("false"))
+                if (exposureValue1.Equals("0") || exposureValue1.ToLowerInvariant().Equals("false"))
                 {
                     exposureValue1 = Config.Settings.RepresentationOfNo;
                     exposureValue2 = Config.Settings.RepresentationOfYes;
@@ -6436,7 +6436,7 @@ namespace EpiDashboard
                 }
 
                 // make sure 'yes' is always first
-                if ((exposureValues[0].Equals("0") || exposureValues[0].ToLower().Equals("false")) && exposureValues.Count >= 2)
+                if ((exposureValues[0].Equals("0") || exposureValues[0].ToLowerInvariant().Equals("false")) && exposureValues.Count >= 2)
                 {
                     string temp = exposureValues[0];
                     exposureValues[0] = exposureValues[1];
@@ -6457,7 +6457,7 @@ namespace EpiDashboard
             columnType = filteredTable.Columns[outcome].DataType.ToString();
             if (columnType.Equals("System.Boolean") || (outcomeField != null && outcomeField is YesNoField))
             {
-                if (outcomeValue1.Equals("0") || outcomeValue1.ToLower().Equals("false"))
+                if (outcomeValue1.Equals("0") || outcomeValue1.ToLowerInvariant().Equals("false"))
                 {
                     outcomeValue1 = Config.Settings.RepresentationOfNo;
                     outcomeValue2 = Config.Settings.RepresentationOfYes;
@@ -6469,7 +6469,7 @@ namespace EpiDashboard
                 }
 
                 // make sure 'yes' is always first
-                if ((outcomeValues[0].Equals("0") || outcomeValues[0].ToLower().Equals("false")) && outcomeValues.Count >= 2)
+                if ((outcomeValues[0].Equals("0") || outcomeValues[0].ToLowerInvariant().Equals("false")) && outcomeValues.Count >= 2)
                 {
                     string temp = outcomeValues[0];
                     outcomeValues[0] = outcomeValues[1];
@@ -6803,7 +6803,7 @@ namespace EpiDashboard
                         int hour = 0;
                         DateTime newDate = DateTime.Now;
 
-                        switch (dateInterval.ToLower())
+                        switch (dateInterval.ToLowerInvariant())
                         {
                             case "years":
                                 year = ((DateTime)dateKey).Year;
@@ -6952,7 +6952,7 @@ namespace EpiDashboard
                         int day = rowDateTime.Value.Day;
                         int hour = rowDateTime.Value.Hour;
 
-                        switch (dateInterval.ToLower())
+                        switch (dateInterval.ToLowerInvariant())
                         {
                             case "hours":
                                 year = rowDateTime.Value.Year;
@@ -7175,20 +7175,20 @@ namespace EpiDashboard
             {
                 foreach (DataRow row in stackedBarTable.Rows)
                 {
-                    if (row[2].ToString().ToLower().Equals("true") || (IsColumnYesNo(yAxisColumn) && row[2].ToString().Equals("1")))
+                    if (row[2].ToString().ToLowerInvariant().Equals("true") || (IsColumnYesNo(yAxisColumn) && row[2].ToString().Equals("1")))
                     {
                         row[2] = Config.Settings.RepresentationOfYes;
                     }
-                    else if (row[2].ToString().ToLower().Equals("false") || (IsColumnYesNo(yAxisColumn) && row[2].ToString().Equals("0")))
+                    else if (row[2].ToString().ToLowerInvariant().Equals("false") || (IsColumnYesNo(yAxisColumn) && row[2].ToString().Equals("0")))
                     {
                         row[2] = Config.Settings.RepresentationOfNo;
                     }
 
-                    if (row[1].ToString().ToLower().Equals("true") || (IsColumnYesNo(xAxisColumn) && row[1].ToString().Equals("1")))
+                    if (row[1].ToString().ToLowerInvariant().Equals("true") || (IsColumnYesNo(xAxisColumn) && row[1].ToString().Equals("1")))
                     {
                         row[1] = Config.Settings.RepresentationOfYes;
                     }
-                    else if (row[1].ToString().ToLower().Equals("false") || (IsColumnYesNo(xAxisColumn) && row[1].ToString().Equals("0")))
+                    else if (row[1].ToString().ToLowerInvariant().Equals("false") || (IsColumnYesNo(xAxisColumn) && row[1].ToString().Equals("0")))
                     {
                         row[1] = Config.Settings.RepresentationOfNo;
                     }
@@ -7245,7 +7245,7 @@ namespace EpiDashboard
                         {
                             foreach (string columnName in allFieldNames)
                             {
-                                if (filterCriteria.ToLower().Contains(columnName.ToLower()))
+                                if (filterCriteria.ToLowerInvariant().Contains(columnName.ToLowerInvariant()))
                                 {
                                     columnNames.Add(columnName);
                                 }
@@ -7277,7 +7277,7 @@ namespace EpiDashboard
                         }
                         else
                         {
-                            if (Database.ConnectionDescription.ToLower().StartsWith("mysql"))
+                            if (Database.ConnectionDescription.ToLowerInvariant().StartsWith("mysql"))
                             {
                                 try
                                 {
@@ -7597,12 +7597,12 @@ namespace EpiDashboard
                 {
                     if (!TableColumnNames.ContainsKey(dc.ColumnName))
                     {
-                        if (dc.ColumnName.ToLower().Equals("recstatus") && !TableColumnNames.ContainsKey(dc.ColumnName))
+                        if (dc.ColumnName.ToLowerInvariant().Equals("recstatus") && !TableColumnNames.ContainsKey(dc.ColumnName))
                         {
                             TableColumnNames.Add("RecStatus", dc.DataType.ToString());
                             FieldTable.Rows.Add("RecStatus", dc.DataType.ToString(), TableName, string.Empty, null);
                         }
-                        else if (dc.ColumnName.ToLower().Equals("uniquekey") && !TableColumnNames.ContainsKey(dc.ColumnName))
+                        else if (dc.ColumnName.ToLowerInvariant().Equals("uniquekey") && !TableColumnNames.ContainsKey(dc.ColumnName))
                         {
                             TableColumnNames.Add("UniqueKey", dc.DataType.ToString());
                             FieldTable.Rows.Add("UniqueKey", dc.DataType.ToString(), TableName, string.Empty, null);
@@ -7650,12 +7650,12 @@ namespace EpiDashboard
                         {
                             if (!TableColumnNames.ContainsKey(dc.ColumnName))
                             {
-                                if (dc.ColumnName.ToLower().Equals("recstatus") && !TableColumnNames.ContainsKey(dc.ColumnName.ToUpper()))
+                                if (dc.ColumnName.ToLowerInvariant().Equals("recstatus") && !TableColumnNames.ContainsKey(dc.ColumnName.ToUpperInvariant()))
                                 {
                                     TableColumnNames.Add("RecStatus", dc.DataType.ToString());
                                     FieldTable.Rows.Add("RecStatus", dc.DataType.ToString(), conn.TableName, string.Empty, null);
                                 }
-                                else if (dc.ColumnName.ToLower().Equals("uniquekey"))
+                                else if (dc.ColumnName.ToLowerInvariant().Equals("uniquekey"))
                                 {
                                     TableColumnNames.Add("UniqueKey", dc.DataType.ToString());
                                     FieldTable.Rows.Add("UniqueKey", dc.DataType.ToString(), conn.TableName, string.Empty, null);
@@ -8107,7 +8107,7 @@ namespace EpiDashboard
                     {
                         Rule_Recode recodeRule = rule as Rule_Recode;
 
-                        if (recodeRule.DestinationColumnName.ToLower().Equals(column.ColumnName.ToLower()) && !recodeRule.DestinationColumnName.Equals("Yes/No") && recodeRule.ShouldMaintainSortOrder)
+                        if (recodeRule.DestinationColumnName.ToLowerInvariant().Equals(column.ColumnName.ToLowerInvariant()) && !recodeRule.DestinationColumnName.Equals("Yes/No") && recodeRule.ShouldMaintainSortOrder)
                         {
                             if (string.IsNullOrEmpty(recodeRule.ElseValue))
                             {
@@ -8610,7 +8610,7 @@ namespace EpiDashboard
                 {
                     foreach (KeyValuePair<string, string> kvp in TableColumnNames)
                     {
-                        if (AdvancedUserDataFilter.ToLower().Contains(kvp.Key.ToLower()) && !columnNames.Contains(kvp.Key, caseInsensitiveEqualityComparer))
+                        if (AdvancedUserDataFilter.ToLowerInvariant().Contains(kvp.Key.ToLowerInvariant()) && !columnNames.Contains(kvp.Key, caseInsensitiveEqualityComparer))
                         {
                             columnNames.Add(kvp.Key);
                         }
@@ -8671,7 +8671,7 @@ namespace EpiDashboard
                     List<string> fieldNames = this.GetFieldsAsList(columnDataType);
                     foreach (string fieldName in fieldNames)
                     {
-                        if (expressionAssignRule.Expression.ToLower().Contains(fieldName.ToLower()) && !columnNames.Contains(fieldName, caseInsensitiveEqualityComparer))
+                        if (expressionAssignRule.Expression.ToLowerInvariant().Contains(fieldName.ToLowerInvariant()) && !columnNames.Contains(fieldName, caseInsensitiveEqualityComparer))
                         {
                             columnNames.Add(fieldName);
                         }
@@ -8905,7 +8905,7 @@ namespace EpiDashboard
                     bool found = false;
                     foreach (string s in columnNames)
                     {
-                        if (column.ColumnName.ToLower().Equals(s.ToLower()))
+                        if (column.ColumnName.ToLowerInvariant().Equals(s.ToLowerInvariant()))
                         {
                             found = true;
                         }
@@ -9945,11 +9945,11 @@ namespace EpiDashboard
                         if (rule is Rule_ExpressionAssign)
                         {
                             Rule_ExpressionAssign expressionAssignRule = rule as Rule_ExpressionAssign;
-                            if (expressionAssignRule.Expression.ToLower().Contains(columnName.ToLower()) && !columnNames.Contains(columnName, caseInsensitiveEqualityComparer))
+                            if (expressionAssignRule.Expression.ToLowerInvariant().Contains(columnName.ToLowerInvariant()) && !columnNames.Contains(columnName, caseInsensitiveEqualityComparer))
                             {
                                 columnNames.Add(columnName);
                             }
-                            if (expressionAssignRule.DestinationColumnName.ToLower().Equals(columnName.ToLower()) && !columnNames.Contains(columnName, caseInsensitiveEqualityComparer))
+                            if (expressionAssignRule.DestinationColumnName.ToLowerInvariant().Equals(columnName.ToLowerInvariant()) && !columnNames.Contains(columnName, caseInsensitiveEqualityComparer))
                             {
                                 columnNames.Add(columnName);
                             }
@@ -9957,7 +9957,7 @@ namespace EpiDashboard
                         else if (rule is Rule_Format)
                         {
                             Rule_Format formatAssignRule = rule as Rule_Format;
-                            if (formatAssignRule.SourceColumnName.ToLower().Equals(columnName.ToLower()) && !columnNames.Contains(columnName, caseInsensitiveEqualityComparer))
+                            if (formatAssignRule.SourceColumnName.ToLowerInvariant().Equals(columnName.ToLowerInvariant()) && !columnNames.Contains(columnName, caseInsensitiveEqualityComparer))
                             {
                                 columnNames.Add(columnName);
                             }
@@ -9978,7 +9978,7 @@ namespace EpiDashboard
                         else if (rule is Rule_Recode)
                         {
                             Rule_Recode recodeRule = rule as Rule_Recode;
-                            if (recodeRule.SourceColumnName.ToLower().Equals(columnName.ToLower()) && !columnNames.Contains(columnName, caseInsensitiveEqualityComparer))
+                            if (recodeRule.SourceColumnName.ToLowerInvariant().Equals(columnName.ToLowerInvariant()) && !columnNames.Contains(columnName, caseInsensitiveEqualityComparer))
                             {
                                 columnNames.Add(columnName);
                             }
@@ -10694,7 +10694,7 @@ namespace EpiDashboard
 
             foreach (DataRow row in sortedDistinctTable.Rows)
             {
-                if (!includeMissing && row[0].ToString().ToLower().Trim().Equals(string.Empty))
+                if (!includeMissing && row[0].ToString().ToLowerInvariant().Trim().Equals(string.Empty))
                 {
                     continue;
                 }
@@ -10770,7 +10770,7 @@ namespace EpiDashboard
 
             foreach (DataRow row in sortedDistinctTable.Rows)
             {
-                if (!includeMissing && row[0].ToString().ToLower().Trim().Equals(string.Empty))
+                if (!includeMissing && row[0].ToString().ToLowerInvariant().Trim().Equals(string.Empty))
                 {
                     continue;
                 }
@@ -10797,15 +10797,15 @@ namespace EpiDashboard
         {
             string recodedValue = string.Empty;
 
-            if (value.ToLower().Equals("true") || value.ToLower().Equals("1"))
+            if (value.ToLowerInvariant().Equals("true") || value.ToLowerInvariant().Equals("1"))
             {
                 recodedValue = Config.Settings.RepresentationOfYes;
             }
-            else if (value.ToLower().Equals("false") || value.ToLower().Equals("0"))
+            else if (value.ToLowerInvariant().Equals("false") || value.ToLowerInvariant().Equals("0"))
             {
                 recodedValue = Config.Settings.RepresentationOfNo;
             }
-            else if (value.ToLower().Trim().Equals(string.Empty))
+            else if (value.ToLowerInvariant().Trim().Equals(string.Empty))
             {
                 recodedValue = Config.Settings.RepresentationOfMissing;
             }

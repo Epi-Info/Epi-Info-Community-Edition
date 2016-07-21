@@ -85,8 +85,8 @@ namespace Epi.Windows.MakeView
         {
             string templatePath = "";
 
-            string programFilesDirectoryName = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles).ToLower();
-            string installFolder = AppDomain.CurrentDomain.BaseDirectory.ToLower();
+            string programFilesDirectoryName = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles).ToLowerInvariant();
+            string installFolder = AppDomain.CurrentDomain.BaseDirectory.ToLowerInvariant();
 
             Configuration config = Configuration.GetNewInstance();
             string configPath = config.Directories.Templates;
@@ -95,7 +95,7 @@ namespace Epi.Windows.MakeView
             {
                 templatePath = Path.Combine(configPath, nodeTag);
             }
-            else if (installFolder.ToLower().StartsWith(programFilesDirectoryName))
+            else if (installFolder.ToLowerInvariant().StartsWith(programFilesDirectoryName))
             {
                 templatePath = Path.Combine(installFolder, "Templates\\" + nodeTag);
             }
@@ -629,7 +629,7 @@ namespace Epi.Windows.MakeView
             string candidate = string.Empty;
             int index = 0;
 
-            string searchCheckCode = checkCode.ToUpper();
+            string searchCheckCode = checkCode.ToUpperInvariant();
 
             bool ContainsField = searchCheckCode.Contains("END-FIELD");
 
@@ -1370,7 +1370,7 @@ namespace Epi.Windows.MakeView
                                     rowFromXml["FieldId"] = _templateFieldId_dbFieldId[fieldId];
                                 }
 
-                                string columnName = rowFromXml["Name"].ToString().ToLower();
+                                string columnName = rowFromXml["Name"].ToString().ToLowerInvariant();
 
                                 if ((   columnName.Equals("uniquerowid") ||
                                         columnName.Equals("recstatus") ||
@@ -1467,7 +1467,7 @@ namespace Epi.Windows.MakeView
                         {
                             foreach (DataRow row in tables)
                             {
-                                if (newCodeTableName.ToLower() == ((string)row[ColumnNames.TABLE_NAME]).ToLower())
+                                if (newCodeTableName.ToLowerInvariant() == ((string)row[ColumnNames.TABLE_NAME]).ToLowerInvariant())
                                 {
                                     newCodeTableName = codeTableName + nameExtension.ToString();
                                     break;
@@ -1575,7 +1575,7 @@ namespace Epi.Windows.MakeView
             //            {
             //                foreach (DataRow row in tables)
             //                {
-            //                    if (newCodeTableName.ToLower() == ((string)row[ColumnNames.TABLE_NAME]).ToLower())
+            //                    if (newCodeTableName.ToLowerInvariant() == ((string)row[ColumnNames.TABLE_NAME]).ToLowerInvariant())
             //                    {
             //                        newCodeTableName = tableName + nameExtension.ToString();
             //                        break;
@@ -1794,7 +1794,7 @@ namespace Epi.Windows.MakeView
         {
             if (metadataSchema.Columns.Contains(reader.Name) && reader.Value != string.Empty)
             {
-                switch (metadataSchema.Columns[reader.Name].DataType.Name.ToLower())
+                switch (metadataSchema.Columns[reader.Name].DataType.Name.ToLowerInvariant())
                 {
                     case "boolean":
                         row[reader.Name] = bool.Parse(reader.Value);
@@ -1847,12 +1847,12 @@ namespace Epi.Windows.MakeView
                 {
                     CopyReaderValueToRow(reader, metadataSchema, row);
 
-                    if (reader.Name.ToLower(System.Globalization.CultureInfo.InvariantCulture) == "fieldtypeid")
+                    if (reader.Name.ToLowerInvariant(System.Globalization.CultureInfo.InvariantCulture) == "fieldtypeid")
                     {
                         field = page.CreateField(((MetaFieldType)Int32.Parse(reader.Value)));
                     }
 
-                    if (reader.Name.ToLower(System.Globalization.CultureInfo.InvariantCulture) == "relatedviewname")
+                    if (reader.Name.ToLowerInvariant(System.Globalization.CultureInfo.InvariantCulture) == "relatedviewname")
                     {
                         relatedViewName = reader.Value.ToString();
                     }

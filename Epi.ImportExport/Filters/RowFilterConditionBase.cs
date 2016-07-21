@@ -158,7 +158,7 @@ namespace Epi.ImportExport
         {
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "description":
                         this.Description = child.InnerText;

@@ -234,7 +234,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         if (NT.Tokens.Length > 0)
                         {
                             string OptionString = this.GetCommandElement(NT.Tokens, 0).Trim();
-                            if (OptionString.ToUpper().Contains("NOINTERCEPT"))
+                            if (OptionString.ToUpperInvariant().Contains("NOINTERCEPT"))
                             {
 
                             }
@@ -256,19 +256,19 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                 string temp = this.ExtractTokens(((NonterminalToken)NT.Tokens[j]).Tokens);
                                 string[] tmp = temp.Split('=');
 
-                                if (tmp[0].ToUpper().Contains("NOINTERCEPT"))
+                                if (tmp[0].ToUpperInvariant().Contains("NOINTERCEPT"))
                                 {
                                     this.nointercept = true;
-                                    tmp[0] = tmp[0].ToUpper().Replace("NOINTERCEPT", string.Empty);
+                                    tmp[0] = tmp[0].ToUpperInvariant().Replace("NOINTERCEPT", string.Empty);
                                 }
 
-                                else if (tmp[1].ToUpper().Contains("NOINTERCEPT"))
+                                else if (tmp[1].ToUpperInvariant().Contains("NOINTERCEPT"))
                                 {
                                     this.nointercept = true;
-                                    tmp[1] = tmp[1].ToUpper().Replace("NOINTERCEPT", string.Empty);
+                                    tmp[1] = tmp[1].ToUpperInvariant().Replace("NOINTERCEPT", string.Empty);
                                 }
 
-                                switch (tmp[0].ToUpper().Trim())
+                                switch (tmp[0].ToUpperInvariant().Trim())
                                 {
                                     case "WEIGHTVAR":
                                         this.WeightVar = tmp[1].Trim();

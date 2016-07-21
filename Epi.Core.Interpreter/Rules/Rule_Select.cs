@@ -31,7 +31,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             }
             else
             {
-                if(pToken.Tokens[0].ToString().ToUpper() == "CANCEL")
+                if(pToken.Tokens[0].ToString().ToUpperInvariant() == "CANCEL")
                 {
                     this.CancelExpresson = true;
                 }
@@ -134,7 +134,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     if (!(var is Epi.Fields.PredefinedDataField))
                     {
-                        if (var.Name.ToUpper() == name.ToUpper())
+                        if (var.Name.ToUpperInvariant() == name.ToUpperInvariant())
                         {
                             isvalid = true;
                             invalidfieldnames.Remove(name);
@@ -151,7 +151,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         invalidfieldnames.Remove(name);
                         break;
                     }
-                    else if (Context.SelectCommandList.Contains(name.ToUpper()))
+                    else if (Context.SelectCommandList.Contains(name.ToUpperInvariant()))
                     {
                         isvalid = true;
                         invalidfieldnames.Remove(name);

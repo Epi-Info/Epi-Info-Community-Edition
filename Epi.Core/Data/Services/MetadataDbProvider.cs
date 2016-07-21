@@ -6033,13 +6033,13 @@ namespace Epi.Data.Services
             //try
             //{
                 
-            //    if (db.TableExists(prefixedTableName.ToLower()))
+            //    if (db.TableExists(prefixedTableName.ToLowerInvariant()))
             //    {
             //        // Needed so that code tables are not constantly appended if you import over
             //        // an existing project with the same code table names; may also cause problems
             //        // if importing over an existing database with the same code table names but
             //        // different code table structure.
-            //        db.DeleteTable(prefixedTableName.ToLower());
+            //        db.DeleteTable(prefixedTableName.ToLowerInvariant());
             //    }
             //        sb = new StringBuilder();
 
@@ -6048,7 +6048,7 @@ namespace Epi.Data.Services
             //        sb.Append(SqlKeyWords.TABLE);
             //        sb.Append(StringLiterals.SPACE);
             //        sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
-            //        sb.Append(prefixedTableName.ToLower());
+            //        sb.Append(prefixedTableName.ToLowerInvariant());
             //        sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
             //        sb.Append(StringLiterals.SPACE);
             //        sb.Append(StringLiterals.PARANTHESES_OPEN);
@@ -6093,14 +6093,14 @@ namespace Epi.Data.Services
 
             try
             {
-                if (!db.TableExists(tableName.ToLower()))
+                if (!db.TableExists(tableName.ToLowerInvariant()))
                 {
                     List<TableColumn> columns = new List<TableColumn>();
                     foreach (string columnName in columnNames)
                     {
                         columns.Add(new TableColumn(columnName, GenericDbColumnType.String, 255, false));
                     }
-                    db.CreateTable(tableName.ToLower(), columns);
+                    db.CreateTable(tableName.ToLowerInvariant(), columns);
                 }
             }
             catch (Exception ex)
@@ -6119,11 +6119,11 @@ namespace Epi.Data.Services
         {
             try
             {
-                if (!db.TableExists(tableName.ToLower()))
+                if (!db.TableExists(tableName.ToLowerInvariant()))
                 {
                     List<TableColumn> columns = new List<TableColumn>();
                     columns.Add(new TableColumn(columnName, GenericDbColumnType.String, 255, false));
-                    db.CreateTable(tableName.ToLower(), columns);
+                    db.CreateTable(tableName.ToLowerInvariant(), columns);
                 }
             }
             catch (Exception ex)

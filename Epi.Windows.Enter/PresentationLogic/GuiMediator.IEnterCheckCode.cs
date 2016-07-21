@@ -72,7 +72,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                     if (ex.InnerException is System.ServiceModel.FaultException<ESRI.ArcGIS.Client.Bing.GeocodeService.ResponseSummary>)
                     {
                         string message = ((System.ServiceModel.FaultException<ESRI.ArcGIS.Client.Bing.GeocodeService.ResponseSummary>)ex.InnerException).Message;
-                        if (message.ToLower().Contains("credential"))
+                        if (message.ToLowerInvariant().Contains("credential"))
                         {
                             Dialog("The Map Service Key is invalid. Please update it from the Tools > Options dialog", "Geocoder");
                         }
@@ -847,10 +847,10 @@ namespace Epi.Windows.Enter.PresentationLogic
         {
             bool ret = false;
 
-            if (modifier.ToUpper().Equals("READ") || modifier.ToUpper().Equals("WRITE"))
+            if (modifier.ToUpperInvariant().Equals("READ") || modifier.ToUpperInvariant().Equals("WRITE"))
             {
                 string filePath;
-                if (TryGetFileDialog((string)input, caption, modifier.ToUpper().Equals("READ"), out filePath))
+                if (TryGetFileDialog((string)input, caption, modifier.ToUpperInvariant().Equals("READ"), out filePath))
                 {
                     ret = true;
                     if (input is StringBuilder)
@@ -950,13 +950,13 @@ namespace Epi.Windows.Enter.PresentationLogic
                 {
                     if (!(control is Label))
                     {
-                        if(OrFieldCount.ContainsKey(fieldName.ToLower()))
+                        if(OrFieldCount.ContainsKey(fieldName.ToLowerInvariant()))
                         {
-                            OrFieldCount[fieldName.ToLower()]++;
+                            OrFieldCount[fieldName.ToLowerInvariant()]++;
                         }
                         else
                         {
-                            OrFieldCount.Add(fieldName.ToLower(),1);
+                            OrFieldCount.Add(fieldName.ToLowerInvariant(),1);
                         }
 
                         autoSearchFields.Add(fieldName);
@@ -1017,7 +1017,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                     for (int i = 0; i < data.Columns.Count; i++)
                     {
 
-                        if (data.Columns[i].ColumnName.ToLower().Contains("globalrecordid"))
+                        if (data.Columns[i].ColumnName.ToLowerInvariant().Contains("globalrecordid"))
                         {
                             ResultTable.Columns.Remove(data.Columns[i].ColumnName.ToString());
                         }
@@ -1094,13 +1094,13 @@ namespace Epi.Windows.Enter.PresentationLogic
                 {
                     if (!(control is Label))
                     {
-                        if (OrFieldCount.ContainsKey(fieldName.ToLower()))
+                        if (OrFieldCount.ContainsKey(fieldName.ToLowerInvariant()))
                         {
-                            OrFieldCount[fieldName.ToLower()]++;
+                            OrFieldCount[fieldName.ToLowerInvariant()]++;
                         }
                         else
                         {
-                            OrFieldCount.Add(fieldName.ToLower(), 1);
+                            OrFieldCount.Add(fieldName.ToLowerInvariant(), 1);
                         }
 
                         autoSearchFields.Add(fieldName);
@@ -1164,7 +1164,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                     for (int i = 0; i < data.Columns.Count; i++)
                     {
 
-                        if (data.Columns[i].ColumnName.ToLower().Contains("globalrecordid"))
+                        if (data.Columns[i].ColumnName.ToLowerInvariant().Contains("globalrecordid"))
                         {
                             ResultTable.Columns.Remove(data.Columns[i].ColumnName.ToString());
                         }
@@ -1233,13 +1233,13 @@ namespace Epi.Windows.Enter.PresentationLogic
                 {
                     if (!(control is Label))
                     {
-                        if (OrFieldCount.ContainsKey(fieldName.ToLower()))
+                        if (OrFieldCount.ContainsKey(fieldName.ToLowerInvariant()))
                         {
-                            OrFieldCount[fieldName.ToLower()]++;
+                            OrFieldCount[fieldName.ToLowerInvariant()]++;
                         }
                         else
                         {
-                            OrFieldCount.Add(fieldName.ToLower(), 1);
+                            OrFieldCount.Add(fieldName.ToLowerInvariant(), 1);
                         }
 
                         autoSearchFields.Add(fieldName);

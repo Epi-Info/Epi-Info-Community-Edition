@@ -63,7 +63,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             _keyDef = ExtractTokens(nextNonterminal.Tokens).Trim();
                             break;
                         case "<JoinOpt>":
-                            _joinOpts.AddRange(ExtractTokens(nextNonterminal.Tokens).ToUpper().Split(StringLiterals.SPACE.ToCharArray()));
+                            _joinOpts.AddRange(ExtractTokens(nextNonterminal.Tokens).ToUpperInvariant().Split(StringLiterals.SPACE.ToCharArray()));
                             break;
                     }
                 }
@@ -170,7 +170,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             int recordCount = 0;
 
-            if (filePath.ToUpper().StartsWith("CONFIG:"))
+            if (filePath.ToUpperInvariant().StartsWith("CONFIG:"))
             {
                 string[] datakey = filePath.Split(':');
                 string ConnectionString = null;
@@ -179,7 +179,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 for (int i = 0; i < config.RecentDataSources.Count; i++)
                 {
                     Epi.DataSets.Config.RecentDataSourceRow row = config.RecentDataSources[i];
-                    if (row.Name.ToUpper() == datakey[1].ToUpper())
+                    if (row.Name.ToUpperInvariant() == datakey[1].ToUpperInvariant())
                     {
                         ConnectionString = Configuration.Decrypt(row.ConnectionString);
                         break;
@@ -224,7 +224,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             System.Data.DataTable table;
 
-            if (filePath.ToUpper().StartsWith("CONFIG:"))
+            if (filePath.ToUpperInvariant().StartsWith("CONFIG:"))
             {
                 string[] datakey = filePath.Split(':');
                 string connectionString = null;
@@ -233,7 +233,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 for (int i = 0; i < config.RecentDataSources.Count; i++)
                 {
                     Epi.DataSets.Config.RecentDataSourceRow row = config.RecentDataSources[i];
-                    if (row.Name.ToUpper() == datakey[1].ToUpper())
+                    if (row.Name.ToUpperInvariant() == datakey[1].ToUpperInvariant())
                     {
                         connectionString = Configuration.Decrypt(row.ConnectionString);
                         break;

@@ -382,7 +382,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             foreach (System.Data.DataColumn C in this.Context.DataSet.Tables["Output"].Columns)
             {
-                if (C.ColumnName.ToUpper() == pColumnName.ToUpper())
+                if (C.ColumnName.ToUpperInvariant() == pColumnName.ToUpperInvariant())
                 {
                     result = C.DataType;
                     break;

@@ -17,7 +17,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             _goto_type = this.GetCommandElement(pToken.Tokens, 0);
             //---2225
            // switch (_goto_type)
-           switch (_goto_type.ToUpper())
+           switch (_goto_type.ToUpperInvariant())
             {
                 case "GOTOFORM":
                     if (pToken.Tokens.Length == 2)
@@ -31,9 +31,9 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                             int number;
                             bool isNumeric = int.TryParse(_destination, out number);
-                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLowerInvariant()) && !isNumeric)
                             {
-                                this.Context.CommandVariableCheck.Add(_form.ToLower(), "gototform");
+                                this.Context.CommandVariableCheck.Add(_form.ToLowerInvariant(), "gototform");
                             }
 
                         }
@@ -66,9 +66,9 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                             int number;
                             bool isNumeric = int.TryParse(_destination, out number);
-                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLowerInvariant()) && !isNumeric)
                             {
-                                this.Context.CommandVariableCheck.Add(_destination.ToLower(), "gototpage");
+                                this.Context.CommandVariableCheck.Add(_destination.ToLowerInvariant(), "gototpage");
                             }
 
                         }
@@ -107,9 +107,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                         {
                             int number;
                             bool isNumeric = int.TryParse(_destination, out number);
-                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLower()) && !isNumeric)
+                            if (!string.IsNullOrEmpty(_destination) && !this.Context.CommandVariableCheck.ContainsKey(_destination.ToLowerInvariant()) && !isNumeric)
                             {
-                                this.Context.CommandVariableCheck.Add(_destination.ToLower(), "gotot");
+                                this.Context.CommandVariableCheck.Add(_destination.ToLowerInvariant(), "gotot");
                             }
 
                         }

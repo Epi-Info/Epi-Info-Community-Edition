@@ -123,9 +123,9 @@ namespace EpiMenu.CommandPlugin
                     case DataType.Boolean:
                     case DataType.YesNo:
                         result = new Boolean();
-                        if (dataValue == "(+)" || dataValue.ToLower() == "true" || dataValue == "1")
+                        if (dataValue == "(+)" || dataValue.ToLowerInvariant() == "true" || dataValue == "1")
                             result = true;
-                        else if (dataValue == "(-)" || dataValue.ToLower() == "false" || dataValue == "0")
+                        else if (dataValue == "(-)" || dataValue.ToLowerInvariant() == "false" || dataValue == "0")
                             result = false;
                         else
                             result = null;
@@ -201,14 +201,14 @@ namespace EpiMenu.CommandPlugin
 
                 result = ((String)subject).Trim('\"');
                 //removing the "1" and "0" conditions here because an expression like 1 + 0 was evaluating as two booleans
-                //if ((String)subject == "1" || (String)subject == "(+)" || ((String)subject).ToLower() == "true")
-                if ((String)subject == "(+)" || ((String)subject).ToLower() == "true")
+                //if ((String)subject == "1" || (String)subject == "(+)" || ((String)subject).ToLowerInvariant() == "true")
+                if ((String)subject == "(+)" || ((String)subject).ToLowerInvariant() == "true")
                 {
                     result = new Boolean();
                     result = true;
                 }
-                //else if ((String)subject == "0" || (String)subject == "(-)" || ((String)subject).ToLower() == "false")
-                else if ((String)subject == "(-)" || ((String)subject).ToLower() == "false")
+                //else if ((String)subject == "0" || (String)subject == "(-)" || ((String)subject).ToLowerInvariant() == "false")
+                else if ((String)subject == "(-)" || ((String)subject).ToLowerInvariant() == "false")
                 {
                     result = new Boolean();
                     result = false;

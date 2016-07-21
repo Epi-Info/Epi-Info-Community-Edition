@@ -264,7 +264,7 @@ namespace Epi.ImportExport
                     sb.Append(") ");
                     Epi.Data.Query insertQuery = destinationDriver.CreateQuery(sb.ToString());
 
-                    if (project.CollectedDataDriver.ToLower().Contains("epi.data.office"))
+                    if (project.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
                     {
                         IDbCommand command = GetCommand(insertQuery.SqlStatement, conn, insertQuery.Parameters);
                         object obj = command.ExecuteNonQuery();
@@ -291,7 +291,7 @@ namespace Epi.ImportExport
                         sb.Append(") ");
                         insertQuery = destinationDriver.CreateQuery(sb.ToString());
 
-                        if (project.CollectedDataDriver.ToLower().Contains("epi.data.office"))
+                        if (project.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
                         {
                             IDbCommand command = GetCommand(insertQuery.SqlStatement, conn, insertQuery.Parameters);
                             object obj = command.ExecuteNonQuery();
@@ -406,7 +406,7 @@ namespace Epi.ImportExport
                     }
                     //destinationDriver.ExecuteNonQuery(updateQuery);
 
-                    if (project.CollectedDataDriver.ToLower().Contains("epi.data.office"))
+                    if (project.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
                     {
                         IDbCommand command = GetCommand(updateQuery.SqlStatement, conn, updateQuery.Parameters);
                         object obj = command.ExecuteNonQuery();
@@ -459,11 +459,11 @@ namespace Epi.ImportExport
                     }
                     // User can elect to use Yes/No fields for boolean and number columns
                 case MetaFieldType.YesNo:
-                    if (value.ToString() == "1" || value.ToString() == "-1" || value.ToString().ToLower() == "true")
+                    if (value.ToString() == "1" || value.ToString() == "-1" || value.ToString().ToLowerInvariant() == "true")
                     {
                         return new QueryParameter("@" + fieldName, DbType.Byte, 1);
                     }
-                    else if (value.ToString() == "0" || value.ToString().ToLower() == "false")
+                    else if (value.ToString() == "0" || value.ToString().ToLowerInvariant() == "false")
                     {
                         return new QueryParameter("@" + fieldName, DbType.Byte, 0);
                     }

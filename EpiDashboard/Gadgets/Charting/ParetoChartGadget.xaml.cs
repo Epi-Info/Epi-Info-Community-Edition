@@ -254,7 +254,7 @@ namespace EpiDashboard.Gadgets.Charting
             {
                 if (!String.IsNullOrEmpty(child.InnerText))
                 {
-                    switch (child.Name.ToLower())
+                    switch (child.Name.ToLowerInvariant())
                     {
                         case "singlevariable":
                                 if (this.Parameters.ColumnNames.Count > 0)
@@ -351,7 +351,7 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -372,7 +372,7 @@ namespace EpiDashboard.Gadgets.Charting
                 {
                     if (!String.IsNullOrEmpty(child.InnerText))
                     {
-                        switch (child.Name.ToLower())
+                        switch (child.Name.ToLowerInvariant())
                         {
                             case "mainvariable":
                                 if (this.Parameters.ColumnNames.Count > 0)
@@ -388,14 +388,14 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((ParetoChartParameters)Parameters).WeightVariableName = child.InnerText.Replace("&lt;", "<");
                                 break;
                             case "showlistlabels":
-                                if (child.InnerText.ToLower().Equals("true"))
+                                if (child.InnerText.ToLowerInvariant().Equals("true"))
                                 {
                                     ((ParetoChartParameters)Parameters).ShowCommentLegalLabels = true;
                                 }
                                 else { ((ParetoChartParameters)Parameters).ShowCommentLegalLabels = false; }
                                 break;
                             case "includemissing":
-                                if (child.InnerText.ToLower().Equals("true")) { ((ParetoChartParameters)Parameters).IncludeMissing = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ParetoChartParameters)Parameters).IncludeMissing = true; }
                                 else { ((ParetoChartParameters)Parameters).IncludeMissing = false; }
                                 break;
                             case "customheading":
@@ -434,11 +434,11 @@ namespace EpiDashboard.Gadgets.Charting
                                 this.DataFilters.CreateFromXml(child);
                                 break;
                             case "userefvalues":
-                                if (child.InnerText.ToLower().Equals("true")) { ((ParetoChartParameters)Parameters).UseRefValues = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ParetoChartParameters)Parameters).UseRefValues = true; }
                                 else { ((ParetoChartParameters)Parameters).UseRefValues = false; }
                                 break;
                             case "showannotations":
-                                if (child.InnerText.ToLower().Equals("true")) { ((ParetoChartParameters)Parameters).ShowAnnotations = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ParetoChartParameters)Parameters).ShowAnnotations = true; }
                                 else { ((ParetoChartParameters)Parameters).ShowAnnotations = false; }
                                 break;
                             case "barspace":
@@ -538,15 +538,15 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((ParetoChartParameters)Parameters).ChartSubTitle = child.InnerText;
                                 break;
                             case "showlegend":
-                                if (child.InnerText.ToLower().Equals("true")) { ((ParetoChartParameters)Parameters).ShowLegend = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ParetoChartParameters)Parameters).ShowLegend = true; }
                                 else { ((ParetoChartParameters)Parameters).ShowLegend = false; }
                                 break;
                             case "showlegendborder":
-                                if (child.InnerText.ToLower().Equals("true")) { ((ParetoChartParameters)Parameters).ShowLegendBorder = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ParetoChartParameters)Parameters).ShowLegendBorder = true; }
                                 else { ((ParetoChartParameters)Parameters).ShowLegendBorder = false; }
                                 break;
                             case "showlegendvarnames":
-                                if (child.InnerText.ToLower().Equals("true")) { ((ParetoChartParameters)Parameters).ShowLegendVarNames = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ParetoChartParameters)Parameters).ShowLegendVarNames = true; }
                                 else { ((ParetoChartParameters)Parameters).ShowLegendVarNames = false; }
                                 break;
                             case "legendfontsize":

@@ -224,7 +224,7 @@ namespace Epi.Windows.Analysis.Dialogs
             if (selectedPlugIn.Key == null) // default project
             {
                 OpenFileDialog dlg = new OpenFileDialog();
-                if (cmbOutputFormat.Text == "Text" || cmbOutputFormat.Text.ToUpper() == "FLAT ASCII FILE")
+                if (cmbOutputFormat.Text == "Text" || cmbOutputFormat.Text.ToUpperInvariant() == "FLAT ASCII FILE")
                 {
                     dlg.Filter = "Text Files (*.txt) |*.txt";
                 }
@@ -236,7 +236,7 @@ namespace Epi.Windows.Analysis.Dialogs
                 dlg.CheckPathExists = false;
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    if (cmbOutputFormat.Text.ToUpper() == "TEXT" || cmbOutputFormat.Text.ToUpper() == "FLAT ASCII FILE")
+                    if (cmbOutputFormat.Text.ToUpperInvariant() == "TEXT" || cmbOutputFormat.Text.ToUpperInvariant() == "FLAT ASCII FILE")
                     {
                         if (!dlg.FileName.EndsWith(".txt") && dlg.FileName.EndsWith(".csv"))
                         {
@@ -553,7 +553,7 @@ namespace Epi.Windows.Analysis.Dialogs
             WordBuilder command = new WordBuilder();
             command.Append(CommandNames.WRITE);
             command.Append((rdbReplace.Checked) ? CommandNames.REPLACE : CommandNames.APPEND);
-            if (cmbOutputFormat.Text.ToUpper() == "TEXT" || cmbOutputFormat.Text.ToUpper() == "FLAT ASCII FILE")
+            if (cmbOutputFormat.Text.ToUpperInvariant() == "TEXT" || cmbOutputFormat.Text.ToUpperInvariant() == "FLAT ASCII FILE")
             {
                 command.Append("\"TEXT\"");
             }
@@ -587,11 +587,11 @@ namespace Epi.Windows.Analysis.Dialogs
 
         private void FormatChanged(object sender, EventArgs e)
         {
-            if (cmbOutputFormat.Text.ToLower().Contains("server"))
+            if (cmbOutputFormat.Text.ToLowerInvariant().Contains("server"))
             {
                 lblDataTable.Text = "Destination Table";
             }
-            else if (cmbOutputFormat.Text.ToLower().Contains("file"))
+            else if (cmbOutputFormat.Text.ToLowerInvariant().Contains("file"))
             {
                 lblDataTable.Text = "Destination File";
             }

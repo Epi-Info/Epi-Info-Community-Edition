@@ -227,7 +227,7 @@ namespace EpiDashboard
                         }
                     }
 
-                    switch (joinType.ToLower())
+                    switch (joinType.ToLowerInvariant())
                     {
                         case "or":
                             this.AddFilterCondition(newCondition, ConditionJoinType.Or);
@@ -269,7 +269,7 @@ namespace EpiDashboard
             {
                 FilterCondition filterCondition = (FilterCondition)row[COLUMN_FILTER];
 
-                root.AppendChild(filterCondition.Serialize(doc, row[COLUMN_FRIENDLY_JOIN].ToString().ToLower()));
+                root.AppendChild(filterCondition.Serialize(doc, row[COLUMN_FRIENDLY_JOIN].ToString().ToLowerInvariant()));
             }
             return root;
         }
@@ -729,7 +729,7 @@ namespace EpiDashboard
             for (int i = 0; i < rows.Length; i++)
             {
                 DataRow row = rows[i];
-                if (row[COLUMN_JOIN].ToString().ToLower().Contains("or"))
+                if (row[COLUMN_JOIN].ToString().ToLowerInvariant().Contains("or"))
                 {
                     tryFilter = false;
                     break;

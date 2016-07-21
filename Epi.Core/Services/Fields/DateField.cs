@@ -148,7 +148,7 @@ namespace Epi.Fields
             get
             {
                 System.Globalization.DateTimeFormatInfo formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo;
-                return formatInfo.ShortDatePattern.ToUpper();
+                return formatInfo.ShortDatePattern.ToUpperInvariant();
             }
         }
         

@@ -1008,7 +1008,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         ((AberrationDetectionChartParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
@@ -1030,7 +1030,7 @@ namespace EpiDashboard
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("stratavariable"))
+                            if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                             {
                                 ((AberrationDetectionChartParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                             }
@@ -1145,7 +1145,7 @@ namespace EpiDashboard
                     if (control is Label)
                     {
                         Label label = control as Label;
-                        if (label.Content.ToString().ToLower().Contains("aberrations found"))
+                        if (label.Content.ToString().ToLowerInvariant().Contains("aberrations found"))
                         {
                             htmlBuilder.AppendLine("<p><span class=\"warning\">" + label.Content + "</span></p>");
                         }

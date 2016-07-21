@@ -187,7 +187,7 @@ namespace Epi.Windows.Globalization.Translators
                 MatchCollection matches = reg.Matches(pageBuilder.ToString());
                 if (matches.Count != 1 || matches[0].Groups.Count != 2)
                 {
-                    translation = sourcedata.ToUpper();
+                    translation = sourcedata.ToUpperInvariant();
                 }
                 else
                 {

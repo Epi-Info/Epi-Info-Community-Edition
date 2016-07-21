@@ -734,7 +734,7 @@ namespace EpiDashboard
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -747,7 +747,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         ((CombinedFrequencyParameters)Parameters).ColumnNames.Add(child.InnerText.Replace("&lt;", "<"));
@@ -756,7 +756,7 @@ namespace EpiDashboard
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("groupfield"))
+                            if (field.Name.ToLowerInvariant().Equals("groupfield"))
                             {
                                 ((CombinedFrequencyParameters)Parameters).ColumnNames.Add(field.InnerText.Replace("&lt;", "<"));
                             }
@@ -765,7 +765,7 @@ namespace EpiDashboard
                     case "combinemode":
                         if (!String.IsNullOrEmpty(child.InnerText.Trim()))
                         {
-                            switch (child.InnerText.ToString().ToLower())
+                            switch (child.InnerText.ToString().ToLowerInvariant())
                             {
                                 case "boolean":
                                     ((CombinedFrequencyParameters)Parameters).CombineMode = CombineModeTypes.Boolean;
@@ -788,7 +788,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "sort":
-                        if (child.InnerText.ToLower().Equals("hightolow") || child.InnerText.ToLower().Equals("highlow"))
+                        if (child.InnerText.ToLowerInvariant().Equals("hightolow") || child.InnerText.ToLowerInvariant().Equals("highlow"))
                         {
                             ((CombinedFrequencyParameters)Parameters).SortHighToLow = true;
                         }
