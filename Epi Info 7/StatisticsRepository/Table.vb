@@ -240,31 +240,31 @@ probIEpi_ResultArray:
         'End If
 
         'For Each kvp As KeyValuePair(Of String, String) In context.InputVariableList
-        '    If kvp.Key.ToLower().Equals("percents") Then
+        '    If kvp.Key.ToLowerInvariant().Equals("percents") Then
         '        percents = kvp.Value
         '    End If
 
-        '    If kvp.Key.ToLower().Equals("stratavar") Then
+        '    If kvp.Key.ToLowerInvariant().Equals("stratavar") Then
         '        strataVar = kvp.Value
         '    End If
 
-        '    If kvp.Key.ToLower().Equals("mainvar") Or kvp.Key.ToLower().Equals("identifier") Or kvp.Key.ToLower().Equals("identifier1") Or kvp.Key.ToLower().Equals("exposurevar") Then
+        '    If kvp.Key.ToLowerInvariant().Equals("mainvar") Or kvp.Key.ToLowerInvariant().Equals("identifier") Or kvp.Key.ToLowerInvariant().Equals("identifier1") Or kvp.Key.ToLowerInvariant().Equals("exposurevar") Then
         '        domainVar = kvp.Value
         '    End If
 
-        '    If kvp.Key.ToLower().Equals("crosstabvar") Or kvp.Key.ToLower().Equals("identifier2") Or kvp.Key.ToLower().Equals("outcomevar") Then
+        '    If kvp.Key.ToLowerInvariant().Equals("crosstabvar") Or kvp.Key.ToLowerInvariant().Equals("identifier2") Or kvp.Key.ToLowerInvariant().Equals("outcomevar") Then
         '        mainVar = kvp.Value
         '    End If
 
-        '    If kvp.Key.ToLower().Equals("psuvar") Then
+        '    If kvp.Key.ToLowerInvariant().Equals("psuvar") Then
         '        psuVar = kvp.Value
         '    End If
 
-        '    If kvp.Key.ToLower().Equals("weightvar") Then
+        '    If kvp.Key.ToLowerInvariant().Equals("weightvar") Then
         '        weightVar = kvp.Value
         '    End If
 
-        '    If kvp.Key.ToLower().Equals("tablename") Then
+        '    If kvp.Key.ToLowerInvariant().Equals("tablename") Then
         '        tableName = kvp.Value
         '    End If
         'Next
@@ -582,7 +582,7 @@ Errorhandler:
         exact = New EIExact()
 
         strat = exact.Strat2x2(data, P, results) 'Strat2x2(data, P, results)
-        If strat.ToLower().StartsWith("error") Or strat.ToLower().StartsWith("problem") Then
+        If strat.ToLowerInvariant().StartsWith("error") Or strat.ToLowerInvariant().StartsWith("problem") Then
             errorMessage = strat
         End If
 

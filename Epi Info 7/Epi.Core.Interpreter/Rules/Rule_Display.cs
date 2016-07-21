@@ -58,8 +58,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 case "<Variables_Display_Statement>":
                     if (pToken.Tokens.Length > 2)
                     {
-                        dbVariablesOpt = this.GetCommandElement(pToken.Tokens, 2).Trim(new char[] { '"' }).ToUpper();
-                        if (dbVariablesOpt.ToUpper().StartsWith(CommandNames.LIST))
+                        dbVariablesOpt = this.GetCommandElement(pToken.Tokens, 2).Trim(new char[] { '"' }).ToUpperInvariant();
+                        if (dbVariablesOpt.ToUpperInvariant().StartsWith(CommandNames.LIST))
                         {
                             identifierList = dbVariablesOpt.Substring(4).Trim();
                         }
@@ -79,7 +79,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 if (!string.IsNullOrEmpty(this.GetCommandElement(pToken.Tokens, 3)))
                 {
                     string tokenFour = this.GetCommandElement(pToken.Tokens, 3);
-                    if (tokenFour.ToUpper().Contains("OUTTABLE"))
+                    if (tokenFour.ToUpperInvariant().Contains("OUTTABLE"))
                     {
                         outTable = this.GetCommandElement(pToken.Tokens, 3);
                         outTable = outTable.Substring(outTable.LastIndexOf('=') + 1).Trim();
@@ -98,7 +98,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             string markup = string.Empty;
             DataTable dataTable = null;
 
-            switch (this.displayType.ToUpper())
+            switch (this.displayType.ToUpperInvariant())
             {
                 case CommandNames.DBVARIABLES:
                     markup = GetVariableMarkup(out dataTable);
@@ -188,11 +188,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                 foreach (string name in tableNames)
                 {
-                    tableNamesUpper.Add(name.ToUpper());
+                    tableNamesUpper.Add(name.ToUpperInvariant());
                 }
 
                 //if TableNamesUpper contains an Epi 3 viewTable then get that table's data
-                if (tableNamesUpper.Contains(viewTableName.ToUpper()))
+                if (tableNamesUpper.Contains(viewTableName.ToUpperInvariant()))
                 {
                     viewTable = driver.GetTableData(viewTableName);
 
@@ -283,7 +283,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                 if (varNames != null)
                 {
-                    if (varnamelist.Contains(dataColumn.Caption.ToString().ToUpper()))
+                    if (varnamelist.Contains(dataColumn.Caption.ToString().ToUpperInvariant()))
                     {
                         table.Rows.Add(GetDataTable(dataColumn, tableText, pattern, formatStrings, rows, table));
                     }
@@ -291,7 +291,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 else if (vars != null)
                 {
                     
-                    if (vars.Contains(dataColumn.Caption.ToString().ToUpper()))
+                    if (vars.Contains(dataColumn.Caption.ToString().ToUpperInvariant()))
                     {
                         if (this.dbVariablesOpt == "FIELDVAR")
                         {
@@ -832,7 +832,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         /// <returns></returns>
         private string GetTableTypeName(string tableName, int numOfColumns)
         {
-            string firstFourChars = tableName.Substring(0, 4).ToLower();
+            string firstFourChars = tableName.Substring(0, 4).ToLowerInvariant();
             //issue 769 start
             if (firstFourChars == "view")
             {

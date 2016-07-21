@@ -210,7 +210,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            string KeyName = _recodeList.VariableName.ToUpper();
+            string KeyName = _recodeList.VariableName.ToUpperInvariant();
 
             if (this.Context.Recodes.ContainsKey(KeyName))
             {
@@ -407,13 +407,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
 
 
-            if (fromValue is string && ((string)fromValue).ToUpper() == "ELSE")
+            if (fromValue is string && ((string)fromValue).ToUpperInvariant() == "ELSE")
             {
                 return true;
             }
             else
             {
-                if (fromValue.ToString().ToUpper() == "LOVALUE")
+                if (fromValue.ToString().ToUpperInvariant() == "LOVALUE")
                 {
                     if (double.TryParse(pValue.ToString(), out double_compare))
                     {
@@ -460,7 +460,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                         else
                         {
-                            LHSO = from.ToUpper();
+                            LHSO = from.ToUpperInvariant();
                         }
                     }
                     else
@@ -507,7 +507,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                         else
                         {
-                            RHSO = pValue.ToString().ToUpper();
+                            RHSO = pValue.ToString().ToUpperInvariant();
                         }
                     }
                 }
@@ -528,7 +528,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         i = ((IComparable)LHSO).CompareTo((IComparable)RHSO);
                 }
 
-                if (this.recodeType.ToUpper() == "=")
+                if (this.recodeType.ToUpperInvariant() == "=")
                 {
                     check1 = i == 0;
                 }
@@ -537,7 +537,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     check1 = i <= 0;
                 }
             }
-            else if (this.recodeType.ToUpper() == "RECODEC")
+            else if (this.recodeType.ToUpperInvariant() == "RECODEC")
             {
                 if (Util.IsEmpty(LHSO))
                 {
@@ -569,13 +569,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     {
                         if (pValue != null)
                         {
-                            LHSO = pValue.ToString().ToUpper();
+                            LHSO = pValue.ToString().ToUpperInvariant();
                         }
                     }
                 }
             }
 
-            if (rangeEnd.ToString().ToUpper() == "HIVALUE")
+            if (rangeEnd.ToString().ToUpperInvariant() == "HIVALUE")
             {
                 if (double.TryParse(pValue.ToString(), out double_compare))
                 {
@@ -604,7 +604,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 if (rangeEnd is string)
                 {
-                    RHSO = ((string)rangeEnd).ToUpper();
+                    RHSO = ((string)rangeEnd).ToUpperInvariant();
                 }
                 else
                 {
@@ -630,7 +630,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                 }
 
-                if (this.recodeType.ToUpper() == "=")
+                if (this.recodeType.ToUpperInvariant() == "=")
                 {
                     check2 = i == 0;
                 }
@@ -673,14 +673,14 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             }
             else if (fromValue is string && pValue is string)
             {
-                if (fromValue.ToString().ToUpper() == pValue.ToString().ToUpper())
+                if (fromValue.ToString().ToUpperInvariant() == pValue.ToString().ToUpperInvariant())
                 {
                     return true;
                 }
             }
             else
             {
-                if ((pValue.GetType().Name.ToUpper() != fromValue.GetType().Name.ToUpper()) && RecodeRange.NumericTypeList.Contains(fromValue.GetType().Name.ToUpper()) && RecodeRange.NumericTypeList.Contains(pValue.GetType().Name.ToUpper()))
+                if ((pValue.GetType().Name.ToUpperInvariant() != fromValue.GetType().Name.ToUpperInvariant()) && RecodeRange.NumericTypeList.Contains(fromValue.GetType().Name.ToUpperInvariant()) && RecodeRange.NumericTypeList.Contains(pValue.GetType().Name.ToUpperInvariant()))
                 {
                     CheckNumber = Convert.ToDouble(fromValue);
                     CheckNumber2 = Convert.ToDouble(pValue);

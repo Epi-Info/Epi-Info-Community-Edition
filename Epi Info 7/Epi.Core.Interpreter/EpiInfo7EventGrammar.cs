@@ -220,7 +220,7 @@ namespace Epi.Core.AnalysisInterpreter
             }
             catch(InvalidOperationException ex)
             {
-                if (!ex.Message.ToUpper().Contains("STACK EMPTY"))
+                if (!ex.Message.ToUpperInvariant().Contains("STACK EMPTY"))
                 {
                     throw ex;
                 }
@@ -236,8 +236,8 @@ namespace Epi.Core.AnalysisInterpreter
                 this.commandText = source;
                 this.IsExecuteMode = true;
                 parser.TrimReductions = true;
-                if (source.ToUpper().Contains("DISPLAY DBVARIABLES\n"))
-                    newsourcetext = source.ToUpper().Replace("DISPLAY DBVARIABLES\n", "DISPLAY DBVARIABLES\nEXIT ");
+                if (source.ToUpperInvariant().Contains("DISPLAY DBVARIABLES\n"))
+                    newsourcetext = source.ToUpperInvariant().Replace("DISPLAY DBVARIABLES\n", "DISPLAY DBVARIABLES\nEXIT ");
                 else
                     newsourcetext = source;
                 parser.Parse(newsourcetext);
@@ -245,7 +245,7 @@ namespace Epi.Core.AnalysisInterpreter
             }
             catch (InvalidOperationException ex)
             {
-                if (!ex.Message.ToUpper().Contains("STACK EMPTY"))
+                if (!ex.Message.ToUpperInvariant().Contains("STACK EMPTY"))
                 {
                     throw ex;
                 }

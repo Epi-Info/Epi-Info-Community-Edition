@@ -22,7 +22,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             And_Exp = EnterRule.BuildStatments(pContext, pTokens.Tokens[0]);
             if(pTokens.Tokens.Length > 1)
             {
-                    op = pTokens.Tokens[1].ToString().ToUpper();
+                    op = pTokens.Tokens[1].ToString().ToUpperInvariant();
                     Expression = EnterRule.BuildStatments(pContext, pTokens.Tokens[2]);
             }
         }

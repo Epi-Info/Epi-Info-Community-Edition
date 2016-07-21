@@ -177,7 +177,7 @@ namespace EpiDashboard.Dialogs
             //    ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.Numeric | ColumnDataType.Text;
             //    foreach (string s in dashboardHelper.GetFieldsAsList(columnDataType))
             //    {
-            //        if (txtDestinationField.Text.ToLower().Equals(s.ToLower()))
+            //        if (txtDestinationField.Text.ToLowerInvariant().Equals(s.ToLowerInvariant()))
             //        {
             //            MsgBox.ShowError("Destination field name already exists as a column in this data set. Please use another name.");
             //            this.DialogResult = DialogResult.None;
@@ -190,7 +190,7 @@ namespace EpiDashboard.Dialogs
             //        if (rule is DataAssignmentRule)
             //        {
             //            DataAssignmentRule assignmentRule = rule as DataAssignmentRule;
-            //            if (txtDestinationField.Text.ToLower().Equals(assignmentRule.DestinationColumnName.ToLower()))
+            //            if (txtDestinationField.Text.ToLowerInvariant().Equals(assignmentRule.DestinationColumnName.ToLowerInvariant()))
             //            {
             //                MsgBox.ShowError("Destination field name already exists as a defined field with recoded values. Please use another field name.");
             //                this.DialogResult = DialogResult.None;

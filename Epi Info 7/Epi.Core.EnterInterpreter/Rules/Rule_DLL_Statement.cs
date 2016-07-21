@@ -38,22 +38,22 @@ namespace Epi.Core.EnterInterpreter.Rules
             if(this.isNETDLL)
             {
                 cNETDLL o = new cNETDLL(Identifier, this.ClassName);
-                if (this.Context.DLLClassList.ContainsKey(this.Identifier.ToLower()))
+                if (this.Context.DLLClassList.ContainsKey(this.Identifier.ToLowerInvariant()))
                 {
-                    this.Context.DLLClassList.Remove(this.Identifier.ToLower());
+                    this.Context.DLLClassList.Remove(this.Identifier.ToLowerInvariant());
                 }
 
-                this.Context.DLLClassList.Add(this.Identifier.ToLower(), o);
+                this.Context.DLLClassList.Add(this.Identifier.ToLowerInvariant(), o);
             }
             else
             {
                 cCOMDLL o = new cCOMDLL(Identifier, this.ClassName);
-                if (this.Context.DLLClassList.ContainsKey(this.Identifier.ToLower()))
+                if (this.Context.DLLClassList.ContainsKey(this.Identifier.ToLowerInvariant()))
                 {
-                    this.Context.DLLClassList.Remove(this.Identifier.ToLower());
+                    this.Context.DLLClassList.Remove(this.Identifier.ToLowerInvariant());
                 }
 
-                this.Context.DLLClassList.Add(this.Identifier.ToLower(), o);
+                this.Context.DLLClassList.Add(this.Identifier.ToLowerInvariant(), o);
             }
             
             return null;

@@ -351,7 +351,7 @@ namespace Epi.Data
 
             DBReadExecute.ProjectFileName = "";
 
-            if (Test.ToLower().EndsWith(".prj"))
+            if (Test.ToLowerInvariant().EndsWith(".prj"))
             {
                 Project P = new Project(Test);
 
@@ -551,7 +551,7 @@ namespace Epi.Data
                         {
                             //string FieldName = param.ParameterName.TrimStart(new char[] { '@' });
                             string FieldName = param.SourceColumn;
-                            if (FieldName.ToUpper() == "UNIQUEKEY")
+                            if (FieldName.ToUpperInvariant() == "UNIQUEKEY")
                             {
                                 param.Value = null;
                             }
@@ -858,7 +858,7 @@ namespace Epi.Data
                 string FieldName = param.SourceColumn;
 
 
-                if (FieldName.ToUpper() == "UNIQUEKEY")
+                if (FieldName.ToUpperInvariant() == "UNIQUEKEY")
                 {
                     continue;
                     //ValueSQL.Append("null");
@@ -924,7 +924,7 @@ namespace Epi.Data
                 string FieldName = column.ColumnName;
 
 
-                if (FieldName.ToUpper() == "UNIQUEKEY")
+                if (FieldName.ToUpperInvariant() == "UNIQUEKEY")
                 {
                     continue;
                     //ValueSQL.Append("null");

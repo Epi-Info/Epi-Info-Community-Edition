@@ -54,7 +54,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     Project currentProject = this.Context.CurrentProject;
                     Rule_Read currentRead = this.Context.CurrentRead;
-                    View currentView = currentProject.Views[currentRead.Identifier.ToLower()];
+                    View currentView = currentProject.Views[currentRead.Identifier.ToLowerInvariant()];
                     string viewName = currentView.TableName;
                     
                     string pSQL = "Select * From [" + viewName + "]";

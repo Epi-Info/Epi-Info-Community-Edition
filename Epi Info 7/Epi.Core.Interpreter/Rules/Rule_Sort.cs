@@ -47,7 +47,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             }
             else
             {
-                if (pToken.Tokens[0].ToString().ToUpper() == "CANCEL")
+                if (pToken.Tokens[0].ToString().ToUpperInvariant() == "CANCEL")
                 {
                     this.CancelSort = true;
                 }
@@ -89,7 +89,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             if (pToken.Tokens.Length > 1)
             {
                 this.SortList.Add(this.GetCommandElement(pToken.Tokens,0).Trim(new char[] { '[',']'}));
-                switch(this.GetCommandElement(pToken.Tokens, 1).ToUpper())
+                switch(this.GetCommandElement(pToken.Tokens, 1).ToUpperInvariant())
                 {
                     case "DESCENDING":
                     case "DESC":
@@ -187,7 +187,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     if (pToken.Tokens.Length > 1)
                     {
                         string Test = this.GetCommandElement(pToken.Tokens, 1);
-                        switch (Test.ToUpper())
+                        switch (Test.ToUpperInvariant())
                         {
                             case "DESCENDING":
                                 pOption.Add("DESC");

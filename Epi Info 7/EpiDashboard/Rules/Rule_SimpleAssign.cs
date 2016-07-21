@@ -470,9 +470,9 @@ namespace EpiDashboard.Rules
                 {
                     foreach (XmlElement parameter in child.ChildNodes)
                     {
-                        if (parameter.Name.ToLower().Equals("parameter"))
+                        if (parameter.Name.ToLowerInvariant().Equals("parameter"))
                         {
-                            if (parameter.Attributes.Count > 0 && parameter.Attributes[0].Value.ToLower().Equals("literal") && parameter.Attributes[1].Value.ToLower().Equals("ticks"))
+                            if (parameter.Attributes.Count > 0 && parameter.Attributes[0].Value.ToLowerInvariant().Equals("literal") && parameter.Attributes[1].Value.ToLowerInvariant().Equals("ticks"))
                             {
                                 DateTime dt = new DateTime(long.Parse(parameter.InnerText));
                                 AssignmentParameters.Add(dt.ToString());
@@ -898,12 +898,12 @@ namespace EpiDashboard.Rules
             else if (AssignmentType.Equals(SimpleAssignType.Uppercase))
             {
                 string textColumnName = AssignmentParameters[0];
-                row[this.DestinationColumnName] = row[textColumnName].ToString().ToUpper();
+                row[this.DestinationColumnName] = row[textColumnName].ToString().ToUpperInvariant();
             }
             else if (AssignmentType.Equals(SimpleAssignType.Lowercase))
             {
                 string textColumnName = AssignmentParameters[0];
-                row[this.DestinationColumnName] = row[textColumnName].ToString().ToLower();
+                row[this.DestinationColumnName] = row[textColumnName].ToString().ToLowerInvariant();
             }
 
             else if (AssignmentType.Equals(SimpleAssignType.AddDays))

@@ -121,7 +121,7 @@ namespace Epi.Core.AnalysisInterpreter
 
             foreach (string s in System.Configuration.ConfigurationSettings.AppSettings)
             {
-                switch (s.ToUpper())
+                switch (s.ToUpperInvariant())
                 {
                     case "FREQUENCY":
                     case "TABLES":
@@ -930,7 +930,7 @@ namespace Epi.Core.AnalysisInterpreter
         {
             foreach (KeyValuePair<string, string> kvp in OverriddenSetOptions)
             {
-                switch (kvp.Key.ToUpper())
+                switch (kvp.Key.ToUpperInvariant())
                 {
                     
                     case "STATISTICS":// '=' <StatisticsOption>	!These options could be set in FREQ,MATCH, and MEANS commands also
@@ -938,7 +938,7 @@ namespace Epi.Core.AnalysisInterpreter
                            | MINIMAL
                            | INTERMEDIATE
                            | COMPLETE*/
-                        switch(kvp.Value.ToUpper())
+                        switch(kvp.Value.ToUpperInvariant())
                         {
                             case "NONE":
                                 config.Settings.StatisticsLevel = 0;
@@ -959,7 +959,7 @@ namespace Epi.Core.AnalysisInterpreter
                         /*<ProcessOption> ::= UNDELETED
                         | DELETED
                         | BOTH*/
-                        switch(kvp.Value.ToUpper())
+                        switch(kvp.Value.ToUpperInvariant())
                         {
                             case "UNDELETED":
                             case "NORMAL": // deleted records are NOT incuded
@@ -976,7 +976,7 @@ namespace Epi.Core.AnalysisInterpreter
                         }
                         break;
                     case "DELETED":// '=' <DeletedOption>
-                        switch(kvp.Value.ToUpper())
+                        switch(kvp.Value.ToUpperInvariant())
                         {
                             case "ONLY": 
                                 config.Settings.RecordProcessingScope = 1;
@@ -1024,7 +1024,7 @@ namespace Epi.Core.AnalysisInterpreter
                         }
                         break;
                     case "PERCENTS":// '=' <OnOff>
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1040,7 +1040,7 @@ namespace Epi.Core.AnalysisInterpreter
                         }
                         break;
                     case "MISSING":// '=' <OnOff>
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1057,7 +1057,7 @@ namespace Epi.Core.AnalysisInterpreter
                         break;
 
                     case "IGNORE":// '=' <OnOff>
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1074,7 +1074,7 @@ namespace Epi.Core.AnalysisInterpreter
                         break;
 
                     case "SELECT":// '=' <OnOff>
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1091,7 +1091,7 @@ namespace Epi.Core.AnalysisInterpreter
                         break;
 
                     case "FREQGRAPH":// '=' <OnOff>
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1108,7 +1108,7 @@ namespace Epi.Core.AnalysisInterpreter
                         break;
 
                     case "HYPERLINKS":// '=' <OnOff>
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1125,7 +1125,7 @@ namespace Epi.Core.AnalysisInterpreter
                         break;
 
                     case "SHOWPROMPTS":// '=' <OnOff>
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1142,7 +1142,7 @@ namespace Epi.Core.AnalysisInterpreter
                         break;
 
                     case "TABLES":// '=' <OnOff>
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1160,7 +1160,7 @@ namespace Epi.Core.AnalysisInterpreter
 
                     case "USEBROWSER":// '=' <OnOff>*/
                         /*
-                        switch (kvp.Value.ToUpper())
+                        switch (kvp.Value.ToUpperInvariant())
                         {
                             // <OnOff> ::= ON | OFF  | Boolean
                             case "ON":
@@ -1212,7 +1212,7 @@ namespace Epi.Core.AnalysisInterpreter
 
             for (int i = 0; i < identifierList.Count; i++)
             {
-                identifierList[i] = identifierList[i].ToUpper();
+                identifierList[i] = identifierList[i].ToUpperInvariant();
             }
 
             if (identifierList.Count == 1 && identifierList[0] == "*")
@@ -1221,7 +1221,7 @@ namespace Epi.Core.AnalysisInterpreter
 
                 foreach (DataColumn column in DataSet.Tables["Output"].Columns)
                 {
-                    identifierList.Add(column.ColumnName.ToUpper());
+                    identifierList.Add(column.ColumnName.ToUpperInvariant());
                 }
             }
 
@@ -1231,7 +1231,7 @@ namespace Epi.Core.AnalysisInterpreter
 
                 foreach (DataColumn column in DataSet.Tables["Output"].Columns)
                 {
-                    List2.Add(column.ColumnName.ToUpper());
+                    List2.Add(column.ColumnName.ToUpperInvariant());
                 }
 
                 foreach (string identifier in identifierList)
@@ -1241,18 +1241,18 @@ namespace Epi.Core.AnalysisInterpreter
                         List<string> GroupVarList = GroupVariableList[identifier];
                         foreach (string Variable in GroupVarList)
                         {
-                            if (List2.Contains(Variable.ToUpper()))
+                            if (List2.Contains(Variable.ToUpperInvariant()))
                             {
-                                List2.Remove(Variable.ToUpper());
+                                List2.Remove(Variable.ToUpperInvariant());
                             }
                         }
                     }
                     else
                     {
-                        if (List2.Contains(identifier.ToUpper()))
+                        if (List2.Contains(identifier.ToUpperInvariant()))
                         {
 
-                            List2.Remove(identifier.ToUpper());
+                            List2.Remove(identifier.ToUpperInvariant());
                         }
                     }
                 }
@@ -1269,15 +1269,15 @@ namespace Epi.Core.AnalysisInterpreter
             {
                 foreach (KeyValuePair<string, List<string>> GroupVarList in GroupVariableList)
                 {
-                    if (identifierList.Contains(GroupVarList.Key.ToUpper()))
+                    if (identifierList.Contains(GroupVarList.Key.ToUpperInvariant()))
                     {
-                        identifierList.Remove(GroupVarList.Key.ToUpper());
+                        identifierList.Remove(GroupVarList.Key.ToUpperInvariant());
 
                         foreach (string Variable in GroupVarList.Value)
                         {
-                            if (!identifierList.Contains(Variable.ToUpper()))
+                            if (!identifierList.Contains(Variable.ToUpperInvariant()))
                             {
-                                identifierList.Add(Variable.ToUpper());
+                                identifierList.Add(Variable.ToUpperInvariant());
                             }
                         }
                     }

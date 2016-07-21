@@ -58,7 +58,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                             foreach (var Identifier in IdentifierList)
                              {
                                  isNumeric = int.TryParse(Identifier, out number);
-                                 if (!string.IsNullOrEmpty(Identifier) && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()) && !isNumeric)
+                                 if (!string.IsNullOrEmpty(Identifier) && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()) && !isNumeric)
                                     {
                                         this.Context.CommandVariableCheck.Add(Identifier, "assign");
                                     }
@@ -95,7 +95,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                                 foreach (var Identifier in IdentifierList)
                                 {
                                     isNumeric = int.TryParse(Identifier, out number);
-                                    if (!string.IsNullOrEmpty(Identifier) && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()) && !isNumeric)
+                                    if (!string.IsNullOrEmpty(Identifier) && !this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()) && !isNumeric)
                                     {
                                         this.Context.CommandVariableCheck.Add(Identifier, "assign");
                                     }
@@ -150,9 +150,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                     this.value = EnterRule.BuildStatments(pContext, pTokens.Tokens[2]);
                     if (pContext.IsVariableValidationEnable)
                     {
-                        if (!string.IsNullOrEmpty(this.QualifiedId) && !this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLower()))
+                        if (!string.IsNullOrEmpty(this.QualifiedId) && !this.Context.CommandVariableCheck.ContainsKey(this.QualifiedId.ToLowerInvariant()))
                         {
-                            this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLower(), this.QualifiedId.ToLower());
+                            this.Context.CommandVariableCheck.Add(this.QualifiedId.ToLowerInvariant(), this.QualifiedId.ToLowerInvariant());
                         }
                     }
                     break;

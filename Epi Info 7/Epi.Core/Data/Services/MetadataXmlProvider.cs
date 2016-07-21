@@ -1780,7 +1780,7 @@ namespace Epi.Data.Services
                 {
                     string tableName = row["Table_Name"].ToString();
 
-                    //if (!tableName.ToLower().StartsWith("sys"))   //This probably only works with Microsoft database, zack 1/29/08
+                    //if (!tableName.ToLowerInvariant().StartsWith("sys"))   //This probably only works with Microsoft database, zack 1/29/08
                     //{
                     dataRow = viewsAndTables.NewRow();
                     dataRow[ColumnNames.NAME] = tableName;

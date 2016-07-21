@@ -305,7 +305,7 @@ namespace EpiDashboard.Gadgets.Charting
                 {
                     if (series.Name == "series0")
                     {
-                        series.Label = chtParameters.ColumnNames[0].ToUpper() + " X " + chtParameters.CrosstabVariableName.ToUpper();
+                        series.Label = chtParameters.ColumnNames[0].ToUpperInvariant() + " X " + chtParameters.CrosstabVariableName.ToUpperInvariant();
                     }
                     else if (series.Name == "series1")
                     {
@@ -836,7 +836,7 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -849,7 +849,7 @@ namespace EpiDashboard.Gadgets.Charting
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         if (this.Parameters.ColumnNames.Count > 0)
@@ -964,15 +964,15 @@ namespace EpiDashboard.Gadgets.Charting
                         ((ScatterChartParameters)Parameters).ChartSubTitle = child.InnerText;
                         break;
                     case "showlegend":
-                        if (child.InnerText.ToLower().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegend = true; }
+                        if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegend = true; }
                         else { ((ScatterChartParameters)Parameters).ShowLegend = false; }
                         break;
                     case "showlegendborder":
-                        if (child.InnerText.ToLower().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegendBorder = true; }
+                        if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegendBorder = true; }
                         else { ((ScatterChartParameters)Parameters).ShowLegendBorder = false; }
                         break;
                     case "showlegendvarnames":
-                        if (child.InnerText.ToLower().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegendVarNames = true; }
+                        if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ScatterChartParameters)Parameters).ShowLegendVarNames = true; }
                         else { ((ScatterChartParameters)Parameters).ShowLegendVarNames = false; }
                         break;
                     case "legendfontsize":

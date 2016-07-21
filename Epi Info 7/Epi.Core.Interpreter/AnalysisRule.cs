@@ -600,7 +600,7 @@ namespace Epi.Core.AnalysisInterpreter
             {
                 if (c == ' ' && Level == 0)
                 {
-                    result.Add(temp.ToString().ToUpper());
+                    result.Add(temp.ToString().ToUpperInvariant());
                     temp.Length = 0;
                 }
                 else
@@ -619,7 +619,7 @@ namespace Epi.Core.AnalysisInterpreter
                     }
                 }
             }
-            result.Add(temp.ToString().ToUpper());
+            result.Add(temp.ToString().ToUpperInvariant());
             return result.ToArray();
         }
 
@@ -660,7 +660,7 @@ namespace Epi.Core.AnalysisInterpreter
         protected object ConvertStringToBoolean(string pValue)
         {
             object result = null;
-            switch (pValue.ToUpper())
+            switch (pValue.ToUpperInvariant())
             {
                 case "(+)":
                 case "YES":

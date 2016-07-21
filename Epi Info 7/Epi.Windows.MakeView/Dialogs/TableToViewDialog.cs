@@ -60,7 +60,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                 DataColumn column = DT.Columns[sourceColumnName];
 
-                if (column.ColumnName.ToUpper() == "UNIQUEKEY" || column.ColumnName.ToUpper() == "RECSTATUS" || column.ColumnName.ToUpper() == "GLOBALRECORDID" || column.ColumnName.ToUpper() == "FKEY")
+                if (column.ColumnName.ToUpperInvariant() == "UNIQUEKEY" || column.ColumnName.ToUpperInvariant() == "RECSTATUS" || column.ColumnName.ToUpperInvariant() == "GLOBALRECORDID" || column.ColumnName.ToUpperInvariant() == "FKEY")
                 {
                     continue;
                 }
@@ -117,7 +117,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                 DataColumn column = DT.Columns[sourceColumnName];
 
-                if (column.ColumnName.ToUpper() == "UNIQUEKEY" || column.ColumnName.ToUpper() == "RECSTATUS" || column.ColumnName.ToUpper() == "GLOBALRECORDID" || column.ColumnName.ToUpper() == "FKEY")
+                if (column.ColumnName.ToUpperInvariant() == "UNIQUEKEY" || column.ColumnName.ToUpperInvariant() == "RECSTATUS" || column.ColumnName.ToUpperInvariant() == "GLOBALRECORDID" || column.ColumnName.ToUpperInvariant() == "FKEY")
                 {
                     continue;
                 }

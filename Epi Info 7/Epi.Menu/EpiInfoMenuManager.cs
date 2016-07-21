@@ -494,7 +494,7 @@ namespace Epi.Menu
 
             foreach (Epi.DataSets.Config.PermanentVariableRow row in config.PermanentVariables)
             {
-                if (row.Name.ToLower().Equals(variableName.ToLower()))
+                if (row.Name.ToLowerInvariant().Equals(variableName.ToLowerInvariant()))
                 {
                     string dataType = row.DataType.ToString();
                     string dataValue = row.DataValue.ToString();

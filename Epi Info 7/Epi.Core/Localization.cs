@@ -89,7 +89,7 @@
 //                        string effectiveString = string.IsNullOrEmpty(translatedString) ? englishString : translatedString;
 
 //                        // make lower cased for case insenitive indexing
-//                        string indexKey = englishString.ToLowerInvariant();
+//                        string indexKey = englishString.ToLowerInvariantInvariant();
 
 //                        if (newLanguageDictionary.Contains(indexKey))
 //                        { 
@@ -130,7 +130,7 @@
 //                string targetLanguage = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
 //                if (targetLanguage != Defaults.LANGUAGE)
 //                {
-//                    string key = englishString.ToLowerInvariant();
+//                    string key = englishString.ToLowerInvariantInvariant();
 
 //                    IDictionary dictionary = GetLanguageDictionary(targetLanguage);
 //                    if (dictionary.Contains(key))

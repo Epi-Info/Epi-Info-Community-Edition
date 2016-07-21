@@ -200,7 +200,7 @@ namespace Epi.Data.PostgreSQL
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            string conn = connectionString.ToLower();
+            string conn = connectionString.ToLowerInvariant();
             if (conn.Contains("host") && conn.Contains("syncnotification"))
             {
                 return true;

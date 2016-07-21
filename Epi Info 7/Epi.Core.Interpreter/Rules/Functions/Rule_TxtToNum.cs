@@ -29,9 +29,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             double doubleValue;
             if (!Util.IsEmpty(result))
             {
-                if (result.ToString().ToLower().Equals("true") || result.ToString().ToLower().Equals("false"))
+                if (result.ToString().ToLowerInvariant().Equals("true") || result.ToString().ToLowerInvariant().Equals("false"))
                 {
-                    result = (result.ToString().ToLower() == "true" ? 1 : 0);
+                    result = (result.ToString().ToLowerInvariant() == "true" ? 1 : 0);
                 }
 
                 if (Double.TryParse(result.ToString(), out doubleValue))

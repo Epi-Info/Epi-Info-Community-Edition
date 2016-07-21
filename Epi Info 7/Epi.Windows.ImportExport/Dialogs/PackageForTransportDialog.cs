@@ -390,7 +390,7 @@ namespace Epi.Windows.ImportExport.Dialogs
             System.IO.FileInfo fi = new System.IO.FileInfo(txtProjectPath.Text);
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(txtPackagePath.Text);
 
-            if (fi.Directory.Name.Equals(di.Name) || fi.Directory.Name.ToLower().Equals(di.Name.ToLower()) || fi.Directory == di)
+            if (fi.Directory.Name.Equals(di.Name) || fi.Directory.Name.ToLowerInvariant().Equals(di.Name.ToLowerInvariant()) || fi.Directory == di)
             {
                 Epi.Windows.MsgBox.ShowError(ImportExportSharedStrings.ERROR_SAME_FOLDER);
                 return false;
@@ -827,7 +827,7 @@ namespace Epi.Windows.ImportExport.Dialogs
 
             foreach (XmlElement element in doc.DocumentElement.ChildNodes)
             {
-                switch (element.Name.ToLower())
+                switch (element.Name.ToLowerInvariant())
                 {
                     case "projectlocation":
                         txtProjectPath.Text = element.InnerText;
@@ -877,15 +877,15 @@ namespace Epi.Windows.ImportExport.Dialogs
         /// <param name="element">XmlElement to process</param>
         private void CreateRowFiltersFromXML(XmlElement element)
         {
-            if (element.Name.ToLower().Equals("rowfilter"))
+            if (element.Name.ToLowerInvariant().Equals("rowfilter"))
             {
                 foreach (XmlElement childElement in element.ChildNodes)
                 {
-                    if (childElement.Name.ToLower().Equals("rowfilterquery"))
+                    if (childElement.Name.ToLowerInvariant().Equals("rowfilterquery"))
                     {
                         selectQuery = sourceProject.CollectedData.GetDbDriver().CreateQuery(childElement.InnerText.Replace("&gt;", ">").Replace("&lt;", "<"));
                     }
-                    else if (childElement.Name.ToLower().Equals("rowfilterparameters"))
+                    else if (childElement.Name.ToLowerInvariant().Equals("rowfilterparameters"))
                     {
                         foreach (XmlElement gcElement in childElement.ChildNodes)
                         {
@@ -895,7 +895,7 @@ namespace Epi.Windows.ImportExport.Dialogs
 
                             foreach (XmlElement ggcElement in gcElement.ChildNodes)
                             {
-                                switch (ggcElement.Name.ToLower())
+                                switch (ggcElement.Name.ToLowerInvariant())
                                 {
                                     case "dbtype":
                                         dbType = ((DbType)Int32.Parse(ggcElement.InnerText));
@@ -916,7 +916,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                             }
                         }
                     }
-                    else if (childElement.Name.ToLower().Equals("rowfilterconditions"))
+                    else if (childElement.Name.ToLowerInvariant().Equals("rowfilterconditions"))
                     {
                         List<IRowFilterCondition> conditions = new List<IRowFilterCondition>();
 
@@ -962,11 +962,11 @@ namespace Epi.Windows.ImportExport.Dialogs
         /// <param name="element">XmlElement to process</param>
         private void CreateNullGridColumnListFromXML(XmlElement element)
         {
-            if (element.Name.ToLower().Equals("gridcolumnstonull"))
+            if (element.Name.ToLowerInvariant().Equals("gridcolumnstonull"))
             {
                 foreach (XmlElement columnElement in element.ChildNodes)
                 {
-                    if (columnElement.Name.ToLower().Equals("gridcolumntonull") && columnElement.Attributes.Count == 2 && columnElement.Attributes[0].Name.ToLower().Equals("formname") && columnElement.Attributes[1].Name.ToLower().Equals("gridname"))
+                    if (columnElement.Name.ToLowerInvariant().Equals("gridcolumntonull") && columnElement.Attributes.Count == 2 && columnElement.Attributes[0].Name.ToLowerInvariant().Equals("formname") && columnElement.Attributes[1].Name.ToLowerInvariant().Equals("gridname"))
                     {
                         string formName = columnElement.Attributes[0].Value;
                         string gridName = columnElement.Attributes[1].Value;
@@ -996,11 +996,11 @@ namespace Epi.Windows.ImportExport.Dialogs
         /// <param name="element">XmlElement to process</param>
         private void CreateNullFieldListFromXML(XmlElement element)
         {
-            if (element.Name.ToLower().Equals("fieldstonull"))
+            if (element.Name.ToLowerInvariant().Equals("fieldstonull"))
             {
                 foreach (XmlElement fieldElement in element.ChildNodes)
                 {
-                    if (fieldElement.Name.ToLower().Equals("fieldtonull") && fieldElement.Attributes.Count > 0 && fieldElement.Attributes[0].Name.ToLower().Equals("formname"))
+                    if (fieldElement.Name.ToLowerInvariant().Equals("fieldtonull") && fieldElement.Attributes.Count > 0 && fieldElement.Attributes[0].Name.ToLowerInvariant().Equals("formname"))
                     {
                         string formName = fieldElement.Attributes[0].Value;
                         string fieldName = fieldElement.InnerText;
@@ -1026,11 +1026,11 @@ namespace Epi.Windows.ImportExport.Dialogs
         /// <param name="element">XmlElement to process</param>
         private void CreateKeyFieldListFromXML(XmlElement element)
         {
-            if (element.Name.ToLower().Equals("keyfields"))
+            if (element.Name.ToLowerInvariant().Equals("keyfields"))
             {
                 foreach (XmlElement fieldElement in element.ChildNodes)
                 {
-                    if (fieldElement.Name.ToLower().Equals("keyfield"))
+                    if (fieldElement.Name.ToLowerInvariant().Equals("keyfield"))
                     {
                         string fieldName = fieldElement.InnerText;
 

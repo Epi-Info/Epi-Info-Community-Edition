@@ -215,7 +215,7 @@ namespace Epi.Windows.Enter
                     }
 
                     //insert the upper case character
-                    ((TextBox)sender).Text = ((TextBox)sender).Text.Insert(pos, Char.ToUpper(e.KeyChar).ToString());
+                    ((TextBox)sender).Text = ((TextBox)sender).Text.Insert(pos, Char.ToUpperInvariant(e.KeyChar).ToString());
 
                     //and update the current caret position
                     ((TextBox)sender).SelectionStart = pos + 1;
@@ -320,7 +320,7 @@ namespace Epi.Windows.Enter
             if (field is UpperCaseTextField)
             {
                 TextBox control = (TextBox)sender;
-                control.Text = control.Text.ToUpper();
+                control.Text = control.Text.ToUpperInvariant();
             }
             else if (field is NumberField)
             {

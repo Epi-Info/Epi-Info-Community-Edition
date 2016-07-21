@@ -96,18 +96,18 @@ namespace EpiDashboard.Dialogs
         private void SetBooleanAssignmentValue(Rule_ConditionalAssign conditionalAssignRule)
         {
             this.txtAssignValue.Text = conditionalAssignRule.AssignValue.ToString();
-            if (conditionalAssignRule.AssignValue.ToString().ToLower() == "true")
+            if (conditionalAssignRule.AssignValue.ToString().ToLowerInvariant() == "true")
                 this.cmbAssignValue.SelectedIndex = 0;
-            else if (conditionalAssignRule.AssignValue.ToString().ToLower() == "false")
+            else if (conditionalAssignRule.AssignValue.ToString().ToLowerInvariant() == "false")
                 this.cmbAssignValue.SelectedIndex = 1;
 
             if (conditionalAssignRule.UseElse == true)
             {
                 this.checkboxUseElse.Checked = true;
                 this.txtElseValue.Text = conditionalAssignRule.ElseValue.ToString();
-                if (conditionalAssignRule.ElseValue.ToString().ToLower() == "true")
+                if (conditionalAssignRule.ElseValue.ToString().ToLowerInvariant() == "true")
                     this.cmbElseValue.SelectedIndex = 0;
-                else if (conditionalAssignRule.ElseValue.ToString().ToLower() == "false")
+                else if (conditionalAssignRule.ElseValue.ToString().ToLowerInvariant() == "false")
                     this.cmbElseValue.SelectedIndex = 1;
             }
             else

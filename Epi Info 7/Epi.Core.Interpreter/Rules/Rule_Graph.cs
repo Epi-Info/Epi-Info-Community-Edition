@@ -109,7 +109,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                 {
                                     tok = ((NonterminalToken)tokenObject).Tokens[0];
 
-                                    if (_aggregateFunction.ToUpper() == "PERCENT()")
+                                    if (_aggregateFunction.ToUpperInvariant() == "PERCENT()")
                                     {
                                         _aggregateFunction = _aggregateFunction.TrimEnd(new char[] { '(', ')' });
                                         _weightVar = _independentVariableList.Trim(new char[] { ',' });
@@ -144,7 +144,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         private void SetIdentifierList(NonterminalToken nonTerm)
         {
-            _independentVariableList = _independentVariableList + "," + this.GetCommandElement(nonTerm.Tokens, 0).ToUpper().Trim(new char[] { '[', ']' });
+            _independentVariableList = _independentVariableList + "," + this.GetCommandElement(nonTerm.Tokens, 0).ToUpperInvariant().Trim(new char[] { '[', ']' });
             if (nonTerm.Tokens.Length > 1)
             {
                 this.SetIdentifierList((NonterminalToken)nonTerm.Tokens[1]);

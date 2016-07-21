@@ -108,7 +108,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 else
                 {
 
-                    if (this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpper()) && this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpper()))
+                    if (this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpperInvariant()) && this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpperInvariant()))
                     {
                         LHSO = Convert.ToDouble(LHSO);
                         RHSO = Convert.ToDouble(RHSO);
@@ -120,7 +120,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                         {
                             result = (RHSO.Equals(!Util.IsEmpty(LHSO)));
                         }
-                        else if (LHSO is string && this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpper()) && double.TryParse(LHSO.ToString(), out TryValue))
+                        else if (LHSO is string && this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpperInvariant()) && double.TryParse(LHSO.ToString(), out TryValue))
                         {
                             i = TryValue.CompareTo(RHSO);
 
@@ -147,7 +147,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                             }
 
                         }
-                        else if (RHSO is string && this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpper()) && double.TryParse(RHSO.ToString(), out TryValue))
+                        else if (RHSO is string && this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpperInvariant()) && double.TryParse(RHSO.ToString(), out TryValue))
                         {
                             i = TryValue.CompareTo(LHSO);
 
@@ -221,7 +221,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                     {
                         i = 0;
 
-                        if (LHSO.GetType().Name.ToUpper() == "STRING" && RHSO.GetType().Name.ToUpper() == "STRING")
+                        if (LHSO.GetType().Name.ToUpperInvariant() == "STRING" && RHSO.GetType().Name.ToUpperInvariant() == "STRING")
                         {
                             i = StringComparer.CurrentCultureIgnoreCase.Compare(LHSO.ToString().Trim(), RHSO.ToString().Trim());
                         }

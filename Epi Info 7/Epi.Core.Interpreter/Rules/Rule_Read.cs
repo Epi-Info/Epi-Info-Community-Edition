@@ -89,7 +89,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             Context.isReadMode = true;
             Context.GroupVariableList = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
 
-            if (File.ToUpper().StartsWith("CONFIG:"))
+            if (File.ToUpperInvariant().StartsWith("CONFIG:"))
             {
                 string[] datakey = File.Split(':');
                 string connectionString = null;
@@ -99,7 +99,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     Epi.DataSets.Config.RecentDataSourceRow row = config.RecentDataSources[i];
                     
-                    if (row.Name.ToUpper() == datakey[1].ToUpper())
+                    if (row.Name.ToUpperInvariant() == datakey[1].ToUpperInvariant())
                     {
                         connectionString = Configuration.Decrypt(row.ConnectionString);
                         break;

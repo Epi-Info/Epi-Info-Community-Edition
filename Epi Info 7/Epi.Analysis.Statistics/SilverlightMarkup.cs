@@ -86,7 +86,7 @@ namespace Epi
             independentTitle = independentTitle.Replace("\"", "");
             dependentTitle = dependentTitle.Replace("\"", "");
 
-            switch (chartType.ToUpper().Replace(" ", ""))
+            switch (chartType.ToUpperInvariant().Replace(" ", ""))
             {
                 case SilverlightStatics.Area:
                     chartType = SilverlightStatics.Area;

@@ -112,18 +112,18 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
                 re = new Regex("\\ssub\\s+[\\w_\\[\\]\\.]*\\b|^sub\\s+[\\w_\\[\\]\\.]*\\b", RegexOptions.IgnoreCase);
                 Dictionary<string, string> IdList = new Dictionary<string, string>();
                
-                MatchCollection MC = re.Matches(this.txtTextArea.Text.ToLower());
+                MatchCollection MC = re.Matches(this.txtTextArea.Text.ToLowerInvariant());
                 for(int i = 0; i < MC.Count; i++)
                 {
-                    int index2 = this.txtTextArea.Text.ToLower().IndexOf(' ', MC[i].Index);
+                    int index2 = this.txtTextArea.Text.ToLowerInvariant().IndexOf(' ', MC[i].Index);
                     
                     if (index2 > -1)
                     {
-                        int index3 = this.txtTextArea.Text.ToLower().IndexOf('\n', index2);
+                        int index3 = this.txtTextArea.Text.ToLowerInvariant().IndexOf('\n', index2);
                         if (index3 > -1)
                         {
                             string id = this.txtTextArea.Text.Substring(index2, index3 - index2).Trim();
-                            if (!IdList.ContainsKey(id.ToUpper()))
+                            if (!IdList.ContainsKey(id.ToUpperInvariant()))
                             {
                                 lbxFields.Items.Add(id);
                             }

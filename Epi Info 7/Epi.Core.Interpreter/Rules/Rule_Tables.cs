@@ -315,7 +315,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             string temp = this.ExtractTokens(((NonterminalToken)T.Tokens[j]).Tokens);
                             string[] tmp = temp.Split('=');
 
-                            switch (tmp[0].ToUpper().Trim())
+                            switch (tmp[0].ToUpperInvariant().Trim())
                             {
                                 case "STRATAVAR":
                                     this.Stratvar = AnalysisRule.SpliIdentifierList(tmp[1].Trim());

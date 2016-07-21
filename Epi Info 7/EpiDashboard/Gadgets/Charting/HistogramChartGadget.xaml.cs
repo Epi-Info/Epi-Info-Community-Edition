@@ -504,7 +504,7 @@ namespace EpiDashboard.Gadgets.Charting
 
                     if (!String.IsNullOrEmpty(chtParameters.Interval))
                     {
-                        interval = chtParameters.Interval.ToLower();//EI-479
+                        interval = chtParameters.Interval.ToLowerInvariant();//EI-479
                     }
 
                     switch (interval)
@@ -616,7 +616,7 @@ namespace EpiDashboard.Gadgets.Charting
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "casestatusvariable":
                         if (!isStacked) ((HistogramChartParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
@@ -654,7 +654,7 @@ namespace EpiDashboard.Gadgets.Charting
                         }
                         break;
                     case "allvalues":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             ((HistogramChartParameters)Parameters).ShowAllListValues = true;
                         }
@@ -829,7 +829,7 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -850,7 +850,7 @@ namespace EpiDashboard.Gadgets.Charting
                 {
                     if (!String.IsNullOrEmpty(child.InnerText))
                     {
-                        switch (child.Name.ToLower())
+                        switch (child.Name.ToLowerInvariant())
                         {
                             case "mainvariable":
                                 if (this.Parameters.ColumnNames.Count > 0)
@@ -879,7 +879,7 @@ namespace EpiDashboard.Gadgets.Charting
                                 foreach (XmlElement field in child.ChildNodes)
                                 {
                                     List<string> fields = new List<string>();
-                                    if (field.Name.ToLower().Equals("stratavariable"))
+                                    if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                                     {
                                         ((HistogramChartParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                                     }
@@ -932,27 +932,27 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((HistogramChartParameters)Parameters).Y2AxisType = int.Parse(child.InnerText.Replace("&lt;", "<"));
                                 break;
                             case "sort":
-                                if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
+                                if (child.InnerText.ToLowerInvariant().Equals("highlow") || child.InnerText.ToLowerInvariant().Equals("hightolow"))
                                 {
                                     ((HistogramChartParameters)Parameters).SortHighToLow = true;
                                 }
                                 break;
                             case "allvalues":
-                                if (child.InnerText.ToLower().Equals("true"))
+                                if (child.InnerText.ToLowerInvariant().Equals("true"))
                                 {
                                     ((HistogramChartParameters)Parameters).ShowAllListValues = true;
                                 }
                                 else { ((HistogramChartParameters)Parameters).ShowAllListValues = false; }
                                 break;
                             case "showlistlabels":
-                                if (child.InnerText.ToLower().Equals("true"))
+                                if (child.InnerText.ToLowerInvariant().Equals("true"))
                                 {
                                     ((HistogramChartParameters)Parameters).ShowCommentLegalLabels = true;
                                 }
                                 else { ((HistogramChartParameters)Parameters).ShowCommentLegalLabels = false; }
                                 break;
                             case "includemissing":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).IncludeMissing = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).IncludeMissing = true; }
                                 else { ((HistogramChartParameters)Parameters).IncludeMissing = false; }
                                 break;
                             case "customheading":
@@ -991,23 +991,23 @@ namespace EpiDashboard.Gadgets.Charting
                                 this.DataFilters.CreateFromXml(child);
                                 break;
                             case "usediffbarcolors":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).UseDiffColors = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).UseDiffColors = true; }
                                 else { ((HistogramChartParameters)Parameters).UseDiffColors = false; }
                                 break;
                             case "userefvalues":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).UseRefValues = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).UseRefValues = true; }
                                 else { ((HistogramChartParameters)Parameters).UseRefValues = false; }
                                 break;
                             case "showannotations":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).ShowAnnotations = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).ShowAnnotations = true; }
                                 else { ((HistogramChartParameters)Parameters).ShowAnnotations = false; }
                                 break;
                             case "y2showannotations":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).Y2ShowAnnotations = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).Y2ShowAnnotations = true; }
                                 else { ((HistogramChartParameters)Parameters).Y2ShowAnnotations = false; }
                                 break;
                             case "showgridlines":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).ShowGridLines = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).ShowGridLines = true; }
                                 else { ((HistogramChartParameters)Parameters).ShowGridLines = false; }
                                 break;
                             case "composition":
@@ -1229,15 +1229,15 @@ namespace EpiDashboard.Gadgets.Charting
                                 ((HistogramChartParameters)Parameters).ChartSubTitle = child.InnerText;
                                 break;
                             case "showlegend":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).ShowLegend = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).ShowLegend = true; }
                                 else { ((HistogramChartParameters)Parameters).ShowLegend = false; }
                                 break;
                             case "showlegendborder":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).ShowLegendBorder = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).ShowLegendBorder = true; }
                                 else { ((HistogramChartParameters)Parameters).ShowLegendBorder = false; }
                                 break;
                             case "showlegendvarnames":
-                                if (child.InnerText.ToLower().Equals("true")) { ((HistogramChartParameters)Parameters).ShowLegendVarNames = true; }
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((HistogramChartParameters)Parameters).ShowLegendVarNames = true; }
                                 else { ((HistogramChartParameters)Parameters).ShowLegendVarNames = false; }
                                 break;
                             case "legendfontsize":
@@ -1691,7 +1691,7 @@ namespace EpiDashboard.Gadgets.Charting
                     endDateElement.InnerText = edDt.Ticks.ToString();
                     element.AppendChild(endDateElement);
                 }
-                else if (chtParameters.EndDate.ToString().ToUpper() == "SYSTEMDATE" || chtParameters.EndDate.ToString() == "SYSTEMDATE")
+                else if (chtParameters.EndDate.ToString().ToUpperInvariant() == "SYSTEMDATE" || chtParameters.EndDate.ToString() == "SYSTEMDATE")
                 {
                     XmlElement endDateElement = doc.CreateElement("SYSTEMDATE");
                     endDateElement.InnerText = edDt.Ticks.ToString();
@@ -1708,7 +1708,7 @@ namespace EpiDashboard.Gadgets.Charting
                     stDateElement.InnerText = stDt.Ticks.ToString();
                     element.AppendChild(stDateElement);
                 }
-                else if (chtParameters.EndDate.ToString().ToUpper() == "SYSTEMDATE" || chtParameters.EndDate.ToString() == "SYSTEMDATE")
+                else if (chtParameters.EndDate.ToString().ToUpperInvariant() == "SYSTEMDATE" || chtParameters.EndDate.ToString() == "SYSTEMDATE")
                 {
                     XmlElement stDateElement = doc.CreateElement("SYSTEMDATE");
                     stDateElement.InnerText = stDt.Ticks.ToString();

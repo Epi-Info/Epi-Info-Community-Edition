@@ -105,12 +105,12 @@ namespace Epi.Windows.MakeView.Dialogs
 
             this.EndPointTextBox.Text = WebServiceEndpointAddress;
 
-            if (((WebServiceBindingMode).ToUpper()).Contains("BASIC"))
+            if (((WebServiceBindingMode).ToUpperInvariant()).Contains("BASIC"))
             {
                 this.BasicRadioButton.Checked = true;
                 this.WsHTTpRadioButton.Checked = false;
             }
-            if (((WebServiceBindingMode).ToUpper()).Contains("WSHTTP"))
+            if (((WebServiceBindingMode).ToUpperInvariant()).Contains("WSHTTP"))
             {
                 this.BasicRadioButton.Checked = false;
                 this.WsHTTpRadioButton.Checked = true;

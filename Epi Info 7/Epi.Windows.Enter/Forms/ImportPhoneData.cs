@@ -490,11 +490,11 @@ namespace Epi.Enter.Forms
 
                 if (field is CheckBoxField || field is YesNoField)
                 {
-                    if (value.ToString().ToLower().Equals("yes"))
+                    if (value.ToString().ToLowerInvariant().Equals("yes"))
                     {
                         value = true;
                     }
-                    else if (value.ToString().ToLower().Equals("no"))
+                    else if (value.ToString().ToLowerInvariant().Equals("no"))
                     {
                         value = false;
                     }
@@ -540,11 +540,11 @@ namespace Epi.Enter.Forms
             System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
             doc.LoadXml(xmlText);
 
-            if (doc.ChildNodes[0].Name.ToLower().Equals("surveyresponses"))
+            if (doc.ChildNodes[0].Name.ToLowerInvariant().Equals("surveyresponses"))
             {
                 foreach (XmlElement docElement in doc.ChildNodes[0].ChildNodes)
                 {
-                    if (docElement.Name.ToLower().Equals("surveyresponse") && docElement.Attributes.Count > 0 && docElement.Attributes[0].Name.ToLower().Equals("surveyresponseid"))
+                    if (docElement.Name.ToLowerInvariant().Equals("surveyresponse") && docElement.Attributes.Count > 0 && docElement.Attributes[0].Name.ToLowerInvariant().Equals("surveyresponseid"))
                     {
                         string surveyResponseId = docElement.Attributes[0].Value;
 
@@ -560,13 +560,13 @@ namespace Epi.Enter.Forms
 
                         foreach (XmlElement surveyElement in docElement.ChildNodes)
                         {
-                            if (surveyElement.Name.ToLower().Equals("page") && surveyElement.Attributes.Count > 0 && surveyElement.Attributes[0].Name.ToLower().Equals("pageid"))
+                            if (surveyElement.Name.ToLowerInvariant().Equals("page") && surveyElement.Attributes.Count > 0 && surveyElement.Attributes[0].Name.ToLowerInvariant().Equals("pageid"))
                             {
                                 List<PhoneFieldData> fieldValues = new List<PhoneFieldData>();
 
                                 foreach (XmlElement pageElement in surveyElement.ChildNodes)
                                 {
-                                    if (pageElement.Name.ToLower().Equals("responsedetail"))
+                                    if (pageElement.Name.ToLowerInvariant().Equals("responsedetail"))
                                     {
                                         string fieldName = string.Empty;
                                         if (pageElement.Attributes.Count > 0)
@@ -636,7 +636,7 @@ namespace Epi.Enter.Forms
                 foreach (PhoneFieldData fieldData in kvp.Value)
                 {
                     int pageId = fieldData.Page;
-                    if (fieldData.FieldName.ToLower().Equals("globalrecordid") || destinationView.GetPageById(pageId).Fields.Contains(fieldData.FieldName))
+                    if (fieldData.FieldName.ToLowerInvariant().Equals("globalrecordid") || destinationView.GetPageById(pageId).Fields.Contains(fieldData.FieldName))
                     {
                         pagedFieldDataDictionary[pageId].Add(fieldData);
                     }
@@ -1248,7 +1248,7 @@ namespace Epi.Enter.Forms
             //        AddErrorStatusMessage("The field name for " + sourceField.Name + " in the source form is invalid.");
             //        errorCount++;
             //    }
-            //    if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLower() != "uniquekey" && sourceField.Name.ToLower() != "recstatus" && sourceField.Name.ToLower() != "fkey"))
+            //    if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLowerInvariant() != "uniquekey" && sourceField.Name.ToLowerInvariant() != "recstatus" && sourceField.Name.ToLowerInvariant() != "fkey"))
             //    {
             //        AddWarningMessage("The field name for " + sourceField.Name + " in the source form is a reserved word. Problems may be encountered during the import.");
             //    }

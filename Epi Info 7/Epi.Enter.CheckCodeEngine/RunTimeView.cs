@@ -299,7 +299,7 @@ namespace Epi.EnterCheckCodeEngine
                 this.OpenRecord(sender, new RunCheckCodeEventArgs(EventActionEnum.OpenRecord,"<<"));
             }
 
-            Epi.Page page = this.mView.Pages.Find(x => x.Name.ToUpper() == e.Parameter.ToUpper());
+            Epi.Page page = this.mView.Pages.Find(x => x.Name.ToUpperInvariant() == e.Parameter.ToUpperInvariant());
             this.mCurrentPage = page;
             this.AfterStack.Push(new KeyValuePair<EventActionEnum, StackCommand>(EventActionEnum.ClosePage, new StackCommand(this.EpiInterpreter, "page", "after", page.Name)));
             this.ExecuteCheckCode("page", "before", page.Name);
@@ -515,7 +515,7 @@ namespace Epi.EnterCheckCodeEngine
         public void ExecuteCheckCode(string pLevel, string pEvent, string pIdentifier)
         {
             ICommand command = null;
-            string QueryString = string.Format("level={0}&event={1}&identifier={2}", pLevel.ToLower(), pEvent.ToLower(), pIdentifier.ToLower());
+            string QueryString = string.Format("level={0}&event={1}&identifier={2}", pLevel.ToLowerInvariant(), pEvent.ToLowerInvariant(), pIdentifier.ToLowerInvariant());
 
             command = this.EpiInterpreter.Context.GetCommand(QueryString);
             if (command != null)

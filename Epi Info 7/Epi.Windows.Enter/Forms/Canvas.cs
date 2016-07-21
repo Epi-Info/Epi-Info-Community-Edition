@@ -1095,7 +1095,7 @@ namespace Epi.Windows.Enter
                     if (mainFrm.CurrentBackgroundImage != null )
                     {
                         Image img = mainFrm.CurrentBackgroundImage;
-                        switch (mainFrm.CurrentBackgroundImageLayout.ToUpper())
+                        switch (mainFrm.CurrentBackgroundImageLayout.ToUpperInvariant())
                         {
                             case "TILE":
                                 TextureBrush tileBrush = new TextureBrush(img, System.Drawing.Drawing2D.WrapMode.Tile);

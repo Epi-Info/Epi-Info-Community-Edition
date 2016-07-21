@@ -724,7 +724,7 @@ namespace Epi.Windows.Dialogs
                 string viewName = lvDataSourceObjects.SelectedItems[0].Text;
                 List<string> childCols = new List<string>();
 
-                if (project.Views.Contains(viewName) && lvDataSourceObjects.SelectedItems[0].Group.ToString().ToLower().Equals("epi info forms"))
+                if (project.Views.Contains(viewName) && lvDataSourceObjects.SelectedItems[0].Group.ToString().ToLowerInvariant().Equals("epi info forms"))
                 {
                     foreach (Epi.Fields.Field field in project.Views[viewName].Fields.DataFields)
                     {
@@ -734,7 +734,7 @@ namespace Epi.Windows.Dialogs
                     cmbChildKey.DataSource = childCols;
                     SelectedItemType = Dialogs.SelectedItemType.Form;
                 }
-                else if (lvDataSourceObjects.SelectedItems[0].Group.ToString().ToLower().Equals("tables"))
+                else if (lvDataSourceObjects.SelectedItems[0].Group.ToString().ToLowerInvariant().Equals("tables"))
                 {
                     IDbDriver dbDriver = project.CollectedData.GetDbDriver();
 
@@ -815,7 +815,7 @@ namespace Epi.Windows.Dialogs
                     mruSelectedDatabaseName = name;
                     selectedDataProvider = provider;
 
-                    if (name.ToLower().EndsWith(".prj"))
+                    if (name.ToLowerInvariant().EndsWith(".prj"))
                     {
                         Project project = new Project(connectionString);
 

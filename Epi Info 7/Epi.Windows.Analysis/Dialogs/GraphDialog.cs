@@ -363,13 +363,13 @@ namespace Epi.Windows.Analysis.Dialogs
                 comboBoxBarOfEachValueOf.Enabled = true;
             }
 
-            if (((System.Windows.Forms.ComboBox)(sender)).Text.ToLower() == "scatter")
+            if (((System.Windows.Forms.ComboBox)(sender)).Text.ToLowerInvariant() == "scatter")
             {
                 FillVariableCombo(comboBoxMainVariable);
                 comboBoxMainVariable.Items.Insert(0, "");
                 comboBoxMainVariable.SelectedIndex = 0;
             }
-            else if (((System.Windows.Forms.ComboBox)(sender)).Text.ToLower() == "epi curve")
+            else if (((System.Windows.Forms.ComboBox)(sender)).Text.ToLowerInvariant() == "epi curve")
             {
                 FillEpiCurveMainVariables(comboBoxMainVariable);
                 comboBoxMainVariable.Items.Insert(0, "");

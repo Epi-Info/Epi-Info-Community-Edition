@@ -44,7 +44,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 object RHSO = this.AddExp.Execute();
 
 
-                if (this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpper()) && this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpper()))
+                if (this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpperInvariant()) && this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpperInvariant()))
                 {
                     LHSO = Convert.ToDouble(LHSO);
                     RHSO = Convert.ToDouble(RHSO);

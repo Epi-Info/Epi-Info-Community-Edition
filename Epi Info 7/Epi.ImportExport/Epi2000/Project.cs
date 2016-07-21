@@ -403,7 +403,7 @@ namespace Epi.Epi2000
                 while(R.Read())
                 {
                     
-                    if (R["Name"].ToString().ToUpper().StartsWith("RELVIEW"))
+                    if (R["Name"].ToString().ToUpperInvariant().StartsWith("RELVIEW"))
                     {
                         if(! RelatedViews.ContainsKey(R["DataTable"].ToString()))
                         {

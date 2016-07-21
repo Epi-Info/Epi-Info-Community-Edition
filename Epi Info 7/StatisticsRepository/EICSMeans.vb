@@ -192,35 +192,35 @@ ERROR_PROC:
         domain2 = String.Empty
 
         For Each kvp As KeyValuePair(Of String, String) In inputVariableList
-            If kvp.Key.ToLower().Equals("percents") Then
+            If kvp.Key.ToLowerInvariant().Equals("percents") Then
                 percents = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("stratavar") Then
+            If kvp.Key.ToLowerInvariant().Equals("stratavar") Then
                 strataVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("stratvarlist") Then
+            If kvp.Key.ToLowerInvariant().Equals("stratvarlist") Then
                 strataVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("numeric_variable") Or kvp.Key.ToLower().Equals("mainvar") Or kvp.Key.ToLower().Equals("identifier") Then
+            If kvp.Key.ToLowerInvariant().Equals("numeric_variable") Or kvp.Key.ToLowerInvariant().Equals("mainvar") Or kvp.Key.ToLowerInvariant().Equals("identifier") Then
                 mainVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("psuvar") Then
+            If kvp.Key.ToLowerInvariant().Equals("psuvar") Then
                 psuVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("cross_tabulation_variable") Or kvp.Key.ToLower().Equals("crosstabvar") Or kvp.Key.ToLower().Equals("identifier2") Then
+            If kvp.Key.ToLowerInvariant().Equals("cross_tabulation_variable") Or kvp.Key.ToLowerInvariant().Equals("crosstabvar") Or kvp.Key.ToLowerInvariant().Equals("identifier2") Then
                 crosstabVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("weightvar") Then
+            If kvp.Key.ToLowerInvariant().Equals("weightvar") Then
                 weightVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("tablename") Then
+            If kvp.Key.ToLowerInvariant().Equals("tablename") Then
                 tableName = kvp.Value
             End If
         Next
@@ -783,35 +783,35 @@ ErrorHandler:
         End If
 
         For Each kvp As KeyValuePair(Of String, String) In context.InputVariableList
-            If kvp.Key.ToLower().Equals("percents") Then
+            If kvp.Key.ToLowerInvariant().Equals("percents") Then
                 percents = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("stratavar") Then
+            If kvp.Key.ToLowerInvariant().Equals("stratavar") Then
                 strataVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("stratvarlist") Then
+            If kvp.Key.ToLowerInvariant().Equals("stratvarlist") Then
                 strataVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("numeric_variable") Or kvp.Key.ToLower().Equals("mainvar") Or kvp.Key.ToLower().Equals("identifier") Then
+            If kvp.Key.ToLowerInvariant().Equals("numeric_variable") Or kvp.Key.ToLowerInvariant().Equals("mainvar") Or kvp.Key.ToLowerInvariant().Equals("identifier") Then
                 mainVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("psuvar") Then
+            If kvp.Key.ToLowerInvariant().Equals("psuvar") Then
                 psuVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("cross_tabulation_variable") Or kvp.Key.ToLower().Equals("crosstabvar") Or kvp.Key.ToLower().Equals("identifier2") Then
+            If kvp.Key.ToLowerInvariant().Equals("cross_tabulation_variable") Or kvp.Key.ToLowerInvariant().Equals("crosstabvar") Or kvp.Key.ToLowerInvariant().Equals("identifier2") Then
                 crosstabVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("weightvar") Then
+            If kvp.Key.ToLowerInvariant().Equals("weightvar") Then
                 weightVar = kvp.Value
             End If
 
-            If kvp.Key.ToLower().Equals("tablename") Then
+            If kvp.Key.ToLowerInvariant().Equals("tablename") Then
                 tableName = kvp.Value
             End If
         Next

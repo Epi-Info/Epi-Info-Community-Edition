@@ -399,7 +399,7 @@ namespace Epi.Windows.MakeView.Forms
                 width = Convert.ToInt32(((float)width) * (float)scaleFactor);
             }
 
-            if (orientation.ToLower() == "landscape")
+            if (orientation.ToLowerInvariant() == "landscape")
             {
                 PagePanel.Size = new Size(height, width);
             }
@@ -1502,7 +1502,7 @@ namespace Epi.Windows.MakeView.Forms
                 if (makeViewForm.CurrentBackgroundImage != null)
                 {
                     Image img = makeViewForm.CurrentBackgroundImage;
-                    switch (makeViewForm.CurrentBackgroundImageLayout.ToUpper())
+                    switch (makeViewForm.CurrentBackgroundImageLayout.ToUpperInvariant())
                     {
                         case "TILE":
                             TextureBrush tileBrush = new TextureBrush(img, System.Drawing.Drawing2D.WrapMode.Tile);

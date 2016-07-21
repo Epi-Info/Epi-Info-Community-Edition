@@ -48,12 +48,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 object RHSO = this.ParameterList[1].Execute(); // this.AddExp.Execute();
 
 
-                if (LHSO!=null && this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpper()))
+                if (LHSO!=null && this.NumericTypeList.Contains(LHSO.GetType().Name.ToUpperInvariant()))
                 {
                     LHSO = Convert.ToDouble(LHSO);
                 }
 
-                if (RHSO!=null && this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpper()))
+                if (RHSO!=null && this.NumericTypeList.Contains(RHSO.GetType().Name.ToUpperInvariant()))
                 {
                     RHSO = Convert.ToDouble(RHSO);
                 }

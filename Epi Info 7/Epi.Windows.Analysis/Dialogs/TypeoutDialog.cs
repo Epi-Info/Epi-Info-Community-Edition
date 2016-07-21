@@ -103,7 +103,7 @@ namespace Epi.Windows.Analysis.Dialogs
                 sb.Append(StringLiterals.SPACE).Append("TEXTFONT");
                 if (!string.IsNullOrEmpty(textFontColorName))
                 {
-                    sb.Append(StringLiterals.SPACE).Append(textFontColorName.ToUpper());
+                    sb.Append(StringLiterals.SPACE).Append(textFontColorName.ToUpperInvariant());
                 }
 
                 if (!string.IsNullOrEmpty(fontSizeToolStripDDL.Text))

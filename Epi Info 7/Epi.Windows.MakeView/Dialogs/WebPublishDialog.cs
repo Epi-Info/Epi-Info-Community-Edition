@@ -83,7 +83,7 @@ namespace Epi.Windows.MakeView.Dialogs
             {
                 this.isRepublishableConfig = false;
             }
-            this.ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+            this.ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
             PopulateTimeDropDowns();
 
             Construct();
@@ -151,7 +151,7 @@ namespace Epi.Windows.MakeView.Dialogs
             stopwatch = new Stopwatch();
             stopwatch.Start();
             var config = Configuration.GetNewInstance();
-            var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+            var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
           //  Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
             if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservice)))
             {
@@ -496,7 +496,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
             try
             {
-                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLower();
+                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
                 if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservice)))
                 {
                     SetDTOObject();

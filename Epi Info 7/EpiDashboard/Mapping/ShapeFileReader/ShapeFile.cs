@@ -276,7 +276,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                 {
                     //The Field info is 32 bytes in length
                     DBFField field = new DBFField();
-                    field.FieldName = Encoding.UTF8.GetString( read.ReadBytes( 11 ), 0, 11 ).Replace( "\0", "" ).ToLower();
+                    field.FieldName = Encoding.UTF8.GetString( read.ReadBytes( 11 ), 0, 11 ).Replace( "\0", "" ).ToLowerInvariant();
                     field.FieldType = read.ReadByte();
                     //Field type: 
                     //    C   –   Character
@@ -385,7 +385,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                 {
                     //The Field info is 32 bytes in length
                     DBFField field = new DBFField();
-                    field.FieldName = Encoding.UTF8.GetString( read.ReadBytes( 11 ), 0, 11 ).Replace( "\0", "" ).ToLower();
+                    field.FieldName = Encoding.UTF8.GetString( read.ReadBytes( 11 ), 0, 11 ).Replace( "\0", "" ).ToLowerInvariant();
                     field.FieldType = read.ReadByte();
                     //Field type: 
                     //    C   –   Character

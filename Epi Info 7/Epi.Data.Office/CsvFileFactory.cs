@@ -154,7 +154,7 @@ namespace Epi.Data.Office
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            if (connectionString.ToLower().Contains("fmt=delimited"))
+            if (connectionString.ToLowerInvariant().Contains("fmt=delimited"))
             {
                 return true;
             }
@@ -176,7 +176,7 @@ namespace Epi.Data.Office
             // columns
             foreach (DataColumn column in table.Columns)
             {
-                if (column.ColumnName.ToLower() == "uniquekey")
+                if (column.ColumnName.ToLowerInvariant() == "uniquekey")
                 {
                     HasUniqueKey = true;
                     sql += "[" + column.ColumnName + "] " + SQLGetType(column) + ",\n";

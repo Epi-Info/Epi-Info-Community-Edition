@@ -425,7 +425,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
             canvas.DisposeControlTrackers();
 
-            bool isHorizontalAlign = projectExplorer.SelectedPage.GetView().PageLabelAlign.ToLower().Equals("horizontal") ? true : false;
+            bool isHorizontalAlign = projectExplorer.SelectedPage.GetView().PageLabelAlign.ToLowerInvariant().Equals("horizontal") ? true : false;
 
             List<String> childFields = new List<string>();
 
@@ -641,7 +641,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
             canvas.DisposeControlTrackers();
 
-            bool isHorizontalAlign = projectExplorer.SelectedPage.GetView().PageLabelAlign.ToLower().Equals("horizontal") ? true : false;
+            bool isHorizontalAlign = projectExplorer.SelectedPage.GetView().PageLabelAlign.ToLowerInvariant().Equals("horizontal") ? true : false;
 
             List<String> childFields = new List<string>();
             // < build a list of controls that are child controls of groups >
@@ -2906,7 +2906,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
             //fieldName needs to be in all lowercase and remove hyphens for MySQL
             fieldName = fieldName.Replace("-", string.Empty);
-            fieldName = fieldName.ToLower();
+            fieldName = fieldName.ToLowerInvariant();
             return fieldName;
         }
 
@@ -3275,7 +3275,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
         private void AutoAlignFieldGivenPromptLocation(Field field, System.Drawing.Point location)
         {
             Panel panel = canvas.PagePanel;
-            bool isHorizontalAlign = field.GetView().PageLabelAlign.ToLower().Equals("horizontal") ? true : false;
+            bool isHorizontalAlign = field.GetView().PageLabelAlign.ToLowerInvariant().Equals("horizontal") ? true : false;
             
             if (field is FieldWithSeparatePrompt)
             {
@@ -4855,7 +4855,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                        printDocument.PrintPage += new PrintPageEventHandler(printDocument_PrintPage);
 
                        DataRow row = page.GetMetadata().GetPageSetupData(view);                      
-                       isLandscape = row["Orientation"].ToString().ToLower() == "landscape";
+                       isLandscape = row["Orientation"].ToString().ToLowerInvariant() == "landscape";
                        Panel printPanel = new Panel();
 
                        float dpiX;
@@ -5131,7 +5131,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                                    if (image != null)
                                    {
                                        Image img = image;
-                                       switch (imageLayout.ToUpper())
+                                       switch (imageLayout.ToUpperInvariant())
                                        {
                                            case "TILE":
                                                TextureBrush tileBrush = new TextureBrush(img, System.Drawing.Drawing2D.WrapMode.Tile);

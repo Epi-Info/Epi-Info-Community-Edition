@@ -65,7 +65,7 @@ namespace Epi.Core.EnterInterpreter
         {
             object result = null;
 
-            switch (pValue.ToUpper())
+            switch (pValue.ToUpperInvariant())
             {
                 case "(+)":
                 case "YES":
@@ -610,9 +610,9 @@ namespace Epi.Core.EnterInterpreter
                         if (item is Rule_Value)
                         {
                             var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
-                            if (id != null && !this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+                            if (id != null && !this.Context.CommandVariableCheck.ContainsKey(id.ToLowerInvariant()))
                             {
-                                this.Context.CommandVariableCheck.Add(id.ToLower(), commandVariableCheckValue);
+                                this.Context.CommandVariableCheck.Add(id.ToLowerInvariant(), commandVariableCheckValue);
                             }
                         }
                     }

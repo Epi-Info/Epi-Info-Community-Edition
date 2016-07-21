@@ -109,7 +109,7 @@ namespace Epi.Core.EnterInterpreter
                 }
                 else
                 {
-                    return _expectedTokens.ToLower();
+                    return _expectedTokens.ToLowerInvariant();
                 }
             }
             set
@@ -139,7 +139,7 @@ namespace Epi.Core.EnterInterpreter
                 }
                 else
                 {
-                    return _nextToken.ToLower();
+                    return _nextToken.ToLowerInvariant();
                 }
             }
             set
@@ -158,7 +158,7 @@ namespace Epi.Core.EnterInterpreter
                 }
                 else
                 {
-                    return _unexpectedToken.ToLower();
+                    return _unexpectedToken.ToLowerInvariant();
                 }
             }
             set
@@ -175,27 +175,27 @@ namespace Epi.Core.EnterInterpreter
             string Identifier = null;
 
             string[] Parameters = parseGetCommandSearchText(pSearchText);
-            Level = Parameters[0].ToLower();
-            Event = Parameters[1].ToLower();
-            Identifier = Parameters[2].ToLower();
+            Level = Parameters[0].ToLowerInvariant();
+            Event = Parameters[1].ToLowerInvariant();
+            Identifier = Parameters[2].ToLowerInvariant();
 
-            switch (Level.ToLower())
+            switch (Level.ToLowerInvariant())
             {
                 case "view":
                 case "form":
-                    if (Event.ToLower() == "")
+                    if (Event.ToLowerInvariant() == "")
                     {
                         result = this.View_Checkcode;
                     }
                     else
-                    if (Event.ToLower() == "before")
+                    if (Event.ToLowerInvariant() == "before")
                     {
                         if (this.BeforeCheckCode.ContainsKey("view"))
                         {
                             result = this.BeforeCheckCode["view"];
                         }
                     }
-                    else if (Event.ToLower() == "after")
+                    else if (Event.ToLowerInvariant() == "after")
                     {
                         if (this.AfterCheckCode.ContainsKey("view"))
                         {
@@ -204,19 +204,19 @@ namespace Epi.Core.EnterInterpreter
                     }
                     break;
                 case "record":
-                    if (Event.ToLower() == "")
+                    if (Event.ToLowerInvariant() == "")
                     {
                         result = this.Record_Checkcode;
                     }
                     else
-                    if (Event.ToLower() == "before")
+                    if (Event.ToLowerInvariant() == "before")
                     {
                         if (this.BeforeCheckCode.ContainsKey("record"))
                         {
                             result = this.BeforeCheckCode["record"];
                         }
                     }
-                    else if (Event.ToLower() == "after")
+                    else if (Event.ToLowerInvariant() == "after")
                     {
                         if (this.AfterCheckCode.ContainsKey("record"))
                         {
@@ -225,7 +225,7 @@ namespace Epi.Core.EnterInterpreter
                     }
                     break;
                 case "page":
-                    if (Event.ToLower() == "")
+                    if (Event.ToLowerInvariant() == "")
                     {
                         if (this.Page_Checkcode.ContainsKey(Identifier))
                         {
@@ -233,14 +233,14 @@ namespace Epi.Core.EnterInterpreter
                         }
                     }
                     else
-                    if (Event.ToLower() == "before")
+                    if (Event.ToLowerInvariant() == "before")
                     {
                         if (this.PageBeforeCheckCode.ContainsKey(Identifier))
                         {
                             result = this.PageBeforeCheckCode[Identifier];
                         }
                     }
-                    else if (Event.ToLower() == "after")
+                    else if (Event.ToLowerInvariant() == "after")
                     {
                         if (this.PageAfterCheckCode.ContainsKey(Identifier))
                         {
@@ -249,7 +249,7 @@ namespace Epi.Core.EnterInterpreter
                     }
                     break;
                 case "field":
-                    if (Event.ToLower() == "")
+                    if (Event.ToLowerInvariant() == "")
                     {
                         if (this.Field_Checkcode.ContainsKey(Identifier))
                         {
@@ -257,21 +257,21 @@ namespace Epi.Core.EnterInterpreter
                         }
                     }
                     else
-                    if (Event.ToLower() == "before")
+                    if (Event.ToLowerInvariant() == "before")
                     {
                         if (this.FieldBeforeCheckCode.ContainsKey(Identifier))
                         {
                             result = this.FieldBeforeCheckCode[Identifier];
                         }
                     }
-                    else if (Event.ToLower() == "after")
+                    else if (Event.ToLowerInvariant() == "after")
                     {
                         if (this.FieldAfterCheckCode.ContainsKey(Identifier))
                         {
                             result = this.FieldAfterCheckCode[Identifier];
                         }
                     }
-                    else if (Event.ToLower() == "click")
+                    else if (Event.ToLowerInvariant() == "click")
                     {
                         if (this.FieldClickCheckCode.ContainsKey(Identifier))
                         {
@@ -555,14 +555,14 @@ namespace Epi.Core.EnterInterpreter
 
             while (currentToken != null)
             {
-                if (currentToken.Rule.Lhs.ToString().ToLower() == pSearchRule.ToLower())
+                if (currentToken.Rule.Lhs.ToString().ToLowerInvariant() == pSearchRule.ToLowerInvariant())
                 {
                     switch (pSearchRule)
                     {
                         case "<Field_Checkcode_Statement>":
                         case "<Page_Checkcode_Statement>":
                         case "<Subroutine_Statement>":
-                            if (currentToken.Tokens[1].ToString().ToLower() == pIdentifier.ToLower())
+                            if (currentToken.Tokens[1].ToString().ToLowerInvariant() == pIdentifier.ToLowerInvariant())
                             {
                                 result = currentToken;
                                 return result;
@@ -621,7 +621,7 @@ namespace Epi.Core.EnterInterpreter
                         {
 
 
-                            if (!string.IsNullOrEmpty(name) &&!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpper()) 
+                            if (!string.IsNullOrEmpty(name) &&!name.Contains("\"") && !SelectCommandList.Contains(name.ToUpperInvariant()) 
                                 && !this.Subroutine.ContainsKey(name) 
                                 && !this.CommandButtonFieldList.Contains(name)
                                 && !this.GroupBoxFieldList.Contains(name)

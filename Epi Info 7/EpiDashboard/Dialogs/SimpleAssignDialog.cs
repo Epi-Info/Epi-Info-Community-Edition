@@ -387,7 +387,7 @@ namespace EpiDashboard.Dialogs
                     if (rule is DataAssignmentRule)
                     {
                         DataAssignmentRule assignmentRule = rule as DataAssignmentRule;
-                        if (txtDestinationField.Text.ToLower().Equals(assignmentRule.DestinationColumnName.ToLower()))
+                        if (txtDestinationField.Text.ToLowerInvariant().Equals(assignmentRule.DestinationColumnName.ToLowerInvariant()))
                         {
                             MsgBox.ShowError(SimpleAssignmentStrings.ERROR_FIELD_ALREADY_EXISTS_WITH_RECODED_DATA);
                             this.DialogResult = DialogResult.None;
@@ -398,7 +398,7 @@ namespace EpiDashboard.Dialogs
 
                 foreach (string s in dashboardHelper.GetFieldsAsList(columnDataType))
                 {
-                    if (txtDestinationField.Text.ToLower().Equals(s.ToLower()))
+                    if (txtDestinationField.Text.ToLowerInvariant().Equals(s.ToLowerInvariant()))
                     {
                         System.Windows.Forms.DialogResult result = MsgBox.ShowQuestion(SimpleAssignmentStrings.OVERWRITE_FIELD_DATA);
                         if (result != System.Windows.Forms.DialogResult.Yes && result != System.Windows.Forms.DialogResult.OK)

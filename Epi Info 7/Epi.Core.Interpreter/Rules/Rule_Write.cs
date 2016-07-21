@@ -223,12 +223,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     {
                         if (var.VarType != VariableType.Global && var.VarType != VariableType.Permanent)
                         {
-                            TempVariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpper());
+                            TempVariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpperInvariant());
                         }
                     }
                     else
                     {
-                        TempVariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpper());
+                        TempVariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpperInvariant());
                     }
                 }
             }
@@ -236,7 +236,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 for (int i = 0; i < this.IdentifierList.Length; i++)
                 {
-                    TempVariableList.Add(this.IdentifierList[i].ToUpper());
+                    TempVariableList.Add(this.IdentifierList[i].ToUpperInvariant());
                 }
             }
 
@@ -244,7 +244,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 for (int i = CurrentDataTable.Columns.Count - 1; i > -1; i--)
                 {
-                    if (TempVariableList.Contains(CurrentDataTable.Columns[i].ColumnName.ToUpper()))
+                    if (TempVariableList.Contains(CurrentDataTable.Columns[i].ColumnName.ToUpperInvariant()))
                     {
                         //CurrentDataTable.Columns.Remove(CurrentDataTable.Columns[i]);
                     }
@@ -258,13 +258,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             {
                                 if (var != null && var.VarType != VariableType.Global && var.VarType != VariableType.Permanent)
                                 {
-                                    VariableList.Add(var.Name.ToUpper());
+                                    VariableList.Add(var.Name.ToUpperInvariant());
                                 }
                             }
                         }
                         else
                         {
-                            VariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpper());
+                            VariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpperInvariant());
                         }
                     }
                 }
@@ -273,9 +273,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 for (int i = 0; i < CurrentDataTable.Columns.Count; i++)
                 {
-                    if(TempVariableList.Contains(CurrentDataTable.Columns[i].ColumnName.ToUpper()))
+                    if(TempVariableList.Contains(CurrentDataTable.Columns[i].ColumnName.ToUpperInvariant()))
                     {
-                        VariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpper());
+                        VariableList.Add(CurrentDataTable.Columns[i].ColumnName.ToUpperInvariant());
                     }
                     else
                     {
@@ -342,7 +342,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     foreach (DataColumn column in CurrentDataTable.Columns)
                     {
-                        if (VariableList.Contains(column.ColumnName.ToUpper()))
+                        if (VariableList.Contains(column.ColumnName.ToUpperInvariant()))
                         {
                             bool isPermanentVariable = false;
 
@@ -423,7 +423,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         bool isFound = false;
                         foreach (DataColumn column in CurrentDataTable.Columns)
                         {
-                            if (column.ColumnName.ToUpper() == columnName.ToUpper())
+                            if (column.ColumnName.ToUpperInvariant() == columnName.ToUpperInvariant())
                             {
                                 isFound = true;
                                 break;
@@ -457,7 +457,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     {
                         foreach (DataColumn column in CurrentDataTable.Columns)
                         {
-                            if (VariableList.Contains(column.ColumnName.ToUpper()))
+                            if (VariableList.Contains(column.ColumnName.ToUpperInvariant()))
                             {
                                 bool isPermanentVariable = false;
 
@@ -536,7 +536,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     {
                         foreach (DataColumn column in CurrentDataTable.Columns)
                         {
-                            if (VariableList.Contains(column.ColumnName.ToUpper()))
+                            if (VariableList.Contains(column.ColumnName.ToUpperInvariant()))
                             {
                                 bool isPermanentVariable = false;
 
@@ -635,7 +635,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     {
                         DataColumn col = WritableTable.Columns[i];
 
-                        if (!VariableList.Contains(col.ColumnName.ToUpper()))
+                        if (!VariableList.Contains(col.ColumnName.ToUpperInvariant()))
                         {
                             WritableTable.Columns.Remove(col);
                         }

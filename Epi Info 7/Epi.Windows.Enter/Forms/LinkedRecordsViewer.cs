@@ -70,7 +70,7 @@ namespace Epi.Windows.Enter
                 {
                     foreach (DataColumn col in data.Columns)
                     {
-                        if (!col.ColumnName.ToLower().Contains("uniquekey") && !col.ColumnName.ToLower().Contains("recstatus") && !col.ColumnName.ToLower().Contains("globalrecordid"))
+                        if (!col.ColumnName.ToLowerInvariant().Contains("uniquekey") && !col.ColumnName.ToLowerInvariant().Contains("recstatus") && !col.ColumnName.ToLowerInvariant().Contains("globalrecordid"))
                         {
                             counter++;
                             sb.Append(col.ColumnName + " = " + row[col].ToString() + Environment.NewLine);
@@ -102,7 +102,7 @@ namespace Epi.Windows.Enter
                 {
                     foreach (DataColumn col in data.Columns)
                     {
-                        if (!col.ColumnName.ToLower().Contains("uniquekey") && !col.ColumnName.ToLower().Contains("recstatus") && !col.ColumnName.ToLower().Contains("globalrecordid"))
+                        if (!col.ColumnName.ToLowerInvariant().Contains("uniquekey") && !col.ColumnName.ToLowerInvariant().Contains("recstatus") && !col.ColumnName.ToLowerInvariant().Contains("globalrecordid"))
                         {
                             counter++;
                             sb.Append(col.ColumnName + " = " + row[col].ToString() + Environment.NewLine);
@@ -277,8 +277,8 @@ namespace Epi.Windows.Enter
                 if (result == DialogResult.OK)
                 {
                     Query query = db.CreateQuery("Insert into metaLinks (FromRecordGuid, ToRecordGuid, FromViewId, ToViewId) values (@FromRecordGuid, @ToRecordGuid, @FromViewId, @ToViewId)");
-                    query.Parameters.Add(new QueryParameter("@FromRecordGuid", DbType.StringFixedLength, findrecords.GlobalRecordId.ToString("D").ToLower()));
-                    query.Parameters.Add(new QueryParameter("@ToRecordGuid", DbType.StringFixedLength, enterMainForm.View.CurrentGlobalRecordId.ToLower()));
+                    query.Parameters.Add(new QueryParameter("@FromRecordGuid", DbType.StringFixedLength, findrecords.GlobalRecordId.ToString("D").ToLowerInvariant()));
+                    query.Parameters.Add(new QueryParameter("@ToRecordGuid", DbType.StringFixedLength, enterMainForm.View.CurrentGlobalRecordId.ToLowerInvariant()));
                     query.Parameters.Add(new QueryParameter("@FromViewId", DbType.Int32, selectedView.Id));
                     query.Parameters.Add(new QueryParameter("@ToViewId", DbType.Int32, enterMainForm.View.Id));
                     db.ExecuteNonQuery(query);
@@ -321,8 +321,8 @@ namespace Epi.Windows.Enter
                 if (result == DialogResult.OK)
                 {
                     Query query = db.CreateQuery("Insert into metaLinks (FromRecordGuid, ToRecordGuid, FromViewId, ToViewId) values (@FromRecordGuid, @ToRecordGuid, @FromViewId, @ToViewId)");
-                    query.Parameters.Add(new QueryParameter("@FromRecordGuid", DbType.StringFixedLength, enterMainForm.View.CurrentGlobalRecordId.ToLower()));
-                    query.Parameters.Add(new QueryParameter("@ToRecordGuid", DbType.StringFixedLength, findrecords.GlobalRecordId.ToString("D").ToLower()));
+                    query.Parameters.Add(new QueryParameter("@FromRecordGuid", DbType.StringFixedLength, enterMainForm.View.CurrentGlobalRecordId.ToLowerInvariant()));
+                    query.Parameters.Add(new QueryParameter("@ToRecordGuid", DbType.StringFixedLength, findrecords.GlobalRecordId.ToString("D").ToLowerInvariant()));
                     query.Parameters.Add(new QueryParameter("@FromViewId", DbType.Int32, enterMainForm.View.Id));
                     query.Parameters.Add(new QueryParameter("@ToViewId", DbType.Int32, selectedView.Id));
                     db.ExecuteNonQuery(query);

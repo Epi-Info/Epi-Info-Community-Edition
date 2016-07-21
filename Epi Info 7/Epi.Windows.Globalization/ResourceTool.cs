@@ -453,7 +453,7 @@ namespace Epi.Windows.Globalization
             //all columns are required except SourceValue
 
             string tempPath = Path.GetTempPath();
-            applicationPath = applicationPath.Trim().ToLower();
+            applicationPath = applicationPath.Trim().ToLowerInvariant();
 
             if (applicationPath[applicationPath.Length - 1] != Path.DirectorySeparatorChar)
                 applicationPath += Path.DirectorySeparatorChar;

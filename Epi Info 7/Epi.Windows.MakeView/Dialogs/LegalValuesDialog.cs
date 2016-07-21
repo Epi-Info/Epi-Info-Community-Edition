@@ -545,7 +545,7 @@ namespace Epi.Windows.MakeView.Dialogs
             //}
             string cleanedCodeTableName = CleanCodeTableName(fieldName, dataView);
 
-            page.GetProject().CreateCodeTable(cleanedCodeTableName, fieldName.ToLower());
+            page.GetProject().CreateCodeTable(cleanedCodeTableName, fieldName.ToLowerInvariant());
             codeTable = page.GetProject().GetTableData(cleanedCodeTableName);
             codeTable.TableName = cleanedCodeTableName;
 
@@ -616,7 +616,7 @@ namespace Epi.Windows.MakeView.Dialogs
             fieldName = "code" + fieldName;
 
             fieldName = fieldName.Replace("-", string.Empty);
-            fieldName = fieldName.ToLower();
+            fieldName = fieldName.ToLowerInvariant();
 
             string tableName = Util.Squeeze(fieldName);
             string newTableName = tableName;

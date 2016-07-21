@@ -29,7 +29,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             //    {
             //        if (item is Rule_Value)
             //        {
-            //            if (!this.Context.CommandVariableCheck.ContainsKey(((Rule_Value)(item)).Id.ToLower()))
+            //            if (!this.Context.CommandVariableCheck.ContainsKey(((Rule_Value)(item)).Id.ToLowerInvariant()))
             //            {
             //                this.Context.CommandVariableCheck.Add(((Rule_Value)(item)).Id, "substring");
             //            }

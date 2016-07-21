@@ -69,7 +69,7 @@ namespace Epi.Windows.Dialogs
                 return false;
             }
 
-            string query = txtQuery.Text.Trim().ToLower();
+            string query = txtQuery.Text.Trim().ToLowerInvariant();
 
             if (!query.StartsWith("select"))
             {

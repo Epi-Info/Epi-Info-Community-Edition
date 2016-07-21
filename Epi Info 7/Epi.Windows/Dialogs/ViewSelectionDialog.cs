@@ -95,7 +95,7 @@ namespace Epi.Windows.Dialogs
                 DialogResult result = openFileDialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    if (openFileDialog.FileName.ToLower().Trim().EndsWith(Epi.FileExtensions.EPI_PROJ))
+                    if (openFileDialog.FileName.ToLowerInvariant().Trim().EndsWith(Epi.FileExtensions.EPI_PROJ))
                     {
                         if (System.IO.File.Exists(openFileDialog.FileName))
                         {
@@ -109,7 +109,7 @@ namespace Epi.Windows.Dialogs
                             currentProject = new Project(openFileDialog.FileName);
                             if (currentProject.CollectedData.FullName.Contains("MS Access"))
                             {
-                                string databaseFileName = currentProject.CollectedData.DataSource.Replace("Data Source=".ToLower(), string.Empty);
+                                string databaseFileName = currentProject.CollectedData.DataSource.Replace("Data Source=".ToLowerInvariant(), string.Empty);
                                 if (System.IO.File.Exists(databaseFileName) == false)
                                 {
                                     MsgBox.ShowError(string.Format(SharedStrings.DATASOURCE_NOT_FOUND, databaseFileName));

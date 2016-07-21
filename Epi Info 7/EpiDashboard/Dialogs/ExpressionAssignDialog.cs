@@ -143,7 +143,7 @@ namespace EpiDashboard.Dialogs
             {
                 foreach (string s in dashboardHelper.GetFieldsAsList())
                 {
-                    if (txtDestinationField.Text.ToLower().Equals(s.ToLower()))
+                    if (txtDestinationField.Text.ToLowerInvariant().Equals(s.ToLowerInvariant()))
                     {
                         MsgBox.ShowError(DashboardSharedStrings.EXPRESSION_ASSIGN_DESTINATION_FIELD_ALREADY_EXISTS);
                         this.DialogResult = DialogResult.None;
@@ -156,7 +156,7 @@ namespace EpiDashboard.Dialogs
                     if (rule is DataAssignmentRule)
                     {
                         DataAssignmentRule assignmentRule = rule as DataAssignmentRule;
-                        if (txtDestinationField.Text.ToLower().Equals(assignmentRule.DestinationColumnName.ToLower()))
+                        if (txtDestinationField.Text.ToLowerInvariant().Equals(assignmentRule.DestinationColumnName.ToLowerInvariant()))
                         {
                             MsgBox.ShowError(DashboardSharedStrings.EXPRESSION_ASSIGN_DESTINATION_FIELD_ALREADY_EXISTS_AS_RECODED);
                             this.DialogResult = DialogResult.None;

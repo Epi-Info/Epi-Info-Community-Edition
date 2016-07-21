@@ -328,7 +328,7 @@ namespace Epi.Enter.Forms
                             bool found = false;
                             foreach (GridColumnBase destinationGridColumn in destinationGridField.Columns)
                             {
-                                if (destinationGridColumn.Name.ToLower().Equals(gridColumn.Name.ToLower()))
+                                if (destinationGridColumn.Name.ToLowerInvariant().Equals(gridColumn.Name.ToLowerInvariant()))
                                 {
                                     found = true;
                                 }
@@ -675,7 +675,7 @@ namespace Epi.Enter.Forms
                         bool found = false;
                         foreach (Field destinationField in destinationView.Fields)
                         {
-                            if (destinationField.Name.ToLower().Equals(sourceField.Name.ToLower()))
+                            if (destinationField.Name.ToLowerInvariant().Equals(sourceField.Name.ToLowerInvariant()))
                             {
                                 found = true;
                             }
@@ -1060,7 +1060,7 @@ namespace Epi.Enter.Forms
                     AddErrorStatusMessage(string.Format(SharedStrings.IMPORT_ERROR_SOURCE_FIELD_NAME_INVALID, sourceField.Name));
                     errorCount++;
                 }
-                if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLower() != "uniquekey" && sourceField.Name.ToLower() != "recstatus" && sourceField.Name.ToLower() != "fkey"))
+                if (Epi.Data.Services.AppData.Instance.IsReservedWord(sourceField.Name) && (sourceField.Name.ToLowerInvariant() != "uniquekey" && sourceField.Name.ToLowerInvariant() != "recstatus" && sourceField.Name.ToLowerInvariant() != "fkey"))
                 {
                     AddWarningMessage(string.Format(SharedStrings.IMPORT_ERROR_SOURCE_FIELD_NAME_RESERVED, sourceField.Name));
                 }

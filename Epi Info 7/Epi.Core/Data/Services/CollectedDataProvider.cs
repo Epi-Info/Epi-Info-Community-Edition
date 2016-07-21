@@ -175,7 +175,7 @@ namespace Epi.Data.Services
                     }
 
                     if (columnNames.Contains((string)row[ColumnNames.NAME]) == false &&
-                        columnNames.Contains(((string)row[ColumnNames.NAME]).ToUpper()) == false)
+                        columnNames.Contains(((string)row[ColumnNames.NAME]).ToUpperInvariant()) == false)
                     {
                         return false;
                     }
@@ -331,7 +331,7 @@ namespace Epi.Data.Services
                     // << build a list of the fields defined in metadata >>
                     foreach (DataRow row in fieldMetadataSync.Rows)
                     {
-                        definedFields.Add(row["Name"].ToString().ToUpper());
+                        definedFields.Add(row["Name"].ToString().ToUpperInvariant());
                     }
 
                     List<string> columnNames = dbDriver.GetTableColumnNames(view.Name);
@@ -339,7 +339,7 @@ namespace Epi.Data.Services
                     // << build a list of the fields that should be dropped from the view table >>
                     foreach (string columnName in columnNames)
                     {
-                        if (definedFields.Contains(columnName.ToUpper()) == false)
+                        if (definedFields.Contains(columnName.ToUpperInvariant()) == false)
                         {
                             columnsToDrop.Add(columnName);
                         }
@@ -379,7 +379,7 @@ namespace Epi.Data.Services
                     definedFields.Add("GLOBALRECORDID");
                     foreach (DataRow row in fieldMetadataSync.Rows)
                     {
-                        definedFields.Add(row["Name"].ToString().ToUpper());
+                        definedFields.Add(row["Name"].ToString().ToUpperInvariant());
                     }
 
                     List<string> columnNames = dbDriver.GetTableColumnNames(TableName);
@@ -387,7 +387,7 @@ namespace Epi.Data.Services
                     // << build a list of the fields that should be dropped from the view table >>
                     foreach (string columnName in columnNames)
                     {
-                        if (definedFields.Contains(columnName.ToUpper()) == false)
+                        if (definedFields.Contains(columnName.ToUpperInvariant()) == false)
                         {
                             columnsToDrop.Add(columnName);
                         }
@@ -1849,10 +1849,10 @@ namespace Epi.Data.Services
 
                 for (int i = 0; i <= searchFields.Count - 1; ParameterCount++, i++)
                 {
-                    if (searchFields[i].ToLower() != CurrentParam)
+                    if (searchFields[i].ToLowerInvariant() != CurrentParam)
                     {
                         CurrentCount = 0;
-                        CurrentParam = searchFields[i].ToLower();
+                        CurrentParam = searchFields[i].ToLowerInvariant();
 
                         if (i == 0)
                         {
@@ -3039,7 +3039,7 @@ namespace Epi.Data.Services
                                     {
                                         string valueString = "0";
 
-                                        if (row[column.Name].ToString().ToLower().Contains("true"))
+                                        if (row[column.Name].ToString().ToLowerInvariant().Contains("true"))
                                         {
                                             valueString = "1";
                                         }
@@ -3166,7 +3166,7 @@ namespace Epi.Data.Services
                             {
                                 string valueString = "0";
 
-                                if (dRow[column.Name].ToString().ToLower().Contains("true"))
+                                if (dRow[column.Name].ToString().ToLowerInvariant().Contains("true"))
                                 {
                                     valueString = "1";
                                 }
@@ -3301,7 +3301,7 @@ namespace Epi.Data.Services
                 {
                     string tableName = row[ColumnNames.TABLE_NAME].ToString();
 
-                    //if (!tableName.ToLower().StartsWith("sys"))   //This probably only works with Microsoft database, zack 1/29/08
+                    //if (!tableName.ToLowerInvariant().StartsWith("sys"))   //This probably only works with Microsoft database, zack 1/29/08
                     //{
                     dataRow = viewsAndTables.NewRow();
                     dataRow[ColumnNames.NAME] = tableName;

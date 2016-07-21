@@ -147,7 +147,7 @@ namespace Epi.Data.Office
                     continue;
                 }
                 
-                if (column.Name.ToLower() != "uniquekey")
+                if (column.Name.ToLowerInvariant() != "uniquekey")
                 {
                     if (column.IsIdentity)
                     {

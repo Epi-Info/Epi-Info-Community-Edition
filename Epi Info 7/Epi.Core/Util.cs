@@ -92,7 +92,7 @@ namespace Epi
         /// <returns>bool</returns>
         public static bool IsDatabaseEpiProject(string connectionInfo, bool isConnectionString)
         {
-            //if (fileName.ToLower().EndsWith(".mdb"))
+            //if (fileName.ToLowerInvariant().EndsWith(".mdb"))
             //{
             IDbDriver db = DBReadExecute.GetDataDriver(connectionInfo, isConnectionString);
             bool isProject = true;
@@ -197,7 +197,7 @@ namespace Epi
             string fileName = databaseFileName;
             string directory = Path.GetDirectoryName(fileName);
 
-            if (fileName.ToLower().EndsWith(".mdb"))
+            if (fileName.ToLowerInvariant().EndsWith(".mdb"))
             {
                 DbDriverInfo collectedDataDBInfo = new DbDriverInfo();
                 IDbDriverFactory collectedDBFactory = DbDriverFactoryCreator.GetDbDriverFactory("Epi.Data.Office.AccessDBFactory, Epi.Data.Office");// GetSelectedCollectedDataDriver();
@@ -272,7 +272,7 @@ namespace Epi
 
             foreach (string piece in pieces)
             {
-                if (!piece.ToLower().StartsWith("password"))
+                if (!piece.ToLowerInvariant().StartsWith("password"))
                 {
                     string[] parts = piece.Split('=');
                     collectedDataDBInfo.DBCnnStringBuilder[parts[0]] = parts[1];
@@ -878,7 +878,7 @@ namespace Epi
         public static Guid GetFileGuid(string filePath)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(System.Text.ASCIIEncoding.ASCII.GetBytes(filePath.ToLower()));
+            byte[] result = md5.ComputeHash(System.Text.ASCIIEncoding.ASCII.GetBytes(filePath.ToLowerInvariant()));
             Guid guid = new Guid(result);
             return guid;
         }

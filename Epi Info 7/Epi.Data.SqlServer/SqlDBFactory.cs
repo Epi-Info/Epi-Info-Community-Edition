@@ -185,7 +185,7 @@ namespace Epi.Data.SqlServer
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            if (connectionString.ToLower().Contains("initial catalog"))
+            if (connectionString.ToLowerInvariant().Contains("initial catalog"))
             {
                 return true;
             }
@@ -207,7 +207,7 @@ namespace Epi.Data.SqlServer
             // columns
             foreach (DataColumn column in table.Columns)
             {
-                if (column.ColumnName.ToLower() == "uniquekey")
+                if (column.ColumnName.ToLowerInvariant() == "uniquekey")
                 {
                     HasUniqueKey = true;
                     sql += "[" + column.ColumnName + "] int Identity,\n";

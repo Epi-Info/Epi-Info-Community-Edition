@@ -235,21 +235,21 @@ namespace Epi.Windows.Enter.Forms
                         }
                     }
 
-                    if (dr["Variable Type"].ToString().ToLower() == "unknown")
+                    if (dr["Variable Type"].ToString().ToLowerInvariant() == "unknown")
 	                {
 	                    dr["Variable Type"] = "Text";
 	                }
 	 
-	                if (dr["Field Type"].ToString().ToLower() == "option")
+	                if (dr["Field Type"].ToString().ToLowerInvariant() == "option")
 	                {
 	                    dr["Variable Type"] = "Number";
 	                }
-                    else if (dr["Field Type"].ToString().ToLower() == "grid")
+                    else if (dr["Field Type"].ToString().ToLowerInvariant() == "grid")
                     {
                         dr["Variable Type"] = "Data Table";
                     }
                     
-	                if (dr["Field Type"].ToString().ToLower() == "image")
+	                if (dr["Field Type"].ToString().ToLowerInvariant() == "image")
 	                {
                         dr["Variable Type"] = "Image";
                         //--2365

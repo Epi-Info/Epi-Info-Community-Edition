@@ -24,7 +24,7 @@ namespace Epi.EnterCheckCodeEngine
             _level = Level;
             _event = Event;
             _identifier = Identifier;
-            this.QueryString = string.Format("level={0}&event={1}&identifier={2}", Level.ToLower(), Event.ToLower(), Identifier.ToLower());
+            this.QueryString = string.Format("level={0}&event={1}&identifier={2}", Level.ToLowerInvariant(), Event.ToLowerInvariant(), Identifier.ToLowerInvariant());
         }
 
         public void Execute()

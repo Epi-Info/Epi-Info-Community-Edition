@@ -300,7 +300,7 @@ namespace EpiDashboard.Gadgets.Charting
 
                 foreach (XmlElement child in element.ChildNodes)
                 {
-                    switch (child.Name.ToLower())
+                    switch (child.Name.ToLowerInvariant())
                     {
                         case "casestatusvariable":
                              if (!isStacked) ((ColumnChartParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
@@ -339,7 +339,7 @@ namespace EpiDashboard.Gadgets.Charting
                             }
                             break;
                         case "allvalues":
-                            if (child.InnerText.ToLower().Equals("true")) 
+                            if (child.InnerText.ToLowerInvariant().Equals("true")) 
                             { 
                                 ((ColumnChartParameters)Parameters).ShowAllListValues = true;
                             }
@@ -504,7 +504,7 @@ namespace EpiDashboard.Gadgets.Charting
                 messagePanel.Visibility = System.Windows.Visibility.Collapsed;
                 foreach (XmlAttribute attribute in element.Attributes)
                 {
-                    switch (attribute.Name.ToLower())
+                    switch (attribute.Name.ToLowerInvariant())
                     {
                         case "actualheight":
                             string actualHeight = attribute.Value.Replace(',', '.');
@@ -525,7 +525,7 @@ namespace EpiDashboard.Gadgets.Charting
                     {
                         if (!String.IsNullOrEmpty(child.InnerText))
                         {
-                            switch (child.Name.ToLower())
+                            switch (child.Name.ToLowerInvariant())
                             {
                                 case "mainvariable":
                                     if (this.Parameters.ColumnNames.Count > 0)
@@ -554,7 +554,7 @@ namespace EpiDashboard.Gadgets.Charting
                                     foreach (XmlElement field in child.ChildNodes)
                                     {
                                         List<string> fields = new List<string>();
-                                        if (field.Name.ToLower().Equals("stratavariable"))
+                                        if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                                         {
                                             ((ColumnChartParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                                         }
@@ -585,27 +585,27 @@ namespace EpiDashboard.Gadgets.Charting
                                     }
                                     break;
                                 case "sort":
-                                    if (child.InnerText.ToLower().Equals("highlow") || child.InnerText.ToLower().Equals("hightolow"))
+                                    if (child.InnerText.ToLowerInvariant().Equals("highlow") || child.InnerText.ToLowerInvariant().Equals("hightolow"))
                                     {
                                         ((ColumnChartParameters)Parameters).SortHighToLow = true;
                                     }
                                     break;
                                 case "allvalues":
-                                    if (child.InnerText.ToLower().Equals("true"))
+                                    if (child.InnerText.ToLowerInvariant().Equals("true"))
                                     {
                                         ((ColumnChartParameters)Parameters).ShowAllListValues = true;
                                     }
                                     else { ((ColumnChartParameters)Parameters).ShowAllListValues = false; }
                                     break;
                                 case "showlistlabels":
-                                    if (child.InnerText.ToLower().Equals("true"))
+                                    if (child.InnerText.ToLowerInvariant().Equals("true"))
                                     {
                                         ((ColumnChartParameters)Parameters).ShowCommentLegalLabels = true;
                                     }
                                     else { ((ColumnChartParameters)Parameters).ShowCommentLegalLabels = false; }
                                     break;
                                 case "includemissing":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).IncludeMissing = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).IncludeMissing = true; }
                                     else { ((ColumnChartParameters)Parameters).IncludeMissing = false; }
                                     break;
                                 case "customheading":
@@ -644,23 +644,23 @@ namespace EpiDashboard.Gadgets.Charting
                                     this.DataFilters.CreateFromXml(child);
                                     break;
                                 case "usediffbarcolors":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).UseDiffColors = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).UseDiffColors = true; }
                                     else { ((ColumnChartParameters)Parameters).UseDiffColors = false; }
                                     break;
                                 case "userefvalues":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).UseRefValues = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).UseRefValues = true; }
                                     else { ((ColumnChartParameters)Parameters).UseRefValues = false; }
                                     break;
                                 case "showannotations":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowAnnotations = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).ShowAnnotations = true; }
                                     else { ((ColumnChartParameters)Parameters).ShowAnnotations = false; }
                                     break;
                                 case "y2showannotations":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).Y2ShowAnnotations = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).Y2ShowAnnotations = true; }
                                     else { ((ColumnChartParameters)Parameters).Y2ShowAnnotations = false; }
                                     break;
                                 case "showgridlines":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowGridLines = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).ShowGridLines = true; }
                                     else { ((ColumnChartParameters)Parameters).ShowGridLines = false; }
                                     break;
                                 case "composition":
@@ -863,15 +863,15 @@ namespace EpiDashboard.Gadgets.Charting
                                     ((ColumnChartParameters)Parameters).ChartSubTitle = child.InnerText;
                                     break;
                                 case "showlegend":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegend = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegend = true; }
                                     else { ((ColumnChartParameters)Parameters).ShowLegend = false; }
                                     break;
                                 case "showlegendborder":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegendBorder = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegendBorder = true; }
                                     else { ((ColumnChartParameters)Parameters).ShowLegendBorder = false; }
                                     break;
                                 case "showlegendvarnames":
-                                    if (child.InnerText.ToLower().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegendVarNames = true; }
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).ShowLegendVarNames = true; }
                                     else { ((ColumnChartParameters)Parameters).ShowLegendVarNames = false; }
                                     break;
                                 case "legendfontsize":

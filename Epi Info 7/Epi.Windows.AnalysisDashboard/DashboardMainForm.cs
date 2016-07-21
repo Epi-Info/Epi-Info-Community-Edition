@@ -139,7 +139,7 @@ namespace Epi.Windows.AnalysisDashboard
 
                 foreach (KeyValuePair<string, string> kvp in this.dashboardHelper.TableColumnNames)
                 {
-                    if (kvp.Value.ToLower() != "epi.fields.groupfield")
+                    if (kvp.Value.ToLowerInvariant() != "epi.fields.groupfield")
                     {
                         tableColumnNamesFiltered.Add(kvp.Key, kvp.Value);
                     }

@@ -86,7 +86,7 @@ namespace Epi.Windows.Analysis.Dialogs
 
                     if (!string.IsNullOrEmpty(textFontColorName))
                     {
-                        sb.Append(textFontColorName.ToUpper());
+                        sb.Append(textFontColorName.ToUpperInvariant());
                     }
 
                     if (!string.IsNullOrEmpty(fontSizeToolStripDDL.Text))

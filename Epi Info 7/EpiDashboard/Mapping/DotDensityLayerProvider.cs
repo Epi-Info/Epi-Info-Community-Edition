@@ -110,7 +110,7 @@ namespace EpiDashboard.Mapping
                 //Get the file info objects for the SHP and the DBF file selected by the user
                 FileInfo shapeFile = new FileInfo(fileName);
                 string directoryName = System.IO.Path.GetDirectoryName(fileName);
-                string dbfFilename = System.IO.Path.GetFileName(fileName).ToLower().Replace(".shp", ".dbf");
+                string dbfFilename = System.IO.Path.GetFileName(fileName).ToLowerInvariant().Replace(".shp", ".dbf");
                 string dbfFullPath = System.IO.Path.Combine(directoryName, dbfFilename);
                 FileInfo dbfFile = new FileInfo(dbfFullPath);
 
@@ -197,7 +197,7 @@ namespace EpiDashboard.Mapping
                 //Get the file info objects for the SHP and the DBF file selected by the user
                 FileInfo shapeFile = new FileInfo(ofd.FileName);
                 string directoryName = System.IO.Path.GetDirectoryName(ofd.FileName);
-                string dbfFilename = System.IO.Path.GetFileName(ofd.FileName).ToLower().Replace(".shp", ".dbf");
+                string dbfFilename = System.IO.Path.GetFileName(ofd.FileName).ToLowerInvariant().Replace(".shp", ".dbf");
                 string dbfFullPath = System.IO.Path.Combine(directoryName, dbfFilename);
                 FileInfo dbfFile = new FileInfo(dbfFullPath);
 
@@ -210,11 +210,11 @@ namespace EpiDashboard.Mapping
                 foreach (string fname in ofd.FileNames)
                 {
                     FileInfo fi = new FileInfo(fname);
-                    if (fi.Extension.ToLower() == ".shp")
+                    if (fi.Extension.ToLowerInvariant() == ".shp")
                     {
                         shapeFile = fi;
                     }
-                    if (fi.Extension.ToLower() == ".dbf")
+                    if (fi.Extension.ToLowerInvariant() == ".dbf")
                     {
                         dbfFile = fi;
                     }

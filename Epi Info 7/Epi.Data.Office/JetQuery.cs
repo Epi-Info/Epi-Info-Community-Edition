@@ -203,7 +203,7 @@ namespace Epi.Data.Office
         }*/
         //private bool getBoolean(string pEpiBool)
         //{
-        //    switch (pEpiBool.ToUpper() )
+        //    switch (pEpiBool.ToUpperInvariant() )
         //    {
         //        case "(+)":
         //            return true; 

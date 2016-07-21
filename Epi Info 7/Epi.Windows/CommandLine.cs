@@ -53,7 +53,7 @@ namespace Epi
                 //    int seperatorPos = argument.IndexOf(':');
                 //    if (seperatorPos == -1)
                 //    {
-                //        key = argument.Substring(1).ToLower(CultureInfo.InvariantCulture);
+                //        key = argument.Substring(1).ToLowerInvariant(CultureInfo.InvariantCulture);
                 //        if (key == "?")
                 //        {
                 //            key = "help";
@@ -61,7 +61,7 @@ namespace Epi
                 //    }
                 //    else
                 //    {
-                //        key = argument.Substring(1, seperatorPos - 1).ToLower(CultureInfo.InvariantCulture);
+                //        key = argument.Substring(1, seperatorPos - 1).ToLowerInvariant(CultureInfo.InvariantCulture);
                 //        value = argument.Substring(seperatorPos + 1);
                 //    }
                 //}
@@ -69,7 +69,7 @@ namespace Epi
                 int seperatorPos = argument.IndexOf(':');
                 if (seperatorPos == -1)
                 {
-                    key = argument.Substring(0).ToLower(CultureInfo.InvariantCulture);
+                    key = argument.Substring(0).ToLowerInvariant();
                     if (key == "?")
                     {
                         key = "help";
@@ -77,7 +77,7 @@ namespace Epi
                 }
                 else
                 {
-                    key = argument.Substring(0, seperatorPos).ToLower(CultureInfo.InvariantCulture);
+                    key = argument.Substring(0, seperatorPos).ToLowerInvariant();
                     value = argument.Substring(seperatorPos + 1);
                 }
 

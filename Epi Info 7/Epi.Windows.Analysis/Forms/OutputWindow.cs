@@ -1123,10 +1123,10 @@ namespace Epi.Windows.Analysis.Forms
         {
             bool ret = false;
 
-            if (modifier.ToUpper().Equals("READ") || modifier.ToUpper().Equals("WRITE"))
+            if (modifier.ToUpperInvariant().Equals("READ") || modifier.ToUpperInvariant().Equals("WRITE"))
             {
                 string filePath;
-                if (TryGetFileDialog((string)input, caption, modifier.ToUpper().Equals("READ"), out filePath))
+                if (TryGetFileDialog((string)input, caption, modifier.ToUpperInvariant().Equals("READ"), out filePath))
                 {
                     ret = true;
                     input = filePath;
@@ -1396,7 +1396,7 @@ namespace Epi.Windows.Analysis.Forms
             if (pContext.CurrentRead != null && pContext.CurrentRead.RelatedTables != null)
             {
                 sb.Append(HTML.Italics(SharedStrings.CURRENT_VIEW + ":&nbsp;"));
-                if (fileName.ToLower().Contains("password="))
+                if (fileName.ToLowerInvariant().Contains("password="))
                 {
                     sb.Append(HTML.Bold(tableName));
                 }
@@ -1415,7 +1415,7 @@ namespace Epi.Windows.Analysis.Forms
             else
             {
                 sb.Append(HTML.Italics(SharedStrings.CURRENT_VIEW + ":&nbsp;"));
-                if (pContext.CurrrentConnection.ToLower().Contains("password="))
+                if (pContext.CurrrentConnection.ToLowerInvariant().Contains("password="))
                 {
                     sb.Append(String.Format("RecordSet:&nbsp;&nbsp;<b>{0}</b>", tableName));
                 }

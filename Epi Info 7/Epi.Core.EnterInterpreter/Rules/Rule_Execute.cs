@@ -35,7 +35,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             firstParam = this.GetCommandElement(pToken.Tokens, 1);
 
-            if (firstParam.ToUpper() == CommandNames.NOWAITFOREXIT.ToUpper() || firstParam.ToUpper() == CommandNames.WAITFOREXIT.ToUpper())
+            if (firstParam.ToUpperInvariant() == CommandNames.NOWAITFOREXIT.ToUpperInvariant() || firstParam.ToUpperInvariant() == CommandNames.WAITFOREXIT.ToUpperInvariant())
             {
                 executeOption = firstParam;
                 commandlineString = this.GetCommandElement(pToken.Tokens, 2);
@@ -78,9 +78,9 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             if(string.IsNullOrEmpty(firstParam) == false)
             {
-                firstParamExecutable = firstParam.ToLower().EndsWith(".exe")
-                || firstParam.ToLower().EndsWith(".bat")
-                || firstParam.ToLower().EndsWith(".cmd");
+                firstParamExecutable = firstParam.ToLowerInvariant().EndsWith(".exe")
+                || firstParam.ToLowerInvariant().EndsWith(".bat")
+                || firstParam.ToLowerInvariant().EndsWith(".cmd");
             }
 
             string fileName = firstParam;
@@ -105,7 +105,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 process.StartInfo.Arguments = commandlineString;
                 process.StartInfo.CreateNoWindow = true;
 
-                if (executeOption.ToUpper() == "WAITFOREXIT")
+                if (executeOption.ToUpperInvariant() == "WAITFOREXIT")
                 {
                     process.Start();
                     process.WaitForExit();

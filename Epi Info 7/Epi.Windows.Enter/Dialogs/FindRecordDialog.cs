@@ -218,7 +218,7 @@ namespace Epi.Windows.Enter.Dialogs
 
                     //add field name label to panel
                     Label fieldName = new Label();
-                    fieldName.Tag = item.Name.ToString().ToUpper();
+                    fieldName.Tag = item.Name.ToString().ToUpperInvariant();
                     fieldName.Location = new System.Drawing.Point(26, labelLinePosition);
                     fieldName.Size = new System.Drawing.Size(35, 13);
                     fieldName.AutoSize = true;
@@ -229,7 +229,7 @@ namespace Epi.Windows.Enter.Dialogs
 
                     //add pattern label to panel
                     Label lblPattern = new Label();
-                    lblPattern.Tag = item.Name.ToString().ToUpper();
+                    lblPattern.Tag = item.Name.ToString().ToUpperInvariant();
                     lblPattern.Location = new System.Drawing.Point(620, patternLinePosition);
                     lblPattern.Size = new System.Drawing.Size(35, 13);
                     lblPattern.AutoSize = true;
@@ -407,13 +407,13 @@ namespace Epi.Windows.Enter.Dialogs
                 {
                     if (string.IsNullOrEmpty(item.ItemValue))
                     {
-                        if (OrFieldCount.ContainsKey(item.Name.ToLower()))
+                        if (OrFieldCount.ContainsKey(item.Name.ToLowerInvariant()))
                         {
-                            OrFieldCount[item.Name.ToLower()]++;
+                            OrFieldCount[item.Name.ToLowerInvariant()]++;
                         }
                         else
                         {
-                            OrFieldCount.Add(item.Name.ToLower(), 1);
+                            OrFieldCount.Add(item.Name.ToLowerInvariant(), 1);
                         }
 
                         searchFields.Add(item.Name);
@@ -426,13 +426,13 @@ namespace Epi.Windows.Enter.Dialogs
                         orValues = item.ItemValue.Split(new[] {" or "," OR "," Or ", " oR "}, StringSplitOptions.RemoveEmptyEntries);
                         for (i = 0; i < orValues.Length; i++)
                         {
-                            if (OrFieldCount.ContainsKey(item.Name.ToLower()))
+                            if (OrFieldCount.ContainsKey(item.Name.ToLowerInvariant()))
                             {
-                                OrFieldCount[item.Name.ToLower()]++;
+                                OrFieldCount[item.Name.ToLowerInvariant()]++;
                             }
                             else
                             {
-                                OrFieldCount.Add(item.Name.ToLower(), 1);
+                                OrFieldCount.Add(item.Name.ToLowerInvariant(), 1);
                             }
                             try
                             {
@@ -453,13 +453,13 @@ namespace Epi.Windows.Enter.Dialogs
                 {                    
                     if (string.IsNullOrEmpty(item.ItemValue))
                     {
-                        if (OrFieldCount.ContainsKey(item.Name.ToLower()))
+                        if (OrFieldCount.ContainsKey(item.Name.ToLowerInvariant()))
                         {
-                            OrFieldCount[item.Name.ToLower()]++;
+                            OrFieldCount[item.Name.ToLowerInvariant()]++;
                         }
                         else
                         {
-                            OrFieldCount.Add(item.Name.ToLower(), 1);
+                            OrFieldCount.Add(item.Name.ToLowerInvariant(), 1);
                         }
 
                         searchFields.Add(item.Name);
@@ -472,13 +472,13 @@ namespace Epi.Windows.Enter.Dialogs
                         orValues = item.ItemValue.Split(new[] { " or ", " OR ", " Or ", " oR " }, StringSplitOptions.RemoveEmptyEntries);                       
                         for (i = 0; i < orValues.Length; i++)
                         {
-                            if (OrFieldCount.ContainsKey(item.Name.ToLower()))
+                            if (OrFieldCount.ContainsKey(item.Name.ToLowerInvariant()))
                             {
-                                OrFieldCount[item.Name.ToLower()]++;
+                                OrFieldCount[item.Name.ToLowerInvariant()]++;
                             }
                             else
                             {
-                                OrFieldCount.Add(item.Name.ToLower(), 1);
+                                OrFieldCount.Add(item.Name.ToLowerInvariant(), 1);
                             }
                             try
                             {                              
@@ -508,13 +508,13 @@ namespace Epi.Windows.Enter.Dialogs
                         orValues = item.ItemValue.Split(new[] { " or ", " OR ", " Or ", " oR " }, StringSplitOptions.RemoveEmptyEntries);
                         for (i = 0; i < orValues.Length; i++)
                         {
-                            if (OrFieldCount.ContainsKey(item.Name.ToLower()))
+                            if (OrFieldCount.ContainsKey(item.Name.ToLowerInvariant()))
                             {
-                                OrFieldCount[item.Name.ToLower()]++;
+                                OrFieldCount[item.Name.ToLowerInvariant()]++;
                             }
                             else
                             {
-                                OrFieldCount.Add(item.Name.ToLower(), 1);
+                                OrFieldCount.Add(item.Name.ToLowerInvariant(), 1);
                             }
                             try
                             {
@@ -544,13 +544,13 @@ namespace Epi.Windows.Enter.Dialogs
                 {
                     if (string.IsNullOrEmpty(item.ItemValue))
                     {
-                        if (OrFieldCount.ContainsKey(item.Name.ToLower()))
+                        if (OrFieldCount.ContainsKey(item.Name.ToLowerInvariant()))
                         {
-                            OrFieldCount[item.Name.ToLower()]++;
+                            OrFieldCount[item.Name.ToLowerInvariant()]++;
                         }
                         else
                         {
-                            OrFieldCount.Add(item.Name.ToLower(), 1);
+                            OrFieldCount.Add(item.Name.ToLowerInvariant(), 1);
                         }
 
                         searchFields.Add(item.Name);
@@ -563,13 +563,13 @@ namespace Epi.Windows.Enter.Dialogs
                         orValues = item.ItemValue.Split(new[] { " or ", " OR ", " Or ", " oR " }, StringSplitOptions.RemoveEmptyEntries);
                         for (i = 0; i < orValues.Length; i++)
                         {
-                            if (OrFieldCount.ContainsKey(item.Name.ToLower()))
+                            if (OrFieldCount.ContainsKey(item.Name.ToLowerInvariant()))
                             {
-                                OrFieldCount[item.Name.ToLower()]++;
+                                OrFieldCount[item.Name.ToLowerInvariant()]++;
                             }
                             else
                             {
-                                OrFieldCount.Add(item.Name.ToLower(), 1);
+                                OrFieldCount.Add(item.Name.ToLowerInvariant(), 1);
                             }
                             try
                             {
@@ -607,13 +607,13 @@ namespace Epi.Windows.Enter.Dialogs
                         }
                         for (i = 0; i < orValues.Length; i++)
                         {
-                            if (OrFieldCount.ContainsKey(item.Name.ToLower()))
+                            if (OrFieldCount.ContainsKey(item.Name.ToLowerInvariant()))
                             {
-                                OrFieldCount[item.Name.ToLower()]++;
+                                OrFieldCount[item.Name.ToLowerInvariant()]++;
                             }
                             else
                             {
-                                OrFieldCount.Add(item.Name.ToLower(), 1);
+                                OrFieldCount.Add(item.Name.ToLowerInvariant(), 1);
                             }
                             searchFields.Add(item.Name);
                             searchFieldItemTypes.Add(item.Type);

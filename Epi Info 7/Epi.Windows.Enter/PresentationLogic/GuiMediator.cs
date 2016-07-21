@@ -438,7 +438,7 @@ namespace Epi.Windows.Enter.PresentationLogic
         public void PrintPreview(int recordStart, int recordEnd, int pageNumberStart, int pageNumberEnd)
         {
             DataRow row = currentPage.GetMetadata().GetPageSetupData(view);
-            bool isLandscape = row["Orientation"].ToString().ToLower() == "landscape";
+            bool isLandscape = row["Orientation"].ToString().ToLowerInvariant() == "landscape";
 
             if (ProcessPrintRequest(recordStart, recordEnd, pageNumberStart, pageNumberEnd))
             {
@@ -522,7 +522,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                     printDocument = new System.Drawing.Printing.PrintDocument();
                     printDocument.PrintPage += new PrintPageEventHandler(printDocument_PrintPage);
                     DataRow row = page.GetMetadata().GetPageSetupData(view);
-                    isLandscape = row["Orientation"].ToString().ToLower() == "landscape";
+                    isLandscape = row["Orientation"].ToString().ToLowerInvariant() == "landscape";
                     Panel printPanel = new Panel();
 
                     float dpiX;
@@ -847,7 +847,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                                 if (image != null)
                                 {
                                     Image img = image;
-                                    switch (imageLayout.ToUpper())
+                                    switch (imageLayout.ToUpperInvariant())
                                     {
                                         case "TILE":
                                             TextureBrush tileBrush = new TextureBrush(img, System.Drawing.Drawing2D.WrapMode.Tile);
@@ -1431,7 +1431,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                 if (string.IsNullOrEmpty(control.Text)) return true;
 
                 DateTimeFormatInfo formatInfo = DateTimeFormatInfo.CurrentInfo;
-                string pattern = formatInfo.ShortDatePattern.ToUpper();
+                string pattern = formatInfo.ShortDatePattern.ToUpperInvariant();
 
                 if (control.Text.Equals(pattern)) return true;
 

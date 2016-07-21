@@ -209,10 +209,10 @@ namespace Epi.Windows.MakeView.Dialogs
                     // Added this condition -- Def 1471
                     //if (page.GetProject().CollectedData.TableExists(codeTable.TableName))
                     //{
-                    //    if (!(page.GetProject().CollectedData.TableExists(codeTable.TableName + fieldName.ToLower())))
+                    //    if (!(page.GetProject().CollectedData.TableExists(codeTable.TableName + fieldName.ToLowerInvariant())))
                     //    {
                     //        //to handle use existing, and the new column
-                    //        codeTable.TableName = codeTable.TableName + fieldName.ToLower();
+                    //        codeTable.TableName = codeTable.TableName + fieldName.ToLowerInvariant();
                     //        dgCodes.DataSource = codeTable;
                     //    }
                     //}
@@ -263,7 +263,7 @@ namespace Epi.Windows.MakeView.Dialogs
         #region Private Methods
         private void SetDgCodes(DataGridView dgCodes, string fieldName)
         {
-            //dgCodes.CaptionText = "List for: " + fieldName.ToLower();
+            //dgCodes.CaptionText = "List for: " + fieldName.ToLowerInvariant();
             //dgCodes.PreferredColumnWidth = Convert.ToInt32(dgCodes.Width * MULTICOLUMN_WIDTH_MULTIPLE);
         }
 
@@ -329,7 +329,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             else
             {
-                page.GetProject().CreateCodeTable(cleanedCodeTableName, fieldName.ToLower());
+                page.GetProject().CreateCodeTable(cleanedCodeTableName, fieldName.ToLowerInvariant());
             }
 
             codeTable = page.GetProject().GetTableData(cleanedCodeTableName);
@@ -368,7 +368,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
         }
 
-        private NamedObjectCollection<Field> ConvertToLower(NamedObjectCollection<Field> columnNames)
+        private NamedObjectCollection<Field> ConvertToLowerInvariant(NamedObjectCollection<Field> columnNames)
         {
             if (columnNames != null)
             {

@@ -683,7 +683,7 @@ namespace Epi.Windows.Analysis.Forms
                             string line = reader.ReadLine();
                             reader.Close();                            
 
-                            if(line.ToUpper().Contains("SEP="))
+                            if(line.ToUpperInvariant().Contains("SEP="))
                             {
                                 String message = String.Format(resources.GetString("DELIMITER_HEADER_WARNING"), line);
                                 MessageBox.Show(message);

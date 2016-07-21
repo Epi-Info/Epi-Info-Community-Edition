@@ -992,7 +992,7 @@ namespace EpiDashboard.Gadgets.Analysis
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -1005,7 +1005,7 @@ namespace EpiDashboard.Gadgets.Analysis
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "groupvariable":
                     case "groupvariableprimary":
@@ -1080,7 +1080,7 @@ namespace EpiDashboard.Gadgets.Analysis
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("listfield"))
+                            if (field.Name.ToLowerInvariant().Equals("listfield"))
                             {
                                 //GadgetOptions.InputVariableList.Add(field.InnerText.Replace("&lt;", "<"), "listfield");
                                 ((DuplicatesListParameters)Parameters).KeyColumnNames.Add(field.InnerText.Replace("&lt;", "<"));
@@ -1091,7 +1091,7 @@ namespace EpiDashboard.Gadgets.Analysis
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("listfield"))
+                            if (field.Name.ToLowerInvariant().Equals("listfield"))
                             {
                                 //GadgetOptions.InputVariableList.Add(field.InnerText.Replace("&lt;", "<"), "listfield");
                                 Parameters.ColumnNames.Add(field.InnerText.Replace("&lt;", "<"));
@@ -1110,7 +1110,7 @@ namespace EpiDashboard.Gadgets.Analysis
                                 order = SortOrder.Descending;
                             }
 
-                            if (field.Name.ToLower().Equals("sortfield"))
+                            if (field.Name.ToLowerInvariant().Equals("sortfield"))
                             {
                                 Parameters.SortVariables.Add(field.InnerText.Replace("&lt;", "<"), order);
                             }

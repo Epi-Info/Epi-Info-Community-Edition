@@ -27,9 +27,9 @@ namespace Epi.Core.EnterInterpreter.Rules
             //        if (item is Rule_Value)
             //        {
             //            var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
-            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLower()))
+            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLowerInvariant()))
             //            {
-            //                this.Context.CommandVariableCheck.Add(id.ToLower(), "tan");
+            //                this.Context.CommandVariableCheck.Add(id.ToLowerInvariant(), "tan");
             //            }
             //        }
             //    }

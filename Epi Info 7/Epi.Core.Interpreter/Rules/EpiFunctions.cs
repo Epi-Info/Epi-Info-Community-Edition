@@ -105,7 +105,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 functionName = this.GetCommandElement(pToken.Tokens, 0).ToString();
 
-                switch (functionName.ToUpper())
+                switch (functionName.ToUpperInvariant())
                 {
                     case "ABS":
                         functionCall = new Rule_Abs(pContext, T);
@@ -240,7 +240,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         functionCall = new Rule_EPIWEEK(pContext, T);
                         break;
                     default:
-                            throw new Exception("Function name " + functionName.ToUpper() + " is not a recognized function.");
+                            throw new Exception("Function name " + functionName.ToUpperInvariant() + " is not a recognized function.");
 
                 }
             }
@@ -262,7 +262,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             if (string.IsNullOrEmpty(this.functionName))
             {
 
-                if (this.Context.DLLClassList.ContainsKey(this.ClassName.ToLower()))
+                if (this.Context.DLLClassList.ContainsKey(this.ClassName.ToLowerInvariant()))
                 {
                     object[] args = this.ParameterList.ToArray();
                     if (this.ParameterList.Count > 0)
@@ -577,7 +577,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
     //        reducedValues.Add(FunctionUtils.StripQuotes(reductions[0].Execute().ToString()));
     //        fullString = (string)reducedValues[0];
 
-    //        result = fullString.ToUpper();
+    //        result = fullString.ToUpperInvariant();
 
     //        return result;
     //    }

@@ -45,7 +45,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 if (!string.IsNullOrEmpty(Identifier))
                 {
 
-                    if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                     {
                         this.Context.CommandVariableCheck.Add(Identifier, "define");
                     }
@@ -97,9 +97,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
                 
 
-                string dataTypeName = VariableTypeIndicator.Trim().ToUpper();
+                string dataTypeName = VariableTypeIndicator.Trim().ToUpperInvariant();
                 EpiInfo.Plugin.DataType type = GetDataType(dataTypeName);
-                string variableScope = Variable_Scope.Trim().ToUpper();
+                string variableScope = Variable_Scope.Trim().ToUpperInvariant();
                 EpiInfo.Plugin.VariableScope vt = EpiInfo.Plugin.VariableScope.Standard;
                 
                //if(variableScope.Equals("PERMANENT", StringComparison.OrdinalIgnoreCase))

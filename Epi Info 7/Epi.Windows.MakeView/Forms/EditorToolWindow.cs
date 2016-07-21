@@ -99,7 +99,7 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="commandText">The check code text</param>
         public void AddCommand(string commandText)
         {
-            if (commandText.ToUpper().StartsWith("DEFINE "))
+            if (commandText.ToUpperInvariant().StartsWith("DEFINE "))
             {
                 cbxFields.SelectedIndex = cbxFields.Items.Count - 1;
             }
@@ -526,14 +526,14 @@ namespace Epi.Windows.MakeView.Forms
 
                     if (variable.VarType.Equals(VariableType.Global) || variable.VarType.Equals(VariableType.Permanent))
                     {
-                        sb.Append(StringLiterals.SPACE).Append(variable.VarType.ToString().ToUpper());
+                        sb.Append(StringLiterals.SPACE).Append(variable.VarType.ToString().ToUpperInvariant());
                     }
 
                     if (!string.IsNullOrEmpty(variable.DataType.ToString()))
                     {
                         DataRow row = AppData.Instance.DataTypesDataTable.FindByDataTypeId((int)variable.DataType);
                         string expression = row[ColumnNames.EXPRESSION].ToString();
-                        sb.Append(StringLiterals.SPACE).Append(expression.ToUpper());
+                        sb.Append(StringLiterals.SPACE).Append(expression.ToUpperInvariant());
                     }
 
                     if (variable.PromptText != null)

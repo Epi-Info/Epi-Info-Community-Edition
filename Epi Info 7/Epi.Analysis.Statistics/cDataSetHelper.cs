@@ -173,7 +173,7 @@ namespace Epi.Data
                             Field.FieldName = FieldParts[0];
                             break;
                         case 2:
-                            Field.Aggregate = FieldParts[0].Trim().ToLower();    //we're doing a case-sensitive comparison later
+                            Field.Aggregate = FieldParts[0].Trim().ToLowerInvariant();    //we're doing a case-sensitive comparison later
                             Field.FieldName = FieldParts[1].Trim(' ', ')');
                             break;
                         default:

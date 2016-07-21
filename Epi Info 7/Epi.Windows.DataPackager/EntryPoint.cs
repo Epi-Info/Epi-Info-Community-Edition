@@ -31,7 +31,7 @@ namespace Epi.Windows.DataPackager
                     Epi.Windows.ImportExport.Dialogs.PackageForTransportDialog M = null;
                     bool useSmallSize = false;
 
-                    if (!string.IsNullOrEmpty(smallsize) && smallsize.ToLower().Equals("true"))
+                    if (!string.IsNullOrEmpty(smallsize) && smallsize.ToLowerInvariant().Equals("true"))
                     {
                         useSmallSize = true;
                     }
@@ -45,7 +45,7 @@ namespace Epi.Windows.DataPackager
                         M = new Epi.Windows.ImportExport.Dialogs.PackageForTransportDialog(useSmallSize);
                     }
 
-                    if (!string.IsNullOrEmpty(autorun) && autorun.ToLower().Equals("true") && M != null)
+                    if (!string.IsNullOrEmpty(autorun) && autorun.ToLowerInvariant().Equals("true") && M != null)
                     {
                         M.CloseOnFinish = true;
                         M.StartCreatePackage();

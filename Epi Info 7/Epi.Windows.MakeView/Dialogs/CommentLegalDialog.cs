@@ -354,7 +354,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             string cleanedCodeTableName = CleanCodeTableName(fieldName, dataView);
 
-            page.GetProject().CreateCodeTable(cleanedCodeTableName, fieldName.ToLower());
+            page.GetProject().CreateCodeTable(cleanedCodeTableName, fieldName.ToLowerInvariant());
             codeTable = page.GetProject().GetTableData(cleanedCodeTableName);
             codeTable.TableName = cleanedCodeTableName;
             dgCodes.DataSource = codeTable;

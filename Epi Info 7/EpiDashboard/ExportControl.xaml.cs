@@ -118,7 +118,7 @@ namespace EpiDashboard
 
             if (cmbDataFormats.SelectedIndex >= 0)
             {
-                if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLower().Contains("csv file"))
+                if (cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("csv file"))
                 {
                     tblockDestinationTable.Text = "File name";
                 }
@@ -342,7 +342,7 @@ namespace EpiDashboard
                         DbDriverInfo dbInfo = new DbDriverInfo();
                         dbInfo.DBCnnStringBuilder = dbFactory.RequestNewConnection(db.DataSource);
                         
-                        if (db.ConnectionDescription.ToLower().Contains("csv file:"))
+                        if (db.ConnectionDescription.ToLowerInvariant().Contains("csv file:"))
                         {
                             isFlatFile = true;
                         }
@@ -814,7 +814,7 @@ namespace EpiDashboard
                     SetGadgetStatusHandler requestUpdateStatus = new SetGadgetStatusHandler(RequestUpdateStatusMessage);
                     CheckForCancellationHandler checkForCancellation = new CheckForCancellationHandler(IsCancelled);
 
-                    if (db.TableExists(tableName) && !db.ConnectionDescription.ToLower().Contains("excel"))
+                    if (db.TableExists(tableName) && !db.ConnectionDescription.ToLowerInvariant().Contains("excel"))
                     {
                         db.DeleteTable(tableName);
                     }
@@ -1048,7 +1048,7 @@ namespace EpiDashboard
 
             string fileName = db.DataSource + "\\" + tableName;
 
-            if (!fileName.ToLower().EndsWith(".csv") && !fileName.ToLower().EndsWith(".txt"))
+            if (!fileName.ToLowerInvariant().EndsWith(".csv") && !fileName.ToLowerInvariant().EndsWith(".txt"))
             {
                 fileName = fileName + ".csv";
             }
@@ -1093,7 +1093,7 @@ namespace EpiDashboard
                 useTabOrder = false;
 
             bool writeToFlatFile = false;
-            if (cmbDataFormats.SelectedItem.ToString().ToLower().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLower().Contains("csv file"))
+            if (cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("csv file"))
             {
                 writeToFlatFile = true;
             }

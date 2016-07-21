@@ -3215,7 +3215,7 @@ namespace EpiDashboard
 
             foreach (System.Xml.XmlElement element in doc.DocumentElement.ChildNodes)
             {
-                if (element.Name.ToLower().Equals("dashboardhelper"))
+                if (element.Name.ToLowerInvariant().Equals("dashboardhelper"))
                 {
                     DashboardHelper helper = new DashboardHelper();
                     helper.NotificationEvent += new NotificationEventHandler(dashboardHelper_NotificationEvent);
@@ -3269,7 +3269,7 @@ namespace EpiDashboard
                                 return;
                             }
 
-                            if (connStr.ToLower().StartsWith("provider=microsoft.ace") || connStr.ToLower().StartsWith("provider=microsoft.jet.oledb"))
+                            if (connStr.ToLowerInvariant().StartsWith("provider=microsoft.ace") || connStr.ToLowerInvariant().StartsWith("provider=microsoft.jet.oledb"))
                             {
                                 string filePath = string.Empty;
 
@@ -3282,12 +3282,12 @@ namespace EpiDashboard
 
                                     bool isTextFile = false;
 
-                                    if (filePath.ToLower().Contains("text;"))
+                                    if (filePath.ToLowerInvariant().Contains("text;"))
                                     {
                                         isTextFile = true;
                                     }
 
-                                    if (filePath.ToLower().Contains("extended properties"))
+                                    if (filePath.ToLowerInvariant().Contains("extended properties"))
                                     {
                                         indexOf = filePath.IndexOf(';');
                                         if (indexOf >= 0)
@@ -3353,7 +3353,7 @@ namespace EpiDashboard
                     catch (ApplicationException ex)
                     {
                         string message = ex.Message;
-                        if (message.ToLower().Equals("error executing select query against the database."))
+                        if (message.ToLowerInvariant().Equals("error executing select query against the database."))
                         {
                             message = DashboardSharedStrings.ERROR_DATA_SOURCE_PERMISSIONS;
                         }
@@ -3406,17 +3406,17 @@ namespace EpiDashboard
                     }
                 }
 
-                if (element.Name.ToLower().Equals("gadgets"))
+                if (element.Name.ToLowerInvariant().Equals("gadgets"))
                 {
                     gadgetXmlElement = element;
                 }
-                if (element.Name.ToLower().Equals("outputsettings"))
+                if (element.Name.ToLowerInvariant().Equals("outputsettings"))
                 {
                     try
                     {
                         foreach (XmlElement child in element.ChildNodes)
                         {
-                            switch (child.Name.ToLower())
+                            switch (child.Name.ToLowerInvariant())
                             {
                                 case "showcanvassummaryinfo":
                                     ShowCanvasSummaryInfoInOutput = bool.Parse(child.InnerText);
@@ -3479,19 +3479,19 @@ namespace EpiDashboard
                         Epi.Windows.MsgBox.ShowException(ex);
                     }
                 }
-                if (element.Name.ToLower().Equals("canvassettings"))
+                if (element.Name.ToLowerInvariant().Equals("canvassettings"))
                 {
                     try
                     {
                         foreach (XmlElement child in element.ChildNodes)
                         {
-                            switch (child.Name.ToLower())
+                            switch (child.Name.ToLowerInvariant())
                             {
                                 case "editmode":
                                     LoadInEditMode = bool.Parse(child.InnerText);
                                     break;
                                 case "layoutmode":
-                                    if (child.InnerText.ToLower().Equals("free"))
+                                    if (child.InnerText.ToLowerInvariant().Equals("free"))
                                     {
                                         canvasMain.AllowDragging = true;
                                         statusStripButtonVerticalArrange.IsSelected = false;
@@ -4092,7 +4092,7 @@ namespace EpiDashboard
 
                 if (DashboardHelper.IsUsingEpiProject)
                 {
-                    //if (cmbTableName.Text.ToLower() == dashboardHelper.View.Name.ToLower() && dashboardHelper.View.Project.FilePath == txtProjectPath.Text)
+                    //if (cmbTableName.Text.ToLowerInvariant() == dashboardHelper.View.Name.ToLowerInvariant() && dashboardHelper.View.Project.FilePath == txtProjectPath.Text)
                     //{
                     //    pnlWarning.Visibility = System.Windows.Visibility.Collapsed;
                     //    txtWarning.Text = string.Empty;

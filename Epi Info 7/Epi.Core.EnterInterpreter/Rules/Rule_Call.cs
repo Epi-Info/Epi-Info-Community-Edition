@@ -20,7 +20,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 if (!string.IsNullOrEmpty(Identifier))
                 {
 
-                    if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLower()))
+                    if (!this.Context.CommandVariableCheck.ContainsKey(Identifier.ToLowerInvariant()))
                     {
                         this.Context.CommandVariableCheck.Add(Identifier, "call");
                     }
@@ -35,7 +35,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            if (this.Context.Subroutine.ContainsKey(this.Identifier.ToLower()))
+            if (this.Context.Subroutine.ContainsKey(this.Identifier.ToLowerInvariant()))
             {
                 EnterRule Sub = this.Context.Subroutine[this.Identifier];
                 return Sub.Execute();

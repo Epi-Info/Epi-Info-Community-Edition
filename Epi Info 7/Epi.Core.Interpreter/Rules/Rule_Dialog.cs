@@ -252,7 +252,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             foreach (string name in tableNames)
             {
-                if (name.ToUpper().StartsWith("VIEW"))
+                if (name.ToUpperInvariant().StartsWith("VIEW"))
                 {
                     viewNames.Add(name);
                 }
@@ -420,7 +420,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             //<Dialog_Date_Statement> ::= DIALOG String Identifier DATEFORMAT <TitleOpt>
             Prompt = this.GetCommandElement(token.Tokens, 1);
             TitleText = this.GetCommandElement(token.Tokens, 4);
-            Modifier = this.GetCommandElement(token.Tokens, 3).ToUpper();
+            Modifier = this.GetCommandElement(token.Tokens, 3).ToUpperInvariant();
             Identifier = this.GetCommandElement(token.Tokens, 2);
         }
         public override object Execute()
@@ -440,7 +440,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             Identifier = this.GetCommandElement(token.Tokens, 2);
             MaskOpt = this.GetCommandElement(token.Tokens, 4);
             TitleText = this.GetCommandElement(token.Tokens, 5);
-            Modifier = this.GetCommandElement(token.Tokens, 3).ToUpper();
+            Modifier = this.GetCommandElement(token.Tokens, 3).ToUpperInvariant();
         }
         public override object Execute()
         {

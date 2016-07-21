@@ -589,7 +589,7 @@ namespace Epi.Windows.Enter
                     currentViewName = this.view.Name;
                     currentProject = this.view.GetProject().FullName;
 
-                    if (recentView.Text.Substring(recentView.Text.LastIndexOf(":") + 1) != currentViewName && currentProject.ToLower() != recentView.Text.ToLower())
+                    if (recentView.Text.Substring(recentView.Text.LastIndexOf(":") + 1) != currentViewName && currentProject.ToLowerInvariant() != recentView.Text.ToLowerInvariant())
                     {
                         if (!CloseView())
                         {
@@ -1921,7 +1921,7 @@ namespace Epi.Windows.Enter
                             currentViewName = this.view.Name;
                             currentProject = this.view.GetProject().FullName;
 
-                            //if (View.Text.Substring(View.Text.LastIndexOf(":") + 1) != currentViewName && currentProject.ToLower() != View.Text.ToLower())
+                            //if (View.Text.Substring(View.Text.LastIndexOf(":") + 1) != currentViewName && currentProject.ToLowerInvariant() != View.Text.ToLowerInvariant())
                             //{
                             //    if (!CloseView())
                             //    {
@@ -2271,7 +2271,7 @@ namespace Epi.Windows.Enter
                 System.Drawing.Imaging.ImageFormat formatClass = (System.Drawing.Imaging.ImageFormat)imageFormatList[i].GetValue(null, null);
                 if (formatClass.Guid.Equals(image.RawFormat.Guid))
                 {
-                    return imageFormatList[i].Name.ToLower();
+                    return imageFormatList[i].Name.ToLowerInvariant();
                 }
             }
             return "";
@@ -2395,7 +2395,7 @@ namespace Epi.Windows.Enter
                 sw.WriteLine("<h1>" + canvas.CurrentView.Name + "</h1><hr><body><table>");
                 foreach (DataColumn col in data.Columns)
                 {
-                    if (!col.ColumnName.ToLower().Contains("globalrecordid"))
+                    if (!col.ColumnName.ToLowerInvariant().Contains("globalrecordid"))
                     {
                         sw.WriteLine("<th>" + col.ColumnName + "</th>");
                     }
@@ -2405,7 +2405,7 @@ namespace Epi.Windows.Enter
                     sw.WriteLine("<tr>");
                     for (int x = 0; x < data.Columns.Count; x++)
                     {
-                        if (!data.Columns[x].ColumnName.ToLower().Contains("globalrecordid"))
+                        if (!data.Columns[x].ColumnName.ToLowerInvariant().Contains("globalrecordid"))
                         {
                             if (row[x] is byte[])
                             {
@@ -2435,7 +2435,7 @@ namespace Epi.Windows.Enter
                                 }
                                 else if (View.Fields.Contains(data.Columns[x].ColumnName) && (View.Fields[data.Columns[x].ColumnName] is Epi.Fields.YesNoField || View.Fields[data.Columns[x].ColumnName] is Epi.Fields.CheckBoxField))
                                 {
-                                    string value = row[x].ToString().ToLower();
+                                    string value = row[x].ToString().ToLowerInvariant();
                                     if (value.Equals("true") || value.Equals("1"))
                                     {
                                         value = config.Settings.RepresentationOfYes;

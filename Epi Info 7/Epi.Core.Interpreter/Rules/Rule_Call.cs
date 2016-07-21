@@ -33,7 +33,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             if (!this.HasRun)
             {
-                this.Identifier = this.Identifier.ToLower();
+                this.Identifier = this.Identifier.ToLowerInvariant();
 
                 if (this.Context.SubroutineList.ContainsKey(this.Identifier))
                 {                     

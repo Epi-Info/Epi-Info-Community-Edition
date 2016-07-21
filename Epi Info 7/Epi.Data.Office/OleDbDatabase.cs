@@ -1707,7 +1707,7 @@ namespace Epi.Data.Office
                     catch (OleDbException ex)
                     {
                         skippedRows++;
-                        if (ex.Message.ToLower().Contains("numeric field overflow"))
+                        if (ex.Message.ToLowerInvariant().Contains("numeric field overflow"))
                         {
                             numericFieldOverflow = true;
                         }
@@ -2060,7 +2060,7 @@ namespace Epi.Data.Office
                 P.ParameterName = temp[1].Trim();
                 foreach (DataColumn C in pDataTable.Columns)
                 {
-                    if (P.ParameterName.ToLower() == C.ColumnName.ToLower())
+                    if (P.ParameterName.ToLowerInvariant() == C.ColumnName.ToLowerInvariant())
                     {
                         switch (C.DataType.Name)
                         {

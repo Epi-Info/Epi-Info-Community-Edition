@@ -45,7 +45,7 @@ namespace EpiDashboard
                 FileStream stream = new FileStream(dlg.FileName, FileMode.Create);
                 BitmapEncoder encoder = null; // new BitmapEncoder();
 
-                if (dlg.SafeFileName.ToLower().EndsWith(".png"))
+                if (dlg.SafeFileName.ToLowerInvariant().EndsWith(".png"))
                 {
                     encoder = new PngBitmapEncoder();
                 }

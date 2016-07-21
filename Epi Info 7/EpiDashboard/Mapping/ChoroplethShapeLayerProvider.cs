@@ -39,7 +39,7 @@ namespace EpiDashboard.Mapping
             {
                 FileInfo shapeFile = new FileInfo(boundrySourceLocation);
                 string directoryName = System.IO.Path.GetDirectoryName(boundrySourceLocation);
-                string dbfFilename = System.IO.Path.GetFileName(boundrySourceLocation).ToLower().Replace(".shp", ".dbf");
+                string dbfFilename = System.IO.Path.GetFileName(boundrySourceLocation).ToLowerInvariant().Replace(".shp", ".dbf");
                 string dbfFullPath = System.IO.Path.Combine(directoryName, dbfFilename);
                 FileInfo dbfFile = new FileInfo(dbfFullPath);
 

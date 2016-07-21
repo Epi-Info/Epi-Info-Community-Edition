@@ -238,15 +238,15 @@ namespace Epi.ImportExport
 
                 foreach (XmlElement docElement in doc.ChildNodes)
                 {
-                    if (docElement.Name.ToLower().Equals("surveyresponse"))
+                    if (docElement.Name.ToLowerInvariant().Equals("surveyresponse"))
                     {
                         foreach (XmlElement surveyElement in docElement.ChildNodes)
                         {
-                            if (surveyElement.Name.ToLower().Equals("page") && surveyElement.Attributes.Count > 0 && surveyElement.Attributes[0].Name.ToLower().Equals("pageid"))
+                            if (surveyElement.Name.ToLowerInvariant().Equals("page") && surveyElement.Attributes.Count > 0 && surveyElement.Attributes[0].Name.ToLowerInvariant().Equals("pageid"))
                             {
                                 foreach (XmlElement pageElement in surveyElement.ChildNodes)
                                 {
-                                    if (pageElement.Name.ToLower().Equals("responsedetail"))
+                                    if (pageElement.Name.ToLowerInvariant().Equals("responsedetail"))
                                     {
                                         string fieldName = string.Empty;
                                         if (pageElement.Attributes.Count > 0)

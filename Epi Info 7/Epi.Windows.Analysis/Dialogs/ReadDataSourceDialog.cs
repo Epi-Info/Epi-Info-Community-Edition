@@ -685,7 +685,7 @@ namespace Epi.Windows.Analysis.Dialogs
                     mruSelectedDatabaseName = name;
                     selectedDataProvider = provider;
 
-                    if (name.ToLower().EndsWith(".prj"))
+                    if (name.ToLowerInvariant().EndsWith(".prj"))
                     {
                         Project project = new Project(connectionString);
                         this.selectedDataSource = project;

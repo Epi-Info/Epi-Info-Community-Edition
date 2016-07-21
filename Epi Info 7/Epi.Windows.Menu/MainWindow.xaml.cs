@@ -321,7 +321,7 @@ namespace Epi.Windows.Menu
 
                 string commandText = null;
 
-                switch (moduleType/*.ToUpper()*/) // to fix a problem for Turkish users where ToUpper doesn't do what it's supposed to do
+                switch (moduleType/*.ToUpperInvariant()*/) // to fix a problem for Turkish users where ToUpperInvariant doesn't do what it's supposed to do
                 {
                     case "ENTER":
                         commandText = Environment.CurrentDirectory + "\\Enter.exe";

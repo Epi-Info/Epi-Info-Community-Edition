@@ -355,7 +355,7 @@ namespace EpiDashboard
                         pnlStackedColumnConfig.Visibility = Visibility.Collapsed;
                         pnlEpiCurveConfig.Visibility = Visibility.Collapsed;
                         pnlSingleConfig.Visibility = Visibility.Visible;
-                        if (chartType.ToLower().Equals("pie") || chartType.ToLower().Equals("pareto"))
+                        if (chartType.ToLowerInvariant().Equals("pie") || chartType.ToLowerInvariant().Equals("pareto"))
                         {
                             cbxStrataField.Visibility = System.Windows.Visibility.Collapsed;
                             tblockStrataField.Visibility = System.Windows.Visibility.Collapsed;
@@ -422,7 +422,7 @@ namespace EpiDashboard
                     txtCustomHeight.Text = string.Empty;
                 }
 
-                if (cbxChartType.Text.ToLower().Equals("column") || cbxChartType.Text.ToLower().Equals("bar"))
+                if (cbxChartType.Text.ToLowerInvariant().Equals("column") || cbxChartType.Text.ToLowerInvariant().Equals("bar"))
                 {
                     if (cbxSingleField.SelectedItem != null && !string.IsNullOrEmpty(cbxSingleField.SelectedItem.ToString()))
                     {
@@ -461,7 +461,7 @@ namespace EpiDashboard
                         checkboxAllValues.IsChecked = false;
                     }
                 }
-                else if (cbxChartType.Text.ToLower().Equals("epi curve"))
+                else if (cbxChartType.Text.ToLowerInvariant().Equals("epi curve"))
                 {
                     string columnName = e.AddedItems[0].ToString();
                     if (cbxDateField.SelectedIndex >= 0)
@@ -1090,11 +1090,11 @@ namespace EpiDashboard
                     {
                         string value = data.Columns[counter].ColumnName;
 
-                        if (value.ToLower().Equals("true") || value.Equals("1"))
+                        if (value.ToLowerInvariant().Equals("true") || value.Equals("1"))
                         {
                             definition.Title = DashboardHelper.Config.Settings.RepresentationOfYes;
                         }
-                        else if (value.ToLower().Equals("false") || value.Equals("0"))
+                        else if (value.ToLowerInvariant().Equals("false") || value.Equals("0"))
                         {
                             definition.Title = DashboardHelper.Config.Settings.RepresentationOfNo;
                         }
@@ -1197,15 +1197,15 @@ namespace EpiDashboard
                             }
                             else
                             {
-                                if (dateFormat.ToLower().Equals("hours"))
+                                if (dateFormat.ToLowerInvariant().Equals("hours"))
                                 {
                                     val.IndependentValue = ((DateTime)row[0]).ToString("g");
                                 }
-                                else if (dateFormat.ToLower().Equals("months"))
+                                else if (dateFormat.ToLowerInvariant().Equals("months"))
                                 {
                                     val.IndependentValue = ((DateTime)row[0]).ToString("MMM yyyy");                                    
                                 }
-                                else if (dateFormat.ToLower().Equals("years"))
+                                else if (dateFormat.ToLowerInvariant().Equals("years"))
                                 {
                                     val.IndependentValue = ((DateTime)row[0]).ToString("yyyy");
                                 }
@@ -1368,19 +1368,19 @@ namespace EpiDashboard
                         }
 
                         //if (dashboardHelper.IsUsingEpiProject && View.Fields.Contains(dateVar) && View.Fields[dateVar] is DateTimeField && !(View.Fields[dateVar] is DateField) && !(View.Fields[dateVar] is TimeField))
-                        if (dateInterval.ToLower().Equals("hours"))
+                        if (dateInterval.ToLowerInvariant().Equals("hours"))
                         {
                             currentDate = currentDate.AddHours(1);
                         }
-                        else if (dateInterval.ToLower().Equals("days"))
+                        else if (dateInterval.ToLowerInvariant().Equals("days"))
                         {
                             currentDate = currentDate.AddDays(1);
                         }
-                        else if (dateInterval.ToLower().Equals("months"))
+                        else if (dateInterval.ToLowerInvariant().Equals("months"))
                         {
                             currentDate = currentDate.AddMonths(1);
                         }
-                        else if (dateInterval.ToLower().Equals("years"))
+                        else if (dateInterval.ToLowerInvariant().Equals("years"))
                         {
                             currentDate = currentDate.AddMonths(1);
                         }
@@ -1555,7 +1555,7 @@ namespace EpiDashboard
                         {
                             GadgetOptions.InputVariableList.Add("xaxisend", txtXAxisEndValue.Text);
                         }
-                        GadgetOptions.InputVariableList.Add("isdatecolumnnumeric", DashboardHelper.IsColumnNumeric(cbxDateField.SelectedItem.ToString()).ToString().ToLower());
+                        GadgetOptions.InputVariableList.Add("isdatecolumnnumeric", DashboardHelper.IsColumnNumeric(cbxDateField.SelectedItem.ToString()).ToString().ToLowerInvariant());
                         GadgetOptions.InputVariableList.Add("dateinterval", cbxDateInterval.Text);
                         GadgetOptions.MainVariableName = cbxDateField.SelectedItem.ToString();
                         if (cbxCaseStatusField.SelectedIndex >= 0)
@@ -1605,7 +1605,7 @@ namespace EpiDashboard
                         }
 
                         string chartType = (((ComboBoxItem)cbxChartType.SelectedItem).Content.ToString());
-                        if (chartType.ToLower().Equals("pareto"))
+                        if (chartType.ToLowerInvariant().Equals("pareto"))
                         {
                             GadgetOptions.ShouldSortHighToLow = true;
                             GadgetOptions.InputVariableList.Add("charttype", "pareto");
@@ -1616,7 +1616,7 @@ namespace EpiDashboard
                         {
                             GadgetOptions.WeightVariableName = cbxWeightField.SelectedItem.ToString();
                         }
-                        if (!chartType.ToLower().Equals("pareto") && cbxStrataField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxStrataField.SelectedItem.ToString()))
+                        if (!chartType.ToLowerInvariant().Equals("pareto") && cbxStrataField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxStrataField.SelectedItem.ToString()))
                         {
                             List<string> strataVars = new List<string>();
                             strataVars.Add(cbxStrataField.SelectedItem.ToString());
@@ -2552,7 +2552,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "casestatusvariable":
                         cbxCaseStatusField.Text = child.InnerText.Replace("&lt;", "<");
@@ -2576,7 +2576,7 @@ namespace EpiDashboard
                         cbxScatterXAxisField.Text = child.InnerText.Replace("&lt;", "<");
                         break;
                     case "allvalues":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             checkboxAllValues.IsChecked = true;
                         }
@@ -2586,7 +2586,7 @@ namespace EpiDashboard
                         }
                         break;
                     case "horizontalgridlines":
-                        if (child.InnerText.ToLower().Equals("true"))
+                        if (child.InnerText.ToLowerInvariant().Equals("true"))
                         {
                             checkboxShowHorizontalGridLines.IsChecked = true;
                         }
@@ -2668,7 +2668,7 @@ namespace EpiDashboard
 
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "top":
                         Canvas.SetTop(this, double.Parse(attribute.Value));

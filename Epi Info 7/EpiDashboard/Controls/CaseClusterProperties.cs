@@ -456,7 +456,7 @@ namespace EpiDashboard.Controls
             List<string> fields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
             foreach (string f in fields)
             {
-                if (!(f.ToUpper() == "RECSTATUS" || f.ToUpper() == "FKEY" || f.ToUpper() == "GLOBALRECORDID" || f.ToUpper() == "UNIQUEKEY"))
+                if (!(f.ToUpperInvariant() == "RECSTATUS" || f.ToUpperInvariant() == "FKEY" || f.ToUpperInvariant() == "GLOBALRECORDID" || f.ToUpperInvariant() == "UNIQUEKEY"))
                 {
                     cmbLatitude.Items.Add(f);
                     cmbLongitude.Items.Add(f);
@@ -477,7 +477,7 @@ namespace EpiDashboard.Controls
             List<string> fields = dashboardHelper.GetFieldsAsList(columnDataType); //dashboardHelper.GetNumericFormFields();
             foreach (string f in fields)
             {
-                if (!(f.ToUpper() == "RECSTATUS" || f.ToUpper() == "FKEY" || f.ToUpper() == "GLOBALRECORDID" || f.ToUpper() == "UNIQUEKEY"))
+                if (!(f.ToUpperInvariant() == "RECSTATUS" || f.ToUpperInvariant() == "FKEY" || f.ToUpperInvariant() == "GLOBALRECORDID" || f.ToUpperInvariant() == "UNIQUEKEY"))
                 {
 
                     cmbLongitude.Items.Add(f);

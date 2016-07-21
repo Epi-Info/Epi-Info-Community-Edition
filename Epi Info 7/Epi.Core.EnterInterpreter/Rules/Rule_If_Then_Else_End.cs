@@ -80,7 +80,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                         {
                             if (IdentifierList.Length > 0)
                             {
-                                if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()) && !NewList.Contains(item))
+                                if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLowerInvariant()) && !NewList.Contains(item))
                                 {
                                     this.Context.CommandVariableCheck.Add(item, "If");
                                 }
@@ -167,7 +167,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             object result = null;
 
-            if (IfClause.Execute().ToString().ToLower() == "true")
+            if (IfClause.Execute().ToString().ToLowerInvariant() == "true")
             {
                 result = ThenClause.Execute();
             }

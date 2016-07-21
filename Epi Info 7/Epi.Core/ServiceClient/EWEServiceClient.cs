@@ -187,7 +187,7 @@ namespace Epi.Core.ServiceClient
             string s = config.Settings.EWEServiceBindingMode;// ConfigurationManager.AppSettings["WCF_BINDING_TYPE"];
             if (!String.IsNullOrEmpty(s))
             {
-                if (s.ToUpper() == "WSHTTP")
+                if (s.ToUpperInvariant() == "WSHTTP")
                 {
                     pIsWsHTTPBinding = true;
                 }

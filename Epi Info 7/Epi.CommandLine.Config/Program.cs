@@ -19,15 +19,15 @@ namespace Epi.CommandLine.Config
             LoadConfiguration(args);
             if (args.Length > 1)
             {
-                if (args[0].ToLower().Equals("set"))
+                if (args[0].ToLowerInvariant().Equals("set"))
                 {
                     SetVariable(args);
                 }
-                if (args[0].ToLower().Equals("get"))
+                if (args[0].ToLowerInvariant().Equals("get"))
                 {
                     GetVariable(args);
                 }
-                if (args[0].ToLower().Equals("dialog"))
+                if (args[0].ToLowerInvariant().Equals("dialog"))
                 {
                     SetVariableViaDialog(args);
                 }
@@ -121,19 +121,19 @@ namespace Epi.CommandLine.Config
 
         private static DataType GetDataType(string arg)
         {
-            if (arg.ToLower().Equals("textinput"))
+            if (arg.ToLowerInvariant().Equals("textinput"))
             {
                 return DataType.Text;
             }
-            else if (arg.ToLower().Equals("numeric"))
+            else if (arg.ToLowerInvariant().Equals("numeric"))
             {
                 return DataType.Number;
             }
-            else if (arg.ToLower().Equals("dateformat"))
+            else if (arg.ToLowerInvariant().Equals("dateformat"))
             {
                 return DataType.DateTime;
             }
-            else if (arg.ToLower().Equals("yn"))
+            else if (arg.ToLowerInvariant().Equals("yn"))
             {
                 return DataType.Boolean;
             }

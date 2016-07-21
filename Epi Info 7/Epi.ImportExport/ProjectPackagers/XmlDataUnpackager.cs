@@ -498,7 +498,7 @@ namespace Epi.ImportExport.ProjectPackagers
                         Query updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + setFieldText.ToString() + StringLiterals.SPACE + whereClause);
                         updateQuery.Parameters = fieldValueParams;
 
-                        if (DestinationProject.CollectedDataDriver.ToLower().Contains("epi.data.office"))
+                        if (DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
                         {
                             IDbCommand command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
                             object obj = command.ExecuteNonQuery();
@@ -773,7 +773,7 @@ namespace Epi.ImportExport.ProjectPackagers
                         
                         updateQuery.Parameters = fieldValueParams;
 
-                        if (DestinationProject.CollectedDataDriver.ToLower().Contains("epi.data.office"))
+                        if (DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
                         {
                             IDbCommand command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
                             object obj = command.ExecuteNonQuery();
@@ -1016,7 +1016,7 @@ namespace Epi.ImportExport.ProjectPackagers
             sb.Append(") ");
             Epi.Data.Query insertQuery = db.CreateQuery(sb.ToString());
 
-            if (DestinationProject.CollectedDataDriver.ToLower().Contains("epi.data.office"))
+            if (DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
             {
                 IDbCommand command = GetCommand(insertQuery.SqlStatement, Conn, insertQuery.Parameters);
                 object obj = command.ExecuteNonQuery();
@@ -1128,7 +1128,7 @@ namespace Epi.ImportExport.ProjectPackagers
             Epi.Data.Query insertQuery = db.CreateQuery(sb.ToString());
             insertQuery.Parameters = parameters;
 
-            if (DestinationProject.CollectedDataDriver.ToLower().Contains("epi.data.office"))
+            if (DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
             {
                 IDbCommand command = GetCommand(insertQuery.SqlStatement, Conn, insertQuery.Parameters);
                 object obj = command.ExecuteNonQuery();
@@ -1150,7 +1150,7 @@ namespace Epi.ImportExport.ProjectPackagers
                 sb.Append("'" + guid + "'");
                 sb.Append(") ");
                 insertQuery = db.CreateQuery(sb.ToString());
-                if (DestinationProject.CollectedDataDriver.ToLower().Contains("epi.data.office"))
+                if (DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
                 {
                     IDbCommand command = GetCommand(insertQuery.SqlStatement, Conn, insertQuery.Parameters);
                     object obj = command.ExecuteNonQuery();

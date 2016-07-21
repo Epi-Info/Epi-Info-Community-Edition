@@ -227,7 +227,7 @@ namespace Epi.Epi2000
 		{
 			get
 			{
-				if (Name.ToLower().StartsWith("view"))
+				if (Name.ToLowerInvariant().StartsWith("view"))
 				{
 					return Name;
 				}
@@ -245,7 +245,7 @@ namespace Epi.Epi2000
 		{
 			get
 			{
-				if (Name.ToLower().StartsWith("view"))
+				if (Name.ToLowerInvariant().StartsWith("view"))
 				{
 					return Name.Substring(4);
 				}
@@ -448,7 +448,7 @@ namespace Epi.Epi2000
         /// <returns></returns>
         public static string StripViewNameOfPrefix(string viewName)
         {
-            if (viewName.ToLower().StartsWith("view"))
+            if (viewName.ToLowerInvariant().StartsWith("view"))
             {
                 return viewName.Substring(4);
             }

@@ -1704,7 +1704,7 @@ namespace EpiDashboard
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -1717,7 +1717,7 @@ namespace EpiDashboard
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         //cbxField.Text = child.InnerText.Replace("&lt;", "<");

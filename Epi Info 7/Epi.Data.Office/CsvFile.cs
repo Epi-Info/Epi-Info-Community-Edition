@@ -48,7 +48,7 @@ namespace Epi.Data.Office
         {
             OleDbConnectionStringBuilder oleDBCnnStrBuilder = new OleDbConnectionStringBuilder(connectionString);
             oleDBCnnStrBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
-            if(connectionString.ToUpper().Contains("UNICODE"))
+            if(connectionString.ToUpperInvariant().Contains("UNICODE"))
             {
                 oleDBCnnStrBuilder.Add("Extended Properties", "text;CharacterSet=UNICODE;HDR=Yes;FMT=Delimited");
             }
@@ -126,7 +126,7 @@ namespace Epi.Data.Office
             sb.Append(" ( ");
             foreach (TableColumn column in columns)
             {
-                if (column.Name.ToLower() != "uniquekey")
+                if (column.Name.ToLowerInvariant() != "uniquekey")
                 {
                     if (column.IsIdentity)
                     {

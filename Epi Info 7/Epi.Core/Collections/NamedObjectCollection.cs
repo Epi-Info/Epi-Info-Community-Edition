@@ -108,7 +108,7 @@ namespace Epi.Collections
         /// <param name="obj">The value of the element to add.</param>
         public virtual void Add(T obj)
         {
-            string name = ((INamedObject)obj).Name.ToLower();
+            string name = ((INamedObject)obj).Name.ToLowerInvariant();
             master.Add(name, obj);
         }
 
@@ -119,7 +119,7 @@ namespace Epi.Collections
         /// <param name="tag">The value of the element to add.</param>
         public void Add(T obj, object tag)
         {
-            string name = ((INamedObject)obj).Name.ToLower();
+            string name = ((INamedObject)obj).Name.ToLowerInvariant();
             Add(obj);
             tags.Add(name, tag);
         }
@@ -133,7 +133,7 @@ namespace Epi.Collections
         public virtual bool Remove(T obj)
         {
             INamedObject namedObject = obj as INamedObject;
-            return master.Remove(namedObject.Name.ToLower());
+            return master.Remove(namedObject.Name.ToLowerInvariant());
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Epi.Collections
         /// <param name="name">Name to remove</param>
         public virtual void Remove(string name)
         {
-            T obj = this[name.ToLower()];
+            T obj = this[name.ToLowerInvariant()];
             Remove(obj);
         }
 
@@ -154,7 +154,7 @@ namespace Epi.Collections
         public virtual bool Contains(T obj)
         {
             INamedObject namedObject = obj as INamedObject;
-            return Contains(namedObject.Name.ToLower());
+            return Contains(namedObject.Name.ToLowerInvariant());
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Epi.Collections
         /// <returns>Boolean</returns>
         public virtual bool Contains(string name)
         {
-            return master.ContainsKey(name.ToLower());
+            return master.ContainsKey(name.ToLowerInvariant());
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace Epi.Collections
         /// <returns>Boolean</returns>
         public bool Exists(string name)
         {
-            return master.ContainsKey(name.ToLower());
+            return master.ContainsKey(name.ToLowerInvariant());
         }
 
         /// <summary>

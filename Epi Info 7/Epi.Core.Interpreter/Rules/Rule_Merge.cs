@@ -265,7 +265,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
 
 
-                string[] KeySet = this.KeyString.ToUpper().Split(new string[] { " AND " }, StringSplitOptions.RemoveEmptyEntries);
+                string[] KeySet = this.KeyString.ToUpperInvariant().Split(new string[] { " AND " }, StringSplitOptions.RemoveEmptyEntries);
 
                 Dictionary<string, string> KeyCheck = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
@@ -420,7 +420,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     {
                         columnIndex += 1;
 
-                        if (!KeyCheck.ContainsKey(C.ToUpper()))
+                        if (!KeyCheck.ContainsKey(C.ToUpperInvariant()))
                         {
                             UpdateSQL.Append(C);
                             UpdateSQL.Append("=@");
@@ -1247,7 +1247,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             object result = null;
 
-            string[] KeySet = this.KeyString.ToUpper().Split(new string[] { " AND " }, StringSplitOptions.RemoveEmptyEntries);
+            string[] KeySet = this.KeyString.ToUpperInvariant().Split(new string[] { " AND " }, StringSplitOptions.RemoveEmptyEntries);
             StringBuilder KeyMatch = new StringBuilder();
 
 
@@ -1276,7 +1276,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             KeyMatch.Append(" And ");
                         }
 
-                        switch (temp[0].Trim().ToUpper())
+                        switch (temp[0].Trim().ToUpperInvariant())
                         {
                             case "GLOBALRECORDID":
                             case "RECSTATUS":

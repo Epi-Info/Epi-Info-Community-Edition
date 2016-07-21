@@ -1206,7 +1206,7 @@ namespace EpiDashboard
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -1218,7 +1218,7 @@ namespace EpiDashboard
             }
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         //cbxField.Text = child.InnerText.Replace("&lt;", "<");
@@ -1230,7 +1230,7 @@ namespace EpiDashboard
                         foreach (XmlElement field in child.ChildNodes)
                         {
                             List<string> fields = new List<string>();
-                            if (field.Name.ToLower().Equals("stratavariable"))
+                            if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                             {
                             }
                         }
@@ -1245,12 +1245,12 @@ namespace EpiDashboard
                         ((WordCloudParameters)Parameters).CommonWords = (child.InnerText.Replace("&lt;", "<"));
                         break;
                     case "sort":
-                        if (child.InnerText.ToLower().Equals("highlow"))
+                        if (child.InnerText.ToLowerInvariant().Equals("highlow"))
                         {
                         }
                         break;
                     case "allvalues":
-                        if (child.InnerText.ToLower().Equals("true")) {  }
+                        if (child.InnerText.ToLowerInvariant().Equals("true")) {  }
                         else {  }
                         break;
                     case "showlistlabels":

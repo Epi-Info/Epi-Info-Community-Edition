@@ -337,7 +337,7 @@ namespace EpiDashboard.Gadgets.Charting
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
             foreach (XmlAttribute attribute in element.Attributes)
             {
-                switch (attribute.Name.ToLower())
+                switch (attribute.Name.ToLowerInvariant())
                 {
                     case "actualheight":
                         string actualHeight = attribute.Value.Replace(',', '.');
@@ -358,7 +358,7 @@ namespace EpiDashboard.Gadgets.Charting
                 {
                     if (!string.IsNullOrEmpty(child.InnerText))
                     {
-                        switch (child.Name.ToLower())
+                        switch (child.Name.ToLowerInvariant())
                         {
                             case "mainvariable":
                                 if (this.Parameters.ColumnNames.Count > 0)
@@ -384,7 +384,7 @@ namespace EpiDashboard.Gadgets.Charting
                                 foreach (XmlElement field in child.ChildNodes)
                                 {
                                     List<string> fields = new List<string>();
-                                    if (field.Name.ToLower().Equals("stratavariable"))
+                                    if (field.Name.ToLowerInvariant().Equals("stratavariable"))
                                     {
                                         ((AberrationDetectionChartParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                                     }
@@ -900,7 +900,7 @@ namespace EpiDashboard.Gadgets.Charting
 
             foreach (XmlElement child in element.ChildNodes)
             {
-                switch (child.Name.ToLower())
+                switch (child.Name.ToLowerInvariant())
                 {
                     case "mainvariable":
                         if (this.Parameters.ColumnNames.Count > 0)

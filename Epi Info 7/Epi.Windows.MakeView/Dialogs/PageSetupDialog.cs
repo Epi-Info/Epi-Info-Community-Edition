@@ -128,7 +128,7 @@ namespace Epi.Windows.MakeView.Dialogs
             _sizes.Keys.CopyTo(sizeNames, 0);
             comboBoxSize.Items.AddRange(sizeNames);
 
-            if (((String)selectedPageSetupDataRow[ColumnNames.PAGE_ORIENTATION]).ToLower() == "landscape")
+            if (((String)selectedPageSetupDataRow[ColumnNames.PAGE_ORIENTATION]).ToLowerInvariant() == "landscape")
             {
                 radioButtonLandscape.Select();
             }
@@ -137,7 +137,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 radioButtonPortrait.Select();
             }
 
-            if (((String)selectedPageSetupDataRow[ColumnNames.PAGE_LABEL_ALIGN]).ToLower() == "horizontal")
+            if (((String)selectedPageSetupDataRow[ColumnNames.PAGE_LABEL_ALIGN]).ToLowerInvariant() == "horizontal")
             {
                 radioButtonLabelAlignHorizontal.Select();
             }
@@ -271,7 +271,7 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             string key = ((ComboBox)sender).Text.Trim();
 
-            if (key.ToLower().Equals("custom size"))
+            if (key.ToLowerInvariant().Equals("custom size"))
             {
                 this.textBoxHeight.Enabled = true;
                 this.textBoxWidth.Enabled = true;

@@ -433,7 +433,7 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                        double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                        double.TryParse(R[C.ColumnName.ToUpperInvariant()].ToString(), out ColVal);
 
                         if (ColumnTotalSet.ContainsKey(C.ColumnName))
                         {
@@ -593,7 +593,7 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                        double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                        double.TryParse(R[C.ColumnName.ToUpperInvariant()].ToString(), out ColVal);
 
                         if (ColumnTotalSet.ContainsKey(C.ColumnName))
                         {
@@ -723,7 +723,7 @@ namespace Epi.Analysis.Statistics
             DataRow[] ROWS;
             string SelectedStatement;
 
-            if (config["include-missing"].ToUpper() == "FALSE")
+            if (config["include-missing"].ToUpperInvariant() == "FALSE")
             {
                 if (DT.Columns.Contains(config["RepresentationOfMissing"]))
                 {
@@ -763,7 +763,7 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                        double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                        double.TryParse(R[C.ColumnName.ToUpperInvariant()].ToString(), out ColVal);
 
                         if (ColumnTotalSet.ContainsKey(C.ColumnName))
                         {
@@ -788,7 +788,7 @@ namespace Epi.Analysis.Statistics
                 SortedColumns = DT.Columns.Cast<DataColumn>().OrderByDescending(x => { return x.ColumnName; });
                 SelectOrder = "__Values__ desc";
             }
-            else if (((DT.Columns.Count == 4 || DT.Columns.Count == 5) && (ROWS.Length == 2 || ROWS.Length == 3) && (this.Context.Columns[this.Cross_Tabulation_Variable].DataType.ToString() == "System.Byte" || this.Context.Columns[this.Cross_Tabulation_Variable].DataType.ToString() == "System.Boolean")) && (config["include-missing"].ToUpper() == "TRUE" && this.Context.EpiViewVariableList.Count > 0))
+            else if (((DT.Columns.Count == 4 || DT.Columns.Count == 5) && (ROWS.Length == 2 || ROWS.Length == 3) && (this.Context.Columns[this.Cross_Tabulation_Variable].DataType.ToString() == "System.Byte" || this.Context.Columns[this.Cross_Tabulation_Variable].DataType.ToString() == "System.Boolean")) && (config["include-missing"].ToUpperInvariant() == "TRUE" && this.Context.EpiViewVariableList.Count > 0))
             {
                 SortedColumns = DT.Columns.Cast<DataColumn>().OrderByDescending(x => { return GetPrintValue(this.Cross_Tabulation_Variable, this.Context.Columns[this.Cross_Tabulation_Variable].DataType.ToString(), x.ColumnName, config); });
                 SelectOrder = "__Values__ desc";
@@ -897,7 +897,7 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                        double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                        double.TryParse(R[C.ColumnName.ToUpperInvariant()].ToString(), out ColVal);
                         values.Add(ColVal);
                         RowTotal += ColVal;
                         //                        pHTMLString.Append("<td align=\"right\">");
@@ -912,7 +912,7 @@ namespace Epi.Analysis.Statistics
                     if (C.ColumnName != "__Values__" && C.ColumnName != "__Count__")
                     {
                         double ColVal = 0;
-                        double.TryParse(R[C.ColumnName.ToUpper()].ToString(), out ColVal);
+                        double.TryParse(R[C.ColumnName.ToUpperInvariant()].ToString(), out ColVal);
                         RowPercent.Append("<td align=\"right\">");
                         if (RowTotal == 0)
                         {
@@ -1349,7 +1349,7 @@ namespace Epi.Analysis.Statistics
 
             bool isNumeric = false;
 
-            if(this.NumericTypeList.Contains(this.Context.Columns[this.Numeric_Variable].DataType.ToString().Replace("System.","").ToUpper()))
+            if(this.NumericTypeList.Contains(this.Context.Columns[this.Numeric_Variable].DataType.ToString().Replace("System.","").ToUpperInvariant()))
             {
                 isNumeric = true;
             }
@@ -1398,7 +1398,7 @@ namespace Epi.Analysis.Statistics
 
             foreach (System.Data.DataColumn C in this.Context.Columns)
             {
-                if (C.ColumnName.ToUpper() == pColumnName.ToUpper())
+                if (C.ColumnName.ToUpperInvariant() == pColumnName.ToUpperInvariant())
                 {
                     result = C.DataType;
                     break;

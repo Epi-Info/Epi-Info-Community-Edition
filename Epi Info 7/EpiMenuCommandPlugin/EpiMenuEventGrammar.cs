@@ -154,7 +154,7 @@ namespace EpiMenu.CommandPlugin
             }
             catch(InvalidOperationException ex)
             {
-                if (!ex.Message.ToUpper().Contains("STACK EMPTY"))
+                if (!ex.Message.ToUpperInvariant().Contains("STACK EMPTY"))
                 {
                     throw ex;
                 }

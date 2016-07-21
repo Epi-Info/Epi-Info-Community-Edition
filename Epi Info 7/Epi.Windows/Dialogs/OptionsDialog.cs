@@ -544,7 +544,7 @@ namespace Epi.Windows.Dialogs
         private void LoadLanguages()
         {
             string installPath = Path.GetDirectoryName(Application.ExecutablePath);
-            string searchPath = installPath.Trim().ToLower();
+            string searchPath = installPath.Trim().ToLowerInvariant();
 
             if (searchPath[searchPath.Length - 1] != Path.DirectorySeparatorChar)
                 searchPath += Path.DirectorySeparatorChar;
@@ -561,7 +561,7 @@ namespace Epi.Windows.Dialogs
                 List<string> index = new List<string>();
                 foreach (string file in files)
                 {
-                    string path = Path.GetDirectoryName(file).ToLower();
+                    string path = Path.GetDirectoryName(file).ToLowerInvariant();
                     if (!index.Contains(path))
                     {
                         index.Add(path);
@@ -708,7 +708,7 @@ namespace Epi.Windows.Dialogs
 
             if (lbxDataDriverPlugins.SelectedItem != null)
             {
-                s = ((DataRowView)lbxDataDriverPlugins.SelectedItem).Row.ItemArray[1].ToString().ToLower();
+                s = ((DataRowView)lbxDataDriverPlugins.SelectedItem).Row.ItemArray[1].ToString().ToLowerInvariant();
 
                 switch (s)
                 {
@@ -732,7 +732,7 @@ namespace Epi.Windows.Dialogs
 
             foreach(Config.DataDriverRow driverRow in config.DataDrivers) 
             {
-                if (driverRow[1].ToString().ToLower().Equals(s))
+                if (driverRow[1].ToString().ToLowerInvariant().Equals(s))
                 {
                     driverRowToRemove = driverRow;
                     break;
@@ -1215,7 +1215,7 @@ namespace Epi.Windows.Dialogs
         private void txtEndpoint_TextChanged(object sender, EventArgs e)
         {
             string URL =((System.Windows.Forms.TextBox)(sender)).Text;
-            if (!string.IsNullOrEmpty (URL) && URL.ToUpper().Contains(".SVC"))
+            if (!string.IsNullOrEmpty (URL) && URL.ToUpperInvariant().Contains(".SVC"))
             {
             Ping.Enabled = true;
             }else{
@@ -1226,7 +1226,7 @@ namespace Epi.Windows.Dialogs
         private void EWEEndPointTextBox_TextChanged(object sender, EventArgs e)
        {
             string URL = ((System.Windows.Forms.TextBox)(sender)).Text;
-            if (!string.IsNullOrEmpty(URL) && URL.ToUpper().Contains(".SVC"))
+            if (!string.IsNullOrEmpty(URL) && URL.ToUpperInvariant().Contains(".SVC"))
             {
                 button1.Enabled = true;
             }

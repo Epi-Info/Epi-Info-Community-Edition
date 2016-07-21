@@ -37,11 +37,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             option = this.GetCommandElement(pToken.Tokens, 2);
             selectedPrinter = String.Empty;
 
-            if (option.ToUpper() == CommandNames.TO.ToUpper())
+            if (option.ToUpperInvariant() == CommandNames.TO.ToUpperInvariant())
             {
                 reportHtmlPath = this.GetCommandElement(pToken.Tokens, 3);
             }
-            else if (option.ToUpper() != CommandNames.DISPLAY.ToUpper())
+            else if (option.ToUpperInvariant() != CommandNames.DISPLAY.ToUpperInvariant())
             {
                 selectedPrinter = this.GetCommandElement(pToken.Tokens, 2);
                 option = "PRINT";

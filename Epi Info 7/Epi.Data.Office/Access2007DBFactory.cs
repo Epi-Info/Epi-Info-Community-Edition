@@ -164,7 +164,7 @@ namespace Epi.Data.Office
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            if (connectionString.ToLower().Contains(".accdb") || (connectionString.ToLower().Contains("provider=microsoft.ace.oledb.12.0") && !connectionString.ToLower().Contains("excel")))
+            if (connectionString.ToLowerInvariant().Contains(".accdb") || (connectionString.ToLowerInvariant().Contains("provider=microsoft.ace.oledb.12.0") && !connectionString.ToLowerInvariant().Contains("excel")))
             {
                 return true;
             }
@@ -181,11 +181,11 @@ namespace Epi.Data.Office
             string Test = fileString.Trim(new char[] { '\'' });
 
 
-            if (Test.ToLower().EndsWith(".accdb") && !Test.ToLower().Contains("provider=microsoft.ace.oledb.12.0"))
+            if (Test.ToLowerInvariant().EndsWith(".accdb") && !Test.ToLowerInvariant().Contains("provider=microsoft.ace.oledb.12.0"))
             {
                 result = string.Format(MSAccess2007, Test);
             }
-            else if (Test.ToLower().IndexOf("provider=microsoft.ace.oledb.12.0") > -1)
+            else if (Test.ToLowerInvariant().IndexOf("provider=microsoft.ace.oledb.12.0") > -1)
             {
                 result = Test;
             }
@@ -200,7 +200,7 @@ namespace Epi.Data.Office
             // columns
             foreach (DataColumn column in table.Columns)
             {
-                if (column.ColumnName.ToLower() == "uniquekey")
+                if (column.ColumnName.ToLowerInvariant() == "uniquekey")
                 {
                     HasUniqueKey = true;
                     sql += "[" + column.ColumnName + "] AutoIncrement,\n";

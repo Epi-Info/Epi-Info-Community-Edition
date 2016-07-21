@@ -19,7 +19,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 {
                     foreach (var item in IdentifierList)
                     {
-                        if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLower()))
+                        if (!string.IsNullOrEmpty(item) && !this.Context.CommandVariableCheck.ContainsKey(item.ToLowerInvariant()))
                         {
                             this.Context.CommandVariableCheck.Add(item, "SetRequired");
                         }
@@ -41,7 +41,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 int i = 0;
                 foreach (EpiInfo.Plugin.IVariable field in variableList)
                 {
-                    this.IdentifierList[i] = field.Name.ToLower();
+                    this.IdentifierList[i] = field.Name.ToLowerInvariant();
                     i++;
                 }
                

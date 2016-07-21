@@ -491,7 +491,7 @@ namespace EpiDashboard
                 string selectedItem = lbxDedupFields.SelectedItem.ToString();
                 int index = lbxDedupFields.SelectedIndex;
 
-                if (selectedItem.ToLower().EndsWith("(ascending)"))
+                if (selectedItem.ToLowerInvariant().EndsWith("(ascending)"))
                 {
                     selectedItem = selectedItem.Remove(selectedItem.Length - 11) + "(descending)";
                 }
@@ -780,7 +780,7 @@ namespace EpiDashboard
                     }
                 }
 
-                if (GadgetOptions.InputVariableList.ContainsKey("usepromptsforcolumnnames") && GadgetOptions.InputVariableList["usepromptsforcolumnnames"].ToLower().Equals("true"))
+                if (GadgetOptions.InputVariableList.ContainsKey("usepromptsforcolumnnames") && GadgetOptions.InputVariableList["usepromptsforcolumnnames"].ToLowerInvariant().Equals("true"))
                 {
                     Field field = DashboardHelper.GetAssociatedField(columns[i].ColumnName);
                     if (field != null && field is RenderableField)
@@ -1807,7 +1807,7 @@ namespace EpiDashboard
 
             //foreach (XmlElement child in element.ChildNodes)
             //{
-            //    switch (child.Name.ToLower())
+            //    switch (child.Name.ToLowerInvariant())
             //    {
             //        case "mainvariables":
             //            lbxDedupFields.SelectedItems.Add(child.InnerText.Replace("&lt;", "<"));
@@ -2438,9 +2438,9 @@ namespace EpiDashboard
 
                                         if ((field != null && (field is YesNoField || field is CheckBoxField)) || column.DataType.ToString().Equals("System.Boolean"))
                                         {
-                                            if (row[column.ColumnName].ToString().Equals("1") || row[column.ColumnName].ToString().ToLower().Equals("true"))
+                                            if (row[column.ColumnName].ToString().Equals("1") || row[column.ColumnName].ToString().ToLowerInvariant().Equals("true"))
                                                 displayValue = yesValue;
-                                            else if (row[column.ColumnName].ToString().Equals("0") || row[column.ColumnName].ToString().ToLower().Equals("false"))
+                                            else if (row[column.ColumnName].ToString().Equals("0") || row[column.ColumnName].ToString().ToLowerInvariant().Equals("false"))
                                                 displayValue = noValue;
                                         }
                                         else if ((field != null && field is DateField) || (!DashboardHelper.DateColumnRequiresTime(listTable, listTable.Columns[column.ColumnName].ColumnName)))

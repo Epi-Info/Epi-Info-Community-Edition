@@ -167,7 +167,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     
                     foreach (string s in this.sourceProject.GetNonViewTableNames())
                     {
-                        string key = s.ToUpper().Trim();
+                        string key = s.ToUpperInvariant().Trim();
                         if (!SourceProjectNames.Contains(key)) 
                         {
                            if (SourceViewnames.Contains(s))
@@ -178,7 +178,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     }
                     foreach (string s in this.sourceProject.GetViewNames())
                     {
-                        string key = s.ToUpper().Trim();
+                        string key = s.ToUpperInvariant().Trim();
                         if (!SourceProjectNames.Contains(key))
                         {
                             SourceProjectNames.Add(key, true);
@@ -523,7 +523,7 @@ namespace Epi.Windows.MakeView.Dialogs
 			bool inputValid = ValidateInput();
             if (inputValid && !string.IsNullOrEmpty(txtViewName.Text) && txtViewName.Text != "enter new view name")
             {
-                if (!this.SourceProjectNames.Contains(txtViewName.Text.ToUpper().Trim()))
+                if (!this.SourceProjectNames.Contains(txtViewName.Text.ToUpperInvariant().Trim()))
                 {
                     btnOK.Enabled = true;
                     NewViewName = txtViewName.Text;
