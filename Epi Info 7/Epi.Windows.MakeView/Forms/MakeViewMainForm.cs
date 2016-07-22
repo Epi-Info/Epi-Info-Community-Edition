@@ -1615,7 +1615,7 @@ namespace Epi.Windows.MakeView.Forms
                     }
 
                     string filePath = openFileDialog.FileName.Trim();
-                    if (filePath.ToLowerInvariant(System.Globalization.CultureInfo.CurrentCulture).EndsWith(FileExtensions.EPI_PROJ))
+                    if (filePath.ToLowerInvariant().EndsWith(FileExtensions.EPI_PROJ))
                     {
                         // This is an Epi 7 project. Open it.
                         Project project = new Project(filePath);
@@ -2513,7 +2513,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
 
                 string filePath = openFileDialog.FileName.Trim();
-                if (filePath.ToLowerInvariant(System.Globalization.CultureInfo.CurrentCulture).EndsWith(FileExtensions.MDB))
+                if (filePath.ToLowerInvariant().EndsWith(FileExtensions.MDB))
                 {
                     Type UpgradeAssistant = Type.GetType("Epi.Windows.ImportExport.UpgradeAssistant, Epi.Windows.ImportExport", true, true);
                     Project project = null;

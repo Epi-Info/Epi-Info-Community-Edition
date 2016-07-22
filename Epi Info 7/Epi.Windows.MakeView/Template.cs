@@ -1847,12 +1847,12 @@ namespace Epi.Windows.MakeView
                 {
                     CopyReaderValueToRow(reader, metadataSchema, row);
 
-                    if (reader.Name.ToLowerInvariant(System.Globalization.CultureInfo.InvariantCulture) == "fieldtypeid")
+                    if (reader.Name.ToLowerInvariant() == "fieldtypeid")
                     {
                         field = page.CreateField(((MetaFieldType)Int32.Parse(reader.Value)));
                     }
 
-                    if (reader.Name.ToLowerInvariant(System.Globalization.CultureInfo.InvariantCulture) == "relatedviewname")
+                    if (reader.Name.ToLowerInvariant() == "relatedviewname")
                     {
                         relatedViewName = reader.Value.ToString();
                     }
