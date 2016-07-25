@@ -137,7 +137,8 @@ namespace Epi.Windows.Analysis.Forms
             {
                 commandGroupId = System.Convert.ToInt16((commandGroup[ColumnNames.ID]));
                 commandGroupNode = AddCommandGroupsToTreeView(commandGroup[ColumnNames.NAME].ToString(), commandGroupId);
-                DataRow[] commandDataRows = commands.Select("CommandGroups_Id = " + commandGroupId.ToString(), "CommandGroups_id");
+                string comGroup = commandGroupId.ToString();
+                DataRow[] commandDataRows = commands.Select("CommandGroups_Id = " + comGroup, "CommandGroups_Id");
                 foreach (DataRow command in commandDataRows)
                 {
                     AddCommandsToTreeView(command[ColumnNames.NAME].ToString(), System.Convert.ToInt16(command[ColumnNames.ID]), commandGroupNode);
@@ -683,7 +684,7 @@ namespace Epi.Windows.Analysis.Forms
                             string line = reader.ReadLine();
                             reader.Close();                            
 
-                            if(line.ToUpperInvariant().Contains("SEP="))
+                            if(line.ToUpper().Contains("SEP="))
                             {
                                 String message = String.Format(resources.GetString("DELIMITER_HEADER_WARNING"), line);
                                 MessageBox.Show(message);
