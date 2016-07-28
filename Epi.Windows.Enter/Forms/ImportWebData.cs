@@ -765,7 +765,8 @@ namespace Epi.Enter.Forms
                 }
                 else
                 {
-                    if ((surveyAnswer.IsDraftMode == IsDraftMode) && (surveyAnswer.Status == SurveyStatus))
+                   // if ((surveyAnswer.IsDraftMode == IsDraftMode) && (surveyAnswer.Status == SurveyStatus))
+                    if ((surveyAnswer.IsDraftMode == IsDraftMode)  )
                     {
                         AddSurveyAnswerResultV3(result, surveyAnswer);
                     }
