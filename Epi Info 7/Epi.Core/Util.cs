@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Reflection;
@@ -877,9 +878,23 @@ namespace Epi
         /// <returns>Globally unique identifier.</returns>
         public static Guid GetFileGuid(string filePath)
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(System.Text.ASCIIEncoding.ASCII.GetBytes(filePath.ToLowerInvariant()));
-            Guid guid = new Guid(result);
+            Guid guid;
+            byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(filePath.ToLowerInvariant());
+            byte[] pathHash;
+
+            Configuration config = Configuration.GetNewInstance();
+            if (config.TextEncryptionModule != null && !string.IsNullOrEmpty(config.TextEncryptionModule.FileName))
+            {
+                SHA256 shaM = new SHA256Managed();
+                pathHash = shaM.ComputeHash(data).Take(16).ToArray();
+            }
+            else
+            {
+                MD5 md5 = new MD5CryptoServiceProvider();
+                pathHash = md5.ComputeHash(data);
+            }
+
+            guid = new Guid(pathHash);
             return guid;
         }
 
