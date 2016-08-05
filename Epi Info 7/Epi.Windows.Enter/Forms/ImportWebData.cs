@@ -707,7 +707,7 @@ namespace Epi.Enter.Forms
 
             foreach (SurveyManagerService.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
             {
-                if (SurveyStatus == 0)
+                if (SurveyStatus == -1 || SurveyStatus == 0)
                 {
                     if ((surveyAnswer.IsDraftMode == IsDraftMode))
                     {
@@ -1241,9 +1241,11 @@ namespace Epi.Enter.Forms
                 {
                     SurveyStatus = 3;
 
-                    if (rdbAllRecords.Checked) SurveyStatus = 0;
+                    if (rdbAllRecords.Checked)
+                    {
+                        SurveyStatus = -1;
 
-                    
+                    }
                 }
                 else 
                 {
