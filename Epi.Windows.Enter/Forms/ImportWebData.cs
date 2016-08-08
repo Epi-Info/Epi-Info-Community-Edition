@@ -704,21 +704,25 @@ namespace Epi.Enter.Forms
         {
             Dictionary<string, Dictionary<string, WebFieldData>> result = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
            // SetFilterProperties(DownLoadType);
+            
+            if (rdbDraftMode.Checked) { IsDraftMode = true; } else { IsDraftMode = false; }
 
             foreach (SurveyManagerService.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
             {
-                if (SurveyStatus == -1 || SurveyStatus == 0)
+                 
+                if (surveyAnswer.IsDraftMode == IsDraftMode)
                 {
-                    if ((surveyAnswer.IsDraftMode == IsDraftMode))
+                    if (rdbAllRecords.Checked)
                     {
                         AddSurveyAnswerResult(result, surveyAnswer);
                     }
-                }
-                else
-                {
-                    if ((surveyAnswer.IsDraftMode == IsDraftMode) && (surveyAnswer.Status == SurveyStatus))
+                    else 
                     {
-                        AddSurveyAnswerResult(result, surveyAnswer);
+
+                        if (surveyAnswer.Status == 3)
+                        {
+                            AddSurveyAnswerResult(result, surveyAnswer);
+                        }
                     }
                 }
             }
@@ -732,18 +736,19 @@ namespace Epi.Enter.Forms
 
             foreach (SurveyManagerServiceV2.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
             {
-                if (SurveyStatus == 0)
+                if (surveyAnswer.IsDraftMode == IsDraftMode)
                 {
-                    if ((surveyAnswer.IsDraftMode == IsDraftMode))
+                    if (rdbAllRecords.Checked)
                     {
                         AddSurveyAnswerResultV2(result, surveyAnswer);
                     }
-                }
-                else
-                {
-                    if ((surveyAnswer.IsDraftMode == IsDraftMode) && (surveyAnswer.Status == SurveyStatus))
+                    else
                     {
-                        AddSurveyAnswerResultV2(result, surveyAnswer);
+
+                        if (surveyAnswer.Status == 3)
+                        {
+                            AddSurveyAnswerResultV2(result, surveyAnswer);
+                        }
                     }
                 }
             }
@@ -757,20 +762,8 @@ namespace Epi.Enter.Forms
 
             foreach (SurveyManagerServiceV3.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
             {
-                if (SurveyStatus == 0)
-                {
-                   
-                        AddSurveyAnswerResultV3(result, surveyAnswer);
-                  
-                }
-                else
-                {
-                   // if ((surveyAnswer.IsDraftMode == IsDraftMode) && (surveyAnswer.Status == SurveyStatus))
-                    if ((surveyAnswer.IsDraftMode == IsDraftMode)  )
-                    {
-                        AddSurveyAnswerResultV3(result, surveyAnswer);
-                    }
-                }
+                 
+                AddSurveyAnswerResultV3(result, surveyAnswer);
             }
 
             return result;
@@ -1201,7 +1194,7 @@ namespace Epi.Enter.Forms
             //    textProjectFile.Text = "Project containing the data to import:";
             //}
         }
-
+       
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textProject.Text))
@@ -1228,6 +1221,12 @@ namespace Epi.Enter.Forms
                 }
 
                 this.Cursor = Cursors.WaitCursor;
+
+                // check if client is communicating  with EIWS 1.3
+
+              
+                
+
                 //DownLoadType = cmbImportType.SelectedIndex;
                 //cmbImportType options:
                 //    0.  Completed records in draft mode
@@ -1239,13 +1238,14 @@ namespace Epi.Enter.Forms
                 config.Settings.WebServiceEndpointAddress.ToLowerInvariant().Contains(Epi.Constants.surveyManagerservice) ||
                 config.Settings.WebServiceEndpointAddress.ToLowerInvariant().Contains(Epi.Constants.surveyManagerservicev2)))
                 {
-                    SurveyStatus = 3;
+                    //SurveyStatus = 3;
 
-                    if (rdbAllRecords.Checked)
-                    {
-                        SurveyStatus = -1;
+                    //if (rdbAllRecords.Checked)
+                    //{
+                    //    SurveyStatus = 0;
 
-                    }
+                    //}
+                    SurveyStatus = -1;
                 }
                 else 
                 {
