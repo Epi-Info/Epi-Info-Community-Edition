@@ -216,6 +216,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockYAxisstepValue.Text = DashboardSharedStrings.GADGET_YAXIS_STEPVALUE;
             tblockY2AxisLegendTitle.Text = DashboardSharedStrings.GADGET_Y2_AXISLEGEND_TITLE;
             tblockY2AxisFormatString.Text = DashboardSharedStrings.GADGET_Y2_AXISFORMAT;
+            tblockY2AxisSubheader.Content = DashboardSharedStrings.GADGETS_YAXIS_HEADER; 
             tblockXAxisSubheader.Content = DashboardSharedStrings.GADGET_XAXIS;
             tblockXAxisLabelType.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL_TYPE;
             tblockXAxisLabelValue.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL;
