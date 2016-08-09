@@ -56,6 +56,11 @@ namespace EpiDashboard.Mapping
                     {
                         shapeFileReader.Read(shapeFile, dbfFile);
                     }
+                    catch ( NotSupportedException e)
+                    {
+                        System.Windows.MessageBox.Show(e.Message);
+                        return null;
+                    }
                     catch
                     {
                         System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_N_POLYGONS_EXCEEDED);
