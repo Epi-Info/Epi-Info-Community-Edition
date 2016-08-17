@@ -199,6 +199,7 @@ namespace Epi.Enter.Forms
                     case MetaFieldType.Multiline:
                         return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.Number:
+                        return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.YesNo:
                     case MetaFieldType.RecStatus:
                         return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
