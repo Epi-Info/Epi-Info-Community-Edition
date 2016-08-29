@@ -49,7 +49,7 @@ namespace Epi.Data.Office
             OleDbConnectionStringBuilder oleDBCnnStrBuilder = new OleDbConnectionStringBuilder(connectionString);
             oleDBCnnStrBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
             oleDBCnnStrBuilder.Add("Mode","ReadWrite");
-            oleDBCnnStrBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes");
+            oleDBCnnStrBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
             return new OleDbConnection(oleDBCnnStrBuilder.ToString());
         }
 
