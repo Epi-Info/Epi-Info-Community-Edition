@@ -1566,7 +1566,7 @@ namespace EpiDashboard
                                 this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
                                 Parameters.GadgetDescription = CustomOutputDescription;
 
-                                if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
+                                if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputDescription.Equals("(none)"))
                                 {
                                     descriptionPanel.Text = CustomOutputDescription;
                                     descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.DisplayMode;
