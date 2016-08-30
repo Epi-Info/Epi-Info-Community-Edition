@@ -106,10 +106,10 @@ namespace Epi.Windows.MakeView.Dialogs
              List<string> IdList = new List<string>();
               IdList.Add(WebSurveyId);
                Criteria.SurveyIdList = IdList.ToArray();
-               if (!string.IsNullOrEmpty(pOrganizationKey))
-               {
-               Criteria.OrganizationKey = new Guid(pOrganizationKey);
-               }
+               //if (!string.IsNullOrEmpty(pOrganizationKey))
+               //{
+               //Criteria.OrganizationKey = new Guid(pOrganizationKey);
+               //}
                Criteria.SurveyType = -1;
                Request.Criteria = Criteria;
               
