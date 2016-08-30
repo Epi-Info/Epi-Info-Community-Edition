@@ -20,6 +20,7 @@ using Epi.Diagnostics;
 using Epi.Windows.Globalization;
 using Epi.Windows.Globalization.Forms;
 using Epi.Windows.Globalization.Translators;
+using System.ServiceModel;
 
 namespace Epi.Windows.Dialogs
 {
@@ -1138,26 +1139,31 @@ namespace Epi.Windows.Dialogs
             try
             {
                 Save();
-                string Message = ValidateEIWSSittings();
-                if (Message.Contains("Success"))
-                {
-                    MessageBox.Show(SharedStrings.WEBSURVEY_PING_SUCCESS, "", MessageBoxButtons.OK);
-                }
-                else
-                {
-                    MessageBox.Show(Message, "", MessageBoxButtons.OK);
-                }
-            }catch(Exception ex){
-                MessageBox.Show(SharedStrings.WEBSURVEY_PING_ERROR, "", MessageBoxButtons.OK);
+                ValidateEIWSSittings();
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_SUCCESS, "", MessageBoxButtons.OK);
+            }
+            catch (FaultException fe)
+            {
+                MessageBox.Show("Fault Exception ouccured !" + "/n Stack:" + fe.StackTrace + "/n Inner:" + fe.Message, "", MessageBoxButtons.OK);
+            }
+            catch (CommunicationException ce)
+            {
+                MessageBox.Show("Communication Exception ouccured !" + "/n Stack:" + ce.StackTrace + "/n Inner:" + ce.Message, "", MessageBoxButtons.OK);
+            }
+            catch (TimeoutException te)
+            {
+                MessageBox.Show("Timeout Exception ouccured !" + "/n Stack:" + te.StackTrace + "/n Inner:" + te.Message, "", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Stack:" + ex.StackTrace + " Message:" + ex.Message, "", MessageBoxButtons.OK);
             }
 
-        }
-        private string  ValidateEIWSSittings()
-        {
-            string  IsValid = "Success";
 
-            try
-            {
+        }
+        private void  ValidateEIWSSittings()
+        {
+            
                 
                 SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
                 SurveyManagerServiceV3.OrganizationRequest Request = new SurveyManagerServiceV3.OrganizationRequest();
@@ -1165,38 +1171,39 @@ namespace Epi.Windows.Dialogs
                 Request.Organization = orgDTO;
                 var Result = client.GetOrganization(Request);
 
-            }
-            catch (Exception ex)
-            {
-                IsValid = ex.InnerException.ToString();
-            }
-            return IsValid;
+            
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-            Save();
-            string Message = ValidateEWESittings();
-            if (Message.Contains("Success"))
-            {
+                Save();
+                ValidateEWESittings();
                 MessageBox.Show(SharedStrings.WEBSURVEY_PING_SUCCESS, "", MessageBoxButtons.OK);
             }
-            else
+            catch (FaultException fe)
             {
-                MessageBox.Show(Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("Fault Exception ouccured !" + "/n Stack:" + fe.StackTrace + "/n Inner:" + fe.Message, "", MessageBoxButtons.OK);
             }
-             }catch(Exception ex){
-                 MessageBox.Show(SharedStrings.WEBSURVEY_PING_ERROR, "", MessageBoxButtons.OK);
+            catch (CommunicationException ce)
+            {
+                MessageBox.Show("Communication Exception ouccured !" + "/n Stack:" + ce.StackTrace + "/n Inner:" + ce.Message, "", MessageBoxButtons.OK);
             }
-        }
-        private string ValidateEWESittings()
-        {
-            string IsValid = "Success";
+            catch (TimeoutException te)
+            {
+                MessageBox.Show("Timeout Exception ouccured !" + "/n Stack:" + te.StackTrace + "/n Inner:" + te.Message, "", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Stack:" + ex.StackTrace + " Message:" + ex.Message, "", MessageBoxButtons.OK);
+            }
 
-            try
-            {
+        }
+        private void ValidateEWESittings()
+        {
+            
                  
                 EWEManagerService.EWEManagerServiceClient   client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
                 EWEManagerService.OrganizationRequest Request = new EWEManagerService.OrganizationRequest();
@@ -1204,12 +1211,7 @@ namespace Epi.Windows.Dialogs
                 Request.Organization = orgDTO;
                 var Result = client.GetOrganization(Request);
 
-            }
-            catch (Exception ex)
-            {
-                IsValid = ex.InnerException.ToString();
-            }
-            return IsValid;
+            
         }
 
         private void txtEndpoint_TextChanged(object sender, EventArgs e)
