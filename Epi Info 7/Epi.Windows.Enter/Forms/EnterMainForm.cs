@@ -1521,10 +1521,7 @@ namespace Epi.Windows.Enter
                 mnuImportFromWeb.Enabled = false;
                 mnuImportFromDataPackage.Enabled = false;
                 mnuPackageForTransport.Enabled = false;
-                if (currentProject.CollectedDataDriver == "Epi.Data.Office.AccessDBFactory, Epi.Data.Office")
-                    fromWebEnterToolStripMenuItem.Enabled = true;
-                else
-                    fromWebEnterToolStripMenuItem.Enabled = false;  
+                fromWebEnterToolStripMenuItem.Enabled = true;                 
                 newRecordToolStripMenuItem.Enabled = false;
                 saveToolStripMenuItem.Enabled = false;
                 editViewToolStripMenuItem.Enabled = false;
@@ -1559,10 +1556,7 @@ namespace Epi.Windows.Enter
                 mnuImportFromWeb.Enabled = true;
                 mnuImportFromDataPackage.Enabled = true;
                 mnuPackageForTransport.Enabled = true;
-                if (currentProject.CollectedDataDriver == "Epi.Data.Office.AccessDBFactory, Epi.Data.Office")
-                    fromWebEnterToolStripMenuItem.Enabled = true;
-                else
-                    fromWebEnterToolStripMenuItem.Enabled = false;  
+                fromWebEnterToolStripMenuItem.Enabled = true;                
                 editViewToolStripMenuItem.Enabled = true;
                 findToolStripMenuItem.Enabled = true;
                 printToolStripMenuItem.Enabled = true;
