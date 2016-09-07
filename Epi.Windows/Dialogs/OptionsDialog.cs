@@ -442,6 +442,12 @@ namespace Epi.Windows.Dialogs
             }
             catch { }
 
+            try
+            {
+                checkBoxSparseConnection.Checked = settings.SparseConnection;
+            }
+            catch { }
+
             // Representation of boolean values ...
             cmbYesAs.SelectedItem = settings.RepresentationOfYes;
             cmbNoAs.SelectedItem = settings.RepresentationOfNo;
@@ -680,6 +686,7 @@ namespace Epi.Windows.Dialogs
             Epi.DataSets.Config.SettingsRow settings = newConfig.Settings;
 
             settings.AutoTouchKeyboard = autoTouchKeyboard.Checked;
+            settings.SparseConnection = checkBoxSparseConnection.Checked;
 
             // Representation of boolean values ...
             settings.RepresentationOfYes = cmbYesAs.Text;

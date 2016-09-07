@@ -367,13 +367,13 @@ namespace EpiDashboard.Mapping
 
             if (classCount > uniqueValues.Count)
             {
-                if (uniqueValues.Count > 2)
+                if (uniqueValues.Count > 1)
                 {
                     classCount = uniqueValues.Count;
                 }
                 else
                 {
-                    throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                    throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, 2));
                 }
             }
 

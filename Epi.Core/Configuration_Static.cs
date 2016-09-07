@@ -715,6 +715,7 @@ namespace Epi
             row.FrameworkTcpPort = 11532;
             row.IsVariableValidationEnable = false;
             row.AutoTouchKeyboard = false;
+            row.SparseConnection = false;
             configDataSet.Settings.Rows.Add(row);
 
             // Data Drivers

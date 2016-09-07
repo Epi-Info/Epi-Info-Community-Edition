@@ -152,11 +152,38 @@
   <data name="&gt;&gt;autoTouchKeyboard.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="checkBoxSparseConnection.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxSparseConnection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 121</value>
+  </data>
+  <data name="checkBoxSparseConnection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 17</value>
+  </data>
+  <data name="checkBoxSparseConnection.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="checkBoxSparseConnection.Text" xml:space="preserve">
+    <value>Offline Mode</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSparseConnection.Name" xml:space="preserve">
+    <value>checkBoxSparseConnection</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSparseConnection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSparseConnection.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;checkBoxSparseConnection.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 113</value>
+    <value>143, 100</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 13</value>
@@ -177,7 +204,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 60</value>
@@ -201,7 +228,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="txtMapKey.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 37</value>
@@ -222,7 +249,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;txtMapKey.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -249,7 +276,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 149</value>
@@ -3692,6 +3719,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.5998.28376, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.6094.17136, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
