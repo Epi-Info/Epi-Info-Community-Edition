@@ -7305,6 +7305,8 @@ namespace Epi.DataSets {
             
             private global::System.Data.DataColumn columnAutoTouchKeyboard;
             
+            private global::System.Data.DataColumn columnSparseConnection;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SettingsDataTable() {
@@ -8044,6 +8046,14 @@ namespace Epi.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SparseConnectionColumn {
+                get {
+                    return this.columnSparseConnection;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -8167,7 +8177,8 @@ namespace Epi.DataSets {
                         int EWEServiceReaderMaxDepth, 
                         int EWEServiceReaderMaxStringContentLength, 
                         bool IsVariableValidationEnable, 
-                        bool AutoTouchKeyboard) {
+                        bool AutoTouchKeyboard, 
+                        bool SparseConnection) {
                 SettingsRow rowSettingsRow = ((SettingsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         BackgroundImage,
@@ -8257,7 +8268,8 @@ namespace Epi.DataSets {
                         EWEServiceReaderMaxDepth,
                         EWEServiceReaderMaxStringContentLength,
                         IsVariableValidationEnable,
-                        AutoTouchKeyboard};
+                        AutoTouchKeyboard,
+                        SparseConnection};
                 rowSettingsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSettingsRow);
                 return rowSettingsRow;
@@ -8368,6 +8380,7 @@ namespace Epi.DataSets {
                 this.columnEWEServiceReaderMaxStringContentLength = base.Columns["EWEServiceReaderMaxStringContentLength"];
                 this.columnIsVariableValidationEnable = base.Columns["IsVariableValidationEnable"];
                 this.columnAutoTouchKeyboard = base.Columns["AutoTouchKeyboard"];
+                this.columnSparseConnection = base.Columns["SparseConnection"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8549,6 +8562,8 @@ namespace Epi.DataSets {
                 base.Columns.Add(this.columnIsVariableValidationEnable);
                 this.columnAutoTouchKeyboard = new global::System.Data.DataColumn("AutoTouchKeyboard", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAutoTouchKeyboard);
+                this.columnSparseConnection = new global::System.Data.DataColumn("SparseConnection", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSparseConnection);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("DateFormat", new global::System.Data.DataColumn[] {
                                 this.columnBackgroundImage}, false));
                 this.columnBackgroundImage.AllowDBNull = false;
@@ -8634,6 +8649,7 @@ namespace Epi.DataSets {
                 this.columnRepublish_RequireSecurityKey.DefaultValue = ((bool)(false));
                 this.columnIsVariableValidationEnable.DefaultValue = ((bool)(false));
                 this.columnAutoTouchKeyboard.DefaultValue = ((bool)(false));
+                this.columnSparseConnection.DefaultValue = ((bool)(false));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11549,6 +11565,22 @@ namespace Epi.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool SparseConnection {
+                get {
+                    try {
+                        return ((bool)(this[this.tableSettings.SparseConnectionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SparseConnection\' in table \'Settings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSettings.SparseConnectionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsOutputFilePrefixNull() {
                 return this.IsNull(this.tableSettings.OutputFilePrefixColumn);
             }
@@ -11989,6 +12021,18 @@ namespace Epi.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAutoTouchKeyboardNull() {
                 this[this.tableSettings.AutoTouchKeyboardColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSparseConnectionNull() {
+                return this.IsNull(this.tableSettings.SparseConnectionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSparseConnectionNull() {
+                this[this.tableSettings.SparseConnectionColumn] = global::System.Convert.DBNull;
             }
         }
         

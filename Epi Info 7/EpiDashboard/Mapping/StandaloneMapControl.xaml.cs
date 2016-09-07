@@ -334,19 +334,38 @@ namespace EpiDashboard.Mapping
                 ESRI.ArcGIS.Client.Bing.TileLayer layer = new TileLayer();
                 layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
 
-                if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                bool sparse_connection = false;
+
+                try
                 {
-                    layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                    layer.LayerStyle = TileLayer.LayerType.AerialWithLabels;
+                    Configuration config = Configuration.GetNewInstance();
+                    if (config.Settings.SparseConnection == true)
+                    {
+                        sparse_connection = true;
+                    }
                 }
-                else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                catch { }
+
+                if (sparse_connection == true)
                 {
-                    layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                    layer.LayerStyle = TileLayer.LayerType.Road;
+                    layer.Token = null;
                 }
                 else
                 {
-                    layer.Token = null;
+                    if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                    {
+                        layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                        layer.LayerStyle = TileLayer.LayerType.AerialWithLabels;
+                    }
+                    else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                    {
+                        layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                        layer.LayerStyle = TileLayer.LayerType.Road;
+                    }
+                    else
+                    {
+                        layer.Token = null;
+                    }
                 }
 
                 GraphicsLayer pointLayer = new GraphicsLayer();
@@ -520,14 +539,15 @@ namespace EpiDashboard.Mapping
 
         private void AdjustScaleLine()
         {
-
             Point scaleLocation = ScaleLine1.PointToScreen(new Point(0, 0));
-            System.Drawing.Point p = new System.Drawing.Point((int)scaleLocation.X, (int)scaleLocation.Y);
-            System.Drawing.Size s = new System.Drawing.Size((int)ScaleLine1.RenderSize.Width, (int)ScaleLine1.RenderSize.Height);
+            System.Drawing.Point point = new System.Drawing.Point((int)scaleLocation.X, (int)scaleLocation.Y);
+            System.Drawing.Size size = new System.Drawing.Size((int)ScaleLine1.RenderSize.Width, (int)ScaleLine1.RenderSize.Height);
 
-            Rectangle controlRectangle = new Rectangle(p, s);
+            if (size.Width == 0 && size.Height == 0) return;
 
-            Bitmap controlBitmap = GetControlBitmap(controlRectangle, p);
+            Rectangle controlRectangle = new Rectangle(point, size);
+
+            Bitmap controlBitmap = GetControlBitmap(controlRectangle, point);
             System.Drawing.Color domColor = GetDominantColor(controlBitmap);
             System.Windows.Media.Color complimentaryColor = GetContrast(ToMediaColor(domColor), false);
 
@@ -536,12 +556,11 @@ namespace EpiDashboard.Mapping
 
         private Bitmap GetControlBitmap(Rectangle controlRectangle, System.Drawing.Point p)
         {
-            //  Width / 2 to gaurante text has high contrast                   
-            Bitmap bmp = new Bitmap(controlRectangle.Width / 2, controlRectangle.Height);
-
+            int width = controlRectangle.Width / 2;
+            int height = controlRectangle.Height;
+            Bitmap bmp = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(bmp);
             g.CopyFromScreen(p.X + controlRectangle.Width / 2, p.Y, 0, 0, new System.Drawing.Size(controlRectangle.Width / 2, controlRectangle.Height));
-
             return bmp;
         }
 
@@ -2667,21 +2686,41 @@ namespace EpiDashboard.Mapping
                 {
                     if (myMap.Layers[0] is TileLayer)
                     {
-                        if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                        bool sparse_connection = false;
+
+                        try
                         {
-                            ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                            ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
+                            Configuration config = Configuration.GetNewInstance();
+                            if (config.Settings.SparseConnection == true)
+                            {
+                                sparse_connection = true;
+                            }
                         }
-                        else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                        {
-                            ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                            ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.Road;
-                        }
-                        else
+                        catch { }
+
+                        if(sparse_connection == true)
                         {
                             ((TileLayer)myMap.Layers[0]).Token = null;
                         }
+                        else
+                        {
+                            if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                            {
+                                ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                                ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
+                            }
+                            else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                            {
+                                ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                                ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.Road;
+                            }
+                            else
+                            {
+                                ((TileLayer)myMap.Layers[0]).Token = null;
+                            }
+                        }
                     }
+
                     ((TileLayer)myMap.Layers[0]).Refresh();
                 }
             }

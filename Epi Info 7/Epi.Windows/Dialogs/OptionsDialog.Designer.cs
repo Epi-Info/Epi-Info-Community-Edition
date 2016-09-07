@@ -34,6 +34,7 @@ namespace Epi.Windows.Dialogs
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.autoTouchKeyboard = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.checkBoxSparseConnection = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label9 = new System.Windows.Forms.Label();
             this.txtMapKey = new System.Windows.Forms.TextBox();
@@ -183,6 +184,7 @@ namespace Epi.Windows.Dialogs
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.checkBoxSparseConnection);
             this.groupBox5.Controls.Add(this.linkLabel1);
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.txtMapKey);
@@ -190,6 +192,12 @@ namespace Epi.Windows.Dialogs
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            // 
+            // checkBoxSparseConnection
+            // 
+            resources.ApplyResources(this.checkBoxSparseConnection, "checkBoxSparseConnection");
+            this.checkBoxSparseConnection.Name = "checkBoxSparseConnection";
+            this.checkBoxSparseConnection.UseVisualStyleBackColor = true;
             // 
             // linkLabel1
             // 
@@ -921,5 +929,6 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.Button Ping;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox autoTouchKeyboard;
+        private System.Windows.Forms.CheckBox checkBoxSparseConnection;
     }
 }
