@@ -162,22 +162,31 @@
                         <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
 
                             <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-                                <Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:__xfe" Margin="0,0,0,0"  />
+                                <Label  VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock x:Name="tblockMaxWidth" TextWrapping="Wrap">Max width:__xfe</TextBlock>                                    
+                                </Label>
                                 <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
                             </StackPanel>
 
                             <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-                                <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:__xfe" Margin="0,0,0,0"  />
+                                <Label VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock x:Name="tblockMaxHeight" TextWrapping="Wrap">Max height:__xfe</TextBlock>
+                                </Label>
+                                
                                 <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
                             </StackPanel>
 
 
                             <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-                                <Label x:Name="tblockMaxVarNameLength" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max var name length:" Margin="0,0,0,0" Visibility="Visible" />
+                                <Label VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" Visibility="Visible">
+                                    <TextBlock x:Name="tblockMaxVarNameLength" TextWrapping="Wrap">Max var name length:</TextBlock>    
+                                </Label>                                
                                 <TextBox x:Name="txtMaxVarNameLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput" Visibility="Visible"></TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-                                <Label x:Name="tblockMaxRows" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max rows to display:" Margin="0,0,0,0" />
+                                <Label  VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock x:Name="tblockMaxRows" TextWrapping="Wrap">Max rows to display:</TextBlock>
+                                </Label>
                                 <TextBox x:Name="txtMaxRows" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="50" TextChanged="txtMaxRows_TextChanged" PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
                             </StackPanel>
                         </WrapPanel>
@@ -189,12 +198,25 @@
                     <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options__xfe</Label>
 
                     <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <CheckBox x:Name="checkboxTabOrder" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort variables by tab order (Adding more text for text)" Visibility="Visible" IsEnabled="true" />
-                        <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts__xfe" Visibility="Visible" IsEnabled="true" />
-                        <CheckBox x:Name="checkboxListLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" IsEnabled="true"/>
-                        <CheckBox x:Name="checkboxLineColumn" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column__xfe" IsChecked="True" />
-                        <CheckBox x:Name="checkboxColumnHeaders" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings__xfe" IsChecked="True" />
-                        <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation__xfe" IsChecked="True"/>
+                        <CheckBox x:Name="checkboxTabOrder"  Style="{StaticResource PropertiesPanelCheckbox}"  Visibility="Visible" IsEnabled="true">
+                            <TextBlock x:Name="checkboxTabOrderTxt" TextWrapping="Wrap" >Sort variables by tab order (Adding more text for text)</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Visibility="Visible" IsEnabled="true">
+                            <TextBlock x:Name="checkboxUsePromptsTxt" TextWrapping="Wrap">Use field prompts__xfe</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxListLabels" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxListLabelsTxt">Display list labels__xfe</TextBlock>
+                        </CheckBox>
+                        
+                        <CheckBox x:Name="checkboxLineColumn" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxLineColumnTxt">Show line column__xfe</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxColumnHeaders" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxColumnHeadersTxt">Show column headings__xfe</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxShowNullsTxt">Show missing representation__xfe</TextBlock>
+                        </CheckBox>
                         <!--<CheckBox x:Name="checkboxAllowUpdates" Style="{StaticResource PropertiesPanelCheckbox}" Content="Allow updates__xfe" Visibility="Collapsed" IsEnabled="true" />-->
                     </WrapPanel>
                 </StackPanel>
