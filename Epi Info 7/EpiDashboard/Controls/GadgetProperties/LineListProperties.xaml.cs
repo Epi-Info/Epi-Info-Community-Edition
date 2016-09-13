@@ -125,20 +125,20 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockAvailableVariables.Content = DashboardSharedStrings.GADGET_AVAILABLE_VARIABLES;
             tblockSortOrder.Content = DashboardSharedStrings.GADGET_SORT_ORDER;
             tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
-            checkboxTabOrder.Content = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
-            checkboxLineColumn.Content = DashboardSharedStrings.GADGET_SHOW_LINE_COLUMN;
-            checkboxColumnHeaders.Content = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
-            checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
+            checkboxTabOrderTxt.Text = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
+            checkboxUsePromptsTxt.Text = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
+            checkboxLineColumnTxt.Text = DashboardSharedStrings.GADGET_SHOW_LINE_COLUMN;
+            checkboxColumnHeadersTxt.Text = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
+            checkboxShowNullsTxt.Text = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
             tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
-            tblockMaxWidth.Content = DashboardSharedStrings.GADGET_MAX_WIDTH;
-            tblockMaxHeight.Content = DashboardSharedStrings.GADGET_MAX_HEIGHT;
+            checkboxListLabelsTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+            tblockMaxWidth.Text = DashboardSharedStrings.GADGET_MAX_WIDTH;
+            tblockMaxHeight.Text = DashboardSharedStrings.GADGET_MAX_HEIGHT;
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
 
-            tblockMaxVarNameLength.Content = SharedStrings.DASHBOARD_MAX_LENGTH;
-            tblockMaxRows.Content = SharedStrings.DASHBOARD_OPTION_MAX_ROWS;
+            tblockMaxVarNameLength.Text = SharedStrings.DASHBOARD_MAX_LENGTH;
+            tblockMaxRows.Text = SharedStrings.DASHBOARD_OPTION_MAX_ROWS;
             #endregion // Translation
 
 
