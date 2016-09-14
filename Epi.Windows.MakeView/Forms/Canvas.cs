@@ -1505,9 +1505,18 @@ namespace Epi.Windows.MakeView.Forms
                     switch (makeViewForm.CurrentBackgroundImageLayout.ToUpperInvariant())
                     {
                         case "TILE":
-                            TextureBrush tileBrush = new TextureBrush(img, System.Drawing.Drawing2D.WrapMode.Tile);
-                            bufferGraphics.FillRectangle(tileBrush, 0, 0, PagePanel.Size.Width, PagePanel.Size.Height);
-                            tileBrush.Dispose();
+                            try
+                            {
+                                TextureBrush tileBrush = new TextureBrush(img);
+                                tileBrush.WrapMode = System.Drawing.Drawing2D.WrapMode.Tile;
+                                bufferGraphics.FillRectangle(tileBrush, 0, 0, PagePanel.Size.Width, PagePanel.Size.Height);
+                                tileBrush.Dispose();
+                            }
+                            catch
+                            {
+                                bufferGraphics.DrawImage(img, 0, 0);
+                            }
+
                             break;
 
                         case "STRETCH":

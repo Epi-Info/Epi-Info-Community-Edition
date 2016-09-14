@@ -209,8 +209,7 @@ namespace Epi.Windows.MakeView.Dialogs
             this.cbImageLayout.Items.AddRange(new object[] {
             resources.GetString("cbImageLayout.Items"),
             resources.GetString("cbImageLayout.Items1"),
-            resources.GetString("cbImageLayout.Items2"),
-            resources.GetString("cbImageLayout.Items3")});
+            resources.GetString("cbImageLayout.Items2")});
             resources.ApplyResources(this.cbImageLayout, "cbImageLayout");
             this.cbImageLayout.Name = "cbImageLayout";
             // 
