@@ -3842,6 +3842,7 @@ namespace Epi.Windows.MakeView.Forms
                 if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
                 {
                     SurveyInfoDTO.IsSqlProject = true;
+                    SurveyInfoDTO.DBConnectionString = this.mediator.Project.CollectedDataConnectionString;
                 }// Update IsSqlProject to true on change survey mode for Sql project.
 
                 //SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
@@ -4473,6 +4474,7 @@ namespace Epi.Windows.MakeView.Forms
             if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
             {
                 SurveyInfoDTO.IsSqlProject = true;
+                SurveyInfoDTO.DBConnectionString = this.mediator.Project.CollectedDataConnectionString;
             }//changed IsSqlProject to true on quick publishing a SQL project
 
             //SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
