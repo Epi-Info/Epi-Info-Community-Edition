@@ -272,8 +272,8 @@ namespace Epi.Enter.Forms
                 dataField is RecStatusField ||
                 dataField is GlobalRecordIdField ||
                 dataField is ImageField ||
-                fieldData.FieldValue == null ||
-                string.IsNullOrEmpty(fieldData.FieldValue.ToString())
+                fieldData.FieldValue == null //||
+               // string.IsNullOrEmpty(fieldData.FieldValue.ToString())
                 ))
                 {
                 String fieldName = ((Epi.INamedObject)dataField).Name;
@@ -284,9 +284,15 @@ namespace Epi.Enter.Forms
                     case MetaFieldType.Date:
                     case MetaFieldType.DateTime:
                     case MetaFieldType.Time:
-                        return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue));
+                        if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
+                            return new QueryParameter("@" + fieldName, DbType.DateTime,DBNull.Value);
+                        else
+                            return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue));
                     case MetaFieldType.Checkbox:
-                        return new QueryParameter("@" + fieldName, DbType.Boolean, Convert.ToBoolean(fieldData.FieldValue));
+                        if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
+                            return new QueryParameter("@" + fieldName, DbType.Boolean, DBNull.Value);
+                        else
+                            return new QueryParameter("@" + fieldName, DbType.Boolean, Convert.ToBoolean(fieldData.FieldValue));
                     case MetaFieldType.CommentLegal:
                     case MetaFieldType.LegalValues:
                     case MetaFieldType.Codes:
@@ -305,12 +311,24 @@ namespace Epi.Enter.Forms
                     case MetaFieldType.Multiline:
                         return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.Number:
-                        return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                       // return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                        if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
+                            return new QueryParameter("@" + fieldName, DbType.Int32, DBNull.Value);
+                        else
+                            return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.YesNo:
                     case MetaFieldType.RecStatus:
-                        return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
+                       // return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
+                        if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
+                            return new QueryParameter("@" + fieldName, DbType.Single, DBNull.Value);
+                        else
+                            return new QueryParameter("@" + fieldName, DbType.Single, Convert.ToSingle(fieldData.FieldValue));
                     case MetaFieldType.Option:
-                        return new QueryParameter("@" + fieldName, DbType.Int16, fieldData.FieldValue);
+                      // return new QueryParameter("@" + fieldName, DbType.Int16, fieldData.FieldValue);
+                       if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
+                           return new QueryParameter("@" + fieldName, DbType.Int16, DBNull.Value);
+                       else
+                           return new QueryParameter("@" + fieldName, DbType.Int16, Convert.ToInt16(fieldData.FieldValue));
                     case MetaFieldType.Image:
                         this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), "The data for " + fieldName + " was not imported. This field type is not supported.");
                         break;
@@ -928,8 +946,8 @@ namespace Epi.Enter.Forms
                                 if (param != null)
                                     {
                                     Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
-                                    updateQuery.Parameters.Add(param);
-                                    destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
+                                    updateQuery.Parameters.Add(param);                                   
+                                        destinationProjectDataDriver.ExecuteNonQuery(updateQuery);                                  
 
                                     if (!GUIDList.Contains(GUID))
                                         {
