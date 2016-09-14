@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACw
-        cQAAAk1TRnQBSQFMAgEBRAEAAUYBAAEsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        cQAAAk1TRnQBSQFMAgEBRAEAAUYBAAE0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/P8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wCjAAH/AwAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf9TAAH/AwAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8jAAH/AwAB/wMAAf8BgAIAAf8BgAIAAf8BgAIAAf8BgAIAAf8BgAIA
@@ -878,12 +878,9 @@
     <value>None</value>
   </data>
   <data name="cbImageLayout.Items1" xml:space="preserve">
-    <value>Tile</value>
-  </data>
-  <data name="cbImageLayout.Items2" xml:space="preserve">
     <value>Center</value>
   </data>
-  <data name="cbImageLayout.Items3" xml:space="preserve">
+  <data name="cbImageLayout.Items2" xml:space="preserve">
     <value>Stretch</value>
   </data>
   <data name="cbImageLayout.Location" type="System.Drawing.Point, System.Drawing">
@@ -1070,6 +1067,6 @@
     <value>BackgroundDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5872.33704, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.6101.21384, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
