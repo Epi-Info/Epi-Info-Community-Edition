@@ -1,0 +1,8 @@
+﻿<?xml version="1.0"?>
+<Template Level="View" Name="Interview" Description="" CreateDate="Wednesday, February 10, 2016 9:56:37 AM">
+<Project>
+  <View ViewId="1" Name="Interview" IsRelatedView="False" CheckCode="" Width="549" Height="780" Orientation="Landscape" LabelAlign="Vertical">
+    
+  </View>
+</Project>
+</Template>
