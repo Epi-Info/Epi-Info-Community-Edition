@@ -235,6 +235,9 @@ namespace Epi.Windows.MakeView.Dialogs
                 // Release COM object.
                 Marshal.FinalReleaseComObject(xlApp);
             }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private static List<Card> SetCardValues(Microsoft.Office.Interop.Excel.Workbook xlWorkbook)

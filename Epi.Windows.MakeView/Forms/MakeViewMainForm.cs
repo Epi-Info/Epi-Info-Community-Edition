@@ -1290,8 +1290,12 @@ namespace Epi.Windows.MakeView.Forms
                 projectExplorer.LoadProject(newProject);
 
                 Template template = new Template(this.mediator);
-                template.CreateFromTemplate(projectTemplatePath);
 
+                string tempFilePath = Path.Combine(Environment.CurrentDirectory, "tempTemplate.xml");
+                newTemplate.Save(tempFilePath);
+
+                template.CreateFromTemplate(tempFilePath);
+                
                 //EnableFeatures();
                 OnProjectAccessed(newProject);
 

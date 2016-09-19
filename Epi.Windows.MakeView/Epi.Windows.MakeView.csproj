@@ -345,6 +345,9 @@
     <Content Include="Web\Epi.Web.Enter.Common.dll" />
     <Content Include="Web\Epi.Web.Enter.Interfaces.dll" />
     <Content Include="Web\Epi.Web.Interfaces.dll" />
+    <None Include="Excel\Survey.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Publish.png" />
     <None Include="Resources\Android_Robot_100.png" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
