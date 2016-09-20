@@ -106,6 +106,11 @@ namespace Epi.Windows.MakeView.Dialogs
             get { return txtProjectName.Text; }
         }
 
+        public string FormName
+        {
+            get { return txtFormName.Text; }
+        }
+
         public String ProjectConnectionString
         {
             get { return collectedDataConnectionString; }
@@ -214,7 +219,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 List<Card> PageList = SetCardValues(xlWorkbook);
 
                 string filename = Path.GetFileNameWithoutExtension(dExcelPath.Text);
-                _template = BuildXml.BuildNewXml(PageList, NewXmlDoc, filename);
+                _template = BuildXml.BuildNewXml(PageList, NewXmlDoc, FormName);
             }
             catch(Exception e)
             {
@@ -981,6 +986,11 @@ namespace Epi.Windows.MakeView.Dialogs
                 {
                     txtProjectName.Text = Path.GetFileNameWithoutExtension(dExcelPath.Text);
                 }
+
+                if (txtFormName.Text == "")
+                {
+                    txtFormName.Text = Path.GetFileNameWithoutExtension(dExcelPath.Text);
+                }
             }
         }
         private void btnBrowseProjectLocation_Click(object sender, EventArgs e)
@@ -1038,6 +1048,19 @@ namespace Epi.Windows.MakeView.Dialogs
         private void dExcelPath_TextChanged(object sender, EventArgs e)
         {
             EnableDisableOkButton();
+        }
+
+        private void linkEmbeddedResource_Clicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                File.WriteAllBytes("Interview.xlsx", Properties.Resources.Survey);
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = "Interview.xlsx";
+                proc.StartInfo.UseShellExecute = true;
+                proc.Start();
+            }
+            catch { }
         }
     }
 }

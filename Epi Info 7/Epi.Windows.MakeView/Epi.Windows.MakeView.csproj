@@ -341,6 +341,7 @@
     <Content Include="PortableDeviceApi\PortableDevices.dll" />
     <Content Include="portraitLetter.bmp" />
     <Content Include="Resources\1368066021_agt_web.png" />
+    <None Include="Resources\exampleDataDictionary.bmp" />
     <Content Include="Web\Epi.Web.Common.dll" />
     <Content Include="Web\Epi.Web.Enter.Common.dll" />
     <Content Include="Web\Epi.Web.Enter.Interfaces.dll" />
@@ -1462,6 +1463,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Resources\Survey.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
