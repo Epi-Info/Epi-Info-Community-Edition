@@ -169,6 +169,8 @@ namespace Epi
 
             try
             {
+                filePath = Environment.ExpandEnvironmentVariables(filePath);
+
                 xmlDoc.Load(filePath);
                 ValidateXmlDoc();
 
