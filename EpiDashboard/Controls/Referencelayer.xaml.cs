@@ -245,11 +245,30 @@ namespace EpiDashboard.Controls
                 serverlayerprop.lblServerName.Content = MapServerName;
                 serverlayerprop.CheckMapGenerated();
             }
-            else if (radKML.IsChecked == true && KMLprovider != null)
+            else if (radKML.IsChecked == true)
             {
-                KMLprovider.RenderServerImage(KMLMapServerName, KMLMapVisibleLayers);
-                kmllayerprop.lblServerName.Content = KMLMapServerName;
-                kmllayerprop.CheckMapGenerated();
+                try
+                {
+                    if (KMLprovider == null)
+                    {
+                        KMLMapServerName = txtKMLpath.Text;
+                        if (KMLprovider == null)
+                        {
+                            KMLprovider = new Mapping.KmlLayerProvider(myMap);
+                        }
+                        ILayerProperties layerProperties = null;
+                        layerProperties = new KmlLayerProperties(myMap);
+                        layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
+                        this.kmllayerprop = (KmlLayerProperties)layerProperties;
+                        kmllayerprop.provider = KMLprovider;
+                        this.mapControl.grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
+                    }
+
+                    KMLprovider.RenderServerImage(KMLMapServerName, KMLMapVisibleLayers);
+                    kmllayerprop.lblServerName.Content = KMLMapServerName;
+                    kmllayerprop.CheckMapGenerated();
+                }
+                catch { }
             }
             if (ChangesAccepted != null)
             {
