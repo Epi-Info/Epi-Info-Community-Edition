@@ -275,6 +275,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 string ColumnName = this.IdentifierList[i];
 
                 DataColumn C = pDataTable.Columns[ColumnName];
+                if (C == null) continue;
+
                 if (PrintColumn(C.ColumnName))
                 {
                     string columnDataType = C.DataType.ToString();
@@ -411,11 +413,15 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 string ColumnName = this.IdentifierList[i];
                 DataColumn C = pDataTable.Columns[ColumnName];
-                if (PrintColumn(C.ColumnName))
+
+                if (C != null)
                 {
-                    pBuilder.Append("<th>");
-                    pBuilder.Append(C.ColumnName);
-                    pBuilder.Append("</th>");
+                    if (PrintColumn(C.ColumnName))
+                    {
+                        pBuilder.Append("<th>");
+                        pBuilder.Append(C.ColumnName);
+                        pBuilder.Append("</th>");
+                    }
                 }
             }
 
