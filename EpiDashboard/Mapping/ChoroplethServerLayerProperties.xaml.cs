@@ -355,39 +355,40 @@ namespace EpiDashboard.Mapping
 
         public System.Xml.XmlNode Serialize(System.Xml.XmlDocument doc)
         {
-            string connectionString = string.Empty;
-            string tableName = string.Empty;
-            string projectPath = string.Empty;
-            string viewName = string.Empty;
-
-            string legacyClassCountIndex = (cbxClasses.SelectedIndex - 1).ToString();
-            
-            if (dashboardHelper.View == null)
+            try
             {
-                connectionString = dashboardHelper.Database.ConnectionString;
-                tableName = dashboardHelper.TableName;
+                string dataKey = cbxDataKey.SelectedItem.ToString();
+                string shapeKey = cbxShapeKey.SelectedItem.ToString();
+                string value = cbxValue.SelectedItem.ToString();
+                string legacyClassCountIndex = (cbxClasses.SelectedIndex - 1).ToString();
+                SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
+                SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
+                SolidColorBrush missingColor = (SolidColorBrush)rctMissingColor.Fill;
+
+                string xmlString = "<shapeFile>" + boundryFilePath + "</shapeFile>" + Environment.NewLine;
+
+                System.Xml.XmlAttribute type = doc.CreateAttribute("layerType");
+                type.Value = "EpiDashboard.Mapping.ChoroplethServerLayerProperties";
+
+                return ChoroplethLayerPropertiesUserControlBase.Serialize(
+                    doc,
+                    Provider,
+                    dataKey,
+                    shapeKey,
+                    value,
+                    legacyClassCountIndex,
+                    highColor,
+                    lowColor,
+                    missingColor,
+                    xmlString,
+                    dashboardHelper,
+                    type,
+                    Opacity);
             }
-            else
+            catch (Exception e)
             {
-                projectPath = dashboardHelper.View.Project.FilePath;
-                viewName = dashboardHelper.View.Name;
+                throw new Exception(e.Message);
             }
-            
-            string dataKey = cbxDataKey.SelectedItem.ToString();
-            string shapeKey = cbxShapeKey.SelectedItem.ToString();
-            string value = cbxValue.SelectedItem.ToString();
-            SolidColorBrush highColor = (SolidColorBrush)rctHighColor.Fill;
-            SolidColorBrush lowColor = (SolidColorBrush)rctLowColor.Fill;
-            string xmlString = "<shapeFile>" + boundryFilePath + "</shapeFile><highColor>" + highColor.Color.ToString() + "</highColor><lowColor>" + lowColor.Color.ToString() + "</lowColor><classes>" + legacyClassCountIndex + "</classes><dataKey>" + dataKey + "</dataKey><shapeKey>" + shapeKey + "</shapeKey><value>" + value + "</value>" + "<selectMapFeature>" + cbxMapFeatureText + "</selectMapFeature> " + "<opacity>" + Opacity.ToString() + "</opacity> ";
-            System.Xml.XmlElement element = doc.CreateElement("dataLayer");
-            element.InnerXml = xmlString;
-            element.AppendChild(dashboardHelper.Serialize(doc));
-
-            System.Xml.XmlAttribute type = doc.CreateAttribute("layerType");
-            type.Value = "EpiDashboard.Mapping.ChoroplethServerLayerProperties";
-            element.Attributes.Append(type);
-
-            return element;
         }
 
         private string GetformattedUrl(string sUrl)
