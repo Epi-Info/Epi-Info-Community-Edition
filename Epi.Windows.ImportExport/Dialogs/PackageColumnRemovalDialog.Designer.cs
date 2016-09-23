@@ -45,8 +45,8 @@
             // 
             // lbxFields
             // 
-            this.lbxFields.FormattingEnabled = true;
             resources.ApplyResources(this.lbxFields, "lbxFields");
+            this.lbxFields.FormattingEnabled = true;
             this.lbxFields.Name = "lbxFields";
             this.lbxFields.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbxFields.SelectedIndexChanged += new System.EventHandler(this.lbxFields_SelectedIndexChanged);
@@ -58,8 +58,8 @@
             // 
             // cmbFormSelector
             // 
-            this.cmbFormSelector.FormattingEnabled = true;
             resources.ApplyResources(this.cmbFormSelector, "cmbFormSelector");
+            this.cmbFormSelector.FormattingEnabled = true;
             this.cmbFormSelector.Name = "cmbFormSelector";
             this.cmbFormSelector.SelectedIndexChanged += new System.EventHandler(this.cmbFormSelector_SelectedIndexChanged);
             // 
@@ -94,11 +94,11 @@
             this.Controls.Add(this.lbxFields);
             this.Controls.Add(this.lblForm);
             this.Controls.Add(this.cmbFormSelector);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PackageColumnRemovalDialog";
             this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.ResumeLayout(false);
 
         }
