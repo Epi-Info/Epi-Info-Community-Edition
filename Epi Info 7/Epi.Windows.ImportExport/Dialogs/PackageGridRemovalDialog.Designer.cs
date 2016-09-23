@@ -45,8 +45,8 @@
             // 
             // lbxGridColumns
             // 
-            this.lbxGridColumns.FormattingEnabled = true;
             resources.ApplyResources(this.lbxGridColumns, "lbxGridColumns");
+            this.lbxGridColumns.FormattingEnabled = true;
             this.lbxGridColumns.Name = "lbxGridColumns";
             this.lbxGridColumns.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbxGridColumns.SelectedIndexChanged += new System.EventHandler(this.lbxFields_SelectedIndexChanged);
@@ -58,8 +58,8 @@
             // 
             // cmbGridSelector
             // 
-            this.cmbGridSelector.FormattingEnabled = true;
             resources.ApplyResources(this.cmbGridSelector, "cmbGridSelector");
+            this.cmbGridSelector.FormattingEnabled = true;
             this.cmbGridSelector.Name = "cmbGridSelector";
             this.cmbGridSelector.SelectedIndexChanged += new System.EventHandler(this.cmbFormSelector_SelectedIndexChanged);
             // 
@@ -94,11 +94,11 @@
             this.Controls.Add(this.lbxGridColumns);
             this.Controls.Add(this.lblForm);
             this.Controls.Add(this.cmbGridSelector);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PackageGridRemovalDialog";
             this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.ResumeLayout(false);
 
         }
