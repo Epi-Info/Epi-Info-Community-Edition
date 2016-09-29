@@ -458,6 +458,8 @@ namespace Epi.Enter.Forms
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.String, data));
                                             break;
                                         case MetaFieldType.Number:
+                                            fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.String, data));
+                                            break;
                                         case MetaFieldType.RecStatus:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));
                                             break;
