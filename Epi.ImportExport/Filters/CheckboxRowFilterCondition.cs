@@ -56,7 +56,7 @@ namespace Epi.ImportExport
         /// </summary>
         protected override void Construct()
         {            
-            Parameter = new QueryParameter(ParameterName, System.Data.DbType.Int16, bool.Parse(Value.ToString()));
+            Parameter = new QueryParameter(ParameterName, System.Data.DbType.Boolean, bool.Parse(Value.ToString()));
         }
         #endregion // Protected Methods
     }
