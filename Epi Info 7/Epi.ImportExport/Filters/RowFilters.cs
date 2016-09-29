@@ -130,8 +130,9 @@ namespace Epi.ImportExport.Filters
             {
                 filterSql.Append(rowFc.Sql);
             }
-
-            Query selectQuery = DataDriver.CreateQuery(fullSql + " " + filterSql.ToString() + ")");
+            
+            string fSql = fullSql + " " + filterSql.ToString() + ")";
+            Query selectQuery = DataDriver.CreateQuery(fSql);
 
             Contract.Assert(selectQuery != null);
             Contract.Assert(!String.IsNullOrEmpty(selectQuery.SqlStatement));

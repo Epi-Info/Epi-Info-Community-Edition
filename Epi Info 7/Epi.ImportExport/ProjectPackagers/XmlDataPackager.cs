@@ -532,7 +532,11 @@ namespace Epi.ImportExport.ProjectPackagers
                 formElement.Attributes.Append(level);
             }
 
-            if (this.IsUsingCustomMatchkeys) { formElement.AppendChild(CreateXmlFormKeyElement(xmlDataPackage, form)); } // only add a custom key element if custom keys are specified... this maintains backward compatibility with 7.1.2.0 which only expects two child elements in <Form>
+            if (this.IsUsingCustomMatchkeys)
+            {
+                formElement.AppendChild(CreateXmlFormKeyElement(xmlDataPackage, form));
+            } // only add a custom key element if custom keys are specified... this maintains backward compatibility with 7.1.2.0 which only expects two child elements in <Form>
+
             formElement.AppendChild(CreateXmlFormMetadataElement(xmlDataPackage, form));
             formElement.AppendChild(CreateXmlFormDataElement(xmlDataPackage, form));
 
@@ -734,8 +738,18 @@ namespace Epi.ImportExport.ProjectPackagers
             }
 
             double totalRecords = 0;
+            IDataReader dataReader = null;
 
-            using (IDataReader guidReader = filterThisForm ? SourceProject.CollectedData.GetDatabase().ExecuteReader(selectQuery) : SourceProject.CollectedData.GetDatabase().GetTableDataReader(form.TableName))
+            if (filterThisForm)
+            {
+                dataReader = SourceProject.CollectedData.GetDatabase().ExecuteReader(selectQuery);
+            }
+            else
+            {
+                dataReader = SourceProject.CollectedData.GetDatabase().GetTableDataReader(form.TableName);
+            }
+
+            using (IDataReader guidReader = dataReader)
             {
                 while (guidReader.Read())
                 {
