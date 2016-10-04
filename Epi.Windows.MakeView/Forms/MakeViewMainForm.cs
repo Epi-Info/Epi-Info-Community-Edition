@@ -4912,57 +4912,60 @@ namespace Epi.Windows.MakeView.Forms
             string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
             Configuration config = Configuration.GetNewInstance();
             int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+            if (ISWindowAuthMode == 1)
+            {
+                try
+                {
+                    UserPrincipal User = GetUser(UserName);
 
-            // try
-            // {
-            // UserPrincipal User = GetUser(UserName);
+                    EWEManagerService.UserAuthenticationRequest Request = new EWEManagerService.UserAuthenticationRequest();
+                    var rUser = new EWEManagerService.UserDTO();
+                    rUser.EmailAddress = User.EmailAddress;
+                    Request.User = rUser;
+                    Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
 
-            // EWEManagerService.UserAuthenticationRequest Request = new EWEManagerService.UserAuthenticationRequest();
-            // var rUser = new EWEManagerService.UserDTO();
-            // rUser.EmailAddress = User.EmailAddress;
-            // Request.User = rUser;
-            // Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
+                    var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+                    var Result = client.GetUser(Request);
+                    if (Result != null && ISWindowAuthMode == 1)
+                    {
+                        IsValidUser = true;
+                        LoginInfo.UserID = Result.User.UserId;
+                    }
 
-            //var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
-            // var Result = client.GetUser(Request);
-            // if (Result != null && ISWindowAuthMode == 1)
-            //  {
-            //   IsValidUser = true;
-            //   LoginInfo.UserID = Result.User.UserId;
-            //   }
+                    return IsValidUser;
+                }
+                catch (Exception ex)
+                {
+                    /*  Template template = new Template(this.mediator);
+                      WebEnterOptions dialog2 = new WebEnterOptions();
+                      DialogResult result3 = dialog2.ShowDialog();
+                      if (result3 == DialogResult.Cancel)
+                      {
+                          iscancel = true;
+                          dialog2.Close();
+                      }
+                      */
+                    //if (ISWindowAuthMode == 0)
+                    //{
+                    //    if (LoginInfo.UserID == -1)
+                    //    {
+                    //        Template template = new Template(this.mediator);
+                    //        UserAuthentication dialog = new UserAuthentication();
+                    //        DialogResult result = dialog.ShowDialog();
+                    //        if (result == System.Windows.Forms.DialogResult.OK)
+                    //        {
+                    //            dialog.Close();
+                    //            IsValidUser = true;
+                    //        }
 
-            // return IsValidUser;
-            // }
-            //  catch (Exception ex) 
-            //      {
-            /*  Template template = new Template(this.mediator);
-              WebEnterOptions dialog2 = new WebEnterOptions();
-              DialogResult result3 = dialog2.ShowDialog();
-              if (result3 == DialogResult.Cancel)
-              {
-                  iscancel = true;
-                  dialog2.Close();
-              }
-              */
-            //    if (ISWindowAuthMode == 0)
-            //    {
-            //        if (LoginInfo.UserID == -1)
-            //        {
-            //            Template template = new Template(this.mediator);
-            //            UserAuthentication dialog = new UserAuthentication();
-            //            DialogResult result = dialog.ShowDialog();
-            //            if (result == System.Windows.Forms.DialogResult.OK)
-            //            {
-            //                dialog.Close();
-            //                IsValidUser = true;
-            //            }
-
-            //        }
-            //        IsValidUser = true;
-            //    }
-            ////    }
-            //return IsValidUser;
-            // }
+                    //    }
+                    //    IsValidUser = true;
+                    //}
+                    //    }
+                    // return IsValidUser;
+                    IsValidUser = false;
+                }
+            }
             if (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress.Trim()))
             {
                 IsValidUser = ValidateUserDialog(IsValidUser, ISWindowAuthMode);
