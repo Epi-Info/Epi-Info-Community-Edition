@@ -4637,6 +4637,18 @@ namespace Epi.Windows.MakeView.Forms
                     {
                         CreateViewDataTable(view);
                     }
+                    else  //checking if any Relate forms are added during republish
+                    {
+                        foreach (View v in view.GetDescendantViews())
+                        {
+                            if (!this.mediator.Project.CollectedData.TableExists(v.TableName))
+                            {
+                                view.SetTableName(v.Name);
+                                this.mediator.Project.CollectedData.CreateDataTableForView(v, 1);
+                            }
+                        }
+                    }
+
                     if (ValidateUser() && !iscancel) // Validate User
                     {
                         if (config.Settings.Republish_IsRepbulishable == true) //IsRepbulishable
