@@ -3197,4 +3197,13 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="INVALID_STARTING_UNIQUE_ID_TOO_LONG" xml:space="preserve">
     <value>The starting value given must be less than 2,147,450,880</value>
   </data>
+  <data name="SHARE_FORM_VIA_EMAIL" xml:space="preserve">
+    <value>Share Form via Email</value>
+  </data>
+  <data name="SHARE_PAGE_VIA_EMAIL" xml:space="preserve">
+    <value>Share Page via Email</value>
+  </data>
+  <data name="SHARE_PROJECT_VIA_EMAIL" xml:space="preserve">
+    <value>Share Project via Email</value>
+  </data>
 </root>

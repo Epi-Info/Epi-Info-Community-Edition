@@ -211,7 +211,6 @@
     </Compile>
     <Compile Include="DataSets\Config.cs">
       <DependentUpon>Config.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Collections\TaggedList.cs" />
     <Compile Include="CommandProcessorResults.cs" />
@@ -284,6 +283,7 @@
     <Compile Include="Exceptions\ReservedWordException.cs" />
     <Compile Include="Exceptions\ValidationFailedException.cs" />
     <Compile Include="ExecutionEnvironment.cs" />
+    <Compile Include="MailUtility.cs" />
     <Compile Include="ProjectPermissions.cs" />
     <Compile Include="Service References\EWEManagerService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -389,7 +389,6 @@
     <Compile Include="Constants\VariableType.cs" />
     <Compile Include="DataSets\AppDataSet.cs">
       <DependentUpon>AppDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Data\Services\CollectedDataProvider.cs">
       <SubType>Code</SubType>
@@ -670,6 +669,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ImagesNotToBeDeployed\App.ico" />
+    <None Include="Resources\ImagesNotToBeDeployed\viaEmail.bmp" />
     <Content Include="Resources\Training Projects\CommunityHealthAssessment\albany_demogz.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

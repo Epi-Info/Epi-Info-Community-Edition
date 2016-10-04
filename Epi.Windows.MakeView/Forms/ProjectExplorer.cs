@@ -15,7 +15,7 @@ using Epi.Windows.Docking;
 using Epi.Windows.MakeView.Dialogs;
 using Epi.Data.Services;
 using EpiInfo.Plugin;
-using System.Reflection;
+using System.Net.Mail;
 #endregion  //Namespaces
 
 namespace Epi.Windows.MakeView.Forms
@@ -1112,6 +1112,65 @@ namespace Epi.Windows.MakeView.Forms
             }
         }
 
+        void mnuShareViaEmail_Click(object sender, EventArgs e)
+        {
+            Template template = new Template(this.mainForm.mediator);
+            string templatesFolderPath = "";
+            string templateNameWithSubfolders = "";
+
+            if (((System.Windows.Forms.ToolStripItem)(sender)).Tag is ProjectNode)
+            {
+                ProjectNode projectNode = (ProjectNode)((System.Windows.Forms.ToolStripItem)(sender)).Tag;
+                templateNameWithSubfolders = projectNode.Text;
+                mainForm.TemplateNode = "Projects";
+                templatesFolderPath = Template.GetTemplatePath("Projects");
+                template.CreateProjectTemplate
+                (
+                    templateNameWithSubfolders,
+                    string.Format(@"Shared Via Email {0}", DateTime.Now.ToString("dddd MMMM dd yyyy hmmsstt"))
+                );
+            }
+            else if (((System.Windows.Forms.ToolStripItem)(sender)).Tag is ViewNode)
+            {
+                ViewNode viewNode = (ViewNode)((System.Windows.Forms.ToolStripItem)(sender)).Tag;
+                templateNameWithSubfolders = viewNode.Text;
+                mainForm.TemplateNode = "Forms";
+                templatesFolderPath = Template.GetTemplatePath("Forms");
+                template.CreateViewTemplate
+                    (
+                        templateNameWithSubfolders,
+                        ((Epi.Windows.Controls.ViewNode)(rightClickedNode)).View
+                    );
+            }
+            else if (((System.Windows.Forms.ToolStripItem)(sender)).Tag is PageNode)
+            {
+                PageNode pageNode = (PageNode)((System.Windows.Forms.ToolStripItem)(sender)).Tag;
+                templateNameWithSubfolders = pageNode.Text;
+                mainForm.TemplateNode = "Pages";
+                templatesFolderPath = Template.GetTemplatePath("Pages");
+                template.CreatePageTemplate
+                    (
+                        templateNameWithSubfolders
+                    );
+            }
+
+            string xmlFullPath = System.IO.Path.Combine(templatesFolderPath, templateNameWithSubfolders) + ".xml";
+
+            var mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("ita3@cdc.gov");
+            mailMessage.Subject = "Epi Info 7 Shared Template";
+            mailMessage.IsBodyHtml = true;
+            mailMessage.Body = "<span style='font-size: 10pt; color: black; font-family: Segoe UI,sans-serif;'>Attached please find an Epi Info 7 template.</span>";
+
+            mailMessage.Attachments.Add(new Attachment(xmlFullPath));
+
+            var filename = "C://Temp//epiInfoSharedViaEmail.eml";
+
+            mailMessage.Save(filename);
+
+            System.Diagnostics.Process.Start(filename);
+        }
+
         /// <summary>
         /// Handles the Click event of the Check Code for a page
         /// </summary>
@@ -1752,7 +1811,15 @@ namespace Epi.Windows.MakeView.Forms
             mnuQuickSaveProjectAsTemplate.Tag = node;
             mnuQuickSaveProjectAsTemplate.Click += new EventHandler(mnuSaveAsTemplate_Click);
             contextMenu.Items.Add(mnuQuickSaveProjectAsTemplate);
-            
+
+            contextMenu.Items.Add(new ToolStripSeparator());
+
+            ToolStripMenuItem mnuShareViaEmail = new ToolStripMenuItem(SharedStrings.SHARE_PROJECT_VIA_EMAIL);
+            mnuShareViaEmail.ImageIndex = 25;
+            mnuShareViaEmail.Tag = node;
+            mnuShareViaEmail.Click += new EventHandler(mnuShareViaEmail_Click);
+            contextMenu.Items.Add(mnuShareViaEmail);
+
             return contextMenu;
         }
 
@@ -1798,6 +1865,15 @@ namespace Epi.Windows.MakeView.Forms
             mnuViewSaveAsTemplate.Tag = node;
             mnuViewSaveAsTemplate.Click += new EventHandler(mnuSaveAsTemplate_Click);
             contextMenu.Items.Add(mnuViewSaveAsTemplate);
+
+            contextMenu.Items.Add(new ToolStripSeparator());
+
+            ToolStripMenuItem mnuShareViaEmail = new ToolStripMenuItem(SharedStrings.SHARE_FORM_VIA_EMAIL);
+            mnuShareViaEmail.ImageIndex = 25;
+            mnuShareViaEmail.Tag = node;
+            mnuShareViaEmail.Click += new EventHandler(mnuShareViaEmail_Click);
+            contextMenu.Items.Add(mnuShareViaEmail);
+
             return contextMenu;
         }
 
@@ -1847,6 +1923,15 @@ namespace Epi.Windows.MakeView.Forms
             mnuPageSaveAsTemplate.Tag = node;
             mnuPageSaveAsTemplate.Click += new EventHandler(mnuSaveAsTemplate_Click);
             contextMenu.Items.Add(mnuPageSaveAsTemplate);
+
+            contextMenu.Items.Add(new ToolStripSeparator());
+
+            ToolStripMenuItem mnuShareViaEmail = new ToolStripMenuItem(SharedStrings.SHARE_PAGE_VIA_EMAIL);
+            mnuShareViaEmail.ImageIndex = 25;
+            mnuShareViaEmail.Tag = node;
+            mnuShareViaEmail.Click += new EventHandler(mnuShareViaEmail_Click);
+            contextMenu.Items.Add(mnuShareViaEmail);
+
             return contextMenu;
         }
 

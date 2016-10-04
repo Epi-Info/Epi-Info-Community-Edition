@@ -29,7 +29,7 @@ namespace Epi.Windows.MakeView.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectExplorer));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectExplorer));
             this.projectTree = new Epi.Windows.FlickerFreeTreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
@@ -149,8 +149,8 @@ namespace Epi.Windows.MakeView.Forms
             this.projectTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.projectTree_NodeMouseClick);
             this.projectTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.projectTree_NodeMouseDoubleClick);
             this.projectTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.projectTree_DragDrop);
-            this.projectTree.DragOver += new System.Windows.Forms.DragEventHandler(projectTree_DragOver);
-            this.projectTree.MouseDown += new System.Windows.Forms.MouseEventHandler(projectTree_MouseDown);
+            this.projectTree.DragOver += new System.Windows.Forms.DragEventHandler(this.projectTree_DragOver);
+            this.projectTree.MouseDown += new System.Windows.Forms.MouseEventHandler(this.projectTree_MouseDown);
             // 
             // imageList1
             // 
@@ -181,12 +181,13 @@ namespace Epi.Windows.MakeView.Forms
             this.imageList1.Images.SetKeyName(22, "ProgramLarge.bmp");
             this.imageList1.Images.SetKeyName(23, "NewConnection.bmp");
             this.imageList1.Images.SetKeyName(24, "save.bmp");
+            this.imageList1.Images.SetKeyName(25, "viaEmail.bmp");
             // 
             // ProjectExplorer
             // 
             this.AllowDock = false;
-            this.AllowUnDock = false;
             this.AllowDrop = true;
+            this.AllowUnDock = false;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.projectTree);
