@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Device.Location;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,18 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>Returns the latitude.</returns>
         public override object Execute()
         {
-            return "implement_latitude";
+            GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
+            watcher.TryStart(false, TimeSpan.FromMilliseconds(5000));
+            var coord = watcher.Position.Location;
+
+            if (coord.IsUnknown != true)
+            {
+                return coord.Latitude.ToString();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

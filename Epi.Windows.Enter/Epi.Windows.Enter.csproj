@@ -214,6 +214,7 @@
     <Reference Include="System.Design">
       <Name>System.Design</Name>
     </Reference>
+    <Reference Include="System.Device" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>

@@ -1166,7 +1166,7 @@ namespace Epi.Windows.MakeView.Forms
 
             string asmPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-            var filename = System.IO.Path.Combine(asmPath, templateNameWithSubfolders) + "//epiInfoSharedViaEmail.eml";
+            var filename = System.IO.Path.Combine(asmPath, "epiInfoSharedViaEmail.eml") ;
 
             mailMessage.Save(filename);
 
