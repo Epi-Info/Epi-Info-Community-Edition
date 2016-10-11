@@ -562,6 +562,18 @@ namespace Epi
         /// </summary>
         public const string SUMMARIZE = "SUMMARIZE";
         /// <summary>
+        /// SYSBARCODE system function
+        /// </summary>
+        public const string SYSBARCODE = "SYSBARCODE";
+        /// <summary>
+        /// SYSLATITUDE system function
+        /// </summary>
+        public const string SYSLATITUDE = "SYSLATITUDE";
+        /// <summary>
+        /// SYSLONGITUDE system function
+        /// </summary>
+        public const string SYSLONGITUDE = "SYSLONGITUDE";
+        /// <summary>
         /// SYSTEMDATE system function
         /// </summary>
         public const string SYSTEMDATE = "SYSTEMDATE";

@@ -250,7 +250,7 @@ Comment End = '*/'
 !                |YEAR '('<FunctionParameterList> ')'
 
 
-<FuncName2> ::= SYSTEMTIME|SYSTEMDATE | RECORDCOUNT
+<FuncName2> ::= SYSBARCODE|SYSLATITUDE|SYSLONGITUDE|SYSTEMTIME|SYSTEMDATE|RECORDCOUNT
 
                  
 
