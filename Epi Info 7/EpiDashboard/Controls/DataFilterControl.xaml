@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              xmlns:EpiDashboard="clr-namespace:EpiDashboard"
              >
-         
+
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -54,31 +54,33 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="70"/>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="26.017"/>
+                            <ColumnDefinition Width="13.903"/>
+                            <ColumnDefinition Width="98.097"/>
+                            <ColumnDefinition Width="17.6"/>
+                            <ColumnDefinition Width="94.4"/>
                             <ColumnDefinition Width="90"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="90"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock x:Name="lblConditions" HorizontalAlignment="Left" TextAlignment="Center" Text="Data filters:" Margin="0,5,0,0" Grid.Row="5" Grid.Column="0"  Grid.ColumnSpan="2" />
-                        <ListBox x:Name="lbxConditions" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Width="514" Visibility="Collapsed"/>
+                        <TextBlock x:Name="lblConditions" HorizontalAlignment="Left" TextAlignment="Center" Text="Data filters:" Margin="0,5,0,0" Grid.Row="5" Grid.Column="0" Width="60" />
+                        <ListBox x:Name="lbxConditions" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="9" Width="514" Visibility="Collapsed"/>
 
                         <DataGrid x:Name="dgFilters" 
-                                      Width="514" 
                                       HorizontalAlignment="Stretch" 
                                       HorizontalScrollBarVisibility="Hidden" 
                                       Grid.Row="6" 
                                       Grid.Column="0" 
-                                      Grid.ColumnSpan="6"                                       
+                                      Grid.ColumnSpan="9"                                       
                                       CanUserReorderColumns="False" 
                                       CanUserResizeColumns="True" 
                                       CanUserResizeRows="False" 
                                       CanUserSortColumns="False"                                       
                                       CanUserAddRows="False" 
                                       CanUserDeleteRows="False"
-                                      RowHeight="18" IsReadOnly="True" SelectionMode="Single" SelectionChanged="dgFilters_SelectionChanged" >
-                            
+                                      RowHeight="18" IsReadOnly="True" SelectionMode="Single" SelectionChanged="dgFilters_SelectionChanged" Margin="2,0,9,0" >
+
                             <DataGrid.ColumnHeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="FontSize" Value="14" />
@@ -91,7 +93,7 @@
                                     <Setter Property="Padding" Value="4" />
                                 </Style>
                             </DataGrid.ColumnHeaderStyle>
-                            
+
                             <DataGrid.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="FontSize" Value="12" />
@@ -104,37 +106,37 @@
 
 
 
-                        <TextBlock x:Name="lblFieldName" HorizontalAlignment="Left" TextAlignment="Center" Text="Field Name:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="1"  />
-                        <ComboBox x:Name="cbxFieldName" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="1" MaxWidth="110" MinWidth="110" SelectionChanged="cbxFieldName_SelectionChanged" />
+                        <TextBlock x:Name="lblFieldName" HorizontalAlignment="Left" TextAlignment="Center" Text="Field Name:" Margin="2,-7,0,12" Grid.Row="0" Width="63"  />
+                        <ComboBox x:Name="cbxFieldName" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxFieldName_SelectionChanged" Margin="0,9,0,11" Grid.RowSpan="2" Grid.ColumnSpan="4" Width="204" />
 
-                        <TextBlock x:Name="lblOperator" HorizontalAlignment="Left" TextAlignment="Center" Text="Operator:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="2"  />
-                        <ComboBox x:Name="cbxOperator"  HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="2" MaxWidth="110" MinWidth="110" SelectionChanged="cbxOperator_SelectionChanged" />
+                        <TextBlock x:Name="lblOperator" HorizontalAlignment="Left" TextAlignment="Center" Text="Operator:" Margin="2,-8,0,13" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Width="51"  />
+                        <ComboBox x:Name="cbxOperator"  HorizontalAlignment="Left" SelectedIndex="0" Grid.Column="4" MaxWidth="110" MinWidth="110" SelectionChanged="cbxOperator_SelectionChanged" Margin="1,9,0,11" Grid.RowSpan="2" Width="110" Grid.ColumnSpan="2" />
 
-                        <TextBlock x:Name="txtValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="3"  />
-                        <ComboBox IsTextSearchEnabled="True" IsEditable="True" x:Name="cbxValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="110" MinWidth="110" Grid.ColumnSpan="3"/>
+                        <TextBlock x:Name="txtValue" HorizontalAlignment="Left" TextAlignment="Center" Text="Value:" Margin="4,-7,0,12" Grid.Row="0" Grid.Column="6" Width="33"  />
+                        <ComboBox IsTextSearchEnabled="True" IsEditable="True" x:Name="cbxValue" HorizontalAlignment="Left" Grid.Column="6" Visibility="Hidden"  MinWidth="110" Margin="3,9,0,11" Grid.ColumnSpan="3" Width="200" RenderTransformOrigin="0.542,1.628" Grid.RowSpan="2"/>
 
-                        <DatePicker x:Name="dateValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" >
+                        <DatePicker x:Name="dateValue" HorizontalAlignment="Left" Grid.Column="6" MinWidth="90" Visibility="Hidden" Margin="4,9,0,11" Grid.RowSpan="2" Grid.ColumnSpan="3" Width="201" >
                             <DatePicker.Resources>
                                 <Style TargetType="Button">
-                                   <Setter Property="MaxHeight" Value="30" />
+                                    <Setter Property="MaxHeight" Value="30" />
                                 </Style>
                             </DatePicker.Resources>
 
                         </DatePicker>
-                        <TextBox x:Name="tbxNumericValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
-                        <TextBox x:Name="tbxValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" />
+                        <TextBox x:Name="tbxNumericValue" HorizontalAlignment="Left" Grid.Column="6" Width="200" MinWidth="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" Margin="4,8,0,12" Grid.ColumnSpan="3" Grid.RowSpan="2" />
+                        <TextBox x:Name="tbxValue" HorizontalAlignment="Left" Grid.Column="6" Width="200" MinWidth="90" Visibility="Hidden" Margin="4,8,0,12" Grid.ColumnSpan="3" Grid.RowSpan="2" />
 
-                        <TextBox x:Name="tbxLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
-                        <TextBox x:Name="tbxHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="5" MaxWidth="90" MinWidth="90" Visibility="Hidden" PreviewTextInput="tbxNumericValue_PreviewTextInput" />
+                        <TextBox x:Name="tbxLowValue" HorizontalAlignment="Left" Grid.Column="6" Width="200"  Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" Grid.ColumnSpan="3" RenderTransformOrigin="0.509,-0.904" Margin="4,9,0,11" Grid.RowSpan="2" />
+                        <TextBox x:Name="tbxHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="6" Width="200"  Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" Grid.ColumnSpan="3" Margin="4,21,0,6" Grid.RowSpan="3" />
 
-                        <DatePicker x:Name="dateLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" MaxWidth="90" MinWidth="90" Visibility="Hidden">
+                        <DatePicker x:Name="dateLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="6" Width="203" Visibility="Hidden" Margin="4,21,-1,6" Grid.ColumnSpan="3" Grid.RowSpan="3" RenderTransformOrigin="0.502,0.714">
                             <DatePicker.Resources>
                                 <Style TargetType="Button">
                                     <Setter Property="MaxHeight" Value="30" />
                                 </Style>
                             </DatePicker.Resources>
                         </DatePicker>
-                        <DatePicker x:Name="dateHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="5" MaxWidth="90" MinWidth="90" Visibility="Hidden">
+                        <DatePicker x:Name="dateHighValue" HorizontalAlignment="Left" Grid.Column="6" MinWidth="90" Visibility="Hidden" Grid.ColumnSpan="3" Margin="4,9,0,11" Grid.RowSpan="2" Width="202">
                             <DatePicker.Resources>
                                 <Style TargetType="Button">
                                     <Setter Property="MaxHeight" Value="30" />
@@ -142,9 +144,9 @@
                             </DatePicker.Resources>
                         </DatePicker>
 
-                        <TextBlock x:Name="txtAnd" Visibility="Visible" Text="and" HorizontalAlignment="Center" Margin="0,5,0,0" Grid.Column="4" Grid.Row="0"/>
+                        <TextBlock x:Name="txtAnd" Visibility="Visible" Text="and" HorizontalAlignment="Right" Margin="0,4,1,9" Grid.Column="5" Grid.Row="2" RenderTransformOrigin="-6.513,4.164" Grid.RowSpan="2" VerticalAlignment="Center" Width="21" Height="14"/>
 
-                        <Button x:Name="btnNewCondition" Width="100" Grid.ColumnSpan="2" Content="Add Filter" Grid.Row="3" HorizontalAlignment="Left" Click="btnNewCondition_Click">
+                        <Button x:Name="btnNewCondition" Width="100" Grid.ColumnSpan="3" Content="Add Filter" Grid.Row="3" HorizontalAlignment="Left" Click="btnNewCondition_Click" Margin="0,10,0,2" Grid.RowSpan="2">
                             <Button.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem x:Name="mnuAddWithAnd" Header="Add Condition with AND" Click="mnuAddWithAnd_Click" />
@@ -153,12 +155,12 @@
                             </Button.ContextMenu>
                         </Button>
 
-                        <StackPanel x:Name="panelAdvanced" Visibility="Collapsed" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" >
+                        <StackPanel x:Name="panelAdvanced" Visibility="Collapsed" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,0,90,0" >
                             <TextBlock x:Name="lblRecordProcessScope" HorizontalAlignment="Left" TextAlignment="Center" Text="Record processing scope:" Grid.ColumnSpan="2"/>
                             <ComboBox x:Name="cbxRecordProcessScope" HorizontalAlignment="Left" MaxWidth="140" Width="140" IsEditable="False" Grid.ColumnSpan="3" SelectionChanged="cbxRecordProcessScope_SelectionChanged" />
                         </StackPanel>
 
-                        <TextBlock x:Name="tbkTheValueOf" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Center" Text="The value of  " Grid.Row="1" Grid.Column="0" />
+                        <TextBlock x:Name="tbkTheValueOf" TextWrapping="Wrap" Visibility="Hidden" HorizontalAlignment="Left" TextAlignment="Center" Text="The value of  " Grid.Column="0" Margin="0,14,0,3" Grid.RowSpan="2" VerticalAlignment="Center" Height="26" Width="44" />
                     </Grid>
 
                     <Grid x:Name="grdGuidedModeButtons" VerticalAlignment="Top" Grid.Row="2" Margin="27, 5, 5, 5">
@@ -224,7 +226,7 @@
                 </Grid>
             </Grid>
         </Border>
-        <Image x:Name="imgClose" Visibility="Collapsed" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="7" VerticalAlignment="Top" Stretch="None" />        
+        <Image x:Name="imgClose" Visibility="Collapsed" Source="..\Images\x_over.png" Cursor="Hand" HorizontalAlignment="Right" Margin="7" VerticalAlignment="Top" Stretch="None" />
     </Grid>
-    
+
 </UserControl>
