@@ -167,6 +167,15 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "SQRT":
                         functionCall = new Rule_SQRT_Func(pContext, T);
                         break;
+                    case "SYSBARCODE":
+                        functionCall = new Rule_SystemBarcode(pContext, T);
+                        break;
+                    case "SYSLATITUDE":
+                        functionCall = new Rule_SystemLatitude(pContext, T);
+                        break;
+                    case "SYSLONGITUDE":
+                        functionCall = new Rule_SystemLongitude(pContext, T);
+                        break;
                     case "SYSTEMDATE":
                         functionCall = new Rule_SystemDate(pContext, T);
                         break;
