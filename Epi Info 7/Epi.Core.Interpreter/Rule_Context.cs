@@ -268,7 +268,6 @@ namespace Epi.Core.AnalysisInterpreter
             lock (dataAccessLock)
             {
                 List<DataRow> result = null;
-
                 string pSQL;
                 IDataReader newReader;
                 System.Data.IDataReader EpiDataReader;
@@ -309,40 +308,6 @@ namespace Epi.Core.AnalysisInterpreter
                                 foreach (Page page in CurrentProject.Views[CurrentRead.Identifier].Pages)
                                 {
                                     Output = CurrentRead.JoinTables(Output, DBReadExecute.GetDataTable(CurrentRead.File, "Select * From [" + page.TableName + "]"));
-                                }
-
-                                Dictionary<string, string> fieldComments = new Dictionary<string,string>();
-
-                                DataTable fieldTable = CurrentProject.Metadata.GetFieldsAsDataTable(CurrentProject.Views[viewName]);
-
-                                DataRow[] rows = fieldTable.Select("FieldTypeId = 19");
-
-                                string fieldName = string.Empty;
-                                string sourceTableName = string.Empty;
-                                string fieldValue = string.Empty;
-                                string textColumnName = string.Empty;
-
-                                foreach(DataRow row in rows)
-                                {
-                                    fieldName = row["Name"].ToString();
-                                    sourceTableName = row["SourceTableName"].ToString();
-                                    textColumnName = row["TextColumnName"].ToString();
-
-                                    DataTable codeTable = CurrentProject.Metadata.GetCodeTable(sourceTableName);
-
-                                    fieldComments.Add(fieldName, sourceTableName);
-
-                                    foreach(DataRow readTableRow in Output.Rows)
-                                    {
-                                        fieldValue = readTableRow[fieldName].ToString();
-
-                                        DataRow[] rowArray = codeTable.Select(textColumnName + " LIKE '" + fieldValue + "-*'");
-
-                                        if(rowArray.Length > 0)
-                                        {
-                                            readTableRow[fieldName] = rowArray[0][0]; 
-                                        }
-                                    }
                                 }
                             }
                             else
@@ -938,7 +903,7 @@ namespace Epi.Core.AnalysisInterpreter
                            | MINIMAL
                            | INTERMEDIATE
                            | COMPLETE*/
-                        switch(kvp.Value.ToUpperInvariant())
+                                switch (kvp.Value.ToUpperInvariant())
                         {
                             case "NONE":
                                 config.Settings.StatisticsLevel = 0;
