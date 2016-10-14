@@ -141,19 +141,19 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
             tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
             tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
-            checkboxAllValues.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
-            checkboxDrawBorders.Content = DashboardSharedStrings.GADGET_DRAW_BORDERS;
-            checkboxDrawHeader.Content = DashboardSharedStrings.GADGET_DRAW_HEADER_ROW;
+            checkboxAllValuesTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
+            checkboxDrawBordersTxt.Text = DashboardSharedStrings.GADGET_DRAW_BORDERS;
+            checkboxDrawHeaderTxt.Text= DashboardSharedStrings.GADGET_DRAW_HEADER_ROW;
             checkboxDrawTotal.Content = DashboardSharedStrings.GADGET_DRAW_TOTAL_ROW;
-            tblockOutputDisplaySubheader.Content = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
-            checkboxColumnFrequency.Content = DashboardSharedStrings.GADGET_COLUMN_FREQUENCY;
-            checkboxColumnPercent.Content = DashboardSharedStrings.GADGET_COLUMN_PERCENT;
-            checkboxColumnCumulativePercent.Content = DashboardSharedStrings.GADGET_COLUMN_CUMULATIVE_PERCENT;
-            checkboxColumn95CILower.Content = DashboardSharedStrings.GADGET_COLUMN_95_CILOWER;
-            checkboxColumn95CIUpper.Content = DashboardSharedStrings.GADGET_COLUMN_95_CIUPPER;
-            checkboxColumnPercentBars.Content = DashboardSharedStrings.GADGET_COLUMN_PERCENTBAR;
+            tblockOutputDisplaySubheaderTxt.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
+            checkboxColumnFrequencyTxt.Text = DashboardSharedStrings.GADGET_COLUMN_FREQUENCY;
+            checkboxColumnPercentTxt.Text = DashboardSharedStrings.GADGET_COLUMN_PERCENT;
+            checkboxColumnCumulativePercentTxt.Text = DashboardSharedStrings.GADGET_COLUMN_CUMULATIVE_PERCENT;
+            checkboxColumn95CILowerTxt.Text = DashboardSharedStrings.GADGET_COLUMN_95_CILOWER;
+            checkboxColumn95CIUpperTxt.Text = DashboardSharedStrings.GADGET_COLUMN_95_CIUPPER;
+            checkboxColumnPercentBarsTxt.Text = DashboardSharedStrings.GADGET_COLUMN_PERCENTBAR;
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockAnyFilterGadgetOnlyTxt.Text = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
 
 
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;
@@ -164,11 +164,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
 
             //checkboxAllValues.Content = DashboardSharedStrings.GADGET_ALL_LIST_VALUES;
-            checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
-            checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
+            checkboxCommentLegalLabelsTxt.Text = DashboardSharedStrings.GADGET_LIST_LABELS;
+            checkboxIncludeMissingTxt.Text = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
 
             checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
+            checkboxUsePromptsTxt.Text = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
             //tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
             tblockPrecision.Content = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
 

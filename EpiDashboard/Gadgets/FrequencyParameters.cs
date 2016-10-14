@@ -38,7 +38,7 @@ namespace EpiDashboard
             Show95CIUpperCol = true;
             ShowPercentBarsCol = true;
             IncludeFullSummaryStatistics = false;
-            GadgetTitle = "Frequency";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;  //"Frequency";
         }
 
         /// <summary>
