@@ -550,7 +550,7 @@
     <value>22</value>
   </data>
   <data name="rdbFinalMode.Text" xml:space="preserve">
-    <value>Records in PRODUCTION mode</value>
+    <value>Records in FINAL mode</value>
   </data>
   <data name="&gt;&gt;rdbFinalMode.Name" xml:space="preserve">
     <value>rdbFinalMode</value>
@@ -577,7 +577,7 @@
     <value>21</value>
   </data>
   <data name="rdbDraftMode.Text" xml:space="preserve">
-    <value>Records in STAGING mode</value>
+    <value>Records in DRAFT mode</value>
   </data>
   <data name="&gt;&gt;rdbDraftMode.Name" xml:space="preserve">
     <value>rdbDraftMode</value>
