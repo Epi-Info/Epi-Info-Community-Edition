@@ -39,7 +39,7 @@ namespace EpiDashboard
         public CrosstabParameters()
             : base()
         {
-            GadgetTitle = "Crosstabulation (MxN, 2x2)";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_CROSSTABULATION; ;
             TreatOutcomeAsContinuous = false;
             StrataSummaryOnly = false;
             UsePromptsForColumnNames = false; //EI-83

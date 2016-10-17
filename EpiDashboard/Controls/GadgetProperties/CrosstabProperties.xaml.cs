@@ -163,7 +163,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_CROSSTABULATION;
+            lblConfigExpandedTitleTxt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_CROSSTABULATION;
+
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_EXPOSURE_OUTCOME;
             tbtnValueMapping.Title = DashboardSharedStrings.GADGET_22_VALUE_MAPPING;
@@ -174,11 +175,12 @@ namespace EpiDashboard.Controls.GadgetProperties
             tbtnDisplas.Description = DashboardSharedStrings.GADGET_TABDESC_COLORS_STYLES;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockPanelValueMapping.Content = DashboardSharedStrings.GADGET_VALUE_MAPPING;
-            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
-            tblockPanelColorStyle.Content = DashboardSharedStrings.GADGET_PANEL_COLORS_STYLES;
-            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+
+            tblockPanelVariablesTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelValueMappingTxt.Text = DashboardSharedStrings.GADGET_VALUE_MAPPING;
+            tblockPanelDisplayTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockPanelColorStyleTxt.Text = DashboardSharedStrings.GADGET_PANEL_COLORS_STYLES;
+            tblockPanelDataFilterTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
             tblockExposureField.Text = DashboardSharedStrings.GADGET_EXPOSURE_VARIABLE;
             tblockOutcomeField.Text = DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
             tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
@@ -186,22 +188,24 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockAllValues.Text = DashboardSharedStrings.GADGET_ALL_VALUES;
             tblockYesValues.Text = DashboardSharedStrings.GADGET_YES_VALUES;
             tblockNoValues.Text = DashboardSharedStrings.GADGET_NO_VALUES;
-            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
-            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
-            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
-            checkboxAllValues.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
-            checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_LIST_LABELS;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
-            checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
-            checkboxOutcomeContinuous.Content = DashboardSharedStrings.GADGET_OUTCOME_CONTINUOUS;
-            checkboxSmartTable.Content = DashboardSharedStrings.GADGET_SMART_2X2;
-            checkboxStrataSummaryOnly.Content = DashboardSharedStrings.GADGET_STRATA_SUMMARY_ONLY;
-            checkboxDisplayChiSq.Content = DashboardSharedStrings.GADGET_DISPLAY_CHISQUARE;
-            checkboxRowColPercents.Content = DashboardSharedStrings.GADGET_ROW_COL_PERCENTS;
-            checkboxHorizontal.Content = DashboardSharedStrings.GADGET_DISPLAY_2X2_SUMMARY_HORIZONTALLY;
+            tblockTitleNDescSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitleTxt.Text = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDescTxt.Text = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockPanelOutputOptTxt.Text = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+
+            checkboxAllValuesTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
+            checkboxCommentLegalLabelsTxt.Text = DashboardSharedStrings.GADGET_LIST_LABELS;
+            checkboxUsePromptsTxt.Text = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
+            checkboxIncludeMissingTxt.Text = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
+            checkboxOutcomeContinuousTxt.Text = DashboardSharedStrings.GADGET_OUTCOME_CONTINUOUS;
+            checkboxSmartTableTxt.Text = DashboardSharedStrings.GADGET_SMART_2X2;
+            checkboxStrataSummaryOnlyTxt.Text = DashboardSharedStrings.GADGET_STRATA_SUMMARY_ONLY;
+            checkboxDisplayChiSqTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_CHISQUARE;
+            checkboxRowColPercentsTxt.Text = DashboardSharedStrings.GADGET_ROW_COL_PERCENTS;
+            checkboxHorizontalTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_2X2_SUMMARY_HORIZONTALLY;
+
             tblockMaxColumnLength.Text = DashboardSharedStrings.GADGET_MAX_COL_NAME_LENGTH;
-            checkboxConditionalShading.Content = DashboardSharedStrings.GADGET_USE_CONDITIONAL_CELL_SHADING;
+            checkboxConditionalShadingTxt.Text = DashboardSharedStrings.GADGET_USE_CONDITIONAL_CELL_SHADING;
             tblockColorGradient.Text = DashboardSharedStrings.GADGET_COLOR_GRADIENT;
             tblockTooltipLowColor.Content = DashboardSharedStrings.GADGET_LOW_VALUE_COLOR;
             tblockTooltipHighColor.Content = DashboardSharedStrings.GADGET_HIGH_VALUE_COLOR;
@@ -211,11 +215,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockBreak3.Text = DashboardSharedStrings.GADGET_BREAK3;
             tblockBreak4.Text = DashboardSharedStrings.GADGET_BREAK4;
             tblockBreak5.Text = DashboardSharedStrings.GADGET_BREAK5;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
-            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
-            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
-            tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
-            tblockStylesSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
+            tblockAnyFilterGadgetOnlyTxt.Text = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            btnOKTxt.Text = DashboardSharedStrings.BUTTON_OK;
+            btnCancelTxt.Text = DashboardSharedStrings.BUTTON_CANCEL;
+            tblockColorsSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
+            tblockStylesSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
             ////expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
             ////expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
             //tblockMainVariable.Text = DashboardSharedStrings.GADGET_FREQUENCY_VARIABLE;
