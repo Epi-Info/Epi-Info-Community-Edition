@@ -30,17 +30,19 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
             <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
                 <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
-                    <Label  x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" >Crosstabulation__xfe</Label>
+                    <Label  x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10" >
+                        <TextBlock TextWrapping="Wrap" x:Name="lblConfigExpandedTitleTxt">Crosstabulation</TextBlock>
+                    </Label>
                 </Viewbox>
             </Border>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables__xfe" Description="Select the columns for exposure and outcome.__xfe" IsChecked="True" Checked="tbtnVariables_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnValueMapping" Title="2x2 Value Mapping__xfe" Description="Specify the values for Exposure and Outcome as Yes or No.__xfe" IsChecked="False" Checked="tbtnValueMapping_Checked"/>
-            <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping__xfe" Description="Set a sort order and create list groups.__xfe" IsChecked="False" Checked="tbtnSorting_Checked"/>-->
-            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display__xfe" Description="Change display options.__xfe" IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnDisplas" Title="Colors and Styles__xfe" Description="Set cell shading and color gradient.__xfe" IsChecked="False" Checked="tbtnDisplayColors_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select the columns for exposure and outcome." IsChecked="True" Checked="tbtnVariables_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnValueMapping" Title="2x2 Value Mapping" Description="Specify the values for Exposure and Outcome as Yes or No." IsChecked="False" Checked="tbtnValueMapping_Checked"/>
+            <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
+            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplas" Title="Colors and Styles" Description="Set cell shading and color gradient." IsChecked="False" Checked="tbtnDisplayColors_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
 
         </StackPanel>
 
@@ -48,16 +50,18 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <DockPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
+                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockPanelVariablesTxt">Variables</TextBlock>
+                </Label>
             </StackPanel>
 
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
-                    
-                    <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:__xfe" Margin="0,5,0,0"  />
+
+                    <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0" TextWrapping="Wrap" />
                     <ComboBox x:Name="cbxExposureField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" />
                     <StackPanel Height="12" />
-                    <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:__xfe" Margin="0,5,0,0"  />
+                    <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:" Margin="0,5,0,0"  TextWrapping="Wrap" />
                     <ComboBox x:Name="cbxOutcomeField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" />
 
                     <!--<TextBlock x:Name="tblockMainVariable">Frequency of:</TextBlock>
@@ -65,11 +69,11 @@
 
                     <StackPanel Height="12" />
 
-                    <TextBlock x:Name="tblockWeightVariable">Weight:__xfe</TextBlock>
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockWeightVariable">Weight:</TextBlock>
                     <ComboBox x:Name="cbxFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldWeight_SelectionChanged" />
 
                     <StackPanel Height="12" />
-                    <TextBlock x:Name="tblockStrataVariable">Stratify by:__xfe</TextBlock>
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockStrataVariable">Stratify by:</TextBlock>
                     <StackPanel x:Name="scrollViewerStrataProperties">
                         <ListBox SelectionMode="Extended" Name="lbxFieldStrata" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Left" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
                     </StackPanel>
@@ -82,7 +86,9 @@
 
         <DockPanel x:Name="panelValueMapping" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelValueMapping" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Value Mapping__xfe</Label>
+                <Label x:Name="tblockPanelValueMapping" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockPanelValueMappingTxt">Value Mapping</TextBlock>
+                </Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
@@ -104,7 +110,7 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Column = "0" Grid.RowSpan="7" >
-                            <TextBlock x:Name="tblockAllValues">All values:__xfe</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockAllValues">All values:</TextBlock>
                             <ScrollViewer x:Name="scrollViewerValueMapping" VerticalAlignment="Stretch" MinHeight="425" MinWidth="150">
                                 <StackPanel>
                                     <ListBox SelectionMode="Extended" Name="lbxAllValues" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="425" />
@@ -121,9 +127,9 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column = "3" Grid.Row="0" Grid.RowSpan="7">
-                            <TextBlock x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:__xfe</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockYesValues" Margin="0,0,0,0">Yes values:</TextBlock>
                             <ListBox SelectionMode="Multiple" Name="lbxYesValues" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200" MinWidth="150"/>
-                            <TextBlock x:Name="tblockNoValues" Margin="0,8,0,0">No values:__xfe</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockNoValues" Margin="0,8,0,0">No values:</TextBlock>
                             <ListBox SelectionMode="Multiple" Name="lbxNoValues" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="200"/>
                         </StackPanel>
                     </Grid>
@@ -136,41 +142,71 @@
         <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
 
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
+                <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockPanelDisplayTxt">Display</TextBlock>
+                </Label>
             </StackPanel>
 
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel Margin="0 0 0 5">
-                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 0">Title and Description__xfe</Label>
+                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0, 0, 0">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockTitleNDescSubheaderTxt">Title and Description</TextBlock>
+                    </Label>
                     <StackPanel Orientation="Vertical">
-                        
-                            <StackPanel>
-                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:__xfe" />
-                                <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
-                            </StackPanel>
+
+                        <StackPanel>
+                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" x:Name="tblockTitleTxt">Gadget title:</TextBlock>
+                            </Label>
+                            <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
+                        </StackPanel>
                         <StackPanel Margin="0 10 0 0">
-                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:__xfe" />
+                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" x:Name="tblockDescTxt">Gadget description:</TextBlock>
+                            </Label>
                             <TextBox x:Name="txtDesc" AcceptsReturn="True" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
                         </StackPanel>
                     </StackPanel>
 
-                    <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options__xfe</Label>
-                    
-                        <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display all list values__xfe" Visibility="Visible" IsEnabled="true" />
-                        <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" Visibility="Visible" IsEnabled="true" />
-                        <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts__xfe" IsEnabled="true" Visibility="Visible" IsChecked="True" />
-                        <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" Content="Include missing values__xfe" IsChecked="False" />
-                        <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" Content="Outcome is continuous__xfe" IsEnabled="True" />
-                        <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" Content="Smart 2x2 table__xfe" IsEnabled="True" IsChecked="True" />
-                        <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show strata summary only__xfe" IsEnabled="True" IsChecked="False" />
-                        <CheckBox x:Name="checkboxDisplayChiSq" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display Chi-Square__xfe" IsEnabled="True" IsChecked="True" />
-                        <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}" Content="Row / column percents__xfe"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
-                        <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Horizontal 2x2 summary__xfe"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True" />
-                            
-                        </WrapPanel>
+                    <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockPanelOutputOptTxt">Output Options</TextBlock>
+                    </Label>
+
+                    <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <CheckBox x:Name="checkboxAllValues" Style="{StaticResource PropertiesPanelCheckbox}" Visibility="Visible" IsEnabled="true">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxAllValuesTxt">Display all list values</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxCommentLegalLabels" Style="{StaticResource PropertiesPanelCheckbox}" Visibility="Visible" IsEnabled="true">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxCommentLegalLabelsTxt">Display list labels</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true" Visibility="Visible" IsChecked="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxUsePromptsTxt">Use field prompts</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxIncludeMissing" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="False">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxIncludeMissingTxt">Include missing values</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxOutcomeContinuous" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxOutcomeContinuousTxt">Outcome is continuous</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxSmartTable" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="True" IsChecked="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxSmartTableTxt">Smart 2x2 table</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxStrataSummaryOnly" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="True" IsChecked="False">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxStrataSummaryOnlyTxt">Show strata summary only</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxDisplayChiSq" Style="{StaticResource PropertiesPanelCheckbox}"  IsEnabled="True" IsChecked="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxDisplayChiSqTxt">Display Chi-Square</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxRowColPercents" Style="{StaticResource PropertiesPanelCheckbox}"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxRowColPercentsTxt">Row / column percents</TextBlock>
+                        </CheckBox>
+                        <CheckBox x:Name="checkboxHorizontal" Style="{StaticResource PropertiesPanelCheckbox}" HorizontalAlignment="Left" IsEnabled="True" IsChecked="True">
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxHorizontalTxt">Horizontal 2x2 summary</TextBlock>
+                        </CheckBox>
+
+                    </WrapPanel>
                     <StackPanel Margin="0 10 0 0">
-                        <TextBlock x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:__xfe" />
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockMaxColumnLength" HorizontalAlignment="Left" TextAlignment="Center" Text="Max column name length:" />
                         <TextBox x:Name="txtMaxColumnLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Margin="0 0 0 0"></TextBox>
                     </StackPanel>
 
@@ -185,62 +221,70 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <DockPanel x:Name="panelDisplayColors" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelColorStyle" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Colors and Styles__xfe</Label>
+                <Label x:Name="tblockPanelColorStyle" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockPanelColorStyleTxt">Colors and Styles</TextBlock>
+                    </Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
-                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Colors__xfe</Label>
-                    <CheckBox x:Name="checkboxConditionalShading" Margin="0,5,0,0" Content="Conditional cell shading__xfe"  HorizontalAlignment="Left" IsEnabled="True" IsChecked="False" />
+                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockColorsSubheaderTxt">Colors</TextBlock>
+                        </Label>
+                    <CheckBox x:Name="checkboxConditionalShading" Margin="0,5,0,0" HorizontalAlignment="Left" IsEnabled="True" IsChecked="False">
+                        <TextBlock TextWrapping="Wrap" x:Name="checkboxConditionalShadingTxt">Conditional cell shading</TextBlock>
+                    </CheckBox>
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4" x:Name="panelHeatMap1">
-                        <TextBlock x:Name="tblockColorGradient" VerticalAlignment="Center" Margin="0,12,4,0">Color Gradient:__xfe</TextBlock>
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockColorGradient" VerticalAlignment="Center" Margin="0,12,4,0">Color Gradient:</TextBlock>
                         <Rectangle VerticalAlignment="Bottom" x:Name="rctLowColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F0FFFFFF" MouseUp="rctLowColor_MouseUp" >
                             <Rectangle.ToolTip>
-                                <Label x:Name="tblockTooltipLowColor" Content="Low value color__xfe"/>
+                                <Label x:Name="tblockTooltipLowColor" Content="Low value color"/>
                             </Rectangle.ToolTip>
                         </Rectangle>
                         <Rectangle VerticalAlignment="Bottom" x:Name="rctHighColor" HorizontalAlignment="Right" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#FFFC5A54" MouseUp="rctHighColor_MouseUp">
                             <Rectangle.ToolTip>
-                                <Label x:Name="tblockTooltipHighColor" Content="High value color__xfe"/>
+                                <Label x:Name="tblockTooltipHighColor" Content="High value color"/>
                             </Rectangle.ToolTip>
                         </Rectangle>
                     </StackPanel>
-                    <Label x:Name="tblockStylesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Styles__xfe</Label>
+                    <Label x:Name="tblockStylesSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockStylesSubheaderTxt">Styles</TextBlock>
+                        </Label>
                     <StackPanel x:Name="panelHeatMap2">
 
-                        <TextBlock x:Name="tblockBreakType" HorizontalAlignment="Left" TextAlignment="Center" Text="Break type:__xfe" Margin="0,12,0,0"  />
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockBreakType" HorizontalAlignment="Left" TextAlignment="Center" Text="Break type:" Margin="0,12,0,0"  />
                         <ComboBox x:Name="cmbBreakType" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0,5,0,5" SelectionChanged="cmbBreakType_SelectionChanged">
                             <ComboBoxItem>Percent of total</ComboBoxItem>
                             <ComboBoxItem>Count</ComboBoxItem>
                         </ComboBox>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="tblockBreak1" VerticalAlignment="Center" Margin="0,12,4,0">Break 1:__xfe</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockBreak1" VerticalAlignment="Center" Margin="0,12,4,0">Break 1:</TextBlock>
                             <TextBox x:Name="txtPct1" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">0</TextBox>
-                            <TextBlock x:Name="tblockPct1" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockPct1" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="tblockBreak2" VerticalAlignment="Center" Margin="0,12,4,0">Break 2:__xfe</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockBreak2" VerticalAlignment="Center" Margin="0,12,4,0">Break 2:</TextBlock>
                             <TextBox x:Name="txtPct2" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">20</TextBox>
-                            <TextBlock x:Name="tblockPct2" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockPct2" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="tblockBreak3" VerticalAlignment="Center" Margin="0,12,4,0">Break 3:__xfe</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockBreak3" VerticalAlignment="Center" Margin="0,12,4,0">Break 3:</TextBlock>
                             <TextBox x:Name="txtPct3" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">40</TextBox>
-                            <TextBlock x:Name="tblockPct3" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockPct3" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="tblockBreak4" VerticalAlignment="Center" Margin="0,12,4,0">Break 4:__xfe</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockBreak4" VerticalAlignment="Center" Margin="0,12,4,0">Break 4:</TextBlock>
                             <TextBox x:Name="txtPct4" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">60</TextBox>
-                            <TextBlock x:Name="tblockPct4" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockPct4" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="tblockBreak5" VerticalAlignment="Center" Margin="0,12,4,0">Break 5:__xfe</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockBreak5" VerticalAlignment="Center" Margin="0,12,4,0">Break 5:</TextBlock>
                             <TextBox x:Name="txtPct5" Style="{StaticResource PropertiesTextBoxSmall}" Margin="0,12,4,0">80</TextBox>
-                            <TextBlock x:Name="tblockPct5" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockPct5" VerticalAlignment="Center" Margin="4,12,0,0">%</TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -249,16 +293,24 @@
 
         <DockPanel  x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
-                <Label x:Name="tblockAnyFilterGadgetOnly" >Note: Any filters set here are applied to this gadget only.__xfe</Label>
+                <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockPanelDataFilterTxt">Data Filters</TextBlock>
+                    </Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly" >
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockAnyFilterGadgetOnlyTxt">Note: Any filters set here are applied to this gadget only.</TextBlock>
+                </Label>
             </StackPanel>
         </DockPanel>
 
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
-            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
-            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">
+                <TextBlock TextWrapping="Wrap" x:Name="btnCancelTxt">Cancel</TextBlock>
+                </Button>
+            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">
+                <TextBlock TextWrapping="Wrap" x:Name="btnOKTxt">OK</TextBlock>
+                </Button>
         </DockPanel>
     </Grid>
 </PropertyPanels:GadgetPropertiesPanelBase>
