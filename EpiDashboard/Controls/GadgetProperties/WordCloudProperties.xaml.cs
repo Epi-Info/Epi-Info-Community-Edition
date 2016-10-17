@@ -89,22 +89,26 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_WORDCLOUD;
+            lblConfigExpandedTitleTxt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_WORDCLOUD;
+
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_WORDCLOUD;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
-            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
-            tblockVariableToParse.Content = DashboardSharedStrings.GADGET_VARIABLE_PARSE;
-            tblockWordsIgnore.Content = DashboardSharedStrings.GADGET_WORDS_IGNORE;
-            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
-            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+
+            tblockPanelVariablesTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelDisplayTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockPanelDataFilterTxt.Text= DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockTitleTxt.Text = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDescTxt.Text = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockTitleNDescSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockAnyFilterGadgetOnlyTxt.Text = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockVariableToParseTxt.Text = DashboardSharedStrings.GADGET_VARIABLE_PARSE;
+            tblockWordsIgnoreTxt.Text = DashboardSharedStrings.GADGET_WORDS_IGNORE;
+            btnOKTxt.Text = DashboardSharedStrings.BUTTON_OK;
+            btnCancelTxt.Text = DashboardSharedStrings.BUTTON_CANCEL;
         }
 
         public bool HasSelectedFields

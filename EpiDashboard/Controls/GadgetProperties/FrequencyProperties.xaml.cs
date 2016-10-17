@@ -138,7 +138,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockSortMethod.Text = DashboardSharedStrings.GADGET_SORT_METHOD;
             tblockPanelDisplayTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
             tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockTitleTxt.Text = DashboardSharedStrings.GADGET_GADET_TITLE;
             tblockDescTxt.Text = DashboardSharedStrings.GADGET_DESCRIPTION;
             tblockPanelOutputOptTxt.Text = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
             checkboxAllValuesTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
