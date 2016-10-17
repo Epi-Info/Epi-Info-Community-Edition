@@ -108,15 +108,15 @@
                 <StackPanel Margin="0 0 0 5">
                     <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0,0,0">Title and Description</Label>
                     <StackPanel Orientation="Vertical">
-
                         <StackPanel Orientation="Vertical">
-                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:" />
+                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" x:Name="tblockTitleTxt">Gadget Title:</TextBlock>
+                            </Label>
                             <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
-
                         <StackPanel Margin="0 10 0 0 ">
                             <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                                <TextBlock TextWrapping="Wrap" x:Name="tblockDescTxt">Gadget description:</TextBlock>
+                                <TextBlock TextWrapping="Wrap" x:Name="tblockDescTxt">Gadget Description:</TextBlock>
                             </Label>
                             <TextBox x:Name="txtDesc" Style="{StaticResource PropertiesGadgetDescription}" AcceptsReturn="True" HorizontalAlignment="Left" TextWrapping="Wrap"></TextBox>
                         </StackPanel>
