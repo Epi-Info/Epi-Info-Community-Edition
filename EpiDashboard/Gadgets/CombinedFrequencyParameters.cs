@@ -22,7 +22,7 @@ namespace EpiDashboard
             SortHighToLow = true;
             ShowDenominator = true;
             TrueValue = String.Empty;
-            GadgetTitle = "Combined Frequency";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMBINEDFEQ;
         }       
     }
 }
