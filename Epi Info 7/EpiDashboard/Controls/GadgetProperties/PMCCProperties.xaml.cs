@@ -163,7 +163,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_MPC_CONTROL;
+            lblConfigExpandedTitleTxt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_MPC_CONTROL;
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_EXPOSURE_OUTCOME;
             tbtnValueMapping.Title = DashboardSharedStrings.GADGET_TABBUTTON_DEFINE_VALMAPPING;
@@ -173,21 +173,21 @@ namespace EpiDashboard.Controls.GadgetProperties
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
             tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockPanelValueMapping.Content = DashboardSharedStrings.GADGET_DEFINE_VALUE_MAPPING;
-            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockPanelValueMappingTxt.Text = DashboardSharedStrings.GADGET_DEFINE_VALUE_MAPPING;
+            tblockPanelDisplayTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
             tblockExposureField.Text = DashboardSharedStrings.GADGET_EXPOSURE_VARIABLE;
             tblockOutcomeField.Text = DashboardSharedStrings.GADGET_CASE_CONTROL;
             tblockStrataVariable.Text = DashboardSharedStrings.GADGET_PAIR_GROUP_ID;
             tblockAllValues.Text = DashboardSharedStrings.GADGET_ALL_VALUES;
             tblockYesValues.Text = DashboardSharedStrings.GADGET_YES_VALUES;
             tblockNoValues.Text = DashboardSharedStrings.GADGET_NO_VALUES;
-            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
-            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockTitleNDescSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitleTxt.Text = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDescTxt.Text = DashboardSharedStrings.GADGET_DESCRIPTION;
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
             tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
-            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
-            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+            btnOKTxt.Text= DashboardSharedStrings.BUTTON_OK;
+            btnCancelTxt.Text = DashboardSharedStrings.BUTTON_CANCEL;
             ////expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
             ////expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
             //tblockMainVariable.Text = DashboardSharedStrings.GADGET_FREQUENCY_VARIABLE;

@@ -23,7 +23,7 @@ namespace EpiDashboard
         public PMCCParameters()
             : base()
         {
-            GadgetTitle = "Matched Pair Case-Control";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_MPC_CONTROL;
             TreatOutcomeAsContinuous = false;
             StrataSummaryOnly = false;
             RowColPercents = true;
