@@ -131,20 +131,20 @@ namespace EpiDashboard.Controls.GadgetProperties
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
-            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockPanelVariablesTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelSortingTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockGroupingSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
             tblockSortingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
             tblockSortMethod.Text = DashboardSharedStrings.GADGET_SORT_METHOD;
-            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockPanelDisplayTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
             tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
             tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
-            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
-            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+            tblockDescTxt.Text = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockPanelOutputOptTxt.Text = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
             checkboxAllValuesTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
             checkboxDrawBordersTxt.Text = DashboardSharedStrings.GADGET_DRAW_BORDERS;
             checkboxDrawHeaderTxt.Text= DashboardSharedStrings.GADGET_DRAW_HEADER_ROW;
-            checkboxDrawTotal.Content = DashboardSharedStrings.GADGET_DRAW_TOTAL_ROW;
+            checkboxDrawTotalTxt.Text = DashboardSharedStrings.GADGET_DRAW_TOTAL_ROW;
             tblockOutputDisplaySubheaderTxt.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
             checkboxColumnFrequencyTxt.Text = DashboardSharedStrings.GADGET_COLUMN_FREQUENCY;
             checkboxColumnPercentTxt.Text = DashboardSharedStrings.GADGET_COLUMN_PERCENT;
@@ -152,11 +152,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxColumn95CILowerTxt.Text = DashboardSharedStrings.GADGET_COLUMN_95_CILOWER;
             checkboxColumn95CIUpperTxt.Text = DashboardSharedStrings.GADGET_COLUMN_95_CIUPPER;
             checkboxColumnPercentBarsTxt.Text = DashboardSharedStrings.GADGET_COLUMN_PERCENTBAR;
-            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockPanelDataFilterTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
             tblockAnyFilterGadgetOnlyTxt.Text = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
 
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;
+            lblConfigExpandedTitleTxt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_FREQUENCY;
             //expanderAdvancedOptions.Header = DashboardSharedStrings.GADGET_ADVANCED_OPTIONS;
             //expanderDisplayOptions.Header = DashboardSharedStrings.GADGET_DISPLAY_OPTIONS;
             tblockMainVariable.Text = DashboardSharedStrings.GADGET_FREQUENCY_VARIABLE;
@@ -167,16 +167,16 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxCommentLegalLabelsTxt.Text = DashboardSharedStrings.GADGET_LIST_LABELS;
             checkboxIncludeMissingTxt.Text = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
 
-            checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
+            checkboxSortHighLowTxt.Text = DashboardSharedStrings.GADGET_SORT_HI_LOW;
             checkboxUsePromptsTxt.Text = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
             //tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
-            tblockPrecision.Content = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
+            tblockPrecisionTxt.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
 
             tblockRows.Text = DashboardSharedStrings.GADGET_MAX_ROWS_TO_DISPLAY;
             tblockBarWidth.Text = DashboardSharedStrings.GADGET_MAX_PERCENT_BAR_WIDTH;
 
-            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
-            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+            btnOKTxt.Text = DashboardSharedStrings.BUTTON_OK;
+            btnCancelTxt.Text = DashboardSharedStrings.BUTTON_CANCEL;
             //btnRun.Content = DashboardSharedStrings.GADGET_RUN_BUTTON;
             #endregion // Translation
 
