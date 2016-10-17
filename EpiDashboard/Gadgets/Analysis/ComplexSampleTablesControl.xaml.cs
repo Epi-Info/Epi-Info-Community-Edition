@@ -1702,18 +1702,6 @@ namespace EpiDashboard
             HideConfigPanel();
             txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
-            foreach (XmlAttribute attribute in element.Attributes)
-            {
-                switch (attribute.Name.ToLowerInvariant())
-                {
-                    case "actualheight":
-                        string actualHeight = attribute.Value.Replace(',', '.');
-                        double controlheight = 0.0;
-                        double.TryParse(actualHeight, out controlheight);
-                        this.Height = controlheight;
-                        break;
-                }
-            }
 
             foreach (XmlElement child in element.ChildNodes)
             {
