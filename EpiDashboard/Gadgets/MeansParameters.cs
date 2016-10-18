@@ -18,6 +18,7 @@ namespace EpiDashboard
             ShowANOVA = true;
             columnsToHide = new List<int>();
             Precision = "4";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_MEANS;
         }
     }
 }

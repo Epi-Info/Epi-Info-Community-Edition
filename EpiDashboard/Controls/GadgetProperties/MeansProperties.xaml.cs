@@ -108,40 +108,44 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_MEANS;
+            lblConfigExpandedTitleTxt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_MEANS;
+
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_MEANS;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
-            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+
+            tblockPanelVariablesTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
-            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockPanelDisplayTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            tblockWeight.Content = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
-            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
-            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
+
+            tblockWeightTxt.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
+            tblockTitleNDescSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitleTxt.Text = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDescTxt.Text = DashboardSharedStrings.GADGET_DESCRIPTION;
             tblockPrecision.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
-            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
-            tblockMeansOf.Content = DashboardSharedStrings.GADGET_MEANS_VARIABLE;
-            tblockCrossTabulateBy.Content = DashboardSharedStrings.GADGET_CROSSTAB_VARIABLE;
-            tblockStratifyBy.Content = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
-            checkboxShowANOVA.Content = DashboardSharedStrings.GADGET_DISPLAY_ANOVA;
-            checkboxShowObservations.Content = DashboardSharedStrings.GADGET_OBSERVATIONS;
-            checkboxShowTotal.Content = DashboardSharedStrings.GADGET_TOTAL;
-            checkboxShowMean.Content = DashboardSharedStrings.GADGET_MEANS;
-            checkboxShowVariance.Content = DashboardSharedStrings.GADGET_VARIANCE;
-            checkboxShowStdDev.Content = DashboardSharedStrings.GADGET_STANDARD_DEVIATION;
-            checkboxShowMin.Content = DashboardSharedStrings.GADGET_MINIMUM;
-            checkboxShowQ1.Content = DashboardSharedStrings.GADGET_SHOWQ1;
-            checkboxShowMedian.Content = DashboardSharedStrings.GADGET_MEDIAN;
-            checkboxShowQ3.Content = DashboardSharedStrings.GADGET_SHOWQ3;
-            checkboxShowMax.Content = DashboardSharedStrings.GADGET_MAXIMUM;
-            checkboxShowMode.Content = DashboardSharedStrings.GADGET_MODE;
-            tblockOutputColumns.Content = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
-            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
-            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+            tblockPanelDataFilterTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnlyTxt.Text = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockMeansOfTxt.Text = DashboardSharedStrings.GADGET_MEANS_VARIABLE;
+            tblockCrossTabulateByTxt.Text = DashboardSharedStrings.GADGET_CROSSTAB_VARIABLE;
+            tblockStratifyByTxt.Text = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
+
+            checkboxShowANOVATxt.Text = DashboardSharedStrings.GADGET_DISPLAY_ANOVA;
+            checkboxShowObservationsTxt.Text = DashboardSharedStrings.GADGET_OBSERVATIONS;
+            checkboxShowTotalTxt.Text = DashboardSharedStrings.GADGET_TOTAL;
+            checkboxShowMeanTxt.Text = DashboardSharedStrings.GADGET_MEANS;
+            checkboxShowVarianceTxt.Text = DashboardSharedStrings.GADGET_VARIANCE;
+            checkboxShowStdDevTxt.Text = DashboardSharedStrings.GADGET_STANDARD_DEVIATION;
+            checkboxShowMinTxt.Text = DashboardSharedStrings.GADGET_MINIMUM;
+            checkboxShowQ1Txt.Text = DashboardSharedStrings.GADGET_SHOWQ1;
+            checkboxShowMedianTxt.Text = DashboardSharedStrings.GADGET_MEDIAN;
+            checkboxShowQ3Txt.Text = DashboardSharedStrings.GADGET_SHOWQ3;
+            checkboxShowMaxTxt.Text = DashboardSharedStrings.GADGET_MAXIMUM;
+            checkboxShowModeTxt.Text = DashboardSharedStrings.GADGET_MODE;
+            tblockOutputColumnsTxt.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
+            btnOKTxt.Text = DashboardSharedStrings.BUTTON_OK;
+            btnCancelTxt.Text = DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
         }

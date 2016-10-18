@@ -30,31 +30,42 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
             <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
                 <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
-                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Means__xfe</Label>
+                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">
+                        <TextBlock TextWrapping="Wrap" x:Name="lblConfigExpandedTitleTxt">Means</TextBlock>
+                    </Label>
                 </Viewbox>
             </Border>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables__xfe" Description="Select columns to display in the list.__xfe" IsChecked="True" Checked="tbtnVariables_Checked"/>
-            <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups.__xfe" IsChecked="False" Checked="tbtnSorting_Checked"/>-->
-            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display__xfe" Description="Change display options.__xfe" IsChecked="False" Checked="tbtnDisplay_Checked"/>
-            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="Variables" Description="Select columns to display in the list." IsChecked="True" Checked="tbtnVariables_Checked"/>
+            <!--<Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Sorting and Grouping" Description="Set a sort order and create list groups." IsChecked="False" Checked="tbtnSorting_Checked"/>-->
+            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display" Description="Change display options." IsChecked="False" Checked="tbtnDisplay_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters" Description="Set data filters for this gadget." IsChecked="False" Checked="tbtnFilters_Checked"/>
         </StackPanel>
 
         <DockPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Variables__xfe</Label>
+                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockPanelVariablesTxt">Variables</TextBlock>
+                </Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
-                    <Label x:Name="tblockMeansOf">Means of:__xfe</Label>
+                    <Label x:Name="tblockMeansOf">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockMeansOfTxt">Means of:</TextBlock>
+                    </Label>
                     <ComboBox x:Name="cbxField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" />
-                    <Label x:Name="tblockCrossTabulateBy">Cross-tabulate by:__xfe</Label>
+                    <Label x:Name="tblockCrossTabulateBy">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockCrossTabulateByTxt">Cross-tabulate by:</TextBlock>
+                    </Label>
                     <ComboBox x:Name="cbxFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" />
-                    <Label x:Name="tblockWeight">Weight:__xfe</Label>
+                    <Label x:Name="tblockWeight">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockWeightTxt">Weight:</TextBlock>
+                    </Label>
                     <ComboBox x:Name="cbxFieldWeight" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" Height="28" />
-
-                    <Label x:Name="tblockStratifyBy">Stratify by:__xfe</Label>
+                    <Label x:Name="tblockStratifyBy">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockStratifyByTxt">Stratify by:</TextBlock>
+                    </Label>
                     <ListBox SelectionMode="Multiple" Name="lvFieldStrata" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Left" VerticalAlignment="Stretch" MaxHeight="90" />
 
 
@@ -82,21 +93,21 @@
 
         <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping__xfe</Label>
+                <Label Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Sorting and Grouping</Label>
             </StackPanel>
 
             <ScrollViewer DockPanel.Dock="Bottom" x:Name="scrollViewerProperties">
                 <StackPanel>
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping__xfe</Label>
-                    <Label>Group By:__xfe</Label>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 5">Grouping</Label>
+                    <Label>Group By:</Label>
                     <ComboBox x:Name="cmbGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
 
-                    <Label>Sub-group By:__xfe</Label>
+                    <Label>Sub-group By:</Label>
                     <ComboBox x:Name="cmbSecondaryGroupField" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left"/>
 
-                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting__xfe</Label>
+                    <Label Style="{StaticResource PropertiesSubHeading}" Margin="0, 30, 0, 4">Sorting</Label>
 
-                    <Label>Sort Method:__xfe</Label>
+                    <Label>Sort Method:</Label>
                     <ComboBox x:Name="cmbSortMethod" Width="{Binding ElementName=lbxAvailableVariables, Path=ActualWidth}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0, 0, 0, 8">
                         <ComboBoxItem>Ascending</ComboBoxItem>
                         <ComboBoxItem>Descending</ComboBoxItem>
@@ -109,12 +120,12 @@
                             <ColumnDefinition Width=".5*" />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <Label>Available Variables:__xfe</Label>
+                            <Label>Available Variables:</Label>
                             <ListBox x:Name="lbxAvailableVariables" Height="370" MouseDoubleClick="lbxAvailableVariables_MouseDoubleClick" />
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
-                            <Label>Sort Order:__xfe</Label>
+                            <Label>Sort Order:</Label>
                             <ListBox x:Name="lbxSortOrder" Style="{StaticResource PropertiesListBox}" Height="370" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
                         </StackPanel>
                     </Grid>
@@ -124,58 +135,99 @@
 
         <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
+                <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockPanelDisplayTxt">Display</TextBlock>
+                </Label>
             </StackPanel>
 
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom" x:Name="scrollViewerDisplay" >
-            <StackPanel>
-                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0,0,5">Title and Description__xfe</Label>
+                <StackPanel>
+                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0,0,0,5">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockTitleNDescSubheaderTxt">Title and Description</TextBlock>
+                    </Label>
                     <StackPanel Orientation="Vertical">
-
                         <StackPanel>
-                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:__xfe" />
+                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" x:Name="tblockTitleTxt">Gadget title:</TextBlock>
+                            </Label>
                             <TextBox x:Name="txtTitle" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
                         <StackPanel Margin="0 10 0 0">
-                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:__xfe" />
+                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" x:Name="tblockDescTxt">Gadget description:</TextBlock>
+                            </Label>
                             <TextBox x:Name="txtDesc" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left"></TextBox>
-                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
-            <!--<Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:" Margin="0,5,0,0"  />
+                    <!--<Label x:Name="tblockMaxWidth" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max width:" Margin="0,5,0,0"  />
             <TextBox x:Name="txtMaxWidth" Width="40" HorizontalAlignment="Left" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"></TextBox>
             
             <Label x:Name="tblockMaxHeight" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Max height:" Margin="0,5,0,0"  />
             <TextBox x:Name="txtMaxHeight" Width="40" HorizontalAlignment="Left" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"></TextBox>-->
 
-            <!--<CheckBox x:Name="checkboxTabOrder" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort variables by tab order" Visibility="Visible" IsEnabled="true" />
+                    <!--<CheckBox x:Name="checkboxTabOrder" Style="{StaticResource PropertiesPanelCheckbox}" Content="Sort variables by tab order" Visibility="Visible" IsEnabled="true" />
             <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Content="Use field prompts" Visibility="Visible" IsEnabled="true" />-->
-                    
-                            <!--/WrapPanel-->
-                        <!--/StackPanel-->
+
+                    <!--/WrapPanel-->
+                    <!--/StackPanel-->
                     <!--/WrapPanel-->
                     <StackPanel Height="30"></StackPanel>
-                    <Label x:Name="tblockOutputColumns" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">Output columns to display:__xfe</Label>
+                    <Label x:Name="tblockOutputColumns" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 5">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockOutputColumnsTxt">Output columns to display:</TextBlock>
+                    </Label>
                     <StackPanel>
-                    <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
-                            <CheckBox x:Name="checkboxShowObservations" Style="{StaticResource PropertiesPanelCheckbox}" Content="Observations__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowTotal" Style="{StaticResource PropertiesPanelCheckbox}" Content="Total__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowMean" Style="{StaticResource PropertiesPanelCheckbox}" Content="Mean__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowVariance" Style="{StaticResource PropertiesPanelCheckbox}" Content="Variance__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowStdDev" Style="{StaticResource PropertiesPanelCheckbox}" Content="Standard Deviation__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowMin" Style="{StaticResource PropertiesPanelCheckbox}" Content="Minimum__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowQ1" Style="{StaticResource PropertiesPanelCheckbox}" Content="25%__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowMedian" Style="{StaticResource PropertiesPanelCheckbox}" Content="Median__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowQ3" Style="{StaticResource PropertiesPanelCheckbox}" Content="75%__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowMax" Style="{StaticResource PropertiesPanelCheckbox}" Content="Maximum__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowMode" Style="{StaticResource PropertiesPanelCheckbox}" Content="Mode__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxShowANOVA" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display ANOVA statistics" IsChecked="True"  />
-                            <CheckBox x:Name="checkboxListLabels" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Display list labels__xfe" IsEnabled="true"/>
-                            <CheckBox x:Name="checkboxLineColumn" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show line column__xfe"  IsChecked="True" />
-                            <CheckBox x:Name="checkboxColumnHeaders" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show column headings__xfe" IsChecked="True" />
-                            <CheckBox x:Name="checkboxShowNulls" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" Content="Show missing representation__xfe" IsChecked="True" />
-                            
+                        <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left" >
+                            <CheckBox x:Name="checkboxShowObservations" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowObservationsTxt">Observations</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowTotal" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowTotalTxt">Total</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowMean" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowMeanTxt">Mean</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowVariance" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowVarianceTxt">Variance</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowStdDev" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowStdDevTxt">Standard Deviation</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowMin" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowMinTxt">Minimum</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowQ1" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowQ1Txt">25%</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowMedian" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowMedianTxt">Median</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowQ3" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowQ3Txt">75%</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowMax" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowMaxTxt">Maximum</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowMode" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowModeTxt">Mode</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowANOVA" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowANOVATxt">Display ANOVA statistics</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxListLabels" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxListLabelsTxt">Display list labels</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxLineColumn" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxLineColumnTxt">Show line column</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxColumnHeaders" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxColumnHeadersTxt">Show column headings</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowNulls" Visibility="Collapsed" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowNullsTxt">Show missing representation</TextBlock>
+                            </CheckBox>
+
                             <StackPanel>
-                                <TextBlock x:Name="tblockPrecision" HorizontalAlignment="Left" TextAlignment="Center" Text="Decimals to display:__xfe" Margin="0,10,0,0"  />
+                                <TextBlock x:Name="tblockPrecision" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Center" Text="Decimals to display:" Margin="0,10,0,0"  />
                                 <ComboBox x:Name="cbxFieldPrecision" HorizontalAlignment="Left" Width="45" SelectedIndex="5">
                                     <ComboBoxItem>0</ComboBoxItem>
                                     <ComboBoxItem>1</ComboBoxItem>
@@ -185,8 +237,8 @@
                                 </ComboBox>
                             </StackPanel>
                             <!--<ListBox x:Name="lbxColumns" SelectionMode="Multiple" SelectionChanged="lbxColumns_SelectionChanged" />-->
-            <!--<CheckBox x:Name="checkboxAllowUpdates" Style="{StaticResource PropertiesPanelCheckbox}" Content="Allow updates" Visibility="Collapsed" IsEnabled="true" />-->
-                    </WrapPanel>
+                            <!--<CheckBox x:Name="checkboxAllowUpdates" Style="{StaticResource PropertiesPanelCheckbox}" Content="Allow updates" Visibility="Collapsed" IsEnabled="true" />-->
+                        </WrapPanel>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
@@ -194,16 +246,24 @@
 
         <DockPanel  x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
-                <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
-                <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
+                <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockPanelDataFilterTxt">Data Filters</TextBlock>
+                </Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly">
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockAnyFilterGadgetOnlyTxt">Note: Any filters set here are applied to this gadget only.</TextBlock>
+                </Label>
             </StackPanel>
         </DockPanel>
 
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
-            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click" Background="#FF89CBFB">Cancel</Button>
-            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click" Background="#FF71C3FF">OK</Button>
+            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click" Background="#FF89CBFB">
+                <TextBlock TextWrapping="Wrap" x:Name="btnCancelTxt">Cancel</TextBlock>
+            </Button>
+            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click" Background="#FF71C3FF">
+                <TextBlock TextWrapping="Wrap" x:Name="btnOKTxt">OK</TextBlock>
+            </Button>
         </DockPanel>
     </Grid>
 </PropertyPanels:GadgetPropertiesPanelBase>
