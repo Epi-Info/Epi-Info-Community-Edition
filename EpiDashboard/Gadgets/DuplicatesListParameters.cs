@@ -33,7 +33,7 @@ namespace EpiDashboard
             ShowNullLabels = true;
             PrimaryGroupField = String.Empty;
             SecondaryGroupField = String.Empty;
-            GadgetTitle = "Duplicates List";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_DUPLICATESLIST;
             CustomUserColumnSort = new List<string>();
             KeyColumnNames = new List<string>();
         }

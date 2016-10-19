@@ -101,34 +101,35 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_DUPLICATESLIST;
+            lblConfigExpandedTitleTxt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_DUPLICATESLIST;
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_MEANS;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
-            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
-            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
-            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
-            tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
-            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
-            checkboxUsePrompts.Content = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
-            checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
-            checkboxColumnHeaders.Content = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
-            checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
-            checkboxTabOrder.Content = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
-            tblockKeyDuplicateChecking.Content = DashboardSharedStrings.GADGET_KEY_DUPCHECKING;
-            tblockAdditionalFieldsDisplay.Content = DashboardSharedStrings.GADGET_ADDITIONAL_FIELDS_DISPLAY;
-            checkboxLineColumn.Content = DashboardSharedStrings.GADGET_SHOW_ROW_NUM;
-            tblockMaxWidth.Content = DashboardSharedStrings.GADGET_MAX_WIDTH;
-            tblockMaxHeight.Content = DashboardSharedStrings.GADGET_MAX_HEIGHT;
-            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
-            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+
+            tblockPanelVariablesTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelDisplayTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockPanelDataFilterTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnlyTxt.Text = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockTitleNDescSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitleTxt.Text = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDescTxt.Text = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockDimensionsTxt.Text = DashboardSharedStrings.GADGET_DIMENSIONS;
+            tblockPanelOutputOptTxt.Text = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+            checkboxUsePromptsTxt.Text = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
+            checkboxListLabelsTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+            checkboxColumnHeadersTxt.Text = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
+            checkboxShowNullsTxt.Text = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
+            checkboxTabOrderTxt.Text = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
+            tblockKeyDuplicateCheckingTxt.Text = DashboardSharedStrings.GADGET_KEY_DUPCHECKING;
+            tblockAdditionalFieldsDisplayTxt.Text = DashboardSharedStrings.GADGET_ADDITIONAL_FIELDS_DISPLAY;
+            checkboxLineColumnTxt.Text = DashboardSharedStrings.GADGET_SHOW_ROW_NUM;
+            tblockMaxWidthTxt.Text = DashboardSharedStrings.GADGET_MAX_WIDTH;
+            tblockMaxHeightTxt.Text = DashboardSharedStrings.GADGET_MAX_HEIGHT;
+            btnOKTxt.Text = DashboardSharedStrings.BUTTON_OK;
+            btnCancelTxt.Text = DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
 
