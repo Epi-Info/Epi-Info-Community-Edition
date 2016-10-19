@@ -142,13 +142,13 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             //txtxAxisStartValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
             //txtxAxisEndValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
-                             
+
 
 
 
             #region Translation
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_COLUMNCHART;
+            lblConfigExpandedTitleTxt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_COLUMNCHART;
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_COLUMNS_CHART;
             tbtnSorting.Title = DashboardSharedStrings.GADGET_TABBUTTON_SORTING;
@@ -157,19 +157,20 @@ namespace EpiDashboard.Controls.GadgetProperties
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
-            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
-            tblockSortingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
+
+            tblockPanelVariablesTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockPanelSortingTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockGroupingSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockSortingSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
             tblockSortMethod.Text = DashboardSharedStrings.GADGET_SORT_METHOD;
-            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
-            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
-            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
-            tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
-            tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
-            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            tblockPanelDisplayTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockTitleNDescSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitleTxt.Text = DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDescTxt.Text = DashboardSharedStrings.GADGET_DESCRIPTION;
+            tblockDimensionsTxt.Text = DashboardSharedStrings.GADGET_DIMENSIONS;
+            tblockPanelOutputOptTxt.Text = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
+            tblockPanelDataFilterTxt.Text = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnlyTxt.Text = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
             tbtnDisplayColors.Title = DashboardSharedStrings.GADGET_TAB_COLORS_STYLES;
             tbtnDisplayColors.Description = DashboardSharedStrings.GADGET_TABDESC_COLORS_STYLES;
             tbtnDisplayLabels.Title = DashboardSharedStrings.GADGET_TABBUTTON_LABELS;
@@ -179,45 +180,46 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockMainVariable.Text = DashboardSharedStrings.GADGET_MAIN_VARIABLE;
             tblockCrossTabVariable.Text = DashboardSharedStrings.GADGET_ONE_GRAPH_VALUE;
             tblockWeightVariable.Text = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
-            tblockStrataVariable.Content = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
-            checkboxSortHighLow.Content = DashboardSharedStrings.GADGET_SORT_HI_LOW;
+            tblockStrataVariableTxt.Text = DashboardSharedStrings.GADGET_STRATA_VARIABLE;
+            checkboxSortHighLowTxt.Text = DashboardSharedStrings.GADGET_SORT_HI_LOW;
             tblockWidth.Text = DashboardSharedStrings.GADGET_WIDTH;
             tblockHeight.Text = DashboardSharedStrings.GADGET_HEIGHT;
-            checkboxAllValues.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
-            checkboxCommentLegalLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
-            checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
-            checkboxUseRefValues.Content = DashboardSharedStrings.GADGET_USE_REFERENCE_VALUE;
-            checkboxAnnotations.Content = DashboardSharedStrings.GADGET_SHOW_ANNOTATIONS;
-            checkboxAnnotationsY2.Content = DashboardSharedStrings.GADGET_SHOW_ANNOTATIONSY2;
-            tblockPanelColorsNStyles.Content = DashboardSharedStrings.GADGET_PANEL_COLORS_STYLES;
-            tblockColorsSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
-            checkboxUseDiffColors.Content = DashboardSharedStrings.GADGET_DIFFERENT_BAR_COLORS;
+            checkboxAllValuesTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_VALUE;
+            checkboxCommentLegalLabelsTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+            checkboxIncludeMissingTxt.Text = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
+            checkboxUseRefValuesTxt.Text = DashboardSharedStrings.GADGET_USE_REFERENCE_VALUE;
+            checkboxAnnotationsTxt.Text = DashboardSharedStrings.GADGET_SHOW_ANNOTATIONS;
+            checkboxAnnotationsY2Txt.Text = DashboardSharedStrings.GADGET_SHOW_ANNOTATIONSY2;
+            tblockPanelColorsNStylesTxt.Text = DashboardSharedStrings.GADGET_PANEL_COLORS_STYLES;
+            tblockColorsSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_COLORS;
+            checkboxUseDiffColorsTxt.Text = DashboardSharedStrings.GADGET_DIFFERENT_BAR_COLORS;
             tblockPalette.Text = DashboardSharedStrings.GADGET_COLOR_PALETTE;
-            tblockStylesSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
+            tblockStylesSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_STYLES;
             tblockComposition.Text = DashboardSharedStrings.GADGET_COMPOSITION;
-            checkboxGridLines.Content = DashboardSharedStrings.GADGET_SHOW_GRID_LINES;
+            checkboxGridLinesTxt.Text = DashboardSharedStrings.GADGET_SHOW_GRID_LINES;
             tblockBarSpacing.Text = DashboardSharedStrings.GADGET_SPACE_BETWEEN_BARS;
             tblockOrientation.Text = DashboardSharedStrings.GADGET_ORIENTATION;
             tblockBarType.Text = DashboardSharedStrings.GADGET_BARTYPE;
             tblockLineTypeY2.Text = DashboardSharedStrings.GADGET_LINETYPE_Y2;
             tblockLineDashTypeY2.Text = DashboardSharedStrings.GADGET_LINEDASH_STYLEY2;
             tblockLineThicknessY2.Text = DashboardSharedStrings.GADGET_LINE_THICKNESSY2;
-            tblockPanelLabels.Content = DashboardSharedStrings.GADGET_PANELSHEADER_LABELS;
-            tblockYAxisSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_YAXIS;
+            tblockPanelLabelsTxt.Text = DashboardSharedStrings.GADGET_PANELSHEADER_LABELS;
+            tblockYAxisSubheaderTxt.Text = DashboardSharedStrings.GADGET_PANELSUBHEADER_YAXIS;
             tblockYAxisLabelValue.Text = DashboardSharedStrings.GADGET_YAXIS_LABEL;
             tblockYAxisFormatString.Text = DashboardSharedStrings.GADGET_YAXIS_FORMAT;
             tblockYAxisLabelFontSize.Text = DashboardSharedStrings.GADGET_YAXIS_LABEL_FONTSIZE;
             tblockYAxisFontSize.Text = DashboardSharedStrings.GADGET_YAXIS_DATA_FONTSIZE;
             tblockSecondYAxis.Text = DashboardSharedStrings.GADGET_SECOND_YAXIS_TYPE;
-            tblockSecondYAxisVariable.Text = DashboardSharedStrings.GADGET_SECOND_YAXIS_VARIABLE;
+            tblockSecondYAxisVariable.Text = "abcdef";
+            //tblockSecondYAxisVariable.Text = DashboardSharedStrings.GADGET_SECOND_YAXIS_VARIABLE;
             tblockY2AxisLabelValue.Text = DashboardSharedStrings.GADGET_Y2_AXISLABEL;
             tblockYAxisMinValue.Text = DashboardSharedStrings.GADGET_YAXIS_MINVALUE;
             tblockYAxismaxValue.Text = DashboardSharedStrings.GADGET_YAXIS_MAXVALUE;
             tblockYAxisstepValue.Text = DashboardSharedStrings.GADGET_YAXIS_STEPVALUE;
             tblockY2AxisLegendTitle.Text = DashboardSharedStrings.GADGET_Y2_AXISLEGEND_TITLE;
             tblockY2AxisFormatString.Text = DashboardSharedStrings.GADGET_Y2_AXISFORMAT;
-            tblockY2AxisSubheader.Content = DashboardSharedStrings.GADGETS_YAXIS_HEADER; 
-            tblockXAxisSubheader.Content = DashboardSharedStrings.GADGET_XAXIS;
+            tblockY2AxisSubheaderTxt.Text = DashboardSharedStrings.GADGETS_YAXIS_HEADER;
+            tblockXAxisSubheaderTxt.Text = DashboardSharedStrings.GADGET_XAXIS;
             tblockXAxisLabelType.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL_TYPE;
             tblockXAxisLabelValue.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL;
             tblockXAxisLabelFontSize.Text = DashboardSharedStrings.GADGET_XAXIS_LABEL_FONTSIZE;
@@ -225,17 +227,17 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockxAxistartValue.Text = DashboardSharedStrings.GADGET_XAXIS_STARTVALUE;
             tblockxAxisendValue.Text = DashboardSharedStrings.GADGET_XAXIS_ENDVALUE;
             tblockXAxisAngle.Text = DashboardSharedStrings.GADGET_XAXIS_ANGLE;
-            tblockTitleSubTitle.Content = DashboardSharedStrings.GADGET_SUBHEADER_TITLESUBTITLE;
+            tblockTitleSubTitleTxt.Text = DashboardSharedStrings.GADGET_SUBHEADER_TITLESUBTITLE;
             tblockChartTitleValue.Text = DashboardSharedStrings.GADGET_CHART_TITLE;
             tblockChartSubTitleValue.Text = DashboardSharedStrings.GADGET_CHART_SUBTITLE;
-            tblockPanelLegend.Content = DashboardSharedStrings.GADGET_PANEL_LEGEND;
-            checkboxShowLegend.Content = DashboardSharedStrings.GADGET_SHOW_LEGEND;
-            checkboxShowLegendBorder.Content = DashboardSharedStrings.GADGET_SHOW_LEGEND_BORDER;
-            checkboxShowVarName.Content = DashboardSharedStrings.GADGET_SHOW_VARIABLE_NAME;
+            tblockPanelLegendTxt.Text = DashboardSharedStrings.GADGET_PANEL_LEGEND;
+            checkboxShowLegendTxt.Text = DashboardSharedStrings.GADGET_SHOW_LEGEND;
+            checkboxShowLegendBorderTxt.Text = DashboardSharedStrings.GADGET_SHOW_LEGEND_BORDER;
+            checkboxShowVarNameTxt.Text = DashboardSharedStrings.GADGET_SHOW_VARIABLE_NAME;
             tblockLegendFontSize.Text = DashboardSharedStrings.GADGET_LEGEND_FONTSIZE;
             tblockLegendDock.Text = DashboardSharedStrings.GADGET_LEGEND_PLACEMENT;
-            btnOK.Content = DashboardSharedStrings.BUTTON_OK;
-            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
+            btnOKTxt.Text = DashboardSharedStrings.BUTTON_OK;
+            btnCancelTxt.Text = DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
 
@@ -1449,7 +1451,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             if (cmbSecondYAxis.SelectedIndex == 0)  //Second Y-axis type = None
             {
-                tblockSecondYAxisVariable.Text = "Second y-axis variable:";
+                tblockSecondYAxisVariable.Text = DashboardSharedStrings.GADGET_SECOND_YAXIS_VARIABLE;
                 //tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
                 //cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
                 cmbSecondYAxisVariable.IsEnabled = false;
@@ -1466,7 +1468,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             else if (cmbSecondYAxis.SelectedIndex == 3)  //Second Y-axis type = Cumulative percent
             {
-                tblockSecondYAxisVariable.Text = "Second y-axis variable:";
+                tblockSecondYAxisVariable.Text = DashboardSharedStrings.GADGET_SECOND_YAXIS_VARIABLE;
                 //tblockSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
                 //cmbSecondYAxisVariable.Visibility = System.Windows.Visibility.Collapsed;
                 cmbSecondYAxisVariable.IsEnabled = false;
@@ -1495,7 +1497,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
                 if (cmbSecondYAxis.SelectedIndex == 1)  //Second y-axis = "Single field"
                 {
-                    tblockSecondYAxisVariable.Text = "Second y-axis variable:";
+                    tblockSecondYAxisVariable.Text = DashboardSharedStrings.GADGET_SECOND_YAXIS_VARIABLE;
                     if (Parameters.ColumnNames.Count > 1 && (!String.IsNullOrEmpty(Parameters.ColumnNames[1])))
                     {
                         cmbSecondYAxisVariable.SelectedItem = Parameters.ColumnNames[1];
@@ -1504,7 +1506,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
                 else if (cmbSecondYAxis.SelectedIndex == 2)  //Second y-axis = "Rate per 100k population"
                 {
-                    tblockSecondYAxisVariable.Text = "Population variable:";
+                    tblockSecondYAxisVariable.Text = DashboardSharedStrings.GADGET_POPULATION_VARIABLE;
                     if (Parameters.ColumnNames.Count > 1)
                     {
                         cmbSecondYAxisVariable.SelectedItem = Parameters.ColumnNames[1];
