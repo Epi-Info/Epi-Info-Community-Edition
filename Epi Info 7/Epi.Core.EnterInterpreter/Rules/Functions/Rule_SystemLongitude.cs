@@ -46,13 +46,15 @@ namespace Epi.Core.EnterInterpreter.Rules
                         rs = System.Text.Encoding.Default.GetString(response);
                     }
 
-                    int latIndex = rs.IndexOf("lng");
-                    string lat = rs.Substring(latIndex + 5, 18).Trim();
+                    int lngIndex = rs.IndexOf("lng");
+                    string lng = rs.Substring(lngIndex + 5).Trim();
+                    int endIndex = lng.IndexOf("\n");
+                    lng = lng.Substring(0,endIndex);
 
-                    double checkLat;
-                    if (double.TryParse(lat, out checkLat))
+                    double checkLng;
+                    if (double.TryParse(lng, out checkLng))
                     {
-                        return lat;
+                        return lng;
                     }
                 }
                 catch { }
