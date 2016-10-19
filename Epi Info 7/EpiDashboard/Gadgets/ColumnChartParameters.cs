@@ -39,7 +39,7 @@ namespace EpiDashboard
             StrataVariableNames = new List<string>();
             SortHighToLow = false;
             //  Display
-            GadgetTitle = "Column Chart";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_COLUMNCHART;
             GadgetDescription = String.Empty;
             Width = 800;
             Height = 500;

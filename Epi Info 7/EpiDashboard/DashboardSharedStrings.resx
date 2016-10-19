@@ -2179,4 +2179,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGETS_YAXIS_HEADER" xml:space="preserve">
     <value>Y2-Axis</value>
   </data>
+  <data name="GADGET_POPULATION_VARIABLE" xml:space="preserve">
+    <value>Population variable:</value>
+  </data>
 </root>
