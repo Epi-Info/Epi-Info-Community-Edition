@@ -1089,14 +1089,14 @@ Comment_Chars             = ('***'{Valid Chars}*)
 <Concat Exp>                            ::= <Add Exp> '&' <Concat Exp>
                                 | <Add Exp>
 
-<Add Exp>                           ::= <Mult Exp> '+' <Add Exp>
-                                        | <Mult Exp> '-' <Add Exp>
+<Add Exp>                           ::= <Add Exp> '+' <Mult Exp>
+                                        | <Add Exp> '-' <Mult Exp>
                                         | <Mult Exp>
 
-<Mult Exp>                          ::= <Pow Exp> '*' <Mult Exp>
-                                | <Pow Exp> '/' <Mult Exp>
-                                | <Pow Exp> MOD <Mult Exp>
-                                | <Pow Exp> '%' <Mult Exp>
+<Mult Exp>                          ::= <Mult Exp> '*' <Pow Exp>
+                                | <Mult Exp> '/' <Pow Exp>
+                                | <Mult Exp> MOD <Pow Exp>
+                                | <Mult Exp> '%' <Pow Exp>
                                         | <Pow Exp>
 
 <Pow Exp>                           ::= <Negate Exp> '^' <Negate Exp>
