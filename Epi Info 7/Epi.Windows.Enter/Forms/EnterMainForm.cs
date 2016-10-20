@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Device.Location;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -2173,6 +2174,23 @@ namespace Epi.Windows.Enter
 
         }
         Project currentProject;
+
+        /// <summary>
+        /// The last GeoPosition
+        /// </summary>
+        public GeoPosition<GeoCoordinate> LastPosition
+        {
+            get
+            {
+                return lastPosition;
+            }
+            set
+            {
+                lastPosition = value;
+                mediator.LastPosition = value;
+            }
+        }
+        GeoPosition<GeoCoordinate> lastPosition;
 
         /// <summary>
         /// Sets the project host's current project

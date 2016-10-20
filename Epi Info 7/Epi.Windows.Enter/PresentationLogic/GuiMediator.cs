@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Device.Location;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Globalization;
@@ -271,6 +272,13 @@ namespace Epi.Windows.Enter.PresentationLogic
                 view = value;
             }
         }
+
+        public GeoPosition<GeoCoordinate> LastPosition
+        {
+            get { return _lastPosition; }
+            set { _lastPosition = value; }
+        }
+        private GeoPosition<GeoCoordinate> _lastPosition;
 
         public bool IsComboTextAssign { get; set; }
         #endregion  //Public Properties

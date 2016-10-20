@@ -613,5 +613,6 @@ namespace Epi.Windows
             this.statusStrip1.Visible = Config.Settings.ShowStatusBar;
         }
         #endregion Private Methods
+
     }
 }
