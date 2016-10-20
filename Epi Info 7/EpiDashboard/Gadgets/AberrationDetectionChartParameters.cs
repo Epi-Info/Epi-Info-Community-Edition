@@ -16,7 +16,7 @@ namespace EpiDashboard
             : base()
         {
             LineType = string.Empty;
-            GadgetTitle = "Aberration Detection Chart";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_ABERRATION_CHART;
             LegendDock = ComponentArt.Win.DataVisualization.Charting.Dock.Right;
             YAxisFontSize = 12;
             YAxisLabelFontSize = 12;
