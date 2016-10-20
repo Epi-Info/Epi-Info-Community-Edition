@@ -31,7 +31,7 @@ namespace EpiDashboard
             StrataVariableNames = new List<string>();
             SortHighToLow = false;
             //  Display
-            GadgetTitle = "Area Chart";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_AREACHART;
             GadgetDescription = String.Empty;
             Width = 800;
             Height = 500;

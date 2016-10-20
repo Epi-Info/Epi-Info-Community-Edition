@@ -27,7 +27,7 @@ namespace EpiDashboard
             WeightVariableName = string.Empty;
             CrosstabVariableName = string.Empty;
             //  Display
-            GadgetTitle = "Pie Chart";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_PIECHART;
             GadgetDescription = String.Empty;
             Width = 800;
             Height = 500;
