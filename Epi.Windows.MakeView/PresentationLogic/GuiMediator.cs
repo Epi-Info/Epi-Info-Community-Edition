@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Device.Location;
 using System.Drawing;
 using System.Windows.Forms;
 using EpiInfo.Plugin;
@@ -130,6 +131,13 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
         public bool isShowTabOrder { get; set; }
         public bool isShowFieldName { get; set; }
+
+        public GeoPosition<GeoCoordinate> LastPosition
+        {
+            get { return _lastPosition; }
+            set { _lastPosition = value; }
+        }
+        private GeoPosition<GeoCoordinate> _lastPosition;
 
         public List<int> NewFieldIds
         {
@@ -4195,6 +4203,8 @@ namespace Epi.Windows.MakeView.PresentationLogic
         /// </summary>
         public bool IsSuppressErrorsEnabled
         { get { return true; } }
+
+
 
         #endregion
         

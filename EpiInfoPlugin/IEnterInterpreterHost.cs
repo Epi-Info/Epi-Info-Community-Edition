@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Text;
 
 namespace EpiInfo.Plugin
@@ -36,5 +37,6 @@ namespace EpiInfo.Plugin
         bool TryGetFieldInfo(string name, out DataType dataType, out string value);
         List<string> GetDbListValues(string ptablename, string pvariablename);
         void Quit();
+        GeoPosition<GeoCoordinate> LastPosition { get; set; }
     }
 }

@@ -24,50 +24,19 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>Returns the longitude.</returns>
         public override object Execute()
         {
-            GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
-            watcher.TryStart(false, TimeSpan.FromMilliseconds(5000));
-            var coord = watcher.Position.Location;
+            GeoCoordinate geoCoordinate = null;
 
-            if (coord.IsUnknown != true)
+            if (Context.EnterCheckCodeInterface.LastPosition != null)
             {
-                return coord.Longitude.ToString();
+                geoCoordinate = Context.EnterCheckCodeInterface.LastPosition.Location;
             }
-            else
+
+            if (geoCoordinate != null && geoCoordinate.IsUnknown != true)
             {
-                try
-                {
-                    // https://developers.google.com/maps/documentation/geolocation/intro
-
-                    string url = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCkwERu0dtXN0CARM8DQNE_12-JiDsF2OM";
-                    string rs = "";
-
-                    using (var client = new WebClient())
-                    {
-                        try
-                        {
-                            rs = client.UploadString(url, "{ \"considerIp\": \"false\" }");
-                        }
-                        catch (System.Net.WebException)
-                        {
-                            return null;
-                        }
-                    }
-
-                    int lngIndex = rs.IndexOf("lng");
-                    string lng = rs.Substring(lngIndex + 5).Trim();
-                    int endIndex = lng.IndexOf("\n");
-                    lng = lng.Substring(0,endIndex);
-
-                    double checkLng;
-                    if (double.TryParse(lng, out checkLng))
-                    {
-                        return lng;
-                    }
-                }
-                catch { }
-
-                return null;
+                return geoCoordinate.Longitude.ToString();
             }
+
+            return null;
         }
     }
 }

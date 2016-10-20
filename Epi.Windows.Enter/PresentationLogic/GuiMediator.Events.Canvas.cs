@@ -136,7 +136,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                         }
 
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         // do nothing for now
                     }
@@ -266,7 +266,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             {
                 while (panel.Controls.Count > 0) panel.Controls[0].Dispose(); 
             }
-            catch (Exception ex)
+            catch
             {
                 //
             }
@@ -354,7 +354,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                 return false;
             }
         }
-        
+
         /// <summary>
         /// Determines if the control is the last control in the view
         /// </summary>
