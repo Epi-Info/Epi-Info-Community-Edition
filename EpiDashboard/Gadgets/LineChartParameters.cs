@@ -23,7 +23,7 @@ namespace EpiDashboard
             XAxisLabelFontSize = 12;
             ChartTitle = String.Empty;
             ChartSubTitle = String.Empty;
-            GadgetTitle = "Line Chart";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_LINECHART;
             GadgetDescription = String.Empty;
             PaletteColors = new List<string>();
         }
