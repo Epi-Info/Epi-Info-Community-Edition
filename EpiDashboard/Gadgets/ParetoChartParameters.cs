@@ -38,7 +38,7 @@ namespace EpiDashboard
             StrataVariableNames = new List<string>();
             SortHighToLow = true;
             //  Display
-            GadgetTitle = "Pareto Chart";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_PARETO_CHART;
             GadgetDescription = String.Empty;
             Width = 800;
             Height = 500;
