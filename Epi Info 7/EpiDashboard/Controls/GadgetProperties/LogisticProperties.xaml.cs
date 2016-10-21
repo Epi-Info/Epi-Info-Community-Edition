@@ -80,60 +80,48 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
-            lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_LOGISTIC_REGRESSION;
+            lblConfigExpandedTitleTxt.Text= DashboardSharedStrings.GADGET_CONFIG_TITLE_LOGISTIC_REGRESSION;
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_LOGISTIC_REGRESSION;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
             tbtnDisplay.Description = DashboardSharedStrings.GADGET_TABDESC_DISPLAY;
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
-            tblockPanelVariables.Content = DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockOutcomeVariable.Content = DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
-            tblockWeightVariable.Content = DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
-            checkboxIncludeMissing.Content = DashboardSharedStrings.GADGET_INCLUDE_MISSING;
-            tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
-            tblockGroupingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
-            tblockSortingSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
-            tblockSortMethod.Content = DashboardSharedStrings.GADGET_SORT_METHOD;
-            tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
-            tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            tblockTitle.Content = DashboardSharedStrings.GADGET_GADET_TITLE;
-            tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
-            checkboxListLabels.Content = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
-            tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
-            tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
-            checkboxShowANOVA.Content = DashboardSharedStrings.GADGET_DISPLAY_ANOVA;
-            tblockGroupby.Content = DashboardSharedStrings.GADGET_GROUP_BY;
-            tblockSubGroupBy.Content = DashboardSharedStrings.GADGET_SUBGROUP_BY;
-            tblockAvailableVariables.Content = DashboardSharedStrings.GADGET_AVAILABLE_VARIABLES;
-            tblockSortOrder.Content = DashboardSharedStrings.GADGET_SORT_ORDER;
-            checkboxLineColumn.Content = DashboardSharedStrings.GADGET_SHOW_LINE_COLUMN;
-            checkboxColumnHeaders.Content = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
-            checkboxShowNulls.Content = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
+            tblockPanelVariablesTxt.Text= DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
+            tblockOutcomeVariableTxt.Text= DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
+            tblockWeightVariableTxt.Text= DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
+            checkboxIncludeMissingTxt.Text= DashboardSharedStrings.GADGET_INCLUDE_MISSING;
+            tblockPanelSortingTxt.Text= DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
+            tblockGroupingSubheaderTxt.Text= DashboardSharedStrings.GADGET_PANELSUBHEADER_GROUPING;
+            tblockSortingSubheaderTxt.Text= DashboardSharedStrings.GADGET_PANELSUBHEADER_SORTING;
+            tblockSortMethodTxt.Text= DashboardSharedStrings.GADGET_SORT_METHOD;
+            tblockPanelDisplayTxt.Text= DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
+            tblockTitleNDescSubheaderTxt.Text= DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
+            tblockTitleTxt.Text= DashboardSharedStrings.GADGET_GADET_TITLE;
+            tblockDescTxt.Text= DashboardSharedStrings.GADGET_DESCRIPTION;
+            checkboxListLabelsTxt.Text= DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
+            tblockPanelDataFilterTxt.Text= DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
+            tblockAnyFilterGadgetOnlyTxt.Text= DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
+            checkboxShowANOVATxt.Text= DashboardSharedStrings.GADGET_DISPLAY_ANOVA;
+            tblockGroupbyTxt.Text= DashboardSharedStrings.GADGET_GROUP_BY;
+            tblockSubGroupByTxt.Text= DashboardSharedStrings.GADGET_SUBGROUP_BY;
+            tblockAvailableVariablesTxt.Text= DashboardSharedStrings.GADGET_AVAILABLE_VARIABLES;
+            tblockSortOrderTxt.Text= DashboardSharedStrings.GADGET_SORT_ORDER;
+            checkboxLineColumnTxt.Text= DashboardSharedStrings.GADGET_SHOW_LINE_COLUMN;
+            checkboxColumnHeadersTxt.Text= DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
+            checkboxShowNullsTxt.Text= DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
             tblockPrecision.Text = DashboardSharedStrings.GADGET_DECIMALS_TO_DISPLAY;
             tblockOutputColumns.Text = DashboardSharedStrings.GADGET_OUTPUT_COLUMNS_DISPLAY;
-            btnMakeDummy.Content = DashboardSharedStrings.GADGET_MAKE_DUMMY;
-            btnClearInteractionTerms.Content = DashboardSharedStrings.GADGET_CLEAR_TERMS;
-            tblockConfidenceLimits.Content = DashboardSharedStrings.GADGET_CONFIDENCE_LIMITS;
+            btnMakeDummyTxt.Text= DashboardSharedStrings.GADGET_MAKE_DUMMY;
+            btnClearInteractionTermsTxt.Text= DashboardSharedStrings.GADGET_CLEAR_TERMS;
+            tblockConfidenceLimitsTxt.Text= DashboardSharedStrings.GADGET_CONFIDENCE_LIMITS;
             tblockDummyVariables.Text = DashboardSharedStrings.GADGET_DUMMY_VARIABLES;
             tblockInteractionTerms.Text = DashboardSharedStrings.GADGET_INTERACTION_TERMS;
-            checkboxNoIntercept.Content = DashboardSharedStrings.GADGET_NO_INTERCEPT;
-            tblockIndependentVariables.Content = DashboardSharedStrings.GADGET_INDEPENDENT_VARIABLES;
-            tblockMatchVariable.Content = DashboardSharedStrings.GADGET_MATCH_VARIABLE;
-            btnRun.Content = DashboardSharedStrings.BUTTON_OK;
-            btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
-
-
-
-
-
-
-
-
-
-
-
-
+            checkboxNoInterceptTxt.Text= DashboardSharedStrings.GADGET_NO_INTERCEPT;
+            tblockIndependentVariablesTxt.Text= DashboardSharedStrings.GADGET_INDEPENDENT_VARIABLES;
+            tblockMatchVariableTxt.Text= DashboardSharedStrings.GADGET_MATCH_VARIABLE;
+            btnRunTxt.Text= DashboardSharedStrings.BUTTON_OK;
+            btnCancelTxt.Text= DashboardSharedStrings.BUTTON_CANCEL;
 
             #endregion // Translation
         }
@@ -169,7 +157,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (!String.IsNullOrEmpty(this.txtTitle.Text))
                 lrc.headerPanel.Text = this.txtTitle.Text;
             else
-                lrc.headerPanel.Text = "Logistic Regression";
+                lrc.headerPanel.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_LOGISTIC_REGRESSION;
             this.Parameters.GadgetDescription = lrc.descriptionPanel.Text;
             this.Parameters.GadgetTitle = lrc.headerPanel.Text;
             lrc.RefreshResults();
@@ -216,11 +204,11 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (lbxOtherFields.SelectedItems.Count == 1 || lbxOtherFields.SelectedItems.Count > 2)
             {
-                btnMakeDummy.Content = "Make Dummy";
+                btnMakeDummyTxt.Text= "Make Dummy";
             }
             else if (lbxOtherFields.SelectedItems.Count == 2)
             {
-                btnMakeDummy.Content = "Make Interaction";
+                btnMakeDummyTxt.Text= "Make Interaction";
             }
         }
 
