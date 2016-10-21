@@ -28,7 +28,7 @@ namespace EpiDashboard
             CrosstabVariableName = String.Empty;
             //  Sorting/Grouping
             //  Display
-            GadgetTitle = "Scatter Chart";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_SCATTER_CHART;
             GadgetDescription = String.Empty;
             Width = 800;
             Height = 500;

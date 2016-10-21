@@ -52,7 +52,7 @@ namespace EpiDashboard
             StrataVariableNames = new List<string>();
             SortHighToLow = false;
             //  Display
-            GadgetTitle = "Epi Curve Chart";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_EPICURVE_CHART;
             GadgetDescription = String.Empty;
             Width = 800;
             Height = 500;
