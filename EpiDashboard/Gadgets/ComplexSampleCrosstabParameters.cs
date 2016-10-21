@@ -35,7 +35,7 @@ namespace EpiDashboard
         public ComplexSampleCrosstabParameters()
             : base()
         {
-            GadgetTitle = "Complex Sample Tables";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMPLEX_TABLES;
             TreatOutcomeAsContinuous = false;
             StrataSummaryOnly = false;
             SmartTable = true;

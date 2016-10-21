@@ -16,7 +16,7 @@ namespace EpiDashboard
         public ComplexSampleMeansParameters()
             : base()
         {
-            GadgetTitle = "Complex Sample Means";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMPLEX_MEANS;
             ShowANOVA = true;
             columnsToHide = new List<int>();
             PSUVariableName = string.Empty;
