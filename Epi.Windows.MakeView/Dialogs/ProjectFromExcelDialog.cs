@@ -259,41 +259,87 @@ namespace Epi.Windows.MakeView.Dialogs
             {
 
                 Card Page = new Card();
-                if (valueArray[row, 1] != null && valueArray[row, 1].ToString() != "")
+                //if (valueArray[row, 1] != null && valueArray[row, 1].ToString() != "")
+                //{
+                //    Page.Question = valueArray[row, 1].ToString();
+                //}
+                //if (valueArray[row, 2] != null && valueArray[row, 2].ToString() != "")
+                //{
+                //    Page.Variable_Name = valueArray[row, 2].ToString();
+                //}
+                //if (valueArray[row, 3] != null && valueArray[row, 3].ToString() != "")
+                //{
+                //    Page.Question_Type = GetFieldType(valueArray[row, 3].ToString());
+                //}
+                //if (valueArray[row, 4] != null && valueArray[row, 4].ToString() != "")
+                //{
+                //    Page.Required = bool.Parse(valueArray[row, 4].ToString());
+                //}
+                //if (valueArray[row, 5] != null && valueArray[row, 5].ToString() != "")
+                //{
+                //    Page.List_Values = GetDropDownList(valueArray[row, 5].ToString(), xlWorkbook);
+                //}
+                //if (valueArray[row, 6] != null && valueArray[row, 6].ToString() != "")
+                //{
+                //    Page.If_Condition = valueArray[row, 6].ToString();
+                //}
+                //if (valueArray[row, 7] != null && valueArray[row, 7].ToString() != "")
+                //{
+                //    Page.Then_Question = valueArray[row, 7].ToString();
+                //}
+                //if (valueArray[row, 8] != null && valueArray[row, 8].ToString() != "")
+                //{
+                //    Page.Else_Question = valueArray[row, 8].ToString();
+                //}
+                //Page.PageName = "Page " + (row - 1).ToString();
+                //Page.PageId = row - 1;
+                //cardList.Add(Page);
+                if (xlWorksheet.Cells[row, 1] != null && xlWorksheet.Cells[row, 1].Text != "")
                 {
-                    Page.Question = valueArray[row, 1].ToString();
+                    Page.Question = xlWorksheet.Cells[row, 1].Text;
                 }
-                if (valueArray[row, 2] != null && valueArray[row, 2].ToString() != "")
+                //
+                if (xlWorksheet.Cells[row, 2] != null && xlWorksheet.Cells[row, 2].Text != "")
                 {
-                    Page.Variable_Name = valueArray[row, 2].ToString();
+                    Page.Title = xlWorksheet.Cells[row, 2].Text;
                 }
-                if (valueArray[row, 3] != null && valueArray[row, 3].ToString() != "")
+                if (xlWorksheet.Cells[row, 3] != null && xlWorksheet.Cells[row, 3].Text != "")
                 {
-                    Page.Question_Type = GetFieldType(valueArray[row, 3].ToString());
+                    Page.Description = xlWorksheet.Cells[row, 3].Text;
                 }
-                if (valueArray[row, 4] != null && valueArray[row, 4].ToString() != "")
+                //
+                if (xlWorksheet.Cells[row, 4] != null && xlWorksheet.Cells[row, 4].Text != "")
                 {
-                    Page.Required = bool.Parse(valueArray[row, 4].ToString());
+                    Page.Variable_Name = xlWorksheet.Cells[row, 4].Text;
                 }
-                if (valueArray[row, 5] != null && valueArray[row, 5].ToString() != "")
+                if (xlWorksheet.Cells[row, 5] != null && xlWorksheet.Cells[row, 5].Text != "")
                 {
-                    Page.List_Values = GetDropDownList(valueArray[row, 5].ToString(), xlWorkbook);
+                    Page.Question_Type = GetFieldType(xlWorksheet.Cells[row, 5].Text);
                 }
-                if (valueArray[row, 6] != null && valueArray[row, 6].ToString() != "")
+                if (xlWorksheet.Cells[row, 6] != null && xlWorksheet.Cells[row, 6].Text != "")
                 {
-                    Page.If_Condition = valueArray[row, 6].ToString();
+                    Page.Required = bool.Parse(xlWorksheet.Cells[row, 6].Text);
                 }
-                if (valueArray[row, 7] != null && valueArray[row, 7].ToString() != "")
+                if (xlWorksheet.Cells[row, 7] != null && xlWorksheet.Cells[row, 7].Text != "")
                 {
-                    Page.Then_Question = valueArray[row, 7].ToString();
+                    Page.List_Values = GetDropDownList(xlWorksheet.Cells[row, 7].Text, xlWorkbook);
                 }
-                if (valueArray[row, 8] != null && valueArray[row, 8].ToString() != "")
+                if (xlWorksheet.Cells[row, 8] != null && xlWorksheet.Cells[row, 8].Text != "")
                 {
-                    Page.Else_Question = valueArray[row, 8].ToString();
+                    Page.If_Condition = xlWorksheet.Cells[row, 8].Text;
+                }
+                if (xlWorksheet.Cells[row, 9] != null && xlWorksheet.Cells[row, 9].Text != "")
+                {
+                    Page.Then_Question = xlWorksheet.Cells[row, 9].Text;
+                }
+                if (xlWorksheet.Cells[row, 10] != null && xlWorksheet.Cells[row, 10].Text != "")
+                {
+                    Page.Else_Question = xlWorksheet.Cells[row, 10].Text;
                 }
                 Page.PageName = "Page " + (row - 1).ToString();
                 Page.PageId = row - 1;
                 cardList.Add(Page);
+
             }
             return cardList;
         }

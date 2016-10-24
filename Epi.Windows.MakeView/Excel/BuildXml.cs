@@ -56,7 +56,7 @@ namespace Epi.Windows.MakeView.Excel
             PageElement.SetAttributeValue("Position", NewPage.PageId - 1);
 
 
-            XElement FiledElement = XPage.XPathSelectElement("Page/Field");
+            XElement FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Controls']");
             FiledElement.SetAttributeValue("IsRequired", NewPage.Required.ToString());
             FiledElement.SetAttributeValue("Name", NewPage.Variable_Name);
             FiledElement.SetAttributeValue("PromptText", NewPage.Question);
@@ -78,6 +78,27 @@ namespace Epi.Windows.MakeView.Excel
                 FiledElement.SetAttributeValue("TextColumnName", NewPage.List_Values[0]);
 
             }
+            // GroupBox Title
+            FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
+            FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Title");
+            FiledElement.SetAttributeValue("PromptText", NewPage.Question);
+            FiledElement.SetAttributeValue("PageId", NewPage.PageId);
+            FiledElement.SetAttributeValue("FieldTypeId", 21);
+            FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
+            FiledElement.SetAttributeValue("PageName", NewPage.PageName);
+            FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
+            FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 4);
+
+            // Description
+            FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
+            FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Description");
+            FiledElement.SetAttributeValue("PromptText", NewPage.Question);
+            FiledElement.SetAttributeValue("PageId", NewPage.PageId);
+            FiledElement.SetAttributeValue("FieldTypeId", 2);
+            FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
+            FiledElement.SetAttributeValue("PageName", NewPage.PageName);
+            FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
+            FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 5);
             if (NewPage.Question_Type == 12)
             {
                 FiledElement.SetAttributeValue("List", ListToString(NewPage.List_Values));
