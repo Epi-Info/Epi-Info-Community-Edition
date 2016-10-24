@@ -23,7 +23,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>Returns a barcode reading.</returns>
         public override object Execute()
         {
-            return "implement_barcode";
+            return null;
         }
     }
 }
