@@ -1146,7 +1146,8 @@ namespace Epi.Windows.MakeView
 
                             if (field == null) continue;
 
-                            if (field.Id != fieldIdFromTemplate)
+                           if (field.Id != fieldIdFromTemplate && !_templateFieldId_dbFieldId.ContainsKey(fieldIdFromTemplate))
+                                
                             {
                                 _templateFieldId_dbFieldId.Add(fieldIdFromTemplate, field.Id);
                             }

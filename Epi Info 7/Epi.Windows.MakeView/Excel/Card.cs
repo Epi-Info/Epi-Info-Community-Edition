@@ -60,5 +60,18 @@ namespace Epi.Windows.MakeView.Excel
         public int PageId { get; set; }
 
         public string PageName { get; set; }
+        private string _Title;
+        public string Title
+        {
+            get { return _Title; }
+            set { _Title = value; }
+        }
+
+        private string _Description;
+        public string Description
+        {
+            get { return _Description; }
+            set { _Description = value; }
+        }
     }
 }
