@@ -81,7 +81,7 @@ namespace Epi.Windows.MakeView.Excel
             // GroupBox Title
             FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
             FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Title");
-            FiledElement.SetAttributeValue("PromptText", NewPage.Question);
+            FiledElement.SetAttributeValue("PromptText", NewPage.Title);
             FiledElement.SetAttributeValue("PageId", NewPage.PageId);
             FiledElement.SetAttributeValue("FieldTypeId", 21);
             FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
@@ -92,7 +92,7 @@ namespace Epi.Windows.MakeView.Excel
             // Description
             FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
             FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Description");
-            FiledElement.SetAttributeValue("PromptText", NewPage.Question);
+            FiledElement.SetAttributeValue("PromptText", NewPage.Description);
             FiledElement.SetAttributeValue("PageId", NewPage.PageId);
             FiledElement.SetAttributeValue("FieldTypeId", 2);
             FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
