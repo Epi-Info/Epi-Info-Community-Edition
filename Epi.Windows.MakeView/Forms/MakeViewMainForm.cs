@@ -1037,7 +1037,9 @@ namespace Epi.Windows.MakeView.Forms
             try
             {
                 EWEServiceEndpointAddress = _config.Settings.EWEServiceEndpointAddress  ;
-            }catch (Exception ex){
+            }
+            catch
+            {
                 _config.Settings.EWEServiceAuthMode = 0; // 0 = Anon, 1 = NT
 
                 _config.Settings.EWEServiceEndpointAddress = string.Empty;
@@ -1752,7 +1754,15 @@ namespace Epi.Windows.MakeView.Forms
         private void Form_Load(object sender, System.EventArgs e)
         {
             LoadRecentProjects();
-            //LoadProjectFromCommandLine();
+
+            try
+            {
+                string clientToken = config.Settings.ClientToken;
+                config.Settings.ClientToken = "";
+                Configuration.Save(config);
+                Configuration.Load(config.ConfigFilePath);
+            }
+            catch { }
         }
 
         /// <summary>

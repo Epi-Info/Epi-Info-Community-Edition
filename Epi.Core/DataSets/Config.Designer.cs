@@ -7307,6 +7307,8 @@ namespace Epi.DataSets {
             
             private global::System.Data.DataColumn columnSparseConnection;
             
+            private global::System.Data.DataColumn columnClientToken;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SettingsDataTable() {
@@ -8054,6 +8056,14 @@ namespace Epi.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ClientTokenColumn {
+                get {
+                    return this.columnClientToken;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -8178,7 +8188,8 @@ namespace Epi.DataSets {
                         int EWEServiceReaderMaxStringContentLength, 
                         bool IsVariableValidationEnable, 
                         bool AutoTouchKeyboard, 
-                        bool SparseConnection) {
+                        bool SparseConnection, 
+                        string ClientToken) {
                 SettingsRow rowSettingsRow = ((SettingsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         BackgroundImage,
@@ -8269,7 +8280,8 @@ namespace Epi.DataSets {
                         EWEServiceReaderMaxStringContentLength,
                         IsVariableValidationEnable,
                         AutoTouchKeyboard,
-                        SparseConnection};
+                        SparseConnection,
+                        ClientToken};
                 rowSettingsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSettingsRow);
                 return rowSettingsRow;
@@ -8381,6 +8393,7 @@ namespace Epi.DataSets {
                 this.columnIsVariableValidationEnable = base.Columns["IsVariableValidationEnable"];
                 this.columnAutoTouchKeyboard = base.Columns["AutoTouchKeyboard"];
                 this.columnSparseConnection = base.Columns["SparseConnection"];
+                this.columnClientToken = base.Columns["ClientToken"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8564,6 +8577,8 @@ namespace Epi.DataSets {
                 base.Columns.Add(this.columnAutoTouchKeyboard);
                 this.columnSparseConnection = new global::System.Data.DataColumn("SparseConnection", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSparseConnection);
+                this.columnClientToken = new global::System.Data.DataColumn("ClientToken", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnClientToken);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("DateFormat", new global::System.Data.DataColumn[] {
                                 this.columnBackgroundImage}, false));
                 this.columnBackgroundImage.AllowDBNull = false;
@@ -8650,6 +8665,7 @@ namespace Epi.DataSets {
                 this.columnIsVariableValidationEnable.DefaultValue = ((bool)(false));
                 this.columnAutoTouchKeyboard.DefaultValue = ((bool)(false));
                 this.columnSparseConnection.DefaultValue = ((bool)(false));
+                this.columnClientToken.DefaultValue = ((string)(""));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10861,7 +10877,7 @@ namespace Epi.DataSets {
             public string GridBackgroundImageLayout {
                 get {
                     if (this.IsGridBackgroundImageLayoutNull()) {
-                        return "None";
+                        return string.Empty;
                     }
                     else {
                         return ((string)(this[this.tableSettings.GridBackgroundImageLayoutColumn]));
@@ -11581,6 +11597,22 @@ namespace Epi.DataSets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ClientToken {
+                get {
+                    if (this.IsClientTokenNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableSettings.ClientTokenColumn]));
+                    }
+                }
+                set {
+                    this[this.tableSettings.ClientTokenColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsOutputFilePrefixNull() {
                 return this.IsNull(this.tableSettings.OutputFilePrefixColumn);
             }
@@ -12033,6 +12065,18 @@ namespace Epi.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSparseConnectionNull() {
                 this[this.tableSettings.SparseConnectionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsClientTokenNull() {
+                return this.IsNull(this.tableSettings.ClientTokenColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetClientTokenNull() {
+                this[this.tableSettings.ClientTokenColumn] = global::System.Convert.DBNull;
             }
         }
         
