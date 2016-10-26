@@ -192,7 +192,10 @@ namespace EpiDashboard.Gadgets.Charting
 
                     dataList.RemoveAll(ValueMissing);
                     dataList.RemoveAll(OutsideLimits);
-                    dataList.Sort(new ChartDataComparer());
+                    if(dataList.Count > 0 && dataList[0].S.GetType() != typeof(String))
+                    {
+                        dataList.Sort(new ChartDataComparer());
+                    }
                 }
                 this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, strata);
             }
