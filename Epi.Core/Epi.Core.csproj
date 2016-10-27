@@ -662,6 +662,12 @@
     <Content Include="FipsCrypto.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Projects\CommunityHealthAssessment\albany_demogz.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Projects\SamplePrograms\Sample.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -669,13 +675,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ImagesNotToBeDeployed\App.ico" />
+    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.dbf" />
+    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.prj" />
+    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.shp" />
+    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.shx" />
+    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.dbf" />
+    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.prj" />
+    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.shp" />
+    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.shx" />
+    <None Include="Projects\CommunityHealthAssessment\assessment.cvs7" />
+    <None Include="Projects\CommunityHealthAssessment\assessment.map7" />
+    <None Include="Projects\CommunityHealthAssessment\AsthmaTable.xls" />
+    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.cvs7" />
+    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.map7" />
+    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.prj" />
     <None Include="Resources\ImagesNotToBeDeployed\viaEmail.bmp" />
-    <Content Include="Projects\CommunityHealthAssessment\albany_demogz.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Projects\Salmonellosis\Salmonellosis.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1093,40 +1107,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Projects\H1N1ClinicalLongForm\H1N1ClinicalLongForm.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.dbf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.shp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.shx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.dbf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.shp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.shx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\assessment.cvs7" />
-    <None Include="Projects\CommunityHealthAssessment\assessment.map7" />
-    <None Include="Projects\CommunityHealthAssessment\AsthmaTable.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.cvs7" />
-    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.map7" />
-    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Projects\Salmonellosis\SalmonellaTrainingCaseData_2013-06-17T20-04-48.edp7">
