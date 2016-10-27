@@ -11,7 +11,7 @@ using Epi.Web.Common.Security;
 
 
 
-namespace Epi.Windows.MakeView.Dialogs
+namespace Epi.Windows.Enter.Dialogs
 {
     public partial class WebEnterOptions : Form
     {
@@ -19,18 +19,15 @@ namespace Epi.Windows.MakeView.Dialogs
         private int WebServiceAuthMode;
         private string WebServiceEndpointAddress;
         private Configuration config;
-        public WebEnterOptions( bool Error = false)
+        public WebEnterOptions(bool Error )
         {
             InitializeComponent();
-
-
             if (!Error)
             {
 
                 pnlError.Visible = false;
             }
-            else
-            {
+            else {
                 pnlError.Visible = true;
                 this.lblError.Text = SharedStrings.WEBSURVEY_SETTINGS_INVALID;
             }

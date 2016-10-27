@@ -215,6 +215,7 @@
       <Name>System.Design</Name>
     </Reference>
     <Reference Include="System.Device" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
@@ -319,6 +320,12 @@
     <Compile Include="Dialogs\SelectATableDialog.Designer.cs">
       <DependentUpon>SelectATableDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\WebEnterOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebEnterOptions.designer.cs">
+      <DependentUpon>WebEnterOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\WithinProjectViewSelectionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -367,6 +374,13 @@
     <Compile Include="Forms\ImportData.Designer.cs">
       <DependentUpon>ImportData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserAuthentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UserAuthentication.Designer.cs">
+      <DependentUpon>UserAuthentication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginInfo.cs" />
     <Compile Include="PresentationLogic\GuiMediator.Event.Handlers.cs" />
     <Compile Include="PresentationLogic\GuiMediator.Events.MainForm.cs" />
     <Compile Include="PresentationLogic\GuiMediator.Events.ViewExplorer.cs" />
@@ -455,6 +469,9 @@
       <DependentUpon>SelectATableDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebEnterOptions.resx">
+      <DependentUpon>WebEnterOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\WithinProjectViewSelectionDialog.resx">
       <DependentUpon>WithinProjectViewSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -504,6 +521,9 @@
     <EmbeddedResource Include="Forms\SNAViewer.resx">
       <DependentUpon>SNAViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserAuthentication.resx">
+      <DependentUpon>UserAuthentication.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ViewExplorer.resx">
       <SubType>Designer</SubType>

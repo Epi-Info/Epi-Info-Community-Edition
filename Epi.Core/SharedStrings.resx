@@ -3206,4 +3206,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="SHARE_PROJECT_VIA_EMAIL" xml:space="preserve">
     <value>Share Project via Email</value>
   </data>
+  <data name="DATA_DOWNLOAD_ACCESS_DENIED" xml:space="preserve">
+    <value>Data download access denied. You don't belong to the organization for this form. Please contact your system administrator to request access to this organization.</value>
+  </data>
 </root>

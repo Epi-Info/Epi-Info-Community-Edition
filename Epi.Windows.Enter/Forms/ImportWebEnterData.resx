@@ -119,10 +119,14 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
+    <value>16, 11</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblDescription.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 77</value>
+    <value>673, 95</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblDescription.TabIndex" type="System.Int32, mscorlib">
@@ -144,10 +148,13 @@
     <value>8</value>
   </data>
   <data name="lblProjectFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 63</value>
+    <value>8, 78</value>
+  </data>
+  <data name="lblProjectFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblProjectFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 13</value>
+    <value>613, 16</value>
   </data>
   <data name="lblProjectFile.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -165,13 +172,16 @@
     <value>groupImportInfo</value>
   </data>
   <data name="&gt;&gt;lblProjectFile.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="textProject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 79</value>
+    <value>12, 97</value>
+  </data>
+  <data name="textProject.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textProject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>487, 20</value>
+    <value>648, 22</value>
   </data>
   <data name="textProject.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -186,13 +196,16 @@
     <value>groupImportInfo</value>
   </data>
   <data name="&gt;&gt;textProject.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="chkIncremental.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 162</value>
+    <value>212, 199</value>
+  </data>
+  <data name="chkIncremental.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="chkIncremental.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 39</value>
+    <value>449, 48</value>
   </data>
   <data name="chkIncremental.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -213,10 +226,13 @@
     <value>0</value>
   </data>
   <data name="textOrganization.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 40</value>
+    <value>12, 49</value>
+  </data>
+  <data name="textOrganization.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textOrganization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>487, 20</value>
+    <value>648, 22</value>
   </data>
   <data name="textOrganization.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -234,10 +250,13 @@
     <value>1</value>
   </data>
   <data name="lblOrganization.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 24</value>
+    <value>8, 30</value>
+  </data>
+  <data name="lblOrganization.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblOrganization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 13</value>
+    <value>613, 16</value>
   </data>
   <data name="lblOrganization.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -257,63 +276,101 @@
   <data name="&gt;&gt;lblOrganization.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="textData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 118</value>
+  <data name="&gt;&gt;rdbDraftMode.Name" xml:space="preserve">
+    <value>rdbDraftMode</value>
   </data>
-  <data name="textData.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
-    <value>*</value>
+  <data name="&gt;&gt;rdbDraftMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="textData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>487, 20</value>
+  <data name="&gt;&gt;rdbDraftMode.Parent" xml:space="preserve">
+    <value>grpImportMode</value>
   </data>
-  <data name="textData.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;rdbDraftMode.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;textData.Name" xml:space="preserve">
-    <value>textData</value>
+  <data name="&gt;&gt;rdbFinalMode.Name" xml:space="preserve">
+    <value>rdbFinalMode</value>
   </data>
-  <data name="&gt;&gt;textData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;rdbFinalMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textData.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdbFinalMode.Parent" xml:space="preserve">
+    <value>grpImportMode</value>
+  </data>
+  <data name="&gt;&gt;rdbFinalMode.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpImportMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 177</value>
+  </data>
+  <data name="grpImportMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grpImportMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grpImportMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 176</value>
+  </data>
+  <data name="grpImportMode.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="grpImportMode.Text" xml:space="preserve">
+    <value>Mode to Import</value>
+  </data>
+  <data name="&gt;&gt;grpImportMode.Name" xml:space="preserve">
+    <value>grpImportMode</value>
+  </data>
+  <data name="&gt;&gt;grpImportMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpImportMode.Parent" xml:space="preserve">
     <value>groupImportInfo</value>
   </data>
-  <data name="&gt;&gt;textData.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;grpImportMode.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="lblDataGUID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
+  <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 208</value>
   </data>
-  <data name="lblDataGUID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 13</value>
+  <data name="groupImportInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="lblDataGUID.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="groupImportInfo.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="lblDataGUID.Text" xml:space="preserve">
-    <value>Security Token:</value>
+  <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>673, 361</value>
   </data>
-  <data name="&gt;&gt;lblDataGUID.Name" xml:space="preserve">
-    <value>lblDataGUID</value>
+  <data name="groupImportInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;lblDataGUID.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupImportInfo.Text" xml:space="preserve">
+    <value>Import Information</value>
   </data>
-  <data name="&gt;&gt;lblDataGUID.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupImportInfo.Name" xml:space="preserve">
     <value>groupImportInfo</value>
   </data>
-  <data name="&gt;&gt;lblDataGUID.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;groupImportInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="&gt;&gt;groupImportInfo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="rdbDraftMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="rdbDraftMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 76</value>
+    <value>16, 94</value>
+  </data>
+  <data name="rdbDraftMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rdbDraftMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 32</value>
+    <value>153, 39</value>
   </data>
   <data name="rdbDraftMode.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -337,10 +394,13 @@
     <value>NoControl</value>
   </data>
   <data name="rdbFinalMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 20</value>
+    <value>16, 25</value>
+  </data>
+  <data name="rdbFinalMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="rdbFinalMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 32</value>
+    <value>153, 39</value>
   </data>
   <data name="rdbFinalMode.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -360,62 +420,35 @@
   <data name="&gt;&gt;rdbFinalMode.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="grpImportMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 144</value>
+  <data name="textData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 118</value>
   </data>
-  <data name="grpImportMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 143</value>
+  <data name="textData.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
+    <value>*</value>
   </data>
-  <data name="grpImportMode.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="textData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 22</value>
   </data>
-  <data name="grpImportMode.Text" xml:space="preserve">
-    <value>Mode to Import</value>
+  <data name="textData.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;grpImportMode.Name" xml:space="preserve">
-    <value>grpImportMode</value>
+  <data name="&gt;&gt;textData.Name" xml:space="preserve">
+    <value>textData</value>
   </data>
-  <data name="&gt;&gt;grpImportMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpImportMode.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;grpImportMode.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 169</value>
-  </data>
-  <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 293</value>
-  </data>
-  <data name="groupImportInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="groupImportInfo.Text" xml:space="preserve">
-    <value>Import Information</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Name" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;textData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="textProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="textProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 595</value>
+    <value>16, 732</value>
+  </data>
+  <data name="textProgress.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 20</value>
+    <value>672, 22</value>
   </data>
   <data name="textProgress.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -439,10 +472,13 @@
     <value>Bottom, Right</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 621</value>
+    <value>16, 764</value>
+  </data>
+  <data name="progressBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 23</value>
+    <value>673, 28</value>
   </data>
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -466,10 +502,13 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 650</value>
+    <value>569, 800</value>
+  </data>
+  <data name="btnCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 23</value>
+    <value>120, 28</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -496,10 +535,13 @@
     <value>False</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 650</value>
+    <value>441, 800</value>
+  </data>
+  <data name="btnOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 23</value>
+    <value>120, 28</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -525,11 +567,17 @@
   <data name="lbxStatus.HorizontalScrollbar" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lbxStatus.ItemHeight" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 468</value>
+    <value>16, 576</value>
+  </data>
+  <data name="lbxStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 121</value>
+    <value>672, 148</value>
   </data>
   <data name="lbxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -547,10 +595,13 @@
     <value>5</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 90</value>
+    <value>20, 111</value>
+  </data>
+  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>18, 18</value>
+    <value>24, 22</value>
   </data>
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -571,10 +622,13 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 90</value>
+    <value>48, 111</value>
+  </data>
+  <data name="lblWarning.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>491, 18</value>
+    <value>655, 22</value>
   </data>
   <data name="lblWarning.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -595,10 +649,13 @@
     <value>1</value>
   </data>
   <data name="lblWarningMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 111</value>
+    <value>16, 137</value>
+  </data>
+  <data name="lblWarningMessage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblWarningMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>508, 55</value>
+    <value>677, 68</value>
   </data>
   <data name="lblWarningMessage.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -622,10 +679,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>529, 686</value>
+    <value>705, 844</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4421,6 +4478,9 @@
         AAAAAAAf//////wAAAAAAAA///////8AAAAAAAD////////AAAAAAAP////////wAAAAAAf////////8
         AAAAAD//////////AAAAAP//////////4AAAB////////////wAA//////////////////////8=
 </value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Import Data From Cloud Data Capture</value>

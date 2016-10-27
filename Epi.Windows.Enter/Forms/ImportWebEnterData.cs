@@ -14,6 +14,7 @@ using Epi.Fields;
 using Epi.Web.Common;
 using Epi.Web.Common.Message;
 using Epi.ImportExport;
+using Epi.Windows.Enter.PresentationLogic;
 
 namespace Epi.Enter.Forms
     {
@@ -44,12 +45,13 @@ namespace Epi.Enter.Forms
         private string SurveyId = string.Empty;
         private string OrganizationKey = string.Empty;
         private string PublishKey = string.Empty;
-        
+        private Epi.Windows.Enter.PresentationLogic.GuiMediator mediator;
         private EWEManagerService.EWEManagerServiceClient client;
         private Dictionary<string, Dictionary<string, WebFieldData>> _webFieldDataList;
         private bool IsDraftMode;
         private int SurveyStatus;
         private int DownLoadType;
+        private int UserId;
         #endregion // Private Members
 
         #region Delegates
@@ -69,13 +71,13 @@ namespace Epi.Enter.Forms
         /// Constructor
         /// </summary>        
         /// <param name="destinationView">The destination form; should be the currently-open view</param>
-        public ImportWebEnterDataForm(View destinationView)
+        public ImportWebEnterDataForm(View destinationView,int UserId = -1)
             {
             InitializeComponent();
 
             this.destinationProject = destinationView.Project;
             this.destinationView = destinationView;
-
+            this.UserId = UserId;
             Construct();
             }
         #endregion // Constructors
@@ -236,6 +238,32 @@ namespace Epi.Enter.Forms
 
                     }
                 this._webFieldDataList = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
+
+
+
+                this.mediator = GuiMediator.Instance;
+               // DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.mediator.ProjectExplorer.CurrentView.Id);
+                DataTable table = mediator.View.Project.Metadata.GetPublishedViewKeys(this.mediator.View.Id);
+                DataRow ViewRow = table.Rows[0];
+                // this.OrganizationKey = this.projectExplorer.CurrentView.EWEOrganizationKey;
+                 if (!string.IsNullOrEmpty(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
+                 {
+                     Guid guid;
+                     bool isValid = Guid.TryParse(ViewRow.ItemArray[2].ToString(), out guid);
+                     if (!isValid)
+                     {
+                         this.textOrganization.Text=Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
+                     }
+                     else
+                     {
+                         this.textOrganization.Text = ViewRow.ItemArray[2].ToString();
+                     }
+                     this.textProject.Text = ViewRow.ItemArray[3].ToString();
+                     this.textOrganization.Enabled = false;
+                     this.textProject.Enabled = false;
+                     this.textData.Enabled = false;
+                 }
+
                 }
             catch (Exception ex)
                 {
@@ -357,9 +385,9 @@ namespace Epi.Enter.Forms
             btnOK.Enabled = true;
             rdbDraftMode.Enabled = true;
             rdbFinalMode.Enabled = true;
-            textProject.Enabled = true;
-            textData.Enabled = true;
-            textOrganization.Enabled = true;
+            //textProject.Enabled = true;
+            //textData.Enabled = true;
+            //textOrganization.Enabled = true;
             progressBar.Visible = false;
             progressBar.Style = ProgressBarStyle.Continuous;
 
@@ -1207,11 +1235,24 @@ namespace Epi.Enter.Forms
         /// <param name="e">.NET supplied event parameters</param>
         private void requestWorker_WorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
             {
-            if (e.Result != null && e.Result is EWEManagerService.SurveyAnswerRequest)
+                if (e.Result != null && e.Result is EWEManagerService.SurveyAnswerRequest )
                 {
                 EWEManagerService.SurveyAnswerRequest Request = (EWEManagerService.SurveyAnswerRequest)e.Result;
-                AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
-                DoImport(Request);
+                if (Request.Criteria.StatusId > -1)
+                {
+                    AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
+                    DoImport(Request);
+                }
+                else {
+                    if (Request.Criteria.StatusId ==-1)
+                    {
+                        AddErrorStatusMessage(SharedStrings.DATA_DOWNLOAD_ACCESS_DENIED);
+                       
+                        StopImport();
+                    }
+                    
+                
+                }
                 }
             else
                 {
@@ -1236,7 +1277,8 @@ namespace Epi.Enter.Forms
                     EWEManagerService.SurveyAnswerCriteria Criteria = new EWEManagerService.SurveyAnswerCriteria();
                     Criteria.SurveyId = SurveyId;
                     Criteria.IsDraftMode = IsDraftMode;
-                    Criteria.UserPublishKey = new Guid(PublishKey);
+                    Criteria.UserId = this.UserId;
+                  //  Criteria.UserPublishKey = new Guid(PublishKey);
                     Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Criteria.ReturnSizeInfoOnly = true;
                     Criteria.SurveyAnswerIdList = new  string[0];
@@ -1247,8 +1289,13 @@ namespace Epi.Enter.Forms
                      
                     Pages = Result.NumberOfPages;
                     PageSize = Result.PageSize;
-
+                    if (Result.Message == "InvalidUserId")
+                    {
+                        Request.Criteria.StatusId = -1;
+                    }
+                   
                     e.Result = Request;
+                     
                     }
                 catch (System.ServiceModel.CommunicationException ex)
                     {
@@ -1306,7 +1353,8 @@ namespace Epi.Enter.Forms
                     EWEManagerService.SurveyAnswerRequest Request = new EWEManagerService.SurveyAnswerRequest();
                     EWEManagerService.SurveyAnswerCriteria Criteria = new EWEManagerService.SurveyAnswerCriteria();
                     Criteria.SurveyId = SurveyId;
-                    Criteria.UserPublishKey = new Guid(PublishKey);
+                   // Criteria.UserPublishKey = new Guid(PublishKey);
+                    Criteria.UserId = this.UserId;
                     Criteria.OrganizationKey = new Guid(OrganizationKey);
                     Criteria.ReturnSizeInfoOnly = false;
                     Criteria.SurveyAnswerIdList = new string[0];
