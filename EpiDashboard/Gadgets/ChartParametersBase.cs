@@ -132,6 +132,8 @@ namespace EpiDashboard
         public int Palette { get; set; }
         public List<string> PaletteColors { get; set; }
         public ComponentArt.Win.DataVisualization.Charting.Dock LegendDock { get; set; }
+
+        public bool SortStringValues { get; set; }
         #endregion  // Properties
     }
 }
