@@ -18,13 +18,15 @@ using Epi.Windows;
 using Epi.Windows.Dialogs;
 using Epi.Windows.Docking;
 using Epi.Windows.Enter.PresentationLogic;
-
+using System.DirectoryServices.AccountManagement;
 //using Epi.Core.Interpreter;
 using EpiInfo.Plugin;
 using Epi.EnterCheckCodeEngine;
 
 //using mshtml;
 using System.Net;
+using Epi.Enter.Forms;
+using Epi.Windows.Enter.Dialogs;
 
 
 #endregion  //Namespaces
@@ -1151,6 +1153,7 @@ namespace Epi.Windows.Enter
             finally
             {
                 dv.Sort = string.Empty;
+                Epi.Windows.Enter.LoginInfo.UserID = -1;
             }
         }
 
@@ -1605,7 +1608,7 @@ namespace Epi.Windows.Enter
                         return;
                     }
                 }
-
+                Epi.Windows.Enter.LoginInfo.UserID = -1;
                 // If the project was changed, update current project. Otherwise, use the current project
                 if (CurrentProject == null || (string.Compare(CurrentProject.FilePath, viewSelectionDialog.CurrentProject.FilePath, true) != 0))
                 {
@@ -2604,7 +2607,7 @@ namespace Epi.Windows.Enter
                 return;
                 }
 
-            Epi.Enter.Forms.ImportWebEnterDataForm importWebDataForm = new Epi.Enter.Forms.ImportWebEnterDataForm(destinationView);
+            Epi.Enter.Forms.ImportWebEnterDataForm importWebDataForm = new Epi.Enter.Forms.ImportWebEnterDataForm(destinationView, LoginInfo.UserID);
             DialogResult result = importWebDataForm.ShowDialog();
 
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -2949,9 +2952,152 @@ namespace Epi.Windows.Enter
         }
  private void fromWebEnterToolStripMenuItem_Click(object sender, EventArgs e)
             {
-            ImportFormDataFromWebEnter(this.view);
+                if (ValidateUser())
+                {
+                    ImportFormDataFromWebEnter(this.view);
+                }
             }
+ private bool ValidateUser()
+ {
+     //iscancel = false;
+     bool IsValidUser = true;
+     string UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
+     Configuration config = Configuration.GetNewInstance();
+     int ISWindowAuthMode = config.Settings.EWEServiceAuthMode;
+     if (ISWindowAuthMode == 1)
+     {
+         try
+         {
+             UserPrincipal User = GetUser(UserName);
 
+             EWEManagerService.UserAuthenticationRequest Request = new EWEManagerService.UserAuthenticationRequest();
+             var rUser = new EWEManagerService.UserDTO();
+             rUser.EmailAddress = User.EmailAddress;
+             Request.User = rUser;
+             Request.User.Operation = EWEManagerService.ConstantOperationMode.NoChange;
+
+             var client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
+             var Result = client.GetUser(Request);
+             if (Result != null && ISWindowAuthMode == 1)
+             {
+                 IsValidUser = true;
+                 LoginInfo.UserID = Result.User.UserId;
+             }
+
+             return IsValidUser;
+         }
+         catch (Exception ex)
+         {
+              
+             // return IsValidUser;
+             IsValidUser = false;
+         }
+     }
+     if (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress.Trim()))
+     {
+         IsValidUser = ValidateUserDialog(IsValidUser, ISWindowAuthMode);
+     }
+     else
+     {
+
+         WebEnterOptions dialog1 = new WebEnterOptions(true);
+         DialogResult result1 = dialog1.ShowDialog();
+         if (result1 == System.Windows.Forms.DialogResult.OK)
+         {
+             config = Configuration.GetNewInstance();
+             ShowHideWebButtons(config);
+             IsValidUser = ValidateUserDialog(IsValidUser, ISWindowAuthMode);
+         }
+         if (result1 == System.Windows.Forms.DialogResult.Cancel)
+         {
+             return false;
+         }
+
+     }
+     return IsValidUser;
+
+
+
+
+ }
+ private void ShowHideWebButtons(Configuration config)
+ {
+     ////if (config.Settings.Republish_IsRepbulishable)
+     ////{
+     ////    if ((!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress.Trim())) || (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.Trim())))
+     ////    {
+     ////        QuickPublishtoolStripButton.Visible = true;
+     ////        ChangeModetoolStripDropDownButton.Visible = true;
+     ////        toolStripSeparator10.Visible = true;
+     ////        toolStripSeparator11.Visible = true;
+     ////    }
+     ////    else
+     ////    {
+     ////        QuickPublishtoolStripButton.Visible = false;
+     ////        ChangeModetoolStripDropDownButton.Visible = false;
+     ////        toolStripSeparator10.Visible = false;
+     ////        toolStripSeparator11.Visible = false;
+
+     ////    }
+     ////}
+     ////else
+     ////{
+     ////    QuickPublishtoolStripButton.Visible = false;
+     ////    ChangeModetoolStripDropDownButton.Visible = false;
+     ////    toolStripSeparator10.Visible = false;
+     ////    toolStripSeparator11.Visible = false;
+
+     ////}
+ }
+ public UserPrincipal GetUser(string UserName)
+ {
+     PrincipalContext PrincipalContext = new PrincipalContext(ContextType.Domain);
+     UserPrincipal UserPrincipal =
+        UserPrincipal.FindByIdentity(PrincipalContext, UserName);
+     return UserPrincipal;
+ }
+ private bool ValidateUserDialog(bool IsValidUser, int ISWindowAuthMode)
+ {
+     if (ISWindowAuthMode == 0)
+     {
+         if (LoginInfo.UserID == -1)
+         {
+           //  Template template = new Template(this.mediator);
+             UserAuthentication dialog = new UserAuthentication();
+             DialogResult result = dialog.ShowDialog();
+             if (result == System.Windows.Forms.DialogResult.OK)
+             {
+                 dialog.Close();
+                 IsValidUser = true;
+             }
+             if (result == System.Windows.Forms.DialogResult.Cancel)
+             {
+                 dialog.Close();
+                 IsValidUser = false;
+             }
+             if (result == System.Windows.Forms.DialogResult.No)
+             {
+                 dialog.Close();
+                 IsValidUser = false;
+                 WebEnterOptions dialog1 = new WebEnterOptions(true);
+                  
+                 DialogResult result1 = dialog1.ShowDialog();
+                 if (result1 == System.Windows.Forms.DialogResult.OK)
+                 {
+                     config = Configuration.GetNewInstance();
+                     ShowHideWebButtons(config);
+                     IsValidUser = ValidateUserDialog(IsValidUser, ISWindowAuthMode);
+                 }
+                 if (result1 == System.Windows.Forms.DialogResult.Cancel)
+                 {
+                     return false;
+                 }
+             }
+         }
+
+     }
+     return IsValidUser;
+ }
  private void enterDockManager_Paint(object sender, PaintEventArgs e)
  {
 

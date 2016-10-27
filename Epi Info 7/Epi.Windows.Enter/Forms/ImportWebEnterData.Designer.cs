@@ -36,11 +36,10 @@
             this.chkIncremental = new System.Windows.Forms.CheckBox();
             this.textOrganization = new System.Windows.Forms.TextBox();
             this.lblOrganization = new System.Windows.Forms.Label();
-            this.textData = new System.Windows.Forms.TextBox();
-            this.lblDataGUID = new System.Windows.Forms.Label();
             this.grpImportMode = new System.Windows.Forms.GroupBox();
             this.rdbDraftMode = new System.Windows.Forms.RadioButton();
             this.rdbFinalMode = new System.Windows.Forms.RadioButton();
+            this.textData = new System.Windows.Forms.TextBox();
             this.textProgress = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -75,8 +74,6 @@
             this.groupImportInfo.Controls.Add(this.chkIncremental);
             this.groupImportInfo.Controls.Add(this.textOrganization);
             this.groupImportInfo.Controls.Add(this.lblOrganization);
-            this.groupImportInfo.Controls.Add(this.textData);
-            this.groupImportInfo.Controls.Add(this.lblDataGUID);
             this.groupImportInfo.Controls.Add(this.textProject);
             this.groupImportInfo.Controls.Add(this.lblProjectFile);
             this.groupImportInfo.Controls.Add(this.grpImportMode);
@@ -100,16 +97,6 @@
             resources.ApplyResources(this.lblOrganization, "lblOrganization");
             this.lblOrganization.Name = "lblOrganization";
             // 
-            // textData
-            // 
-            resources.ApplyResources(this.textData, "textData");
-            this.textData.Name = "textData";
-            // 
-            // lblDataGUID
-            // 
-            resources.ApplyResources(this.lblDataGUID, "lblDataGUID");
-            this.lblDataGUID.Name = "lblDataGUID";
-            // 
             // grpImportMode
             // 
             this.grpImportMode.Controls.Add(this.rdbDraftMode);
@@ -131,6 +118,11 @@
             this.rdbFinalMode.Name = "rdbFinalMode";
             this.rdbFinalMode.TabStop = true;
             this.rdbFinalMode.UseVisualStyleBackColor = true;
+            // 
+            // textData
+            // 
+            resources.ApplyResources(this.textData, "textData");
+            this.textData.Name = "textData";
             // 
             // textProgress
             // 
@@ -229,7 +221,6 @@
         private System.Windows.Forms.Label lblWarning;
         private System.Windows.Forms.Label lblWarningMessage;
         private System.Windows.Forms.TextBox textData;
-        private System.Windows.Forms.Label lblDataGUID;
         private System.Windows.Forms.TextBox textOrganization;
         private System.Windows.Forms.Label lblOrganization;
         private System.Windows.Forms.GroupBox grpImportMode;

@@ -3331,6 +3331,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data download access denied. You don&apos;t belong to the organization for this form. Please contact your system administrator to request access to this organization..
+        /// </summary>
+        public static string DATA_DOWNLOAD_ACCESS_DENIED {
+            get {
+                return ResourceManager.GetString("DATA_DOWNLOAD_ACCESS_DENIED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to command can only be executed for data entry fields..
         /// </summary>
         public static string DATA_ENTRY_EXECUTION_ONLY {

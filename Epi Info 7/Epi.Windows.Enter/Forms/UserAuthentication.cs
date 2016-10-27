@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Epi.Windows.MakeView.Dialogs
+namespace Epi.Enter.Forms
     {
     public partial class UserAuthentication : Form
         {
@@ -31,15 +31,15 @@ namespace Epi.Windows.MakeView.Dialogs
             else if (!ValidateUser(out errorMessage))
                 {
                     if (errorMessage.Contains("Service communication Error"))
-                    {
-                        this.DialogResult = System.Windows.Forms.DialogResult.No;
-                    }
-                    else
-                    {
-                        this.errorProvider1.SetError(PassWordTextBox1, SharedStrings.WEBENTER_LOGIN_AGAIN);
-                        this.errorProvider1.SetError(EmailAddresstextBox1, SharedStrings.WEBENTER_LOGIN_AGAIN);
-
-                    }
+                {
+                    this.DialogResult = System.Windows.Forms.DialogResult.No;
+                }
+                else
+                {
+                 this.errorProvider1.SetError(PassWordTextBox1, SharedStrings.WEBENTER_LOGIN_AGAIN);
+                this.errorProvider1.SetError(EmailAddresstextBox1, SharedStrings.WEBENTER_LOGIN_AGAIN);
+                
+                }
                 }
             else
                 {
@@ -72,7 +72,7 @@ namespace Epi.Windows.MakeView.Dialogs
 
                 if (Result.User != null)
                 {
-                    LoginInfo.UserID = Result.User.UserId;
+                    Epi.Windows.Enter.LoginInfo.UserID = Result.User.UserId;
                     return true;
                 }
                 else
@@ -82,7 +82,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             catch (Exception ex)
             {
-                message="Service communication Error";
+                message = "Service communication Error";
                 return false;
             }
         }

@@ -4767,7 +4767,7 @@ namespace Epi.Windows.MakeView.Forms
                                     }
                                     catch (Exception ex)
                                     {
-                                        WebEnterOptions dialog2 = new WebEnterOptions();
+                                        WebEnterOptions dialog2 = new WebEnterOptions(true);
                                         DialogResult result3 = dialog2.ShowDialog();
                                         if (result3 == System.Windows.Forms.DialogResult.OK)
                                         {
@@ -5023,7 +5023,24 @@ namespace Epi.Windows.MakeView.Forms
                         dialog.Close();
                         IsValidUser = false;
                     }
+                    if (result == System.Windows.Forms.DialogResult.No)
+                    {
+                        dialog.Close();
+                        IsValidUser = false;
+                        WebEnterOptions dialog1 = new WebEnterOptions(true);
 
+                        DialogResult result1 = dialog1.ShowDialog();
+                        if (result1 == System.Windows.Forms.DialogResult.OK)
+                        {
+                            config = Configuration.GetNewInstance();
+                            ShowHideWebButtons(config);
+                            IsValidUser = ValidateUserDialog(IsValidUser, ISWindowAuthMode);
+                        }
+                        if (result1 == System.Windows.Forms.DialogResult.Cancel)
+                        {
+                            return false;
+                        }
+                    }
                 }
 
             }
