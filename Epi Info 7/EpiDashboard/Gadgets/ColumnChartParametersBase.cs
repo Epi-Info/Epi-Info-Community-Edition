@@ -28,6 +28,7 @@ namespace EpiDashboard
             YAxisStep = 0;
             XAxisStart = string.Empty;
             XAxisEnd = string.Empty;
+            SortStringValues = false;
         }
 
         /// <summary>
@@ -43,6 +44,7 @@ namespace EpiDashboard
             YAxisStep = parameters.YAxisStep;
             XAxisStart = parameters.XAxisStart;
             XAxisEnd = parameters.XAxisEnd;
+            SortStringValues = parameters.SortStringValues;
         }
         
         #endregion     // Constructors
@@ -59,6 +61,7 @@ namespace EpiDashboard
         public string XAxisStart { get; set; }
         public string XAxisEnd { get; set; }
         public object XAxisStep { get; set; }
+        public bool SortStringValues { get; set; }
 
         #endregion  // Properties
 

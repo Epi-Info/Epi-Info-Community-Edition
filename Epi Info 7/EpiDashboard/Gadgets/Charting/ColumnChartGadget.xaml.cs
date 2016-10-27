@@ -489,8 +489,12 @@ namespace EpiDashboard.Gadgets.Charting
                                     ((ColumnChartParameters)Parameters).XAxisAngle = 0;
                                     break;
                             }
-                            break;                    
-                    }
+                            break;
+                    case "sortStringValues":
+                        if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).SortStringValues = true; }
+                        else { ((ColumnChartParameters)Parameters).SortStringValues = false; }
+                        break;
+                }
                 }
             }
 
@@ -900,7 +904,10 @@ namespace EpiDashboard.Gadgets.Charting
                                 case "xaxisendvalue":
                                     ((ColumnChartParameters)Parameters).XAxisEnd = child.InnerText;
                                     break;
-                                
+                                case "sortStringValues":
+                                    if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).SortStringValues = true; }
+                                    else { ((ColumnChartParameters)Parameters).SortStringValues = false; }
+                                    break;
                             }
                         }
                     }
@@ -1084,8 +1091,7 @@ namespace EpiDashboard.Gadgets.Charting
                     customCaptionElement.InnerText = string.Empty;
                 }
                 element.AppendChild(customCaptionElement);
-
-
+                
                 //useDiffBarColors 
                 XmlElement useDiffBarColorsElement = doc.CreateElement("useDiffBarColors");
                 useDiffBarColorsElement.InnerText = chtParameters.UseDiffColors.ToString();
@@ -1270,7 +1276,12 @@ namespace EpiDashboard.Gadgets.Charting
                 XmlElement xAxisendElement = doc.CreateElement("xAxisEndValue");
                 xAxisendElement.InnerText = chtParameters.XAxisEnd.ToString().Replace("<", "&lt;");
                 element.AppendChild(xAxisendElement);
-                               
+
+                //sortStringValues 
+                XmlElement sortStringValuesElement = doc.CreateElement("sortStringValues");
+                sortStringValuesElement.InnerText = chtParameters.SortStringValues.ToString();
+                element.AppendChild(sortStringValuesElement);
+
                 //
                 //y2AxisLabel 
                 XmlElement y2AxisLabelElement = doc.CreateElement("y2AxisLabel");

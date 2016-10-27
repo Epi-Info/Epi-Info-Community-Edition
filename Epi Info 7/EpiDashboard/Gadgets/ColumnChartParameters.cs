@@ -21,7 +21,7 @@ namespace EpiDashboard
         public BarKind BarKind { get; set; }
         public string ChartStrataTitle { get; set; }
         public string YAxisStacked100Label { get; set; }
-
+        public bool SortStringValues { get; set; }
         #endregion  // Properties
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace EpiDashboard
             YAxisLabelFontSize = 12;
             XAxisFontSize = 12;
             XAxisLabelFontSize = 12;
-           
+            SortStringValues = false;
          
         }
 
@@ -167,7 +167,7 @@ namespace EpiDashboard
             YAxisLabelFontSize = parameters.YAxisLabelFontSize;
             XAxisFontSize = parameters.XAxisFontSize;
             XAxisLabelFontSize = parameters.XAxisLabelFontSize;
-           
+            SortStringValues = parameters.SortStringValues;
         }
     }
 }

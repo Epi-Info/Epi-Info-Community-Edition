@@ -117,21 +117,21 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
 
-            //EI-98
             txtXAxisFontSize.Text = parameters.XAxisFontSize.ToString();
             txtYAxisFontSize.Text = parameters.YAxisFontSize.ToString();
 
             txtXAxisLabelFontSize.Text = parameters.XAxisLabelFontSize.ToString();
             txtYAxisLabelFontSize.Text = parameters.YAxisLabelFontSize.ToString();
 
-            //Ei-418
             txtYAxismaxValue.Text = parameters.YAxisTo.ToString();
             txtYAxisminValue.Text = parameters.YAxisFrom.ToString();
             txtYAxisstepValue.Text = parameters.YAxisStep.ToString();
 
             txtxAxisStartValue.Text = parameters.XAxisStart.ToString();
             txtxAxisEndValue.Text = parameters.XAxisEnd.ToString();
-          
+
+            checkboxSortStringValues.IsChecked = Parameters.SortStringValues;
+
             txtWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtHeight.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtLegendFontSize.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
@@ -142,9 +142,6 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             //txtxAxisStartValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
             //txtxAxisEndValue.PreviewKeyDown += new KeyEventHandler(txtInput_NumbersWithDecimals_PreviewKeyDown);
-
-
-
 
             #region Translation
 
@@ -554,9 +551,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             Parameters.SortHighToLow = (bool)checkboxSortHighLow.IsChecked;
 
-
             //Display settings ///////////////////////////////////////////
-            
+
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
             double height = 0;
@@ -842,7 +838,9 @@ namespace EpiDashboard.Controls.GadgetProperties
            
             Parameters.XAxisStart = txtxAxisStartValue.Text;
             Parameters.XAxisEnd = txtxAxisEndValue.Text;
-            }
+
+            Parameters.SortStringValues = (bool)checkboxSortStringValues.IsChecked;
+        }
 
         private List<string> GetPaletteColores()
         {
@@ -914,6 +912,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
             checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;
+            checkboxSortStringValues.IsChecked = Parameters.SortStringValues;
 
             //Display settings
             scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (Math.Max(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
