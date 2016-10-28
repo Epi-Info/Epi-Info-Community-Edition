@@ -904,7 +904,7 @@ namespace EpiDashboard.Gadgets.Charting
                                 case "xaxisendvalue":
                                     ((ColumnChartParameters)Parameters).XAxisEnd = child.InnerText;
                                     break;
-                                case "sortStringValues":
+                                case "sortstringvalues":
                                     if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).SortStringValues = true; }
                                     else { ((ColumnChartParameters)Parameters).SortStringValues = false; }
                                     break;
