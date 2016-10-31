@@ -81,7 +81,7 @@ namespace Epi.Windows.MakeView.Dialogs
             _sizes.Add(displayLabel, size);
 
             /// ANDROID
-            FormatSizeKeyValue("Android Galaxy Tab 2 7.0", PaperSizeUnit.Pixels, 341, 553, out displayLabel, out size);
+            FormatSizeKeyValue("Mobile Interview", PaperSizeUnit.Pixels, 549, 780, out displayLabel, out size);
             _sizes.Add(displayLabel, size);
 
             displayLabel = "Custom Size";
@@ -94,7 +94,10 @@ namespace Epi.Windows.MakeView.Dialogs
         private void FormatSizeKeyValue(string sizeName, PaperSizeUnit paperSizeUnit, double width, double height, out string displayLabel, out Size size)
         {
             double ratio = 94.55;
+            double linearCorrection = 0.25;
+
             string unitAsString = string.Empty;
+
             switch(paperSizeUnit)
             {
                 case PaperSizeUnit.Inches: 
@@ -107,11 +110,12 @@ namespace Epi.Windows.MakeView.Dialogs
                     break;
                 case PaperSizeUnit.Pixels:
                     unitAsString = "px";
-                    ratio = 1; 
+                    ratio = 1;
+                    linearCorrection = 0.0;
                     break;
             }
 
-            size = new Size((int)((width - 0.25) * ratio), (int)((height - 0.25) * ratio));
+            size = new Size((int)((width - linearCorrection) * ratio), (int)((height - linearCorrection) * ratio));
             displayLabel = string.Format("{0} ({1:#####.##}x{2:#####.##}{3})", sizeName, width, height, unitAsString);
         }
 
@@ -270,6 +274,13 @@ namespace Epi.Windows.MakeView.Dialogs
         private void comboBoxSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             string key = ((ComboBox)sender).Text.Trim();
+
+            radioButtonPortrait.Checked = true;
+
+            if (key.ToLowerInvariant().Contains("mobile interview"))
+            {
+                radioButtonLandscape.Checked = true;
+            }
 
             if (key.ToLowerInvariant().Equals("custom size"))
             {
