@@ -1158,9 +1158,9 @@ namespace Epi.Windows.MakeView.Forms
 
             var mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("ita3@cdc.gov");
-            mailMessage.Subject = "Epi Info 7 Shared Template";
+            mailMessage.Subject = SharedStrings.SHARE_VIA_EMAIL_SUBJECT;
             mailMessage.IsBodyHtml = true;
-            mailMessage.Body = "<span style='font-size: 10pt; color: black; font-family: Segoe UI,sans-serif;'>Attached please find an Epi Info 7 template.</span>";
+            mailMessage.Body = "<span style='font-size: 10pt; color: black; font-family: Segoe UI,sans-serif;'>" + SharedStrings.SHARE_VIA_EMAIL_BODY + "</span>";
 
             mailMessage.Attachments.Add(new Attachment(xmlFullPath));
 

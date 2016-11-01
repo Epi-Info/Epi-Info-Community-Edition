@@ -3209,4 +3209,10 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="DATA_DOWNLOAD_ACCESS_DENIED" xml:space="preserve">
     <value>Data download access denied. You don't belong to the organization for this form. Please contact your system administrator to request access to this organization.</value>
   </data>
+  <data name="SHARE_VIA_EMAIL_BODY" xml:space="preserve">
+    <value>Attached please find an Epi Info 7 template.</value>
+  </data>
+  <data name="SHARE_VIA_EMAIL_SUBJECT" xml:space="preserve">
+    <value>Epi Info 7 Shared Template</value>
+  </data>
 </root>
