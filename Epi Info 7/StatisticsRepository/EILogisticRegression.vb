@@ -897,7 +897,12 @@ Option Compare Text
                 Err.Raise(3 + vbObjectError, "GET RAW DATA", "<tlt>Please Recode Dependent Variable to be numeric</tlt>")
 
             End If
+
             DataArray(i - lintOffset, 0) = rows(i)(mstrDependVar) 'DataArray(i - lintOffset, 0) = table.Rows(i)(0) 'reader(0) 'lconRS.Fields(0).Value
+
+            If DataArray(i - lintOffset, 0) = -1 And VarType(lVarCurData) = VariantType.Boolean Then
+                DataArray(i - lintOffset, 0) = 1
+            End If
 
             If lIntIsMatch = 1 Then
                 lVarCurData = rows(i)(mstrMatchVar) 'lVarCurData = table.Rows(i)(1) 'reader(1).Value 'lconRS.Fields(1).Value
