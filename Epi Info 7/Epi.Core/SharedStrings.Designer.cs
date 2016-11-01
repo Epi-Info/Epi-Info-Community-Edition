@@ -7826,6 +7826,24 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attached please find an Epi Info 7 template..
+        /// </summary>
+        public static string SHARE_VIA_EMAIL_BODY {
+            get {
+                return ResourceManager.GetString("SHARE_VIA_EMAIL_BODY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Epi Info 7 Shared Template.
+        /// </summary>
+        public static string SHARE_VIA_EMAIL_SUBJECT {
+            get {
+                return ResourceManager.GetString("SHARE_VIA_EMAIL_SUBJECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Tab Order.
         /// </summary>
         public static string SHOW_TAB_ORDER {
