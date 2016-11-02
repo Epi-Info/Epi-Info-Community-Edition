@@ -1049,7 +1049,7 @@
     <value>42</value>
   </data>
   <data name="lblPublishModeStatus.Text" xml:space="preserve">
-    <value>Staging</value>
+    <value>Draft</value>
   </data>
   <data name="&gt;&gt;lblPublishModeStatus.Name" xml:space="preserve">
     <value>lblPublishModeStatus</value>
