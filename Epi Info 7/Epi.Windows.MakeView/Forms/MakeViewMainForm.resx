@@ -2156,13 +2156,13 @@
     <value>156, 26</value>
   </data>
   <data name="draftToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Staging</value>
+    <value>Draft</value>
   </data>
   <data name="finalToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 26</value>
   </data>
   <data name="finalToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Production</value>
+    <value>Final</value>
   </data>
   <data name="EWEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 26</value>

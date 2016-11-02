@@ -1105,11 +1105,11 @@ namespace Epi.Windows.MakeView.Dialogs
                     currentSurveyInfoDTO = response.SurveyInfoList[0];
                     if (currentSurveyInfoDTO.IsDraftMode)
                         {
-                        this.lblPublishModeStatus.Text = "Staging";
+                        this.lblPublishModeStatus.Text = "Draft";
                         }
                     else
                         {
-                        this.lblPublishModeStatus.Text = "Production";
+                        this.lblPublishModeStatus.Text = "Final";
                         }
 
                     //dtpSurveyClosingDate.Value = currentSurveyInfoDTO.ClosingDate;

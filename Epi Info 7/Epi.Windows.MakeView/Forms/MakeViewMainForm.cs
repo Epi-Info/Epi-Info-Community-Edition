@@ -3977,11 +3977,11 @@ namespace Epi.Windows.MakeView.Forms
                     //this.UpdateStatus("Survey mode was successfully updated!");
                     if (IsDraftMode)
                     {
-                        MessageBox.Show("Form mode was successfully changed to Staging.", "", MessageBoxButtons.OK);
+                        MessageBox.Show("Form mode was successfully changed to Draft.", "", MessageBoxButtons.OK);
                     }
                     else
                     {
-                        MessageBox.Show("Form mode was successfully changed to Production.", "", MessageBoxButtons.OK);
+                        MessageBox.Show("Form mode was successfully changed to Final.", "", MessageBoxButtons.OK);
                     }
                 }
             }
