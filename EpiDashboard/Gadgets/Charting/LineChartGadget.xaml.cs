@@ -391,9 +391,13 @@ namespace EpiDashboard.Gadgets.Charting
                         }
                         break;
                     case "stratavariable":
-                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
+                        if (((LineChartParameters)Parameters).StrataVariableNames.Count > 0)
                         {
                             ((LineChartParameters)Parameters).StrataVariableNames[0] = child.InnerText.Replace("&lt;", "<");
+                        }
+                        else
+                        {
+                            ((LineChartParameters)Parameters).StrataVariableNames.Add(child.InnerText.Replace("&lt;", "<"));
                         }
                         break;
                     case "customheading":
