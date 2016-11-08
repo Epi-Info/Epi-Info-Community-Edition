@@ -992,10 +992,10 @@ namespace Epi.ImportExport
                                                 case MetaFieldType.UniqueRowId:
                                                 case MetaFieldType.ForeignKey:
                                                 case MetaFieldType.GlobalRecordId:
-                                                case MetaFieldType.Multiline:                                                    
+                                                case MetaFieldType.Multiline:
+                                                case MetaFieldType.Number:
                                                     fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.String, sourceReader[renderableField.Name]));
                                                     break;
-                                                case MetaFieldType.Number:
                                                 case MetaFieldType.RecStatus:
                                                 case MetaFieldType.YesNo:
                                                     fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.Single, sourceReader[renderableField.Name]));
@@ -1129,10 +1129,10 @@ namespace Epi.ImportExport
                                                 case MetaFieldType.UniqueRowId:
                                                 case MetaFieldType.ForeignKey:
                                                 case MetaFieldType.GlobalRecordId:
-                                                case MetaFieldType.Multiline:                                                
+                                                case MetaFieldType.Multiline:
+                                                case MetaFieldType.Number:
                                                     fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.String, sourceReader[fieldName]));
                                                     break;
-                                                case MetaFieldType.Number:
                                                 case MetaFieldType.YesNo:
                                                 case MetaFieldType.RecStatus:
                                                     fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.Single, sourceReader[fieldName]));
@@ -1365,10 +1365,9 @@ namespace Epi.ImportExport
                                         case MetaFieldType.UniqueRowId:
                                         case MetaFieldType.ForeignKey:
                                         case MetaFieldType.GlobalRecordId:
-                                            //sb.Append("'" + data.ToString().Replace("'", "''") + "'");
+                                        case MetaFieldType.Number:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.String, data));
                                             break;
-                                        case MetaFieldType.Number:
                                         case MetaFieldType.RecStatus:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));
                                             break;
@@ -1435,9 +1434,9 @@ namespace Epi.ImportExport
                                         case MetaFieldType.UniqueRowId:
                                         case MetaFieldType.ForeignKey:
                                         case MetaFieldType.GlobalRecordId:
+                                        case MetaFieldType.Number:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.String, data));
                                             break;
-                                        case MetaFieldType.Number:
                                         case MetaFieldType.RecStatus:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));
                                             break;

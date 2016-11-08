@@ -842,9 +842,9 @@ namespace Epi.Enter.Forms
                                         case MetaFieldType.ForeignKey:
                                         case MetaFieldType.GlobalRecordId:
                                         case MetaFieldType.Multiline:
+                                        case MetaFieldType.Number:
                                             fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue));
                                             break;
-                                        case MetaFieldType.Number:
                                         case MetaFieldType.YesNo:
                                         case MetaFieldType.Option:
                                         case MetaFieldType.RecStatus:
@@ -1050,8 +1050,8 @@ namespace Epi.Enter.Forms
                         case MetaFieldType.ForeignKey:
                         case MetaFieldType.GlobalRecordId:
                         case MetaFieldType.Multiline:
-                            return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                         case MetaFieldType.Number:
+                            return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                         case MetaFieldType.YesNo:
                         case MetaFieldType.Option:
                         case MetaFieldType.RecStatus:

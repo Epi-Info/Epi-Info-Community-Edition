@@ -1203,8 +1203,8 @@ namespace Epi.ImportExport.ProjectPackagers
                     case MetaFieldType.GlobalRecordId:
                     case MetaFieldType.Multiline:
                     case MetaFieldType.GUID:
-                        return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.Number:
+                        return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.YesNo:
                     case MetaFieldType.RecStatus:
                         return new QueryParameter("@" + fieldName, DbType.Single, Convert.ToDouble(fieldData.FieldValue, System.Globalization.CultureInfo.InvariantCulture));
@@ -1263,8 +1263,8 @@ namespace Epi.ImportExport.ProjectPackagers
                     case MetaFieldType.ForeignKey:
                     case MetaFieldType.GlobalRecordId:
                     case MetaFieldType.Multiline:
-                        return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.Number:
+                        return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.YesNo:
                         return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);
                     default:
