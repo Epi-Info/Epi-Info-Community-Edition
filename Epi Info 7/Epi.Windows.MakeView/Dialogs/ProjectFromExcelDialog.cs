@@ -220,11 +220,12 @@ namespace Epi.Windows.MakeView.Dialogs
 
                 string filename = Path.GetFileNameWithoutExtension(dExcelPath.Text);
                 _template = BuildXml.BuildNewXml(PageList, NewXmlDoc, FormName);
+                this.DialogResult = DialogResult.OK;
             }
-            catch(Exception e)
+            catch
             {
                 MessageBox.Show("Invalid input detected");
-                //dExcelPath.Text = string.Empty;
+                this.DialogResult = DialogResult.Abort;
             }
             finally
             {
@@ -241,8 +242,10 @@ namespace Epi.Windows.MakeView.Dialogs
                 Marshal.FinalReleaseComObject(xlApp);
             }
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if (this.DialogResult == DialogResult.OK)
+            {
+                this.Close();
+            }
         }
 
         private static List<Card> SetCardValues(Microsoft.Office.Interop.Excel.Workbook xlWorkbook)
