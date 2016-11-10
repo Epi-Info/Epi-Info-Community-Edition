@@ -253,6 +253,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                 case MetaFieldType.Multiline:
                 case MetaFieldType.Option:
                 case MetaFieldType.Number:
+                case MetaFieldType.GUID:
                     txtFieldValue.Visible = true;
                     cmbFieldValue.Visible = false;
                     dtpFieldValue.Visible = false;
@@ -324,6 +325,8 @@ namespace Epi.Windows.ImportExport.Dialogs
                         cmbFieldOperator.Items.Add("is equal to");
                         break;
                     case MetaFieldType.Date:
+                    case MetaFieldType.DateTime:
+                    case MetaFieldType.Time:
                         //cmbField1Operator.Items.Add("is not missing");
                         //cmbField1Operator.Items.Add("is missing");
                         cmbFieldOperator.Items.Add("is greater than");
@@ -349,6 +352,8 @@ namespace Epi.Windows.ImportExport.Dialogs
                     case MetaFieldType.LegalValues:
                     case MetaFieldType.CommentLegal:
                     case MetaFieldType.Codes:
+                    case MetaFieldType.GUID:
+                    case MetaFieldType.PhoneNumber:
                         //cmbField1Operator.Items.Add("is not missing");
                         //cmbField1Operator.Items.Add("is missing");
                         //cmbField1Operator.Items.Add("is not equal to");
@@ -408,6 +413,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                 case MetaFieldType.Multiline:
                 case MetaFieldType.Option:
                 case MetaFieldType.Number:
+                case MetaFieldType.GUID:
                     // Textbox
                     if (string.IsNullOrEmpty(txtFieldValue.Text))
                     {
@@ -573,6 +579,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                 case MetaFieldType.LegalValues:
                 case MetaFieldType.CommentLegal:
                 case MetaFieldType.Codes:
+                case MetaFieldType.GUID:
                     rowFc = new TextRowFilterCondition(conditionSql, conditionColumnName, conditionParamName, value);
                     break;
                 case MetaFieldType.Date:

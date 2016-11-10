@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 276</value>
+    <value>167, 378</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -151,7 +151,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>359, 276</value>
+    <value>359, 378</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -175,7 +175,7 @@
     <value>14</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 1</value>
+    <value>12, 1</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>441, 49</value>
@@ -202,13 +202,13 @@
     <value>12</value>
   </data>
   <data name="cmbFieldName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="cmbFieldName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 78</value>
+    <value>12, 69</value>
   </data>
   <data name="cmbFieldName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+    <value>435, 21</value>
   </data>
   <data name="cmbFieldName.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -225,11 +225,8 @@
   <data name="&gt;&gt;cmbFieldName.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="lblField1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="lblField1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 59</value>
+    <value>12, 50</value>
   </data>
   <data name="lblField1.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 16</value>
@@ -252,14 +249,11 @@
   <data name="&gt;&gt;lblField1.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="cmbFieldOperator.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="cmbFieldOperator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 78</value>
+    <value>12, 112</value>
   </data>
   <data name="cmbFieldOperator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 21</value>
+    <value>245, 21</value>
   </data>
   <data name="cmbFieldOperator.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -277,10 +271,10 @@
     <value>9</value>
   </data>
   <data name="txtFieldValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 78</value>
+    <value>263, 113</value>
   </data>
   <data name="txtFieldValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
+    <value>184, 20</value>
   </data>
   <data name="txtFieldValue.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -297,11 +291,8 @@
   <data name="&gt;&gt;txtFieldValue.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="lblField1Op.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="lblField1Op.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 59</value>
+    <value>12, 93</value>
   </data>
   <data name="lblField1Op.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 16</value>
@@ -324,11 +315,8 @@
   <data name="&gt;&gt;lblField1Op.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="lblField1Val.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="lblField1Val.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 59</value>
+    <value>260, 93</value>
   </data>
   <data name="lblField1Val.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 16</value>
@@ -352,13 +340,13 @@
     <value>6</value>
   </data>
   <data name="lbxRecordFilters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="lbxRecordFilters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 175</value>
+    <value>12, 213</value>
   </data>
   <data name="lbxRecordFilters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>437, 95</value>
+    <value>437, 147</value>
   </data>
   <data name="lbxRecordFilters.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -375,11 +363,8 @@
   <data name="&gt;&gt;lbxRecordFilters.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 140</value>
+    <value>12, 175</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>440, 32</value>
@@ -405,17 +390,14 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="btnAdd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="btnAdd.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="btnAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 114</value>
+    <value>12, 149</value>
   </data>
   <data name="btnAdd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 23</value>
+    <value>245, 23</value>
   </data>
   <data name="btnAdd.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -436,10 +418,10 @@
     <value>3</value>
   </data>
   <data name="cmbFieldValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 78</value>
+    <value>263, 113</value>
   </data>
   <data name="cmbFieldValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 21</value>
+    <value>184, 21</value>
   </data>
   <data name="cmbFieldValue.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -459,14 +441,11 @@
   <data name="&gt;&gt;cmbFieldValue.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="dtpFieldValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
   <data name="dtpFieldValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 78</value>
+    <value>263, 113</value>
   </data>
   <data name="dtpFieldValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
+    <value>184, 20</value>
   </data>
   <data name="dtpFieldValue.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -490,7 +469,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 276</value>
+    <value>263, 378</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -519,8 +498,14 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>462, 311</value>
+    <value>462, 413</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>478, 451</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Select Records for Data Package</value>
