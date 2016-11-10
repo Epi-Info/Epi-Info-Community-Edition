@@ -80,9 +80,9 @@
             // 
             // cmbFieldOperator
             // 
-            resources.ApplyResources(this.cmbFieldOperator, "cmbFieldOperator");
             this.cmbFieldOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFieldOperator.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbFieldOperator, "cmbFieldOperator");
             this.cmbFieldOperator.Name = "cmbFieldOperator";
             this.cmbFieldOperator.SelectedIndexChanged += new System.EventHandler(this.cmbField1Operator_SelectedIndexChanged);
             // 
@@ -129,8 +129,8 @@
             // 
             // dtpFieldValue
             // 
-            resources.ApplyResources(this.dtpFieldValue, "dtpFieldValue");
             this.dtpFieldValue.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            resources.ApplyResources(this.dtpFieldValue, "dtpFieldValue");
             this.dtpFieldValue.MaxDate = new System.DateTime(2050, 12, 31, 0, 0, 0, 0);
             this.dtpFieldValue.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpFieldValue.Name = "dtpFieldValue";
@@ -163,11 +163,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PackageRecordSelectionDialog";
             this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.ResumeLayout(false);
             this.PerformLayout();
 
