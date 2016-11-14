@@ -723,6 +723,9 @@
     <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\EColi\Under14_demo.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\ImagesNotToBeDeployed\viaEmail.bmp" />
     <Content Include="Projects\Salmonellosis\Salmonellosis.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
