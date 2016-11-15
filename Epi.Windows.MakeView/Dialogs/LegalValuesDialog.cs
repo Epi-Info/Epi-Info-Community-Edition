@@ -12,6 +12,8 @@ using Epi.Fields;
 using Epi.Windows.Dialogs;
 
 
+
+
 namespace Epi.Windows.MakeView.Dialogs
 {
     /// <summary>
@@ -823,7 +825,14 @@ namespace Epi.Windows.MakeView.Dialogs
         }
 
         #endregion Private Methods
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
+    
+    
 
     public enum CreationMode
     {
