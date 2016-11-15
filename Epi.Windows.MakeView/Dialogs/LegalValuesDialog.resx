@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABS
-        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAEsAQEBEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAFsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/CEAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         FwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf+XAAH/AQABgAEAAf8BAAGA
         AQAB/wMAGf8DAAH/FwAl/wMAAf+XAAH/AQABgAEAAf8BAAGAAQAB/wMAGf8DAAH/FwAl/wMAAf+LAAH/
@@ -629,15 +629,15 @@
 </value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dgCodes.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="dgCodes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dgCodes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 18</value>
+    <value>7, 17</value>
   </data>
   <data name="dgCodes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>660, 348</value>
+    <value>552, 366</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dgCodes.TabIndex" type="System.Int32, mscorlib">
@@ -661,6 +661,9 @@
   <data name="dataGridTextBoxColumn1.Width" type="System.Int32, mscorlib">
     <value>75</value>
   </data>
+  <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
   <data name="btnOK.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -668,7 +671,7 @@
     <value>System</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>458, 504</value>
+    <value>386, 496</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 27</value>
@@ -694,11 +697,14 @@
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
   <data name="btnCancel.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>555, 504</value>
+    <value>483, 496</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 27</value>
@@ -722,7 +728,7 @@
     <value>1</value>
   </data>
   <data name="btnUseExisting.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="btnUseExisting.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -758,7 +764,7 @@
     <value>2</value>
   </data>
   <data name="btnCreate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="btnCreate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -800,7 +806,7 @@
     <value>System</value>
   </data>
   <data name="cbxSort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 372</value>
+    <value>7, 389</value>
   </data>
   <data name="cbxSort.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 21</value>
@@ -824,7 +830,7 @@
     <value>2</value>
   </data>
   <data name="btnDelete.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="btnDelete.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -859,8 +865,11 @@
   <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="btnFromExisting.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left</value>
+    <value>Bottom, Right</value>
   </data>
   <data name="btnFromExisting.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -898,11 +907,14 @@
   <data name="&gt;&gt;btnFromExisting.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="flowLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
   <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 401</value>
+    <value>3, 419</value>
   </data>
   <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>654, 63</value>
+    <value>561, 61</value>
   </data>
   <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -920,10 +932,10 @@
     <value>0</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>14, 7</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>666, 470</value>
+    <value>567, 483</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -946,14 +958,11 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>40</value>
-  </metadata>
   <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
     <value>6, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>666, 543</value>
+    <value>595, 535</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -983,6 +992,6 @@
     <value>LegalValuesDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.6162.31551, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.6163.25723, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
