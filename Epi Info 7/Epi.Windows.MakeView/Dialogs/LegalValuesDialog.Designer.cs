@@ -38,9 +38,11 @@ namespace Epi.Windows.MakeView.Dialogs
             this.cbxSort = new System.Windows.Forms.CheckBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnFromExisting = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgCodes)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -120,8 +122,9 @@ namespace Epi.Windows.MakeView.Dialogs
             // dgCodes
             // 
             this.dgCodes.AllowDrop = true;
-            resources.ApplyResources(this.dgCodes, "dgCodes");
+            this.dgCodes.AllowUserToDeleteRows = false;
             this.dgCodes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            resources.ApplyResources(this.dgCodes, "dgCodes");
             this.dgCodes.MultiSelect = false;
             this.dgCodes.Name = "dgCodes";
             this.dgCodes.DataSourceChanged += new System.EventHandler(this.dgCodes_DataSourceChanged);
@@ -150,8 +153,8 @@ namespace Epi.Windows.MakeView.Dialogs
             // 
             // btnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -181,15 +184,22 @@ namespace Epi.Windows.MakeView.Dialogs
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.btnFromExisting);
-            this.groupBox1.Controls.Add(this.btnDelete);
+            this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Controls.Add(this.dgCodes);
             this.groupBox1.Controls.Add(this.cbxSort);
-            this.groupBox1.Controls.Add(this.btnCreate);
-            this.groupBox1.Controls.Add(this.btnUseExisting);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnCreate);
+            this.flowLayoutPanel1.Controls.Add(this.btnFromExisting);
+            this.flowLayoutPanel1.Controls.Add(this.btnUseExisting);
+            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // btnFromExisting
             // 
@@ -213,6 +223,8 @@ namespace Epi.Windows.MakeView.Dialogs
             this.Load += new System.EventHandler(this.Dialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCodes)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -262,5 +274,6 @@ namespace Epi.Windows.MakeView.Dialogs
         /// </summary>
         protected System.Windows.Forms.GroupBox groupBox1;
         protected System.Windows.Forms.Button btnFromExisting;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

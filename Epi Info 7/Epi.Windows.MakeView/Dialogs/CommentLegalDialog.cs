@@ -405,6 +405,16 @@ namespace Epi.Windows.MakeView.Dialogs
 
         #endregion Private Events
 
+        private void btnFromExisting_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion Private Members
+
+        private void btnOK_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
