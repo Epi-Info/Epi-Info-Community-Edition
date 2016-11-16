@@ -1872,12 +1872,11 @@ namespace Epi.Windows.Enter.PresentationLogic
                 }
                 else if (field is DDLFieldOfLegalValues)
                 {
-                    //use .Text instead of .SelectedValue.ToString() here because of issues around sorting
-                    ((IDataField)field).CurrentRecordValueObject = ((ComboBox)control).Text;
+                    ((IDataField)field).CurrentRecordValueObject = ((ComboBox)control).SelectedItem;
                 }
                 else if (field is DDLFieldOfCommentLegal)
                 {
-                    ((DDLFieldOfCommentLegal)field).CurrentRecordValueString = (((ComboBox)control).Text);
+                    ((DDLFieldOfCommentLegal)field).CurrentRecordValueString = ((ComboBox)control).SelectedItem.ToString();
                 }
                 else if (field is DDLFieldOfCodes)
                 {
