@@ -335,7 +335,7 @@ namespace Epi.Windows.Enter.PresentationLogic
 
             foreach (Control candidate in _fieldPanel.Controls)
             {
-                if (candidate.TabStop && candidate.Enabled && candidate.Visible)
+                if (candidate.TabStop && candidate.Enabled && candidate.Visible && candidate.GetType() != typeof(DragableGroupBox))
                 {
                     if (candidate.TabIndex >= maxTabIndexFound)
                     {
