@@ -3820,61 +3820,129 @@ namespace Epi.Windows.MakeView.Forms
         {
             try
             {
-                SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
-                Configuration config = Configuration.GetNewInstance();
-
-                SurveyManagerServiceV2.SurveyInfoRequest Request = new SurveyManagerServiceV2.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
-                SurveyManagerServiceV2.SurveyInfoResponse Result = new SurveyManagerServiceV2.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
-                Request.Criteria = new SurveyManagerServiceV2.SurveyInfoCriteria();
-                Request.Criteria.ClosingDate = this.CloseDate;
-                Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
-                Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
-                Request.Criteria.SurveyIdList = new string[] { this.SurveyId };
-
-                SurveyManagerServiceV2.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerServiceV2.SurveyInfoDTO();
-
-                SurveyInfoDTO.ClosingDate = this.CloseDate;
-                SurveyInfoDTO.StartDate = this.StartDate;
-                SurveyInfoDTO.SurveyId = new Guid(this.CurrentView.WebSurveyId).ToString();
-                SurveyInfoDTO.SurveyType = this.SurveyType;
-                SurveyInfoDTO.SurveyNumber = this.SurveyNumber;
-                SurveyInfoDTO.SurveyName = this.SurveyName;
-                SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
-                SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
-                SurveyInfoDTO.OrganizationName = this.OrganizationName;
-                SurveyInfoDTO.XML = this.TemplateXML;
-                SurveyInfoDTO.ExitText = this.ExitText;
-                SurveyInfoDTO.IntroductionText = this.IntroductionText;
-                SurveyInfoDTO.DepartmentName = this.DepartmentName;
-
-                Request.Criteria.SurveyType = this.SurveyType;
-
-                if (IsDraftMode)
+                this.config = Configuration.GetNewInstance();
+                var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev3)))
                 {
-                    Request.Action = "Update";
-                    Request.Criteria.IsDraftMode = true;
-                    SurveyInfoDTO.IsDraftMode = true;
-                }
-                else
-                {
-                    Request.Action = "UpdateMode";
-                    Request.Criteria.IsDraftMode = false;
-                    SurveyInfoDTO.IsDraftMode = false;
-                }
+                    SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
 
-                Request.SurveyInfoList = new SurveyManagerServiceV2.SurveyInfoDTO[] { SurveyInfoDTO };
-                Result = client.SetSurveyInfo(Request);
+                    SurveyManagerServiceV3.SurveyInfoRequest Request = new SurveyManagerServiceV3.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
+                    SurveyManagerServiceV3.SurveyInfoResponse Result = new SurveyManagerServiceV3.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+                    Request.Criteria = new SurveyManagerServiceV3.SurveyInfoCriteria();
+                    Request.Criteria.ClosingDate = this.CloseDate;
+                    Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                    Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
+                    Request.Criteria.SurveyIdList = new string[] { this.SurveyId };
 
-                if (Result != null && Result.SurveyInfoList.Length > 0)
-                {
-                    //this.UpdateStatus("Survey mode was successfully updated!");
+                    SurveyManagerServiceV3.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerServiceV3.SurveyInfoDTO();
+
+                    SurveyInfoDTO.ClosingDate = this.CloseDate;
+                    SurveyInfoDTO.StartDate = this.StartDate;
+                    SurveyInfoDTO.SurveyId = new Guid(this.CurrentView.WebSurveyId).ToString();
+                    SurveyInfoDTO.SurveyType = this.SurveyType;
+                    SurveyInfoDTO.SurveyNumber = this.SurveyNumber;
+                    SurveyInfoDTO.SurveyName = this.SurveyName;
+                    SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+                    SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
+                    SurveyInfoDTO.OrganizationName = this.OrganizationName;
+                    SurveyInfoDTO.XML = this.TemplateXML;
+                    SurveyInfoDTO.ExitText = this.ExitText;
+                    SurveyInfoDTO.IntroductionText = this.IntroductionText;
+                    SurveyInfoDTO.DepartmentName = this.DepartmentName;
+
+                    Request.Criteria.SurveyType = this.SurveyType;
+
                     if (IsDraftMode)
                     {
-                        MessageBox.Show(SharedStrings.WEBSURVEY_MODE_DRAFT, "", MessageBoxButtons.OK);
+                        Request.Action = "Update";
+                        Request.Criteria.IsDraftMode = true;
+                        SurveyInfoDTO.IsDraftMode = true;
                     }
                     else
                     {
-                        MessageBox.Show(SharedStrings.WEBSURVEY_MODE_FINAL, "", MessageBoxButtons.OK);
+                        Request.Action = "UpdateMode";
+                        Request.Criteria.IsDraftMode = false;
+                        SurveyInfoDTO.IsDraftMode = false;
+                    }
+                    if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+                    {
+                        SurveyInfoDTO.IsSqlProject = true;
+                        SurveyInfoDTO.DBConnectionString = this.mediator.Project.CollectedDataConnectionString;
+                    }
+                    Request.SurveyInfoList = new SurveyManagerServiceV3.SurveyInfoDTO[] { SurveyInfoDTO };
+                    Result = client.SetSurveyInfo(Request);
+
+                    if (Result != null && Result.SurveyInfoList.Length > 0)
+                    {
+                        //this.UpdateStatus("Survey mode was successfully updated!");
+                        if (IsDraftMode)
+                        {
+                            MessageBox.Show(SharedStrings.WEBSURVEY_MODE_DRAFT, "", MessageBoxButtons.OK);
+                        }
+                        else
+                        {
+                            MessageBox.Show(SharedStrings.WEBSURVEY_MODE_FINAL, "", MessageBoxButtons.OK);
+                        }
+                    }
+
+                }
+                else
+                {
+                    SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();                  
+
+                    SurveyManagerServiceV2.SurveyInfoRequest Request = new SurveyManagerServiceV2.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
+                    SurveyManagerServiceV2.SurveyInfoResponse Result = new SurveyManagerServiceV2.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+                    Request.Criteria = new SurveyManagerServiceV2.SurveyInfoCriteria();
+                    Request.Criteria.ClosingDate = this.CloseDate;
+                    Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+                    Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
+                    Request.Criteria.SurveyIdList = new string[] { this.SurveyId };
+
+                    SurveyManagerServiceV2.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerServiceV2.SurveyInfoDTO();
+
+                    SurveyInfoDTO.ClosingDate = this.CloseDate;
+                    SurveyInfoDTO.StartDate = this.StartDate;
+                    SurveyInfoDTO.SurveyId = new Guid(this.CurrentView.WebSurveyId).ToString();
+                    SurveyInfoDTO.SurveyType = this.SurveyType;
+                    SurveyInfoDTO.SurveyNumber = this.SurveyNumber;
+                    SurveyInfoDTO.SurveyName = this.SurveyName;
+                    SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+                    SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
+                    SurveyInfoDTO.OrganizationName = this.OrganizationName;
+                    SurveyInfoDTO.XML = this.TemplateXML;
+                    SurveyInfoDTO.ExitText = this.ExitText;
+                    SurveyInfoDTO.IntroductionText = this.IntroductionText;
+                    SurveyInfoDTO.DepartmentName = this.DepartmentName;
+
+                    Request.Criteria.SurveyType = this.SurveyType;
+
+                    if (IsDraftMode)
+                    {
+                        Request.Action = "Update";
+                        Request.Criteria.IsDraftMode = true;
+                        SurveyInfoDTO.IsDraftMode = true;
+                    }
+                    else
+                    {
+                        Request.Action = "UpdateMode";
+                        Request.Criteria.IsDraftMode = false;
+                        SurveyInfoDTO.IsDraftMode = false;
+                    }
+
+                    Request.SurveyInfoList = new SurveyManagerServiceV2.SurveyInfoDTO[] { SurveyInfoDTO };
+                    Result = client.SetSurveyInfo(Request);
+
+                    if (Result != null && Result.SurveyInfoList.Length > 0)
+                    {
+                        //this.UpdateStatus("Survey mode was successfully updated!");
+                        if (IsDraftMode)
+                        {
+                            MessageBox.Show(SharedStrings.WEBSURVEY_MODE_DRAFT, "", MessageBoxButtons.OK);
+                        }
+                        else
+                        {
+                            MessageBox.Show(SharedStrings.WEBSURVEY_MODE_FINAL, "", MessageBoxButtons.OK);
+                        }
                     }
                 }
             }
@@ -4393,6 +4461,7 @@ namespace Epi.Windows.MakeView.Forms
             if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
             {
                 SurveyInfoDTO.IsSqlProject = true;
+                SurveyInfoDTO.DBConnectionString = this.mediator.Project.CollectedDataConnectionString;
             }
 
             Request.Criteria.SurveyType = this.SurveyType;
