@@ -2554,12 +2554,12 @@ namespace Epi.Data.Services
             {
                 CreatePageDataTableForView(page);
 
-                string viewName = page.view.Name;
-                foreach (DataRow row in project.CollectedData.GetTableData(viewName).Rows)
+                string tableName = page.view.TableName;
+                foreach (DataRow row in project.CollectedData.GetTableData(tableName).Rows)
                 {
                     string id = row["GlobalRecordId"].ToString();
                     string queryString = string.Format("GlobalRecordId = '{0}'", id);
-                    DataRow[] rows = project.CollectedData.GetTableData(viewName).Select(queryString);
+                    DataRow[] rows = project.CollectedData.GetTableData(tableName).Select(queryString);
 
                     queryString = string.Format("insert into [{0}] (GlobalRecordId) values ('{1}')",
                         page.TableName,
