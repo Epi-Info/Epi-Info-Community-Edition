@@ -31,16 +31,20 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             int month;
             int day;
 
-            if (Int32.TryParse(ParameterList[0].Execute().ToString(), out year))
+            try
             {
-                if (Int32.TryParse(ParameterList[1].Execute().ToString(), out month))
+                if (Int32.TryParse(ParameterList[0].Execute().ToString(), out year))
                 {
-                    if (Int32.TryParse(ParameterList[2].Execute().ToString(), out day))
+                    if (Int32.TryParse(ParameterList[1].Execute().ToString(), out month))
                     {
-                        result = new DateTime(year, month, day);
+                        if (Int32.TryParse(ParameterList[2].Execute().ToString(), out day))
+                        {
+                            result = new DateTime(year, month, day);
+                        }
                     }
                 }
             }
+            catch { };
 
             return result;
         }
