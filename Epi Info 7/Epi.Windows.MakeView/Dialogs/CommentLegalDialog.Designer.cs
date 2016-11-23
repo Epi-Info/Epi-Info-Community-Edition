@@ -33,17 +33,33 @@ namespace Epi.Windows.MakeView.Dialogs
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommentLegalDialog));
+            ((System.ComponentModel.ISupportInitialize)(this.dgCodes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOK
             // 
             resources.ApplyResources(this.btnOK, "btnOK");
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click_1);
             // 
             // btnCancel
             // 
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            // 
+            // btnUseExisting
+            // 
+            resources.ApplyResources(this.btnUseExisting, "btnUseExisting");
+            // 
+            // btnCreate
+            // 
+            resources.ApplyResources(this.btnCreate, "btnCreate");
+            // 
+            // dgCodes
+            // 
+            resources.ApplyResources(this.dgCodes, "dgCodes");
+            // 
+            // btnDelete
+            // 
+            resources.ApplyResources(this.btnDelete, "btnDelete");
             // 
             // cbxSort
             // 
@@ -52,6 +68,10 @@ namespace Epi.Windows.MakeView.Dialogs
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            // 
+            // btnFromExisting
+            // 
+            resources.ApplyResources(this.btnFromExisting, "btnFromExisting");
             // 
             // baseImageList
             // 
@@ -134,7 +154,9 @@ namespace Epi.Windows.MakeView.Dialogs
             this.CancelButton = null;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "CommentLegalDialog";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Load += new System.EventHandler(this.CommentLegal_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgCodes)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
