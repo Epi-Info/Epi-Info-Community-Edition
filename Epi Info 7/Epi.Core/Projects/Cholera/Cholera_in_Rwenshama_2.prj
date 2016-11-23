@@ -1,7 +1,0 @@
-<Project id="884738b5-1571-4e10-286a-ff86479dbcbd" name="Cholera_in_Rwenshama_2" location="\\cdc.gov\project\OPHSS_Epi_Info_Development\EpiInfoEcosystem\EpiInfoTraining\4_Documentation\Cholera in Rwenshama\Database" description="" schemaVersion="102" epiVersion="" createDate="09/02/2016 14:50:46" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
-  <CollectedData>
-    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7Sj9EN3Tw6gyoykYAJDAPc7OVRe9tcGGyXMxPYw0KuiVgpRctC4R3v1YLSGWyFwG/p0rHa5Hfy91sumzGXUPFpbpFAJUQM7PbQp9/kKd6gDFQEkl9OCxfkixTC9Y+LsU8=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
-  </CollectedData>
-  <Metadata source="2" />
-  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
-</Project>
