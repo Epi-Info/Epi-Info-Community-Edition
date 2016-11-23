@@ -1151,9 +1151,6 @@
     <None Include="Projects\Sample\SampleSurveillance.cvs7">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Projects\H1N1ClinicalLongForm\H1N1ClinicalLongForm.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Projects\Salmonellosis\SalmonellaTrainingCaseData_2013-06-17T20-04-48.edp7">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1216,9 +1213,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Projects\Nutrition\Nutrition.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Projects\H1N1ClinicalLongForm\H1N1ClinicalLongForm.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\ImagesNotToBeDeployed\AddLayer.bmp" />
