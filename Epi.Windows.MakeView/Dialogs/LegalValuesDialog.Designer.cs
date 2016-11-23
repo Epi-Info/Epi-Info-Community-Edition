@@ -38,8 +38,8 @@ namespace Epi.Windows.MakeView.Dialogs
             this.cbxSort = new System.Windows.Forms.CheckBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnFromExisting = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgCodes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -190,20 +190,20 @@ namespace Epi.Windows.MakeView.Dialogs
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // flowLayoutPanel1
-            // 
-            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
-            this.flowLayoutPanel1.Controls.Add(this.btnCreate);
-            this.flowLayoutPanel1.Controls.Add(this.btnFromExisting);
-            this.flowLayoutPanel1.Controls.Add(this.btnUseExisting);
-            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            // 
             // btnFromExisting
             // 
             resources.ApplyResources(this.btnFromExisting, "btnFromExisting");
             this.btnFromExisting.Name = "btnFromExisting";
             this.btnFromExisting.Click += new System.EventHandler(this.btnFromExisting_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnCreate);
+            this.flowLayoutPanel1.Controls.Add(this.btnFromExisting);
+            this.flowLayoutPanel1.Controls.Add(this.btnUseExisting);
+            this.flowLayoutPanel1.Controls.Add(this.btnDelete);
+            resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
             // LegalValuesDialog
             // 
@@ -221,7 +221,6 @@ namespace Epi.Windows.MakeView.Dialogs
             this.Load += new System.EventHandler(this.Dialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCodes)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
