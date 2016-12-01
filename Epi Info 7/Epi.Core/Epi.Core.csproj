@@ -665,6 +665,9 @@
     <None Include="Projects\Cholera\Advanced Analysis.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\Cholera\Case Studies English.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\Cholera\Cholera_in_Rwenshama_2.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -677,6 +680,7 @@
     <None Include="Projects\Sample\Sample.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Projects\Cholera\Uganda_Cholera.png" />
     <Content Include="Resources\ImagesNotToBeDeployed\App.ico" />
     <None Include="Projects\Cholera\cb.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
