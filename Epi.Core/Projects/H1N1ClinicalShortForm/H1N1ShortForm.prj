@@ -1,0 +1,7 @@
+<Project id="c1a370bf-5c16-85c7-78ba-2adeea7460f7" name="H1N1ShortForm" location="C:\Users\jca6\Epi Info 7\Projects\H1N1ShortForm" description="" schemaVersion="102" epiVersion="" createDate="10/25/2016 15:02:44" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7csqJucXA0eUm4ILZ7oROE9IvLqgH3LJFHhTl/IOfVdm3NFTDZ0rju1mNqnxoFDSGDLEjF2g0zfpG7P1Upl0RAZQUysU2wABviShy7vPDtvkQamR+sS1wLympIyP6bXXA=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>
