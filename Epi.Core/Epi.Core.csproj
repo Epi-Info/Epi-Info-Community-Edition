@@ -680,7 +680,9 @@
     <None Include="Projects\Sample\Sample.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Projects\Cholera\Uganda_Cholera.png" />
+    <None Include="Projects\Cholera\Uganda_Cholera.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\ImagesNotToBeDeployed\App.ico" />
     <None Include="Projects\Cholera\cb.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
