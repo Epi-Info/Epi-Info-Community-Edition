@@ -1296,8 +1296,17 @@ namespace Epi.Windows.MakeView.Forms
                 string tempFilePath = Path.Combine(Environment.CurrentDirectory, "tempTemplate.xml");
                 newTemplate.Save(tempFilePath);
 
-                template.CreateFromTemplate(tempFilePath);
-                
+                try
+                {
+                    template.CreateFromTemplate(tempFilePath);
+                }
+                catch(System.ArgumentException argumentException)
+                {
+                    MessageBox.Show(argumentException.Message, argumentException.Message, MessageBoxButtons.OK);
+                    CloseCurrentProject();
+                    return;
+                }
+
                 //EnableFeatures();
                 OnProjectAccessed(newProject);
 
