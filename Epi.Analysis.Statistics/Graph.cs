@@ -951,7 +951,7 @@ namespace Epi.Analysis.Statistics
             {
                 filter.crossTabValue = "'" + filter.crossTabValue + "'";
             }
-            
+
             if (string.IsNullOrEmpty(filter.crossTabName) == false)
             {
                 filterSelect = string.Format("{0} AND {1} = {2}", filterSelect, filter.crossTabName, filter.crossTabValue);
@@ -959,7 +959,17 @@ namespace Epi.Analysis.Statistics
 
             if (string.IsNullOrEmpty(filter.strataVarName) == false)
             {
-                filterSelect = string.Format("{0} AND {1} = {2}", filterSelect, filter.strataVarName, filter.strataVarValue);
+                double value;
+                if (Double.TryParse(filter.strataVarValue, out value))
+                {
+                    filterSelect = string.Format("{0} AND [{1}] = {2}", filterSelect, filter.strataVarName, filter.strataVarValue);
+                }
+                else
+                {
+                    filterSelect = string.Format("{0} AND [{1}] = '{2}'", filterSelect, filter.strataVarName, filter.strataVarValue);
+                }
+
+
             }
 
             filteredRows = sourceTable.Select(filterSelect);
