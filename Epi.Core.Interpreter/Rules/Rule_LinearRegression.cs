@@ -259,7 +259,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             for (int i = 0; i < pToken.Tokens.Length; i++)
             {
+                if(pToken.Tokens[i] is TerminalToken)
+                {
+                    continue;
+                }
+
                 NonterminalToken T = (NonterminalToken)pToken.Tokens[i];
+
                 switch (T.Rule.Rhs[0].ToString())
                 {
                     case "WEIGHTVAR":
