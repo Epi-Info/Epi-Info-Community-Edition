@@ -277,7 +277,12 @@ namespace Epi.Analysis.Statistics
                         {
                             if (R[pNumericVariable] is DateTime)
                             {
-                                Dest[((DateTime)R[pNumericVariable]).ToString("MM/dd/yyyy hh:mm:ss.fff tt")] = rowCrossTabValue + rowWeightValue;
+                                string asString = ((DateTime)R[pNumericVariable]).ToString("MM/dd/yyyy hh:mm:ss.fff tt");
+                                bool containsColumn = Dest.Table.Columns.Contains(asString);
+                                if(containsColumn)
+                                {
+                                    Dest[asString] = rowCrossTabValue + rowWeightValue;
+                                }
                             }
                             else
                             {
