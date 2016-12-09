@@ -102,6 +102,30 @@ namespace Epi.Analysis.Statistics
                     columnList.ToString(),
                     null,
                     groupByList.ToString());
+
+                // Dec. 9, 2016
+                // Replace the values in the dataTable.Rows created by the above method,
+                // which limits the working dataset to rows where all participating variables
+                // are non-missing, with values from a dataset that does not impose this limit.
+                for (int e = 0; e < participatingVariableList.Count; e++)
+                {
+                    // Compute the summary statistics one at a time.
+                    // Working dataset is limited to rows with non-missing values
+                    // for just the one variable being summarized
+                    List<string> subList = new List<string>();
+                    subList.Add(participatingVariableList[e]);
+                    dsHelper.InsertGroupByInto(
+                        dataTable,
+                        Context.Columns,
+                        Context.GetDataRows(subList),
+                        columnList.ToString().Split(',')[e],
+                        null,
+                        groupByList.ToString());
+
+                    dataTable.Rows[0][e] = dataTable.Rows[dataTable.Rows.Count - 1][e];
+                    dataTable.Rows.RemoveAt(dataTable.Rows.Count - 1);
+                }
+                // End of Dec. 9, 2016 change.
             }
             else
             {
@@ -141,13 +165,51 @@ namespace Epi.Analysis.Statistics
                     columnList.ToString()
                     );
 
+                // Dec. 9, 2016
+                // Replace the values in the dataTable.Rows created by the above method,
+                // which limits the working dataset to rows where all participating variables
+                // are non-missing, with values from a dataset that does not impose this limit.
+
+                // First, allow missing values for the by-variables to be included
+                List<string> participatingVariablesMinusStrataVariablesList = new List<string>();
+                for (int e = 0; e < participatingVariableList.Count - stratvarList.Length; e++)
+                    participatingVariablesMinusStrataVariablesList.Add(participatingVariableList[e]);
+
                 dsHelper.InsertGroupByInto(
                     dataTable, 
                     Context.Columns, 
-                    Context.GetDataRows(participatingVariableList), 
+                    Context.GetDataRows(participatingVariablesMinusStrataVariablesList), 
                     columnList.ToString(), 
                     null, 
                     groupByList.ToString());
+
+                // Start a column list string with the by-variables
+                int numberOfRows = dataTable.Rows.Count;
+                string[] columnArray = columnList.ToString().Split(',');
+                string newColumnList = columnArray[0];
+                for (int e = 1; e < stratvarList.Length; e++)
+                    newColumnList = newColumnList + ", " + columnArray[e];
+
+                for (int e = 0; e < participatingVariableList.Count - stratvarList.Length; e++)
+                {
+                    // Similar process to non-stratified section but with more than one row per variable
+                    List<string> subList = new List<string>();
+                    subList.Add(participatingVariableList[e]);
+                    dsHelper.InsertGroupByInto(
+                        dataTable,
+                        Context.Columns,
+                        Context.GetDataRows(subList),
+                        newColumnList + ", " + columnList.ToString().Split(',')[e + stratvarList.Length],
+                        null,
+                        groupByList.ToString());
+
+                    for (int z = numberOfRows - 1; z >= 0; z--)
+                    {
+                        dataTable.Rows[z][e + stratvarList.Length] = dataTable.Rows[z + numberOfRows][e + stratvarList.Length];
+                        dataTable.Rows.RemoveAt(z + numberOfRows);
+                    }
+                }
+                // End of Dec. 9, 2016 change.
             }
 
             Context.OutTable(dataTable);
