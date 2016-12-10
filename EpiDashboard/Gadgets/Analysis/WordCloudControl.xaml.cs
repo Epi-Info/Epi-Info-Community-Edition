@@ -695,6 +695,9 @@ namespace EpiDashboard
             }
 #endif
 
+            // HIDE SEND DATA TO EXCEL MENU ITEM BECAUSE WORD CLOUDS ARE IMAGES NOT TABULAR INFORMATION
+            mnuSendDataToExcel.Visibility = Visibility.Collapsed;
+
             mnuSendToBack.Click += new RoutedEventHandler(mnuSendToBack_Click);
             mnuClose.Click += new RoutedEventHandler(mnuClose_Click);
 
