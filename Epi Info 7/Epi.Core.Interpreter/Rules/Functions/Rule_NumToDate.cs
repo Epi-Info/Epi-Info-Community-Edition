@@ -35,6 +35,15 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 if (Int32.TryParse(ParameterList[0].Execute().ToString(), out year))
                 {
+                    if (year <= 29 && year >= 0)
+                    {
+                        year += 2000;
+                    }
+                    else if (year <= 99 && year >= 30)
+                    {
+                        year += 1900;
+                    }
+
                     if (Int32.TryParse(ParameterList[1].Execute().ToString(), out month))
                     {
                         if (Int32.TryParse(ParameterList[2].Execute().ToString(), out day))
