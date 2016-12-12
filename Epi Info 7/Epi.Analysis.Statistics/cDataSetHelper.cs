@@ -191,7 +191,72 @@ namespace Epi.Data
                 GroupByFieldList = FieldList;
             }
 
-            public DataTable CreateGroupByTable(string tableName, DataColumnCollection columns, List<DataRow> sourceTable, string fieldList)
+        // SUMMARIZE needs results columns with DateTime data type when DateTime variables are summarized
+        // Overloading this method with an extra argument for that routine
+        public DataTable CreateGroupByTable(string tableName, DataColumnCollection columns, List<DataRow> sourceTable, string fieldList, bool forTheSummarizeCommand)
+        {
+            /*
+             * Creates a table based on aggregates of fields of another table
+             * 
+             * RowFilter affects rows before GroupBy operation. No "Having" support
+             * though this can be emulated by subsequent filtering of the table that results
+             * 
+             *  FieldList syntax: fieldname[ alias]|aggregatefunction(fieldname)[ alias], ...
+            */
+            if (fieldList == null)
+            {
+                throw new ArgumentException("You must specify at least one field in the field list.");
+            }
+            else
+            {
+                DataTable table = new DataTable(tableName);
+                ParseGroupByFieldList(fieldList);
+
+                foreach (FieldInfo Field in GroupByFieldInfo)
+                {
+                    DataColumn column = columns[Field.FieldName];
+                    if (column != null && Field.Aggregate == null)
+                    {
+                        table.Columns.Add(Field.FieldAlias, column.DataType, column.Expression);
+                    }
+                    else
+                    {
+                        if (column == null)
+                        {
+                            table.Columns.Add(Field.FieldAlias, typeof(double));
+                        }
+                        else
+                        {
+                            if (Field.Aggregate != null)
+                            {
+                                if (Field.Aggregate.ToLower().Equals("count"))
+                                    table.Columns.Add(Field.FieldAlias, typeof(double));
+                                else
+                                {
+                                    if (column.DataType == typeof(System.DateTime))
+                                        table.Columns.Add(Field.FieldAlias, column.DataType);
+                                    else
+                                        table.Columns.Add(Field.FieldAlias, typeof(double));
+                                }
+                            }
+                            else
+                            {
+                                table.Columns.Add(Field.FieldAlias, column.DataType);
+                            }
+                        }
+                    }
+                }
+
+                if (ds != null)
+                {
+                    ds.Tables.Add(table);
+                }
+
+                return table;
+            }
+        }
+
+        public DataTable CreateGroupByTable(string tableName, DataColumnCollection columns, List<DataRow> sourceTable, string fieldList)
             {
                 /*
                  * Creates a table based on aggregates of fields of another table

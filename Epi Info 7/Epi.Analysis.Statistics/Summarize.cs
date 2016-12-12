@@ -92,7 +92,8 @@ namespace Epi.Analysis.Statistics
                     outTableName,
                     Context.Columns,
                     Context.GetDataRows(null),
-                    columnList.ToString()
+                    columnList.ToString(),
+                    true
                     );
 
                 dsHelper.InsertGroupByInto(
@@ -162,7 +163,8 @@ namespace Epi.Analysis.Statistics
                     outTableName, 
                     Context.Columns, 
                     Context.GetDataRows(null), 
-                    columnList.ToString()
+                    columnList.ToString(),
+                    true
                     );
 
                 // Dec. 9, 2016
