@@ -513,6 +513,35 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The MERGE command is used to update or append records based on a matching key in both data sources.
+        ///
+        ///The key can be one or more fields or variables that correspond to matching keys in the data being merged.
+        ///
+        ///Select the key variable or variables in both lists below to be used as the merge keys.  Then click the Add Relation button..
+        /// </summary>
+        public static string BUILDKEY_MERGE_INSTRUCTIONS {
+            get {
+                return ResourceManager.GetString("BUILDKEY_MERGE_INSTRUCTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When relating forms in an Epi Info 7 project that is set up as a relational database, select the GlobalRecordId for the parent form in the Current Data Variables list.
+        ///Then select the foreign key [FKEY] for the child form in the Related Table Variables list.
+        ///
+        ///If you are relating a child form to a grandchild form, select the GlobalRecordId in the child form.
+        ///Then select the foreign key [FKEY] for the grandchild form in the Related Table Variables list.
+        ///
+        ///Example:
+        ///To relate a parent form to a child form [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string BUILDKEY_RELATE_INSTRUCTIONS {
+            get {
+                return ResourceManager.GetString("BUILDKEY_RELATE_INSTRUCTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot connect to MySQL database..
         /// </summary>
         public static string CAN_NOT_CONNECT_MYSQL {

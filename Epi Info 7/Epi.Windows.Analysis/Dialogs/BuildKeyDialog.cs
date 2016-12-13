@@ -20,6 +20,8 @@ namespace Epi.Windows.Analysis.Dialogs
         #region Private Members
         string relatedTable = string.Empty;
         private object selectedDataSource = null;
+        string callingDialog = string.Empty;
+
         List<string> relatedFields = new List<string>();
         List<string> currentFields = new List<string>();
 
@@ -66,6 +68,23 @@ namespace Epi.Windows.Analysis.Dialogs
         }
 
         /// <summary>
+        /// CallingDialog from the dialog that called this dialog. Used to determine if BuildKeyDialog was called by the
+        /// MERGE or RELATE command dialogs so the appropriate instructions can be dispalyed.
+        /// </summary>
+        public string CallingDialog
+        {
+            get
+            {
+                return callingDialog;
+            }
+            set
+            {
+                callingDialog = value;
+            }
+        }
+
+
+        /// <summary>
         /// KEY statement
         /// </summary>
         public string Key
@@ -108,7 +127,6 @@ namespace Epi.Windows.Analysis.Dialogs
             if (!this.DesignMode)
             {
                 this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-
             }
         }
         #endregion
@@ -234,6 +252,16 @@ namespace Epi.Windows.Analysis.Dialogs
             
             lbxCurrentTableFields.SelectedIndex = -1;
             lbxRelatedTableFields.SelectedIndex = -1;
+
+            if (CallingDialog == "RELATE")
+            {
+                lblBuildKeyInstructions.Text = SharedStrings.BUILDKEY_RELATE_INSTRUCTIONS;
+            }
+            else
+            {
+                lblBuildKeyInstructions.Text = SharedStrings.BUILDKEY_MERGE_INSTRUCTIONS;
+            }
+
             this.LoadIsFinished = true;
 
         }

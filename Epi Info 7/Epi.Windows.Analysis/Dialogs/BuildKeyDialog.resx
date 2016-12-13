@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACs
-        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAG0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAG8AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABJgEBAgABAQEAASAGAAEmAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AbgAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8IAAPfAf8BHQGCAbUB/wEbAYEBswH/ARgBfgGw
         Af8BFgF8Aa4B/wETAXkBqwH/ARABdgGoAf8BDQFzAaUB/wELAXEBowH/AQgBbgGgAf8BBgFsAZ4B/wEE
@@ -855,18 +855,5 @@
         AY8B/wEAAQEB8AJ/Af0C/wGAAQ8B8AH/AX8B/QL/AcABBwHxAf8BfwH9AY8B/wHgAQMB8wH/AQABAQGM
         AQEB8AEBAfcD/wGPAf8WAAs=
 </value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>When relating forms in an Epi Info 7 project that is set up as a relational database, select the 
-GlobalRecordId for the parent form in the Current Data Variables list.
-Then select the foreign key [FKEY] for the child form in the Related Table Variables list.
-
-If you are relating a child form to a grandchild form, select the GlobalRecordId associated 
-with the grandchild’s parent – Parent_GlobalRecordId.
-Then select the foreign key [FKEY] for the grandchild form in the Related Table Variables list.
-
-Relate Examples:
-  Relate a parent form to a child form use:  GlobalRecordId = [FKEY]
-  Relate a child form to a grandchild form use:  Parent_GlobalRecordId = [FKEY]</value>
   </data>
 </root>

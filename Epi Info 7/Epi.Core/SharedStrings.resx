@@ -3215,4 +3215,22 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="SHARE_VIA_EMAIL_SUBJECT" xml:space="preserve">
     <value>Epi Info 7 Shared Template</value>
   </data>
+  <data name="BUILDKEY_MERGE_INSTRUCTIONS" xml:space="preserve">
+    <value>The MERGE command is used to update or append records based on a matching key in both data sources.
+
+The key can be one or more fields or variables that correspond to matching keys in the data being merged.
+
+Select the key variable or variables in both lists below to be used as the merge keys.  Then click the Add Relation button.</value>
+  </data>
+  <data name="BUILDKEY_RELATE_INSTRUCTIONS" xml:space="preserve">
+    <value>When relating forms in an Epi Info 7 project that is set up as a relational database, select the GlobalRecordId for the parent form in the Current Data Variables list.
+Then select the foreign key [FKEY] for the child form in the Related Table Variables list.
+
+If you are relating a child form to a grandchild form, select the GlobalRecordId in the child form.
+Then select the foreign key [FKEY] for the grandchild form in the Related Table Variables list.
+
+Example:
+To relate a parent form to a child form in an Epi Info 7 project use:  
+GlobalRecordId = [FKEY]</value>
+  </data>
 </root>
