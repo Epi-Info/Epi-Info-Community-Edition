@@ -43,7 +43,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.label2 = new System.Windows.Forms.Label();
             this.AddCommandButton = new System.Windows.Forms.Button();
             this.AddLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblBuildKeyInstructions = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -233,13 +233,12 @@ namespace Epi.Windows.Analysis.Dialogs
             this.AddLabel.TabIndex = 6;
             this.AddLabel.Text = "label3";
             // 
-            // label3
+            // lblBuildKeyInstructions
             // 
-            this.label3.Location = new System.Drawing.Point(15, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(679, 143);
-            this.label3.TabIndex = 10;
-            this.label3.Text = resources.GetString("label3.Text");
+            this.lblBuildKeyInstructions.Location = new System.Drawing.Point(15, 9);
+            this.lblBuildKeyInstructions.Name = "lblBuildKeyInstructions";
+            this.lblBuildKeyInstructions.Size = new System.Drawing.Size(679, 143);
+            this.lblBuildKeyInstructions.TabIndex = 10;
             // 
             // btnHelp
             // 
@@ -272,7 +271,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.ClientSize = new System.Drawing.Size(706, 473);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnHelp);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblBuildKeyInstructions);
             this.Controls.Add(this.AddLabel);
             this.Controls.Add(this.AddCommandButton);
             this.Controls.Add(this.label1);
@@ -306,7 +305,7 @@ namespace Epi.Windows.Analysis.Dialogs
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button AddCommandButton;
         private System.Windows.Forms.Label AddLabel;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblBuildKeyInstructions;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Button btnClear;
     }

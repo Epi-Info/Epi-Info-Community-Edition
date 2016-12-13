@@ -346,6 +346,7 @@ namespace Epi.Windows.Analysis.Dialogs
                 BuildKeyDialog buildKeyDialog = new BuildKeyDialog(mainForm);
                 buildKeyDialog.RelatedTable = relatedTableName;
                 buildKeyDialog.SelectedDataSource = selectedDataSource;
+                buildKeyDialog.CallingDialog = "RELATE";
                 DialogResult result = buildKeyDialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
