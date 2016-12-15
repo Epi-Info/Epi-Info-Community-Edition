@@ -130,6 +130,13 @@ namespace Epi.Data.Office
             #endregion Input Validation
 
             IDbConnection connection = GetConnection();
+
+            if (connection.ConnectionString.Contains("Provider=Microsoft.Jet.OLEDB.4.0"))
+            {
+                string newString = connection.ConnectionString.Replace("HDR=Yes", "HDR=Yes;IMEX=1");
+                connection.ConnectionString = newString;
+            }
+
             OleDbDataAdapter adapter = new OleDbDataAdapter();
             adapter.SelectCommand = (OleDbCommand)GetCommand(selectQuery.SqlStatement, connection, selectQuery.Parameters);
 

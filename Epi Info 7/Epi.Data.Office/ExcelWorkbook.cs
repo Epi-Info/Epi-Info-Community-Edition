@@ -46,13 +46,13 @@ namespace Epi.Data.Office
 
         protected override OleDbConnection GetNativeConnection(string connectionString)
         {
-            OleDbConnectionStringBuilder oleDBCnnStrBuilder = new OleDbConnectionStringBuilder(connectionString);
+            OleDbConnectionStringBuilder oleDBCnnStrBuilder = new OleDbConnectionStringBuilder(ConnectionString);
             oleDBCnnStrBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
             oleDBCnnStrBuilder.Add("Mode","ReadWrite");
 
-            if(false == connectionString.Contains("Excel 8.0"))
+            if(false == connectionString.Contains("Extended Properties"))
             {
-                oleDBCnnStrBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+                oleDBCnnStrBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes");
             }
 
             return new OleDbConnection(oleDBCnnStrBuilder.ToString());
@@ -295,9 +295,11 @@ namespace Epi.Data.Office
                 OleDbConnectionStringBuilder cnnBuilder = new OleDbConnectionStringBuilder(base.ConnectionString);
                 cnnBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
 
-                if (false == base.ConnectionString.Contains("Excel 8.0"))
+                string connection = base.ConnectionString;
+
+                if (false == connection.Contains("Extended Properties"))
                 {
-                    cnnBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+                    cnnBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes");
                 }
 
                 return cnnBuilder.ToString();
@@ -328,7 +330,7 @@ namespace Epi.Data.Office
             }
 
             builder.Append(EncodeOleDbConnectionStringValue(filePath));
-            builder.Append(";ReadOnly=False;Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=1\";");
+            builder.Append(";ReadOnly=False;Extended Properties=\"Excel 8.0;HDR=Yes\";");
 
             // sanity check
             OleDbConnectionStringBuilder connectionBuilder = new OleDbConnectionStringBuilder(builder.ToString());
@@ -364,7 +366,7 @@ namespace Epi.Data.Office
         public static string BuildDefaultConnectionString(string databaseName)
         {
             string cnnString = BuildConnectionString(Configuration.GetNewInstance().Directories.Project + "\\" + databaseName + ".xls", string.Empty);
-            cnnString += ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=1\";";
+            cnnString += ";Extended Properties=\"Excel 8.0;HDR=Yes\";";
             return cnnString;
         }
 
