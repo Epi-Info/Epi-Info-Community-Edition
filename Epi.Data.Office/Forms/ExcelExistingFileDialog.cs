@@ -147,6 +147,7 @@ namespace Epi.Data.Office.Forms
             if (result == DialogResult.OK)
             {
                 txtFileName.Text = dialog.FileName;
+                txtFileName.Enabled = true;
             }
         }
 

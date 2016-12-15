@@ -62,7 +62,7 @@ namespace Epi.Data.Office
                 cnnBuilder.DataSource = dbConnection.ConnectionString;
                 //ToDo: Change code to read the configuration file, need to add provider information into the configuration file. 
                 cnnBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";   //Zack: here just hard coded for debug  
-                cnnBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+                cnnBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes");
                 instance = CreateDatabaseObject(cnnBuilder);
             }
             else
@@ -115,7 +115,7 @@ namespace Epi.Data.Office
             OleDbConnectionStringBuilder cnnStringBuilder = new OleDbConnectionStringBuilder();
             cnnStringBuilder.DataSource = fileName;
             cnnStringBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
-            cnnStringBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+            cnnStringBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes");
             return cnnStringBuilder;
         }
 
@@ -131,7 +131,7 @@ namespace Epi.Data.Office
 
                 OleDbConnectionStringBuilder oleDbCnnStringBuilder = new OleDbConnectionStringBuilder(AccessDatabase.BuildDefaultConnectionString(databaseName));
                 oleDbCnnStringBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
-                oleDbCnnStringBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+                oleDbCnnStringBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes");
                 return oleDbCnnStringBuilder;
 
             }
