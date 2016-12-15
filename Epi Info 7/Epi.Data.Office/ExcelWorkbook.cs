@@ -49,7 +49,12 @@ namespace Epi.Data.Office
             OleDbConnectionStringBuilder oleDBCnnStrBuilder = new OleDbConnectionStringBuilder(connectionString);
             oleDBCnnStrBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
             oleDBCnnStrBuilder.Add("Mode","ReadWrite");
-            oleDBCnnStrBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+
+            if(false == connectionString.Contains("Excel 8.0"))
+            {
+                oleDBCnnStrBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+            }
+
             return new OleDbConnection(oleDBCnnStrBuilder.ToString());
         }
 
@@ -289,7 +294,12 @@ namespace Epi.Data.Office
             {
                 OleDbConnectionStringBuilder cnnBuilder = new OleDbConnectionStringBuilder(base.ConnectionString);
                 cnnBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
-                cnnBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+
+                if (false == base.ConnectionString.Contains("Excel 8.0"))
+                {
+                    cnnBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes;IMEX=1");
+                }
+
                 return cnnBuilder.ToString();
             }
             set
