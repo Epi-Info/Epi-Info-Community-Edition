@@ -114,6 +114,11 @@ namespace Epi.Windows.Analysis.Dialogs
 
             foreach (Epi.DataSets.Config.DataDriverRow row in config.DataDrivers)
             {
+                if (row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver)
+                {
+                    continue;
+                }
+
                 cmbOutputFormat.Items.Add(new ComboBoxItem(row.Type, row.DisplayName, null));
             }
 
