@@ -87,6 +87,11 @@ namespace EpiDashboard
 
             foreach (Epi.DataSets.Config.DataDriverRow row in dashboardHelper.Config.DataDrivers)
             {
+                if (row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver)
+                {
+                    continue;
+                }
+
                 ComboBoxItem item = new ComboBoxItem();
                 item.Content = row.DisplayName;                
                 //cmbDataFormats.Items.Add(new ComboBoxItem(row.Type, row.DisplayName, null));
@@ -314,6 +319,11 @@ namespace EpiDashboard
                 string plugin = string.Empty;
                 foreach (Epi.DataSets.Config.DataDriverRow row in dashboardHelper.Config.DataDrivers)
                 {
+                    if (row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver)
+                    {
+                        continue;
+                    }
+
                     string content = selectedPlugIn.Content.ToString();
                     if (content.Equals(row.DisplayName))
                     {
