@@ -139,26 +139,19 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 20);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Excel File";
             // 
             // btnBrowseInput
             // 
-            this.btnBrowseInput.Location = new System.Drawing.Point(329, 34);
+            resources.ApplyResources(this.btnBrowseInput, "btnBrowseInput");
             this.btnBrowseInput.Name = "btnBrowseInput";
-            this.btnBrowseInput.Size = new System.Drawing.Size(90, 23);
-            this.btnBrowseInput.TabIndex = 2;
-            this.btnBrowseInput.Text = "Browse";
             this.btnBrowseInput.UseVisualStyleBackColor = true;
             this.btnBrowseInput.Click += new System.EventHandler(this.btnBrowseInput_Click);
             // 
             // grpProject
             // 
-            this.grpProject.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            resources.ApplyResources(this.grpProject, "grpProject");
             this.grpProject.Controls.Add(this.label2);
             this.grpProject.Controls.Add(this.txtFormName);
             this.grpProject.Controls.Add(this.btnBrowseProjectLocation);
@@ -166,202 +159,124 @@
             this.grpProject.Controls.Add(this.lblProjectName);
             this.grpProject.Controls.Add(this.txtProjectName);
             this.grpProject.Controls.Add(this.lblLocation);
-            this.grpProject.Location = new System.Drawing.Point(12, 107);
             this.grpProject.Name = "grpProject";
-            this.grpProject.Padding = new System.Windows.Forms.Padding(7);
-            this.grpProject.Size = new System.Drawing.Size(417, 147);
-            this.grpProject.TabIndex = 7;
             this.grpProject.TabStop = false;
-            this.grpProject.Text = "New Project";
             // 
             // label2
             // 
-            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(10, 59);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(338, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Form Name";
             // 
             // txtFormName
             // 
-            this.txtFormName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFormName.Location = new System.Drawing.Point(13, 78);
+            resources.ApplyResources(this.txtFormName, "txtFormName");
             this.txtFormName.Name = "txtFormName";
-            this.txtFormName.Size = new System.Drawing.Size(391, 20);
-            this.txtFormName.TabIndex = 4;
             // 
             // btnBrowseProjectLocation
             // 
-            this.btnBrowseProjectLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseProjectLocation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBrowseProjectLocation.Location = new System.Drawing.Point(317, 114);
+            resources.ApplyResources(this.btnBrowseProjectLocation, "btnBrowseProjectLocation");
             this.btnBrowseProjectLocation.Name = "btnBrowseProjectLocation";
-            this.btnBrowseProjectLocation.Size = new System.Drawing.Size(90, 23);
-            this.btnBrowseProjectLocation.TabIndex = 3;
-            this.btnBrowseProjectLocation.Text = "Browse";
             this.btnBrowseProjectLocation.UseVisualStyleBackColor = true;
             this.btnBrowseProjectLocation.Click += new System.EventHandler(this.btnBrowseProjectLocation_Click);
             // 
             // txtNewProjectLocation
             // 
-            this.txtNewProjectLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewProjectLocation.Location = new System.Drawing.Point(13, 117);
+            resources.ApplyResources(this.txtNewProjectLocation, "txtNewProjectLocation");
             this.txtNewProjectLocation.Name = "txtNewProjectLocation";
-            this.txtNewProjectLocation.Size = new System.Drawing.Size(293, 20);
-            this.txtNewProjectLocation.TabIndex = 2;
             this.txtNewProjectLocation.TextChanged += new System.EventHandler(this.txtProjectLocation_TextChanged);
             // 
             // lblProjectName
             // 
-            this.lblProjectName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblProjectName.Location = new System.Drawing.Point(10, 20);
+            resources.ApplyResources(this.lblProjectName, "lblProjectName");
             this.lblProjectName.Name = "lblProjectName";
-            this.lblProjectName.Size = new System.Drawing.Size(338, 13);
-            this.lblProjectName.TabIndex = 1;
-            this.lblProjectName.Text = "Name";
             // 
             // txtProjectName
             // 
-            this.txtProjectName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtProjectName.Location = new System.Drawing.Point(13, 36);
+            resources.ApplyResources(this.txtProjectName, "txtProjectName");
             this.txtProjectName.Name = "txtProjectName";
-            this.txtProjectName.Size = new System.Drawing.Size(391, 20);
-            this.txtProjectName.TabIndex = 1;
             this.txtProjectName.TextChanged += new System.EventHandler(this.txtProjectName_TextChanged);
             this.txtProjectName.Leave += new System.EventHandler(this.txtProjectName_Leave);
             // 
             // lblLocation
             // 
-            this.lblLocation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblLocation.Location = new System.Drawing.Point(10, 101);
+            resources.ApplyResources(this.lblLocation, "lblLocation");
             this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(260, 13);
-            this.lblLocation.TabIndex = 2;
-            this.lblLocation.Text = "Location";
             // 
             // btnOk
             // 
-            this.btnOk.Enabled = false;
-            this.btnOk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOk.Location = new System.Drawing.Point(137, 371);
+            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(90, 23);
-            this.btnOk.TabIndex = 15;
-            this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(233, 371);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 23);
-            this.btnCancel.TabIndex = 16;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnHelp
             // 
-            this.btnHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnHelp.Location = new System.Drawing.Point(329, 371);
+            resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(90, 23);
-            this.btnHelp.TabIndex = 17;
-            this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
             // 
             // grpData
             // 
-            this.grpData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            resources.ApplyResources(this.grpData, "grpData");
             this.grpData.Controls.Add(this.btnBuildCollectedDataConnectionString);
             this.grpData.Controls.Add(this.lblCollectedData);
             this.grpData.Controls.Add(this.txtCollectedData);
             this.grpData.Controls.Add(this.cbxCollectedDataDriver);
-            this.grpData.Location = new System.Drawing.Point(12, 260);
             this.grpData.Name = "grpData";
-            this.grpData.Padding = new System.Windows.Forms.Padding(7);
-            this.grpData.Size = new System.Drawing.Size(417, 105);
-            this.grpData.TabIndex = 14;
             this.grpData.TabStop = false;
-            this.grpData.Text = "Data";
             // 
             // btnBuildCollectedDataConnectionString
             // 
-            this.btnBuildCollectedDataConnectionString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuildCollectedDataConnectionString.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBuildCollectedDataConnectionString.Location = new System.Drawing.Point(317, 71);
+            resources.ApplyResources(this.btnBuildCollectedDataConnectionString, "btnBuildCollectedDataConnectionString");
             this.btnBuildCollectedDataConnectionString.Name = "btnBuildCollectedDataConnectionString";
-            this.btnBuildCollectedDataConnectionString.Size = new System.Drawing.Size(90, 23);
-            this.btnBuildCollectedDataConnectionString.TabIndex = 6;
-            this.btnBuildCollectedDataConnectionString.Text = "Browse";
             this.btnBuildCollectedDataConnectionString.UseVisualStyleBackColor = true;
             this.btnBuildCollectedDataConnectionString.Click += new System.EventHandler(this.btnBuildCollectedDataConnectionString_Click);
             // 
             // lblCollectedData
             // 
-            this.lblCollectedData.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblCollectedData.Location = new System.Drawing.Point(10, 20);
+            resources.ApplyResources(this.lblCollectedData, "lblCollectedData");
             this.lblCollectedData.Name = "lblCollectedData";
-            this.lblCollectedData.Size = new System.Drawing.Size(183, 13);
-            this.lblCollectedData.TabIndex = 3;
-            this.lblCollectedData.Text = "Data Repository";
             // 
             // txtCollectedData
             // 
-            this.txtCollectedData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCollectedData.Location = new System.Drawing.Point(13, 73);
+            resources.ApplyResources(this.txtCollectedData, "txtCollectedData");
             this.txtCollectedData.Name = "txtCollectedData";
             this.txtCollectedData.ReadOnly = true;
-            this.txtCollectedData.Size = new System.Drawing.Size(296, 20);
-            this.txtCollectedData.TabIndex = 4;
             this.txtCollectedData.TabStop = false;
             // 
             // cbxCollectedDataDriver
             // 
-            this.cbxCollectedDataDriver.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.cbxCollectedDataDriver, "cbxCollectedDataDriver");
             this.cbxCollectedDataDriver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCollectedDataDriver.FormattingEnabled = true;
-            this.cbxCollectedDataDriver.Location = new System.Drawing.Point(13, 37);
             this.cbxCollectedDataDriver.Name = "cbxCollectedDataDriver";
-            this.cbxCollectedDataDriver.Size = new System.Drawing.Size(394, 21);
-            this.cbxCollectedDataDriver.TabIndex = 5;
             this.cbxCollectedDataDriver.SelectedIndexChanged += new System.EventHandler(this.cbxCollectedDataDriver_SelectedIndexChanged);
             // 
             // dExcelPath
             // 
-            this.dExcelPath.Location = new System.Drawing.Point(25, 36);
+            resources.ApplyResources(this.dExcelPath, "dExcelPath");
             this.dExcelPath.Name = "dExcelPath";
-            this.dExcelPath.Size = new System.Drawing.Size(293, 20);
-            this.dExcelPath.TabIndex = 18;
             this.dExcelPath.TextChanged += new System.EventHandler(this.dExcelPath_TextChanged);
             // 
             // linkLabel1
             // 
             this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Blue;
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(25, 63);
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(151, 13);
-            this.linkLabel1.TabIndex = 19;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Click here to view an example.";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkEmbeddedResource_Clicked);
             // 
             // ProjectFromExcelDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(447, 407);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.dExcelPath);
             this.Controls.Add(this.btnOk);
@@ -372,11 +287,8 @@
             this.Controls.Add(this.btnBrowseInput);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ProjectFromExcelDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Create New Project from Data Dictionary";
             this.Load += new System.EventHandler(this.ProjectFromExcelDialog_Load);
             this.grpProject.ResumeLayout(false);
             this.grpProject.PerformLayout();

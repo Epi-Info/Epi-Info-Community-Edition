@@ -3233,4 +3233,19 @@ Example:
 To relate a parent form to a child form in an Epi Info 7 project use:  
 GlobalRecordId = [FKEY]</value>
   </data>
+  <data name="INVALID_INPUT" xml:space="preserve">
+    <value>Invalid input detected.</value>
+  </data>
+  <data name="MISSING_COMPONENTS" xml:space="preserve">
+    <value>Missing Components</value>
+  </data>
+  <data name="MISSING_MS_EXCEL_COMPONENTS" xml:space="preserve">
+    <value>The necessary Microsoft Excel runtime files were not found on this machine. Please download them from:</value>
+  </data>
+  <data name="PROJECT_CREATION_STOPPED" xml:space="preserve">
+    <value>Project creation stopped after warning that metadata would be overridden.</value>
+  </data>
+  <data name="PROJECT_OVERWRITTEN" xml:space="preserve">
+    <value>Epi Info 7 project overwritten</value>
+  </data>
 </root>
