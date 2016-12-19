@@ -215,7 +215,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                     }
                     else
                     {
-                        var.Expression = "Null";
+                        var.Expression = null;
                     }
 
                     if (var.VariableScope == EpiInfo.Plugin.VariableScope.Permanent)
