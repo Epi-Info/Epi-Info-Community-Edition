@@ -5614,6 +5614,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid input detected..
+        /// </summary>
+        public static string INVALID_INPUT {
+            get {
+                return ResourceManager.GetString("INVALID_INPUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lower range entered is not a valid date..
         /// </summary>
         public static string INVALID_LOWER_DATE_RANGE {
@@ -6276,6 +6285,24 @@ namespace Epi {
         public static string METADATA_PREFIX {
             get {
                 return ResourceManager.GetString("METADATA_PREFIX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing Components.
+        /// </summary>
+        public static string MISSING_COMPONENTS {
+            get {
+                return ResourceManager.GetString("MISSING_COMPONENTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The necessary Microsoft Excel runtime files were not found on this machine. Please download them from:.
+        /// </summary>
+        public static string MISSING_MS_EXCEL_COMPONENTS {
+            get {
+                return ResourceManager.GetString("MISSING_MS_EXCEL_COMPONENTS", resourceCulture);
             }
         }
         
@@ -7369,6 +7396,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project creation stopped after warning that metadata would be overridden..
+        /// </summary>
+        public static string PROJECT_CREATION_STOPPED {
+            get {
+                return ResourceManager.GetString("PROJECT_CREATION_STOPPED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project File.
         /// </summary>
         public static string PROJECT_FILE {
@@ -7455,6 +7491,15 @@ namespace Epi {
         public static string PROJECT_NAME_TOO_LONG_AND_INVALID_CHARACTERS {
             get {
                 return ResourceManager.GetString("PROJECT_NAME_TOO_LONG_AND_INVALID_CHARACTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Epi Info 7 project overwritten.
+        /// </summary>
+        public static string PROJECT_OVERWRITTEN {
+            get {
+                return ResourceManager.GetString("PROJECT_OVERWRITTEN", resourceCulture);
             }
         }
         

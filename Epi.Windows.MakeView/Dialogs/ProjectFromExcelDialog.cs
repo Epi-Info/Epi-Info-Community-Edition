@@ -203,7 +203,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             catch
             {
-                MessageBox.Show("The necessary Microsoft Excel runtime files were not found on this machine. Please download them from:\n\r\n\rhttps://www.microsoft.com/en-us/download/details.aspx?id=3508", "Missing Components", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, 0, "https://www.microsoft.com/en-us/download/details.aspx?id=3508", "");
+                MessageBox.Show(SharedStrings.MISSING_MS_EXCEL_COMPONENTS + "\n\r\n\rhttps://www.microsoft.com/en-us/download/details.aspx?id=3508", SharedStrings.MISSING_COMPONENTS, MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1, 0, "https://www.microsoft.com/en-us/download/details.aspx?id=3508", "");
                 return;
             }
 
@@ -224,7 +224,7 @@ namespace Epi.Windows.MakeView.Dialogs
             }
             catch
             {
-                MessageBox.Show("Invalid input detected");
+                MessageBox.Show(SharedStrings.INVALID_INPUT);
                 this.DialogResult = DialogResult.Abort;
             }
             finally
@@ -504,21 +504,20 @@ namespace Epi.Windows.MakeView.Dialogs
 
                 if (projectExists)
                 {
-                    DialogResult result = Epi.Windows.MsgBox.Show("An Epi Info 7 project may already exist in the specified database. Continuing the project creation process will cause the project's metadata to be overwritten.\n\n" +
-                        "Do you wish to proceed with the creation of the project and overwrite any existing project metadata?  This action cannot be undone.", "Overwrite existing Epi Info 7 project metadata", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    DialogResult result = Epi.Windows.MsgBox.Show(string.Format(SharedStrings.PROJECT_ALREADY_EXISTS, project.Location), SharedStrings.PROJECT_ALREADY_EXISTS_TITLE, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Cancel)
                     {
-                        Logger.Log(DateTime.Now + ":  " + "Project creation aborted by user [" + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString() + "] after being prompted to overwrite existing Epi Info 7 project metadata.");
+                        Logger.Log(DateTime.Now + ":  " + SharedStrings.PROJECT_CREATION_STOPPED + " [" + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString() + "]");
                         return false;
                     }
                     else
                     {
-                        Logger.Log(DateTime.Now + ":  " + "Project creation proceeded by user [" + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString() + "] after being prompted to overwrite existing Epi Info 7 project metadata.");
+                        Logger.Log(DateTime.Now + ":  " + SharedStrings.PROJECT_OVERWRITTEN + " [" + System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString() + "]");
                     }
                 }
             }
 
-            Logger.Log(DateTime.Now + ":  " + string.Format("Project [{0}] created in {1} by user [{2}].", project.Name, project.Location, System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()));
+            //Logger.Log(DateTime.Now + ":  " + string.Format("Project [{0}] created in {1} by user [{2}].", project.Name, project.Location, System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()));
 
             // Metadata ..
             project.MetadataSource = GetSelectedMetadataSource();
