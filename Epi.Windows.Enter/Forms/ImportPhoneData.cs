@@ -858,9 +858,16 @@ namespace Epi.Enter.Forms
                                                 string part2 = fieldData.FieldValue.ToString().Substring(fieldData.FieldValue.ToString().IndexOf("EpiInfo"), fieldData.FieldValue.ToString().Length - fieldData.FieldValue.ToString().IndexOf("EpiInfo"));
                                                 string fileName = part1 + part2;
 
-                                                if (File.Exists(fileName))
+                                                try
                                                 {
-                                                    imageBytes = Util.GetByteArrayFromImagePath(fileName);
+                                                    if (File.Exists(fileName))
+                                                    {
+                                                        imageBytes = Util.GetByteArrayFromImagePath(fileName);
+                                                    }
+                                                }
+                                                catch
+                                                {
+                                                    break;
                                                 }
                                             }
                                             else
@@ -918,10 +925,7 @@ namespace Epi.Enter.Forms
                                                         pd.DownloadFile(existingFile, tempPath);
                                                         imageBytes = Util.GetByteArrayFromImagePath(tempPath + existingFile.Id);
                                                     }
-                                                    catch (Exception ex)
-                                                    {
-                                                        //
-                                                    }
+                                                    catch { }
                                                 }
                                             }
                                             if (imageBytes != null)
