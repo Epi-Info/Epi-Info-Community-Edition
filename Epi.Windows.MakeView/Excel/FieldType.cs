@@ -17,6 +17,7 @@ namespace Epi.Windows.MakeView.Excel
             Options = 12,
             Dropdown = 17,
             Date = 7,
+            Time = 8
         };
     }
 }

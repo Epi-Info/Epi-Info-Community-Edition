@@ -55,27 +55,27 @@ namespace Epi.Windows.MakeView.Excel
             PageElement.SetAttributeValue("Name", NewPage.PageName);
             PageElement.SetAttributeValue("Position", NewPage.PageId - 1);
 
-
-            XElement FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Controls']");
-            FiledElement.SetAttributeValue("IsRequired", NewPage.Required.ToString());
-            FiledElement.SetAttributeValue("Name", NewPage.Variable_Name);
-            FiledElement.SetAttributeValue("PromptText", NewPage.Question);
-            FiledElement.SetAttributeValue("PageId", NewPage.PageId);
-            FiledElement.SetAttributeValue("FieldTypeId", NewPage.Question_Type);
-            FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
-            FiledElement.SetAttributeValue("PageName", NewPage.PageName);
-            FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
-            FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 3);
-            if (NewPage.Question_Type == 17)
+ 
+            XElement FiledElement = null;
+            if (NewPage.Question_Type != 10)
             {
-                XmlDocument SourceTableXml = new XmlDocument();
-                SourceTableXml.Load("./Excel/SourceTable.xml");
-                XDocument XSourceTable = ToXDocument(SourceTableXml);
-                XElement SourceTableElement = XSourceTable.XPathSelectElement("SourceTable");
-                //var TableName = SourceTableElement.Attribute("TableName").Value;
-                FiledElement.SetAttributeValue("SourceTableName", "code" + NewPage.List_Values[0]);
-                FiledElement.SetAttributeValue("CodeColumnName", NewPage.List_Values[0]);
-                FiledElement.SetAttributeValue("TextColumnName", NewPage.List_Values[0]);
+                FiledElement = AddControlXml(NewPage);
+                PageElement.Add(FiledElement);
+            }
+            else
+            {
+                int count = 1;
+                foreach (var checkbox in NewPage.List_Values)
+                {
+
+                    NewPage.Question = checkbox;
+                    NewPage.Variable_Name = "checkbox_" + checkbox;
+                    NewPage.Counter = count;
+                    FiledElement = AddControlXml(NewPage);
+                    PageElement.Add(FiledElement);
+                    count++;
+                }
+
 
             }
             // GroupBox Title
@@ -88,7 +88,16 @@ namespace Epi.Windows.MakeView.Excel
             FiledElement.SetAttributeValue("PageName", NewPage.PageName);
             FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
             FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 4);
+            if (NewPage.Question_Type == 12)
+            {
 
+                FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.04).ToString());
+            }
+            if (NewPage.Question_Type == 10)
+            {
+
+                FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
+            }
             // Description
             FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
             FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Description");
@@ -99,9 +108,15 @@ namespace Epi.Windows.MakeView.Excel
             FiledElement.SetAttributeValue("PageName", NewPage.PageName);
             FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
             FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 5);
+           
             if (NewPage.Question_Type == 12)
             {
-                FiledElement.SetAttributeValue("List", ListToString(NewPage.List_Values));
+                FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.04).ToString());
+            }
+            if (NewPage.Question_Type == 10)
+            {
+
+                FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
             }
             // Add page element to Xml
             XElement XmlElement = NewXmlDoc.XPathSelectElement("Template/Project/View");
@@ -159,6 +174,92 @@ namespace Epi.Windows.MakeView.Excel
                 return XDocument.Load(nodeReader);
             }
         }
+        private static double GetPositionValue(int ListCount, Double StartValue, Double IncrementValue)
+        {
 
+            Double ControlPosition = StartValue;
+            for (int i = 0; ListCount > i; i++)
+            {
+                ControlPosition = ControlPosition + IncrementValue;
+
+            }
+            return ControlPosition;
+        }
+
+        private static XElement AddControlXml(Card NewPage)
+        {
+            // Control
+            // XElement FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Controls']");
+
+            XmlDocument FieldXml = new XmlDocument();
+
+            FieldXml.Load("./Excel/Control.xml");
+            XDocument XField = ToXDocument(FieldXml);
+
+            XElement FiledElement = XField.XPathSelectElement("Field");
+
+            FiledElement.SetAttributeValue("IsRequired", NewPage.Required.ToString());
+            FiledElement.SetAttributeValue("Name", NewPage.Variable_Name);
+            FiledElement.SetAttributeValue("PromptText", NewPage.Question);
+            FiledElement.SetAttributeValue("PageId", NewPage.PageId);
+            FiledElement.SetAttributeValue("FieldTypeId", NewPage.Question_Type);
+            FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
+            FiledElement.SetAttributeValue("PageName", NewPage.PageName);
+            FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
+            FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 3);
+            if (NewPage.Question_Type == 17)
+            {
+                XmlDocument SourceTableXml = new XmlDocument();
+                string SourceTableXmlpath = "./Excel/SourceTable.xml";
+                SourceTableXml.Load(SourceTableXmlpath);
+                XDocument XSourceTable = ToXDocument(SourceTableXml);
+                XElement SourceTableElement = XSourceTable.XPathSelectElement("SourceTable");
+                SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.Variable_Name);
+                var TableName = SourceTableElement.Attribute("TableName").Value;
+                FiledElement.SetAttributeValue("SourceTableName", TableName);
+                FiledElement.SetAttributeValue("CodeColumnName", NewPage.Variable_Name);
+                FiledElement.SetAttributeValue("TextColumnName", NewPage.Variable_Name);
+
+            }
+            if (NewPage.Question_Type == 12)
+            {
+                string Values = GetOptionsValue(NewPage.List_Values);
+                FiledElement.SetAttributeValue("List", Values);
+                FiledElement.SetAttributeValue("ShowTextOnRight", "True");
+                FiledElement.SetAttributeValue("ControlWidthPercentage", "0.80");
+                FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.12, 0.03));
+                FiledElement.SetAttributeValue("ControlLeftPositionPercentage", "0.07 ");
+                FiledElement.SetAttributeValue("ControlTopPositionPercentage", "0.17");
+            }
+            if (NewPage.Question_Type == 10)
+            {
+                Double ControlTopPositionPercentage = 0.12 + (0.04 * NewPage.Counter);
+
+                FiledElement.SetAttributeValue("ControlTopPositionPercentage", ControlTopPositionPercentage.ToString());
+            }
+            return FiledElement;
+        }
+
+
+
+        private static string GetOptionsValue(List<string> list)
+        {
+            StringBuilder Value = new StringBuilder();
+            Value.Append(string.Join(",", list));
+            Value.Append("||");
+            var x = ".01231";
+
+            for (int i = 1; i < list.Count() + 1; i++)
+            {
+                var y = .03000;
+                y = y * i;
+                Value.Append(y.ToString() + ":" + x);
+                if (i < list.Count())
+                {
+                    Value.Append(",");
+                }
+            }
+            return Value.ToString();
+        }
     }
 }
