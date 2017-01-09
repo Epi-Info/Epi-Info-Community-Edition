@@ -374,6 +374,9 @@ namespace Epi.Windows.MakeView.Dialogs
                 case "Date":
                     type = (int)FieldType.Types.Date;
                     break;
+                case "Time":
+                    type = (int)FieldType.Types.Time;
+                    break;
                 default:
                     type = 0;
                     break;
