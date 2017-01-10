@@ -153,7 +153,7 @@ namespace Epi.Windows.MakeView.Excel
             for (int i = 1; NewPage.List_Values.Count() > i; i++)
             {
                 XElement ItemElement = new XElement("Item");
-                ItemElement.SetAttributeValue(NewPage.List_Values[0], NewPage.List_Values[i]);
+                ItemElement.SetAttributeValue(NewPage.Variable_Name, NewPage.List_Values[i]);
                 SourceTableElement.Add(ItemElement);
             }
             return SourceTableElement;
