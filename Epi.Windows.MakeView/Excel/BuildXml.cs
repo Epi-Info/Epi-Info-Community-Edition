@@ -79,44 +79,50 @@ namespace Epi.Windows.MakeView.Excel
 
             }
             // GroupBox Title
-            FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
-            FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Title");
-            FiledElement.SetAttributeValue("PromptText", NewPage.Title);
-            FiledElement.SetAttributeValue("PageId", NewPage.PageId);
-            FiledElement.SetAttributeValue("FieldTypeId", 21);
-            FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
-            FiledElement.SetAttributeValue("PageName", NewPage.PageName);
-            FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
-            FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 4);
-            if (NewPage.Question_Type == 12)
+            if (!string.IsNullOrEmpty(NewPage.Title))
             {
+                FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
+                FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Title");
+                FiledElement.SetAttributeValue("PromptText", NewPage.Title);
+                FiledElement.SetAttributeValue("PageId", NewPage.PageId);
+                FiledElement.SetAttributeValue("FieldTypeId", 21);
+                FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
+                FiledElement.SetAttributeValue("PageName", NewPage.PageName);
+                FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
+                FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 4);
+                if (NewPage.Question_Type == 12 || NewPage.Question_Type == 10)
+                
+                {
 
-                FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.04).ToString());
+                    FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
+                }
+              
             }
-            if (NewPage.Question_Type == 10)
-            {
-
-                FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
+            else {
+                FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
+                FiledElement.Remove();
             }
             // Description
-            FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
-            FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Description");
-            FiledElement.SetAttributeValue("PromptText", NewPage.Description);
-            FiledElement.SetAttributeValue("PageId", NewPage.PageId);
-            FiledElement.SetAttributeValue("FieldTypeId", 2);
-            FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
-            FiledElement.SetAttributeValue("PageName", NewPage.PageName);
-            FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
-            FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 5);
-           
-            if (NewPage.Question_Type == 12)
+            if (!string.IsNullOrEmpty(NewPage.Description))
             {
-                FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.04).ToString());
-            }
-            if (NewPage.Question_Type == 10)
-            {
+                FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
+                FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Description");
+                FiledElement.SetAttributeValue("PromptText", NewPage.Description);
+                FiledElement.SetAttributeValue("PageId", NewPage.PageId);
+                FiledElement.SetAttributeValue("FieldTypeId", 2);
+                FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
+                FiledElement.SetAttributeValue("PageName", NewPage.PageName);
+                FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
+                FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 5);
 
-                FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
+                if (NewPage.Question_Type == 12 || NewPage.Question_Type == 10)
+                {
+                    FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
+                }
+            }
+            else {
+                FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
+                FiledElement.Remove();
             }
             // Add page element to Xml
             XElement XmlElement = NewXmlDoc.XPathSelectElement("Template/Project/View");
