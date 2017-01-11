@@ -313,7 +313,8 @@ namespace Epi.Windows.MakeView.Dialogs
                 //
                 if (xlWorksheet.Cells[row, 4] != null && xlWorksheet.Cells[row, 4].Text != "")
                 {
-                    Page.Variable_Name = xlWorksheet.Cells[row, 4].Text;
+                    string Text = xlWorksheet.Cells[row, 4].Text;
+                    Page.Variable_Name = Text.Replace(" ", "_");
                 }
                 if (xlWorksheet.Cells[row, 5] != null && xlWorksheet.Cells[row, 5].Text != "")
                 {

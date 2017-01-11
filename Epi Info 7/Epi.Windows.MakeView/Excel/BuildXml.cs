@@ -65,24 +65,25 @@ namespace Epi.Windows.MakeView.Excel
             else
             {
                 int count = 1;
+                var Variable_Name  =  NewPage.Variable_Name ;
                 foreach (var checkbox in NewPage.List_Values)
                 {
 
                     NewPage.Question = checkbox;
-                    NewPage.Variable_Name = "checkbox_" + checkbox;
+                    NewPage.Variable_Name = "Chk_" + checkbox;
                     NewPage.Counter = count;
                     FiledElement = AddControlXml(NewPage);
                     PageElement.Add(FiledElement);
                     count++;
                 }
 
-
+                NewPage.Variable_Name = Variable_Name;
             }
             // GroupBox Title
             if (!string.IsNullOrEmpty(NewPage.Title))
             {
                 FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
-                FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Title");
+                FiledElement.SetAttributeValue("Name", "Gbx_" + NewPage.Variable_Name );
                 FiledElement.SetAttributeValue("PromptText", NewPage.Title);
                 FiledElement.SetAttributeValue("PageId", NewPage.PageId);
                 FiledElement.SetAttributeValue("FieldTypeId", 21);
@@ -106,7 +107,7 @@ namespace Epi.Windows.MakeView.Excel
             if (!string.IsNullOrEmpty(NewPage.Description))
             {
                 FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
-                FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Description");
+                FiledElement.SetAttributeValue("Name", "Lbl_" + NewPage.Variable_Name );
                 FiledElement.SetAttributeValue("PromptText", NewPage.Description);
                 FiledElement.SetAttributeValue("PageId", NewPage.PageId);
                 FiledElement.SetAttributeValue("FieldTypeId", 2);
