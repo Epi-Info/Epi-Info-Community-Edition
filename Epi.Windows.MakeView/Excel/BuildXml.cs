@@ -70,7 +70,7 @@ namespace Epi.Windows.MakeView.Excel
                 {
 
                     NewPage.Question = checkbox;
-                    NewPage.Variable_Name = "Chk_" + checkbox;
+                    NewPage.Variable_Name = "Chk_" + checkbox.Replace(" ","_");
                     NewPage.Counter = count;
                     FiledElement = AddControlXml(NewPage);
                     PageElement.Add(FiledElement);
