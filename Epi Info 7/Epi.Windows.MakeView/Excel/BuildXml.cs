@@ -83,7 +83,7 @@ namespace Epi.Windows.MakeView.Excel
             if (!string.IsNullOrEmpty(NewPage.Title))
             {
                 FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
-                FiledElement.SetAttributeValue("Name", "Gbx_" + NewPage.Variable_Name );
+                FiledElement.SetAttributeValue("Name", "Grp_" + NewPage.Variable_Name );
                 FiledElement.SetAttributeValue("PromptText", NewPage.Title);
                 FiledElement.SetAttributeValue("PageId", NewPage.PageId);
                 FiledElement.SetAttributeValue("FieldTypeId", 21);
