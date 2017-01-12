@@ -792,7 +792,7 @@ namespace EpiDashboard.Rules
 
                             if ((numericValue == lowerBound) || (numericValue >= lowerBound && numericValue < upperBound))
                             {
-                                recodedValue = recodeRow[1].ToString();
+                                recodedValue = string.IsNullOrEmpty(recodeRow[2].ToString()) ? recodeRow[1].ToString() : recodeRow[2].ToString();
                             }
 
                             if (destinationColumnType.Equals("System.Boolean") || (dashboardHelper.IsUsingEpiProject && dashboardHelper.View.Fields.Contains(destinationColumnName) && dashboardHelper.View.Fields[destinationColumnName] is Epi.Fields.YesNoField))
