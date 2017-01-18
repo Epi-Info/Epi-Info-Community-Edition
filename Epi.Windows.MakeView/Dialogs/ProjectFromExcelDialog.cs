@@ -1106,9 +1106,15 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             try
             {
-                File.WriteAllBytes("Interview.xlsx", Properties.Resources.Survey);
+                string path = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
+                if (Environment.OSVersion.Version.Major >= 6)
+                {
+                    path = Directory.GetParent(path).ToString();
+                }
+
+                File.WriteAllBytes(path + "/AppData/Interview.xlsx", Properties.Resources.Survey);
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo.FileName = "Interview.xlsx";
+                proc.StartInfo.FileName = path + "/AppData/Interview.xlsx";
                 proc.StartInfo.UseShellExecute = true;
                 proc.Start();
             }
