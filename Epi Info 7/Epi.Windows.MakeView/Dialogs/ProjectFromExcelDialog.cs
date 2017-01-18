@@ -1116,7 +1116,10 @@ namespace Epi.Windows.MakeView.Dialogs
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.StartInfo.FileName = path + "/AppData/Interview.xlsx";
                 proc.StartInfo.UseShellExecute = true;
+
                 proc.Start();
+
+                dExcelPath.Text = Path.GetFullPath(proc.StartInfo.FileName);
             }
             catch { }
         }
