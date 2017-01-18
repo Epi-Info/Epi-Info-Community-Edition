@@ -1293,11 +1293,16 @@ namespace Epi.Windows.MakeView.Forms
 
                 Template template = new Template(this.mediator);
 
-                string tempFilePath = Path.Combine(Environment.CurrentDirectory, "tempTemplate.xml");
-                newTemplate.Save(tempFilePath);
-
                 try
                 {
+                    string path = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
+                    if (Environment.OSVersion.Version.Major >= 6)
+                    {
+                        path = Directory.GetParent(path).ToString();
+                    }
+
+                    string tempFilePath = Path.Combine(path, "AppData", "tempTemplate.xml");
+                    newTemplate.Save(tempFilePath);
                     template.CreateFromTemplate(tempFilePath);
                 }
                 catch(System.ArgumentException argumentException)
