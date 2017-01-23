@@ -288,6 +288,26 @@ namespace Epi.Windows.Enter.PresentationLogic
                 {
                     result = true;
                 }
+                else if (field is GroupField)
+                {
+                    try
+                    {
+                        int alphaValue = int.Parse(setValue.ToString().Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                        int redValue = int.Parse(setValue.ToString().Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                        int greenValue = int.Parse(setValue.ToString().Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+                        int blueValue = int.Parse(setValue.ToString().Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+                        ControlFactory factory = ControlFactory.Instance;
+                        List<Control> controls = factory.GetAssociatedControls(this.view.Fields[name]);
+                        if (controls.Count > 0 && controls[0] is GroupBox)
+                        {
+                            ((GroupBox)controls[0]).BackColor = System.Drawing.Color.FromArgb(alphaValue, redValue, greenValue, blueValue);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //
+                    }
+                }
 
                 if (this.currentPage != null && this.currentPage.Fields.Contains(name))
                 {
