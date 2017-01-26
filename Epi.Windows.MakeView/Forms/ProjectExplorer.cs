@@ -1137,10 +1137,10 @@ namespace Epi.Windows.MakeView.Forms
                 mainForm.TemplateNode = "Forms";
                 templatesFolderPath = Template.GetTemplatePath("Forms");
                 template.CreateViewTemplate
-                    (
-                        templateNameWithSubfolders,
-                        ((Epi.Windows.Controls.ViewNode)(rightClickedNode)).View
-                    );
+                (
+                    templateNameWithSubfolders,
+                    ((Epi.Windows.Controls.ViewNode)(rightClickedNode)).View
+                );
             }
             else if (((System.Windows.Forms.ToolStripItem)(sender)).Tag is PageNode)
             {
@@ -1149,24 +1149,28 @@ namespace Epi.Windows.MakeView.Forms
                 mainForm.TemplateNode = "Pages";
                 templatesFolderPath = Template.GetTemplatePath("Pages");
                 template.CreatePageTemplate
-                    (
-                        templateNameWithSubfolders
-                    );
+                (
+                    templateNameWithSubfolders
+                );
             }
 
             string xmlFullPath = System.IO.Path.Combine(templatesFolderPath, templateNameWithSubfolders) + ".xml";
 
             var mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("ita3@cdc.gov");
+            mailMessage.From = new MailAddress("ita3@cdc.gov"); // The email adderess is set to blank in the Save(filename) method.
             mailMessage.Subject = SharedStrings.SHARE_VIA_EMAIL_SUBJECT;
             mailMessage.IsBodyHtml = true;
             mailMessage.Body = "<span style='font-size: 10pt; color: black; font-family: Segoe UI,sans-serif;'>" + SharedStrings.SHARE_VIA_EMAIL_BODY + "</span>";
 
             mailMessage.Attachments.Add(new Attachment(xmlFullPath));
 
-            string asmPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string path = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                path = Directory.GetParent(path).ToString();
+            }
 
-            var filename = System.IO.Path.Combine(asmPath, "epiInfoSharedViaEmail.eml") ;
+            string filename = Path.Combine(path, "AppData", "epiInfoSharedViaEmail.eml");
 
             mailMessage.Save(filename);
 
