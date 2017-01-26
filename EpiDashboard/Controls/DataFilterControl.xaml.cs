@@ -93,7 +93,7 @@ namespace EpiDashboard.Controls
             lblAdvancedText.Text = DashboardSharedStrings.GADGET_ADVANCED_FILTER_TEXT + "  (LastName LIKE '%sen') OR (LastName = 'Smith')";
             lblAdvancedDate.Text = DashboardSharedStrings.GADGET_ADVANCED_FILTER_DATE + "  (DOB >= #01/01/2000#) AND (DOB <= #12/31/2000 23:59:59#)";
             lblAdvancedBool.Text = DashboardSharedStrings.GADGET_ADVANCED_FILTER_BOOLEAN + "  (ILL = true)";
-
+            txtAnd.Text = DashboardSharedStrings.AND;
             btnApplyAdvancedFilter.Content = DashboardSharedStrings.GADGET_APPLY_ADVANCED_FILTER;
             btnGuidedMode.Content=DashboardSharedStrings.GADGET_GUIDED_MODE;
             #endregion //Translation

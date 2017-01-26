@@ -2182,4 +2182,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_POPULATION_VARIABLE" xml:space="preserve">
     <value>Population variable:</value>
   </data>
+  <data name="AND" xml:space="preserve">
+    <value>and</value>
+  </data>
 </root>
