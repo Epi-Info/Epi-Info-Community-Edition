@@ -70,6 +70,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        public static string AND {
+            get {
+                return ResourceManager.GetString("AND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Base Layer.
         /// </summary>
         public static string BASE_LAYER {
