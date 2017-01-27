@@ -3982,6 +3982,17 @@ namespace Epi.Windows.MakeView.PresentationLogic
             throw new Exception("The method or operation is not implemented.");
         }
 
+        /// <summary>
+        /// AssignColor
+        /// </summary>
+        /// <param name="pName">name.Color</param>
+        /// <param name="pValue">value</param>
+        /// <returns>bool</returns>
+        public bool AssignColor(string pName, object pValue)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
         public bool AssignGrid(string pName, object pValue, int pIndex0, object pIndex1)
         {
             throw new Exception("The method or operation is not implemented.");

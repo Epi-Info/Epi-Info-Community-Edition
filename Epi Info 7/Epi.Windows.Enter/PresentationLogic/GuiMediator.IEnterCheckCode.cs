@@ -431,6 +431,93 @@ namespace Epi.Windows.Enter.PresentationLogic
             return result;
         }
 
+        /// <summary>
+        /// AssignColor
+        /// </summary>
+        /// <param name="name">Name.Color</param>
+        /// <param name="setValue">value</param>
+        /// <returns>boolean</returns>
+        public bool AssignColor(string name, object setValue)
+        {
+            if (string.IsNullOrEmpty(name)) return false;
+
+            bool result = false;
+
+            try
+            {
+                if (this.view == null)
+                {
+                    this.view = this.EnterCheckCodeEngine.CurrentView.View;
+                }
+
+                Field field = this.view.Fields[name];
+
+                if (setValue is TimeSpan)
+                {
+                    setValue = new DateTime(1900, 1, 1, ((TimeSpan)setValue).Hours, ((TimeSpan)setValue).Minutes, ((TimeSpan)setValue).Seconds);
+                }
+
+                if (field is DDLFieldOfCommentLegal)
+                {
+                    setValue = setValue.ToString();
+                }
+
+                if (field is IDataField)
+                {
+                    ((IDataField)field).CurrentRecordValueObject = setValue;
+                    this.IsDirty = true;
+                    result = true;
+                }
+                else if (field is LabelField)
+                {
+                    try
+                    {
+                        int alphaValue = int.Parse(setValue.ToString().Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                        int redValue = int.Parse(setValue.ToString().Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                        int greenValue = int.Parse(setValue.ToString().Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+                        int blueValue = int.Parse(setValue.ToString().Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+                        ControlFactory factory = ControlFactory.Instance;
+                        List<Control> controls = factory.GetAssociatedControls(this.view.Fields[name]);
+                        if (controls.Count > 0 && controls[0] is TransparentLabel)
+                        {
+                            ((TransparentLabel)controls[0]).ForeColor = System.Drawing.Color.FromArgb(alphaValue, redValue, greenValue, blueValue);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //
+                    }
+                }
+                else if (field is GroupField)
+                {
+                    try
+                    {
+                        int alphaValue = int.Parse(setValue.ToString().Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                        int redValue = int.Parse(setValue.ToString().Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                        int greenValue = int.Parse(setValue.ToString().Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+                        int blueValue = int.Parse(setValue.ToString().Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+                        ControlFactory factory = ControlFactory.Instance;
+                        List<Control> controls = factory.GetAssociatedControls(this.view.Fields[name]);
+                        if (controls.Count > 0 && controls[0] is GroupBox)
+                        {
+                            ((GroupBox)controls[0]).BackColor = System.Drawing.Color.FromArgb(alphaValue, redValue, greenValue, blueValue);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //
+                    }
+                }
+
+            }
+            catch (Exception e2)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
         public int RecordCount()
         {
             return this.EnterCheckCodeEngine.CurrentView.View.GetRecordCount();

@@ -11,6 +11,7 @@ namespace EpiInfo.Plugin
         bool IsExecutionEnabled { get; }
         bool IsSuppressErrorsEnabled { get; }
         bool Assign(string pName, object pValue);
+        bool AssignColor(string pName, object pValue);
         bool AssignGrid(string pName, object pValue, int pIndex0, object pIndex1);
         bool Geocode(string address, string latName, string longName);
         void AutoSearch(string[] pIdentifierList, string[] pDisplayList, bool pAlwaysShow);

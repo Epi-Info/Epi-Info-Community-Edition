@@ -228,7 +228,14 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
                 if (this.Index0 == -1)
                 {
-                    this.Context.EnterCheckCodeInterface.Assign(this.QualifiedId, result);
+                    if (this.Namespace != null && this.QualifiedId.ToLower().Equals("color"))
+                    {
+                        this.Context.EnterCheckCodeInterface.AssignColor(this.Namespace, result);
+                    }
+                    else
+                    {
+                        this.Context.EnterCheckCodeInterface.Assign(this.QualifiedId, result);
+                    }
                 }
                 else
                 {
