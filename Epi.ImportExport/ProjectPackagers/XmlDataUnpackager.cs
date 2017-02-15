@@ -1313,7 +1313,7 @@ namespace Epi.ImportExport.ProjectPackagers
                 if (field is NumberField && !string.IsNullOrEmpty(value.ToString()))
                 {
                     double result = -1;
-                    if (double.TryParse(value.ToString(), out result))
+                    if (double.TryParse(value.ToString(), System.Globalization.NumberStyles.Any, new System.Globalization.CultureInfo("en-US"), out result))
                     {
                         value = result;
                     }
