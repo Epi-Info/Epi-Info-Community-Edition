@@ -492,7 +492,6 @@ namespace EpiDashboard.Controls
             {
                 if (txtProjectPath.Text.Length > 0 && provider != null)
                 {
-                    Addfilters();
                     RenderMap();
                     layerprop.SetValues(txtDescription.Text, cmbLatitude.Text, cmbLongitude.Text, colorselected);
                 }
@@ -552,66 +551,6 @@ namespace EpiDashboard.Controls
         {
             SetFilter();
         }
-
-        private void Addfilters()
-        {
-            string sfilterOperand = string.Empty;
-            string[] shilowvars;
-            string svarname;
-
-            this.datafilters = rowfiltercontrol.DataFilters;
-
-            List<string> sconditionval = datafilters.GetFilterConditionsAsList();
-            string strreadablecondition = datafilters.GenerateReadableDataFilterString().Trim();
-            if (!(string.IsNullOrEmpty(strreadablecondition)))
-            {
-                if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING;
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_MISSING))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_MISSING;
-                }
-
-                if (!(strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN)))
-                {
-                    svarname = strreadablecondition.Substring(strreadablecondition.IndexOf("[") + 1, strreadablecondition.IndexOf("]") - strreadablecondition.IndexOf("[") - 1);
-                    dashboardHelper.AddDataFilterCondition(sfilterOperand, sconditionval[0].ToString(), svarname, ConditionJoinType.And);
-                }
-                else if (strreadablecondition.Contains(SharedStrings.FRIENDLY_OPERATOR_BETWEEN))
-                {
-                    sfilterOperand = SharedStrings.FRIENDLY_OPERATOR_BETWEEN;
-                    string strcondition = strreadablecondition.Substring(0, strreadablecondition.IndexOf(sfilterOperand)).Trim();
-                    string[] strVarstrings = strcondition.Split(' ');
-                    svarname = strVarstrings[3].ToString();
-                    string sValues = strreadablecondition.ToString().Substring(strreadablecondition.IndexOf(sfilterOperand) + sfilterOperand.Length, (strreadablecondition.ToString().Length) - (strreadablecondition.ToString().IndexOf(sfilterOperand) + sfilterOperand.Length)).Trim();
-                    shilowvars = sValues.Split(' ');
-                    dashboardHelper.AddDataFilterCondition(sfilterOperand, shilowvars[0].ToString(), shilowvars[2].ToString(), svarname, ConditionJoinType.And);
-                }
-            }
-        }
-
 
         private void PropertyChanged_EnableDisable()
         {
