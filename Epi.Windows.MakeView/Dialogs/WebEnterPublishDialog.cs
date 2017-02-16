@@ -504,7 +504,24 @@ namespace Epi.Windows.MakeView.Dialogs
                 {
                     panel3.Visible = true;
 
-                    txtURL.Text = Result.PublishInfo.URL;
+                    if (Result.PublishInfo.URL.EndsWith("/Login"))
+                    {
+                        txtURL.Text = Result.PublishInfo.URL;
+                    }
+                    else
+                    {
+                        Uri uriResult = null;
+
+                        if (Uri.TryCreate(new Uri(Result.PublishInfo.URL), "Login", out uriResult))
+                        {
+                            txtURL.Text = uriResult.AbsoluteUri;
+                        }
+                        else
+                        {
+                            txtURL.Text = Result.PublishInfo.URL;
+                        }
+                    }
+
                     lblSuccessNotice.Visible = true;
                     lblSuccessNotice2.Visible = true;
                     Importantlabel3.Visible = true;
@@ -590,8 +607,24 @@ namespace Epi.Windows.MakeView.Dialogs
         {
             if (Result.PublishInfo.IsPulished)
             {
-                txtURL.Text = Result.PublishInfo.URL;
-                //txtSurveyKey.Text = txtURL.Text.Substring(txtURL.Text.LastIndexOf('/') + 1);
+                if (Result.PublishInfo.URL.EndsWith("/Login"))
+                {
+                    txtURL.Text = Result.PublishInfo.URL;
+                }
+                else
+                {
+                    Uri uriResult = null;
+
+                    if(Uri.TryCreate(new Uri(Result.PublishInfo.URL), "Login", out uriResult))
+                    {
+                        txtURL.Text = uriResult.AbsoluteUri;
+                    }
+                    else
+                    {
+                        txtURL.Text = Result.PublishInfo.URL;
+                    }
+                }
+
                 txtSurveyKey.Text = Result.PublishInfo.ViewIdAndFormIdList.ToList()[0].Value.ToString();//Result.PublishInfo.ViewIdAndFormIdList[1];
                 txtDataKey.Text = UserPublishGuid.ToString();
                 //txtDataKey.Text = txtSurveyKey.Text;
