@@ -974,9 +974,14 @@ namespace Epi.Enter.Forms
                                 if (param != null)
                                     {
                                     Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
-                                    updateQuery.Parameters.Add(param);                                   
-                                        destinationProjectDataDriver.ExecuteNonQuery(updateQuery);                                  
+                                    updateQuery.Parameters.Add(param);
+                                    try
+                                    {
+                                        destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
+                                    }catch(Exception ex){
+                                        this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Error Processing record number " + GUID.ToString() + " Field Name:" + FieldName);
 
+                                    }
                                     if (!GUIDList.Contains(GUID))
                                         {
                                         GUIDList.Add(GUID);
@@ -1382,7 +1387,7 @@ namespace Epi.Enter.Forms
                         this.BeginInvoke(new SetMaxProgressBarValueDelegate(SetProgressBarMaximum), i);
 
                         try
-                            {
+                        {
                             Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
                             IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
                             List<string> destinationGUIDList = new List<string>();
