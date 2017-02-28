@@ -1050,7 +1050,7 @@ namespace Epi.Windows.MakeView
             _sourceTableRenames.Clear();
             pageIdViewNamePairs.Clear();
             viewIdViewNamePairs.Clear();            
-
+            
             using (XmlReader reader = XmlReader.Create(templatePath))
             {
                 while (reader.ReadToFollowing("View"))
@@ -1142,8 +1142,10 @@ namespace Epi.Windows.MakeView
                     {
                         do
                         {
-                            Field field = CreateFields(fieldSubtree, metadataSchema, page, out fieldIdFromTemplate);
+                            
 
+                            Field field = CreateFields(fieldSubtree, metadataSchema, page, out fieldIdFromTemplate);
+                            
                             if (field == null) continue;
 
                            if (field.Id != fieldIdFromTemplate && !_templateFieldId_dbFieldId.ContainsKey(fieldIdFromTemplate))
@@ -2107,10 +2109,10 @@ namespace Epi.Windows.MakeView
                 }
 
                 string nameTemplate = field.Name;
-
-                mediator.PasteFromTemplate((RenderableField)field);
-
-                if (field.Name != (string)row["Name"])
+                
+                    mediator.PasteFromTemplate((RenderableField)field);
+                 
+                if (field.Name != (string)row["Name"] && !_fieldRenames.ContainsKey((string)row["Name"]))
                 {
                     _fieldRenames.Add((string)row["Name"], field.Name);
                 }
