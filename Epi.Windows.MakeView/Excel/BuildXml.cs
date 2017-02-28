@@ -64,13 +64,19 @@ namespace Epi.Windows.MakeView.Excel
             }
             else
             {
+                NewPage.Question = NewPage.Question;
+                NewPage.Variable_Name = "Text_" + NewPage.PageName;
+                NewPage.Question_Type = 2;
+                FiledElement = AddControlXml(NewPage);
+                FiledElement.SetAttributeValue("ControlTopPositionPercentage",0.2);
+                PageElement.Add(FiledElement);
                 int count = 1;
                 var Variable_Name  =  NewPage.Variable_Name ;
                 foreach (var checkbox in NewPage.List_Values)
                 {
-
+                    NewPage.Question_Type = 10;
                     NewPage.Question = checkbox;
-                    NewPage.Variable_Name = "Chk_" + checkbox.Replace(" ","_");
+                    NewPage.Variable_Name = "Chk_" + Variable_Name + "_"+ count;
                     NewPage.Counter = count;
                     FiledElement = AddControlXml(NewPage);
                     PageElement.Add(FiledElement);
@@ -240,7 +246,7 @@ namespace Epi.Windows.MakeView.Excel
             }
             if (NewPage.Question_Type == 10)
             {
-                Double ControlTopPositionPercentage = 0.12 + (0.04 * NewPage.Counter);
+                Double ControlTopPositionPercentage = 0.23 + (0.04 * NewPage.Counter);
 
                 FiledElement.SetAttributeValue("ControlTopPositionPercentage", ControlTopPositionPercentage.ToString());
             }
