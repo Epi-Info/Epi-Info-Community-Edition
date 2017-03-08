@@ -1284,6 +1284,18 @@ namespace Epi.Data.PostgreSQL
             {
                 tableNames.Add(row[0].ToString());
             }
+
+            //Option 1
+            //DataTable schemaViews = Select(this.CreateQuery("select viewname from pg_catalog.pg_views where schemaname not in ('pg_catalog', 'information_schema')"));
+
+            //Option 2 does not include system views in the result
+            DataTable schemaViews = Select(this.CreateQuery("select table_name from INFORMATION_SCHEMA.views WHERE table_schema = ANY (current_schemas(false))"));
+
+            foreach (DataRow row in schemaViews.Rows)
+            {
+                tableNames.Add(row[0].ToString());
+            }
+
             return tableNames;
         }
 
