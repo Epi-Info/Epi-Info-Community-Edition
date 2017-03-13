@@ -374,18 +374,22 @@ namespace Epi.Windows.Dialogs
                     cbxMetadataDriver.SelectedIndex = cbxCollectedDataDriver.SelectedIndex;
                 }
 
-                if (!cbxCollectedDataDriver.SelectedValue.Equals(Configuration.AccessDriver))
+                try
                 {
-                    txtMetadata.Text = string.Empty;
-                    btnBuildCollectedDataConnectionString.Enabled = true;
+                    if (!cbxCollectedDataDriver.SelectedValue.Equals(Configuration.AccessDriver))
+                    {
+                        txtMetadata.Text = string.Empty;
+                        btnBuildCollectedDataConnectionString.Enabled = true;
+                    }
+                    else
+                    {
+                        btnBuildCollectedDataConnectionString.Enabled = false;
+                        GetMetaConnectionString();
+                        txtMetadata.Text = metadataConnectionString;
+                        //txtMetadata.Text = txtCollectedData.Text;
+                    }
                 }
-                else
-                {
-                    btnBuildCollectedDataConnectionString.Enabled = false;
-                    GetMetaConnectionString();
-                    txtMetadata.Text = metadataConnectionString;
-                    //txtMetadata.Text = txtCollectedData.Text;
-                }
+                catch { }
             }
 
             PrepopulateCollectedDataLocation();
