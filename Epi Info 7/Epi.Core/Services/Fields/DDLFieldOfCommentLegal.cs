@@ -124,7 +124,7 @@ namespace Epi.Fields
             {
                 int firstHyphenIndex = value.Contains("-") ? value.IndexOf('-') : value.Length;
                 string comment = value.Substring(0, (value.Length - (value.Length - firstHyphenIndex)));
-                base.currentRecordValueObject = comment;
+                base.currentRecordValueObject = comment.Trim();
             }
         }
 
