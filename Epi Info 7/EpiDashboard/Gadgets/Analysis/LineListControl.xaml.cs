@@ -1319,15 +1319,8 @@ namespace EpiDashboard
             }
 
             DataGrid dg = GetDataGrid();
-
-
-            //if (dg.ItemsSource is ListCollectionView)
-            //{
-            //    StrataCount = cvGroup.Count;
-            //}
-            //for (int i = 0; i < StrataCount; i++)
-            //{
             Dictionary<String, bool> groupValues = new Dictionary<String, bool>();
+
             if (dg != null && dg.ItemsSource != null)
             {
                 if (!String.IsNullOrEmpty(groupField))
@@ -1407,19 +1400,32 @@ namespace EpiDashboard
                         else
                         {
                             if (dg.ItemsSource is DataView)
-                           {
+                            {
                                 DataView dgItemSource = dg.ItemsSource as DataView;
                                 int dgtcindex = 0;
                                 foreach (DataColumn dc in dgItemSource.Table.Columns)
                                 {
+                                    string nombre = dg.Columns[dgtcindex].Header.ToString();
                                     if (dg.Columns.Count > dgtcindex)
-                                    { 
-                                        dc.ColumnName = dg.Columns[dgtcindex].Header.ToString();
+                                    {
+                                        for (int i = 2; i < 24; i++)
+                                        {
+                                            if (dgItemSource.Table.Columns.Contains(nombre) && dc.Ordinal != 0)
+                                            {
+                                                nombre = nombre + '(' + i + ')';
+                                            }
+                                            else
+                                            {
+                                                dc.ColumnName = nombre;
+                                                break;
+                                            }
+                                        }
                                     }
                                     dgtcindex++;
                                 }
+
+                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
                             }
-                            htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
                         }
                     }
                     else if (dg.ItemsSource is ListCollectionView)

@@ -3992,6 +3992,7 @@ namespace EpiDashboard
             htmlBuilder.AppendLine("</body>");
             htmlBuilder.AppendLine("</html>");
 
+            RefreshResults();
             return htmlBuilder.ToString();
         }
 
