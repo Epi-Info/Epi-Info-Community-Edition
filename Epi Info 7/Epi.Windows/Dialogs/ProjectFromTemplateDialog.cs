@@ -1027,6 +1027,7 @@ namespace Epi.Windows.Dialogs
 
                 string validationMessage = string.Empty;
                 string projectNameFromTemplate = rows[0][ColumnNames.NAME].ToString();
+                projectNameFromTemplate = Regex.Replace(projectNameFromTemplate, "[^a-zA-Z0-9_]", "");
                 string projectNameCandidate = projectNameFromTemplate;
 
                 if (string.IsNullOrEmpty(projectNameFromTemplate) == false)
