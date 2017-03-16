@@ -52,17 +52,19 @@ namespace Epi.Core.EnterInterpreter.Rules
                 DateTime param1 = (DateTime)p1;
                 DateTime param2 = (DateTime)p2;
 
-                int age = param2.Year - param1.Year;
-                if
-                (
-                    param2.Month < param1.Month ||
-                    (param2.Month == param1.Month && param2.Day < param1.Day)
-                )
+                if(param1 > param2)
                 {
-                    age--;
+                    TimeSpan timeSpan = param1 - param2;
+                    DateTime dateTime = new DateTime(timeSpan.Ticks);
+                    result = (dateTime.Year - 1) * -1;
+                }
+                else
+                {
+                    TimeSpan timeSpan = param2 - param1;
+                    DateTime dateTime = new DateTime(timeSpan.Ticks);
+                    result = dateTime.Year - 1;
                 }
 
-                result = age;
             }
             else {
 

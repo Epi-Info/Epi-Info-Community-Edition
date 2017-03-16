@@ -50,54 +50,18 @@ namespace Epi.Core.EnterInterpreter.Rules
                 DateTime param1 = (DateTime)p1;
                 DateTime param2 = (DateTime)p2;
 
-                int monthsApart = 12 * (param2.Year - param1.Year) + param2.Month - param1.Month;
-
-                if (param2.Day < param1.Day)
+                if (param1 > param2)
                 {
-                    monthsApart--;
+                    TimeSpan timeSpan = param1 - param2;
+                    DateTime dateTime = new DateTime(timeSpan.Ticks);
+                    result = (dateTime.Month - 1) * -1;
                 }
-
-                result = monthsApart;
-                //int age = param2.Year - param1.Year;
-                //if
-                //(
-                //    param2.Month < param1.Month ||
-                //    (param2.Month == param1.Month && param2.Day < param1.Day)
-                //)
-                //{
-                //    age--;
-
-                //}
-
-                //age *= 12;
-
-                //int months;
-                //if (param2.Month > param1.Month)
-                //{
-                //    months = param2.Month - param1.Month;
-
-                //    if (param2.Day < param1.Day)
-                //    {
-                //        months--;
-                //    }
-                //}
-                //else if (param2.Month == param1.Month && param2.Day < param1.Day)
-                //{
-                //    months = 11;
-                //}
-                //else
-                //{
-                //    months = 12 - param1.Month;
-                //    months = months + param2.Month;
-
-                //    if (param2.Day < param1.Day)
-                //    {
-                //        months--;
-                //    }
-
-                //}
-
-                //result = age + months;
+                else
+                {
+                    TimeSpan timeSpan = param2 - param1;
+                    DateTime dateTime = new DateTime(timeSpan.Ticks);
+                    result = dateTime.Month - 1;
+                }
             }
 
             return result;
