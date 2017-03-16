@@ -52,7 +52,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 DateTime param2 = (DateTime)p2;
 
                 TimeSpan timeSpan = param2 - param1;
-                result = Math.Round(timeSpan.TotalHours);
+                result = timeSpan.Hours;
 
             }
 
