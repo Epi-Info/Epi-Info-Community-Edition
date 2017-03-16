@@ -1152,15 +1152,25 @@ namespace Epi.Windows.MakeView.Forms
 
                     currentSearchOpts |= (dlg.WholeWord) ? RichTextBoxFinds.WholeWord : RichTextBoxFinds.None;
 
+                    int start = 0;
+
                     do
                     {
-                        location = codeText.Find(currentSearchString, currentSearchOpts);
+                        if(dlg.ReplaceAll)
+                        {
+                            location = codeText.Find(currentSearchString, start, currentSearchOpts);
+                        }
+                        else
+                        {
+                            location = codeText.Find(currentSearchString, currentSearchOpts);
+                        }
 
                         if (location > 0)
                         {
                             codeText.SelectionStart = location;
                             codeText.SelectionLength = currentSearchString.Length;
                             codeText.SelectedText = dlg.ReplacementString;
+                            start = location - currentSearchString.Length + dlg.ReplacementString.Length + 1;
                         }
                     }
                     while (location > 0 && dlg.ReplaceAll);
