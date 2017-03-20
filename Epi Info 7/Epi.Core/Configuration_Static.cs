@@ -737,7 +737,7 @@ namespace Epi
             dataDriverRow3.Type = Access2007Driver;
             dataDriverRow3.DataProvider = true;
             dataDriverRow3.MetadataProvider = false;
-            //[EI-1023](keep comment) configDataSet.DataDriver.Rows.Add(dataDriverRow3);
+            configDataSet.DataDriver.Rows.Add(dataDriverRow3);
 
             // Excel driver
             Config.DataDriverRow dataDriverRowExcel = configDataSet.DataDriver.NewDataDriverRow();
@@ -749,7 +749,7 @@ namespace Epi
             dataDriverRowExcel.Type = ExcelDriver;
             dataDriverRowExcel.DataProvider = true;
             dataDriverRowExcel.MetadataProvider = false;
-            //[EI-1023](keep comment) configDataSet.DataDriver.Rows.Add(dataDriverRowExcel);
+            configDataSet.DataDriver.Rows.Add(dataDriverRowExcel);
 
             Config.DataDriverRow dataDriverRowExcel2007 = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowExcel2007.DataDriversRow = parentDataDriversRow;
@@ -757,7 +757,7 @@ namespace Epi
             dataDriverRowExcel2007.Type = Excel2007Driver;
             dataDriverRowExcel2007.DataProvider = true;
             dataDriverRowExcel2007.MetadataProvider = false;
-            //[EI-1023](keep comment) configDataSet.DataDriver.Rows.Add(dataDriverRowExcel2007);
+            configDataSet.DataDriver.Rows.Add(dataDriverRowExcel2007);
 
             // SQL Server driver
             Config.DataDriverRow dataDriverRow2 = configDataSet.DataDriver.NewDataDriverRow();
@@ -774,7 +774,7 @@ namespace Epi
             dataDriverRowCsv.Type = CsvDriver;
             dataDriverRowCsv.DataProvider = true;
             dataDriverRowCsv.MetadataProvider = false;
-            //[EI-1023](keep comment) configDataSet.DataDriver.Rows.Add(dataDriverRowCsv);
+            configDataSet.DataDriver.Rows.Add(dataDriverRowCsv);
 
             Config.DataDriverRow dataDriverRowMySql = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowMySql.DataDriversRow = parentDataDriversRow;
@@ -782,7 +782,7 @@ namespace Epi
             dataDriverRowMySql.Type = MySQLDriver;
             dataDriverRowMySql.DataProvider = true;
             dataDriverRowMySql.MetadataProvider = false;
-            //[EI-1023](keep comment) configDataSet.DataDriver.Rows.Add(dataDriverRowMySql);
+            configDataSet.DataDriver.Rows.Add(dataDriverRowMySql);
 
             Config.DataDriverRow dataDriverRowPostgreSql = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowPostgreSql.DataDriversRow = parentDataDriversRow;
@@ -790,7 +790,7 @@ namespace Epi
             dataDriverRowPostgreSql.Type = PostgreSQLDriver;
             dataDriverRowPostgreSql.DataProvider = true;
             dataDriverRowPostgreSql.MetadataProvider = false;
-            //[EI-1023](keep comment) configDataSet.DataDriver.Rows.Add(dataDriverRowPostgreSql);
+            configDataSet.DataDriver.Rows.Add(dataDriverRowPostgreSql);
 
             //// MySQLDriver Driver
             //Config.DataDriverRow dataDriverRow3 = configDataSet.DataDriver.NewDataDriverRow();
