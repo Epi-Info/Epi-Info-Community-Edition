@@ -2185,4 +2185,13 @@ of records or select fewer fields for the group.</value>
   <data name="AND" xml:space="preserve">
     <value>and</value>
   </data>
+  <data name="GADGET_CONFIG_TITLE_RATES" xml:space="preserve">
+    <value>Rates</value>
+  </data>
+  <data name="GADGET_VARIABLES_DENOMINATOR" xml:space="preserve">
+    <value>Denominator:</value>
+  </data>
+  <data name="GADGET_VARIABLES_NUMERATOR" xml:space="preserve">
+    <value>Numerator:</value>
+  </data>
 </root>

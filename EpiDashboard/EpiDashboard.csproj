@@ -229,6 +229,9 @@
     <Compile Include="Controls\GadgetProperties\LinearRegressionProperties.xaml.cs">
       <DependentUpon>LinearRegressionProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GadgetProperties\RatesProperties.xaml.cs">
+      <DependentUpon>RatesProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GadgetProperties\PMCCProperties.xaml.cs">
       <DependentUpon>PMCCProperties.xaml</DependentUpon>
     </Compile>
@@ -460,6 +463,9 @@
     <Compile Include="Gadgets\Analysis\DuplicatesListControl.xaml.cs">
       <DependentUpon>DuplicatesListControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gadgets\Analysis\RatesControl.xaml.cs">
+      <DependentUpon>RatesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gadgets\Analysis\Old_DuplicatesListControl.xaml.cs">
       <DependentUpon>Old_DuplicatesListControl.xaml</DependentUpon>
     </Compile>
@@ -511,6 +517,7 @@
     <Compile Include="Gadgets\ComplexSampleCrosstabParameters.cs" />
     <Compile Include="Gadgets\ComplexSampleFrequencyParameters.cs" />
     <Compile Include="Gadgets\ComplexSampleMeansParameters.cs" />
+    <Compile Include="Gadgets\RatesParameters.cs" />
     <Compile Include="Gadgets\PMCCParameters.cs" />
     <Compile Include="Gadgets\HistogramChartParameters.cs" />
     <Compile Include="Gadgets\HistogramChartParametersBase.cs" />
@@ -979,6 +986,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\GadgetProperties\RatesProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\GadgetProperties\PMCCProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1124,6 +1135,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GadgetPropertyStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\RatesControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -3025,7 +3025,7 @@ namespace EpiDashboard
 
         //    List<string> strataOuter = new List<string>();
         //    strataOuter.Add(strata1);
-            
+
         //    List<Strata> outerStratas = GetStrataValuesAsDictionary(strataOuter, false, false);
         //    List<Strata> innerStratas = new List<Strata>();
 
@@ -3093,6 +3093,194 @@ namespace EpiDashboard
 
         //    return tableDictionary;
         //}
+
+        /// <summary>
+        /// Generates a grouped rate listing .NET data table based off of the given columns, sort order, and group field
+        /// </summary>
+        /// <param name="inputs">The inputs needed to process the frequency</param>
+        /// <returns>A dictionary of data tables, one for each value of the stratification variable, and that table's associated count</returns>
+        public List<DataTable> GenerateRates(RatesParameters parameters)
+        {
+            parameters.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);
+
+            List<string> columnsToSelect = new List<string>();
+            List<string> originalColumnsToSelect = new List<string>();
+
+            string sortOrder = string.Empty;
+
+            if (!String.IsNullOrEmpty(parameters.PrimaryGroupField))
+            {
+                columnsToSelect.Add(parameters.PrimaryGroupField);
+                originalColumnsToSelect.Add(parameters.PrimaryGroupField);
+            }
+            if (!String.IsNullOrEmpty(parameters.SecondaryGroupField))
+            {
+                columnsToSelect.Add(parameters.SecondaryGroupField);
+                originalColumnsToSelect.Add(parameters.SecondaryGroupField);
+            }
+
+            foreach (string listFieldName in parameters.ColumnNames)
+            {
+                if (!columnsToSelect.Contains(listFieldName))
+                {
+                    if (IsUsingEpiProject && GetGroupFieldsAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
+                    {
+                        // add fields in a group
+                        foreach (Field field in this.View.Fields)
+                        {
+                            if (field is GroupField && field.Name.Equals(listFieldName))
+                            {
+                                GroupField groupField = field as GroupField;
+                                foreach (string s in groupField.ChildFieldNameArray)
+                                {
+                                    if (!columnsToSelect.Contains(listFieldName))
+                                    {
+                                        columnsToSelect.Add(s);
+                                        originalColumnsToSelect.Add(s);
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    else if (GetGroupVariablesAsList().Contains(listFieldName, caseInsensitiveEqualityComparer))
+                    {
+                        // add fields in a group
+                        foreach (string columnName in GetGroupVariable(listFieldName).Variables)
+                        {
+                            if (!columnsToSelect.Contains(listFieldName))
+                            {
+                                columnsToSelect.Add(columnName);
+                                originalColumnsToSelect.Add(columnName);
+                            }
+                        }
+                    }
+                    else if (IsUsingEpiProject && listFieldName.ToLowerInvariant().StartsWith("page "))
+                    {
+                        int pageNumber = -1;
+
+                        string strPageNumber = listFieldName.Remove(0, 5);
+
+                        int.TryParse(strPageNumber, out pageNumber);
+
+                        if (pageNumber < 0)
+                        {
+                            continue;
+                        }
+
+                        pageNumber--;
+                        Page page = this.View.Pages[pageNumber];
+
+                        foreach (Field field in page.Fields)
+                        {
+                            if (field is IDataField && field is RenderableField && !(field is GroupField) && !(field is GridField) && !(field is MirrorField))
+                            {
+                                if (!columnsToSelect.Contains(listFieldName))
+                                {
+                                    columnsToSelect.Add(field.Name);
+                                    originalColumnsToSelect.Add(field.Name);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (!columnsToSelect.Contains(listFieldName))
+                        {
+                            columnsToSelect.Add(listFieldName);
+                            originalColumnsToSelect.Add(listFieldName);
+                        }
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<string, SortOrder> kvp in parameters.SortVariables)
+            {
+                string sortFieldName = kvp.Key;
+
+                switch (kvp.Value)
+                {
+                    case SortOrder.Ascending:
+                        sortOrder = sortOrder + sortFieldName + " ASC,";
+                        break;
+                    case SortOrder.Descending:
+                        sortOrder = sortOrder + sortFieldName + " DESC,";
+                        break;
+                }
+
+                if (!columnsToSelect.Contains(sortFieldName))
+                {
+                    columnsToSelect.Add(sortFieldName);
+                }
+            }
+
+            foreach (FilterCondition condition in this.DataFilters)
+            {
+                if (!columnsToSelect.Contains(condition.RawColumnName))
+                {
+                    columnsToSelect.Add(condition.RawColumnName);
+                }
+            }
+
+            sortOrder = sortOrder.TrimEnd(',');
+            parameters.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
+
+            PopulateDataSet(parameters);
+
+            DataView dv = GenerateView(parameters);
+
+            DataView dvAllRows = new DataView(mainTable);
+            dvAllRows.RowFilter = mainTable.DefaultView.RowFilter;
+            if (!string.IsNullOrEmpty(parameters.CustomFilter))
+            {
+                dvAllRows.RowFilter = CombineFilters(parameters.CustomFilter, dvAllRows);
+            }
+            dvAllRows.Sort = sortOrder;
+
+            RecordCount = mainTable.DefaultView.Count;
+
+            DataTable dt = dvAllRows.ToTable();
+
+            List<DataColumn> columnsToRemove = new List<DataColumn>();
+
+            foreach (DataColumn column in dt.Columns)
+            {
+                bool found = false;
+
+                foreach (string s in originalColumnsToSelect)
+                {
+                    if (column.ColumnName.ToLowerInvariant().Equals(s.ToLowerInvariant()))
+                    {
+                        found = true;
+                    }
+                }
+
+                if (!found)
+                {
+                    columnsToRemove.Add(column);
+                }
+            }
+
+            foreach (DataColumn dc in columnsToRemove)
+            {
+                dt.Columns.Remove(dc);
+            }
+
+            OrderColumns(dt, parameters.SortColumnsByTabOrder);
+
+            if (parameters.ShowCommentLegalLabels)
+            {
+                AddOptionLabelsToListTable(dt);
+                AddCommentLegalLabelsToListTable(dt);
+            }
+
+            List<DataTable> tables = new List<DataTable>();
+            ConvertLineListData(dt);
+            tables.Add(dt);
+
+            return tables;
+        }
+
 
         /// <summary>
         /// Generates a grouped line listing .NET data table based off of the given columns, sort order, and group field
