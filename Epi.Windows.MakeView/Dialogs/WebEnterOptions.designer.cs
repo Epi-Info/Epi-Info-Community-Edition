@@ -172,6 +172,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WebEnterOptions";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.WebSurveyOptions_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();

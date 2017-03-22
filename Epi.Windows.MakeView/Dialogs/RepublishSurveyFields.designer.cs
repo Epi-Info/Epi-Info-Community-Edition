@@ -209,6 +209,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RepublishSurveyFields";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Republish Survey Form Fields";
             this.Load += new System.EventHandler(this.UpdateSurveyFields_Load);
             this.ResumeLayout(false);

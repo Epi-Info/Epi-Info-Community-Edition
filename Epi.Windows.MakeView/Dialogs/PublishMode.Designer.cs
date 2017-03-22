@@ -253,6 +253,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PublishMode";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Change Publish Mode";
             this.Load += new System.EventHandler(this.PublishMode_Load);
             this.groupBox1.ResumeLayout(false);
