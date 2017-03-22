@@ -1,0 +1,60 @@
+﻿<EpiDashboard:GadgetBase
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:EpiDashboard="clr-namespace:EpiDashboard"
+    xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+    x:Class="EpiDashboard.RatesControl"    
+    Style="{DynamicResource gadgetBaseStyle}">
+    <EpiDashboard:GadgetBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\..\ResourceDictionary.xaml"/>
+                <ResourceDictionary Source="..\..\StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </EpiDashboard:GadgetBase.Resources>
+    <Grid>
+        <Controls:ShadowRectangle x:Name="rectangleShadow"></Controls:ShadowRectangle>
+        <Border Name="borderAll" Style="{DynamicResource GadgetBorderStyle}" >
+            <Border.ContextMenu>
+                <ContextMenu x:Name="gadgetContextMenu">
+                    <MenuItem Visibility="Collapsed" x:Name="mnuCopy" Header="Copy list data to clipboard"/>
+                    <MenuItem Visibility="Collapsed" x:Name="mnuSendDataToHTML" Header="Send Rates data to web browser">
+                        <MenuItem.Icon>
+                            <Image Source="../../Images/saveHTML.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Visibility="Collapsed" x:Name="mnuSendDataToExcel" Header="Send Rates data to Excel" />
+                    <Separator Visibility="Collapsed"/>
+                    <MenuItem x:Name="mnuRemoveSorts" Header="Remove all sort criteria"/>
+                    <Separator/>
+                    <MenuItem x:Name="mnuSendToBack" Header="Send Rates to back"/>
+                    <MenuItem x:Name="mnuCenter" Header="Center horizontally"/>
+                    <MenuItem x:Name="mnuClose" Header="Close Rates"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+            <Grid x:Name="grdMain" ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="0" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="0" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="0" />
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False"  Text="Rates" />
+                <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
+                <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
+                <Controls:GadgetInfoPanel Grid.Row="6" Visibility="Collapsed" Margin="4" x:Name="infoPanel"></Controls:GadgetInfoPanel>
+
+                <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
+
+                <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{DynamicResource gadgetWaitPanelStyle}" />
+                <StackPanel Grid.Row="1" Grid.RowSpan="7" Orientation="Vertical" Margin="00,-15,-10,0" HorizontalAlignment="Right" VerticalAlignment="Top" >                    
+        </StackPanel>                
+            </Grid>
+        </Border>
+    </Grid>
+</EpiDashboard:GadgetBase>

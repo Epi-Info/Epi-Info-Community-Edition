@@ -2544,6 +2544,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rates.
+        /// </summary>
+        public static string GADGET_CONFIG_TITLE_RATES {
+            get {
+                return ResourceManager.GetString("GADGET_CONFIG_TITLE_RATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Satellite.
         /// </summary>
         public static string GADGET_CONFIG_TITLE_SATELLITE {
@@ -5114,6 +5123,24 @@ namespace EpiDashboard {
         public static string GADGET_VARIABLES_CHORPLTH {
             get {
                 return ResourceManager.GetString("GADGET_VARIABLES_CHORPLTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Denominator:.
+        /// </summary>
+        public static string GADGET_VARIABLES_DENOMINATOR {
+            get {
+                return ResourceManager.GetString("GADGET_VARIABLES_DENOMINATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numerator:.
+        /// </summary>
+        public static string GADGET_VARIABLES_NUMERATOR {
+            get {
+                return ResourceManager.GetString("GADGET_VARIABLES_NUMERATOR", resourceCulture);
             }
         }
         

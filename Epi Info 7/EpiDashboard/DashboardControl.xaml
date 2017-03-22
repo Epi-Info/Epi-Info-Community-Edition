@@ -284,15 +284,14 @@
                             <Image Source="Images/gadget.png" Stretch="None" />
                         </MenuItem.Icon>
                         <Controls:GadgetMenuItem x:Name="mnuLineList" Header="Line list" GadgetType="EpiDashboard.LineListControl" Click="mnuGadgetMenuItem_Click" />
+                        <Controls:GadgetMenuItem x:Name="mnuRates" Header="Rates" GadgetType="EpiDashboard.RatesControl" Click="mnuGadgetMenuItem_Click" />
                         <Controls:GadgetMenuItem x:Name="mnuFrequency" Header="Frequency" GadgetType="EpiDashboard.FrequencyControl" Click="mnuGadgetMenuItem_Click" />
                         <Controls:GadgetMenuItem x:Name="mnuWordCloud" Header="Word cloud" GadgetType="EpiDashboard.WordCloudControl" Click="mnuGadgetMenuItem_Click" />
-                        <!--<Controls:GadgetMenuItem x:Name="mnuAberration" Header="Aberration Detection" GadgetType="EpiDashboard.AberrationControl" Click="mnuGadgetMenuItem_Click" />-->
                         <Controls:GadgetMenuItem x:Name="mnuCombinedFrequency" Header="Combined frequency" GadgetType="EpiDashboard.CombinedFrequencyControl" Click="mnuGadgetMenuItem_Click" />
                         <Controls:GadgetMenuItem x:Name="mnu2x2" Header="2 x 2 Table" Visibility="Collapsed" GadgetType="EpiDashboard.CrosstabControl" Click="mnuGadgetMenuItem_Click"  />
                         <Controls:GadgetMenuItem x:Name="mnuMxN" Header="M x N / 2 x 2 Table" IsEnabled="True" GadgetType="EpiDashboard.CrosstabControl" Click="mnuGadgetMenuItem_Click" />
                         <Controls:GadgetMenuItem x:Name="mnuPMCC" Header="Matched pair case-control" IsEnabled="True" GadgetType="EpiDashboard.PMCCControl" Click="mnuGadgetMenuItem_Click" />
                         <Controls:GadgetMenuItem x:Name="mnuMeans" Header="Means" GadgetType="EpiDashboard.MeansControl" Click="mnuGadgetMenuItem_Click" />
-                        <!--<Controls:GadgetMenuItem x:Name="mnuChart" Header="Chart" GadgetType="EpiDashboard.ChartControl" Click="mnuGadgetMenuItem_Click" />-->
                         <Controls:GadgetMenuItem x:Name="mnuDuplicates" Header="Duplicates List" GadgetType="EpiDashboard.Gadgets.Analysis.DuplicatesListControl" Click="mnuGadgetMenuItem_Click" />
                         <MenuItem x:Name="mnuCharts"  Header="Charts">
                             <Controls:GadgetMenuItem x:Name="mnuColumnChart" Header="Column chart" IsEnabled="True" GadgetType="EpiDashboard.Gadgets.Charting.ColumnChartGadget" Click="mnuGadgetMenuItem_Click" />
