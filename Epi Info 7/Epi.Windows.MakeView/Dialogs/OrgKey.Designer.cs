@@ -136,6 +136,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrgKey";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.pnlOrgKey.ResumeLayout(false);
             this.pnlOrgKey.PerformLayout();
             this.pnlError.ResumeLayout(false);

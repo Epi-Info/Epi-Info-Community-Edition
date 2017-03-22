@@ -264,6 +264,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GetSurveyLink";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Get Survey Link and Keys";
             this.ResumeLayout(false);
             this.PerformLayout();

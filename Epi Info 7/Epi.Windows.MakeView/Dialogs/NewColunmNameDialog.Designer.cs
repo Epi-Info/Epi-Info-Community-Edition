@@ -72,6 +72,8 @@ namespace Epi.Windows.MakeView.Dialogs
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewColumnNameDialog";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.ResumeLayout(false);
             this.PerformLayout();
 

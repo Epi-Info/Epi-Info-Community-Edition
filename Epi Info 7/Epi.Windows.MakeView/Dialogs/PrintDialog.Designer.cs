@@ -142,6 +142,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Print";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Print";
             this.SelectPages.ResumeLayout(false);
             this.SelectPages.PerformLayout();

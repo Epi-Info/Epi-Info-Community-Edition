@@ -99,6 +99,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UserAuthentication";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

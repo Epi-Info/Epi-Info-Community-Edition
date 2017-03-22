@@ -345,6 +345,27 @@
   <data name="pnlSuccessMsg.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblSuccess.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSuccess.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="lblSuccess.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="lblSuccess.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblSuccess.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 15</value>
+  </data>
+  <data name="lblSuccess.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblSuccess.Text" xml:space="preserve">
+    <value>[Success Message]</value>
+  </data>
   <data name="&gt;&gt;lblSuccess.Name" xml:space="preserve">
     <value>lblSuccess</value>
   </data>
@@ -430,39 +451,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblSuccess.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSuccess.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="lblSuccess.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
-  </data>
-  <data name="lblSuccess.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="lblSuccess.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 15</value>
-  </data>
-  <data name="lblSuccess.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblSuccess.Text" xml:space="preserve">
-    <value>[Success Message]</value>
-  </data>
-  <data name="&gt;&gt;lblSuccess.Name" xml:space="preserve">
-    <value>lblSuccess</value>
-  </data>
-  <data name="&gt;&gt;lblSuccess.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSuccess.Parent" xml:space="preserve">
-    <value>pnlSuccessMsg</value>
-  </data>
-  <data name="&gt;&gt;lblSuccess.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
