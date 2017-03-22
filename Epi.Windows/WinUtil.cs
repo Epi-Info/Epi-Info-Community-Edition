@@ -141,6 +141,7 @@ namespace Epi.Windows
         {
             Configuration config = Configuration.GetNewInstance();
             DataView dv = config.DataDrivers.DefaultView;
+            dv.RowFilter = "DisplayName LIKE '%(.mdb)%' OR DisplayName LIKE '%icrosoft SQL%' ";
             dv.Sort = "DisplayName";
             cb.DataSource = dv;
             cb.DisplayMember = "DisplayName";
