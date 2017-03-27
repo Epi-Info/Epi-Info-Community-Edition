@@ -474,10 +474,13 @@ namespace EpiDashboard
                             var numerRows = table.Select(numerSelect);
                             var denomRows = table.Select(denomSelect);
 
-                            var distinctNumer = (numerRows).Distinct();
-                            var distinctDenom = (denomRows).Distinct();
+                            var distinctNumer = (from DataRow dRow in numerRows
+                                                select new { col1 = dRow["MosquitoesPresent"], col2 = dRow["HouseID"] }).Distinct();
 
-                            int numerValue = distinctNumer.Count();
+                            var distinctDenom = (from DataRow dRow in denomRows
+                                                 select new { col1 = dRow["HouseID"] }).Distinct();
+
+                            int numerValue = distinctNumer.Count(); 
                             int denomValue = distinctDenom.Count();
 
                             double rate = ((double)numerValue / (double)denomValue) * 100;
