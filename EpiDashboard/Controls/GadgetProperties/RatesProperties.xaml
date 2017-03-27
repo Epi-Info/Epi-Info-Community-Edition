@@ -85,30 +85,29 @@
                                     </ListView.GroupStyle>
                                 </ListView>
 
-                    <Label x:Name="lblNumeratorWhere" >Where:</Label>
+                    <Label x:Name="lblNumeratorWhere">Where:</Label>
                     <Label x:Name="numeratorRule"></Label>
+                    <!--<StackPanel Margin="0,10" >
+                        <Label x:Name="lblNumerator">Numerator:</Label>
+                        <ComboBox x:Name="cmbNumeratorField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
+                    </StackPanel>-->
                     <Button x:Name="btnNumeratorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnNumeratorRule_Click">Create/Edit Condition</Button>
                     <CheckBox x:Name="checkBoxNumberatorDistinct">Distinct</CheckBox>
 
                     <StackPanel Orientation="Horizontal">
-                        <Rectangle Height="4" Width="300" Margin="0,60" Fill="LightGray" Stroke="LightGray"/>
+                        <Rectangle Height="4" Width="250" Margin="0,40" Fill="LightGray" Stroke="LightGray"/>
                         <Label x:Name="lblPER" VerticalAlignment="Center">PER</Label>
-                        <Rectangle Height="4" Width="300" Margin="0,60" Fill="LightGray" Stroke="LightGray"/>
+                        <Rectangle Height="4" Width="250" Margin="0,40" Fill="LightGray" Stroke="LightGray"/>
                     </StackPanel>
 
                     <Label x:Name="lblDenominatorWhere">Where:</Label>
                     <Label x:Name="denominatorRule"></Label>
+                    <!--<StackPanel Margin="0,10" >
+                        <Label x:Name="lblDenominator">Denominator:</Label>
+                        <ComboBox x:Name="cmbDenominatorField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
+                    </StackPanel>-->
                     <Button x:Name="btnDenominatorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnDenominatorRule_Click">Create/Edit Condition</Button>
                     <CheckBox x:Name="checkBoxDenominatorDistinct">Distinct</CheckBox>
-
-
-
-
-
-
-
-
-
 
                     <Label Visibility="Collapsed" x:Name="tblockVariableDenominator">Denominator:__xfe</Label>
                     <ListView Visibility="Collapsed" Name="lvDenominator" HorizontalAlignment="Left" Width="Auto" Height="280">
@@ -149,9 +148,7 @@
 
         <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top" >
-
-                <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">
-                    Groupig and Sorting__xfe</Label>
+                <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Groupig and Sorting__xfe</Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5">
@@ -275,6 +272,19 @@
                         <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
                             <TextBlock TextWrapping="Wrap" x:Name="checkboxShowNullsTxt">Show missing representation__xfe</TextBlock>
                         </CheckBox>
+                        <StackPanel Margin="0,10" >
+                            <Label x:Name="lblRateMultiplier">Rate Multiplier:</Label>
+                            <ComboBox x:Name="cmbRateMultiplier" IsEditable="true" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left">
+                                <ComboBoxItem>1</ComboBoxItem>
+                                <ComboBoxItem>10</ComboBoxItem>
+                                <ComboBoxItem>100</ComboBoxItem>
+                                <ComboBoxItem>1000</ComboBoxItem>
+                                <ComboBoxItem>10000</ComboBoxItem>
+                                <ComboBoxItem>100000</ComboBoxItem>
+                                <ComboBoxItem>1000000</ComboBoxItem>
+                                <ComboBoxItem>10000000</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
                         <!--<CheckBox x:Name="checkboxAllowUpdates" Style="{StaticResource PropertiesPanelCheckbox}" Content="Allow updates__xfe" Visibility="Collapsed" IsEnabled="true" />-->
                     </WrapPanel>
                 </StackPanel>

@@ -92,6 +92,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             lvDenominator.ItemsSource = items;
 
             cmbGroupField.ItemsSource = fields;
+            //cmbNumeratorField.ItemsSource = fields;
+            //cmbDenominatorField.ItemsSource = fields;
             cmbSecondaryGroupField.ItemsSource = fields;
 
             foreach (string fieldName in fields)
@@ -252,6 +254,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.ShowLineColumn = checkboxLineColumn.IsChecked.Value;
             Parameters.ShowNullLabels = checkboxShowNulls.IsChecked.Value;
             Parameters.ShowCommentLegalLabels = checkboxListLabels.IsChecked.Value;
+            Parameters.NumerDistinct = checkBoxNumberatorDistinct.IsChecked.Value;
+            Parameters.DenomDistinct = checkBoxDenominatorDistinct.IsChecked.Value;
 
             if (checkboxUsePrompts.IsChecked == true)
             {
@@ -283,6 +287,16 @@ namespace EpiDashboard.Controls.GadgetProperties
                     }
                 }
             }
+
+            //if (cmbNumeratorField.SelectedIndex >= 0)
+            //{
+            //    Parameters.NumeratorField = cmbNumeratorField.SelectedItem.ToString();
+            //}
+
+            //if (cmbDenominatorField.SelectedIndex >= 0)
+            //{
+            //    Parameters.DenominatorField = cmbDenominatorField.SelectedItem.ToString();
+            //}
 
             if (cmbGroupField.SelectedIndex >= 0)
             {
@@ -389,6 +403,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxShowNulls.IsChecked = Parameters.ShowNullLabels;
             checkboxListLabels.IsChecked = Parameters.ShowCommentLegalLabels;
 
+            //cmbNumeratorField.SelectedItem = Parameters.NumeratorField;
+            //cmbDenominatorField.SelectedItem = Parameters.DenominatorField;
             cmbGroupField.SelectedItem = Parameters.PrimaryGroupField;
             cmbSecondaryGroupField.SelectedItem = Parameters.SecondaryGroupField;
 
@@ -537,19 +553,22 @@ namespace EpiDashboard.Controls.GadgetProperties
 
         private void btnNumeratorRule_Click(object sender, RoutedEventArgs e)
         {
-            Dialogs.RowFilterDialog rfd = new Dialogs.RowFilterDialog(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, DataFilters, true);
+            Dialogs.RowFilterDialog rfd = new Dialogs.RowFilterDialog(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, _numerFilter, true);
             System.Windows.Forms.DialogResult result = rfd.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 _numerFilter = rfd.DataFilters;
                 Parameters.NumerFilter = rfd.DataFilters;
                 numeratorRule.Content = _numerFilter.GenerateReadableDataFilterString();
+                string dataFilterString = _numerFilter.GenerateDataFilterString();
+
+                //System.Data.DataView dvAssign = new System.Data.DataView(table, DataFilters.GenerateDataFilterString(), string.Empty, System.Data.DataViewRowState.CurrentRows);
             }
         }
-        
+
         private void btnDenominatorRule_Click(object sender, RoutedEventArgs e)
         {
-            Dialogs.RowFilterDialog rfd = new Dialogs.RowFilterDialog(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, DataFilters, true);
+            Dialogs.RowFilterDialog rfd = new Dialogs.RowFilterDialog(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, _denomFilter, true);
             System.Windows.Forms.DialogResult result = rfd.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
