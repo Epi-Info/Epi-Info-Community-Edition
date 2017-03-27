@@ -3108,6 +3108,16 @@ namespace EpiDashboard
 
             string sortOrder = string.Empty;
 
+            //if (!String.IsNullOrEmpty(parameters.NumeratorField))
+            //{
+            //    columnsToSelect.Add(parameters.NumeratorField);
+            //    originalColumnsToSelect.Add(parameters.NumeratorField);
+            //}
+            //if (!String.IsNullOrEmpty(parameters.DenominatorField))
+            //{
+            //    columnsToSelect.Add(parameters.DenominatorField);
+            //    originalColumnsToSelect.Add(parameters.DenominatorField);
+            //}
             if (!String.IsNullOrEmpty(parameters.PrimaryGroupField))
             {
                 columnsToSelect.Add(parameters.PrimaryGroupField);
@@ -3273,6 +3283,8 @@ namespace EpiDashboard
                 AddOptionLabelsToListTable(dt);
                 AddCommentLegalLabelsToListTable(dt);
             }
+
+
 
             List<DataTable> tables = new List<DataTable>();
             ConvertLineListData(dt);
@@ -3676,6 +3688,57 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="dt">A valid line list data table being processed in the GenerateLineListTable method</param>
         private void ConvertLineListData(DataTable dt)
+        {
+            Dictionary<DataColumn, DataColumn> dictionary = new Dictionary<DataColumn, DataColumn>();
+            List<DataColumn> columnsToAdd = new List<DataColumn>();
+            List<DataColumn> columnsToRemove = new List<DataColumn>();
+
+            foreach (DataColumn dc in dt.Columns)
+            {
+                Field field = GetAssociatedField(dc.ColumnName);
+                if (field != null && (field is YesNoField || field is CheckBoxField))
+                {
+                    DataColumn newDc = new DataColumn(dc.ColumnName + "___1234_ACD_PLX", typeof(string));
+                    columnsToAdd.Add(newDc);
+                    columnsToRemove.Add(dc);
+                    dictionary.Add(newDc, dc);
+                }
+            }
+
+            foreach (DataColumn dc in columnsToAdd)
+            {
+                dt.Columns.Add(dc);
+            }
+
+            foreach (DataRow row in dt.Rows)
+            {
+                foreach (KeyValuePair<DataColumn, DataColumn> kvp in dictionary)
+                {
+                    DataColumn newDc = kvp.Key;
+                    DataColumn oldDc = kvp.Value;
+
+                    if (row[oldDc].ToString() == "1" || row[oldDc].ToString().ToLowerInvariant() == "true")
+                    {
+                        row[newDc] = Config.Settings.RepresentationOfYes;
+                    }
+                    else if (row[oldDc].ToString() == "0" || row[oldDc].ToString().ToLowerInvariant() == "false")
+                    {
+                        row[newDc] = Config.Settings.RepresentationOfNo;
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<DataColumn, DataColumn> kvp in dictionary)
+            {
+                dt.Columns.Remove(kvp.Value);
+                kvp.Key.ColumnName = kvp.Key.ColumnName.Replace("___1234_ACD_PLX", String.Empty);
+            }
+        }
+        /// <summary>
+        /// Carries out any needed data conversions in line list tables
+        /// </summary>
+        /// <param name="dt">A valid line list data table being processed in the GenerateLineListTable method</param>
+        private void ConvertRatesData(DataTable dt)
         {
             Dictionary<DataColumn, DataColumn> dictionary = new Dictionary<DataColumn, DataColumn>();
             List<DataColumn> columnsToAdd = new List<DataColumn>();

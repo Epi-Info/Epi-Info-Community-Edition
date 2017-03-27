@@ -386,6 +386,36 @@ namespace EpiDashboard
         {
             lock (syncLock)
             {
+                RatesParameters ratesParameters = null;
+                if ((Parameters is RatesParameters) == true)
+                {
+                    ratesParameters = ((RatesParameters)Parameters);
+                }
+                else
+                {
+                    return;
+                }
+
+                String numerExpression = "([MosquitoesPresent] = 1) ";
+                if (Parameters != null && ratesParameters.NumerFilter != null)
+                {
+                    //numerExpression = ratesParameters.NumerFilter.GenerateDataFilterString(false);
+                }
+                else
+                {
+                    //return;
+                }
+
+                String denomExpression = "([HouseID] is not null )";
+                if (Parameters != null && ratesParameters.DenomFilter != null)
+                {
+                    //denomExpression = ratesParameters.DenomFilter.GenerateDataFilterString(false);
+                }
+                else
+                {
+                    //return;
+                }
+
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
@@ -395,7 +425,7 @@ namespace EpiDashboard
 
                 try
                 {
-                    int maxRows =( (RatesParameters)Parameters).MaxRows;
+                    int maxRows = ratesParameters.MaxRows;
                     bool exceededMaxRows = false;
                     Parameters.GadgetStatusUpdate += new GadgetStatusUpdateHandler(requestUpdateStatus);
                     Parameters.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(checkForCancellation);
@@ -408,19 +438,57 @@ namespace EpiDashboard
                         Parameters.CustomFilter = string.Empty;
                     }
 
-                    List<DataTable> ratesTables = DashboardHelper.GenerateRates(Parameters as RatesParameters);
+                    ratesParameters.ColumnNames = new List<string>() { "MosquitoesPresent", "HouseID" };
+
+                    List<DataTable> ratesTables = DashboardHelper.GenerateRates(ratesParameters);
+
+                    string primaryGroupField = ratesParameters.PrimaryGroupField;
+
+                    List<string> groupFields = new List<string>();
+                    groupFields.Add(primaryGroupField);
+                    DataTable groupTable = new DataTable();
+                    List<string> primaryGroupElements = new List<string>();
 
                     DataTable dataTable = new DataTable();
                     dataTable.Columns.Add("Rate");
                     dataTable.Columns.Add("Rate_Description");
+                    if (string.IsNullOrEmpty(primaryGroupField) == false)
+                    {
+                        dataTable.Columns.Add(((RatesParameters)Parameters).PrimaryGroupField);
+                    }
                     DataRow newRow = dataTable.NewRow();
-                    newRow["Rate"] = "55";
-                    newRow["Rate_Description"] = "Region A";
-                    dataTable.Rows.Add(newRow);
-                    newRow = dataTable.NewRow();
-                    newRow["Rate"] = "42";
-                    newRow["Rate_Description"] = "Region B";
-                    dataTable.Rows.Add(newRow);
+
+                    foreach (DataTable table in ratesTables)
+                    {
+                        groupTable = table.DefaultView.ToTable(true, groupFields.ToArray());
+
+                        foreach (DataRow row in groupTable.Rows)
+                        {
+                            string aggregateName = groupTable.Columns[0].ColumnName;
+                            string groupName = row[aggregateName] as string;
+                            string aggregateExpression = "([" + aggregateName + "] = '" + groupName + "')";
+
+                            string numerSelect = aggregateExpression + " AND " + denomExpression + " AND " + numerExpression;
+                            string denomSelect = aggregateExpression + " AND " + denomExpression;                         
+
+                            var numerRows = table.Select(numerSelect);
+                            var denomRows = table.Select(denomSelect);
+
+                            var distinctNumer = (numerRows).Distinct();
+                            var distinctDenom = (denomRows).Distinct();
+
+                            int numerValue = distinctNumer.Count();
+                            int denomValue = distinctDenom.Count();
+
+                            double rate = ((double)numerValue / (double)denomValue) * 100;
+
+                            newRow = dataTable.NewRow();
+                            newRow["Rate"] = rate;
+                            newRow["Rate_Description"] = aggregateExpression;
+                            newRow[primaryGroupField] = groupName;
+                            dataTable.Rows.Add(newRow);
+                        }
+                    }
 
                     ratesTables = new List<DataTable>();
                     ratesTables.Add(dataTable);
@@ -861,10 +929,32 @@ namespace EpiDashboard
             element.Attributes.Append(collapsed);
             element.Attributes.Append(type);
             element.Attributes.Append(id);
+
             if (IsCollapsed == false)
             {
                 element.Attributes.Append(actualHeight);
             }
+
+            string numerVar = String.Empty;
+            string denomVar = String.Empty;
+
+            if (!String.IsNullOrEmpty(ratesParameters.NumeratorField))
+            {
+                numerVar = ratesParameters.NumeratorField;
+            }
+
+            if (!String.IsNullOrEmpty(ratesParameters.DenominatorField))
+            {
+                denomVar = ratesParameters.DenominatorField;
+            }
+
+            XmlElement numerElement = doc.CreateElement("numerVariable");
+            numerElement.InnerText = numerVar;
+            element.AppendChild(numerElement);
+
+            XmlElement denomElement = doc.CreateElement("denomVariable");
+            denomElement.InnerText = denomVar;
+            element.AppendChild(denomElement);
 
             string groupVar1 = String.Empty;
             string groupVar2 = String.Empty;
@@ -1055,6 +1145,18 @@ namespace EpiDashboard
                             ((RatesParameters)Parameters).SecondaryGroupField = child.InnerText.Trim();
                         }
                         break;
+                    case "numerVariable":
+                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
+                        {
+                            ((RatesParameters)Parameters).NumeratorField = child.InnerText.Trim();
+                        }
+                        break;
+                    case "denomVariable":
+                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
+                        {
+                            ((RatesParameters)Parameters).DenominatorField = child.InnerText.Trim();
+                        }
+                        break;
                     case "maxcolumnnamelength":
                         int maxColumnLength = 24;
                         int.TryParse(child.InnerText, out maxColumnLength);
@@ -1099,6 +1201,21 @@ namespace EpiDashboard
                         bool showAsPercent = true;
                         bool.TryParse(child.InnerText, out showAsPercent);
                         ((RatesParameters)Parameters).ShowAsPercent = showAsPercent;
+                        break;
+                    case "numerDistinct":
+                        bool numerDistinct = true;
+                        bool.TryParse(child.InnerText, out numerDistinct);
+                        ((RatesParameters)Parameters).NumerDistinct = numerDistinct;
+                        break;
+                    case "denomDistinct":
+                        bool denomDistinct = true;
+                        bool.TryParse(child.InnerText, out denomDistinct);
+                        ((RatesParameters)Parameters).DenomDistinct = denomDistinct;
+                        break;
+                    case "rateMultiplyer":
+                        int rateMultiplyer = 100;
+                        int.TryParse(child.InnerText, out rateMultiplyer);
+                        ((RatesParameters)Parameters).RateMultiplier = rateMultiplyer;
                         break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText))

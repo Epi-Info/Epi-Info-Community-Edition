@@ -17,12 +17,16 @@ namespace EpiDashboard
         public bool NumerDistinct { get; set; }
         public bool DenomDistinct { get; set; }
         public bool ShowAsPercent { get; set; }
+        public string NumeratorField { get; set; }
+        public string DenominatorField { get; set; }
         public string PrimaryGroupField { get; set; }
         public string SecondaryGroupField { get; set; }
         public int MaxColumnLength { get; set; }
+        public int RateMultiplier { get; set; }
         public int MaxRows { get; set; }
         public DataFilters NumerFilter { get; set; }
         public DataFilters DenomFilter { get; set; }
+
 
         public RatesParameters()
             : base()
@@ -35,8 +39,11 @@ namespace EpiDashboard
             DenomDistinct = false;
             ShowNullLabels = true;
             ShowAsPercent = true;
+            NumeratorField = String.Empty;
+            DenominatorField = String.Empty;
             PrimaryGroupField = String.Empty;
             SecondaryGroupField = String.Empty;
+            RateMultiplier = 100;
             GadgetTitle = "Rates";
         }
     }
