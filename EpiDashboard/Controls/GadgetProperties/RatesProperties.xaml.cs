@@ -46,7 +46,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             _numerFilter = new DataFilters(DashboardHelper);
             _denomFilter = new DataFilters(DashboardHelper);
 
-        List<FieldInfo> items = new List<FieldInfo>();
+            List<FieldInfo> items = new List<FieldInfo>();
             List<string> fields = new List<string>();
             fields.Add(string.Empty);
 
@@ -288,6 +288,15 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
 
+            if (string.IsNullOrWhiteSpace(cmbRateMultiplier.Text) == false)
+            {
+                Parameters.RateMultiplierString = cmbRateMultiplier.Text;
+            }
+            else
+            {
+                Parameters.RateMultiplierString = "100";
+            }
+
             //if (cmbNumeratorField.SelectedIndex >= 0)
             //{
             //    Parameters.NumeratorField = cmbNumeratorField.SelectedItem.ToString();
@@ -402,6 +411,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxLineColumn.IsChecked = Parameters.ShowLineColumn;
             checkboxShowNulls.IsChecked = Parameters.ShowNullLabels;
             checkboxListLabels.IsChecked = Parameters.ShowCommentLegalLabels;
+
+            if (!String.IsNullOrEmpty(Parameters.RateMultiplierString))
+            {
+                cmbRateMultiplier.Text = Parameters.RateMultiplierString;
+            }
 
             //cmbNumeratorField.SelectedItem = Parameters.NumeratorField;
             //cmbDenominatorField.SelectedItem = Parameters.DenominatorField;

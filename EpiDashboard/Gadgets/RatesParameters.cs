@@ -22,11 +22,45 @@ namespace EpiDashboard
         public string PrimaryGroupField { get; set; }
         public string SecondaryGroupField { get; set; }
         public int MaxColumnLength { get; set; }
-        public int RateMultiplier { get; set; }
+        public string RateMultiplierString { get; set; }
         public int MaxRows { get; set; }
         public DataFilters NumerFilter { get; set; }
         public DataFilters DenomFilter { get; set; }
 
+
+        public double RateMultiplier
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(RateMultiplierString))
+                {
+                    return 100;
+                }
+                else
+                { 
+                    string selectedText = RateMultiplierString;
+
+                    int multiplierInt = 100;
+                    double multiplierDouble = 100;
+
+                    if (int.TryParse(selectedText, out multiplierInt))
+                    {
+                        return multiplierInt;
+                    }
+                    else if (selectedText.Contains("^"))
+                    {
+                        string ortex = selectedText.Replace("^", "E");
+
+                        if (double.TryParse(ortex, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out multiplierDouble))
+                        {
+                            return (double)multiplierDouble;
+                        }
+                    }
+
+                    return 100;
+                }
+            }
+        }
 
         public RatesParameters()
             : base()
@@ -43,7 +77,7 @@ namespace EpiDashboard
             DenominatorField = String.Empty;
             PrimaryGroupField = String.Empty;
             SecondaryGroupField = String.Empty;
-            RateMultiplier = 100;
+            RateMultiplierString = "100";
             GadgetTitle = "Rates";
         }
     }
