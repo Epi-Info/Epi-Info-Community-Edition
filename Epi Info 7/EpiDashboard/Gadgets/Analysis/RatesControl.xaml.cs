@@ -483,7 +483,7 @@ namespace EpiDashboard
                             int numerValue = distinctNumer.Count(); 
                             int denomValue = distinctDenom.Count();
 
-                            double rate = ((double)numerValue / (double)denomValue) * 100;
+                            double rate = ((double)numerValue / (double)denomValue) * ratesParameters.RateMultiplier;
 
                             newRow = dataTable.NewRow();
                             newRow["Rate"] = rate;
@@ -1003,9 +1003,13 @@ namespace EpiDashboard
             showNullLabelsElement.InnerText = ratesParameters.ShowNullLabels.ToString();
             element.AppendChild(showNullLabelsElement);
 
+            XmlElement rateMultiplierElement = doc.CreateElement("rateMultiplierString");
+            rateMultiplierElement.InnerText = ratesParameters.RateMultiplierString;
+            element.AppendChild(rateMultiplierElement);
+
             XmlElement showAsPercentElement = doc.CreateElement("showAsPercent");
-            showNullLabelsElement.InnerText = ratesParameters.ShowNullLabels.ToString();
-            element.AppendChild(showNullLabelsElement);
+            showAsPercentElement.InnerText = ratesParameters.ShowAsPercent.ToString();
+            element.AppendChild(showAsPercentElement);
 
             XmlElement numerDistinctElement = doc.CreateElement("numerDistinct");
             numerDistinctElement.InnerText = ratesParameters.NumerDistinct.ToString();
@@ -1148,13 +1152,13 @@ namespace EpiDashboard
                             ((RatesParameters)Parameters).SecondaryGroupField = child.InnerText.Trim();
                         }
                         break;
-                    case "numerVariable":
+                    case "numervariable":
                         if (!String.IsNullOrEmpty(child.InnerText.Trim()))
                         {
                             ((RatesParameters)Parameters).NumeratorField = child.InnerText.Trim();
                         }
                         break;
-                    case "denomVariable":
+                    case "denomvariable":
                         if (!String.IsNullOrEmpty(child.InnerText.Trim()))
                         {
                             ((RatesParameters)Parameters).DenominatorField = child.InnerText.Trim();
@@ -1205,20 +1209,21 @@ namespace EpiDashboard
                         bool.TryParse(child.InnerText, out showAsPercent);
                         ((RatesParameters)Parameters).ShowAsPercent = showAsPercent;
                         break;
-                    case "numerDistinct":
+                    case "numerdistinct":
                         bool numerDistinct = true;
                         bool.TryParse(child.InnerText, out numerDistinct);
                         ((RatesParameters)Parameters).NumerDistinct = numerDistinct;
                         break;
-                    case "denomDistinct":
+                    case "denomdistinct":
                         bool denomDistinct = true;
                         bool.TryParse(child.InnerText, out denomDistinct);
                         ((RatesParameters)Parameters).DenomDistinct = denomDistinct;
                         break;
-                    case "rateMultiplyer":
-                        int rateMultiplyer = 100;
-                        int.TryParse(child.InnerText, out rateMultiplyer);
-                        ((RatesParameters)Parameters).RateMultiplier = rateMultiplyer;
+                    case "ratemultiplierstring":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            ((RatesParameters)Parameters).RateMultiplierString = child.InnerText;
+                        }
                         break;
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText))
