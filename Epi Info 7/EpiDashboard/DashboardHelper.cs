@@ -3284,8 +3284,6 @@ namespace EpiDashboard
                 AddCommentLegalLabelsToListTable(dt);
             }
 
-
-
             List<DataTable> tables = new List<DataTable>();
             ConvertLineListData(dt);
             tables.Add(dt);

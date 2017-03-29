@@ -122,7 +122,7 @@ namespace EpiDashboard
         /// <summary>
         /// Gets the data table containing the various filter conditions
         /// </summary>
-        private DataTable ConditionTable 
+        public DataTable ConditionTable 
         {
             get
             {
@@ -212,32 +212,36 @@ namespace EpiDashboard
         {
             string joinType = "and";
 
-            foreach (System.Xml.XmlElement iChild in element.ChildNodes)
+            try
             {
-                if (iChild.Name.Equals("filterCondition"))
+                foreach (System.Xml.XmlElement iChild in element.ChildNodes)
                 {
-                    FilterCondition newCondition = new FilterCondition();
-                    newCondition.CreateFromXml(iChild);
-
-                    foreach (XmlElement jChild in iChild.ChildNodes)
+                    if (iChild.Name.Equals("filterCondition"))
                     {
-                        if (jChild.Name.Equals("joinType"))
+                        FilterCondition newCondition = new FilterCondition();
+                        newCondition.CreateFromXml(iChild);
+
+                        foreach (XmlElement jChild in iChild.ChildNodes)
                         {
-                            joinType = jChild.InnerText;
+                            if (jChild.Name.Equals("joinType"))
+                            {
+                                joinType = jChild.InnerText;
+                            }
+                        }
+
+                        switch (joinType.ToLowerInvariant())
+                        {
+                            case "or":
+                                this.AddFilterCondition(newCondition, ConditionJoinType.Or);
+                                break;
+                            default:
+                                this.AddFilterCondition(newCondition, ConditionJoinType.And);
+                                break;
                         }
                     }
-
-                    switch (joinType.ToLowerInvariant())
-                    {
-                        case "or":
-                            this.AddFilterCondition(newCondition, ConditionJoinType.Or);
-                            break;
-                        default:
-                            this.AddFilterCondition(newCondition, ConditionJoinType.And);
-                            break;
-                    }                    
                 }
             }
+            catch { }
         }
 
         /// <summary>
@@ -268,8 +272,8 @@ namespace EpiDashboard
             foreach (DataRow row in ConditionTable.Rows)
             {
                 FilterCondition filterCondition = (FilterCondition)row[COLUMN_FILTER];
-
-                root.AppendChild(filterCondition.Serialize(doc, row[COLUMN_FRIENDLY_JOIN].ToString().ToLowerInvariant()));
+                XmlNode xmlNode = filterCondition.Serialize(doc, row[COLUMN_FRIENDLY_JOIN].ToString().ToLowerInvariant());
+                root.AppendChild(xmlNode);
             }
             return root;
         }

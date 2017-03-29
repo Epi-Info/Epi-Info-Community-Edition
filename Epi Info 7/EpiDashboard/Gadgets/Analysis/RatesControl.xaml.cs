@@ -396,24 +396,24 @@ namespace EpiDashboard
                     return;
                 }
 
-                String numerExpression = "([MosquitoesPresent] = 1) ";
+                String numerExpression = "";
                 if (Parameters != null && ratesParameters.NumerFilter != null)
                 {
-                    //numerExpression = ratesParameters.NumerFilter.GenerateDataFilterString(false);
+                    numerExpression = ratesParameters.NumerFilter.GenerateDataFilterString(false);
                 }
                 else
                 {
-                    //return;
+                    return;
                 }
 
-                String denomExpression = "([HouseID] is not null )";
+                String denomExpression = "";
                 if (Parameters != null && ratesParameters.DenomFilter != null)
                 {
-                    //denomExpression = ratesParameters.DenomFilter.GenerateDataFilterString(false);
+                    denomExpression = ratesParameters.DenomFilter.GenerateDataFilterString(false);
                 }
                 else
                 {
-                    //return;
+                    return;
                 }
 
                 Stopwatch stopwatch = new Stopwatch();
@@ -538,8 +538,12 @@ namespace EpiDashboard
                                 continue;
                             }
                             string tableHeading = listTable.TableName;
+
                             if (Parameters.ColumnNames.Count != columnOrder.Count)
+                            {
                                 columnOrder = new List<string>();
+                            }
+
                             SetCustomColumnSort(listTable);
 
                             if (listTable.Columns.Count == 0)
@@ -548,6 +552,7 @@ namespace EpiDashboard
                             }
 
                             int[] totals = new int[listTable.Columns.Count - 1];
+
                             if (listTable.Rows.Count > maxRows)
                             {
                                 exceededMaxRows = true;
@@ -1110,12 +1115,16 @@ namespace EpiDashboard
 
             if(ratesParameters.NumerFilter != null)
             {
-                ratesParameters.NumerFilter.Serialize(doc);
+                XmlElement numerDataFilterElement = doc.CreateElement("numerDataFilter");
+                numerDataFilterElement.AppendChild(ratesParameters.NumerFilter.Serialize(doc));
+                element.AppendChild(numerDataFilterElement);
             }
 
             if (ratesParameters.DenomFilter != null)
             {
-                ratesParameters.DenomFilter.Serialize(doc);
+                XmlElement denomDataFilterElement = doc.CreateElement("denomDataFilter");
+                denomDataFilterElement.AppendChild(ratesParameters.NumerFilter.Serialize(doc));
+                element.AppendChild(denomDataFilterElement);
             }
 
             return element;
@@ -1139,6 +1148,20 @@ namespace EpiDashboard
             {
                 switch (child.Name.ToLowerInvariant())
                 {
+                    case "numerdatafilter":
+                        if (!String.IsNullOrEmpty(child.InnerText.Trim()) && child.FirstChild != null)
+                        {
+                            ((RatesParameters)Parameters).NumerFilter = new DataFilters(this.DashboardHelper);
+                            ((RatesParameters)Parameters).NumerFilter.CreateFromXml(((XmlElement)child.FirstChild));
+                        }
+                        break;
+                    case "denomdatafilter":
+                        if (!String.IsNullOrEmpty(child.InnerText.Trim()) && child.FirstChild != null)
+                        {
+                            ((RatesParameters)Parameters).DenomFilter = new DataFilters(this.DashboardHelper);
+                            ((RatesParameters)Parameters).DenomFilter.CreateFromXml(((XmlElement)child.FirstChild));
+                        }
+                        break;
                     case "groupvariable":
                     case "groupvariableprimary":
                         if (!String.IsNullOrEmpty(child.InnerText.Trim()))

@@ -92,8 +92,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             lvDenominator.ItemsSource = items;
 
             cmbGroupField.ItemsSource = fields;
-            //cmbNumeratorField.ItemsSource = fields;
-            //cmbDenominatorField.ItemsSource = fields;
             cmbSecondaryGroupField.ItemsSource = fields;
 
             foreach (string fieldName in fields)
@@ -417,8 +415,16 @@ namespace EpiDashboard.Controls.GadgetProperties
                 cmbRateMultiplier.Text = Parameters.RateMultiplierString;
             }
 
-            //cmbNumeratorField.SelectedItem = Parameters.NumeratorField;
-            //cmbDenominatorField.SelectedItem = Parameters.DenominatorField;
+            if(Parameters.NumerFilter != null)
+            {
+                numeratorRule.Content = Parameters.NumerFilter.GenerateReadableDataFilterString();
+            }
+
+            if (Parameters.DenomFilter != null)
+            {
+                denominatorRule.Content = Parameters.DenomFilter.GenerateReadableDataFilterString();
+            }
+
             cmbGroupField.SelectedItem = Parameters.PrimaryGroupField;
             cmbSecondaryGroupField.SelectedItem = Parameters.SecondaryGroupField;
 
@@ -567,27 +573,25 @@ namespace EpiDashboard.Controls.GadgetProperties
 
         private void btnNumeratorRule_Click(object sender, RoutedEventArgs e)
         {
-            Dialogs.RowFilterDialog rfd = new Dialogs.RowFilterDialog(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, _numerFilter, true);
-            System.Windows.Forms.DialogResult result = rfd.ShowDialog();
+            Dialogs.RowFilterDialog rowFilterDialog = new Dialogs.RowFilterDialog(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, Parameters.NumerFilter, true);
+            System.Windows.Forms.DialogResult result = rowFilterDialog.ShowDialog();
+
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                _numerFilter = rfd.DataFilters;
-                Parameters.NumerFilter = rfd.DataFilters;
+                _numerFilter = rowFilterDialog.DataFilters;
+                Parameters.NumerFilter = rowFilterDialog.DataFilters;
                 numeratorRule.Content = _numerFilter.GenerateReadableDataFilterString();
-                string dataFilterString = _numerFilter.GenerateDataFilterString();
-
-                //System.Data.DataView dvAssign = new System.Data.DataView(table, DataFilters.GenerateDataFilterString(), string.Empty, System.Data.DataViewRowState.CurrentRows);
             }
         }
 
         private void btnDenominatorRule_Click(object sender, RoutedEventArgs e)
         {
-            Dialogs.RowFilterDialog rfd = new Dialogs.RowFilterDialog(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, _denomFilter, true);
-            System.Windows.Forms.DialogResult result = rfd.ShowDialog();
+            Dialogs.RowFilterDialog rowFilterDialog = new Dialogs.RowFilterDialog(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, Parameters.DenomFilter, true);
+            System.Windows.Forms.DialogResult result = rowFilterDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                _denomFilter = rfd.DataFilters;
-                Parameters.DenomFilter = rfd.DataFilters;
+                _denomFilter = rowFilterDialog.DataFilters;
+                Parameters.DenomFilter = rowFilterDialog.DataFilters;
                 denominatorRule.Content = _denomFilter.GenerateReadableDataFilterString();
             }
         }
