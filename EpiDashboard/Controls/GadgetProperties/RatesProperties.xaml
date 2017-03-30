@@ -92,7 +92,7 @@
                         <ComboBox x:Name="cmbNumeratorField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
                     </StackPanel>-->
                     <Button x:Name="btnNumeratorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnNumeratorRule_Click">Create/Edit Condition</Button>
-                    <CheckBox x:Name="checkBoxNumberatorDistinct">Distinct</CheckBox>
+                    <CheckBox x:Name="checkBoxNumberatorDistinct" Visibility="Collapsed">Distinct</CheckBox>
 
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Height="4" Width="250" Margin="0,40" Fill="LightGray" Stroke="LightGray"/>
@@ -107,7 +107,7 @@
                         <ComboBox x:Name="cmbDenominatorField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
                     </StackPanel>-->
                     <Button x:Name="btnDenominatorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnDenominatorRule_Click">Create/Edit Condition</Button>
-                    <CheckBox x:Name="checkBoxDenominatorDistinct">Distinct</CheckBox>
+                    <CheckBox x:Name="checkBoxDenominatorDistinct" Visibility="Collapsed">Distinct</CheckBox>
 
                     <Label Visibility="Collapsed" x:Name="tblockVariableDenominator">Denominator:__xfe</Label>
                     <ListView Visibility="Collapsed" Name="lvDenominator" HorizontalAlignment="Left" Width="Auto" Height="280">
