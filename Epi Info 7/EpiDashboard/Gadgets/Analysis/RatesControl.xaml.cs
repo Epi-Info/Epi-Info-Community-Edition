@@ -438,7 +438,31 @@ namespace EpiDashboard
                         Parameters.CustomFilter = string.Empty;
                     }
 
-                    ratesParameters.ColumnNames = new List<string>() { "MosquitoesPresent", "HouseID" };
+                    List<string> numerFilterFields = new List<string>();
+
+                    foreach (DataRow numerRow in ratesParameters.NumerFilter.ConditionTable.Rows)
+                    {
+                        string[] fragments = (numerRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                        if (fragments.Length == 3)
+                        {
+                            numerFilterFields.Add(fragments[1]);
+                        }
+                    }
+
+                    List<string> denomFilterFields = new List<string>();
+
+                    foreach (DataRow denomRow in ratesParameters.DenomFilter.ConditionTable.Rows)
+                    {
+                        string[] fragments = (denomRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                        if (fragments.Length == 3)
+                        {
+                            denomFilterFields.Add(fragments[1]);
+                        }
+                    }
+
+                    numerFilterFields.AddRange(denomFilterFields.ToList<string>());
+
+                    ratesParameters.ColumnNames = numerFilterFields;
 
                     List<DataTable> ratesTables = DashboardHelper.GenerateRates(ratesParameters);
 
@@ -471,16 +495,8 @@ namespace EpiDashboard
                             string numerSelect = aggregateExpression + " AND " + denomExpression + " AND " + numerExpression;
                             string denomSelect = aggregateExpression + " AND " + denomExpression;                         
 
-                            List<string> numerFilterFields = new List<string>();
-                            numerFilterFields.Add("MosquitoesPresent");
-                            numerFilterFields.Add("HouseID");
-
                             DataView numerView = new DataView(table, numerSelect, numerFilterFields[0], DataViewRowState.CurrentRows);
                             DataTable numerTable = numerView.ToTable(true, numerFilterFields.ToArray());
-
-
-                            List<string> denomFilterFields = new List<string>();
-                            denomFilterFields.Add("HouseID");
 
                             DataView denomView = new DataView(table, denomSelect, denomFilterFields[0], DataViewRowState.CurrentRows);
                             DataTable denomTable = denomView.ToTable(true, denomFilterFields.ToArray());
@@ -1128,7 +1144,7 @@ namespace EpiDashboard
             if (ratesParameters.DenomFilter != null)
             {
                 XmlElement denomDataFilterElement = doc.CreateElement("denomDataFilter");
-                denomDataFilterElement.AppendChild(ratesParameters.NumerFilter.Serialize(doc));
+                denomDataFilterElement.AppendChild(ratesParameters.DenomFilter.Serialize(doc));
                 element.AppendChild(denomDataFilterElement);
             }
 
