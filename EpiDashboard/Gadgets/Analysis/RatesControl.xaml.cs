@@ -471,17 +471,22 @@ namespace EpiDashboard
                             string numerSelect = aggregateExpression + " AND " + denomExpression + " AND " + numerExpression;
                             string denomSelect = aggregateExpression + " AND " + denomExpression;                         
 
-                            var numerRows = table.Select(numerSelect);
-                            var denomRows = table.Select(denomSelect);
+                            List<string> numerFilterFields = new List<string>();
+                            numerFilterFields.Add("MosquitoesPresent");
+                            numerFilterFields.Add("HouseID");
 
-                            var distinctNumer = (from DataRow dRow in numerRows
-                                                select new { col1 = dRow["MosquitoesPresent"], col2 = dRow["HouseID"] }).Distinct();
+                            DataView numerView = new DataView(table, numerSelect, numerFilterFields[0], DataViewRowState.CurrentRows);
+                            DataTable numerTable = numerView.ToTable(true, numerFilterFields.ToArray());
 
-                            var distinctDenom = (from DataRow dRow in denomRows
-                                                 select new { col1 = dRow["HouseID"] }).Distinct();
 
-                            int numerValue = distinctNumer.Count(); 
-                            int denomValue = distinctDenom.Count();
+                            List<string> denomFilterFields = new List<string>();
+                            denomFilterFields.Add("HouseID");
+
+                            DataView denomView = new DataView(table, denomSelect, denomFilterFields[0], DataViewRowState.CurrentRows);
+                            DataTable denomTable = denomView.ToTable(true, denomFilterFields.ToArray());
+
+                            int numerValue = numerTable.Rows.Count;
+                            int denomValue = denomTable.Rows.Count;
 
                             double rate = ((double)numerValue / (double)denomValue) * ratesParameters.RateMultiplier;
 
@@ -1588,4 +1593,32 @@ namespace EpiDashboard
             }
         }
     }
+
+    //#region Classes
+    //private class DistinctComparer : IEqualityComparer<DataRow>
+    //{
+    //    List<string> _columnNames;
+
+    //    DistinctComparer(List<string> columns)
+    //    {
+    //        _columnNames = columns;
+    //    }
+        
+    //    public bool Equals(DataRow one, DataRow two)
+    //    {
+    //        if(one.Field<string>("ID") == one.Field<string>("ID"))
+    //        {
+    //            return true;
+    //        }
+    //        else
+    //        {
+    //            return false;
+    //        }
+    //    }
+
+    //    public int GetHashCode(string obj)
+    //    {
+    //        return obj.GetHashCode();
+    //    }
+    //}
 }
