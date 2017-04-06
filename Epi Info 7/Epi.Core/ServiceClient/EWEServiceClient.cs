@@ -42,7 +42,7 @@ namespace Epi.Core.ServiceClient
                     binding.CloseTimeout = new TimeSpan(0, 10, 0);
                     binding.OpenTimeout = new TimeSpan(0, 10, 0);
                     binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                    binding.SendTimeout = new TimeSpan(0, 1, 0);
+                    binding.SendTimeout = new TimeSpan(0, 10, 0);
                     binding.AllowCookies = false;
                     binding.BypassProxyOnLocal = false;
                     binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
