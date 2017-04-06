@@ -1578,7 +1578,7 @@ namespace Epi.Windows.MakeView.Forms
                 {
                     switch (field.FieldType.ToString())
                     {
-                        case "Codes":
+                        //case "Codes":
                         case "TextUppercase":
                         case "GUID":
                         case "PhoneNumber":
