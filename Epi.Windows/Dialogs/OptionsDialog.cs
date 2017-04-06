@@ -1151,35 +1151,43 @@ namespace Epi.Windows.Dialogs
             }
             catch (FaultException fe)
             {
-                MessageBox.Show("Fault Exception ouccured !" + "/n Stack:" + fe.StackTrace + "/n Inner:" + fe.Message, "", MessageBoxButtons.OK);
+
+                Logger.Log("Fault Exception ouccured !" + "/n Stack:" + fe.StackTrace + "/n Inner:" + fe.Message);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_FAULT_EXCEPTION, "", MessageBoxButtons.OK);
             }
             catch (CommunicationException ce)
             {
-                MessageBox.Show("Communication Exception ouccured !" + "/n Stack:" + ce.StackTrace + "/n Inner:" + ce.Message, "", MessageBoxButtons.OK);
+
+                Logger.Log("Communication Exception ouccured !" + "/n Stack:" + ce.StackTrace + "/n Inner:" + ce.Message);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_COMMUNICATION_EXCEPTION, "", MessageBoxButtons.OK);
             }
             catch (TimeoutException te)
             {
-                MessageBox.Show("Timeout Exception ouccured !" + "/n Stack:" + te.StackTrace + "/n Inner:" + te.Message, "", MessageBoxButtons.OK);
+
+                Logger.Log("Timeout Exception ouccured !" + "/n Stack:" + te.StackTrace + "/n Inner:" + te.Message);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_TIMEOUT_EXCEPTION, "", MessageBoxButtons.OK);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Stack:" + ex.StackTrace + " Message:" + ex.Message, "", MessageBoxButtons.OK);
+
+                Logger.Log("Stack:" + ex.StackTrace + "/n Message:" + ex.Message);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_ERROR, "", MessageBoxButtons.OK);
             }
 
 
         }
-        private void  ValidateEIWSSittings()
+        private void ValidateEIWSSittings()
         {
-            
-                
-                SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
-                SurveyManagerServiceV3.OrganizationRequest Request = new SurveyManagerServiceV3.OrganizationRequest();
-                SurveyManagerServiceV3.OrganizationDTO orgDTO = new SurveyManagerServiceV3.OrganizationDTO();
-                Request.Organization = orgDTO;
-                var Result = client.GetOrganization(Request);
 
-            
-            
+
+            SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+            SurveyManagerServiceV3.OrganizationRequest Request = new SurveyManagerServiceV3.OrganizationRequest();
+            SurveyManagerServiceV3.OrganizationDTO orgDTO = new SurveyManagerServiceV3.OrganizationDTO();
+            Request.Organization = orgDTO;
+            var Result = client.GetOrganization(Request);
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1192,19 +1200,27 @@ namespace Epi.Windows.Dialogs
             }
             catch (FaultException fe)
             {
-                MessageBox.Show("Fault Exception ouccured !" + "/n Stack:" + fe.StackTrace + "/n Inner:" + fe.Message, "", MessageBoxButtons.OK);
+
+                Logger.Log("Fault Exception ouccured !" + "/n Stack:" + fe.StackTrace + "/n Inner:" + fe.Message);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_FAULT_EXCEPTION, "", MessageBoxButtons.OK);
             }
             catch (CommunicationException ce)
             {
-                MessageBox.Show("Communication Exception ouccured !" + "/n Stack:" + ce.StackTrace + "/n Inner:" + ce.Message, "", MessageBoxButtons.OK);
+
+                Logger.Log("Communication Exception ouccured !" + "/n Stack:" + ce.StackTrace + "/n Inner:" + ce.Message);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_COMMUNICATION_EXCEPTION, "", MessageBoxButtons.OK);
             }
             catch (TimeoutException te)
             {
-                MessageBox.Show("Timeout Exception ouccured !" + "/n Stack:" + te.StackTrace + "/n Inner:" + te.Message, "", MessageBoxButtons.OK);
+
+                Logger.Log("Timeout Exception ouccured !" + "/n Stack:" + te.StackTrace + "/n Inner:" + te.Message);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_TIMEOUT_EXCEPTION, "", MessageBoxButtons.OK);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Stack:" + ex.StackTrace + " Message:" + ex.Message, "", MessageBoxButtons.OK);
+
+                Logger.Log("Stack:" + ex.StackTrace + "/n Message:" + ex.Message);
+                MessageBox.Show(SharedStrings.WEBSURVEY_PING_ERROR, "", MessageBoxButtons.OK);
             }
 
         }

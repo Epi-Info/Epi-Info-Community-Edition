@@ -9108,11 +9108,29 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error. Ping not successful..
+        ///   Looks up a localized string similar to Error: Communication exception ouccured..
+        /// </summary>
+        public static string WEBSURVEY_PING_COMMUNICATION_EXCEPTION {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_PING_COMMUNICATION_EXCEPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: Ping not successful..
         /// </summary>
         public static string WEBSURVEY_PING_ERROR {
             get {
                 return ResourceManager.GetString("WEBSURVEY_PING_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: Fault exception ouccured..
+        /// </summary>
+        public static string WEBSURVEY_PING_FAULT_EXCEPTION {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_PING_FAULT_EXCEPTION", resourceCulture);
             }
         }
         
@@ -9122,6 +9140,15 @@ namespace Epi {
         public static string WEBSURVEY_PING_SUCCESS {
             get {
                 return ResourceManager.GetString("WEBSURVEY_PING_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: Timeout exception ouccured..
+        /// </summary>
+        public static string WEBSURVEY_PING_TIMEOUT_EXCEPTION {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_PING_TIMEOUT_EXCEPTION", resourceCulture);
             }
         }
         
