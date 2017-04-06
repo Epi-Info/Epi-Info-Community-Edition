@@ -3177,7 +3177,7 @@ Do you wish to proceed with the import and overwrite these tables? This action c
     <value>The Epi Info™ Help Desk Customer Portal is hosted on Atlassian.net. Please create an account and Log In to submit an Epi Info™ Help Desk ticket.</value>
   </data>
   <data name="WEBSURVEY_PING_ERROR" xml:space="preserve">
-    <value>Error. Ping not successful.</value>
+    <value>Error: Ping not successful.</value>
   </data>
   <data name="WEBSURVEY_PING_SUCCESS" xml:space="preserve">
     <value>Ping was successful.</value>
@@ -3247,5 +3247,14 @@ GlobalRecordId = [FKEY]</value>
   </data>
   <data name="PROJECT_OVERWRITTEN" xml:space="preserve">
     <value>Epi Info 7 project overwritten</value>
+  </data>
+  <data name="WEBSURVEY_PING_COMMUNICATION_EXCEPTION" xml:space="preserve">
+    <value>Error: Communication exception ouccured.</value>
+  </data>
+  <data name="WEBSURVEY_PING_FAULT_EXCEPTION" xml:space="preserve">
+    <value>Error: Fault exception ouccured.</value>
+  </data>
+  <data name="WEBSURVEY_PING_TIMEOUT_EXCEPTION" xml:space="preserve">
+    <value>Error: Timeout exception ouccured.</value>
   </data>
 </root>
