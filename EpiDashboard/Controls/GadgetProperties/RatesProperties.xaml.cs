@@ -158,11 +158,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             get
             {
-                if (lvNumerator.SelectedItems.Count > 0 && lvDenominator.SelectedItems.Count > 0)
-                {
-                    return true;
-                }
-                return false;
+                return _numerFilter != null && _denomFilter != null;
             }
         }
 
@@ -219,16 +215,30 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             List<string> listFields = new List<string>();
 
-            if (lvNumerator.SelectedItems.Count > 0)
+            List<string> numerFilterFields = new List<string>();
+
+            foreach (System.Data.DataRow numerRow in Parameters.NumerFilter.ConditionTable.Rows)
             {
-                foreach (FieldInfo fieldInfo in lvNumerator.SelectedItems)
+                string[] fragments = (numerRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                if (fragments.Length == 3)
                 {
-                    if (!string.IsNullOrEmpty(fieldInfo.Name))
-                    {
-                        listFields.Add(fieldInfo.Name);
-                    }
+                    numerFilterFields.Add(fragments[1]);
                 }
             }
+
+            List<string> denomFilterFields = new List<string>();
+
+            foreach (System.Data.DataRow denomRow in Parameters.DenomFilter.ConditionTable.Rows)
+            {
+                string[] fragments = (denomRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                if (fragments.Length == 3)
+                {
+                    denomFilterFields.Add(fragments[1]);
+                }
+            }
+
+            numerFilterFields.AddRange(denomFilterFields.ToList<string>());
+            listFields = numerFilterFields;
 
             listFields.Sort();
             if ((Gadget as RatesControl).IsHostedByEnter)

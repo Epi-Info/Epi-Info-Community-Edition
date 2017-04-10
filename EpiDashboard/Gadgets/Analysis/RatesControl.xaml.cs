@@ -467,9 +467,11 @@ namespace EpiDashboard
                     List<DataTable> ratesTables = DashboardHelper.GenerateRates(ratesParameters);
 
                     string primaryGroupField = ratesParameters.PrimaryGroupField;
+                    string secondaryGroupField = ratesParameters.SecondaryGroupField;
 
                     List<string> groupFields = new List<string>();
                     groupFields.Add(primaryGroupField);
+                    groupFields.Add(secondaryGroupField);
                     DataTable groupTable = new DataTable();
                     List<string> primaryGroupElements = new List<string>();
 
@@ -480,20 +482,52 @@ namespace EpiDashboard
                     {
                         dataTable.Columns.Add(((RatesParameters)Parameters).PrimaryGroupField);
                     }
+                    if (string.IsNullOrEmpty(secondaryGroupField) == false)
+                    {
+                        dataTable.Columns.Add(((RatesParameters)Parameters).SecondaryGroupField);
+                    }
                     DataRow newRow = dataTable.NewRow();
+
+                    groupFields.RemoveAll(string.IsNullOrWhiteSpace);
+                    bool containsGroupField = groupFields.Count > 0;
 
                     foreach (DataTable table in ratesTables)
                     {
-                        groupTable = table.DefaultView.ToTable(true, groupFields.ToArray());
-
-                        foreach (DataRow row in groupTable.Rows)
+                        if (containsGroupField)
                         {
-                            string aggregateName = groupTable.Columns[0].ColumnName;
-                            string groupName = row[aggregateName] as string;
-                            string aggregateExpression = "([" + aggregateName + "] = '" + groupName + "')";
+                            groupTable = table.DefaultView.ToTable(true, groupFields.ToArray());
 
-                            string numerSelect = aggregateExpression + " AND " + denomExpression + " AND " + numerExpression;
-                            string denomSelect = aggregateExpression + " AND " + denomExpression;                         
+                            foreach (DataRow row in groupTable.Rows)
+                            {
+                                string aggregateName = groupTable.Columns[0].ColumnName;
+                                string groupName = row[aggregateName] as string;
+                                string aggregateExpression = "([" + aggregateName + "] = '" + groupName + "')";
+
+                                string numerSelect = aggregateExpression + " AND " + denomExpression + " AND " + numerExpression;
+                                string denomSelect = aggregateExpression + " AND " + denomExpression;
+
+                                DataView numerView = new DataView(table, numerSelect, numerFilterFields[0], DataViewRowState.CurrentRows);
+                                DataTable numerTable = numerView.ToTable(true, numerFilterFields.ToArray());
+
+                                DataView denomView = new DataView(table, denomSelect, denomFilterFields[0], DataViewRowState.CurrentRows);
+                                DataTable denomTable = denomView.ToTable(true, denomFilterFields.ToArray());
+
+                                int numerValue = numerTable.Rows.Count;
+                                int denomValue = denomTable.Rows.Count;
+
+                                double rate = ((double)numerValue / (double)denomValue) * ratesParameters.RateMultiplier;
+
+                                newRow = dataTable.NewRow();
+                                newRow["Rate"] = rate;
+                                newRow["Rate_Description"] = aggregateExpression;
+                                newRow[primaryGroupField] = groupName;
+                                dataTable.Rows.Add(newRow);
+                            }
+                        }
+                        else
+                        {
+                            string numerSelect = denomExpression + " AND " + numerExpression;
+                            string denomSelect = denomExpression;
 
                             DataView numerView = new DataView(table, numerSelect, numerFilterFields[0], DataViewRowState.CurrentRows);
                             DataTable numerTable = numerView.ToTable(true, numerFilterFields.ToArray());
@@ -508,8 +542,6 @@ namespace EpiDashboard
 
                             newRow = dataTable.NewRow();
                             newRow["Rate"] = rate;
-                            newRow["Rate_Description"] = aggregateExpression;
-                            newRow[primaryGroupField] = groupName;
                             dataTable.Rows.Add(newRow);
                         }
                     }
