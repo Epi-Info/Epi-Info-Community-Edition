@@ -51,46 +51,71 @@
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5" VerticalAlignment="Center">
 
-                            <Label x:Name="tblockVariableNumerator" Visibility="Collapsed">Numerator:__xfe</Label>
-                                <ListView Name="lvNumerator" Visibility="Collapsed" HorizontalAlignment="Left" Width="Auto" Height="280">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
-                                            <GridViewColumn Header="Data Type" Width="Auto" DisplayMemberBinding="{Binding DataType}" />
-                                        </GridView>
-                                    </ListView.View>
-                                    <ListView.GroupStyle>
-                                        <GroupStyle>
-                                            <GroupStyle.ContainerStyle>
-                                                <Style TargetType="{x:Type GroupItem}">
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate>
-                                                                <Expander IsExpanded="True">
-                                                                    <Expander.Header>
-                                                                        <StackPanel Orientation="Horizontal">
-                                                                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
-                                                                            <TextBlock Text="{Binding ItemCount}" FontSize="11" Foreground="Silver" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
-                                                                            <TextBlock Text=" item(s)" FontSize="11" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
-                                                                        </StackPanel>
-                                                                    </Expander.Header>
-                                                                    <ItemsPresenter />
-                                                                </Expander>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </GroupStyle.ContainerStyle>
-                                        </GroupStyle>
-                                    </ListView.GroupStyle>
-                                </ListView>
-
-                    <Label x:Name="lblNumeratorWhere">Where:</Label>
+                            <Label x:Name="tblockVariableNumerator" Visibility="Visible">Numerator:__xfe</Label>
+                            <ListView Name="lvNumerator" Visibility="Visible" HorizontalAlignment="Left" Width="Auto" Height="280">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}" />
+                                        <GridViewColumn Header="Data Type" Width="Auto" DisplayMemberBinding="{Binding DataType}" />
+                                    </GridView>
+                                </ListView.View>
+                                <ListView.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.ContainerStyle>
+                                            <Style TargetType="{x:Type GroupItem}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate>
+                                                            <Expander IsExpanded="True">
+                                                                <Expander.Header>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                                                                        <TextBlock Text="{Binding ItemCount}" FontSize="11" Foreground="Silver" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                                        <TextBlock Text=" item(s)" FontSize="11" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                                    </StackPanel>
+                                                                </Expander.Header>
+                                                                <ItemsPresenter />
+                                                            </Expander>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </GroupStyle.ContainerStyle>
+                                    </GroupStyle>
+                                </ListView.GroupStyle>
+                            </ListView>
+                    
+                    <StackPanel Margin="0,10" >
+                        <StackPanel Margin="0,10" >
+                            <Label x:Name="lblNumerator">For the value: (select field)</Label>
+                            <ComboBox x:Name="cmbNumeratorField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,10" >
+                            <Label x:Name="lblSelectNumeratorAggregateFunction">Aggregate by: (select aggregate function)</Label>
+                        </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox x:Name="cmbSelectNumeratorAggregateFunction" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left">
+                                    <ComboBoxItem Content="" />
+                                    <ComboBoxItem Content="AVG" />
+                                    <ComboBoxItem Content="AVG [DISTINCT]"/>
+                                    <ComboBoxItem Content="COUNT"/>
+                                    <ComboBoxItem Content="COUNT [DISTINCT]"/>
+                                    <ComboBoxItem Content="MAX"/>
+                                    <ComboBoxItem Content="MAX [DISTINCT]"/>
+                                    <ComboBoxItem Content="MIN"/>
+                                    <ComboBoxItem Content="MIN [DISTINCT]"/>
+                                    <ComboBoxItem Content="STDEV"/>
+                                    <ComboBoxItem Content="STDEV [DISTINCT]"/>
+                                    <ComboBoxItem Content="SUM"/>
+                                    <ComboBoxItem Content="SUM [DISTINCT]"/>
+                                    <ComboBoxItem Content="VAR"/>
+                                    <ComboBoxItem Content="VAR [DISTINCT]"/>
+                                </ComboBox>
+                                <Label x:Name="lblAggregateFunctionDefinition" Margin="10,0">Returns the sum of all the values, or only the DISTINCT values, in the expression. SUM can be used with numeric columns only. Null values are ignored.</Label>
+                        </StackPanel>
+                    </StackPanel>
+                    <Label x:Name="lblNumeratorWhere">And Where: (filter condition)</Label>
                     <Label x:Name="numeratorRule"></Label>
-                    <!--<StackPanel Margin="0,10" >
-                        <Label x:Name="lblNumerator">Numerator:</Label>
-                        <ComboBox x:Name="cmbNumeratorField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
-                    </StackPanel>-->
                     <Button x:Name="btnNumeratorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnNumeratorRule_Click">Create/Edit Condition</Button>
                     <CheckBox x:Name="checkBoxNumberatorDistinct" Visibility="Collapsed">Distinct</CheckBox>
 
