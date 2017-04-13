@@ -490,6 +490,8 @@ namespace EpiDashboard
 
                     foreach (DataTable table in ratesTables)
                     {
+                        /// https://msdn.microsoft.com/en-us/library/system.data.datacolumn.expression(v=vs.110).aspx
+
                         if (containsGroupField)
                         {
                             groupTable = table.DefaultView.ToTable(true, groupFields.ToArray());
@@ -523,6 +525,8 @@ namespace EpiDashboard
                         }
                         else
                         {
+
+
                             string numerSelect = denomExpression + " AND " + numerExpression;
                             string denomSelect = denomExpression;
 
@@ -1014,6 +1018,28 @@ namespace EpiDashboard
             denomElement.InnerText = denomVar;
             element.AppendChild(denomElement);
 
+            string numerAggFxVar = String.Empty;
+            string denomAggFxVar = String.Empty;
+
+            if (!String.IsNullOrEmpty(ratesParameters.NumeratorAggregator))
+            {
+                numerAggFxVar = ratesParameters.NumeratorAggregator;
+            }
+
+            if (!String.IsNullOrEmpty(ratesParameters.DenominatorAggregator))
+            {
+                denomAggFxVar = ratesParameters.DenominatorAggregator;
+            }
+
+            XmlElement numerAggFxElement = doc.CreateElement("numerAggFxVariable");
+            numerAggFxElement.InnerText = numerAggFxVar;
+            element.AppendChild(numerAggFxElement);
+
+            XmlElement denomAggFxElement = doc.CreateElement("denomAggFxVariable");
+            denomAggFxElement.InnerText = denomAggFxVar;
+            element.AppendChild(denomAggFxElement);
+
+
             string groupVar1 = String.Empty;
             string groupVar2 = String.Empty;
 
@@ -1235,6 +1261,18 @@ namespace EpiDashboard
                         if (!String.IsNullOrEmpty(child.InnerText.Trim()))
                         {
                             ((RatesParameters)Parameters).DenominatorField = child.InnerText.Trim();
+                        }
+                        break;
+                    case "numeraggfxvariable":
+                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
+                        {
+                            ((RatesParameters)Parameters).NumeratorAggregator = child.InnerText.Trim();
+                        }
+                        break;
+                    case "denomaggfxvariable":
+                        if (!String.IsNullOrEmpty(child.InnerText.Trim()))
+                        {
+                            ((RatesParameters)Parameters).DenominatorAggregator = child.InnerText.Trim();
                         }
                         break;
                     case "maxcolumnnamelength":
