@@ -19,6 +19,8 @@ namespace EpiDashboard
         public bool ShowAsPercent { get; set; }
         public string NumeratorField { get; set; }
         public string DenominatorField { get; set; }
+        public string NumeratorAggregator { get; set; }
+        public string DenominatorAggregator { get; set; }
         public string PrimaryGroupField { get; set; }
         public string SecondaryGroupField { get; set; }
         public int MaxColumnLength { get; set; }

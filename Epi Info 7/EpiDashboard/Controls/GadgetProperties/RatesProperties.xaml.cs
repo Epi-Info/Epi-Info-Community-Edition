@@ -91,6 +91,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             lvNumerator.ItemsSource = items;
             lvDenominator.ItemsSource = items;
 
+            cmbNumeratorField.ItemsSource = items;
+            cmbDenominatorField.ItemsSource = items;
+
             cmbGroupField.ItemsSource = fields;
             cmbSecondaryGroupField.ItemsSource = fields;
 
@@ -214,26 +217,30 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
             List<string> listFields = new List<string>();
-
             List<string> numerFilterFields = new List<string>();
+            List<string> denomFilterFields = new List<string>();
 
-            foreach (System.Data.DataRow numerRow in Parameters.NumerFilter.ConditionTable.Rows)
-            {
-                string[] fragments = (numerRow["filter"]).ToString().Split(new char[] { '[', ']' });
-                if (fragments.Length == 3)
+            if (Parameters.NumerFilter != null)
+            { 
+                foreach (System.Data.DataRow numerRow in Parameters.NumerFilter.ConditionTable.Rows)
                 {
-                    numerFilterFields.Add(fragments[1]);
+                    string[] fragments = (numerRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                    if (fragments.Length == 3)
+                    {
+                        numerFilterFields.Add(fragments[1]);
+                    }
                 }
             }
 
-            List<string> denomFilterFields = new List<string>();
-
-            foreach (System.Data.DataRow denomRow in Parameters.DenomFilter.ConditionTable.Rows)
+            if (Parameters.DenomFilter != null)
             {
-                string[] fragments = (denomRow["filter"]).ToString().Split(new char[] { '[', ']' });
-                if (fragments.Length == 3)
+                foreach (System.Data.DataRow denomRow in Parameters.DenomFilter.ConditionTable.Rows)
                 {
-                    denomFilterFields.Add(fragments[1]);
+                    string[] fragments = (denomRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                    if (fragments.Length == 3)
+                    {
+                        denomFilterFields.Add(fragments[1]);
+                    }
                 }
             }
 
@@ -605,5 +612,41 @@ namespace EpiDashboard.Controls.GadgetProperties
                 denominatorRule.Content = _denomFilter.GenerateReadableDataFilterString();
             }
         }
+
+        private void cmbNumeratorField_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox control = (ComboBox)sender;
+            if(control.SelectedItem != null)
+            {
+                if(control.SelectedItem is FieldInfo)
+                {
+                    FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
+                    Parameters.NumeratorField = fieldInfo.Name;
+                } 
+            }
+
+        }
+
+        private void cmbSelectNumeratorAggregateFunction_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox control = (ComboBox)sender;
+            if (control.SelectedItem != null)
+            {
+                if (control.SelectedItem is ComboBoxItem)
+                {
+                    Parameters.NumeratorAggregator = (string)((ComboBoxItem)(control.SelectedItem)).Content;
+                }
+            }
+        }
+
+        private void cmbDenominatorField_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void cmbSelectDenominatorAggregateFunction_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
     }
 }
