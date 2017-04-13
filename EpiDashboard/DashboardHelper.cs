@@ -3108,16 +3108,16 @@ namespace EpiDashboard
 
             string sortOrder = string.Empty;
 
-            //if (!String.IsNullOrEmpty(parameters.NumeratorField))
-            //{
-            //    columnsToSelect.Add(parameters.NumeratorField);
-            //    originalColumnsToSelect.Add(parameters.NumeratorField);
-            //}
-            //if (!String.IsNullOrEmpty(parameters.DenominatorField))
-            //{
-            //    columnsToSelect.Add(parameters.DenominatorField);
-            //    originalColumnsToSelect.Add(parameters.DenominatorField);
-            //}
+            if (!String.IsNullOrEmpty(parameters.NumeratorField))
+            {
+                columnsToSelect.Add(parameters.NumeratorField);
+                originalColumnsToSelect.Add(parameters.NumeratorField);
+            }
+            if (!String.IsNullOrEmpty(parameters.DenominatorField))
+            {
+                columnsToSelect.Add(parameters.DenominatorField);
+                originalColumnsToSelect.Add(parameters.DenominatorField);
+            }
             if (!String.IsNullOrEmpty(parameters.PrimaryGroupField))
             {
                 columnsToSelect.Add(parameters.PrimaryGroupField);

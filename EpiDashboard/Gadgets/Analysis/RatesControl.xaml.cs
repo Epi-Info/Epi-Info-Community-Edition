@@ -401,19 +401,11 @@ namespace EpiDashboard
                 {
                     numerExpression = ratesParameters.NumerFilter.GenerateDataFilterString(false);
                 }
-                else
-                {
-                    return;
-                }
 
                 String denomExpression = "";
                 if (Parameters != null && ratesParameters.DenomFilter != null)
                 {
                     denomExpression = ratesParameters.DenomFilter.GenerateDataFilterString(false);
-                }
-                else
-                {
-                    return;
                 }
 
                 Stopwatch stopwatch = new Stopwatch();
@@ -439,24 +431,29 @@ namespace EpiDashboard
                     }
 
                     List<string> numerFilterFields = new List<string>();
+                    List<string> denomFilterFields = new List<string>();
 
-                    foreach (DataRow numerRow in ratesParameters.NumerFilter.ConditionTable.Rows)
+                    if (ratesParameters.NumerFilter != null)
                     {
-                        string[] fragments = (numerRow["filter"]).ToString().Split(new char[] { '[', ']' });
-                        if (fragments.Length == 3)
+                        foreach (DataRow numerRow in ratesParameters.NumerFilter.ConditionTable.Rows)
                         {
-                            numerFilterFields.Add(fragments[1]);
+                            string[] fragments = (numerRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                            if (fragments.Length == 3)
+                            {
+                                numerFilterFields.Add(fragments[1]);
+                            }
                         }
                     }
 
-                    List<string> denomFilterFields = new List<string>();
-
-                    foreach (DataRow denomRow in ratesParameters.DenomFilter.ConditionTable.Rows)
+                    if (ratesParameters.DenomFilter != null)
                     {
-                        string[] fragments = (denomRow["filter"]).ToString().Split(new char[] { '[', ']' });
-                        if (fragments.Length == 3)
+                        foreach (DataRow denomRow in ratesParameters.DenomFilter.ConditionTable.Rows)
                         {
-                            denomFilterFields.Add(fragments[1]);
+                            string[] fragments = (denomRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                            if (fragments.Length == 3)
+                            {
+                                denomFilterFields.Add(fragments[1]);
+                            }
                         }
                     }
 
