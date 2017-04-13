@@ -88,9 +88,6 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             fields.Sort();
 
-            lvNumerator.ItemsSource = items;
-            lvDenominator.ItemsSource = items;
-
             cmbNumeratorField.ItemsSource = items;
             cmbDenominatorField.ItemsSource = items;
 
@@ -102,9 +99,9 @@ namespace EpiDashboard.Controls.GadgetProperties
                 lbxAvailableVariables.Items.Add(fieldName);
             }
 
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvNumerator.ItemsSource);
+            //nk  CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvNumerator.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
-            view.GroupDescriptions.Add(groupDescription);
+            //nk  view.GroupDescriptions.Add(groupDescription);
 
             RowFilterControl = new RowFilterControl(this.DashboardHelper, Dialogs.FilterDialogMode.ConditionalMode, (gadget as RatesControl).DataFilters, true);
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
@@ -133,7 +130,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
             tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
             tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
-            tblockVariableNumerator.Content = DashboardSharedStrings.GADGET_VARIABLES_NUMERATOR;
+            //tblockVariableNumerator.Content = DashboardSharedStrings.GADGET_VARIABLES_NUMERATOR;
             tblockVariableDenominator.Content = DashboardSharedStrings.GADGET_VARIABLES_DENOMINATOR;
             tblockGroupby.Content = DashboardSharedStrings.GADGET_GROUP_BY;
             tblockSubGroupBy.Content = DashboardSharedStrings.GADGET_SUBGROUP_BY;
@@ -312,15 +309,41 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.RateMultiplierString = "100";
             }
 
-            //if (cmbNumeratorField.SelectedIndex >= 0)
-            //{
-            //    Parameters.NumeratorField = cmbNumeratorField.SelectedItem.ToString();
-            //}
+            if (cmbNumeratorField.SelectedIndex >= 0)
+            {
+                if (cmbNumeratorField.SelectedItem is RatesProperties.FieldInfo)
+                {
+                    Parameters.NumeratorField = ((RatesProperties.FieldInfo)cmbNumeratorField.SelectedItem).Name;
+                }
+            }
 
-            //if (cmbDenominatorField.SelectedIndex >= 0)
-            //{
-            //    Parameters.DenominatorField = cmbDenominatorField.SelectedItem.ToString();
-            //}
+            if (cmbDenominatorField.SelectedIndex >= 0)
+            {
+                if (cmbDenominatorField.SelectedItem is RatesProperties.FieldInfo)
+                {
+                    Parameters.DenominatorField = ((RatesProperties.FieldInfo)cmbDenominatorField.SelectedItem).Name;
+                }
+            }
+
+            if(string.IsNullOrWhiteSpace(Parameters.DenominatorField) == false )
+            {
+                Parameters.ColumnNames.Add(Parameters.DenominatorField);
+            }
+
+            if (string.IsNullOrWhiteSpace(Parameters.DenominatorField) == false)
+            {
+                Parameters.ColumnNames.Add(Parameters.DenominatorField);
+            }
+
+            if (cmbSelectNumeratorAggregateFunction.SelectedIndex >= 0)
+            {
+                Parameters.NumeratorAggregator = (string)((ComboBoxItem)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Content;
+            }
+
+            if (cmbSelectDenominatorAggregateFunction.SelectedIndex >= 0)
+            {
+                Parameters.DenominatorAggregator = (string)((ComboBoxItem)(cmbSelectDenominatorAggregateFunction.SelectedItem)).Content;
+            }
 
             if (cmbGroupField.SelectedIndex >= 0)
             {
@@ -389,20 +412,6 @@ namespace EpiDashboard.Controls.GadgetProperties
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            lvNumerator.MaxHeight = this.ActualHeight - 200;
-
-            foreach (string s in Parameters.ColumnNames)
-            {
-                foreach (FieldInfo info in lvNumerator.Items)
-                {
-                    if (info.Name == s)
-                    {
-                        lvNumerator.SelectedItems.Add(info);
-                        continue;
-                    }
-                }
-            }
-
             if (!String.IsNullOrEmpty(Parameters.Height.ToString()))
             {
                 txtMaxHeight.Text = Parameters.Height.ToString();
@@ -444,6 +453,25 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             cmbGroupField.SelectedItem = Parameters.PrimaryGroupField;
             cmbSecondaryGroupField.SelectedItem = Parameters.SecondaryGroupField;
+
+            var numerFieldInfo = cmbNumeratorField.Items.Cast<FieldInfo>().
+                Where(fieldInfo => String.Compare(fieldInfo.Name, Parameters.NumeratorField) == 0).
+                ToList<FieldInfo>();
+            if(numerFieldInfo.Count > 0 && numerFieldInfo[0] is FieldInfo)
+            {
+                cmbNumeratorField.SelectedItem = numerFieldInfo[0];
+            }
+
+            var denomFieldInfo = cmbDenominatorField.Items.Cast<FieldInfo>().
+                Where(fieldInfo => String.Compare(fieldInfo.Name, Parameters.DenominatorField) == 0).
+                ToList<FieldInfo>();
+            if (denomFieldInfo.Count > 0 && denomFieldInfo[0] is FieldInfo)
+            {
+                cmbDenominatorField.SelectedItem = denomFieldInfo[0];
+            }
+
+            cmbSelectNumeratorAggregateFunction.Text = Parameters.NumeratorAggregator;
+            cmbSelectDenominatorAggregateFunction.Text = Parameters.DenominatorAggregator;
 
             foreach (KeyValuePair<string, SortOrder> kvp in Parameters.SortVariables)
             {
@@ -633,7 +661,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (control.SelectedItem != null)
             {
                 if (control.SelectedItem is ComboBoxItem)
-                {
+                { // dpb remove parameters assign from here - should be done on okay click
                     Parameters.NumeratorAggregator = (string)((ComboBoxItem)(control.SelectedItem)).Content;
                 }
             }
