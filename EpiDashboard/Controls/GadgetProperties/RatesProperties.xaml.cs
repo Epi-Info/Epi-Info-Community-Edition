@@ -49,6 +49,12 @@ namespace EpiDashboard.Controls.GadgetProperties
             List<FieldInfo> items = new List<FieldInfo>();
             List<string> fields = new List<string>();
             fields.Add(string.Empty);
+            items.Add(new FieldInfo()
+            {
+                Name = "",
+                DataType = "",
+                VariableCategory = VariableCategory.Field
+            });
 
             foreach (string fieldName in DashboardHelper.GetFieldsAsList())
             {
@@ -508,11 +514,16 @@ namespace EpiDashboard.Controls.GadgetProperties
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
-        public class AggFxInfo { public string Name { get; set; } public string Keyword { get; set; } public string Description { get; set; }
-            public AggFxInfo(string name, string keyword, string description)
+        public class AggFxInfo {
+            public string Name { get; set; }
+            public string Keyword { get; set; }
+            public string UseAsDefaultForType { get; set; }
+            public string Description { get; set; }
+            public AggFxInfo(string name, string keyword, string useAsDefaultForType, string description)
             {
                 Name = name;
                 Keyword = keyword;
+                UseAsDefaultForType = useAsDefaultForType;
                 Description = description;
             }
         }
@@ -663,19 +674,21 @@ namespace EpiDashboard.Controls.GadgetProperties
         private static List<AggFxInfo> GetAggFxInfo(FieldInfo fieldInfo)
         {
             List<AggFxInfo> items = new List<AggFxInfo>();
-            items.Add(new AggFxInfo("", "", ""));
-            if (fieldInfo.DataType.ToLowerInvariant() == "string")
+            items.Add(new AggFxInfo("", "", "", ""));
+
+            string dataType = fieldInfo.DataType.ToLowerInvariant();
+            if (dataType == "string" || dataType == "boolean" || dataType == "datetime")
             {
-                items.Add(new AggFxInfo("Count", "count", ""));
+                items.Add(new AggFxInfo("Count", "count", "string,boolean,datetime", "Returns the number of all the values in the field. COUNT can be used with numeric, text, and boolean columns. Null values are ignored."));
             }
             else
             {
-                items.Add(new AggFxInfo("Sum", "sum", "Returns the sum of all the values in the expression. SUM can be used with numeric columns only. Null values are ignored."));
-                items.Add(new AggFxInfo("Average", "avg", ""));
-                items.Add(new AggFxInfo("Minimum", "min", ""));
-                items.Add(new AggFxInfo("Maximum", "count", ""));
-                items.Add(new AggFxInfo("Statistical Standard Eviation", "stdev", ""));
-                items.Add(new AggFxInfo("Statistical Variance", "var", ""));
+                items.Add(new AggFxInfo("Sum", "sum", "int,double,decimal", "Returns the sum of all the values in the field. SUM can be used with numeric columns only. Null values are ignored."));
+                items.Add(new AggFxInfo("Average", "avg", "", ""));
+                items.Add(new AggFxInfo("Minimum", "min", "", ""));
+                items.Add(new AggFxInfo("Maximum", "max", "", ""));
+                items.Add(new AggFxInfo("Statistical Standard Eviation", "", "stdev", ""));
+                items.Add(new AggFxInfo("Statistical Variance", "var", "", ""));
             }
 
             return items;
@@ -689,9 +702,9 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
                     Parameters.NumeratorField = fieldInfo.Name;
-
                     List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
                     cmbSelectNumeratorAggregateFunction.ItemsSource = items;
+                    SetSelectedItem(cmbSelectNumeratorAggregateFunction, fieldInfo);
                 }
             }
         }
@@ -704,13 +717,26 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
                     Parameters.DenominatorField = fieldInfo.Name;
-
                     List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
                     cmbSelectDenominatorAggregateFunction.ItemsSource = items;
+                    SetSelectedItem(cmbSelectDenominatorAggregateFunction, fieldInfo);
                 }
             }
         }
 
+        private void SetSelectedItem(ComboBox combobox, FieldInfo fieldInfo)
+        {
+            if (false)
+            {
+                var aggregateFunction = combobox.Items.Cast<AggFxInfo>().
+                Where(aggFxInfo => ((string)aggFxInfo.UseAsDefaultForType.ToLowerInvariant()).Contains(fieldInfo.DataType.ToLowerInvariant())).
+                ToList<AggFxInfo>();
+                if (aggregateFunction.Count > 0 && aggregateFunction[0] is AggFxInfo)
+                {
+                    combobox.SelectedItem = aggregateFunction[0];
+                }
+            }
+        }
 
         private void cmbSelectNumeratorAggregateFunction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -725,7 +751,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
-
         private void cmbSelectDenominatorAggregateFunction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox control = (ComboBox)sender;
@@ -738,6 +763,5 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
         }
-
     }
 }

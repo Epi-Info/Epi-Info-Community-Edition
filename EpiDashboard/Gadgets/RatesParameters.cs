@@ -51,7 +51,7 @@ namespace EpiDashboard
                     }
                     else if (selectedText.Contains("^"))
                     {
-                        string ortex = selectedText.Replace("^", "E");
+                        string ortex = selectedText.Replace("10^", "1E");
 
                         if (double.TryParse(ortex, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out multiplierDouble))
                         {
