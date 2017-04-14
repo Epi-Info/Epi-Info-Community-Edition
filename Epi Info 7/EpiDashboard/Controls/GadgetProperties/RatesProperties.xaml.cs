@@ -337,12 +337,12 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             if (cmbSelectNumeratorAggregateFunction.SelectedIndex >= 0)
             {
-                Parameters.NumeratorAggregator = (string)((ComboBoxItem)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Content;
+                Parameters.NumeratorAggregator = (string)((AggFxInfo)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Keyword;
             }
 
             if (cmbSelectDenominatorAggregateFunction.SelectedIndex >= 0)
             {
-                Parameters.DenominatorAggregator = (string)((ComboBoxItem)(cmbSelectDenominatorAggregateFunction.SelectedItem)).Content;
+                Parameters.DenominatorAggregator = (string)((AggFxInfo)(cmbSelectDenominatorAggregateFunction.SelectedItem)).Keyword;
             }
 
             if (cmbGroupField.SelectedIndex >= 0)
@@ -470,8 +470,21 @@ namespace EpiDashboard.Controls.GadgetProperties
                 cmbDenominatorField.SelectedItem = denomFieldInfo[0];
             }
 
-            cmbSelectNumeratorAggregateFunction.Text = Parameters.NumeratorAggregator;
-            cmbSelectDenominatorAggregateFunction.Text = Parameters.DenominatorAggregator;
+            var numerAggregateFunction = cmbSelectNumeratorAggregateFunction.Items.Cast<AggFxInfo>().
+                Where(aggFxInfo => String.Compare(aggFxInfo.Keyword, Parameters.NumeratorAggregator) == 0).
+                ToList<AggFxInfo>();
+            if (numerAggregateFunction.Count > 0 && numerAggregateFunction[0] is AggFxInfo)
+            {
+                cmbSelectNumeratorAggregateFunction.SelectedItem = numerAggregateFunction[0];
+            }
+
+            var denomAggregateFunction = cmbSelectDenominatorAggregateFunction.Items.Cast<AggFxInfo>().
+                Where(aggFxInfo => String.Compare(aggFxInfo.Keyword, Parameters.DenominatorAggregator) == 0).
+                ToList<AggFxInfo>();
+            if (denomAggregateFunction.Count > 0 && denomAggregateFunction[0] is AggFxInfo)
+            {
+                cmbSelectDenominatorAggregateFunction.SelectedItem = denomAggregateFunction[0];
+            }
 
             foreach (KeyValuePair<string, SortOrder> kvp in Parameters.SortVariables)
             {
@@ -495,7 +508,14 @@ namespace EpiDashboard.Controls.GadgetProperties
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
-
+        public class AggFxInfo { public string Name { get; set; } public string Keyword { get; set; } public string Description { get; set; }
+            public AggFxInfo(string name, string keyword, string description)
+            {
+                Name = name;
+                Keyword = keyword;
+                Description = description;
+            }
+        }
         private void tbtnVariables_Checked(object sender, RoutedEventArgs e)
         {
             if (panelVariables == null) return;
@@ -640,7 +660,26 @@ namespace EpiDashboard.Controls.GadgetProperties
                 denominatorRule.Content = _denomFilter.GenerateReadableDataFilterString();
             }
         }
+        private static List<AggFxInfo> GetAggFxInfo(FieldInfo fieldInfo)
+        {
+            List<AggFxInfo> items = new List<AggFxInfo>();
+            items.Add(new AggFxInfo("", "", ""));
+            if (fieldInfo.DataType.ToLowerInvariant() == "string")
+            {
+                items.Add(new AggFxInfo("Count", "count", ""));
+            }
+            else
+            {
+                items.Add(new AggFxInfo("Sum", "sum", "Returns the sum of all the values in the expression. SUM can be used with numeric columns only. Null values are ignored."));
+                items.Add(new AggFxInfo("Average", "avg", ""));
+                items.Add(new AggFxInfo("Minimum", "min", ""));
+                items.Add(new AggFxInfo("Maximum", "count", ""));
+                items.Add(new AggFxInfo("Statistical Standard Eviation", "stdev", ""));
+                items.Add(new AggFxInfo("Statistical Variance", "var", ""));
+            }
 
+            return items;
+        }
         private void cmbNumeratorField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox control = (ComboBox)sender;
@@ -650,30 +689,54 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
                     Parameters.NumeratorField = fieldInfo.Name;
-                } 
-            }
 
+                    List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
+                    cmbSelectNumeratorAggregateFunction.ItemsSource = items;
+                }
+            }
         }
+        private void cmbDenominatorField_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox control = (ComboBox)sender;
+            if (control.SelectedItem != null)
+            {
+                if (control.SelectedItem is FieldInfo)
+                {
+                    FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
+                    Parameters.DenominatorField = fieldInfo.Name;
+
+                    List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
+                    cmbSelectDenominatorAggregateFunction.ItemsSource = items;
+                }
+            }
+        }
+
 
         private void cmbSelectNumeratorAggregateFunction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox control = (ComboBox)sender;
             if (control.SelectedItem != null)
             {
-                if (control.SelectedItem is ComboBoxItem)
-                { // dpb remove parameters assign from here - should be done on okay click
-                    Parameters.NumeratorAggregator = (string)((ComboBoxItem)(control.SelectedItem)).Content;
+                if (control.SelectedItem is AggFxInfo)
+                { 
+                    Parameters.NumeratorAggregator = (string)((AggFxInfo)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Keyword;
+                    lblAggregateFunctionDefinition.Content = (string)((AggFxInfo)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Description;
                 }
             }
         }
 
-        private void cmbDenominatorField_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
         private void cmbSelectDenominatorAggregateFunction_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ComboBox control = (ComboBox)sender;
+            if (control.SelectedItem != null)
+            {
+                if (control.SelectedItem is AggFxInfo)
+                {
+                    Parameters.DenominatorAggregator = (string)((AggFxInfo)(cmbSelectDenominatorAggregateFunction.SelectedItem)).Keyword;
+                    lblAggregateFunctionDefinitionDenominator.Content = (string)((AggFxInfo)(cmbSelectDenominatorAggregateFunction.SelectedItem)).Description;
+                }
+            }
         }
 
     }
