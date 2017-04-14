@@ -748,6 +748,40 @@ namespace Epi.Enter.Forms
                         }
                     }
                 }
+            else
+            {
+                foreach (View v in destinationView.GetDescendantViews())
+                {
+                    if(v.Fields.Contains(fieldName))
+                    {
+                         Field field = v.Fields[fieldName];
+
+                if (field is CheckBoxField || field is YesNoField)
+                    {
+                    if (value.ToString().ToLowerInvariant().Equals("yes"))
+                        {
+                        value = true;
+                        }
+                    else if (value.ToString().ToLowerInvariant().Equals("no"))
+                        {
+                        value = false;
+                        }
+                    }
+
+                    if (field is NumberField && !string.IsNullOrEmpty(value.ToString()))
+                    {
+                    double result = -1;
+                    if (double.TryParse(value.ToString(), out result))
+                        {
+                        value = result;
+                        }
+                    }
+                    return value;
+                    
+                    }
+                }
+
+            }
             return value;
             }
 
