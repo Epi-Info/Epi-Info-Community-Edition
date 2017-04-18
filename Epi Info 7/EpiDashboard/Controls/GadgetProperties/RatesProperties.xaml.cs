@@ -441,6 +441,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxLineColumn.IsChecked = Parameters.ShowLineColumn;
             checkboxShowNulls.IsChecked = Parameters.ShowNullLabels;
             checkboxListLabels.IsChecked = Parameters.ShowCommentLegalLabels;
+            checkBoxDenominatorDistinct.IsChecked = Parameters.DenomDistinct;
+            checkBoxNumberatorDistinct.IsChecked = Parameters.NumerDistinct;
 
             if (!String.IsNullOrEmpty(Parameters.RateMultiplierString))
             {
@@ -674,7 +676,6 @@ namespace EpiDashboard.Controls.GadgetProperties
         private static List<AggFxInfo> GetAggFxInfo(FieldInfo fieldInfo)
         {
             List<AggFxInfo> items = new List<AggFxInfo>();
-            items.Add(new AggFxInfo("", "", "", ""));
 
             string dataType = fieldInfo.DataType.ToLowerInvariant();
             if (dataType == "string" || dataType == "boolean" || dataType == "datetime")
@@ -683,6 +684,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             else
             {
+                items.Add(new AggFxInfo("Count", "count", "string,boolean,datetime", "Returns the number of all the values in the field. COUNT can be used with numeric, text, and boolean columns. Null values are ignored."));
                 items.Add(new AggFxInfo("Sum", "sum", "int,double,decimal", "Returns the sum of all the values in the field. SUM can be used with numeric columns only. Null values are ignored."));
                 items.Add(new AggFxInfo("Average", "avg", "", ""));
                 items.Add(new AggFxInfo("Minimum", "min", "", ""));
@@ -704,7 +706,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                     Parameters.NumeratorField = fieldInfo.Name;
                     List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
                     cmbSelectNumeratorAggregateFunction.ItemsSource = items;
-                    SetSelectedItem(cmbSelectNumeratorAggregateFunction, fieldInfo);
+                    //SetSelectedItem(cmbSelectNumeratorAggregateFunction, fieldInfo);
                 }
             }
         }

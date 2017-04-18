@@ -48,23 +48,27 @@
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel Margin="0 0 0 5" VerticalAlignment="Center">
-                    <StackPanel Margin="0,10" >
-                        <StackPanel Margin="0,10" >
-                            <Label x:Name="lblNumerator">For the value: (select field)</Label>
-                            <ComboBox x:Name="cmbNumeratorField" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbNumeratorField_SelectionChanged"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <StackPanel Margin="0,10">
+                                <Label x:Name="lblSelectNumeratorAggregateFunction">Aggregate:</Label>
+                                <ComboBox x:Name="cmbSelectNumeratorAggregateFunction" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbSelectNumeratorAggregateFunction_SelectionChanged"/>
+                                <Label x:Name="lblAggregateFunctionDefinition" Visibility="Collapsed" Margin="10,0"/>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Margin="0,10" >
-                            <Label x:Name="lblSelectNumeratorAggregateFunction">Aggregate by: (select aggregate function)</Label>
-                        </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="cmbSelectNumeratorAggregateFunction" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbSelectNumeratorAggregateFunction_SelectionChanged"/>
-                            <Label x:Name="lblAggregateFunctionDefinition" Margin="10,0"/>
+                        <StackPanel>
+                            <StackPanel Margin="10,10">
+                                <Label x:Name="lblNumerator">of:</Label>
+                                <ComboBox x:Name="cmbNumeratorField" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbNumeratorField_SelectionChanged"/>
+                           </StackPanel>
                         </StackPanel>
                     </StackPanel>
+                    
                     <Label x:Name="lblNumeratorWhere">And Where: (filter condition - optional)</Label>
                     <Label x:Name="numeratorRule"></Label>
                     <Button x:Name="btnNumeratorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnNumeratorRule_Click">Create/Edit Condition</Button>
-                    <CheckBox x:Name="checkBoxNumberatorDistinct" Visibility="Collapsed">Distinct</CheckBox>
+                    <CheckBox x:Name="checkBoxNumberatorDistinct" >Distinct</CheckBox>
 
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Height="4" Width="250" Margin="0,40" Fill="LightGray" Stroke="LightGray"/>
@@ -72,24 +76,26 @@
                         <Rectangle Height="4" Width="250" Margin="0,40" Fill="LightGray" Stroke="LightGray"/>
                     </StackPanel>
 
-                    <StackPanel Margin="0,10" >
-                        <StackPanel Margin="0,10" >
-                            <Label x:Name="lblDenominator">For the value: (select field)</Label>
-                            <ComboBox x:Name="cmbDenominatorField" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbDenominatorField_SelectionChanged"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <StackPanel Margin="0,10">
+                                <Label x:Name="lblSelectDenominatorAggregateFunction">Aggregate:</Label>
+                                <ComboBox x:Name="cmbSelectDenominatorAggregateFunction" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbSelectNumeratorAggregateFunction_SelectionChanged"/>
+                                <Label x:Name="lblAggregateFunctionDefinitionDenominator" Visibility="Collapsed" Margin="10,0"/>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Margin="0,10" >
-                            <Label x:Name="lblSelectDenominatorAggregateFunction">Aggregate by: (select aggregate function)</Label>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="cmbSelectDenominatorAggregateFunction" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbSelectDenominatorAggregateFunction_SelectionChanged"/>
-                            <Label x:Name="lblAggregateFunctionDefinitionDenominator" Margin="10,0"/>
+                        <StackPanel>
+                            <StackPanel Margin="10,10">
+                                <Label x:Name="lblDenominator">of:</Label>
+                                <ComboBox x:Name="cmbDenominatorField" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbDenominatorField_SelectionChanged"/>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
 
                     <Label x:Name="lblDenominatorWhere">And Where: (filter condition - optional)</Label>
                     <Label x:Name="denominatorRule"></Label>
                     <Button x:Name="btnDenominatorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnDenominatorRule_Click">Create/Edit Condition</Button>
-                    <CheckBox x:Name="checkBoxDenominatorDistinct" Visibility="Collapsed">Distinct</CheckBox>
+                    <CheckBox x:Name="checkBoxDenominatorDistinct">Distinct</CheckBox>
                     <Label Visibility="Collapsed" x:Name="tblockVariableDenominator">Denominator:__xfe</Label>
                 </StackPanel>
             </ScrollViewer>
