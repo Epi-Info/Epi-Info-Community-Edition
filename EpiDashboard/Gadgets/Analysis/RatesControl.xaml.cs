@@ -378,18 +378,6 @@ namespace EpiDashboard
                     return;
                 }
 
-                String numerFilter = "";
-                if (Parameters != null && ratesParameters.NumerFilter != null)
-                {
-                    numerFilter = ratesParameters.NumerFilter.GenerateDataFilterString(false);
-                }
-
-                String denomFilter = "";
-                if (Parameters != null && ratesParameters.DenomFilter != null)
-                {
-                    denomFilter = ratesParameters.DenomFilter.GenerateDataFilterString(false);
-                }
-
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
@@ -454,143 +442,66 @@ namespace EpiDashboard
                     DataTable groupTable = new DataTable();
                     List<string> primaryGroupElements = new List<string>();
 
-                    DataTable dataTable = new DataTable();
-                    dataTable.Columns.Add("Rate");
-                    dataTable.Columns.Add("Rate_Description");
+                    DataTable outputRateTable = new DataTable();
+                    outputRateTable.Columns.Add("Rate");
+                    outputRateTable.Columns.Add("Rate_Description");
+
                     if (string.IsNullOrEmpty(primaryGroupField) == false)
                     {
-                        dataTable.Columns.Add(((RatesParameters)Parameters).PrimaryGroupField);
+                        outputRateTable.Columns.Add(((RatesParameters)Parameters).PrimaryGroupField);
                     }
                     if (string.IsNullOrEmpty(secondaryGroupField) == false)
                     {
-                        dataTable.Columns.Add(((RatesParameters)Parameters).SecondaryGroupField);
+                        outputRateTable.Columns.Add(((RatesParameters)Parameters).SecondaryGroupField);
                     }
-                    DataRow newRow = dataTable.NewRow();
+                    DataRow newRow = outputRateTable.NewRow();
 
                     groupFields.RemoveAll(string.IsNullOrWhiteSpace);
                     bool containsGroupField = groupFields.Count > 0;
 
-                    foreach (DataTable table in ratesTables)
+                    foreach (DataTable sourceTable in ratesTables)
                     {
                         /// https://msdn.microsoft.com/en-us/library/system.data.datatable.compute(v=vs.110).aspx
                         /// https://msdn.microsoft.com/en-us/library/system.data.datacolumn.expression(v=vs.110).aspx
 
                         if (containsGroupField)
                         {
-                            groupTable = table.DefaultView.ToTable(true, groupFields.ToArray());
+                            groupTable = sourceTable.DefaultView.ToTable(true, groupFields.ToArray());
 
                             foreach (DataRow row in groupTable.Rows)
                             {
                                 string aggregateName = groupTable.Columns[0].ColumnName;
                                 string groupName = row[aggregateName] as string;
                                 string aggregateExpression = "";
-                                string numerSelect = "";
-                                string denomSelect = "";
 
                                 if (aggregateName != "" && groupName != "")
                                 {
                                     aggregateExpression = "([" + aggregateName + "] = '" + groupName + "')";
                                 }
 
-                                if(aggregateExpression != "")
-                                {
-                                    denomSelect = aggregateExpression;
-                                    numerSelect = aggregateExpression;
-                                }
-
-                                if (denomFilter != "")
-                                {
-                                    denomSelect += " AND " + denomFilter;
-                                    numerSelect += " AND " + denomFilter;
-                                }
-
-                                if (numerFilter != "")
-                                {
-                                    numerSelect += " AND " + numerFilter;
-                                }
-
-                                string numerExpression = "";
-                                double numerAggResult = double.NaN;
-                                string numerAggFxName = ratesParameters.NumeratorAggregator != null ? ratesParameters.NumeratorAggregator : "";
-                                if (ratesParameters.NumeratorField != "" && numerAggFxName != "")
-                                {
-                                    numerExpression = numerAggFxName + "(" + b(ratesParameters.NumeratorField) + ")";
-                                    numerAggResult = Convert.ToDouble(table.Compute(numerExpression, numerSelect));
-                                }
-                                else
-                                {
-                                    DataView numerView = new DataView(table, numerSelect, numerFilterFields[0], DataViewRowState.CurrentRows);
-                                    DataTable numerTable = numerView.ToTable(true, numerFilterFields.ToArray());
-                                    numerAggResult = numerTable.Rows.Count;
-                                }
-
-                                string denomExpression = "";
-                                double denomAggResult = double.NaN;
-                                string denomAggFxName = ratesParameters.DenominatorAggregator != null ? ratesParameters.DenominatorAggregator : "";
-                                if (ratesParameters.DenominatorField != "" && denomAggFxName != "")
-                                {
-                                    denomExpression = denomAggFxName + "(" + b(ratesParameters.DenominatorField) + ")";
-                                    denomAggResult = Convert.ToDouble(table.Compute(denomExpression, denomSelect));
-                                }
-                                else
-                                {
-                                    DataView denomView = new DataView(table, denomSelect, denomFilterFields[0], DataViewRowState.CurrentRows);
-                                    DataTable denomTable = denomView.ToTable(true, denomFilterFields.ToArray());
-                                    denomAggResult = denomTable.Rows.Count;
-                                }
-
-                                double rate = (numerAggResult / denomAggResult) * ratesParameters.RateMultiplier;
-                                newRow = dataTable.NewRow();
-                                newRow["Rate"] = rate;
-                                newRow["Rate_Description"] = aggregateExpression;
-                                newRow[primaryGroupField] = groupName;
-                                dataTable.Rows.Add(newRow);
+                                RateTable(ratesParameters, 
+                                    numerFilterFields,
+                                    denomFilterFields,
+                                    primaryGroupField,
+                                    ref outputRateTable,
+                                    sourceTable,
+                                    groupName, 
+                                    aggregateExpression);
                             }
                         }
                         else
                         {
-                            string numerSelect = denomFilter + " AND " + numerFilter;
-                            string denomSelect = denomFilter;
-
-                            string numerExpression = "";
-                            double numerAggResult = double.NaN;
-                            string numerAggFxName = ratesParameters.NumeratorAggregator != null ? ratesParameters.NumeratorAggregator : "";
-                            if (ratesParameters.NumeratorField != "" && numerAggFxName != "")
-                            {
-                                numerExpression = numerAggFxName + "(" + b(ratesParameters.NumeratorField) + ")";
-                                numerAggResult = Convert.ToDouble(table.Compute(numerExpression, numerFilter));
-                            }
-                            else
-                            {
-                                DataView numerView = new DataView(table, numerSelect, numerFilterFields[0], DataViewRowState.CurrentRows);
-                                DataTable numerTable = numerView.ToTable(true, numerFilterFields.ToArray());
-                                numerAggResult = numerTable.Rows.Count;
-                            }
-
-                            string denomExpression = "";
-                            double denomAggResult = double.NaN;
-                            string denomAggFxName = ratesParameters.DenominatorAggregator != null ? ratesParameters.DenominatorAggregator : "";
-                            if (ratesParameters.DenominatorField != "" && denomAggFxName != "")
-                            {
-                                denomExpression = denomAggFxName + "(" + b(ratesParameters.DenominatorField) + ")";
-                                denomAggResult = Convert.ToDouble(table.Compute(denomExpression, denomFilter));
-                            }
-                            else
-                            {
-                                DataView denomView = new DataView(table, denomSelect, denomFilterFields[0], DataViewRowState.CurrentRows);
-                                DataTable denomTable = denomView.ToTable(true, denomFilterFields.ToArray());
-                                denomAggResult = denomTable.Rows.Count;
-                            }
-
-                            double rate = (numerAggResult / denomAggResult) * ratesParameters.RateMultiplier;
-                            newRow = dataTable.NewRow();
-                            newRow["Rate"] = rate;
-                            dataTable.Rows.Add(newRow);
+                            RateTable(ratesParameters,
+                                numerFilterFields,
+                                denomFilterFields,
+                                primaryGroupField,
+                                ref outputRateTable,
+                                sourceTable);
                         }
                     }
 
                     ratesTables = new List<DataTable>();
-                    ratesTables.Add(dataTable);
+                    ratesTables.Add(outputRateTable);
 
                     if (ratesTables == null || ratesTables.Count == 0)
                     {
@@ -675,6 +586,119 @@ namespace EpiDashboard
                     Debug.Print(DashboardHelper.DataFilters.GenerateDataFilterString());
                 }
             }
+        }
+
+        private void RateTable(RatesParameters ratesParameters, List<string> numerFilterFields, List<string> denomFilterFields, string primaryGroupField, ref DataTable outputRateTable, DataTable table, string groupName = "", string aggregateExpression = "" )
+        {
+            String numerFilter = "";
+            if (Parameters != null && ratesParameters.NumerFilter != null)
+            {
+                numerFilter = ratesParameters.NumerFilter.GenerateDataFilterString(false);
+            }
+
+            String denomFilter = "";
+            if (Parameters != null && ratesParameters.DenomFilter != null)
+            {
+                denomFilter = ratesParameters.DenomFilter.GenerateDataFilterString(false);
+            }
+
+            string numerSelect = "";
+            string denomSelect = "";
+
+            DataRow newRow;
+            if (aggregateExpression != "")
+            {
+                denomSelect = aggregateExpression;
+                numerSelect = aggregateExpression;
+            }
+
+            if (denomFilter != "")
+            {
+                denomSelect += " AND " + denomFilter;
+                numerSelect += " AND " + denomFilter;
+            }
+
+            if (numerFilter != "")
+            {
+                numerSelect += " AND " + numerFilter;
+            }
+
+            double numerAggResult = double.NaN;
+            string numerAggFxName = ratesParameters.NumeratorAggregator != null ? ratesParameters.NumeratorAggregator : "";
+
+            double denomAggResult = double.NaN;
+            string denomAggFxName = ratesParameters.DenominatorAggregator != null ? ratesParameters.DenominatorAggregator : "";
+
+            List<string> columnNames = new List<string>();
+            if (numerFilterFields != null && numerFilterFields.Count > 0) { columnNames.Add(numerFilterFields[0]); }
+            if (denomFilterFields != null && denomFilterFields.Count > 0) { columnNames.Add(denomFilterFields[0]); }
+            if (string.IsNullOrEmpty(ratesParameters.NumeratorField) == false) { columnNames.Add(ratesParameters.NumeratorField); }
+            if (string.IsNullOrEmpty(ratesParameters.DenominatorField) == false) { columnNames.Add(ratesParameters.DenominatorField); }
+
+            string sort = "";
+            numerAggResult = AggResult(table, ratesParameters.NumeratorField, numerFilter, aggregateExpression, numerSelect, numerAggFxName, ratesParameters.NumerDistinct, columnNames, sort);
+
+            columnNames = new List<string>();
+            if (denomFilterFields != null && denomFilterFields.Count > 0) { columnNames.Add(denomFilterFields[0]); }
+            if (string.IsNullOrEmpty(ratesParameters.DenominatorField) == false) { columnNames.Add(ratesParameters.DenominatorField); }
+
+            denomAggResult = AggResult(table, ratesParameters.DenominatorField, denomFilter, aggregateExpression, denomSelect, denomAggFxName, ratesParameters.DenomDistinct, columnNames, sort);
+
+            double rate = (numerAggResult / denomAggResult) * ratesParameters.RateMultiplier;
+            newRow = outputRateTable.NewRow();
+            newRow["Rate"] = rate;
+            newRow["Rate_Description"] = aggregateExpression;
+
+            if(string.IsNullOrEmpty(groupName) == false)
+            {
+                if (outputRateTable.Columns.Contains(ratesParameters.PrimaryGroupField) == false)
+                {
+                    outputRateTable.Columns.Add(((RatesParameters)Parameters).PrimaryGroupField);
+                }
+                newRow[((RatesParameters)Parameters).PrimaryGroupField] = groupName;
+            }
+
+            outputRateTable.Rows.Add(newRow);
+            return;
+        }
+
+        private double AggResult(DataTable sourceTable, string fieldName, string filter, string aggregateExpression, string selectExpression, string aggFxName, bool distinct, List<string> columnNames, string sort)
+        {
+            double aggResult = double.NaN;
+
+            DataView localView = new DataView(sourceTable, aggregateExpression, sort, DataViewRowState.CurrentRows);
+
+            DataTable localTable;
+            if (distinct)
+            {
+                localTable = localView.ToTable(true, columnNames.Distinct<string>().ToArray<string>());
+            }
+            else
+            {
+                localTable = localView.ToTable();
+            }
+
+            if (fieldName != "" && aggFxName != "")
+            {
+                string expression = aggFxName + "(" + b(fieldName) + ")";
+                aggResult = Convert.ToDouble(localTable.Compute(expression, filter));
+            }
+            else if (fieldName != "")
+            {
+                string valueFilter = "[" + fieldName + "] is not null";
+                if(string.IsNullOrEmpty(filter) == false) valueFilter += " AND " + filter;
+
+                DataRow[] rows = localTable.Select(valueFilter);
+                foreach(DataRow row in rows)
+                {
+                    var value = row[fieldName];
+
+                    aggResult = Convert.ToDouble(value);
+                    break;
+                }
+            }
+
+            return aggResult;
         }
 
         #endregion
