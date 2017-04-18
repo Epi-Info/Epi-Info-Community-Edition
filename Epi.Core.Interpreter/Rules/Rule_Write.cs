@@ -598,6 +598,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     StringBuilder ColumnSQL = new StringBuilder();
 
                     OutputDriver.IsBulkOperation = true;
+                    StringBuilder sqlquery = new StringBuilder();
+                    int count = 0;
+                    sqlquery.Append("create table [" + TableName + "] ( ");                  
                     foreach (string column in VariableList)
                     {
                         string columnName = String.Empty;
@@ -605,14 +608,25 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         {
                             //add column
                             columnName = column;
-                            Query qr = OutputDriver.CreateQuery("alter table [" + TableName + "] add [" + columnName + "] " + DBReadExecute.SQLGetType(CurrentDataTable.Columns[column]));
-                            OutputDriver.ExecuteNonQuery(qr);
+                            if (count > 0)
+                            {
+                              sqlquery.Append(", ");
+                            }
+                           sqlquery.Append(" ["+columnName+"] "+DBReadExecute.SQLGetType(CurrentDataTable.Columns[column]));
+                            count++;
+                         //   Query qr = OutputDriver.CreateQuery("alter table [" + altertablename + "] add [" + columnName + "] " + DBReadExecute.SQLGetType(CurrentDataTable.Columns[column]));                          
                         }
-
+                       
                         ColumnSQL.Append(" [");
                         ColumnSQL.Append(column);
                         ColumnSQL.Append("],");
                     }
+                   sqlquery.Append(" )");
+                   if (count > 0)
+                    {
+                      Query qr = OutputDriver.CreateQuery(sqlquery.ToString());
+                      OutputDriver.ExecuteNonQuery(qr);
+                   }
                     OutputDriver.IsBulkOperation = false;
 
                     ColumnSQL.Length = ColumnSQL.Length - 1;
