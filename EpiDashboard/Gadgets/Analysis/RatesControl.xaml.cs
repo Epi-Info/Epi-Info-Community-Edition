@@ -992,6 +992,54 @@ namespace EpiDashboard
         /// </summary>
         public override void RefreshResults()
         {
+            List<string> listFields = new List<string>();
+            List<string> numerFilterFields = new List<string>();
+            List<string> denomFilterFields = new List<string>();
+
+            if (((RatesParameters)Parameters).NumerFilter != null)
+            {
+                foreach (System.Data.DataRow numerRow in ((RatesParameters)Parameters).NumerFilter.ConditionTable.Rows)
+                {
+                    string[] fragments = (numerRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                    if (fragments.Length == 3)
+                    {
+                        numerFilterFields.Add(fragments[1]);
+                    }
+                }
+            }
+
+            if (((RatesParameters)Parameters).DenomFilter != null)
+            {
+                foreach (System.Data.DataRow denomRow in ((RatesParameters)Parameters).DenomFilter.ConditionTable.Rows)
+                {
+                    string[] fragments = (denomRow["filter"]).ToString().Split(new char[] { '[', ']' });
+                    if (fragments.Length == 3)
+                    {
+                        denomFilterFields.Add(fragments[1]);
+                    }
+                }
+            }
+
+            numerFilterFields.AddRange(denomFilterFields.ToList<string>());
+            listFields = numerFilterFields;
+
+            listFields.Sort();
+
+            foreach (string field in listFields)
+            {
+                Parameters.ColumnNames.Add(field);
+            }
+
+            if (string.IsNullOrWhiteSpace(((RatesParameters)Parameters).DenominatorField) == false)
+            {
+                Parameters.ColumnNames.Add(((RatesParameters)Parameters).DenominatorField);
+            }
+
+            if (string.IsNullOrWhiteSpace(((RatesParameters)Parameters).DenominatorField) == false)
+            {
+                Parameters.ColumnNames.Add(((RatesParameters)Parameters).DenominatorField);
+            }
+
             if (!LoadingCombos && Parameters != null && Parameters.ColumnNames.Count > 0)
             {
                 if (IsHostedByEnter)
@@ -1486,7 +1534,6 @@ namespace EpiDashboard
             }
 
             base.CreateFromXml(element);
-
             this.LoadingCombos = false;
 
             RefreshResults();
