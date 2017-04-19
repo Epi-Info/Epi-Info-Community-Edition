@@ -182,16 +182,7 @@
                                 <Label VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
                                     <TextBlock x:Name="tblockMaxHeight" TextWrapping="Wrap">Max height:__xfe</TextBlock>
                                 </Label>
-                                
                                 <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
-                            </StackPanel>
-
-
-                            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-                                <Label VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" Visibility="Visible">
-                                    <TextBlock x:Name="tblockMaxVarNameLength" TextWrapping="Wrap">Max var name length:</TextBlock>    
-                                </Label>                                
-                                <TextBox x:Name="txtMaxVarNameLength" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="24"  PreviewTextInput="txtMaxVarNameLength_PreviewTextInput" Visibility="Visible"></TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Margin="0 20 0 0">
                                 <Label  VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
@@ -202,31 +193,9 @@
                         </WrapPanel>
                     </StackPanel>
 
-
-
-
                     <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options__xfe</Label>
-
                     <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-                        <CheckBox x:Name="checkboxTabOrder"  Style="{StaticResource PropertiesPanelCheckbox}"  Visibility="Visible" IsEnabled="true">
-                            <TextBlock x:Name="checkboxTabOrderTxt" TextWrapping="Wrap" >Sort variables by tab order (Adding more text for text)</TextBlock>
-                        </CheckBox>
-                        <CheckBox x:Name="checkboxUsePrompts" Style="{StaticResource PropertiesPanelCheckbox}" Visibility="Visible" IsEnabled="true">
-                            <TextBlock x:Name="checkboxUsePromptsTxt" TextWrapping="Wrap">Use field prompts__xfe</TextBlock>
-                        </CheckBox>
-                        <CheckBox x:Name="checkboxListLabels" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
-                            <TextBlock TextWrapping="Wrap" x:Name="checkboxListLabelsTxt">Display list labels__xfe</TextBlock>
-                        </CheckBox>
-                        
-                        <CheckBox x:Name="checkboxLineColumn" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
-                            <TextBlock TextWrapping="Wrap" x:Name="checkboxLineColumnTxt">Show line column__xfe</TextBlock>
-                        </CheckBox>
-                        <CheckBox x:Name="checkboxColumnHeaders" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
-                            <TextBlock TextWrapping="Wrap" x:Name="checkboxColumnHeadersTxt">Show column headings__xfe</TextBlock>
-                        </CheckBox>
-                        <CheckBox x:Name="checkboxShowNulls" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
-                            <TextBlock TextWrapping="Wrap" x:Name="checkboxShowNullsTxt">Show missing representation__xfe</TextBlock>
-                        </CheckBox>
+
                         <StackPanel Margin="0,10" >
                             <Label x:Name="lblRateMultiplier">Rate Multiplier:</Label>
                             <ComboBox x:Name="cmbRateMultiplier" IsEditable="true" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left">
@@ -239,8 +208,59 @@
                                 <ComboBoxItem>10^12</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
-                        <!--<CheckBox x:Name="checkboxAllowUpdates" Style="{StaticResource PropertiesPanelCheckbox}" Content="Allow updates__xfe" Visibility="Collapsed" IsEnabled="true" />-->
                     </WrapPanel>
+                    
+                    
+                    <!-- VERT -->
+                    <StackPanel Margin="0 10 0 0" Visibility="Collapsed">
+                        <Grid x:Name="stratGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="75" x:Name="rampStartColumn"/>
+                                <ColumnDefinition Width="50" x:Name="rampCompareColumn"/>
+                                <ColumnDefinition Width="75" x:Name="rampEndColumn"/>
+                                <ColumnDefinition Width="0" x:Name="quintileColumn"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="tblockColorRamp" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
+                            <TextBlock x:Name="tblockRange" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">Range</TextBlock>
+
+                            <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor1" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="03" Grid.Column="0" x:Name="rctColor2" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="04" Grid.Column="0" x:Name="rctColor3" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="05" Grid.Column="0" x:Name="rctColor4" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+
+                            <TextBox Grid.Row="02" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="03" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="04" x:Name="rampStart03" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="05" x:Name="rampStart04" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+
+                            <TextBlock Grid.Row="02" x:Name="centerText01" Grid.Column="2" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="03" x:Name="centerText02" Grid.Column="2" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="04" x:Name="centerText03" Grid.Column="2" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="05" x:Name="centerText04" Grid.Column="2" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            
+                            <TextBox Grid.Row="02" x:Name="rampEnd01" Grid.Column="3" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="03" x:Name="rampEnd02" Grid.Column="3" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="04" x:Name="rampEnd03" Grid.Column="3" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="05" x:Name="rampEnd04" Grid.Column="3" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+
+                        </Grid>
+                    </StackPanel>
+                    <!-- VERTERED -->
+                    
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
