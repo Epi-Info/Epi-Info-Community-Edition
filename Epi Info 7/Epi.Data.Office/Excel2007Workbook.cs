@@ -137,7 +137,9 @@ namespace Epi.Data.Office
             StringBuilder sb = new StringBuilder();
 
             sb.Append("create table ");
+            sb.Append("[");
             sb.Append(tableName);
+            sb.Append("]");
             sb.Append(" ( ");
             foreach (TableColumn column in columns)
             {

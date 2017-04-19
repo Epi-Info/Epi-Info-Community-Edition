@@ -734,13 +734,13 @@ namespace EpiDashboard
                     if (db.TableExists(tableName) && !db.ConnectionDescription.ToLowerInvariant().Contains("excel"))
                     {
                         db.DeleteTable(tableName);
-                    }
-                    else if (db.TableExists(tableName))
-                    {
-                        this.Dispatcher.BeginInvoke(new SetStatusDelegate(SetErrorMessage), string.Format(SharedStrings.DASHBOARD_EXPORT_EXCEL_TABLE_OVERWRITE_FAIL, tableName));
-                        stopWatch.Stop();
-                        return;
-                    }
+                   }
+                    //else if (db.TableExists(tableName))
+                    //{
+                    //    this.Dispatcher.BeginInvoke(new SetStatusDelegate(SetErrorMessage), string.Format(SharedStrings.DASHBOARD_EXPORT_EXCEL_TABLE_OVERWRITE_FAIL, tableName));
+                    //    stopWatch.Stop();
+                    //    return;
+                    //}
 
                     dashboardHelper.PopulateDataSet(); // the only reason to call this is to see if any new user-defined vars have been added and apply them.
                     List<Epi.Data.TableColumn> tcList = dashboardHelper.GetFieldsAsListOfEpiTableColumns(useTabOrder);
