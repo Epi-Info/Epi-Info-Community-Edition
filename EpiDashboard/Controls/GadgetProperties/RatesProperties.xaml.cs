@@ -136,26 +136,17 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockDesc.Content = DashboardSharedStrings.GADGET_DESCRIPTION;
             tblockPanelOutputOpt.Content = DashboardSharedStrings.GADGET_OUTPUT_OPTIONS;
             tblockAnyFilterGadgetOnly.Content = DashboardSharedStrings.GADGET_FILTER_GADGET_ONLY;
-            //tblockVariableNumerator.Content = DashboardSharedStrings.GADGET_VARIABLES_NUMERATOR;
             tblockVariableDenominator.Content = DashboardSharedStrings.GADGET_VARIABLES_DENOMINATOR;
             tblockGroupby.Content = DashboardSharedStrings.GADGET_GROUP_BY;
             tblockSubGroupBy.Content = DashboardSharedStrings.GADGET_SUBGROUP_BY;
             tblockAvailableVariables.Content = DashboardSharedStrings.GADGET_AVAILABLE_VARIABLES;
             tblockSortOrder.Content = DashboardSharedStrings.GADGET_SORT_ORDER;
             tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
-            checkboxTabOrderTxt.Text = DashboardSharedStrings.EXPORT_SORT_BY_TAB_ORDER;
-            checkboxUsePromptsTxt.Text = DashboardSharedStrings.GADGET_USE_FIELD_PROMPTS;
-            checkboxLineColumnTxt.Text = DashboardSharedStrings.GADGET_SHOW_LINE_COLUMN;
-            checkboxColumnHeadersTxt.Text = DashboardSharedStrings.GADGET_SHOW_COLUMN_HEADINGS;
-            checkboxShowNullsTxt.Text = DashboardSharedStrings.GADGET_SHOW_MISSING_REP;
             tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
-            checkboxListLabelsTxt.Text = DashboardSharedStrings.GADGET_DISPLAY_LIST_LABELS;
             tblockMaxWidth.Text = DashboardSharedStrings.GADGET_MAX_WIDTH;
             tblockMaxHeight.Text = DashboardSharedStrings.GADGET_MAX_HEIGHT;
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
-
-            tblockMaxVarNameLength.Text = SharedStrings.DASHBOARD_MAX_LENGTH;
             tblockMaxRows.Text = SharedStrings.DASHBOARD_OPTION_MAX_ROWS;
             #endregion // Translation
         }
@@ -203,14 +194,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (success)
             {
                 Parameters.Width = width;
-            }
-
-            success = int.TryParse(txtMaxVarNameLength.Text, out maxColumnLength);
-            if (success)
-            {
-                if (maxColumnLength > 64)
-                    maxColumnLength = 64;
-                Parameters.MaxColumnLength = maxColumnLength;
             }
 
             success = int.TryParse(txtMaxRows.Text, out maxrows);
@@ -266,23 +249,8 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.ColumnNames.Add(field);
             }
 
-            Parameters.SortColumnsByTabOrder = checkboxTabOrder.IsChecked.Value;
-            Parameters.UsePromptsForColumnNames = checkboxUsePrompts.IsChecked.Value;
-            Parameters.ShowColumnHeadings = checkboxColumnHeaders.IsChecked.Value;
-            Parameters.ShowLineColumn = checkboxLineColumn.IsChecked.Value;
-            Parameters.ShowNullLabels = checkboxShowNulls.IsChecked.Value;
-            Parameters.ShowCommentLegalLabels = checkboxListLabels.IsChecked.Value;
             Parameters.NumerDistinct = checkBoxNumberatorDistinct.IsChecked.Value;
             Parameters.DenomDistinct = checkBoxDenominatorDistinct.IsChecked.Value;
-
-            if (checkboxUsePrompts.IsChecked == true)
-            {
-                inputVariableList.Add("usepromptsforcolumnnames", "true");
-            }
-            else
-            {
-                inputVariableList.Add("usepromptsforcolumnnames", "false");
-            }
 
             if (lbxSortOrder.Items.Count > 0)
             {
@@ -426,21 +394,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 txtMaxWidth.Text = Parameters.Width.ToString();
             }
-            if (!String.IsNullOrEmpty(Parameters.MaxColumnLength.ToString()) & Parameters.MaxColumnLength != 0)
-            {
-                txtMaxVarNameLength.Text = Parameters.MaxColumnLength.ToString();
-            }
             if (!String.IsNullOrEmpty(Parameters.MaxRows.ToString()) & Parameters.MaxRows != 0)
             {
                 txtMaxRows.Text = Parameters.MaxRows.ToString();
             }
 
-            checkboxTabOrder.IsChecked = Parameters.SortColumnsByTabOrder;
-            checkboxUsePrompts.IsChecked = Parameters.UsePromptsForColumnNames;
-            checkboxColumnHeaders.IsChecked = Parameters.ShowColumnHeadings;
-            checkboxLineColumn.IsChecked = Parameters.ShowLineColumn;
-            checkboxShowNulls.IsChecked = Parameters.ShowNullLabels;
-            checkboxListLabels.IsChecked = Parameters.ShowCommentLegalLabels;
             checkBoxDenominatorDistinct.IsChecked = Parameters.DenomDistinct;
             checkBoxNumberatorDistinct.IsChecked = Parameters.NumerDistinct;
 
@@ -765,5 +723,148 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
         }
+
+        private void rctSelectColor_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Forms.ColorDialog dialog = new System.Windows.Forms.ColorDialog();
+            System.Windows.Media.Color currentColor = ((SolidColorBrush)((System.Windows.Shapes.Rectangle)sender).Fill).Color;
+            System.Drawing.Color initColor = System.Drawing.Color.FromArgb(255, currentColor.R, currentColor.G, currentColor.B);
+
+            List<Int32> baseColors = new List<Int32>()
+            {
+                -32640,
+                -128,
+                -8323200,
+                -16711808,
+                -8323073,
+                -16744193,
+                -32576,
+                -32513,
+
+                -65536,
+                -256,
+                -8323328,
+                -16711872,
+                -16711681,
+                -16744256,
+                -8355648,
+                -65281,
+
+                -8372160,
+                -32704,
+                -16711936,
+                -16744320,
+                -16760704,
+                -8355585,
+                -8388544,
+                -65408,
+
+                -8388608,
+                -32768,
+                -16744448,
+                -16744384,
+                -16776961,
+                -16777056,
+                -8388480,
+                -8388353,
+
+                -12582912,
+                -32768,
+                -16744448,
+                -16744384,
+                -16776961,
+                -16777056,
+                -8388480,
+                -8388353,
+
+                -12582912,
+                -8372224,
+                -16760832,
+                -16760768,
+                -16777088,
+                -16777152,
+                -12582848,
+                -12582784,
+
+                -16777216,
+                -8355840,
+                -8355776,
+                -8355712,
+                -12550016,
+                -4144960,
+                -12582848,
+                -1
+            };
+
+            Int32 initColorString = initColor.ToArgb();
+
+            if (baseColors.Contains(initColorString))
+            {
+                dialog.Color = initColor;
+            }
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ((System.Windows.Shapes.Rectangle)sender).Fill = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                //LayerProvider.UseCustomColors = true;
+
+                Int32 colValue = dialog.Color.ToArgb();
+
+               // LayerProvider.CustomColorsDictionary.Add(((System.Windows.Shapes.Rectangle)sender).Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+                if (((System.Windows.Shapes.Rectangle)sender).Tag is String && ((String)((System.Windows.Shapes.Rectangle)sender).Tag) == "Reset_Legend")
+                {
+                    //Reset_Legend();
+                }
+            }
+        }
+        private void rampValue_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if ((sender is System.Windows.Controls.TextBox) == false)
+            {
+                return;
+            }
+
+            System.Windows.Controls.TextBox textBox = ((System.Windows.Controls.TextBox)sender);
+            string newText = textBox.Text;
+            float newValue = float.NaN;
+
+            string name = textBox.Name;
+
+            //int classLevel = LayerProvider.ClassRangesDictionary.GetClassLevelWithKey(name);
+            //ClassLimitType limit = LayerProvider.ClassRangesDictionary.GetLimitTypeWithKey(name);
+
+            if (float.TryParse(newText, out newValue) == false)
+            {
+                System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(name);
+               // if (LayerProvider.ClassRangesDictionary.RangeDictionary.ContainsKey(name))
+                {
+                //    found.Text = LayerProvider.ClassRangesDictionary.RangeDictionary[name];
+                }
+                return;
+            }
+
+            //UpdateClassRangesDictionary_FromControls();
+
+            //if (IsMissingLimitValue())
+            {
+                return;
+            }
+
+            //List<ClassLimits> limits = LayerProvider.ClassRangesDictionary.GetLimitValues();
+
+            //AdjustClassBreaks(limits, newValue, classLevel, limit);
+
+            //LayerProvider.ClassRangesDictionary.SetRangesDictionary(limits);
+
+            //foreach (KeyValuePair<string, string> kvp in LayerProvider.ClassRangesDictionary.RangeDictionary)
+            {
+                //System.Windows.Controls.TextBox found = (System.Windows.Controls.TextBox)this.FindName(kvp.Key);
+                //found.Text = kvp.Value;
+            }
+
+            //PropertyChanged_EnableDisable();
+        }
+
     }
 }
