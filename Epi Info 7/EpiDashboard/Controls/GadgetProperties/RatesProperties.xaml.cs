@@ -663,8 +663,11 @@ namespace EpiDashboard.Controls.GadgetProperties
                     FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
                     Parameters.NumeratorField = fieldInfo.Name;
                     List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
-                    cmbSelectNumeratorAggregateFunction.ItemsSource = items;
-                    //SetSelectedItem(cmbSelectNumeratorAggregateFunction, fieldInfo);
+                    if(cmbSelectNumeratorAggregateFunction.Items.Count != items.Count)
+                    {
+                        cmbSelectNumeratorAggregateFunction.ItemsSource = items;
+                        SetSelectedItem(cmbSelectNumeratorAggregateFunction, fieldInfo);
+                    }
                 }
             }
         }
@@ -678,8 +681,11 @@ namespace EpiDashboard.Controls.GadgetProperties
                     FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
                     Parameters.DenominatorField = fieldInfo.Name;
                     List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
-                    cmbSelectDenominatorAggregateFunction.ItemsSource = items;
-                    SetSelectedItem(cmbSelectDenominatorAggregateFunction, fieldInfo);
+                    if (cmbSelectDenominatorAggregateFunction.Items.Count != items.Count)
+                    {
+                        cmbSelectDenominatorAggregateFunction.ItemsSource = items;
+                        SetSelectedItem(cmbSelectDenominatorAggregateFunction, fieldInfo);
+                    }
                 }
             }
         }
@@ -693,7 +699,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 ToList<AggFxInfo>();
                 if (aggregateFunction.Count > 0 && aggregateFunction[0] is AggFxInfo)
                 {
-                    combobox.SelectedItem = aggregateFunction[0];
+                    combobox.SelectedItem = aggregateFunction[0].Name;
                 }
             }
         }
