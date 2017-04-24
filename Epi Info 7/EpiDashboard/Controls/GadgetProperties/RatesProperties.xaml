@@ -42,7 +42,7 @@
             <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
         </StackPanel>
 
-        <DockPanel x:Name="panelVariables" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0">
+        <DockPanel x:Name="panelVariables" Visibility="Collapsed" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">DefineRate__xfe</Label>
             </StackPanel>
@@ -148,7 +148,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel  x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <DockPanel  x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
 
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
@@ -203,6 +203,7 @@
                                 <ComboBoxItem>10</ComboBoxItem>
                                 <ComboBoxItem>100</ComboBoxItem>
                                 <ComboBoxItem>10^4</ComboBoxItem>
+                                <ComboBoxItem>10^5</ComboBoxItem>
                                 <ComboBoxItem>10^6</ComboBoxItem>
                                 <ComboBoxItem>10^9</ComboBoxItem>
                                 <ComboBoxItem>10^12</ComboBoxItem>
@@ -212,7 +213,13 @@
                     
                     
                     <!-- VERT -->
-                    <StackPanel Margin="0 10 0 0" Visibility="Collapsed">
+
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <Rectangle x:Name="rctColorDefault" HorizontalAlignment="Center" Margin="10 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+                        <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="defaultColorOption" Click="CheckBox_DefaultColor_Click"  IsChecked="True" Content="Use default color" HorizontalAlignment="Left" VerticalAlignment="Center" Margin=" 25,0,0,0" />
+                    </StackPanel>
+
+                    <StackPanel x:Name="colorStack" Margin="0 10 0 0" Visibility="Collapsed">
                         <Grid x:Name="stratGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -227,7 +234,9 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="75" x:Name="rampStartColumn"/>
-                                <ColumnDefinition Width="50" x:Name="rampCompareColumn"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="auto" x:Name="rampCompareColumn" />
+                                <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="75" x:Name="rampEndColumn"/>
                                 <ColumnDefinition Width="0" x:Name="quintileColumn"/>
                                 <ColumnDefinition Width="220"/>
@@ -235,27 +244,25 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock x:Name="tblockColorRamp" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
-                            <TextBlock x:Name="tblockRange" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">Range</TextBlock>
+                            <TextBlock x:Name="tblockRange" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Center" Visibility="Visible">Range</TextBlock>
 
                             <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor1" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
                             <Rectangle Grid.Row="03" Grid.Column="0" x:Name="rctColor2" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
                             <Rectangle Grid.Row="04" Grid.Column="0" x:Name="rctColor3" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
                             <Rectangle Grid.Row="05" Grid.Column="0" x:Name="rctColor4" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
 
-                            <TextBox Grid.Row="02" x:Name="rampStart01" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
                             <TextBox Grid.Row="03" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
                             <TextBox Grid.Row="04" x:Name="rampStart03" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
                             <TextBox Grid.Row="05" x:Name="rampStart04" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
 
-                            <TextBlock Grid.Row="02" x:Name="centerText01" Grid.Column="2" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                            <TextBlock Grid.Row="03" x:Name="centerText02" Grid.Column="2" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                            <TextBlock Grid.Row="04" x:Name="centerText03" Grid.Column="2" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
-                            <TextBlock Grid.Row="05" x:Name="centerText04" Grid.Column="2" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="02" x:Name="centerText01" Grid.Column="3" HorizontalAlignment="Right" Margin="0 5 0 0" VerticalAlignment="Center">  X &lt;</TextBlock>
+                            <TextBlock Grid.Row="03" x:Name="centerText02" Grid.Column="3" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="04" x:Name="centerText03" Grid.Column="3" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="05" x:Name="centerText04" Grid.Column="3" HorizontalAlignment="Left" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X  </TextBlock>
                             
-                            <TextBox Grid.Row="02" x:Name="rampEnd01" Grid.Column="3" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
-                            <TextBox Grid.Row="03" x:Name="rampEnd02" Grid.Column="3" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
-                            <TextBox Grid.Row="04" x:Name="rampEnd03" Grid.Column="3" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
-                            <TextBox Grid.Row="05" x:Name="rampEnd04" Grid.Column="3" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="02" x:Name="rampEnd01" Grid.Column="5" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="03" x:Name="rampEnd02" Grid.Column="5" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="04" x:Name="rampEnd03" Grid.Column="5" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
 
                         </Grid>
                     </StackPanel>

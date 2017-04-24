@@ -816,7 +816,10 @@ namespace EpiDashboard.Controls.GadgetProperties
 
                 Int32 colValue = dialog.Color.ToArgb();
 
-               // LayerProvider.CustomColorsDictionary.Add(((System.Windows.Shapes.Rectangle)sender).Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                // LayerProvider.CustomColorsDictionary.Add(((System.Windows.Shapes.Rectangle)sender).Name, Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+
+                ((SolidColorBrush)((System.Windows.Shapes.Rectangle)sender).Fill).Color = Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B);
+
 
                 if (((System.Windows.Shapes.Rectangle)sender).Tag is String && ((String)((System.Windows.Shapes.Rectangle)sender).Tag) == "Reset_Legend")
                 {
@@ -872,5 +875,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             //PropertyChanged_EnableDisable();
         }
 
+        private void CheckBox_DefaultColor_Click(object sender, RoutedEventArgs e)
+        {
+            colorStack.Visibility = ((CheckBox)sender).IsChecked == true ? Visibility.Collapsed : Visibility.Visible;
+        }
     }
 }
