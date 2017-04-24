@@ -342,8 +342,17 @@ namespace Epi.Windows.Analysis.Dialogs
 
                 foreach (string tableName in tableNames)
                 {
-                    ComboBoxItem newItem = new ComboBoxItem(tableName, tableName,tableName);
-                    this.cmbDataTable.Items.Add(newItem);
+                     ComboBoxItem newItem=null;
+                     if (tableName.EndsWith("$") & (selectedPlugIn.Key=="Epi.Data.Office.ExcelWBFactory, Epi.Data.Office") ||
+                         (selectedPlugIn.Key == "Epi.Data.Office.Excel2007WBFactory, Epi.Data.Office"))
+                     {
+                         newItem = new ComboBoxItem(tableName.Remove(tableName.Length - 1), tableName.Remove(tableName.Length - 1), tableName);
+                     }
+                     else
+                     {
+                         newItem = new ComboBoxItem(tableName, tableName, tableName);
+                     }
+                    this.cmbDataTable.Items.Add(newItem);                    
                 }
 
                 

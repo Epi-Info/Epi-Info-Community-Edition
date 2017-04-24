@@ -89,49 +89,49 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 case "Int16":
                     return GenericDbColumnType.Int16;
-              
+
                 case "Int32":
                     return GenericDbColumnType.Int32;
-                
+
                 case "Int64":
                     return GenericDbColumnType.Int64;
-               
+
                 case "String":
                     return GenericDbColumnType.String;
-            
+
                 case "Byte":
                     return GenericDbColumnType.Byte;
-               
+
                 case "Boolean":
                     return GenericDbColumnType.Boolean;
-               
+
                 case "Decimal":
                     return GenericDbColumnType.Decimal;
-          
+
                 case "Double":
                     return GenericDbColumnType.Double;
-              
+
                 case "DateTime":
                     return GenericDbColumnType.DateTime;
-            
+
                 case "Guid":
                     return GenericDbColumnType.String;
-           
+
                 case "UInt16":
                     return GenericDbColumnType.UInt16;
-          
+
                 case "UInt32":
                     return GenericDbColumnType.UInt32;
-           
+
                 case "UInt64":
                     return GenericDbColumnType.UInt64;
-              
+
                 case "Single":
                     return GenericDbColumnType.Single;
-           
+
                 case "SByte":
                     return GenericDbColumnType.SByte;
-              
+
                 default:
                     return GenericDbColumnType.Object;
 
@@ -268,7 +268,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                     }
                 }
-            } 
+            }
             else // is NOT an isExceptionList
             {
                 for (int i = 0; i < CurrentDataTable.Columns.Count; i++)
@@ -299,7 +299,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                 }
 
-                OutputDriver = DBReadExecute.GetDataDriver(FilePath, this.isConnectionString);            
+                OutputDriver = DBReadExecute.GetDataDriver(FilePath, this.isConnectionString);
 
                 if (OutputDriver.GetType().Name.Equals("CsvFile", StringComparison.OrdinalIgnoreCase) || this.FileDataFormat.Equals("TEXT", StringComparison.OrdinalIgnoreCase))
                 {
@@ -352,7 +352,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             {
                                 isPermanentVariable = true;
                             }
-                            
+
                             if (isPermanentVariable == false)
                             {
                                 TableColumn newTableColumn;
@@ -383,7 +383,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                 {
                                     newTableColumn = new TableColumn(column.ColumnName.ToString(), ConvertToGenericType(column.DataType), column.AllowDBNull);
                                 }
-                                
+
                                 newTableColumn.AllowNull = column.AllowDBNull;
                                 newTableColumn.IsIdentity = column.Unique;
                                 TableColumns.Add(newTableColumn);
@@ -391,7 +391,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                     }
 
-                    if 
+                    if
                     (
                         (
                            (!(OutputDriver.GetType().Name.Equals("AccessDatabase", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Access2007Database", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("ExcelWorkbook", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Excel2007Workbook", StringComparison.OrdinalIgnoreCase))
@@ -407,7 +407,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                         if (OutputDriver.GetType().Name.Equals("ExcelWorkbook", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Excel2007Workbook", StringComparison.OrdinalIgnoreCase))
                         {
-                            WideTableColumns = this.CreateExcelWideTable(TableColumns); 
+                            WideTableColumns = this.CreateExcelWideTable(TableColumns);
                         }
                         else if(!OutputDriver.GetType().Name.Equals("CsvFile", StringComparison.OrdinalIgnoreCase))
                         {
@@ -469,7 +469,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                 }
 
                                 if (isPermanentVariable == false)
-                                { 
+                                {
                                     TableColumn newTableColumn;
 
                                     if (column.DataType.ToString() == "System.String")
@@ -498,7 +498,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                     {
                                         newTableColumn = new TableColumn(column.ColumnName.ToString(), ConvertToGenericType(column.DataType), column.AllowDBNull);
                                     }
-    
+
                                     newTableColumn.AllowNull = column.AllowDBNull;
                                     newTableColumn.IsIdentity = column.Unique;
                                     TableColumns.Add(newTableColumn);
@@ -590,7 +590,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 else if ((OutputDriver.GetType().Name.Equals("AccessDatabase", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Access2007Database", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("ExcelWorkbook", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Excel2007Workbook", StringComparison.OrdinalIgnoreCase)) && VariableList.Count > Max_Number_Columns)
                 {
                     this.PopulateTable(WideTableColumns);
-                }                
+                }
                 else
                 {
                     DataTable sourceTable = OutputDriver.GetTableData(TableName);
@@ -598,9 +598,6 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     StringBuilder ColumnSQL = new StringBuilder();
 
                     OutputDriver.IsBulkOperation = true;
-                    StringBuilder sqlquery = new StringBuilder();
-                    int count = 0;
-                    sqlquery.Append("create table [" + TableName + "] ( ");                  
                     foreach (string column in VariableList)
                     {
                         string columnName = String.Empty;
@@ -608,25 +605,14 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         {
                             //add column
                             columnName = column;
-                            if (count > 0)
-                            {
-                              sqlquery.Append(", ");
-                            }
-                           sqlquery.Append(" ["+columnName+"] "+DBReadExecute.SQLGetType(CurrentDataTable.Columns[column]));
-                            count++;
-                         //   Query qr = OutputDriver.CreateQuery("alter table [" + altertablename + "] add [" + columnName + "] " + DBReadExecute.SQLGetType(CurrentDataTable.Columns[column]));                          
+                            Query qr = OutputDriver.CreateQuery("alter table [" + TableName + "] add [" + columnName + "] " + DBReadExecute.SQLGetType(CurrentDataTable.Columns[column]));                            
+                            OutputDriver.ExecuteNonQuery(qr);
                         }
-                       
+
                         ColumnSQL.Append(" [");
                         ColumnSQL.Append(column);
                         ColumnSQL.Append("],");
                     }
-                   sqlquery.Append(" )");
-                   if (count > 0)
-                    {
-                      Query qr = OutputDriver.CreateQuery(sqlquery.ToString());
-                      OutputDriver.ExecuteNonQuery(qr);
-                   }
                     OutputDriver.IsBulkOperation = false;
 
                     ColumnSQL.Length = ColumnSQL.Length - 1;
@@ -761,7 +747,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             List<DataRow> Rows = this.Context.GetOutput();
 
-            TextWriter stream = System.IO.File.AppendText(string.Format("{0}\\{1}",curFile,TableName.ToString().Replace("#",".")));           
+            TextWriter stream = System.IO.File.AppendText(string.Format("{0}\\{1}",curFile,TableName.ToString().Replace("#",".")));
             //if (!this.WriteMode.Equals("REPLACE", StringComparison.OrdinalIgnoreCase))
             if (TableColumns.Count > Max_Number_Columns)
             {
@@ -788,7 +774,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         stream.Write('\n');
                     }
                 }
-           }
+            }
 
 
             foreach (DataRow row in Rows)
@@ -984,7 +970,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     if(ParcialTableColumns.Contains(column))
                     {
-                        
+
                     }
                     else
                     {
@@ -1005,7 +991,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                     if (sequence > 0)
                     {
-                       tableName[sequence] = tableName[0] + "_Seq" + sequence.ToString();
+                        tableName[sequence] = tableName[0] + "_Seq" + sequence.ToString();
                     }
 
                     ParcialTableColumns = new List<TableColumn>();
@@ -1098,8 +1084,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             result.Add(tableName[sequence], ParcialTableColumns);
             return result;
         }
-  
-    
+
+
     }
 
 
