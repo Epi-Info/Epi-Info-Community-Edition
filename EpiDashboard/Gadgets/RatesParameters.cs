@@ -29,6 +29,18 @@ namespace EpiDashboard
         public DataFilters NumerFilter { get; set; }
         public DataFilters DenomFilter { get; set; }
 
+        public string DefaultColor { get; set; }
+        public bool UseDefaultColor { get; set; }
+        public string Color_L1 { get; set; }
+        public double HighValue_L1 { get; set; }
+        public string Color_L2 { get; set; }
+        public double HighValue_L2 { get; set; }
+        public double LowValue_L2 { get; set; }
+        public string Color_L3 { get; set; }
+        public double HighValue_L3 { get; set; }
+        public double LowValue_L3 { get; set; }
+        public string Color_L4 { get; set; }
+        public double LowValue_L4 { get; set; }
 
         public double RateMultiplier
         {
@@ -81,6 +93,18 @@ namespace EpiDashboard
             SecondaryGroupField = String.Empty;
             RateMultiplierString = "100";
             GadgetTitle = "Rates";
+            DefaultColor = "#FF0080FF";
+            UseDefaultColor = true;
+            Color_L1 = "#FF0080FF";
+            Color_L2 = "#FFFFFF80";
+            Color_L3 = "#FFFF8040";
+            Color_L4 = "#FFDC0A0A";
+            HighValue_L1 = double.NaN;
+            LowValue_L2 = double.NaN;
+            HighValue_L2 = double.NaN;
+            LowValue_L3 = double.NaN;
+            HighValue_L3 = double.NaN;
+            LowValue_L4 = double.NaN;
         }
     }
 }

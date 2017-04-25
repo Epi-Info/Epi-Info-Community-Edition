@@ -1317,6 +1317,54 @@ namespace EpiDashboard
                 element.AppendChild(denomDataFilterElement);
             }
 
+            XmlElement defaultColorElement = doc.CreateElement("defaultColor");
+            defaultColorElement.InnerText = ratesParameters.DefaultColor;
+            element.AppendChild(defaultColorElement);
+
+            XmlElement useDefaultColorElement = doc.CreateElement("useDefaultColor");
+            useDefaultColorElement.InnerText = ratesParameters.UseDefaultColor.ToString();
+            element.AppendChild(useDefaultColorElement);
+
+            XmlElement color_L1Element = doc.CreateElement("color_L1");
+            color_L1Element.InnerText = ratesParameters.Color_L1;
+            element.AppendChild(color_L1Element);
+
+            XmlElement color_L2Element = doc.CreateElement("color_L2");
+            color_L2Element.InnerText = ratesParameters.Color_L2;
+            element.AppendChild(color_L2Element);
+
+            XmlElement color_L3Element = doc.CreateElement("color_L3");
+            color_L3Element.InnerText = ratesParameters.Color_L3;
+            element.AppendChild(color_L3Element);
+
+            XmlElement color_L4Element = doc.CreateElement("color_L4");
+            color_L4Element.InnerText = ratesParameters.Color_L4;
+            element.AppendChild(color_L4Element);
+
+            XmlElement highValue_L1Element = doc.CreateElement("highValue_L1");
+            highValue_L1Element.InnerText = ratesParameters.HighValue_L1.ToString(); 
+            element.AppendChild(highValue_L1Element);
+
+            XmlElement lowValue_L2Element = doc.CreateElement("lowValue_L2");
+            lowValue_L2Element.InnerText = ratesParameters.LowValue_L2.ToString();
+            element.AppendChild(lowValue_L2Element);
+
+            XmlElement highValue_L2Element = doc.CreateElement("highValue_L2");
+            highValue_L2Element.InnerText = ratesParameters.HighValue_L2.ToString();
+            element.AppendChild(highValue_L2Element);
+
+            XmlElement lowValue_L3Element = doc.CreateElement("lowValue_L3");
+            lowValue_L3Element.InnerText = ratesParameters.LowValue_L3.ToString();
+            element.AppendChild(lowValue_L3Element);
+
+            XmlElement highValue_L3Element = doc.CreateElement("highValue_L3");
+            highValue_L3Element.InnerText = ratesParameters.HighValue_L3.ToString();
+            element.AppendChild(highValue_L3Element);
+
+            XmlElement lowValue_L4Element = doc.CreateElement("lowValue_L4");
+            lowValue_L4Element.InnerText = ratesParameters.LowValue_L4.ToString();
+            element.AppendChild(lowValue_L4Element);
+
             return element;
         }
 
@@ -1529,6 +1577,71 @@ namespace EpiDashboard
                         int maxWidth = 800;
                         int.TryParse(child.InnerText, out maxWidth);
                         ((RatesParameters)Parameters).Width = maxWidth;
+                        break;
+                    case "defaultcolor":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            ((RatesParameters)Parameters).DefaultColor = child.InnerText;
+                        }
+                        break;
+                    case "usedefaultcolor":
+                        bool useDefaultColor = true;
+                        bool.TryParse(child.InnerText, out useDefaultColor);
+                        ((RatesParameters)Parameters).UseDefaultColor = useDefaultColor;
+                        break;
+                    case "color_l1":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            ((RatesParameters)Parameters).Color_L1 = child.InnerText;
+                        }
+                        break;
+                    case "highvalue_l1":
+                        double highvalue_l1 = -1;
+                        double.TryParse(child.InnerText, out highvalue_l1);
+                        ((RatesParameters)Parameters).HighValue_L1 = highvalue_l1;
+                        break;
+                    case "color_l2":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            ((RatesParameters)Parameters).Color_L2 = child.InnerText;
+                        }
+                        break;
+                    case "lowvalue_l2":
+                        double lowvalue_l2 = -1;
+                        double.TryParse(child.InnerText, out lowvalue_l2);
+                        ((RatesParameters)Parameters).LowValue_L2 = lowvalue_l2;
+                        break;
+                    case "highvalue_l2":
+                        double highvalue_l2 = -1;
+                        double.TryParse(child.InnerText, out highvalue_l2);
+                        ((RatesParameters)Parameters).HighValue_L2 = highvalue_l2;
+                        break;
+                    case "color_l3":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            ((RatesParameters)Parameters).Color_L3 = child.InnerText;
+                        }
+                        break;
+                    case "highvalue_l3":
+                        double highvalue_l3 = -1;
+                        double.TryParse(child.InnerText, out highvalue_l3);
+                        ((RatesParameters)Parameters).HighValue_L3 = highvalue_l3;
+                        break;
+                    case "lowvalue_l3":
+                        double lowvalue_l3 = -1;
+                        double.TryParse(child.InnerText, out lowvalue_l3);
+                        ((RatesParameters)Parameters).LowValue_L3 = lowvalue_l3;
+                        break;
+                    case "color_l4":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            ((RatesParameters)Parameters).Color_L4 = child.InnerText;
+                        }
+                        break;
+                    case "lowvalue_l4":
+                        double lowvalue_l4 = -1;
+                        double.TryParse(child.InnerText, out lowvalue_l4);
+                        ((RatesParameters)Parameters).LowValue_L4 = lowvalue_l4;
                         break;
                 }
             }
