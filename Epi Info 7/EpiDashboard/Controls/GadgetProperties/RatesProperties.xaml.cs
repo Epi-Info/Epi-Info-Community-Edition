@@ -168,7 +168,6 @@ namespace EpiDashboard.Controls.GadgetProperties
         /// </summary> 
         protected override void CreateInputVariableList()
         {
-
             this.DataFilters = RowFilterControl.DataFilters;
 
             Dictionary<string, string> inputVariableList = new Dictionary<string, string>();
@@ -382,6 +381,31 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
             Parameters.InputVariableList = inputVariableList;
+
+            Parameters.DefaultColor = rctColorDefault.Fill.ToString();
+            Parameters.UseDefaultColor = defaultColorOption.IsChecked == true;
+
+            double doubleValue = -1;
+
+            Parameters.Color_L1 = rctColor1.Fill.ToString();
+            success = double.TryParse(rampEnd01.Text, out doubleValue);
+            if (success) Parameters.HighValue_L1 = doubleValue;
+
+            Parameters.Color_L2 = rctColor2.Fill.ToString();
+            success = double.TryParse(rampStart02.Text, out doubleValue);
+            if (success) Parameters.LowValue_L2 = doubleValue;
+            success = double.TryParse(rampEnd02.Text, out doubleValue);
+            if (success) Parameters.HighValue_L2 = doubleValue;
+
+            Parameters.Color_L3 = rctColor3.Fill.ToString();
+            success = double.TryParse(rampStart03.Text, out doubleValue);
+            if (success) Parameters.LowValue_L3 = doubleValue;
+            success = double.TryParse(rampEnd03.Text, out doubleValue);
+            if (success) Parameters.HighValue_L3 = doubleValue;
+
+            Parameters.Color_L4 = rctColor4.Fill.ToString();
+            success = double.TryParse(rampStart04.Text, out doubleValue);
+            if (success) Parameters.LowValue_L4 = doubleValue;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -471,6 +495,55 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
+
+            Color color;
+            if (Parameters.DefaultColor != null)
+            {
+                color = (Color)ColorConverter.ConvertFromString(Parameters.DefaultColor);
+                rctColorDefault.Fill = new SolidColorBrush(color);
+            }
+
+            if (Parameters.UseDefaultColor == true)
+            {
+                defaultColorOption.IsChecked = true;
+                colorStack.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                defaultColorOption.IsChecked = false;
+                colorStack.Visibility = Visibility.Visible;
+            }
+
+            if (Parameters.DefaultColor != null)
+            {
+                color = (Color)ColorConverter.ConvertFromString(Parameters.Color_L1);
+                rctColor1.Fill = new SolidColorBrush(color);
+            }
+            if (Parameters.DefaultColor != null)
+            {
+                color = (Color)ColorConverter.ConvertFromString(Parameters.Color_L2);
+                rctColor2.Fill = new SolidColorBrush(color);
+            }
+
+            if (Parameters.DefaultColor != null)
+            {
+                color = (Color)ColorConverter.ConvertFromString(Parameters.Color_L3);
+                rctColor3.Fill = new SolidColorBrush(color);
+            }
+
+            if (Parameters.DefaultColor != null)
+            {
+                color = (Color)ColorConverter.ConvertFromString(Parameters.Color_L4);
+                rctColor4.Fill = new SolidColorBrush(color);
+            }
+
+            rampStart02.Text = Parameters.LowValue_L2.ToString();
+            rampStart03.Text = Parameters.LowValue_L3.ToString();
+            rampStart04.Text = Parameters.LowValue_L4.ToString();
+
+            rampEnd01.Text = Parameters.HighValue_L1.ToString();
+            rampEnd02.Text = Parameters.HighValue_L2.ToString();
+            rampEnd03.Text = Parameters.HighValue_L3.ToString();
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }

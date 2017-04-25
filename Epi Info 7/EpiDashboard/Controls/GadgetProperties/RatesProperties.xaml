@@ -42,7 +42,7 @@
             <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
         </StackPanel>
 
-        <DockPanel x:Name="panelVariables" Visibility="Collapsed" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0">
+        <DockPanel x:Name="panelVariables" Visibility="Visible" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">DefineRate__xfe</Label>
             </StackPanel>
@@ -148,7 +148,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel  x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
+        <DockPanel  x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
 
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
