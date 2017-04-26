@@ -498,13 +498,12 @@ namespace Epi.Windows.Analysis.Dialogs
                             //cmbDataTable.Text = cmbDataTable.Text + "#txt";
                             cmbDataTable.Text = cmbDataTable.Text + "#csv";
                         }
-                    }
-
+                    }                 
 
                     IDbDriver db = selectedDataSource as IDbDriver;
-                    if (db.TableExists(cmbDataTable.Text))
+                    if (db.TableExists(((Epi.Windows.Analysis.Dialogs.WriteDialog.ComboBoxItem)(cmbDataTable.SelectedItem)).Value.ToString()))
                     {
-                        DataTable temp = db.Select(db.CreateQuery("SELECT COUNT (*) FROM " + cmbDataTable.Text));
+                        DataTable temp = db.Select(db.CreateQuery("SELECT COUNT (*) FROM " + ((Epi.Windows.Analysis.Dialogs.WriteDialog.ComboBoxItem)(cmbDataTable.SelectedItem)).Value.ToString()));
                         if (temp.Rows.Count > 0)
                         {
                             int count = (int)temp.Rows[0][0];

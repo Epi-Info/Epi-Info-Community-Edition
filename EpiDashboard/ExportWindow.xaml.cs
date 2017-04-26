@@ -203,9 +203,9 @@ namespace EpiDashboard
 
             if (cmbDestinationTable.SelectedItem != null)
             {
-                foreach (String item in cmbDestinationTable.Items)
+                foreach (KeyValuePair<string, string> item in cmbDestinationTable.Items)
                 {
-                    if (item.Equals(cmbDestinationTable.SelectedItem.ToString()))
+                    if (item.Value == (((System.Collections.Generic.KeyValuePair<string, string>)(cmbDestinationTable.SelectedItem)).Value))
                     {
                         messagePanel.Visibility = System.Windows.Visibility.Visible;
                         messagePanel.MessagePanelType = Controls.MessagePanelType.WarningPanel;
@@ -446,11 +446,20 @@ namespace EpiDashboard
                     if (!isFlatFile)
                     {
                         System.Collections.Generic.List<string> tableNames = db.GetTableNames();
+                        string newtablename;
+                        this.cmbDestinationTable.SelectedValuePath = "Key";
+                        this.cmbDestinationTable.DisplayMemberPath = "Value";
+
                         foreach (string tableName in tableNames)
                         {
-                            ComboBoxItem newItem = new ComboBoxItem();//tableName, tableName, tableName);
-                            newItem.Content = tableName;
-                            cmbDestinationTable.Items.Add(tableName);
+                            newtablename = tableName;
+                           // ComboBoxItem newItem = new ComboBoxItem();//tableName, tableName, tableName);
+                            if (tableName.EndsWith("$")& (plugin=="Epi.Data.Office.ExcelWBFactory, Epi.Data.Office") ||
+                               plugin == "Epi.Data.Office.Excel2007WBFactory, Epi.Data.Office")
+                           {
+                               newtablename = tableName.Remove(tableName.Length - 1); 
+                           }                                                      
+                            cmbDestinationTable.Items.Add(new KeyValuePair<string, string>(tableName, newtablename));
                             //this.cmbDataTable.Items.Add(newItem);
                         }
                     }
@@ -731,7 +740,7 @@ namespace EpiDashboard
                     SetGadgetStatusHandler requestUpdateStatus = new SetGadgetStatusHandler(RequestUpdateStatusMessage);
                     CheckForCancellationHandler checkForCancellation = new CheckForCancellationHandler(IsCancelled);
 
-                    if (db.TableExists(tableName) && !db.ConnectionDescription.ToLowerInvariant().Contains("excel"))
+                    if (db.TableExists(tableName))// && !db.ConnectionDescription.ToLowerInvariant().Contains("excel"))
                     {
                         db.DeleteTable(tableName);
                    }
@@ -966,7 +975,7 @@ namespace EpiDashboard
 
             if (cmbDestinationTable.SelectedItem != null)
             {
-                tableName = cmbDestinationTable.SelectedItem.ToString();
+                tableName = ((System.Collections.Generic.KeyValuePair<string, string>)(cmbDestinationTable.SelectedItem)).Key.ToString();
             }
             else
             {
