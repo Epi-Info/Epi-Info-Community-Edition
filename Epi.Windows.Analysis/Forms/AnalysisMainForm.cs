@@ -605,19 +605,20 @@ namespace Epi.Windows.Analysis.Forms
         {
             try
             {
-                this.BeginInvoke(new MethodInvoker(delegate()
-                {
-                    this.programEditor.txtTextArea.Enabled = false;
-                    this.programEditor.btnRun.Enabled = false;
-                }));
+                if (!IsHandleCreated)
+                    this.CreateControl();                
+                    this.BeginInvoke(new MethodInvoker(delegate()
+                    {
+                        this.programEditor.txtTextArea.Enabled = false;
+                        this.programEditor.btnRun.Enabled = false;
+                    }));
 
-                this.EpiInterpreter.Execute(this.commandText);
+                    this.EpiInterpreter.Execute(this.commandText);
 
-                this.BeginInvoke(new MethodInvoker(delegate()
-                {
-                    this.UpdateStatus("Ready");
-                }));
-
+                    this.BeginInvoke(new MethodInvoker(delegate()
+                    {
+                        this.UpdateStatus("Ready");
+                    }));              
             }
             catch (GeneralException ex)
             {
