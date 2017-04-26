@@ -606,7 +606,7 @@ namespace Epi.Windows.Analysis.Forms
             try
             {
                 if (!IsHandleCreated)
-                    this.CreateControl();                
+                    this.CreateHandle();             
                     this.BeginInvoke(new MethodInvoker(delegate()
                     {
                         this.programEditor.txtTextArea.Enabled = false;
