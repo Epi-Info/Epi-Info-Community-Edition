@@ -144,7 +144,7 @@ namespace Epi.Windows.MakeView.Dialogs
                     break;
             }
             dataView.Sort = display;
-            lbxTables.DataSource = dataView;
+            lbxTables.DataSource = dataView.ToTable(true, new string[] { display });
             lbxTables.DisplayMember = display;
             lbxTables.ValueMember = display;
 		}
