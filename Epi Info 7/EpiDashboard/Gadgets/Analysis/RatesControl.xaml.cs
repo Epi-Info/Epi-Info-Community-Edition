@@ -255,7 +255,7 @@ namespace EpiDashboard
         {
             DataGrid dg = new DataGrid();
             dg.Style = this.Resources["LineListDataGridStyle"] as Style;
-
+            ratesGrid.Style = this.Resources["RateDataGridStyle"] as Style;
             RatesParameters ListParameters = (this.Parameters) as RatesParameters;
 
             FrameworkElementFactory datagridRowsPresenter = new FrameworkElementFactory(typeof(DataGridRowsPresenter));
@@ -298,7 +298,7 @@ namespace EpiDashboard
                 }
                 
                 dg.ItemsSource = lcv;
-                ratesGrid.DataContext = lcv;
+                ratesGrid.ItemsSource = lcv;
                
                 
             }
