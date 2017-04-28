@@ -298,6 +298,9 @@ namespace EpiDashboard
                 }
                 
                 dg.ItemsSource = lcv;
+                ratesGrid.DataContext = lcv;
+               
+                
             }
             else
             {
@@ -467,7 +470,7 @@ namespace EpiDashboard
                         if (containsGroupField)
                         {
                             groupTable = sourceTable.DefaultView.ToTable(true, groupFields.ToArray());
-
+                            
                             foreach (DataRow row in groupTable.Rows)
                             {
                                 string aggregateName = groupTable.Columns[0].ColumnName;
@@ -487,6 +490,8 @@ namespace EpiDashboard
                                     sourceTable,
                                     groupName, 
                                     aggregateExpression);
+                               
+                                
                             }
                         }
                         else

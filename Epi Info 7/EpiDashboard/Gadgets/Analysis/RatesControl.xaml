@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:EpiDashboard="clr-namespace:EpiDashboard"
-    xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+    xmlns:Controls="clr-namespace:EpiDashboard.Controls" x:Name="gadgetBase"
     x:Class="EpiDashboard.RatesControl"    
     Style="{DynamicResource gadgetBaseStyle}">
     <EpiDashboard:GadgetBase.Resources>
@@ -43,6 +43,7 @@
                     <RowDefinition Height="0" />
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False"  Text="Rates" />
                 <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
@@ -50,10 +51,45 @@
                 <Controls:GadgetInfoPanel Grid.Row="6" Visibility="Collapsed" Margin="4" x:Name="infoPanel"></Controls:GadgetInfoPanel>
 
                 <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
+                <StackPanel  Grid.Row="8">
+                
+                    <Grid Name="ratesGrid" >
+
+                        <ListView IsHitTestVisible="False">
+                            <ListView.View>
+                                <GridView>
+                                    
+                                    <GridViewColumn>
+                                       <Border CornerRadius="50"
+                                            Width="Auto"
+                                            Height="Auto"
+                                            Margin="0"
+                                            Padding="5"
+                                            Background="Transparent"
+                                            BorderBrush="#4e4e4e"
+                                            BorderThickness="1">
+
+                                            <TextBlock>76.000000000000</TextBlock>
+
+
+                                        </Border>
+                                        
+                                        
+                                        
+                                    </GridViewColumn>
+                                    
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+
+                </StackPanel>
 
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{DynamicResource gadgetWaitPanelStyle}" />
-                <StackPanel Grid.Row="1" Grid.RowSpan="7" Orientation="Vertical" Margin="00,-15,-10,0" HorizontalAlignment="Right" VerticalAlignment="Top" >                    
-        </StackPanel>                
+                <StackPanel Grid.Row="1" Grid.RowSpan="7" Orientation="Vertical" Margin="00,-15,-10,0" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>
