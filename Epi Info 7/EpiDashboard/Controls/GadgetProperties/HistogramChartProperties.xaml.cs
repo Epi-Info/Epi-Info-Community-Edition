@@ -460,6 +460,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                     Parameters.StartDate = stDt;
                 }
             }
+            else
+            {
+                Parameters.StartDate = null;
+            }
 
             if (!string.IsNullOrEmpty(txtEndValue.Text))
             {
@@ -479,6 +483,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     Parameters.EndDate = DateTime.Now;
                 }
+            }
+            else
+            {
+                Parameters.EndDate = null;
             }
 
             //if (cmbField.SelectedIndex > -1 && !string.IsNullOrEmpty(cmbField.SelectedItem.ToString()))
