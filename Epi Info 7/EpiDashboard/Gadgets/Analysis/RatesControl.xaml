@@ -73,7 +73,7 @@
                             <DataGridTemplateColumn Width="Auto" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Rate_Description}" />
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Rate_Description}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
