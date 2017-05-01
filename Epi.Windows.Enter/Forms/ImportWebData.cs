@@ -14,6 +14,7 @@ using Epi.Fields;
 using Epi.Web.Common;
 using Epi.Web.Common.Message;
 using Epi.ImportExport;
+using System.Globalization;
 
 namespace Epi.Enter.Forms
 {
@@ -178,7 +179,7 @@ namespace Epi.Enter.Forms
                     case MetaFieldType.Date:
                     case MetaFieldType.DateTime:
                     case MetaFieldType.Time:
-                        return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue));
+                        return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue, CultureInfo.InvariantCulture));
                     case MetaFieldType.Checkbox:
                         return new QueryParameter("@" + fieldName, DbType.Boolean, Convert.ToBoolean(fieldData.FieldValue));
                     case MetaFieldType.CommentLegal:
