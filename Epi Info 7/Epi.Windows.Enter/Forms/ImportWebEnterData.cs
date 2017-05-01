@@ -15,6 +15,7 @@ using Epi.Web.Common;
 using Epi.Web.Common.Message;
 using Epi.ImportExport;
 using Epi.Windows.Enter.PresentationLogic;
+using System.Globalization;
 
 namespace Epi.Enter.Forms
     {
@@ -315,7 +316,7 @@ namespace Epi.Enter.Forms
                         if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
                             return new QueryParameter("@" + fieldName, DbType.DateTime,DBNull.Value);
                         else
-                            return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue));
+                            return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue, CultureInfo.InvariantCulture));
                     case MetaFieldType.Checkbox:
                         if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
                             return new QueryParameter("@" + fieldName, DbType.Boolean, DBNull.Value);
