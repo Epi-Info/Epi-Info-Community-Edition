@@ -43,43 +43,15 @@
                     <RowDefinition Height="0" />
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
+        
                 </Grid.RowDefinitions>
                 <Controls:GadgetHeaderPanel x:Name="headerPanel" Grid.Row="0" IsDescriptionButtonAvailable="False" IsFilterButtonAvailable="False"  Text="Rates" />
                 <Controls:GadgetMessagePanel Margin="4" x:Name="messagePanel" Grid.Row="2" Text="" />
                 <Controls:GadgetDescriptionPanel Grid.Row="4" PanelMode="Collapsed" x:Name="descriptionPanel"></Controls:GadgetDescriptionPanel>
                 <Controls:GadgetInfoPanel Grid.Row="6" Visibility="Collapsed" Margin="4" x:Name="infoPanel"></Controls:GadgetInfoPanel>
 
-                <StackPanel Grid.Row="7" x:Name="panelMain" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
-                <StackPanel  Grid.Row="8">
-                    <DataGrid Name="ratesGrid" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Width="SizeToCells" IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Border CornerRadius="50"
-                                            Width="100"
-                                            Height="100"
-                                            Margin="0"
-                                            Padding="5"
-                                            Background="Transparent"
-                                            BorderBrush="#CC0000"
-                                            BorderThickness="12">
-                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Rate}" />
-                                        </Border>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="Auto" IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Rate_Description}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
+                <StackPanel Grid.Row="7" x:Name="panelMain"  HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
+               
 
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" Style="{DynamicResource gadgetWaitPanelStyle}" />
                 <StackPanel Grid.Row="1" Grid.RowSpan="7" Orientation="Vertical" Margin="00,-15,-10,0" HorizontalAlignment="Right" VerticalAlignment="Top" >

@@ -246,8 +246,7 @@
         </DockPanel>
     </DataTemplate>
 
-    <Style TargetType="DataGrid" x:Key="dataGridHeader">
-    </Style>
+
 
 
     <Style TargetType="DataGridColumnHeader">
@@ -332,6 +331,11 @@
 
     <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="White" />
+        <Style.Triggers>
+            <Trigger Property="DataGridRow.IsSelected" Value="True">
+                <Setter Property="Background" Value="AliceBlue" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
     <Style 
@@ -363,7 +367,98 @@
         <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
     </Style>
     
+    
+    <Style 
+       TargetType="{x:Type DataGridCell}" x:Key="rate2DataGridStyle">
+       <Style.Triggers>
+           <Trigger Property="DataGridCell.IsSelected" Value="True">
+               <Setter Property="Foreground" Value="Black" />
+               
+           </Trigger>
+       </Style.Triggers>
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="5" />
+       
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border Name="rowBorder" >
+                        <Border Name="columnBorder" >
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    
+                                    <Style.Triggers>
+                                       
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Column.DisplayIndex}" Value="0">
+                                            <Setter Property="BorderThickness">
+                                                <Setter.Value>
+                                                    <Thickness Left="12" Right="12" Top="12" Bottom="12"></Thickness>
+                                                </Setter.Value>
+                                            </Setter>
+                                            
+                                            <Setter Property="BorderBrush">
+                                                <Setter.Value>#CC0000</Setter.Value>
+                                            </Setter>
+                                            
+                                            
+                                            <Setter Property="CornerRadius">
+                                                <Setter.Value>
+                                                    50
+                                                </Setter.Value>
+                                                
+                                            </Setter>
+                                            <!--<Setter Property="BorderBrush">
+                                                <Setter.Value>
+                                                    <RadialGradientBrush >
+                                                        <GradientStop Color="BlueViolet" Offset=".20" />
+                                                        <GradientStop Color="Red" />
+                                                    </RadialGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>-->
+                                            
+                                           
+                                            <Setter Property="Width">
+                                                <Setter.Value>75</Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Height">
+                                                <Setter.Value>75</Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                  
+                                  
+                                 
+                                        <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Column.DisplayIndex}" Value="1">
+                                            <Setter Property="BorderBrush" Value="Transparent">
+                                              
+                                            </Setter>
+                                        </DataTrigger>-->
+                                      
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              
+                                              
+                                              >
+                               
+                            </ContentPresenter>
+ 
+                        </Border>
+                    </Border>
+                    
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+    
     <Style TargetType="{x:Type DataGrid}" x:Key="RateDataGridStyle">
+        
         <Setter Property="VerticalGridLinesBrush" Value="#D9E8F1" />
         <Setter Property="HorizontalGridLinesBrush" Value="#D9E8F1" />
         <Setter Property="Foreground" Value="#333333"/>
