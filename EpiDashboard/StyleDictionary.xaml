@@ -394,7 +394,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                             <Setter Property="BorderBrush">
-                                                <Setter.Value>#FF0080FF</Setter.Value>
+                                                <Setter.Value>#FF3F51B5</Setter.Value>
                                             </Setter>
                                             <Setter Property="CornerRadius">
                                                 <Setter.Value>

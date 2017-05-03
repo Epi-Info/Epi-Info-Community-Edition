@@ -621,13 +621,17 @@ namespace EpiDashboard
 
             if (denomFilter != "")
             {
-                denomSelect += " AND " + denomFilter;
-                numerSelect += " AND " + denomFilter;
+                if (denomSelect != "") { denomSelect += " AND "; }
+                denomSelect += denomFilter;
+
+                if (numerSelect != "") { numerSelect += " AND "; }
+                numerSelect += denomFilter;
             }
 
             if (numerFilter != "")
             {
-                numerSelect += " AND " + numerFilter;
+                if(numerSelect != "") { numerSelect += " AND "; }
+                numerSelect += numerFilter;
             }
 
             double numerAggResult = double.NaN;
