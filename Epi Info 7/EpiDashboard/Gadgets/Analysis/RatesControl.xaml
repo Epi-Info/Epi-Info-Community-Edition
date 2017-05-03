@@ -34,6 +34,9 @@
                 </ContextMenu>
             </Border.ContextMenu>
             <Grid x:Name="grdMain" ShowGridLines="False">
+                <Grid.Background>
+                    <SolidColorBrush Color="White"/>
+                </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="0" />

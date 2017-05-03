@@ -368,17 +368,14 @@
     </Style>
     
     
-    <Style 
-       TargetType="{x:Type DataGridCell}" x:Key="rate2DataGridStyle">
+    <Style TargetType="{x:Type DataGridCell}" x:Key="RateDataGridCellStyle">
        <Style.Triggers>
            <Trigger Property="DataGridCell.IsSelected" Value="True">
                <Setter Property="Foreground" Value="Black" />
-               
            </Trigger>
        </Style.Triggers>
-        <Setter Property="Margin" Value="0" />
+        <Setter Property="Margin" Value="10,0,0,0" />
         <Setter Property="Padding" Value="5" />
-       
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridCell">
@@ -386,37 +383,24 @@
                         <Border Name="columnBorder" >
                             <Border.Style>
                                 <Style TargetType="Border">
-                                    
                                     <Style.Triggers>
-                                       
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#FFFFFF" />
+                                        </Trigger>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Column.DisplayIndex}" Value="0">
                                             <Setter Property="BorderThickness">
                                                 <Setter.Value>
-                                                    <Thickness Left="12" Right="12" Top="12" Bottom="12"></Thickness>
+                                                    <Thickness Left="10" Right="10" Top="10" Bottom="10"></Thickness>
                                                 </Setter.Value>
                                             </Setter>
-                                            
                                             <Setter Property="BorderBrush">
-                                                <Setter.Value>#CC0000</Setter.Value>
+                                                <Setter.Value>#FF0080FF</Setter.Value>
                                             </Setter>
-                                            
-                                            
                                             <Setter Property="CornerRadius">
                                                 <Setter.Value>
-                                                    50
+                                                    60
                                                 </Setter.Value>
-                                                
                                             </Setter>
-                                            <!--<Setter Property="BorderBrush">
-                                                <Setter.Value>
-                                                    <RadialGradientBrush >
-                                                        <GradientStop Color="BlueViolet" Offset=".20" />
-                                                        <GradientStop Color="Red" />
-                                                    </RadialGradientBrush>
-                                                </Setter.Value>
-                                            </Setter>-->
-                                            
-                                           
                                             <Setter Property="Width">
                                                 <Setter.Value>75</Setter.Value>
                                             </Setter>
@@ -424,43 +408,40 @@
                                                 <Setter.Value>75</Setter.Value>
                                             </Setter>
                                         </DataTrigger>
-                                  
-                                  
-                                 
-                                        <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Column.DisplayIndex}" Value="1">
-                                            <Setter Property="BorderBrush" Value="Transparent">
-                                              
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Column.DisplayIndex}" Value="2">
+                                            <Setter Property="Width">
+                                                <Setter.Value>0</Setter.Value>
                                             </Setter>
-                                        </DataTrigger>-->
-                                      
+                                        </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
-
                             <ContentPresenter Content="{TemplateBinding Content}"
                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                               VerticalAlignment="Center"
-                                              HorizontalAlignment="Center"
-                                              
-                                              
-                                              >
-                               
+                                              HorizontalAlignment="Center">
                             </ContentPresenter>
- 
                         </Border>
                     </Border>
-                    
-                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
+    </Style>
+ 
+    <Style TargetType="DataGridRow" x:Key="RateRowStyle">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Margin" Value="5"/>
     </Style>
     
     <Style TargetType="{x:Type DataGrid}" x:Key="RateDataGridStyle">
-        
-        <Setter Property="VerticalGridLinesBrush" Value="#D9E8F1" />
-        <Setter Property="HorizontalGridLinesBrush" Value="#D9E8F1" />
+        <Setter Property="Margin" Value="24"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="VerticalGridLinesBrush" Value="#FFFFFF" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#FFFFFF" />
         <Setter Property="Foreground" Value="#333333"/>
         <Setter Property="FontFamily" Value="Global User Interface"/>
         <Setter Property="RowHeaderWidth" Value="0" />

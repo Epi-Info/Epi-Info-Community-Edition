@@ -254,13 +254,11 @@ namespace EpiDashboard
         private void AddDataGrid(DataView dv, string strataValue)
         {
             DataGrid dg = new DataGrid();
-            dg.Style = this.Resources["LineListDataGridStyle"] as Style;
-            dg.CellStyle = this.Resources["rate2DataGridStyle"] as Style;
+            dg.Style = this.Resources["RateDataGridStyle"] as Style;
+            dg.CellStyle = this.Resources["RateDataGridCellStyle"] as Style;
+            dg.HeadersVisibility = DataGridHeadersVisibility.None;
+            dg.RowStyle = this.Resources["RateRowStyle"] as Style;
             
-            
-            
-            
-            //ratesGrid.Style = this.Resources["RateDataGridStyle"] as Style;
             RatesParameters ListParameters = (this.Parameters) as RatesParameters;
 
             FrameworkElementFactory datagridRowsPresenter = new FrameworkElementFactory(typeof(DataGridRowsPresenter));
@@ -270,11 +268,11 @@ namespace EpiDashboard
             GroupStyle groupStyle = new GroupStyle();
             groupStyle.ContainerStyle = this.Resources["DefaultGroupItemStyle"] as Style;
             groupStyle.Panel = itemsPanelTemplate;
-            dg.GroupStyle.Add(groupStyle);
+            //dg.GroupStyle.Add(groupStyle);
 
             GroupStyle groupStyle2 = new GroupStyle();
             groupStyle2.HeaderTemplate = this.Resources["GroupDataTemplate"] as DataTemplate;
-            dg.GroupStyle.Add(groupStyle2);
+            //dg.GroupStyle.Add(groupStyle2);
 
             string groupVar = String.Empty;
 
@@ -295,17 +293,15 @@ namespace EpiDashboard
             {
                 groupVar = ListParameters.PrimaryGroupField.Trim();
                 ListCollectionView lcv = new ListCollectionView(dataView);
-                lcv.GroupDescriptions.Add(new PropertyGroupDescription(groupVar));
+                //lcv.GroupDescriptions.Add(new PropertyGroupDescription(groupVar));
                 
                 if (!String.IsNullOrEmpty(ListParameters.SecondaryGroupField.Trim()) && !ListParameters.SecondaryGroupField.Trim().Equals(groupVar))
                 {
-                    lcv.GroupDescriptions.Add(new PropertyGroupDescription(ListParameters.SecondaryGroupField.Trim())); // for second category
+                    //lcv.GroupDescriptions.Add(new PropertyGroupDescription(ListParameters.SecondaryGroupField.Trim())); // for second category
                 }
                 
                 dg.ItemsSource = lcv;
-                //ratesGrid.ItemsSource = lcv;
-               
-                
+
             }
             else
             {
@@ -657,8 +653,16 @@ namespace EpiDashboard
 
             double rate = (numerAggResult / denomAggResult) * ratesParameters.RateMultiplier;
             newRow = outputRateTable.NewRow();
-            newRow["Rate"] = rate;
-            newRow["Rate_Description"] = aggregateExpression;
+            string formatedRate = rate.ToString("G4", CultureInfo.InvariantCulture);
+            newRow["Rate"] = formatedRate;
+
+            string description = numerSelect.Replace("[","").Replace("]","");
+            description = description.Replace("(", "").Replace(")", "");
+            description = description.Replace("'", "");
+            description = description.Replace("AND", "and");
+            description = description.Replace("OR", "or");
+
+            newRow["Rate_Description"] = description;
 
             if(string.IsNullOrEmpty(groupName) == false)
             {
