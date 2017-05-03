@@ -344,7 +344,14 @@ namespace Epi.Enter.Forms
                         if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
                             return new QueryParameter("@" + fieldName, DbType.Int32, DBNull.Value);
                         else
-                            return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                        {
+                            if (fieldData.FieldValue.ToString().Contains("."))
+                            {
+                                return new QueryParameter("@" + fieldName, DbType.Double, Convert.ToDecimal(fieldData.FieldValue, CultureInfo.InvariantCulture));
+                            }
+                            else
+                                return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                        }
                     case MetaFieldType.YesNo:
                     case MetaFieldType.RecStatus:
                        // return new QueryParameter("@" + fieldName, DbType.Single, fieldData.FieldValue);

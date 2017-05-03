@@ -200,6 +200,11 @@ namespace Epi.Enter.Forms
                     case MetaFieldType.Multiline:
                         return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.Number:
+                        if (fieldData.FieldValue.ToString().Contains("."))
+                        {
+                            return new QueryParameter("@" + fieldName, DbType.Double, Convert.ToDecimal(fieldData.FieldValue, CultureInfo.InvariantCulture));
+                        }
+                        else
                         return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.YesNo:
                     case MetaFieldType.RecStatus:
