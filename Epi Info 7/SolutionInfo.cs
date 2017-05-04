@@ -37,10 +37,10 @@ using Epi;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("7.2.*")]
-[assembly: AssemblyFileVersion("7.2.1.5")]
-[assembly: AssemblyInformationalVersion("7.2.1.5")]
+[assembly: AssemblyFileVersion("7.2.1.6")]
+[assembly: AssemblyInformationalVersion("7.2.1.6")]
 [assembly: SatelliteContractVersion("7.0.0.0")]
-[assembly: Epi.AssemblyReleaseDateAttribute("04/28/2017")]
+[assembly: Epi.AssemblyReleaseDateAttribute("05/04/2017")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
