@@ -282,13 +282,14 @@ namespace EpiDashboard
             }
 
             DataTable dataTable = dv.ToTable();
+            
             if (dataTable.Rows.Count > ListParameters.MaxRows && ListParameters.MaxRows > 0) //Added condition for EI-336
             {
                 dataTable = dataTable.AsEnumerable().Skip(0).Take(ListParameters.MaxRows).CopyToDataTable();
             }
 
             DataView dataView = new DataView(dataTable);
-            
+
             if (!String.IsNullOrEmpty(ListParameters.PrimaryGroupField.Trim()))
             {
                 groupVar = ListParameters.PrimaryGroupField.Trim();
@@ -450,6 +451,7 @@ namespace EpiDashboard
                     DataTable outputRateTable = new DataTable();
                     outputRateTable.Columns.Add("Rate");
                     outputRateTable.Columns.Add("Rate_Description");
+                    outputRateTable.Columns.Add("hexColor");
 
                     if (string.IsNullOrEmpty(primaryGroupField) == false)
                     {
@@ -492,8 +494,6 @@ namespace EpiDashboard
                                     sourceTable,
                                     groupName, 
                                     aggregateExpression);
-                               
-                                
                             }
                         }
                         else
@@ -668,7 +668,39 @@ namespace EpiDashboard
 
             newRow["Rate_Description"] = description;
 
-            if(string.IsNullOrEmpty(groupName) == false)
+            string hexColor = ratesParameters.DefaultColor;
+
+            if(ratesParameters.UseDefaultColor == false)
+            {
+                try
+                {
+                    if (rate < ratesParameters.HighValue_L1)
+                    {
+                        hexColor = ratesParameters.Color_L1;
+                    }
+                    else if (ratesParameters.LowValue_L2 <= rate && rate < ratesParameters.HighValue_L2)
+                    {
+                        hexColor = ratesParameters.Color_L2;
+                    }
+                    else if (ratesParameters.LowValue_L3 <= rate && rate < ratesParameters.HighValue_L3)
+                    {
+                        hexColor = ratesParameters.Color_L3;
+                    }
+                    else if (ratesParameters.LowValue_L4 <= rate)
+                    {
+                        hexColor = ratesParameters.Color_L4;
+                    }
+                    else
+                    {
+                        hexColor = "#FFFFFF";
+                    }
+                }
+                catch { }
+            }
+
+            newRow["hexColor"] = hexColor;
+
+            if (string.IsNullOrEmpty(groupName) == false)
             {
                 if (outputRateTable.Columns.Contains(ratesParameters.PrimaryGroupField) == false)
                 {

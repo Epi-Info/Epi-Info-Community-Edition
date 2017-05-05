@@ -537,13 +537,13 @@ namespace EpiDashboard.Controls.GadgetProperties
                 rctColor4.Fill = new SolidColorBrush(color);
             }
 
-            rampStart02.Text = Parameters.LowValue_L2.ToString();
-            rampStart03.Text = Parameters.LowValue_L3.ToString();
-            rampStart04.Text = Parameters.LowValue_L4.ToString();
+            rampStart02.Text = Parameters.LowValue_L2.ToString().Replace("NaN", "");
+            rampStart03.Text = Parameters.LowValue_L3.ToString().Replace("NaN", "");
+            rampStart04.Text = Parameters.LowValue_L4.ToString().Replace("NaN", "");
 
-            rampEnd01.Text = Parameters.HighValue_L1.ToString();
-            rampEnd02.Text = Parameters.HighValue_L2.ToString();
-            rampEnd03.Text = Parameters.HighValue_L3.ToString();
+            rampEnd01.Text = Parameters.HighValue_L1.ToString().Replace("NaN", "");
+            rampEnd02.Text = Parameters.HighValue_L2.ToString().Replace("NaN", "");
+            rampEnd03.Text = Parameters.HighValue_L3.ToString().Replace("NaN", "");
         }
 
         public class FieldInfo { public string Name { get; set; } public string DataType { get; set; } public VariableCategory VariableCategory { get; set; } }
@@ -951,6 +951,31 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void CheckBox_DefaultColor_Click(object sender, RoutedEventArgs e)
         {
             colorStack.Visibility = ((CheckBox)sender).IsChecked == true ? Visibility.Collapsed : Visibility.Visible;
+        }
+    }
+
+    [ValueConversion(typeof(double), typeof(String))]
+    public class RateToBrushConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if(value is TextBlock)
+            {
+                try
+                {
+                    TextBlock textBlock = (TextBlock)value;
+                    System.Data.DataRowView rowView = (System.Data.DataRowView)textBlock.BindingGroup.Items[0];
+                    return rowView.Row["hexColor"].ToString();
+                }
+                catch { }
+            }
+
+            return "#FFFFFF";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
         }
     }
 }
