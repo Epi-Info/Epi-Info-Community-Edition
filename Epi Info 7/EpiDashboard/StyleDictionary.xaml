@@ -4,7 +4,11 @@
                     xmlns:EpiDashboard="clr-namespace:EpiDashboard"
                     xmlns:Controls="clr-namespace:EpiDashboard.Controls"
                     xml:space="preserve"
-                    xmlns:PropertyPanels="clr-namespace:EpiDashboard.Controls.GadgetProperties">
+                    xmlns:PropertyPanels="clr-namespace:EpiDashboard.Controls.GadgetProperties"
+                    xmlns:rates="clr-namespace:EpiDashboard.Controls.GadgetProperties">
+    
+    <rates:RateToBrushConverter x:Key="RateToBrushConverter" /> 
+
     
     <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
     <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
@@ -15,7 +19,6 @@
     <SolidColorBrush x:Key="GadgetBackgroundBrush" Color="#FAFCFF" />
     <SolidColorBrush x:Key="GadgetBorderBrush" Color="#D5DFE5" />
     <SolidColorBrush x:Key="DataGridBorderBrush" Color="#D5D5D5" />
-
 
     <!--<SolidColorBrush x:Key="PrimaryAccentColor" Color="#3567BB" />
     <SolidColorBrush x:Key="PrimaryAccentColorLight" Color="#5885CF" />-->
@@ -57,8 +60,6 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-    
-   
     <Style TargetType="ListView">
         <Setter Property="BorderBrush" Value="#8a8a8a" />
         <Setter Property="BorderThickness" Value="1 1 1 1" />
@@ -81,7 +82,6 @@
         <Setter Property="MaxWidth" Value="500" />
         
     </Style>
-
     <Style x:Key="GadgetBorderStyle" TargetType="Border">
         <Setter Property="CornerRadius" Value="2"></Setter>
         <Setter Property="Padding" Value="0"></Setter>
@@ -89,19 +89,15 @@
         <Setter Property="BorderBrush" Value="{StaticResource GadgetBorderBrush}"></Setter>
         <Setter Property="Background" Value="{StaticResource GadgetBackgroundBrush}"></Setter>
     </Style>
-
-    
     <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleLarge">
         <Setter Property="MaxWidth" Value="360" />
         <Setter Property="MinWidth" Value="240" />
         
     </Style>
-
-     <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleMed">
+    <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleMed">
         <Setter Property="MaxWidth" Value="180" />
         <Setter Property="MinWidth" Value="100" />
     </Style>
-
     <Style TargetType="ComboBox" x:Key="PropertiesComboxStyleSmall">
         <Setter Property="Width" Value="60" />
     </Style>
@@ -110,16 +106,11 @@
         <Setter Property="FontFamily" Value="Global User Interface" />
         <Setter Property="Background" Value="White" />
     </Style>
-
-    
-
-
     <Style x:Key="PropertiesPanelCheckbox" TargetType="CheckBox">
         <Setter Property="Margin" Value="0,16,20,16" />
         <Setter Property="ToolTipService.ShowDuration" Value="5000" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="50" />
     </Style>
-
     <Style x:Key="SpinCursorCircle" TargetType="Ellipse">
         <!-- Width="80" Height="80" StrokeThickness="3" Stroke="White" -->
         <Setter Property="Width" Value="80"></Setter>
@@ -127,11 +118,9 @@
         <Setter Property="StrokeThickness" Value="3"></Setter>
         <Setter Property="Stroke" Value="White"></Setter>
     </Style>
-
     <Style x:Key="SpinCursorRectangle" TargetType="Rectangle">
         <Setter Property="Fill" Value="{StaticResource PrimaryAccentColorLight}"></Setter>
     </Style>
-
     <LinearGradientBrush x:Key="CloseButtonFillBrush" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
             <GradientStopCollection>
@@ -140,7 +129,6 @@
             </GradientStopCollection>
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
-
     <LinearGradientBrush x:Key="CloseButtonStrokeBrush" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
             <GradientStopCollection>
@@ -149,11 +137,9 @@
             </GradientStopCollection>
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
-    
     <Style x:Key="FieldSpacer" TargetType="StackPanel">
         <Setter Property="Width" Value="9" />
     </Style>
-    
     <Style x:Key="CloseRectangle" TargetType="Rectangle">
         <Setter Property="Fill" Value="{StaticResource CloseButtonFillBrush}"/>
         <Setter Property="Stroke" Value="{StaticResource CloseButtonStrokeBrush}"/>
@@ -163,7 +149,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style x:Key="CloseRectangleOverlay" TargetType="Rectangle">
         <Setter Property="Opacity" Value="0.5" />
         <Setter Property="Stroke" Value="Transparent" />
@@ -182,7 +167,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style x:Key="ClosePath" TargetType="Path">
         <Setter Property="Stroke" Value="White"/>
         <Setter Property="IsHitTestVisible" Value="False" />
@@ -194,8 +178,6 @@
         <Setter Property="StrokeEndLineCap" Value="Round" />
         <Setter Property="Data" Value="M 200,0 L 0,200 M 0,0 L 200,200" />
     </Style>
-  
-
     <Style x:Key="CloseButtonStyle" TargetType="Button" >
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Background" Value="Transparent" />
@@ -218,7 +200,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style TargetType="{x:Type GroupItem}" x:Key="DefaultGroupItemStyle" >
         <Setter Property="Template">
             <Setter.Value>
@@ -238,17 +219,12 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
     <DataTemplate x:Key="GroupDataTemplate">
         <DockPanel Background="#B7D8F0">
             <TextBlock FontSize="15"  FontFamily="Global User Interface" Text="{Binding Path=Name}" Foreground="Black" Margin="30,4,4,4" Width="100"/>
             <TextBlock FontSize="15"  FontFamily="Global User Interface" Text="{Binding Path=ItemCount}" Margin="4" Foreground="Black"/>
         </DockPanel>
     </DataTemplate>
-
-
-
-
     <Style TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="{StaticResource ColumnHeaderBackgroundBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ColumnHeaderForegroundBrush}" />
@@ -291,8 +267,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-
     <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -324,11 +298,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}" x:Key="RightAlignDataGridCellStyle">
         <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
-
     <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="White" />
         <Style.Triggers>
@@ -337,7 +309,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
     <Style 
        TargetType="{x:Type DataGrid}" x:Key="LineListDataGridStyle">
         <Setter Property="VerticalGridLinesBrush" Value="#D9E8F1" />
@@ -367,7 +338,6 @@
         <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
     </Style>
     
-    
     <Style TargetType="{x:Type DataGridCell}" x:Key="RateDataGridCellStyle">
        <Style.Triggers>
            <Trigger Property="DataGridCell.IsSelected" Value="True">
@@ -393,9 +363,9 @@
                                                     <Thickness Left="10" Right="10" Top="10" Bottom="10"></Thickness>
                                                 </Setter.Value>
                                             </Setter>
-                                            <Setter Property="BorderBrush">
-                                                <Setter.Value>#FF3F51B5</Setter.Value>
-                                            </Setter>
+                                            <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                                Path=Content,
+                                                Converter={StaticResource RateToBrushConverter}}"/>
                                             <Setter Property="CornerRadius">
                                                 <Setter.Value>
                                                     60
@@ -409,6 +379,11 @@
                                             </Setter>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Column.DisplayIndex}" Value="2">
+                                            <Setter Property="Width">
+                                                <Setter.Value>0</Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Column.DisplayIndex}" Value="3">
                                             <Setter Property="Width">
                                                 <Setter.Value>0</Setter.Value>
                                             </Setter>

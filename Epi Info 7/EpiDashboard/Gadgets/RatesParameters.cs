@@ -93,12 +93,20 @@ namespace EpiDashboard
             SecondaryGroupField = String.Empty;
             RateMultiplierString = "100";
             GadgetTitle = "Rates";
-            DefaultColor = "#FF0080FF";
             UseDefaultColor = true;
-            Color_L1 = "#FF0080FF";
-            Color_L2 = "#FFFFFF80";
-            Color_L3 = "#FFFF8040";
-            Color_L4 = "#FFDC0A0A";
+
+            Color_L1 = "#FF1A237E"; // GOOGLE MATERIAL DESIGN INDEGO 900
+            Color_L2 = "#FFF57F17"; // GOOGLE MATERIAL DESIGN YELLOW 900
+            Color_L3 = "#FFFF6F00"; // GOOGLE MATERIAL DESIGN ORANGE 900
+            Color_L4 = "#FFE65100"; // GOOGLE MATERIAL DESIGN RED    900
+
+            Color_L1 = "#FF3F51B5"; // GOOGLE MATERIAL DESIGN INDEGO 500
+            Color_L2 = "#FFFFEB3B"; // GOOGLE MATERIAL DESIGN YELLOW 500
+            Color_L3 = "#FFFF9800"; // GOOGLE MATERIAL DESIGN ORANGE 500
+            Color_L4 = "#FFF44336"; // GOOGLE MATERIAL DESIGN RED    500
+
+            DefaultColor = Color_L1;
+
             HighValue_L1 = double.NaN;
             LowValue_L2 = double.NaN;
             HighValue_L2 = double.NaN;
