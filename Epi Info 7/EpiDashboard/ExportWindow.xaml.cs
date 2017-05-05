@@ -44,6 +44,8 @@ namespace EpiDashboard
         private bool useFieldPrompts;
         private const string SEPARATOR = StringLiterals.COMMA;
         private bool loadingCombos = false;
+        private bool IsReplace = false;
+        private List<string> VariableList = new List<string>();
         #endregion // Private Members
 
         #region Public Events
@@ -205,11 +207,11 @@ namespace EpiDashboard
             {
                 foreach (KeyValuePair<string, string> item in cmbDestinationTable.Items)
                 {
-                    if (item.Value == (((System.Collections.Generic.KeyValuePair<string, string>)(cmbDestinationTable.SelectedItem)).Value))
+                    if (item.Value == (((System.Collections.Generic.KeyValuePair<string, string>)(cmbDestinationTable.SelectedItem)).Value) && radReplace.IsChecked==true)
                     {
                         messagePanel.Visibility = System.Windows.Visibility.Visible;
                         messagePanel.MessagePanelType = Controls.MessagePanelType.WarningPanel;
-                        messagePanel.Text = string.Format(SharedStrings.DASHBOARD_EXPORT_WARNING, item);
+                        messagePanel.Text = string.Format(SharedStrings.DASHBOARD_EXPORT_WARNING, item.Key);
                         //pnlTableOverwrite.Visibility = System.Windows.Visibility.Visible;
                         //txtTableOverwrite.Text = string.Format(SharedStrings.DASHBOARD_EXPORT_WARNING, item);
                     }
@@ -740,7 +742,7 @@ namespace EpiDashboard
                     SetGadgetStatusHandler requestUpdateStatus = new SetGadgetStatusHandler(RequestUpdateStatusMessage);
                     CheckForCancellationHandler checkForCancellation = new CheckForCancellationHandler(IsCancelled);
 
-                    if (db.TableExists(tableName))// && !db.ConnectionDescription.ToLowerInvariant().Contains("excel"))
+                    if (db.TableExists(tableName) && IsReplace)// && !db.ConnectionDescription.ToLowerInvariant().Contains("excel"))
                     {
                         db.DeleteTable(tableName);
                    }
@@ -753,15 +755,45 @@ namespace EpiDashboard
 
                     dashboardHelper.PopulateDataSet(); // the only reason to call this is to see if any new user-defined vars have been added and apply them.
                     List<Epi.Data.TableColumn> tcList = dashboardHelper.GetFieldsAsListOfEpiTableColumns(useTabOrder);
+                    foreach (Epi.Data.TableColumn c in tcList)
+                    {
+                        VariableList.Add(c.Name);
+                    }
                     allFieldsSelected = false; // TODO: Fix?
 
                     if (allFieldsSelected)
                     {
                         if (tcList.Count <= 250)
                         {
-                            db.CreateTable(tableName, tcList);
+                          // if (!DBReadExecute.CheckDatabaseTableExistance(db.DataSource, tableName, true))
+                            if (!db.TableExists(tableName))
+                            {
+                                db.CreateTable(tableName, tcList);
+                            }
+                            else
+                            {
+                                DataTable sourceTable = db.GetTableData(tableName);
+                                StringBuilder ColumnSQL = new StringBuilder();
+                                db.IsBulkOperation = true;
+                                foreach (Epi.Data.TableColumn column in tcList)
+                                {
+                                    string columnName = String.Empty;
+                                    if (!column.Name.Contains(".") && !db.ColumnExists(tableName, column.Name))
+                                    {
+                                        //add column                                       
+                                        columnName = column.Name;
+                                        Query qr = db.CreateQuery("alter table [" + tableName + "] add [" + columnName + "] " + ConvertToGenericType(column));
+                                       db.ExecuteNonQuery(qr);                                       
+                                    }
+
+                                    ColumnSQL.Append(" [");
+                                    ColumnSQL.Append(column);
+                                    ColumnSQL.Append("],");
+                                }
+                                db.IsBulkOperation = false;
+                            }
                             DataView dv = dashboardHelper.DataSet.Tables[0].DefaultView;
-                            DataTable table = dv.ToTable(false);
+                            DataTable table = dv.ToTable(false);                           
                             if (useTabOrder)
                             {
                                 dashboardHelper.OrderColumns(table, true);
@@ -806,7 +838,35 @@ namespace EpiDashboard
 
                             foreach (KeyValuePair<string, List<Epi.Data.TableColumn>> kvp in fieldTableDictionary)
                             {
-                                db.CreateTable(kvp.Key, kvp.Value);
+                                //if (!DBReadExecute.CheckDatabaseTableExistance(db.DataSource, tableName, true))
+                                if (!db.TableExists(tableName))
+                                {
+                                    db.CreateTable(kvp.Key, kvp.Value);
+                                }
+                                else
+                                {
+                                    DataTable sourceTable = db.GetTableData(tableName);
+
+                                    StringBuilder ColumnSQL = new StringBuilder();
+
+                                    db.IsBulkOperation = true;
+                                    foreach (Epi.Data.TableColumn column in kvp.Value)
+                                    {
+                                        string columnName = String.Empty;
+                                        if (!column.Name.Contains(".") && !db.ColumnExists(tableName, column.Name))
+                                        {
+                                            //add column
+                                            columnName = column.Name;
+                                            Query qr = db.CreateQuery("alter table [" + tableName + "] add [" + columnName + "] " + ConvertToGenericType(column));
+                                            db.ExecuteNonQuery(qr);                                            
+                                        }
+
+                                        ColumnSQL.Append(" [");
+                                        ColumnSQL.Append(column);
+                                        ColumnSQL.Append("],");
+                                    }
+                                    db.IsBulkOperation = false;
+                                }
                             }
 
                             foreach (KeyValuePair<string, List<Epi.Data.TableColumn>> kvp in fieldTableDictionary)
@@ -818,7 +878,7 @@ namespace EpiDashboard
                                 }
 
                                 DataView dv = dashboardHelper.DataSet.Tables[0].DefaultView;
-                                DataTable table = dv.ToTable(false, exportTableFields.ToArray());
+                                DataTable table = dv.ToTable(false, exportTableFields.ToArray());                                
                                 if (useTabOrder)
                                 {
                                     dashboardHelper.OrderColumns(table, true);
@@ -855,16 +915,42 @@ namespace EpiDashboard
 
                         if (tcFilteredList.Count <= 250)
                         {
-                            db.CreateTable(tableName, tcFilteredList);
+                           // if (!DBReadExecute.CheckDatabaseTableExistance(db.DataSource, tableName, true))
+                           if (!db.TableExists(tableName))
+                            {
+                                db.CreateTable(tableName, tcFilteredList);
+                            }
+                            else
+                            {
+                                DataTable sourceTable = db.GetTableData(tableName);
+                                StringBuilder ColumnSQL = new StringBuilder();
+                                db.IsBulkOperation = true;                              
+                                foreach (Epi.Data.TableColumn column in tcFilteredList)
+                                {
+                                    string columnName = String.Empty;
+                                    if (!column.Name.Contains(".") && !db.ColumnExists(tableName, column.Name))
+                                    {
+                                        //add column
+                                        columnName = column.Name;
+                                        Query qr = db.CreateQuery("alter table [" + tableName + "] add [" + columnName + "] " + ConvertToGenericType(column));
+                                        db.ExecuteNonQuery(qr);                                      
+                                    }
+
+                                    ColumnSQL.Append(" [");
+                                    ColumnSQL.Append(column);
+                                    ColumnSQL.Append("],");
+                                }                               
+                                db.IsBulkOperation = false;
+                            }
                             DataView dv = dashboardHelper.DataSet.Tables[0].DefaultView;
-                            DataTable table = dv.ToTable(false, exportFields.ToArray());
+                            DataTable table = dv.ToTable(false, exportFields.ToArray());                                                      
                             if (useTabOrder)
                             {
                                 dashboardHelper.OrderColumns(table, true);
                             }
                             System.Data.Common.DbDataReader dataReader = table.CreateDataReader(); //dv.ToTable().CreateDataReader();
                             db.InsertBulkRows("Select * From [" + tableName + "]", dataReader, requestUpdateStatus, checkForCancellation);
-                        }
+                        }                    
                         else
                         {
                             Dictionary<string, List<Epi.Data.TableColumn>> fieldTableDictionary = new Dictionary<string, List<Epi.Data.TableColumn>>();
@@ -914,18 +1000,42 @@ namespace EpiDashboard
                             }
 
                             foreach (KeyValuePair<string, List<Epi.Data.TableColumn>> kvp in fieldTableDictionary)
-                            {
+                            {                               
                                 if (db.TableExists(kvp.Key))
                                 {
                                     this.Dispatcher.BeginInvoke(new SetStatusDelegate(SetErrorMessage), string.Format(SharedStrings.DASHBOARD_EXPORT_WIDE_TABLE_FAIL, totalTablesNeeded.ToString()));
                                     return;
                                 }
-                            }
+                            }                                                       
 
-                            foreach (KeyValuePair<string, List<Epi.Data.TableColumn>> kvp in fieldTableDictionary)
-                            {
-                                db.CreateTable(kvp.Key, kvp.Value);
-                            }
+                                foreach (KeyValuePair<string, List<Epi.Data.TableColumn>> kvp in fieldTableDictionary)
+                                {
+                                   // if (!DBReadExecute.CheckDatabaseTableExistance(db.DataSource, tableName, true))
+                                    if (!db.TableExists(tableName))
+                                    {
+                                        db.CreateTable(kvp.Key, kvp.Value);
+                                    }
+                                    else
+                                    {
+                                        DataTable sourceTable = db.GetTableData(tableName);
+                                        StringBuilder ColumnSQL = new StringBuilder();
+                                        db.IsBulkOperation = true;                                     
+                                        foreach (Epi.Data.TableColumn column in kvp.Value)
+                                        {
+                                            string columnName = String.Empty;
+                                            if (!column.Name.Contains(".") && !db.ColumnExists(tableName, column.Name))
+                                            {                                                
+                                                columnName = column.Name;
+                                                Query qr = db.CreateQuery("alter table [" + tableName + "] add [" + columnName + "] " + ConvertToGenericType(column));
+                                               db.ExecuteNonQuery(qr);                                                
+                                            }
+                                            ColumnSQL.Append(" [");
+                                            ColumnSQL.Append(column);
+                                            ColumnSQL.Append("],");
+                                        }                                      
+                                        db.IsBulkOperation = false;
+                                    }
+                                 }
 
                             foreach (KeyValuePair<string, List<Epi.Data.TableColumn>> kvp in fieldTableDictionary)
                             {
@@ -949,7 +1059,7 @@ namespace EpiDashboard
                                 System.Data.Common.DbDataReader dataReader = table.CreateDataReader(); //dv.ToTable().CreateDataReader();
                                 db.InsertBulkRows("Select * From [" + kvp.Key + "]", dataReader, requestUpdateStatus, checkForCancellation);
                             }
-                        }
+                        }                                                
                     }
                 }
                 catch (Exception ex)
@@ -964,6 +1074,99 @@ namespace EpiDashboard
             }
         }
 
+        private GenericDbColumnType ConvertToGenericType(Epi.Data.TableColumn dataType)
+        {
+            //dataType.GetType();
+            //return GenericDbColumnType.Unknown;
+            switch (dataType.DataType.ToString())
+            {
+                case "Int16":
+                    return GenericDbColumnType.Int16;
+
+                case "Int32":
+                    return GenericDbColumnType.Int32;
+
+                case "Int64":
+                    return GenericDbColumnType.Int64;
+
+                case "String":
+                    return GenericDbColumnType.String;
+
+                case "Byte":
+                    return GenericDbColumnType.Byte;
+
+                case "Boolean":
+                    return GenericDbColumnType.Boolean;
+
+                case "Decimal":
+                    return GenericDbColumnType.Decimal;
+
+                case "Double":
+                    return GenericDbColumnType.Double;
+
+                case "DateTime":
+                    return GenericDbColumnType.DateTime;
+
+                case "Guid":
+                    return GenericDbColumnType.String;
+
+                case "UInt16":
+                    return GenericDbColumnType.UInt16;
+
+                case "UInt32":
+                    return GenericDbColumnType.UInt32;
+
+                case "UInt64":
+                    return GenericDbColumnType.UInt64;
+
+                case "Single":
+                    return GenericDbColumnType.Single;
+
+                case "SByte":
+                    return GenericDbColumnType.SByte;
+
+                default:
+                    return GenericDbColumnType.Object;
+
+
+                //    case DataType.Boolean:
+                //        return GenericDbColumnType.Boolean;
+
+                //    case DataType.Date:
+                //        return GenericDbColumnType.Date;
+
+                //    case DataType.DateTime:
+                //        return GenericDbColumnType.DateTime;
+
+                //    case DataType.GUID:
+                //        return GenericDbColumnType.Guid;
+
+                //    case DataType.Number:
+                //        return GenericDbColumnType.Double;
+
+                //    case DataType.Object:
+                //        return GenericDbColumnType.Object;
+
+                //    case DataType.PhoneNumber:
+                //        return GenericDbColumnType.String;
+
+                //    case DataType.Text:
+                //        return GenericDbColumnType.String;
+
+                //    case DataType.Time:
+                //        return GenericDbColumnType.Time;
+
+                //    case DataType.Unknown:
+                //        return GenericDbColumnType.Unknown;
+
+                //    case DataType.YesNo:
+                //        return GenericDbColumnType.Boolean;
+
+                //    default:
+                //        return GenericDbColumnType.Unknown;
+            }
+        }
+
         private void Export()
         {
             if (string.IsNullOrEmpty(txtConnectionInformation.Text))
@@ -975,7 +1178,7 @@ namespace EpiDashboard
 
             if (cmbDestinationTable.SelectedItem != null)
             {
-                tableName = ((System.Collections.Generic.KeyValuePair<string, string>)(cmbDestinationTable.SelectedItem)).Key.ToString();
+                tableName = ((System.Collections.Generic.KeyValuePair<string, string>)(cmbDestinationTable.SelectedItem)).Value.ToString();
             }
             else
             {
@@ -985,6 +1188,10 @@ namespace EpiDashboard
             if (string.IsNullOrEmpty(tableName))
             {
                 return;
+            }
+            if (radReplace.IsChecked == true)
+            {
+                IsReplace = true;
             }
 
             if (
@@ -1199,6 +1406,6 @@ namespace EpiDashboard
         private void cmbDestinationTable_KeyUp(object sender, KeyEventArgs e)
         {
             EnableDisableExportButton();
-        }
+        }       
     }
 }

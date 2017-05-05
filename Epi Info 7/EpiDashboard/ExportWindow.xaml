@@ -26,6 +26,19 @@
 
             <TextBlock Visibility="Collapsed" Text="This gadget will export the current set of records to one of the available formats below. To proceed, first select an output format. Then click the ... button next to Connection Information to specify a database. Finally, select a table or spreadsheet from within the database." TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="0, 0, 0, 10" />
 
+            <GroupBox Header="Output Mode">
+                <StackPanel>           
+            <WrapPanel Orientation="Horizontal">
+                <StackPanel Margin="30 5 30 5">
+                            <RadioButton x:Name="radAppend"  GroupName="radData" Content="Append"  IsChecked="true" ></RadioButton>
+                </StackPanel>
+                        <StackPanel Margin="30 5 30 5">
+                    <RadioButton x:Name="radReplace"  GroupName="radData" Content="Replace"  />
+                </StackPanel>
+            </WrapPanel>
+                </StackPanel>
+            </GroupBox>
+            
             <TextBlock x:Name="tblockOutputFormat" Text="Output format" ></TextBlock>
             <ComboBox x:Name="cmbDataFormats" Margin="0,0,0,8" MinWidth="445"></ComboBox>
 
@@ -42,8 +55,8 @@
             </Grid>
 
             <TextBlock x:Name="tblockDestinationTable"  Text="Destination table" ></TextBlock>
-            <ComboBox x:Name="cmbDestinationTable" IsEditable="True"  Margin="0,0,0,8" SelectionChanged="cmbDestinationTable_SelectionChanged" TextInput="cmbDestinationTable_TextInput" KeyDown="cmbDestinationTable_KeyDown" KeyUp="cmbDestinationTable_KeyUp"></ComboBox>
-
+            <ComboBox x:Name="cmbDestinationTable" IsEditable="True"  Margin="0,0,0,8" SelectionChanged="cmbDestinationTable_SelectionChanged" TextInput="cmbDestinationTable_TextInput" KeyDown="cmbDestinationTable_KeyDown" KeyUp="cmbDestinationTable_KeyUp"></ComboBox>           
+            
             <TextBlock  x:Name="tblockFields" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" Text="Fields to export:" TextAlignment="Center" />
             <ListBox HorizontalAlignment="Stretch" Margin="0,0,0,8" Name="lbxExportFields" SelectedIndex="0" SelectionMode="Extended" Width="Auto" Height="225" />
             <TextBlock x:Name="tblockFieldCount" Text="0 fields selected" FontSize="10" Margin="0,0,0,12"></TextBlock>
