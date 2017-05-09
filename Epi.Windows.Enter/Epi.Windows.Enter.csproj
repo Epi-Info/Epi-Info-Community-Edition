@@ -175,6 +175,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Epi.Enter.ServiceApplication\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -429,6 +432,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\SearchListBoxItem.cs" />
+    <None Include="app.manifest" />
     <None Include="ClassDiagram1.cd" />
     <EmbeddedResource Include="Controls\ListFieldComboBox.resx">
       <DependentUpon>ListFieldComboBox.cs</DependentUpon>
