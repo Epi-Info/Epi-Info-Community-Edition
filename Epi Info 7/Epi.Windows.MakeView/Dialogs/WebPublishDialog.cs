@@ -1522,7 +1522,11 @@ namespace Epi.Windows.MakeView.Dialogs
                     {
                         SetDTOObject(response);
                         btnPublishForm.Enabled = true;
-                    }
+                        if (response.SurveyInfoList[0].SurveyType == 1)
+                            rdbSingleResponse.Checked = true;
+                        else if (response.SurveyInfoList[0].SurveyType == 2)
+                            rdbMultipleResponse.Checked = true;
+                    }                  
                 }
                 if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev2)))
                 {
@@ -1540,7 +1544,11 @@ namespace Epi.Windows.MakeView.Dialogs
                     {
                         SetDTOObjectV2(response);
                         btnPublishForm.Enabled = true;
-                    }
+                        if (response.SurveyInfoList[0].SurveyType == 1)
+                            rdbSingleResponse.Checked = true;
+                        else if (response.SurveyInfoList[0].SurveyType == 2)
+                            rdbMultipleResponse.Checked = true;
+                    }                   
                 }
                 if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev3)))
                 {
@@ -1558,7 +1566,11 @@ namespace Epi.Windows.MakeView.Dialogs
                     {
                         SetDTOObjectV3(response);
                         btnPublishForm.Enabled = true;
-                    }
+                        if (response.SurveyInfoList[0].SurveyType == 1)
+                            rdbSingleResponse.Checked = true;
+                        else if (response.SurveyInfoList[0].SurveyType == 2)
+                            rdbMultipleResponse.Checked = true;
+                    }                    
                 }
             }
 
