@@ -1371,6 +1371,20 @@ namespace Epi.Windows.Analysis.Forms
 
         }
 
+        private void tsbClear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (webBrowser1 != null)
+                {
+                    webBrowser1.Navigate("about:blank");
+                }
+            }
+            catch (System.UriFormatException)
+            {
+                return;
+            }
+        }
     }
 
     /// <summary>
