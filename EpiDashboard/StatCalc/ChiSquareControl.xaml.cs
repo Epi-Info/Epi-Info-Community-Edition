@@ -251,6 +251,56 @@ namespace EpiDashboard.StatCalc
 
         public double calcP(double q, double df)
         {
+            {
+                double j = 0.0;
+                double k = 0.0;
+                double l = 0.0;
+                double m = 0.0;
+                double pi = Math.PI;
+                double absx = q;
+
+                if (q < 0)
+                    absx = -q;
+
+                if (q < 0.000000001 || df < 1.0)
+                    return 1.0;
+
+                double rr = 1.0;
+
+                int ii = (int)(df * 1);
+
+                while (ii >= 2)
+                {
+                    rr = rr * (double)(ii * 1.0);
+                    ii = ii - 2;
+                }
+
+                k = Math.Exp(Math.Floor((df + 1.0) * 0.5) * Math.Log(absx) - q * 0.5) / rr;
+
+                if (k < 0.00001)
+                    return 0.0;
+
+                if (Math.Floor(df * 0.5) == df * 0.5)
+                    j = 1.0;
+                else j = Math.Sqrt(2.0 / q / pi);
+
+                l = 1.0;
+                m = 1.0;
+
+                if (!Double.IsNaN(q) && !Double.IsInfinity(q))
+                {
+                    while (m >= 0.00000001)
+                    {
+                        df = df + 2.0;
+                        m = m * q / df;
+                        l = l + m;
+                    }
+                }
+                return 1 - j * k * l;
+            }
+            // p-value routine changed 5/12/2017 by John Copeland
+            // old routine is commented out below
+/*
             double tk = 0;
             double CFL = 0;
             double CFU = 0;
@@ -277,6 +327,7 @@ namespace EpiDashboard.StatCalc
             }
             prob = 1 - prob;
             return prob;
+            */
         }
 
         public double lngamma(double c)
@@ -358,7 +409,7 @@ namespace EpiDashboard.StatCalc
 
             Vsum += (n1 * n2 * (n * T3 - (T2 * T2))) / (n * n * (n - 1));
             V1sum += T1 - ((n1 / n) * T2);
-            XMHchisq += ((V1sum - 0.5) * (V1sum - 0.5)) / Vsum;
+            XMHchisq += (V1sum * V1sum) / Vsum;
             result.SetChi(XMHchisq);
             result.SetPValue(calcP(XMHchisq, 1));
             return result;
