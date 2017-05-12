@@ -96,8 +96,7 @@ namespace Epi.Windows.MakeView.Forms
                 this.mainForm.EpiInterpreter.Parse(checkCode);
                 isValidCommand = true;
                 this.view.CheckCode = checkCode;
-                codeText.Clear();
-                PopulateTextArea();
+
             }
             catch (ParseException ex)
             {
@@ -1030,7 +1029,14 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="e">.NET supplied Key Event Arguments</param>
         private void codeText_KeyUp(object sender, KeyEventArgs e)
         {
-            CalculateStatus();
+            bool kodachromeLine = false;
+
+            if(char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                kodachromeLine = true;
+            }
+
+            CalculateStatus(kodachromeLine);
         }
 
         /// <summary>
@@ -1405,6 +1411,50 @@ namespace Epi.Windows.MakeView.Forms
             }
         }
 
+        public void Kodachrome(int lineNumber)
+        {
+            int initialSelectionStart = codeText.SelectionStart;
+            int initialSelectionLength = codeText.SelectionLength;
+
+            string line = codeText.Lines[lineNumber];
+            int firstCharIndex = ((RichTextBox)codeText).GetFirstCharIndexFromLine(lineNumber);
+
+            Regex r = new Regex("(\".*\")|(\\([.+-]\\))|([ \\t{}():;=+-/%^&])");
+            String[] tokens = r.Split(line);
+
+            int selectionIndex = firstCharIndex;
+            int selectionLength = 0;
+
+            foreach (string token in tokens)
+            {
+                selectionLength = token.Length;
+
+                codeText.SelectionStart = selectionIndex;
+                codeText.SelectionLength = selectionLength;
+
+                if (this.keywords.Contains(token.Trim().ToLowerInvariant()))
+                {
+                    codeText.SelectionColor = Color.Blue;
+                    codeText.SelectionFont = printFont;
+                }
+                else if (this.operators.Contains(token.Trim().ToLowerInvariant()))
+                {
+                    codeText.SelectionColor = Color.Brown;
+                    codeText.SelectionFont = printFont;
+                }
+                else
+                {
+                    codeText.SelectionColor = Color.Black;
+                    codeText.SelectionFont = printFont;
+                }
+
+                selectionIndex += selectionLength;
+            }
+
+            codeText.SelectionStart = initialSelectionStart;
+            codeText.SelectionLength = initialSelectionLength;
+        }
+
         /// <summary>
         /// Input box for adding a Sub-routine to the Check Code
         /// </summary>
@@ -1456,7 +1506,7 @@ namespace Epi.Windows.MakeView.Forms
 
         #endregion //Public Methods
 
-        #region Private Methods
+         #region Private Methods
 
         /// <summary>
         /// Calculate Status method
@@ -1464,7 +1514,7 @@ namespace Epi.Windows.MakeView.Forms
         /// <remarks>
         /// Calculates the line number, column, and overall position of the insertion point.
         /// </remarks>
-        private void CalculateStatus()
+        private void CalculateStatus(bool kodachromeLine = false)
         {
             int Findline, Findcol, Findindex;
 
@@ -1494,6 +1544,15 @@ namespace Epi.Windows.MakeView.Forms
                 Findcol = codeText.SelectionStart + 1 + (TabCount * 5);
             }
 
+            try
+            {
+                if(kodachromeLine)
+                {
+                    Kodachrome(Findline);
+                }
+            }
+            catch { }
+            
             Findline++;
             LineNumberLabel.Text = Findline.ToString();
             ColumnNumberLabel.Text = Findcol.ToString();
