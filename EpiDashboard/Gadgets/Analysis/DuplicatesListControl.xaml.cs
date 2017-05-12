@@ -555,7 +555,7 @@ namespace EpiDashboard.Gadgets.Analysis
 
             this.GadgetStatusUpdate += new GadgetStatusUpdateHandler(RequestUpdateStatusMessage);
             this.GadgetCheckForCancellation += new GadgetCheckForCancellationHandler(IsCancelled);
-
+            mnuRemoveSorts.Click += mnuRemoveSorts_Click;
             base.Construct();
 
             #region Translation
@@ -591,6 +591,15 @@ namespace EpiDashboard.Gadgets.Analysis
 
             //btnRun.Content = LineListSharedStrings.GENERATE_LINE_LIST;
             #endregion // Translation
+        }
+
+        void mnuRemoveSorts_Click(object sender, RoutedEventArgs e)
+        {
+            if (properties != null)
+            {
+                Parameters.SortVariables.Clear();
+                RefreshResults();
+            }
         }
 
         void mnuCenter_Click(object sender, RoutedEventArgs e)
@@ -1271,5 +1280,6 @@ namespace EpiDashboard.Gadgets.Analysis
                 //}
             }
         }
+      
     }
 }
