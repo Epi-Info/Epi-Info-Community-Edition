@@ -300,9 +300,10 @@ namespace EpiDashboard
         /// </summary>
         protected override void CopyToClipboard()
         {
+            #region unused code
             StringBuilder sb = new StringBuilder();
-
-            foreach (Grid grid in this.StrataGridList)
+           
+           /* foreach (Grid grid in this.StrataGridList)
             {
                 if (StrataGridList.Count > 1)
                 {
@@ -353,10 +354,107 @@ namespace EpiDashboard
                 sb.AppendLine("(Exposure = Rows; Outcome = Columns)");
 
                 sb.AppendLine();
+            }*/
+            #endregion
+
+            StringBuilder htmlBuilder = new StringBuilder();
+
+            const string header = @"Format:HTML  Format  
+                                    Version:1.0  
+                                    StartHTML:<<<<<<<1  
+                                    EndHTML:<<<<<<<2  
+                                    StartFragment:<<<<<<<3  
+                                    EndFragment:<<<<<<<4  
+                                    StartSelection:<<<<<<<3  
+                                    EndSelection:<<<<<<<3";
+
+            htmlBuilder.Append(header);
+
+            int startHtml = htmlBuilder.Length;
+
+            htmlBuilder.Append(@"<!DOCTYPE HTML PUBLIC  ""-//W3C//DTD HTML 4.0  Transitional//EN""><!--StartFragment-->");
+            int fragmentStart = htmlBuilder.Length;
+
+            CustomOutputHeading = headerPanel.Text;
+            CustomOutputDescription = descriptionPanel.Text;
+
+            if (CustomOutputHeading == null || (string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)")))
+            {
+                htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Crosstabulation</h2>");
+            }
+            else if (CustomOutputHeading != "(none)")
+            {
+                htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">" + CustomOutputHeading + "</h2>");
             }
 
+            htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
+            htmlBuilder.AppendLine("<em>Main variable:</em> <strong>" + cbxExposureField.Text + "</strong>");
+            htmlBuilder.AppendLine("<br />");
+
+            htmlBuilder.AppendLine("<em>Crosstab variable:</em> <strong>" + cbxOutcomeField.Text + "</strong>");
+            htmlBuilder.AppendLine("<br />");
+
+            if (cbxFieldWeight.SelectedIndex >= 0)
+            {
+                htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + cbxFieldWeight.Text + "</strong>");
+                htmlBuilder.AppendLine("<br />");
+            }
+           
+            if (lbxFieldStrata.SelectedItems.Count > 0)
+            {
+                WordBuilder wb = new WordBuilder(", ");
+                foreach (string s in lbxFieldStrata.SelectedItems)
+                {
+                    wb.Add(s);
+                }
+                htmlBuilder.AppendLine("<em>Strata variable:</em> <strong>" + wb.ToString() + "</strong>");
+                htmlBuilder.AppendLine("<br />");
+            }
+
+            htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + checkboxIncludeMissing.IsChecked.ToString() + "</strong>");
+            htmlBuilder.AppendLine("<br />");
+            htmlBuilder.AppendLine("</small></p>");
+
+            if (!string.IsNullOrEmpty(CustomOutputDescription))
+            {
+                htmlBuilder.AppendLine("<p class=\"gadgetsummary\">" + CustomOutputDescription + "</p>");
+            }
+
+            if (!string.IsNullOrEmpty(messagePanel.Text) && messagePanel.Visibility == Visibility.Visible)
+            {
+                htmlBuilder.AppendLine("<p><small><strong>" + messagePanel.Text + "</strong></small></p>");
+            }
+
+            if (!string.IsNullOrEmpty(infoPanel.Text) && infoPanel.Visibility == Visibility.Visible)
+            {
+                htmlBuilder.AppendLine("<p><small><strong>" + infoPanel.Text + "</strong></small></p>");
+            }
+
+            foreach (UIElement element in panelMain.Children)
+            {
+                if (element is GadgetMatchedPairPanel)
+                {
+                    GadgetMatchedPairPanel stap = element as GadgetMatchedPairPanel;
+                    htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
+                    htmlBuilder.AppendLine(stap.ToHTML());
+                    htmlBuilder.AppendLine("<p></p>");
+                }
+            }
+
+            int fragmentEnd = htmlBuilder.Length;
+            htmlBuilder.Append(@"<!--EndFragment-->");
+            int endHtml = htmlBuilder.Length;
+            htmlBuilder.Replace("<<<<<<<1", String.Format("{0,8}", startHtml));
+            htmlBuilder.Replace("<<<<<<<2", String.Format("{0,8}", endHtml));
+            htmlBuilder.Replace("<<<<<<<3", String.Format("{0,8}", fragmentStart));
+            htmlBuilder.Replace("<<<<<<<4", String.Format("{0,8}", fragmentEnd));
+          
             Clipboard.Clear();
-            Clipboard.SetText(sb.ToString());
+            var data = htmlBuilder.ToString();
+            var dataObject = new DataObject();
+            dataObject.SetData(DataFormats.Html, data);      
+            Clipboard.SetDataObject(dataObject);  
+         
         }
 
         private void ClearResults()
@@ -2012,6 +2110,7 @@ namespace EpiDashboard
             Grid.SetRow(txt6, 1);
             Grid.SetColumn(txt6, 2);
             grid.Children.Add(txt6);
+            //StrataGridList.Add(grid);
         }
 
         private DataTable ApplyRowValueMappings(DataTable table)
