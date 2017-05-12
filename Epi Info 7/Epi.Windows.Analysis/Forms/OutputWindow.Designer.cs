@@ -41,6 +41,7 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbWindowState = new System.Windows.Forms.ToolStripButton();
+            this.tsbClear = new System.Windows.Forms.ToolStripButton();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.ts1.SuspendLayout();
             this.SuspendLayout();
@@ -159,10 +160,11 @@ namespace Epi.Windows.Analysis.Forms
             this.toolStripButton8,
             this.tsbPrint,
             this.toolStripSeparator1,
-            this.tsbWindowState});
+            this.tsbWindowState,
+            this.tsbClear});
             this.ts1.Location = new System.Drawing.Point(0, 0);
             this.ts1.Name = "ts1";
-            this.ts1.Size = new System.Drawing.Size(611, 25);
+            this.ts1.Size = new System.Drawing.Size(789, 25);
             this.ts1.TabIndex = 0;
             this.ts1.Text = "toolStrip1";
             // 
@@ -172,9 +174,8 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbGoBack.Image = ((System.Drawing.Image)(resources.GetObject("tsbGoBack.Image")));
             this.tsbGoBack.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbGoBack.Name = "tsbGoBack";
-            this.tsbGoBack.Size = new System.Drawing.Size(68, 22);
-            this.tsbGoBack.Text = SharedStrings.PREVIOUS;
-            resources.ApplyResources(this.tsbGoBack, "tsbGoBack");
+            this.tsbGoBack.Size = new System.Drawing.Size(72, 22);
+            this.tsbGoBack.Text = "Previous";
             this.tsbGoBack.Click += new System.EventHandler(this.tsbGoBack_Click);
             // 
             // tsbGoForward
@@ -183,9 +184,8 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbGoForward.Image = ((System.Drawing.Image)(resources.GetObject("tsbGoForward.Image")));
             this.tsbGoForward.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbGoForward.Name = "tsbGoForward";
-            this.tsbGoForward.Size = new System.Drawing.Size(50, 22);
-            this.tsbGoForward.Text = SharedStrings.NEXT;
-            resources.ApplyResources(this.tsbGoForward, "tsbGoForward");
+            this.tsbGoForward.Size = new System.Drawing.Size(51, 22);
+            this.tsbGoForward.Text = "Next";
             this.tsbGoForward.Click += new System.EventHandler(this.tsbGoForward_Click);
             // 
             // tsbGoToLast
@@ -194,9 +194,8 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbGoToLast.Image = ((System.Drawing.Image)(resources.GetObject("tsbGoToLast.Image")));
             this.tsbGoToLast.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbGoToLast.Name = "tsbGoToLast";
-            this.tsbGoToLast.Size = new System.Drawing.Size(47, 22);
-            this.tsbGoToLast.Text = SharedStrings.LAST;
-            resources.ApplyResources(this.tsbGoToLast, "tsbGoToLast");
+            this.tsbGoToLast.Size = new System.Drawing.Size(48, 22);
+            this.tsbGoToLast.Text = "Last";
             this.tsbGoToLast.Click += new System.EventHandler(this.tsbGoToLast_Click);
             // 
             // tsbHistory
@@ -206,9 +205,8 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbHistory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbHistory.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.tsbHistory.Name = "tsbHistory";
-            this.tsbHistory.Size = new System.Drawing.Size(61, 22);
-            this.tsbHistory.Text = SharedStrings.HISTORY;
-            resources.ApplyResources(this.tsbHistory, "tsbHistory");
+            this.tsbHistory.Size = new System.Drawing.Size(65, 22);
+            this.tsbHistory.Text = "History";
             this.tsbHistory.Click += new System.EventHandler(this.tsbHistory_Click);
             // 
             // toolStripButton5
@@ -221,9 +219,8 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbOpen.Image = ((System.Drawing.Image)(resources.GetObject("tsbOpen.Image")));
             this.tsbOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbOpen.Name = "tsbOpen";
-            this.tsbOpen.Size = new System.Drawing.Size(53, 22);
-            this.tsbOpen.Text = SharedStrings.OPEN;
-            resources.ApplyResources(this.tsbOpen, "tsbOpen");
+            this.tsbOpen.Size = new System.Drawing.Size(56, 22);
+            this.tsbOpen.Text = "Open";
             this.tsbOpen.Click += new System.EventHandler(this.tsbOpen_Click);
             // 
             // tsbBookmark
@@ -231,9 +228,8 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbBookmark.Image = ((System.Drawing.Image)(resources.GetObject("tsbBookmark.Image")));
             this.tsbBookmark.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbBookmark.Name = "tsbBookmark";
-            this.tsbBookmark.Size = new System.Drawing.Size(73, 22);
-            this.tsbBookmark.Text = SharedStrings.BOOKMARK;
-            resources.ApplyResources(this.tsbBookmark, "tsbBookmark");
+            this.tsbBookmark.Size = new System.Drawing.Size(81, 22);
+            this.tsbBookmark.Text = "Bookmark";
             this.tsbBookmark.Click += new System.EventHandler(this.tsbBookmark_Click);
             // 
             // toolStripButton8
@@ -246,9 +242,8 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbPrint.Image = ((System.Drawing.Image)(resources.GetObject("tsbPrint.Image")));
             this.tsbPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPrint.Name = "tsbPrint";
-            this.tsbPrint.Size = new System.Drawing.Size(49, 22);
-            this.tsbPrint.Text = SharedStrings.PRINT;
-            resources.ApplyResources(this.tsbPrint, "tsbPrint");
+            this.tsbPrint.Size = new System.Drawing.Size(52, 22);
+            this.tsbPrint.Text = "Print";
             this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
             // 
             // toolStripSeparator1
@@ -263,11 +258,19 @@ namespace Epi.Windows.Analysis.Forms
             this.tsbWindowState.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbWindowState.ImageTransparentColor = System.Drawing.SystemColors.ButtonFace;
             this.tsbWindowState.Name = "tsbWindowState";
-            this.tsbWindowState.Size = new System.Drawing.Size(70, 22);
-            this.tsbWindowState.Text = SharedStrings.MAXIMIZE;
-            resources.ApplyResources(this.tsbWindowState, "tsbWindowState");
+            this.tsbWindowState.Size = new System.Drawing.Size(77, 22);
+            this.tsbWindowState.Text = "Maximize";
             this.tsbWindowState.Visible = false;
             this.tsbWindowState.Click += new System.EventHandler(this.tsbWindowState_Click);
+            // 
+            // tsbClear
+            // 
+            this.tsbClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbClear.Name = "tsbClear";
+            this.tsbClear.Size = new System.Drawing.Size(79, 22);
+            this.tsbClear.Text = "Clear Output";
+            this.tsbClear.Click += new System.EventHandler(this.tsbClear_Click);
             // 
             // webBrowser1
             // 
@@ -275,7 +278,7 @@ namespace Epi.Windows.Analysis.Forms
             this.webBrowser1.Location = new System.Drawing.Point(0, 25);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(611, 220);
+            this.webBrowser1.Size = new System.Drawing.Size(789, 331);
             this.webBrowser1.TabIndex = 1;
             this.webBrowser1.CanGoBackChanged += new System.EventHandler(this.webBrowser1_CanGoBackChanged);
             this.webBrowser1.CanGoForwardChanged += new System.EventHandler(this.webBrowser1_CanGoForwardChanged);
@@ -288,7 +291,7 @@ namespace Epi.Windows.Analysis.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 245);
+            this.ClientSize = new System.Drawing.Size(789, 356);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.ts1);
             this.DockType = Epi.Windows.Docking.DockContainerType.Document;
@@ -318,5 +321,6 @@ namespace Epi.Windows.Analysis.Forms
         private System.Windows.Forms.ToolStripButton tsbPrint;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton tsbWindowState;
+        private System.Windows.Forms.ToolStripButton tsbClear;
     }
 }
