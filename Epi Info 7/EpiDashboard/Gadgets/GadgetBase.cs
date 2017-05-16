@@ -18,6 +18,7 @@ using Epi;
 using Epi.Core;
 using Epi.Fields;
 using EpiDashboard.Controls;
+using System.Linq;
 
 namespace EpiDashboard
 {
@@ -912,8 +913,14 @@ namespace EpiDashboard
         /// Sends the gadget to the back of the canvas
         /// </summary>
         protected void SendToBack()
-        {
-            Canvas.SetZIndex(this, -1);
+        {                    
+            EpiDashboard.DragCanvas parent = this.Parent as EpiDashboard.DragCanvas;
+            if (parent == null) return;         
+            var minZ = parent.Children.OfType<UIElement>()
+              .Where(x => x != this)
+              .Select(x => Canvas.GetZIndex(x))
+              .Min();
+            Canvas.SetZIndex(this, minZ-1);            
         }
 
         protected virtual FieldFlags SetFieldFlags(Epi.Fields.RenderableField field)
