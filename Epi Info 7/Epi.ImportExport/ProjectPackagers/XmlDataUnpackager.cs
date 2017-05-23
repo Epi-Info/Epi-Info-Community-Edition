@@ -495,17 +495,28 @@ namespace Epi.ImportExport.ProjectPackagers
 
                     if (fieldsInQuery.Count > 0 && fieldValueParams.Count > 0)
                     {
-                        Query updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + setFieldText.ToString() + StringLiterals.SPACE + whereClause);
-                        updateQuery.Parameters = fieldValueParams;
-
-                        if (DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office"))
+                        if (DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office") == false)
                         {
-                            IDbCommand command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
-                            object obj = command.ExecuteNonQuery();
+                            Query updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + setFieldText + StringLiterals.SPACE + whereClause);
+                            updateQuery.Parameters = fieldValueParams;
+                            db.ExecuteNonQuery(updateQuery);
                         }
                         else
                         {
-                            db.ExecuteNonQuery(updateQuery);
+                            string fieldNames = setFieldText.ToString(0, 126);
+                            Query updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + fieldNames + StringLiterals.SPACE + whereClause);
+                            updateQuery.Parameters = fieldValueParams;
+                            IDbCommand command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
+                            object obj = command.ExecuteNonQuery();
+
+                            if (fieldsInQuery.Count > 126)
+                            {
+                                fieldNames = setFieldText.ToString(126);
+                                updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + fieldNames + StringLiterals.SPACE + whereClause);
+                                updateQuery.Parameters = fieldValueParams;
+                                command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
+                                obj = command.ExecuteNonQuery();
+                            }
                         }
                     }
 
