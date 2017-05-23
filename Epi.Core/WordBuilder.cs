@@ -102,6 +102,37 @@ namespace Epi
             }
 		}
 
+        public string ToString(int start, int length = -1)
+        {
+            if (Count > 0)
+            {
+                try
+                {
+                    if (length == -1)
+                    {
+                        length = Count - start;
+                    }
+
+                    StringBuilder sb = new StringBuilder(Count * 2);
+                    for (int index = start; (index < start + length - 1) && (index < Count - 1); index++)
+                    {
+                        sb.Append(this[index].ToString());
+                        sb.Append(delimiter);
+                    }
+                    sb.Append(this[Count - 1]);
+                    return sb.ToString();
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         /// <summary>
         /// Terminate resources acquired for object instance.
         /// </summary>
