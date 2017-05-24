@@ -194,6 +194,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            this.MinimumSize = new System.Drawing.Size(500, 400);
+            this.MaximumSize = new System.Drawing.Size(750, 900);
             this.Name = "ImportWebEnterDataForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImportDataForm_FormClosing);
             this.Load += new System.EventHandler(this.ImportDataForm_Load);
