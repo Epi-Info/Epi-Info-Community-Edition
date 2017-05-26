@@ -179,7 +179,7 @@ namespace Epi.Enter.Forms
                     case MetaFieldType.Date:
                     case MetaFieldType.DateTime:
                     case MetaFieldType.Time:
-                        return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue, CultureInfo.InvariantCulture));
+                        return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue));
                     case MetaFieldType.Checkbox:
                         return new QueryParameter("@" + fieldName, DbType.Boolean, Convert.ToBoolean(fieldData.FieldValue));
                     case MetaFieldType.CommentLegal:
@@ -683,7 +683,7 @@ namespace Epi.Enter.Forms
 
                 if (field is NumberField && !string.IsNullOrEmpty(value.ToString()))
                 {
-                    double result = -1;
+                    double result = -1;                   
                     if (double.TryParse(value.ToString(), out result))
                     {
                         value = result;
