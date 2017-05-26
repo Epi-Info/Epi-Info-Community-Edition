@@ -316,7 +316,7 @@ namespace Epi.Enter.Forms
                         if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
                             return new QueryParameter("@" + fieldName, DbType.DateTime,DBNull.Value);
                         else
-                            return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue, CultureInfo.InvariantCulture));
+                            return new QueryParameter("@" + fieldName, DbType.DateTime, Convert.ToDateTime(fieldData.FieldValue));
                     case MetaFieldType.Checkbox:
                         if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
                             return new QueryParameter("@" + fieldName, DbType.Boolean, DBNull.Value);
