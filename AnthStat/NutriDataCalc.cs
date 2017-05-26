@@ -5385,7 +5385,7 @@ namespace AnthStat
 
             for (int i = 0; i < CDCWtHt.Length / 5; i++)
             {
-                if (CDCWtHt[i, 0] == gender && CDCWtHt[i, 1] == ageMonths)
+                if (CDCWtHt[i, 0] == gender && CDCWtHt[i, 1] == rawScore)
                 {
                     L = CDCWtHt[i, 2];
                     M = CDCWtHt[i, 3];
@@ -5395,13 +5395,13 @@ namespace AnthStat
                 }
             }
 
-            Z = (rawScore / M);
+            Z = (ageMonths / M);
             Z = Math.Pow(Z, L);
             Z = Z - 1;
             Z = Z / (L * S);
 
             if (!foundValue)
-                Z = InterpCDCZ(rawScore, ageMonths, gender, 5, ref flag);
+                Z = InterpCDCZ(ageMonths, rawScore, gender, 5, ref flag);
             else
             {
                 double stddev = 0;

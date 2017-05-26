@@ -509,6 +509,28 @@ namespace Epi.ImportExport.ProjectPackagers
                             IDbCommand command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
                             object obj = command.ExecuteNonQuery();
 
+                            if(obj is int && (int)obj == 0)
+                            {
+                                Query hasQuery = db.CreateQuery("SELECT [GlobalRecordId] FROM [" + previousPage.TableName + "] " + whereClause);
+                                IDataReader reader = db.ExecuteReader(hasQuery);
+                                bool hasRow = reader.Read();
+
+                                if (hasRow == false)
+                                {
+                                    StringBuilder insert = new StringBuilder();
+                                    insert.Append("INSERT INTO [");
+                                    insert.Append(previousPage.TableName);
+                                    insert.Append("] ([GlobalRecordId]) VALUES ('");
+                                    insert.Append(lastGuid);
+                                    insert.Append("')");
+
+                                    Query insertQuery = db.CreateQuery(insert.ToString());
+                                    obj = db.ExecuteNonQuery(insertQuery);
+                                }
+
+                                obj = command.ExecuteNonQuery();
+                            }
+
                             if (fieldsInQuery.Count > 126)
                             {
                                 fieldNames = setFieldText.ToString(126);
