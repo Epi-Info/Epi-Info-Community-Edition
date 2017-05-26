@@ -218,8 +218,10 @@ namespace Epi.Data.Services
             return false;
         }
 
-        public bool CheckCollectedDataIntegrity(View view)
+        public bool UpdateCheck_CollectedData(View view)
         {
+            bool passedCountCheck = true;
+
             if (view == null)
             {
                 throw new ArgumentNullException("view");
@@ -236,7 +238,50 @@ namespace Epi.Data.Services
 
                 if (masterRecordCount != Int32.Parse((dbDriver.ExecuteScalar(query)).ToString()))
                 {
-                    return false;
+                    passedCountCheck = false;
+                    break;
+                }
+            }
+
+            if(passedCountCheck == false)
+            {
+                Query masterGuidQuery = dbDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + view.TableName + "] ");
+                IDataReader reader = dbDriver.ExecuteReader(masterGuidQuery);
+
+                while (reader.Read())
+                {
+                    string recordId = reader[0].ToString();
+
+                    foreach (Page page in view.Pages)
+                    {
+                        StringBuilder sb = new StringBuilder();
+
+                        sb.Append(SqlKeyWords.WHERE);
+                        sb.Append(StringLiterals.SPACE);
+                        sb.Append(dbDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
+                        sb.Append(StringLiterals.EQUAL);
+                        sb.Append("'");
+                        sb.Append(recordId);
+                        sb.Append("'");
+                        string whereClause = sb.ToString();
+
+                        Query hasQuery = dbDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + page.TableName + "] " + whereClause);
+                        IDataReader hasReader = dbDriver.ExecuteReader(hasQuery);
+                        bool hasRow = hasReader.Read();
+
+                        if (hasRow == false)
+                        {
+                            StringBuilder insert = new StringBuilder();
+                            insert.Append("INSERT INTO [");
+                            insert.Append(page.TableName);
+                            insert.Append("] ([GlobalRecordId]) VALUES ('");
+                            insert.Append(recordId);
+                            insert.Append("')");
+
+                            Query insertQuery = dbDriver.CreateQuery(insert.ToString());
+                            object obj = dbDriver.ExecuteNonQuery(insertQuery);
+                        }
+                    }
                 }
             }
 
@@ -1302,7 +1347,29 @@ namespace Epi.Data.Services
                     query = dbDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
                     query.Parameters = fieldValueParams;
 
-                    dbDriver.ExecuteNonQuery(query);
+                    int num = dbDriver.ExecuteNonQuery(query);
+
+                    if(num == 0)
+                    { 
+                        Query hasQuery = dbDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + page.TableName + "] " + whereClause);
+                        IDataReader reader = dbDriver.ExecuteReader(hasQuery);
+                        bool hasRow = reader.Read();
+
+                        if (hasRow == false)
+                        {
+                            StringBuilder insert = new StringBuilder();
+                            insert.Append("INSERT INTO [");
+                            insert.Append(page.TableName);
+                            insert.Append("] ([GlobalRecordId]) VALUES ('");
+                            insert.Append(GlobalRecordID);
+                            insert.Append("')");
+
+                            Query insertQuery = dbDriver.CreateQuery(insert.ToString());
+                            dbDriver.ExecuteNonQuery(insertQuery);
+                        }
+
+                        dbDriver.ExecuteNonQuery(query);
+                    }
 
                     columnIndex = 0;
                     sb.Remove(0, sb.ToString().Length);
@@ -1632,6 +1699,23 @@ namespace Epi.Data.Services
                                     {
                                         dataField.CurrentRecordValueObject = dataRow[((Epi.INamedObject)dataField).Name];
                                     }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (RenderableField renderableField in page.Fields)
+                        {
+                            if (renderableField is GridField || renderableField is GroupField)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                if (renderableField is IDataField)
+                                {
+                                    ((IDataField)renderableField).CurrentRecordValueObject = null;
                                 }
                             }
                         }

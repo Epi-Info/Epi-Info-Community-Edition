@@ -1029,14 +1029,16 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="e">.NET supplied Key Event Arguments</param>
         private void codeText_KeyUp(object sender, KeyEventArgs e)
         {
-            bool kodachromeLine = false;
+            //bool kodachromeLine = false;
 
-            if(char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                kodachromeLine = true;
-            }
+            //if(char.IsLetterOrDigit((char)e.KeyCode))
+            //{
+            //    kodachromeLine = true;
+            //}
 
-            CalculateStatus(kodachromeLine);
+            //CalculateStatus(kodachromeLine);
+
+            CalculateStatus();
         }
 
         /// <summary>
