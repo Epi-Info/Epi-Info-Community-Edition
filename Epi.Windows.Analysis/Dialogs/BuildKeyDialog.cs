@@ -216,9 +216,16 @@ namespace Epi.Windows.Analysis.Dialogs
                 }
                 if (this.EpiInterpreter.Context.DataSet != null)
                 {    
-                     View CurrentView=null;
-                     if (this.EpiInterpreter.Context.CurrentProject != null)
-                     {
+                    View CurrentView = null;
+                    bool currentReadIdentifierIsView = false;
+
+                    if(this.EpiInterpreter.Context.CurrentProject != null)
+                    {
+                        currentReadIdentifierIsView = this.EpiInterpreter.Context.CurrentProject.IsView(this.EpiInterpreter.Context.CurrentRead.Identifier);
+                    }
+
+                    if (currentReadIdentifierIsView)
+                    {
                          CurrentView = this.EpiInterpreter.Context.CurrentProject.GetViewByName(this.EpiInterpreter.Context.CurrentRead.Identifier);//EI-705
                          foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
                          {
