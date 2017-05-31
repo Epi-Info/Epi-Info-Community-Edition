@@ -782,7 +782,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             ComboBox control = (ComboBox)sender;
             if (control.SelectedItem != null)
             {
-                if (control.SelectedItem is AggFxInfo)
+                if (control.SelectedItem is AggFxInfo && cmbSelectNumeratorAggregateFunction.SelectedItem != null)
                 { 
                     Parameters.NumeratorAggregator = (string)((AggFxInfo)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Keyword;
                     lblAggregateFunctionDefinition.Content = (string)((AggFxInfo)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Description;
@@ -795,7 +795,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             ComboBox control = (ComboBox)sender;
             if (control.SelectedItem != null)
             {
-                if (control.SelectedItem is AggFxInfo)
+                if (control.SelectedItem is AggFxInfo && cmbSelectDenominatorAggregateFunction.SelectedItem != null)
                 {
                     Parameters.DenominatorAggregator = (string)((AggFxInfo)(cmbSelectDenominatorAggregateFunction.SelectedItem)).Keyword;
                     lblAggregateFunctionDefinitionDenominator.Content = (string)((AggFxInfo)(cmbSelectDenominatorAggregateFunction.SelectedItem)).Description;
