@@ -136,8 +136,8 @@
         </StackPanel>
         <DockPanel Grid.Column="0" Height="560">
 
-            <Border Padding="0 0 0 10" DockPanel.Dock="Top" Panel.ZIndex="0" >
-                <Grid Height="75" Margin="0 0 0 0">
+            <Border MouseDown="click_leftDown" Padding="0 0 0 10" DockPanel.Dock="Top" Panel.ZIndex="0" >
+                <Grid   Height="75" Margin="0 0 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="60" />
@@ -169,15 +169,15 @@
                 </Grid>
             </Border>
 
-            <DockPanel  DockPanel.Dock="Top"   >
-                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"  >
-                    <StackPanel DockPanel.Dock="Top">
+            <DockPanel  Name="mainContainer"  DockPanel.Dock="Top"   >
+                <ScrollViewer  ScrollViewer.VerticalScrollBarVisibility="Auto"  >
+                    <StackPanel DockPanel.Dock="Top" MouseDown="click_leftDown">
 
-                        <StackPanel Margin="0 0 0 0">
+                        <StackPanel  Margin="0 0 0 0">
 
-                            <StackPanel Panel.ZIndex="1" >
+                            <StackPanel Panel.ZIndex="1" Background="White" MouseDown="click_leftDown" >
 
-                                <WrapPanel  Margin="85 0 85 0" Orientation="Horizontal">
+                                <WrapPanel Margin="85 0 85 0" Orientation="Horizontal">
                                     <!--<ContentControl  MouseDown="createForms_Click" AutomationProperties.HelpText="Create Forms - Create surveys and questionnaires with field validation and skip logic." TabIndex="1" Name="createFormContainer" Cursor="Hand"  >-->
                                     <!--<ContentControl   Cursor="Hand"  >-->
 
