@@ -478,7 +478,7 @@ namespace EpiDashboard
                             foreach (DataRow row in groupTable.Rows)
                             {
                                 string aggregateName = groupTable.Columns[0].ColumnName;
-                                string groupName = row[aggregateName] as string;
+                                string groupName = row[aggregateName].ToString();
                                 string aggregateExpression = "";
 
                                 if (aggregateName != "" && groupName != "")
@@ -486,10 +486,20 @@ namespace EpiDashboard
                                     aggregateExpression = "([" + aggregateName + "] = '" + groupName + "')";
                                 }
 
+                                if (groupTable.Columns.Count > 1)
+                                {
+                                    aggregateName = groupTable.Columns[1].ColumnName;
+                                    groupName = row[aggregateName].ToString();
+
+                                    if (aggregateName != "" && groupName != "")
+                                    {
+                                        aggregateExpression += " AND ([" + aggregateName + "] = '" + groupName + "')";
+                                    }
+                                }
+
                                 RateTable(ratesParameters, 
                                     numerFilterFields,
                                     denomFilterFields,
-                                    primaryGroupField,
                                     ref outputRateTable,
                                     sourceTable,
                                     groupName, 
@@ -501,7 +511,6 @@ namespace EpiDashboard
                             RateTable(ratesParameters,
                                 numerFilterFields,
                                 denomFilterFields,
-                                primaryGroupField,
                                 ref outputRateTable,
                                 sourceTable);
                         }
@@ -595,7 +604,7 @@ namespace EpiDashboard
             }
         }
 
-        private void RateTable(RatesParameters ratesParameters, List<string> numerFilterFields, List<string> denomFilterFields, string primaryGroupField, ref DataTable outputRateTable, DataTable table, string groupName = "", string aggregateExpression = "" )
+        private void RateTable(RatesParameters ratesParameters, List<string> numerFilterFields, List<string> denomFilterFields, ref DataTable outputRateTable, DataTable table, string groupName = "", string aggregateExpression = "" )
         {
             String numerFilter = "";
             if (Parameters != null && ratesParameters.NumerFilter != null)
