@@ -533,6 +533,29 @@ namespace Epi.Windows.Menu
             }
         }
 
+        private void click_leftDown(object sender, MouseButtonEventArgs e)
+        {
+            var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
+
+            if (pnlRightMenuHeight == "163")
+            {
+                this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+
+
+            }
+            else if (pnlRightMenuHeight == "220")
+            {
+                this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+
+            }
+        }
+
+
+        private void click_Test(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.MessageBox.Show("Hi");
+        }
+
         private void createForms_KeyDown(object sender, KeyEventArgs e)
         {
 
