@@ -340,7 +340,7 @@ namespace EpiDashboard
             }
 
             this.Height = dg.Height + 1024;
-
+            dg.IsReadOnly = true;
             panelMain.Children.Add(dg);
             
         }
@@ -1023,7 +1023,7 @@ namespace EpiDashboard
             }
 
             panelMain.Visibility = System.Windows.Visibility.Visible;
-
+            
             IsCollapsed = false;
         }
 
