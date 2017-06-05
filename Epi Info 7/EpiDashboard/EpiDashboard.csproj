@@ -70,6 +70,9 @@
   <PropertyGroup>
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ComponentArt.Win.DataVisualization.Charting, Version=2012.1.1871.0, Culture=neutral, PublicKeyToken=9bc9f846553156bb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -1657,6 +1660,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.manifest" />
     <None Include="ClassDiagram1.cd" />
     <EmbeddedResource Include="ComponentArt.Win.DataVisualization.lic" />
   </ItemGroup>
