@@ -144,7 +144,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockDimensions.Content = DashboardSharedStrings.GADGET_DIMENSIONS;
             tblockTitleNDescSubheader.Content = DashboardSharedStrings.GADGET_PANELSUBHEADER_TITLENDESC;
             tblockMaxWidth.Text = DashboardSharedStrings.GADGET_MAX_WIDTH;
-            tblockMaxHeight.Text = DashboardSharedStrings.GADGET_MAX_HEIGHT;
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
             tblockMaxRows.Text = SharedStrings.DASHBOARD_OPTION_MAX_ROWS;
@@ -178,18 +177,12 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.GadgetTitle = txtTitle.Text;
             Parameters.GadgetDescription = txtDesc.Text;
 
-            double height = 0;
+            double height = 5000;
             double width = 0;
             int maxrows = 0;
             int maxColumnLength = 0;
 
-            bool success = double.TryParse(txtMaxHeight.Text, out height);
-            if (success)
-            {
-                Parameters.Height = height;
-            }
-
-            success = double.TryParse(txtMaxWidth.Text, out width);
+            bool success = double.TryParse(txtMaxWidth.Text, out width);
             if (success)
             {
                 Parameters.Width = width;
@@ -410,10 +403,6 @@ namespace EpiDashboard.Controls.GadgetProperties
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(Parameters.Height.ToString()))
-            {
-                txtMaxHeight.Text = Parameters.Height.ToString();
-            }
             if (!String.IsNullOrEmpty(Parameters.Width.ToString()))
             {
                 txtMaxWidth.Text = Parameters.Width.ToString();
@@ -666,16 +655,6 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
-        private void txtHeight_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            double thisHeight = 0;
-            double.TryParse(txtMaxHeight.Text, out thisHeight);
-            if (thisHeight > System.Windows.SystemParameters.PrimaryScreenHeight * 2)
-            {
-                txtMaxHeight.Text = (System.Windows.SystemParameters.PrimaryScreenHeight * 2).ToString();
-            }
-        }
-
         private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
         }
@@ -715,13 +694,13 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             else
             {
-                items.Add(new AggFxInfo("Count", "count", "string,boolean,datetime", "Returns the number of all the values in the field. COUNT can be used with numeric, text, and boolean columns. Null values are ignored."));
+                items.Add(new AggFxInfo("Count", "count", "int,double,decimal,string,boolean,datetime", "Returns the number of all the values in the field. COUNT can be used with numeric, text, and boolean columns. Null values are ignored."));
                 items.Add(new AggFxInfo("Sum", "sum", "int,double,decimal", "Returns the sum of all the values in the field. SUM can be used with numeric columns only. Null values are ignored."));
-                items.Add(new AggFxInfo("Average", "avg", "", ""));
-                items.Add(new AggFxInfo("Minimum", "min", "", ""));
-                items.Add(new AggFxInfo("Maximum", "max", "", ""));
-                items.Add(new AggFxInfo("Statistical Standard Eviation", "", "stdev", ""));
-                items.Add(new AggFxInfo("Statistical Variance", "var", "", ""));
+                items.Add(new AggFxInfo("Average", "avg", "int,double,decimal", ""));
+                items.Add(new AggFxInfo("Minimum", "min", "int,double,decimal", ""));
+                items.Add(new AggFxInfo("Maximum", "max", "int,double,decimal", ""));
+                items.Add(new AggFxInfo("Statistical Standard Eviation", "int,double,decimal", "stdev", ""));
+                items.Add(new AggFxInfo("Statistical Variance", "var", "int,double,decimal", ""));
             }
 
             return items;
@@ -729,17 +708,39 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void cmbNumeratorField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox control = (ComboBox)sender;
-            if(control.SelectedItem != null)
+            if (control.SelectedItem != null)
             {
-                if(control.SelectedItem is FieldInfo)
+                if (control.SelectedItem is FieldInfo)
                 {
                     FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
                     Parameters.NumeratorField = fieldInfo.Name;
                     List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
-                    if(cmbSelectNumeratorAggregateFunction.Items.Count != items.Count)
+
+                    if (cmbSelectNumeratorAggregateFunction.ItemsSource == null)
                     {
                         cmbSelectNumeratorAggregateFunction.ItemsSource = items;
-                        SetSelectedItem(cmbSelectNumeratorAggregateFunction, fieldInfo);
+                    }
+                    else
+                    {
+                        if (cmbSelectNumeratorAggregateFunction.Items.Count != items.Count)
+                        {
+                            object currentNumeratorSelected = cmbSelectNumeratorAggregateFunction.SelectedItem;
+                            cmbSelectNumeratorAggregateFunction.ItemsSource = items;
+
+                            if (currentNumeratorSelected is AggFxInfo)
+                            {
+                                var aggregateFunction = cmbSelectNumeratorAggregateFunction.Items.Cast<AggFxInfo>().
+                                    Where(aggFxInfo => ((string)aggFxInfo.UseAsDefaultForType.ToLowerInvariant()).Contains(fieldInfo.DataType.ToLowerInvariant())).
+                                    ToList<AggFxInfo>();
+
+                                if (aggregateFunction.Count > 0 && aggregateFunction[0] is AggFxInfo)
+                                {
+                                    cmbSelectNumeratorAggregateFunction.SelectionChanged -= new System.Windows.Controls.SelectionChangedEventHandler(this.cmbNumeratorField_SelectionChanged);
+                                    cmbSelectNumeratorAggregateFunction.SelectedItem = aggregateFunction[0];
+                                    cmbSelectNumeratorAggregateFunction.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.cmbNumeratorField_SelectionChanged);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -754,25 +755,33 @@ namespace EpiDashboard.Controls.GadgetProperties
                     FieldInfo fieldInfo = (FieldInfo)control.SelectedItem;
                     Parameters.DenominatorField = fieldInfo.Name;
                     List<AggFxInfo> items = GetAggFxInfo(fieldInfo);
-                    if (cmbSelectDenominatorAggregateFunction.Items.Count != items.Count)
+
+                    if (cmbSelectDenominatorAggregateFunction.ItemsSource == null)
                     {
                         cmbSelectDenominatorAggregateFunction.ItemsSource = items;
-                        SetSelectedItem(cmbSelectDenominatorAggregateFunction, fieldInfo);
                     }
-                }
-            }
-        }
+                    else
+                    {
+                        if (cmbSelectDenominatorAggregateFunction.Items.Count != items.Count)
+                        {
+                            object currentDenominatorSelected = cmbSelectDenominatorAggregateFunction.SelectedItem;
+                            cmbSelectDenominatorAggregateFunction.ItemsSource = items;
 
-        private void SetSelectedItem(ComboBox combobox, FieldInfo fieldInfo)
-        {
-            if (false)
-            {
-                var aggregateFunction = combobox.Items.Cast<AggFxInfo>().
-                Where(aggFxInfo => ((string)aggFxInfo.UseAsDefaultForType.ToLowerInvariant()).Contains(fieldInfo.DataType.ToLowerInvariant())).
-                ToList<AggFxInfo>();
-                if (aggregateFunction.Count > 0 && aggregateFunction[0] is AggFxInfo)
-                {
-                    combobox.SelectedItem = aggregateFunction[0].Name;
+                            if (currentDenominatorSelected is AggFxInfo)
+                            {
+                                var aggregateFunction = cmbSelectDenominatorAggregateFunction.Items.Cast<AggFxInfo>().
+                                    Where(aggFxInfo => ((string)aggFxInfo.UseAsDefaultForType.ToLowerInvariant()).Contains(fieldInfo.DataType.ToLowerInvariant())).
+                                    ToList<AggFxInfo>();
+
+                                if (aggregateFunction.Count > 0 && aggregateFunction[0] is AggFxInfo)
+                                {
+                                    cmbSelectDenominatorAggregateFunction.SelectionChanged -= new System.Windows.Controls.SelectionChangedEventHandler(this.cmbDenominatorField_SelectionChanged);
+                                    cmbSelectDenominatorAggregateFunction.SelectedItem = aggregateFunction[0];
+                                    cmbSelectDenominatorAggregateFunction.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.cmbDenominatorField_SelectionChanged);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -783,7 +792,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (control.SelectedItem != null)
             {
                 if (control.SelectedItem is AggFxInfo && cmbSelectNumeratorAggregateFunction.SelectedItem != null)
-                { 
+                {
                     Parameters.NumeratorAggregator = (string)((AggFxInfo)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Keyword;
                     lblAggregateFunctionDefinition.Content = (string)((AggFxInfo)(cmbSelectNumeratorAggregateFunction.SelectedItem)).Description;
                 }
