@@ -315,7 +315,7 @@ namespace EpiDashboard
             }
             else
             {
-                dg.MaxHeight = 700;
+                dg.MaxHeight = 5000;
             }
 
             if (Parameters.Width.HasValue)
@@ -461,6 +461,7 @@ namespace EpiDashboard
                     {
                         outputRateTable.Columns.Add(((RatesParameters)Parameters).SecondaryGroupField);
                     }
+
                     DataRow newRow = outputRateTable.NewRow();
 
                     groupFields.RemoveAll(string.IsNullOrWhiteSpace);

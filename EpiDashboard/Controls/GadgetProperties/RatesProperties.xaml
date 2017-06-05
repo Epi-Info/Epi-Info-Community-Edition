@@ -170,19 +170,11 @@
                     <StackPanel>
                         <Label x:Name="tblockDimensions" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Dimensions__xfe</Label>
                         <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
-
                             <StackPanel Orientation="Vertical" Margin="0 20 0 0">
                                 <Label  VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
                                     <TextBlock x:Name="tblockMaxWidth" TextWrapping="Wrap">Max width:__xfe</TextBlock>                                    
                                 </Label>
                                 <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-                                <Label VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
-                                    <TextBlock x:Name="tblockMaxHeight" TextWrapping="Wrap">Max height:__xfe</TextBlock>
-                                </Label>
-                                <TextBox x:Name="txtMaxHeight" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="500" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown"  TextChanged="txtHeight_TextChanged"></TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Margin="0 20 0 0">
                                 <Label  VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
@@ -192,7 +184,6 @@
                             </StackPanel>
                         </WrapPanel>
                     </StackPanel>
-
                     <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options__xfe</Label>
                     <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
 
@@ -210,10 +201,7 @@
                             </ComboBox>
                         </StackPanel>
                     </WrapPanel>
-                    
-                    
                     <!-- VERT -->
-
                     <StackPanel Orientation="Horizontal" Margin="0 10 0 0" Visibility="Visible">
                         <Rectangle x:Name="rctColorDefault" HorizontalAlignment="Center" Margin="10 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
                         <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="defaultColorOption" Click="CheckBox_DefaultColor_Click"  IsChecked="True" Content="Use default color" HorizontalAlignment="Left" VerticalAlignment="Center" Margin=" 25,0,0,0" />
