@@ -678,6 +678,9 @@
     <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\Salmonellosis\Salmonellosis.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\Sample\Sample.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
