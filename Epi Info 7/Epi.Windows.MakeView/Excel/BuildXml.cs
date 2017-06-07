@@ -65,7 +65,7 @@ namespace Epi.Windows.MakeView.Excel
             else
             {
                 NewPage.Question = NewPage.Question;
-                NewPage.Variable_Name = "Text_" + NewPage.PageName;
+                NewPage.Variable_Name = "Text_" + NewPage.PageName.Replace(" ", "");
                 NewPage.Question_Type = 2;
                 FiledElement = AddControlXml(NewPage);
                 FiledElement.SetAttributeValue("ControlTopPositionPercentage",0.2);
