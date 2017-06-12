@@ -1147,6 +1147,15 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_OBSERVATIONS" xml:space="preserve">
     <value>Observations</value>
   </data>
+  <data name="CMENU_ADD_RATES" xml:space="preserve">   
+	  <value>Rates</value>   
+  </data>
+  <data name="GADGET_SPECIFY_ASSIGN_CONDITION" xml:space="preserve">   
+	  <value>Specify assign condition</value>   
+  </data>
+  <data name="GADGET_SPECIFY_ROW_FILTER" xml:space="preserve">   
+	  <value>Specify row filter</value>   
+  </data>
   <data name="GADGET_ONE_GRAPH_VALUE" xml:space="preserve">
     <value>One graph for each value of:</value>
   </data>
@@ -2194,13 +2203,55 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_VARIABLES_NUMERATOR" xml:space="preserve">
     <value>Numerator:</value>
   </data>
-  <data name="CMENU_ADD_RATES" xml:space="preserve">
-    <value>Rates</value>
+  <data name="AGGREGATE_COLON" xml:space="preserve">
+    <value>Aggregate:</value>
   </data>
-  <data name="GADGET_SPECIFY_ASSIGN_CONDITION" xml:space="preserve">
-    <value>Specify assign condition</value>
+  <data name="AND_WHERE" xml:space="preserve">
+    <value>And Where: (filter condition - optional)</value>
   </data>
-  <data name="GADGET_SPECIFY_ROW_FILTER" xml:space="preserve">
-    <value>Specify row filter</value>
+  <data name="AVERAGE" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="CREATE_RULES_TO_DEFINE_A_RATE" xml:space="preserve">
+    <value>Create rules to define a rate.</value>
+  </data>
+  <data name="DEFINE_RATE" xml:space="preserve">
+    <value>Define Rate</value>
+  </data>
+  <data name="DENOMINATOR_COLON" xml:space="preserve">
+    <value>Denominator:</value>
+  </data>
+  <data name="DISTINCT" xml:space="preserve">
+    <value>Distinct</value>
+  </data>
+  <data name="MAXIMUM" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="MINIMUM" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="OF_COLON" xml:space="preserve">
+    <value>of:</value>
+  </data>
+  <data name="PER" xml:space="preserve">
+    <value>PER</value>
+  </data>
+  <data name="STATISTICAL_STANDARD_DEVIATION" xml:space="preserve">
+    <value>Statistical Standard Deviation</value>
+  </data>
+  <data name="STATISTICAL_VARIANCE" xml:space="preserve">
+    <value>Statistical Variance</value>
+  </data>
+  <data name="SUM" xml:space="preserve">
+    <value>SUM</value>
+  </data>
+  <data name="RATE_MULTIPLIER_COLON" xml:space="preserve">
+    <value>Rate Multiplier:</value>
+  </data>
+  <data name="USE_DEFAULT_COLOR" xml:space="preserve">
+    <value>Use default color</value>
+  </data>
+  <data name="CREATE_EDIT_CONDITION" xml:space="preserve">
+    <value>Create/Edit Condition</value>
   </data>
 </root>
