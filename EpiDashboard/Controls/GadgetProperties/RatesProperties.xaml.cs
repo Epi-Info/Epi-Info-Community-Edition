@@ -115,9 +115,26 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
+            lblSelectNumeratorAggregateFunction.Content = DashboardSharedStrings.AGGREGATE_COLON; // Aggregate:
+            lblNumerator.Content = DashboardSharedStrings.OF_COLON; // of:
+            lblNumeratorWhere.Content = DashboardSharedStrings.AND_WHERE; // And Where: (filter condition - optional)
+            checkBoxNumberatorDistinct.Content = DashboardSharedStrings.DISTINCT; // Distinct
+            lblPER.Content = DashboardSharedStrings.PER; // PER
+            lblSelectDenominatorAggregateFunction.Content = DashboardSharedStrings.AGGREGATE_COLON; // Aggregate:
+            lblDenominator.Content = DashboardSharedStrings.OF_COLON; // of:
+            lblDenominatorWhere.Content = DashboardSharedStrings.AND_WHERE; // And Where: (filter condition - optional)
+            checkBoxDenominatorDistinct.Content = DashboardSharedStrings.DISTINCT; // Distinct
+            tblockVariableDenominator.Content = DashboardSharedStrings.DENOMINATOR_COLON; // Denominator:
+
+            lblRateMultiplier.Content = DashboardSharedStrings.RATE_MULTIPLIER_COLON; // Rate Multiplier:
+            defaultColorOption.Content = DashboardSharedStrings.USE_DEFAULT_COLOR; // Use default color
+
+            btnDenominatorRule.Content = DashboardSharedStrings.CREATE_EDIT_CONDITION; // Create/Edit Condition
+            btnNumeratorRule.Content = DashboardSharedStrings.CREATE_EDIT_CONDITION; // Create/Edit Condition
+
             lblConfigExpandedTitle.Content = DashboardSharedStrings.GADGET_CONFIG_TITLE_RATES;
-            tbtnVariables.Title = "Define Rate";
-            tbtnVariables.Description = "Create rules to define a rate.";
+            tbtnVariables.Title = DashboardSharedStrings.DEFINE_RATE; ;
+            tbtnVariables.Description = DashboardSharedStrings.CREATE_RULES_TO_DEFINE_A_RATE; // Create rules to define a rate.
             tbtnSorting.Title = DashboardSharedStrings.GADGET_TABBUTTON_SORTING;
             tbtnSorting.Description = DashboardSharedStrings.GADGET_TABDESC_SORTING;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
@@ -125,7 +142,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
 
-            tblockPanelVariables.Content = "Define Rate";
+            tblockPanelVariables.Content = DashboardSharedStrings.DEFINE_RATE; //"Define Rate";
             tblockPanelDisplay.Content = DashboardSharedStrings.GADGET_PANELHEADER_DISPLAY;
             tblockPanelSorting.Content = DashboardSharedStrings.GADGET_PANELHEADER_SORTING;
             tblockPanelDataFilter.Content = DashboardSharedStrings.GADGET_PANELHEADER_DATA_FILTER;
@@ -690,17 +707,17 @@ namespace EpiDashboard.Controls.GadgetProperties
             string dataType = fieldInfo.DataType.ToLowerInvariant();
             if (dataType == "string" || dataType == "boolean" || dataType == "datetime")
             {
-                items.Add(new AggFxInfo("Count", "count", "string,boolean,datetime", "Returns the number of all the values in the field. COUNT can be used with numeric, text, and boolean columns. Null values are ignored."));
+                items.Add(new AggFxInfo(DashboardSharedStrings.COUNT, "count", "string,boolean,datetime", "Returns the number of all the values in the field. COUNT can be used with numeric, text, and boolean columns. Null values are ignored."));
             }
             else
             {
-                items.Add(new AggFxInfo("Count", "count", "int,double,decimal,string,boolean,datetime", "Returns the number of all the values in the field. COUNT can be used with numeric, text, and boolean columns. Null values are ignored."));
-                items.Add(new AggFxInfo("Sum", "sum", "int,double,decimal", "Returns the sum of all the values in the field. SUM can be used with numeric columns only. Null values are ignored."));
-                items.Add(new AggFxInfo("Average", "avg", "int,double,decimal", ""));
-                items.Add(new AggFxInfo("Minimum", "min", "int,double,decimal", ""));
-                items.Add(new AggFxInfo("Maximum", "max", "int,double,decimal", ""));
-                items.Add(new AggFxInfo("Statistical Standard Eviation", "int,double,decimal", "stdev", ""));
-                items.Add(new AggFxInfo("Statistical Variance", "var", "int,double,decimal", ""));
+                items.Add(new AggFxInfo(DashboardSharedStrings.COUNT, "count", "int,double,decimal,string,boolean,datetime", "Returns the number of all the values in the field. COUNT can be used with numeric, text, and boolean columns. Null values are ignored."));
+                items.Add(new AggFxInfo(DashboardSharedStrings.SUM, "sum", "int,double,decimal", "Returns the sum of all the values in the field. SUM can be used with numeric columns only. Null values are ignored."));
+                items.Add(new AggFxInfo(DashboardSharedStrings.AVERAGE, "avg", "int,double,decimal", ""));
+                items.Add(new AggFxInfo(DashboardSharedStrings.MINIMUM, "min", "int,double,decimal", ""));
+                items.Add(new AggFxInfo(DashboardSharedStrings.MAXIMUM, "max", "int,double,decimal", ""));
+                //items.Add(new AggFxInfo(DashboardSharedStrings.STATISTICAL_STANDARD_DEVIATION, "int,double,decimal", "stdev", ""));
+                //items.Add(new AggFxInfo(DashboardSharedStrings.STATISTICAL_VARIANCE, "var", "int,double,decimal", ""));
             }
 
             return items;

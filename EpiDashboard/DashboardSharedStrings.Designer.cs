@@ -61,6 +61,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aggregate:.
+        /// </summary>
+        public static string AGGREGATE_COLON {
+            get {
+                return ResourceManager.GetString("AGGREGATE_COLON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alert.
         /// </summary>
         public static string ALERT {
@@ -75,6 +84,24 @@ namespace EpiDashboard {
         public static string AND {
             get {
                 return ResourceManager.GetString("AND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to And Where: (filter condition - optional).
+        /// </summary>
+        public static string AND_WHERE {
+            get {
+                return ResourceManager.GetString("AND_WHERE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average.
+        /// </summary>
+        public static string AVERAGE {
+            get {
+                return ResourceManager.GetString("AVERAGE", resourceCulture);
             }
         }
         
@@ -1177,6 +1204,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create/Edit Condition.
+        /// </summary>
+        public static string CREATE_EDIT_CONDITION {
+            get {
+                return ResourceManager.GetString("CREATE_EDIT_CONDITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create rules to define a rate..
+        /// </summary>
+        public static string CREATE_RULES_TO_DEFINE_A_RATE {
+            get {
+                return ResourceManager.GetString("CREATE_RULES_TO_DEFINE_A_RATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A field with this name already exists..
         /// </summary>
         public static string CREATE_VAR_GROUP_FIELD_ALREADY_EXISTS {
@@ -1402,6 +1447,24 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Define Rate.
+        /// </summary>
+        public static string DEFINE_RATE {
+            get {
+                return ResourceManager.GetString("DEFINE_RATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Denominator:.
+        /// </summary>
+        public static string DENOMINATOR_COLON {
+            get {
+                return ResourceManager.GetString("DENOMINATOR_COLON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fields are boolean.
         ///Denominator = {0}.
         /// </summary>
@@ -1418,6 +1481,15 @@ namespace EpiDashboard {
         public static string DENOMINATOR_DESCRIPTION_NON_BOOLEAN {
             get {
                 return ResourceManager.GetString("DENOMINATOR_DESCRIPTION_NON_BOOLEAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distinct.
+        /// </summary>
+        public static string DISTINCT {
+            get {
+                return ResourceManager.GetString("DISTINCT", resourceCulture);
             }
         }
         
@@ -5523,6 +5595,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum.
+        /// </summary>
+        public static string MAXIMUM {
+            get {
+                return ResourceManager.GetString("MAXIMUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Base Layer.
         /// </summary>
         public static string MENU_ADD_BASELAYER {
@@ -5793,6 +5874,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimum.
+        /// </summary>
+        public static string MINIMUM {
+            get {
+                return ResourceManager.GetString("MINIMUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The current canvas was saved to file {0}..
         /// </summary>
         public static string NOTIFICATION_CANVAS_SAVE {
@@ -5802,11 +5892,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to of:.
+        /// </summary>
+        public static string OF_COLON {
+            get {
+                return ResourceManager.GetString("OF_COLON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Output has been saved..
         /// </summary>
         public static string OUTPUT_SAVED {
             get {
                 return ResourceManager.GetString("OUTPUT_SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PER.
+        /// </summary>
+        public static string PER {
+            get {
+                return ResourceManager.GetString("PER", resourceCulture);
             }
         }
         
@@ -5874,6 +5982,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rate Multiplier:.
+        /// </summary>
+        public static string RATE_MULTIPLIER_COLON {
+            get {
+                return ResourceManager.GetString("RATE_MULTIPLIER_COLON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Records: {0}).
         /// </summary>
         public static string RECORD_COUNT {
@@ -5915,6 +6032,33 @@ namespace EpiDashboard {
         public static string SAVE_SUCCESSFUL {
             get {
                 return ResourceManager.GetString("SAVE_SUCCESSFUL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistical Standard Deviation.
+        /// </summary>
+        public static string STATISTICAL_STANDARD_DEVIATION {
+            get {
+                return ResourceManager.GetString("STATISTICAL_STANDARD_DEVIATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistical Variance.
+        /// </summary>
+        public static string STATISTICAL_VARIANCE {
+            get {
+                return ResourceManager.GetString("STATISTICAL_VARIANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SUM.
+        /// </summary>
+        public static string SUM {
+            get {
+                return ResourceManager.GetString("SUM", resourceCulture);
             }
         }
         
@@ -6113,6 +6257,15 @@ namespace EpiDashboard {
         public static string TOOLTIP_SWAP_OUTCOME {
             get {
                 return ResourceManager.GetString("TOOLTIP_SWAP_OUTCOME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use default color.
+        /// </summary>
+        public static string USE_DEFAULT_COLOR {
+            get {
+                return ResourceManager.GetString("USE_DEFAULT_COLOR", resourceCulture);
             }
         }
         
