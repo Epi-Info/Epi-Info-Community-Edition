@@ -61,11 +61,11 @@ namespace EpiDashboard.Dialogs
                 this.mode = value;
                 if (Mode == FilterDialogMode.RowFilterMode)
                 {
-                    this.Text = "Specify row filter";
+                    this.Text = DashboardSharedStrings.GADGET_SPECIFY_ROW_FILTER;  //"Specify row filter";
                 }
                 else if (Mode == FilterDialogMode.ConditionalMode)
                 {
-                    this.Text = "Specify assign condition";
+                    this.Text = DashboardSharedStrings.GADGET_SPECIFY_ASSIGN_CONDITION;  //"Specify assign condition";
                 }
             }
         }
