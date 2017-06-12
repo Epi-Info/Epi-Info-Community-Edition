@@ -346,6 +346,7 @@ namespace EpiDashboard
             mnuReset.Header = DashboardSharedStrings.CMENU_RESET;
 
             mnuLineList.Header = DashboardSharedStrings.CMENU_ADD_LINE_LIST;
+            mnuRates.Header = DashboardSharedStrings.CMENU_ADD_RATES;
             mnuFrequency.Header = DashboardSharedStrings.CMENU_ADD_FREQUENCY;
             mnuCombinedFrequency.Header = DashboardSharedStrings.CMENU_ADD_COMBINED_FREQUENCY;
             mnuWordCloud.Header = DashboardSharedStrings.CMENU_ADD_WORD_CLOUD;

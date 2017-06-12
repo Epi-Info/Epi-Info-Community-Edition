@@ -2194,4 +2194,13 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_VARIABLES_NUMERATOR" xml:space="preserve">
     <value>Numerator:</value>
   </data>
+  <data name="CMENU_ADD_RATES" xml:space="preserve">
+    <value>Rates</value>
+  </data>
+  <data name="GADGET_SPECIFY_ASSIGN_CONDITION" xml:space="preserve">
+    <value>Specify assign condition</value>
+  </data>
+  <data name="GADGET_SPECIFY_ROW_FILTER" xml:space="preserve">
+    <value>Specify row filter</value>
+  </data>
 </root>

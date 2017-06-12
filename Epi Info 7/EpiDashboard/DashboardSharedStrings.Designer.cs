@@ -601,6 +601,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rates.
+        /// </summary>
+        public static string CMENU_ADD_RATES {
+            get {
+                return ResourceManager.GetString("CMENU_ADD_RATES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add related data source....
         /// </summary>
         public static string CMENU_ADD_RELATED_DATA {
@@ -4488,11 +4497,29 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify assign condition.
+        /// </summary>
+        public static string GADGET_SPECIFY_ASSIGN_CONDITION {
+            get {
+                return ResourceManager.GetString("GADGET_SPECIFY_ASSIGN_CONDITION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specify the values for Exposure and Outcome as Yes or No..
         /// </summary>
         public static string GADGET_SPECIFY_EXPOSURE_OUTCOME {
             get {
                 return ResourceManager.GetString("GADGET_SPECIFY_EXPOSURE_OUTCOME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify row filter.
+        /// </summary>
+        public static string GADGET_SPECIFY_ROW_FILTER {
+            get {
+                return ResourceManager.GetString("GADGET_SPECIFY_ROW_FILTER", resourceCulture);
             }
         }
         

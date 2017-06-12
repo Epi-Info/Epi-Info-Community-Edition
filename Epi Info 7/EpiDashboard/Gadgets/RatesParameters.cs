@@ -92,7 +92,7 @@ namespace EpiDashboard
             PrimaryGroupField = String.Empty;
             SecondaryGroupField = String.Empty;
             RateMultiplierString = "100";
-            GadgetTitle = "Rates";
+            GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_RATES;  //"Rates";
             UseDefaultColor = true;
 
             Color_L1 = "#FF1A237E"; // GOOGLE MATERIAL DESIGN INDEGO 900
