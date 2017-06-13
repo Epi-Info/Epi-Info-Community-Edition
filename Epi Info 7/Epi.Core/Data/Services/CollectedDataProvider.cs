@@ -26,7 +26,8 @@ namespace Epi.Data.Services
     {
         private BackgroundWorker saveResponseWorker;
         protected object syncLock = new object();
-
+        protected object updateLock = new object();
+  
         private bool isWebMode;
 
         public bool IsWebMode
@@ -245,41 +246,47 @@ namespace Epi.Data.Services
 
             if(passedCountCheck == false)
             {
-                Query masterGuidQuery = dbDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + view.TableName + "] ");
-                IDataReader reader = dbDriver.ExecuteReader(masterGuidQuery);
-
-                while (reader.Read())
+                lock (updateLock)
                 {
-                    string recordId = reader[0].ToString();
-
-                    foreach (Page page in view.Pages)
+                    Query masterGuidQuery = dbDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + view.TableName + "] ");
+                    IDataReader reader = dbDriver.ExecuteReader(masterGuidQuery);
+                    
+                    List<string> allGuids = new List<string>();
+                    while (reader.Read())
                     {
-                        StringBuilder sb = new StringBuilder();
+                        allGuids.Add(reader[0].ToString());
+                    }
 
-                        sb.Append(SqlKeyWords.WHERE);
-                        sb.Append(StringLiterals.SPACE);
-                        sb.Append(dbDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
-                        sb.Append(StringLiterals.EQUAL);
-                        sb.Append("'");
-                        sb.Append(recordId);
-                        sb.Append("'");
-                        string whereClause = sb.ToString();
-
-                        Query hasQuery = dbDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + page.TableName + "] " + whereClause);
-                        IDataReader hasReader = dbDriver.ExecuteReader(hasQuery);
-                        bool hasRow = hasReader.Read();
-
-                        if (hasRow == false)
+                    foreach (string recordId in allGuids)
+                    {
+                        foreach (Page page in view.Pages)
                         {
-                            StringBuilder insert = new StringBuilder();
-                            insert.Append("INSERT INTO [");
-                            insert.Append(page.TableName);
-                            insert.Append("] ([GlobalRecordId]) VALUES ('");
-                            insert.Append(recordId);
-                            insert.Append("')");
+                            StringBuilder sb = new StringBuilder();
 
-                            Query insertQuery = dbDriver.CreateQuery(insert.ToString());
-                            object obj = dbDriver.ExecuteNonQuery(insertQuery);
+                            sb.Append(SqlKeyWords.WHERE);
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append(dbDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
+                            sb.Append(StringLiterals.EQUAL);
+                            sb.Append("'");
+                            sb.Append(recordId);
+                            sb.Append("'");
+                            string whereClause = sb.ToString();
+
+                            Query hasQuery = dbDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + page.TableName + "] " + whereClause);
+                            object count = dbDriver.ExecuteScalar(hasQuery);
+
+                            if (count == null)
+                            {
+                                StringBuilder insert = new StringBuilder();
+                                insert.Append("INSERT INTO [");
+                                insert.Append(page.TableName);
+                                insert.Append("] ([GlobalRecordId]) VALUES ('");
+                                insert.Append(recordId);
+                                insert.Append("')");
+
+                                Query insertQuery = dbDriver.CreateQuery(insert.ToString());
+                                dbDriver.ExecuteNonQuery(insertQuery);
+                            }
                         }
                     }
                 }
