@@ -34,7 +34,7 @@ namespace Epi.Windows.Enter.PresentationLogic
         private BackgroundWorker _callUpdateRecStatusServiceWorker;
 
         private bool IsClosingRelatedView = false;
-
+        protected object updateLock = new object();
 
         public void Subscribe(EnterMainForm enterMainForm, ViewExplorer viewExplorer, Canvas canvas, LinkedRecordsViewer linkedRecordsViewer)
         {
@@ -112,6 +112,11 @@ namespace Epi.Windows.Enter.PresentationLogic
                 this.view = this.EnterCheckCodeEngine.CurrentView.View;
                 this.view.ReturnToParent = e.View.ReturnToParent;
 
+                lock(updateLock)
+                {
+                    view.GetProject().CollectedData.UpdateCheck_CollectedData(view);
+                }
+
                 this.mainForm.OpenView(this.view);
                 this.viewExplorer.LoadView(this.EnterCheckCodeEngine.CurrentView);
                 this.canvas.CurrentView = this.view;
@@ -128,11 +133,9 @@ namespace Epi.Windows.Enter.PresentationLogic
                 {
                     this.EnterCheckCodeEngine.CheckCodeHandler(this, new RunCheckCodeEventArgs(EventActionEnum.OpenRecord, e.RecordNumber));
                 }
-                this.CurrentRecordId = this.EnterCheckCodeEngine.CurrentView.CurrentRecordNumber;  
+                this.CurrentRecordId = this.EnterCheckCodeEngine.CurrentView.CurrentRecordNumber;
 
                 this.OpenPageHandler(sender, new PageSelectedEventArgs(this.view.Pages[0]));
-
-                view.GetProject().CollectedData.UpdateCheck_CollectedData(view);
 
                 IsDirty = false;
             }
