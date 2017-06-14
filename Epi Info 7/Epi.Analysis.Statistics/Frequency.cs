@@ -460,7 +460,7 @@ namespace Epi.Analysis.Statistics
                         HTMLString.Append(ConvertToPercent(AccumulatedTotal / Total));
                         HTMLString.Append("</td><td><div class=PercentBar_Summary style=\"width:" + ConvertToPixelLength(currrentCount / Total) + "\">&nbsp;</div></td>");
                         HTMLString.Append("</tr>");
-                        confLimits.Add(GetConfLimit(GetPrintValue(Key.Key,R["value"], config), (int)currrentCount, (int)Total));
+                        confLimits.Add(GetConfLimit(GetPrintValue(Key.Key,R["value"], config), (float)currrentCount, (float)Total));
                     }
 
                     mean = Sum / n;
@@ -500,6 +500,40 @@ namespace Epi.Analysis.Statistics
         }
 
         private ConfLimit GetConfLimit(string value, int frequency, int count)
+        {
+            StatisticsRepository.cFreq freq = new StatisticsRepository.cFreq();
+            double lower = 0;
+            double upper = 0;
+            if (frequency == count)
+            {
+                lower = 1;
+                upper = 1;
+                if (count < 300)
+                {
+                    lower = 0;
+                    freq.ExactCI(frequency, (double)count, 95.0, ref lower, ref upper);
+                    upper = 1;
+                }
+            }
+            else
+            {
+                if (count >= 300)
+                {
+                    freq.WILSON(frequency, (double)count, 1.96, ref lower, ref upper);
+                }
+                else
+                {
+                    freq.ExactCI(frequency, (double)count, 95.0, ref lower, ref upper);
+                }
+            }
+            ConfLimit cl = new ConfLimit();
+            cl.Lower = lower;
+            cl.Upper = upper;
+            cl.Value = value;
+            return cl;
+        }
+
+        private ConfLimit GetConfLimit(string value, float frequency, float count)
         {
             StatisticsRepository.cFreq freq = new StatisticsRepository.cFreq();
             double lower = 0;
