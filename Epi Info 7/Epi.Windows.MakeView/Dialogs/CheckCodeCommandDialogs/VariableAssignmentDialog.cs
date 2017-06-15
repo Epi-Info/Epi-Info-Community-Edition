@@ -569,6 +569,19 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
 
             //===================================================================
             ToolStripMenuItem mnuSys = new ToolStripMenuItem(SharedStrings.CNTXT_FXN_SYSFXN);
+
+            ToolStripMenuItem mnuSYSALTITUDE = new ToolStripMenuItem(CommandNames.SYSTEMDATE);
+            mnuSYSALTITUDE.ToolTipText = CommandNames.SYSTEMDATE;
+            mnuSYSALTITUDE.Click += new EventHandler(FXClickHandler);
+
+            ToolStripMenuItem mnuSYSLATITUDE = new ToolStripMenuItem(CommandNames.SYSLATITUDE);
+            mnuSYSLATITUDE.ToolTipText = CommandNames.SYSLATITUDE;
+            mnuSYSLATITUDE.Click += new EventHandler(FXClickHandler);
+
+            ToolStripMenuItem mnuSYSLONGITUDE = new ToolStripMenuItem(CommandNames.SYSLONGITUDE);
+            mnuSYSLONGITUDE.ToolTipText = CommandNames.SYSLONGITUDE;
+            mnuSYSLONGITUDE.Click += new EventHandler(FXClickHandler);
+
             ToolStripMenuItem mnuSYSTEMDATE = new ToolStripMenuItem(CommandNames.SYSTEMDATE);
             mnuSYSTEMDATE.ToolTipText = CommandNames.SYSTEMDATE;
             mnuSYSTEMDATE.Click += new EventHandler(FXClickHandler);

@@ -566,6 +566,10 @@ namespace Epi
         /// </summary>
         public const string SYSBARCODE = "SYSBARCODE";
         /// <summary>
+        /// SYSALTITUDE system function
+        /// </summary>
+        public const string SYSALTITUDE = "SYSALTITUDE";
+        /// <summary>
         /// SYSLATITUDE system function
         /// </summary>
         public const string SYSLATITUDE = "SYSLATITUDE";

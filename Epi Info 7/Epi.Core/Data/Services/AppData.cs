@@ -829,6 +829,7 @@ namespace Epi.Data.Services
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"SYSTEM_USER", @"B");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"SYSTEMDATE", @"A");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"SYSTEMTIME", @"A");
+                    reservedWordsDataTable.AddReservedWordsRow(index++, @"SYSALTITUDE", @"A");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"SYSLATITUDE", @"A");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"SYSLONGITUDE", @"A");
                     reservedWordsDataTable.AddReservedWordsRow(index++, @"SYSBARCODE", @"A");
