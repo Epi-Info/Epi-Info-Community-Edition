@@ -176,6 +176,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "SYSLONGITUDE":
                         functionCall = new Rule_SystemLongitude(pContext, T);
                         break;
+                    case "SYSALTITUDE":
+                        functionCall = new Rule_SystemAltitude(pContext, T);
+                        break;
                     case "SYSTEMDATE":
                         functionCall = new Rule_SystemDate(pContext, T);
                         break;

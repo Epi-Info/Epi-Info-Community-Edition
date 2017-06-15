@@ -318,6 +318,10 @@ namespace Epi.Windows.MakeView.Dialogs
             mnuSYSBARCODE.ToolTipText = CommandNames.SYSBARCODE;
             mnuSYSBARCODE.Click += new EventHandler(FXClickHandler);
 
+            ToolStripMenuItem mnuSYSALTITUDE = new ToolStripMenuItem(CommandNames.SYSALTITUDE);
+            mnuSYSALTITUDE.ToolTipText = CommandNames.SYSALTITUDE;
+            mnuSYSALTITUDE.Click += new EventHandler(FXClickHandler);
+
             ToolStripMenuItem mnuSYSLATITUDE = new ToolStripMenuItem(CommandNames.SYSLATITUDE);
             mnuSYSLATITUDE.ToolTipText = CommandNames.SYSLATITUDE;
             mnuSYSLATITUDE.Click += new EventHandler(FXClickHandler);
@@ -526,7 +530,7 @@ namespace Epi.Windows.MakeView.Dialogs
             mnuBools.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuAND, mnuOR, mnuXOR, mnuNOT });
             mnuNums.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuABS, mnuEXP, mnuLN, mnuLOG, mnuNTD, mnuNTT, mnuRECORDCOUNT, mnuRND, mnuROUND, mnuSTEP, mnuSIN, mnuCOS, mnuTAN, mnuTRUNC, mnuPFROMZ, mnuZSCORE });
             mnuDates.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuYRS, mnuMOS, mnuDYS, mnuYR, mnuMO, mnuDY, mnuEpiWeek });
-            mnuSys.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuCurrUser, mnuEXISTS, mnuFILEDATE, mnuSYSBARCODE, mnuSYSLATITUDE, mnuSYSLONGITUDE, mnuSYSTEMDATE, mnuSYSTEMTIME, mnuFIRSTSAVETIME, mnuLASTSAVETIME });
+            mnuSys.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuCurrUser, mnuEXISTS, mnuFILEDATE, mnuSYSBARCODE, mnuSYSALTITUDE, mnuSYSALTITUDE, mnuSYSLATITUDE, mnuSYSLONGITUDE, mnuSYSTEMDATE, mnuSYSTEMTIME, mnuFIRSTSAVETIME, mnuLASTSAVETIME });
             mnuTimes.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuHOURS, mnuMINUTES, mnuSECONDS, mnuHOUR, mnuMINUTE, mnuSECOND });
             mnuTxts.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuFINDTEXT, mnuFORMAT, mnuLINEBREAK, mnuSTRLEN, mnuSUBSTRING, mnuTXTTONUM, mnuTXTTODATE, mnuUPPERCASE });
 
