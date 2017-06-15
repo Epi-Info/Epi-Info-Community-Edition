@@ -258,7 +258,7 @@ namespace Epi.Windows.Enter
                             if (item is String)
                             {
                                 string[] parts = ((String)item).Split('-');
-                                if (val == parts[0])
+                                if (val == parts[0].Trim())
                                 {
                                     ((ComboBox)control).Text = ((String)item);
                                     ((ComboBox)control).SelectedIndex = ((ComboBox)control).FindString(((String)item));
