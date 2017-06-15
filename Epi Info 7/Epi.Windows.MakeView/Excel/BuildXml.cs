@@ -227,7 +227,7 @@ namespace Epi.Windows.MakeView.Excel
                 SourceTableXml.Load(SourceTableXmlpath);
                 XDocument XSourceTable = ToXDocument(SourceTableXml);
                 XElement SourceTableElement = XSourceTable.XPathSelectElement("SourceTable");
-                SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.Variable_Name);
+                SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.List_Values[0]);
                 var TableName = SourceTableElement.Attribute("TableName").Value;
                 FiledElement.SetAttributeValue("SourceTableName", TableName);
                 FiledElement.SetAttributeValue("CodeColumnName", NewPage.Variable_Name);
