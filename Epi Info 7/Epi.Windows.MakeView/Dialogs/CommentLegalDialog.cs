@@ -287,7 +287,7 @@ namespace Epi.Windows.MakeView.Dialogs
         private bool CheckForHyphens()
         {
             bool isValidated;
-            Regex commentLegalCheck = new Regex(@"^[0-9a-zA-Z]+(\s)*(-){1}");
+            Regex commentLegalCheck = new Regex(@"^[0-9a-zA-Z:]+(\s)*(-){1}");
 
             codeTable = (DataTable)dgCodes.DataSource;
 
