@@ -120,6 +120,7 @@ Public Class ComplexSampleTables
         Public Value As String
         Public Domain As String
         Public Count As Double
+        Public WeightedCount As Double
         Public RowPercent As Double
         Public ColPercent As Double
         Public SE As Double
@@ -246,6 +247,7 @@ Public Class ComplexSampleTables
             fRow.Value = vntOutTable(i, 0)
             fRow.Domain = vntOutTable(i, 1)
             fRow.Count = vntOutTable(i, 2)
+            fRow.WeightedCount = vntOutTable(i, 9)
             fRow.RowPercent = vntOutTable(i, 3)
             fRow.ColPercent = vntOutTable(i, 4)
             fRow.SE = vntOutTable(i, 5)
@@ -1456,7 +1458,7 @@ ErrorHandler:
             '
             ' Dimension the results array and populate the values.
             '
-            ReDim vntOutTable(nRows - 1, 8)
+            ReDim vntOutTable(nRows - 1, 9)
 
             Pd = FirstDom
             nCurrentRow = 0 '1
@@ -1470,6 +1472,7 @@ ErrorHandler:
                     vntOutTable(nCurrentRow, 1) = Nothing
 
                     vntOutTable(nCurrentRow, 2) = P.N
+                    vntOutTable(nCurrentRow, 9) = P.YE
 
                     If nDom = 1 Then ' Only have the Totals to display.  Switch Row/Col and make Row % = 100%
 
@@ -1957,6 +1960,11 @@ ErrorHandler:
             If (Not Pc Is Nothing) Then
                 AddToOutput("<TD ALIGN=""right"">")
                 AddToOutput(VB6.Format(Pc.N, "0"))
+                If Pc.N <> Pc.YE Then
+                    AddToOutput(" (")
+                    AddToOutput(VB6.Format(Pc.YE, "0"))
+                    AddToOutput(")")
+                End If
                 AddToOutput("</TD>")
             Else
                 Pc = Pd.FirstCat
@@ -1964,10 +1972,20 @@ ErrorHandler:
                     AddToOutput("<TD ALIGN=""right"">")
                     AddToOutput(VB6.Format(Pc.N, "0"))
                     AddToOutput("</TD>")
+                    If Pc.N <> Pc.YE Then
+                        AddToOutput(" (")
+                        AddToOutput(VB6.Format(Pc.YE, "0"))
+                        AddToOutput(")")
+                    End If
                     Pc = Pc.NextCat
                 End While
                 AddToOutput("<TD ALIGN=""right"">")
                 AddToOutput(VB6.Format(Pd.N, "0"))
+                If Pd.N <> Pd.SumW Then
+                    AddToOutput(" (")
+                    AddToOutput(VB6.Format(Pd.SumW, "0"))
+                    AddToOutput(")")
+                End If
                 AddToOutput("</TD>")
             End If
 
@@ -2789,14 +2807,18 @@ ErrorHandler:
 
                 AddToOutput("<TR>")
                 AddToOutput("<TD ALIGN=""left""><B><TLT>TOTAL</TLT></B></TD>")
-                AddToOutput("<TD ALIGN=""right"">" & VB6.Format(TotalDom.N, "0") & "</TD>")
-                AddToOutput("</TR>")
+                AddToOutput("<TD ALIGN=""right"">" & VB6.Format(TotalDom.N, "0") & "")
+                If TotalDom.N <> TotalDom.SumW Then
+                    AddToOutput(" (")
+                    AddToOutput(VB6.Format(TotalDom.SumW, "0") & ")")
+                End If
+                AddToOutput("</TD></TR>")
 
                 If cnOutputLevel > 2 Then
                     AddToOutput("<TR>")
                     AddToOutput("<TD ALIGN=""right"">&nbsp;<TLT>Design Effect</TLT></TD>")
                     'UPGRADE_WARNING: Couldn't resolve default property of object DesignEffect(). Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6A50421D-15FE-4896-8A1B-2EC21E9037B2"'
-                    AddToOutput("<TD ALIGN=""right"">" & VB6.Format(DesignEffect(Pd), "0.000") & "</TD>")
+                    AddToOutput("<TD ALIGN=""right"">" & VB6.Format(DesignEffect(Pd), "0.00") & "</TD>")
                     AddToOutput("</TR>")
                 End If
 
