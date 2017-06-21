@@ -753,6 +753,7 @@ namespace EpiDashboard
             grid.Children.Add(txtTotalHeader);
 
             double runningTotal = 0;
+            double runningWeightedTotal = 0;
 
             // Grid rows
             foreach (StatisticsRepository.ComplexSampleTables.CSRow fRow in results.Rows)
@@ -769,7 +770,10 @@ namespace EpiDashboard
                 grid.Children.Add(txtValueLabel);
 
                 TextBlock txtValue = new TextBlock();
-                txtValue.Text = fRow.Count.ToString();
+                if (fRow.Count != fRow.WeightedCount)
+                    txtValue.Text = fRow.Count.ToString() + " (" + Math.Round(fRow.WeightedCount).ToString() + ")";
+                else
+                    txtValue.Text = fRow.Count.ToString();
                 txtValue.Margin = (Thickness)this.Resources["genericTextMargin"];
                 txtValue.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                 Grid.SetRow(txtValue, grid.RowDefinitions.Count - 1);
@@ -867,6 +871,7 @@ namespace EpiDashboard
                 grid.Children.Add(txtUCLPercent);
 
                 runningTotal = runningTotal + fRow.Count;
+                runningWeightedTotal = runningWeightedTotal + fRow.WeightedCount;
             }
 
             // Setup grid footer
@@ -885,7 +890,10 @@ namespace EpiDashboard
             grid.Children.Add(txtTotalFooter);
 
             TextBlock txtTotalFooterValue = new TextBlock();
-            txtTotalFooterValue.Text = runningTotal.ToString();
+            if (runningTotal != runningWeightedTotal)
+                txtTotalFooterValue.Text = runningTotal.ToString() + " (" + Math.Round(runningWeightedTotal).ToString() + ")";
+            else
+                txtTotalFooterValue.Text = runningTotal.ToString();
             txtTotalFooterValue.Margin = (Thickness)this.Resources["genericTextMargin"];
             txtTotalFooterValue.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             Grid.SetRow(txtTotalFooterValue, grid.RowDefinitions.Count - 2);
