@@ -156,7 +156,7 @@ namespace Epi.Windows.MakeView.Excel
             XDocument XSourceTable = ToXDocument(SourceTableXml);
             XElement SourceTableElement = XSourceTable.XPathSelectElement("SourceTable");
 
-            SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.List_Values[0]);
+            SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.Variable_Name);
             for (int i = 1; NewPage.List_Values.Count() > i; i++)
             {
                 XElement ItemElement = new XElement("Item");
@@ -227,7 +227,7 @@ namespace Epi.Windows.MakeView.Excel
                 SourceTableXml.Load(SourceTableXmlpath);
                 XDocument XSourceTable = ToXDocument(SourceTableXml);
                 XElement SourceTableElement = XSourceTable.XPathSelectElement("SourceTable");
-                SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.List_Values[0]);
+                SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.Variable_Name);
                 var TableName = SourceTableElement.Attribute("TableName").Value;
                 FiledElement.SetAttributeValue("SourceTableName", TableName);
                 FiledElement.SetAttributeValue("CodeColumnName", NewPage.Variable_Name);
