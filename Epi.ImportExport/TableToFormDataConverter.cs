@@ -496,16 +496,16 @@ namespace Epi.ImportExport
                         bool success = double.TryParse(value.ToString(), out dValue);
                         if (success)
                         {
-                            return new QueryParameter("@" + fieldName, DbType.Single, dValue);
+                            return new QueryParameter("@" + fieldName, DbType.Double, dValue);
                         }
                         else
                         {
-                            return new QueryParameter("@" + fieldName, DbType.Single, DBNull.Value);
+                            return new QueryParameter("@" + fieldName, DbType.Double, DBNull.Value);
                         }
                     }
                     else
                     {
-                        return new QueryParameter("@" + fieldName, DbType.Single, value);
+                        return new QueryParameter("@" + fieldName, DbType.Double, value);
                     }                    
                 default:
                     throw new ApplicationException("Invalid field type");

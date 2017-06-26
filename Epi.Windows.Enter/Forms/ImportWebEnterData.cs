@@ -332,17 +332,19 @@ namespace Epi.Enter.Forms
                     case MetaFieldType.ForeignKey:
                     case MetaFieldType.GlobalRecordId:
                         if (fieldData.FieldValue.ToString().Length > 255)
-                            {
+                        {
                             fieldData.FieldValue = fieldData.FieldValue.ToString().Substring(0, 255);
                             AddStatusMessage(SharedStrings.IMPORT_ERROR_WE_EXCEEDS_LENGTH + " " + fieldData.FieldName + "; " + fieldData.RecordGUID);
-                            }
+                        }
                         return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.Multiline:
                         return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                     case MetaFieldType.Number:
-                       // return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                        // return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
                         if (string.IsNullOrEmpty(fieldData.FieldValue.ToString()))
-                            return new QueryParameter("@" + fieldName, DbType.Int32, DBNull.Value);
+                        {
+                            return new QueryParameter("@" + fieldName, DbType.Double, DBNull.Value);
+                        }
                         else
                         {
                             if (fieldData.FieldValue.ToString().Contains("."))
@@ -350,7 +352,9 @@ namespace Epi.Enter.Forms
                                 return new QueryParameter("@" + fieldName, DbType.Double, Convert.ToDecimal(fieldData.FieldValue, CultureInfo.InvariantCulture));
                             }
                             else
-                                return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                            {
+                                return new QueryParameter("@" + fieldName, DbType.Double, fieldData.FieldValue);
+                            }
                         }
                     case MetaFieldType.YesNo:
                     case MetaFieldType.RecStatus:
