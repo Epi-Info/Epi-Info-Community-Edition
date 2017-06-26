@@ -993,8 +993,10 @@ namespace Epi.ImportExport
                                                 case MetaFieldType.ForeignKey:
                                                 case MetaFieldType.GlobalRecordId:
                                                 case MetaFieldType.Multiline:
-                                                case MetaFieldType.Number:
                                                     fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.String, sourceReader[renderableField.Name]));
+                                                    break;
+                                                case MetaFieldType.Number:
+                                                    fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.Double, sourceReader[renderableField.Name]));
                                                     break;
                                                 case MetaFieldType.RecStatus:
                                                 case MetaFieldType.YesNo:
@@ -1130,8 +1132,10 @@ namespace Epi.ImportExport
                                                 case MetaFieldType.ForeignKey:
                                                 case MetaFieldType.GlobalRecordId:
                                                 case MetaFieldType.Multiline:
-                                                case MetaFieldType.Number:
                                                     fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.String, sourceReader[fieldName]));
+                                                    break;
+                                                case MetaFieldType.Number:
+                                                    fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.Double, sourceReader[fieldName]));
                                                     break;
                                                 case MetaFieldType.YesNo:
                                                 case MetaFieldType.RecStatus:
@@ -1365,8 +1369,10 @@ namespace Epi.ImportExport
                                         case MetaFieldType.UniqueRowId:
                                         case MetaFieldType.ForeignKey:
                                         case MetaFieldType.GlobalRecordId:
-                                        case MetaFieldType.Number:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.String, data));
+                                            break;
+                                        case MetaFieldType.Number:
+                                            fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Double, data));
                                             break;
                                         case MetaFieldType.RecStatus:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));
@@ -1434,8 +1440,10 @@ namespace Epi.ImportExport
                                         case MetaFieldType.UniqueRowId:
                                         case MetaFieldType.ForeignKey:
                                         case MetaFieldType.GlobalRecordId:
-                                        case MetaFieldType.Number:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.String, data));
+                                            break;
+                                        case MetaFieldType.Number:
+                                            fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Double, data));
                                             break;
                                         case MetaFieldType.RecStatus:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));

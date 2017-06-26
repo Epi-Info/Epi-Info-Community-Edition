@@ -842,8 +842,10 @@ namespace Epi.Enter.Forms
                                         case MetaFieldType.ForeignKey:
                                         case MetaFieldType.GlobalRecordId:
                                         case MetaFieldType.Multiline:
-                                        case MetaFieldType.Number:
                                             fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue));
+                                            break;
+                                        case MetaFieldType.Number:
+                                            fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.Double, fieldData.FieldValue));
                                             break;
                                         case MetaFieldType.YesNo:
                                         case MetaFieldType.Option:
@@ -1022,7 +1024,7 @@ namespace Epi.Enter.Forms
                         case MetaFieldType.Multiline:
                             return new QueryParameter("@" + fieldName, DbType.String, DBNull.Value);
                         case MetaFieldType.Number:
-                            return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                            return new QueryParameter("@" + fieldName, DbType.Double, DBNull.Value);
                         case MetaFieldType.YesNo:
                         case MetaFieldType.Option:
                         case MetaFieldType.RecStatus:
@@ -1054,8 +1056,9 @@ namespace Epi.Enter.Forms
                         case MetaFieldType.ForeignKey:
                         case MetaFieldType.GlobalRecordId:
                         case MetaFieldType.Multiline:
-                        case MetaFieldType.Number:
                             return new QueryParameter("@" + fieldName, DbType.String, fieldData.FieldValue);
+                        case MetaFieldType.Number:
+                            return new QueryParameter("@" + fieldName, DbType.Double, fieldData.FieldValue);
                         case MetaFieldType.YesNo:
                         case MetaFieldType.Option:
                         case MetaFieldType.RecStatus:
