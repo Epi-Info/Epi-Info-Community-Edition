@@ -610,13 +610,13 @@ namespace EpiDashboard
             String numerFilter = "";
             if (Parameters != null && ratesParameters.NumerFilter != null)
             {
-                numerFilter = ratesParameters.NumerFilter.GenerateDataFilterString(false);
+                numerFilter = GetDataFilterString(ratesParameters.NumerFilter, table);
             }
 
             String denomFilter = "";
             if (Parameters != null && ratesParameters.DenomFilter != null)
             {
-                denomFilter = ratesParameters.DenomFilter.GenerateDataFilterString(false);
+                denomFilter = GetDataFilterString(ratesParameters.DenomFilter, table);
             }
 
             string numerSelect = "";
@@ -723,6 +723,24 @@ namespace EpiDashboard
             return;
         }
 
+        private static string GetDataFilterString(DataFilters dataFilters, DataTable table)
+        {
+            DataFilters tempDataFilters = dataFilters;
+
+            foreach (FilterCondition fiCon in tempDataFilters.ToList<FilterCondition>())
+            {
+                string columnTypeName = table.Columns[fiCon.RawColumnName].DataType.Name;
+
+                if (columnTypeName == "String" && fiCon.ColumnType == "System.Boolean")
+                {
+                    fiCon.Condition = "(" + fiCon.ColumnName + " " + fiCon.Operand + " '" + fiCon.FriendlyValue + "') ";
+                }
+            }
+
+            string filter = tempDataFilters.GenerateDataFilterString(false);
+            return filter;
+        }
+
         private double AggResult(DataTable sourceTable, string fieldName, string filter, string aggregateExpression, string selectExpression, string aggFxName, bool distinct, List<string> columnNames, string sort)
         {
             double aggResult = double.NaN;
@@ -742,7 +760,8 @@ namespace EpiDashboard
             if (fieldName != "" && aggFxName != "")
             {
                 string expression = aggFxName + "(" + b(fieldName) + ")";
-                aggResult = Convert.ToDouble(localTable.Compute(expression, filter));
+                object computed = localTable.Compute(expression, filter);
+                aggResult = Convert.ToDouble(computed);
             }
             else if (fieldName != "")
             {

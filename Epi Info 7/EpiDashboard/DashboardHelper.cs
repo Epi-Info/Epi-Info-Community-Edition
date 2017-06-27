@@ -3285,7 +3285,7 @@ namespace EpiDashboard
             }
 
             List<DataTable> tables = new List<DataTable>();
-            ConvertLineListData(dt);
+            ConvertRatesData(dt);
             tables.Add(dt);
 
             return tables;

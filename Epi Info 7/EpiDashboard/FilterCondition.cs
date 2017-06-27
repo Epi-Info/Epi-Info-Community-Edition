@@ -121,6 +121,10 @@ namespace EpiDashboard
             {
                 return this.condition;
             }
+            set
+            {
+                this.condition = value;
+            }
         }
 
         /// <summary>
