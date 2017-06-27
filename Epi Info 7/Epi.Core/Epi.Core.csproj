@@ -659,6 +659,62 @@
     </Compile>
     <Compile Include="Web\SessionHistory.cs" />
     <Compile Include="WordBuilder.cs" />
+    <Content Include="Analysis.resources.dll" />
+    <Content Include="Enter.resources.dll" />
+    <Content Include="Epi.Core.resources.dll" />
+    <Content Include="Epi.Data.MySQL.resources.dll" />
+    <Content Include="Epi.Data.PostgreSQL.resources.dll" />
+    <Content Include="Epi.Data.SqlServer.resources.dll" />
+    <Content Include="Epi.ImportExport.resources.dll" />
+    <Content Include="Epi.Windows.Globalization.resources.dll" />
+    <Content Include="Epi.Windows.ImportExport.resources.dll" />
+    <Content Include="Epi.Windows.resources.dll" />
+    <Content Include="EpiDashboard.resources.dll" />
+    <Content Include="es-ES\Analysis.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Enter.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Epi.Core.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Epi.Data.MySQL.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Epi.Data.PostgreSQL.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Epi.Data.SqlServer.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Epi.ImportExport.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Epi.Windows.Globalization.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Epi.Windows.ImportExport.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Epi.Windows.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\EpiDashboard.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\MakeView.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Mapping.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\Menu.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="es-ES\StatCalc.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="FipsCrypto.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -687,6 +743,54 @@
     <None Include="Projects\Cholera\Uganda_Cholera.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="fr-FR\Analysis.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Enter.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Epi.Core.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Epi.Data.MySQL.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Epi.Data.PostgreSQL.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Epi.Data.SqlServer.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Epi.ImportExport.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Epi.Windows.Globalization.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Epi.Windows.ImportExport.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Epi.Windows.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\EpiDashboard.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\MakeView.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Mapping.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\Menu.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fr-FR\StatCalc.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MakeView.resources.dll" />
+    <Content Include="Mapping.resources.dll" />
+    <Content Include="Menu.resources.dll" />
     <Content Include="Projects\Cholera\EpiChol.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -929,6 +1033,7 @@
     <Content Include="Resources\PHIN\PHINVS.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="StatCalc.resources.dll" />
     <Content Include="Templates\Fields\debug - one of each field with different widths.xml" />
     <Content Include="Templates\Fields\debug - one of each field.xml" />
     <Content Include="Templates\Fields\States.xml">

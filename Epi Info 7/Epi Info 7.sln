@@ -73,49 +73,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Data.PostgreSQL", "Epi.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightControls.Web", "SilverlightControls.Web\SilverlightControls.Web.csproj", "{C7AC7E6F-B379-4027-83AB-7A91EC7DD944}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fr-FR", "fr-FR", "{EF3A9625-21D3-487A-B884-4958762E08AA}"
-	ProjectSection(SolutionItems) = preProject
-		fr-FR\Analysis.resources.dll = fr-FR\Analysis.resources.dll
-		fr-FR\Enter.resources.dll = fr-FR\Enter.resources.dll
-		fr-FR\Epi.Core.resources.dll = fr-FR\Epi.Core.resources.dll
-		fr-FR\Epi.Data.MySQL.resources.dll = fr-FR\Epi.Data.MySQL.resources.dll
-		fr-FR\Epi.Data.PostgreSQL.resources.dll = fr-FR\Epi.Data.PostgreSQL.resources.dll
-		fr-FR\Epi.Data.SqlServer.resources.dll = fr-FR\Epi.Data.SqlServer.resources.dll
-		fr-FR\Epi.ImportExport.resources.dll = fr-FR\Epi.ImportExport.resources.dll
-		fr-FR\Epi.Windows.Globalization.resources.dll = fr-FR\Epi.Windows.Globalization.resources.dll
-		fr-FR\Epi.Windows.ImportExport.resources.dll = fr-FR\Epi.Windows.ImportExport.resources.dll
-		fr-FR\Epi.Windows.resources.dll = fr-FR\Epi.Windows.resources.dll
-		fr-FR\EpiDashboard.resources.dll = fr-FR\EpiDashboard.resources.dll
-		fr-FR\MakeView.resources.dll = fr-FR\MakeView.resources.dll
-		fr-FR\Mapping.resources.dll = fr-FR\Mapping.resources.dll
-		fr-FR\Menu.resources.dll = fr-FR\Menu.resources.dll
-		fr-FR\StatCalc.resources.dll = fr-FR\StatCalc.resources.dll
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatCalc", "StatCalc\StatCalc.csproj", "{B7DDC22F-4E01-4795-81F5-7019B3C4E3B0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3DE9D74E-BF08-4101-AC21-96D250A177D4} = {3DE9D74E-BF08-4101-AC21-96D250A177D4}
 		{EBD2B961-A952-4670-96CA-50BAA12C7F29} = {EBD2B961-A952-4670-96CA-50BAA12C7F29}
 		{D120296B-493B-46AC-8657-4D32A9604231} = {D120296B-493B-46AC-8657-4D32A9604231}
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "es-ES", "es-ES", "{224F53BE-1879-4BDA-B2B1-8E0F7098DCE8}"
-	ProjectSection(SolutionItems) = preProject
-		es-ES\Analysis.resources.dll = es-ES\Analysis.resources.dll
-		es-ES\Enter.resources.dll = es-ES\Enter.resources.dll
-		es-ES\Epi.Core.resources.dll = es-ES\Epi.Core.resources.dll
-		es-ES\Epi.Data.MySQL.resources.dll = es-ES\Epi.Data.MySQL.resources.dll
-		es-ES\Epi.Data.PostgreSQL.resources.dll = es-ES\Epi.Data.PostgreSQL.resources.dll
-		es-ES\Epi.Data.SqlServer.resources.dll = es-ES\Epi.Data.SqlServer.resources.dll
-		es-ES\Epi.ImportExport.resources.dll = es-ES\Epi.ImportExport.resources.dll
-		es-ES\Epi.Windows.Globalization.resources.dll = es-ES\Epi.Windows.Globalization.resources.dll
-		es-ES\Epi.Windows.ImportExport.resources.dll = es-ES\Epi.Windows.ImportExport.resources.dll
-		es-ES\Epi.Windows.resources.dll = es-ES\Epi.Windows.resources.dll
-		es-ES\EpiDashboard.resources.dll = es-ES\EpiDashboard.resources.dll
-		es-ES\MakeView.resources.dll = es-ES\MakeView.resources.dll
-		es-ES\Mapping.resources.dll = es-ES\Mapping.resources.dll
-		es-ES\Menu.resources.dll = es-ES\Menu.resources.dll
-		es-ES\StatCalc.resources.dll = es-ES\StatCalc.resources.dll
 	EndProjectSection
 EndProject
 Global
