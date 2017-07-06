@@ -10,6 +10,7 @@ using System.Text;
 using Epi.Data;
 using System.Globalization;
 using Epi.Data.Office.Forms;
+using System.Diagnostics;
 
 namespace Epi.Data.Office
 {
@@ -285,6 +286,14 @@ namespace Epi.Data.Office
         {
             get { return "Microsoft Excel Workbook: " + Location; }
         }
+
+        private bool firstRowContainsHeaderInformation = true;
+        public bool FirstRowContainsHeaderInformation
+        {
+            get { return firstRowContainsHeaderInformation; }
+            set { firstRowContainsHeaderInformation = value; }
+        }
+
         /// <summary>
         /// Connection String attribute
         /// </summary>
@@ -299,7 +308,29 @@ namespace Epi.Data.Office
 
                 if (false == connection.Contains("Extended Properties"))
                 {
-                    cnnBuilder.Add("Extended Properties", "Excel 8.0;HDR=Yes");
+                    cnnBuilder.Add("Extended Properties", "Excel 8.0;");
+                }
+                
+                StackFrame[] frames = new StackTrace().GetFrames();
+
+                foreach (StackFrame frame in frames)
+                {
+                    string methodName = frame.GetMethod().Name;
+
+                    if (methodName == "GetDataTable" || methodName == "GetDataTableReader")
+                    {
+                        if (cnnBuilder.ConnectionString.Contains("IMEX=1") == false)
+                        {
+                            cnnBuilder.ConnectionString = cnnBuilder.ConnectionString.Replace("Extended Properties=\"Excel 8.0", "Extended Properties=\"Excel 8.0;IMEX=1;");
+                        }
+
+                        break;
+                    }
+                }
+
+                if (FirstRowContainsHeaderInformation)
+                {
+                    cnnBuilder.ConnectionString = cnnBuilder.ConnectionString.Replace("Extended Properties=\"Excel 8.0", "Extended Properties=\"Excel 8.0;HDR=Yes");
                 }
 
                 return cnnBuilder.ToString();
@@ -357,19 +388,7 @@ namespace Epi.Data.Office
             }
             return tableNames;
         }
-
-        /// <summary>
-        /// Builds a connection string using default parameters given a database name
-        /// </summary>
-        /// <param name="databaseName">Name of the database</param>
-        /// <returns>A connection string</returns>
-        public static string BuildDefaultConnectionString(string databaseName)
-        {
-            string cnnString = BuildConnectionString(Configuration.GetNewInstance().Directories.Project + "\\" + databaseName + ".xls", string.Empty);
-            cnnString += ";Extended Properties=\"Excel 8.0;HDR=Yes\";";
-            return cnnString;
-        }
-
+        
         /// <summary>
         /// Returns Code Table names for the project
         /// </summary>
