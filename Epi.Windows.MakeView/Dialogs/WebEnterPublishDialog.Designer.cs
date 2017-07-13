@@ -155,6 +155,7 @@
             resources.ApplyResources(this.Shareable, "Shareable");
             this.Shareable.Name = "Shareable";
             this.Shareable.UseVisualStyleBackColor = true;
+            this.Shareable.Visible = false; // 1144 [dpb]
             this.Shareable.CheckedChanged += new System.EventHandler(this.Shareable_CheckedChanged);
             // 
             // progressBar
