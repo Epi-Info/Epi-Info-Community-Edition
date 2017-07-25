@@ -88,7 +88,11 @@ namespace Epi.Windows.MakeView.Dialogs
                 textColumn.MappingName = column;
                 textColumn.HeaderText = column;
                 textColumn.NullText = string.Empty;
-                this.dataGridTableStyle.GridColumnStyles.Add(textColumn);
+
+                if(this.dataGridTableStyle.GridColumnStyles.Contains(textColumn.HeaderText) == false)
+                { 
+                    this.dataGridTableStyle.GridColumnStyles.Add(textColumn);
+                }
             }
         }
 
