@@ -6,6 +6,7 @@ using System.Text;
 
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
 

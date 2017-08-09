@@ -15,6 +15,7 @@ using System.Net;
 
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
 
@@ -35,7 +36,7 @@ namespace EpiDashboard.Controls
     public partial class ChoroplethProperties : System.Windows.Controls.UserControl
     {
         private EpiDashboard.Mapping.StandaloneMapControl _mapControl;
-        private ESRI.ArcGIS.Client.Map _myMap;
+        private MapView _mapView;
         private DashboardHelper _dashboardHelper;
         private int _currentStratCount;
         private SolidColorBrush _currentColor_rampMissing;
@@ -84,11 +85,11 @@ namespace EpiDashboard.Controls
             public string legendText;
         }
 
-        public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, MapView mapView)
         {
             InitializeComponent();
             _mapControl = mapControl;
-            _myMap = myMap;
+            this._mapView = mapView;
 
             if(mapControl != null)
             { 
@@ -107,7 +108,7 @@ namespace EpiDashboard.Controls
             _currentColor_rampStart = (SolidColorBrush)rctLowColor.Fill;
             _currentColor_rampEnd = (SolidColorBrush)rctHighColor.Fill;
             _initialRampCalc = true;
-            mapOriginalExtent = myMap.Extent;
+            mapOriginalExtent = mapView.Extent;
 
             #region Translation
 
@@ -574,15 +575,15 @@ namespace EpiDashboard.Controls
             {
                 if (choroplethKmlLayerProperties != null)
                 {
-                    ESRI.ArcGIS.Client.Toolkit.DataSources.KmlLayer shapeLayer = _myMap.Layers[id] as ESRI.ArcGIS.Client.Toolkit.DataSources.KmlLayer;
+                    KmlLayer shapeLayer = _mapView.Map.Layers[id] as KmlLayer;
                     if (shapeLayer != null)
-                        _myMap.Layers.Remove(shapeLayer);
+                        _mapView.Map.Layers.Remove(shapeLayer);
                 }
                 else
                 {
-                    ESRI.ArcGIS.Client.GraphicsLayer graphicsLayer = _myMap.Layers[id] as ESRI.ArcGIS.Client.GraphicsLayer;
+                    GraphicsLayer graphicsLayer = _mapView.Map.Layers[id] as GraphicsLayer;
                     if (graphicsLayer != null)
-                        _myMap.Layers.Remove(graphicsLayer);
+                        _mapView.Map.Layers.Remove(graphicsLayer);
                 }
             }
             if (choroplethServerLayerProperties != null && shapeAttributes != null & !string.IsNullOrEmpty(ShapeKey))
@@ -1781,7 +1782,7 @@ namespace EpiDashboard.Controls
 
         private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            LayerProvider = new Mapping.ChoroplethShapeLayerProvider(_myMap);
+            LayerProvider = new Mapping.ChoroplethShapeLayerProvider(_mapView);
             object[] shapeFileProperties = LayerProvider.Load();
 
             if (shapeFileProperties != null)
@@ -1791,7 +1792,7 @@ namespace EpiDashboard.Controls
                 if (choroplethShapeLayerProperties == null)
                 {
                     ILayerProperties layerProperties = null;
-                    layerProperties = new ChoroplethShapeLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
+                    layerProperties = new ChoroplethShapeLayerProperties(_mapView, this.DashboardHelper, this._mapControl);
                     layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
                     layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
                     layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);
@@ -1907,7 +1908,7 @@ namespace EpiDashboard.Controls
                         if (choroplethServerLayerProperties == null)
                         {
                             ILayerProperties layerProperties = null;
-                            layerProperties = new ChoroplethServerLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
+                            layerProperties = new ChoroplethServerLayerProperties(_mapView, this.DashboardHelper, this._mapControl);
                             ((ChoroplethServerLayerProperties)layerProperties).Provider = choroplethServerLayerProvider;
                             ((ChoroplethServerLayerProperties)layerProperties).Provider.LayerId = choroplethServerLayerProvider.LayerId;
                             ((ChoroplethServerLayerProperties)layerProperties).Provider.FeatureLoaded += new FeatureLoadedHandler(((ChoroplethServerLayerProperties)layerProperties).provider_FeatureLoaded);
@@ -2299,7 +2300,7 @@ namespace EpiDashboard.Controls
             {
                 if (LayerProvider == null)
                 {
-                    LayerProvider = new Mapping.ChoroplethServerLayerProvider(_myMap);
+                    LayerProvider = new Mapping.ChoroplethServerLayerProvider(_mapView);
                 }
                 
                 string message = GetMessage(txtMapSeverpath.Text + "?f=json");

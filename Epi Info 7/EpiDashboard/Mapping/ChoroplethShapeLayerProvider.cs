@@ -8,8 +8,11 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 using EpiDashboard.Mapping.ShapeFileReader;
 
@@ -17,7 +20,7 @@ namespace EpiDashboard.Mapping
 {
     public class ChoroplethShapeLayerProvider : ChoroplethLayerProvider, IChoroLayerProvider
     {
-        public ChoroplethShapeLayerProvider(Map clientMap) : base(clientMap)
+        public ChoroplethShapeLayerProvider(MapView clientMap) : base(clientMap)
         {
         }
 
@@ -80,7 +83,7 @@ namespace EpiDashboard.Mapping
                 {
                     graphicsLayer = new GraphicsLayer();
                     graphicsLayer.ID = LayerId.ToString();
-                    ArcGIS_Map.Layers.Add(graphicsLayer);
+                    ArcGIS_MapView.Map.Layers.Add(graphicsLayer);
 
                     int recCount = shapeFileReader.Records.Count;
                     int rgbFactor = 255 / recCount;
@@ -103,24 +106,24 @@ namespace EpiDashboard.Mapping
                     Envelope shapeFileExtent = shapeFileReader.GetExtent();
                     if (shapeFileExtent.SpatialReference == null)
                     {
-                        ArcGIS_Map.Extent = shapeFileExtent;
+                        //////ArcGIS_MapView.Extent = shapeFileExtent;
                     }
                     else
                     {
-                        if (shapeFileExtent.SpatialReference.WKID == 4326)
+                        if (shapeFileExtent.SpatialReference.Wkid == 4326)
                         {
-                            ArcGIS_Map.Extent = new Envelope(
-                                ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), 
-                                ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                            //////ArcGIS_MapView.Extent = new Envelope(
+                            //////    BingLayer..Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), 
+                            //////    ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                         }
                     }
                 }
                 else
                 {
-                    ArcGIS_Map.Extent = graphicsLayer.FullExtent;
+                    //////ArcGIS_MapView.Extent = graphicsLayer.FullExtent;
                 }
                 
-                graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
+                //////graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
 
                 return new object[] { boundrySourceLocation, graphicsLayer.Graphics[0].Attributes };
             }
@@ -150,7 +153,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer() 
         {
-            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as GraphicsLayer;
             return graphicsLayer;
         }
     }

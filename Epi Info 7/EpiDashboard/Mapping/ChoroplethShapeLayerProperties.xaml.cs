@@ -5,6 +5,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml;
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping
 {
@@ -45,14 +50,14 @@ namespace EpiDashboard.Mapping
             get { return _useCustomColors; }
         }
 
-        public ChoroplethShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethShapeLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            Provider = new ChoroplethShapeLayerProvider(myMap);
+            Provider = new ChoroplethShapeLayerProvider(_mapView);
 
             FillComboBoxes();
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);

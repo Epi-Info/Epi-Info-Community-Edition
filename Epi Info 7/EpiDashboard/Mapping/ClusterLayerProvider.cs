@@ -17,8 +17,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 using Epi;
 using Epi.Data;
@@ -34,7 +37,7 @@ namespace EpiDashboard.Mapping
         public event RecordSelectedHandler RecordSelected;
         public event DateRangeDefinedHandler DateRangeDefined;
 
-        private Esri.ArcGISRuntime.Controls.Map myMap;
+        private MapView _mapView;
         private List<KeyValuePair<DateTime, int>> intervalCounts;
         private double minX;
         private double minY;
@@ -53,9 +56,9 @@ namespace EpiDashboard.Mapping
         private StackPanel legendStackPanel;
 
 
-        public ClusterLayerProvider(Map myMap)
+        public ClusterLayerProvider(MapView mapView)
         {
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.layerId = Guid.NewGuid();
             this.geoReference = new SpatialReference(4326);
         }
@@ -77,33 +80,33 @@ namespace EpiDashboard.Mapping
 
         public void Refresh()
         {
-            GraphicsLayer clusterLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer clusterLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (clusterLayer != null)
             {
-                clusterLayer.ClearGraphics();
+                clusterLayer.Graphics.Clear();
                 RenderClusterMap(this.dashboardHelper, this.latVar, this.longVar, this.clusterColor, this.timeVar, this.description);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < _mapView.Map.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -116,7 +119,7 @@ namespace EpiDashboard.Mapping
             this.description = description;
             this.clusterColor = (SolidColorBrush)clusterColor;
 
-            GraphicsLayer clusterLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer clusterLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (clusterLayer != null)
             {
                 clusterLayer.Graphics.Clear();
@@ -125,7 +128,7 @@ namespace EpiDashboard.Mapping
             {
                 clusterLayer = new GraphicsLayer();
                 clusterLayer.ID = layerId.ToString();
-                myMap.Layers.Add(clusterLayer);
+                _mapView.Map.Layers.Add(clusterLayer);
             }
 
             CustomCoordinateList coordinateList = GetCoordinates(dashboardHelper, latVar, longVar, timeVar);
@@ -138,10 +141,10 @@ namespace EpiDashboard.Mapping
                     Symbol = MarkerSymbol
                 };
                 if (coordinateList.Coordinates[i].TimeSpan.HasValue)
-                    graphic.TimeExtent = new TimeExtent(coordinateList.Coordinates[i].TimeSpan.Value);
-                else
-                    graphic.TimeExtent = new TimeExtent(DateTime.MinValue, DateTime.MaxValue);
-                graphic.MouseLeftButtonUp += new MouseButtonEventHandler(graphic_MouseLeftButtonUp);
+                //    graphic.TimeExtent = new TimeExtent(coordinateList.Coordinates[i].TimeSpan.Value);
+                //else
+                //    graphic.TimeExtent = new TimeExtent(DateTime.MinValue, DateTime.MaxValue);
+                //graphic.MouseLeftButtonUp += new MouseButtonEventHandler(graphic_MouseLeftButtonUp);
                 clusterLayer.Graphics.Add(graphic);
             }
             Brush flareForeground;
@@ -153,15 +156,15 @@ namespace EpiDashboard.Mapping
             {
                 flareForeground = new SolidColorBrush(Colors.White);
             }
-            FlareClusterer clusterer = new FlareClusterer()
-            {
-                FlareBackground = clusterColor,
-                FlareForeground = flareForeground,
-                MaximumFlareCount = 10,
-                Radius = 15,
-                Gradient = ClustererGradient
-            };
-            clusterLayer.Clusterer = clusterer;
+            ////////////FlareClusterer clusterer = new FlareClusterer()
+            ////////////{
+            ////////////    FlareBackground = clusterColor,
+            ////////////    FlareForeground = flareForeground,
+            ////////////    MaximumFlareCount = 10,
+            ////////////    Radius = 15,
+            ////////////    Gradient = ClustererGradient
+            ////////////};
+            ////////////clusterLayer.Clusterer = clusterer;
             
             if(LegendStackPanel == null)
             {
@@ -212,7 +215,7 @@ namespace EpiDashboard.Mapping
 
             if (coordinateList.Coordinates.Count > 0)
             {
-                myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
+                //////myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
                 if (!string.IsNullOrEmpty(timeVar))
                 {
                     if (minTime != null && maxTime != null)
@@ -220,17 +223,17 @@ namespace EpiDashboard.Mapping
 
                         intervalCounts = new List<KeyValuePair<DateTime, int>>();
                         DateTime previousInterval = DateTime.MinValue;
-                        IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
-                        foreach (DateTime interval in intervals)
-                        {
-                            int count = clusterLayer.Graphics.Count(x => x.TimeExtent.Start <= interval && x.TimeExtent.Start >= previousInterval);
-                            intervalCounts.Add(new KeyValuePair<DateTime, int>(interval.Date, count));
-                            previousInterval = interval;
-                        }
-                        if (DateRangeDefined != null)
-                        {
-                            DateRangeDefined(minTime, maxTime, intervalCounts);
-                        }
+                        ////////////IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
+                        ////////////foreach (DateTime interval in intervals)
+                        ////////////{
+                        ////////////    int count = clusterLayer.Graphics.Count(x => x.TimeExtent.Start <= interval && x.TimeExtent.Start >= previousInterval);
+                        ////////////    intervalCounts.Add(new KeyValuePair<DateTime, int>(interval.Date, count));
+                        ////////////    previousInterval = interval;
+                        ////////////}
+                        ////////////if (DateRangeDefined != null)
+                        ////////////{
+                        ////////////    DateRangeDefined(minTime, maxTime, intervalCounts);
+                        ////////////}
                     }
                 }
             }
@@ -241,9 +244,9 @@ namespace EpiDashboard.Mapping
             get
             {
                 SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
-                symbol.Color = clusterColor;
+                symbol.Color = ((SolidColorBrush)clusterColor).Color;
                 symbol.Size = 15;
-                symbol.Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle;
+                symbol.Style = SimpleMarkerStyle.Circle;
                 return symbol;
             }
         }
@@ -343,10 +346,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                myMap.Layers.Remove(graphicsLayer);
+                _mapView.Map.Layers.Remove(graphicsLayer);
                 if (legendStackPanel != null)
                 {
                     legendStackPanel.Children.Clear();

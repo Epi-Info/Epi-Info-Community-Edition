@@ -6,11 +6,17 @@ using System.Text;
 using System.Xml;
 using System.Windows.Media;
 
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+
 namespace EpiDashboard.Mapping
 {
     public class ChoroplethLayerPropertiesUserControlBase : UserControl
     {
-        public ESRI.ArcGIS.Client.Map myMap;
+        public MapView _mapView;
         public DashboardHelper dashboardHelper;
         public string boundryFilePath;
         public IMapControl mapControl;
@@ -225,7 +231,7 @@ namespace EpiDashboard.Mapping
         {
             dynamic layerPropertiesControl = this;
 
-            EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(mapControl as StandaloneMapControl, myMap);
+            EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(mapControl as StandaloneMapControl, mapView);
 
             if (provider is ChoroplethShapeLayerProvider)
             {

@@ -8,8 +8,11 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 
 namespace EpiDashboard.Mapping
@@ -41,22 +44,22 @@ namespace EpiDashboard.Mapping
             if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
                 _kmlURL = boundrySourceLocation;
-                KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
+                KmlLayer shapeLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as KmlLayer;
                 
                 if (shapeLayer != null)
                 {
-                    ArcGIS_Map.Layers.Remove(shapeLayer);
+                    ArcGIS_MapView.Layers.Remove(shapeLayer);
                 }
                 
                 shapeLayer = new KmlLayer();
                 shapeLayer.ID = LayerId.ToString();
                 shapeLayer.Url = new Uri(boundrySourceLocation);
                 shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
-                ArcGIS_Map.Layers.Add(shapeLayer);
+                ArcGIS_MapView.Layers.Add(shapeLayer);
 
-                ArcGIS_Map.Extent = shapeLayer.FullExtent;
+                ArcGIS_MapView.Extent = shapeLayer.FullExtent;
 
-                //KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
+                //KmlLayer shapeLayer = ArcGIS_MapView.Layers[_layerId.ToString()] as KmlLayer;
                 GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
 
                 if (graphicsLayer != null)
@@ -107,7 +110,7 @@ namespace EpiDashboard.Mapping
                             ymax = g.Geometry.Extent.YMax;
                     }
 
-                    ArcGIS_Map.Extent = new Envelope(
+                    ArcGIS_MapView.Extent = new Envelope(
                         ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)),
                         ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5))
                         );
@@ -130,7 +133,7 @@ namespace EpiDashboard.Mapping
 
         void shapeLayer_Initialized(object sender, EventArgs e)
         {
-            KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
 
             if (graphicsLayer != null)
@@ -181,7 +184,7 @@ namespace EpiDashboard.Mapping
                     ymax = g.Geometry.Extent.YMax;
             }
 
-            ArcGIS_Map.Extent = new Envelope(
+            ArcGIS_MapView.Extent = new Envelope(
                 ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)),
                 ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5))
                 );
@@ -277,7 +280,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer()
         {
-            KmlLayer kmlLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
+            KmlLayer kmlLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = GetGraphicsLayer(kmlLayer as Layer);
             return graphicsLayer;
         }
@@ -304,10 +307,10 @@ namespace EpiDashboard.Mapping
 
         override public void CloseLayer()
         {
-            KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as KmlLayer;
             if (shapeLayer != null)
             {
-                ArcGIS_Map.Layers.Remove(shapeLayer);
+                ArcGIS_MapView.Layers.Remove(shapeLayer);
                 
                 if (LegendStackPanel != null)
                 {
