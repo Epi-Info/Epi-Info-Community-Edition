@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
 
@@ -32,46 +33,46 @@ namespace EpiDashboard.Mapping
 
     public class MapServerLayerProvider : ILayerProvider
     {
-        private Map myMap;
+        private MapView _mapView;
         private Guid layerId;
         private string url;
         private int[] visibleLayers;
 
-        public MapServerLayerProvider(Map myMap)
+        public MapServerLayerProvider(MapView mapView)
         {
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.layerId = Guid.NewGuid();
         }
 
         public void Refresh()
         {
-            ArcGISDynamicMapServiceLayer layer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
+            ArcGISDynamicMapServiceLayer layer = this._mapView.Map.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (layer != null)
             {
-                myMap.Layers.Remove(layer);
+                _mapView.Map.Layers.Remove(layer);
                 RenderServerImage(this.url, this.visibleLayers);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < _mapView.Map.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -79,22 +80,22 @@ namespace EpiDashboard.Mapping
         {
             this.url = url;
 
-            ArcGISDynamicMapServiceLayer shapeLayer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
+            ArcGISDynamicMapServiceLayer shapeLayer = _mapView.Map.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (shapeLayer != null)
             {
-                myMap.Layers.Remove(shapeLayer);
+                _mapView.Map.Layers.Remove(shapeLayer);
             }
 
             shapeLayer = new ArcGISDynamicMapServiceLayer();
             shapeLayer.ID = layerId.ToString();
-            shapeLayer.Url = url;
+            shapeLayer.ServiceUri = url;
             if (visibleLayers != null)
             {
-                shapeLayer.VisibleLayers = visibleLayers;
+                //////shapeLayer.VisibleLayers = visibleLayers;
             }
-            myMap.Layers.Add(shapeLayer);
+            _mapView.Map.Layers.Add(shapeLayer);
 
-            myMap.Extent = shapeLayer.FullExtent;
+            //////_mapView.Extent = shapeLayer.FullExtent;
         }
 
         public MapServerDialog RenderServerImage()
@@ -111,9 +112,8 @@ namespace EpiDashboard.Mapping
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
             SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
+            symbol.Color = brush.Color;
+            symbol.Style = SimpleFillStyle.Solid;
             return symbol;
         }
 
@@ -121,10 +121,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            ArcGISDynamicMapServiceLayer graphicsLayer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
+            ArcGISDynamicMapServiceLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (graphicsLayer != null)
             {
-                myMap.Layers.Remove(graphicsLayer);
+                _mapView.Map.Layers.Remove(graphicsLayer);
             }
         }
 

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
 
@@ -29,7 +30,7 @@ namespace EpiDashboard.Mapping
     {
 
         public MapServerLayerProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private MapView _mapView;
         private string serverName;
         private int[] visibleLayers;
         private bool flagrunedit;
@@ -39,11 +40,11 @@ namespace EpiDashboard.Mapping
         
         private bool isReadOnlyMode;
 
-        public MapServerLayerProperties(ESRI.ArcGIS.Client.Map myMap)
+        public MapServerLayerProperties(MapView mapView)
         {
             InitializeComponent();
 
-            this.myMap = myMap;
+            this._mapView = mapView;
 
            // provider = new MapServerLayerProvider(_mapView);
             #region Translation
@@ -180,7 +181,7 @@ namespace EpiDashboard.Mapping
             }
             if (provider == null)
             {
-                provider = new MapServerLayerProvider(myMap);
+                provider = new MapServerLayerProvider(_mapView);
             }
             provider.RenderServerImage(serverName, visibleLayers);
             if (MapGenerated != null)

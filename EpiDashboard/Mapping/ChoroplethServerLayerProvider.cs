@@ -8,8 +8,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 
 namespace EpiDashboard.Mapping
@@ -49,10 +52,10 @@ namespace EpiDashboard.Mapping
         {
             if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
-                FeatureLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as FeatureLayer;
+                FeatureLayer graphicsLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as FeatureLayer;
                 if (graphicsLayer != null)
                 {
-                    ArcGIS_Map.Layers.Remove(graphicsLayer);
+                    ArcGIS_MapView.Layers.Remove(graphicsLayer);
                 }
 
                 graphicsLayer = new FeatureLayer();
@@ -68,7 +71,7 @@ namespace EpiDashboard.Mapping
                 //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                 //    graphicsLayer.OutFields.Add("COUNTY_NAME");
                 //    graphicsLayer.Where = "STATE_FIPSCODE = '36'";
-                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
+                //    ArcGIS_MapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
                 //}
                 //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - Rhode Island Zip Code Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19"))
                 //{
@@ -76,7 +79,7 @@ namespace EpiDashboard.Mapping
                 //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                 //    graphicsLayer.OutFields.Add("NAME");
                 //    graphicsLayer.Where = "STATE_FIPSCODE = '44'";
-                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
+                //    ArcGIS_MapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
                 //}
                 //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - U.S. State Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17"))
                 //{
@@ -84,20 +87,20 @@ namespace EpiDashboard.Mapping
                 //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                 //    graphicsLayer.OutFields.Add("STATE_ABBR");
                 //    graphicsLayer.OutFields.Add("STATE_NAME");
-                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
+                //    ArcGIS_MapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
                 //}
                 //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - World Boundaries"))
                 //{
                 //    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Blank_US/MapServer/17";
-                //    ArcGIS_Map.Extent = graphicsLayer.FullExtent;
+                //    ArcGIS_MapView.Extent = graphicsLayer.FullExtent;
                 //}
                 //else
                 //{
                     graphicsLayer.Url = boundrySourceLocation;
                 //}
 
-                ArcGIS_Map.Layers.Add(graphicsLayer);
-                ArcGIS_Map.Cursor = Cursors.Wait;
+                ArcGIS_MapView.Layers.Add(graphicsLayer);
+                ArcGIS_MapView.Cursor = Cursors.Wait;
 
                 return new object[] { boundrySourceLocation, graphicsLayer};
             }
@@ -109,13 +112,13 @@ namespace EpiDashboard.Mapping
 
         void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
         {
-            ArcGIS_Map.Cursor = Cursors.Arrow;
+            ArcGIS_MapView.Cursor = Cursors.Arrow;
             _flagUpdateToGraphicsLayerFailed = true;
         }
 
         void graphicsLayer_InitializationFailed(object sender, EventArgs e)
         {
-            ArcGIS_Map.Cursor = Cursors.Arrow;
+            ArcGIS_MapView.Cursor = Cursors.Arrow;
         }
 
         void graphicsLayer_Initialized(object sender, EventArgs e)
@@ -127,7 +130,7 @@ namespace EpiDashboard.Mapping
 
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
-            FeatureLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as FeatureLayer;
+            FeatureLayer graphicsLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as FeatureLayer;
             _flagUpdateToGraphicsLayerFailed = false;
             
             if (graphicsLayer != null)
@@ -141,7 +144,7 @@ namespace EpiDashboard.Mapping
                 }
             }
             
-            ArcGIS_Map.Cursor = Cursors.Arrow;
+            ArcGIS_MapView.Cursor = Cursors.Arrow;
         }
 
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
@@ -152,7 +155,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer()
         {
-            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as GraphicsLayer;
             return graphicsLayer;
         }
     }

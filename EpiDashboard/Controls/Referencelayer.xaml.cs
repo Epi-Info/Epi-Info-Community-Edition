@@ -15,6 +15,12 @@ using EpiDashboard.Mapping;
 using System.Net;
 using System.IO;
 
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+
 namespace EpiDashboard.Controls
 {
     /// <summary>
@@ -24,7 +30,7 @@ namespace EpiDashboard.Controls
     {
 
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private MapView _mapView;
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
         private EpiDashboard.Mapping.KmlLayerProvider KMLprovider;
@@ -43,11 +49,11 @@ namespace EpiDashboard.Controls
         public int[] KMLMapVisibleLayers { get; set; }
         #endregion
 
-        public Referencelayer(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public Referencelayer(EpiDashboard.Mapping.StandaloneMapControl mapControl, MapView mapView)
         {
             InitializeComponent();
             this.mapControl = mapControl;
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.radShapeFile.IsChecked = true;
             mapControl.SizeChanged += mapControl_SizeChanged;
 
@@ -157,10 +163,10 @@ namespace EpiDashboard.Controls
 
                     if (Mapprovider == null)
                     {
-                        Mapprovider = new Mapping.MapServerLayerProvider(myMap);
+                        Mapprovider = new Mapping.MapServerLayerProvider(_mapView);
                     }
                     ILayerProperties layerProperties = null;
-                    layerProperties = new MapServerLayerProperties(myMap);                    
+                    layerProperties = new MapServerLayerProperties(_mapView);                    
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     this.serverlayerprop = (MapServerLayerProperties)layerProperties;
                     serverlayerprop.provider = Mapprovider;

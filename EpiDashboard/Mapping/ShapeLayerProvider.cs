@@ -125,17 +125,17 @@ namespace EpiDashboard.Mapping
 
             if (shapeFileExtent.SpatialReference == null)
             {
-                _mapView.Extent = shapeFileExtent;
+                ////////////_mapView.Extent = shapeFileExtent;
             }
             else
             {
-                if (shapeFileExtent.SpatialReference.WKID == 4326)
+                if (shapeFileExtent.SpatialReference.Wkid == 4326)
                 {
-                    _mapView.Extent = new Envelope
-                    (
-                        ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)),
-                        ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax))
-                    );
+                    //_mapView.Extent = new Envelope
+                    //(
+                    //    ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)),
+                    //    ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax))
+                    //);
                 }
             }
         }
@@ -159,9 +159,8 @@ namespace EpiDashboard.Mapping
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
             SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
+            symbol.Color = brush.Color;
+            symbol.Style = SimpleFillStyle.Solid;
             return symbol;
         }
 
@@ -169,10 +168,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                myMap.Layers.Remove(graphicsLayer);
+                _mapView.Map.Layers.Remove(graphicsLayer);
             }
         }
 

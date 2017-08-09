@@ -8,8 +8,11 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 using EpiDashboard.Mapping.ShapeFileReader;
 
@@ -17,9 +20,9 @@ namespace EpiDashboard.Mapping
 {
     public abstract class ChoroplethLayerProvider
     {
-        public ChoroplethLayerProvider(Map myMap)
+        public ChoroplethLayerProvider(MapView mapView)
         {
-            ArcGIS_Map = myMap;
+            ArcGIS_MapView = mapView;
             if (_layerId == Guid.Empty)
             {
                 _layerId = Guid.NewGuid();
@@ -53,11 +56,11 @@ namespace EpiDashboard.Mapping
             set { _rangeValues = value; }
         }
 
-        Map arcGIS_Map;
-        public Map ArcGIS_Map
+        MapView arcGIS_MapView;
+        public MapView ArcGIS_MapView
         {
-            get { return arcGIS_Map; }
-            set { arcGIS_Map = value; }
+            get { return arcGIS_MapView; }
+            set { arcGIS_MapView = value; }
         }
 
         bool _useCustomColors;
@@ -170,7 +173,7 @@ namespace EpiDashboard.Mapping
             GraphicsLayer graphicsLayer = GetGraphicsLayer();
             if (graphicsLayer != null)
             {
-                ArcGIS_Map.Layers.Remove(graphicsLayer);
+                ArcGIS_MapView.Map.Layers.Remove(graphicsLayer);
                 if (LegendStackPanel != null)
                 {
                     LegendStackPanel.Children.Clear();
@@ -180,23 +183,23 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            Layer layer = ArcGIS_Map.Layers[_layerId.ToString()];
-            int currentIndex = ArcGIS_Map.Layers.IndexOf(layer);
-            if (currentIndex < ArcGIS_Map.Layers.Count - 1)
+            Layer layer = ArcGIS_MapView.Map.Layers[_layerId.ToString()];
+            int currentIndex = ArcGIS_MapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < ArcGIS_MapView.Map.Layers.Count - 1)
             {
-                ArcGIS_Map.Layers.Remove(layer);
-                ArcGIS_Map.Layers.Insert(currentIndex + 1, layer);
+                ArcGIS_MapView.Map.Layers.Remove(layer);
+                ArcGIS_MapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = ArcGIS_Map.Layers[_layerId.ToString()];
-            int currentIndex = ArcGIS_Map.Layers.IndexOf(layer);
+            Layer layer = ArcGIS_MapView.Map.Layers[_layerId.ToString()];
+            int currentIndex = ArcGIS_MapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                ArcGIS_Map.Layers.Remove(layer);
-                ArcGIS_Map.Layers.Insert(currentIndex - 1, layer);
+                ArcGIS_MapView.Map.Layers.Remove(layer);
+                ArcGIS_MapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -508,9 +511,8 @@ namespace EpiDashboard.Mapping
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
             SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
+            symbol.Color = brush.Color;
+            symbol.Style = SimpleFillStyle.Solid;
             return symbol;
         }
 
@@ -914,10 +916,9 @@ namespace EpiDashboard.Mapping
 
                             SimpleFillSymbol symbol = new SimpleFillSymbol();
 
-                            symbol.Fill = fill;
-                            symbol.BorderBrush = new SolidColorBrush(Colors.Black);
-                            symbol.BorderThickness = 1;
-
+                            symbol.Color = ((SolidColorBrush)fill).Color;
+                            symbol.Style = SimpleFillStyle.Solid;
+                            
                             graphicFeature.Symbol = symbol;
                         }
 
@@ -941,7 +942,7 @@ namespace EpiDashboard.Mapping
                         panel.Children.Add(t);
                         border.Child = panel;
 
-                        graphicFeature.MapTip = border;
+                        //////graphicFeature.MapTip = border;
 
                         if (graphicFeature.Attributes.Keys.Contains("EpiInfoValCol"))
                         {
@@ -971,8 +972,8 @@ namespace EpiDashboard.Mapping
                         for(int i = 0;  i < _thematicItem.RangeStarts.Count; i++)
                         {
                             ClassBreakInfo classBreakInfo = new ClassBreakInfo();
-                            classBreakInfo.MinimumValue = double.Parse(RangeValues[i, 0]);
-                            classBreakInfo.MaximumValue = double.Parse(RangeValues[i, 1]);
+                            classBreakInfo.Minimum = double.Parse(RangeValues[i, 0]);
+                            classBreakInfo.Maximum = double.Parse(RangeValues[i, 1]);
 
                             color = ((SolidColorBrush)brushList[i]).Color;
                             fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
@@ -984,7 +985,7 @@ namespace EpiDashboard.Mapping
                                 BorderThickness = 1
                             };
 
-                            renderer.Classes.Add(classBreakInfo);
+                            renderer.Infos.Add(classBreakInfo);
                         }
 
                         graphicsLayer.Renderer = renderer;
