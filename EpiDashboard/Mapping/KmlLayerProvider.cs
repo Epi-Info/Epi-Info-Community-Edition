@@ -33,15 +33,15 @@ namespace EpiDashboard.Mapping
 
     public class KmlLayerProvider : ILayerProvider
     {
-        private Map myMap;
+        private MapView _mapView;
         private Guid layerId;
         private string url;
         private int[] visibleLayers;
         private List<GraphicsLayer> graphicsLayers;
 
-        public KmlLayerProvider(Map myMap)
+        public KmlLayerProvider(MapView mapView)
         {
-            this.myMap = myMap;
+            _mapView = mapView;
             this.layerId = Guid.NewGuid();
             graphicsLayers = new List<GraphicsLayer>();
         }
@@ -90,7 +90,7 @@ namespace EpiDashboard.Mapping
 
             shapeLayer = new KmlLayer();
             shapeLayer.ID = layerId.ToString();
-            shapeLayer.Url = new Uri(url);
+            shapeLayer.SourceUri = url;
             shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
             if (visibleLayers != null)
             {
@@ -98,7 +98,7 @@ namespace EpiDashboard.Mapping
             }
             _mapView.Map.Layers.Add(shapeLayer);
 
-            myMap.Extent = shapeLayer.FullExtent;
+            _mapView.Extent = shapeLayer.FullExtent;
         }
 
         void shapeLayer_Initialized(object sender, EventArgs e)
@@ -139,10 +139,18 @@ namespace EpiDashboard.Mapping
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
-            SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
+            SimpleFillSymbol symbol = new SimpleFillSymbol()
+            {
+                Color = brush.Color,
+                Style = SimpleFillStyle.Solid,
+                Outline = new SimpleLineSymbol()
+                {
+                    Color = Colors.Gray,
+                    Style = SimpleLineStyle.Solid,
+                    Width = 1
+                }
+            };
+
             return symbol;
         }
 

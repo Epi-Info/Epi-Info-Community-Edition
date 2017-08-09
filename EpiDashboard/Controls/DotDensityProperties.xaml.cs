@@ -732,7 +732,7 @@ namespace EpiDashboard.Controls
 
                 if (KMLprovider == null)
                 {
-                    KMLprovider = new Mapping.DotDensityKmlLayerProvider(myMap);
+                    KMLprovider = new Mapping.DotDensityKmlLayerProvider(_mapView);
                     KMLprovider.FeatureLoaded += new FeatureLoadedHandler(KMLprovider_FeatureLoaded);
                 }
                 object[] kmlFileProperties = KMLprovider.LoadKml(KMLMapServerName);
@@ -744,7 +744,7 @@ namespace EpiDashboard.Controls
                         ILayerProperties layerProperties = null;
                         if (DashboardHelper == null)
                             DashboardHelper = dashboardHelper;
-                        layerProperties = new DotDensityKmlLayerProperties(myMap, this.DashboardHelper, this.mapControl);
+                        layerProperties = new DotDensityKmlLayerProperties(_mapView, this.DashboardHelper, this.mapControl);
                         layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                         layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
                         layerProperties.EditRequested += new EventHandler(this.mapControl.ILayerProperties_EditRequested);
@@ -1127,7 +1127,7 @@ namespace EpiDashboard.Controls
                     MapVisibleLayer = visibleLayer;
                     if (Mapprovider == null)
                     {
-                        Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
+                        Mapprovider = new Mapping.DotDensityServerLayerProvider(_mapView);
                         Mapprovider.FeatureLoaded += new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
                     }
                     object[] mapFileProperties = Mapprovider.LoadShapeFile(MapServerName + "/" + MapVisibleLayer);
@@ -1137,7 +1137,7 @@ namespace EpiDashboard.Controls
                         if (serverlayerprop == null)
                         {
                             ILayerProperties layerProperties = null;
-                            layerProperties = new DotDensityServerLayerProperties(myMap, this.DashboardHelper, this.mapControl);
+                            layerProperties = new DotDensityServerLayerProperties(_mapView, this.DashboardHelper, this.mapControl);
                             layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                             layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
                             layerProperties.EditRequested += new EventHandler(this.mapControl.ILayerProperties_EditRequested);

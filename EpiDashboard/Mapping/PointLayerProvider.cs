@@ -52,7 +52,7 @@ namespace EpiDashboard.Mapping
         private Guid layerId;
         private Color pointColor;
         private SpatialReference geoReference;
-        private SimpleMarkerSymbol.SimpleMarkerStyle style;
+        private SimpleMarkerStyle style;
         private StackPanel legendStackPanel;
 
 

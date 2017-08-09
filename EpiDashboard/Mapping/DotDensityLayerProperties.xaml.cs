@@ -13,7 +13,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
-
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 namespace EpiDashboard.Mapping
 {
     /// <summary>
@@ -21,7 +25,7 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class DotDensityLayerProperties : UserControl, ILayerProperties
     {
-        private ESRI.ArcGIS.Client.Map myMap;
+        private MapView _mapView;
         private DashboardHelper dashboardHelper;
         public DotDensityLayerProvider provider;
         private System.Xml.XmlElement currentElement;
@@ -35,10 +39,10 @@ namespace EpiDashboard.Mapping
         public string shapeFilePath;
         public IDictionary<string, object> shapeAttributes;
 
-        public DotDensityLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public DotDensityLayerProperties(MapView _mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
-            this.myMap = myMap;
+            this._mapView = _mapView;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;           
             FillComboBoxes();
@@ -265,7 +269,7 @@ namespace EpiDashboard.Mapping
                 {
                     if (provider == null)
                     {
-                        provider = new DotDensityLayerProvider(myMap);
+                        provider = new DotDensityLayerProvider(_mapView);
                     }
                     object[] shapeFileProperties = provider.LoadShapeFile(child.InnerText);
                     if (shapeFileProperties != null)

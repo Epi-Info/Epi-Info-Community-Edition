@@ -211,10 +211,10 @@ namespace EpiDashboard.Controls
                 KMLMapServerName = txtKMLpath.Text;
                 if (KMLprovider == null)
                 {
-                    KMLprovider = new Mapping.KmlLayerProvider(myMap);
+                    KMLprovider = new Mapping.KmlLayerProvider(_mapView);
                 }
                 ILayerProperties layerProperties = null;
-                layerProperties = new KmlLayerProperties(myMap);               
+                layerProperties = new KmlLayerProperties(_mapView);               
                 layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                 this.kmllayerprop = (KmlLayerProperties)layerProperties;
                 kmllayerprop.provider = KMLprovider;

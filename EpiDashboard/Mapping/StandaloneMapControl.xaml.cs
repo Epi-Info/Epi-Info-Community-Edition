@@ -18,6 +18,8 @@ using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.Toolkit;
+using Esri.ArcGISRuntime.Toolkit.Controls;
 
 using Epi;
 using Epi.Data;
@@ -60,16 +62,16 @@ namespace EpiDashboard.Mapping
 
         private BackgroundWorker worker;
         private BackgroundWorker openDefaultMapWorker;
-        private Map myMap;
+        private MapView _mapView;
         private MapPoint rightClickedPoint;
         private delegate void RenderMapDelegate(string url);
         private delegate void SimpleDelegate();
         private delegate void DebugDelegate(string debugMsg);
-        private TimeSlider slider;
+        //////////private TimeSlider slider;
         private DataFilteringControl dataFilteringControl;
         private LayerList layerList;
         private string currentTimeVariable;
-        private Navigation nav;
+        ////////////private Navigation nav;
         private string defaultMapPath = string.Empty;
         private MapBackgroundType defaultBackgroundType = MapBackgroundType.Satellite;
         private bool bypassInternetCheck;
@@ -84,7 +86,7 @@ namespace EpiDashboard.Mapping
         public double ResizedHeight { get; set; }
 
         //Create a new ScaleLine Control and add it to the LayoutRoot (a Grid in the XAML)
-        ESRI.ArcGIS.Client.Toolkit.ScaleLine ScaleLine1 = new ESRI.ArcGIS.Client.Toolkit.ScaleLine();
+        ScaleLine ScaleLine1 = new ScaleLine();
 
         public StandaloneMapControl()
         {
@@ -234,12 +236,12 @@ namespace EpiDashboard.Mapping
 
         void MapContainer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (myMap != null)
+            if (_mapView != null)
             {
-                if (myMap.IsEnabled)
+                if (_mapView.IsEnabled)
                 {
-                    myMap.Width = e.NewSize.Width;
-                    myMap.Height = e.NewSize.Height;
+                    _mapView.Width = e.NewSize.Width;
+                    _mapView.Height = e.NewSize.Height;
                 }
             }
 
@@ -332,7 +334,7 @@ namespace EpiDashboard.Mapping
                 txtLoading.Visibility = Visibility.Collapsed;
                 waitCursor.Visibility = Visibility.Collapsed;
 
-                ESRI.ArcGIS.Client.Bing.TileLayer layer = new TileLayer();
+                BingLayer layer = new BingLayer();
                 layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
 
                 bool sparse_connection = false;
@@ -407,25 +409,25 @@ namespace EpiDashboard.Mapping
                 mnuClear.Click += new RoutedEventHandler(mnuClear_Click);
                 menu.Items.Add(mnuClear);
 
-                myMap = new Map();
-                myMap.Background = Brushes.White;
-                myMap.Height = MapContainer.ActualHeight;
-                myMap.Width = MapContainer.ActualWidth;
-                myMap.WrapAround = true;
-                myMap.ContextMenu = menu;
+                _mapView = new MapView();
+                _mapView.Background = Brushes.White;
+                _mapView.Height = MapContainer.ActualHeight;
+                _mapView.Width = MapContainer.ActualWidth;
+                _mapView.WrapAround = true;
+                _mapView.ContextMenu = menu;
                 _mapView.Map.Layers.Add(layer);
                 _mapView.Map.Layers.Add(pointLayer);
                 _mapView.Map.Layers.Add(textLayer);
                 _mapView.Map.Layers.Add(zoneLayer);
 
-                myMap.MouseMove += new MouseEventHandler(myMap_MouseMove);
-                myMap.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
-                myMap.Loaded += new RoutedEventHandler(myMap_Loaded);
-                myMap.ExtentChanged += myMap_ExtentChanged;
+                _mapView.MouseMove += new MouseEventHandler(myMap_MouseMove);
+                _mapView.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
+                _mapView.Loaded += new RoutedEventHandler(myMap_Loaded);
+                _mapView.ExtentChanged += myMap_ExtentChanged;
 
-                myMap.RotationChanged += myMap_RotationChanged;
+                _mapView.RotationChanged += myMap_RotationChanged;
 
-                MapContainer.Children.Add(myMap);
+                MapContainer.Children.Add(_mapView);
 
                 ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
                 extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
@@ -798,17 +800,17 @@ namespace EpiDashboard.Mapping
 
         private void SetBackgroundColor(Brush brush)
         {
-            if (grdMapDef != null && myMap != null)
+            if (grdMapDef != null && _mapView != null)
             {
                 grdMapDef.Background = brush;
-                myMap.Background = brush;
+                _mapView.Background = brush;
             }
         }
 
         void layer_InitializationFailed(object sender, EventArgs e)
         {
-            myMap.IsEnabled = false;
-            nav.Visibility = System.Windows.Visibility.Collapsed;
+            _mapView.IsEnabled = false;
+            ////////////nav.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private enum LayerType
@@ -908,13 +910,13 @@ namespace EpiDashboard.Mapping
             switch (layerType)
             {
                 case LayerType.Marker:
-                    layerProperties = new MarkerProperties(myMap, rightClickedPoint);
+                    layerProperties = new MarkerProperties(_mapView, rightClickedPoint);
                     break;
                 case LayerType.Zone:
-                    layerProperties = new ZoneProperties(myMap, rightClickedPoint);
+                    layerProperties = new ZoneProperties(_mapView, rightClickedPoint);
                     break;
                 case LayerType.Text:
-                    layerProperties = new TextProperties(myMap, rightClickedPoint);
+                    layerProperties = new TextProperties(_mapView, rightClickedPoint);
                     break;
                 default:
                     if (DataSourceRequested != null)
@@ -942,31 +944,31 @@ namespace EpiDashboard.Mapping
                             switch (layerType)
                             {
                                 case LayerType.CaseCluster:
-                                    layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new ClusterLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethShapeFile:
-                                    layerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new ChoroplethShapeLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethMapServer:
-                                    layerProperties = new ChoroplethServerLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new ChoroplethServerLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethKml:
-                                    layerProperties = new ChoroplethKmlLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new ChoroplethKmlLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityKml:
-                                    layerProperties = new DotDensityKmlLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new DotDensityKmlLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityShapeFile:
-                                    layerProperties = new DotDensityLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new DotDensityLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityMapServer:
-                                    layerProperties = new DotDensityServerLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new DotDensityServerLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                                 case LayerType.PointMap:
-                                    layerProperties = new PointLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new PointLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                                 default:
-                                    layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
+                                    layerProperties = new ClusterLayerProperties(_mapView, dashboardHelper, this);
                                     break;
                             }
                         }
@@ -1160,7 +1162,7 @@ namespace EpiDashboard.Mapping
                 }
             }
 
-            layerList = new LayerList(myMap, null, null, null);
+            layerList = new LayerList(_mapView, null, null, null);
             layerList.Loaded += new RoutedEventHandler(layerList_Loaded);
             layerList.SizeChanged += new SizeChangedEventHandler(layerList_SizeChanged);
             layerList.MouseEnter += new MouseEventHandler(layerList_MouseEnter);
@@ -2581,7 +2583,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, _mapView);
 
             dotdensityproperties.Width = 800;
             dotdensityproperties.Height = 600;

@@ -30,9 +30,9 @@ namespace EpiDashboard.Mapping
     {
 
         private TextProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private MapView _mapView;
         private System.Drawing.Font font;
-        private ESRI.ArcGIS.Client.Geometry.MapPoint point;
+        private MapPoint point;
         private bool isReadOnlyMode;
 
         public event EventHandler MapGenerated;
@@ -40,15 +40,15 @@ namespace EpiDashboard.Mapping
         public event EventHandler EditRequested;
 
 
-        public TextProperties(ESRI.ArcGIS.Client.Map myMap, ESRI.ArcGIS.Client.Geometry.MapPoint point)
+        public TextProperties(MapView mapView, MapPoint point)
         {
             InitializeComponent();
             isReadOnlyMode = false;
 
-            this.myMap = myMap;
+            _mapView = mapView;
             this.point = point;
 
-            provider = new TextProvider(myMap, point);
+            provider = new TextProvider(mapView, point);
             txtFont.TextChanged += new TextChangedEventHandler(config_TextChanged);
             txtText.TextChanged += new TextChangedEventHandler(config_TextChanged);
             rctColor.MouseUp += new MouseButtonEventHandler(rctColor_MouseUp);
