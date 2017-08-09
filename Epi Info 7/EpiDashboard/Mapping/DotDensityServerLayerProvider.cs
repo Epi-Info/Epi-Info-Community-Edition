@@ -34,7 +34,7 @@ namespace EpiDashboard.Mapping
 
         #region DotDensity
 
-        private Map myMap;
+        private MapView _mapView;
         private DashboardHelper dashboardHelper;
         private string shapeKey;
         private string dataKey;
@@ -45,9 +45,9 @@ namespace EpiDashboard.Mapping
         private string url;
         private bool flagupdatetoglfailed;
 
-        public DotDensityServerLayerProvider(Map myMap)
+        public DotDensityServerLayerProvider(MapView mapView)
         {
-            this.myMap = myMap;
+            _mapView = mapView;
             this.layerId = Guid.NewGuid();
         }
 
@@ -345,7 +345,7 @@ namespace EpiDashboard.Mapping
                                 bool foundBottomRight = false;
                                 bool foundTopLeft = false;
                                 bool foundTopRight = false;
-                                foreach (ESRI.ArcGIS.Client.Geometry.PointCollection pc in ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings)
+                                foreach (Esri.ArcGISRuntime.Geometry.PointCollection pc in ((Esri.ArcGISRuntime.Geometry.Polygon)graphicFeature.Geometry).Rings)
                                 {
                                     foundBottomLeft = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
                                     foundBottomRight = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);

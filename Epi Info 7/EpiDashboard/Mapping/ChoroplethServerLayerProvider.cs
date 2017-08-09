@@ -21,7 +21,7 @@ namespace EpiDashboard.Mapping
 
     public class ChoroplethServerLayerProvider : ChoroplethLayerProvider , IChoroLayerProvider
     {
-        public ChoroplethServerLayerProvider(MapView clientMapView) : base(clientMap)
+        public ChoroplethServerLayerProvider(MapView clientMapView) : base(clientMapView)
         {
         }
         
@@ -52,18 +52,18 @@ namespace EpiDashboard.Mapping
         {
             if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
-                FeatureLayer graphicsLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as FeatureLayer;
+                FeatureLayer graphicsLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as FeatureLayer;
                 if (graphicsLayer != null)
                 {
-                    ArcGIS_MapView.Layers.Remove(graphicsLayer);
+                    ArcGIS_MapView.Map.Layers.Remove(graphicsLayer);
                 }
 
                 graphicsLayer = new FeatureLayer();
                 graphicsLayer.ID = LayerId.ToString();
-                graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
-                graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
-                graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);
-                graphicsLayer.UpdateFailed += new EventHandler<TaskFailedEventArgs>(graphicsLayer_UpdateFailed);
+                ////////////graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
+                ////////////graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
+                ////////////graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);
+                ////////////graphicsLayer.UpdateFailed += new EventHandler<TaskFailedEventArgs>(graphicsLayer_UpdateFailed);
 
                 //if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - New York County Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13"))
                 //{
@@ -96,10 +96,10 @@ namespace EpiDashboard.Mapping
                 //}
                 //else
                 //{
-                    graphicsLayer.Url = boundrySourceLocation;
+                   /////////// graphicsLayer.Url = boundrySourceLocation;
                 //}
 
-                ArcGIS_MapView.Layers.Add(graphicsLayer);
+                ArcGIS_MapView.Map.Layers.Add(graphicsLayer);
                 ArcGIS_MapView.Cursor = Cursors.Wait;
 
                 return new object[] { boundrySourceLocation, graphicsLayer};
@@ -110,11 +110,11 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
-        {
-            ArcGIS_MapView.Cursor = Cursors.Arrow;
-            _flagUpdateToGraphicsLayerFailed = true;
-        }
+        ////////////void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
+        ////////////{
+        ////////////    ArcGIS_MapView.Cursor = Cursors.Arrow;
+        ////////////    _flagUpdateToGraphicsLayerFailed = true;
+        ////////////}
 
         void graphicsLayer_InitializationFailed(object sender, EventArgs e)
         {
@@ -128,24 +128,24 @@ namespace EpiDashboard.Mapping
             //x++;
         }
 
-        void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
-        {
-            FeatureLayer graphicsLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as FeatureLayer;
-            _flagUpdateToGraphicsLayerFailed = false;
+        ////////////void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
+        ////////////{
+        ////////////    FeatureLayer graphicsLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as FeatureLayer;
+        ////////////    _flagUpdateToGraphicsLayerFailed = false;
             
-            if (graphicsLayer != null)
-            {
-                if (graphicsLayer.Graphics.Count > 0)
-                {
-                    if (FeatureLoaded != null)
-                    {
-                        FeatureLoaded(graphicsLayer.Url, graphicsLayer.Graphics[0].Attributes);
-                    }
-                }
-            }
+        ////////////    if (graphicsLayer != null)
+        ////////////    {
+        ////////////        if (graphicsLayer.Graphics.Count > 0)
+        ////////////        {
+        ////////////            if (FeatureLoaded != null)
+        ////////////            {
+        ////////////                FeatureLoaded(graphicsLayer.Url, graphicsLayer.Graphics[0].Attributes);
+        ////////////            }
+        ////////////        }
+        ////////////    }
             
-            ArcGIS_MapView.Cursor = Cursors.Arrow;
-        }
+        ////////////    ArcGIS_MapView.Cursor = Cursors.Arrow;
+        ////////////}
 
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
         {
@@ -155,7 +155,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer()
         {
-            GraphicsLayer graphicsLayer = ArcGIS_MapView.Layers[LayerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as GraphicsLayer;
             return graphicsLayer;
         }
     }

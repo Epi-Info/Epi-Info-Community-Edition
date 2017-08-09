@@ -29,7 +29,7 @@ namespace EpiDashboard.Mapping
     {
 
         public PointLayerProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private MapView _mapView;
         private DashboardHelper dashboardHelper;
 
         public event EventHandler MapGenerated;
@@ -41,17 +41,17 @@ namespace EpiDashboard.Mapping
         private bool flagrunedit;
         private StackPanel legendStackPanel;
 
-        public PointLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public PointLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
 
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
 
-            provider = new PointLayerProvider(myMap);
+            provider = new PointLayerProvider(_mapView);
             provider.DateRangeDefined += new DateRangeDefinedHandler(provider_DateRangeDefined);
             provider.RecordSelected += new RecordSelectedHandler(provider_RecordSelected);
             cbxLatitude.SelectionChanged += new SelectionChangedEventHandler(coord_SelectionChanged);
@@ -156,7 +156,7 @@ namespace EpiDashboard.Mapping
         {
             if (cbxLatitude.SelectedIndex != -1 && cbxLongitude.SelectedIndex != -1)
             {
-                provider.RenderPointMap(dashboardHelper, cbxLatitude.SelectedItem.ToString(), cbxLongitude.SelectedItem.ToString(), rctColor.Fill, null, (SimpleMarkerSymbol.SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerSymbol.SimpleMarkerStyle), cbxStyle.SelectedItem.ToString()), txtDescription.Text);
+                provider.RenderPointMap(dashboardHelper, cbxLatitude.SelectedItem.ToString(), cbxLongitude.SelectedItem.ToString(), rctColor.Fill, null, (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle), cbxStyle.SelectedItem.ToString()), txtDescription.Text);
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
@@ -187,7 +187,7 @@ namespace EpiDashboard.Mapping
                 cbxLongitude.SelectedIndex = -1;
             }
 
-            cbxStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerSymbol.SimpleMarkerStyle));
+            cbxStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerStyle));
             cbxStyle.SelectedIndex = 0;
         }
 

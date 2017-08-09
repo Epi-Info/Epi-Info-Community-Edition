@@ -33,7 +33,7 @@ namespace EpiDashboard.Mapping
 
     public class TextProvider : ILayerProvider
     {
-        private Map myMap;
+        private MapView _mapView;
         private Guid layerId;
         MapPoint point;
         System.Drawing.Font font; 
@@ -41,9 +41,9 @@ namespace EpiDashboard.Mapping
         string text;
 
 
-        public TextProvider(Map myMap, MapPoint point)
+        public TextProvider(MapView mapView, MapPoint point)
         {
-            this.myMap = myMap;
+            _mapView = mapView;
             this.point = point;
             this.layerId = Guid.NewGuid();
         }
@@ -53,7 +53,7 @@ namespace EpiDashboard.Mapping
             GraphicsLayer textLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (textLayer != null)
             {
-                textLayer.ClearGraphics();
+                textLayer.Graphics.Clear();
                 RenderText(this.font, this.fontColor, this.text);
             }
         }
@@ -105,11 +105,19 @@ namespace EpiDashboard.Mapping
         {
             get
             {
+                Color color = ((SolidColorBrush)fontColor).Color;
+
                 TextSymbol textSymbol = new TextSymbol()
                 {
-                    FontFamily = new System.Windows.Media.FontFamily(font.FontFamily.Name),
-                    Foreground = fontColor,
-                    FontSize = double.Parse(font.Size.ToString()),
+                    Font = new SymbolFont()
+                    {
+                        FontStyle = SymbolFontStyle.Normal,
+                        FontWeight = SymbolFontWeight.Normal,
+                        FontFamily = font.FontFamily.Name,
+                        FontSize = double.Parse(font.Size.ToString())
+                    },
+
+                    Color = color,
                     Text = text
                 };
                 return textSymbol;

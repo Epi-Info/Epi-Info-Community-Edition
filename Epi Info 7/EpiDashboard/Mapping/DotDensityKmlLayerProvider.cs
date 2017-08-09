@@ -34,7 +34,7 @@ namespace EpiDashboard.Mapping
 
         #region DotDensity
 
-        private Map myMap;
+        private MapView _mapView;
         private DashboardHelper dashboardHelper;
         private string shapeKey;
         private string dataKey;
@@ -45,9 +45,9 @@ namespace EpiDashboard.Mapping
         private List<GraphicsLayer> graphicsLayers;
         private string url;
 
-        public DotDensityKmlLayerProvider(Map myMap)
+        public DotDensityKmlLayerProvider(MapView mapView)
         {
-            this.myMap = myMap;
+            _mapView = mapView;
             this.layerId = Guid.NewGuid();
             graphicsLayers = new List<GraphicsLayer>();
         }
@@ -129,12 +129,12 @@ namespace EpiDashboard.Mapping
                 }
 
                 shapeLayer = new KmlLayer();
-                shapeLayer.ID = layerId.ToString();
-                shapeLayer.Url = new Uri(url);
+                shapeLayer.ID = layerId.ToString(); 
+                shapeLayer.SourceUri = url;
                 shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
                 _mapView.Map.Layers.Add(shapeLayer);
 
-                myMap.Extent = shapeLayer.FullExtent;
+                _mapView.Extent = shapeLayer.FullExtent;
                 return new object[] { shapeLayer };
             }
             else return null;
@@ -191,17 +191,17 @@ namespace EpiDashboard.Mapping
 
         private void FindGraphicsLayers(KmlLayer kmlLayer)
         {
-            foreach (Layer layer in kmlLayer.ChildLayers)
-            {
-                if (layer is GraphicsLayer)
-                {
-                    graphicsLayers.Add((GraphicsLayer)layer);
-                }
-                else if (layer is KmlLayer)
-                {
-                    FindGraphicsLayers((KmlLayer)layer);
-                }
-            }
+            ////////////foreach (Layer layer in kmlLayer.ChildLayers)
+            //////////////{
+            //////////////    if (layer is GraphicsLayer)
+            //////////////    {
+            //////////////        graphicsLayers.Add((GraphicsLayer)layer);
+            //////////////    }
+            //////////////    else if (layer is KmlLayer)
+            //////////////    {
+            //////////////        FindGraphicsLayers((KmlLayer)layer);
+            //////////////    }
+            //////////////}
         }
 
 

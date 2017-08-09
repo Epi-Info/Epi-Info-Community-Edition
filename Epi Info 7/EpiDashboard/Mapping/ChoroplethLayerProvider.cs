@@ -964,9 +964,14 @@ namespace EpiDashboard.Mapping
 
                         renderer.DefaultSymbol = new SimpleFillSymbol()
                         {
-                            Fill = fill,
-                            BorderBrush = new SolidColorBrush(Colors.Black),
-                            BorderThickness = 1
+                            Color = ((SolidColorBrush)fill).Color,
+                            Style = SimpleFillStyle.Solid,
+                            Outline = new SimpleLineSymbol()
+                            {
+                                Color = Colors.Black,
+                                Style = SimpleLineStyle.Solid,
+                                Width = 1
+                            }
                         };
 
                         for(int i = 0;  i < _thematicItem.RangeStarts.Count; i++)
@@ -980,9 +985,14 @@ namespace EpiDashboard.Mapping
 
                             classBreakInfo.Symbol = new SimpleFillSymbol()
                             {
-                                Fill = fill,
-                                BorderBrush = new SolidColorBrush(Colors.Black),
-                                BorderThickness = 1
+                                Color = ((SolidColorBrush)fill).Color,
+                                Style = SimpleFillStyle.Solid,
+                                Outline = new SimpleLineSymbol()
+                                {
+                                    Color = Colors.Black,
+                                    Style = SimpleLineStyle.Solid,
+                                    Width = 1
+                                }
                             };
 
                             renderer.Infos.Add(classBreakInfo);
