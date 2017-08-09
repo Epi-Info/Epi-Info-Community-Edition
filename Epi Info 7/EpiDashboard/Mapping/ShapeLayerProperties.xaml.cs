@@ -11,7 +11,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client.Symbols;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+
 using Epi;
 using Epi.Fields;
 
@@ -39,7 +44,7 @@ namespace EpiDashboard.Mapping
 
             this.myMap = myMap;
 
-            // provider = new ShapeLayerProvider(myMap);
+            // provider = new ShapeLayerProvider(_mapView);
 
             #region Translation
             lblTitle.Content = DashboardSharedStrings.GADGET_SHAPEFILE;

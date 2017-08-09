@@ -16,14 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Toolkit.DataSources;
-using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
-using ESRI.ArcGIS.Client.Bing;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Tasks;
+
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Controls;
+
 using Epi;
 using Epi.Data;
 
@@ -55,17 +51,17 @@ namespace EpiDashboard.Mapping
 
        /* public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            Layer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Layers[layerId.ToString()];
+            Layer dotLayer = _mapView.Layers[layerId.ToString() + "_dotLayer"];
+            int currentIndex = _mapView.Layers.IndexOf(layer);
+            int currentDotIndex = _mapView.Layers.IndexOf(dotLayer);
+            if (currentIndex < _mapView.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
-                // int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
-                myMap.Layers.Remove(dotLayer);
-                myMap.Layers.Insert(currentDotIndex + 1, dotLayer);
+                _mapView.Layers.Remove(layer);
+                _mapView.Layers.Insert(currentIndex + 1, layer);
+                // int currentDotIndex = _mapView.Layers.IndexOf(dotLayer);
+                _mapView.Layers.Remove(dotLayer);
+                _mapView.Layers.Insert(currentDotIndex + 1, dotLayer);
             }
         }*/
 
@@ -82,16 +78,16 @@ namespace EpiDashboard.Mapping
 
        /* public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            Layer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            int currentDotIndex = myMap.Layers.IndexOf(dotLayer);
+            Layer layer = _mapView.Layers[layerId.ToString()];
+            Layer dotLayer = _mapView.Layers[layerId.ToString() + "_dotLayer"];
+            int currentIndex = _mapView.Layers.IndexOf(layer);
+            int currentDotIndex = _mapView.Layers.IndexOf(dotLayer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
-                myMap.Layers.Remove(dotLayer);
-                myMap.Layers.Insert(currentDotIndex - 1, dotLayer);
+                _mapView.Layers.Remove(layer);
+                _mapView.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Layers.Remove(dotLayer);
+                _mapView.Layers.Insert(currentDotIndex - 1, dotLayer);
             }
         }*/
 

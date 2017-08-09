@@ -1,9 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Media;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+
 using EpiDashboard.Mapping.ShapeFileReader;
 
 namespace EpiDashboard.Mapping
@@ -11,45 +15,45 @@ namespace EpiDashboard.Mapping
 
     public class ShapeLayerProvider : ILayerProvider
     {
-        private Map myMap;
+        private MapView _mapView;
         private Guid layerId;
         private string fileName;
 
-        public ShapeLayerProvider(Map myMap)
+        public ShapeLayerProvider(MapView mapView)
         {
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.layerId = Guid.NewGuid();
         }
 
         public void Refresh()
         {
-            GraphicsLayer markerLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer markerLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (markerLayer != null)
             {
-                markerLayer.ClearGraphics();
+                markerLayer.Graphics.Clear();
                 RenderShape(this.fileName);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < _mapView.Map.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -57,14 +61,14 @@ namespace EpiDashboard.Mapping
         {
             this.fileName = fileName;
 
-            GraphicsLayer shapeLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer shapeLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (shapeLayer != null)
             {
-                myMap.Layers.Remove(shapeLayer);
+                _mapView.Map.Layers.Remove(shapeLayer);
             }
             shapeLayer = new GraphicsLayer();
             shapeLayer.ID = layerId.ToString();
-            myMap.Layers.Add(shapeLayer);
+            _mapView.Map.Layers.Add(shapeLayer);
 
             //Get the file info objects for the SHP and the DBF file selected by the user
             FileInfo shapeFile = new FileInfo(fileName);
@@ -116,16 +120,22 @@ namespace EpiDashboard.Mapping
                 }
                 counter += rgbFactor;
             }
+            
             Envelope shapeFileExtent = shapeFileReader.GetExtent();
+
             if (shapeFileExtent.SpatialReference == null)
             {
-                myMap.Extent = shapeFileExtent;
+                _mapView.Extent = shapeFileExtent;
             }
             else
             {
                 if (shapeFileExtent.SpatialReference.WKID == 4326)
                 {
-                    myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                    _mapView.Extent = new Envelope
+                    (
+                        ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)),
+                        ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax))
+                    );
                 }
             }
         }

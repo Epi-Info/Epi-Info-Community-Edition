@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Client.Symbols;
+using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping
 {
@@ -47,13 +47,17 @@ namespace EpiDashboard.Mapping
         {
             get
             {
-                TextSymbol textSymbol = new TextSymbol()
-                {
-                    FontFamily = new System.Windows.Media.FontFamily(txtFont.Text),
-                    Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(pictureBox1.BackColor.R, pictureBox1.BackColor.G, pictureBox1.BackColor.B)),
-                    FontSize = double.Parse(selectedFont.Size.ToString()), 
-                    Text = txtText.Text
-                };
+                TextSymbol textSymbol = new TextSymbol();
+               
+                textSymbol.Font = new SymbolFont(
+                    txtFont.Text,
+                    double.Parse(selectedFont.Size.ToString())
+                );
+
+                textSymbol.Color = System.Windows.Media.Color.FromRgb(pictureBox1.BackColor.R, pictureBox1.BackColor.G, pictureBox1.BackColor.B);
+                
+                Text = txtText.Text;
+                
                 return textSymbol;
             }
         }

@@ -19,7 +19,7 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class LayerListItem : UserControl
     {
-        private ESRI.ArcGIS.Client.Map myMap;
+        private Esri.ArcGISRuntime.Controls.Map myMap;
         private Epi.View view;
         private Epi.Data.IDbDriver db;
         private DashboardHelper dashboardHelper;
@@ -29,7 +29,7 @@ namespace EpiDashboard.Mapping
         public event EventHandler MapGenerated;
         private MapControl mapControl;
 
-        public LayerListItem(ESRI.ArcGIS.Client.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper, MapControl mapControl)
+        public LayerListItem(Esri.ArcGISRuntime.Controls.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper, MapControl mapControl)
         {
             InitializeComponent();
 

@@ -12,15 +12,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Bing;
-using ESRI.ArcGIS.Client.Geometry;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+
 using Epi;
 using Epi.Data;
 using EpiDashboard.Controls;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Windows.Media.Color;
@@ -2155,7 +2155,7 @@ namespace EpiDashboard.Mapping
 
             }
 
-            //choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
+            //choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, _mapView);
             //choroplethproperties.choroplethServerLayerProperties = choroplethLayerProperties;
             //choroplethproperties.choroplethServerLayerProvider = choroplethLayerProperties.provider;
             //choroplethproperties.choroplethServerLayerProvider.CloseLayer();

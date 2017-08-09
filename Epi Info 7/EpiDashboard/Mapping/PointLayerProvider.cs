@@ -16,12 +16,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Bing;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Tasks;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
@@ -35,7 +36,7 @@ namespace EpiDashboard.Mapping
         public event RecordSelectedHandler RecordSelected;
         public event DateRangeDefinedHandler DateRangeDefined;
 
-        private Map myMap;
+        private MapView _mapView;
         private List<KeyValuePair<DateTime, int>> intervalCounts;
         private double minX;
         private double minY;
@@ -49,15 +50,15 @@ namespace EpiDashboard.Mapping
         private string timeVar;
         private string description;
         private Guid layerId;
-        private SolidColorBrush pointColor;
+        private Color pointColor;
         private SpatialReference geoReference;
         private SimpleMarkerSymbol.SimpleMarkerStyle style;
         private StackPanel legendStackPanel;
 
 
-        public PointLayerProvider(Map myMap)
+        public PointLayerProvider(MapView mapView)
         {
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.layerId = Guid.NewGuid();
             this.geoReference = new SpatialReference(4326);
         }
@@ -79,37 +80,37 @@ namespace EpiDashboard.Mapping
 
         public void Refresh()
         {
-            GraphicsLayer pointLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer pointLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (pointLayer != null)
             {
-                pointLayer.ClearGraphics();
+                pointLayer.Graphics.Clear();
                 RenderPointMap(this.dashboardHelper, this.latVar, this.longVar, this.pointColor, this.timeVar, this.style, this.description);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < _mapView.Map.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
-        public void RenderPointMap(DashboardHelper dashboardHelper, string latVar, string longVar, Brush pointColor, string timeVar, SimpleMarkerSymbol.SimpleMarkerStyle style, string description)
+        public void RenderPointMap(DashboardHelper dashboardHelper, string latVar, string longVar, Brush pointColor, string timeVar, SimpleMarkerStyle style, string description)
         {
             this.dashboardHelper = dashboardHelper;
             this.latVar = latVar;
@@ -119,7 +120,7 @@ namespace EpiDashboard.Mapping
             this.description = description;
             this.pointColor = (SolidColorBrush)pointColor;
 
-            GraphicsLayer pointLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer pointLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (pointLayer != null)
             {
                 pointLayer.Graphics.Clear();
@@ -128,10 +129,11 @@ namespace EpiDashboard.Mapping
             {
                 pointLayer = new GraphicsLayer();
                 pointLayer.ID = layerId.ToString();
-                myMap.Layers.Add(pointLayer);
+                _mapView.Map.Layers.Add(pointLayer);
             }
 
             CustomCoordinateList coordinateList = GetCoordinates(dashboardHelper, latVar, longVar, timeVar);
+            
             for (int i = 0; i < coordinateList.Coordinates.Count; i++)
             {
                 ExtendedGraphic graphic = new ExtendedGraphic()
@@ -140,10 +142,16 @@ namespace EpiDashboard.Mapping
                     RecordId = coordinateList.Coordinates[i].RecordId,
                     Symbol = MarkerSymbol
                 };
+
                 if (coordinateList.Coordinates[i].TimeSpan.HasValue)
+                {
                     graphic.TimeExtent = new TimeExtent(coordinateList.Coordinates[i].TimeSpan.Value);
+                }
                 else
+                {
                     graphic.TimeExtent = new TimeExtent(DateTime.MinValue, DateTime.MaxValue);
+                }
+                
                 graphic.MouseLeftButtonUp += new MouseButtonEventHandler(graphic_MouseLeftButtonUp);
                 pointLayer.Graphics.Add(graphic);
             }
@@ -182,24 +190,24 @@ namespace EpiDashboard.Mapping
                 TextBlock symbolTextBlock = new TextBlock();
                 switch (style)
                 {
-                    case SimpleMarkerSymbol.SimpleMarkerStyle.Circle:
+                    case SimpleMarkerStyle.Circle:
                         symbolTextBlock.Text = "●";
                         symbolTextBlock.FontSize = 16;
                         break;
-                    case SimpleMarkerSymbol.SimpleMarkerStyle.Cross:
+                    case SimpleMarkerStyle.Cross:
                         symbolTextBlock.Text = "+";
                         symbolTextBlock.FontSize = 18;
                         symbolTextBlock.FontWeight = FontWeights.Bold;
                         break;
-                    case SimpleMarkerSymbol.SimpleMarkerStyle.Diamond:
+                    case SimpleMarkerStyle.Diamond:
                         symbolTextBlock.Text = "♦";
                         symbolTextBlock.FontSize = 17;
                         break;
-                    case SimpleMarkerSymbol.SimpleMarkerStyle.Square:
+                    case SimpleMarkerStyle.Square:
                         symbolTextBlock.Text = "■";
                         symbolTextBlock.FontSize = 16;
                         break;
-                    case SimpleMarkerSymbol.SimpleMarkerStyle.Triangle:
+                    case SimpleMarkerStyle.Triangle:
                         symbolTextBlock.Text = "▲";
                         symbolTextBlock.FontSize = 16;
                         break;
@@ -212,7 +220,7 @@ namespace EpiDashboard.Mapping
 
                 symbolTextBlock.VerticalAlignment = VerticalAlignment.Top;
                 symbolTextBlock.Margin = new Thickness(0, 4, 7, 4);
-                symbolTextBlock.Foreground = this.pointColor;
+                symbolTextBlock.Foreground = new SolidColorBrush(this.pointColor);
                 
                 StackPanel classStackPanel = new StackPanel();
                 classStackPanel.Margin = new Thickness(10, 0, 10, 10);
@@ -227,7 +235,7 @@ namespace EpiDashboard.Mapping
 
             if (coordinateList.Coordinates.Count > 0)
             {
-                myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
+                _mapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
                 if (!string.IsNullOrEmpty(timeVar))
                 {
                     if (minTime != null && maxTime != null)
@@ -346,10 +354,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                myMap.Layers.Remove(graphicsLayer);
+                _mapView.Map.Layers.Remove(graphicsLayer);
                 if (legendStackPanel != null)
                 {
                     legendStackPanel.Children.Clear();
