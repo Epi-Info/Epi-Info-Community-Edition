@@ -70,12 +70,12 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < _mapView.Map.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
@@ -96,12 +96,12 @@ namespace EpiDashboard.Mapping
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -122,17 +122,17 @@ namespace EpiDashboard.Mapping
             if (!string.IsNullOrEmpty(url))
             {
                 this.url = url;
-                KmlLayer shapeLayer = myMap.Layers[layerId.ToString()] as KmlLayer;
+                KmlLayer shapeLayer = _mapView.Map.Layers[layerId.ToString()] as KmlLayer;
                 if (shapeLayer != null)
                 {
-                    myMap.Layers.Remove(shapeLayer);
+                    _mapView.Map.Layers.Remove(shapeLayer);
                 }
 
                 shapeLayer = new KmlLayer();
                 shapeLayer.ID = layerId.ToString();
                 shapeLayer.Url = new Uri(url);
                 shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
-                myMap.Layers.Add(shapeLayer);
+                _mapView.Map.Layers.Add(shapeLayer);
 
                 myMap.Extent = shapeLayer.FullExtent;
                 return new object[] { shapeLayer };
@@ -142,7 +142,7 @@ namespace EpiDashboard.Mapping
 
         void shapeLayer_Initialized(object sender, EventArgs e)
         {
-            KmlLayer shapeLayer = myMap.Layers[layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = _mapView.Map.Layers[layerId.ToString()] as KmlLayer;
             Dictionary<string, object> allAttributes = new Dictionary<string, object>();
 
             FindGraphicsLayers(shapeLayer);
@@ -419,16 +419,16 @@ namespace EpiDashboard.Mapping
                     g.Symbol = symbol;
                 }
 
-                GraphicsLayer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
-                int currentDotIndex = myMap.Layers.Count;
+                GraphicsLayer dotLayer = _mapView.Map.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
+                int currentDotIndex = _mapView.Map.Layers.Count;
                 if (dotLayer != null)
                 {
-                    currentDotIndex = myMap.Layers.IndexOf(dotLayer);
-                    myMap.Layers.Remove(dotLayer);
+                    currentDotIndex = _mapView.Map.Layers.IndexOf(dotLayer);
+                    _mapView.Map.Layers.Remove(dotLayer);
                 }
                 dotLayer = new GraphicsLayer();
                 dotLayer.ID = layerId.ToString() + "_dotLayer";
-                myMap.Layers.Insert(currentDotIndex, dotLayer);
+                _mapView.Map.Layers.Insert(currentDotIndex, dotLayer);
                 foreach (Graphic g in graphicsToBeAdded)
                 {
                     dotLayer.Graphics.Add(g);
@@ -465,15 +465,15 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            KmlLayer shapeLayer = myMap.Layers[layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = _mapView.Map.Layers[layerId.ToString()] as KmlLayer;
             if (shapeLayer != null)
             {
-                myMap.Layers.Remove(shapeLayer);
+                _mapView.Map.Layers.Remove(shapeLayer);
             }
-            GraphicsLayer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
+            GraphicsLayer dotLayer = _mapView.Map.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
             if (dotLayer != null)
             {
-                myMap.Layers.Remove(dotLayer);
+                _mapView.Map.Layers.Remove(dotLayer);
             }
             if (LegendStackPanel != null)
             {

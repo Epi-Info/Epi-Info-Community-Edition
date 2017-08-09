@@ -50,7 +50,7 @@ namespace EpiDashboard.Mapping
 
         public void Refresh()
         {
-            GraphicsLayer textLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer textLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (textLayer != null)
             {
                 textLayer.ClearGraphics();
@@ -60,23 +60,23 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < _mapView.Map.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -86,7 +86,7 @@ namespace EpiDashboard.Mapping
             this.fontColor = fontColor;
             this.text = text;
 
-            GraphicsLayer markerLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer markerLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (markerLayer != null)
             {
                 markerLayer.Graphics.Clear();
@@ -95,7 +95,7 @@ namespace EpiDashboard.Mapping
             {
                 markerLayer = new GraphicsLayer();
                 markerLayer.ID = layerId.ToString();
-                myMap.Layers.Add(markerLayer);
+                _mapView.Map.Layers.Add(markerLayer);
             }
 
             markerLayer.Graphics.Add(new Graphic() { Geometry = point, Symbol = TextSymbol });
@@ -120,10 +120,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                myMap.Layers.Remove(graphicsLayer);
+                _mapView.Map.Layers.Remove(graphicsLayer);
             }
         }
 

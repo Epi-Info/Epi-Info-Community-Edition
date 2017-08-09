@@ -35,7 +35,7 @@ namespace EpiDashboard.Mapping
         private int Numclasses;
         public DataFilters datafilters { get; set; }
 
-        public ChoroplethKmlLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethKmlLayerProperties(MapView  mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
             this.myMap = myMap;

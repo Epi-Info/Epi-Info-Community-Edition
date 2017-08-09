@@ -30,7 +30,7 @@ namespace EpiDashboard.Mapping
     {
 
         public ShapeLayerProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private MapView _mapView;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -39,11 +39,11 @@ namespace EpiDashboard.Mapping
 
         private bool isReadOnlyMode;
 
-        public ShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap)
+        public ShapeLayerProperties(MapView mapView)
         {
             InitializeComponent();
 
-            this.myMap = myMap;
+            this._mapView = mapView;
 
             // provider = new ShapeLayerProvider(_mapView);
 

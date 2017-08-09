@@ -36,7 +36,7 @@ namespace EpiDashboard.Controls
     public partial class DotDensityProperties : System.Windows.Controls.UserControl
     {      
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private MapView _mapView;
         private DashboardHelper dashboardHelper;
         public EpiDashboard.Mapping.DotDensityLayerProvider provider;       
         //public RowFilterControl rowFilterControl { get; protected set; }                  
@@ -113,11 +113,11 @@ namespace EpiDashboard.Controls
         #endregion
 
         # region Constructors
-        public DotDensityProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public DotDensityProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, MapView mapView)
         {
             InitializeComponent();
             this.mapControl = mapControl;
-            this.myMap = myMap;           
+            this._mapView = mapView;           
             Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
             tblockCurrentEpiVersion.Text = "Epi Info " + appId.Version;
             mapControl.SizeChanged+=mapControl_SizeChanged;
@@ -180,7 +180,7 @@ namespace EpiDashboard.Controls
 
             btnOK.Content = DashboardSharedStrings.BUTTON_OK;
             btnCancel.Content = DashboardSharedStrings.BUTTON_CANCEL;
-            mapOriginalExtent = myMap.Extent;
+            mapOriginalExtent = _mapView.Extent;
 
             #endregion // Translation
          
@@ -532,11 +532,11 @@ namespace EpiDashboard.Controls
                 }*/
                 foreach (string id in layerAddednew)
                 {
-                    ESRI.ArcGIS.Client.GraphicsLayer graphicsLayer = myMap.Layers[id] as ESRI.ArcGIS.Client.GraphicsLayer;
+                    GraphicsLayer graphicsLayer = _mapView.Map.Layers[id] as GraphicsLayer;
                     if (graphicsLayer!=null)
-                    myMap.Layers.Remove(graphicsLayer);
+                        _mapView.Map.Layers.Remove(graphicsLayer);
                 }
-                myMap.Extent = mapOriginalExtent;
+                ////////_mapView.Extent = mapOriginalExtent;
             }
         }
 
@@ -663,7 +663,7 @@ namespace EpiDashboard.Controls
         
         private void btnBrowseShapeFile_Click(object sender, RoutedEventArgs e)
         {
-            provider = new Mapping.DotDensityLayerProvider(myMap);
+            provider = new Mapping.DotDensityLayerProvider(_mapView);
             object[] shapeFileProperties = provider.LoadShapeFile();         
             if (shapeFileProperties != null)
             {
@@ -673,7 +673,7 @@ namespace EpiDashboard.Controls
                     ILayerProperties layerProperties = null;
                     if (DashboardHelper == null)
                         DashboardHelper = dashboardHelper;
-                    layerProperties = new DotDensityLayerProperties(myMap, this.DashboardHelper, this.mapControl);
+                    layerProperties = new DotDensityLayerProperties(_mapView, this.DashboardHelper, this.mapControl);
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
                     layerProperties.EditRequested += new EventHandler(this.mapControl.ILayerProperties_EditRequested);

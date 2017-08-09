@@ -30,7 +30,7 @@ namespace EpiDashboard.Mapping
     {
 
         public KmlLayerProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private MapView _mapView;
         private string serverName;
         private int[] visibleLayers;
 
@@ -40,11 +40,11 @@ namespace EpiDashboard.Mapping
 
         private bool isReadOnlyMode;
 
-        public KmlLayerProperties(ESRI.ArcGIS.Client.Map myMap)
+        public KmlLayerProperties(MapView mapView)
         {
             InitializeComponent();
 
-            this.myMap = myMap;
+            this._mapView = mapView;
 
             //  provider = new KmlLayerProvider(_mapView);
             #region Translation

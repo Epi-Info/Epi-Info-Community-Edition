@@ -69,12 +69,12 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < _mapView.Map.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
@@ -95,12 +95,12 @@ namespace EpiDashboard.Mapping
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -108,10 +108,10 @@ namespace EpiDashboard.Mapping
         {
             if (!string.IsNullOrEmpty(url))
             {
-                FeatureLayer graphicsLayer = myMap.Layers[layerId.ToString()] as FeatureLayer;
+                FeatureLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
                 if (graphicsLayer != null)
                 {
-                    myMap.Layers.Remove(graphicsLayer);
+                    _mapView.Map.Layers.Remove(graphicsLayer);
                 }
                 graphicsLayer = new FeatureLayer();
                 graphicsLayer.ID = layerId.ToString();
@@ -153,7 +153,7 @@ namespace EpiDashboard.Mapping
                 {
                     graphicsLayer.Url = url;
                 }
-                myMap.Layers.Add(graphicsLayer);
+                _mapView.Map.Layers.Add(graphicsLayer);
                 myMap.Cursor = Cursors.Wait;
                 return new object[] { graphicsLayer };
             }
@@ -200,7 +200,7 @@ namespace EpiDashboard.Mapping
 
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
-            FeatureLayer graphicsLayer = myMap.Layers[layerId.ToString()] as FeatureLayer;
+            FeatureLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
             flagupdatetoglfailed = false;
             if (graphicsLayer != null)
             {
@@ -299,7 +299,7 @@ namespace EpiDashboard.Mapping
                 }
 
 
-                GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
 
                 List<double> valueList = new List<double>();
                 List<Graphic> graphicsToBeAdded = new List<Graphic>();
@@ -414,16 +414,16 @@ namespace EpiDashboard.Mapping
 
                 graphicsLayer.Renderer = renderer;
 
-                GraphicsLayer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
-                int currentDotIndex = myMap.Layers.Count;
+                GraphicsLayer dotLayer = _mapView.Map.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
+                int currentDotIndex = _mapView.Map.Layers.Count;
                 if (dotLayer != null)
                 {
-                    currentDotIndex = myMap.Layers.IndexOf(dotLayer);
-                    myMap.Layers.Remove(dotLayer);
+                    currentDotIndex = _mapView.Map.Layers.IndexOf(dotLayer);
+                    _mapView.Map.Layers.Remove(dotLayer);
                 }
                 dotLayer = new GraphicsLayer();
                 dotLayer.ID = layerId.ToString() + "_dotLayer";
-                myMap.Layers.Insert(currentDotIndex, dotLayer);
+                _mapView.Map.Layers.Insert(currentDotIndex, dotLayer);
                 foreach (Graphic g in graphicsToBeAdded)
                 {
                     dotLayer.Graphics.Add(g);
@@ -460,15 +460,15 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            Layer shapeLayer = myMap.Layers[layerId.ToString()] as Layer;
+            Layer shapeLayer = _mapView.Map.Layers[layerId.ToString()] as Layer;
             if (shapeLayer != null)
             {
-                myMap.Layers.Remove(shapeLayer);
+                _mapView.Map.Layers.Remove(shapeLayer);
             }
-            GraphicsLayer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
+            GraphicsLayer dotLayer = _mapView.Map.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
             if (dotLayer != null)
             {
-                myMap.Layers.Remove(dotLayer);
+                _mapView.Map.Layers.Remove(dotLayer);
             }
             if (LegendStackPanel != null)
             {
