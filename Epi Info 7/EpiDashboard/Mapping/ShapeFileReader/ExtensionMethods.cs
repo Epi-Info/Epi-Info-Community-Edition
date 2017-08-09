@@ -38,12 +38,16 @@ namespace EpiDashboard.Mapping.ShapeFileReader
         public static SimpleFillSymbol DEFAULT_FILL_SYMBOL = new SimpleFillSymbol()
         {
             Color = Color.FromArgb(192, 255, 0, 0),
-            Style = SimpleFillStyle.
-            BorderBrush = new SolidColorBrush(Colors.Gray),
-            BorderThickness = 1
+            Style = SimpleFillStyle.Solid,
+            Outline = new SimpleLineSymbol()
+            {
+                Color = Colors.Gray,
+                Style = SimpleLineStyle.Solid,
+                Width = 1
+            }
         };
 
-        public static Symbol GetDefaultSymbol( Geometry geometry )
+        public static Symbol GetDefaultSymbol( Esri.ArcGISRuntime.Geometry.Geometry geometry )
         {
             if( geometry == null )
                 return null;
@@ -51,7 +55,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
             Type t = geometry.GetType();
             if( t == typeof( MapPoint ) )
                 return DEFAULT_MARKER_SYMBOL;
-            else if( t == typeof( MultiPoint ) )
+            else if( t == typeof( Multipoint ) )
                 return DEFAULT_MARKER_SYMBOL;
             else if( t == typeof( Polyline ) )
                 return DEFAULT_LINE_SYMBOL;
@@ -149,8 +153,8 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                 return null;
 
             Graphic graphic = new Graphic();
-            graphic.MouseEnter += new System.Windows.Input.MouseEventHandler(graphic_MouseEnter);
-            graphic.MouseLeave += new System.Windows.Input.MouseEventHandler(graphic_MouseLeave);
+            ////////graphic.MouseEnter += new System.Windows.Input.MouseEventHandler(graphic_MouseEnter);
+            ////////graphic.MouseLeave += new System.Windows.Input.MouseEventHandler(graphic_MouseLeave);
 
             //add all the attributes to the graphic
             foreach( var item in record.Attributes )
@@ -188,54 +192,61 @@ namespace EpiDashboard.Mapping.ShapeFileReader
 
         static void graphic_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            SolidColorBrush currentBrush = ((SolidColorBrush)((SimpleFillSymbol)((Graphic)sender).Symbol).Fill).Clone();
-            Color currentColor = currentBrush.Color;
+            Symbol symbol = ((Graphic)sender).Symbol;
+            SimpleFillSymbol simpleFillSymbol = ((SimpleFillSymbol)symbol);
+            Color currentColor = simpleFillSymbol.Color;
+            SolidColorBrush currentBrush = new SolidColorBrush(currentColor);
             currentColor.A -= 15;
             currentBrush.Color = currentColor;
-            ((SimpleFillSymbol)((Graphic)sender).Symbol).Fill = currentBrush;
+            ((SimpleFillSymbol)((Graphic)sender).Symbol).Color = ((SolidColorBrush)currentBrush).Color;
         }
 
         static void graphic_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            SolidColorBrush currentBrush = ((SolidColorBrush)((SimpleFillSymbol)((Graphic)sender).Symbol).Fill).Clone();
-            Color currentColor = currentBrush.Color;
+            Symbol symbol = ((Graphic)sender).Symbol;
+            SimpleFillSymbol simpleFillSymbol = ((SimpleFillSymbol)symbol);
+            Color currentColor = simpleFillSymbol.Color;
+            SolidColorBrush currentBrush = new SolidColorBrush(currentColor);
             currentColor.A += 15;
             currentBrush.Color = currentColor;
-            ((SimpleFillSymbol)((Graphic)sender).Symbol).Fill = currentBrush;
+            ((SimpleFillSymbol)((Graphic)sender).Symbol).Color = ((SolidColorBrush)currentBrush).Color;
         }
 
-        private static ESRI.ArcGIS.Client.Geometry.Geometry GetPolyline( ShapeFileRecord record )
+        private static Esri.ArcGISRuntime.Geometry.Geometry GetPolyline( ShapeFileRecord record )
         {
-            Polyline line = new Polyline();
-            for( int i = 0; i < record.NumberOfParts; i++ )
+            Polyline line;
+            Esri.ArcGISRuntime.Geometry.PointCollection points = new Esri.ArcGISRuntime.Geometry.PointCollection();
+
+            for ( int i = 0; i < record.NumberOfParts; i++ )
             {
-                // Determine the starting index and the end index
-                // into the points array that defines the figure.
                 int start = record.Parts[ i ];
                 int end;
-                if( record.NumberOfParts > 1 && i != ( record.NumberOfParts - 1 ) )
-                    end = record.Parts[ i + 1 ];
-                else
-                    end = record.NumberOfPoints;
 
-                ESRI.ArcGIS.Client.Geometry.PointCollection points = new ESRI.ArcGIS.Client.Geometry.PointCollection();
-                // Add line segments to the polyline
+                if (record.NumberOfParts > 1 && i != (record.NumberOfParts - 1))
+                {
+                    end = record.Parts[i + 1];
+                }
+                else
+                {
+                    end = record.NumberOfPoints;
+                }
+
                 for( int j = start; j < end; j++ )
                 {
                     System.Windows.Point point = record.Points[ j ];
                     points.Add( new MapPoint( point.X, point.Y ) );
                 }
-
-                line.Paths.Add( points );
             }
 
+            line = new Polyline(points);
             return line;
         }
 
-        private static ESRI.ArcGIS.Client.Geometry.Geometry GetPolygon( ShapeFileRecord record )
+        private static Esri.ArcGISRuntime.Geometry.Geometry GetPolygon( ShapeFileRecord record )
         {
             Random rnd = new Random();
-            Polygon polygon = new Polygon();
+            Polygon polygon;
+            Esri.ArcGISRuntime.Geometry.PointCollection points = new Esri.ArcGISRuntime.Geometry.PointCollection();
             SpatialReference geoReference = new SpatialReference(4326);
             try
             {
@@ -246,11 +257,14 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                     int start = record.Parts[i];
                     int end;
                     if (record.NumberOfParts > 1 && i != (record.NumberOfParts - 1))
+                    {
                         end = record.Parts[i + 1];
+                    }
                     else
+                    { 
                         end = record.NumberOfPoints;
+                    }
 
-                    ESRI.ArcGIS.Client.Geometry.PointCollection points = new ESRI.ArcGIS.Client.Geometry.PointCollection();
                     // Add line segments to the polyline
                     bool isWebMercator = false;
                     if (record.Points.Count > 0)
@@ -261,7 +275,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                         }
                         else
                         {
-                            polygon.SpatialReference = geoReference;
+                            ////////////polygon.SpatialReference = geoReference;
                         }
                     }
                     for (int j = start; j < end; j++)
@@ -293,14 +307,12 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                             }
                         }
                     }
-
-                    polygon.Rings.Add(points);
                 }
             }
-            catch (Exception ex)
-            {
-                //
-            }
+            catch { }
+
+            polygon = new Polygon(points);
+
             return polygon;
         }
 
@@ -330,13 +342,15 @@ namespace EpiDashboard.Mapping.ShapeFileReader
 
         private static Esri.ArcGISRuntime.Geometry.Geometry GetMultiPoint(ShapeFileRecord record)
         {
-            MultiPoint points = new MultiPoint();
-            for( int i = 0; i < record.Points.Count; i++ )
+            Multipoint points;
+            Esri.ArcGISRuntime.Geometry.PointCollection pointCollection = new Esri.ArcGISRuntime.Geometry.PointCollection();
+            for ( int i = 0; i < record.Points.Count; i++ )
             {
                 System.Windows.Point point = record.Points[ i ];
-                points.Points.Add( new MapPoint( point.X, point.Y ) );
+                pointCollection.Add( new MapPoint( point.X, point.Y ) );
             }
 
+            points = new Multipoint(pointCollection);
             return points;
         }
 

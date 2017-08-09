@@ -59,10 +59,10 @@ namespace EpiDashboard.Mapping
 
         public IDictionary<string, object> curfeatureAttributes;
 
-        public ChoroplethServerLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethServerLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
@@ -431,7 +431,7 @@ namespace EpiDashboard.Mapping
 
             if (Provider == null)
             {
-                Provider = new ChoroplethServerLayerProvider(myMap);
+                Provider = new ChoroplethServerLayerProvider(_mapView);
                 Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }
 

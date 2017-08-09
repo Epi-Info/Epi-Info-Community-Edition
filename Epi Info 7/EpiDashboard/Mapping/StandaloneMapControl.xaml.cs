@@ -413,10 +413,10 @@ namespace EpiDashboard.Mapping
                 myMap.Width = MapContainer.ActualWidth;
                 myMap.WrapAround = true;
                 myMap.ContextMenu = menu;
-                myMap.Layers.Add(layer);
-                myMap.Layers.Add(pointLayer);
-                myMap.Layers.Add(textLayer);
-                myMap.Layers.Add(zoneLayer);
+                _mapView.Map.Layers.Add(layer);
+                _mapView.Map.Layers.Add(pointLayer);
+                _mapView.Map.Layers.Add(textLayer);
+                _mapView.Map.Layers.Add(zoneLayer);
 
                 myMap.MouseMove += new MouseEventHandler(myMap_MouseMove);
                 myMap.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
@@ -2683,9 +2683,9 @@ namespace EpiDashboard.Mapping
             if (myMap != null)
             {
 
-                if (myMap.Layers.Count > 0)
+                if (_mapView.Map.Layers.Count > 0)
                 {
-                    if (myMap.Layers[0] is TileLayer)
+                    if (_mapView.Map.Layers[0] is TileLayer)
                     {
                         bool sparse_connection = false;
 
@@ -2701,28 +2701,28 @@ namespace EpiDashboard.Mapping
 
                         if(sparse_connection == true)
                         {
-                            ((TileLayer)myMap.Layers[0]).Token = null;
+                            ((TileLayer)_mapView.Map.Layers[0]).Token = null;
                         }
                         else
                         {
                             if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
-                                ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                                ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
+                                ((TileLayer)_mapView.Map.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                                ((TileLayer)_mapView.Map.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
                             }
                             else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
-                                ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                                ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.Road;
+                                ((TileLayer)_mapView.Map.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                                ((TileLayer)_mapView.Map.Layers[0]).LayerStyle = TileLayer.LayerType.Road;
                             }
                             else
                             {
-                                ((TileLayer)myMap.Layers[0]).Token = null;
+                                ((TileLayer)_mapView.Map.Layers[0]).Token = null;
                             }
                         }
                     }
 
-                    ((TileLayer)myMap.Layers[0]).Refresh();
+                    ((TileLayer)_mapView.Map.Layers[0]).Refresh();
                 }
             }
         }

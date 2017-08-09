@@ -21,7 +21,7 @@ namespace EpiDashboard.Mapping
 
     public class ChoroplethServerLayerProvider : ChoroplethLayerProvider , IChoroLayerProvider
     {
-        public ChoroplethServerLayerProvider(Map clientMap) : base(clientMap)
+        public ChoroplethServerLayerProvider(MapView clientMapView) : base(clientMap)
         {
         }
         
@@ -123,7 +123,7 @@ namespace EpiDashboard.Mapping
 
         void graphicsLayer_Initialized(object sender, EventArgs e)
         {
-            //FeatureLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as FeatureLayer;
+            //FeatureLayer graphicsLayer = __mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
             //int x = 5;
             //x++;
         }

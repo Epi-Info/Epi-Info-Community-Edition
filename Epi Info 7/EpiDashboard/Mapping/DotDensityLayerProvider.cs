@@ -35,7 +35,7 @@ namespace EpiDashboard.Mapping
 
         #region DotDensity
 
-        private Map myMap;
+        private MapView _mapView;
         private DashboardHelper dashboardHelper;
         private string shapeKey;
         private string dataKey;
@@ -45,9 +45,9 @@ namespace EpiDashboard.Mapping
         private int dotValue;
         private string url;
 
-        public DotDensityLayerProvider(Map myMap)
+        public DotDensityLayerProvider(MapView mapView)
         {
-            this.myMap = myMap;
+            this._mapView = mapView;
             this.layerId = Guid.NewGuid();
         }
 
@@ -69,12 +69,12 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            if (currentIndex < _mapView.Map.Layers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
@@ -95,12 +95,12 @@ namespace EpiDashboard.Mapping
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = _mapView.Map.Layers[layerId.ToString()];
+            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                _mapView.Map.Layers.Remove(layer);
+                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -146,12 +146,12 @@ namespace EpiDashboard.Mapping
                     return null;
                 }
 
-                GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
                 if (graphicsLayer == null)
                 {
                     graphicsLayer = new GraphicsLayer();
                     graphicsLayer.ID = layerId.ToString();
-                    myMap.Layers.Add(graphicsLayer);
+                    _mapView.Map.Layers.Add(graphicsLayer);
                 }
 
                 int recCount = shapeFileReader.Records.Count;
@@ -172,19 +172,19 @@ namespace EpiDashboard.Mapping
                     Envelope shapeFileExtent = shapeFileReader.GetExtent();
                     if (shapeFileExtent.SpatialReference == null)
                     {
-                        myMap.Extent = shapeFileExtent;
+                        //////////myMap.Extent = shapeFileExtent;
                     }
                     else
                     {
-                        if (shapeFileExtent.SpatialReference.WKID == 4326)
+                        if (shapeFileExtent.SpatialReference.Wkid == 4326)
                         {
-                            myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                            //////////myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                         }
                     }
                 }
                 else
                 {
-                    myMap.Extent = graphicsLayer.FullExtent;
+                    //////////myMap.Extent = graphicsLayer.FullExtent;
                 }
                 return new object[] { fileName, graphicsLayer.Graphics[0].Attributes };
             }
@@ -251,12 +251,12 @@ namespace EpiDashboard.Mapping
                     return null;
                 }
 
-                GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
                 if (graphicsLayer == null)
                 {
                     graphicsLayer = new GraphicsLayer();
                     graphicsLayer.ID = layerId.ToString();
-                    myMap.Layers.Add(graphicsLayer);
+                    _mapView.Map.Layers.Add(graphicsLayer);
                 }
 
                 int recCount = shapeFileReader.Records.Count;
@@ -369,7 +369,7 @@ namespace EpiDashboard.Mapping
                 }
 
 
-                GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
+                GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
 
                 List<double> valueList = new List<double>();
                 List<Graphic> graphicsToBeAdded = new List<Graphic>();
@@ -417,7 +417,7 @@ namespace EpiDashboard.Mapping
                                 bool foundBottomRight = false;
                                 bool foundTopLeft = false;
                                 bool foundTopRight = false;
-                                foreach (ESRI.ArcGIS.Client.Geometry.PointCollection pc in ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings)
+                                foreach (Esri.ArcGISRuntime.Geometry.PointCollection pc in ((Esri.ArcGISRuntime.Geometry.Polygon)graphicFeature.Geometry).Rings)
                                 {
                                     foundBottomLeft = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
                                     foundBottomRight = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
@@ -488,16 +488,16 @@ namespace EpiDashboard.Mapping
                     g.Symbol = symbol;
                 }
 
-                GraphicsLayer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
-                int currentDotIndex = myMap.Layers.Count;
+                GraphicsLayer dotLayer = _mapView.Map.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
+                int currentDotIndex = _mapView.Map.Layers.Count;
                 if (dotLayer != null)
                 {
-                    currentDotIndex = myMap.Layers.IndexOf(dotLayer);
-                    myMap.Layers.Remove(dotLayer);
+                    currentDotIndex = _mapView.Map.Layers.IndexOf(dotLayer);
+                    _mapView.Map.Layers.Remove(dotLayer);
                 }
                 dotLayer = new GraphicsLayer();
                 dotLayer.ID = layerId.ToString() + "_dotLayer";
-                myMap.Layers.Insert(currentDotIndex, dotLayer);
+                _mapView.Map.Layers.Insert(currentDotIndex, dotLayer);
                 foreach (Graphic g in graphicsToBeAdded)
                 {
                     dotLayer.Graphics.Add(g);
@@ -581,15 +581,15 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            Layer shapeLayer = myMap.Layers[layerId.ToString()] as Layer;
+            Layer shapeLayer = _mapView.Map.Layers[layerId.ToString()] as Layer;
             if (shapeLayer != null)
             {
-                myMap.Layers.Remove(shapeLayer);
+                _mapView.Map.Layers.Remove(shapeLayer);
             }
-            GraphicsLayer dotLayer = myMap.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
+            GraphicsLayer dotLayer = _mapView.Map.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;
             if (dotLayer != null)
             {
-                myMap.Layers.Remove(dotLayer);
+                _mapView.Map.Layers.Remove(dotLayer);
             }
             if (LegendStackPanel != null)
             {
