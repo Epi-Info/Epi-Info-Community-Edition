@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping
 {

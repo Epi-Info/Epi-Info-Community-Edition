@@ -12,8 +12,11 @@ using Epi;
 using EpiDashboard.Mapping;
 using System.Windows.Forms;
 using System.Net;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Toolkit;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Controls
 {

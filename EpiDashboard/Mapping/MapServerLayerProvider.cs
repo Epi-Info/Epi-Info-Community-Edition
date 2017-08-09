@@ -16,12 +16,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Bing;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Tasks;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;

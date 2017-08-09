@@ -21,8 +21,12 @@ using Epi.Fields;
 using EpiDashboard.Mapping;
 using System.Net;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Geometry;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+
 namespace EpiDashboard.Controls
 {
     /// <summary>
@@ -501,27 +505,27 @@ namespace EpiDashboard.Controls
                 {
                     if (layerAdded)
                     {
-                        FeatureLayer graphicsLayer = myMap.Layers[Mapprovider.layerId.ToString()] as FeatureLayer;
-                        myMap.Layers.Remove(graphicsLayer);
-                        myMap.Extent = mapOriginalExtent;
+                        FeatureLayer graphicsLayer = _mapView.Layers[Mapprovider.layerId.ToString()] as FeatureLayer;
+                        _mapView.Layers.Remove(graphicsLayer);
+                        _mapView.Extent = mapOriginalExtent;
                     }           
                 }
                 else if(provider!=null)
                 {
                     if (layerAdded)
                     {
-                        ESRI.ArcGIS.Client.GraphicsLayer graphicsLayer = myMap.Layers[provider.layerId.ToString()] as ESRI.ArcGIS.Client.GraphicsLayer;
-                        myMap.Layers.Remove(graphicsLayer);
-                        myMap.Extent = mapOriginalExtent;
+                        ESRI.ArcGIS.Client.GraphicsLayer graphicsLayer = _mapView.Layers[provider.layerId.ToString()] as ESRI.ArcGIS.Client.GraphicsLayer;
+                        _mapView.Layers.Remove(graphicsLayer);
+                        _mapView.Extent = mapOriginalExtent;
                     }
                 }
                 else if (KMLprovider != null)
                 {
                     if (layerAdded)
                     {                        
-                        ESRI.ArcGIS.Client.Toolkit.DataSources.KmlLayer shapeLayer = myMap.Layers[KMLprovider.layerId.ToString()] as ESRI.ArcGIS.Client.Toolkit.DataSources.KmlLayer;
-                        myMap.Layers.Remove(shapeLayer);
-                        myMap.Extent = mapOriginalExtent;
+                        ESRI.ArcGIS.Client.Toolkit.DataSources.KmlLayer shapeLayer = _mapView.Layers[KMLprovider.layerId.ToString()] as ESRI.ArcGIS.Client.Toolkit.DataSources.KmlLayer;
+                        _mapView.Layers.Remove(shapeLayer);
+                        _mapView.Extent = mapOriginalExtent;
                        
                     }
                 }*/
@@ -758,13 +762,13 @@ namespace EpiDashboard.Controls
 
         private void btnMapFile_Click(object sender, RoutedEventArgs e)
         {
-          /*  Mapprovider = new Mapping.DotDensityServerLayerProvider(myMap);
+          /*  Mapprovider = new Mapping.DotDensityServerLayerProvider(_mapView);
             Mapprovider.FeatureLoaded += new FeatureLoadedHandler(Mapprovider_FeatureLoaded);
               object[] mapFileProperties= Mapprovider.LoadShapeFile();
               if (mapFileProperties != null)
               {
                   ILayerProperties layerProperties = null;
-                  layerProperties = new DotDensityServerLayerProperties(myMap, this.DashboardHelper, this.mapControl);
+                  layerProperties = new DotDensityServerLayerProperties(_mapView, this.DashboardHelper, this.mapControl);
                   layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                   layerProperties.FilterRequested += new EventHandler(this.mapControl.ILayerProperties_FilterRequested);
                   this.serverlayerprop = (DotDensityServerLayerProperties)layerProperties;

@@ -43,7 +43,7 @@ namespace EpiDashboard.Mapping
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-           // provider = new DotDensityKmlLayerProvider(myMap);
+           // provider = new DotDensityKmlLayerProvider(_mapView);
            // provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();

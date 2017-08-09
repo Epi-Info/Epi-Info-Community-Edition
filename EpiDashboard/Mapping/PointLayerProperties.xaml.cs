@@ -13,7 +13,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
-using ESRI.ArcGIS.Client.Symbols;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping
 {

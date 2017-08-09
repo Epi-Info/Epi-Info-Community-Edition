@@ -1,13 +1,16 @@
 using System;
-using ESRI.ArcGIS.Client;
 using EpiDashboard.Mapping.ShapeFileReader;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
 using System.Collections;
+
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping.ShapeFileReader
 {
@@ -21,25 +24,26 @@ namespace EpiDashboard.Mapping.ShapeFileReader
 
         public static SimpleMarkerSymbol DEFAULT_MARKER_SYMBOL = new SimpleMarkerSymbol()
         {
-            Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle,
-            Color = new SolidColorBrush( Colors.Red )
+            Style = SimpleMarkerStyle.Circle,
+            Color = Colors.Red
         };
 
         public static SimpleLineSymbol DEFAULT_LINE_SYMBOL = new SimpleLineSymbol()
         {
-            Color = new SolidColorBrush( Colors.Red ),
-            Style = SimpleLineSymbol.LineStyle.Solid,
+            Color = Colors.Red,
+            Style = SimpleLineStyle.Solid,
             Width = 2
         };
 
         public static SimpleFillSymbol DEFAULT_FILL_SYMBOL = new SimpleFillSymbol()
         {
-            Fill = new SolidColorBrush(Color.FromArgb(192, 255, 0, 0)),
+            Color = Color.FromArgb(192, 255, 0, 0),
+            Style = SimpleFillStyle.
             BorderBrush = new SolidColorBrush(Colors.Gray),
             BorderThickness = 1
         };
 
-        public static Symbol GetDefaultSymbol( this ESRI.ArcGIS.Client.Geometry.Geometry geometry )
+        public static Symbol GetDefaultSymbol( Geometry geometry )
         {
             if( geometry == null )
                 return null;
@@ -308,25 +312,23 @@ namespace EpiDashboard.Mapping.ShapeFileReader
             bottomMostPoint = 0;
         }
 
-        public static ESRI.ArcGIS.Client.Geometry.Envelope GetExtent(this ShapeFile shapeFile)
+        public static Esri.ArcGISRuntime.Geometry.Envelope GetExtent(this ShapeFile shapeFile)
         {
-            Envelope env = new Envelope(leftMostPoint, topMostPoint, rightMostPoint, bottomMostPoint);
+            Envelope envelope = new Envelope(leftMostPoint, topMostPoint, rightMostPoint, bottomMostPoint);
             if (topMostPoint >= -90 && topMostPoint <= 90)
             {
-                env.SpatialReference = new SpatialReference(4326);
+                envelope = new Envelope(leftMostPoint, topMostPoint, rightMostPoint, bottomMostPoint, new SpatialReference(4326));
             }
-            return env;
+            return envelope;
         }
 
-        private static ESRI.ArcGIS.Client.Geometry.Geometry GetPoint( ShapeFileRecord record )
+        private static Esri.ArcGISRuntime.Geometry.Geometry GetPoint( ShapeFileRecord record )
         {
-            MapPoint point = new MapPoint();
-            point.X = record.Points[ 0 ].X;
-            point.Y = record.Points[ 0 ].Y;
+            MapPoint point = new MapPoint(record.Points[0].X, record.Points[0].Y);
             return point;
         }
 
-        private static ESRI.ArcGIS.Client.Geometry.Geometry GetMultiPoint( ShapeFileRecord record )
+        private static Esri.ArcGISRuntime.Geometry.Geometry GetMultiPoint(ShapeFileRecord record)
         {
             MultiPoint points = new MultiPoint();
             for( int i = 0; i < record.Points.Count; i++ )

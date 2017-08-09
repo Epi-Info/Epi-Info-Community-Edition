@@ -7,11 +7,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit.DataSources;
-using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
+
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Controls;
+
 
 namespace EpiDashboard.Mapping
 {
