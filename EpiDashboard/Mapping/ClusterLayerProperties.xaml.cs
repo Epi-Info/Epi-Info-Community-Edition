@@ -13,6 +13,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping
 {
@@ -23,7 +28,7 @@ namespace EpiDashboard.Mapping
     {
 
         public ClusterLayerProvider provider;
-        private Esri.ArcGISRuntime.Controls.Map myMap;
+        private MapView _mapView;
         private DashboardHelper dashboardHelper;
 
         public event EventHandler MapGenerated;
@@ -33,17 +38,17 @@ namespace EpiDashboard.Mapping
 
         private IMapControl mapControl;
 
-        public ClusterLayerProperties(Esri.ArcGISRuntime.Controls.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ClusterLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
 
-            this.myMap = myMap;
+            _mapView = mapView;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
 
-            provider = new ClusterLayerProvider(myMap);
+            provider = new ClusterLayerProvider(mapView);
             provider.DateRangeDefined += new DateRangeDefinedHandler(provider_DateRangeDefined);
             provider.RecordSelected += new RecordSelectedHandler(provider_RecordSelected);
             cbxLatitude.SelectionChanged += new SelectionChangedEventHandler(coord_SelectionChanged);
