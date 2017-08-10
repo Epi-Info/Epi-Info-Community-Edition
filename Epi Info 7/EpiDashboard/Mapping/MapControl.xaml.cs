@@ -262,7 +262,7 @@ namespace EpiDashboard.Mapping
 
         void AddLayerList()
         {
-            layerList = new LayerList(_mapView.Map, view, db, dashboardHelper);
+            layerList = new LayerList(_mapView, view, db, dashboardHelper);
             layerList.Loaded += new RoutedEventHandler(layerList_Loaded);
             layerList.SizeChanged += new SizeChangedEventHandler(layerList_SizeChanged);
             layerList.MouseEnter += new MouseEventHandler(layerList_MouseEnter);
@@ -526,7 +526,12 @@ namespace EpiDashboard.Mapping
         {
             GraphicsLayer graphicsLayer = _mapView.Map.Layers["zoneLayer"] as GraphicsLayer;
 
-            //////_rightClickedPoint.SpatialReference = _mapView.Map.SpatialReference;
+            double x = _rightClickedPoint.X;
+            double y = _rightClickedPoint.Y;
+            SpatialReference sRef = _rightClickedPoint.SpatialReference;
+
+            _rightClickedPoint = new MapPoint(x, y, sRef);
+
             Graphic graphic = new Graphic()
             {
                 Geometry = _rightClickedPoint,
@@ -536,41 +541,41 @@ namespace EpiDashboard.Mapping
             graphic.ZIndex = 1;
             graphicsLayer.Graphics.Add(graphic);
 
-            Esri.ArcGISRuntime.Geometry. geometryService =
-              new Esri.ArcGISRuntime.ArcGISServices.ServiceInfo("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
-            geometryService.BufferCompleted += GeometryService_BufferCompleted;
-            geometryService.Failed += GeometryService_Failed;
+            ////////////Esri.ArcGISRuntime.ArcGISServices. =
+            ////////////  new Esri.ArcGISRuntime.ArcGISServices.FeatureServiceInfo("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+            ////////////geometryService.BufferCompleted += GeometryService_BufferCompleted;
+            ////////////geometryService.Failed += GeometryService_Failed;
 
-            // If buffer spatial reference is GCS and unit is linear, geometry service will do geodesic buffering
-            BufferParameters bufferParams = new BufferParameters()
-            {
-                Unit = selectedUnit,
-                BufferSpatialReference = new SpatialReference(4326),
-                OutSpatialReference = _mapView.SpatialReference
-            };
+            ////////////// If buffer spatial reference is GCS and unit is linear, geometry service will do geodesic buffering
+            ////////////BufferParameters bufferParams = new BufferParameters()
+            ////////////{
+            ////////////    Unit = selectedUnit,
+            ////////////    BufferSpatialReference = new SpatialReference(4326),
+            ////////////    OutSpatialReference = _mapView.SpatialReference
+            ////////////};
             
-            bufferParams.Features.Add(graphic);
-            bufferParams.Distances.Add(selectedRadius);
+            ////////////bufferParams.Features.Add(graphic);
+            ////////////bufferParams.Distances.Add(selectedRadius);
 
-            geometryService.BufferAsync(bufferParams);
+            ////////////geometryService.BufferAsync(bufferParams);
         }
 
-        void GeometryService_BufferCompleted(object sender, GraphicsEventArgs args)
-        {
-            IList<Graphic> results = args.Results;
-            GraphicsLayer graphicsLayer = _mapView.Map.Layers["zoneLayer"] as GraphicsLayer;
+        ////////////void GeometryService_BufferCompleted(object sender, GraphicsEventArgs args)
+        ////////////{
+        ////////////    IList<Graphic> results = args.Results;
+        ////////////    GraphicsLayer graphicsLayer = _mapView.Map.Layers["zoneLayer"] as GraphicsLayer;
 
-            foreach (Graphic graphic in results)
-            {
-                graphic.Symbol = new SimpleFillSymbol() { Fill = new SolidColorBrush(Color.FromArgb(64, selectedColor.R, selectedColor.G, selectedColor.B)), BorderThickness = 0 };
-                graphicsLayer.Graphics.Add(graphic);
-            }
-        }
+        ////////////    foreach (Graphic graphic in results)
+        ////////////    {
+        ////////////        graphic.Symbol = new SimpleFillSymbol() { Fill = new SolidColorBrush(Color.FromArgb(64, selectedColor.R, selectedColor.G, selectedColor.B)), BorderThickness = 0 };
+        ////////////        graphicsLayer.Graphics.Add(graphic);
+        ////////////    }
+        ////////////}
 
-        private void GeometryService_Failed(object sender, TaskFailedEventArgs e)
-        {
-            MessageBox.Show("Geometry Service error: " + e.Error);
-        }
+        ////////////private void GeometryService_Failed(object sender, TaskFailedEventArgs e)
+        ////////////{
+        ////////////    MessageBox.Show("Geometry Service error: " + e.Error);
+        ////////////}
 
         public void UnSubscribe()
         {
@@ -644,10 +649,10 @@ namespace EpiDashboard.Mapping
 
             _mapView.TimeExtent = new TimeExtent(start.AddHours(-1), end.AddHours(1));
 
-            slider.MinimumValue = _mapView.TimeExtent.Start;
-            slider.MaximumValue = _mapView.TimeExtent.End;
-            slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
-            slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(1, 0, 0, 0));
+            //slider.MinimumValue = _mapView.TimeExtent.Start;
+            //slider.MaximumValue = _mapView.TimeExtent.End;
+            //slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
+            //slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(1, 0, 0, 0));
             
             DateTimeAxis axis = new DateTimeAxis();
             axis.Orientation = AxisOrientation.X;
@@ -666,36 +671,36 @@ namespace EpiDashboard.Mapping
         {
             if (areaChartDataPoints != null)
             {
-                List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
-                {
-                    return pair.Key < slider.Value.End;
-                });
-                areaSeries.ItemsSource = test;
+                ////////////List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
+                ////////////{
+                ////////////    ////////return pair.Key < slider.Value.End;
+                ////////////});
+                ////////////areaSeries.ItemsSource = test;
             }
         }
 
-        void slider_ValueChanged(object sender, TimeSlider.ValueChangedEventArgs e)
-        {
-            if (currentTimeVariable != null)
-            {
-                grdTimeLapse.Visibility = Visibility.Visible;
-                stkTimeLapse.Visibility = Visibility.Visible;
-                chrtTimeLapse.Visibility = Visibility.Visible;
+        ////////////void slider_ValueChanged(object sender, TimeSlider.ValueChangedEventArgs e)
+        ////////////{
+        ////////////    if (currentTimeVariable != null)
+        ////////////    {
+        ////////////        grdTimeLapse.Visibility = Visibility.Visible;
+        ////////////        stkTimeLapse.Visibility = Visibility.Visible;
+        ////////////        chrtTimeLapse.Visibility = Visibility.Visible;
 
-                txtSliderStartDate.Text = e.NewValue.Start.ToShortDateString();
-                txtSliderEndDate.Text = e.NewValue.End.ToShortDateString();
+        ////////////        txtSliderStartDate.Text = e.NewValue.Start.ToShortDateString();
+        ////////////        txtSliderEndDate.Text = e.NewValue.End.ToShortDateString();
 
-                _mapView.TimeExtent = new TimeExtent(e.NewValue.Start, e.NewValue.End);
-                if (areaChartDataPoints != null)
-                {
-                    List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
-                    {
-                        return pair.Key < e.NewValue.End;
-                    });
-                    areaSeries.ItemsSource = test;
-                }
-            }
-        }
+        ////////////        _mapView.TimeExtent = new TimeExtent(e.NewValue.Start, e.NewValue.End);
+        ////////////        if (areaChartDataPoints != null)
+        ////////////        {
+        ////////////            List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
+        ////////////            {
+        ////////////                return pair.Key < e.NewValue.End;
+        ////////////            });
+        ////////////            areaSeries.ItemsSource = test;
+        ////////////        }
+        ////////////    }
+        ////////////}
         
 
         public void OnRecordSelected(int id)

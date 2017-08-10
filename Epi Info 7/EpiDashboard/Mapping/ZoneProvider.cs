@@ -33,7 +33,7 @@ namespace EpiDashboard.Mapping
 
     public class ZoneProvider : ILayerProvider
     {
-        private Map myMap;
+        private MapView _mapView;
         private Guid layerId;
         MapPoint point;
         double radius;
@@ -41,9 +41,9 @@ namespace EpiDashboard.Mapping
         string units;
 
 
-        public ZoneProvider(Map myMap, MapPoint point)
+        public ZoneProvider(MapView  mapView, MapPoint point)
         {
-            this.myMap = myMap;
+            _mapView = mapView;
             this.point = point;
             this.layerId = Guid.NewGuid();
         }
@@ -53,7 +53,7 @@ namespace EpiDashboard.Mapping
             GraphicsLayer markerLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (markerLayer != null)
             {
-                markerLayer.ClearGraphics();
+                markerLayer.Graphics.Clear();
                 RenderZone(this.radius, this.zoneColor, this.units);
             }
         }
@@ -105,7 +105,7 @@ namespace EpiDashboard.Mapping
         {
             GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
 
-            point.SpatialReference = myMap.SpatialReference;
+            point.SpatialReference = _mapView.SpatialReference;
             Graphic graphic = new ESRI.ArcGIS.Client.Graphic()
             {
                 Geometry = point,
