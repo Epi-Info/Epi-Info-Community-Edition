@@ -20,8 +20,7 @@ namespace EpiDashboard.Mapping
         public MarkerConfigDialog()
         {
             InitializeComponent();
-            cbxStyle.DataSource = Enum.GetNames(typeof(SimpleMarkerSymbol.SimpleMarkerStyle));
-            //cbxStyle.SelectedIndex = 35;
+            cbxStyle.DataSource = Enum.GetNames(typeof(SimpleMarkerStyle));
         }
 
         public SimpleMarkerSymbol Marker
@@ -29,9 +28,9 @@ namespace EpiDashboard.Mapping
             get
             {
                 SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
-                symbol.Color = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(pictureBox1.BackColor.R, pictureBox1.BackColor.G, pictureBox1.BackColor.B));
+                symbol.Color = System.Windows.Media.Color.FromRgb(pictureBox1.BackColor.R, pictureBox1.BackColor.G, pictureBox1.BackColor.B);
                 symbol.Size = double.Parse(txtSize.Text);
-                symbol.Style = (SimpleMarkerSymbol.SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerSymbol.SimpleMarkerStyle), cbxStyle.SelectedItem.ToString());
+                symbol.Style = (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle), cbxStyle.SelectedItem.ToString());
                 return symbol;
             }
         }

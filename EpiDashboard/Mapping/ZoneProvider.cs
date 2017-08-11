@@ -105,74 +105,80 @@ namespace EpiDashboard.Mapping
         {
             GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
 
-            point.SpatialReference = _mapView.SpatialReference;
-            Graphic graphic = new ESRI.ArcGIS.Client.Graphic()
+            double x = point.X;
+            double y = point.Y;
+            SpatialReference sRef = _mapView.SpatialReference;
+
+            point = new MapPoint(x, y, sRef);
+
+            Graphic graphic = new Graphic()
             {
                 Geometry = point,
                 Symbol = SimplePointSymbol
             };
-            graphic.SetZIndex(1);
+
+            graphic.ZIndex = 1;
             graphicsLayer.Graphics.Add(graphic);
 
-            GeometryService geometryService =
-              new GeometryService("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
-            geometryService.BufferCompleted += GeometryService_BufferCompleted;
-            geometryService.Failed += GeometryService_Failed;
+            ////////////////GeometryService geometryService =
+            ////////////////  new GeometryService("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+            ////////////////geometryService.BufferCompleted += GeometryService_BufferCompleted;
+            ////////////////geometryService.Failed += GeometryService_Failed;
 
-            // If buffer spatial reference is GCS and unit is linear, geometry service will do geodesic buffering
-            BufferParameters bufferParams = new BufferParameters()
-            {
-                Unit = StandardUnit,
-                BufferSpatialReference = new SpatialReference(4326),
-                OutSpatialReference = myMap.SpatialReference
-            };
-            bufferParams.Features.Add(graphic);
-            bufferParams.Distances.Add(radius);
+            ////////////////// If buffer spatial reference is GCS and unit is linear, geometry service will do geodesic buffering
+            ////////////////BufferParameters bufferParams = new BufferParameters()
+            ////////////////{
+            ////////////////    Unit = StandardUnit,
+            ////////////////    BufferSpatialReference = new SpatialReference(4326),
+            ////////////////    OutSpatialReference = myMap.SpatialReference
+            ////////////////};
+            ////////////////bufferParams.Features.Add(graphic);
+            ////////////////bufferParams.Distances.Add(radius);
 
-            geometryService.BufferAsync(bufferParams);
+            ////////////////geometryService.BufferAsync(bufferParams);
         }
 
-        private LinearUnit StandardUnit
-        {
-            get
-            {
-                switch (units)
-                {
-                    case "Kilometer": return LinearUnit.Kilometer;
-                    case "Meter": return LinearUnit.Meter;
-                    case "Mile": return LinearUnit.StatuteMile;
-                    case "Yard": return LinearUnit.InternationalYard;
-                    case "Foot": return LinearUnit.Foot;
-                    default: return LinearUnit.StatuteMile;
-                }
-            }
-        }
+        //////////private LinearUnit StandardUnit
+        //////////{
+        //////////    get
+        //////////    {
+        //////////        switch (units)
+        //////////        {
+        //////////            case "Kilometer": return LinearUnit.Kilometer;
+        //////////            case "Meter": return LinearUnit.Meter;
+        //////////            case "Mile": return LinearUnit.StatuteMile;
+        //////////            case "Yard": return LinearUnit.InternationalYard;
+        //////////            case "Foot": return LinearUnit.Foot;
+        //////////            default: return LinearUnit.StatuteMile;
+        //////////        }
+        //////////    }
+        //////////}
 
-        void GeometryService_BufferCompleted(object sender, GraphicsEventArgs args)
-        {
-            IList<Graphic> results = args.Results;
-            GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
+        //void GeometryService_BufferCompleted(object sender, GraphicsEventArgs args)
+        //{
+        //    IList<Graphic> results = args.Results;
+        //    GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
 
-            foreach (Graphic graphic in results)
-            {
-                graphic.Symbol = new SimpleFillSymbol() { Fill = zoneColor, BorderThickness = 0 };
-                graphicsLayer.Graphics.Add(graphic);
-            }
-        }
+        //    foreach (Graphic graphic in results)
+        //    {
+        //        graphic.Symbol = new SimpleFillSymbol() { Fill = zoneColor, BorderThickness = 0 };
+        //        graphicsLayer.Graphics.Add(graphic);
+        //    }
+        //}
 
-        private void GeometryService_Failed(object sender, TaskFailedEventArgs e)
-        {
-            Logger.Log("Geometry Service error: " + e.Error);
-        }
+        //private void GeometryService_Failed(object sender, TaskFailedEventArgs e)
+        //{
+        //    Logger.Log("Geometry Service error: " + e.Error);
+        //}
 
         private Symbol SimplePointSymbol
         {
             get
             {
                 SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
-                symbol.Color = Brushes.Black;
+                symbol.Color = Colors.Black;
                 symbol.Size = 3;
-                symbol.Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle;
+                symbol.Style = SimpleMarkerStyle.Circle;
                 return symbol;
             }
         }

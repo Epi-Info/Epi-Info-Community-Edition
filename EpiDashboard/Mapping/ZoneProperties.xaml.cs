@@ -45,8 +45,8 @@ namespace EpiDashboard.Mapping
 
             _mapView = mapView;
             this.point = point;
-            
-            provider = new ZoneProvider(myMap, point);
+
+            provider = new ZoneProvider(_mapView, point);
             cbxUnits.SelectionChanged += new SelectionChangedEventHandler(config_SelectionChanged);
             txtRadius.TextChanged+=new TextChangedEventHandler(txtRadius_TextChanged);
             rctColor.MouseUp += new MouseButtonEventHandler(rctColor_MouseUp);

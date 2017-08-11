@@ -35,14 +35,14 @@ namespace EpiDashboard.Mapping
         private int Numclasses;
         public DataFilters datafilters { get; set; }
 
-        public ChoroplethKmlLayerProperties(MapView  mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethKmlLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
-            this.myMap = myMap;
+            _mapView = mapView;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            Provider = new ChoroplethKmlLayerProvider(myMap);
+            Provider = new ChoroplethKmlLayerProvider(mapView);
             Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();
@@ -297,7 +297,7 @@ namespace EpiDashboard.Mapping
         {
             if (Provider == null)
             {
-                Provider = new ChoroplethKmlLayerProvider(myMap);
+                Provider = new ChoroplethKmlLayerProvider(_mapView);
                 Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }          
             base.CreateFromXml(element, Provider);

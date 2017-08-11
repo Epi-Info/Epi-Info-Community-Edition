@@ -104,92 +104,92 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public object[] LoadShapeFile(string url)
-        {
-            if (!string.IsNullOrEmpty(url))
-            {
-                FeatureLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
-                if (graphicsLayer != null)
-                {
-                    _mapView.Map.Layers.Remove(graphicsLayer);
-                }
-                graphicsLayer = new FeatureLayer();
-                graphicsLayer.ID = layerId.ToString();
-                graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
-                graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
-                graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);
-                graphicsLayer.UpdateFailed += new EventHandler<TaskFailedEventArgs>(graphicsLayer_UpdateFailed);
+        //////////////public object[] LoadShapeFile(string url)
+        //////////////{
+        //////////////    if (!string.IsNullOrEmpty(url))
+        //////////////    {
+                //////////////////FeatureLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
+                //////////////////if (graphicsLayer != null)
+                //////////////////{
+                //////////////////    _mapView.Map.Layers.Remove(graphicsLayer);
+                //////////////////}
+                //////////////////graphicsLayer = new FeatureLayer();
+                //////////////////graphicsLayer.ID = layerId.ToString();
+                //////////////////graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
+                //////////////////graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
+                //////////////////graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);
+                //////////////////graphicsLayer.UpdateFailed += new EventHandler<TaskFailedEventArgs>(graphicsLayer_UpdateFailed);
 
-                if (url.Split('/')[0].Equals("NationalMap.gov - New York County Boundaries") || url.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13"))
-                {
-                    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13";
-                    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
-                    graphicsLayer.OutFields.Add("COUNTY_NAME");
-                    graphicsLayer.Where = "STATE_FIPSCODE = '36'";
-                    myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
-                }
-                else if (url.Split('/')[0].Equals("NationalMap.gov - Rhode Island Zip Code Boundaries") || url.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19"))
-                {
-                    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19";
-                    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
-                    graphicsLayer.OutFields.Add("NAME");
-                    graphicsLayer.Where = "STATE_FIPSCODE = '44'";
-                    myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
-                }
-                else if (url.Split('/')[0].Equals("NationalMap.gov - U.S. State Boundaries") || url.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17"))
-                {
-                    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17";
-                    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
-                    graphicsLayer.OutFields.Add("STATE_ABBR");
-                    graphicsLayer.OutFields.Add("STATE_NAME");
-                    myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
-                }
-                else if (url.Split('/')[0].Equals("NationalMap.gov - World Boundaries"))
-                {
-                    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Blank_US/MapServer/17";
-                    myMap.Extent = graphicsLayer.FullExtent;
-                }
-                else
-                {
-                    graphicsLayer.Url = url;
-                }
-                _mapView.Map.Layers.Add(graphicsLayer);
-                myMap.Cursor = Cursors.Wait;
-                return new object[] { graphicsLayer };
-            }
-            else
-                return null;
-        }
+                //////////////////if (url.Split('/')[0].Equals("NationalMap.gov - New York County Boundaries") || url.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13"))
+                //////////////////{
+                //////////////////    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13";
+                //////////////////    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
+                //////////////////    graphicsLayer.OutFields.Add("COUNTY_NAME");
+                //////////////////    graphicsLayer.Where = "STATE_FIPSCODE = '36'";
+                //////////////////    myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
+                //////////////////}
+                //////////////////else if (url.Split('/')[0].Equals("NationalMap.gov - Rhode Island Zip Code Boundaries") || url.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19"))
+                //////////////////{
+                //////////////////    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19";
+                //////////////////    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
+                //////////////////    graphicsLayer.OutFields.Add("NAME");
+                //////////////////    graphicsLayer.Where = "STATE_FIPSCODE = '44'";
+                //////////////////    myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
+                //////////////////}
+                //////////////////else if (url.Split('/')[0].Equals("NationalMap.gov - U.S. State Boundaries") || url.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17"))
+                //////////////////{
+                //////////////////    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17";
+                //////////////////    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
+                //////////////////    graphicsLayer.OutFields.Add("STATE_ABBR");
+                //////////////////    graphicsLayer.OutFields.Add("STATE_NAME");
+                //////////////////    myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
+                //////////////////}
+                //////////////////else if (url.Split('/')[0].Equals("NationalMap.gov - World Boundaries"))
+                //////////////////{
+                //////////////////    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Blank_US/MapServer/17";
+                //////////////////    myMap.Extent = graphicsLayer.FullExtent;
+                //////////////////}
+                //////////////////else
+                //////////////////{
+                //////////////////    graphicsLayer.Url = url;
+                //////////////////}
+                //////////////////_mapView.Map.Layers.Add(graphicsLayer);
+                //////////////////myMap.Cursor = Cursors.Wait;
+                //////////////////return new object[] { graphicsLayer };
+        ////////////////    }
+        ////////////////    else
+        ////////////////        return null;
+        ////////////////}
 
-        public object[] LoadShapeFile()
-        {
-            MapServerFeatureDialog dialog = new MapServerFeatureDialog();
+        ////////////////public object[] LoadShapeFile()
+        ////////////////{
+        ////////////////    MapServerFeatureDialog dialog = new MapServerFeatureDialog();
 
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                object[] graphicslayer= null;
-               graphicslayer= LoadShapeFile(dialog.ServerName + "/" + dialog.VisibleLayer);
-               return graphicslayer;
-            }
-            else return null;
-        }
+        ////////////////    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        ////////////////    {
+        ////////////////        object[] graphicslayer= null;
+        ////////////////       graphicslayer= LoadShapeFile(dialog.ServerName + "/" + dialog.VisibleLayer);
+        ////////////////       return graphicslayer;
+        ////////////////    }
+        ////////////////    else return null;
+        ////////////////}
 
-        void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
-        {
-            //FeatureLayer graphicsLayer = _mapView.Layers[layerId.ToString()] as FeatureLayer;
-            //int x = 5;
-            //x++;
-            myMap.Cursor = Cursors.Arrow;
-            flagupdatetoglfailed = true;
-        }
+        ////////////////void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
+        ////////////////{
+        ////////////////    //FeatureLayer graphicsLayer = _mapView.Layers[layerId.ToString()] as FeatureLayer;
+        ////////////////    //int x = 5;
+        ////////////////    //x++;
+        ////////////////    myMap.Cursor = Cursors.Arrow;
+        ////////////////    flagupdatetoglfailed = true;
+        ////////////////}
 
-        void graphicsLayer_InitializationFailed(object sender, EventArgs e)
-        {
-            //FeatureLayer graphicsLayer = _mapView.Layers[layerId.ToString()] as FeatureLayer;
-            //int x = 5;
-            //x++;
-            myMap.Cursor = Cursors.Arrow;
-        }
+        ////////////////void graphicsLayer_InitializationFailed(object sender, EventArgs e)
+        ////////////////{
+        ////////////////    //FeatureLayer graphicsLayer = _mapView.Layers[layerId.ToString()] as FeatureLayer;
+        ////////////////    //int x = 5;
+        ////////////////    //x++;
+        ////////////////    myMap.Cursor = Cursors.Arrow;
+        ////////////////}
 
         void graphicsLayer_Initialized(object sender, EventArgs e)
         {
@@ -200,27 +200,41 @@ namespace EpiDashboard.Mapping
 
         void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
         {
-            FeatureLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
-            flagupdatetoglfailed = false;
-            if (graphicsLayer != null)
-            {
-                if (graphicsLayer.Graphics.Count > 0)
-                {
-                    if (FeatureLoaded != null)
-                    {
-                        FeatureLoaded(graphicsLayer.Url, graphicsLayer.Graphics[0].Attributes);
-                    }
-                }
-            }
-            myMap.Cursor = Cursors.Arrow;
+            ////////////FeatureLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
+            ////////////flagupdatetoglfailed = false;
+            ////////////if (graphicsLayer != null)
+            ////////////{
+            ////////////    if (graphicsLayer.Graphics.Count > 0)
+            ////////////    {
+            ////////////        if (FeatureLoaded != null)
+            ////////////        {
+            ////////////            FeatureLoaded(graphicsLayer.Url, graphicsLayer.Graphics[0].Attributes);
+            ////////////        }
+            ////////////    }
+            ////////////}
+            ////////////myMap.Cursor = Cursors.Arrow;
         }
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
-            SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
+            ////////////SimpleFillSymbol symbol = new SimpleFillSymbol();
+            ////////////symbol.Fill = brush;
+            ////////////symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
+            ////////////symbol.BorderThickness = 1;
+            ////////////return symbol;
+
+            SimpleFillSymbol symbol = new SimpleFillSymbol()
+            {
+                Color = brush.Color,
+                Style = SimpleFillStyle.Solid,
+                Outline = new SimpleLineSymbol()
+                {
+                    Color = Colors.Gray,
+                    Style = SimpleLineStyle.Solid,
+                    Width = 1
+                }
+            };
+
             return symbol;
         }
 
@@ -244,9 +258,9 @@ namespace EpiDashboard.Mapping
             get
             {
                 SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
-                symbol.Color = new SolidColorBrush(dotColor);
+                symbol.Color = dotColor;
                 symbol.Size = 5;
-                symbol.Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle;
+                symbol.Style = SimpleMarkerStyle.Circle;
                 return symbol;
             }
         }
@@ -345,55 +359,55 @@ namespace EpiDashboard.Mapping
                                 bool foundBottomRight = false;
                                 bool foundTopLeft = false;
                                 bool foundTopRight = false;
-                                foreach (Esri.ArcGISRuntime.Geometry.PointCollection pc in ((Esri.ArcGISRuntime.Geometry.Polygon)graphicFeature.Geometry).Rings)
-                                {
-                                    foundBottomLeft = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                    foundBottomRight = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
-                                    foundTopLeft = pc.Any((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                    foundTopRight = pc.Any((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                //foreach (Esri.ArcGISRuntime.Geometry.PointCollection pc in ((Esri.ArcGISRuntime.Geometry.Polygon)graphicFeature.Geometry).Rings)
+                                //{
+                                //    foundBottomLeft = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                //    foundBottomRight = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                //    foundTopLeft = pc.Any((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                //    foundTopRight = pc.Any((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
 
-                                    if (foundBottomLeft && foundBottomRight && foundTopLeft && foundTopRight)
-                                    {
-                                        try
-                                        {
-                                            MapPoint firstBottomLeft = pc.First((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint firstBottomRight = pc.First((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint firstTopLeft = pc.First((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint firstTopRight = pc.First((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                //    if (foundBottomLeft && foundBottomRight && foundTopLeft && foundTopRight)
+                                //    {
+                                //        try
+                                //        {
+                                //            MapPoint firstBottomLeft = pc.First((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                //            MapPoint firstBottomRight = pc.First((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                //            MapPoint firstTopLeft = pc.First((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                //            MapPoint firstTopRight = pc.First((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
 
-                                            int indexBL = pc.IndexOf(firstBottomLeft);
-                                            int indexBR = pc.IndexOf(firstBottomRight);
-                                            int indexTL = pc.IndexOf(firstTopLeft);
-                                            int indexTR = pc.IndexOf(firstTopRight);
+                                //            int indexBL = pc.IndexOf(firstBottomLeft);
+                                //            int indexBR = pc.IndexOf(firstBottomRight);
+                                //            int indexTL = pc.IndexOf(firstTopLeft);
+                                //            int indexTR = pc.IndexOf(firstTopRight);
 
-                                            MapPoint lastBottomLeft = pc.Last((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint lastBottomRight = pc.Last((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint lastTopLeft = pc.Last((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint lastTopRight = pc.Last((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                //            MapPoint lastBottomLeft = pc.Last((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                //            MapPoint lastBottomRight = pc.Last((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                //            MapPoint lastTopLeft = pc.Last((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                //            MapPoint lastTopRight = pc.Last((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
 
-                                            int indexBL2 = pc.IndexOf(lastBottomLeft);
-                                            int indexBR2 = pc.IndexOf(lastBottomRight);
-                                            int indexTL2 = pc.IndexOf(lastTopLeft);
-                                            int indexTR2 = pc.IndexOf(lastTopRight);
+                                //            int indexBL2 = pc.IndexOf(lastBottomLeft);
+                                //            int indexBR2 = pc.IndexOf(lastBottomRight);
+                                //            int indexTL2 = pc.IndexOf(lastTopLeft);
+                                //            int indexTR2 = pc.IndexOf(lastTopRight);
 
-                                            if ((Math.Abs(indexTL - indexTR2) == 1 && Math.Abs(indexTR - indexBR2) == 1) || (Math.Abs(indexBL - indexTL2) == 1 && Math.Abs(indexTL - indexTR2) == 1) || (Math.Abs(indexBR - indexBL2) == 1 && Math.Abs(indexTR - indexBR2) == 1))
-                                            {
-                                                pointInGraphic = true;
-                                                break;
-                                            }
-                                            else if ((Math.Abs(indexBL - indexBR2) == 1 && Math.Abs(indexTL - indexBL2) == 1) || (Math.Abs(indexTL - indexBL2) == 1 && Math.Abs(indexTR - indexTL2) == 1) || (Math.Abs(indexBR - indexTR2) == 1 && Math.Abs(indexTR - indexTL2) == 1))
-                                            {
-                                                pointInGraphic = true;
-                                                break;
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            pointInGraphic = false;
-                                        }
+                                //            if ((Math.Abs(indexTL - indexTR2) == 1 && Math.Abs(indexTR - indexBR2) == 1) || (Math.Abs(indexBL - indexTL2) == 1 && Math.Abs(indexTL - indexTR2) == 1) || (Math.Abs(indexBR - indexBL2) == 1 && Math.Abs(indexTR - indexBR2) == 1))
+                                //            {
+                                //                pointInGraphic = true;
+                                //                break;
+                                //            }
+                                //            else if ((Math.Abs(indexBL - indexBR2) == 1 && Math.Abs(indexTL - indexBL2) == 1) || (Math.Abs(indexTL - indexBL2) == 1 && Math.Abs(indexTR - indexTL2) == 1) || (Math.Abs(indexBR - indexTR2) == 1 && Math.Abs(indexTR - indexTL2) == 1))
+                                //            {
+                                //                pointInGraphic = true;
+                                //                break;
+                                //            }
+                                //        }
+                                //        catch (Exception ex)
+                                //        {
+                                //            pointInGraphic = false;
+                                //        }
 
-                                    }
-                                }
+                                //    }
+                                //}
                             }
                             graphicsToBeAdded.Add(graphic);
                         }
@@ -405,13 +419,19 @@ namespace EpiDashboard.Mapping
                 }
 
                 SimpleRenderer renderer = new SimpleRenderer();
+
                 renderer.Symbol = new SimpleFillSymbol()
                 {
-                    Fill = new SolidColorBrush(Colors.Transparent),
-                    BorderBrush = new SolidColorBrush(Colors.Black),
-                    BorderThickness = 1
+                    Color = Colors.Transparent,
+                    Style = SimpleFillStyle.Solid,
+                    Outline = new SimpleLineSymbol()
+                    {
+                        Color = Colors.Black,
+                        Style = SimpleLineStyle.Solid,
+                        Width = 1
+                    }
                 };
-
+                
                 graphicsLayer.Renderer = renderer;
 
                 GraphicsLayer dotLayer = _mapView.Map.Layers[layerId.ToString() + "_dotLayer"] as GraphicsLayer;

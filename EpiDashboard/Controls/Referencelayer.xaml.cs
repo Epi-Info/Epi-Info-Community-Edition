@@ -260,10 +260,10 @@ namespace EpiDashboard.Controls
                         KMLMapServerName = txtKMLpath.Text;
                         if (KMLprovider == null)
                         {
-                            KMLprovider = new Mapping.KmlLayerProvider(myMap);
+                            KMLprovider = new Mapping.KmlLayerProvider(_mapView);
                         }
                         ILayerProperties layerProperties = null;
-                        layerProperties = new KmlLayerProperties(myMap);
+                        layerProperties = new KmlLayerProperties(_mapView);
                         layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                         this.kmllayerprop = (KmlLayerProperties)layerProperties;
                         kmllayerprop.provider = KMLprovider;
@@ -353,7 +353,7 @@ namespace EpiDashboard.Controls
 
         private void btnBrowseShape_Click(object sender, RoutedEventArgs e)
         {
-            provider = new Mapping.ShapeLayerProvider(myMap);          
+            provider = new Mapping.ShapeLayerProvider(_mapView);          
             //Create the dialog allowing the user to select the "*.shp" and the "*.dbf" files
             Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
             ofd.Filter = "ESRI Shapefiles (*.shp)|*.shp";
@@ -365,7 +365,7 @@ namespace EpiDashboard.Controls
                 {
                     txtShapePath.Text = retval;
                     ILayerProperties layerProperties = null;
-                    layerProperties = new ShapeLayerProperties(myMap);                    
+                    layerProperties = new ShapeLayerProperties(_mapView);                    
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     this.layerprop = (ShapeLayerProperties)layerProperties;
                     layerprop.provider = provider;
