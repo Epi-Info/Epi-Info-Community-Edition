@@ -75,12 +75,12 @@ namespace EpiDashboard.Mapping
 
                     if (graphicsLayer.Graphics[0].Attributes.ContainsKey("extendedData"))
                     {
-                        ////////////List<KMKmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
+                        //////////////List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
 
-                        ////////////foreach (KmlExtendedData ed in eds)
-                        ////////////{
-                        ////////////    allAttributes.Add(ed.Name, ed.Value);
-                        ////////////}
+                        //////////////foreach (KmlExtendedData ed in eds)
+                        //////////////{
+                        //////////////    allAttributes.Add(ed.Name, ed.Value);
+                        //////////////}
 
                         List<object> eds = (List<object>)graphicsLayer.Graphics[0].Attributes["extendedData"];
 
@@ -116,14 +116,13 @@ namespace EpiDashboard.Mapping
                             ymax = g.Geometry.Extent.YMax;
                     }
 
-                    ////////////ArcGIS_MapView.SetView( new Envelope(
-                    ////////////    ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)),
-                    ////////////    ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5))
-                    ////////////    ));
+                    SpatialReference webMercator = new SpatialReference(102100);
+                    
+                    MapPoint firstCornerWGS84 = (new MapPoint(xmin - 0.5, ymax + 0.5));
+                    MapPoint secondCornerWGS84 = (new MapPoint(xmax + 0.5, ymin - 0.5));
 
-                    //////////// Did use - ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator
-                    MapPoint firstCorner = (new MapPoint(xmin - 0.5, ymax + 0.5));
-                    MapPoint secondCorner = (new MapPoint(xmax + 0.5, ymin - 0.5));
+                    MapPoint firstCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
+                    MapPoint secondCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
 
                     ArcGIS_MapView.SetView(new Envelope(firstCorner, secondCorner));
                 }
@@ -203,11 +202,15 @@ namespace EpiDashboard.Mapping
                     ymax = g.Geometry.Extent.YMax;
             }
 
-            //////////// Did use - ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator
-            MapPoint firstCorner = (new MapPoint(xmin - 0.5, ymax + 0.5));
-            MapPoint secondCorner =(new MapPoint(xmax + 0.5, ymin - 0.5));
+            SpatialReference webMercator = new SpatialReference(102100);
 
-            ArcGIS_MapView.SetView( new Envelope(firstCorner, secondCorner));
+            MapPoint firstCornerWGS84 = (new MapPoint(xmin - 0.5, ymax + 0.5));
+            MapPoint secondCornerWGS84 = (new MapPoint(xmax + 0.5, ymin - 0.5));
+
+            MapPoint firstCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
+            MapPoint secondCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
+
+            ArcGIS_MapView.SetView(new Envelope(firstCorner, secondCorner));
         }
 
         private void AddSchemaDataAttributes(string _kmlURL, GraphicCollection graphics)
