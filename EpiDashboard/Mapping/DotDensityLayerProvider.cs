@@ -172,19 +172,27 @@ namespace EpiDashboard.Mapping
                     Envelope shapeFileExtent = shapeFileReader.GetExtent();
                     if (shapeFileExtent.SpatialReference == null)
                     {
-                        //////////myMap.Extent = shapeFileExtent;
+                        _mapView.SetView(shapeFileExtent);
                     }
                     else
                     {
                         if (shapeFileExtent.SpatialReference.Wkid == 4326)
                         {
-                            //////////myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                            SpatialReference webMercator = new SpatialReference(102100);
+                            
+                            MapPoint firstCornerWGS84 = (new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin));
+                            MapPoint secondCornerWGS84 = (new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax));
+
+                            MapPoint firstCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
+                            MapPoint secondCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
+
+                            _mapView.SetView(new Envelope(firstCorner, secondCorner));
                         }
                     }
                 }
                 else
                 {
-                    //////////myMap.Extent = graphicsLayer.FullExtent;
+                    _mapView.SetView(graphicsLayer.FullExtent);
                 }
                 return new object[] { fileName, graphicsLayer.Graphics[0].Attributes };
             }

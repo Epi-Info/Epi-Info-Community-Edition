@@ -336,7 +336,13 @@ namespace EpiDashboard.Mapping
 
                 BingLayer bingLayer = new BingLayer();
 
+
+
+
                 ////////////bingLayer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
+
+
+
 
                 bool sparse_connection = false;
 
@@ -350,27 +356,32 @@ namespace EpiDashboard.Mapping
                 }
                 catch { }
 
-                //////////////if (sparse_connection == true)
-                //////////////{
-                //////////////    bingLayer.Token = null;
-                //////////////}
-                //////////////else
-                //////////////{
-                //////////////    if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                //////////////    {
-                //////////////        bingLayer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                //////////////        bingLayer.LayerStyle = TileLayer.LayerType.AerialWithLabels;
-                //////////////    }
-                //////////////    else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                //////////////    {
-                //////////////        bingLayer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                //////////////        bingLayer.LayerStyle = TileLayer.LayerType.Road;
-                //////////////    }
-                //////////////    else
-                //////////////    {
-                //////////////        bingLayer.Token = null;
-                //////////////    }
-                //////////////}
+
+
+                if (sparse_connection == true)
+                {
+                    bingLayer.Key = null;
+                }
+                else
+                {
+                    if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                    {
+                        bingLayer.Key = Configuration.GetNewInstance().Settings.MapServiceKey;
+                        bingLayer.MapStyle = BingLayer.LayerType.AerialWithLabels;
+                    }
+                    else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                    {
+                        bingLayer.Key = Configuration.GetNewInstance().Settings.MapServiceKey;
+                        bingLayer.MapStyle = BingLayer.LayerType.Road;
+                    }
+                    else
+                    {
+                        bingLayer.Key = null;
+                    }
+                }
+
+
+
 
                 GraphicsLayer pointLayer = new GraphicsLayer();
                 pointLayer.ID = "pointLayer";
@@ -430,9 +441,9 @@ namespace EpiDashboard.Mapping
 
                 MapContainer.Children.Add(_mapView);
 
-                ////////////ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
-                ////////////extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
-                ////////////System.Windows.Interactivity.Interaction.GetBehaviors(_mapView).Add(extentBehavior);
+                //ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
+                //extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
+                //System.Windows.Interactivity.Interaction.GetBehaviors(_mapView).Add(extentBehavior);
 
                 ////////////nav = new Navigation();
                 ////////////nav.Margin = new Thickness(5);

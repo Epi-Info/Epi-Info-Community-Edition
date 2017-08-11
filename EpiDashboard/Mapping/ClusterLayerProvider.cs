@@ -215,7 +215,16 @@ namespace EpiDashboard.Mapping
 
             if (coordinateList.Coordinates.Count > 0)
             {
-                //////myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
+                SpatialReference webMercator = new SpatialReference(102100);
+
+                MapPoint firstCornerWGS84 = (new MapPoint(minX - 0.01, minY - 0.01, geoReference));
+                MapPoint secondCornerWGS84 = (new MapPoint(maxX + 0.01, maxY + 0.01, geoReference));
+
+                MapPoint firstCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
+                MapPoint secondCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
+
+                _mapView.SetView(new Envelope(firstCorner, secondCorner));
+                
                 if (!string.IsNullOrEmpty(timeVar))
                 {
                     if (minTime != null && maxTime != null)
