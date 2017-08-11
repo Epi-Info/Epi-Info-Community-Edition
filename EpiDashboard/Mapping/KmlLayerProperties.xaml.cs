@@ -166,7 +166,7 @@ namespace EpiDashboard.Mapping
             }
             if (provider == null)
             {
-                provider = new KmlLayerProvider(myMap);
+                provider = new KmlLayerProvider(_mapView);
             }
             provider.RenderServerImage(serverName, visibleLayers);
             if (MapGenerated != null)

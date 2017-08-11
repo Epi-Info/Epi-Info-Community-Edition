@@ -244,27 +244,27 @@ namespace EpiDashboard.Mapping
 
             if (coordinateList.Coordinates.Count > 0)
             {
-                //_mapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
-                //if (!string.IsNullOrEmpty(timeVar))
-                //{
-                //    if (minTime != null && maxTime != null)
-                //    {
+                ////////////_mapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
+                ////////////if (!string.IsNullOrEmpty(timeVar))
+                ////////////{
+                ////////////    if (minTime != null && maxTime != null)
+                ////////////    {
 
-                //        intervalCounts = new List<KeyValuePair<DateTime, int>>();
-                //        DateTime previousInterval = DateTime.MinValue;
-                //        IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
-                //        foreach (DateTime interval in intervals)
-                //        {
-                //            int count = pointLayer.Graphics.Count(x => x.TimeExtent.Start <= interval && x.TimeExtent.Start >= previousInterval);
-                //            intervalCounts.Add(new KeyValuePair<DateTime, int>(interval.Date, count));
-                //            previousInterval = interval;
-                //        }
-                //        if (DateRangeDefined != null)
-                //        {
-                //            DateRangeDefined(minTime, maxTime, intervalCounts);
-                //        }
-                //    }
-                //}
+                ////////////        intervalCounts = new List<KeyValuePair<DateTime, int>>();
+                ////////////        DateTime previousInterval = DateTime.MinValue;
+                ////////////        IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
+                ////////////        foreach (DateTime interval in intervals)
+                ////////////        {
+                ////////////            int count = pointLayer.Graphics.Count(x => x.TimeExtent.Start <= interval && x.TimeExtent.Start >= previousInterval);
+                ////////////            intervalCounts.Add(new KeyValuePair<DateTime, int>(interval.Date, count));
+                ////////////            previousInterval = interval;
+                ////////////        }
+                ////////////        if (DateRangeDefined != null)
+                ////////////        {
+                ////////////            DateRangeDefined(minTime, maxTime, intervalCounts);
+                ////////////        }
+                ////////////    }
+                ////////////}
             }
         }
 

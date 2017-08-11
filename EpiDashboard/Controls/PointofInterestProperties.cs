@@ -574,7 +574,7 @@ namespace EpiDashboard.Controls
                         dashboardHelper,
                         cmbLatitude.SelectedItem.ToString(),
                         cmbLongitude.SelectedItem.ToString(),
-                        colorselected,
+                        ((SolidColorBrush)colorselected).Color,
                         string.Empty,
                         (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle),  cmbStyle.SelectedItem.ToString()),
                         txtDescription.Text

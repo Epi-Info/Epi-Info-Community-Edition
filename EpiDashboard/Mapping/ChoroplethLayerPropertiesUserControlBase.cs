@@ -231,7 +231,7 @@ namespace EpiDashboard.Mapping
         {
             dynamic layerPropertiesControl = this;
 
-            EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(mapControl as StandaloneMapControl, mapView);
+            EpiDashboard.Controls.ChoroplethProperties choroplethprop = new Controls.ChoroplethProperties(mapControl as StandaloneMapControl, _mapView);
 
             if (provider is ChoroplethShapeLayerProvider)
             {

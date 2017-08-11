@@ -269,7 +269,7 @@ namespace EpiDashboard.Mapping
             layerList.MouseLeave += new MouseEventHandler(layerList_MouseLeave);
             MapContainer.Children.Add(layerList);
 
-            layerAdder = new LayerAdder(_mapView.Map, view, db, dashboardHelper, layerList, this);
+            layerAdder = new LayerAdder(_mapView, view, db, dashboardHelper, layerList, this);
             layerAdder.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             Grid.SetRow(layerAdder, 0);
             grdMapDef.Children.Add(layerAdder);

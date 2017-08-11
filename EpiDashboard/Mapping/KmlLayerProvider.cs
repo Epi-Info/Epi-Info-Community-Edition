@@ -113,17 +113,17 @@ namespace EpiDashboard.Mapping
 
         private void FindGraphicsLayers(KmlLayer kmlLayer)
         {
-            foreach (Layer layer in kmlLayer.ChildLayers)
-            {
-                if (layer is GraphicsLayer)
-                {
-                    graphicsLayers.Add((GraphicsLayer)layer);
-                }
-                else if (layer is KmlLayer)
-                {
-                    FindGraphicsLayers((KmlLayer)layer);
-                }
-            }
+            ////////////foreach (Layer layer in kmlLayer.ChildLayers)
+            ////////////{
+            ////////////    if (layer is GraphicsLayer)
+            ////////////    {
+            ////////////        graphicsLayers.Add((GraphicsLayer)layer);
+            ////////////    }
+            ////////////    else if (layer is KmlLayer)
+            ////////////    {
+            ////////////        FindGraphicsLayers((KmlLayer)layer);
+            ////////////    }
+            ////////////}
         }
 
         public KmlDialog RenderServerImage()
