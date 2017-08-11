@@ -111,9 +111,18 @@ namespace EpiDashboard.Mapping
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
-            SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Color = brush.Color;
-            symbol.Style = SimpleFillStyle.Solid;
+            SimpleFillSymbol symbol = new SimpleFillSymbol()
+            {
+                Color = brush.Color,
+                Style = SimpleFillStyle.Solid,
+                Outline = new SimpleLineSymbol()
+                {
+                    Color = Colors.Gray,
+                    Style = SimpleLineStyle.Solid,
+                    Width = 1
+                }
+            };
+
             return symbol;
         }
 

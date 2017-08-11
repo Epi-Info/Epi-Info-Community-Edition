@@ -333,7 +333,7 @@ namespace EpiDashboard.Mapping
                 {
                     if (provider == null)
                     {
-                        provider = new DotDensityServerLayerProvider(myMap);
+                        provider = new DotDensityServerLayerProvider(_mapView);
                         provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
                     }
                     provider.LoadShapeFile(child.InnerText);

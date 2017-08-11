@@ -321,7 +321,7 @@ namespace EpiDashboard.Mapping
                 {
                     if (provider == null)
                     {
-                        provider = new DotDensityKmlLayerProvider(myMap);
+                        provider = new DotDensityKmlLayerProvider(_mapView);
                         provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
                     }
                     provider.LoadKml(child.InnerText);

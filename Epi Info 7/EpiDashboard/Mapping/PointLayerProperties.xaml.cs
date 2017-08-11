@@ -156,7 +156,17 @@ namespace EpiDashboard.Mapping
         {
             if (cbxLatitude.SelectedIndex != -1 && cbxLongitude.SelectedIndex != -1)
             {
-                provider.RenderPointMap(dashboardHelper, cbxLatitude.SelectedItem.ToString(), cbxLongitude.SelectedItem.ToString(), rctColor.Fill, null, (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle), cbxStyle.SelectedItem.ToString()), txtDescription.Text);
+                provider.RenderPointMap(
+                    dashboardHelper, 
+                    cbxLatitude.SelectedItem.ToString(), 
+                    cbxLongitude.SelectedItem.ToString(), 
+                    ((SolidColorBrush)rctColor.Fill).Color, 
+                    null,
+                    (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle),
+                    cbxStyle.SelectedItem.ToString()),
+                    txtDescription.Text
+                );
+                
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());

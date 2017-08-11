@@ -275,13 +275,13 @@ namespace EpiDashboard.Mapping
                 Envelope shapeFileExtent = shapeFileReader.GetExtent();
                 if (shapeFileExtent.SpatialReference == null)
                 {
-                    myMap.Extent = shapeFileExtent;
+                    _mapView.SetView(shapeFileExtent);
                 }
                 else
                 {
-                    if (shapeFileExtent.SpatialReference.WKID == 4326)
+                    if (shapeFileExtent.SpatialReference.Wkid == 4326)
                     {
-                        myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                        ////////////myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                     }
                 }
 
@@ -292,10 +292,18 @@ namespace EpiDashboard.Mapping
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
-            SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
+            SimpleFillSymbol symbol = new SimpleFillSymbol()
+            {
+                Color = brush.Color,
+                Style = SimpleFillStyle.Solid,
+                Outline = new SimpleLineSymbol()
+                {
+                    Color = Colors.Gray,
+                    Style = SimpleLineStyle.Solid,
+                    Width = 1
+                }
+            };
+
             return symbol;
         }
 
@@ -314,9 +322,9 @@ namespace EpiDashboard.Mapping
             get
             {
                 SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
-                symbol.Color = new SolidColorBrush(dotColor);
+                symbol.Color = dotColor;
                 symbol.Size = 5;
-                symbol.Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle;
+                symbol.Style = SimpleMarkerStyle.Circle;
                 return symbol;
             }
         }
@@ -417,54 +425,54 @@ namespace EpiDashboard.Mapping
                                 bool foundBottomRight = false;
                                 bool foundTopLeft = false;
                                 bool foundTopRight = false;
-                                foreach (Esri.ArcGISRuntime.Geometry.PointCollection pc in ((Esri.ArcGISRuntime.Geometry.Polygon)graphicFeature.Geometry).Rings)
-                                {
-                                    foundBottomLeft = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                    foundBottomRight = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
-                                    foundTopLeft = pc.Any((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                    foundTopRight = pc.Any((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                ////////foreach (Esri.ArcGISRuntime.Geometry.PointCollection pc in ((Esri.ArcGISRuntime.Geometry.Polygon)graphicFeature.Geometry).Rings)
+                                ////////{
+                                ////////    foundBottomLeft = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                ////////    foundBottomRight = pc.Any((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                ////////    foundTopLeft = pc.Any((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                ////////    foundTopRight = pc.Any((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
 
-                                    if (foundBottomLeft && foundBottomRight && foundTopLeft && foundTopRight)
-                                    {
-                                        try
-                                        {
-                                            MapPoint firstBottomLeft = pc.First((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint firstBottomRight = pc.First((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint firstTopLeft = pc.First((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint firstTopRight = pc.First((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                ////////    if (foundBottomLeft && foundBottomRight && foundTopLeft && foundTopRight)
+                                ////////    {
+                                ////////        try
+                                ////////        {
+                                ////////            MapPoint firstBottomLeft = pc.First((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                ////////            MapPoint firstBottomRight = pc.First((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                ////////            MapPoint firstTopLeft = pc.First((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                ////////            MapPoint firstTopRight = pc.First((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
 
-                                            int indexBL = pc.IndexOf(firstBottomLeft);
-                                            int indexBR = pc.IndexOf(firstBottomRight);
-                                            int indexTL = pc.IndexOf(firstTopLeft);
-                                            int indexTR = pc.IndexOf(firstTopRight);
+                                ////////            int indexBL = pc.IndexOf(firstBottomLeft);
+                                ////////            int indexBR = pc.IndexOf(firstBottomRight);
+                                ////////            int indexTL = pc.IndexOf(firstTopLeft);
+                                ////////            int indexTR = pc.IndexOf(firstTopRight);
 
-                                            MapPoint lastBottomLeft = pc.Last((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint lastBottomRight = pc.Last((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint lastTopLeft = pc.Last((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
-                                            MapPoint lastTopRight = pc.Last((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                ////////            MapPoint lastBottomLeft = pc.Last((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                ////////            MapPoint lastBottomRight = pc.Last((point) => point.Y <= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
+                                ////////            MapPoint lastTopLeft = pc.Last((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X <= ((MapPoint)graphic.Geometry).X);
+                                ////////            MapPoint lastTopRight = pc.Last((point) => point.Y >= ((MapPoint)graphic.Geometry).Y && point.X >= ((MapPoint)graphic.Geometry).X);
 
-                                            int indexBL2 = pc.IndexOf(lastBottomLeft);
-                                            int indexBR2 = pc.IndexOf(lastBottomRight);
-                                            int indexTL2 = pc.IndexOf(lastTopLeft);
-                                            int indexTR2 = pc.IndexOf(lastTopRight);
+                                ////////            int indexBL2 = pc.IndexOf(lastBottomLeft);
+                                ////////            int indexBR2 = pc.IndexOf(lastBottomRight);
+                                ////////            int indexTL2 = pc.IndexOf(lastTopLeft);
+                                ////////            int indexTR2 = pc.IndexOf(lastTopRight);
 
-                                            if ((Math.Abs(indexTL - indexTR2) == 1 && Math.Abs(indexTR - indexBR2) == 1) || (Math.Abs(indexBL - indexTL2) == 1 && Math.Abs(indexTL - indexTR2) == 1) || (Math.Abs(indexBR - indexBL2) == 1 && Math.Abs(indexTR - indexBR2) == 1))
-                                            {
-                                                pointInGraphic = true;
-                                                break;
-                                            }
-                                            else if ((Math.Abs(indexBL - indexBR2) == 1 && Math.Abs(indexTL - indexBL2) == 1) || (Math.Abs(indexTL - indexBL2) == 1 && Math.Abs(indexTR - indexTL2) == 1) || (Math.Abs(indexBR - indexTR2) == 1 && Math.Abs(indexTR - indexTL2) == 1))
-                                            {
-                                                pointInGraphic = true;
-                                                break;
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            pointInGraphic = false;
-                                        }
-                                    }
-                                }
+                                ////////            if ((Math.Abs(indexTL - indexTR2) == 1 && Math.Abs(indexTR - indexBR2) == 1) || (Math.Abs(indexBL - indexTL2) == 1 && Math.Abs(indexTL - indexTR2) == 1) || (Math.Abs(indexBR - indexBL2) == 1 && Math.Abs(indexTR - indexBR2) == 1))
+                                ////////            {
+                                ////////                pointInGraphic = true;
+                                ////////                break;
+                                ////////            }
+                                ////////            else if ((Math.Abs(indexBL - indexBR2) == 1 && Math.Abs(indexTL - indexBL2) == 1) || (Math.Abs(indexTL - indexBL2) == 1 && Math.Abs(indexTR - indexTL2) == 1) || (Math.Abs(indexBR - indexTR2) == 1 && Math.Abs(indexTR - indexTL2) == 1))
+                                ////////            {
+                                ////////                pointInGraphic = true;
+                                ////////                break;
+                                ////////            }
+                                ////////        }
+                                ////////        catch (Exception ex)
+                                ////////        {
+                                ////////            pointInGraphic = false;
+                                ////////        }
+                                ////////    }
+                                ////////}
                             }
                             graphicsToBeAdded.Add(graphic);
                         }
@@ -478,13 +486,25 @@ namespace EpiDashboard.Mapping
 
                 foreach (Graphic g in graphicsLayer.Graphics)
                 {
+                    ////////////SimpleFillSymbol symbol = new SimpleFillSymbol()
+                    ////////////{
+                    ////////////    Fill = new SolidColorBrush(Colors.Transparent),
+                    ////////////    BorderBrush = new SolidColorBrush(Colors.Black),
+                    ////////////    BorderThickness = 1
+                    ////////////};
+
                     SimpleFillSymbol symbol = new SimpleFillSymbol()
                     {
-                        Fill = new SolidColorBrush(Colors.Transparent),
-                        BorderBrush = new SolidColorBrush(Colors.Black),
-                        BorderThickness = 1
+                        Color = Colors.Transparent,
+                        Style = SimpleFillStyle.Solid,
+                        Outline = new SimpleLineSymbol()
+                        {
+                            Color = Colors.Black,
+                            Style = SimpleLineStyle.Solid,
+                            Width = 1
+                        }
                     };
-
+                    
                     g.Symbol = symbol;
                 }
 

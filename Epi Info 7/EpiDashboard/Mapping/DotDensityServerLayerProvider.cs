@@ -104,8 +104,9 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        //////////////public object[] LoadShapeFile(string url)
-        //////////////{
+        public object[] LoadShapeFile(string url)
+        {
+            return null;
         //////////////    if (!string.IsNullOrEmpty(url))
         //////////////    {
                 //////////////////FeatureLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
@@ -159,10 +160,11 @@ namespace EpiDashboard.Mapping
         ////////////////    }
         ////////////////    else
         ////////////////        return null;
-        ////////////////}
+            }
 
-        ////////////////public object[] LoadShapeFile()
-        ////////////////{
+        public object[] LoadShapeFile()
+        {
+            return null;
         ////////////////    MapServerFeatureDialog dialog = new MapServerFeatureDialog();
 
         ////////////////    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -189,7 +191,7 @@ namespace EpiDashboard.Mapping
         ////////////////    //int x = 5;
         ////////////////    //x++;
         ////////////////    myMap.Cursor = Cursors.Arrow;
-        ////////////////}
+        }
 
         void graphicsLayer_Initialized(object sender, EventArgs e)
         {
@@ -217,12 +219,6 @@ namespace EpiDashboard.Mapping
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
-            ////////////SimpleFillSymbol symbol = new SimpleFillSymbol();
-            ////////////symbol.Fill = brush;
-            ////////////symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            ////////////symbol.BorderThickness = 1;
-            ////////////return symbol;
-
             SimpleFillSymbol symbol = new SimpleFillSymbol()
             {
                 Color = brush.Color,
