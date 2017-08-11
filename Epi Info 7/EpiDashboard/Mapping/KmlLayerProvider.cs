@@ -91,14 +91,14 @@ namespace EpiDashboard.Mapping
             shapeLayer = new KmlLayer();
             shapeLayer.ID = layerId.ToString();
             shapeLayer.SourceUri = url;
-            shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
+            ////////////////shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
             if (visibleLayers != null)
             {
                 //shapeLayer.VisibleLayers = visibleLayers;
             }
             _mapView.Map.Layers.Add(shapeLayer);
 
-            _mapView.Extent = shapeLayer.FullExtent;
+            _mapView.SetView(shapeLayer.FullExtent);
         }
 
         void shapeLayer_Initialized(object sender, EventArgs e)

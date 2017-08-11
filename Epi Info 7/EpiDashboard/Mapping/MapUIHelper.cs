@@ -45,17 +45,16 @@ namespace EpiDashboard.Mapping
                         DateTime time = (DateTime)row[timeVar];
                         minTime = minTime < time ? minTime : time;
                         maxTime = maxTime > time ? maxTime : time;
-
-
                     }
                 }
-
             }
 
-            IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(
-                new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
+            return 1;
 
-            return intervals.ToList().Count;
+            //////////////IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(
+            //////////////    new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
+
+            //////////////return intervals.ToList().Count;
 
         }
     }

@@ -576,7 +576,7 @@ namespace EpiDashboard.Controls
                         cmbLongitude.SelectedItem.ToString(),
                         colorselected,
                         string.Empty,
-                        (SimpleMarkerSymbol.Style)Enum.Parse(typeof(SimpleMarkerStyle),  cmbStyle.SelectedItem.ToString()),
+                        (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle),  cmbStyle.SelectedItem.ToString()),
                         txtDescription.Text
                         );
                 

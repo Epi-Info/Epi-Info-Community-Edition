@@ -1847,7 +1847,7 @@ namespace EpiDashboard.Controls
 
             if (choroplethKmlLayerProvider == null)
             {
-                choroplethKmlLayerProvider = new Mapping.ChoroplethKmlLayerProvider(_myMap);
+                choroplethKmlLayerProvider = new Mapping.ChoroplethKmlLayerProvider(_mapView);
                 choroplethKmlLayerProvider.FeatureLoaded += new FeatureLoadedHandler(choroKMLprovider_FeatureLoaded);
             }
 
@@ -1862,7 +1862,7 @@ namespace EpiDashboard.Controls
                 if (choroplethKmlLayerProperties == null)
                 {
                     ILayerProperties layerProperties = null;
-                    layerProperties = new ChoroplethKmlLayerProperties(_myMap, this.DashboardHelper, this._mapControl);
+                    layerProperties = new ChoroplethKmlLayerProperties(_mapView, this.DashboardHelper, this._mapControl);
                     layerProperties.MapGenerated += new EventHandler(this._mapControl.ILayerProperties_MapGenerated);
                     layerProperties.FilterRequested += new EventHandler(this._mapControl.ILayerProperties_FilterRequested);
                     layerProperties.EditRequested += new EventHandler(this._mapControl.ILayerProperties_EditRequested);

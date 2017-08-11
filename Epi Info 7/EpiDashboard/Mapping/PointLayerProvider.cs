@@ -84,7 +84,16 @@ namespace EpiDashboard.Mapping
             if (pointLayer != null)
             {
                 pointLayer.Graphics.Clear();
-                RenderPointMap(this.dashboardHelper, this.latVar, this.longVar, this.pointColor, this.timeVar, this.style, this.description);
+                RenderPointMap
+                (
+                    this.dashboardHelper, 
+                    this.latVar, 
+                    this.longVar, 
+                    this.pointColor, 
+                    this.timeVar, 
+                    this.style, 
+                    this.description
+                );
             }
         }
 
@@ -110,7 +119,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void RenderPointMap(DashboardHelper dashboardHelper, string latVar, string longVar, Brush pointColor, string timeVar, SimpleMarkerStyle style, string description)
+        public void RenderPointMap(DashboardHelper dashboardHelper, string latVar, string longVar, Color pointColor, string timeVar, SimpleMarkerStyle style, string description)
         {
             this.dashboardHelper = dashboardHelper;
             this.latVar = latVar;
@@ -118,7 +127,7 @@ namespace EpiDashboard.Mapping
             this.timeVar = timeVar;
             this.style = style;
             this.description = description;
-            this.pointColor = (SolidColorBrush)pointColor;
+            this.pointColor = pointColor;
 
             GraphicsLayer pointLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
             if (pointLayer != null)
@@ -145,14 +154,14 @@ namespace EpiDashboard.Mapping
 
                 if (coordinateList.Coordinates[i].TimeSpan.HasValue)
                 {
-                    graphic.TimeExtent = new TimeExtent(coordinateList.Coordinates[i].TimeSpan.Value);
+                    ////////////graphic.TimeExtent = new TimeExtent(coordinateList.Coordinates[i].TimeSpan.Value);
                 }
                 else
                 {
-                    graphic.TimeExtent = new TimeExtent(DateTime.MinValue, DateTime.MaxValue);
+                    ////////////graphic.TimeExtent = new TimeExtent(DateTime.MinValue, DateTime.MaxValue);
                 }
                 
-                graphic.MouseLeftButtonUp += new MouseButtonEventHandler(graphic_MouseLeftButtonUp);
+                //////////////graphic.MouseLeftButtonUp += new MouseButtonEventHandler(graphic_MouseLeftButtonUp);
                 pointLayer.Graphics.Add(graphic);
             }
 
@@ -235,27 +244,27 @@ namespace EpiDashboard.Mapping
 
             if (coordinateList.Coordinates.Count > 0)
             {
-                _mapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
-                if (!string.IsNullOrEmpty(timeVar))
-                {
-                    if (minTime != null && maxTime != null)
-                    {
+                //_mapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(minX - 0.01, minY - 0.01, geoReference)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(maxX + 0.01, maxY + 0.01, geoReference)));
+                //if (!string.IsNullOrEmpty(timeVar))
+                //{
+                //    if (minTime != null && maxTime != null)
+                //    {
 
-                        intervalCounts = new List<KeyValuePair<DateTime, int>>();
-                        DateTime previousInterval = DateTime.MinValue;
-                        IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
-                        foreach (DateTime interval in intervals)
-                        {
-                            int count = pointLayer.Graphics.Count(x => x.TimeExtent.Start <= interval && x.TimeExtent.Start >= previousInterval);
-                            intervalCounts.Add(new KeyValuePair<DateTime, int>(interval.Date, count));
-                            previousInterval = interval;
-                        }
-                        if (DateRangeDefined != null)
-                        {
-                            DateRangeDefined(minTime, maxTime, intervalCounts);
-                        }
-                    }
-                }
+                //        intervalCounts = new List<KeyValuePair<DateTime, int>>();
+                //        DateTime previousInterval = DateTime.MinValue;
+                //        IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
+                //        foreach (DateTime interval in intervals)
+                //        {
+                //            int count = pointLayer.Graphics.Count(x => x.TimeExtent.Start <= interval && x.TimeExtent.Start >= previousInterval);
+                //            intervalCounts.Add(new KeyValuePair<DateTime, int>(interval.Date, count));
+                //            previousInterval = interval;
+                //        }
+                //        if (DateRangeDefined != null)
+                //        {
+                //            DateRangeDefined(minTime, maxTime, intervalCounts);
+                //        }
+                //    }
+                //}
             }
         }
 
