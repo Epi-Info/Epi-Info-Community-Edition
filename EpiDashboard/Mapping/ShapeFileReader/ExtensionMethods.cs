@@ -246,10 +246,21 @@ namespace EpiDashboard.Mapping.ShapeFileReader
         {
             Random rnd = new Random();
             Polygon polygon;
-            Esri.ArcGISRuntime.Geometry.PointCollection points = new Esri.ArcGISRuntime.Geometry.PointCollection();
+            Esri.ArcGISRuntime.Geometry.PointCollection points = new Esri.ArcGISRuntime.Geometry.PointCollection(new SpatialReference(4326));
             SpatialReference geoReference = new SpatialReference(4326);
             try
             {
+
+                bool isWebMercator = false;
+                if (record.Points.Count > 0)
+                {
+                    if (record.Points[0].Y < -90 || record.Points[0].Y > 90)
+                    {
+                        isWebMercator = true;
+                        points = new Esri.ArcGISRuntime.Geometry.PointCollection(new SpatialReference(102100));
+                    }
+                }
+
                 for (int i = 0; i < record.NumberOfParts; i++)
                 {
                     // Determine the starting index and the end index
@@ -265,19 +276,6 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                         end = record.NumberOfPoints;
                     }
 
-                    // Add line segments to the polyline
-                    bool isWebMercator = false;
-                    if (record.Points.Count > 0)
-                    {
-                        if (record.Points[0].Y < -90 || record.Points[0].Y > 90)
-                        {
-                            isWebMercator = true;
-                        }
-                        else
-                        {
-                            ////////////polygon.SpatialReference = geoReference;
-                        }
-                    }
                     for (int j = start; j < end; j++)
                     {
                         if (record.NumberOfPoints < 5000 || rnd.Next(0, 5) == 1)
@@ -285,7 +283,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                             System.Windows.Point point = record.Points[j];
                             if (isWebMercator)
                             {
-                                points.Add(new MapPoint(point.X, point.Y));
+                                points.Add(new MapPoint(point.X, point.Y, new SpatialReference(102100)));
                             }
                             else
                             {
@@ -311,7 +309,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
             }
             catch { }
 
-            polygon = new Polygon(points);
+            polygon = new Polygon(points, geoReference);
 
             return polygon;
         }

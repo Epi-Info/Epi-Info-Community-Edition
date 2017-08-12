@@ -69,6 +69,7 @@ namespace EpiDashboard.Mapping
         private MapPoint rightClickedPoint;
         private BingLayer _aerialWithLabels;
         private BingLayer _Roads;
+        private Envelope _extent;
         private delegate void RenderMapDelegate(string url);
         private delegate void SimpleDelegate();
         private delegate void DebugDelegate(string debugMsg);
@@ -566,10 +567,12 @@ namespace EpiDashboard.Mapping
         {
             try
             {
-                ////////////if (e.NewExtent.Equals(e.OldExtent))
+                if (_extent != null && ((MapView)sender).Extent.Width == _extent.Width)
                 {
                     return;
                 }
+
+                _extent = ((MapView)sender).Extent;
 
                 if (autoContrast)
                 {
