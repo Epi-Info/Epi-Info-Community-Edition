@@ -67,6 +67,8 @@ namespace EpiDashboard.Mapping
         private BackgroundWorker openDefaultMapWorker;
         private MapView _mapView;
         private MapPoint rightClickedPoint;
+        private BingLayer _aerialWithLabels;
+        private BingLayer _Roads;
         private delegate void RenderMapDelegate(string url);
         private delegate void SimpleDelegate();
         private delegate void DebugDelegate(string debugMsg);
@@ -371,15 +373,26 @@ namespace EpiDashboard.Mapping
 
                                 foreach (BingLayer.LayerType layerType in layerTypes)
                                 {
-                                    BingLayer addLayer = new BingLayer();
-                                    addLayer.ID = layerType.ToString();
-                                    addLayer.MapStyle = layerType;
-                                    addLayer.Key = mapServiceKey;
-                                    addLayer.IsVisible = false;
-                                    _mapView.Map.Layers.Add(addLayer);
+                                    if (layerType != BingLayer.LayerType.Aerial)
+                                    {
+                                        BingLayer insertLayer = new BingLayer();
+                                        insertLayer.ID = layerType.ToString();
+                                        insertLayer.MapStyle = layerType;
+                                        insertLayer.Key = mapServiceKey;
+                                        insertLayer.IsVisible = false;
+                                        _mapView.Map.Layers.Insert(0,insertLayer); 
+                                    }
                                 }
 
-                                _mapView.Map.Layers["Aerial"].IsVisible = true;
+                                if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                                {
+                                    _mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()].IsVisible = true;
+                                }
+                                else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                                {
+                                    _mapView.Map.Layers[BingLayer.LayerType.Road.ToString()].IsVisible = true;
+                                }
+
                             }
                             else { } // !ValidCredentials
                         }
@@ -388,33 +401,6 @@ namespace EpiDashboard.Mapping
                     
                     webClient.OpenReadAsync(new System.Uri(myUri));  // trigger WebClient.OpenReadCompleted event 
                 }
-
-                BingLayer bingLayer = new BingLayer();
-
-                ////////////bingLayer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
-                
-                //{
-                //    bingLayer.Key = null;
-                //}
-                //else
-                //{
-                //    if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                //    {
-                //        bingLayer.Key = Configuration.GetNewInstance().Settings.MapServiceKey;
-                //        bingLayer.MapStyle = BingLayer.LayerType.AerialWithLabels;
-                //    }
-                //    else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                //    {
-                //        bingLayer.Key = Configuration.GetNewInstance().Settings.MapServiceKey;
-                //        bingLayer.MapStyle = BingLayer.LayerType.Road;
-                //    }
-                //    else
-                //    {
-                //        bingLayer.Key = null;
-                //    }
-                //}
-
-                bingLayer.ID = "bingLayer";
 
                 GraphicsLayer pointLayer = new GraphicsLayer();
                 pointLayer.ID = "pointLayer";
@@ -459,7 +445,6 @@ namespace EpiDashboard.Mapping
                 _mapView.Width = MapContainer.ActualWidth;
                 _mapView.WrapAround = true;
                 _mapView.ContextMenu = menu;
-                // _mapView.Map.Layers.Add(bingLayer);
                 _mapView.Map.Layers.Add(pointLayer);
                 _mapView.Map.Layers.Add(textLayer);
                 _mapView.Map.Layers.Add(zoneLayer);
@@ -472,8 +457,6 @@ namespace EpiDashboard.Mapping
                 ////////////_mapView.RotationChanged += _mapView_RotationChanged;
 
                 MapContainer.Children.Add(_mapView);
-
-                //bingLayer.IsVisible = true;
 
                 //ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
                 //extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
@@ -2740,47 +2723,32 @@ namespace EpiDashboard.Mapping
         {
             if (_mapView != null)
             {
-
                 if (_mapView.Map.Layers.Count > 0)
                 {
                     if (_mapView.Map.Layers[0] is BingLayer)
                     {
-                        bool sparse_connection = false;
-
-                        try
+                        if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                         {
-                            Configuration config = Configuration.GetNewInstance();
-                            if (config.Settings.SparseConnection == true)
-                            {
-                                sparse_connection = true;
-                            }
+                            _mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()].IsVisible = true;
+                            _mapView.Map.Layers[BingLayer.LayerType.Road.ToString()].IsVisible = false;
                         }
-                        catch { }
-
-                        if(sparse_connection == true)
+                        else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                         {
-                            ((BingLayer)_mapView.Map.Layers[0]).Key = null;
+                            _mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()].IsVisible = false;
+                            _mapView.Map.Layers[BingLayer.LayerType.Road.ToString()].IsVisible = true;
                         }
                         else
                         {
-                            if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                            {
-                                ((BingLayer)_mapView.Map.Layers[0]).Key = Configuration.GetNewInstance().Settings.MapServiceKey;
-                                ((BingLayer)_mapView.Map.Layers[0]).MapStyle = BingLayer.LayerType.AerialWithLabels;
-                            }
-                            else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                            {
-                                ((BingLayer)_mapView.Map.Layers[0]).Key = Configuration.GetNewInstance().Settings.MapServiceKey;
-                                ((BingLayer)_mapView.Map.Layers[0]).MapStyle = BingLayer.LayerType.Road;
-                            }
-                            else
-                            {
-                                ((BingLayer)_mapView.Map.Layers[0]).Key = null;
-                            }
+                            _mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()].IsVisible = false;
+                            _mapView.Map.Layers[BingLayer.LayerType.Road.ToString()].IsVisible = false;
+
+                            //_mapView.Map.Layers.Remove(BingLayer.LayerType.AerialWithLabels.ToString());
+                            //_mapView.Map.Layers.Remove(BingLayer.LayerType.Road.ToString());
+
+                            //((BingLayer)_mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()]).Key = null;
+                            //((BingLayer)_mapView.Map.Layers[BingLayer.LayerType.Road.ToString()]).Key = null;
                         }
                     }
-
-                    ////////////((BingLayer)_mapView.Map.Layers[0]).Refresh();
                 }
             }
         }
