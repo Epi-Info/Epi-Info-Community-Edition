@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Geometry;
@@ -334,16 +337,6 @@ namespace EpiDashboard.Mapping
                 txtLoading.Visibility = Visibility.Collapsed;
                 waitCursor.Visibility = Visibility.Collapsed;
 
-                BingLayer bingLayer = new BingLayer();
-
-
-
-
-                ////////////bingLayer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
-
-
-
-
                 bool sparse_connection = false;
 
                 try
@@ -356,32 +349,72 @@ namespace EpiDashboard.Mapping
                 }
                 catch { }
 
+                string mapServiceKey = Configuration.GetNewInstance().Settings.MapServiceKey;
+                System.Net.WebClient webClient = new System.Net.WebClient();
+                string myUri = string.Format("http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?supressStatus=true&key={0}", mapServiceKey);
+                _mapView = new MapView();
 
-
-                if (sparse_connection == true)
+                if (sparse_connection == false)
                 {
-                    bingLayer.Key = null;
+                    webClient.OpenReadCompleted += (sender, openReadCompletedEventArgs) =>
+                    {
+                        if (openReadCompletedEventArgs.Error == null)
+                        {
+                            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(BingAuthentication));
+                            BingAuthentication bingAuthentication = serializer.ReadObject(openReadCompletedEventArgs.Result) as BingAuthentication;
+                            openReadCompletedEventArgs.Result.Close();
+                            string authenticationResult = bingAuthentication.AuthenticationResultCode.ToString();
+                            if (authenticationResult == "ValidCredentials")
+                            {
+                                System.Array bingLayerTypes = System.Enum.GetValues(typeof(BingLayer.LayerType));
+                                int[] layerTypes = (int[])bingLayerTypes;
+
+                                foreach (BingLayer.LayerType layerType in layerTypes)
+                                {
+                                    BingLayer addLayer = new BingLayer();
+                                    addLayer.ID = layerType.ToString();
+                                    addLayer.MapStyle = layerType;
+                                    addLayer.Key = mapServiceKey;
+                                    addLayer.IsVisible = false;
+                                    _mapView.Map.Layers.Add(addLayer);
+                                }
+
+                                _mapView.Map.Layers["Aerial"].IsVisible = true;
+                            }
+                            else { } // !ValidCredentials
+                        }
+                        else { } // !WebClient.OpenReadCompleted
+                    };
+                    
+                    webClient.OpenReadAsync(new System.Uri(myUri));  // trigger WebClient.OpenReadCompleted event 
                 }
-                else
-                {
-                    if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                    {
-                        bingLayer.Key = Configuration.GetNewInstance().Settings.MapServiceKey;
-                        bingLayer.MapStyle = BingLayer.LayerType.AerialWithLabels;
-                    }
-                    else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                    {
-                        bingLayer.Key = Configuration.GetNewInstance().Settings.MapServiceKey;
-                        bingLayer.MapStyle = BingLayer.LayerType.Road;
-                    }
-                    else
-                    {
-                        bingLayer.Key = null;
-                    }
-                }
 
+                BingLayer bingLayer = new BingLayer();
 
+                ////////////bingLayer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
+                
+                //{
+                //    bingLayer.Key = null;
+                //}
+                //else
+                //{
+                //    if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                //    {
+                //        bingLayer.Key = Configuration.GetNewInstance().Settings.MapServiceKey;
+                //        bingLayer.MapStyle = BingLayer.LayerType.AerialWithLabels;
+                //    }
+                //    else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                //    {
+                //        bingLayer.Key = Configuration.GetNewInstance().Settings.MapServiceKey;
+                //        bingLayer.MapStyle = BingLayer.LayerType.Road;
+                //    }
+                //    else
+                //    {
+                //        bingLayer.Key = null;
+                //    }
+                //}
 
+                bingLayer.ID = "bingLayer";
 
                 GraphicsLayer pointLayer = new GraphicsLayer();
                 pointLayer.ID = "pointLayer";
@@ -421,13 +454,12 @@ namespace EpiDashboard.Mapping
                 mnuClear.Click += new RoutedEventHandler(mnuClear_Click);
                 menu.Items.Add(mnuClear);
 
-                _mapView = new MapView();
                 _mapView.Background = Brushes.White;
                 _mapView.Height = MapContainer.ActualHeight;
                 _mapView.Width = MapContainer.ActualWidth;
                 _mapView.WrapAround = true;
                 _mapView.ContextMenu = menu;
-                _mapView.Map.Layers.Add(bingLayer);
+                // _mapView.Map.Layers.Add(bingLayer);
                 _mapView.Map.Layers.Add(pointLayer);
                 _mapView.Map.Layers.Add(textLayer);
                 _mapView.Map.Layers.Add(zoneLayer);
@@ -440,6 +472,8 @@ namespace EpiDashboard.Mapping
                 ////////////_mapView.RotationChanged += _mapView_RotationChanged;
 
                 MapContainer.Children.Add(_mapView);
+
+                //bingLayer.IsVisible = true;
 
                 //ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
                 //extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
@@ -514,6 +548,16 @@ namespace EpiDashboard.Mapping
                 throw new Exception("Error from RenderMap " + ex.Message + ex.StackTrace);
             }
         }
+
+        // Create a custom BingAuthentication class that can be used to hold JSON serializable information from the WebClient. We will use this to see if
+        // we get back the string 'ValidCredentials' from a Microsoft Bing development web server for a specific Bing Key provided by the user.
+        [System.Runtime.Serialization.DataContract]
+        public class BingAuthentication
+        {
+            [System.Runtime.Serialization.DataMember(Name = "authenticationResultCode")]
+            public string AuthenticationResultCode { get; set; }
+        }
+
 
         void mnuScaleContextItem_Click(object sender, RoutedEventArgs e)
         {
