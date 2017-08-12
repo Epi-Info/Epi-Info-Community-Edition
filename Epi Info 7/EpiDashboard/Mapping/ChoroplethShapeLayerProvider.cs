@@ -112,9 +112,16 @@ namespace EpiDashboard.Mapping
                     {
                         if (shapeFileExtent.SpatialReference.Wkid == 4326)
                         {
-                            //////ArcGIS_MapView.Extent = new Envelope(
-                            //////    BingLayer..Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), 
-                            //////    ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                            SpatialReference webMercator = new SpatialReference(102100);
+                            SpatialReference WGS84 = new SpatialReference(4326);
+
+                            MapPoint firstCornerWGS84 = (new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin, WGS84));
+                            MapPoint secondCornerWGS84 = (new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax, WGS84));
+
+                            MapPoint firstCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
+                            MapPoint secondCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(secondCornerWGS84, webMercator);
+
+                            ArcGIS_MapView.SetView(new Envelope(firstCorner, secondCorner));
                         }
                     }
                 }
