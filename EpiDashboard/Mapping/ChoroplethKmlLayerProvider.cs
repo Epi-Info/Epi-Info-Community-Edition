@@ -45,16 +45,16 @@ namespace EpiDashboard.Mapping
             {
                 _kmlURL = boundrySourceLocation;
                 KmlLayer shapeLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as KmlLayer;
-                
+
                 if (shapeLayer != null)
                 {
                     ArcGIS_MapView.Map.Layers.Remove(shapeLayer);
                 }
-                
+
                 shapeLayer = new KmlLayer();
                 shapeLayer.ID = LayerId.ToString();
                 shapeLayer.SourceUri = boundrySourceLocation;
-                ////////////shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
+                shapeLayer_Initialized();
                 ArcGIS_MapView.Map.Layers.Add(shapeLayer);
 
                 ArcGIS_MapView.SetView(shapeLayer.FullExtent);
@@ -117,7 +117,7 @@ namespace EpiDashboard.Mapping
                     }
 
                     SpatialReference webMercator = new SpatialReference(102100);
-                    
+
                     MapPoint firstCornerWGS84 = (new MapPoint(xmin - 0.5, ymax + 0.5));
                     MapPoint secondCornerWGS84 = (new MapPoint(xmax + 0.5, ymin - 0.5));
 
@@ -136,13 +136,13 @@ namespace EpiDashboard.Mapping
                     return new object[] { boundrySourceLocation, graphicsLayer.Graphics[0].Attributes };
                 }
             }
-            else 
-            { 
-                return null; 
+            else
+            {
+                return null;
             }
         }
 
-        void shapeLayer_Initialized(object sender, EventArgs e)
+        void shapeLayer_Initialized()
         {
             KmlLayer shapeLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);

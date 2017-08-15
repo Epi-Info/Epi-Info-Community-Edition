@@ -106,7 +106,7 @@ namespace EpiDashboard.Mapping
                     Envelope shapeFileExtent = shapeFileReader.GetExtent();
                     if (shapeFileExtent.SpatialReference == null)
                     {
-                        //////ArcGIS_MapView.Extent = shapeFileExtent;
+                        ArcGIS_MapView.SetView(shapeFileExtent);
                     }
                     else
                     {
@@ -127,10 +127,10 @@ namespace EpiDashboard.Mapping
                 }
                 else
                 {
-                    //////ArcGIS_MapView.Extent = graphicsLayer.FullExtent;
+                    ArcGIS_MapView.SetView(graphicsLayer.FullExtent);
                 }
-                
-                //////graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
+
+                ///////////graphicsLayer.RenderingMode = GraphicsRenderingMode.Static; dpb error RenderingMode could not be changed after load. Set in above code?
 
                 return new object[] { boundrySourceLocation, graphicsLayer.Graphics[0].Attributes };
             }

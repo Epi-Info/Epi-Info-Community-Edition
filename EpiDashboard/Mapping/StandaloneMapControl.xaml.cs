@@ -354,7 +354,8 @@ namespace EpiDashboard.Mapping
 
                 string mapServiceKey = Configuration.GetNewInstance().Settings.MapServiceKey;
                 System.Net.WebClient webClient = new System.Net.WebClient();
-                string myUri = string.Format("http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?supressStatus=true&key={0}", mapServiceKey);
+                //string myUri = string.Format("http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?supressStatus=true&key={0}", mapServiceKey);
+                string myUri = string.Format("http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?supressStatus=true&key={0}&queryKey={1}", mapServiceKey, "Am1SuWm6L2Od6cNtifVUXc3tAwTqh24aRcXxem2lY8-Bh5sZRIDzYT_UHjznRcdL");
                 _mapView = new MapView();
 
                 if (sparse_connection == false)
