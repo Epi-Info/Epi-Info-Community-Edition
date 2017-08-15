@@ -879,6 +879,8 @@ namespace EpiDashboard.Mapping
                     {
                         Graphic graphicFeature = graphicsLayer.Graphics[i];
 
+                        if (graphicFeature.Symbol is Esri.ArcGISRuntime.Symbology.TextSymbol) continue;
+
                         string filterExpression = "";
 
                         if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
@@ -931,18 +933,20 @@ namespace EpiDashboard.Mapping
                             graphicFeature.Symbol = symbol;
                         }
 
+                        String text;
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;
 
                         if (graphicValue == Double.PositiveInfinity)
                         {
-                            t.Text = GetShapeValue(graphicFeature, shapeKey) + " " + DashboardSharedStrings.DASHBOARD_MAP_NO_DATA;
+                            text = GetShapeValue(graphicFeature, shapeKey) + " " + DashboardSharedStrings.DASHBOARD_MAP_NO_DATA;
                         }
                         else
                         {
-                            t.Text = GetShapeValue(graphicFeature, shapeKey) + " : " + graphicValue.ToString();
+                            text = GetShapeValue(graphicFeature, shapeKey) + " : " + graphicValue.ToString();
                         }
-                        
+
+                        t.Text = text;
                         t.FontSize = 14;
                         
                         Border border = new Border();
@@ -951,7 +955,20 @@ namespace EpiDashboard.Mapping
                         panel.Children.Add(t);
                         border.Child = panel;
 
-                        //////graphicFeature.MapTip = border;
+                        var textSymbol = new Esri.ArcGISRuntime.Symbology.TextSymbol();
+                        textSymbol.Color = Colors.Black;
+                        textSymbol.Font = new Esri.ArcGISRuntime.Symbology.SymbolFont("Arial", 16);
+                        textSymbol.Text = text;
+                        textSymbol.Angle = 0;
+                        textSymbol.BackgroundColor = Colors.White;
+                        textSymbol.BorderLineColor = Colors.Black;
+                        textSymbol.BorderLineSize = 1;
+
+                        ReadOnlyPartCollection parts = ((Multipart)graphicFeature.Geometry).Parts;
+                        Segment segment = parts.First<ReadOnlySegmentCollection>().First<Segment>();
+                        MapPoint graphicStartPoint = segment.StartPoint;
+                        var textGraphic = new Esri.ArcGISRuntime.Layers.Graphic(graphicStartPoint, textSymbol);
+                        graphicsLayer.Graphics.Add(textGraphic);
 
                         if (graphicFeature.Attributes.Keys.Contains("EpiInfoValCol"))
                         {
