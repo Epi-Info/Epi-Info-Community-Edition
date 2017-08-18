@@ -7,22 +7,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Toolkit.DataSources;
+using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using EpiDashboard.Mapping.ShapeFileReader;
 
 namespace EpiDashboard.Mapping
 {
     public abstract class ChoroplethLayerProvider
     {
-        public ChoroplethLayerProvider(MapView mapView)
+        public ChoroplethLayerProvider(Map myMap)
         {
-            ArcGIS_MapView = mapView;
+            ArcGIS_Map = myMap;
             if (_layerId == Guid.Empty)
             {
                 _layerId = Guid.NewGuid();
@@ -56,11 +54,11 @@ namespace EpiDashboard.Mapping
             set { _rangeValues = value; }
         }
 
-        MapView arcGIS_MapView;
-        public MapView ArcGIS_MapView
+        Map arcGIS_Map;
+        public Map ArcGIS_Map
         {
-            get { return arcGIS_MapView; }
-            set { arcGIS_MapView = value; }
+            get { return arcGIS_Map; }
+            set { arcGIS_Map = value; }
         }
 
         bool _useCustomColors;
@@ -173,7 +171,7 @@ namespace EpiDashboard.Mapping
             GraphicsLayer graphicsLayer = GetGraphicsLayer();
             if (graphicsLayer != null)
             {
-                ArcGIS_MapView.Map.Layers.Remove(graphicsLayer);
+                ArcGIS_Map.Layers.Remove(graphicsLayer);
                 if (LegendStackPanel != null)
                 {
                     LegendStackPanel.Children.Clear();
@@ -183,23 +181,23 @@ namespace EpiDashboard.Mapping
 
         public void MoveUp()
         {
-            Layer layer = ArcGIS_MapView.Map.Layers[_layerId.ToString()];
-            int currentIndex = ArcGIS_MapView.Map.Layers.IndexOf(layer);
-            if (currentIndex < ArcGIS_MapView.Map.Layers.Count - 1)
+            Layer layer = ArcGIS_Map.Layers[_layerId.ToString()];
+            int currentIndex = ArcGIS_Map.Layers.IndexOf(layer);
+            if (currentIndex < ArcGIS_Map.Layers.Count - 1)
             {
-                ArcGIS_MapView.Map.Layers.Remove(layer);
-                ArcGIS_MapView.Map.Layers.Insert(currentIndex + 1, layer);
+                ArcGIS_Map.Layers.Remove(layer);
+                ArcGIS_Map.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = ArcGIS_MapView.Map.Layers[_layerId.ToString()];
-            int currentIndex = ArcGIS_MapView.Map.Layers.IndexOf(layer);
+            Layer layer = ArcGIS_Map.Layers[_layerId.ToString()];
+            int currentIndex = ArcGIS_Map.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                ArcGIS_MapView.Map.Layers.Remove(layer);
-                ArcGIS_MapView.Map.Layers.Insert(currentIndex - 1, layer);
+                ArcGIS_Map.Layers.Remove(layer);
+                ArcGIS_Map.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -510,18 +508,10 @@ namespace EpiDashboard.Mapping
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
-            SimpleFillSymbol symbol = new SimpleFillSymbol()
-            {
-                Color = brush.Color,
-                Style = SimpleFillStyle.Solid,
-                Outline = new SimpleLineSymbol()
-                {
-                    Color = Colors.Gray,
-                    Style = SimpleLineStyle.Solid,
-                    Width = 1
-                }
-            };
-
+            SimpleFillSymbol symbol = new SimpleFillSymbol();
+            symbol.Fill = brush;
+            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
+            symbol.BorderThickness = 1;
             return symbol;
         }
 
@@ -879,8 +869,6 @@ namespace EpiDashboard.Mapping
                     {
                         Graphic graphicFeature = graphicsLayer.Graphics[i];
 
-                        if (graphicFeature.Symbol is Esri.ArcGISRuntime.Symbology.TextSymbol) continue;
-
                         string filterExpression = "";
 
                         if (dataKey.Contains(" ") || dataKey.Contains("$") || dataKey.Contains("#"))
@@ -927,26 +915,25 @@ namespace EpiDashboard.Mapping
 
                             SimpleFillSymbol symbol = new SimpleFillSymbol();
 
-                            symbol.Color = ((SolidColorBrush)fill).Color;
-                            symbol.Style = SimpleFillStyle.Solid;
-                            
+                            symbol.Fill = fill;
+                            symbol.BorderBrush = new SolidColorBrush(Colors.Black);
+                            symbol.BorderThickness = 1;
+
                             graphicFeature.Symbol = symbol;
                         }
 
-                        String text;
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;
 
                         if (graphicValue == Double.PositiveInfinity)
                         {
-                            text = GetShapeValue(graphicFeature, shapeKey) + " " + DashboardSharedStrings.DASHBOARD_MAP_NO_DATA;
+                            t.Text = GetShapeValue(graphicFeature, shapeKey) + " " + DashboardSharedStrings.DASHBOARD_MAP_NO_DATA;
                         }
                         else
                         {
-                            text = GetShapeValue(graphicFeature, shapeKey) + " : " + graphicValue.ToString();
+                            t.Text = GetShapeValue(graphicFeature, shapeKey) + " : " + graphicValue.ToString();
                         }
-
-                        t.Text = text;
+                        
                         t.FontSize = 14;
                         
                         Border border = new Border();
@@ -955,20 +942,7 @@ namespace EpiDashboard.Mapping
                         panel.Children.Add(t);
                         border.Child = panel;
 
-                        var textSymbol = new Esri.ArcGISRuntime.Symbology.TextSymbol();
-                        textSymbol.Color = Colors.Black;
-                        textSymbol.Font = new Esri.ArcGISRuntime.Symbology.SymbolFont("Arial", 16);
-                        textSymbol.Text = text;
-                        textSymbol.Angle = 0;
-                        textSymbol.BackgroundColor = Colors.White;
-                        textSymbol.BorderLineColor = Colors.Black;
-                        textSymbol.BorderLineSize = 1;
-
-                        ReadOnlyPartCollection parts = ((Multipart)graphicFeature.Geometry).Parts;
-                        Segment segment = parts.First<ReadOnlySegmentCollection>().First<Segment>();
-                        MapPoint graphicStartPoint = segment.StartPoint;
-                        var textGraphic = new Esri.ArcGISRuntime.Layers.Graphic(graphicStartPoint, textSymbol);
-                        graphicsLayer.Graphics.Add(textGraphic);
+                        graphicFeature.MapTip = border;
 
                         if (graphicFeature.Attributes.Keys.Contains("EpiInfoValCol"))
                         {
@@ -990,38 +964,28 @@ namespace EpiDashboard.Mapping
 
                         renderer.DefaultSymbol = new SimpleFillSymbol()
                         {
-                            Color = ((SolidColorBrush)fill).Color,
-                            Style = SimpleFillStyle.Solid,
-                            Outline = new SimpleLineSymbol()
-                            {
-                                Color = Colors.Black,
-                                Style = SimpleLineStyle.Solid,
-                                Width = 1
-                            }
+                            Fill = fill,
+                            BorderBrush = new SolidColorBrush(Colors.Black),
+                            BorderThickness = 1
                         };
 
                         for(int i = 0;  i < _thematicItem.RangeStarts.Count; i++)
                         {
                             ClassBreakInfo classBreakInfo = new ClassBreakInfo();
-                            classBreakInfo.Minimum = double.Parse(RangeValues[i, 0]);
-                            classBreakInfo.Maximum = double.Parse(RangeValues[i, 1]);
+                            classBreakInfo.MinimumValue = double.Parse(RangeValues[i, 0]);
+                            classBreakInfo.MaximumValue = double.Parse(RangeValues[i, 1]);
 
                             color = ((SolidColorBrush)brushList[i]).Color;
                             fill = new SolidColorBrush(Color.FromArgb(Opacity, color.R, color.G, color.B));
 
                             classBreakInfo.Symbol = new SimpleFillSymbol()
                             {
-                                Color = ((SolidColorBrush)fill).Color,
-                                Style = SimpleFillStyle.Solid,
-                                Outline = new SimpleLineSymbol()
-                                {
-                                    Color = Colors.Black,
-                                    Style = SimpleLineStyle.Solid,
-                                    Width = 1
-                                }
+                                Fill = fill,
+                                BorderBrush = new SolidColorBrush(Colors.Black),
+                                BorderThickness = 1
                             };
 
-                            renderer.Infos.Add(classBreakInfo);
+                            renderer.Classes.Add(classBreakInfo);
                         }
 
                         graphicsLayer.Renderer = renderer;

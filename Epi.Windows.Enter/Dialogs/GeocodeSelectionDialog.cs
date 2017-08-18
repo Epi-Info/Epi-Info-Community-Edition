@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
+using ESRI.ArcGIS.Client.Bing.GeocodeService;
 
 namespace Epi.Enter.Dialogs
 {
@@ -23,6 +24,22 @@ namespace Epi.Enter.Dialogs
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public ObservableCollection<GeocodeResult> Results 
+        {
+            set
+            {
+                int counter = 0;
+                foreach (GeocodeResult result in value)
+                {
+                    GeocodeResultControl resultControl = new GeocodeResultControl(result.DisplayName, result.Confidence.ToString(), result.MatchCodes[0], result.Locations[0].Latitude, result.Locations[0].Longitude);
+                    resultControl.Location = new Point(3, 153 * counter);
+                    resultControl.CoordinatesSelected += new CoordinatesSelectedHandler(resultControl_CoordinatesSelected);
+                    pnlContainer.Controls.Add(resultControl);
+                    counter++;
+                }
+            }
         }
 
         void resultControl_CoordinatesSelected(string latitude, string longitude)

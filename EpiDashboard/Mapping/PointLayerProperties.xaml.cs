@@ -13,12 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
+using ESRI.ArcGIS.Client.Symbols;
 
 namespace EpiDashboard.Mapping
 {
@@ -29,7 +24,7 @@ namespace EpiDashboard.Mapping
     {
 
         public PointLayerProvider provider;
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
 
         public event EventHandler MapGenerated;
@@ -41,17 +36,17 @@ namespace EpiDashboard.Mapping
         private bool flagrunedit;
         private StackPanel legendStackPanel;
 
-        public PointLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public PointLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
 
-            this._mapView = mapView;
+            this.myMap = myMap;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
             mapControl.MapDataChanged += new EventHandler(mapControl_MapDataChanged);
 
-            provider = new PointLayerProvider(_mapView);
+            provider = new PointLayerProvider(myMap);
             provider.DateRangeDefined += new DateRangeDefinedHandler(provider_DateRangeDefined);
             provider.RecordSelected += new RecordSelectedHandler(provider_RecordSelected);
             cbxLatitude.SelectionChanged += new SelectionChangedEventHandler(coord_SelectionChanged);
@@ -156,17 +151,7 @@ namespace EpiDashboard.Mapping
         {
             if (cbxLatitude.SelectedIndex != -1 && cbxLongitude.SelectedIndex != -1)
             {
-                provider.RenderPointMap(
-                    dashboardHelper, 
-                    cbxLatitude.SelectedItem.ToString(), 
-                    cbxLongitude.SelectedItem.ToString(), 
-                    ((SolidColorBrush)rctColor.Fill).Color, 
-                    null,
-                    (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle),
-                    cbxStyle.SelectedItem.ToString()),
-                    txtDescription.Text
-                );
-                
+                provider.RenderPointMap(dashboardHelper, cbxLatitude.SelectedItem.ToString(), cbxLongitude.SelectedItem.ToString(), rctColor.Fill, null, (SimpleMarkerSymbol.SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerSymbol.SimpleMarkerStyle), cbxStyle.SelectedItem.ToString()), txtDescription.Text);
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
@@ -197,7 +182,7 @@ namespace EpiDashboard.Mapping
                 cbxLongitude.SelectedIndex = -1;
             }
 
-            cbxStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerStyle));
+            cbxStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerSymbol.SimpleMarkerStyle));
             cbxStyle.SelectedIndex = 0;
         }
 

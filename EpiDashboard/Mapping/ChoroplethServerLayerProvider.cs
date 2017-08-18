@@ -7,13 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 
 namespace EpiDashboard.Mapping
 {
@@ -21,7 +18,7 @@ namespace EpiDashboard.Mapping
 
     public class ChoroplethServerLayerProvider : ChoroplethLayerProvider , IChoroLayerProvider
     {
-        public ChoroplethServerLayerProvider(MapView clientMapView) : base(clientMapView)
+        public ChoroplethServerLayerProvider(Map clientMap) : base(clientMap)
         {
         }
         
@@ -52,18 +49,18 @@ namespace EpiDashboard.Mapping
         {
             if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
-                FeatureLayer graphicsLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as FeatureLayer;
+                FeatureLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as FeatureLayer;
                 if (graphicsLayer != null)
                 {
-                    ArcGIS_MapView.Map.Layers.Remove(graphicsLayer);
+                    ArcGIS_Map.Layers.Remove(graphicsLayer);
                 }
 
                 graphicsLayer = new FeatureLayer();
                 graphicsLayer.ID = LayerId.ToString();
-                ////////////graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
-                ////////////graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
-                ////////////graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);
-                ////////////graphicsLayer.UpdateFailed += new EventHandler<TaskFailedEventArgs>(graphicsLayer_UpdateFailed);
+                graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
+                graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
+                graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);
+                graphicsLayer.UpdateFailed += new EventHandler<TaskFailedEventArgs>(graphicsLayer_UpdateFailed);
 
                 //if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - New York County Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/13"))
                 //{
@@ -71,7 +68,7 @@ namespace EpiDashboard.Mapping
                 //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                 //    graphicsLayer.OutFields.Add("COUNTY_NAME");
                 //    graphicsLayer.Where = "STATE_FIPSCODE = '36'";
-                //    ArcGIS_MapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
+                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-80, 45.1)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 40)));
                 //}
                 //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - Rhode Island Zip Code Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/19"))
                 //{
@@ -79,7 +76,7 @@ namespace EpiDashboard.Mapping
                 //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                 //    graphicsLayer.OutFields.Add("NAME");
                 //    graphicsLayer.Where = "STATE_FIPSCODE = '44'";
-                //    ArcGIS_MapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
+                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-72, 42.03)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-71, 41)));
                 //}
                 //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - U.S. State Boundaries") || boundrySourceLocation.Equals("http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer/17"))
                 //{
@@ -87,20 +84,20 @@ namespace EpiDashboard.Mapping
                 //    graphicsLayer.OutFields.Add("STATE_FIPSCODE");
                 //    graphicsLayer.OutFields.Add("STATE_ABBR");
                 //    graphicsLayer.OutFields.Add("STATE_NAME");
-                //    ArcGIS_MapView.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
+                //    ArcGIS_Map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-196, 72)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(-61, 14.5)));
                 //}
                 //else if (boundrySourceLocation.Split('/')[0].Equals("NationalMap.gov - World Boundaries"))
                 //{
                 //    graphicsLayer.Url = "http://services.nationalmap.gov/ArcGIS/rest/services/TNM_Blank_US/MapServer/17";
-                //    ArcGIS_MapView.Extent = graphicsLayer.FullExtent;
+                //    ArcGIS_Map.Extent = graphicsLayer.FullExtent;
                 //}
                 //else
                 //{
-                   /////////// graphicsLayer.Url = boundrySourceLocation;
+                    graphicsLayer.Url = boundrySourceLocation;
                 //}
 
-                ArcGIS_MapView.Map.Layers.Add(graphicsLayer);
-                ArcGIS_MapView.Cursor = Cursors.Wait;
+                ArcGIS_Map.Layers.Add(graphicsLayer);
+                ArcGIS_Map.Cursor = Cursors.Wait;
 
                 return new object[] { boundrySourceLocation, graphicsLayer};
             }
@@ -110,42 +107,42 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        ////////////void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
-        ////////////{
-        ////////////    ArcGIS_MapView.Cursor = Cursors.Arrow;
-        ////////////    _flagUpdateToGraphicsLayerFailed = true;
-        ////////////}
+        void graphicsLayer_UpdateFailed(object sender, TaskFailedEventArgs e)
+        {
+            ArcGIS_Map.Cursor = Cursors.Arrow;
+            _flagUpdateToGraphicsLayerFailed = true;
+        }
 
         void graphicsLayer_InitializationFailed(object sender, EventArgs e)
         {
-            ArcGIS_MapView.Cursor = Cursors.Arrow;
+            ArcGIS_Map.Cursor = Cursors.Arrow;
         }
 
         void graphicsLayer_Initialized(object sender, EventArgs e)
         {
-            //FeatureLayer graphicsLayer = __mapView.Map.Layers[layerId.ToString()] as FeatureLayer;
+            //FeatureLayer graphicsLayer = _myMap.Layers[layerId.ToString()] as FeatureLayer;
             //int x = 5;
             //x++;
         }
 
-        ////////////void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
-        ////////////{
-        ////////////    FeatureLayer graphicsLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as FeatureLayer;
-        ////////////    _flagUpdateToGraphicsLayerFailed = false;
+        void graphicsLayer_UpdateCompleted(object sender, EventArgs e)
+        {
+            FeatureLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as FeatureLayer;
+            _flagUpdateToGraphicsLayerFailed = false;
             
-        ////////////    if (graphicsLayer != null)
-        ////////////    {
-        ////////////        if (graphicsLayer.Graphics.Count > 0)
-        ////////////        {
-        ////////////            if (FeatureLoaded != null)
-        ////////////            {
-        ////////////                FeatureLoaded(graphicsLayer.Url, graphicsLayer.Graphics[0].Attributes);
-        ////////////            }
-        ////////////        }
-        ////////////    }
+            if (graphicsLayer != null)
+            {
+                if (graphicsLayer.Graphics.Count > 0)
+                {
+                    if (FeatureLoaded != null)
+                    {
+                        FeatureLoaded(graphicsLayer.Url, graphicsLayer.Graphics[0].Attributes);
+                    }
+                }
+            }
             
-        ////////////    ArcGIS_MapView.Cursor = Cursors.Arrow;
-        ////////////}
+            ArcGIS_Map.Cursor = Cursors.Arrow;
+        }
 
         override public string GetShapeValue(Graphic graphicFeature, string shapeValue)
         {
@@ -155,7 +152,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer()
         {
-            GraphicsLayer graphicsLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as GraphicsLayer;
             return graphicsLayer;
         }
     }

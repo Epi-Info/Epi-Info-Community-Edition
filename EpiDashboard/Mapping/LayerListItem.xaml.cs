@@ -11,11 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping
 {
@@ -24,7 +19,7 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class LayerListItem : UserControl
     {
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         private Epi.View view;
         private Epi.Data.IDbDriver db;
         private DashboardHelper dashboardHelper;
@@ -34,11 +29,11 @@ namespace EpiDashboard.Mapping
         public event EventHandler MapGenerated;
         private MapControl mapControl;
 
-        public LayerListItem(MapView mapView, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper, MapControl mapControl)
+        public LayerListItem(ESRI.ArcGIS.Client.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper, MapControl mapControl)
         {
             InitializeComponent();
 
-            _mapView = mapView;
+            this.myMap = myMap;
             this.view = view;
             this.db = db;
             this.dashboardHelper = dashboardHelper;
@@ -54,13 +49,13 @@ namespace EpiDashboard.Mapping
             switch (cbxLayerType.SelectedIndex)
             {
                 case 0:
-                    LayerProperties = new ClusterLayerProperties(_mapView, dashboardHelper, mapControl);
+                    LayerProperties = new ClusterLayerProperties(myMap, dashboardHelper, mapControl);
                     break;
                 case 1:
-                    LayerProperties = new ChoroplethShapeLayerProperties(_mapView, dashboardHelper, mapControl);
+                    LayerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, mapControl);
                     break;
                 default:
-                    LayerProperties = new ClusterLayerProperties(_mapView, dashboardHelper, mapControl);
+                    LayerProperties = new ClusterLayerProperties(myMap, dashboardHelper, mapControl);
                     break;
             }
             LayerProperties.MapGenerated += new EventHandler(layerProperties_MapGenerated);

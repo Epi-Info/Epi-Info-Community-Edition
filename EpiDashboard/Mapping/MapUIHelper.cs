@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
 
 namespace EpiDashboard.Mapping
 {
@@ -45,16 +41,17 @@ namespace EpiDashboard.Mapping
                         DateTime time = (DateTime)row[timeVar];
                         minTime = minTime < time ? minTime : time;
                         maxTime = maxTime > time ? maxTime : time;
+
+
                     }
                 }
+
             }
 
-            return 1;
+            IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(
+                new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
 
-            //////////////IEnumerable<DateTime> intervals = TimeSlider.CreateTimeStopsByTimeInterval(
-            //////////////    new TimeExtent(minTime, maxTime), new TimeSpan(1, 0, 0, 0));
-
-            //////////////return intervals.ToList().Count;
+            return intervals.ToList().Count;
 
         }
     }

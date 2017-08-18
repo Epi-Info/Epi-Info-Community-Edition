@@ -12,21 +12,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.Toolkit;
-using Esri.ArcGISRuntime.Toolkit.Controls;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Bing;
+using ESRI.ArcGIS.Client.Geometry;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Controls;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Windows.Media.Color;
@@ -41,6 +35,7 @@ using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 using UserControl = System.Windows.Controls.UserControl;
 using View = Epi.View;
+using ESRI.ArcGIS.Client.Toolkit.DataSources;
 
 namespace EpiDashboard.Mapping
 {
@@ -65,19 +60,16 @@ namespace EpiDashboard.Mapping
 
         private BackgroundWorker worker;
         private BackgroundWorker openDefaultMapWorker;
-        private MapView _mapView;
+        private Map myMap;
         private MapPoint rightClickedPoint;
-        private BingLayer _aerialWithLabels;
-        private BingLayer _Roads;
-        private Envelope _extent;
         private delegate void RenderMapDelegate(string url);
         private delegate void SimpleDelegate();
         private delegate void DebugDelegate(string debugMsg);
-        //////////private TimeSlider slider;
+        private TimeSlider slider;
         private DataFilteringControl dataFilteringControl;
         private LayerList layerList;
         private string currentTimeVariable;
-        ////////////private Navigation nav;
+        private Navigation nav;
         private string defaultMapPath = string.Empty;
         private MapBackgroundType defaultBackgroundType = MapBackgroundType.Satellite;
         private bool bypassInternetCheck;
@@ -92,7 +84,7 @@ namespace EpiDashboard.Mapping
         public double ResizedHeight { get; set; }
 
         //Create a new ScaleLine Control and add it to the LayoutRoot (a Grid in the XAML)
-        ScaleLine ScaleLine1 = new ScaleLine();
+        ESRI.ArcGIS.Client.Toolkit.ScaleLine ScaleLine1 = new ESRI.ArcGIS.Client.Toolkit.ScaleLine();
 
         public StandaloneMapControl()
         {
@@ -194,7 +186,7 @@ namespace EpiDashboard.Mapping
             bypassInternetCheck = true;
         }
 
-        void _mapView_Loaded(object sender, RoutedEventArgs e)
+        void myMap_Loaded(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(defaultMapPath))
             {
@@ -204,7 +196,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        void _mapView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        void myMap_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
         }
 
@@ -242,12 +234,12 @@ namespace EpiDashboard.Mapping
 
         void MapContainer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_mapView != null)
+            if (myMap != null)
             {
-                if (_mapView.IsEnabled)
+                if (myMap.IsEnabled)
                 {
-                    _mapView.Width = e.NewSize.Width;
-                    _mapView.Height = e.NewSize.Height;
+                    myMap.Width = e.NewSize.Width;
+                    myMap.Height = e.NewSize.Height;
                 }
             }
 
@@ -340,6 +332,9 @@ namespace EpiDashboard.Mapping
                 txtLoading.Visibility = Visibility.Collapsed;
                 waitCursor.Visibility = Visibility.Collapsed;
 
+                OpenStreetMapLayer layer = new OpenStreetMapLayer();
+                layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
+
                 bool sparse_connection = false;
 
                 try
@@ -352,57 +347,27 @@ namespace EpiDashboard.Mapping
                 }
                 catch { }
 
-                string mapServiceKey = Configuration.GetNewInstance().Settings.MapServiceKey;
-                System.Net.WebClient webClient = new System.Net.WebClient();
-                //string myUri = string.Format("http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?supressStatus=true&key={0}", mapServiceKey);
-                string myUri = string.Format("http://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?supressStatus=true&key={0}&queryKey={1}", mapServiceKey, "Am1SuWm6L2Od6cNtifVUXc3tAwTqh24aRcXxem2lY8-Bh5sZRIDzYT_UHjznRcdL");
-                _mapView = new MapView();
-
-                if (sparse_connection == false)
-                {
-                    webClient.OpenReadCompleted += (sender, openReadCompletedEventArgs) =>
-                    {
-                        if (openReadCompletedEventArgs.Error == null)
-                        {
-                            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(BingAuthentication));
-                            BingAuthentication bingAuthentication = serializer.ReadObject(openReadCompletedEventArgs.Result) as BingAuthentication;
-                            openReadCompletedEventArgs.Result.Close();
-                            string authenticationResult = bingAuthentication.AuthenticationResultCode.ToString();
-                            if (authenticationResult == "ValidCredentials")
-                            {
-                                System.Array bingLayerTypes = System.Enum.GetValues(typeof(BingLayer.LayerType));
-                                int[] layerTypes = (int[])bingLayerTypes;
-
-                                foreach (BingLayer.LayerType layerType in layerTypes)
-                                {
-                                    if (layerType != BingLayer.LayerType.Aerial)
-                                    {
-                                        BingLayer insertLayer = new BingLayer();
-                                        insertLayer.ID = layerType.ToString();
-                                        insertLayer.MapStyle = layerType;
-                                        insertLayer.Key = mapServiceKey;
-                                        insertLayer.IsVisible = false;
-                                        _mapView.Map.Layers.Insert(0,insertLayer); 
-                                    }
-                                }
-
-                                if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                                {
-                                    _mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()].IsVisible = true;
-                                }
-                                else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                                {
-                                    _mapView.Map.Layers[BingLayer.LayerType.Road.ToString()].IsVisible = true;
-                                }
-
-                            }
-                            else { } // !ValidCredentials
-                        }
-                        else { } // !WebClient.OpenReadCompleted
-                    };
-                    
-                    webClient.OpenReadAsync(new System.Uri(myUri));  // trigger WebClient.OpenReadCompleted event 
-                }
+                //////if (sparse_connection == true)
+                //////{
+                //////    layer.Token = null;
+                //////}
+                //////else
+                //////{
+                //////    if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                //////    {
+                //////        layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                //////        layer.LayerStyle = TileLayer.LayerType.AerialWithLabels;
+                //////    }
+                //////    else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                //////    {
+                //////        layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                //////        layer.LayerStyle = TileLayer.LayerType.Road;
+                //////    }
+                //////    else
+                //////    {
+                //////        layer.Token = null;
+                //////    }
+                //////}
 
                 GraphicsLayer pointLayer = new GraphicsLayer();
                 pointLayer.ID = "pointLayer";
@@ -442,48 +407,53 @@ namespace EpiDashboard.Mapping
                 mnuClear.Click += new RoutedEventHandler(mnuClear_Click);
                 menu.Items.Add(mnuClear);
 
-                _mapView.Background = Brushes.White;
-                _mapView.Height = MapContainer.ActualHeight;
-                _mapView.Width = MapContainer.ActualWidth;
-                _mapView.WrapAround = true;
-                _mapView.ContextMenu = menu;
-                _mapView.Map.Layers.Add(pointLayer);
-                _mapView.Map.Layers.Add(textLayer);
-                _mapView.Map.Layers.Add(zoneLayer);
+                myMap = new Map();
+                myMap.Background = Brushes.White;
+                myMap.Height = MapContainer.ActualHeight;
+                myMap.Width = MapContainer.ActualWidth;
+                myMap.WrapAround = true;
+                myMap.ContextMenu = menu;
+                if (sparse_connection == false)
+                {
+                    myMap.Layers.Add(layer);
+                }
+                myMap.Layers.Add(pointLayer);
+                myMap.Layers.Add(textLayer);
+                myMap.Layers.Add(zoneLayer);
 
-                _mapView.MouseMove += new MouseEventHandler(_mapView_MouseMove);
-                _mapView.MouseRightButtonDown += new MouseButtonEventHandler(_mapView_MouseRightButtonDown);
-                _mapView.Loaded += new RoutedEventHandler(_mapView_Loaded);
-                _mapView.ExtentChanged += _mapView_ExtentChanged;
+                myMap.MouseMove += new MouseEventHandler(myMap_MouseMove);
+                myMap.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
+                myMap.Loaded += new RoutedEventHandler(myMap_Loaded);
+                myMap.ExtentChanged += myMap_ExtentChanged;
 
-                ////////////_mapView.RotationChanged += _mapView_RotationChanged;
+                myMap.RotationChanged += myMap_RotationChanged;
 
-                MapContainer.Children.Add(_mapView);
+                MapContainer.Children.Add(myMap);
 
-                //ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
-                //extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
-                //System.Windows.Interactivity.Interaction.GetBehaviors(_mapView).Add(extentBehavior);
+                ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
+                extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
+                System.Windows.Interactivity.Interaction.GetBehaviors(myMap).Add(extentBehavior);
 
-                ////////////nav = new Navigation();
-                ////////////nav.Margin = new Thickness(5);
-                ////////////nav.HorizontalAlignment = HorizontalAlignment.Left;
-                ////////////nav.VerticalAlignment = VerticalAlignment.Top;
-                ////////////nav.Map = _mapView;
-                ////////////MapContainer.Children.Add(nav);
+                nav = new Navigation();
+                nav.Margin = new Thickness(5);
+                nav.HorizontalAlignment = HorizontalAlignment.Left;
+                nav.VerticalAlignment = VerticalAlignment.Top;
+                nav.Map = myMap;
+                MapContainer.Children.Add(nav);
 
-                ////////////slider = new TimeSlider();
-                ////////////slider.Name = "slider";
-                ////////////slider.PlaySpeed = new TimeSpan(0, 0, 1);
-                ////////////slider.Height = 20;
-                ////////////slider.TimeMode = TimeMode.CumulativeFromStart;
-                ////////////slider.MinimumValue = DateTime.Now.Subtract(TimeSpan.FromDays(7)).ToUniversalTime();
-                ////////////slider.MaximumValue = DateTime.Now.ToUniversalTime();
-                ////////////slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
-                ////////////slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(0, 2, 0, 0));
-                ////////////slider.Padding = new Thickness(0, 100, 0, 0);
-                ////////////slider.ValueChanged += new EventHandler<TimeSlider.ValueChangedEventArgs>(slider_ValueChanged);
-                ////////////areaSeries.Loaded += new RoutedEventHandler(areaSeries_Loaded);
-                ////////////stkTimeLapse.Children.Add(slider);
+                slider = new TimeSlider();
+                slider.Name = "slider";
+                slider.PlaySpeed = new TimeSpan(0, 0, 1);
+                slider.Height = 20;
+                slider.TimeMode = TimeMode.CumulativeFromStart;
+                slider.MinimumValue = DateTime.Now.Subtract(TimeSpan.FromDays(7)).ToUniversalTime();
+                slider.MaximumValue = DateTime.Now.ToUniversalTime();
+                slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
+                slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(0, 2, 0, 0));
+                slider.Padding = new Thickness(0, 100, 0, 0);
+                slider.ValueChanged += new EventHandler<TimeSlider.ValueChangedEventArgs>(slider_ValueChanged);
+                areaSeries.Loaded += new RoutedEventHandler(areaSeries_Loaded);
+                stkTimeLapse.Children.Add(slider);
 
                 SetBackgroundColor(defaultBackgroundColor);
 
@@ -494,7 +464,7 @@ namespace EpiDashboard.Mapping
                 Grid.SetRow(ScaleLine1, 2);
 
                 //Associate the ScaleLine with Map Control (analagous to a OneTime Binding). Most common coding pattern.
-                ////////////ScaleLine1. = _mapView;
+                ScaleLine1.Map = myMap;
 
                 //Set the alignment properties relative the hosting Grid Control
                 ScaleLine1.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
@@ -502,7 +472,7 @@ namespace EpiDashboard.Mapping
                 ScaleLine1.Margin = new System.Windows.Thickness { Right=10 };
 
                 //Set the Map units for the ScaleLine
-                ////////////ScaleLine1.MapUnit = Esri.ArcGISRuntime.Controls.ScScaleLine.ScaleLineUnit.DecimalDegrees;
+                ScaleLine1.MapUnit = ESRI.ArcGIS.Client.Toolkit.ScaleLine.ScaleLineUnit.DecimalDegrees;
 
                 //Set the target width for the ScaleLine
                 ScaleLine1.TargetWidth = 200;
@@ -534,27 +504,17 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        // Create a custom BingAuthentication class that can be used to hold JSON serializable information from the WebClient. We will use this to see if
-        // we get back the string 'ValidCredentials' from a Microsoft Bing development web server for a specific Bing Key provided by the user.
-        [System.Runtime.Serialization.DataContract]
-        public class BingAuthentication
-        {
-            [System.Runtime.Serialization.DataMember(Name = "authenticationResultCode")]
-            public string AuthenticationResultCode { get; set; }
-        }
-
-
         void mnuScaleContextItem_Click(object sender, RoutedEventArgs e)
         {
             autoContrast = ((MenuItem)sender).IsChecked;
         }
 
-        void _mapView_RotationChanged(object sender, DependencyPropertyChangedEventArgs e)
+        void myMap_RotationChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             NorthArrowText.RenderTransformOrigin = new Point(0.5, 0.5);
             var rt = (RotateTransform)NorthArrowText.RenderTransform;
 
-            rt.Angle = _mapView.Rotation;
+            rt.Angle = myMap.Rotation;
         }
 
         private bool autoContrast = true;
@@ -564,16 +524,14 @@ namespace EpiDashboard.Mapping
             autoContrast = ((MenuItem)sender).IsChecked;
         }
 
-        void _mapView_ExtentChanged(object sender, EventArgs e)
+        void myMap_ExtentChanged(object sender, ExtentEventArgs e)
         {
             try
             {
-                if (_extent != null && ((MapView)sender).Extent.Width == _extent.Width)
+                if (e.NewExtent.Equals(e.OldExtent))
                 {
                     return;
                 }
-
-                _extent = ((MapView)sender).Extent;
 
                 if (autoContrast)
                 {
@@ -843,17 +801,17 @@ namespace EpiDashboard.Mapping
 
         private void SetBackgroundColor(Brush brush)
         {
-            if (grdMapDef != null && _mapView != null)
+            if (grdMapDef != null && myMap != null)
             {
                 grdMapDef.Background = brush;
-                _mapView.Background = brush;
+                myMap.Background = brush;
             }
         }
 
         void layer_InitializationFailed(object sender, EventArgs e)
         {
-            _mapView.IsEnabled = false;
-            ////////////nav.Visibility = System.Windows.Visibility.Collapsed;
+            myMap.IsEnabled = false;
+            nav.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private enum LayerType
@@ -953,13 +911,13 @@ namespace EpiDashboard.Mapping
             switch (layerType)
             {
                 case LayerType.Marker:
-                    layerProperties = new MarkerProperties(_mapView, rightClickedPoint);
+                    layerProperties = new MarkerProperties(myMap, rightClickedPoint);
                     break;
                 case LayerType.Zone:
-                    layerProperties = new ZoneProperties(_mapView, rightClickedPoint);
+                    layerProperties = new ZoneProperties(myMap, rightClickedPoint);
                     break;
                 case LayerType.Text:
-                    layerProperties = new TextProperties(_mapView, rightClickedPoint);
+                    layerProperties = new TextProperties(myMap, rightClickedPoint);
                     break;
                 default:
                     if (DataSourceRequested != null)
@@ -987,31 +945,31 @@ namespace EpiDashboard.Mapping
                             switch (layerType)
                             {
                                 case LayerType.CaseCluster:
-                                    layerProperties = new ClusterLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethShapeFile:
-                                    layerProperties = new ChoroplethShapeLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethMapServer:
-                                    layerProperties = new ChoroplethServerLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new ChoroplethServerLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethKml:
-                                    layerProperties = new ChoroplethKmlLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new ChoroplethKmlLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityKml:
-                                    layerProperties = new DotDensityKmlLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new DotDensityKmlLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityShapeFile:
-                                    layerProperties = new DotDensityLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new DotDensityLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityMapServer:
-                                    layerProperties = new DotDensityServerLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new DotDensityServerLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.PointMap:
-                                    layerProperties = new PointLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new PointLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 default:
-                                    layerProperties = new ClusterLayerProperties(_mapView, dashboardHelper, this);
+                                    layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
                                     break;
                             }
                         }
@@ -1205,7 +1163,7 @@ namespace EpiDashboard.Mapping
                 }
             }
 
-            layerList = new LayerList(_mapView, null, null, null);
+            layerList = new LayerList(myMap, null, null, null);
             layerList.Loaded += new RoutedEventHandler(layerList_Loaded);
             layerList.SizeChanged += new SizeChangedEventHandler(layerList_SizeChanged);
             layerList.MouseEnter += new MouseEventHandler(layerList_MouseEnter);
@@ -1381,34 +1339,34 @@ namespace EpiDashboard.Mapping
             stkLegends.Children.Clear();
         }
 
-        void _mapView_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        void myMap_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            rightClickedPoint = _mapView.ScreenToLocation(e.GetPosition(_mapView));
+            rightClickedPoint = myMap.ScreenToMap(e.GetPosition(myMap));
         }
 
         public void UnSubscribe()
         {
-            if (_mapView != null)
+            if (myMap != null)
             {
-                _mapView.MouseMove -= new MouseEventHandler(_mapView_MouseMove);
+                myMap.MouseMove -= new MouseEventHandler(myMap_MouseMove);
             }
 
-            this._mapView = null;
+            this.myMap = null;
             this.worker = null;
         }
 
-        void _mapView_MouseMove(object sender, MouseEventArgs e)
+        void myMap_MouseMove(object sender, MouseEventArgs e)
         {
             try
             {
-                MapView mapView = (MapView)e.Source;
+                Map myMap = (Map)e.Source;
 
-                if (!_mapView.IsFocused)
+                if (!myMap.IsFocused)
                 {
-                    _mapView.Focus();
+                    myMap.Focus();
                 }
 
-                MapPoint wmPoint = _mapView.ScreenToLocation(e.GetPosition(_mapView));
+                MapPoint wmPoint = myMap.ScreenToMap(e.GetPosition(myMap));
 
                 if (MouseCoordinatesChanged != null)
                 {
@@ -1452,12 +1410,12 @@ namespace EpiDashboard.Mapping
 
             this.areaChartDataPoints = areaChartDataPoints;
 
-            _mapView.TimeExtent = new TimeExtent(start.AddHours(-1), end.AddHours(1));
+            myMap.TimeExtent = new TimeExtent(start.AddHours(-1), end.AddHours(1));
 
-            ////////////slider.MinimumValue = _mapView.TimeExtent.Start;
-            ////////////slider.MaximumValue = _mapView.TimeExtent.End;
-            ////////////slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
-            ////////////slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(1, 0, 0, 0));
+            slider.MinimumValue = myMap.TimeExtent.Start;
+            slider.MaximumValue = myMap.TimeExtent.End;
+            slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
+            slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(1, 0, 0, 0));
 
             if (layerList.ClusterLayers.Count == 1)
             {
@@ -1479,50 +1437,50 @@ namespace EpiDashboard.Mapping
         {
             if (areaChartDataPoints != null)
             {
-                ////////////List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
-                ////////////{
-                ////////////    return pair.Key < slider.Value.End;
-                ////////////});
-                ////////////areaSeries.ItemsSource = test;
+                List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
+                {
+                    return pair.Key < slider.Value.End;
+                });
+                areaSeries.ItemsSource = test;
             }
         }
 
-        ////////////void slider_ValueChanged(object sender, TimeSlider.ValueChangedEventArgs e)
-        ////////////{
-        ////////////    if (currentTimeVariable != null)
-        ////////////    {
-        ////////////        grdLapse.Visibility = Visibility.Visible;
-        ////////////        grdTimeLapse.Visibility = Visibility.Visible;
-        ////////////        stkTimeLapse.Visibility = Visibility.Visible;
+        void slider_ValueChanged(object sender, TimeSlider.ValueChangedEventArgs e)
+        {
+            if (currentTimeVariable != null)
+            {
+                grdLapse.Visibility = Visibility.Visible;
+                grdTimeLapse.Visibility = Visibility.Visible;
+                stkTimeLapse.Visibility = Visibility.Visible;
 
-        ////////////        if (layerList.ClusterLayers.Count == 1)
-        ////////////        {
-        ////////////            chrtTimeLapse.Visibility = Visibility.Visible;
-        ////////////            grdTimeLapseBorder.Height = 120;
-        ////////////        }
-        ////////////        else
-        ////////////        {
-        ////////////            grdTimeLapseBorder.Height = 50;
-        ////////////        }
+                if (layerList.ClusterLayers.Count == 1)
+                {
+                    chrtTimeLapse.Visibility = Visibility.Visible;
+                    grdTimeLapseBorder.Height = 120;
+                }
+                else
+                {
+                    grdTimeLapseBorder.Height = 50;
+                }
 
-        ////////////        txtSliderStartDate.Text = e.NewValue.Start.ToShortDateString();
-        ////////////        txtSliderEndDate.Text = e.NewValue.End.ToShortDateString();
+                txtSliderStartDate.Text = e.NewValue.Start.ToShortDateString();
+                txtSliderEndDate.Text = e.NewValue.End.ToShortDateString();
 
-        ////////////        _mapView.TimeExtent = new TimeExtent(e.NewValue.Start, e.NewValue.End);
+                myMap.TimeExtent = new TimeExtent(e.NewValue.Start, e.NewValue.End);
 
-        ////////////        if (areaChartDataPoints != null)
-        ////////////        {
-        ////////////            if (layerList.ClusterLayers.Count == 1)
-        ////////////            {
-        ////////////                List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
-        ////////////                {
-        ////////////                    return pair.Key < e.NewValue.End;
-        ////////////                });
-        ////////////                areaSeries.ItemsSource = test;
-        ////////////            }
-        ////////////        }
-        ////////////    }
-        ////////////}
+                if (areaChartDataPoints != null)
+                {
+                    if (layerList.ClusterLayers.Count == 1)
+                    {
+                        List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
+                        {
+                            return pair.Key < e.NewValue.End;
+                        });
+                        areaSeries.ItemsSource = test;
+                    }
+                }
+            }
+        }
 
         public void OnRecordSelected(int id)
         {
@@ -1574,7 +1532,7 @@ namespace EpiDashboard.Mapping
 
                     if (element.Name.Equals("referenceLayer"))
                     {
-                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { _mapView });
+                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap });
                         layerProperties.MakeReadOnly();
                         layerProperties.CreateFromXml(element);
                         layerList.AddListItem(layerProperties, 0);
@@ -1582,7 +1540,7 @@ namespace EpiDashboard.Mapping
 
                     if (element.Name.Equals("graphicsLayer"))
                     {
-                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { _mapView, new MapPoint(double.Parse(element.Attributes["locationX"].Value), double.Parse(element.Attributes["locationY"].Value)) });
+                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, new MapPoint(double.Parse(element.Attributes["locationX"].Value), double.Parse(element.Attributes["locationY"].Value)) });
                         layerProperties.MakeReadOnly();
                         layerProperties.CreateFromXml(element);
                         layerList.AddListItem(layerProperties, 0);
@@ -1648,10 +1606,10 @@ namespace EpiDashboard.Mapping
                         ILayerProperties layerProperties = null;
                         if (element.Attributes["layerType"].Value.ToString() == "EpiDashboard.Mapping.ChoroplethLayerProperties")
                         {
-                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType("EpiDashboard.Mapping.ChoroplethShapeLayerProperties"), new object[] { _mapView, helper, this });
+                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType("EpiDashboard.Mapping.ChoroplethShapeLayerProperties"), new object[] { myMap, helper, this });
                         }
                         else
-                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { _mapView, helper, this });
+                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, helper, this });
                         layerProperties.MakeReadOnly();
                         layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
                         layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
@@ -1727,7 +1685,7 @@ namespace EpiDashboard.Mapping
             if (dlg.ShowDialog().Value)
             {
                 layerList.Visibility = System.Windows.Visibility.Collapsed;
-                ////////////nav.Visibility = Visibility.Collapsed;
+                nav.Visibility = Visibility.Collapsed;
                 grdLayerTypeChooser.Visibility = Visibility.Collapsed;
                 grdBaseMap.Visibility = Visibility.Collapsed;
 
@@ -1749,7 +1707,7 @@ namespace EpiDashboard.Mapping
                 stream.Close();
 
                 layerList.Visibility = System.Windows.Visibility.Visible;
-                ////////////nav.Visibility = System.Windows.Visibility.Visible;
+                nav.Visibility = System.Windows.Visibility.Visible;
                 grdLayerTypeChooser.Visibility = Visibility.Visible;
                 grdBaseMap.Visibility = Visibility.Visible;
 
@@ -1767,21 +1725,21 @@ namespace EpiDashboard.Mapping
 
         public void AddShapeFileLayer()
         {
-            ShapeLayerProperties layerProperties = new ShapeLayerProperties(_mapView);
+            ShapeLayerProperties layerProperties = new ShapeLayerProperties(myMap);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.AddShapeFile();
         }
 
         public void AddMapServerLayer()
         {
-            MapServerLayerProperties layerProperties = new MapServerLayerProperties(_mapView);
+            MapServerLayerProperties layerProperties = new MapServerLayerProperties(myMap);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.AddServerImage();
         }
 
         public void AddKmlLayer()
         {
-            KmlLayerProperties layerProperties = new KmlLayerProperties(_mapView);
+            KmlLayerProperties layerProperties = new KmlLayerProperties(myMap);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.AddServerImage();
         }
@@ -1805,7 +1763,7 @@ namespace EpiDashboard.Mapping
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
-            pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, _mapView, (PointLayerProperties)layerProperties);
+            pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap, (PointLayerProperties)layerProperties);
 
             dashboardHelper = pointlayerprop.GetDashboardHelper();
             pointofinterestproperties.SetDashboardHelper(dashboardHelper);
@@ -1851,12 +1809,12 @@ namespace EpiDashboard.Mapping
             popup.Parent = LayoutRoot;
 
 
-            layerProperties = new PointLayerProperties(_mapView, dashboardHelper, this);
+            layerProperties = new PointLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, _mapView, (PointLayerProperties)layerProperties);
+            pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap, (PointLayerProperties)layerProperties);
             pointofinterestproperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
@@ -1893,12 +1851,12 @@ namespace EpiDashboard.Mapping
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
 
-            layerProperties = new ClusterLayerProperties(_mapView, dashboardHelper, this);
+            layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            EpiDashboard.Controls.CaseClusterProperties caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, _mapView, (ClusterLayerProperties)layerProperties);
+            EpiDashboard.Controls.CaseClusterProperties caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, myMap, (ClusterLayerProperties)layerProperties);
             caseclusterproperties.layerprop = (ClusterLayerProperties)layerProperties;
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
@@ -1940,7 +1898,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, _mapView, (ClusterLayerProperties)layerProperties);
+            caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, myMap, (ClusterLayerProperties)layerProperties);
             caseclusterproperties.layerprop = (ClusterLayerProperties)layerProperties;
 
             dashboardHelper = clusterlayerprop.GetDashboardHelper();
@@ -1981,14 +1939,14 @@ namespace EpiDashboard.Mapping
             ILayerProperties layerProperties = null;
 
             DashboardHelper dashboardHelper = new DashboardHelper();
-            layerProperties = new ChoroplethShapeLayerProperties(_mapView, dashboardHelper, this);
+            layerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
-            EpiDashboard.Controls.ChoroplethProperties properties = new EpiDashboard.Controls.ChoroplethProperties(this, _mapView);
+            EpiDashboard.Controls.ChoroplethProperties properties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
             properties.choroplethShapeLayerProperties = (ChoroplethShapeLayerProperties)layerProperties;
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
@@ -2032,7 +1990,7 @@ namespace EpiDashboard.Mapping
                 popup = new DashboardPopup();
                 popup.Parent = LayoutRoot;
 
-                choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, _mapView);
+                choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
 
                 choroplethproperties.radShapeFile.IsEnabled = false;
                 choroplethproperties.radKML.IsEnabled = false;
@@ -2176,10 +2134,10 @@ namespace EpiDashboard.Mapping
                     {
                         FeatureLayer featureLayer = (FeatureLayer)shapeFileProperties[1];
 
-                        ////////if(featureLayer.FeatureTable.RowCount > 0)
-                        ////////{
-                        ////////    choroplethproperties.shapeAttributes = featureLayer.FeatureTable...Attributes;
-                        ////////}
+                        if(featureLayer.Graphics.Count > 0)
+                        {
+                            choroplethproperties.shapeAttributes = featureLayer.Graphics[0].Attributes;
+                        }
                         choroplethproperties.MapServerConnect();
                     }
                     else if (shapeFileProperties[1] is IDictionary<string, object>)
@@ -2201,7 +2159,7 @@ namespace EpiDashboard.Mapping
 
             }
 
-            //choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, _mapView);
+            //choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
             //choroplethproperties.choroplethServerLayerProperties = choroplethLayerProperties;
             //choroplethproperties.choroplethServerLayerProvider = choroplethLayerProperties.provider;
             //choroplethproperties.choroplethServerLayerProvider.CloseLayer();
@@ -2383,7 +2341,7 @@ namespace EpiDashboard.Mapping
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
 
-            EpiDashboard.Controls.DotDensityProperties properties = new EpiDashboard.Controls.DotDensityProperties(this, _mapView);
+            EpiDashboard.Controls.DotDensityProperties properties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
 
             properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             properties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
@@ -2426,7 +2384,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, _mapView);
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
             dotdensityproperties.layerprop = densitylayerprop;
             dotdensityproperties.provider = densitylayerprop.provider;
 
@@ -2511,7 +2469,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, _mapView);
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
 
             dotdensityproperties.Width = 800;
             dotdensityproperties.Height = 600;
@@ -2626,7 +2584,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, _mapView);
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
 
             dotdensityproperties.Width = 800;
             dotdensityproperties.Height = 600;
@@ -2725,34 +2683,49 @@ namespace EpiDashboard.Mapping
 
         private void SetBackgroundImageType()
         {
-            if (_mapView != null)
+            if (myMap != null)
             {
-                if (_mapView.Map.Layers.Count > 0)
+
+                if (myMap.Layers.Count > 0)
                 {
-                    if (_mapView.Map.Layers[0] is BingLayer)
+                    if (myMap.Layers[0] is TileLayer)
                     {
-                        if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                        bool sparse_connection = false;
+
+                        try
                         {
-                            _mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()].IsVisible = true;
-                            _mapView.Map.Layers[BingLayer.LayerType.Road.ToString()].IsVisible = false;
+                            Configuration config = Configuration.GetNewInstance();
+                            if (config.Settings.SparseConnection == true)
+                            {
+                                sparse_connection = true;
+                            }
                         }
-                        else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                        catch { }
+
+                        if(sparse_connection == true)
                         {
-                            _mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()].IsVisible = false;
-                            _mapView.Map.Layers[BingLayer.LayerType.Road.ToString()].IsVisible = true;
+                            ((TileLayer)myMap.Layers[0]).Token = null;
                         }
                         else
                         {
-                            _mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()].IsVisible = false;
-                            _mapView.Map.Layers[BingLayer.LayerType.Road.ToString()].IsVisible = false;
-
-                            //_mapView.Map.Layers.Remove(BingLayer.LayerType.AerialWithLabels.ToString());
-                            //_mapView.Map.Layers.Remove(BingLayer.LayerType.Road.ToString());
-
-                            //((BingLayer)_mapView.Map.Layers[BingLayer.LayerType.AerialWithLabels.ToString()]).Key = null;
-                            //((BingLayer)_mapView.Map.Layers[BingLayer.LayerType.Road.ToString()]).Key = null;
+                            if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                            {
+                                ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                                ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
+                            }
+                            else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                            {
+                                ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                                ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.Road;
+                            }
+                            else
+                            {
+                                ((TileLayer)myMap.Layers[0]).Token = null;
+                            }
                         }
                     }
+
+                    ((TileLayer)myMap.Layers[0]).Refresh();
                 }
             }
         }
@@ -2909,7 +2882,7 @@ namespace EpiDashboard.Mapping
                     dashboardHelpers.Add(layer.GetDashboardHelper());
                 }
             }
-            timeLaspe = new EpiDashboard.Mapping.TimeLapse(dashboardHelpers, this, _mapView);
+            timeLaspe = new EpiDashboard.Mapping.TimeLapse(dashboardHelpers, this, myMap);
             timeLaspe.btnOK.Click += new RoutedEventHandler(btn_TimeLapseClick);
 
             timeLaspe.Width = 305;
@@ -2926,7 +2899,7 @@ namespace EpiDashboard.Mapping
             DashboardHelper dashboardHelper = new DashboardHelper();
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
-            EpiDashboard.Controls.Referencelayer properties = new EpiDashboard.Controls.Referencelayer(this, _mapView);
+            EpiDashboard.Controls.Referencelayer properties = new EpiDashboard.Controls.Referencelayer(this, myMap);
             properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             //properties.Width = 800;
             //properties.Height = 600;

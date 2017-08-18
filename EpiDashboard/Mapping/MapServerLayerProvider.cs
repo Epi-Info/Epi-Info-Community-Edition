@@ -16,13 +16,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Bing;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
@@ -33,46 +32,46 @@ namespace EpiDashboard.Mapping
 
     public class MapServerLayerProvider : ILayerProvider
     {
-        private MapView _mapView;
+        private Map myMap;
         private Guid layerId;
         private string url;
         private int[] visibleLayers;
 
-        public MapServerLayerProvider(MapView mapView)
+        public MapServerLayerProvider(Map myMap)
         {
-            this._mapView = mapView;
+            this.myMap = myMap;
             this.layerId = Guid.NewGuid();
         }
 
         public void Refresh()
         {
-            ArcGISDynamicMapServiceLayer layer = this._mapView.Map.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
+            ArcGISDynamicMapServiceLayer layer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (layer != null)
             {
-                _mapView.Map.Layers.Remove(layer);
+                myMap.Layers.Remove(layer);
                 RenderServerImage(this.url, this.visibleLayers);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = _mapView.Map.Layers[layerId.ToString()];
-            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
-            if (currentIndex < _mapView.Map.Layers.Count - 1)
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
+            if (currentIndex < myMap.Layers.Count - 1)
             {
-                _mapView.Map.Layers.Remove(layer);
-                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = _mapView.Map.Layers[layerId.ToString()];
-            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                _mapView.Map.Layers.Remove(layer);
-                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -80,22 +79,22 @@ namespace EpiDashboard.Mapping
         {
             this.url = url;
 
-            ArcGISDynamicMapServiceLayer shapeLayer = _mapView.Map.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
+            ArcGISDynamicMapServiceLayer shapeLayer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (shapeLayer != null)
             {
-                _mapView.Map.Layers.Remove(shapeLayer);
+                myMap.Layers.Remove(shapeLayer);
             }
 
             shapeLayer = new ArcGISDynamicMapServiceLayer();
             shapeLayer.ID = layerId.ToString();
-            shapeLayer.ServiceUri = url;
+            shapeLayer.Url = url;
             if (visibleLayers != null)
             {
-                //////shapeLayer.VisibleLayers = visibleLayers;
+                shapeLayer.VisibleLayers = visibleLayers;
             }
-            _mapView.Map.Layers.Add(shapeLayer);
+            myMap.Layers.Add(shapeLayer);
 
-            //////_mapView.Extent = shapeLayer.FullExtent;
+            myMap.Extent = shapeLayer.FullExtent;
         }
 
         public MapServerDialog RenderServerImage()
@@ -111,18 +110,10 @@ namespace EpiDashboard.Mapping
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
-            SimpleFillSymbol symbol = new SimpleFillSymbol()
-            {
-                Color = brush.Color,
-                Style = SimpleFillStyle.Solid,
-                Outline = new SimpleLineSymbol()
-                {
-                    Color = Colors.Gray,
-                    Style = SimpleLineStyle.Solid,
-                    Width = 1
-                }
-            };
-
+            SimpleFillSymbol symbol = new SimpleFillSymbol();
+            symbol.Fill = brush;
+            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
+            symbol.BorderThickness = 1;
             return symbol;
         }
 
@@ -130,10 +121,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            ArcGISDynamicMapServiceLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
+            ArcGISDynamicMapServiceLayer graphicsLayer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (graphicsLayer != null)
             {
-                _mapView.Map.Layers.Remove(graphicsLayer);
+                myMap.Layers.Remove(graphicsLayer);
             }
         }
 

@@ -14,11 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MessageBox = System.Windows.Forms.MessageBox;
 using UserControl = System.Windows.Controls.UserControl;
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping
 {
@@ -48,10 +43,10 @@ namespace EpiDashboard.Mapping
         }
 
         # region Constructors
-        public TimeLapse(List<DashboardHelper> dashboardHelpers, StandaloneMapControl mapControl, MapView mapView)
+        public TimeLapse(List<DashboardHelper> dashboardHelpers, StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
-            provider = new ClusterLayerProvider(mapView);
+            provider = new ClusterLayerProvider(myMap);
             this.mapControl = mapControl;
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
             this.dashboardHelpers = dashboardHelpers;

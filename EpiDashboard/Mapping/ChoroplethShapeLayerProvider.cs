@@ -7,20 +7,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
 using EpiDashboard.Mapping.ShapeFileReader;
 
 namespace EpiDashboard.Mapping
 {
     public class ChoroplethShapeLayerProvider : ChoroplethLayerProvider, IChoroLayerProvider
     {
-        public ChoroplethShapeLayerProvider(MapView clientMap) : base(clientMap)
+        public ChoroplethShapeLayerProvider(Map clientMap) : base(clientMap)
         {
         }
 
@@ -83,7 +79,7 @@ namespace EpiDashboard.Mapping
                 {
                     graphicsLayer = new GraphicsLayer();
                     graphicsLayer.ID = LayerId.ToString();
-                    ArcGIS_MapView.Map.Layers.Add(graphicsLayer);
+                    ArcGIS_Map.Layers.Add(graphicsLayer);
 
                     int recCount = shapeFileReader.Records.Count;
                     int rgbFactor = 255 / recCount;
@@ -106,31 +102,24 @@ namespace EpiDashboard.Mapping
                     Envelope shapeFileExtent = shapeFileReader.GetExtent();
                     if (shapeFileExtent.SpatialReference == null)
                     {
-                        ArcGIS_MapView.SetView(shapeFileExtent);
+                        ArcGIS_Map.Extent = shapeFileExtent;
                     }
                     else
                     {
-                        if (shapeFileExtent.SpatialReference.Wkid == 4326)
+                        if (shapeFileExtent.SpatialReference.WKID == 4326)
                         {
-                            SpatialReference webMercator = new SpatialReference(102100);
-                            SpatialReference WGS84 = new SpatialReference(4326);
-
-                            MapPoint firstCornerWGS84 = (new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin, WGS84));
-                            MapPoint secondCornerWGS84 = (new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax, WGS84));
-
-                            MapPoint firstCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
-                            MapPoint secondCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(secondCornerWGS84, webMercator);
-
-                            ArcGIS_MapView.SetView(new Envelope(firstCorner, secondCorner));
+                            ArcGIS_Map.Extent = new Envelope(
+                                ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), 
+                                ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                         }
                     }
                 }
                 else
                 {
-                    ArcGIS_MapView.SetView(graphicsLayer.FullExtent);
+                    ArcGIS_Map.Extent = graphicsLayer.FullExtent;
                 }
-
-                ///////////graphicsLayer.RenderingMode = GraphicsRenderingMode.Static; dpb error RenderingMode could not be changed after load. Set in above code?
+                
+                graphicsLayer.RenderingMode = GraphicsLayerRenderingMode.Static;
 
                 return new object[] { boundrySourceLocation, graphicsLayer.Graphics[0].Attributes };
             }
@@ -160,7 +149,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer() 
         {
-            GraphicsLayer graphicsLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = ArcGIS_Map.Layers[LayerId.ToString()] as GraphicsLayer;
             return graphicsLayer;
         }
     }

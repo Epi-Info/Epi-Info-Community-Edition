@@ -1,16 +1,13 @@
 using System;
+using ESRI.ArcGIS.Client;
 using EpiDashboard.Mapping.ShapeFileReader;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
 using System.Collections;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
 
 namespace EpiDashboard.Mapping.ShapeFileReader
 {
@@ -24,30 +21,25 @@ namespace EpiDashboard.Mapping.ShapeFileReader
 
         public static SimpleMarkerSymbol DEFAULT_MARKER_SYMBOL = new SimpleMarkerSymbol()
         {
-            Style = SimpleMarkerStyle.Circle,
-            Color = Colors.Red
+            Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle,
+            Color = new SolidColorBrush( Colors.Red )
         };
 
         public static SimpleLineSymbol DEFAULT_LINE_SYMBOL = new SimpleLineSymbol()
         {
-            Color = Colors.Red,
-            Style = SimpleLineStyle.Solid,
+            Color = new SolidColorBrush( Colors.Red ),
+            Style = SimpleLineSymbol.LineStyle.Solid,
             Width = 2
         };
 
         public static SimpleFillSymbol DEFAULT_FILL_SYMBOL = new SimpleFillSymbol()
         {
-            Color = Color.FromArgb(192, 255, 0, 0),
-            Style = SimpleFillStyle.Solid,
-            Outline = new SimpleLineSymbol()
-            {
-                Color = Colors.Gray,
-                Style = SimpleLineStyle.Solid,
-                Width = 1
-            }
+            Fill = new SolidColorBrush(Color.FromArgb(192, 255, 0, 0)),
+            BorderBrush = new SolidColorBrush(Colors.Gray),
+            BorderThickness = 1
         };
 
-        public static Symbol GetDefaultSymbol( Esri.ArcGISRuntime.Geometry.Geometry geometry )
+        public static Symbol GetDefaultSymbol( this ESRI.ArcGIS.Client.Geometry.Geometry geometry )
         {
             if( geometry == null )
                 return null;
@@ -55,7 +47,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
             Type t = geometry.GetType();
             if( t == typeof( MapPoint ) )
                 return DEFAULT_MARKER_SYMBOL;
-            else if( t == typeof( Multipoint ) )
+            else if( t == typeof( MultiPoint ) )
                 return DEFAULT_MARKER_SYMBOL;
             else if( t == typeof( Polyline ) )
                 return DEFAULT_LINE_SYMBOL;
@@ -153,8 +145,8 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                 return null;
 
             Graphic graphic = new Graphic();
-            ////////graphic.MouseEnter += new System.Windows.Input.MouseEventHandler(graphic_MouseEnter);
-            ////////graphic.MouseLeave += new System.Windows.Input.MouseEventHandler(graphic_MouseLeave);
+            graphic.MouseEnter += new System.Windows.Input.MouseEventHandler(graphic_MouseEnter);
+            graphic.MouseLeave += new System.Windows.Input.MouseEventHandler(graphic_MouseLeave);
 
             //add all the attributes to the graphic
             foreach( var item in record.Attributes )
@@ -192,75 +184,57 @@ namespace EpiDashboard.Mapping.ShapeFileReader
 
         static void graphic_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Symbol symbol = ((Graphic)sender).Symbol;
-            SimpleFillSymbol simpleFillSymbol = ((SimpleFillSymbol)symbol);
-            Color currentColor = simpleFillSymbol.Color;
-            SolidColorBrush currentBrush = new SolidColorBrush(currentColor);
+            SolidColorBrush currentBrush = ((SolidColorBrush)((SimpleFillSymbol)((Graphic)sender).Symbol).Fill).Clone();
+            Color currentColor = currentBrush.Color;
             currentColor.A -= 15;
             currentBrush.Color = currentColor;
-            ((SimpleFillSymbol)((Graphic)sender).Symbol).Color = ((SolidColorBrush)currentBrush).Color;
+            ((SimpleFillSymbol)((Graphic)sender).Symbol).Fill = currentBrush;
         }
 
         static void graphic_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Symbol symbol = ((Graphic)sender).Symbol;
-            SimpleFillSymbol simpleFillSymbol = ((SimpleFillSymbol)symbol);
-            Color currentColor = simpleFillSymbol.Color;
-            SolidColorBrush currentBrush = new SolidColorBrush(currentColor);
+            SolidColorBrush currentBrush = ((SolidColorBrush)((SimpleFillSymbol)((Graphic)sender).Symbol).Fill).Clone();
+            Color currentColor = currentBrush.Color;
             currentColor.A += 15;
             currentBrush.Color = currentColor;
-            ((SimpleFillSymbol)((Graphic)sender).Symbol).Color = ((SolidColorBrush)currentBrush).Color;
+            ((SimpleFillSymbol)((Graphic)sender).Symbol).Fill = currentBrush;
         }
 
-        private static Esri.ArcGISRuntime.Geometry.Geometry GetPolyline( ShapeFileRecord record )
+        private static ESRI.ArcGIS.Client.Geometry.Geometry GetPolyline( ShapeFileRecord record )
         {
-            Polyline line;
-            Esri.ArcGISRuntime.Geometry.PointCollection points = new Esri.ArcGISRuntime.Geometry.PointCollection();
-
-            for ( int i = 0; i < record.NumberOfParts; i++ )
+            Polyline line = new Polyline();
+            for( int i = 0; i < record.NumberOfParts; i++ )
             {
+                // Determine the starting index and the end index
+                // into the points array that defines the figure.
                 int start = record.Parts[ i ];
                 int end;
-
-                if (record.NumberOfParts > 1 && i != (record.NumberOfParts - 1))
-                {
-                    end = record.Parts[i + 1];
-                }
+                if( record.NumberOfParts > 1 && i != ( record.NumberOfParts - 1 ) )
+                    end = record.Parts[ i + 1 ];
                 else
-                {
                     end = record.NumberOfPoints;
-                }
 
+                ESRI.ArcGIS.Client.Geometry.PointCollection points = new ESRI.ArcGIS.Client.Geometry.PointCollection();
+                // Add line segments to the polyline
                 for( int j = start; j < end; j++ )
                 {
                     System.Windows.Point point = record.Points[ j ];
                     points.Add( new MapPoint( point.X, point.Y ) );
                 }
+
+                line.Paths.Add( points );
             }
 
-            line = new Polyline(points);
             return line;
         }
 
-        private static Esri.ArcGISRuntime.Geometry.Geometry GetPolygon( ShapeFileRecord record )
+        private static ESRI.ArcGIS.Client.Geometry.Geometry GetPolygon( ShapeFileRecord record )
         {
             Random rnd = new Random();
-            Polygon polygon;
-            Esri.ArcGISRuntime.Geometry.PointCollection points = new Esri.ArcGISRuntime.Geometry.PointCollection(new SpatialReference(4326));
+            Polygon polygon = new Polygon();
             SpatialReference geoReference = new SpatialReference(4326);
             try
             {
-
-                bool isWebMercator = false;
-                if (record.Points.Count > 0)
-                {
-                    if (record.Points[0].Y < -90 || record.Points[0].Y > 90)
-                    {
-                        isWebMercator = true;
-                        points = new Esri.ArcGISRuntime.Geometry.PointCollection(new SpatialReference(102100));
-                    }
-                }
-
                 for (int i = 0; i < record.NumberOfParts; i++)
                 {
                     // Determine the starting index and the end index
@@ -268,14 +242,24 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                     int start = record.Parts[i];
                     int end;
                     if (record.NumberOfParts > 1 && i != (record.NumberOfParts - 1))
-                    {
                         end = record.Parts[i + 1];
-                    }
                     else
-                    { 
                         end = record.NumberOfPoints;
-                    }
 
+                    ESRI.ArcGIS.Client.Geometry.PointCollection points = new ESRI.ArcGIS.Client.Geometry.PointCollection();
+                    // Add line segments to the polyline
+                    bool isWebMercator = false;
+                    if (record.Points.Count > 0)
+                    {
+                        if (record.Points[0].Y < -90 || record.Points[0].Y > 90)
+                        {
+                            isWebMercator = true;
+                        }
+                        else
+                        {
+                            polygon.SpatialReference = geoReference;
+                        }
+                    }
                     for (int j = start; j < end; j++)
                     {
                         if (record.NumberOfPoints < 5000 || rnd.Next(0, 5) == 1)
@@ -283,7 +267,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                             System.Windows.Point point = record.Points[j];
                             if (isWebMercator)
                             {
-                                points.Add(new MapPoint(point.X, point.Y, new SpatialReference(102100)));
+                                points.Add(new MapPoint(point.X, point.Y));
                             }
                             else
                             {
@@ -305,12 +289,14 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                             }
                         }
                     }
+
+                    polygon.Rings.Add(points);
                 }
             }
-            catch { }
-
-            polygon = new Polygon(points, geoReference);
-
+            catch (Exception ex)
+            {
+                //
+            }
             return polygon;
         }
 
@@ -322,33 +308,33 @@ namespace EpiDashboard.Mapping.ShapeFileReader
             bottomMostPoint = 0;
         }
 
-        public static Esri.ArcGISRuntime.Geometry.Envelope GetExtent(this ShapeFile shapeFile)
+        public static ESRI.ArcGIS.Client.Geometry.Envelope GetExtent(this ShapeFile shapeFile)
         {
-            Envelope envelope = new Envelope(leftMostPoint, topMostPoint, rightMostPoint, bottomMostPoint);
+            Envelope env = new Envelope(leftMostPoint, topMostPoint, rightMostPoint, bottomMostPoint);
             if (topMostPoint >= -90 && topMostPoint <= 90)
             {
-                envelope = new Envelope(leftMostPoint, topMostPoint, rightMostPoint, bottomMostPoint, new SpatialReference(4326));
+                env.SpatialReference = new SpatialReference(4326);
             }
-            return envelope;
+            return env;
         }
 
-        private static Esri.ArcGISRuntime.Geometry.Geometry GetPoint( ShapeFileRecord record )
+        private static ESRI.ArcGIS.Client.Geometry.Geometry GetPoint( ShapeFileRecord record )
         {
-            MapPoint point = new MapPoint(record.Points[0].X, record.Points[0].Y);
+            MapPoint point = new MapPoint();
+            point.X = record.Points[ 0 ].X;
+            point.Y = record.Points[ 0 ].Y;
             return point;
         }
 
-        private static Esri.ArcGISRuntime.Geometry.Geometry GetMultiPoint(ShapeFileRecord record)
+        private static ESRI.ArcGIS.Client.Geometry.Geometry GetMultiPoint( ShapeFileRecord record )
         {
-            Multipoint points;
-            Esri.ArcGISRuntime.Geometry.PointCollection pointCollection = new Esri.ArcGISRuntime.Geometry.PointCollection();
-            for ( int i = 0; i < record.Points.Count; i++ )
+            MultiPoint points = new MultiPoint();
+            for( int i = 0; i < record.Points.Count; i++ )
             {
                 System.Windows.Point point = record.Points[ i ];
-                pointCollection.Add( new MapPoint( point.X, point.Y ) );
+                points.Points.Add( new MapPoint( point.X, point.Y ) );
             }
 
-            points = new Multipoint(pointCollection);
             return points;
         }
 

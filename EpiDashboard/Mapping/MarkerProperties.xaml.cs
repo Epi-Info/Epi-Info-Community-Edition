@@ -11,13 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client.Symbols;
 using Epi;
 using Epi.Fields;
 
@@ -30,8 +24,8 @@ namespace EpiDashboard.Mapping
     {
 
         private MarkerProvider provider;
-        private MapView _mapView;
-        private MapPoint _point;
+        private ESRI.ArcGIS.Client.Map myMap;
+        private ESRI.ArcGIS.Client.Geometry.MapPoint point;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -39,14 +33,14 @@ namespace EpiDashboard.Mapping
         
         private bool isReadOnlyMode;
 
-        public MarkerProperties(MapView mapView, MapPoint point)
+        public MarkerProperties(ESRI.ArcGIS.Client.Map myMap, ESRI.ArcGIS.Client.Geometry.MapPoint point)
         {
             InitializeComponent();
 
-            this._mapView = mapView;
-            this._point = point;
+            this.myMap = myMap;
+            this.point = point;
             
-            provider = new MarkerProvider(_mapView, point);
+            provider = new MarkerProvider(myMap, point);
             cbxSize.SelectionChanged += new SelectionChangedEventHandler(config_SelectionChanged);
             cbxStyle.SelectionChanged += new SelectionChangedEventHandler(config_SelectionChanged);
             rctColor.MouseUp += new MouseButtonEventHandler(rctColor_MouseUp);
@@ -105,7 +99,7 @@ namespace EpiDashboard.Mapping
         {
             if (cbxStyle.SelectedIndex != -1 && cbxSize.SelectedIndex != -1)
             {
-                provider.RenderMarker(int.Parse(cbxSize.SelectedItem.ToString()), rctColor.Fill, (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle), cbxStyle.SelectedItem.ToString()));
+                provider.RenderMarker(int.Parse(cbxSize.SelectedItem.ToString()), rctColor.Fill, (SimpleMarkerSymbol.SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerSymbol.SimpleMarkerStyle), cbxStyle.SelectedItem.ToString()));
                 if (MapGenerated != null)
                 {
                     MapGenerated(this, new EventArgs());
@@ -134,7 +128,7 @@ namespace EpiDashboard.Mapping
         {
             cbxStyle.Items.Clear();
             cbxSize.Items.Clear();
-            cbxStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerStyle));
+            cbxStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerSymbol.SimpleMarkerStyle));
             for (int x = 10; x < 31; x++)
             {
                 cbxSize.Items.Add(x.ToString());
@@ -196,11 +190,11 @@ namespace EpiDashboard.Mapping
             element.Attributes.Append(type);
 
             System.Xml.XmlAttribute x = doc.CreateAttribute("locationX");
-            x.Value = _point.X.ToString();
+            x.Value = point.X.ToString();
             element.Attributes.Append(x);
 
             System.Xml.XmlAttribute y = doc.CreateAttribute("locationY");
-            y.Value = _point.Y.ToString();
+            y.Value = point.Y.ToString();
             element.Attributes.Append(y);
             return element;
         }

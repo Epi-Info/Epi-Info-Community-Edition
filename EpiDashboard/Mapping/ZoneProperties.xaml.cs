@@ -11,13 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client.Symbols;
 using Epi;
 using Epi.Fields;
 
@@ -30,8 +24,8 @@ namespace EpiDashboard.Mapping
     {
 
         private ZoneProvider provider;
-        private MapView _mapView;
-        private MapPoint point;
+        private ESRI.ArcGIS.Client.Map myMap;
+        private ESRI.ArcGIS.Client.Geometry.MapPoint point;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -39,14 +33,14 @@ namespace EpiDashboard.Mapping
         
         private bool isReadOnlyMode;
 
-        public ZoneProperties(MapView mapView, MapPoint point)
+        public ZoneProperties(ESRI.ArcGIS.Client.Map myMap, ESRI.ArcGIS.Client.Geometry.MapPoint point)
         {
             InitializeComponent();
 
-            _mapView = mapView;
+            this.myMap = myMap;
             this.point = point;
-
-            provider = new ZoneProvider(_mapView, point);
+            
+            provider = new ZoneProvider(myMap, point);
             cbxUnits.SelectionChanged += new SelectionChangedEventHandler(config_SelectionChanged);
             txtRadius.TextChanged+=new TextChangedEventHandler(txtRadius_TextChanged);
             rctColor.MouseUp += new MouseButtonEventHandler(rctColor_MouseUp);

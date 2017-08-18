@@ -14,13 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client.Symbols;
 using EpiDashboard.Mapping;
 
 namespace EpiDashboard.Controls
@@ -33,25 +27,26 @@ namespace EpiDashboard.Controls
      public partial class PointofInterestProperties : UserControl, ILayerProperties
      {
             
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
         private EpiDashboard.Mapping.PointLayerProvider provider;
+        private SimpleMarkerSymbol.SimpleMarkerStyle style;
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
         private IMapControl imapcontrol;
         private PointLayerProperties layerprop;
         private Brush colorselected;
         private RowFilterControl rowfiltercontrol;
         public DataFilters datafilters;
+       
 
-
-        public PointofInterestProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, MapView mapView, PointLayerProperties pointlayerprop)
+        public PointofInterestProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap, PointLayerProperties pointlayerprop)
         {
             InitializeComponent();
 
-            this._mapView = mapView;
+            this.myMap = myMap;
             this.mapControl = mapControl;
           
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);
@@ -505,7 +500,7 @@ namespace EpiDashboard.Controls
           
             }
 
-            cmbStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerStyle));
+            cmbStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerSymbol.SimpleMarkerStyle));
             cmbStyle.SelectedIndex = 0;
         }
         public void ReFillLongitudeComboBoxes()
@@ -523,7 +518,7 @@ namespace EpiDashboard.Controls
                 }
             }
 
-            cmbStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerStyle));
+            cmbStyle.ItemsSource = Enum.GetNames(typeof(SimpleMarkerSymbol.SimpleMarkerStyle));
             cmbStyle.SelectedIndex = 0;
         }
         private void btnOK_Click(object sender, RoutedEventArgs e)
@@ -569,17 +564,7 @@ namespace EpiDashboard.Controls
             
             if (cmbLatitude.SelectedIndex != -1 && cmbLongitude.SelectedIndex != -1)
             {
-                provider.RenderPointMap
-                    (
-                        dashboardHelper,
-                        cmbLatitude.SelectedItem.ToString(),
-                        cmbLongitude.SelectedItem.ToString(),
-                        ((SolidColorBrush)colorselected).Color,
-                        string.Empty,
-                        (SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerStyle),  cmbStyle.SelectedItem.ToString()),
-                        txtDescription.Text
-                        );
-                
+                provider.RenderPointMap(dashboardHelper, cmbLatitude.SelectedItem.ToString(), cmbLongitude.SelectedItem.ToString(), colorselected , string.Empty,(SimpleMarkerSymbol.SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerSymbol.SimpleMarkerStyle),  cmbStyle.SelectedItem.ToString()), txtDescription.Text);
                 if (MapGenerated != null)
                 {
                     MapGenerated(layerprop, new EventArgs());
