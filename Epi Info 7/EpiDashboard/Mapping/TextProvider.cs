@@ -16,13 +16,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Bing;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
@@ -33,7 +32,7 @@ namespace EpiDashboard.Mapping
 
     public class TextProvider : ILayerProvider
     {
-        private MapView _mapView;
+        private Map myMap;
         private Guid layerId;
         MapPoint point;
         System.Drawing.Font font; 
@@ -41,42 +40,42 @@ namespace EpiDashboard.Mapping
         string text;
 
 
-        public TextProvider(MapView mapView, MapPoint point)
+        public TextProvider(Map myMap, MapPoint point)
         {
-            _mapView = mapView;
+            this.myMap = myMap;
             this.point = point;
             this.layerId = Guid.NewGuid();
         }
 
         public void Refresh()
         {
-            GraphicsLayer textLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer textLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
             if (textLayer != null)
             {
-                textLayer.Graphics.Clear();
+                textLayer.ClearGraphics();
                 RenderText(this.font, this.fontColor, this.text);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = _mapView.Map.Layers[layerId.ToString()];
-            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
-            if (currentIndex < _mapView.Map.Layers.Count - 1)
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
+            if (currentIndex < myMap.Layers.Count - 1)
             {
-                _mapView.Map.Layers.Remove(layer);
-                _mapView.Map.Layers.Insert(currentIndex + 1, layer);
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = _mapView.Map.Layers[layerId.ToString()];
-            int currentIndex = _mapView.Map.Layers.IndexOf(layer);
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                _mapView.Map.Layers.Remove(layer);
-                _mapView.Map.Layers.Insert(currentIndex - 1, layer);
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -86,7 +85,7 @@ namespace EpiDashboard.Mapping
             this.fontColor = fontColor;
             this.text = text;
 
-            GraphicsLayer markerLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer markerLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
             if (markerLayer != null)
             {
                 markerLayer.Graphics.Clear();
@@ -95,7 +94,7 @@ namespace EpiDashboard.Mapping
             {
                 markerLayer = new GraphicsLayer();
                 markerLayer.ID = layerId.ToString();
-                _mapView.Map.Layers.Add(markerLayer);
+                myMap.Layers.Add(markerLayer);
             }
 
             markerLayer.Graphics.Add(new Graphic() { Geometry = point, Symbol = TextSymbol });
@@ -105,19 +104,11 @@ namespace EpiDashboard.Mapping
         {
             get
             {
-                Color color = ((SolidColorBrush)fontColor).Color;
-
                 TextSymbol textSymbol = new TextSymbol()
                 {
-                    Font = new SymbolFont()
-                    {
-                        FontStyle = SymbolFontStyle.Normal,
-                        FontWeight = SymbolFontWeight.Normal,
-                        FontFamily = font.FontFamily.Name,
-                        FontSize = double.Parse(font.Size.ToString())
-                    },
-
-                    Color = color,
+                    FontFamily = new System.Windows.Media.FontFamily(font.FontFamily.Name),
+                    Foreground = fontColor,
+                    FontSize = double.Parse(font.Size.ToString()),
                     Text = text
                 };
                 return textSymbol;
@@ -128,10 +119,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            GraphicsLayer graphicsLayer = _mapView.Map.Layers[layerId.ToString()] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                _mapView.Map.Layers.Remove(graphicsLayer);
+                myMap.Layers.Remove(graphicsLayer);
             }
         }
 

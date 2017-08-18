@@ -11,13 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client.Symbols;
 using Epi;
 using Epi.Fields;
 
@@ -30,7 +24,7 @@ namespace EpiDashboard.Mapping
     {
 
         public ShapeLayerProvider provider;
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -39,13 +33,13 @@ namespace EpiDashboard.Mapping
 
         private bool isReadOnlyMode;
 
-        public ShapeLayerProperties(MapView mapView)
+        public ShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
 
-            this._mapView = mapView;
+            this.myMap = myMap;
 
-            // provider = new ShapeLayerProvider(_mapView);
+            // provider = new ShapeLayerProvider(myMap);
 
             #region Translation
             lblTitle.Content = DashboardSharedStrings.GADGET_SHAPEFILE;
@@ -148,7 +142,7 @@ namespace EpiDashboard.Mapping
             }
             if (provider == null)
             {
-                provider = new ShapeLayerProvider(_mapView);
+                provider = new ShapeLayerProvider(myMap);
             }
             provider.RenderShape(lblFileName.Content.ToString());
             if (MapGenerated != null)

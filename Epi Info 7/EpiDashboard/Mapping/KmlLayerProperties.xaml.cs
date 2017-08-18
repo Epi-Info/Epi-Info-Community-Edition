@@ -11,13 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client.Symbols;
 using Epi;
 using Epi.Fields;
 
@@ -30,7 +24,7 @@ namespace EpiDashboard.Mapping
     {
 
         public KmlLayerProvider provider;
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         private string serverName;
         private int[] visibleLayers;
 
@@ -40,13 +34,13 @@ namespace EpiDashboard.Mapping
 
         private bool isReadOnlyMode;
 
-        public KmlLayerProperties(MapView mapView)
+        public KmlLayerProperties(ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
 
-            this._mapView = mapView;
+            this.myMap = myMap;
 
-            //  provider = new KmlLayerProvider(_mapView);
+            //  provider = new KmlLayerProvider(myMap);
             #region Translation
             lblTitle.Content = DashboardSharedStrings.GADGET_KMLFILE;
             #endregion //translation
@@ -166,7 +160,7 @@ namespace EpiDashboard.Mapping
             }
             if (provider == null)
             {
-                provider = new KmlLayerProvider(_mapView);
+                provider = new KmlLayerProvider(myMap);
             }
             provider.RenderServerImage(serverName, visibleLayers);
             if (MapGenerated != null)

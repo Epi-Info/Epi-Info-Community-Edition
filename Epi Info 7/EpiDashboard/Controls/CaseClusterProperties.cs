@@ -14,13 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client.Symbols;
 using EpiDashboard.Mapping;
 
 namespace EpiDashboard.Controls
@@ -33,14 +27,14 @@ namespace EpiDashboard.Controls
     public partial class CaseClusterProperties : UserControl, ILayerProperties
     {
 
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
 
         private EpiDashboard.Mapping.ClusterLayerProvider provider;
-        private SimpleMarkerStyle style;
+        private SimpleMarkerSymbol.SimpleMarkerStyle style;
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
         private IMapControl imapcontrol;
         public ClusterLayerProperties layerprop;
@@ -48,11 +42,11 @@ namespace EpiDashboard.Controls
         private RowFilterControl rowfiltercontrol;
         private DataFilters datafilters;
 
-        public CaseClusterProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, MapView mapView, ClusterLayerProperties clusterprop)
+        public CaseClusterProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap, ClusterLayerProperties clusterprop)
         {
             InitializeComponent();
 
-            this._mapView = mapView;
+            this.myMap = myMap;
             this.mapControl = mapControl;
 
             mapControl.TimeVariableSet += new TimeVariableSetHandler(mapControl_TimeVariableSet);

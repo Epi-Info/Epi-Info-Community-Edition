@@ -4,11 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
+
 namespace EpiDashboard.Mapping
 {
     /// <summary>
@@ -35,14 +31,14 @@ namespace EpiDashboard.Mapping
         private int Numclasses;
         public DataFilters datafilters { get; set; }
 
-        public ChoroplethKmlLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethKmlLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
-            _mapView = mapView;
+            this.myMap = myMap;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-            Provider = new ChoroplethKmlLayerProvider(mapView);
+            Provider = new ChoroplethKmlLayerProvider(myMap);
             Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();
@@ -297,7 +293,7 @@ namespace EpiDashboard.Mapping
         {
             if (Provider == null)
             {
-                Provider = new ChoroplethKmlLayerProvider(_mapView);
+                Provider = new ChoroplethKmlLayerProvider(myMap);
                 Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }          
             base.CreateFromXml(element, Provider);

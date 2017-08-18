@@ -15,12 +15,6 @@ using EpiDashboard.Mapping;
 using System.Net;
 using System.IO;
 
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
 namespace EpiDashboard.Controls
 {
     /// <summary>
@@ -30,7 +24,7 @@ namespace EpiDashboard.Controls
     {
 
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
         private EpiDashboard.Mapping.KmlLayerProvider KMLprovider;
@@ -49,11 +43,11 @@ namespace EpiDashboard.Controls
         public int[] KMLMapVisibleLayers { get; set; }
         #endregion
 
-        public Referencelayer(EpiDashboard.Mapping.StandaloneMapControl mapControl, MapView mapView)
+        public Referencelayer(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
             this.mapControl = mapControl;
-            this._mapView = mapView;
+            this.myMap = myMap;
             this.radShapeFile.IsChecked = true;
             mapControl.SizeChanged += mapControl_SizeChanged;
 
@@ -163,10 +157,10 @@ namespace EpiDashboard.Controls
 
                     if (Mapprovider == null)
                     {
-                        Mapprovider = new Mapping.MapServerLayerProvider(_mapView);
+                        Mapprovider = new Mapping.MapServerLayerProvider(myMap);
                     }
                     ILayerProperties layerProperties = null;
-                    layerProperties = new MapServerLayerProperties(_mapView);                    
+                    layerProperties = new MapServerLayerProperties(myMap);                    
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     this.serverlayerprop = (MapServerLayerProperties)layerProperties;
                     serverlayerprop.provider = Mapprovider;
@@ -211,10 +205,10 @@ namespace EpiDashboard.Controls
                 KMLMapServerName = txtKMLpath.Text;
                 if (KMLprovider == null)
                 {
-                    KMLprovider = new Mapping.KmlLayerProvider(_mapView);
+                    KMLprovider = new Mapping.KmlLayerProvider(myMap);
                 }
                 ILayerProperties layerProperties = null;
-                layerProperties = new KmlLayerProperties(_mapView);               
+                layerProperties = new KmlLayerProperties(myMap);               
                 layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                 this.kmllayerprop = (KmlLayerProperties)layerProperties;
                 kmllayerprop.provider = KMLprovider;
@@ -260,10 +254,10 @@ namespace EpiDashboard.Controls
                         KMLMapServerName = txtKMLpath.Text;
                         if (KMLprovider == null)
                         {
-                            KMLprovider = new Mapping.KmlLayerProvider(_mapView);
+                            KMLprovider = new Mapping.KmlLayerProvider(myMap);
                         }
                         ILayerProperties layerProperties = null;
-                        layerProperties = new KmlLayerProperties(_mapView);
+                        layerProperties = new KmlLayerProperties(myMap);
                         layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                         this.kmllayerprop = (KmlLayerProperties)layerProperties;
                         kmllayerprop.provider = KMLprovider;
@@ -353,7 +347,7 @@ namespace EpiDashboard.Controls
 
         private void btnBrowseShape_Click(object sender, RoutedEventArgs e)
         {
-            provider = new Mapping.ShapeLayerProvider(_mapView);          
+            provider = new Mapping.ShapeLayerProvider(myMap);          
             //Create the dialog allowing the user to select the "*.shp" and the "*.dbf" files
             Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
             ofd.Filter = "ESRI Shapefiles (*.shp)|*.shp";
@@ -365,7 +359,7 @@ namespace EpiDashboard.Controls
                 {
                     txtShapePath.Text = retval;
                     ILayerProperties layerProperties = null;
-                    layerProperties = new ShapeLayerProperties(_mapView);                    
+                    layerProperties = new ShapeLayerProperties(myMap);                    
                     layerProperties.MapGenerated += new EventHandler(this.mapControl.ILayerProperties_MapGenerated);
                     this.layerprop = (ShapeLayerProperties)layerProperties;
                     layerprop.provider = provider;

@@ -7,13 +7,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit.DataSources;
+using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
 
 namespace EpiDashboard.Mapping
 {
@@ -23,7 +21,7 @@ namespace EpiDashboard.Mapping
 
         string _kmlURL;
 
-        public ChoroplethKmlLayerProvider(MapView clientMap) : base(clientMap)
+        public ChoroplethKmlLayerProvider(Map clientMap) : base(clientMap)
         {
         }
 
@@ -44,21 +42,22 @@ namespace EpiDashboard.Mapping
             if (!string.IsNullOrEmpty(boundrySourceLocation))
             {
                 _kmlURL = boundrySourceLocation;
-                KmlLayer shapeLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as KmlLayer;
-
+                KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
+                
                 if (shapeLayer != null)
                 {
-                    ArcGIS_MapView.Map.Layers.Remove(shapeLayer);
+                    ArcGIS_Map.Layers.Remove(shapeLayer);
                 }
-
+                
                 shapeLayer = new KmlLayer();
                 shapeLayer.ID = LayerId.ToString();
-                shapeLayer.SourceUri = boundrySourceLocation;
-                shapeLayer_Initialized();
-                ArcGIS_MapView.Map.Layers.Add(shapeLayer);
+                shapeLayer.Url = new Uri(boundrySourceLocation);
+                shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
+                ArcGIS_Map.Layers.Add(shapeLayer);
 
-                ArcGIS_MapView.SetView(shapeLayer.FullExtent);
+                ArcGIS_Map.Extent = shapeLayer.FullExtent;
 
+                //KmlLayer shapeLayer = ArcGIS_Map.Layers[_layerId.ToString()] as KmlLayer;
                 GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
 
                 if (graphicsLayer != null)
@@ -75,18 +74,11 @@ namespace EpiDashboard.Mapping
 
                     if (graphicsLayer.Graphics[0].Attributes.ContainsKey("extendedData"))
                     {
-                        //////////////List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
+                        List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
 
-                        //////////////foreach (KmlExtendedData ed in eds)
-                        //////////////{
-                        //////////////    allAttributes.Add(ed.Name, ed.Value);
-                        //////////////}
-
-                        List<object> eds = (List<object>)graphicsLayer.Graphics[0].Attributes["extendedData"];
-
-                        foreach (object ed in eds)
+                        foreach (KmlExtendedData ed in eds)
                         {
-                            ////////////allAttributes.Add(ed.Name, ed.Value);
+                            allAttributes.Add(ed.Name, ed.Value);
                         }
                     }
 
@@ -116,15 +108,10 @@ namespace EpiDashboard.Mapping
                             ymax = g.Geometry.Extent.YMax;
                     }
 
-                    SpatialReference webMercator = new SpatialReference(102100);
-
-                    MapPoint firstCornerWGS84 = (new MapPoint(xmin - 0.5, ymax + 0.5));
-                    MapPoint secondCornerWGS84 = (new MapPoint(xmax + 0.5, ymin - 0.5));
-
-                    MapPoint firstCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
-                    MapPoint secondCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
-
-                    ArcGIS_MapView.SetView(new Envelope(firstCorner, secondCorner));
+                    ArcGIS_Map.Extent = new Envelope(
+                        ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)),
+                        ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5))
+                        );
                 }
 
                 if (graphicsLayer == null)
@@ -136,15 +123,15 @@ namespace EpiDashboard.Mapping
                     return new object[] { boundrySourceLocation, graphicsLayer.Graphics[0].Attributes };
                 }
             }
-            else
-            {
-                return null;
+            else 
+            { 
+                return null; 
             }
         }
 
-        void shapeLayer_Initialized()
+        void shapeLayer_Initialized(object sender, EventArgs e)
         {
-            KmlLayer shapeLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
 
             if (graphicsLayer != null)
@@ -161,18 +148,11 @@ namespace EpiDashboard.Mapping
 
                 if (graphicsLayer.Graphics[0].Attributes.ContainsKey("extendedData"))
                 {
-                    //////List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
+                    List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicsLayer.Graphics[0].Attributes["extendedData"];
 
-                    //////foreach (KmlExtendedData ed in eds)
-                    //////{
-                    //////    allAttributes.Add(ed.Name, ed.Value);
-                    //////}
-
-                    List<object> eds = (List<object>)graphicsLayer.Graphics[0].Attributes["extendedData"];
-
-                    foreach (object ed in eds)
+                    foreach (KmlExtendedData ed in eds)
                     {
-                        //////////allAttributes.Add(ed.Name, ed.Value);
+                        allAttributes.Add(ed.Name, ed.Value);
                     }
                 }
 
@@ -202,15 +182,10 @@ namespace EpiDashboard.Mapping
                     ymax = g.Geometry.Extent.YMax;
             }
 
-            SpatialReference webMercator = new SpatialReference(102100);
-
-            MapPoint firstCornerWGS84 = (new MapPoint(xmin - 0.5, ymax + 0.5));
-            MapPoint secondCornerWGS84 = (new MapPoint(xmax + 0.5, ymin - 0.5));
-
-            MapPoint firstCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
-            MapPoint secondCorner = (MapPoint)Esri.ArcGISRuntime.Geometry.GeometryEngine.Project(firstCornerWGS84, webMercator);
-
-            ArcGIS_MapView.SetView(new Envelope(firstCorner, secondCorner));
+            ArcGIS_Map.Extent = new Envelope(
+                ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmin - 0.5, ymax + 0.5)),
+                ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(xmax + 0.5, ymin - 0.5))
+                );
         }
 
         private void AddSchemaDataAttributes(string _kmlURL, GraphicCollection graphics)
@@ -259,18 +234,18 @@ namespace EpiDashboard.Mapping
 
                         if (graphic.Attributes.ContainsKey("extendedData") == false)
                         {
-                            //////////graphic.Attributes.Add("extendedData", new List<KmlExtendedData>());
+                            graphic.Attributes.Add("extendedData", new List<KmlExtendedData>());
                         }
 
                         if (extendedData.ContainsKey(description))
                         {
                             foreach (KeyValuePair<string, string> kvp in extendedData[description])
                             {
-                                ////////////KmlExtendedData datum = new KmlExtendedData();
-                                ////////////datum.DisplayName = kvp.Key;
-                                ////////////datum.Name = kvp.Key;
-                                ////////////datum.Value = kvp.Value;
-                                ////////////((List<KmlExtendedData>)graphic.Attributes["extendedData"]).Add(datum);
+                                KmlExtendedData datum = new KmlExtendedData();
+                                datum.DisplayName = kvp.Key;
+                                datum.Name = kvp.Key;
+                                datum.Value = kvp.Value;
+                                ((List<KmlExtendedData>)graphic.Attributes["extendedData"]).Add(datum);
                             }
                         }
                     }
@@ -283,24 +258,14 @@ namespace EpiDashboard.Mapping
         {
             if (!graphicFeature.Attributes.ContainsKey(_shapeKey))
             {
-                //////////////List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicFeature.Attributes["extendedData"];
-                //////////////foreach (KmlExtendedData ed in eds)
-                //////////////{
-                //////////////    if (ed.Name.Equals(_shapeKey))
-                //////////////    {
-                //////////////        shapeValue = ed.Value.Replace("'", "''").Trim();
-                //////////////        break;
-                //////////////    }
-                //////////////}
-
-                List<object> eds = (List<object>)graphicFeature.Attributes["extendedData"];
-                foreach (object ed in eds)
+                List<KmlExtendedData> eds = (List<KmlExtendedData>)graphicFeature.Attributes["extendedData"];
+                foreach (KmlExtendedData ed in eds)
                 {
-                    //////////////if (ed.Name.Equals(_shapeKey))
-                    //////////////{
-                    //////////////    shapeValue = ed.Value.Replace("'", "''").Trim();
-                    //////////////    break;
-                    //////////////}
+                    if (ed.Name.Equals(_shapeKey))
+                    {
+                        shapeValue = ed.Value.Replace("'", "''").Trim();
+                        break;
+                    }
                 }
             }
             else
@@ -313,7 +278,7 @@ namespace EpiDashboard.Mapping
 
         override public GraphicsLayer GetGraphicsLayer()
         {
-            KmlLayer kmlLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as KmlLayer;
+            KmlLayer kmlLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = GetGraphicsLayer(kmlLayer as Layer);
             return graphicsLayer;
         }
@@ -340,10 +305,10 @@ namespace EpiDashboard.Mapping
 
         override public void CloseLayer()
         {
-            KmlLayer shapeLayer = ArcGIS_MapView.Map.Layers[LayerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
             if (shapeLayer != null)
             {
-                ArcGIS_MapView.Map.Layers.Remove(shapeLayer);
+                ArcGIS_Map.Layers.Remove(shapeLayer);
                 
                 if (LegendStackPanel != null)
                 {

@@ -13,12 +13,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 
 namespace EpiDashboard.Mapping
 {
@@ -59,14 +57,14 @@ namespace EpiDashboard.Mapping
 
         public IDictionary<string, object> curfeatureAttributes;
 
-        public ChoroplethServerLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethServerLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
-            this._mapView = mapView;
+            this.myMap = myMap;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-           // Provider = new ChoroplethServerLayerProvider(_mapView);
+           // Provider = new ChoroplethServerLayerProvider(myMap);
            // Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();
@@ -431,7 +429,7 @@ namespace EpiDashboard.Mapping
 
             if (Provider == null)
             {
-                Provider = new ChoroplethServerLayerProvider(_mapView);
+                Provider = new ChoroplethServerLayerProvider(myMap);
                 Provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
             }
 

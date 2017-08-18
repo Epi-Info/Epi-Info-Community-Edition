@@ -27,58 +27,60 @@ namespace Epi.Windows.Enter.PresentationLogic
             return true;
         }
 
-        private async void GeocodeAsync(string address, string latName, string longName)
+        public bool Geocode(string address, string latName, string longName)
+        {
+            ESRI.ArcGIS.Client.Bing.Geocoder geocoder = new ESRI.ArcGIS.Client.Bing.Geocoder(Configuration.GetNewInstance().Settings.MapServiceKey);
+            this.latName = latName;
+            this.longName = longName;
+            geocoder.Geocode(address, Geocode_Completed);
+            return true;
+        }
+
+        private void Geocode_Completed(object sender, ESRI.ArcGIS.Client.Bing.GeocodeService.GeocodeCompletedEventArgs e)
         {
             try
             {
-                Esri.ArcGISRuntime.Tasks.Geocoding.LocatorTask locatorTask;
-                System.Collections.Generic.IList<Esri.ArcGISRuntime.Tasks.Geocoding.LocatorGeocodeResult> candidateResults;
-                locatorTask = new Esri.ArcGISRuntime.Tasks.Geocoding.OnlineLocatorTask(new Uri("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"), string.Empty);
-                Esri.ArcGISRuntime.Tasks.Geocoding.LocatorServiceInfo locatorServiceInfo = await locatorTask.GetInfoAsync();
-                System.Collections.Generic.Dictionary<string, string> inputAddress = new System.Collections.Generic.Dictionary<string, string>()
-                { { locatorServiceInfo.SingleLineAddressField.FieldName, address } };
-
-                candidateResults = await locatorTask.GeocodeAsync(
-                    inputAddress, 
-                    new System.Collections.Generic.List<string>{ "Match_addr" }, 
-                    System.Threading.CancellationToken.None
-                );
-
-                if(candidateResults.Count > 0)
-                { 
-                    this.latName = latName;
-                    this.longName = longName;
-
-                    Assign(latName, candidateResults[0].Location.Y);
-                    Assign(longName, candidateResults[0].Location.X);
+                if (e.Result.Results.Count > 0)
+                {
+                    Epi.Enter.Dialogs.GeocodeSelectionDialog dialog = new Epi.Enter.Dialogs.GeocodeSelectionDialog();
+                    dialog.Results = e.Result.Results;
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        Assign(latName, dialog.Latitude);
+                        Assign(longName, dialog.Longitude);
+                    }
                 }
                 else
                 {
                     Dialog("No matching coordinates found for the specified address.", "Geocoder");
                 }
             }
-            catch (System.Net.Http.HttpRequestException ex)
+            catch (System.Reflection.TargetInvocationException ex)
             {
                 if (ex.InnerException != null)
                 {
-                    if (ex.InnerException is System.Net.WebException)
+                    if (ex.InnerException is System.ServiceModel.EndpointNotFoundException)
                     {
                         Dialog("There was a problem running the geocode command. Please ensure the computer is connected to the Internet and try agian.", "Geocoder");
+                    }
+                }                
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    if (ex.InnerException is System.ServiceModel.FaultException<ESRI.ArcGIS.Client.Bing.GeocodeService.ResponseSummary>)
+                    {
+                        string message = ((System.ServiceModel.FaultException<ESRI.ArcGIS.Client.Bing.GeocodeService.ResponseSummary>)ex.InnerException).Message;
+                        if (message.ToLowerInvariant().Contains("credential"))
+                        {
+                            Dialog("The Map Service Key is invalid. Please update it from the Tools > Options dialog", "Geocoder");
+                        }
                     }
                 }
             }
         }
 
-        public bool Geocode(string address, string latName, string longName)
-        {
-            try
-            {
-                GeocodeAsync(address, latName, longName);
-            }
-            catch { return false; }
-
-            return true;
-        }
 
         public bool AssignGrid(string pName, object pValue, int pIndex0, object pIndex1)
         {

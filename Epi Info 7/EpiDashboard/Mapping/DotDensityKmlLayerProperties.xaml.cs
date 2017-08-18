@@ -14,12 +14,6 @@ using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
 
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
 namespace EpiDashboard.Mapping
 {
     /// <summary>
@@ -27,7 +21,7 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class DotDensityKmlLayerProperties : UserControl, ILayerProperties
     {
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
         public DotDensityKmlLayerProvider provider;
         private System.Xml.XmlElement currentElement;
@@ -42,14 +36,14 @@ namespace EpiDashboard.Mapping
         public DataFilters datafilters { get; set; }
         public IDictionary<string, object> curfeatureAttributes;
 
-        public DotDensityKmlLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public DotDensityKmlLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
-            this._mapView = mapView;
+            this.myMap = myMap;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-           // provider = new DotDensityKmlLayerProvider(_mapView);
+           // provider = new DotDensityKmlLayerProvider(myMap);
            // provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();
@@ -321,7 +315,7 @@ namespace EpiDashboard.Mapping
                 {
                     if (provider == null)
                     {
-                        provider = new DotDensityKmlLayerProvider(_mapView);
+                        provider = new DotDensityKmlLayerProvider(myMap);
                         provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
                     }
                     provider.LoadKml(child.InnerText);

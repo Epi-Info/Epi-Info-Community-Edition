@@ -18,13 +18,12 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Bing;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
@@ -46,15 +45,15 @@ namespace EpiDashboard.Mapping
         public event EventHandler MapDataChanged;
 
         private BackgroundWorker worker;
-        private MapView _mapView;
-        private MapPoint _rightClickedPoint;
+        private Map myMap;
+        private MapPoint rightClickedPoint;
         private System.Drawing.Color selectedColor;
         private double selectedRadius;
-        private Esri.ArcGISRuntime.Geometry.LinearUnit selectedUnit;
+        private LinearUnit selectedUnit;
         private delegate void RenderMapDelegate(string url);
         private delegate void SimpleDelegate();
         private delegate void DebugDelegate(string debugMsg);
-        private object slider;
+        private TimeSlider slider;
         private View view;
         private IDbDriver db;
         private DashboardHelper dashboardHelper;
@@ -96,10 +95,10 @@ namespace EpiDashboard.Mapping
 
         void MapContainer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_mapView != null)
+            if (myMap != null)
             {
-                _mapView.Width = e.NewSize.Width;
-                _mapView.Height = e.NewSize.Height;
+                myMap.Width = e.NewSize.Width;
+                myMap.Height = e.NewSize.Height;
             }
             if (dataFilteringControl != null)
             {
@@ -139,9 +138,9 @@ namespace EpiDashboard.Mapping
             waitCursor.Visibility = Visibility.Collapsed;
             LayerTypeSelector.Visibility = Visibility.Visible;
 
-            BingLayer bingLayer = new BingLayer();
-            bingLayer.ID = "Aua5s8kFcEZMx5lsd8Vkerz3frboU1CwzvOyzX_vgSnzsnbqV7xlQ4WTRUlN19_Q";
-            bingLayer.MapStyle = BingLayer.LayerType.AerialWithLabels;
+            ESRI.ArcGIS.Client.Bing.TileLayer layer = new TileLayer();
+            layer.Token = "Aua5s8kFcEZMx5lsd8Vkerz3frboU1CwzvOyzX_vgSnzsnbqV7xlQ4WTRUlN19_Q";
+            layer.LayerStyle = TileLayer.LayerType.AerialWithLabels;
 
             GraphicsLayer pointLayer = new GraphicsLayer();
             pointLayer.ID = "pointLayer";
@@ -186,46 +185,48 @@ namespace EpiDashboard.Mapping
             mnuSave.Click += new RoutedEventHandler(mnuSave_Click);
             menu.Items.Add(mnuSave);
 
-            _mapView = new MapView();
-            _mapView.Background = Brushes.White;
-            _mapView.Height = MapContainer.ActualHeight;
-            _mapView.Width = MapContainer.ActualWidth;
-            _mapView.ContextMenu = menu;
-            _mapView.Map.Layers.Add(bingLayer);
-            _mapView.Map.Layers.Add(shapeFileLayer);
-            _mapView.Map.Layers.Add(pointLayer);
-            _mapView.Map.Layers.Add(textLayer);
-            _mapView.Map.Layers.Add(zoneLayer);
-            _mapView.Map.Layers.Add(clusterLayer);
-            _mapView.MouseMove += new MouseEventHandler(myMap_MouseMove);
-            _mapView.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
-            MapContainer.Children.Add(_mapView);
+            myMap = new Map();
+            myMap.Background = Brushes.White;
+            myMap.Height = MapContainer.ActualHeight;
+            myMap.Width = MapContainer.ActualWidth;
+            myMap.ContextMenu = menu;
+            myMap.Layers.Add(layer);
+            myMap.Layers.Add(shapeFileLayer);
+            myMap.Layers.Add(pointLayer);
+            myMap.Layers.Add(textLayer);
+            myMap.Layers.Add(zoneLayer);
+            myMap.Layers.Add(clusterLayer);
+            myMap.MouseMove += new MouseEventHandler(myMap_MouseMove);
+            myMap.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
+            MapContainer.Children.Add(myMap);
 
-            //////ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
-            //////extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(-20000000, -12000000), new MapPoint(20000000, 12000000));
-            //////System.Windows.Interactivity.Interaction.GetBehaviors(_mapView).Add(extentBehavior);
+            ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
+            extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(-20000000, -12000000), new MapPoint(20000000, 12000000));
+            System.Windows.Interactivity.Interaction.GetBehaviors(myMap).Add(extentBehavior);
 
-            //////Navigation nav = new Navigation();
-            //////nav.Margin = new Thickness(5);
-            //////nav.HorizontalAlignment = HorizontalAlignment.Left;
-            //////nav.VerticalAlignment = VerticalAlignment.Top;
-            //////nav.Map = _mapView;
-            //////MapContainer.Children.Add(nav);
+            Navigation nav = new Navigation();
+            nav.Margin = new Thickness(5);
+            nav.HorizontalAlignment = HorizontalAlignment.Left;
+            nav.VerticalAlignment = VerticalAlignment.Top;
+            nav.Map = myMap;
+            MapContainer.Children.Add(nav);
 
-            //////slider = new TimeSlider();
-            //////slider.Name = "slider";
-            //////slider.PlaySpeed = new TimeSpan(0, 0, 1);
-            //////slider.Height = 20;
-            //////slider.TimeMode = TimeMode.CumulativeFromStart;
-            //////slider.MinimumValue = DateTime.Now.Subtract(TimeSpan.FromDays(7)).ToUniversalTime();
-            //////slider.MaximumValue = DateTime.Now.ToUniversalTime();
-            //////slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
-            //////slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(0, 2, 0, 0));
-            //////slider.Padding = new Thickness(0, 100, 0, 0);
-            //////slider.ValueChanged += new EventHandler<TimeSlider.ValueChangedEventArgs>(slider_ValueChanged);
-            //////areaSeries.Loaded += new RoutedEventHandler(areaSeries_Loaded);
-            //////stkTimeLapse.Children.Add(slider);
+            slider = new TimeSlider();
+            slider.Name = "slider";
+            slider.PlaySpeed = new TimeSpan(0, 0, 1);
+            slider.Height = 20;
+            slider.TimeMode = TimeMode.CumulativeFromStart;
+            slider.MinimumValue = DateTime.Now.Subtract(TimeSpan.FromDays(7)).ToUniversalTime();
+            slider.MaximumValue = DateTime.Now.ToUniversalTime();
+            slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
+            slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(0, 2, 0, 0));
+            slider.Padding = new Thickness(0, 100, 0, 0);
+            slider.ValueChanged += new EventHandler<TimeSlider.ValueChangedEventArgs>(slider_ValueChanged);
+            areaSeries.Loaded += new RoutedEventHandler(areaSeries_Loaded);
+            stkTimeLapse.Children.Add(slider);
 
+            //grdMapDef.Background = Brushes.Black;
+            //myMap.Background = Brushes.Black;
             SetBackgroundColor(defaultBackgroundColor);
 
             AddSelectionCriteria();
@@ -253,23 +254,23 @@ namespace EpiDashboard.Mapping
 
         private void SetBackgroundColor(Brush brush)
         {
-            if (grdMapDef != null && _mapView != null)
+            if (grdMapDef != null && myMap != null)
             {
                 grdMapDef.Background = brush;
-                _mapView.Background = brush;
+                myMap.Background = brush;
             }
         }
 
         void AddLayerList()
         {
-            layerList = new LayerList(_mapView, view, db, dashboardHelper);
+            layerList = new LayerList(myMap, view, db, dashboardHelper);
             layerList.Loaded += new RoutedEventHandler(layerList_Loaded);
             layerList.SizeChanged += new SizeChangedEventHandler(layerList_SizeChanged);
             layerList.MouseEnter += new MouseEventHandler(layerList_MouseEnter);
             layerList.MouseLeave += new MouseEventHandler(layerList_MouseLeave);
             MapContainer.Children.Add(layerList);
 
-            layerAdder = new LayerAdder(_mapView, view, db, dashboardHelper, layerList, this);
+            layerAdder = new LayerAdder(myMap, view, db, dashboardHelper, layerList, this);
             layerAdder.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             Grid.SetRow(layerAdder, 0);
             grdMapDef.Children.Add(layerAdder);
@@ -468,8 +469,8 @@ namespace EpiDashboard.Mapping
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                GraphicsLayer graphicsLayer = (GraphicsLayer)_mapView.Map.Layers["textLayer"];
-                graphicsLayer.Graphics.Add(new Graphic() { Geometry = _rightClickedPoint, Symbol = dialog.MapText });
+                GraphicsLayer graphicsLayer = (GraphicsLayer)myMap.Layers["textLayer"];
+                graphicsLayer.Graphics.Add(new Graphic() { Geometry = rightClickedPoint, Symbol = dialog.MapText });
             }
         }
 
@@ -484,19 +485,19 @@ namespace EpiDashboard.Mapping
             stkTimeLapse.Visibility = Visibility.Collapsed;
             chrtTimeLapse.Visibility = Visibility.Collapsed;
 
-            ((GraphicsLayer)_mapView.Map.Layers["pointLayer"]).Graphics.Clear();
-            ((GraphicsLayer)_mapView.Map.Layers["textLayer"]).Graphics.Clear();
-            ((GraphicsLayer)_mapView.Map.Layers["zoneLayer"]).Graphics.Clear();
-            ((GraphicsLayer)_mapView.Map.Layers["shapefileGraphicsLayer"]).Graphics.Clear();
+            ((GraphicsLayer)myMap.Layers["pointLayer"]).ClearGraphics();
+            ((GraphicsLayer)myMap.Layers["textLayer"]).ClearGraphics();
+            ((GraphicsLayer)myMap.Layers["zoneLayer"]).ClearGraphics();
+            ((GraphicsLayer)myMap.Layers["shapefileGraphicsLayer"]).ClearGraphics();
 
-            GraphicsLayer clusterLayer = _mapView.Map.Layers["clusterLayer"] as GraphicsLayer;
+            GraphicsLayer clusterLayer = myMap.Layers["clusterLayer"] as GraphicsLayer;
             if (clusterLayer != null)
             {
-                _mapView.Map.Layers.Remove(clusterLayer);
+                myMap.Layers.Remove(clusterLayer);
             }
             clusterLayer = new GraphicsLayer();
             clusterLayer.ID = "clusterLayer";
-            _mapView.Map.Layers.Add(clusterLayer);
+            myMap.Layers.Add(clusterLayer);
         }
 
         void mnuMarker_Click(object sender, RoutedEventArgs e)
@@ -519,106 +520,99 @@ namespace EpiDashboard.Mapping
 
         void myMap_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _rightClickedPoint = _mapView.ScreenToLocation(e.GetPosition(_mapView));
+            rightClickedPoint = myMap.ScreenToMap(e.GetPosition(myMap));
         }
 
         private void AddBufferedPoint()
         {
-            GraphicsLayer graphicsLayer = _mapView.Map.Layers["zoneLayer"] as GraphicsLayer;
+            GraphicsLayer graphicsLayer = myMap.Layers["zoneLayer"] as GraphicsLayer;
 
-            double x = _rightClickedPoint.X;
-            double y = _rightClickedPoint.Y;
-            SpatialReference sRef = _rightClickedPoint.SpatialReference;
-
-            _rightClickedPoint = new MapPoint(x, y, sRef);
-
-            Graphic graphic = new Graphic()
+            rightClickedPoint.SpatialReference = myMap.SpatialReference;
+            Graphic graphic = new ESRI.ArcGIS.Client.Graphic()
             {
-                Geometry = _rightClickedPoint,
+                Geometry = rightClickedPoint,
                 Symbol = SimplePointSymbol
             };
-
-            graphic.ZIndex = 1;
+            graphic.SetZIndex(1);
             graphicsLayer.Graphics.Add(graphic);
 
-            ////////////Esri.ArcGISRuntime.ArcGISServices. =
-            ////////////  new Esri.ArcGISRuntime.ArcGISServices.FeatureServiceInfo("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
-            ////////////geometryService.BufferCompleted += GeometryService_BufferCompleted;
-            ////////////geometryService.Failed += GeometryService_Failed;
+            GeometryService geometryService =
+              new GeometryService("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+            geometryService.BufferCompleted += GeometryService_BufferCompleted;
+            geometryService.Failed += GeometryService_Failed;
 
-            ////////////// If buffer spatial reference is GCS and unit is linear, geometry service will do geodesic buffering
-            ////////////BufferParameters bufferParams = new BufferParameters()
-            ////////////{
-            ////////////    Unit = selectedUnit,
-            ////////////    BufferSpatialReference = new SpatialReference(4326),
-            ////////////    OutSpatialReference = _mapView.SpatialReference
-            ////////////};
-            
-            ////////////bufferParams.Features.Add(graphic);
-            ////////////bufferParams.Distances.Add(selectedRadius);
+            // If buffer spatial reference is GCS and unit is linear, geometry service will do geodesic buffering
+            BufferParameters bufferParams = new BufferParameters()
+            {
+                Unit = selectedUnit,
+                BufferSpatialReference = new SpatialReference(4326),
+                OutSpatialReference = myMap.SpatialReference
+            };
+            bufferParams.Features.Add(graphic);
+            bufferParams.Distances.Add(selectedRadius);
 
-            ////////////geometryService.BufferAsync(bufferParams);
+            geometryService.BufferAsync(bufferParams);
         }
 
-        ////////////void GeometryService_BufferCompleted(object sender, GraphicsEventArgs args)
-        ////////////{
-        ////////////    IList<Graphic> results = args.Results;
-        ////////////    GraphicsLayer graphicsLayer = _mapView.Map.Layers["zoneLayer"] as GraphicsLayer;
+        void GeometryService_BufferCompleted(object sender, GraphicsEventArgs args)
+        {
+            IList<Graphic> results = args.Results;
+            GraphicsLayer graphicsLayer = myMap.Layers["zoneLayer"] as GraphicsLayer;
 
-        ////////////    foreach (Graphic graphic in results)
-        ////////////    {
-        ////////////        graphic.Symbol = new SimpleFillSymbol() { Fill = new SolidColorBrush(Color.FromArgb(64, selectedColor.R, selectedColor.G, selectedColor.B)), BorderThickness = 0 };
-        ////////////        graphicsLayer.Graphics.Add(graphic);
-        ////////////    }
-        ////////////}
+            foreach (Graphic graphic in results)
+            {
+                graphic.Symbol = new SimpleFillSymbol() { Fill = new SolidColorBrush(Color.FromArgb(64, selectedColor.R, selectedColor.G, selectedColor.B)), BorderThickness = 0 };
+                graphicsLayer.Graphics.Add(graphic);
+            }
+        }
 
-        ////////////private void GeometryService_Failed(object sender, TaskFailedEventArgs e)
-        ////////////{
-        ////////////    MessageBox.Show("Geometry Service error: " + e.Error);
-        ////////////}
+        private void GeometryService_Failed(object sender, TaskFailedEventArgs e)
+        {
+            MessageBox.Show("Geometry Service error: " + e.Error);
+        }
 
         public void UnSubscribe()
         {
-            if(_mapView != null)
+            if(myMap != null)
             {
-                    _mapView.MouseMove -= new MouseEventHandler(myMap_MouseMove);
+                    myMap.MouseMove -= new MouseEventHandler(myMap_MouseMove);
             }
-            this._mapView = null;
+            this.myMap = null;
             this.worker = null;
         }
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_mapView != null)
+            if (myMap != null)
             {
-                if (_mapView.Map.Layers.Count > 0)
+                if (myMap.Layers.Count > 0)
                 {
                     if (ImageryRadioButton.IsChecked.Value)
                     {
-                        ((BingLayer)_mapView.Map.Layers[0]).MapStyle = BingLayer.LayerType.AerialWithLabels;
+                        ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
                     }
                     else
                     {
-                        ((BingLayer)_mapView.Map.Layers[0]).MapStyle = BingLayer.LayerType.Road;
+                        ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.Road;
                     }
                 }
             }
         }
 
-        private SimpleMarkerSymbol SimplePointSymbol
+        private Symbol SimplePointSymbol
         {
             get
             {
                 SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
-                symbol.Color = System.Windows.Media.Color.FromRgb(0,0,0);
+                symbol.Color = Brushes.Black;
                 symbol.Size = 3;
-                symbol.Style = SimpleMarkerStyle.Circle;
+                symbol.Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle;
                 return symbol;
             }
         }
 
         void myMap_MouseMove(object sender, MouseEventArgs e)
         {
-            MapView myMap = (MapView)e.Source;
+            Map myMap = (Map)e.Source;
             if (!myMap.IsFocused)
                 myMap.Focus();
         }
@@ -631,8 +625,12 @@ namespace EpiDashboard.Mapping
                 HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("http://www.google.com");
                 HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                 retval = true;
+                //this.Dispatcher.Invoke(new DebugDelegate(ShowDebugMessage), retval);
             }
-            catch { }
+            catch (Exception ex)
+            {
+
+            }
             return retval;
         }
 
@@ -647,12 +645,12 @@ namespace EpiDashboard.Mapping
         {
             this.areaChartDataPoints = areaChartDataPoints;
 
-            _mapView.TimeExtent = new TimeExtent(start.AddHours(-1), end.AddHours(1));
+            myMap.TimeExtent = new TimeExtent(start.AddHours(-1), end.AddHours(1));
 
-            //slider.MinimumValue = _mapView.TimeExtent.Start;
-            //slider.MaximumValue = _mapView.TimeExtent.End;
-            //slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
-            //slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(1, 0, 0, 0));
+            slider.MinimumValue = myMap.TimeExtent.Start;
+            slider.MaximumValue = myMap.TimeExtent.End;
+            slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
+            slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(1, 0, 0, 0));
             
             DateTimeAxis axis = new DateTimeAxis();
             axis.Orientation = AxisOrientation.X;
@@ -671,36 +669,36 @@ namespace EpiDashboard.Mapping
         {
             if (areaChartDataPoints != null)
             {
-                ////////////List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
-                ////////////{
-                ////////////    ////////return pair.Key < slider.Value.End;
-                ////////////});
-                ////////////areaSeries.ItemsSource = test;
+                List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
+                {
+                    return pair.Key < slider.Value.End;
+                });
+                areaSeries.ItemsSource = test;
             }
         }
 
-        ////////////void slider_ValueChanged(object sender, TimeSlider.ValueChangedEventArgs e)
-        ////////////{
-        ////////////    if (currentTimeVariable != null)
-        ////////////    {
-        ////////////        grdTimeLapse.Visibility = Visibility.Visible;
-        ////////////        stkTimeLapse.Visibility = Visibility.Visible;
-        ////////////        chrtTimeLapse.Visibility = Visibility.Visible;
+        void slider_ValueChanged(object sender, TimeSlider.ValueChangedEventArgs e)
+        {
+            if (currentTimeVariable != null)
+            {
+                grdTimeLapse.Visibility = Visibility.Visible;
+                stkTimeLapse.Visibility = Visibility.Visible;
+                chrtTimeLapse.Visibility = Visibility.Visible;
 
-        ////////////        txtSliderStartDate.Text = e.NewValue.Start.ToShortDateString();
-        ////////////        txtSliderEndDate.Text = e.NewValue.End.ToShortDateString();
+                txtSliderStartDate.Text = e.NewValue.Start.ToShortDateString();
+                txtSliderEndDate.Text = e.NewValue.End.ToShortDateString();
 
-        ////////////        _mapView.TimeExtent = new TimeExtent(e.NewValue.Start, e.NewValue.End);
-        ////////////        if (areaChartDataPoints != null)
-        ////////////        {
-        ////////////            List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
-        ////////////            {
-        ////////////                return pair.Key < e.NewValue.End;
-        ////////////            });
-        ////////////            areaSeries.ItemsSource = test;
-        ////////////        }
-        ////////////    }
-        ////////////}
+                myMap.TimeExtent = new TimeExtent(e.NewValue.Start, e.NewValue.End);
+                if (areaChartDataPoints != null)
+                {
+                    List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
+                    {
+                        return pair.Key < e.NewValue.End;
+                    });
+                    areaSeries.ItemsSource = test;
+                }
+            }
+        }
         
 
         public void OnRecordSelected(int id)

@@ -14,12 +14,6 @@ using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
 
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Data;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-
 namespace EpiDashboard.Mapping
 {
     /// <summary>
@@ -27,7 +21,7 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class DotDensityServerLayerProperties : UserControl, ILayerProperties
     {
-        private MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
         public DotDensityServerLayerProvider provider;
         private System.Xml.XmlElement currentElement;
@@ -45,14 +39,14 @@ namespace EpiDashboard.Mapping
        
         public IDictionary<string, object> curfeatureAttributes;
 
-        public DotDensityServerLayerProperties(MapView mapView, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public DotDensityServerLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
-            this._mapView = mapView;
+            this.myMap = myMap;
             this.dashboardHelper = dashboardHelper;
             this.mapControl = mapControl;
 
-           // provider = new DotDensityServerLayerProvider(_mapView);
+           // provider = new DotDensityServerLayerProvider(myMap);
            // provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
 
             FillComboBoxes();
@@ -333,7 +327,7 @@ namespace EpiDashboard.Mapping
                 {
                     if (provider == null)
                     {
-                        provider = new DotDensityServerLayerProvider(_mapView);
+                        provider = new DotDensityServerLayerProvider(myMap);
                         provider.FeatureLoaded += new FeatureLoadedHandler(provider_FeatureLoaded);
                     }
                     provider.LoadShapeFile(child.InnerText);
