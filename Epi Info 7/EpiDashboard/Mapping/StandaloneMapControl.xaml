@@ -262,15 +262,12 @@
                     </Path.Fill>
                 </Path>
             </StackPanel>
-
             <!--<Button Grid.Row="1" Foreground="Orange"  HorizontalAlignment="Right" Width="100"  FontSize="24">N
                 <Button.RenderTransform>
                     <RotateTransform  />
                 </Button.RenderTransform>
             </Button>-->
-
         </Grid>
-
         
         <Grid HorizontalAlignment="Right"  x:Name="grdBaseMap" VerticalAlignment="Top" Grid.Column="1">
             <Grid.ColumnDefinitions>
@@ -291,10 +288,10 @@
             <Border x:Name="borderStr_alt" Visibility="Visible" Grid.Column="3" BorderThickness="0" Background="#ffffff" ></Border>
             <Border x:Name="borderBln_alt" Visibility="Visible" Grid.Column="5" BorderThickness="0" Background="#ffffff" ></Border>
 
-            <TextBlock x:Name="ImageryRadioButton" Cursor="Hand" MouseLeftButtonUp="ImageryRadioButton_MouseLeftButtonUp"  Visibility="Collapsed" VerticalAlignment="Center" Foreground="White" FontWeight="Light" FontSize="16" Grid.Column="0"
+            <!--<TextBlock x:Name="ImageryRadioButton" Cursor="Hand" MouseLeftButtonUp="ImageryRadioButton_MouseLeftButtonUp"  Visibility="Collapsed" VerticalAlignment="Center" Foreground="White" FontWeight="Light" FontSize="16" Grid.Column="0"
                              Tag="0" Margin="5,0,5,0">Satellite</TextBlock>
             <TextBlock x:Name="ImageryRadioButton_alt" VerticalAlignment="Center" Foreground="Black" FontWeight="Light" FontSize="16" Grid.Column="1"
-                             Tag="0" Margin="5,0,5,0" Background="White">Satellite</TextBlock>
+                             Tag="0" Margin="5,0,5,0" Background="White">Satellite</TextBlock>-->
             <TextBlock x:Name="StreetsRadioButton" Cursor="Hand" MouseLeftButtonUp="StreetsRadioButton_MouseLeftButtonUp" Grid.Column="2" VerticalAlignment="Center"
                        Tag="1" Margin="5,0,5,0" Foreground="White" FontWeight="Light" FontSize="16">Street</TextBlock>
             <TextBlock x:Name="StreetsRadioButton_alt" Visibility="Collapsed" Grid.Column="3" VerticalAlignment="Center"

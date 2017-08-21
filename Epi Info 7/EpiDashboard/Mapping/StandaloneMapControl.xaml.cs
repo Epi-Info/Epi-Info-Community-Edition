@@ -97,8 +97,8 @@ namespace EpiDashboard.Mapping
             txtChoropleth.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_CHOROPLETH;
             txtDotDensity.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_DOTDENSITY;
 
-            ImageryRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SATELLITE;
-            ImageryRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SATELLITE;
+            //ImageryRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SATELLITE;
+            //ImageryRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SATELLITE;
             StreetsRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_STREETS;
             StreetsRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_STREETS;
             BlankRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_BLANK;
@@ -273,8 +273,8 @@ namespace EpiDashboard.Mapping
 
         private void ToggleSatellite()
         {
-            ImageryRadioButton.Visibility = System.Windows.Visibility.Collapsed;
-            ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
+            //ImageryRadioButton.Visibility = System.Windows.Visibility.Collapsed;
+            //ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
             StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
             StreetsRadioButton.Visibility = System.Windows.Visibility.Visible;
             BlankRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
@@ -285,8 +285,8 @@ namespace EpiDashboard.Mapping
         {
             StreetsRadioButton.Visibility = System.Windows.Visibility.Collapsed;
             StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
-            ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            ImageryRadioButton.Visibility = System.Windows.Visibility.Visible;
+            //ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
+            //ImageryRadioButton.Visibility = System.Windows.Visibility.Visible;
             BlankRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
             BlankRadioButton.Visibility = System.Windows.Visibility.Visible;
         }
@@ -295,8 +295,8 @@ namespace EpiDashboard.Mapping
         {
             BlankRadioButton.Visibility = System.Windows.Visibility.Collapsed;
             BlankRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
-            ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            ImageryRadioButton.Visibility = System.Windows.Visibility.Visible;
+            //ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
+            //ImageryRadioButton.Visibility = System.Windows.Visibility.Visible;
             StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
             StreetsRadioButton.Visibility = System.Windows.Visibility.Visible;
         }
@@ -1655,11 +1655,12 @@ namespace EpiDashboard.Mapping
             {
                 System.Xml.XmlElement element = layerList.SerializeLayers();
                 System.Xml.XmlAttribute baseMapType = element.OwnerDocument.CreateAttribute("baseMapType");
-                if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                {
-                    baseMapType.Value = "satellite";
-                }
-                else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                //if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                //{
+                //    baseMapType.Value = "satellite";
+                //}
+                //else 
+                if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                 {
                     baseMapType.Value = "street";
                 }
@@ -2688,7 +2689,7 @@ namespace EpiDashboard.Mapping
 
                 if (myMap.Layers.Count > 0)
                 {
-                    if (myMap.Layers[0] is TileLayer)
+                    if (myMap.Layers[0] is OpenStreetMapLayer)
                     {
                         bool sparse_connection = false;
 
@@ -2704,28 +2705,28 @@ namespace EpiDashboard.Mapping
 
                         if(sparse_connection == true)
                         {
-                            ((TileLayer)myMap.Layers[0]).Token = null;
+                            ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
                         }
                         else
                         {
-                            if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                            //if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                            //{
+                            //    ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
+                            //    ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
+                            //}
+                            //else 
+                            if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
-                                ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                                ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
-                            }
-                            else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                            {
-                                ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                                ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.Road;
+                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
                             }
                             else
                             {
-                                ((TileLayer)myMap.Layers[0]).Token = null;
+                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
                             }
                         }
                     }
 
-                    ((TileLayer)myMap.Layers[0]).Refresh();
+                    ((OpenStreetMapLayer)myMap.Layers[0]).Refresh();
                 }
             }
         }

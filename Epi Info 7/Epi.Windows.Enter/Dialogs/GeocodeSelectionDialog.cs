@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Collections.ObjectModel;
-using ESRI.ArcGIS.Client.Bing.GeocodeService;
+
+using System.Xml;
 
 namespace Epi.Enter.Dialogs
 {
@@ -15,10 +10,12 @@ namespace Epi.Enter.Dialogs
     {
         private string latitude;
         private string longitude;
+        private XmlNamespaceManager _nsmgr;
 
-        public GeocodeSelectionDialog()
+        public GeocodeSelectionDialog(XmlNamespaceManager nsmgr)
         {
             InitializeComponent();
+            _nsmgr = nsmgr;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -26,18 +23,40 @@ namespace Epi.Enter.Dialogs
             this.Close();
         }
 
-        public ObservableCollection<GeocodeResult> Results 
+        public XmlNodeList Results 
         {
             set
             {
                 int counter = 0;
-                foreach (GeocodeResult result in value)
+                XmlNode nodeName;
+                XmlNode nodePoint;
+                XmlNode nodeConfidence;
+                XmlNode nodeMatchCodes;
+                XmlNode nodeAddress;
+
+                foreach (XmlNode node in value)
                 {
-                    GeocodeResultControl resultControl = new GeocodeResultControl(result.DisplayName, result.Confidence.ToString(), result.MatchCodes[0], result.Locations[0].Latitude, result.Locations[0].Longitude);
-                    resultControl.Location = new Point(3, 153 * counter);
-                    resultControl.CoordinatesSelected += new CoordinatesSelectedHandler(resultControl_CoordinatesSelected);
-                    pnlContainer.Controls.Add(resultControl);
-                    counter++;
+                    nodeName = node["Name"];
+                    nodePoint = node["Point"];
+                    nodeConfidence = node["Confidence"];
+                    nodeMatchCodes = node["MatchCode"];
+                    nodeAddress = node["Address"];
+
+                    if (nodeName != null && nodePoint != null && nodeConfidence != null && nodeMatchCodes != null && nodeAddress != null)
+                    {
+                        GeocodeResultControl resultControl = new GeocodeResultControl(
+                            nodeAddress["FormattedAddress"].InnerText,
+                            nodeConfidence.InnerText,
+                            nodeMatchCodes.InnerText,
+                            double.Parse(nodePoint["Latitude"].InnerText),
+                            double.Parse(nodePoint["Longitude"].InnerText)
+                        );
+
+                        resultControl.Location = new Point(3, 153 * counter);
+                        resultControl.CoordinatesSelected += new CoordinatesSelectedHandler(resultControl_CoordinatesSelected);
+                        pnlContainer.Controls.Add(resultControl);
+                        counter++;
+                    }
                 }
             }
         }
