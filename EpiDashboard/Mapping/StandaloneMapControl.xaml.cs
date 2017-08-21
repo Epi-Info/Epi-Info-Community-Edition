@@ -1603,13 +1603,18 @@ namespace EpiDashboard.Mapping
                                 }
                             }
                         }
+
                         ILayerProperties layerProperties = null;
+
                         if (element.Attributes["layerType"].Value.ToString() == "EpiDashboard.Mapping.ChoroplethLayerProperties")
                         {
                             layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType("EpiDashboard.Mapping.ChoroplethShapeLayerProperties"), new object[] { myMap, helper, this });
                         }
                         else
+                        {
                             layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, helper, this });
+                        }
+
                         layerProperties.MakeReadOnly();
                         layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
                         layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
@@ -1622,17 +1627,14 @@ namespace EpiDashboard.Mapping
                 if (doc.DocumentElement.Attributes.Count > 0)
                 {
                     string baseMapType = doc.DocumentElement.Attributes["baseMapType"].Value;
-                    if (baseMapType.Equals("street"))
+
+                    if (baseMapType.Equals("blank"))
                     {
-                        ToggleStreet();
-                    }
-                    else if (baseMapType.Equals("satellite"))
-                    {
-                        ToggleSatellite();
+                        ToggleBlank();
                     }
                     else
                     {
-                        ToggleBlank();
+                        ToggleStreet();
                     }
                 }
 
@@ -1655,11 +1657,7 @@ namespace EpiDashboard.Mapping
             {
                 System.Xml.XmlElement element = layerList.SerializeLayers();
                 System.Xml.XmlAttribute baseMapType = element.OwnerDocument.CreateAttribute("baseMapType");
-                //if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                //{
-                //    baseMapType.Value = "satellite";
-                //}
-                //else 
+
                 if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                 {
                     baseMapType.Value = "street";
@@ -2686,7 +2684,6 @@ namespace EpiDashboard.Mapping
         {
             if (myMap != null)
             {
-
                 if (myMap.Layers.Count > 0)
                 {
                     if (myMap.Layers[0] is OpenStreetMapLayer)
@@ -2709,12 +2706,6 @@ namespace EpiDashboard.Mapping
                         }
                         else
                         {
-                            //if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                            //{
-                            //    ((TileLayer)myMap.Layers[0]).Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                            //    ((TileLayer)myMap.Layers[0]).LayerStyle = TileLayer.LayerType.AerialWithLabels;
-                            //}
-                            //else 
                             if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
                                 ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
