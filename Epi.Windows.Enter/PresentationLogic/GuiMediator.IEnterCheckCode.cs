@@ -7,8 +7,11 @@ using System.Text;
 using System.Windows.Forms;
 using Epi.Fields;
 using EpiInfo.Plugin;
-using Epi.Windows.Enter.PresentationLogic;
 using Epi.Windows.Controls;
+using System.Collections.Specialized;
+using System.Net;
+using System.Xml;
+using System.Drawing;
 
 namespace Epi.Windows.Enter.PresentationLogic
 {
@@ -29,58 +32,64 @@ namespace Epi.Windows.Enter.PresentationLogic
 
         public bool Geocode(string address, string latName, string longName)
         {
-            ESRI.ArcGIS.Client.Bing.Geocoder geocoder = new ESRI.ArcGIS.Client.Bing.Geocoder(Configuration.GetNewInstance().Settings.MapServiceKey);
             this.latName = latName;
             this.longName = longName;
-            geocoder.Geocode(address, Geocode_Completed);
-            return true;
-        }
 
-        private void Geocode_Completed(object sender, ESRI.ArcGIS.Client.Bing.GeocodeService.GeocodeCompletedEventArgs e)
-        {
+            NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString("");
+            queryString["query"] = address;
+            queryString["output"] = "xml";
+            queryString["maxResults"] = "7";
+            queryString["key"] = Configuration.GetNewInstance().Settings.MapServiceKey;
+            WebRequest request = WebRequest.Create("http://dev.virtualearth.net/REST/v1/Locations?" + queryString.ToString());
+
             try
             {
-                if (e.Result.Results.Count > 0)
+                using (WebResponse response = request.GetResponse())
                 {
-                    Epi.Enter.Dialogs.GeocodeSelectionDialog dialog = new Epi.Enter.Dialogs.GeocodeSelectionDialog();
-                    dialog.Results = e.Result.Results;
-                    if (dialog.ShowDialog() == DialogResult.OK)
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(response.GetResponseStream());
+                    XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
+                    nsmgr.AddNamespace("v1", "http://schemas.microsoft.com/search/local/ws/rest/v1");
+                    XmlNodeList nodeList;
+                    XmlElement root = doc.DocumentElement;
+                    nodeList = root.SelectNodes("/v1:Response/v1:ResourceSets/v1:ResourceSet/v1:Resources/v1:Location", nsmgr);
+
+                    if (nodeList != null)
                     {
-                        Assign(latName, dialog.Latitude);
-                        Assign(longName, dialog.Longitude);
-                    }
-                }
-                else
-                {
-                    Dialog("No matching coordinates found for the specified address.", "Geocoder");
-                }
-            }
-            catch (System.Reflection.TargetInvocationException ex)
-            {
-                if (ex.InnerException != null)
-                {
-                    if (ex.InnerException is System.ServiceModel.EndpointNotFoundException)
-                    {
-                        Dialog("There was a problem running the geocode command. Please ensure the computer is connected to the Internet and try agian.", "Geocoder");
-                    }
-                }                
-            }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null)
-                {
-                    if (ex.InnerException is System.ServiceModel.FaultException<ESRI.ArcGIS.Client.Bing.GeocodeService.ResponseSummary>)
-                    {
-                        string message = ((System.ServiceModel.FaultException<ESRI.ArcGIS.Client.Bing.GeocodeService.ResponseSummary>)ex.InnerException).Message;
-                        if (message.ToLowerInvariant().Contains("credential"))
+                        if (nodeList.Count < 1)
                         {
-                            Dialog("The Map Service Key is invalid. Please update it from the Tools > Options dialog", "Geocoder");
+                            Dialog("No matching coordinates found for the specified address.", "Geocoder");
+                        }
+                        else
+                        { 
+                            Epi.Enter.Dialogs.GeocodeSelectionDialog dialog = new Epi.Enter.Dialogs.GeocodeSelectionDialog(nsmgr);
+                            dialog.Results = nodeList;
+                            if (dialog.ShowDialog() == DialogResult.OK)
+                            {
+                                Assign(latName, dialog.Latitude);
+                                Assign(longName, dialog.Longitude);
+                            }
                         }
                     }
                 }
             }
-        }
+            catch (WebException WebException)
+            {
+                if(WebException.Message.Contains("(401)"))
+                {
+                    Dialog("The Map Service Key is invalid. Please update it from the Tools > Options dialog", "Geocoder");
+                }
+                else
+                {
+                    Dialog("There was a problem running the geocode command. Please ensure the computer is connected to the Internet and try agian.", "Geocoder");
+                }
 
+                return false;
+            }
+            catch { }
+
+            return true;
+        }
 
         public bool AssignGrid(string pName, object pValue, int pIndex0, object pIndex1)
         {
