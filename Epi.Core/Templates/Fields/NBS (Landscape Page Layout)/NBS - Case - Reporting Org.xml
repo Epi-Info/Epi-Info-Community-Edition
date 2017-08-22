@@ -1,0 +1,43 @@
+﻿<Template Level="Field">
+  <Project>
+    <View CheckCode="">
+      <Page>
+        <Field Name="NBS_UI_23" PageId="3" FieldId="62" UniqueId="8cfad84d-359d-4247-ac46-b57f6baae7fd" FieldTypeId="21" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="Case P1" PageBeforeCheckCode="" PageAfterCheckCode="" Position="2" ControlTopPositionPercentage="0" ControlLeftPositionPercentage="0" ControlHeightPercentage="0.128205128205128" ControlWidthPercentage="0.380905511811024" Expr1015="Verdana" Expr1016="8.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Reporting Information - Reporting Organization" PromptFontFamily="" PromptFontSize="" PromptFontStyle="" ControlFontFamily="Verdana" ControlFontSize="8.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="INV_SOURCE_TYPE_CD,INV183" SourceTableName="" CodeColumnName="" TextColumnName="" BackgroundColor="-150994945" Sort="False" IsExclusiveTable="False" TabIndex="12.8" HasTabStop="True" SourceFieldId="" />
+        <Field Name="INV_SOURCE_TYPE_CD" PageId="3" FieldId="63" UniqueId="e9fc5da5-2ed5-401f-9318-63325771c755" FieldTypeId="19" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="Case P1" PageBeforeCheckCode="" PageAfterCheckCode="" Position="2" ControlTopPositionPercentage="0.0256410256410258" ControlLeftPositionPercentage="0.160433070866142" ControlHeightPercentage="0.0307692307692308" ControlWidthPercentage="0.196850393700787" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.0256410256410256" PromptLeftPositionPercentage="0.00984251968503937" PromptText="Reporting Source Type:" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="code_inv112" CodeColumnName="" TextColumnName="INV112" BackgroundColor="" Sort="False" IsExclusiveTable="False" TabIndex="13" HasTabStop="True" SourceFieldId="" />
+        <Field Name="INV183" PageId="3" FieldId="64" UniqueId="6faf3c2f-3e8d-4135-8245-8aa596930ae3" FieldTypeId="1" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="Case P1" PageBeforeCheckCode="" PageAfterCheckCode="" Position="2" ControlTopPositionPercentage="0.0717948717948718" ControlLeftPositionPercentage="0.160433070866142" ControlHeightPercentage="0.0294871794871795" ControlWidthPercentage="0.196850393700787" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.0717948717948718" PromptLeftPositionPercentage="0.00984251968503937" PromptText="Reporting Organization:" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="0" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" BackgroundColor="" Sort="False" IsExclusiveTable="False" TabIndex="14" HasTabStop="True" SourceFieldId="" />
+      </Page>
+    </View>
+  </Project>
+  <SourceTable TableName="code_inv112">
+    <Item INV112="BB-Blood Bank" />
+    <Item INV112="CF-Correctional Facilities" />
+    <Item INV112="DD-Dentist" />
+    <Item INV112="DF-Daycare Facility" />
+    <Item INV112="DT-Drug Treatment Facility" />
+    <Item INV112="ER-Emergency Room/Emergency Department" />
+    <Item INV112="FA-Other Federal Agencies" />
+    <Item INV112="FP-Family Planning Facility" />
+    <Item INV112="HO-Hospital" />
+    <Item INV112="IH-Indian Health Service" />
+    <Item INV112="JT-National Job Training Program" />
+    <Item INV112="LA-Laboratory" />
+    <Item INV112="MC-Managed Care/HMOs" />
+    <Item INV112="MI-Military" />
+    <Item INV112="OT-Other Treatment Center" />
+    <Item INV112="PC-Pharmacy" />
+    <Item INV112="PH-Public Health Clinic" />
+    <Item INV112="PO-Prenatal/Obstetrics Facility" />
+    <Item INV112="PP-Private Physician Office" />
+    <Item INV112="PS-Public Health Clinic - STD" />
+    <Item INV112="PT-Public Health Clinic - TB" />
+    <Item INV112="PV-Public Health Clinic - HIV" />
+    <Item INV112="RE-Data Registries" />
+    <Item INV112="RU-Rural Health Clinic" />
+    <Item INV112="SC-School Clinic" />
+    <Item INV112="SL-Other State and Local Agencies" />
+    <Item INV112="TF-Tribal Government" />
+    <Item INV112="VS-Vital Statistics" />
+    <Item INV112="VT-Veterinary Sources" />
+  </SourceTable>
+  <FieldFootprint Width="388" Height="100" />
+</Template>
