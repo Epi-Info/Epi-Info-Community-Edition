@@ -1,0 +1,19 @@
+﻿<Template Level="Field">
+  <Project>
+    <View CheckCode="">
+      <Page>
+        <Field Name="NBS11003" PageId="4" FieldId="107" UniqueId="96c6b6a4-acde-4d4a-b6af-95c6fe568bd3" FieldTypeId="21" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="Case Info 2" PageBeforeCheckCode="" PageAfterCheckCode="" Position="3" ControlTopPositionPercentage="0" ControlLeftPositionPercentage="0" ControlHeightPercentage="0.0948717948717949" ControlWidthPercentage="0.646653543307087" Expr1015="Verdana" Expr1016="8.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Epidemiologic - Binational Reporting" PromptFontFamily="" PromptFontSize="" PromptFontStyle="" ControlFontFamily="Verdana" ControlFontSize="8.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="BinationalReportingCriteria" SourceTableName="" CodeColumnName="" TextColumnName="" BackgroundColor="-67108865" Sort="False" IsExclusiveTable="False" TabIndex="12.8" HasTabStop="True" SourceFieldId="" />
+        <Field Name="INV515" PageId="4" FieldId="106" UniqueId="1b552178-241e-4b71-97ba-85f7cc9fc6cf" FieldTypeId="19" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="Case Info 2" PageBeforeCheckCode="" PageAfterCheckCode="" Position="3" ControlTopPositionPercentage="0.0461538461538462" ControlLeftPositionPercentage="0.181102362204724" ControlHeightPercentage="0.0307692307692308" ControlWidthPercentage="0.451771653543307" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.0461538461538462" PromptLeftPositionPercentage="0.00393700787401575" PromptText="Binational Reporting Criteria:" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="code_inv515" CodeColumnName="" TextColumnName="INV515" BackgroundColor="" Sort="False" IsExclusiveTable="False" TabIndex="13" HasTabStop="True" SourceFieldId="" />
+      </Page>
+    </View>
+  </Project>
+  <SourceTable TableName="code_inv515">
+    <Item INV515="PHC1137-Potentially exposed while in Mexico or Canada" />
+    <Item INV515="PHC1138-Resident of Canada or Mexico" />
+    <Item INV515="PHC1139-Has case contacts in or from Mexico or Canada" />
+    <Item INV515="PHC1140-Exposure to suspected product from Canada or Mexico" />
+    <Item INV515="PHC1141-Other situations that may require binational notification or coordination of response" />
+    <Item INV515="PHC1215-Potentially exposed by a resident of Mexico or Canada" />
+  </SourceTable>
+  <FieldFootprint Width="657" Height="74" />
+</Template>
