@@ -481,7 +481,7 @@ namespace Epi.Windows.Enter.PresentationLogic
             }
             else
             {
-                for (int i = 1; i <= recordEnd; i++)
+                for (int i = recordStart; i <= recordEnd; i++)
                 {
                     if (i == 1)
                     {
@@ -499,6 +499,11 @@ namespace Epi.Windows.Enter.PresentationLogic
                     }
                     else
                     {
+                        if(i == recordStart)
+                        {
+                            mediator.view.LoadRecord(recordStart);
+                        }
+
                         mediator.view.LoadNextRecord(mediator.view.CurrentRecordId);
 
                         continueProcess = ProcessPrintRequest(pageNumberStart, pageNumberEnd, true);
