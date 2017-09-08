@@ -1156,7 +1156,7 @@ namespace Epi.Windows.Enter
                 {
                     foreach (GroupBox group in groups)
                     {
-                        if (group.Top < control.Top && group.Bottom > control.Bottom && group.Left < control.Left && group.Right > control.Right)
+                        if (group.Top < control.Top && group.Bottom > control.Top && group.Left < control.Left && group.Right > control.Left)
                         {
                             control.BackColor = group.BackColor;
                         }
