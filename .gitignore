@@ -161,11 +161,9 @@ AnthStat/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 AnthStat/obj/Release/AnthStat.csproj.CoreCompileInputs.cache
 AnthStat/obj/x86/Debug/AnthStat.csproj.CoreCompileInputs.cache
 AnthStat/obj/x86/Release/AnthStat.csproj.CoreCompileInputs.cache
-Build/Debug/Analysis.exe
 Build/Debug/Analysis.exe.config
 Build/Debug/Analysis.pdb
 Build/Debug/Analysis.xml
-Build/Debug/AnalysisDashboard.exe
 Build/Debug/AnalysisDashboard.exe.config
 Build/Debug/AnalysisDashboard.pdb
 Build/Debug/AnthStat.dll
@@ -173,14 +171,11 @@ Build/Debug/AnthStat.pdb
 Build/Debug/CalithaLib.dll
 Build/Debug/ComponentArt.Win.DataVisualization.Charting.dll
 Build/Debug/ComponentArt.Win.DataVisualization.Common.dll
-Build/Debug/Config.exe
 Build/Debug/Config.exe.config
 Build/Debug/Config.pdb
 Build/Debug/Configuration/EpiInfo.Config.xml
-Build/Debug/DataPackager.exe
 Build/Debug/DataPackager.exe.config
 Build/Debug/DataPackager.pdb
-Build/Debug/DataUnpackager.exe
 Build/Debug/DataUnpackager.exe.config
 Build/Debug/DataUnpackager.pdb
 Build/Debug/DynamicDataDisplay.dll
@@ -190,7 +185,6 @@ Build/Debug/ESRI.ArcGIS.Client.Toolkit.DataSources.dll
 Build/Debug/ESRI.ArcGIS.Client.Toolkit.dll
 Build/Debug/ESRI.ArcGIS.Client.dll
 Build/Debug/Enter.application
-Build/Debug/Enter.exe
 Build/Debug/Enter.exe.config
 Build/Debug/Enter.exe.manifest
 Build/Debug/Enter.pdb
@@ -260,14 +254,11 @@ Build/Debug/Excel/SourceTable.xml
 Build/Debug/Excel/Survey.xlsx
 Build/Debug/FipsCrypto.dll
 Build/Debug/GoldParserEngine.dll
-Build/Debug/MakeView.exe
 Build/Debug/MakeView.exe.config
 Build/Debug/MakeView.pdb
 Build/Debug/MakeView.xml
-Build/Debug/Mapping.exe
 Build/Debug/Mapping.exe.config
 Build/Debug/Mapping.pdb
-Build/Debug/Menu.exe
 Build/Debug/Menu.exe.config
 Build/Debug/Menu.pdb
 Build/Debug/Microsoft.VisualBasic.PowerPacks.Vs.dll
@@ -337,7 +328,6 @@ Build/Debug/Projects/Sample/Sample.mdb
 Build/Debug/Projects/Sample/Sample.prj
 Build/Debug/Projects/Sample/SampleSurveillance.cvs7
 Build/Debug/Resources/PHIN/PHINVS.mdb
-Build/Debug/StatCalc.exe
 Build/Debug/StatCalc.exe.config
 Build/Debug/StatCalc.pdb
 Build/Debug/StatisticsRepository.dll
@@ -397,11 +387,9 @@ Build/Debug/TestCases/TestCanvas01_output_11.png
 Build/Debug/TestCases/TestCanvas01_output_19.png
 Build/Debug/TestCases/TestCanvas01_output_20.png
 Build/Debug/TestCases/TestCanvas01_output_9.png
-Build/Debug/Updater.exe
 Build/Debug/Updater.exe.config
 Build/Debug/Updater.pdb
 Build/Debug/WPFToolkit.dll
-Build/Debug/app.publish/Enter.exe
 Build/Debug/es-ES/Analysis.resources.dll
 Build/Debug/es-ES/Enter.resources.dll
 Build/Debug/es-ES/Epi.Core.resources.dll
@@ -445,7 +433,6 @@ Epi.Analysis.Statistics/obj/x86/Release/Epi.Analysis.Statistics.csproj.CoreCompi
 Epi.CommandLine.Config/obj/x86/Debug/BooleanVariableControl.baml
 Epi.CommandLine.Config/obj/x86/Debug/BooleanVariableControl.g.cs
 Epi.CommandLine.Config/obj/x86/Debug/BooleanVariableControl.g.i.cs
-Epi.CommandLine.Config/obj/x86/Debug/Config.exe
 Epi.CommandLine.Config/obj/x86/Debug/Config.g.resources
 Epi.CommandLine.Config/obj/x86/Debug/Config.pdb
 Epi.CommandLine.Config/obj/x86/Debug/Config_Content.g.cs
@@ -1276,7 +1263,6 @@ Epi.WPF/obj/Release/Epi.WPF_MarkupCompile.lref
 Epi.WPF/obj/Release/GeneratedInternalTypeHelper.g.cs
 Epi.WPF/obj/Release/ResourceDictionary.baml
 Epi.Windows.Analysis/obj/Debug (Exclude EpiMap)/Epi.Windows.Analysis.csproj.CoreCompileInputs.cache
-Epi.Windows.Analysis/obj/Debug/Analysis.exe
 Epi.Windows.Analysis/obj/Debug/Analysis.pdb
 Epi.Windows.Analysis/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Epi.Windows.Analysis/obj/Debug/Epi.Analysis.Dialogs.GridListDialog.resources
@@ -1361,7 +1347,6 @@ Epi.Windows.Analysis/obj/x86/Debug/Epi.Windows.Analysis.csproj.CoreCompileInputs
 Epi.Windows.Analysis/obj/x86/Epi.Enter.ServiceApplication/Epi.Windows.Analysis.csproj.CoreCompileInputs.cache
 Epi.Windows.Analysis/obj/x86/Linux/Epi.Windows.Analysis.csproj.CoreCompileInputs.cache
 Epi.Windows.Analysis/obj/x86/Release/Epi.Windows.Analysis.csproj.CoreCompileInputs.cache
-Epi.Windows.AnalysisDashboard/obj/x86/Debug/AnalysisDashboard.exe
 Epi.Windows.AnalysisDashboard/obj/x86/Debug/AnalysisDashboard.pdb
 Epi.Windows.AnalysisDashboard/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Epi.Windows.AnalysisDashboard/obj/x86/Debug/Epi.Windows.AnalysisDashboard.DashboardMainForm.resources
@@ -1485,7 +1470,6 @@ Epi.Windows.Dashboard/obj/x86/Release/GeneratedInternalTypeHelper.g.cs
 Epi.Windows.Dashboard/obj/x86/Release/MainWindow.g.cs
 Epi.Windows.Dashboard/obj/x86/Release/WaitCursor.baml
 Epi.Windows.Dashboard/obj/x86/Release/WaitCursor.g.cs
-Epi.Windows.DataPackager/obj/x86/Debug/DataPackager.exe
 Epi.Windows.DataPackager/obj/x86/Debug/DataPackager.pdb
 Epi.Windows.DataPackager/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Epi.Windows.DataPackager/obj/x86/Debug/Epi.Windows.DataPackager.Form1.resources
@@ -1495,7 +1479,6 @@ Epi.Windows.DataPackager/obj/x86/Debug/Epi.Windows.DataPackager.csproj.FileListA
 Epi.Windows.DataPackager/obj/x86/Debug/Epi.Windows.DataPackager.csproj.GenerateResource.Cache
 Epi.Windows.DataPackager/obj/x86/Debug/Epi.Windows.DataPackager.csprojResolveAssemblyReference.cache
 Epi.Windows.DataPackager/obj/x86/Release/Epi.Windows.DataPackager.csproj.CoreCompileInputs.cache
-Epi.Windows.DataUnpackager/obj/x86/Debug/DataUnpackager.exe
 Epi.Windows.DataUnpackager/obj/x86/Debug/DataUnpackager.pdb
 Epi.Windows.DataUnpackager/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Epi.Windows.DataUnpackager/obj/x86/Debug/Epi.Windows.DataUnpackager.Form1.resources
@@ -1508,7 +1491,6 @@ Epi.Windows.DataUnpackager/obj/x86/Release/Epi.Windows.DataUnpackager.csproj.Cor
 Epi.Windows.Enter/obj/Debug (Exclude EpiMap)/Epi.Windows.Enter.csproj.CoreCompileInputs.cache
 Epi.Windows.Enter/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 Epi.Windows.Enter/obj/Debug/Enter.application
-Epi.Windows.Enter/obj/Debug/Enter.exe
 Epi.Windows.Enter/obj/Debug/Enter.exe.manifest
 Epi.Windows.Enter/obj/Debug/Enter.pdb
 Epi.Windows.Enter/obj/Debug/Epi.Enter.Dialogs.GeocodeResultControl.resources
@@ -1722,7 +1704,6 @@ Epi.Windows.MakeView/obj/Debug/Epi.Windows.MakeView.csproj.ResolveComReference.c
 Epi.Windows.MakeView/obj/Debug/Epi.Windows.MakeView.csprojResolveAssemblyReference.cache
 Epi.Windows.MakeView/obj/Debug/Interop.PortableDeviceApiLib.dll
 Epi.Windows.MakeView/obj/Debug/Interop.PortableDeviceTypesLib.dll
-Epi.Windows.MakeView/obj/Debug/MakeView.exe
 Epi.Windows.MakeView/obj/Debug/MakeView.pdb
 Epi.Windows.MakeView/obj/Epi.Enter.ServiceApplication/Epi.Windows.MakeView.csproj.CoreCompileInputs.cache
 Epi.Windows.MakeView/obj/Epi.Enter.ServiceApplication/Epi.Windows.MakeView.csproj.ResolveComReference.cache
@@ -1763,7 +1744,6 @@ Epi.Windows.Mapping/obj/x86/Debug/Epi.Windows.Mapping.csproj.CoreCompileInputs.c
 Epi.Windows.Mapping/obj/x86/Debug/Epi.Windows.Mapping.csproj.FileListAbsolute.txt
 Epi.Windows.Mapping/obj/x86/Debug/Epi.Windows.Mapping.csproj.GenerateResource.Cache
 Epi.Windows.Mapping/obj/x86/Debug/Epi.Windows.Mapping.csprojResolveAssemblyReference.cache
-Epi.Windows.Mapping/obj/x86/Debug/Mapping.exe
 Epi.Windows.Mapping/obj/x86/Debug/Mapping.pdb
 Epi.Windows.Mapping/obj/x86/Release/Epi.Windows.Mapping.csproj.CoreCompileInputs.cache
 Epi.Windows.Menu/obj/Debug (Exclude EpiMap)/Epi.Windows.Menu.csproj.CoreCompileInputs.cache
@@ -1791,7 +1771,6 @@ Epi.Windows.Menu/obj/Debug/Epi.Windows.Menu.csprojResolveAssemblyReference.cache
 Epi.Windows.Menu/obj/Debug/MainWindow.baml
 Epi.Windows.Menu/obj/Debug/MainWindow.g.cs
 Epi.Windows.Menu/obj/Debug/MainWindow.g.i.cs
-Epi.Windows.Menu/obj/Debug/Menu.exe
 Epi.Windows.Menu/obj/Debug/Menu.g.resources
 Epi.Windows.Menu/obj/Debug/Menu.pdb
 Epi.Windows.Menu/obj/Debug/Menu_Content.g.cs
@@ -3180,7 +3159,6 @@ StatCalc/obj/Debug/StatCalc.csproj.CoreCompileInputs.cache
 StatCalc/obj/Debug/StatCalc.csproj.FileListAbsolute.txt
 StatCalc/obj/Debug/StatCalc.csproj.GenerateResource.Cache
 StatCalc/obj/Debug/StatCalc.csprojResolveAssemblyReference.cache
-StatCalc/obj/Debug/StatCalc.exe
 StatCalc/obj/Debug/StatCalc.g.resources
 StatCalc/obj/Debug/StatCalc.pdb
 StatCalc/obj/Debug/StatCalcMenu.baml
@@ -3371,7 +3349,6 @@ Updater/obj/x86/Debug/Updater.csproj.CoreCompileInputs.cache
 Updater/obj/x86/Debug/Updater.csproj.FileListAbsolute.txt
 Updater/obj/x86/Debug/Updater.csproj.GenerateResource.Cache
 Updater/obj/x86/Debug/Updater.csprojResolveAssemblyReference.cache
-Updater/obj/x86/Debug/Updater.exe
 Updater/obj/x86/Debug/Updater.pdb
 Updater/obj/x86/Release/Updater.csproj.CoreCompileInputs.cache
 Utilities/obj/Debug (Exclude EpiMap)/Utilities.csproj.CoreCompileInputs.cache
@@ -3390,3 +3367,4 @@ Build/Debug/Templates/Projects/[New Record] with [Repeat Last].xml
 Epi.Core.EnterInterpreter/bin/Debug/Templates/Projects/[New Record] with [Repeat Last].xml
 Epi.Core.Interpreter/bin/Debug/Templates/Projects/[New Record] with [Repeat Last].xml
 Epi.Statistics/bin/Debug/Templates/Projects/[New Record] with [Repeat Last].xml
+*.exe
