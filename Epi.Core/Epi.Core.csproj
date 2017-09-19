@@ -1164,9 +1164,7 @@
     <Content Include="Templates\Projects\Time Based Control Examples.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Projects\[New Record] with [Repeat Last].xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Templates\Projects\[New Record] with [Repeat Last].xml" />
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
