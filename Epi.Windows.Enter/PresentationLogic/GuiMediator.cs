@@ -25,6 +25,7 @@ using Epi.Collections;
 using Epi.EnterCheckCodeEngine;
 using System.Threading;
 using System.ComponentModel;
+using System.Runtime;
 
 namespace Epi.Windows.Enter.PresentationLogic
 {
@@ -431,6 +432,7 @@ namespace Epi.Windows.Enter.PresentationLogic
 
         public void Print(int recordStart, int recordEnd, int pageStart, int pageEnd)
         {
+            printDocument = null;
             if (ProcessPrintRequest(recordStart, recordEnd, pageStart, pageEnd))
             {
                 printDocument.Print();
@@ -438,9 +440,11 @@ namespace Epi.Windows.Enter.PresentationLogic
             else
             {
                 MessageBox.Show("The selected range and number of pages is too much to print at one time.");
-                System.GC.Collect();
-                System.GC.WaitForPendingFinalizers();
             }
+
+            this.printDocument.Dispose();
+            System.GC.Collect();
+            System.GC.WaitForPendingFinalizers();
         }
 
         public void PrintPreview(int recordStart, int recordEnd, int pageNumberStart, int pageNumberEnd)
@@ -596,10 +600,22 @@ namespace Epi.Windows.Enter.PresentationLogic
                                     printControl.Font = control.Font;
                                 }
 
+                                var memFailPoint = new MemoryFailPoint(8);
                                 printPanel.Controls.Add(printControl);
+                            }
+                            catch(System.InsufficientMemoryException)
+                            {
+                                printPanel.Dispose();
+                                return false;
+                            }
+                            catch (System.OutOfMemoryException)
+                            {
+                                printPanel.Dispose();
+                                return false;
                             }
                             catch
                             {
+                                printPanel.Dispose();
                                 return false;
                             }
                         }
@@ -912,6 +928,8 @@ namespace Epi.Windows.Enter.PresentationLogic
                                 graphics.Dispose();
                                 printPanel.Dispose();
                                 pageImageList = null;
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
                                 return false;
                             }
                         }
@@ -945,6 +963,8 @@ namespace Epi.Windows.Enter.PresentationLogic
                         printPanel.DrawToBitmap(memoryImage, new Rectangle(0, 0, printPanel.Width, printPanel.Height));
                         printPanel.Dispose();
                         pageImageList.Add(memoryImage.Clone());
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
                     }
                     catch
                     {
@@ -953,6 +973,8 @@ namespace Epi.Windows.Enter.PresentationLogic
                         printPanel.Dispose();                      
                         pageImageList = null;
                         memoryImage.Dispose();
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
                         return false;
                     }
                 }
@@ -961,6 +983,8 @@ namespace Epi.Windows.Enter.PresentationLogic
             {
                 memoryImage.Dispose();
                 pageImageList = null;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
                 return false;
             };
 
