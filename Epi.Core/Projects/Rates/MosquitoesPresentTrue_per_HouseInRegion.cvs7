@@ -1,0 +1,129 @@
+﻿<DashboardCanvas>
+  <dashboardHelper>
+    <connectionString>/CMip3j3HV8RumZ8DOXlLEjbl02wcdTewDzxjYITJzWsRlQQlo5RTTunNcX4FNz72cuNMCWzt8+nFQoNsOSkGWw7LYmBNcn5VFgPJa5+7rN1ICCbOxMihiZ3IxSVRKrykdyCOGPcQzMBqjxIv0iTXa/pxIlzbWk3QKVhVjZl0vZbmGyEfplH5w9b0lMCeJiBNCVuHvhER3/fFUmWm4ndLC+Whc/NBBccCe3LCXCjpY6USZO73e7gKGkhYL1eFtFD3YVRoWgED/8L2DmbCpLWqA==</connectionString>
+    <tableName>Sheet1$</tableName>
+    <useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition>
+    <advancedDataFilterCondition>
+    </advancedDataFilterCondition>
+    <relatedDataConnections />
+    <dataFilters recordProcessScope="undeleted" />
+    <dashboardRules />
+  </dashboardHelper>
+  <Gadgets>
+    <lineListGadget top="53" left="610" collapsed="False" gadgetType="EpiDashboard.LineListControl" id="48690a6b-1edc-4f9b-bc83-4d77c3df3923" actualHeight="478.33">
+      <dataFilters recordProcessScope="undeleted" />
+      <groupVariable>
+      </groupVariable>
+      <groupVariableSecondary>
+      </groupVariableSecondary>
+      <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <showLineColumn>True</showLineColumn>
+      <showColumnHeadings>True</showColumnHeadings>
+      <showNullLabels>True</showNullLabels>
+      <customHeading>Line List</customHeading>
+      <customDescription>
+      </customDescription>
+      <maxRows>50</maxRows>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <maxWidth>800</maxWidth>
+      <maxHeight>500</maxHeight>
+      <listFields>
+        <listField>HouseID</listField>
+        <listField>MosquitoesPresent</listField>
+      </listFields>
+    </lineListGadget>
+    <ratesGadget top="54" left="108" collapsed="False" gadgetType="EpiDashboard.RatesControl" id="056fbfe5-7cd2-4f63-9986-fea651b034dd" actualHeight="342">
+      <dataFilters recordProcessScope="undeleted" />
+      <numerVariable>HouseID</numerVariable>
+      <denomVariable>HouseID</denomVariable>
+      <numerAggFxVariable>count</numerAggFxVariable>
+      <denomAggFxVariable>count</denomAggFxVariable>
+      <groupVariable>Region</groupVariable>
+      <groupVariableSecondary>
+      </groupVariableSecondary>
+      <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <showLineColumn>True</showLineColumn>
+      <showColumnHeadings>True</showColumnHeadings>
+      <showNullLabels>True</showNullLabels>
+      <rateMultiplierString>100</rateMultiplierString>
+      <showAsPercent>True</showAsPercent>
+      <numerDistinct>True</numerDistinct>
+      <denomDistinct>True</denomDistinct>
+      <customHeading>Rates</customHeading>
+      <customDescription>
+      </customDescription>
+      <maxRows>50</maxRows>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <maxWidth>800</maxWidth>
+      <listFields>
+        <listField>MosquitoesPresent</listField>
+      </listFields>
+      <numerDataFilter>
+        <dataFilters recordProcessScope="undeleted">
+          <filterCondition>
+            <condition>([MosquitoesPresent] = 1)</condition>
+            <friendlyCondition>The value of [MosquitoesPresent] is equal to Yes</friendlyCondition>
+            <columnName>[MosquitoesPresent]</columnName>
+            <columnType>System.Boolean</columnType>
+            <rawColumnName>MosquitoesPresent</rawColumnName>
+            <operand>=</operand>
+            <friendlyOperand>is equal to</friendlyOperand>
+            <value>1</value>
+            <friendlyValue>Yes</friendlyValue>
+            <highValue>
+            </highValue>
+            <friendlyHighValue>
+            </friendlyHighValue>
+            <lowValue>
+            </lowValue>
+            <friendlyLowValue>
+            </friendlyLowValue>
+            <isBetween>false</isBetween>
+            <isEnabled>true</isEnabled>
+            <joinType>
+            </joinType>
+          </filterCondition>
+        </dataFilters>
+      </numerDataFilter>
+      <defaultColor>#FF3F51B5</defaultColor>
+      <useDefaultColor>False</useDefaultColor>
+      <color_L1>#FF3F51B5</color_L1>
+      <color_L2>#FFFFEB3B</color_L2>
+      <color_L3>#FFFF9800</color_L3>
+      <color_L4>#FFF44336</color_L4>
+      <highValue_L1>25</highValue_L1>
+      <lowValue_L2>25</lowValue_L2>
+      <highValue_L2>50</highValue_L2>
+      <lowValue_L3>50</lowValue_L3>
+      <highValue_L3>100</highValue_L3>
+      <lowValue_L4>100</lowValue_L4>
+    </ratesGadget>
+  </Gadgets>
+  <OutputSettings>
+    <showCanvasSummaryInfo>True</showCanvasSummaryInfo>
+    <showGadgetHeadings>True</showGadgetHeadings>
+    <showGadgetSettings>True</showGadgetSettings>
+    <useAlternatingColors>False</useAlternatingColors>
+    <defaultChartWidth>800</defaultChartWidth>
+    <defaultChartHeight>500</defaultChartHeight>
+    <tableFontSize>13</tableFontSize>
+    <customHeading>
+    </customHeading>
+    <customSummary>
+    </customSummary>
+    <customConclusion>
+    </customConclusion>
+    <customTableFontFamily>
+    </customTableFontFamily>
+    <canvasHeight>8000</canvasHeight>
+    <sortGadgets>True</sortGadgets>
+  </OutputSettings>
+  <CanvasSettings>
+    <editMode>True</editMode>
+    <layoutMode>free</layoutMode>
+  </CanvasSettings>
+</DashboardCanvas>

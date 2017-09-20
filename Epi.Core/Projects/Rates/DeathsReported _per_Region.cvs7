@@ -1,0 +1,114 @@
+﻿<DashboardCanvas>
+  <dashboardHelper>
+    <connectionString>/CMip3j3HV8RumZ8DOXlLEjbl02wcdTewDzxjYITJzW/ZM1NZbWHG2HL7uGaLTLkIOtwOfhULxkU9Tltd5ttHj6TaClnw3pIUdUWoR93duxvQCCnFoa3NqA7Jspnb9AaBxqEUP40Qbctor+neJ4JqfSV0jXAD4QjB8VfbqKDfi6KOIUwHFj+S3RgDDkb5wfSaP8ew4zv9pnTSWVGau2qnQ0ksjTMx3Ni4u1+n8/8qsw/R95SXfwTM2gpU7ZN4R8F</connectionString>
+    <tableName>Sheet1$</tableName>
+    <useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition>
+    <advancedDataFilterCondition>
+    </advancedDataFilterCondition>
+    <relatedDataConnections>
+      <relatedDataConnection>
+        <projectPath>
+        </projectPath>
+        <viewName>
+        </viewName>
+        <connectionString>/CMip3j3HV8RumZ8DOXlLEjbl02wcdTewDzxjYITJzW/ZM1NZbWHG2HL7uGaLTLkIOtwOfhULxkU9Tltd5ttHj6TaClnw3pIUdUWoR93duxvQCCnFoa3NqA7Jspnb9AaBxqEUP40Qbctor+neJ4JqfSV0jXAD4QjB8VfbqKDfi6KOIUwHFj+S3RgDDkb5wfSaP8ew4zv9pnTSWVGau2qnQ0ksjTMx3Ni4u1+n8/8qsw/R95SXfwTM2gpU7ZN4R8F</connectionString>
+        <tableName>Sheet2$</tableName>
+        <parentKeyField>ReportingRegion</parentKeyField>
+        <childKeyField>Region</childKeyField>
+        <useUnmatched>True</useUnmatched>
+        <sameDataSource>False</sameDataSource>
+      </relatedDataConnection>
+    </relatedDataConnections>
+    <dataFilters recordProcessScope="undeleted" />
+    <dashboardRules />
+  </dashboardHelper>
+  <Gadgets>
+    <lineListGadget top="49" left="603" collapsed="False" gadgetType="EpiDashboard.LineListControl" id="a1dd83c3-c668-469c-bf16-51f89081e05f" actualHeight="349.33">
+      <dataFilters recordProcessScope="undeleted" />
+      <groupVariable>
+      </groupVariable>
+      <groupVariableSecondary>
+      </groupVariableSecondary>
+      <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <showLineColumn>True</showLineColumn>
+      <showColumnHeadings>True</showColumnHeadings>
+      <showNullLabels>True</showNullLabels>
+      <customHeading>Line List</customHeading>
+      <customDescription>
+      </customDescription>
+      <maxRows>50</maxRows>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <maxWidth>800</maxWidth>
+      <maxHeight>500</maxHeight>
+      <listFields>
+        <listField>DeathsReported</listField>
+        <listField>EpiWeek</listField>
+        <listField>Population</listField>
+        <listField>Region</listField>
+        <listField>ReportingRegion</listField>
+      </listFields>
+    </lineListGadget>
+    <ratesGadget top="52" left="103" collapsed="False" gadgetType="EpiDashboard.RatesControl" id="34066369-8e58-4e13-bc77-cc3ab374650e" actualHeight="358.8">
+      <dataFilters recordProcessScope="undeleted" />
+      <numerVariable>DeathsReported</numerVariable>
+      <denomVariable>Population</denomVariable>
+      <numerAggFxVariable>sum</numerAggFxVariable>
+      <denomAggFxVariable>sum</denomAggFxVariable>
+      <groupVariable>Region</groupVariable>
+      <groupVariableSecondary>
+      </groupVariableSecondary>
+      <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <showLineColumn>True</showLineColumn>
+      <showColumnHeadings>True</showColumnHeadings>
+      <showNullLabels>True</showNullLabels>
+      <rateMultiplierString>10^6</rateMultiplierString>
+      <showAsPercent>True</showAsPercent>
+      <numerDistinct>False</numerDistinct>
+      <denomDistinct>True</denomDistinct>
+      <customHeading>Rates</customHeading>
+      <customDescription>Mortality rates - deaths reported per population (1/100,000) in a region. </customDescription>
+      <maxRows>50</maxRows>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <maxWidth>800</maxWidth>
+      <defaultColor>#FF3F51B5</defaultColor>
+      <useDefaultColor>True</useDefaultColor>
+      <color_L1>#FF3F51B5</color_L1>
+      <color_L2>#FFFFEB3B</color_L2>
+      <color_L3>#FFFF9800</color_L3>
+      <color_L4>#FFF44336</color_L4>
+      <highValue_L1>NaN</highValue_L1>
+      <lowValue_L2>NaN</lowValue_L2>
+      <highValue_L2>NaN</highValue_L2>
+      <lowValue_L3>NaN</lowValue_L3>
+      <highValue_L3>NaN</highValue_L3>
+      <lowValue_L4>NaN</lowValue_L4>
+    </ratesGadget>
+  </Gadgets>
+  <OutputSettings>
+    <showCanvasSummaryInfo>True</showCanvasSummaryInfo>
+    <showGadgetHeadings>True</showGadgetHeadings>
+    <showGadgetSettings>True</showGadgetSettings>
+    <useAlternatingColors>False</useAlternatingColors>
+    <defaultChartWidth>800</defaultChartWidth>
+    <defaultChartHeight>500</defaultChartHeight>
+    <tableFontSize>13</tableFontSize>
+    <customHeading>
+    </customHeading>
+    <customSummary>
+    </customSummary>
+    <customConclusion>
+    </customConclusion>
+    <customTableFontFamily>
+    </customTableFontFamily>
+    <canvasHeight>8000</canvasHeight>
+    <sortGadgets>True</sortGadgets>
+  </OutputSettings>
+  <CanvasSettings>
+    <editMode>True</editMode>
+    <layoutMode>free</layoutMode>
+  </CanvasSettings>
+</DashboardCanvas>
