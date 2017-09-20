@@ -301,3 +301,4 @@ __pycache__/
 # OpenCover UI analysis results
 OpenCover/
 
+Epi.Core/Configuration_Static.cs
