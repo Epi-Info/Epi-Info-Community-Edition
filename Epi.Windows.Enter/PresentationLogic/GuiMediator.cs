@@ -26,6 +26,7 @@ using Epi.EnterCheckCodeEngine;
 using System.Threading;
 using System.ComponentModel;
 using System.Runtime;
+using System.Threading.Tasks;
 
 namespace Epi.Windows.Enter.PresentationLogic
 {
@@ -600,22 +601,10 @@ namespace Epi.Windows.Enter.PresentationLogic
                                     printControl.Font = control.Font;
                                 }
 
-                                var memFailPoint = new MemoryFailPoint(8);
                                 printPanel.Controls.Add(printControl);
-                            }
-                            catch(System.InsufficientMemoryException)
-                            {
-                                printPanel.Dispose();
-                                return false;
-                            }
-                            catch (System.OutOfMemoryException)
-                            {
-                                printPanel.Dispose();
-                                return false;
                             }
                             catch
                             {
-                                printPanel.Dispose();
                                 return false;
                             }
                         }
@@ -924,7 +913,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                             }
                             catch
                             {
-                                bufferBitmap.Dispose();
+                                bufferBitmap = null;
                                 graphics.Dispose();
                                 printPanel.Dispose();
                                 pageImageList = null;
@@ -963,16 +952,17 @@ namespace Epi.Windows.Enter.PresentationLogic
                         printPanel.DrawToBitmap(memoryImage, new Rectangle(0, 0, printPanel.Width, printPanel.Height));
                         printPanel.Dispose();
                         pageImageList.Add(memoryImage.Clone());
+                        memoryImage = null; bufferBitmap = null;
                         GC.Collect();
                         GC.WaitForPendingFinalizers();
                     }
                     catch
                     {
-                        bufferBitmap.Dispose();
+                        bufferBitmap = null;
                         graphics.Dispose();
                         printPanel.Dispose();                      
                         pageImageList = null;
-                        memoryImage.Dispose();
+                        memoryImage = null;
                         GC.Collect();
                         GC.WaitForPendingFinalizers();
                         return false;
@@ -981,11 +971,12 @@ namespace Epi.Windows.Enter.PresentationLogic
             }
             catch
             {
-                memoryImage.Dispose();
+                memoryImage = null;
                 pageImageList = null;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 return false;
+                throw new NotImplementedException();
             };
 
             return true;
