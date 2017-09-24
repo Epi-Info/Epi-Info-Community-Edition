@@ -2781,6 +2781,11 @@ namespace EpiDashboard.Mapping
             }
         }
 
+        private void OpenHelp()
+        {
+            System.Diagnostics.Process.Start(@"https://www.cdc.gov/epiinfo/user-guide/maps/mapsintro.html");
+        }
+
         private void iconAddDataLayer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             CollapseExpandLayerChooser();
@@ -2789,6 +2794,11 @@ namespace EpiDashboard.Mapping
         private void iconHideShowLegend_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             CollapseExpandLegend();
+        }
+
+        private void iconHelp_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            OpenHelp();
         }
 
         private void imgChoropleth_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

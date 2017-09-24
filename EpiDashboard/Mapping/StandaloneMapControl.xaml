@@ -208,17 +208,21 @@
                                 <Path Width="12.5" Margin="5 0 0 0" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
                                 <Ellipse Width="4" Height="3.5" Margin="0 12 15 0" Fill="White" />
                                 <Path Width="12.5" Margin="5 13 0 0" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
-
                                 <Ellipse Width="36" Height="36" Stroke="White" Fill="Transparent" StrokeThickness="3" />
-
-
-
                             </Grid>
-
                         </DockPanel>
-
-
-
+                        <DockPanel x:Name="iconHelp"  Margin="5" Style="{StaticResource menuIconStyle}" Grid.Row="7" MouseLeftButtonUp="iconHelp_MouseLeftButtonUp" IsEnabled="True" Visibility="Visible">
+                            <DockPanel.ToolTip>
+                                <StackPanel>
+                                    <Label x:Name="tooltipHelpHeader" FontWeight="Bold">Help</Label>
+                                    <TextBlock x:Name="tooltipHelp" Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">Open Online Help.</TextBlock>
+                                </StackPanel>
+                            </DockPanel.ToolTip>
+                            <Grid Height="36" Width="36">
+                                <Path Width="12.5" Margin="5 13 0 0" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
+                                <Ellipse Width="36" Height="36" Stroke="White" Fill="Transparent" StrokeThickness="3" />
+                            </Grid>
+                        </DockPanel>
                         <DockPanel x:Name="whiteUnderlineRefresh" Background="White" Height="3" VerticalAlignment="Bottom"  Grid.Column="1" Visibility="Collapsed"></DockPanel>
                         <DockPanel x:Name="whiteUnderlineSetData" Background="White" Width="{Binding ElementName=tblockSetDataSource, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="2" Visibility="Collapsed"></DockPanel>
                         <DockPanel x:Name="whiteUnderlineOpen" Background="White" Width="{Binding ElementName=tblockOpen, Path=ActualWidth}" Height="3" VerticalAlignment="Bottom"  Grid.Column="3" Visibility="Collapsed"></DockPanel>
