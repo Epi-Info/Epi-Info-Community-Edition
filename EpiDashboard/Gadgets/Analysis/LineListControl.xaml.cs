@@ -1403,25 +1403,32 @@ namespace EpiDashboard
                             {
                                 DataView dgItemSource = dg.ItemsSource as DataView;
                                 int dgtcindex = 0;
+
                                 foreach (DataColumn dc in dgItemSource.Table.Columns)
                                 {
-                                    string nombre = dg.Columns[dgtcindex].Header.ToString();
-                                    if (dg.Columns.Count > dgtcindex)
+                                    try
                                     {
-                                        for (int i = 2; i < 24; i++)
+                                        if (dg.Columns.Count > dgtcindex)
                                         {
-                                            if (dgItemSource.Table.Columns.Contains(nombre) && dc.Ordinal != 0)
+                                            string nombre = dg.Columns[dgtcindex].Header.ToString();
+
+                                            for (int i = 2; i < 24; i++)
                                             {
-                                                nombre = nombre + '(' + i + ')';
-                                            }
-                                            else
-                                            {
-                                                dc.ColumnName = nombre;
-                                                break;
+                                                if (dgItemSource.Table.Columns.Contains(nombre) && dc.Ordinal != 0)
+                                                {
+                                                    nombre = nombre + '(' + i + ')';
+                                                }
+                                                else
+                                                {
+                                                    dc.ColumnName = nombre;
+                                                    break;
+                                                }
                                             }
                                         }
+
+                                        dgtcindex++;
                                     }
-                                    dgtcindex++;
+                                    catch { }
                                 }
 
                                 htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
