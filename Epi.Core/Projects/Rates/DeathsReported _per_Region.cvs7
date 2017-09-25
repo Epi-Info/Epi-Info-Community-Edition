@@ -23,34 +23,7 @@
     <dashboardRules />
   </dashboardHelper>
   <Gadgets>
-    <lineListGadget top="49" left="603" collapsed="False" gadgetType="EpiDashboard.LineListControl" id="a1dd83c3-c668-469c-bf16-51f89081e05f" actualHeight="349.33">
-      <dataFilters recordProcessScope="undeleted" />
-      <groupVariable>
-      </groupVariable>
-      <groupVariableSecondary>
-      </groupVariableSecondary>
-      <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
-      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
-      <showListLabels>False</showListLabels>
-      <showLineColumn>True</showLineColumn>
-      <showColumnHeadings>True</showColumnHeadings>
-      <showNullLabels>True</showNullLabels>
-      <customHeading>Line List</customHeading>
-      <customDescription>
-      </customDescription>
-      <maxRows>50</maxRows>
-      <maxColumnNameLength>24</maxColumnNameLength>
-      <maxWidth>800</maxWidth>
-      <maxHeight>500</maxHeight>
-      <listFields>
-        <listField>DeathsReported</listField>
-        <listField>EpiWeek</listField>
-        <listField>Population</listField>
-        <listField>Region</listField>
-        <listField>ReportingRegion</listField>
-      </listFields>
-    </lineListGadget>
-    <ratesGadget top="52" left="103" collapsed="False" gadgetType="EpiDashboard.RatesControl" id="34066369-8e58-4e13-bc77-cc3ab374650e" actualHeight="358.8">
+    <ratesGadget top="47" left="106" collapsed="False" gadgetType="EpiDashboard.RatesControl" id="34066369-8e58-4e13-bc77-cc3ab374650e" actualHeight="358.8">
       <dataFilters recordProcessScope="undeleted" />
       <numerVariable>DeathsReported</numerVariable>
       <denomVariable>Population</denomVariable>
@@ -65,7 +38,7 @@
       <showLineColumn>True</showLineColumn>
       <showColumnHeadings>True</showColumnHeadings>
       <showNullLabels>True</showNullLabels>
-      <rateMultiplierString>10^6</rateMultiplierString>
+      <rateMultiplierString>10^5</rateMultiplierString>
       <showAsPercent>True</showAsPercent>
       <numerDistinct>False</numerDistinct>
       <denomDistinct>True</denomDistinct>
@@ -87,6 +60,34 @@
       <highValue_L3>NaN</highValue_L3>
       <lowValue_L4>NaN</lowValue_L4>
     </ratesGadget>
+    <lineListGadget top="47" left="579" collapsed="False" gadgetType="EpiDashboard.LineListControl" id="a1dd83c3-c668-469c-bf16-51f89081e05f" actualHeight="349.33">
+      <dataFilters recordProcessScope="undeleted" />
+      <groupVariable>
+      </groupVariable>
+      <groupVariableSecondary>
+      </groupVariableSecondary>
+      <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <showLineColumn>True</showLineColumn>
+      <showColumnHeadings>True</showColumnHeadings>
+      <showNullLabels>True</showNullLabels>
+      <customHeading>Line List</customHeading>
+      <customDescription>
+      </customDescription>
+      <maxRows>50</maxRows>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <maxWidth>800</maxWidth>
+      <maxHeight>500</maxHeight>
+      <anchorLeft>34066369-8e58-4e13-bc77-cc3ab374650e</anchorLeft>
+      <listFields>
+        <listField>DeathsReported</listField>
+        <listField>EpiWeek</listField>
+        <listField>Population</listField>
+        <listField>Region</listField>
+        <listField>ReportingRegion</listField>
+      </listFields>
+    </lineListGadget>
   </Gadgets>
   <OutputSettings>
     <showCanvasSummaryInfo>True</showCanvasSummaryInfo>
