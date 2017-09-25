@@ -89,6 +89,7 @@
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="50"/>
                             <RowDefinition Height=".05*"/>
                             <RowDefinition Height="2" />
                             <RowDefinition Height=".05*" MaxHeight="32" />
@@ -211,7 +212,7 @@
                                 <Ellipse Width="36" Height="36" Stroke="White" Fill="Transparent" StrokeThickness="3" />
                             </Grid>
                         </DockPanel>
-                        <DockPanel x:Name="iconHelp"  Margin="5" Style="{StaticResource menuIconStyle}" Grid.Row="7" MouseLeftButtonUp="iconHelp_MouseLeftButtonUp" IsEnabled="True" Visibility="Visible">
+                        <DockPanel x:Name="iconHelp"  Margin="5" Style="{StaticResource menuIconStyle}" Grid.Row="8" MouseLeftButtonUp="iconHelp_MouseLeftButtonUp" IsEnabled="True" Visibility="Visible">
                             <DockPanel.ToolTip>
                                 <StackPanel>
                                     <Label x:Name="tooltipHelpHeader" FontWeight="Bold">Help</Label>
@@ -219,8 +220,8 @@
                                 </StackPanel>
                             </DockPanel.ToolTip>
                             <Grid Height="36" Width="36">
-                                <Path Width="12.5" Margin="5 13 0 0" Height="2.5" Stretch="Fill" Fill="White" Data="F1 M 31,45L 57,45L 57,53L 31,53L 31,45 Z" />
                                 <Ellipse Width="36" Height="36" Stroke="White" Fill="Transparent" StrokeThickness="3" />
+                                <TextBlock x:Name="textBlock" FontFamily="Arial" TextAlignment="Center" HorizontalAlignment="Left" FontSize="28" Height="26.25" Margin="7.916,2.43,0,0" TextWrapping="Wrap" Text="?" Foreground="White" VerticalAlignment="Top" Width="20.75"/>
                             </Grid>
                         </DockPanel>
                         <DockPanel x:Name="whiteUnderlineRefresh" Background="White" Height="3" VerticalAlignment="Bottom"  Grid.Column="1" Visibility="Collapsed"></DockPanel>
