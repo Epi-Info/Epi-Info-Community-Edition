@@ -652,9 +652,7 @@ namespace EpiDashboard
 
             List<string> columnNames = new List<string>();
             if (numerFilterFields != null && numerFilterFields.Count > 0) { columnNames.Add(numerFilterFields[0]); }
-            if (denomFilterFields != null && denomFilterFields.Count > 0) { columnNames.Add(denomFilterFields[0]); }
             if (string.IsNullOrEmpty(ratesParameters.NumeratorField) == false) { columnNames.Add(ratesParameters.NumeratorField); }
-            if (string.IsNullOrEmpty(ratesParameters.DenominatorField) == false) { columnNames.Add(ratesParameters.DenominatorField); }
 
             string sort = "";
             numerAggResult = AggResult(table, ratesParameters.NumeratorField, numerFilter, aggregateExpression, numerSelect, numerAggFxName, ratesParameters.NumerDistinct, columnNames, sort);
