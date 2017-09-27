@@ -922,7 +922,7 @@ namespace Epi.Enter.Forms
                 {
                     string currentGUID = string.Empty;
                     string lastGUID = string.Empty;
-
+                    string FieldName = string.Empty;
                     WordBuilder fieldNames = new WordBuilder(StringLiterals.COMMA);
                     WordBuilder fieldValues = new WordBuilder(StringLiterals.COMMA);
                     List<QueryParameter> fieldValueParams = new List<QueryParameter>();
@@ -931,76 +931,83 @@ namespace Epi.Enter.Forms
 
                     foreach (Field PageField in destinationPage.Fields)
                     {
-
-                        if (PageField is IDataField)
+                        try
                         {
-                            IDataField field = PageField as IDataField;
-                            string FieldName = ((Epi.INamedObject)field).Name;
-
-                            currentGUID = kvp.Key;//fieldDataList[FieldName].RecordGUID;
-
-                            if (importWorker.CancellationPending)
+                            if (PageField is IDataField)
                             {
-                                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
-                                return;
-                            }
+                                IDataField field = PageField as IDataField;
+                                  FieldName = ((Epi.INamedObject)field).Name;
 
-                            if (kvp.Value.ContainsKey(FieldName))
-                            {
-                                string GUID = kvp.Value[FieldName].RecordGUID;
+                                currentGUID = kvp.Key;//fieldDataList[FieldName].RecordGUID;
 
-                                string updateHeader = string.Empty;
-                                string whereClause = string.Empty;
-                                fieldValueParams = new List<QueryParameter>();
-                                StringBuilder sb = new StringBuilder();
-
-                                // Build the Update statement which will be reused
-                                sb.Append(SqlKeyWords.UPDATE);
-                                sb.Append(StringLiterals.SPACE);
-                                sb.Append(destinationProjectDataDriver.InsertInEscape(destinationPage.TableName));
-                                sb.Append(StringLiterals.SPACE);
-                                sb.Append(SqlKeyWords.SET);
-                                sb.Append(StringLiterals.SPACE);
-
-                                updateHeader = sb.ToString();
-
-                                sb.Remove(0, sb.ToString().Length);
-
-                                // Build the WHERE caluse which will be reused
-                                sb.Append(SqlKeyWords.WHERE);
-                                sb.Append(StringLiterals.SPACE);
-                                sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
-                                sb.Append(StringLiterals.EQUAL);
-                                sb.Append("'");
-                                sb.Append(GUID);
-                                sb.Append("'");
-                                whereClause = sb.ToString();
-
-                                sb.Remove(0, sb.ToString().Length);
-
-                                sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
-                                sb.Append(FieldName);
-                                sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
-                                sb.Append(StringLiterals.EQUAL);
-
-                                sb.Append(StringLiterals.COMMERCIAL_AT);
-                                sb.Append(FieldName);
-
-                                QueryParameter param = GetQueryParameterForField(kvp.Value[FieldName], destinationPage);
-                                if (param != null)
+                                if (importWorker.CancellationPending)
                                 {
-                                    Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
-                                    updateQuery.Parameters.Add(param);
-                                    destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
+                                    this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
+                                    return;
+                                }
 
-                                    if (!GUIDList.Contains(GUID))
+                                if (kvp.Value.ContainsKey(FieldName))
+                                {
+                                    string GUID = kvp.Value[FieldName].RecordGUID;
+
+                                    string updateHeader = string.Empty;
+                                    string whereClause = string.Empty;
+                                    fieldValueParams = new List<QueryParameter>();
+                                    StringBuilder sb = new StringBuilder();
+
+                                    // Build the Update statement which will be reused
+                                    sb.Append(SqlKeyWords.UPDATE);
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(destinationProjectDataDriver.InsertInEscape(destinationPage.TableName));
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(SqlKeyWords.SET);
+                                    sb.Append(StringLiterals.SPACE);
+
+                                    updateHeader = sb.ToString();
+
+                                    sb.Remove(0, sb.ToString().Length);
+
+                                    // Build the WHERE caluse which will be reused
+                                    sb.Append(SqlKeyWords.WHERE);
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
+                                    sb.Append(StringLiterals.EQUAL);
+                                    sb.Append("'");
+                                    sb.Append(GUID);
+                                    sb.Append("'");
+                                    whereClause = sb.ToString();
+
+                                    sb.Remove(0, sb.ToString().Length);
+
+                                    sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
+                                    sb.Append(FieldName);
+                                    sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
+                                    sb.Append(StringLiterals.EQUAL);
+
+                                    sb.Append(StringLiterals.COMMERCIAL_AT);
+                                    sb.Append(FieldName);
+
+                                    QueryParameter param = GetQueryParameterForField(kvp.Value[FieldName], destinationPage);
+                                    if (param != null)
                                     {
-                                        GUIDList.Add(GUID);
-                                        recordsInserted++;
-                                        this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
+                                        Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
+                                        updateQuery.Parameters.Add(param);
+                                        destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
+
+                                        if (!GUIDList.Contains(GUID))
+                                        {
+                                            GUIDList.Add(GUID);
+                                            recordsInserted++;
+                                            this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
+                                        }
                                     }
                                 }
                             }
+                        }
+                        catch (Exception ex)
+                        {
+
+                            this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message + "RecordId: " + currentGUID + " FieldName: " + FieldName);
                         }
                     }
                 //}
