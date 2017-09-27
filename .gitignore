@@ -302,3 +302,6 @@ __pycache__/
 OpenCover/
 
 Epi.Core/Configuration_Static.cs
+Build/
+
+
