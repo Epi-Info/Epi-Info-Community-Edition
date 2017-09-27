@@ -746,9 +746,7 @@
     <None Include="Projects\Rates\MosquitoesPresentTrue_per_HouseInRegion.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Projects\Rates\Rates.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Projects\Rates\Rates.docx" />
     <None Include="Projects\Salmonellosis\Salmonellosis.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
