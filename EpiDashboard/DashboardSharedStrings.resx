@@ -1147,14 +1147,14 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_OBSERVATIONS" xml:space="preserve">
     <value>Observations</value>
   </data>
-  <data name="CMENU_ADD_RATES" xml:space="preserve">   
-	  <value>Rates</value>   
+  <data name="CMENU_ADD_RATES" xml:space="preserve">
+    <value>Rates</value>
   </data>
-  <data name="GADGET_SPECIFY_ASSIGN_CONDITION" xml:space="preserve">   
-	  <value>Specify assign condition</value>   
+  <data name="GADGET_SPECIFY_ASSIGN_CONDITION" xml:space="preserve">
+    <value>Specify assign condition</value>
   </data>
-  <data name="GADGET_SPECIFY_ROW_FILTER" xml:space="preserve">   
-	  <value>Specify row filter</value>   
+  <data name="GADGET_SPECIFY_ROW_FILTER" xml:space="preserve">
+    <value>Specify row filter</value>
   </data>
   <data name="GADGET_ONE_GRAPH_VALUE" xml:space="preserve">
     <value>One graph for each value of:</value>
@@ -2253,5 +2253,11 @@ of records or select fewer fields for the group.</value>
   </data>
   <data name="CREATE_EDIT_CONDITION" xml:space="preserve">
     <value>Create/Edit Condition</value>
+  </data>
+  <data name="GADGET_MAPHELP" xml:space="preserve">
+    <value>Open Online Help.</value>
+  </data>
+  <data name="GADGET_MAPHELP_HEADERTITLE" xml:space="preserve">
+    <value>Help</value>
   </data>
 </root>

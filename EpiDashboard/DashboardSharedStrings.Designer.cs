@@ -27,7 +27,7 @@ namespace EpiDashboard {
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal DashboardSharedStrings() {
         }
@@ -3822,6 +3822,15 @@ namespace EpiDashboard {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string GADGET_MAPHELP_ {
+            get {
+                return ResourceManager.GetString("GADGET_MAPHELP_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Map Legend.
         /// </summary>
         public static string GADGET_MAPLEGEND_HEADERTITLE {
@@ -3829,7 +3838,23 @@ namespace EpiDashboard {
                 return ResourceManager.GetString("GADGET_MAPLEGEND_HEADERTITLE", resourceCulture);
             }
         }
-        
+
+        public static string GADGET_MAPHELP_HEADERTITLE
+        {
+            get
+            {
+                return ResourceManager.GetString("GADGET_MAPHELP_HEADERTITLE", resourceCulture);
+            }
+        }
+
+        public static string GADGET_MAPHELP
+        {
+            get
+            {
+                return ResourceManager.GetString("GADGET_MAPHELP", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Map Server.
         /// </summary>

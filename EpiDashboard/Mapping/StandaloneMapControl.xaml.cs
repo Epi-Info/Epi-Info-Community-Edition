@@ -128,7 +128,8 @@ namespace EpiDashboard.Mapping
             tooltipLegendHeader.Content = DashboardSharedStrings.GADGET_HIDE_SHOW_LEGEND;
             tooltipLegend.Text = DashboardSharedStrings.GADGET_HIDESHOW_DESCRP;
             legendTitleTextBlock.Text = DashboardSharedStrings.GADGET_MAPLEGEND_HEADERTITLE;
-
+            tooltipHelpHeader.Content = DashboardSharedStrings.GADGET_MAPHELP_HEADERTITLE;
+            tooltipHelp.Text = DashboardSharedStrings.GADGET_MAPHELP;
             #endregion
         }
 

@@ -1534,7 +1534,6 @@
     <EmbeddedResource Include="DashboardSharedStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
-      <LastGenOutput>DashboardSharedStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ConditionalAssignDialog.resx">
       <DependentUpon>ConditionalAssignDialog.cs</DependentUpon>

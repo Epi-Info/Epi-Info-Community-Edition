@@ -215,8 +215,8 @@
                         <DockPanel x:Name="iconHelp"  Margin="5" Style="{StaticResource menuIconStyle}" Grid.Row="8" MouseLeftButtonUp="iconHelp_MouseLeftButtonUp" IsEnabled="True" Visibility="Visible">
                             <DockPanel.ToolTip>
                                 <StackPanel>
-                                    <Label x:Name="tooltipHelpHeader" FontWeight="Bold">Help</Label>
-                                    <TextBlock x:Name="tooltipHelp" Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">Open Online Help.</TextBlock>
+                                    <Label x:Name="tooltipHelpHeader" FontWeight="Bold">xfe_Help</Label>
+                                    <TextBlock x:Name="tooltipHelp" Padding="10" Background="Transparent" TextWrapping="WrapWithOverflow" Width="200">xfe_Open Online Help.</TextBlock>
                                 </StackPanel>
                             </DockPanel.ToolTip>
                             <Grid Height="36" Width="36">
