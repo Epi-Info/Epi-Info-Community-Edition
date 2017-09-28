@@ -29,7 +29,7 @@
       <denomVariable>Population</denomVariable>
       <numerAggFxVariable>sum</numerAggFxVariable>
       <denomAggFxVariable>sum</denomAggFxVariable>
-      <groupVariable>Region</groupVariable>
+      <groupVariable>ReportingRegion</groupVariable>
       <groupVariableSecondary>
       </groupVariableSecondary>
       <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
