@@ -50,6 +50,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 DateTime param1 = (DateTime)p1;
                 DateTime param2 = (DateTime)p2;
 
+                //
                 if (param1 > param2)
                 {
                     TimeSpan timeSpan = param1 - param2;
