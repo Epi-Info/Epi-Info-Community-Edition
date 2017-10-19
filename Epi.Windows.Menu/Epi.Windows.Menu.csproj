@@ -177,10 +177,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Epi.Core\GoldParserEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel">
-      <HintPath>..\..\..\..\..\EpiInfoMain\Epi.Windows.MakeView\obj\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System">
