@@ -1133,11 +1133,11 @@ namespace Epi.Windows.Dialogs
             if (EWErbUseWindows.Checked)
             {
                 EWErbBasic.Checked = true;
-                groupBox8.Enabled = false;
+                EWEgbBindingProtocol.Enabled = false;
             }
             else
             {
-                groupBox8.Enabled = true;
+                EWEgbBindingProtocol.Enabled = true;
             }
         }
 
