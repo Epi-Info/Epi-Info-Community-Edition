@@ -523,6 +523,7 @@ namespace Epi.Windows.Enter
                     lvLinkedFrom.Items.Clear();
                     lvLinkedFrom.Groups.Clear();
                 }
+
                 if (btnUnlinkFrom.InvokeRequired)
                 {
                     btnUnlinkFrom.Invoke(new MethodInvoker(delegate
@@ -591,7 +592,12 @@ namespace Epi.Windows.Enter
                     {
                         lvLinkedFrom.Invoke(new MethodInvoker(delegate
                         {
-                            lvLinkedFrom.Items.Add(item);
+
+
+                            if(lvLinkedFrom.Items.Contains(item) == false)
+                            {
+                                lvLinkedFrom.Items.Add(item);
+                            }
                         }));
                     }
                     else
@@ -600,10 +606,7 @@ namespace Epi.Windows.Enter
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                // do nothing!
-            }
+            catch { }
         }
 
         #endregion
@@ -619,14 +622,16 @@ namespace Epi.Windows.Enter
                     this.runTimeView = runTimeView;
                     FillFromNodes();
                     FillToNodes();
+                    ToggleEnable(true);
                 }
                 else
+                {
+                    lvLinkedFrom.Clear();
+                    lvLinkedTo.Clear();
                     ToggleEnable(false);
+                }
             }
-            catch (Exception ex)
-            {
-                //temporarily catch all
-            }
+            catch { }
         }
 
         #endregion
