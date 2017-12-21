@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACI
-        5wAAAk1TRnQBSQFMAgEBYQEAAWMBAAEsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        5wAAAk1TRnQBSQFMAgEBYQEAAWMBAAFMAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABXgEBAgABAQEAASAGAAFeAQH/AP8AEwABvQGcAXwF/wG9AZwBhAX/Ab0BnAF8Bf8BvQGcAYQF/wG9
         AZwBfAX/Ab0BnAGEBf8BvQGcAXwF/wG9AZwBhAH/xAA8/8QAAb0BnAGECf8BvQGlAYQB/wG9AZwBhAH/
         Ab0BpQGEBf8BvQGlAYQB/wG9AZwBhAH/Ab0BpQGEEf8BvQGcAXwB/8QACP8BxgGlAYQJ/wG9AZwBhAX/
@@ -1130,7 +1130,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB0
-        RgAAAk1TRnQBSQFMAwEBAAEgAQABIAEAATIBAAEwAQAE/wEhAQAI/wFCAU0BNgcAATYDAAEoAwAByAMA
+        RgAAAk1TRnQBSQFMAwEBAAFAAQABQAEAATIBAAEwAQAE/wEhAQAI/wFCAU0BNgcAATYDAAEoAwAByAMA
         ATADAAEBAQABIAYAAZYSAAHgAc0BxAH/AeABzQHEAf8B4AHNAcQB/wHgAc0BxAH/AeABzQHEAf8B4AHN
         AcQB/wHgAc0BxAH/AeABzQHEAf8B4AHNAcQB/wHgAc0BxAH/AeABzQHEAf8B4AHNAcQB/wHgAc0BxAH/
         AeABzQHEAf8B4AHNAcQB/wHgAc0BxAH/AeABzQHEAf8B4AHNAcQB/wHgAc0BxAH/AeABzQHEAf8B4AHN
@@ -1457,16 +1457,16 @@
     <value>0</value>
   </data>
   <data name="btnUnlinkFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Bottom, Left</value>
   </data>
   <data name="btnUnlinkFrom.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="btnUnlinkFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 267</value>
+    <value>3, 267</value>
   </data>
   <data name="btnUnlinkFrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>95, 23</value>
   </data>
   <data name="btnUnlinkFrom.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1487,16 +1487,16 @@
     <value>1</value>
   </data>
   <data name="btnNewLinkFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="btnNewLinkFrom.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="btnNewLinkFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 267</value>
+    <value>104, 267</value>
   </data>
   <data name="btnNewLinkFrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 23</value>
+    <value>136, 23</value>
   </data>
   <data name="btnNewLinkFrom.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1543,6 +1543,24 @@
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnUnlinkTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="btnUnlinkTo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnUnlinkTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 267</value>
+  </data>
+  <data name="btnUnlinkTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 23</value>
+  </data>
+  <data name="btnUnlinkTo.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnUnlinkTo.Text" xml:space="preserve">
+    <value>Unlink</value>
+  </data>
   <data name="&gt;&gt;btnUnlinkTo.Name" xml:space="preserve">
     <value>btnUnlinkTo</value>
   </data>
@@ -1555,6 +1573,24 @@
   <data name="&gt;&gt;btnUnlinkTo.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnNewLinkTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="btnNewLinkTo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnNewLinkTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 267</value>
+  </data>
+  <data name="btnNewLinkTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 23</value>
+  </data>
+  <data name="btnNewLinkTo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btnNewLinkTo.Text" xml:space="preserve">
+    <value>Add Exposure</value>
+  </data>
   <data name="&gt;&gt;btnNewLinkTo.Name" xml:space="preserve">
     <value>btnNewLinkTo</value>
   </data>
@@ -1565,6 +1601,18 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;btnNewLinkTo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lvLinkedTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="lvLinkedTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 6</value>
+  </data>
+  <data name="lvLinkedTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 255</value>
+  </data>
+  <data name="lvLinkedTo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="&gt;&gt;lvLinkedTo.Name" xml:space="preserve">
@@ -1627,101 +1675,17 @@
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnUnlinkTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="btnUnlinkTo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="btnUnlinkTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 267</value>
-  </data>
-  <data name="btnUnlinkTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btnUnlinkTo.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="btnUnlinkTo.Text" xml:space="preserve">
-    <value>Unlink</value>
-  </data>
-  <data name="&gt;&gt;btnUnlinkTo.Name" xml:space="preserve">
-    <value>btnUnlinkTo</value>
-  </data>
-  <data name="&gt;&gt;btnUnlinkTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnUnlinkTo.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;btnUnlinkTo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnNewLinkTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="btnNewLinkTo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="btnNewLinkTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 267</value>
-  </data>
-  <data name="btnNewLinkTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 23</value>
-  </data>
-  <data name="btnNewLinkTo.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="btnNewLinkTo.Text" xml:space="preserve">
-    <value>Add Exposure...</value>
-  </data>
-  <data name="&gt;&gt;btnNewLinkTo.Name" xml:space="preserve">
-    <value>btnNewLinkTo</value>
-  </data>
-  <data name="&gt;&gt;btnNewLinkTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnNewLinkTo.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;btnNewLinkTo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lvLinkedTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="lvLinkedTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 6</value>
-  </data>
-  <data name="lvLinkedTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 255</value>
-  </data>
-  <data name="lvLinkedTo.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lvLinkedTo.Name" xml:space="preserve">
-    <value>lvLinkedTo</value>
-  </data>
-  <data name="&gt;&gt;lvLinkedTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lvLinkedTo.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;lvLinkedTo.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="btnViewSNA.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="btnViewSNA.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="btnViewSNA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 333</value>
+    <value>110, 333</value>
   </data>
   <data name="btnViewSNA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 23</value>
+    <value>136, 23</value>
   </data>
   <data name="btnViewSNA.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1778,6 +1742,6 @@
     <value>LinkedRecordsViewer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Docking.DockWindow, Epi.Windows, Version=7.1.5799.26925, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Docking.DockWindow, Epi.Windows, Version=7.2.6564.16125, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

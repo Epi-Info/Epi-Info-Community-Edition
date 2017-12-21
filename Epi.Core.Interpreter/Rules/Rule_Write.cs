@@ -331,9 +331,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
 
 
+                bool? deleteSuccessful = null;
                 if (this.WriteMode.Equals("REPLACE", StringComparison.OrdinalIgnoreCase) && DBReadExecute.CheckDatabaseTableExistance(FilePath, TableName, this.isConnectionString))
                 {
-                    OutputDriver.DeleteTable(TableName);
+                    deleteSuccessful = OutputDriver.DeleteTable(TableName);
                 }
 
                 List<TableColumn> TableColumns = new List<TableColumn>();
@@ -595,27 +596,36 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     DataTable sourceTable = OutputDriver.GetTableData(TableName);
 
-                    StringBuilder ColumnSQL = new StringBuilder();
+                    OutputDriver.IsBulkOperation = true; StringBuilder sqlquery = new StringBuilder();
 
-                    OutputDriver.IsBulkOperation = true;
+                    int count = 0;
+
+                    sqlquery.Append("create table [" + TableName + "] ( ");
+
                     foreach (string column in VariableList)
                     {
                         string columnName = String.Empty;
                         if (!column.Contains(".") && !OutputDriver.ColumnExists(TableName, column))
                         {
-                            //add column
                             columnName = column;
-                            Query qr = OutputDriver.CreateQuery("alter table [" + TableName + "] add [" + columnName + "] " + DBReadExecute.SQLGetType(CurrentDataTable.Columns[column]));                            
-                            OutputDriver.ExecuteNonQuery(qr);
+                            if (count > 0)
+                            {
+                                sqlquery.Append(", ");
+                            }
+                            sqlquery.Append(" [" + columnName + "] " + DBReadExecute.SQLGetType(CurrentDataTable.Columns[column]));
+                            count++;
                         }
-
-                        ColumnSQL.Append(" [");
-                        ColumnSQL.Append(column);
-                        ColumnSQL.Append("],");
                     }
-                    OutputDriver.IsBulkOperation = false;
 
-                    ColumnSQL.Length = ColumnSQL.Length - 1;
+                    sqlquery.Append(" )");
+
+                    if (count > 0)
+                    {
+                        Query qr = OutputDriver.CreateQuery(sqlquery.ToString());
+                        OutputDriver.ExecuteNonQuery(qr);
+                    }
+
+                    OutputDriver.IsBulkOperation = false;
 
                     //Insert data into table
 
@@ -665,6 +675,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                     this.statusMessage += CurrentDataTable.Rows.Count.ToString() + " records written.";
 
+                    DataReader.Close();
                 }
             }
             catch (Exception ex)

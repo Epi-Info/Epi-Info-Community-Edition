@@ -2,35 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using RDotNet;
 
 namespace Epi.Statistics
 {
     public static class SingleMxN
     {
-        public static double CalcFisher(System.Data.DataRow[] SortedRows, Boolean classic)
-        {
-            REngine engine = REngine.GetInstance();
-            StringBuilder strb = new StringBuilder();
-            strb.Append("c(");
-
-            for (int i = 0; i < SortedRows.Length; i++)
-            {
-                for (int j = 1; j < SortedRows[0].ItemArray.Length; j++)
-                {
-                    strb.Append(SortedRows[i][j] + ",");
-                }
-            }
-            int ncol = SortedRows[0].ItemArray.Length - 1;
-            strb.Replace(',', ')', strb.Length - 1, 1);
-            strb.Append(",byrow=TRUE,ncol=" + ncol);
-
-            GenericVector fisherResults = engine.Evaluate("aggregates = matrix(" + strb.ToString() + ")\n" +
-                "fisher.test(aggregates)").AsList();
-
-            return fisherResults[0].AsNumeric().ToArray()[0];
-        }
-
         public static double[] CalcChiSq(System.Data.DataRow[] SortedRows, Boolean classic)
         {
             double[] ChiSq = { 0.0, 0.0 };

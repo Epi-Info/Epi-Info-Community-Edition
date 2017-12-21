@@ -65,7 +65,7 @@ namespace EpiDashboard
         private delegate void RenderFrequencyHeaderDelegate(string strataValue, string freqVar, DataColumnCollection columns);
         //private delegate void AddGridRowDelegate(string strataValue, int height);
         private delegate void FillPercentsDelegate(Grid grid);
-        private delegate void AddChiSquareDelegate(double tableChiSq, double tableChiSqDf, double tableChiSqP, double tableFisherP, string disclaimer, string value);
+        private delegate void AddChiSquareDelegate(double tableChiSq, double tableChiSqDf, double tableChiSqP, string disclaimer, string value);
         //private delegate void DrawFrequencyBordersDelegate(string strataValue);  
         protected new delegate void SetGridTextDelegate(string strataValue, TextBlockConfig textBlockConfig, FontWeight fontWeight, double total);
 
@@ -1215,14 +1215,13 @@ namespace EpiDashboard
                             double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, false);
                             double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
                             double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
-                            double fisherTestResult = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
                             String disclaimer = "";
                             if (tableChiSq[1] == 5.0)
                                 disclaimer = "An expected cell value is <5. X" + '\u00B2' + " may not be valid.";
                             if (tableChiSq[1] == 1.0)
                                 disclaimer = "An expected cell value is <1. X" + '\u00B2' + " may not be valid.";
 
-                            this.Dispatcher.BeginInvoke(new AddChiSquareDelegate(RenderChiSquare), tableChiSq[0], tableChiSqDF, tableChiSqP, fisherTestResult, disclaimer, strataValue);
+                            this.Dispatcher.BeginInvoke(new AddChiSquareDelegate(RenderChiSquare), tableChiSq[0], tableChiSqDF, tableChiSqP, disclaimer, strataValue);
                             this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, rowCount, totals);
                             this.Dispatcher.BeginInvoke(drawBorders, strataValue);
                         }
@@ -2233,7 +2232,7 @@ namespace EpiDashboard
            
         }
 
-        private void RenderChiSquare(double tableChiSq, double tableChiSqDF, double tableChiSqP, double tableFisherP, string disclaimer, string value)
+        private void RenderChiSquare(double tableChiSq, double tableChiSqDF, double tableChiSqP, string disclaimer, string value)
         {
             TextBlock textBlock = new TextBlock();
 
@@ -2324,36 +2323,9 @@ namespace EpiDashboard
             Grid.SetColumn(txt6, 2);
             grid.Children.Add(txt6);
 
-            grid.RowDefinitions.Add(new RowDefinition());
-            TextBlock txt1b = new TextBlock();
-            txt1b.Text = "Fisher's Exact";
-            txt1b.FontWeight = FontWeights.Bold;
-            txt1b.Margin = margin;
-            txt1b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            Grid.SetRow(txt1b, 2);
-            Grid.SetColumn(txt1b, 0);
-            grid.Children.Add(txt1b);
-
-            TextBlock txt2b = new TextBlock();
-            txt2b.Text = tableFisherP.ToString("F4");
-            txt2b.Margin = margin;
-            txt2b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            Grid.SetRow(txt2b, 2);
-            Grid.SetColumn(txt2b, 2);
-            grid.Children.Add(txt2b);
-
-            grid.RowDefinitions.Add(new RowDefinition());
-            TextBlock txt4b = new TextBlock();
-            txt4b.Text = "(Computed by R)";
-            txt4b.Margin = margin;
-            txt4b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            Grid.SetRow(txt4b, 3);
-            Grid.SetColumn(txt4b, 2);
-            grid.Children.Add(txt4b);
-
             if (!string.IsNullOrEmpty(disclaimer) && !Double.IsNaN(tableChiSq))
             {
-//                grid.RowDefinitions.Add(new RowDefinition());
+                grid.RowDefinitions.Add(new RowDefinition());
 
                 StackPanel g = (StackPanel)grid.Parent;
 
