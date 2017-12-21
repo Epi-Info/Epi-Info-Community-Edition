@@ -99,7 +99,19 @@ namespace EpiDashboard.Controls.GadgetProperties
             RowFilterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             panelFilters.Children.Add(RowFilterControl);
 
+            cbxFieldCLType.Items.Add("Wald");
+            cbxFieldCLType.Items.Add("Logit");
+            if (parameters.UseLogitConfidenceIntervals)
+                cbxFieldCLType.SelectedIndex = 1;
+            else
+                cbxFieldCLType.SelectedIndex = 0;
 
+            cbxFieldCLLevel.Items.Add("90%");
+            cbxFieldCLLevel.Items.Add("95%");
+            if (parameters.ConfidenceLevel == 0.9)
+                cbxFieldCLLevel.SelectedIndex = 0;
+            else
+                cbxFieldCLLevel.SelectedIndex = 1;
 
             #region Translation
 
@@ -229,6 +241,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Display settings
             txtTitle.Text = Parameters.GadgetTitle;
             txtDesc.Text = Parameters.GadgetDescription;
+
+            if (Parameters.UseLogitConfidenceIntervals)
+                cbxFieldCLType.SelectedIndex = 1;
+            else
+                cbxFieldCLType.SelectedIndex = 0;
 
             CheckVariables();
         }
@@ -378,6 +395,21 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void cbxField_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CheckVariables();
+        }
+
+        private void cbxFieldCLType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxFieldCLType.SelectedIndex == 1)
+                Parameters.UseLogitConfidenceIntervals = true;
+            else
+                Parameters.UseLogitConfidenceIntervals = false;
+        }
+
+        private void cbxFieldCLLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxFieldCLLevel.SelectedIndex == 0)
+                Parameters.ConfidenceLevel = 0.9;
+            else Parameters.ConfidenceLevel = 0.95;
         }
     }
 }

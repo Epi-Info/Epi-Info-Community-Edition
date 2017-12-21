@@ -96,6 +96,7 @@ Public Class ComplexSampleTables
     Private isVerified As Boolean
 
     Private varianceMultiplier As Double
+    Public confidenceLevel As Double
 
     Private context As EpiInfo.Plugin.IAnalysisStatisticContext
 
@@ -127,6 +128,8 @@ Public Class ComplexSampleTables
         Public LCL As Double
         Public UCL As Double
         Public DesignEffect As Decimal
+        Public LogitLCL As Double
+        Public LogitUCL As Double
     End Structure
 
     Public Structure CSFrequencyResults
@@ -254,6 +257,8 @@ Public Class ComplexSampleTables
             fRow.LCL = vntOutTable(i, 6)
             fRow.UCL = vntOutTable(i, 7)
             fRow.DesignEffect = vntOutTable(i, 8)
+            fRow.LogitLCL = vntOutTable(i, 10)
+            fRow.LogitUCL = vntOutTable(i, 11)
             csFrequencyResults.Rows.Add(fRow)
         Next
 
@@ -1040,7 +1045,7 @@ ErrorHandler:
         Else
             Dim dist As New statlib
             dist = New statlib()
-            varianceMultiplier = dist.TfromP(0.95, numCats - numStrata)
+            varianceMultiplier = dist.TfromP(confidenceLevel, numCats - numStrata)
         End If
         '#Else
         '        'UPGRADE_NOTE: #If #EndIf block was not upgraded because the expression Else did not evaluate to True or was not evaluated. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="27EE2C3C-05AF-4C04-B2AF-657B4FB6B5FC"'
@@ -1458,7 +1463,7 @@ ErrorHandler:
             '
             ' Dimension the results array and populate the values.
             '
-            ReDim vntOutTable(nRows - 1, 9)
+            ReDim vntOutTable(nRows - 1, 11)
 
             Pd = FirstDom
             nCurrentRow = 0 '1
@@ -1536,6 +1541,14 @@ ErrorHandler:
                     If (Pct > 0.0#) Then
                         vntOutTable(nCurrentRow, 6) = 100 * ((P.YE / Pd.SumW) + (-varianceMultiplier * Math.Sqrt((P.VarT))))
                         vntOutTable(nCurrentRow, 7) = 100 * ((P.YE / Pd.SumW) + (varianceMultiplier * Math.Sqrt((P.VarT))))
+                        Dim phat As Double
+                        phat = P.YE / Pd.SumW
+                        Dim logitLCL As Double
+                        Dim logitUCL As Double
+                        logitLCL = Math.Log(phat / (1.0 - phat)) - varianceMultiplier * (Math.Sqrt(P.VarT) / (phat * (1.0 - phat)))
+                        logitUCL = Math.Log(phat / (1.0 - phat)) + varianceMultiplier * (Math.Sqrt(P.VarT) / (phat * (1.0 - phat)))
+                        vntOutTable(nCurrentRow, 10) = 100 * (Math.Exp(logitLCL) / (1 + Math.Exp(logitLCL)))
+                        vntOutTable(nCurrentRow, 11) = 100 * (Math.Exp(logitUCL) / (1 + Math.Exp(logitUCL)))
                     Else
                         vntOutTable(nCurrentRow, 6) = System.DBNull.Value
                         vntOutTable(nCurrentRow, 7) = System.DBNull.Value

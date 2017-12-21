@@ -838,7 +838,15 @@ namespace EpiDashboard
                 grid.RowDefinitions.Add(new RowDefinition());
 
                 TextBlock txtLCLPercentLabel = new TextBlock();
-                txtLCLPercentLabel.Text = "LCL %";
+                txtLCLPercentLabel.Text = "Wald 95% LCL";
+                if (((ComplexSampleFrequencyParameters)Parameters).ConfidenceLevel == 0.9)
+                    txtLCLPercentLabel.Text = "Wald 90% LCL";
+                if (((ComplexSampleFrequencyParameters)Parameters).UseLogitConfidenceIntervals)
+                {
+                    txtLCLPercentLabel.Text = "Logit 95% LCL";
+                    if (((ComplexSampleFrequencyParameters)Parameters).ConfidenceLevel == 0.9)
+                        txtLCLPercentLabel.Text = "Logit 90% LCL";
+                }
                 txtLCLPercentLabel.Margin = (Thickness)this.Resources["genericTextMargin"];
                 Grid.SetRow(txtLCLPercentLabel, grid.RowDefinitions.Count - 1);
                 Grid.SetColumn(txtLCLPercentLabel, 0);
@@ -846,6 +854,8 @@ namespace EpiDashboard
 
                 TextBlock txtLCLPercent = new TextBlock();
                 txtLCLPercent.Text = fRow.LCL.ToString("F3");
+                if (((ComplexSampleFrequencyParameters)Parameters).UseLogitConfidenceIntervals)
+                    txtLCLPercent.Text = fRow.LogitLCL.ToString("F3");
                 txtLCLPercent.Margin = (Thickness)this.Resources["genericTextMargin"];
                 txtLCLPercent.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                 Grid.SetRow(txtLCLPercent, grid.RowDefinitions.Count - 1);
@@ -856,7 +866,15 @@ namespace EpiDashboard
                 grid.RowDefinitions.Add(new RowDefinition());
 
                 TextBlock txtUCLPercentLabel = new TextBlock();
-                txtUCLPercentLabel.Text = "UCL %";
+                txtUCLPercentLabel.Text = "Wald 95% UCL";
+                if (((ComplexSampleFrequencyParameters)Parameters).ConfidenceLevel == 0.9)
+                    txtUCLPercentLabel.Text = "Wald 90% UCL";
+                if (((ComplexSampleFrequencyParameters)Parameters).UseLogitConfidenceIntervals)
+                {
+                    txtUCLPercentLabel.Text = "Logit 95% UCL";
+                    if (((ComplexSampleFrequencyParameters)Parameters).ConfidenceLevel == 0.9)
+                        txtUCLPercentLabel.Text = "Logit 90% UCL";
+                }
                 txtUCLPercentLabel.Margin = (Thickness)this.Resources["genericTextMargin"];
                 Grid.SetRow(txtUCLPercentLabel, grid.RowDefinitions.Count - 1);
                 Grid.SetColumn(txtUCLPercentLabel, 0);
@@ -864,6 +882,8 @@ namespace EpiDashboard
 
                 TextBlock txtUCLPercent = new TextBlock();
                 txtUCLPercent.Text = fRow.UCL.ToString("F3");
+                if (((ComplexSampleFrequencyParameters)Parameters).UseLogitConfidenceIntervals)
+                    txtUCLPercent.Text = fRow.LogitUCL.ToString("F3");
                 txtUCLPercent.Margin = (Thickness)this.Resources["genericTextMargin"];
                 txtUCLPercent.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                 Grid.SetRow(txtUCLPercent, grid.RowDefinitions.Count - 1);
@@ -1044,6 +1064,7 @@ namespace EpiDashboard
                         {
                             // Complex sample frequency actually uses the CS Tables class.
                             StatisticsRepository.ComplexSampleTables csFrequency = new StatisticsRepository.ComplexSampleTables();
+                            csFrequency.confidenceLevel = ((ComplexSampleFrequencyParameters)Parameters).ConfidenceLevel;
                             //StatisticsRepository.ComplexSampleTables.CSFrequencyResults results = csFrequency.ComplexSampleFrequencies(GadgetOptions.InputVariableList, csTable);
                             StatisticsRepository.ComplexSampleTables.CSFrequencyResults results = csFrequency.ComplexSampleFrequencies(csfreqParameters.InputVariableList, csTable);
                             if (!string.IsNullOrEmpty(results.ErrorMessage))
@@ -1289,6 +1310,24 @@ namespace EpiDashboard
                 element.AppendChild(psuVariableElement);
             }
 
+            XmlElement levelOfConfidenceElement = doc.CreateElement("levelOfConfidence");
+            if (!String.IsNullOrEmpty(csfreqParameters.ConfidenceLevel.ToString()))
+            {
+                levelOfConfidenceElement.InnerText = csfreqParameters.ConfidenceLevel.ToString();
+                element.AppendChild(levelOfConfidenceElement);
+            }
+
+            XmlElement confidenceIntervalTypeElement = doc.CreateElement("confidenceLevelType");
+            if (csfreqParameters.UseLogitConfidenceIntervals)
+            {
+                confidenceIntervalTypeElement.InnerText = "Logit";
+            }
+            else
+            {
+                confidenceIntervalTypeElement.InnerText = "Wald";
+            }
+            element.AppendChild(confidenceIntervalTypeElement);
+
             //if (GadgetOptions.StrataVariableNames != null && GadgetOptions.StrataVariableNames.Count == 1)
             //{
             //    strataVar = GadgetOptions.StrataVariableNames[0];
@@ -1339,6 +1378,8 @@ namespace EpiDashboard
             txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
 
+            ((ComplexSampleFrequencyParameters)Parameters).ConfidenceLevel = 0.95;
+
             foreach (XmlElement child in element.ChildNodes)
             {
                 switch (child.Name.ToLowerInvariant())
@@ -1377,6 +1418,24 @@ namespace EpiDashboard
                                 //lbxFieldStrata.SelectedItems.Add(field.InnerText.Replace("&lt;", "<"));
                                 ((ComplexSampleFrequencyParameters)Parameters).StrataVariableNames.Add(field.InnerText.Replace("&lt;", "<"));
                                 inputVariableList.Add("StratvarList", child.InnerText.Replace("&lt;", "<"));
+                            }
+                        }
+                        break;
+                    case "levelofconfidence":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            if (child.InnerText.Equals("0.9"))
+                            {
+                                ((ComplexSampleFrequencyParameters)Parameters).ConfidenceLevel = 0.9;
+                            }
+                        }
+                        break;
+                    case "confidenceleveltype":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            if (child.InnerText.Equals("Logit"))
+                            {
+                                ((ComplexSampleFrequencyParameters)Parameters).UseLogitConfidenceIntervals = true;
                             }
                         }
                         break;

@@ -22,6 +22,9 @@ namespace EpiDashboard
         public bool Show95CIUpperCol { get; set; }
         public bool ShowPercentBarsCol { get; set; }
         public string PSUVariableName { get; set; }
+        public bool UseWaldConfidenceIntervals { get; set; }
+        public bool UseLogitConfidenceIntervals { get; set; }
+        public double ConfidenceLevel { get; set; }
 
         public ComplexSampleFrequencyParameters()
             : base()

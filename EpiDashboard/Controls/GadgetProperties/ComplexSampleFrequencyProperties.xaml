@@ -68,6 +68,20 @@
 
                     <TextBlock x:Name="tblockPSU" TextWrapping="Wrap" >PSU:</TextBlock>
                     <ComboBox x:Name="cbxFieldPSU" Width="216" HorizontalAlignment="Left" Height="28" />
+
+                    <StackPanel Height="12" />
+
+                            <Label x:Name="tblockCLTypeVariable" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockGLMTypeTxt">Confidence Interval Type:</TextBlock>
+                        </Label>
+                            <ComboBox VerticalAlignment="Bottom" HorizontalAlignment="Left" x:Name="cbxFieldCLType" Width="216" Height="28" SelectionChanged="cbxFieldCLType_SelectionChanged" />
+
+                    <StackPanel Height="12" />
+
+                    <Label x:Name="tblockCLLevelVariable" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockCLLevelTxt">Level of Confidence:</TextBlock>
+                    </Label>
+                    <ComboBox VerticalAlignment="Bottom" HorizontalAlignment="Left" x:Name="cbxFieldCLLevel" Width="216" Height="28" SelectionChanged="cbxFieldCLLevel_SelectionChanged" />
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
@@ -98,7 +112,7 @@
                             </Label>
                             <TextBox x:Name="txtDesc" Style="{StaticResource PropertiesGadgetDescription}" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Left"></TextBox>
                         </StackPanel>
-                    </StackPanel>
+                </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
