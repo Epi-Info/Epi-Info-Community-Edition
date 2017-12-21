@@ -3249,13 +3249,13 @@ GlobalRecordId = [FKEY]</value>
     <value>Epi Info 7 project overwritten</value>
   </data>
   <data name="WEBSURVEY_PING_COMMUNICATION_EXCEPTION" xml:space="preserve">
-    <value>Error: Communication exception ouccured.</value>
+    <value>Error: Communication exception occurred.</value>
   </data>
   <data name="WEBSURVEY_PING_FAULT_EXCEPTION" xml:space="preserve">
-    <value>Error: Fault exception ouccured.</value>
+    <value>Error: Fault exception occurred.</value>
   </data>
   <data name="WEBSURVEY_PING_TIMEOUT_EXCEPTION" xml:space="preserve">
-    <value>Error: Timeout exception ouccured.</value>
+    <value>Error: Timeout exception occurred.</value>
   </data>
   <data name="UNLINK_POST" xml:space="preserve">
     <value>Click OK to delete the link, or click Cancel to undo the selection.</value>

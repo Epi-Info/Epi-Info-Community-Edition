@@ -107,7 +107,7 @@ namespace Epi.Windows.Dialogs
             this.lblEndpoint = new System.Windows.Forms.Label();
             this.tabPageWebEnter = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.EWEgbBindingProtocol = new System.Windows.Forms.GroupBox();
             this.EWErbWSHTTP = new System.Windows.Forms.RadioButton();
             this.EWErbBasic = new System.Windows.Forms.RadioButton();
             this.EWEEndPointTextBox = new System.Windows.Forms.TextBox();
@@ -140,7 +140,7 @@ namespace Epi.Windows.Dialogs
             this.BindingGroupBox.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPageWebEnter.SuspendLayout();
-            this.groupBox8.SuspendLayout();
+            this.EWEgbBindingProtocol.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -341,9 +341,9 @@ namespace Epi.Windows.Dialogs
             // 
             // lbxLanguages
             // 
+            resources.ApplyResources(this.lbxLanguages, "lbxLanguages");
             this.lbxLanguages.Items.AddRange(new object[] {
             resources.GetString("lbxLanguages.Items")});
-            resources.ApplyResources(this.lbxLanguages, "lbxLanguages");
             this.lbxLanguages.Name = "lbxLanguages";
             this.lbxLanguages.SelectedIndexChanged += new System.EventHandler(this.lbxLanguages_SelectedIndexChanged);
             // 
@@ -679,7 +679,7 @@ namespace Epi.Windows.Dialogs
             // tabPageWebEnter
             // 
             this.tabPageWebEnter.Controls.Add(this.button1);
-            this.tabPageWebEnter.Controls.Add(this.groupBox8);
+            this.tabPageWebEnter.Controls.Add(this.EWEgbBindingProtocol);
             this.tabPageWebEnter.Controls.Add(this.EWEEndPointTextBox);
             this.tabPageWebEnter.Controls.Add(this.groupBox7);
             this.tabPageWebEnter.Controls.Add(this.label10);
@@ -694,13 +694,13 @@ namespace Epi.Windows.Dialogs
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // groupBox8
+            // EWEgbBindingProtocol
             // 
-            this.groupBox8.Controls.Add(this.EWErbWSHTTP);
-            this.groupBox8.Controls.Add(this.EWErbBasic);
-            resources.ApplyResources(this.groupBox8, "groupBox8");
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.TabStop = false;
+            this.EWEgbBindingProtocol.Controls.Add(this.EWErbWSHTTP);
+            this.EWEgbBindingProtocol.Controls.Add(this.EWErbBasic);
+            resources.ApplyResources(this.EWEgbBindingProtocol, "EWEgbBindingProtocol");
+            this.EWEgbBindingProtocol.Name = "EWEgbBindingProtocol";
+            this.EWEgbBindingProtocol.TabStop = false;
             // 
             // EWErbWSHTTP
             // 
@@ -828,8 +828,8 @@ namespace Epi.Windows.Dialogs
             this.groupBox6.PerformLayout();
             this.tabPageWebEnter.ResumeLayout(false);
             this.tabPageWebEnter.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
+            this.EWEgbBindingProtocol.ResumeLayout(false);
+            this.EWEgbBindingProtocol.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
@@ -892,7 +892,7 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.RadioButton rbNoWindows;
         private System.Windows.Forms.RadioButton rbUseWindows;
         private System.Windows.Forms.TabPage tabPageWebEnter;
-        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox EWEgbBindingProtocol;
         private System.Windows.Forms.RadioButton EWErbWSHTTP;
         private System.Windows.Forms.RadioButton EWErbBasic;
         private System.Windows.Forms.TextBox EWEEndPointTextBox;

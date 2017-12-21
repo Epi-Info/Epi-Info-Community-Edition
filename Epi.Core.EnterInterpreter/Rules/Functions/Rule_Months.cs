@@ -54,13 +54,13 @@ namespace Epi.Core.EnterInterpreter.Rules
                 {
                     TimeSpan timeSpan = param1 - param2;
                     DateTime dateTime = new DateTime(timeSpan.Ticks);
-                    result = (dateTime.Month - 1) * -1;
+                    result = -1 * ((param1.Year - param2.Year) * 12 + param1.Month - param2.Month + (param1.Day >= param2.Day ? 0 : -1));
                 }
                 else
                 {
                     TimeSpan timeSpan = param2 - param1;
                     DateTime dateTime = new DateTime(timeSpan.Ticks);
-                    result = dateTime.Month - 1;
+                   result = (param2.Year - param1.Year) * 12 + param2.Month - param1.Month + (param2.Day >= param1.Day ? 0 : -1);
                 }
             }
 

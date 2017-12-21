@@ -9126,7 +9126,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error: Communication exception ouccured..
+        ///   Looks up a localized string similar to Error: Communication exception occurred..
         /// </summary>
         public static string WEBSURVEY_PING_COMMUNICATION_EXCEPTION {
             get {
@@ -9144,7 +9144,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error: Fault exception ouccured..
+        ///   Looks up a localized string similar to Error: Fault exception occurred..
         /// </summary>
         public static string WEBSURVEY_PING_FAULT_EXCEPTION {
             get {
@@ -9162,7 +9162,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error: Timeout exception ouccured..
+        ///   Looks up a localized string similar to Error: Timeout exception occurred..
         /// </summary>
         public static string WEBSURVEY_PING_TIMEOUT_EXCEPTION {
             get {
