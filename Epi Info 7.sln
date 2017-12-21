@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.ImportExport", "Epi.ImportExport\Epi.ImportExport.csproj", "{B5F72DDF-5349-4C03-9285-AE35110BA6CD}"
 EndProject
@@ -81,6 +81,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatCalc", "StatCalc\StatCa
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Exclude EpiMap)|Any CPU = Debug (Exclude EpiMap)|Any CPU
 		Debug (Exclude EpiMap)|Mixed Platforms = Debug (Exclude EpiMap)|Mixed Platforms
@@ -1370,115 +1373,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 36
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs09
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = AnthStat\\AnthStat.csproj
-		SccProjectName1 = AnthStat
-		SccLocalPath1 = AnthStat
-		SccProjectUniqueName2 = Epi.Analysis.Statistics\\Epi.Analysis.Statistics.csproj
-		SccProjectName2 = Epi.Analysis.Statistics
-		SccLocalPath2 = Epi.Analysis.Statistics
-		SccProjectUniqueName3 = Epi.CommandLine.Config\\Epi.CommandLine.Config.csproj
-		SccProjectName3 = Epi.CommandLine.Config
-		SccLocalPath3 = Epi.CommandLine.Config
-		SccProjectUniqueName4 = Epi.Core.EnterInterpreter\\Epi.Core.EnterInterpreter.csproj
-		SccProjectName4 = Epi.Core.EnterInterpreter
-		SccLocalPath4 = Epi.Core.EnterInterpreter
-		SccProjectUniqueName5 = Epi.Core.Interpreter\\Epi.Core.AnalysisInterpreter.csproj
-		SccProjectName5 = Epi.Core.Interpreter
-		SccLocalPath5 = Epi.Core.Interpreter
-		SccProjectUniqueName6 = Epi.Core\\Epi.Core.csproj
-		SccProjectName6 = Epi.Core
-		SccLocalPath6 = Epi.Core
-		SccProjectUniqueName7 = Epi.Data.MySQL\\Epi.Data.MySQL.csproj
-		SccProjectName7 = Epi.Data.MySQL
-		SccLocalPath7 = Epi.Data.MySQL
-		SccProjectUniqueName8 = Epi.Data.Office\\Epi.Data.Office.csproj
-		SccProjectName8 = Epi.Data.Office
-		SccLocalPath8 = Epi.Data.Office
-		SccProjectUniqueName9 = Epi.Data.PostgreSQL\\Epi.Data.PostgreSQL.csproj
-		SccProjectName9 = Epi.Data.PostgreSQL
-		SccLocalPath9 = Epi.Data.PostgreSQL
-		SccProjectUniqueName10 = Epi.Data.SqlServer\\Epi.Data.SqlServer.csproj
-		SccProjectName10 = Epi.Data.SqlServer
-		SccLocalPath10 = Epi.Data.SqlServer
-		SccProjectUniqueName11 = Epi.Enter.CheckCodeEngine\\Epi.Enter.CheckCodeEngine.csproj
-		SccProjectName11 = Epi.Enter.CheckCodeEngine
-		SccLocalPath11 = Epi.Enter.CheckCodeEngine
-		SccProjectUniqueName12 = Epi.ImportExport\\Epi.ImportExport.csproj
-		SccProjectName12 = Epi.ImportExport
-		SccLocalPath12 = Epi.ImportExport
-		SccProjectUniqueName13 = Epi.Menu\\Epi.Menu.csproj
-		SccProjectName13 = Epi.Menu
-		SccLocalPath13 = Epi.Menu
-		SccProjectUniqueName14 = Epi.Statistics\\Epi.Statistics.csproj
-		SccProjectName14 = Epi.Statistics
-		SccLocalPath14 = Epi.Statistics
-		SccProjectUniqueName15 = Epi.Windows.Analysis\\Epi.Windows.Analysis.csproj
-		SccProjectName15 = Epi.Windows.Analysis
-		SccLocalPath15 = Epi.Windows.Analysis
-		SccProjectUniqueName16 = Epi.Windows.AnalysisDashboard\\Epi.Windows.AnalysisDashboard.csproj
-		SccProjectName16 = Epi.Windows.AnalysisDashboard
-		SccLocalPath16 = Epi.Windows.AnalysisDashboard
-		SccProjectUniqueName17 = Epi.Windows.DataPackager\\Epi.Windows.DataPackager.csproj
-		SccProjectName17 = Epi.Windows.DataPackager
-		SccLocalPath17 = Epi.Windows.DataPackager
-		SccProjectUniqueName18 = Epi.Windows.DataUnpackager\\Epi.Windows.DataUnpackager.csproj
-		SccProjectName18 = Epi.Windows.DataUnpackager
-		SccLocalPath18 = Epi.Windows.DataUnpackager
-		SccProjectUniqueName19 = Epi.Windows.Enter\\Epi.Windows.Enter.csproj
-		SccProjectName19 = Epi.Windows.Enter
-		SccLocalPath19 = Epi.Windows.Enter
-		SccProjectUniqueName20 = Epi.Windows.Globalization\\Epi.Windows.Globalization.csproj
-		SccProjectName20 = Epi.Windows.Globalization
-		SccLocalPath20 = Epi.Windows.Globalization
-		SccProjectUniqueName21 = Epi.Windows.ImportExport\\Epi.Windows.ImportExport.csproj
-		SccProjectName21 = Epi.Windows.ImportExport
-		SccLocalPath21 = Epi.Windows.ImportExport
-		SccProjectUniqueName22 = Epi.Windows.MakeView\\Epi.Windows.MakeView.csproj
-		SccProjectName22 = Epi.Windows.MakeView
-		SccLocalPath22 = Epi.Windows.MakeView
-		SccProjectUniqueName23 = Epi.Windows.Mapping\\Epi.Windows.Mapping.csproj
-		SccProjectName23 = Epi.Windows.Mapping
-		SccLocalPath23 = Epi.Windows.Mapping
-		SccProjectUniqueName24 = Epi.Windows.Menu\\Epi.Windows.Menu.csproj
-		SccProjectName24 = Epi.Windows.Menu
-		SccLocalPath24 = Epi.Windows.Menu
-		SccProjectUniqueName25 = Epi.Windows.WebSurveyExporter\\Epi.Windows.WebSurveyExporter.csproj
-		SccProjectName25 = Epi.Windows.WebSurveyExporter
-		SccLocalPath25 = Epi.Windows.WebSurveyExporter
-		SccProjectUniqueName26 = Epi.Windows\\Epi.Windows.csproj
-		SccProjectName26 = Epi.Windows
-		SccLocalPath26 = Epi.Windows
-		SccProjectUniqueName27 = EpiDashboard\\EpiDashboard.csproj
-		SccProjectName27 = EpiDashboard
-		SccLocalPath27 = EpiDashboard
-		SccProjectUniqueName28 = EpiInfo.exe\\EpiInfo.exe.csproj
-		SccProjectName28 = EpiInfo.exe
-		SccLocalPath28 = EpiInfo.exe
-		SccProjectUniqueName29 = EpiInfoPlugin\\EpiInfo.Plugin.csproj
-		SccProjectName29 = EpiInfoPlugin
-		SccLocalPath29 = EpiInfoPlugin
-		SccProjectUniqueName30 = EpiMenuCommandPlugin\\EpiMenu.CommandPlugin.csproj
-		SccProjectName30 = EpiMenuCommandPlugin
-		SccLocalPath30 = EpiMenuCommandPlugin
-		SccProjectUniqueName31 = StatisticsRepository\\StatisticsRepository.vbproj
-		SccProjectName31 = StatisticsRepository
-		SccLocalPath31 = StatisticsRepository
-		SccProjectUniqueName32 = Updater\\Updater.csproj
-		SccProjectName32 = Updater
-		SccLocalPath32 = Updater
-		SccProjectUniqueName33 = Utilities\\Utilities.csproj
-		SccProjectName33 = Utilities
-		SccLocalPath33 = Utilities
-		SccProjectUniqueName34 = SilverlightControls.Web\\SilverlightControls.Web.csproj
-		SccProjectName34 = SilverlightControls.Web
-		SccLocalPath34 = SilverlightControls.Web
-		SccProjectUniqueName35 = StatCalc\\StatCalc.csproj
-		SccProjectName35 = StatCalc
-		SccLocalPath35 = StatCalc
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDEAD85D-6A03-4BCB-BC04-DF4CEF035146}
 	EndGlobalSection
 EndGlobal
