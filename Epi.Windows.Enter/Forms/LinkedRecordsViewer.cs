@@ -44,6 +44,18 @@ namespace Epi.Windows.Enter
             lvLinkedFrom.ItemMouseHover += new ListViewItemMouseHoverEventHandler(lvLinkedFrom_ItemMouseHover);
             lvLinkedTo.MouseLeave += new EventHandler(lvLinkedTo_MouseLeave);
             lvLinkedFrom.MouseLeave += new EventHandler(lvLinkedFrom_MouseLeave);
+            lvLinkedTo.LostFocus += LvLinkedTo_LostFocus;
+            lvLinkedFrom.LostFocus += LvLinkedFrom_LostFocus;
+        }
+
+        private void LvLinkedFrom_LostFocus(object sender, EventArgs e)
+        {
+            //lvLinkedFrom.SelectedItems.Clear();
+        }
+
+        private void LvLinkedTo_LostFocus(object sender, EventArgs e)
+        {
+            //lvLinkedTo.SelectedItems.Clear();
         }
 
         void lvLinkedFrom_MouseLeave(object sender, EventArgs e)
@@ -339,7 +351,10 @@ namespace Epi.Windows.Enter
         {
             if (lvLinkedTo.SelectedItems != null)
             {
-                if (lvLinkedTo.SelectedItems.Count > 0)
+                string recordNumber = ((ListViewItem)lvLinkedTo.SelectedItems[0]).Text;
+                DialogResult result = MsgBox.ShowQuestion(SharedStrings.UNLINK_PRE + " " + recordNumber + Environment.NewLine + SharedStrings.UNLINK_POST, MessageBoxButtons.OKCancel);
+
+                if (lvLinkedTo.SelectedItems.Count > 0 && result == DialogResult.OK)
                 {
                     Query query = db.CreateQuery("Delete from metaLinks Where FromRecordGuid = @FromRecordGuid and ToRecordGuid = @ToRecordGuid");
                     query.Parameters.Add(new QueryParameter("@FromRecordGuid", DbType.StringFixedLength, enterMainForm.View.CurrentGlobalRecordId));
@@ -354,7 +369,10 @@ namespace Epi.Windows.Enter
         {
             if (lvLinkedFrom.SelectedItems != null)
             {
-                if (lvLinkedFrom.SelectedItems.Count > 0)
+                string recordNumber = ((ListViewItem)lvLinkedFrom.SelectedItems[0]).Text;
+                DialogResult result = MsgBox.ShowQuestion(SharedStrings.UNLINK_PRE + " " + recordNumber + Environment.NewLine + SharedStrings.UNLINK_POST, MessageBoxButtons.OKCancel);
+
+                if (lvLinkedFrom.SelectedItems.Count > 0 && result == DialogResult.OK)
                 {
                     Query query = db.CreateQuery("Delete from metaLinks Where ToRecordGuid = @ToRecordGuid and FromRecordGuid = @FromRecordGuid");
                     query.Parameters.Add(new QueryParameter("@ToRecordGuid", DbType.StringFixedLength, enterMainForm.View.CurrentGlobalRecordId));
@@ -480,16 +498,30 @@ namespace Epi.Windows.Enter
                     }
                     item.ImageIndex = 0;
                     item.Group = lvLinkedTo.Groups[row["ToViewId"].ToString()];
+
+                    List<string> names = new List<string>();
+
+                    foreach (ListViewItem i in lvLinkedTo.Items)
+                    {
+                        names.Add(i.Name);
+                    }
+
                     if (lvLinkedTo.InvokeRequired)
                     {
                         lvLinkedTo.Invoke(new MethodInvoker(delegate
                         {
-                            lvLinkedTo.Items.Add(item);
+                            if (names.Contains(item.Name) == false)
+                            {
+                                lvLinkedTo.Items.Add(item);
+                            }
                         }));
                     }
                     else
                     {
-                        lvLinkedTo.Items.Add(item);
+                        if (names.Contains(item.Name) == false)
+                        {
+                            lvLinkedTo.Items.Add(item);
+                        }
                     }
                 }
             }
@@ -588,13 +620,18 @@ namespace Epi.Windows.Enter
                     item.ImageIndex = 0;
                     item.Group = lvLinkedFrom.Groups[row["FromViewId"].ToString()];
 
+                    List<string> names = new List<string>();
+
+                    foreach(ListViewItem i in lvLinkedFrom.Items)
+                    {
+                        names.Add(i.Name);
+                    }
+
                     if (lvLinkedFrom.InvokeRequired)
                     {
                         lvLinkedFrom.Invoke(new MethodInvoker(delegate
                         {
-
-
-                            if(lvLinkedFrom.Items.Contains(item) == false)
+                            if (names.Contains(item.Name) == false)
                             {
                                 lvLinkedFrom.Items.Add(item);
                             }
@@ -602,7 +639,10 @@ namespace Epi.Windows.Enter
                     }
                     else
                     {
-                        lvLinkedFrom.Items.Add(item);
+                        if (names.Contains(item.Name) == false)
+                        {
+                            lvLinkedFrom.Items.Add(item);
+                        }
                     }
                 }
             }

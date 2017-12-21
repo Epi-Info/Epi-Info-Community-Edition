@@ -3257,4 +3257,10 @@ GlobalRecordId = [FKEY]</value>
   <data name="WEBSURVEY_PING_TIMEOUT_EXCEPTION" xml:space="preserve">
     <value>Error: Timeout exception ouccured.</value>
   </data>
+  <data name="UNLINK_POST" xml:space="preserve">
+    <value>Click OK to delete the link, or click Cancel to undo the selection.</value>
+  </data>
+  <data name="UNLINK_PRE" xml:space="preserve">
+    <value>You are about to unlink the following record number:</value>
+  </data>
 </root>

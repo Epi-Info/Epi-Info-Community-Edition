@@ -1791,9 +1791,12 @@ namespace Epi.Data.Office
                 }
                 if (cmdOle != null)
                 {
+                    cmdOle.Cancel();
                     cmdOle.Dispose();
                 }
             }
+
+            GC.Collect();
 
             result = true;
             return result;
