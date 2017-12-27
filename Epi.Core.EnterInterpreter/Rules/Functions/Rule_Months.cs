@@ -18,20 +18,6 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             this.ParameterList = EnterRule.GetFunctionParameters(pContext, pToken);
             AddCommandVariableCheckValue(ParameterList, "months");
-            //if (ParameterList.Count > 0)
-            //{
-            //    foreach (var item in ParameterList)
-            //    {
-            //        if (item is Rule_Value)
-            //        {
-            //            var id = ((Epi.Core.EnterInterpreter.Rules.Rule_Value)(item)).Id;
-            //            if (!this.Context.CommandVariableCheck.ContainsKey(id.ToLowerInvariant()))
-            //            {
-            //                this.Context.CommandVariableCheck.Add(id.ToLowerInvariant(), "months");
-            //            }
-            //        }
-            //    }
-            //}
         }
 
         /// <summary>
@@ -50,17 +36,25 @@ namespace Epi.Core.EnterInterpreter.Rules
                 DateTime param1 = (DateTime)p1;
                 DateTime param2 = (DateTime)p2;
 
+                int monthsApart = 12 * (param2.Year - param1.Year) + param2.Month - param1.Month;
+
                 if (param1 > param2)
                 {
-                    TimeSpan timeSpan = param1 - param2;
-                    DateTime dateTime = new DateTime(timeSpan.Ticks);
-                    result = -1 * ((param1.Year - param2.Year) * 12 + param1.Month - param2.Month + (param1.Day >= param2.Day ? 0 : -1));
+                    if (param1.Day < param2.Day)
+                    {
+                        monthsApart++;
+                    }
+
+                    result = monthsApart;
                 }
                 else
                 {
-                    TimeSpan timeSpan = param2 - param1;
-                    DateTime dateTime = new DateTime(timeSpan.Ticks);
-                   result = (param2.Year - param1.Year) * 12 + param2.Month - param1.Month + (param2.Day >= param1.Day ? 0 : -1);
+                    if (param2.Day < param1.Day)
+                    {
+                        monthsApart--;
+                    }
+
+                    result = monthsApart;
                 }
             }
 
