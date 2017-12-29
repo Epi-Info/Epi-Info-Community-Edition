@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Epi.Windows.MakeView.Excel
 {
-   public class Card
+    public class Card
     {
         private string _Question;
         public string Question
@@ -78,6 +78,13 @@ namespace Epi.Windows.MakeView.Excel
         {
             get { return _Counter; }
             set { _Counter = value; }
+        }
+
+        private string _GPSCheckCode;
+        public string GPSCheckCode
+        {
+            get { return _GPSCheckCode; }
+            set { _GPSCheckCode = value; }
         }
     }
 }

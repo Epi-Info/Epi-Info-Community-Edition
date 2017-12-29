@@ -17,12 +17,9 @@ namespace Epi.Windows.MakeView.Excel
         }
         public XDocument BuildNewXml(List<Card> PageList, XDocument NewXmlDoc, string formName)
         {
-            //  "C:/WorkSpace/Challenge/PageTemplate.xml"
             foreach (var NewPage in PageList)
             {
-
                 XElement XmlElement = AddPageXml(NewXmlDoc, NewPage);
-
 
                 if (NewPage.List_Values != null && NewPage.List_Values.Count() > 0 && NewPage.Question_Type == 17)
                 {
@@ -30,10 +27,21 @@ namespace Epi.Windows.MakeView.Excel
                     XElement TemplaitElement = NewXmlDoc.XPathSelectElement("Template");
                     TemplaitElement.Add(SourceTableElement);
                 }
-                // Update Check code
+
+                string checkCode = string.Empty;
                 if (!string.IsNullOrEmpty(NewPage.If_Condition) && !string.IsNullOrEmpty(NewPage.Then_Question))
                 {
-                    XmlElement.SetAttributeValue("CheckCode", GetCheckCode(XmlElement.Attribute("CheckCode").Value, NewPage));
+                    checkCode = GetCheckCode(XmlElement.Attribute("CheckCode").Value, NewPage);
+                }
+
+                if (string.IsNullOrEmpty(NewPage.GPSCheckCode) == false)
+                {
+                    checkCode = Environment.NewLine + NewPage.GPSCheckCode + Environment.NewLine;
+                }
+
+                if (string.IsNullOrEmpty(checkCode) == false)
+                {
+                    XmlElement.SetAttributeValue("CheckCode", checkCode);
                 }
 
                 XmlElement.SetAttributeValue("Name", formName);
@@ -54,29 +62,30 @@ namespace Epi.Windows.MakeView.Excel
             PageElement.SetAttributeValue("PageId", NewPage.PageId);
             PageElement.SetAttributeValue("Name", NewPage.PageName);
             PageElement.SetAttributeValue("Position", NewPage.PageId - 1);
-
  
             XElement FiledElement = null;
-            if (NewPage.Question_Type != 10)
+
+            if (NewPage.Question_Type == 31) // GPS
             {
-                FiledElement = AddControlXml(NewPage);
-                PageElement.Add(FiledElement);
+                XElement[] FieldElements = null;
+                FieldElements = Add_GPS_Xml(NewPage);
+                PageElement.Add(FieldElements);
             }
-            else
+            else if (NewPage.Question_Type == 10) // CHECKBOX
             {
                 NewPage.Question = NewPage.Question;
                 NewPage.Variable_Name = "Text_" + NewPage.PageName.Replace(" ", "");
                 NewPage.Question_Type = 2;
                 FiledElement = AddControlXml(NewPage);
-                FiledElement.SetAttributeValue("ControlTopPositionPercentage",0.2);
+                FiledElement.SetAttributeValue("ControlTopPositionPercentage", 0.2);
                 PageElement.Add(FiledElement);
                 int count = 1;
-                var Variable_Name  =  NewPage.Variable_Name ;
+                var Variable_Name = NewPage.Variable_Name;
                 foreach (var checkbox in NewPage.List_Values)
                 {
                     NewPage.Question_Type = 10;
                     NewPage.Question = checkbox;
-                    NewPage.Variable_Name = "Chk_" + Variable_Name + "_"+ count;
+                    NewPage.Variable_Name = "Chk_" + Variable_Name + "_" + count;
                     NewPage.Counter = count;
                     FiledElement = AddControlXml(NewPage);
                     PageElement.Add(FiledElement);
@@ -85,6 +94,12 @@ namespace Epi.Windows.MakeView.Excel
 
                 NewPage.Variable_Name = Variable_Name;
             }
+            else 
+            {
+                FiledElement = AddControlXml(NewPage);
+                PageElement.Add(FiledElement);
+            }
+
             // GroupBox Title
             if (!string.IsNullOrEmpty(NewPage.Title))
             {
@@ -98,17 +113,20 @@ namespace Epi.Windows.MakeView.Excel
                 FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
                 FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 4);
                 if (NewPage.Question_Type == 12 || NewPage.Question_Type == 10)
-                
                 {
-
                     FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
                 }
-              
+                if (NewPage.Question_Type == 31)
+                {
+                    FiledElement.SetAttributeValue("ControlHeightPercentage", "0.66120218579235");
+                }
             }
-            else {
+            else
+            {
                 FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
                 FiledElement.Remove();
             }
+            
             // Description
             if (!string.IsNullOrEmpty(NewPage.Description))
             {
@@ -127,10 +145,12 @@ namespace Epi.Windows.MakeView.Excel
                     FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
                 }
             }
-            else {
+            else
+            {
                 FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
                 FiledElement.Remove();
             }
+            
             // Add page element to Xml
             XElement XmlElement = NewXmlDoc.XPathSelectElement("Template/Project/View");
             XmlElement.Add(PageElement);
@@ -199,16 +219,67 @@ namespace Epi.Windows.MakeView.Excel
             return ControlPosition;
         }
 
+        private static XElement[] Add_GPS_Xml(Card NewPage)
+        {
+            XmlDocument GPSXml = new XmlDocument();
+            GPSXml.Load("./Excel/GPS.xml");
+            XDocument GPSField = ToXDocument(GPSXml);
+            List<XElement> fieldElements = GPSField.XPathSelectElement("GPS").Elements().ToList();
+
+            string fieldName;
+            int position = NewPage.PageId - 1;
+            int fieldId = NewPage.PageId + 3;
+            string buttonName = string.Empty;
+            string latName = string.Empty;
+            string lonName = string.Empty;
+
+            foreach (XElement field in fieldElements)
+            {
+                fieldName = field.Attribute("Name").Value;
+
+                field.SetAttributeValue("Name", NewPage.Variable_Name + fieldName);
+                field.SetAttributeValue("PageId", NewPage.PageId);
+                field.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
+                field.SetAttributeValue("PageName", NewPage.PageName);
+                field.SetAttributeValue("Position", position++);
+                field.SetAttributeValue("FieldId", fieldId++);
+
+                if(fieldName == "BTN")
+                {
+                    buttonName = NewPage.Variable_Name + fieldName;
+                }
+                else if (fieldName == "LAT")
+                {
+                    field.SetAttributeValue("IsRequired", NewPage.Required.ToString());
+                    latName = NewPage.Variable_Name + fieldName;
+                }
+                else if (fieldName == "LONG")
+                {
+                    field.SetAttributeValue("IsRequired", NewPage.Required.ToString());
+                    lonName = NewPage.Variable_Name + fieldName;
+                }
+            }
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Field " + buttonName + "\r");
+            builder.Append("    Click\r");
+            builder.Append("        ASSIGN  " + latName + " = SYSLATITUDE\r");
+            builder.Append("        ASSIGN  " + lonName + " = SYSLONGITUDE\r");
+            builder.Append("    End-Click\r");
+            builder.Append("End-Field\r");
+
+            NewPage.GPSCheckCode = builder.ToString();
+
+            return fieldElements.ToArray();
+        }
         private static XElement AddControlXml(Card NewPage)
         {
             // Control
             // XElement FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Controls']");
 
             XmlDocument FieldXml = new XmlDocument();
-
             FieldXml.Load("./Excel/Control.xml");
             XDocument XField = ToXDocument(FieldXml);
-
             XElement FiledElement = XField.XPathSelectElement("Field");
 
             FiledElement.SetAttributeValue("IsRequired", NewPage.Required.ToString());
@@ -220,7 +291,8 @@ namespace Epi.Windows.MakeView.Excel
             FiledElement.SetAttributeValue("PageName", NewPage.PageName);
             FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
             FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 3);
-            if (NewPage.Question_Type == 17)
+
+            if (NewPage.Question_Type == 17) // DROPDOWN
             {
                 XmlDocument SourceTableXml = new XmlDocument();
                 string SourceTableXmlpath = "./Excel/SourceTable.xml";
@@ -232,9 +304,8 @@ namespace Epi.Windows.MakeView.Excel
                 FiledElement.SetAttributeValue("SourceTableName", TableName);
                 FiledElement.SetAttributeValue("CodeColumnName", NewPage.Variable_Name);
                 FiledElement.SetAttributeValue("TextColumnName", NewPage.Variable_Name);
-
             }
-            if (NewPage.Question_Type == 12)
+            else if (NewPage.Question_Type == 12) // OPTIONS
             {
                 string Values = GetOptionsValue(NewPage.List_Values);
                 FiledElement.SetAttributeValue("List", Values);
@@ -244,16 +315,14 @@ namespace Epi.Windows.MakeView.Excel
                 FiledElement.SetAttributeValue("ControlLeftPositionPercentage", "0.07 ");
                 FiledElement.SetAttributeValue("ControlTopPositionPercentage", "0.17");
             }
-            if (NewPage.Question_Type == 10)
+            else if (NewPage.Question_Type == 10) // CHECKBOX
             {
                 Double ControlTopPositionPercentage = 0.23 + (0.04 * NewPage.Counter);
-
                 FiledElement.SetAttributeValue("ControlTopPositionPercentage", ControlTopPositionPercentage.ToString());
             }
+
             return FiledElement;
         }
-
-
 
         private static string GetOptionsValue(List<string> list)
         {

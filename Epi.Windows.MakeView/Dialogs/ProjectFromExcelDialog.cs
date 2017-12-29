@@ -378,6 +378,12 @@ namespace Epi.Windows.MakeView.Dialogs
                 case "Time":
                     type = (int)FieldType.Types.Time;
                     break;
+                case "GPS":
+                    type = (int)FieldType.Types.GPS;
+                    break;
+                case "Label":
+                    type = (int)FieldType.Types.Label;
+                    break;
                 default:
                     type = 0;
                     break;

@@ -11,13 +11,15 @@ namespace Epi.Windows.MakeView.Excel
         public enum Types
         {
             Text = 1,
+            Label = 2,
             Numeric = 5,
             YesNo = 11,
             Checkbox = 10,
             Options = 12,
             Dropdown = 17,
             Date = 7,
-            Time = 8
+            Time = 8,
+            GPS = 31
         };
     }
 }
