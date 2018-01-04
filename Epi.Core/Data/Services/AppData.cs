@@ -1089,49 +1089,48 @@ namespace Epi.Data.Services
 			}
 		}
 
-		private DataSets.AppDataSet.SettingsDataTable settingsDataTable;
+		//private DataSets.AppDataSet.SettingsDataTable settingsDataTable;
 		/// <summary>
 		/// Settings Data Table in Application DataSet 
 		/// </summary>
-		public DataSets.AppDataSet.SettingsDataTable SettingsDataTable
-		{
-			get
-			{
-				if (settingsDataTable == null)
-				{
-					settingsDataTable = new DataSets.AppDataSet.SettingsDataTable();
-					settingsDataTable.AddSettingsRow(1, @"BackgroundImage", @"C:\Epi_Info");
-					settingsDataTable.AddSettingsRow(2, @"MRUProjectsCount", @"4");
-					settingsDataTable.AddSettingsRow(3, @"Language", @"English");
-					settingsDataTable.AddSettingsRow(4, @"RepresentationOfYes", @"Yes");
-					settingsDataTable.AddSettingsRow(5, @"RepresentationOfNo", @"No");
-					settingsDataTable.AddSettingsRow(6, @"RepresentationOfMissing", @"Missing");
-					settingsDataTable.AddSettingsRow(7, @"StatisticsLevel", @"2");
-					settingsDataTable.AddSettingsRow(8, @"RecordProcessingScope", @"2");
-					settingsDataTable.AddSettingsRow(9, @"ShowCompletePrompt", @"true");
-					settingsDataTable.AddSettingsRow(10, @"ShowSelection", @"true");
-					settingsDataTable.AddSettingsRow(11, @"ShowGraphics", @"true");
-					settingsDataTable.AddSettingsRow(12, @"ShowPercents", @"true");
-					settingsDataTable.AddSettingsRow(13, @"ShowTables", @"true");
-					settingsDataTable.AddSettingsRow(14, @"ShowHyperlinks", @"true");
-					settingsDataTable.AddSettingsRow(15, @"IncludeMissingValues", @"false");
-					settingsDataTable.AddSettingsRow(16, @"SnapToGrid", @"true");
-					settingsDataTable.AddSettingsRow(17, @"EditorFontName", @"Verdana");
-					settingsDataTable.AddSettingsRow(18, @"EditorFontSize", @"8.25");
-					settingsDataTable.AddSettingsRow(17, @"ControlFontName", @"Arial");
-					settingsDataTable.AddSettingsRow(18, @"ControlFontSize", @"11.25");
-					settingsDataTable.AddSettingsRow(19, @"DefaultDatabaseFormat", @"2");
-					settingsDataTable.AddSettingsRow(20, @"WorkingDirectory", @"C:\Temp");
-					settingsDataTable.AddSettingsRow(21, @"ProjectDirectory", @"C:\Documents and Settings\kkm4\My Documents\Epi Info Projects");
-					settingsDataTable.AddSettingsRow(22, @"MRUViewsCount", @"4");
-					settingsDataTable.AddSettingsRow(22, @"MRUDataSourcesCount", @"5");
-					settingsDataTable.AddSettingsRow(23, @"DefaultDataFormat", @"3");
-				}
-				return (settingsDataTable);
-			}
-		}
-
-
+		//public DataSets.AppDataSet.SettingsDataTable SettingsDataTable
+		//{
+		//	get
+		//	{
+		//		if (settingsDataTable == null)
+		//		{
+		//			settingsDataTable = new DataSets.AppDataSet.SettingsDataTable();
+		//			settingsDataTable.AddSettingsRow(1, @"BackgroundImage", @"C:\Epi_Info");
+		//			settingsDataTable.AddSettingsRow(2, @"MRUProjectsCount", @"4");
+		//			settingsDataTable.AddSettingsRow(3, @"Language", @"English");
+		//			settingsDataTable.AddSettingsRow(4, @"RepresentationOfYes", @"Yes");
+		//			settingsDataTable.AddSettingsRow(5, @"RepresentationOfNo", @"No");
+		//			settingsDataTable.AddSettingsRow(6, @"RepresentationOfMissing", @"Missing");
+		//			settingsDataTable.AddSettingsRow(7, @"StatisticsLevel", @"2");
+		//			settingsDataTable.AddSettingsRow(8, @"RecordProcessingScope", @"2");
+		//			settingsDataTable.AddSettingsRow(9, @"ShowCompletePrompt", @"true");
+		//			settingsDataTable.AddSettingsRow(10, @"ShowSelection", @"true");
+		//			settingsDataTable.AddSettingsRow(11, @"ShowGraphics", @"true");
+		//			settingsDataTable.AddSettingsRow(12, @"ShowPercents", @"true");
+		//			settingsDataTable.AddSettingsRow(13, @"ShowTables", @"true");
+		//			settingsDataTable.AddSettingsRow(14, @"ShowHyperlinks", @"true");
+		//			settingsDataTable.AddSettingsRow(15, @"IncludeMissingValues", @"false");
+		//			settingsDataTable.AddSettingsRow(16, @"SnapToGrid", @"true");
+		//			settingsDataTable.AddSettingsRow(17, @"EditorFontName", @"Verdana");
+		//			settingsDataTable.AddSettingsRow(18, @"EditorFontSize", @"8.25");
+		//			settingsDataTable.AddSettingsRow(17, @"ControlFontName", @"Arial");
+		//			settingsDataTable.AddSettingsRow(18, @"ControlFontSize", @"11.25");
+		//			settingsDataTable.AddSettingsRow(19, @"DefaultDatabaseFormat", @"2");
+		//			settingsDataTable.AddSettingsRow(20, @"WorkingDirectory", @"C:\Temp");
+		//			settingsDataTable.AddSettingsRow(21, @"ProjectDirectory", @"C:\Documents and Settings\kkm4\My Documents\Epi Info Projects");
+		//			settingsDataTable.AddSettingsRow(22, @"MRUViewsCount", @"4");
+		//			settingsDataTable.AddSettingsRow(22, @"MRUDataSourcesCount", @"5");
+		//			settingsDataTable.AddSettingsRow(23, @"DefaultDataFormat", @"3");
+		//		}
+		//		return (settingsDataTable);
+		//	}
+		//}
+        
 
 		private DataSets.AppDataSet.SourceControlTypesDataTable sourceControlTypesDataTable;
 		/// <summary>

@@ -679,10 +679,10 @@ namespace Epi
             row.ShowTables = true;
             row.IncludeMissingValues = false;
             row.SnapToGrid = true;
-            row.EditorFontName = "Verdana";
-            row.EditorFontSize = 8.25M;
-            row.ControlFontName = "Arial";
-            row.ControlFontSize = 10.25M;
+            row.EditorFontName = "Segoe UI";
+            row.EditorFontSize = 10M;
+            row.ControlFontName = "Segoe UI";
+            row.ControlFontSize = 10M;
             row.ShowStatusBar = true;
             row.PrecisionForStatistics = 2;
             row.MapServiceKey = "Aua5s8kFcEZMx5lsd8Vkerz3frboU1CwzvOyzX_vgSnzsnbqV7xlQ4WTRUlN19_Q";
