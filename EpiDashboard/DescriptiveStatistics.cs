@@ -44,6 +44,8 @@ namespace EpiDashboard
         public double? bartlettPValue;
         public double? kruskalWallisH;
         public double? kruskalPValue;
+        public double? kurtosis;
+        public double? skewness;
         public double meansDiff;
         public double stdDevDiff;
         public double equalLCLMean;

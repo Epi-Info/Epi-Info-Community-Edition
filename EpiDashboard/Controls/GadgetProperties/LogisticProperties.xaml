@@ -74,10 +74,14 @@
                         </Label>
                         <!--ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" /-->
                         <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="216" HorizontalAlignment="Left" Height="28" />
-                        <Label x:Name="tblockWeightVariable" Grid.Column="2" Grid.Row="0">
+                        <Label x:Name="tblockGLMTypeVariable" Grid.Column="2" Grid.Row="0">
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockGLMTypeTxt">Regression Type:</TextBlock>
+                        </Label>
+                        <ComboBox Grid.Column="2" Grid.Row="1" x:Name="cbxFieldGLMType" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldGLMType_SelectionChanged" />
+                        <Label x:Name="tblockWeightVariable" Grid.Column="2" Grid.Row="2">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockWeightVariableTxt">Weight:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="2" Grid.Row="1" x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+                        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
                         <Label x:Name="tblockIndependentVariables" Grid.Column="0" Grid.Row="2">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockIndependentVariablesTxt">Independent Variables:</TextBlock>
                         </Label>
@@ -93,11 +97,12 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            <Label Height="5" Grid.Row="0" Grid.Column="0" />
                             <Button x:Name="btnMakeDummy" Grid.Row="0" HorizontalAlignment="Left" Width="auto" Grid.Column="0" Click="btnMakeDummy_Click">
                                 <TextBlock TextWrapping="Wrap" x:Name="btnMakeDummyTxt">Make Dummy</TextBlock>
                             </Button>
-                            <Label Height="5" Grid.Row="1" Grid.Column="0" />
-                            <Button x:Name="btnClearInteractionTerms" Grid.Row="2" Grid.Column="0" Width="auto" HorizontalAlignment="Left" Click="btnClearInteractionTerms_Click">
+                            <Label Height="5" Grid.Row="2" Grid.Column="0" />
+                            <Button x:Name="btnClearInteractionTerms" Grid.Row="3" Grid.Column="0" Width="auto" HorizontalAlignment="Left" Click="btnClearInteractionTerms_Click">
                                 <TextBlock TextWrapping="Wrap" x:Name="btnClearInteractionTermsTxt">Clear Terms</TextBlock>
                             </Button>
                         </Grid>

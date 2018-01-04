@@ -260,7 +260,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (!(bool)checkboxShowQ3.IsChecked) Parameters.columnsToHide.Add(9);
             if (!(bool)checkboxShowMax.IsChecked) Parameters.columnsToHide.Add(10);
             if (!(bool)checkboxShowMode.IsChecked) Parameters.columnsToHide.Add(11);
-            }
+            if (!(bool)checkboxShowSkewness.IsChecked) Parameters.columnsToHide.Add(12);
+            if (!(bool)checkboxShowKurtosis.IsChecked) Parameters.columnsToHide.Add(13);
+        }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -297,6 +299,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxShowQ3.IsChecked = true;
             checkboxShowMax.IsChecked = true;
             checkboxShowMode.IsChecked = true;
+            checkboxShowSkewness.IsChecked = true;
+            checkboxShowKurtosis.IsChecked = true;
 
             if (Parameters.columnsToHide.Count > 0)
             {
@@ -336,6 +340,12 @@ namespace EpiDashboard.Controls.GadgetProperties
                             break;
                         case 11:
                             checkboxShowMode.IsChecked = false;
+                            break;
+                        case 12:
+                            checkboxShowSkewness.IsChecked = false;
+                            break;
+                        case 13:
+                            checkboxShowKurtosis.IsChecked = false;
                             break;
                     }
                 }

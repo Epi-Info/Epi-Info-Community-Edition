@@ -9485,6 +9485,38 @@ namespace EpiDashboard
                     if (means.variance != null)
                     {
                         means.stdDev = Math.Sqrt((double)means.variance);
+
+                        DataColumn m_0CalcColumn = new DataColumn();
+                        m_0CalcColumn.DataType = typeof(double);
+                        m_0CalcColumn.ColumnName = "___m_0_calc___";
+                        m_0CalcColumn.Expression = safeWeightVar + " * " + safeWeightVar + " * " +
+                            "((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                            ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                            ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                            ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev + ")";
+                        table.Columns.Add(m_0CalcColumn);
+                        double m_0 = Convert.ToDouble(table.Compute("sum(" + m_0CalcColumn.ColumnName + ")", filter));
+
+                        DataColumn weightMultiplierColumn = new DataColumn();
+                        weightMultiplierColumn.DataType = typeof(double);
+                        weightMultiplierColumn.ColumnName = "___weight_multiplier___";
+                        table.Columns.Add(weightMultiplierColumn);
+                        foreach (DataRow dr in table.Rows)
+                        {
+                            dr["___weight_multiplier___"] = Math.Pow(Convert.ToDouble(dr[weightVar]), 1.5);
+                        }
+
+                        DataColumn m_1CalcColumn = new DataColumn();
+                        m_1CalcColumn.DataType = typeof(double);
+                        m_1CalcColumn.ColumnName = "___m_1_calc___";
+                        m_1CalcColumn.Expression = "___weight_multiplier___ * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                            ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                            ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev + ")";
+                        table.Columns.Add(m_1CalcColumn);
+                        double m_1 = Convert.ToDouble(table.Compute("sum(" + m_1CalcColumn.ColumnName + ")", filter));
+
+                        means.skewness = (means.unweightedObservations / ((means.unweightedObservations - 1) * (means.unweightedObservations - 2))) * m_1;
+                        means.kurtosis = ((means.unweightedObservations * (means.unweightedObservations + 1)) / ((means.unweightedObservations - 1) * (means.unweightedObservations - 2) * (means.unweightedObservations - 3))) * m_0 - ((3 * Math.Pow(means.unweightedObservations - 1, 2.0)) / ((means.unweightedObservations - 2) * (means.unweightedObservations - 3)));
                     }
 
                     //DataRow[] rows = freqTable.Select("freq > 0", freqVar + " ASC");
@@ -9696,6 +9728,28 @@ namespace EpiDashboard
                             means.stdError = means.stdDev / Math.Sqrt((double)means.observations);
                             means.tZero = means.mean / means.stdError;
                             means.tZeroP = 2.0 * Epi.Statistics.SharedResources.PFromT((double)means.tZero, (int)means.observations - 1);
+
+                            DataColumn m_0CalcColumn = new DataColumn();
+                            m_0CalcColumn.DataType = typeof(double);
+                            m_0CalcColumn.ColumnName = "___m_0_calc___";
+                            m_0CalcColumn.Expression = "((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                                ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                                ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                                ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev + ")";
+                            table.Columns.Add(m_0CalcColumn);
+                            double m_0 = Convert.ToDouble(table.Compute("sum(" + m_0CalcColumn.ColumnName + ")", filter));
+
+                            DataColumn m_1CalcColumn = new DataColumn();
+                            m_1CalcColumn.DataType = typeof(double);
+                            m_1CalcColumn.ColumnName = "___m_1_calc___";
+                            m_1CalcColumn.Expression = "((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                                ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev +
+                                ") * ((" + safeFreqVar + " - " + means.mean + ") / " + means.stdDev + ")";
+                            table.Columns.Add(m_1CalcColumn);
+                            double m_1 = Convert.ToDouble(table.Compute("sum(" + m_1CalcColumn.ColumnName + ")", filter));
+
+                            means.skewness = (means.observations / ((means.observations - 1) * (means.observations - 2))) * m_1;
+                            means.kurtosis = ((means.observations * (means.observations + 1)) / ((means.observations - 1) * (means.observations - 2) * (means.observations - 3))) * m_0 - ((3 * Math.Pow(means.observations - 1, 2.0)) / ((means.observations - 2) * (means.observations - 3)));
                         }
 
                     }

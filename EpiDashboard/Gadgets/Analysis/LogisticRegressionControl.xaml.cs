@@ -397,9 +397,63 @@ namespace EpiDashboard
                         {
                             StatisticsRepository.LogisticRegression logisticRegression = new StatisticsRepository.LogisticRegression();
 
-//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
 
-                            results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
+                            Array logRegressionResults = Enumerable.Repeat(1.0, 1).ToArray();
+                            Array logRegressionJustCoefficients = Enumerable.Repeat(1.0, 1).ToArray();
+                            Array logRegressionCLs = Enumerable.Repeat(1.0, 1).ToArray();
+                            Array logRegressionTerms = Enumerable.Repeat("intercept", 1).ToArray();
+                            Array logRegressionMinus2LogLog = Enumerable.Repeat(1.0, 1).ToArray();
+                            int logRegressionNumObservations = 0;
+                            Array logRegressionFitStatistics = Enumerable.Repeat(1.0, 1).ToArray();
+                            Array termNames = Enumerable.Repeat("intercept", 1).ToArray();
+//                            string glmType = "Logistic";
+//                            string glmType = (string)this.Dispatcher.Invoke(new Func<string>(() => (string)cbxFieldGLMType.SelectedItem));
+                            int glmTypeInt = (int)this.Dispatcher.Invoke(new Func<int>(() => (int)cbxFieldGLMType.SelectedIndex));
+                            if (glmTypeInt == 1)
+                            {
+                                Epi.Statistics.SharedResources.LogRegressionWithR(inputVariableList, regressTable, ref logRegressionResults, ref logRegressionCLs, ref logRegressionMinus2LogLog, ref logRegressionNumObservations, ref logRegressionFitStatistics, ref logRegressionJustCoefficients, ref termNames);
+                                List<string> orderedListOfTerms = new List<string>();
+                                int indx = 0;
+                                foreach (string term in termNames)
+                                {
+                                    if (term.Equals("(Intercept)"))
+                                        continue;
+                                    else if (term.Contains("factor("))
+                                    {
+                                        string newTerm = term.Substring(term.IndexOf('(') + 1, term.IndexOf(')') - term.IndexOf('(') - 1);
+                                        if (orderedListOfTerms.Contains(newTerm))
+                                            continue;
+                                        orderedListOfTerms.Insert(indx, newTerm);
+                                    }
+                                    else if (term.Contains(":"))
+                                        orderedListOfTerms.Insert(indx, term.Replace(':', '*'));
+                                    else
+                                        orderedListOfTerms.Insert(indx, term);
+                                    indx++;
+                                }
+
+                                results.regressionResults = logisticRegression.LogRegression(inputVariableList, regressTable, orderedListOfTerms);
+                                int termsInRegressionResults = (int)logRegressionResults.Length / 4;
+                                if (logRegressionJustCoefficients.Length > logRegressionResults.Length / 4)
+                                {
+                                    List<double> tempResults = logRegressionResults.OfType<double>().ToList();
+                                    for (int i = logRegressionJustCoefficients.Length - 1; i > -1; i--)
+                                    {
+                                        double coefValue = (double)logRegressionJustCoefficients.GetValue(i);
+                                        if (Double.IsNaN(coefValue))
+                                        {
+                                            tempResults.Insert(termsInRegressionResults * 3 + i, coefValue);
+                                            tempResults.Insert(termsInRegressionResults * 2 + i, coefValue);
+                                            tempResults.Insert(termsInRegressionResults * 1 + i, coefValue);
+                                            tempResults.Insert(i, coefValue);
+                                        }
+                                    }
+                                    logRegressionResults = tempResults.ToArray();
+                                }
+                            }
+
+                            else
+                                results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
 
                             results.casesIncluded = results.regressionResults.casesIncluded;
                             results.convergence = results.regressionResults.convergence;
@@ -413,6 +467,13 @@ namespace EpiDashboard
                             results.scoreStatistic = results.regressionResults.scoreStatistic;
                             results.errorMessage = results.regressionResults.errorMessage.Replace("<tlt>", string.Empty).Replace("</tlt>", string.Empty);
                             results.variables = new List<VariableRow>();
+
+                            if (glmTypeInt == 1)
+                            {
+                                results.casesIncluded = logRegressionNumObservations;
+                                results.finalLikelihood = (double)logRegressionMinus2LogLog.GetValue(0);
+                                results.scoreStatistic = (double)logRegressionFitStatistics.GetValue(0);
+                            }
 
                             if (!string.IsNullOrEmpty(results.errorMessage))
                             {
@@ -433,6 +494,69 @@ namespace EpiDashboard
                                     nrow.variableName = vrow.variableName;
                                     nrow.Z = vrow.Z;
                                     results.variables.Add(nrow);
+                                }
+
+                                if (glmTypeInt == 1)
+                                {
+                                    int terms = logRegressionResults.Length / 4;
+                                    for (int logrow = 0; logrow < logRegressionResults.Length; logrow++)
+                                    {
+                                        int term = logrow % terms;
+                                        if (logrow < terms)
+                                        {
+                                            if (term == 0)
+                                            {
+                                                VariableRow vr = results.variables.Last();
+                                                vr.coefficient = (double)logRegressionResults.GetValue(logrow);
+                                                results.variables[results.variables.Count - 1] = vr;
+                                            }
+                                            else
+                                            {
+                                                VariableRow vr = results.variables.ElementAt(term - 1);
+                                                vr.coefficient = (double)logRegressionResults.GetValue(logrow);
+                                                vr.oddsRatio = Math.Exp(vr.coefficient);
+                                                vr.ninetyFivePercent = Math.Exp((double)logRegressionCLs.GetValue(term));
+                                                vr.ci = Math.Exp((double)logRegressionCLs.GetValue((term) + terms));
+                                                results.variables[term - 1] = vr;
+                                            }
+                                        }
+                                        else if (logrow < 2 * terms)
+                                        {
+                                            if (term == 0)
+                                            {
+                                                VariableRow vr = results.variables.Last();
+                                                vr.se = (double)logRegressionResults.GetValue(logrow);
+                                                results.variables[results.variables.Count - 1] = vr;
+                                            }
+                                            else
+                                            {
+                                                VariableRow vr = results.variables.ElementAt(term - 1);
+                                                vr.se = (double)logRegressionResults.GetValue(logrow);
+                                                results.variables[term - 1] = vr;
+                                            }
+                                        }
+                                        else if (logrow < 3 * terms)
+                                        {
+                                            if (term == 0)
+                                            {
+                                                VariableRow vr = results.variables.Last();
+                                                vr.Z = (double)logRegressionResults.GetValue(logrow);
+                                                vr.P = 2.0 * Epi.Statistics.SharedResources.PFromZ(Math.Abs(vr.Z));
+                                                results.variables[results.variables.Count - 1] = vr;
+                                            }
+                                            else
+                                            {
+                                                VariableRow vr = results.variables.ElementAt(term - 1);
+                                                vr.Z = (double)logRegressionResults.GetValue(logrow);
+                                                vr.P = 2.0 * Epi.Statistics.SharedResources.PFromZ(Math.Abs(vr.Z));
+                                                results.variables[term - 1] = vr;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                    }
                                 }
 
                                 this.Dispatcher.BeginInvoke(new SimpleCallback(RenderRegressionHeader));
@@ -547,6 +671,12 @@ namespace EpiDashboard
 
             grdRegress.Visibility = System.Windows.Visibility.Visible;
             grdIOR.Visibility = System.Windows.Visibility.Visible;
+//            string glmLink = (string)cbxFieldGLMType.SelectedItem;
+            int glmLinkInt = (int)cbxFieldGLMType.SelectedIndex;
+            if (glmLinkInt == 1)
+            {
+                grdIOR.Visibility = Visibility.Collapsed;
+            }
             grdStats.Visibility = System.Windows.Visibility.Visible;
             grdParameters.Visibility = System.Windows.Visibility.Visible;
 
@@ -571,7 +701,10 @@ namespace EpiDashboard
                 txtConvergenceLabel.TextWrapping = TextWrapping.Wrap;
             }
             else
-            {                
+            {
+//                string glmType = (string)this.Dispatcher.Invoke(new Func<string>(() => (string)cbxFieldGLMType.SelectedItem));
+                int glmTypeInt = (int)this.Dispatcher.Invoke(new Func<int>(() => (int)cbxFieldGLMType.SelectedIndex));
+
                 grdParameters.Visibility = System.Windows.Visibility.Visible;
                 grdStats.Visibility = System.Windows.Visibility.Visible;
 
@@ -585,12 +718,24 @@ namespace EpiDashboard
 
                 txtConvergence.Text = results.convergence;
                 txtIterations.Text = StringLiterals.SPACE + results.iterations.ToString() + StringLiterals.SPACE;
+                if (glmTypeInt == 1)
+                {
+                    txtIterations.Text = StringLiterals.SPACE + results.scoreStatistic.ToString("F4") + StringLiterals.SPACE;
+                    grdParameters.Visibility = System.Windows.Visibility.Collapsed;
+                }
                 txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
                 txtCasesIncluded.Text = StringLiterals.SPACE + results.casesIncluded.ToString() + StringLiterals.SPACE;
 
                 txtConvergenceLabel.Text = "Convergence:";
                 txtIterationsLabel.Text ="Iterations:";
                 txtFinalLogLabel.Text = "Final -2*Log-Likelihood:";
+                if (glmTypeInt == 1)
+                {
+                    txtConvergence.Visibility = Visibility.Collapsed;
+                    txtConvergenceLabel.Visibility = Visibility.Collapsed;
+                    txtIterationsLabel.Text = "AIC:";
+                    txtFinalLogLabel.Text = "Residual deviance:";
+                }
                 txtCasesIncludedLabel.Text = "Cases Included:";
             }
 
@@ -619,8 +764,15 @@ namespace EpiDashboard
             Grid.SetColumn(txtVarHeader, 0);
             grdRegress.Children.Add(txtVarHeader);
 
+//            string glmType = (string)this.Dispatcher.Invoke(new Func<string>(() => (string)cbxFieldGLMType.SelectedItem));
+            int glmTypeInt = (int)this.Dispatcher.Invoke(new Func<int>(() => (int)cbxFieldGLMType.SelectedIndex));
             TextBlock txtOddsHeader = new TextBlock();
             txtOddsHeader.Text = "Odds Ratio";
+            if (glmTypeInt == 1)
+            {
+                txtOddsHeader.Text = "Risk Ratio";
+                headerPanel.Text = "Log Regression (Computed by R Software)";
+            }
             txtOddsHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtOddsHeader, 0);
             Grid.SetColumn(txtOddsHeader, 1);
@@ -1129,6 +1281,7 @@ namespace EpiDashboard
             string weightVar = string.Empty;
             string matchVar = string.Empty;
             string pvalue = string.Empty;
+            string regressionType = string.Empty;
             bool intercept = true;
 
             if (cbxFieldOutcome.SelectedItem != null)
@@ -1144,6 +1297,11 @@ namespace EpiDashboard
             if (cbxFieldMatch.SelectedItem != null)
             {
                 matchVar = cbxFieldMatch.SelectedItem.ToString();
+            }
+
+            if (cbxFieldGLMType.SelectedItem != null)
+            {
+                regressionType = cbxFieldGLMType.SelectedItem.ToString();
             }
 
             if (checkboxNoIntercept.IsChecked == true)
@@ -1177,6 +1335,7 @@ namespace EpiDashboard
             "<weightVariable>" + weightVar + "</weightVariable>" +
             "<matchVariable>" + matchVar + "</matchVariable>" +
             "<pvalue>" + pvalue + "</pvalue>" +
+            "<regressionType>" + regressionType + "</regressionType>" +
             "<intercept>" + intercept.ToString() + "</intercept>" +
             "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
             "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>";
@@ -1235,6 +1394,13 @@ namespace EpiDashboard
         {
             this.LoadingCombos = true;
 
+            int cbxFieldGLMTypeLength = cbxFieldGLMType.Items.Count;
+            if (cbxFieldGLMTypeLength == 0)
+            {
+                cbxFieldGLMType.Items.Add("Logistic");
+                cbxFieldGLMType.Items.Add("Log-Binomial");
+            }
+
             foreach (XmlElement child in element.ChildNodes)
             {
                 switch (child.Name.ToLowerInvariant())
@@ -1252,6 +1418,16 @@ namespace EpiDashboard
                         if (child.InnerText.Equals("90")) { cbxConf.SelectedIndex = 1; }
                         if (child.InnerText.Equals("95")) { cbxConf.SelectedIndex = 2; }
                         if (child.InnerText.Equals("99")) { cbxConf.SelectedIndex = 3; }
+                        break;
+                    case "regressiontype":
+                        if (child.InnerText.Equals("Logistic"))
+                        {
+                            cbxFieldGLMType.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            this.cbxFieldGLMType.SelectedIndex = 1;
+                        }
                         break;
                     case "intercept":
                         if (child.InnerText.ToLowerInvariant().Equals("false")) { checkboxNoIntercept.IsChecked = true; }

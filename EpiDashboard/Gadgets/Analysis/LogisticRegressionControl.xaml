@@ -185,6 +185,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="0"  />
+                                <ComboBox x:Name="cbxFieldGLMType" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="0" MaxWidth="120" Width="120"/>
                                 <ComboBox x:Name="cbxFieldOutcome" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="1" Grid.Column="0" MaxWidth="120" Width="120"/>
 
                                 <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Fields:" Margin="0,5,0,0" Grid.Row="0" Grid.Column="1"  />

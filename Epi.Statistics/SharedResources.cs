@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RDotNet;
 
 namespace Epi.Statistics
 {
@@ -13,6 +14,224 @@ namespace Epi.Statistics
                 return addedLogValue;
             double power = Math.Round(logValue);
             return power + Math.Log10(Math.Pow(10.0, logValue - power) + Math.Pow(10.0, addedLogValue - power));
+        }
+
+        public static void LogRegressionWithR(Dictionary<string, string> inputVariableList, System.Data.DataTable regressTable, ref Array coeffecientsArray, ref Array termsArray, ref Array minus2LogLogArray, ref int numObservations, ref Array fitStatisticsArray, ref Array justCoefficients, ref Array termNames)
+        {
+            // Point to the R DLL library and
+            // create the instance of REngine.
+            REngine engine = REngine.GetInstance();
+
+            // Pull the data (rows and columns) from the regressTable
+            System.Data.DataRowCollection rows = regressTable.Rows;
+            System.Data.DataColumnCollection columns = regressTable.Columns;
+
+            // Use the columns to build the GLM model statement
+            // with R syntax.
+            StringBuilder csm = new StringBuilder();
+            StringBuilder bvm = new StringBuilder();
+            StringBuilder ac = new StringBuilder();
+            int subtracter = 0;
+            for (int jj = 0; jj < columns.Count; jj++)
+            {
+                if (columns[jj].ToString().Equals("RecStatus"))
+                    break;
+                else if (!inputVariableList.ContainsKey(columns[jj].ToString()))
+                    continue;
+                else if (inputVariableList[columns[jj].ToString()].Equals("weightvar"))
+                {
+                    subtracter++;
+                    continue;
+                }
+                if (jj - subtracter > 0)
+                {
+                    if (jj - subtracter == 1)
+                    {
+                        csm.Append("~");
+                        bvm.Append("~");
+                    }
+                    else
+                        csm.Append("+");
+                }
+                if (inputVariableList[columns[jj].ToString()].Equals("discrete") || columns[jj].DataType.ToString().Equals("System.String"))
+                {
+                    csm.Append("factor(");
+                    csm.Append(columns[jj]);
+                    csm.Append(")");
+                }
+                else
+                {
+                    csm.Append(columns[jj]);
+                }
+                if (jj - subtracter < 2)
+                {
+                    if (inputVariableList[columns[jj].ToString()].Equals("discrete"))
+                    {
+                        bvm.Append("factor(");
+                        bvm.Append(columns[jj]);
+                        bvm.Append(")");
+                    }
+                    else
+                    {
+                        bvm.Append(columns[jj]);
+                    }
+                }
+                else
+                {
+                    if (!inputVariableList[columns[jj].ToString()].Equals("discrete"))
+                    {
+                        ac.Append(", 0");
+                    }
+                    else if (!columns[jj].DataType.ToString().Equals("System.String"))
+                    {
+                        List<string> columnjjvalues = new List<string>();
+                        foreach (System.Data.DataRow dr in regressTable.Rows)
+                        {
+                            if (!columnjjvalues.Contains(dr[jj].ToString()))
+                                columnjjvalues.Add((string)dr[jj].ToString());
+                        }
+                        for (int ll = 1; ll < columnjjvalues.Count; ll++)
+                            ac.Append(", 0");
+                    }
+                    else
+                    {
+                        ac.Append(", 0");
+                    }
+                }
+            }
+            string weightString = "";
+            foreach (KeyValuePair<string, string> kvp in inputVariableList)
+            {
+                if (kvp.Key.Contains("*"))
+                {
+                    csm.Append("+");
+                    csm.Append(kvp.Key.Replace('*', ':'));
+                    ac.Append(", 0");
+                }
+                else if (kvp.Value.Equals("weightvar"))
+                {
+                    weightString = ", weight=" + kvp.Key;
+                }
+            }
+            string modelString = csm.ToString();
+            string bivariateModelString = bvm.ToString();
+            string additionalCoefficients = ac.ToString();
+
+            // Create R data.frame with the dependent variable column
+            // Start with a vector of ints (in this type of analysis
+            // the dependendent variable is binary); populate it with
+            // data; then put it in a data.frame called 'q' and label
+            // the column.
+            //int[] dataVector = new int[rows.Count];
+            int ii = 0;
+            //foreach (System.Data.DataRow row in rows)
+            //{
+            //    dataVector[ii] = Convert.ToInt32(row[0]);
+            //    ii++;
+            //}
+            int[] dataVector = Array.ConvertAll<System.Data.DataRow, int>(
+                regressTable.Select(),
+                delegate (System.Data.DataRow row) { return (int)Convert.ToInt32(row[0]); }
+                );
+            IntegerVector vector = engine.CreateIntegerVector(dataVector);
+            engine.SetSymbol("q", vector);
+            engine.Evaluate("q <- as.data.frame(q, stringsAsFactors = FALSE)\n" +
+                "colnames(q) <- c(\"" + columns[0] + "\")");
+
+            // Loop over the remaining columns in regressTable,
+            // creating the type of vector appropriate for the
+            // data type. Add each new column to the q data.frame.
+            for (int jj = 1; jj < columns.Count; jj++)
+            {
+                string t = rows[0][jj].GetType().ToString();
+                if (t.Equals("System.Boolean") || t.Equals("System.Byte") || t.Equals("System.Int16") || t.Equals("System.Int32"))
+                {
+                    //dataVector = new int[rows.Count];
+                    //ii = 0;
+                    //foreach (System.Data.DataRow row in rows)
+                    //{
+                    //    dataVector[ii] = Convert.ToInt32(row[jj]);
+                    //    ii++;
+                    //}
+                    dataVector = Array.ConvertAll<System.Data.DataRow, int>(
+                                    regressTable.Select(),
+                                    delegate (System.Data.DataRow row) { return (int)Convert.ToInt32(row[jj]); }
+                                    );
+                    IntegerVector vector0 = engine.CreateIntegerVector(dataVector);
+                    engine.SetSymbol("q0", vector0);
+                    engine.Evaluate("q0 <- as.data.frame(q0, stringsAsFactors = FALSE)\n" +
+                        "colnames(q0) <- c(\"" + columns[jj] + "\")\n" +
+                        "q[[\"" + columns[jj] + "\"]] <- q0$" + columns[jj] + "");
+                }
+                else if (t.Equals("System.String"))
+                {
+                    //string[] stringDataVector = new string[rows.Count];
+                    //ii = 0;
+                    //foreach (System.Data.DataRow row in rows)
+                    //{
+                    //    stringDataVector[ii] = Convert.ToString(row[jj]);
+                    //    ii++;
+                    //}
+                    string[] stringDataVector = Array.ConvertAll<System.Data.DataRow, string>(
+                                    regressTable.Select(),
+                                    delegate (System.Data.DataRow row) { return (string)row[jj]; }
+                                    );
+                    CharacterVector vector0 = engine.CreateCharacterVector(stringDataVector);
+                    engine.SetSymbol("q0", vector0);
+                    engine.Evaluate("q0 <- as.data.frame(q0, stringsAsFactors = FALSE)\n" +
+                        "colnames(q0) <- c(\"" + columns[jj] + "\")\n" +
+                        "q[[\"" + columns[jj] + "\"]] <- q0$" + columns[jj] + "");
+                    // Count the distinct values to add zeroes to the starting coefficients.
+                    string[] dedupedStringDataVector = stringDataVector.Distinct().ToArray();
+                    for (int value = 0; value < dedupedStringDataVector.Count() - 2; value++)
+                    {
+                        // Added the break condition on 11/28/17. It may cause other problems.
+                        if (jj == 1)
+                            break;
+                        additionalCoefficients = additionalCoefficients + ", 0";
+                    }
+                }
+                else if (t.Equals("System.Single"))
+                {
+                    //double[] doubleDataVector = new double[rows.Count];
+                    //ii = 0;
+                    //foreach (System.Data.DataRow row in rows)
+                    //{
+                    //    doubleDataVector[ii] = Convert.ToDouble(row[jj]);
+                    //    ii++;
+                    //}
+                    double[] doubleDataVector = Array.ConvertAll<System.Data.DataRow, double>(
+                                    regressTable.Select(),
+                                    delegate (System.Data.DataRow row) { return (double)Convert.ToDouble(row[jj]); }
+                                    );
+                    NumericVector vector0 = engine.CreateNumericVector(doubleDataVector);
+                    engine.SetSymbol("q0", vector0);
+                    engine.Evaluate("q0 <- as.data.frame(q0, stringsAsFactors = FALSE)\n" +
+                        "colnames(q0) <- c(\"" + columns[jj] + "\")\n" +
+                        "q[[\"" + columns[jj] + "\"]] <- q0$" + columns[jj] + "");
+                }
+            }
+
+            // Data.frame 'q' is complete; now run the analysis
+            NumericVector coefini = engine.Evaluate("set.seed(123)\n" +
+                "coefini=coef(glm(" + bivariateModelString + weightString + ",data=q, family=\"binomial\"(link=\"log\")))\n" +
+                "coefini").AsNumeric();
+            GenericVector testResults = engine.Evaluate("fit <- glm(" + modelString + weightString + ", data=q, family=\"binomial\"(link=\"log\"), start=c(coefini" + additionalCoefficients + "))\n" +
+                    "summary(fit)").AsList();
+            GenericVector CLResults = engine.Evaluate("confint.default(fit)").AsList();
+            GenericVector ANOVAResults = engine.Evaluate("offset(fit)").AsList();
+            Vector<string> coefficientResults = engine.Evaluate("names(coefficients(fit))").AsCharacter();
+
+            // Index 11 contains the regression betas, standard errors, test statistics, and p-values
+            //            return testResults[11].AsNumeric().ToArray();
+            termNames = coefficientResults.ToArray();
+            Array otherInfo = ANOVAResults.AsCharacter().ToArray();
+            coeffecientsArray = testResults[11].AsNumeric().ToArray();
+            termsArray = CLResults.AsNumeric().ToArray();
+            numObservations = testResults[10].AsNumeric().ToArray().Count();
+            minus2LogLogArray = testResults[3].AsNumeric().ToArray();
+            fitStatisticsArray = ANOVAResults[10].AsNumeric().ToArray();
+            justCoefficients = ANOVAResults[0].AsNumeric().ToArray();
         }
 
         public static double PValFromChiSq(double _x, double _df)

@@ -207,6 +207,43 @@ Option Compare Text
 
     End Function
 
+    Public Function LogRegression(ByVal inputVariableList As Dictionary(Of String, String), ByVal dataTable As DataTable, ByVal listOfTerms As List(Of String)) As LogisticRegressionResults
+
+        currentTable = dataTable
+
+        CreateSettings(inputVariableList)
+
+        If Not mstraTerms Is Nothing Then
+            If Not listOfTerms Is Nothing Then
+                mstraTerms = listOfTerms.ToArray
+            End If
+        End If
+
+        Dim errorMessage As String
+        errorMessage = String.Empty
+
+        Dim regressionResults As New LogisticRegressionResults
+        regressionResults.errorMessage = String.Empty
+
+        If GetRawData(errorMessage) = False Then
+            regressionResults.errorMessage = errorMessage
+            Return regressionResults 'Exit Function
+        End If
+
+        regressionResults.variables = New List(Of VariableRow)
+
+        For i = 0 To UBound(mStrAMatrixLabels)
+            Dim variableRow As VariableRow
+            If mStrAMatrixLabels(i) <> Nothing Then
+                variableRow.variableName = mStrAMatrixLabels(i).ToString()
+                regressionResults.variables.Add(variableRow)
+            End If
+        Next
+
+        Return regressionResults
+
+    End Function
+
     Private Sub CreateSettings(ByVal inputVariableList As Dictionary(Of String, String))
 
         Dim dist As New statlib

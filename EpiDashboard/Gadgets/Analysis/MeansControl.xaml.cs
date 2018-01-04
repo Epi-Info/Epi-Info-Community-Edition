@@ -368,6 +368,8 @@ namespace EpiDashboard
                                     string statsMax = Epi.SharedStrings.UNDEFINED;
                                     string statsMedian = Epi.SharedStrings.UNDEFINED;
                                     string statsMode = Epi.SharedStrings.UNDEFINED;
+                                    string statsSkewness = Epi.SharedStrings.UNDEFINED;
+                                    string statsKurtosis = Epi.SharedStrings.UNDEFINED;
                                     string statsQ1 = Epi.SharedStrings.UNDEFINED;
                                     string statsQ3 = Epi.SharedStrings.UNDEFINED;
 
@@ -396,6 +398,10 @@ namespace EpiDashboard
                                         statsMax = ((double)means.max).ToString(precisionFormat);
                                     if (means.mode != null)
                                         statsMode = ((double)means.mode).ToString(precisionFormat);
+                                    if (means.skewness != null)
+                                        statsSkewness = ((double)means.skewness).ToString(precisionFormat);
+                                    if (means.kurtosis != null)
+                                        statsKurtosis = ((double)means.kurtosis).ToString(precisionFormat);
 
                                     if (statsObs.EndsWith("0") && (statsObs.Contains(".") || statsObs.Contains(",")))
                                     {
@@ -419,6 +425,8 @@ namespace EpiDashboard
                                     this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(statsQ3, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 9, Visibility.Visible));
                                     this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(statsMax, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 10, Visibility.Visible));
                                     this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(statsMode, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 11, Visibility.Visible));
+                                    this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(statsSkewness, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 12, Visibility.Visible));
+                                    this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(statsKurtosis, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 13, Visibility.Visible));
 
                                     rowCount++;
                                 }
@@ -486,6 +494,8 @@ namespace EpiDashboard
                         if (!lbxColumns.SelectedItems.Contains("75%")) columnsToShow.Add(9);
                         if (!lbxColumns.SelectedItems.Contains("Maximum")) columnsToShow.Add(10);
                         if (!lbxColumns.SelectedItems.Contains("Mode")) columnsToShow.Add(11);
+                        if (!lbxColumns.SelectedItems.Contains("Skewness")) columnsToShow.Add(12);
+                        if (!lbxColumns.SelectedItems.Contains("Kurtosis")) columnsToShow.Add(13);
 
                         foreach (Grid grid in this.StrataGridList)
                         {
@@ -1854,6 +1864,8 @@ namespace EpiDashboard
             ColumnDefinition column10 = new ColumnDefinition();
             ColumnDefinition column11 = new ColumnDefinition();
             ColumnDefinition column12 = new ColumnDefinition();
+            ColumnDefinition column13 = new ColumnDefinition();
+            ColumnDefinition column14 = new ColumnDefinition();
 
             //column1.Width = new GridLength(1, GridUnitType.Star);
             column1.Width = new GridLength(1, GridUnitType.Star);
@@ -1869,7 +1881,9 @@ namespace EpiDashboard
             column9.Width = GridLength.Auto;
             column10.Width = GridLength.Auto;
             column11.Width = GridLength.Auto;
-            column12.Width = GridLength.Auto;            
+            column12.Width = GridLength.Auto;
+            column13.Width = GridLength.Auto;
+            column14.Width = GridLength.Auto;
 
             grid.ColumnDefinitions.Add(column1);
             grid.ColumnDefinitions.Add(column2);
@@ -1883,6 +1897,8 @@ namespace EpiDashboard
             grid.ColumnDefinitions.Add(column10);
             grid.ColumnDefinitions.Add(column11);
             grid.ColumnDefinitions.Add(column12);
+            grid.ColumnDefinitions.Add(column13);
+            grid.ColumnDefinitions.Add(column14);
 
             if (string.IsNullOrEmpty(strataVar))
             {
@@ -2043,6 +2059,20 @@ namespace EpiDashboard
             Grid.SetRow(txtModeHeader, 0);
             Grid.SetColumn(txtModeHeader, 11);
             grid.Children.Add(txtModeHeader);
+
+            TextBlock txtSkewnessHeader = new TextBlock();
+            txtSkewnessHeader.Text = "Skewness";
+            txtSkewnessHeader.Style = this.Resources["columnHeadingText"] as Style;
+            Grid.SetRow(txtSkewnessHeader, 0);
+            Grid.SetColumn(txtSkewnessHeader, 12);
+            grid.Children.Add(txtSkewnessHeader);
+
+            TextBlock txtKurtosisHeader = new TextBlock();
+            txtKurtosisHeader.Text = "Kurtosis";
+            txtKurtosisHeader.Style = this.Resources["columnHeadingText"] as Style;
+            Grid.SetRow(txtKurtosisHeader, 0);
+            Grid.SetColumn(txtKurtosisHeader, 13);
+            grid.Children.Add(txtKurtosisHeader);
         }
 
         /// <summary>
@@ -2528,6 +2558,8 @@ namespace EpiDashboard
             columnsToShowList.Add(9);
             columnsToShowList.Add(10);
             columnsToShowList.Add(11);
+            columnsToShowList.Add(12);
+            columnsToShowList.Add(13);
             foreach (int x in columnsToShowList)
                 {
                     if (!meansParameters.columnsToHide.Contains(x))
@@ -2610,6 +2642,8 @@ namespace EpiDashboard
            ((MeansParameters)Parameters).columnsToHide.Add(9);
            ((MeansParameters)Parameters).columnsToHide.Add(10);
            ((MeansParameters)Parameters).columnsToHide.Add(11);
+           ((MeansParameters)Parameters).columnsToHide.Add(12);
+           ((MeansParameters)Parameters).columnsToHide.Add(13);
 
             foreach (XmlElement child in element.ChildNodes)
             {

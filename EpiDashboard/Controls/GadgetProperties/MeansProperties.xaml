@@ -210,6 +210,12 @@
                             <CheckBox x:Name="checkboxShowMode" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
                                 <TextBlock TextWrapping="Wrap" x:Name="checkboxShowModeTxt">Mode</TextBlock>
                             </CheckBox>
+                            <CheckBox x:Name="checkboxShowSkewness" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowSkewnessTxt">Skewness</TextBlock>
+                            </CheckBox>
+                            <CheckBox x:Name="checkboxShowKurtosis" Style="{StaticResource PropertiesPanelCheckbox}" IsEnabled="true">
+                                <TextBlock TextWrapping="Wrap" x:Name="checkboxShowKurtosisTxt">Kurtosis</TextBlock>
+                            </CheckBox>
                             <CheckBox x:Name="checkboxShowANOVA" Style="{StaticResource PropertiesPanelCheckbox}" IsChecked="True">
                                 <TextBlock TextWrapping="Wrap" x:Name="checkboxShowANOVATxt">Display ANOVA statistics</TextBlock>
                             </CheckBox>

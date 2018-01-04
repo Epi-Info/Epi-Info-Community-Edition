@@ -68,6 +68,10 @@ namespace EpiDashboard.Controls.GadgetProperties
 //            lbxOtherFields.ItemsSource = strataFields;
             cbxFields.ItemsSource = fields;
 
+            cbxFieldGLMType.Items.Add("Logistic");
+            cbxFieldGLMType.Items.Add("Log-Binomial");
+            cbxFieldGLMType.SelectedIndex = 0;
+
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxFieldOutcome.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
             view.GroupDescriptions.Add(groupDescription);
@@ -145,6 +149,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             lrc.cbxFieldOutcome = this.cbxFieldOutcome;
             lrc.lbxOtherFields = this.lbxOtherFields;
             lrc.lbxDummyTerms = this.lbxDummyTerms;
+            lrc.cbxFieldGLMType = this.cbxFieldGLMType;
             lrc.cbxFieldWeight = this.cbxFieldWeight;
             lrc.checkboxNoIntercept = this.checkboxNoIntercept;
             lrc.checkboxIncludeMissing = this.checkboxIncludeMissing;
@@ -407,6 +412,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
             cbxFieldOutcome.SelectedItem = lrc.cbxFieldOutcome.SelectedItem;
+            if (lrc.cbxFieldGLMType.SelectedIndex > -1)
+                cbxFieldGLMType.SelectedItem = lrc.cbxFieldGLMType.SelectedItem;
             //checkboxShowAllListValues.IsChecked = Parameters.ShowAllListValues;
             //checkboxShowListLabels.IsChecked = Parameters.ShowListLabels;
             //checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;
@@ -514,6 +521,22 @@ namespace EpiDashboard.Controls.GadgetProperties
             //        lbxAvailableVariables.Items.Add(item);
             //    }
             //}
+        }
+
+        private void cbxFieldGLMType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxFieldGLMType.SelectedIndex == 0)
+            {
+                cbxFieldMatch.IsEnabled = true;
+                checkboxNoIntercept.IsEnabled = true;
+            }
+            else
+            {
+                cbxFieldMatch.SelectedIndex = -1;
+                cbxFieldMatch.IsEnabled = false;
+                checkboxNoIntercept.IsChecked = false;
+                checkboxNoIntercept.IsEnabled = false;
+            }
         }
     }
 }
