@@ -305,3 +305,7 @@ Epi.Core/Configuration_Static.cs
 Build/
 
 
+Epi.Windows.AnalysisDashboard/ComponentArt.Win.DataVisualization.lic
+Epi.Windows.Enter/ComponentArt.Win.DataVisualization.lic
+EpiDashboard/ComponentArt.Win.DataVisualization.lic
+/commitReport.code

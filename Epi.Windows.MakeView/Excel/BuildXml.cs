@@ -36,7 +36,7 @@ namespace Epi.Windows.MakeView.Excel
 
                 if (string.IsNullOrEmpty(NewPage.GPSCheckCode) == false)
                 {
-                    checkCode = Environment.NewLine + NewPage.GPSCheckCode + Environment.NewLine;
+                    checkCode = Environment.NewLine + XmlElement.Attribute("CheckCode").Value + NewPage.GPSCheckCode + Environment.NewLine;
                 }
 
                 if (string.IsNullOrEmpty(checkCode) == false)
@@ -74,7 +74,7 @@ namespace Epi.Windows.MakeView.Excel
             else if (NewPage.Question_Type == 10) // CHECKBOX
             {
                 NewPage.Question = NewPage.Question;
-                NewPage.Variable_Name = "Text_" + NewPage.PageName.Replace(" ", "");
+                NewPage.Variable_Name = NewPage.Variable_Name + "_" + NewPage.PageName.Replace(" ", "");
                 NewPage.Question_Type = 2;
                 FiledElement = AddControlXml(NewPage);
                 FiledElement.SetAttributeValue("ControlTopPositionPercentage", 0.2);
@@ -85,7 +85,7 @@ namespace Epi.Windows.MakeView.Excel
                 {
                     NewPage.Question_Type = 10;
                     NewPage.Question = checkbox;
-                    NewPage.Variable_Name = "Chk_" + Variable_Name + "_" + count;
+                    NewPage.Variable_Name = Variable_Name + "_" + count;
                     NewPage.Counter = count;
                     FiledElement = AddControlXml(NewPage);
                     PageElement.Add(FiledElement);
@@ -257,6 +257,10 @@ namespace Epi.Windows.MakeView.Excel
                 {
                     field.SetAttributeValue("IsRequired", NewPage.Required.ToString());
                     lonName = NewPage.Variable_Name + fieldName;
+                }
+                else
+                {
+                    field.SetAttributeValue("PromptText", NewPage.Question);
                 }
             }
 
