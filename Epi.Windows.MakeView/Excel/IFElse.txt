@@ -1,1 +1,0 @@
-﻿Page [{0}] After IF {1} =  "{2}"  THEN GOTO {3}  ELSE GOTO {4}  END-IF End-After End-Page 

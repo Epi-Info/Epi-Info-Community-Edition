@@ -185,19 +185,20 @@ namespace Epi.Windows.MakeView.Excel
             }
             return SourceTableElement;
         }
-
         private string GetCheckCode(string CheckCode, Card NewPage)
         {
-            StringBuilder _CheckCode = new StringBuilder();
-            _CheckCode.Append(CheckCode);
-            string text;
-            using (var streamReader = new StreamReader(@"./Excel/IFElse.txt", Encoding.UTF8))
-            {
-                text = streamReader.ReadToEnd();
-            }
-            text = string.Format(text, NewPage.PageName, NewPage.Variable_Name, NewPage.If_Condition, NewPage.Then_Question, NewPage.Else_Question);
-            _CheckCode.Append("\n" + text);
-            return _CheckCode.ToString();
+            StringBuilder builder = new StringBuilder(CheckCode);
+
+            builder.Append("\rPage [" + NewPage.PageName + "]\r");
+            builder.Append("    After\r");
+            builder.Append("        IF " + NewPage.Variable_Name + " = \"" + NewPage.If_Condition  + "\"\r");
+            builder.Append("        THEN GOTO " + NewPage.Then_Question + "\r");
+            builder.Append("        ELSE GOTO " + NewPage.Else_Question + "\r");
+            builder.Append("        END-IF\r");
+            builder.Append("    End-After\r");
+            builder.Append("End-Page\r");
+
+            return builder.ToString();
         }
         public static XDocument ToXDocument(XmlDocument xmlDocument)
         {
@@ -265,7 +266,7 @@ namespace Epi.Windows.MakeView.Excel
             }
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Field " + buttonName + "\r");
+            builder.Append("\rField " + buttonName + "\r");
             builder.Append("    Click\r");
             builder.Append("        ASSIGN  " + latName + " = SYSLATITUDE\r");
             builder.Append("        ASSIGN  " + lonName + " = SYSLONGITUDE\r");
