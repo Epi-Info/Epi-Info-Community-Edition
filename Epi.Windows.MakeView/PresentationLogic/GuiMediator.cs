@@ -778,7 +778,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
                                     controlLeft = tabStopAccumulator;
 
-                                    int vertPadding = -3;
+                                    int vertPadding = -7; //2018
 
                                     controlTop = promptTop + promptHeight + vertPadding;
                                     controlTop = canvas.Snap(controlTop, true);
@@ -3304,7 +3304,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
                 }
                 else
                 {
-                    int padHeight = -1;
+                    int padHeight = -3;  // 2018
                     int controlTop = location.Y + promptHeight + padHeight;
 
                     controlTop = canvas.Snap(controlTop, true);
