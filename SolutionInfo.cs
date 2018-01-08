@@ -40,7 +40,7 @@ using Epi;
 [assembly: AssemblyFileVersion("7.2.2.3")]
 [assembly: AssemblyInformationalVersion("7.2.2.3")]
 [assembly: SatelliteContractVersion("7.0.0.0")]
-[assembly: Epi.AssemblyReleaseDateAttribute("01/04/2018")]
+[assembly: Epi.AssemblyReleaseDateAttribute("01/08/2018")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

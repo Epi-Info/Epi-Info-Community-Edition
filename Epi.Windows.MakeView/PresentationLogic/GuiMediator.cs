@@ -3304,10 +3304,10 @@ namespace Epi.Windows.MakeView.PresentationLogic
                 }
                 else
                 {
-                    int padHeight = -3;  // 2018
+                    int padHeight = -2;  // 2018
                     int controlTop = location.Y + promptHeight + padHeight;
 
-                    controlTop = canvas.Snap(controlTop, true);
+                    //controlTop = canvas.Snap(controlTop, true); // 2018
 
                     ((FieldWithSeparatePrompt)field).ControlLeftPositionPercentage = positionedField.PromptLeftPositionPercentage;
                     ((FieldWithSeparatePrompt)field).ControlTopPositionPercentage = 1.0 * controlTop / canvas.PagePanel.Size.Height;
