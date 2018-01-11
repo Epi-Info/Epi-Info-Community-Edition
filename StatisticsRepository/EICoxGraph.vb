@@ -1402,7 +1402,7 @@ cleanup:
         Next i
 
         lstrChartLineSeries = lstrChartLineSeries & "LineSeriesDataString"
-        lstrChartLineSeries = lstrChartLineSeries & ")"
+        lstrChartLineSeries = lstrChartLineSeries.Replace(","c, "."c) & ")"
         lstrInputParams = lstrDomainLabel & "," & lstrChartType & "," & "independentLabel=Time,dependentLabel=Survival Probability," & lstrIndependentValueType & "," & lstrChartLineSeries
 
         lstrGraphOut = lstrGraphOut & "<br clear=""all"">"
@@ -1414,6 +1414,8 @@ cleanup:
         lstrGraphOut = lstrGraphOut & "<param name=""onError"" value=""onSilverlightError"" />"
         lstrGraphOut = lstrGraphOut & "<param name=""minRuntimeVersion"" value=""4.0.50826.0"" />"
         lstrGraphOut = lstrGraphOut & "<param name=""autoUpgrade"" value=""true"" />"
+        lstrGraphOut = lstrGraphOut & "<param name=""uiculture"" value=""en-US"" />"
+        lstrGraphOut = lstrGraphOut & "<param name=""culture"" value=""en-US"" />"
         lstrGraphOut = lstrGraphOut & "<a href=""http://go.microsoft.com/fwlink/?LinkID=149156&v=4.0.50826.0"" style=""text-decoration: none"">"
         lstrGraphOut = lstrGraphOut & "<img src=""http://go.microsoft.com/fwlink/?LinkId=161376"" alt=""Get Microsoft Silverlight"""
         lstrGraphOut = lstrGraphOut & "style=""border-style: none"" />"
