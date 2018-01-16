@@ -58,18 +58,44 @@ namespace Epi.Core.ServiceClient
                     binding.ReaderQuotas.MaxBytesPerRead = config.Settings.EWEServiceReaderMaxBytesPerRead;
                     binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.EWEServiceReaderMaxNameTableCharCount;
 
-                    binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                    binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                    binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                    binding.Security.Transport.Realm = string.Empty;
+                    //binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                    //binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                    //binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                    //binding.Security.Transport.Realm = string.Empty;
 
-                    binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
+                    //binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
 
+                    //System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+
+                    //result = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
+                    //result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
+                    //result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                    if (endpoint.Uri.Scheme == "http")
+                    {
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                        binding.Security.Transport.Realm = string.Empty;
+                    }
+                    else
+                    {
+                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+
+
+                    }
+                    binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
+                     
 
                     result = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
+                    System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                        (se, cert, chain, sslerror) =>
+                        {
+                            return true;
+                        };
                 }
                 else
                 {
@@ -136,14 +162,29 @@ namespace Epi.Core.ServiceClient
                         binding.ReaderQuotas.MaxBytesPerRead = config.Settings.EWEServiceReaderMaxBytesPerRead;
                         binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.EWEServiceReaderMaxNameTableCharCount;
 
-                        binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
-                        binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
-                        binding.Security.Transport.Realm = string.Empty;
-
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
+                        if (endpoint.Uri.Scheme == "http")
+                        {
+                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                            binding.Security.Transport.ProxyCredentialType = System.ServiceModel.HttpProxyCredentialType.None;
+                            binding.Security.Transport.Realm = string.Empty;
+                        }
+                        else
+                        {
+                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+
+
+                        }
+
 
                         result = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
+                        System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                        (se, cert, chain, sslerror) =>
+                        {
+                            return true;
+                        };
                     }
                 }
             }
