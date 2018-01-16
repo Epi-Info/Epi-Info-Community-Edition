@@ -122,7 +122,7 @@ namespace Epi.Enter.Forms
                 this.rdbFinalMode.Checked = true;
                 this.chkIncremental.Checked = true;
 
-                if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
+              /*  if (config.Settings.WebServiceAuthMode == 1) // Windows Authentication
                     {
                     System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                     binding.Name = "BasicHttpBinding";
@@ -161,7 +161,7 @@ namespace Epi.Enter.Forms
                     }
                 else
                     {
-
+                     
 
                     if (config.Settings.WebServiceBindingMode.Equals("wshttp", StringComparison.OrdinalIgnoreCase))
                         {
@@ -237,7 +237,8 @@ namespace Epi.Enter.Forms
                         client = new EWEManagerService.EWEManagerServiceClient(binding, endpoint);
                         }
 
-                    }
+                    }*/
+                    client = Epi.Core.ServiceClient.EWEServiceClient.GetClient();
                 this._webFieldDataList = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
 
 
