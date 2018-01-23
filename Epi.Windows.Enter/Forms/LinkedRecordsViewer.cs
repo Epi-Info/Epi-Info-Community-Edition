@@ -44,19 +44,19 @@ namespace Epi.Windows.Enter
             lvLinkedFrom.ItemMouseHover += new ListViewItemMouseHoverEventHandler(lvLinkedFrom_ItemMouseHover);
             lvLinkedTo.MouseLeave += new EventHandler(lvLinkedTo_MouseLeave);
             lvLinkedFrom.MouseLeave += new EventHandler(lvLinkedFrom_MouseLeave);
-            lvLinkedTo.LostFocus += LvLinkedTo_LostFocus;
-            lvLinkedFrom.LostFocus += LvLinkedFrom_LostFocus;
+            //lvLinkedTo.LostFocus += LvLinkedTo_LostFocus;
+            //lvLinkedFrom.LostFocus += LvLinkedFrom_LostFocus;
         }
 
-        private void LvLinkedFrom_LostFocus(object sender, EventArgs e)
-        {
-            //lvLinkedFrom.SelectedItems.Clear();
-        }
+        //private void LvLinkedFrom_LostFocus(object sender, EventArgs e)
+        //{
+        //    //lvLinkedFrom.SelectedItems.Clear();
+        //}
 
-        private void LvLinkedTo_LostFocus(object sender, EventArgs e)
-        {
-            //lvLinkedTo.SelectedItems.Clear();
-        }
+        //private void LvLinkedTo_LostFocus(object sender, EventArgs e)
+        //{
+        //    //lvLinkedTo.SelectedItems.Clear();
+        //}
 
         void lvLinkedFrom_MouseLeave(object sender, EventArgs e)
         {
@@ -489,6 +489,9 @@ namespace Epi.Windows.Enter
                         }
                     }
                 }
+
+                List<string> names = new List<string>();
+
                 foreach (DataRow row in data.Rows)
                 {
                     ListViewItem item = new ListViewItem(row["Key" + row["ToViewId"].ToString()].ToString());
@@ -499,36 +502,25 @@ namespace Epi.Windows.Enter
                     item.ImageIndex = 0;
                     item.Group = lvLinkedTo.Groups[row["ToViewId"].ToString()];
 
-                    List<string> names = new List<string>();
-
-                    foreach (ListViewItem i in lvLinkedTo.Items)
+                    if (names.Contains(item.Text) == false)
                     {
-                        names.Add(i.Name);
-                    }
-
-                    if (lvLinkedTo.InvokeRequired)
-                    {
-                        lvLinkedTo.Invoke(new MethodInvoker(delegate
+                        names.Add(item.Text);
+                        
+                        if (lvLinkedTo.InvokeRequired)
                         {
-                            if (names.Contains(item.Name) == false)
+                            lvLinkedTo.Invoke(new MethodInvoker(delegate
                             {
                                 lvLinkedTo.Items.Add(item);
-                            }
-                        }));
-                    }
-                    else
-                    {
-                        if (names.Contains(item.Name) == false)
+                            }));
+                        }
+                        else
                         {
                             lvLinkedTo.Items.Add(item);
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                // do nothing!
-            }
+            catch { }
         }
 
         private void FillFromNodes()
@@ -610,6 +602,9 @@ namespace Epi.Windows.Enter
                         }
                     }
                 }
+
+                List<string> names = new List<string>();
+
                 foreach (DataRow row in data.Rows)
                 {
                     ListViewItem item = new ListViewItem(row["Key" + row["FromViewId"].ToString()].ToString());
@@ -620,26 +615,18 @@ namespace Epi.Windows.Enter
                     item.ImageIndex = 0;
                     item.Group = lvLinkedFrom.Groups[row["FromViewId"].ToString()];
 
-                    List<string> names = new List<string>();
-
-                    foreach(ListViewItem i in lvLinkedFrom.Items)
+                    if(names.Contains(item.Text) == false)
                     {
-                        names.Add(i.Name);
-                    }
+                        names.Add(item.Text);
 
-                    if (lvLinkedFrom.InvokeRequired)
-                    {
-                        lvLinkedFrom.Invoke(new MethodInvoker(delegate
+                        if (lvLinkedFrom.InvokeRequired)
                         {
-                            if (names.Contains(item.Name) == false)
+                            lvLinkedFrom.Invoke(new MethodInvoker(delegate
                             {
                                 lvLinkedFrom.Items.Add(item);
-                            }
-                        }));
-                    }
-                    else
-                    {
-                        if (names.Contains(item.Name) == false)
+                            }));
+                        }
+                        else
                         {
                             lvLinkedFrom.Items.Add(item);
                         }
