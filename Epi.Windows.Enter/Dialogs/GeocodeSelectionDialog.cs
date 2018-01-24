@@ -48,8 +48,8 @@ namespace Epi.Enter.Dialogs
                             nodeAddress["FormattedAddress"].InnerText,
                             nodeConfidence.InnerText,
                             nodeMatchCodes.InnerText,
-                            double.Parse(nodePoint["Latitude"].InnerText),
-                            double.Parse(nodePoint["Longitude"].InnerText)
+                            double.Parse(nodePoint["Latitude"].InnerText, System.Globalization.CultureInfo.InvariantCulture),
+                            double.Parse(nodePoint["Longitude"].InnerText, System.Globalization.CultureInfo.InvariantCulture)
                         );
 
                         resultControl.Location = new Point(3, 153 * counter);

@@ -32,10 +32,11 @@
             this.lblDialogTitle = new System.Windows.Forms.Label();
             this.lbxFields = new System.Windows.Forms.ListBox();
             this.btnHelp = new System.Windows.Forms.Button();
-            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.lblUnsupportedList = new System.Windows.Forms.Label();
             this.lblInstructions = new System.Windows.Forms.Label();
             this.lblFields = new System.Windows.Forms.Label();
+            this.buttonProceedAnyway = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -138,11 +139,11 @@
             resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
             // 
-            // btnOk
+            // btnCancel
             // 
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.btnOk, "btnOk");
-            this.btnOk.Name = "btnOk";
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.Name = "btnCancel";
             // 
             // lblUnsupportedList
             // 
@@ -159,16 +160,24 @@
             resources.ApplyResources(this.lblFields, "lblFields");
             this.lblFields.Name = "lblFields";
             // 
+            // buttonProceedAnyway
+            // 
+            this.buttonProceedAnyway.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this.buttonProceedAnyway, "buttonProceedAnyway");
+            this.buttonProceedAnyway.Name = "buttonProceedAnyway";
+            this.buttonProceedAnyway.UseVisualStyleBackColor = true;
+            // 
             // SupportedFieldTypeAndroidDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnOk;
+            this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.buttonProceedAnyway);
             this.Controls.Add(this.lblFields);
             this.Controls.Add(this.lblInstructions);
             this.Controls.Add(this.lblUnsupportedList);
             this.Controls.Add(this.btnHelp);
-            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lbxFields);
             this.Controls.Add(this.lblDialogTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -186,9 +195,10 @@
         private System.Windows.Forms.Label lblDialogTitle;
         private System.Windows.Forms.ListBox lbxFields;
         private System.Windows.Forms.Button btnHelp;
-        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblUnsupportedList;
         private System.Windows.Forms.Label lblInstructions;
         private System.Windows.Forms.Label lblFields;
+        private System.Windows.Forms.Button buttonProceedAnyway;
     }
 }
