@@ -1215,7 +1215,8 @@ namespace EpiDashboard
                             double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, false);
                             double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
                             double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
-                            double fisherTestResult = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+//                            double fisherTestResult = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+                            double fisherTestResult = 0.0;
                             String disclaimer = "";
                             if (tableChiSq[1] == 5.0)
                                 disclaimer = "An expected cell value is <5. X" + '\u00B2' + " may not be valid.";
@@ -2324,6 +2325,8 @@ namespace EpiDashboard
             Grid.SetColumn(txt6, 2);
             grid.Children.Add(txt6);
 
+            // Commenting out Fisher's Exact rendering for now.
+/*
             grid.RowDefinitions.Add(new RowDefinition());
             TextBlock txt1b = new TextBlock();
             txt1b.Text = "Fisher's Exact";
@@ -2350,7 +2353,7 @@ namespace EpiDashboard
             Grid.SetRow(txt4b, 3);
             Grid.SetColumn(txt4b, 2);
             grid.Children.Add(txt4b);
-
+*/
             if (!string.IsNullOrEmpty(disclaimer) && !Double.IsNaN(tableChiSq))
             {
 //                grid.RowDefinitions.Add(new RowDefinition());
