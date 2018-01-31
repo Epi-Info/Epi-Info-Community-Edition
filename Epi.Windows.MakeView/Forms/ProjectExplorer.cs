@@ -136,9 +136,9 @@ namespace Epi.Windows.MakeView.Forms
         public void LoadProject(Project project)
         {
             Epi.Windows.Controls.ProjectNode projectNode = new Epi.Windows.Controls.ProjectNode(project);
-            
+
             projectTree.Nodes.Insert(0, projectNode);
-            
+
             if (projectNode.Nodes.Count > 0)
             {
                 if (projectNode.Nodes[0].Nodes.Count > 0)
@@ -245,11 +245,11 @@ namespace Epi.Windows.MakeView.Forms
                             pageNode.Page.view = view;
                         }
                     }
-                }                
+                }
             }
         }
 
-        public bool ViewNameAlreadyExists(string viewNameCandidate )
+        public bool ViewNameAlreadyExists(string viewNameCandidate)
         {
             bool NodeFound = false;
             ViewNode VN = null;
@@ -299,7 +299,7 @@ namespace Epi.Windows.MakeView.Forms
         /// </summary>
         public void DeleteCurrentPage()
         {
-            string msg = SharedStrings.CONFIRM_PAGE_DELETE;            
+            string msg = SharedStrings.CONFIRM_PAGE_DELETE;
             DeletePage((PageNode)projectTree.SelectedNode, msg);
         }
 
@@ -353,11 +353,11 @@ namespace Epi.Windows.MakeView.Forms
                 CreateAndInsertNewPage(viewTreeNode, pageName);
             }
         }
-      
+
         public void InsertPage(TreeNode pageTreeNode)
         {
             if (pageTreeNode is PageNode)
-            { 
+            {
                 PageNode pageNode = (PageNode)pageTreeNode;
                 ViewNode viewTreeNode = (ViewNode)pageNode.Parent;
                 RenamePageDialog dialog = new RenamePageDialog(this.mainForm, ((ViewNode)viewTreeNode).View);
@@ -392,7 +392,7 @@ namespace Epi.Windows.MakeView.Forms
         private void InsertPage(TreeNode viewTreeNode, Page page)
         {
             PageNode pageNode;
-            
+
             if (dropOnNode != null)
             {
                 pageNode = ((ViewNode)viewTreeNode).InsertPageNode(page, dropOnNode.Index);
@@ -409,7 +409,7 @@ namespace Epi.Windows.MakeView.Forms
             pageNode.Page.SaveToDb();
             ViewNode viewNode = (ViewNode)pageNode.Parent;
 
-            Page foundPage = viewNode.View.Pages.Find(delegate(Page p) { return p.Id == pageNode.Page.Id; });
+            Page foundPage = viewNode.View.Pages.Find(delegate (Page p) { return p.Id == pageNode.Page.Id; });
 
             if (foundPage != null)
             {
@@ -422,7 +422,7 @@ namespace Epi.Windows.MakeView.Forms
 
             PageSelected(SelectedPage);
         }
-      
+
         /// <summary>
         /// Add a page to a view's tree node
         /// </summary>
@@ -447,7 +447,7 @@ namespace Epi.Windows.MakeView.Forms
                     break;
                 }
             }
-            
+
             ViewNode viewNodeSelected = (ViewNode)projectTree.SelectedNode;
             InsertPage(viewNodeSelected, page);
         }
@@ -461,26 +461,26 @@ namespace Epi.Windows.MakeView.Forms
             {
                 if (((ViewNode)(projectTree.SelectedNode.Parent)).View.Pages.Count < 150) // TODO: Hard coded (magic) number not allowed. Not sure who wrote this code.
                 {
-                       RenamePageDialog dialog = new RenamePageDialog(this.mainForm, ((ViewNode)projectTree.SelectedNode.Parent).View);
-                       dialog.PageName = "InsertPage"; ;
-                       DialogResult result = dialog.ShowDialog();
-                       string pageName = dialog.PageName;
-                       if (result == DialogResult.OK)
-                       {
-                           Page page = ((ViewNode)projectTree.SelectedNode.Parent).View.CreatePage(pageName, projectTree.SelectedNode.Index);
-                           // Page page = ((ViewNode)projectTree.SelectedNode.Parent).View.CreatePage(SharedStrings.INSERTED_PAGE, projectTree.SelectedNode.Index);
-                           PageNode node = ((ViewNode)projectTree.SelectedNode.Parent).InsertPageNode(page, projectTree.SelectedNode.Index);
-                           projectTree.SelectedNode = node;
+                    RenamePageDialog dialog = new RenamePageDialog(this.mainForm, ((ViewNode)projectTree.SelectedNode.Parent).View);
+                    dialog.PageName = "InsertPage"; ;
+                    DialogResult result = dialog.ShowDialog();
+                    string pageName = dialog.PageName;
+                    if (result == DialogResult.OK)
+                    {
+                        Page page = ((ViewNode)projectTree.SelectedNode.Parent).View.CreatePage(pageName, projectTree.SelectedNode.Index);
+                        // Page page = ((ViewNode)projectTree.SelectedNode.Parent).View.CreatePage(SharedStrings.INSERTED_PAGE, projectTree.SelectedNode.Index);
+                        PageNode node = ((ViewNode)projectTree.SelectedNode.Parent).InsertPageNode(page, projectTree.SelectedNode.Index);
+                        projectTree.SelectedNode = node;
 
-                           foreach (TreeNode eachNode in node.Parent.Nodes)
-                           {
-                               if (eachNode is PageNode)
-                               {
-                                   ((PageNode)eachNode).Page.Position = eachNode.Index;
-                                   ((PageNode)eachNode).Page.SaveToDb();
-                               }
-                           }
-                       }
+                        foreach (TreeNode eachNode in node.Parent.Nodes)
+                        {
+                            if (eachNode is PageNode)
+                            {
+                                ((PageNode)eachNode).Page.Position = eachNode.Index;
+                                ((PageNode)eachNode).Page.SaveToDb();
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -491,13 +491,13 @@ namespace Epi.Windows.MakeView.Forms
             {
                 if (((ViewNode)projectTree.SelectedNode).View.Pages.Count < 150) // TODO: Hard coded (magic) number not allowed. Not sure who wrote this code.
                 {
-                    RenamePageDialog dialog = new RenamePageDialog(this.mainForm, ((ViewNode)projectTree.SelectedNode).View) ;
+                    RenamePageDialog dialog = new RenamePageDialog(this.mainForm, ((ViewNode)projectTree.SelectedNode).View);
                     dialog.PageName = "InsertPage"; ;
                     DialogResult result = dialog.ShowDialog();
                     string pageName = dialog.PageName;
                     if (result == DialogResult.OK)
                     {
-                      //Page page = ((ViewNode)projectTree.SelectedNode).View.CreatePage(SharedStrings.INSERTED_PAGE, 0);
+                        //Page page = ((ViewNode)projectTree.SelectedNode).View.CreatePage(SharedStrings.INSERTED_PAGE, 0);
                         Page page = ((ViewNode)projectTree.SelectedNode).View.CreatePage(pageName, 0);
                         PageNode node = ((ViewNode)projectTree.SelectedNode).InsertPageNode(page, 0);
                         projectTree.SelectedNode = node;
@@ -645,10 +645,10 @@ namespace Epi.Windows.MakeView.Forms
                     if (dropOnNode != null && dropOnNode.Parent != null && dropOnNode is PageNode)
                     {
                         if (dropOnNode != draggedPageNode)
-                        { 
+                        {
                             draggedPageNode.Remove();
                             int mouseOverIndex = dropOnNode.Index;
-                            
+
                             if (dropOnNode.Parent != null)
                             {
                                 dropOnNode.Parent.Nodes.Insert(mouseOverIndex, draggedPageNode);
@@ -669,27 +669,34 @@ namespace Epi.Windows.MakeView.Forms
                 {
                     if (dropOnNode != null && dropOnNode is PageNode)
                     {
-                        int dropOnNodePosition = ((PageNode)dropOnNode).Page.Position;
-                        SelectView(((PageNode)dropOnNode).Page.view.Name);
-                        Template template = new Template(this.mainForm.mediator);
-                        template.CreateFromTemplate((TemplateNode)draggedTemplateNode, dropOnNodePosition);
-
-                        int mouseOverIndex = dropOnNodePosition;
-
-                        if (dropOnNode != null && dropOnNode.Parent != null)
+                        if (draggedTemplateNode.FullPath.Contains(@"Templates\Pages\"))
                         {
-                            foreach (TreeNode pageNode in dropOnNode.Parent.Nodes)
+                            int dropOnNodePosition = ((PageNode)dropOnNode).Page.Position;
+                            SelectView(((PageNode)dropOnNode).Page.view.Name);
+                            Template template = new Template(this.mainForm.mediator);
+                            template.CreateFromTemplate((TemplateNode)draggedTemplateNode, dropOnNodePosition);
+
+                            int mouseOverIndex = dropOnNodePosition;
+
+                            if (dropOnNode != null && dropOnNode.Parent != null)
                             {
-                                if (pageNode is PageNode)
+                                foreach (TreeNode pageNode in dropOnNode.Parent.Nodes)
                                 {
-                                    ((PageNode)pageNode).Page.Position = pageNode.Index;
-                                    ((PageNode)pageNode).Page.SaveToDb();
+                                    if (pageNode is PageNode)
+                                    {
+                                        ((PageNode)pageNode).Page.Position = pageNode.Index;
+                                        ((PageNode)pageNode).Page.SaveToDb();
+                                    }
                                 }
                             }
-                        }
 
-                        Page selectedPage = this.mainForm.mediator.ProjectExplorer.SelectedPage;
-                        this.mainForm.mediator.projectExplorer_PageSelected(selectedPage);
+                            Page selectedPage = this.mainForm.mediator.ProjectExplorer.SelectedPage;
+                            this.mainForm.mediator.projectExplorer_PageSelected(selectedPage);
+                        }
+                        else
+                        {
+                            new Template(this.mainForm.mediator).CreateFromTemplate((TemplateNode)draggedTemplateNode, new Point(0, 0));
+                        }
                     }
                     else if (dropOnNode != null && dropOnNode is ViewNode)
                     {
@@ -715,7 +722,7 @@ namespace Epi.Windows.MakeView.Forms
                             this.mainForm.mediator.projectExplorer_PageSelected(selectedPage);
                         }
                         else
-                        new Template(this.mainForm.mediator).CreateFromTemplate((TemplateNode)draggedTemplateNode, new Point(0, 0));
+                            new Template(this.mainForm.mediator).CreateFromTemplate((TemplateNode)draggedTemplateNode, new Point(0, 0));
                     }
                 }
             }
@@ -819,7 +826,7 @@ namespace Epi.Windows.MakeView.Forms
                         currentPage = page;
                     }
                 }
-                
+
                 if (PageSelected != null)
                 {
                     PageSelected(currentPage);
@@ -827,7 +834,7 @@ namespace Epi.Windows.MakeView.Forms
                     try
                     {
                         makeViewMainForm.SetDataTableMenuItems();
-                        makeViewMainForm.SetPublishMenuItems(currentPage.view);                                      
+                        makeViewMainForm.SetPublishMenuItems(currentPage.view);
                         //if (!currentPage.view.Project.CollectedData.TableExists(currentPage.view.TableName))
                         //{
                         //    makeViewMainForm.SetDataTableMenuItems();
@@ -847,7 +854,7 @@ namespace Epi.Windows.MakeView.Forms
                     catch { }
                 }
             }
-            else if(e.Node is ViewNode)
+            else if (e.Node is ViewNode)
             {
                 if (this.mainForm != null)
                 {
@@ -918,7 +925,7 @@ namespace Epi.Windows.MakeView.Forms
                 }
                 else if (templateLevel == Enums.TemplateLevel.Page)
                 {
-                
+
                 }
                 else if (templateLevel == Enums.TemplateLevel.Form)
                 {
@@ -944,7 +951,7 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="e">Tree Node event parameters</param>
         private void projectTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Button == MouseButtons.Right )
+            if (e.Button == MouseButtons.Right)
             {
                 rightClickedNode = e.Node;
 
@@ -996,7 +1003,7 @@ namespace Epi.Windows.MakeView.Forms
                 mainForm.mediator.LoadPage(currentPage);
             }
         }
-        
+
         void mnuViewUseDefaultFonts_Click(object sender, EventArgs e)
         {
             DialogResult result = MsgBox.ShowQuestion("The font of all controls including all labels will be changed to the default prompt. The changes cannot be undone.\r\n\r\nContinue with changes?");
@@ -1017,7 +1024,7 @@ namespace Epi.Windows.MakeView.Forms
         void mnuPageUseDefaultFonts_Click(object sender, EventArgs e)
         {
             DialogResult result = MsgBox.ShowQuestion("The font of all controls including all labels will be changed to the default prompt. The changes cannot be undone.\r\n\r\nContinue with changes?");
-            
+
             if (result == DialogResult.Yes)
             {
                 System.Drawing.Font promptFont;
@@ -1027,7 +1034,7 @@ namespace Epi.Windows.MakeView.Forms
 
                 int pageId = currentPage.Id;
                 int viewId = currentPage.view.Id;
-                currentPage.GetMetadata().UpdateFonts(controlFont, promptFont,viewId: viewId, pageId: pageId);
+                currentPage.GetMetadata().UpdateFonts(controlFont, promptFont, viewId: viewId, pageId: pageId);
                 mainForm.mediator.LoadPage(currentPage);
             }
         }
@@ -1039,7 +1046,7 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="e">.NET supplied event parameters</param>
         void mnuNewLinkedConnection_Click(object sender, EventArgs e)
         {
-            MsgBox.ShowInformation("This functionality will be available in a later build."); 
+            MsgBox.ShowInformation("This functionality will be available in a later build.");
         }
 
         /// <summary>
@@ -1065,7 +1072,7 @@ namespace Epi.Windows.MakeView.Forms
                 Template template = new Template(this.mainForm.mediator);
                 template.CreateProjectTemplate
                     (
-                        this.projectTree.TopNode.Text,    
+                        this.projectTree.TopNode.Text,
                         string.Format(@"Quick saved: {0}", DateTime.Now.ToString("dddd, MMMM dd, yyyy h:mm:ss tt")),
                         string.Format("{0} {1}", this.projectTree.TopNode.Text, DateTime.Now.ToString("yyyyMMddhmmsstt"))
                     );
@@ -1093,7 +1100,7 @@ namespace Epi.Windows.MakeView.Forms
                 if (dialog.DialogResult == DialogResult.OK)
                 {
                     Template template = new Template(this.mainForm.mediator);
-                    template.CreateViewTemplate(dialog.TemplateName, ((Epi.Windows.Controls.ViewNode)(rightClickedNode)).View); 
+                    template.CreateViewTemplate(dialog.TemplateName, ((Epi.Windows.Controls.ViewNode)(rightClickedNode)).View);
                     this.mainForm.mediator.ProjectExplorer.UpdateTemplates();
                 }
             }
@@ -1184,7 +1191,7 @@ namespace Epi.Windows.MakeView.Forms
         /// <param name="e">.NET supplied event parameters</param>
         void mnuPageCheckCode_Click(object sender, EventArgs e)
         {
-            Epi.Windows.MakeView.Forms.CheckCode checkCode = new Epi.Windows.MakeView.Forms.CheckCode(((PageNode)rightClickedNode).Page, (MakeViewMainForm)this.mainForm,CurrentView);
+            Epi.Windows.MakeView.Forms.CheckCode checkCode = new Epi.Windows.MakeView.Forms.CheckCode(((PageNode)rightClickedNode).Page, (MakeViewMainForm)this.mainForm, CurrentView);
             checkCode.ShowDialog();
         }
 
@@ -1274,7 +1281,7 @@ namespace Epi.Windows.MakeView.Forms
         private void AddOpenFields()
         {
             if (this.IsProjectLoaded == false || OpenForViewingOnly) return;
-            
+
             this.SuspendLayout();
             this.fieldsNode = new TreeNode();
 
@@ -1284,7 +1291,7 @@ namespace Epi.Windows.MakeView.Forms
             fieldsNode.ImageIndex = 6;
             fieldsNode.SelectedImageIndex = 6;
             projectTree.Nodes.Add(fieldsNode);
-            
+
             OpenFieldNode labelNode = new OpenFieldNode();
             labelNode.Text = SharedStrings.PE_LABEL_NODE;
             labelNode.ImageIndex = 8;
@@ -1439,7 +1446,7 @@ namespace Epi.Windows.MakeView.Forms
             groupNode.SelectedImageIndex = 18;
             groupNode.Value = MetaFieldType.Group;
             fieldsNode.Nodes.Add(groupNode);
-            
+
             this.ResumeLayout();
             fieldsNode.ExpandAll();
         }
@@ -1458,7 +1465,7 @@ namespace Epi.Windows.MakeView.Forms
             {
                 return;
             }
-            
+
             TreeNode templateRootNode = new TreeNode();
             templateRootNode.Text = SharedStrings.PE_TEMPLATES;
             templateRootNode.Name = "Templates";
@@ -1472,8 +1479,8 @@ namespace Epi.Windows.MakeView.Forms
             if (System.IO.Directory.Exists(path) == false)
             {
                 System.IO.Directory.CreateDirectory(path);
-            } 
-            
+            }
+
             AddTemplateNodes(templateRootNode, path);
 
             if (expandAllNodes == true)
@@ -1503,11 +1510,11 @@ namespace Epi.Windows.MakeView.Forms
                 name = name.Substring(name.LastIndexOf('\\'));
                 name = name.TrimStart(new char[] { '\\' });
 
-                if ((IsProjectLoaded && name != "SourceTables") || 
+                if ((IsProjectLoaded && name != "SourceTables") ||
                     (IsProjectLoaded == false && name == "Projects") ||
                     (IsProjectLoaded == false && name == "Forms"))
                 {
-                    
+
                     TemplateNode templateNode = new TemplateNode();
                     templateNode.Text = Path.GetFileNameWithoutExtension(directoryNames[i]);
                     templateNode.ImageIndex = 0;
@@ -1574,7 +1581,7 @@ namespace Epi.Windows.MakeView.Forms
                 if (result == DialogResult.Yes)
                 {
                     mainForm.mediator.OnPageDeleteUpdateFieldQueue(delNode.Page);
-                    
+
                     ViewNode viewNode = (ViewNode)delNode.Parent;
                     int currentNodeIndex = delNode.Index;
                     viewNode.View.DeletePage(delNode.Page);
@@ -1674,7 +1681,7 @@ namespace Epi.Windows.MakeView.Forms
                     {
                         delNode.View.DeletePage(page);
                     }
-                    
+
                     prjNode.Project.Metadata.DeleteView(delNode.View.Name);
                     prjNode.Project.Views.Remove(delNode.View.Name);
                     projectTree.Nodes.Remove(delNode);
@@ -1810,8 +1817,8 @@ namespace Epi.Windows.MakeView.Forms
             mnuProjectSaveAsTemplate.Tag = node;
             mnuProjectSaveAsTemplate.Click += new EventHandler(mnuSaveAsTemplate_Click);
             contextMenu.Items.Add(mnuProjectSaveAsTemplate);
-            
-            
+
+
             ToolStripMenuItem mnuQuickSaveProjectAsTemplate = new ToolStripMenuItem(SharedStrings.QUICK_SAVE_PROJECT_AS_TEMPLATE);
             mnuQuickSaveProjectAsTemplate.ImageIndex = 24;
             mnuQuickSaveProjectAsTemplate.Tag = node;
@@ -1848,7 +1855,7 @@ namespace Epi.Windows.MakeView.Forms
             mnuDeleteView.Click += new EventHandler(mnuDeleteView_Click);
             mnuDeleteView.Enabled = true;
             contextMenu.Items.Add(mnuDeleteView);
-            
+
             ToolStripMenuItem mnuViewCheckCode = new ToolStripMenuItem(SharedStrings.VIEW_CHECK_CODE);
             mnuViewCheckCode.ImageIndex = 22;
             mnuViewCheckCode.Click += new EventHandler(mnuViewCheckCode_Click);
@@ -1865,7 +1872,7 @@ namespace Epi.Windows.MakeView.Forms
 
             ///---
             contextMenu.Items.Add(new ToolStripSeparator());
-            
+
             ToolStripMenuItem mnuViewSaveAsTemplate = new ToolStripMenuItem(SharedStrings.SAVE_FORM_AS_TEMPLATE);
             mnuViewSaveAsTemplate.ImageIndex = 24;
             mnuViewSaveAsTemplate.Tag = node;
@@ -1892,21 +1899,21 @@ namespace Epi.Windows.MakeView.Forms
         {
             ContextMenuStrip contextMenu = new ContextMenuStrip();
             contextMenu.ImageList = imageList1;
-            
+
             ToolStripMenuItem mnuDeletePage = new ToolStripMenuItem(SharedStrings.DELETE_PAGE); // TODO: Hard coded string
             mnuDeletePage.ImageIndex = 21;
             mnuDeletePage.Click += new EventHandler(mnuDeletePage_Click);
             contextMenu.Items.Add(mnuDeletePage);
-            
+
             ToolStripMenuItem mnuInsertPage = new ToolStripMenuItem(SharedStrings.INSERT_PAGE);// TODO: Hard coded string
             mnuInsertPage.ImageIndex = 20;
             mnuInsertPage.Click += new EventHandler(mnuInsertPage_Click);
             contextMenu.Items.Add(mnuInsertPage);
-            
+
             ToolStripMenuItem mnuRenamePage = new ToolStripMenuItem(SharedStrings.RENAME_PAGE);// TODO: Hard coded string
             mnuRenamePage.Click += new EventHandler(mnuRenamePage_Click);
             contextMenu.Items.Add(mnuRenamePage);
-            
+
             ToolStripMenuItem mnuPageCheckCode = new ToolStripMenuItem(SharedStrings.PAGE_CHECK_CODE);// TODO: Hard coded string
             mnuPageCheckCode.ImageIndex = 22;
             mnuPageCheckCode.Click += new EventHandler(mnuPageCheckCode_Click);
@@ -1923,7 +1930,7 @@ namespace Epi.Windows.MakeView.Forms
 
             ///---
             contextMenu.Items.Add(new ToolStripSeparator());
-            
+
             ToolStripMenuItem mnuPageSaveAsTemplate = new ToolStripMenuItem(SharedStrings.SAVE_PAGE_AS_TEMPLATE);
             mnuPageSaveAsTemplate.ImageIndex = 24;
             mnuPageSaveAsTemplate.Tag = node;
@@ -1955,7 +1962,7 @@ namespace Epi.Windows.MakeView.Forms
             if (node.Parent.Tag is string && isTemplateParentFolder)
             {
                 if (((string)node.Parent.Tag).EndsWith(SharedStrings.PROJECTS))
-                { 
+                {
                     ToolStripMenuItem mnuOpen = new ToolStripMenuItem(SharedStrings.OPEN);
                     mnuOpen.Tag = node;
                     mnuOpen.Click += new EventHandler(mnuOpen_Click);
@@ -2013,8 +2020,8 @@ namespace Epi.Windows.MakeView.Forms
         void mnuOpen_Click(object sender, EventArgs e)
         {
             TemplateNode node = ((TemplateNode)((ToolStripMenuItem)sender).Tag);
-            string path = node.FullPath; 
-            CreateNewProjectFromTemplate(path); 
+            string path = node.FullPath;
+            CreateNewProjectFromTemplate(path);
         }
 
         void mnuRename_Click(object sender, EventArgs e)
@@ -2039,7 +2046,7 @@ namespace Epi.Windows.MakeView.Forms
 
             if (dialog.DialogResult == DialogResult.OK)
             {
-                fullPathCanditate = Path.Combine(copiedFolderName, dialog.TemplateName) + copiedExtension; 
+                fullPathCanditate = Path.Combine(copiedFolderName, dialog.TemplateName) + copiedExtension;
 
                 File.Copy(fullPath, fullPathCanditate);
                 File.Delete(fullPath);
@@ -2052,17 +2059,17 @@ namespace Epi.Windows.MakeView.Forms
             string fullPath = GetTemplateFullPath(sender);
             DialogResult continueWithDelete = MessageBox.Show(SharedStrings.DELETE_TEMPLATE, SharedStrings.DELETE_TEMPLATE, MessageBoxButtons.YesNoCancel);
             if (continueWithDelete == DialogResult.Yes)
-            { 
+            {
                 File.Delete(fullPath);
                 UpdateTemplates();
             }
         }
-        
+
         void mnuCopy_Click(object sender, EventArgs e)
         {
             _nameOfCopiedTemplate = GetTemplateFullPath(sender);
         }
-        
+
         void mnuPaste_Click(object sender, EventArgs e)
         {
             string copyText = " - Copy";
@@ -2123,7 +2130,7 @@ namespace Epi.Windows.MakeView.Forms
         {
             TemplateNode node = ((TemplateNode)((ToolStripMenuItem)sender).Tag);
             string templatesFolderPath = Template.GetTemplatePath(node);
-            System.Diagnostics.Process.Start(templatesFolderPath); 
+            System.Diagnostics.Process.Start(templatesFolderPath);
         }
 
         /// <summary>
@@ -2164,7 +2171,7 @@ namespace Epi.Windows.MakeView.Forms
                 UpdatePageNameinCheckCode(strOldPageName, dialog.PageName);
                 //--
                 ViewNode viewNode = (ViewNode)node.Parent;
-                Page foundPage = viewNode.View.Pages.Find(delegate(Page p) { return p.Id == node.Page.Id; });
+                Page foundPage = viewNode.View.Pages.Find(delegate (Page p) { return p.Id == node.Page.Id; });
                 foundPage.Name = dialog.PageName;
                 PageSelected(SelectedPage);
             }
@@ -2214,7 +2221,8 @@ namespace Epi.Windows.MakeView.Forms
 
         public View CurrentView
         {
-            get {
+            get
+            {
 
                 if (projectTree.SelectedNode is ViewNode)
                 {
@@ -2224,7 +2232,7 @@ namespace Epi.Windows.MakeView.Forms
                 {
                     return ((ViewNode)projectTree.SelectedNode.Parent).View;
                 }
-                else if(projectTree.SelectedNode is ProjectNode)
+                else if (projectTree.SelectedNode is ProjectNode)
                 {
                     return this.mainForm.CurrentView;
                 }
