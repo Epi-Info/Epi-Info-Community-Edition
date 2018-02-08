@@ -7962,7 +7962,7 @@ namespace Epi.Data.Services
                     "[ControlFontFamily] = @ControlFontFamily, [ControlFontStyle] = @ControlFontStyle, [ControlFontSize] = @ControlFontSize, " +
                     "[ControlHeightPercentage] = @ControlHeightPercentage, [ControlLeftPositionPercentage] = @ControlLeftPositionPercentage, " +
                     "[ControlTopPositionPercentage] = @ControlTopPositionPercentage, [ControlWidthPercentage] = @ControlWidthPercentage, " +
-                    "[FieldTypeId] = @FieldTypeId, [HasTabStop] = @HasTabStop, [IsReadOnly] = @IsReadOnly, [IsRequired] = @IsRequired, " +
+                    "[FieldTypeId] = @FieldTypeId, [HasTabStop] = @HasTabStop, [IsReadOnly] = @IsReadOnly, [IsRequired] = @IsRequired, [IsEncrypted] = @IsEncrypted, " +
                     "[MaxLength] = @MaxLength, [Name] = @Name, [PageId] = @PageId, [PromptFontFamily] = @PromptFontFamily, " +
                     "[PromptFontStyle] = @PromptFontStyle, [PromptFontSize] = @PromptFontSize, [PromptLeftPositionPercentage] = @PromptLeftPositionPercentage, " +
                     "[PromptText] = @PromptText, [PromptTopPositionPercentage] = @PromptTopPositionPercentage, [ShouldRepeatLast] = @ShouldRepeatLast, " +
@@ -7989,6 +7989,7 @@ namespace Epi.Data.Services
                 updateQuery.Parameters.Add(new QueryParameter("@HasTabStop", DbType.Boolean, field.HasTabStop));
                 updateQuery.Parameters.Add(new QueryParameter("@IsReadOnly", DbType.Boolean, field.IsReadOnly));
                 updateQuery.Parameters.Add(new QueryParameter("@IsRequired", DbType.Boolean, field.IsRequired));
+                updateQuery.Parameters.Add(new QueryParameter("@IsEncrypted", DbType.Boolean, field.IsEncrypted));
                 updateQuery.Parameters.Add(new QueryParameter("@MaxLength", DbType.Int16, field.MaxLength));
                 updateQuery.Parameters.Add(new QueryParameter("@Name", DbType.String, field.Name));
                 updateQuery.Parameters.Add(new QueryParameter("@PageId", DbType.Int32, field.Page.Id));
@@ -9392,6 +9393,7 @@ namespace Epi.Data.Services
             columns.Add(new TableColumn("ShouldRepeatLast", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("IsRequired", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("IsReadOnly", GenericDbColumnType.Boolean, true));
+            columns.Add(new TableColumn("IsEncrypted", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("ShouldRetainImageSize", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("MaxLength", GenericDbColumnType.Int16, true));
             columns.Add(new TableColumn("Lower", GenericDbColumnType.String, 20, true));

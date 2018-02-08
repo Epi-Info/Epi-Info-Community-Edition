@@ -72,7 +72,8 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
 			chkReadOnly.Checked = field.IsReadOnly;
 			chkRepeatLast.Checked = field.ShouldRepeatLast;
 			chkRequired.Checked = field.IsRequired;
-			
+            chkEncrypted.Checked = field.IsEncrypted;
+
             if (field.MaxLength > 0)
 			{
                 mtbSize.Text = field.MaxLength.ToString();
@@ -103,6 +104,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             }
             field.IsRequired = chkRequired.Checked;
             field.IsReadOnly = chkReadOnly.Checked;
+            field.IsEncrypted = chkEncrypted.Checked;
             field.ShouldRepeatLast = chkRepeatLast.Checked;
         }
 

@@ -31,6 +31,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.chkReadOnly = new System.Windows.Forms.CheckBox();
             this.chkRequired = new System.Windows.Forms.CheckBox();
             this.chkRepeatLast = new System.Windows.Forms.CheckBox();
+            this.chkEncrypted = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +45,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkEncrypted);
             this.groupBox1.Controls.Add(this.chkRepeatLast);
             this.groupBox1.Controls.Add(this.chkRequired);
             this.groupBox1.Controls.Add(this.chkReadOnly);
@@ -53,6 +55,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.groupBox1.Controls.SetChildIndex(this.chkRepeatLast, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnFieldFont, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnPromptFont, 0);
+            this.groupBox1.Controls.SetChildIndex(this.chkEncrypted, 0);
             // 
             // baseImageList
             // 
@@ -161,7 +164,12 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             resources.ApplyResources(this.chkRepeatLast, "chkRepeatLast");
             this.chkRepeatLast.Name = "chkRepeatLast";
-            this.chkRepeatLast.Visible = true;
+            // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            this.chkEncrypted.Name = "chkEncrypted";
+            this.chkEncrypted.UseVisualStyleBackColor = true;
             // 
             // TextFieldDefinition
             // 
@@ -169,6 +177,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.Name = "TextFieldDefinition";
             this.ShowInTaskbar = false;
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,5 +199,6 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
         /// The Repeat Last checkbox
         /// </summary>
 		protected System.Windows.Forms.CheckBox chkRepeatLast;
+        protected System.Windows.Forms.CheckBox chkEncrypted;
     }
 }

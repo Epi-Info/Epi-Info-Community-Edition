@@ -8704,6 +8704,7 @@ namespace Epi.Data.Services
             columns.Add(new TableColumn("ShouldRepeatLast", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("IsRequired", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("IsReadOnly", GenericDbColumnType.Boolean, true));
+            columns.Add(new TableColumn("IsEncrypted", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("ShouldRetainImageSize", GenericDbColumnType.Boolean, true));
             columns.Add(new TableColumn("MaxLength", GenericDbColumnType.Int16, true));
             columns.Add(new TableColumn("Lower", GenericDbColumnType.String, 20, true));
