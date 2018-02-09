@@ -33,8 +33,7 @@ namespace Epi.Fields
         /// Constructor for the class
         /// </summary>
         /// <param name="page">The page this field belongs to</param>
-        public SingleLineTextField(Page page)
-            : base(page)
+        public SingleLineTextField(Page page) : base(page)
         {
         }
 
@@ -54,8 +53,7 @@ namespace Epi.Fields
         /// Constructor
         /// </summary>
         /// <param name="view">View</param>
-        public SingleLineTextField(View view)
-            : base(view)
+        public SingleLineTextField(View view) : base(view)
         {
         }
 
@@ -64,8 +62,7 @@ namespace Epi.Fields
         /// </summary>
         /// <param name="view">View</param>
         /// <param name="fieldNode">Xml field node</param>
-        public SingleLineTextField(View view, XmlNode fieldNode)
-            : base(view)
+        public SingleLineTextField(View view, XmlNode fieldNode) : base(view)
         {
             this.fieldNode = fieldNode;
             this.view.Project.Metadata.GetFieldData(this, fieldNode);           
@@ -127,8 +124,5 @@ namespace Epi.Fields
         }
 
         #endregion  //Public Properties
-
-
-
     }
 }

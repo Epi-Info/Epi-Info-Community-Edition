@@ -57,7 +57,7 @@ namespace Epi.Fields
             {
                 object encrypted = row[ColumnNames.IS_ENCRYPTED];
 
-                if (encrypted != null && (encrypted is System.DBNull == false))//&& encrypted == true)
+                if (encrypted != null && (encrypted is System.DBNull == false) && (encrypted is bool) && (bool)encrypted == true)
                 {
                     isEncrypted = true;
                 }

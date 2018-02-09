@@ -1143,17 +1143,7 @@ namespace Epi.Data.Services
             try
             {
                 string queryString =
-                    "select F.[FieldId], F.[UniqueId], F.[Name] As Name, F.[PageId], F.[ViewId], F.[FieldTypeId], F.[CheckCodeAfter] As ControlAfterCheckCode, F.[CheckCodeBefore] As ControlBeforeCheckCode,  " +
-                    "F.[ControlTopPositionPercentage], F.[ControlLeftPositionPercentage], F.[ControlHeightPercentage], F.[ControlWidthPercentage], " +
-                    "F.[ControlFontFamily] As ControlFontFamily, F.[ControlFontSize] As ControlFontSize, F.[ControlFontStyle] As ControlFontStyle, F.[ControlScriptName], " +
-                    "F.[PromptTopPositionPercentage], F.[PromptLeftPositionPercentage], F.[PromptText], F.[PromptFontFamily], F.[PromptFontSize], F.[PromptFontStyle], F.[ControlFontFamily], F.[ControlFontSize], F.[ControlFontStyle], F.[PromptScriptName], " +
-                    "F.[ShouldRepeatLast], F.[IsRequired], F.[IsReadOnly],  " +
-                    "F.[ShouldRetainImageSize], F.[Pattern], F.[MaxLength], F.[ShowTextOnRight], " +
-                    "F.[Lower], F.[Upper], F.[RelateCondition], F.[ShouldReturnToParent], F.[RelatedViewId], " +
-                    "F.[SourceTableName], F.[CodeColumnName], F.[TextColumnName], " +
-                    "F.[List], F.[BackgroundColor], " +
-                    "F.[Sort], F.[IsExclusiveTable], F.[TabIndex], F.[HasTabStop],F.[SourceFieldId], F.[DataTableName] " +
-                    "from metaFields F where F.[ViewId] = @viewId " +
+                    "select * from metaFields F where F.[ViewId] = @viewId " +
                     "order by F.[ControlTopPositionPercentage], F.[ControlLeftPositionPercentage]";
 
                 Query query = db.CreateQuery(queryString);
