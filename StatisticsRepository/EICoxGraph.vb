@@ -1226,7 +1226,7 @@ NEXTO:
                         'Set up column names for this strata thingy
 
                         'So there is one of these for each failure, plus an end point, and a starting point..
-                        If lintEstimated <= UBound(ldblaSTE) + 1 Then
+                        If lintEstimated <= UBound(ldblaSTE) Then
                             While ldblaSTE(lintEstimated - 1) < ldblaSTimes(j)
                                 lintEstimated = lintEstimated + 1
                                 If lintEstimated > UBound(ldblaSTE) Then
