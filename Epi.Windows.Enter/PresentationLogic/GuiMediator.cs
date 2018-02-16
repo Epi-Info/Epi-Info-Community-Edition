@@ -1765,7 +1765,18 @@ namespace Epi.Windows.Enter.PresentationLogic
 
                     if ((control.Text.Trim().Length <= textField.MaxLength || textField.MaxLength <= 0) || (textField.IsReadOnly))
                     {
-                        textField.CurrentRecordValueObject = control.Text;
+                        string text = control.Text;
+
+                        if(field is SingleLineTextField && ((SingleLineTextField)field).IsEncrypted == true)
+                        { 
+                            try
+                            {
+                                text = Configuration.Encrypt(text);
+                            }
+                            catch { }
+                        }
+
+                        textField.CurrentRecordValueObject = text;
                     }
                     else
                     {

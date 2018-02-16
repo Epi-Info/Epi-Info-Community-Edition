@@ -13,6 +13,7 @@ namespace Epi.Fields
 		#region Private Class Members
 		private int maxLength;
 		private int sourceFieldId;
+        private bool isEncrypted;
 		#endregion //Private Class Members
 
 		#region Constructors
@@ -48,6 +49,18 @@ namespace Epi.Fields
             if (row["SourceFieldId"].ToString().Length > 0)
             {
                 sourceFieldId = int.Parse(row["SourceFieldId"].ToString());
+            }
+
+            isEncrypted = false;
+
+            if (row.Table.Columns.Contains(ColumnNames.IS_ENCRYPTED))
+            {
+                object encrypted = row[ColumnNames.IS_ENCRYPTED];
+
+                if (encrypted != null && (encrypted is System.DBNull == false) && (encrypted is bool) && (bool)encrypted == true)
+                {
+                    isEncrypted = true;
+                }
             }
         }
 
@@ -144,7 +157,19 @@ namespace Epi.Fields
 				sourceFieldId = value;
 			}
 		}
-		#endregion Public Properties
+
+        public bool IsEncrypted
+        {
+            get
+            {
+                return (isEncrypted);
+            }
+            set
+            {
+                isEncrypted = value;
+            }
+        }
+        #endregion Public Properties
 
         #region Public Methods
         /// <summary>

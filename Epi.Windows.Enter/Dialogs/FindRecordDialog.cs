@@ -145,8 +145,8 @@ namespace Epi.Windows.Enter.Dialogs
                         fieldTextBox.Size = new System.Drawing.Size(286, 20);
                         fieldTextBox.BringToFront();
                         fieldTextBox.Leave += new EventHandler(fieldTextBox_Leave);
-                        //                    fieldTextBox.MaskInputRejected += new MaskInputRejectedEventHandler(maskedTextBox_MaskInputRejected); 
-
+                    //                    fieldTextBox.MaskInputRejected += new MaskInputRejectedEventHandler(maskedTextBox_MaskInputRejected); 
+                        fieldTextBox.KeyUp += FieldTextBox_KeyUp;
                         string mask = AppData.Instance.DataPatternsDataTable.GetMaskByPattern(item.Pattern);
                         //fieldTextBox.Mask = AppData.Instance.DataPatternsDataTable.GetExpressionByMask(mask, item.Pattern);
                         fieldTextBox.Tag = item.Type;
@@ -206,6 +206,7 @@ namespace Epi.Windows.Enter.Dialogs
                             fieldTextBox.Size = new System.Drawing.Size(286, 20);
                             fieldTextBox.BringToFront();
                             fieldTextBox.Leave += new EventHandler(fieldTextBox_Leave);
+                            fieldTextBox.KeyUp += FieldTextBox_KeyUp;
                             splitContainer1.Panel2.Controls.Add(fieldTextBox);
                             textLinePosition += 38;
 
@@ -245,7 +246,16 @@ namespace Epi.Windows.Enter.Dialogs
                     //myControlItemDictionary.Add(fieldTextBox, item);
                 }
             
-        }   
+        }
+
+        private void FieldTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                SetFieldData((Control)sender);
+                searchToolStripMenuItem_Click(null, null);
+            }
+        }
 
         /// <summary>
         /// Resets the Find Records form

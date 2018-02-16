@@ -182,6 +182,10 @@ namespace Epi
         /// </summary>
         public const string INDEX = "Index";
         /// <summary>
+        /// Is TextField Encrypted
+        /// </summary>
+        public const string IS_ENCRYPTED = "IsEncrypted";
+        /// <summary>
         /// Is Exclusive Table
         /// </summary>
         public const string IS_EXCLUSIVE_TABLE = "IsExclusiveTable";

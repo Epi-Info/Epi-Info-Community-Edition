@@ -107,7 +107,18 @@ namespace Epi.Windows.Enter
             }
             else
             {
-                control.Text = ((IDataField)field).CurrentRecordValueString;
+                string value = ((IDataField)field).CurrentRecordValueString;
+
+                if (field is SingleLineTextField && ((SingleLineTextField)field).IsEncrypted == true)
+                {
+                    try
+                    {
+                        value = Configuration.Decrypt(value);
+                    }
+                    catch { }
+                }
+                
+                control.Text = value;
             }
         }
 
