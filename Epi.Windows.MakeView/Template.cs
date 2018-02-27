@@ -1922,7 +1922,7 @@ namespace Epi.Windows.MakeView
                     ((InputFieldWithSeparatePrompt)field).IsRequired = (bool)row["IsRequired"];
                     ((InputFieldWithSeparatePrompt)field).IsReadOnly = (bool)row["IsReadOnly"];
 
-                    if (field is TextField && row.Table.Columns.Contains("IsEncrypted"))
+                    if (field is TextField && row.Table.Columns.Contains("IsEncrypted") && row["IsEncrypted"] != DBNull.Value )
                     {
                         ((TextField)field).IsEncrypted = (bool)row["IsEncrypted"];
                     }
