@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Epi;
 using Epi.Data;
@@ -2219,6 +2220,15 @@ namespace Epi.Data.Services
 
                 selectQuery.Parameters.AddRange(parameters);
                 DataTable Output = (DataTable)dbDriver.Select(selectQuery);
+
+                var query = Output.AsEnumerable().Where(r => r.Field<string>("GlobalRecordId") == view.CurrentGlobalRecordId);
+
+                foreach (var row in query.ToList())
+                {
+                    row.Delete();
+                }
+
+                Output.AcceptChanges();
 
                 if (Output.Rows.Count > 0)
                 {
