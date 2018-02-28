@@ -62,7 +62,7 @@ namespace Epi.Windows.Enter
         {
             this.toolTip1.Hide(enterMainForm);
         }
-        
+
         void lvLinkedTo_MouseLeave(object sender, EventArgs e)
         {
             this.toolTip1.Hide(enterMainForm);
@@ -94,10 +94,7 @@ namespace Epi.Windows.Enter
                 this.toolTip1.ToolTipTitle = "Record preview:";
                 this.toolTip1.Show(sb.ToString().Substring(0, sb.Length - 2), enterMainForm, relativePosition.X + 5, relativePosition.Y - (15 + (counter * 13)));
             }
-            catch (Exception ex)
-            {
-                //
-            }
+            catch { }
         }
 
         void lvLinkedTo_ItemMouseHover(object sender, ListViewItemMouseHoverEventArgs e)
@@ -126,10 +123,7 @@ namespace Epi.Windows.Enter
                 this.toolTip1.ToolTipTitle = SharedStrings.LINKED_RECS_PREVIEW;
                 this.toolTip1.Show(sb.ToString().Substring(0, sb.Length - 2), enterMainForm, relativePosition.X + 5, relativePosition.Y - (15 + (counter * 13)));
             }
-            catch (Exception ex)
-            {
-                //
-            }
+            catch { }
         }
 
         #endregion
@@ -452,17 +446,15 @@ namespace Epi.Windows.Enter
                 string joins = "";
                 foreach (View view in enterMainForm.View.Project.Views)
                 {
-                    // IF statement added by E. Knudsen 4/5/2011 to prevent errors in Enter if another view (form) in the
-                    // same project didn't have a data table.
-                    //if (!string.IsNullOrEmpty(view.TableName) && db.TableExists(view.TableName))
-                    //{
-                    if (!view.IsRelatedView)
+                    if (!string.IsNullOrEmpty(view.TableName) && db.TableExists(view.TableName))
                     {
-                        uniqueKeys += "t" + view.Id + ".UniqueKey as Key" + view.Id + ", ";
-                        parens += "(";
-                        joins += "left outer join " + view.TableName + " t" + view.Id + " on m.ToRecordGuid = t" + view.Id + ".GlobalRecordId) ";
+                        if (!view.IsRelatedView)
+                        {
+                            uniqueKeys += "t" + view.Id + ".UniqueKey as Key" + view.Id + ", ";
+                            parens += "(";
+                            joins += "left outer join " + view.TableName + " t" + view.Id + " on m.ToRecordGuid = t" + view.Id + ".GlobalRecordId) ";
+                        }
                     }
-                    //}
                 }
                 uniqueKeys = uniqueKeys.Substring(0, uniqueKeys.Length - 2) + " ";
 
@@ -471,7 +463,7 @@ namespace Epi.Windows.Enter
                 parameter.Size = enterMainForm.View.CurrentGlobalRecordId.Length;
                 query.Parameters.Add(parameter);
                 DataTable data = db.Select(query);
-                
+
                 if (data.Rows.Count > 0)
                 {
                     foreach (View view in enterMainForm.View.Project.Views)
@@ -505,7 +497,7 @@ namespace Epi.Windows.Enter
                     if (names.Contains(item.Text) == false)
                     {
                         names.Add(item.Text);
-                        
+
                         if (lvLinkedTo.InvokeRequired)
                         {
                             lvLinkedTo.Invoke(new MethodInvoker(delegate
@@ -565,17 +557,15 @@ namespace Epi.Windows.Enter
                 string joins = "";
                 foreach (View view in enterMainForm.View.Project.Views)
                 {
-                    // IF statement added by E. Knudsen 4/5/2011 to prevent errors in Enter if another view (form) in the
-                    // same project didn't have a data table.
-                    //if (!string.IsNullOrEmpty(view.TableName) && db.TableExists(view.TableName)) 
-                    //{
-                    if (!view.IsRelatedView)
+                    if (!string.IsNullOrEmpty(view.TableName) && db.TableExists(view.TableName))
                     {
-                        uniqueKeys += "t" + view.Id + ".UniqueKey as Key" + view.Id + ", ";
-                        parens += "(";
-                        joins += "left outer join " + view.TableName + " t" + view.Id + " on m.FromRecordGuid = t" + view.Id + ".GlobalRecordId) ";
+                        if (!view.IsRelatedView)
+                        {
+                            uniqueKeys += "t" + view.Id + ".UniqueKey as Key" + view.Id + ", ";
+                            parens += "(";
+                            joins += "left outer join " + view.TableName + " t" + view.Id + " on m.FromRecordGuid = t" + view.Id + ".GlobalRecordId) ";
+                        }
                     }
-                    //}
                 }
                 uniqueKeys = uniqueKeys.Substring(0, uniqueKeys.Length - 2) + " ";
 
@@ -615,7 +605,7 @@ namespace Epi.Windows.Enter
                     item.ImageIndex = 0;
                     item.Group = lvLinkedFrom.Groups[row["FromViewId"].ToString()];
 
-                    if(names.Contains(item.Text) == false)
+                    if (names.Contains(item.Text) == false)
                     {
                         names.Add(item.Text);
 
@@ -662,6 +652,5 @@ namespace Epi.Windows.Enter
         }
 
         #endregion
-        
     }
 }

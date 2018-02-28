@@ -9119,6 +9119,11 @@ namespace Epi.Data.Services
                     TableColumn tableEWEFormIdColumn = new TableColumn(ColumnNames.EWEForm_ID, GenericDbColumnType.StringLong, true);
                     db.AddColumn("metaViews", tableEWEFormIdColumn);
                 }
+                if (db.ColumnExists("metaFields", ColumnNames.IS_ENCRYPTED) == false)
+                {
+                    TableColumn isEncryptedColumm = new TableColumn(ColumnNames.IS_ENCRYPTED, GenericDbColumnType.Boolean, false);
+                    db.AddColumn("metaFields", isEncryptedColumm);
+                }
             }
             catch (Exception ex)
             {
