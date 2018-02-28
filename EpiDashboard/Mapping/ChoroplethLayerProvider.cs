@@ -719,6 +719,8 @@ namespace EpiDashboard.Mapping
 
             thematicItem.RowCount = loadedData.Rows.Count;
 
+            string filterExpression = "";
+
             for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
             {
                 Graphic graphicFeature = graphicsLayer.Graphics[i];
@@ -734,7 +736,7 @@ namespace EpiDashboard.Mapping
 
                 usedShapeValues.Add(shapeValue);
 
-                string filterExpression = "";
+                filterExpression = "";
 
                 if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
                 {
@@ -813,7 +815,9 @@ namespace EpiDashboard.Mapping
             if(valueList.Count == 0)
             {
                 //MessageBox.Show(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
-                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount) 
+                    + Environment.NewLine + Environment.NewLine
+                    + "[" + filterExpression + "]?");
             }
 
             valueList.Sort(); 
