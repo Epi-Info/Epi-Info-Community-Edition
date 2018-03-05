@@ -42,6 +42,7 @@
             this.lbxViews.Size = new System.Drawing.Size(260, 186);
             this.lbxViews.TabIndex = 0;
             this.lbxViews.SelectedIndexChanged += new System.EventHandler(this.lbxViews_SelectedIndexChanged);
+            this.lbxViews.MouseDoubleClick += LbxViews_MouseDoubleClick;
             // 
             // label1
             // 
