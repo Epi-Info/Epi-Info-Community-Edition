@@ -1113,6 +1113,13 @@ namespace Epi
             }
         }
 
+        static string GetConfigPassPhrase()
+        {
+            string phrase = string.Empty;
+            Configuration config = Configuration.GetNewInstance();
+            return phrase;
+        }
+
         /// <summary>
         /// Encryption
         /// </summary>
@@ -1121,6 +1128,9 @@ namespace Epi
         public static string Encrypt(string plainText)
         {
             Configuration config = Configuration.GetNewInstance();
+            
+            string phrase = GetConfigPassPhrase();
+            
             if (config.TextEncryptionModule != null && !string.IsNullOrEmpty(config.TextEncryptionModule.FileName))
             {
                 Assembly assemblyInstance = Assembly.LoadFrom(@config.TextEncryptionModule.FileName);
@@ -1132,6 +1142,10 @@ namespace Epi
                     {
                         string typeName = t.FullName;
                         object lateBoundObj = Activator.CreateInstance(t);
+
+                        //object[] parameter = new object[2];
+                        //parameter[0] = plainText;
+                        //parameter[1] = phrase;
 
                         object[] parameter = new object[1];
                         parameter[0] = plainText;
