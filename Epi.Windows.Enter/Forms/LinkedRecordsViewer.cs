@@ -553,6 +553,7 @@ namespace Epi.Windows.Enter
 
                     item = new ListViewItem(fieldPrint);
                     item.Tag = row["Key" + row["ToViewId"].ToString()].ToString();
+                    item.Name = toRecordGuid;
 
                     for (int x = 0; x < data.Columns.Count; x++)
                     {
@@ -562,20 +563,26 @@ namespace Epi.Windows.Enter
                     item.ImageIndex = 0;
                     item.Group = lvLinkedTo.Groups[row["ToViewId"].ToString()];
                     
-                    if (names.Contains(item.Text) == false)
+                    if (names.Contains(toRecordGuid) == false)
                     {
-                        names.Add(item.Text);
+                        names.Add(toRecordGuid);
 
                         if (lvLinkedTo.InvokeRequired)
                         {
                             lvLinkedTo.Invoke(new MethodInvoker(delegate
                             {
-                                lvLinkedTo.Items.Add(item);
+                                if (lvLinkedTo.Items.ContainsKey(toRecordGuid) == false)
+                                {
+                                    lvLinkedTo.Items.Add(item);
+                                }
                             }));
                         }
                         else
                         {
-                            lvLinkedTo.Items.Add(item);
+                            if (lvLinkedTo.Items.ContainsKey(toRecordGuid) == false)
+                            {
+                                lvLinkedTo.Items.Add(item);
+                            }
                         }
                     }
                 }
@@ -611,9 +618,9 @@ namespace Epi.Windows.Enter
                 if (btnUnlinkFrom.InvokeRequired)
                 {
                     btnUnlinkFrom.Invoke(new MethodInvoker(delegate
-                        {
-                            btnUnlinkFrom.Enabled = false;
-                        }));
+                    {
+                        btnUnlinkFrom.Enabled = false;
+                    }));
                 }
                 else
                 {
@@ -718,6 +725,7 @@ namespace Epi.Windows.Enter
 
                     item = new ListViewItem(fieldPrint);
                     item.Tag = row["Key" + row["FromViewId"].ToString()].ToString();
+                    item.Name = fromRecordGuid;
 
                     for (int x = 0; x < data.Columns.Count; x++)
                     {
@@ -727,20 +735,26 @@ namespace Epi.Windows.Enter
                     item.ImageIndex = 0;
                     item.Group = lvLinkedFrom.Groups[row["FromViewId"].ToString()];
 
-                    if (names.Contains(item.Text) == false)
+                    if (names.Contains(fromRecordGuid) == false)
                     {
-                        names.Add(item.Text);
+                        names.Add(fromRecordGuid);
 
                         if (lvLinkedFrom.InvokeRequired)
                         {
                             lvLinkedFrom.Invoke(new MethodInvoker(delegate
                             {
-                                lvLinkedFrom.Items.Add(item);
+                                if (lvLinkedFrom.Items.ContainsKey(fromRecordGuid) == false)
+                                {
+                                    lvLinkedFrom.Items.Add(item);
+                                }
                             }));
                         }
                         else
                         {
-                            lvLinkedFrom.Items.Add(item);
+                            if (lvLinkedFrom.Items.Contains(item) == false)
+                            {
+                                lvLinkedFrom.Items.Add(item);
+                            }
                         }
                     }
                 }
