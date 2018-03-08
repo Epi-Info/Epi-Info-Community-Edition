@@ -548,14 +548,8 @@ namespace Epi.Windows.Enter
 
                     var datatable = db.GetTableData(collectedDataTableName, fieldPrintList);
                     var theRow = datatable.Select("GlobalRecordId = '" + toRecordGuid + "'");
-
-                    fieldPrint = row["Key" + row["ToViewId"].ToString()].ToString(); ;
-
-                    if (theRow != null)
-                    {
-                        fieldPrint += " :: ";
-                        fieldPrint += theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
-                    }
+                    
+                    fieldPrint = theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
 
                     item = new ListViewItem(fieldPrint);
                     item.Tag = row["Key" + row["ToViewId"].ToString()].ToString();
@@ -727,13 +721,7 @@ namespace Epi.Windows.Enter
                     var datatable = db.GetTableData(collectedDataTableName, fieldPrintList);
                     var theRow = datatable.Select("GlobalRecordId = '" + fromRecordGuid + "'");
 
-                    fieldPrint = row["Key" + row["FromViewId"].ToString()].ToString(); ;
-
-                    if(theRow != null)
-                    {
-                        fieldPrint += " :: ";
-                        fieldPrint += theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
-                    }
+                    fieldPrint = theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
 
                     item = new ListViewItem(fieldPrint);
                     item.Tag = row["Key" + row["FromViewId"].ToString()].ToString();
