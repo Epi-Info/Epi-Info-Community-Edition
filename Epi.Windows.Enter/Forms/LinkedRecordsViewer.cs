@@ -163,7 +163,7 @@ namespace Epi.Windows.Enter
                 {
                     if (lvLinkedTo.SelectedItems[0].Group.Name.Equals(enterMainForm.View.Id.ToString()))
                     {
-                        if(lvLinkedTo.SelectedItems[0].Tag is string)
+                        if (lvLinkedTo.SelectedItems[0].Tag is string)
                         {
                             enterMainForm.LoadRecord(int.Parse((string)lvLinkedTo.SelectedItems[0].Tag));
                         }
@@ -458,17 +458,17 @@ namespace Epi.Windows.Enter
 
                 query = db.CreateQuery
                     (
-                        "SELECT [metaPages.PageId] as PageId, [metaPages.ViewId] as ViewId, [metaViews.Name] as Name " + 
-                        "FROM [metaPages] " + 
-                        "LEFT OUTER JOIN [metaViews] ON metaPages.ViewId = metaViews.ViewId " + 
+                        "SELECT [metaPages.PageId] as PageId, [metaPages.ViewId] as ViewId, [metaViews.Name] as Name " +
+                        "FROM [metaPages] " +
+                        "LEFT OUTER JOIN [metaViews] ON metaPages.ViewId = metaViews.ViewId " +
                         "WHERE [metaPages.Position] = 0"
                     );
 
                 DataTable pageIds = db.Select(query);
-                
+
                 query = db.CreateQuery
                     (
-                        "SELECT [metaFields.Name] as Name, [metaFields.PageId] as PageId, [metaFields.ViewId] as ViewId, [metaFields.TabIndex] as TabIndex " + 
+                        "SELECT [metaFields.Name] as Name, [metaFields.PageId] as PageId, [metaFields.ViewId] as ViewId, [metaFields.TabIndex] as TabIndex " +
                         "FROM [metaFields] " +
                         "LEFT OUTER JOIN [metaPages] ON metaPages.ViewId = metaFields.ViewId " +
                         "WHERE [metaFields.HasTabStop] = true AND [metaPages.Position] = 0 " +
@@ -476,7 +476,7 @@ namespace Epi.Windows.Enter
                     );
 
                 DataTable fields = db.Select(query);
-                
+
                 List<string> list = fields.AsEnumerable().Select(r => r.Field<string>(0)).ToList();
 
                 string uniqueKeys = "";
@@ -521,7 +521,7 @@ namespace Epi.Windows.Enter
                         }
                     }
                 }
-                
+
                 List<string> names = new List<string>();
 
                 string toViewId = string.Empty;
@@ -534,13 +534,13 @@ namespace Epi.Windows.Enter
                 foreach (DataRow row in data.Rows)
                 {
                     ListViewItem item = new ListViewItem();
-                    
+
                     toViewId = row["ToViewId"].ToString();
                     toRecordGuid = row["ToRecordGuid"].ToString();
 
                     DataRow[] oneRow = pageIds.Select("ViewId = '" + toViewId + "'");
                     collectedDataTableName = ((string)oneRow[0]["Name"]) + ((string)oneRow[0]["PageId"].ToString());
-                    
+
                     fieldRows = fields.Select("ViewId = " + toViewId);
 
                     fieldPrintList = fieldRows.Select(r => r.Field<string>(0)).ToList();
@@ -548,8 +548,14 @@ namespace Epi.Windows.Enter
 
                     var datatable = db.GetTableData(collectedDataTableName, fieldPrintList);
                     var theRow = datatable.Select("GlobalRecordId = '" + toRecordGuid + "'");
-                    
-                    fieldPrint = theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
+
+                    fieldPrint = row["Key" + row["ToViewId"].ToString()].ToString(); ;
+
+                    if (theRow != null)
+                    {
+                        fieldPrint += " :: ";
+                        fieldPrint += theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
+                    }
 
                     item = new ListViewItem(fieldPrint);
                     item.Tag = row["Key" + row["ToViewId"].ToString()].ToString();
@@ -562,7 +568,7 @@ namespace Epi.Windows.Enter
 
                     item.ImageIndex = 0;
                     item.Group = lvLinkedTo.Groups[row["ToViewId"].ToString()];
-                    
+
                     if (names.Contains(toRecordGuid) == false)
                     {
                         names.Add(toRecordGuid);
@@ -721,7 +727,13 @@ namespace Epi.Windows.Enter
                     var datatable = db.GetTableData(collectedDataTableName, fieldPrintList);
                     var theRow = datatable.Select("GlobalRecordId = '" + fromRecordGuid + "'");
 
-                    fieldPrint = theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
+                    fieldPrint = row["Key" + row["FromViewId"].ToString()].ToString(); ;
+
+                    if (theRow != null)
+                    {
+                        fieldPrint += " :: ";
+                        fieldPrint += theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
+                    }
 
                     item = new ListViewItem(fieldPrint);
                     item.Tag = row["Key" + row["FromViewId"].ToString()].ToString();
