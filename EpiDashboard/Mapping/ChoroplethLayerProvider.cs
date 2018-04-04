@@ -867,6 +867,8 @@ namespace EpiDashboard.Mapping
                     PopulateRangeValues();
                 }
 
+                GraphicCollection textGraphics = new GraphicCollection();
+
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
                     for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
@@ -922,10 +924,24 @@ namespace EpiDashboard.Mapping
                             symbol.Fill = fill;
                             symbol.BorderBrush = new SolidColorBrush(Colors.Black);
                             symbol.BorderThickness = 1;
-
+                            
                             graphicFeature.Symbol = symbol;
                         }
 
+                        TextSymbol textSymbol = new TextSymbol();
+                        double xmin = graphicFeature.Geometry.Extent.XMin;
+                        double xmax = graphicFeature.Geometry.Extent.XMax;
+                        double ymin = graphicFeature.Geometry.Extent.YMin;
+                        double ymax = graphicFeature.Geometry.Extent.YMax;
+                        textSymbol.OffsetX = (xmin + xmax) / 2.0;
+                        textSymbol.OffsetY = (ymin + ymax) / 2.0;
+                        textSymbol.Foreground = new SolidColorBrush(Colors.Black);
+                        textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
+
+                        Graphic graphic = new Graphic();
+                        graphic.Symbol = textSymbol;
+                        textGraphics.Add(graphic);
+                        
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;
 
@@ -958,6 +974,8 @@ namespace EpiDashboard.Mapping
                         }
                     }
 
+                    graphicsLayer.Graphics.AddRange(textGraphics);
+                                                            
                     if (graphicsLayer is FeatureLayer)
                     {
                         ClassBreaksRenderer renderer = new ClassBreaksRenderer();
@@ -973,7 +991,7 @@ namespace EpiDashboard.Mapping
                             BorderThickness = 1
                         };
 
-                        for(int i = 0;  i < _thematicItem.RangeStarts.Count; i++)
+                        for (int i = 0; i < _thematicItem.RangeStarts.Count; i++)
                         {
                             ClassBreakInfo classBreakInfo = new ClassBreakInfo();
                             classBreakInfo.MinimumValue = double.Parse(RangeValues[i, 0]);
