@@ -933,13 +933,14 @@ namespace EpiDashboard.Mapping
                         double xmax = graphicFeature.Geometry.Extent.XMax;
                         double ymin = graphicFeature.Geometry.Extent.YMin;
                         double ymax = graphicFeature.Geometry.Extent.YMax;
-                        textSymbol.OffsetX = (xmin + xmax) / 2.0;
-                        textSymbol.OffsetY = (ymin + ymax) / 2.0;
+                        double xMid = (xmin + xmax) / 2.0;
+                        double yMin = (ymin + ymax) / 2.0;
                         textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                         textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
 
-                        Graphic graphic = new Graphic();
-                        graphic.Symbol = textSymbol;
+                        MapPoint mapPoint = new MapPoint(xMid, yMin);
+                        Graphic graphic = new Graphic() { Geometry = mapPoint, Symbol = textSymbol };
+
                         textGraphics.Add(graphic);
                         
                         TextBlock t = new TextBlock();
