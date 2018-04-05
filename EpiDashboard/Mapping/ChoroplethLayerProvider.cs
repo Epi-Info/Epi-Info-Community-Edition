@@ -725,6 +725,8 @@ namespace EpiDashboard.Mapping
             {
                 Graphic graphicFeature = graphicsLayer.Graphics[i];
 
+                if(graphicFeature.Symbol is TextSymbol) { continue; }
+                
                 string shapeValue = string.Empty;
 
                 shapeValue = GetShapeValue(graphicFeature, shapeValue);
@@ -933,12 +935,13 @@ namespace EpiDashboard.Mapping
                         double xmax = graphicFeature.Geometry.Extent.XMax;
                         double ymin = graphicFeature.Geometry.Extent.YMin;
                         double ymax = graphicFeature.Geometry.Extent.YMax;
-                        double xMid = (xmin + xmax) / 2.0;
-                        double yMin = (ymin + ymax) / 2.0;
+                        double xmid = (xmin + xmax) / 2.0;
+                        double ymid = (ymin + ymax) / 2.0;
                         textSymbol.Foreground = new SolidColorBrush(Colors.Black);
+                        textSymbol.FontSize = 11;
                         textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
-
-                        MapPoint mapPoint = new MapPoint(xMid, yMin);
+                        textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
+                        MapPoint mapPoint = new MapPoint(xmid, ymid, new SpatialReference(4326));
                         Graphic graphic = new Graphic() { Geometry = mapPoint, Symbol = textSymbol };
 
                         textGraphics.Add(graphic);
