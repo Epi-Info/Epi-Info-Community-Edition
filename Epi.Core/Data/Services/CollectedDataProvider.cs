@@ -1858,7 +1858,7 @@ namespace Epi.Data.Services
         /// <param name="comparisonTypes"></param>
         /// <returns>Records found meeting search criteria</returns>
         //        public DataTable GetSearchRecords(View view, Collection<string> searchFields, Collection<string> searchFieldValues)        
-        public DataTable GetSearchRecords(View view, Dictionary<string, int> OrFieldCount, Collection<string> searchFields, Collection<string> searchFieldItemTypes, Collection<string> comparisonTypes, ArrayList searchFieldValues)
+        public DataTable GetSearchRecords(View view, Dictionary<string, int> OrFieldCount, Collection<string> searchFields, Collection<string> searchFieldItemTypes, Collection<string> comparisonTypes, ArrayList searchFieldValues, View currentView = null)
         {
             #region Input Validation
 
@@ -1937,142 +1937,36 @@ namespace Epi.Data.Services
                     joinText = join;
                 }
 
-                sb.Append(selectText + joinText + " WHERE ");
+                sb.Append(selectText + joinText + " where ");
 
-                for (int i = 0; i <= searchFields.Count - 1; ParameterCount++, i++)
+                if (searchFields.Count > 0)
                 {
-                    if (searchFields[i].ToLowerInvariant() != CurrentParam)
+                    for (int i = 0; i <= searchFields.Count - 1; ParameterCount++, i++)
                     {
-                        CurrentCount = 0;
-                        CurrentParam = searchFields[i].ToLowerInvariant();
+                        if (searchFields[i].ToLowerInvariant() != CurrentParam)
+                        {
+                            CurrentCount = 0;
+                            CurrentParam = searchFields[i].ToLowerInvariant();
 
-                        if (i == 0)
-                        {
-                            sb.Append("(");
-                        }
-                        else
-                        {
-                            sb.Append(" And (");
-                        }
-                    }
-                    else
-                    {
-                        sb.Append(" OR ");
-                    }
-
-                    paramName = "@param" + ParameterCount.ToString();
-
-                    if (searchFieldItemTypes[i].Equals("YesNo"))
-                    {
-                        if (searchFieldValues[i] == null || searchFieldValues[i] == "(.)" || searchFieldValues[i] == config.Settings.RepresentationOfMissing)
-                        {
-                            sb.Append(searchFields[i]);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.IS);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.NULL);
-                        }
-                        else
-                        {
-                            if (searchFieldValues[i].Equals(config.Settings.RepresentationOfYes) || searchFieldValues[i].Equals("1") || searchFieldValues[i].Equals("(+)"))
+                            if (i == 0)
                             {
-                                sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + "1"));
-                            }
-                            else if (searchFieldValues[i].Equals(config.Settings.RepresentationOfNo) || searchFieldValues[i].Equals("0") || searchFieldValues[i].Equals("(-)"))
-                            {
-                                sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + "0"));
+                                sb.Append("(");
                             }
                             else
                             {
-                                sb.Append(searchFields[i] + StringLiterals.SPACE + SqlKeyWords.IS + StringLiterals.SPACE + SqlKeyWords.NULL);
+                                sb.Append(" And (");
                             }
-                        }
-                    }
-                    else if (searchFieldItemTypes[i].Equals("Checkbox"))
-                    {
-                        if (searchFieldValues[i] == null)
-                        {
-                            sb.Append(searchFields[i]);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.IS);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.NULL);
                         }
                         else
                         {
-                            if (searchFieldValues[i].Equals(config.Settings.RepresentationOfYes) || searchFieldValues[i].Equals("1") || searchFieldValues[i].Equals("(+)"))
-                            {
-                                sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + paramName));
-                                parameters.Add(new QueryParameter(paramName, DbType.Boolean, true));
-                            }
-                            else if (searchFieldValues[i].Equals(config.Settings.RepresentationOfNo) || searchFieldValues[i].Equals("0") || searchFieldValues[i].Equals("(-)"))
-                            {
-                                sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + paramName));
-                                parameters.Add(new QueryParameter(paramName, DbType.Boolean, false));
-                            }
+                            sb.Append(" OR ");
                         }
-                    }
-                    else if (searchFieldItemTypes[i].Equals("Number"))
-                    {
-                        if (searchFieldValues[i] == null)
-                        {
-                            sb.Append(searchFields[i]);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.IS);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.NULL);
-                        }
-                        else
-                        {
-                            double num;
-                            bool isNum = Double.TryParse(searchFieldValues[i].ToString(), out num);
 
-                            if (isNum)
-                            {
-                                sb.Append(searchFields[i] + " " + comparisonTypes[i] + " " + searchFieldValues[i].ToString());
-                            }
-                        }
-                    }
-                    //---EI-139
-                    else if (searchFieldItemTypes[i].Equals("GlobalRecordId"))
-                    {
-                        if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))
+                        paramName = "@param" + ParameterCount.ToString();
+
+                        if (searchFieldItemTypes[i].Equals("YesNo"))
                         {
-                            sb.Append(searchFields[i]);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.IS);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.NULL);
-                        }
-                        else
-                        {
-                            sb.Append("basetable." + searchFields[i] + " " + comparisonTypes[i] + " " + Util.InsertInSingleQuotes(searchFieldValues[i].ToString()));
-                        }
-                    }
-                    else if (searchFieldItemTypes[i].Equals("LastSaveTime") || searchFieldItemTypes[i].Equals("FirstSaveTime"))
-                    {
-                        if (searchFieldValues[i] == null || string.IsNullOrEmpty(searchFieldValues[i].ToString()))
-                        {
-                            sb.Append(searchFields[i]);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.IS);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.NULL);
-                        }
-                        else
-                        {
-                            DateTime date;
-                            bool isDate = DateTime.TryParse(searchFieldValues[i].ToString(), out date);
-                            if (isDate)
-                            {
-                                sb.Append("basetable." + searchFields[i] +
-                                               StringLiterals.SPACE +
-                                               comparisonTypes[i] +
-                                               StringLiterals.SPACE +
-                                               paramName);
-                                parameters.Add(new QueryParameter(paramName, DbType.DateTime, date));
-                            }
-                            else
+                            if (searchFieldValues[i] == null || searchFieldValues[i] == "(.)" || searchFieldValues[i] == config.Settings.RepresentationOfMissing)
                             {
                                 sb.Append(searchFields[i]);
                                 sb.Append(StringLiterals.SPACE);
@@ -2080,28 +1974,84 @@ namespace Epi.Data.Services
                                 sb.Append(StringLiterals.SPACE);
                                 sb.Append(SqlKeyWords.NULL);
                             }
+                            else
+                            {
+                                if (searchFieldValues[i].Equals(config.Settings.RepresentationOfYes) || searchFieldValues[i].Equals("1") || searchFieldValues[i].Equals("(+)"))
+                                {
+                                    sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + "1"));
+                                }
+                                else if (searchFieldValues[i].Equals(config.Settings.RepresentationOfNo) || searchFieldValues[i].Equals("0") || searchFieldValues[i].Equals("(-)"))
+                                {
+                                    sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + "0"));
+                                }
+                                else
+                                {
+                                    sb.Append(searchFields[i] + StringLiterals.SPACE + SqlKeyWords.IS + StringLiterals.SPACE + SqlKeyWords.NULL);
+                                }
+                            }
+                        }
+                        else if (searchFieldItemTypes[i].Equals("Checkbox"))
+                        {
+                            if (searchFieldValues[i] == null)
+                            {
+                                sb.Append(searchFields[i]);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.IS);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.NULL);
+                            }
+                            else
+                            {
+                                if (searchFieldValues[i].Equals(config.Settings.RepresentationOfYes) || searchFieldValues[i].Equals("1") || searchFieldValues[i].Equals("(+)"))
+                                {
+                                    sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + paramName));
+                                    parameters.Add(new QueryParameter(paramName, DbType.Boolean, true));
+                                }
+                                else if (searchFieldValues[i].Equals(config.Settings.RepresentationOfNo) || searchFieldValues[i].Equals("0") || searchFieldValues[i].Equals("(-)"))
+                                {
+                                    sb.Append(Util.InsertInParantheses(searchFields[i] + StringLiterals.SPACE + "=" + StringLiterals.SPACE + paramName));
+                                    parameters.Add(new QueryParameter(paramName, DbType.Boolean, false));
+                                }
+                            }
+                        }
+                        else if (searchFieldItemTypes[i].Equals("Number"))
+                        {
+                            if (searchFieldValues[i] == null)
+                            {
+                                sb.Append(searchFields[i]);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.IS);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.NULL);
+                            }
+                            else
+                            {
+                                double num;
+                                bool isNum = Double.TryParse(searchFieldValues[i].ToString(), out num);
 
+                                if (isNum)
+                                {
+                                    sb.Append(searchFields[i] + " " + comparisonTypes[i] + " " + searchFieldValues[i].ToString());
+                                }
+                            }
                         }
-                    }
-                    //--
-                    else if (searchFieldItemTypes[i].Equals("PhoneNumber"))
-                    {
-                        if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))
+                        //---EI-139
+                        else if (searchFieldItemTypes[i].Equals("GlobalRecordId"))
                         {
-                            sb.Append(searchFields[i]);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.IS);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.NULL);
+                            if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))
+                            {
+                                sb.Append(searchFields[i]);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.IS);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.NULL);
+                            }
+                            else
+                            {
+                                sb.Append("basetable." + searchFields[i] + " " + comparisonTypes[i] + " " + Util.InsertInSingleQuotes(searchFieldValues[i].ToString()));
+                            }
                         }
-                        else
-                        {
-                            sb.Append(searchFields[i] + " " + comparisonTypes[i] + " " + Util.InsertInSingleQuotes(searchFieldValues[i].ToString()));
-                        }
-                    }
-                    else
-                    {
-                        if (searchFieldItemTypes[i].Equals("Date") || searchFieldItemTypes[i].Equals("DateTime") || searchFieldItemTypes[i].Equals("Time"))
+                        else if (searchFieldItemTypes[i].Equals("LastSaveTime") || searchFieldItemTypes[i].Equals("FirstSaveTime"))
                         {
                             if (searchFieldValues[i] == null || string.IsNullOrEmpty(searchFieldValues[i].ToString()))
                             {
@@ -2115,44 +2065,30 @@ namespace Epi.Data.Services
                             {
                                 DateTime date;
                                 bool isDate = DateTime.TryParse(searchFieldValues[i].ToString(), out date);
-
                                 if (isDate)
                                 {
-                                    if (searchFieldItemTypes[i].Equals("Time"))
-                                    {
-                                        sb.Append(searchFields[i]);
-                                        sb.Append(StringLiterals.SPACE);
-                                        sb.Append(SqlKeyWords.LIKE);
-                                        sb.Append(StringLiterals.SPACE);
-                                        sb.Append(Util.InsertInSingleQuotes(StringLiterals.PERCENT + date.ToLongTimeString() + StringLiterals.PERCENT));
-                                    }
-                                    else
-                                    {
-                                        sb.Append(searchFields[i] +
-                                            StringLiterals.SPACE +
-                                            comparisonTypes[i] +
-                                            StringLiterals.SPACE +
-                                            paramName);
-                                        parameters.Add(new QueryParameter(paramName, DbType.DateTime, date));
-                                    }
+                                    sb.Append("basetable." + searchFields[i] +
+                                                   StringLiterals.SPACE +
+                                                   comparisonTypes[i] +
+                                                   StringLiterals.SPACE +
+                                                   paramName);
+                                    parameters.Add(new QueryParameter(paramName, DbType.DateTime, date));
                                 }
                                 else
                                 {
-                                    if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))
-                                    {
-                                        sb.Append(searchFields[i]);
-                                        sb.Append(StringLiterals.SPACE);
-                                        sb.Append(SqlKeyWords.IS);
-                                        sb.Append(StringLiterals.SPACE);
-                                        sb.Append(SqlKeyWords.NULL);
-                                    }
+                                    sb.Append(searchFields[i]);
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(SqlKeyWords.IS);
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(SqlKeyWords.NULL);
                                 }
+
                             }
                         }
-                        else
+                        //--
+                        else if (searchFieldItemTypes[i].Equals("PhoneNumber"))
                         {
-                            string searchValue = String.Empty;
-                            if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))       //Value is null or an empty string)
+                            if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))
                             {
                                 sb.Append(searchFields[i]);
                                 sb.Append(StringLiterals.SPACE);
@@ -2160,58 +2096,125 @@ namespace Epi.Data.Services
                                 sb.Append(StringLiterals.SPACE);
                                 sb.Append(SqlKeyWords.NULL);
                             }
-                            //for wild card searches - EJ
-                            else if (
-                                searchFieldValues[i].ToString().Contains(StringLiterals.PERCENT)
-                                || searchFieldValues[i].ToString().Contains(StringLiterals.STAR)
-                                || searchFieldValues[i].ToString().Contains("?")
-                                )   //allows for wild card searches (i.e. "%T%")
-                            {
-                                sb.Append(searchFields[i]);
-                                sb.Append(StringLiterals.SPACE);
-                                sb.Append(SqlKeyWords.LIKE);
-                                sb.Append(StringLiterals.SPACE);
-                                sb.Append(string.Format("'{0}'", searchFieldValues[i].ToString().Replace("*", "%").Replace("'", "")));
-                                ParameterCount--;
-                            }
                             else
                             {
-                                // Multiline fields are stored as ntext which cannot be compared using the = operator. 
-                                // Compare up to the first 255 characters for Multiline fields.
-                                if (searchFieldItemTypes[i].Equals("Multiline"))
-                                {
-                                    if (this.GetDbDriver().GetType().Name == "AccessDatabase")
-                                    {
-                                        sb.Append("MID(" + searchFields[i] + ", 1, 255) = MID(" + paramName + ", 1, 255)");
-                                    }
-                                    else
-                                    {
-                                        sb.Append("SUBSTRING(" + searchFields[i] + ", 1, 255) = SUBSTRING(" + paramName + ", 1, 255)");
-                                    }
-                                    parameters.Add(new QueryParameter(paramName, DbType.AnsiString, searchFieldValues[i]));
-                                }
-                                else
+                                sb.Append(searchFields[i] + " " + comparisonTypes[i] + " " + Util.InsertInSingleQuotes(searchFieldValues[i].ToString()));
+                            }
+                        }
+                        else
+                        {
+                            if (searchFieldItemTypes[i].Equals("Date") || searchFieldItemTypes[i].Equals("DateTime") || searchFieldItemTypes[i].Equals("Time"))
+                            {
+                                if (searchFieldValues[i] == null || string.IsNullOrEmpty(searchFieldValues[i].ToString()))
                                 {
                                     sb.Append(searchFields[i]);
                                     sb.Append(StringLiterals.SPACE);
-                                    sb.Append(StringLiterals.EQUAL);
+                                    sb.Append(SqlKeyWords.IS);
                                     sb.Append(StringLiterals.SPACE);
-                                    sb.Append(paramName);
-                                    parameters.Add(new QueryParameter(paramName, DbType.String, searchFieldValues[i]));
+                                    sb.Append(SqlKeyWords.NULL);
+                                }
+                                else
+                                {
+                                    DateTime date;
+                                    bool isDate = DateTime.TryParse(searchFieldValues[i].ToString(), out date);
+
+                                    if (isDate)
+                                    {
+                                        if (searchFieldItemTypes[i].Equals("Time"))
+                                        {
+                                            sb.Append(searchFields[i]);
+                                            sb.Append(StringLiterals.SPACE);
+                                            sb.Append(SqlKeyWords.LIKE);
+                                            sb.Append(StringLiterals.SPACE);
+                                            sb.Append(Util.InsertInSingleQuotes(StringLiterals.PERCENT + date.ToLongTimeString() + StringLiterals.PERCENT));
+                                        }
+                                        else
+                                        {
+                                            sb.Append(searchFields[i] +
+                                                StringLiterals.SPACE +
+                                                comparisonTypes[i] +
+                                                StringLiterals.SPACE +
+                                                paramName);
+                                            parameters.Add(new QueryParameter(paramName, DbType.DateTime, date));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))
+                                        {
+                                            sb.Append(searchFields[i]);
+                                            sb.Append(StringLiterals.SPACE);
+                                            sb.Append(SqlKeyWords.IS);
+                                            sb.Append(StringLiterals.SPACE);
+                                            sb.Append(SqlKeyWords.NULL);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                string searchValue = String.Empty;
+                                if (string.IsNullOrEmpty(searchFieldValues[i].ToString()))       //Value is null or an empty string)
+                                {
+                                    sb.Append(searchFields[i]);
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(SqlKeyWords.IS);
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(SqlKeyWords.NULL);
+                                }
+                                //for wild card searches - EJ
+                                else if (
+                                    searchFieldValues[i].ToString().Contains(StringLiterals.PERCENT)
+                                    || searchFieldValues[i].ToString().Contains(StringLiterals.STAR)
+                                    || searchFieldValues[i].ToString().Contains("?")
+                                    )   //allows for wild card searches (i.e. "%T%")
+                                {
+                                    sb.Append(searchFields[i]);
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(SqlKeyWords.LIKE);
+                                    sb.Append(StringLiterals.SPACE);
+                                    sb.Append(string.Format("'{0}'", searchFieldValues[i].ToString().Replace("*", "%").Replace("'", "")));
+                                    ParameterCount--;
+                                }
+                                else
+                                {
+                                    // Multiline fields are stored as ntext which cannot be compared using the = operator. 
+                                    // Compare up to the first 255 characters for Multiline fields.
+                                    if (searchFieldItemTypes[i].Equals("Multiline"))
+                                    {
+                                        if (this.GetDbDriver().GetType().Name == "AccessDatabase")
+                                        {
+                                            sb.Append("MID(" + searchFields[i] + ", 1, 255) = MID(" + paramName + ", 1, 255)");
+                                        }
+                                        else
+                                        {
+                                            sb.Append("SUBSTRING(" + searchFields[i] + ", 1, 255) = SUBSTRING(" + paramName + ", 1, 255)");
+                                        }
+                                        parameters.Add(new QueryParameter(paramName, DbType.AnsiString, searchFieldValues[i]));
+                                    }
+                                    else
+                                    {
+                                        sb.Append(searchFields[i]);
+                                        sb.Append(StringLiterals.SPACE);
+                                        sb.Append(StringLiterals.EQUAL);
+                                        sb.Append(StringLiterals.SPACE);
+                                        sb.Append(paramName);
+                                        parameters.Add(new QueryParameter(paramName, DbType.String, searchFieldValues[i]));
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    if (CurrentCount == OrFieldCount[CurrentParam] - 1)
-                    {
-                        sb.Append(")");
+                        if (CurrentCount == OrFieldCount[CurrentParam] - 1)
+                        {
+                            sb.Append(")");
+                        }
+                        else
+                        {
+                            sb.Append(" ");
+                        }
+                        CurrentCount++;
                     }
-                    else
-                    {
-                        sb.Append(" ");
-                    }
-                    CurrentCount++;
                 }
 
                 sb.Append(" and RecStatus > 0");
@@ -2221,13 +2224,16 @@ namespace Epi.Data.Services
                 selectQuery.Parameters.AddRange(parameters);
                 DataTable Output = (DataTable)dbDriver.Select(selectQuery);
 
-                var query = Output.AsEnumerable().Where(r => r.Field<string>("GlobalRecordId") == view.CurrentGlobalRecordId);
-
-                foreach (var row in query.ToList())
+                if(currentView != null && currentView.Name == view.Name)
                 {
-                    row.Delete();
+                    var query = Output.AsEnumerable().Where(r => r.Field<string>("GlobalRecordId") == view.CurrentGlobalRecordId);
+                    var v = Output.AsEnumerable().ToList();
+                    foreach (var row in query.ToList())
+                    {
+                        row.Delete();
+                    }
                 }
-
+                
                 Output.AcceptChanges();
 
                 if (Output.Rows.Count > 0)

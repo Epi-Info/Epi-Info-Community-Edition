@@ -25,7 +25,8 @@ namespace Epi.Windows.Enter.Dialogs
     public partial class FindRecords : DialogBase
     {
         #region Private Class Members
-        private View view;
+        private View selectedView;
+        private View currentView;
         private new EnterMainForm mainForm;
         DataGrid dataGrid1;
         DataTable data;        
@@ -61,13 +62,13 @@ namespace Epi.Windows.Enter.Dialogs
         /// <summary>
         /// Constructor for FindRecords dialog
         /// </summary>
-        /// <param name="view">The current view</param>
+        /// <param name="selectedView">The current view</param>
         /// <param name="mainForm">Enter module's main form</param>
-        public FindRecords(View view, EnterMainForm mainForm)
+        public FindRecords(View selectedView, EnterMainForm mainForm, View currentView = null)
             : base(mainForm)
         {
             #region Input Validation
-            if (view == null)
+            if (selectedView == null)
             {
                 {
                     throw new ArgumentNullException("view");
@@ -76,7 +77,8 @@ namespace Epi.Windows.Enter.Dialogs
             #endregion Input Validation
 
             InitializeComponent();
-            this.view = view;
+            this.selectedView = selectedView;
+            this.currentView = currentView;
             this.mainForm = mainForm;
             this.KeyPreview = true;
         }
@@ -92,9 +94,9 @@ namespace Epi.Windows.Enter.Dialogs
         {
             lbxSearchFields.Items.Clear();
 
-            if (view.Pages.Count > 0)
+            if (selectedView.Pages.Count > 0)
             {
-                foreach (Page page in view.Pages)
+                foreach (Page page in selectedView.Pages)
                 {
                     foreach (Epi.Fields.Field field in page.Fields)
                     {
@@ -112,9 +114,9 @@ namespace Epi.Windows.Enter.Dialogs
                     }
                  }
                 //--Ei-139
-                RecStatusField recstatus = new RecStatusField(view);
+                RecStatusField recstatus = new RecStatusField(selectedView);
                 lbxSearchFields.Items.Add(new SearchListBoxItem(recstatus.Name.ToString(), recstatus.Id, recstatus.FieldType.ToString(), string.Empty, string.Empty));
-                GlobalRecordIdField globalfld = new GlobalRecordIdField(view);
+                GlobalRecordIdField globalfld = new GlobalRecordIdField(selectedView);
                 lbxSearchFields.Items.Add(new SearchListBoxItem(globalfld.Name.ToString(), globalfld.Id, globalfld.FieldType.ToString(), string.Empty, string.Empty));
                 //--
               }
@@ -665,13 +667,13 @@ namespace Epi.Windows.Enter.Dialogs
                 splitContainer1.Panel2.Controls.Remove(dataGrid1);
             }
 
-            Project project = this.view.GetProject();
+            Project project = this.selectedView.GetProject();
 
-            bool tableExists = project.CollectedData.TableExists(this.view.TableName);
+            bool tableExists = project.CollectedData.TableExists(this.selectedView.TableName);
 
             if (tableExists)
             {
-                dataGrid1.DataSource = project.CollectedData.GetSearchRecords(this.view, OrFieldCount, searchFields, searchFieldItemTypes, comparisonTypes, searchFieldValues);
+                dataGrid1.DataSource = project.CollectedData.GetSearchRecords(this.selectedView, OrFieldCount, searchFields, searchFieldItemTypes, comparisonTypes, searchFieldValues, this.currentView);
 
                 data = (DataTable)dataGrid1.DataSource;
 
@@ -694,7 +696,7 @@ namespace Epi.Windows.Enter.Dialogs
             }
             else
             {
-                MsgBox.ShowInformation(string.Format(SharedStrings.DATA_TABLE_NOT_FOUND, this.view.Name));
+                MsgBox.ShowInformation(string.Format(SharedStrings.DATA_TABLE_NOT_FOUND, this.selectedView.Name));
             }
         }
 

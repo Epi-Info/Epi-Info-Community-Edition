@@ -289,7 +289,7 @@ namespace Epi.Windows.Enter
                     selectedView = currentView;
                 }
 
-                findrecords = new Epi.Windows.Enter.Dialogs.FindRecords(selectedView, enterMainForm);
+                findrecords = new Epi.Windows.Enter.Dialogs.FindRecords(selectedView, enterMainForm, currentView);
                 DialogResult result = findrecords.ShowDialog();
                 this.BringToFront();
 
@@ -333,7 +333,7 @@ namespace Epi.Windows.Enter
                     selectedView = currentView;
                 }
 
-                findrecords = new Epi.Windows.Enter.Dialogs.FindRecords(selectedView, enterMainForm);
+                findrecords = new Epi.Windows.Enter.Dialogs.FindRecords(selectedView, enterMainForm, currentView);
                 DialogResult result = findrecords.ShowDialog();
                 this.BringToFront();
 
