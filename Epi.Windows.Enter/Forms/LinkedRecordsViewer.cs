@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Epi.Data;
@@ -62,7 +63,7 @@ namespace Epi.Windows.Enter
         {
             this.toolTip1.Hide(enterMainForm);
         }
-        
+
         void lvLinkedTo_MouseLeave(object sender, EventArgs e)
         {
             this.toolTip1.Hide(enterMainForm);
@@ -94,10 +95,7 @@ namespace Epi.Windows.Enter
                 this.toolTip1.ToolTipTitle = "Record preview:";
                 this.toolTip1.Show(sb.ToString().Substring(0, sb.Length - 2), enterMainForm, relativePosition.X + 5, relativePosition.Y - (15 + (counter * 13)));
             }
-            catch (Exception ex)
-            {
-                //
-            }
+            catch { }
         }
 
         void lvLinkedTo_ItemMouseHover(object sender, ListViewItemMouseHoverEventArgs e)
@@ -126,10 +124,7 @@ namespace Epi.Windows.Enter
                 this.toolTip1.ToolTipTitle = SharedStrings.LINKED_RECS_PREVIEW;
                 this.toolTip1.Show(sb.ToString().Substring(0, sb.Length - 2), enterMainForm, relativePosition.X + 5, relativePosition.Y - (15 + (counter * 13)));
             }
-            catch (Exception ex)
-            {
-                //
-            }
+            catch { }
         }
 
         #endregion
@@ -168,14 +163,20 @@ namespace Epi.Windows.Enter
                 {
                     if (lvLinkedTo.SelectedItems[0].Group.Name.Equals(enterMainForm.View.Id.ToString()))
                     {
-                        enterMainForm.LoadRecord(int.Parse(lvLinkedTo.SelectedItems[0].Text));
+                        if (lvLinkedTo.SelectedItems[0].Tag is string)
+                        {
+                            enterMainForm.LoadRecord(int.Parse((string)lvLinkedTo.SelectedItems[0].Tag));
+                        }
                     }
                     else
                     {
                         View view = enterMainForm.View.Project.GetViewById(int.Parse(lvLinkedTo.SelectedItems[0].Group.Name));
-                        int recordId = int.Parse(lvLinkedTo.SelectedItems[0].Text);
-                        enterMainForm.InvokeOpenView(view);
-                        enterMainForm.LoadRecord(recordId);
+                        if (lvLinkedTo.SelectedItems[0].Tag is string)
+                        {
+                            int recordId = int.Parse((string)lvLinkedTo.SelectedItems[0].Tag);
+                            enterMainForm.InvokeOpenView(view);
+                            enterMainForm.LoadRecord(recordId);
+                        }
                     }
                 }
             }
@@ -189,14 +190,20 @@ namespace Epi.Windows.Enter
                 {
                     if (lvLinkedFrom.SelectedItems[0].Group.Name.Equals(enterMainForm.View.Id.ToString()))
                     {
-                        enterMainForm.LoadRecord(int.Parse(lvLinkedFrom.SelectedItems[0].Text));
+                        if (lvLinkedFrom.SelectedItems[0].Tag is string)
+                        {
+                            enterMainForm.LoadRecord(int.Parse((string)lvLinkedFrom.SelectedItems[0].Tag));
+                        }
                     }
                     else
                     {
                         View view = enterMainForm.View.Project.GetViewById(int.Parse(lvLinkedFrom.SelectedItems[0].Group.Name));
-                        int recordId = int.Parse(lvLinkedFrom.SelectedItems[0].Text);
-                        enterMainForm.InvokeOpenView(view);
-                        enterMainForm.LoadRecord(recordId);
+                        if (lvLinkedFrom.SelectedItems[0].Tag is string)
+                        {
+                            int recordId = int.Parse((string)lvLinkedFrom.SelectedItems[0].Tag);
+                            enterMainForm.InvokeOpenView(view);
+                            enterMainForm.LoadRecord(recordId);
+                        }
                     }
                 }
             }
@@ -282,7 +289,7 @@ namespace Epi.Windows.Enter
                     selectedView = currentView;
                 }
 
-                findrecords = new Epi.Windows.Enter.Dialogs.FindRecords(selectedView, enterMainForm);
+                findrecords = new Epi.Windows.Enter.Dialogs.FindRecords(selectedView, enterMainForm, currentView);
                 DialogResult result = findrecords.ShowDialog();
                 this.BringToFront();
 
@@ -326,7 +333,7 @@ namespace Epi.Windows.Enter
                     selectedView = currentView;
                 }
 
-                findrecords = new Epi.Windows.Enter.Dialogs.FindRecords(selectedView, enterMainForm);
+                findrecords = new Epi.Windows.Enter.Dialogs.FindRecords(selectedView, enterMainForm, currentView);
                 DialogResult result = findrecords.ShowDialog();
                 this.BringToFront();
 
@@ -403,7 +410,6 @@ namespace Epi.Windows.Enter
             lvLinkedFrom.Columns[0].Width = 0;
         }
 
-
         private void ToggleEnable(bool isEnabled)
         {
             btnViewSNA.Enabled = isEnabled;
@@ -447,31 +453,57 @@ namespace Epi.Windows.Enter
                     btnUnlinkTo.Enabled = false;
                 }
 
+                Dictionary<string, string> fieldNames = new Dictionary<string, string>();
+                Query query;
+
+                query = db.CreateQuery
+                    (
+                        "SELECT [metaPages.PageId] as PageId, [metaPages.ViewId] as ViewId, [metaViews.Name] as Name " +
+                        "FROM [metaPages] " +
+                        "LEFT OUTER JOIN [metaViews] ON metaPages.ViewId = metaViews.ViewId " +
+                        "WHERE [metaPages.Position] = 0"
+                    );
+
+                DataTable pageIds = db.Select(query);
+
+                query = db.CreateQuery
+                    (
+                        "SELECT [metaFields.Name] as Name, [metaFields.PageId] as PageId, [metaFields.ViewId] as ViewId, [metaFields.TabIndex] as TabIndex " +
+                        "FROM [metaFields] " +
+                        "LEFT OUTER JOIN [metaPages] ON metaPages.ViewId = metaFields.ViewId " +
+                        "WHERE [metaFields.HasTabStop] = true AND [metaPages.Position] = 0 " +
+                        "ORDER BY [metaFields.ViewId], [metaFields.TabIndex]"
+                    );
+
+                DataTable fields = db.Select(query);
+
+                List<string> list = fields.AsEnumerable().Select(r => r.Field<string>(0)).ToList();
+
                 string uniqueKeys = "";
                 string parens = "";
                 string joins = "";
+
                 foreach (View view in enterMainForm.View.Project.Views)
                 {
-                    // IF statement added by E. Knudsen 4/5/2011 to prevent errors in Enter if another view (form) in the
-                    // same project didn't have a data table.
-                    //if (!string.IsNullOrEmpty(view.TableName) && db.TableExists(view.TableName))
-                    //{
-                    if (!view.IsRelatedView)
+                    if (!string.IsNullOrEmpty(view.TableName) && db.TableExists(view.TableName))
                     {
-                        uniqueKeys += "t" + view.Id + ".UniqueKey as Key" + view.Id + ", ";
-                        parens += "(";
-                        joins += "left outer join " + view.TableName + " t" + view.Id + " on m.ToRecordGuid = t" + view.Id + ".GlobalRecordId) ";
+                        if (!view.IsRelatedView)
+                        {
+                            uniqueKeys += "t" + view.Id + ".UniqueKey as Key" + view.Id + ", ";
+                            parens += "(";
+                            joins += "left outer join " + view.TableName + " t" + view.Id + " on m.ToRecordGuid = t" + view.Id + ".GlobalRecordId) ";
+                        }
                     }
-                    //}
                 }
+
                 uniqueKeys = uniqueKeys.Substring(0, uniqueKeys.Length - 2) + " ";
 
-                Query query = db.CreateQuery(@"Select FromRecordGuid, ToRecordGuid, FromViewId, ToViewId, " + uniqueKeys + " from " + parens + "metaLinks m " + joins + " where m.FromRecordGuid = @GlobalRecordId");
+                query = db.CreateQuery(@"Select FromRecordGuid, ToRecordGuid, FromViewId, ToViewId, " + uniqueKeys + " from " + parens + "metaLinks m " + joins + " where m.FromRecordGuid = @GlobalRecordId");
                 QueryParameter parameter = new QueryParameter("@GlobalRecordId", DbType.StringFixedLength, enterMainForm.View.CurrentGlobalRecordId);
                 parameter.Size = enterMainForm.View.CurrentGlobalRecordId.Length;
                 query.Parameters.Add(parameter);
                 DataTable data = db.Select(query);
-                
+
                 if (data.Rows.Count > 0)
                 {
                     foreach (View view in enterMainForm.View.Project.Views)
@@ -492,30 +524,71 @@ namespace Epi.Windows.Enter
 
                 List<string> names = new List<string>();
 
+                string toViewId = string.Empty;
+                string toRecordGuid = string.Empty;
+                string fieldPrint = string.Empty;
+                DataRow[] fieldRows = null;
+                List<string> fieldPrintList;
+                string collectedDataTableName = string.Empty;
+
                 foreach (DataRow row in data.Rows)
                 {
-                    ListViewItem item = new ListViewItem(row["Key" + row["ToViewId"].ToString()].ToString());
+                    ListViewItem item = new ListViewItem();
+
+                    toViewId = row["ToViewId"].ToString();
+                    toRecordGuid = row["ToRecordGuid"].ToString();
+
+                    DataRow[] oneRow = pageIds.Select("ViewId = '" + toViewId + "'");
+                    collectedDataTableName = ((string)oneRow[0]["Name"]) + ((string)oneRow[0]["PageId"].ToString());
+
+                    fieldRows = fields.Select("ViewId = " + toViewId);
+
+                    fieldPrintList = fieldRows.Select(r => r.Field<string>(0)).ToList();
+                    fieldPrintList.Add("GlobalRecordId");
+
+                    var datatable = db.GetTableData(collectedDataTableName, fieldPrintList);
+                    var theRow = datatable.Select("GlobalRecordId = '" + toRecordGuid + "'");
+
+                    fieldPrint = row["Key" + row["ToViewId"].ToString()].ToString(); ;
+
+                    if (theRow != null)
+                    {
+                        fieldPrint += " :: ";
+                        fieldPrint += theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
+                    }
+
+                    item = new ListViewItem(fieldPrint);
+                    item.Tag = row["Key" + row["ToViewId"].ToString()].ToString();
+                    item.Name = toRecordGuid;
+
                     for (int x = 0; x < data.Columns.Count; x++)
                     {
                         item.SubItems.Add(row[x].ToString());
                     }
+
                     item.ImageIndex = 0;
                     item.Group = lvLinkedTo.Groups[row["ToViewId"].ToString()];
 
-                    if (names.Contains(item.Text) == false)
+                    if (names.Contains(toRecordGuid) == false)
                     {
-                        names.Add(item.Text);
-                        
+                        names.Add(toRecordGuid);
+
                         if (lvLinkedTo.InvokeRequired)
                         {
                             lvLinkedTo.Invoke(new MethodInvoker(delegate
                             {
-                                lvLinkedTo.Items.Add(item);
+                                if (lvLinkedTo.Items.ContainsKey(toRecordGuid) == false)
+                                {
+                                    lvLinkedTo.Items.Add(item);
+                                }
                             }));
                         }
                         else
                         {
-                            lvLinkedTo.Items.Add(item);
+                            if (lvLinkedTo.Items.ContainsKey(toRecordGuid) == false)
+                            {
+                                lvLinkedTo.Items.Add(item);
+                            }
                         }
                     }
                 }
@@ -551,35 +624,59 @@ namespace Epi.Windows.Enter
                 if (btnUnlinkFrom.InvokeRequired)
                 {
                     btnUnlinkFrom.Invoke(new MethodInvoker(delegate
-                        {
-                            btnUnlinkFrom.Enabled = false;
-                        }));
+                    {
+                        btnUnlinkFrom.Enabled = false;
+                    }));
                 }
                 else
                 {
                     btnUnlinkFrom.Enabled = false;
                 }
 
+                Dictionary<string, string> fieldNames = new Dictionary<string, string>();
+                Query query;
+
+                query = db.CreateQuery
+                    (
+                        "SELECT [metaPages.PageId] as PageId, [metaPages.ViewId] as ViewId, [metaViews.Name] as Name " +
+                        "FROM [metaPages] " +
+                        "LEFT OUTER JOIN [metaViews] ON metaPages.ViewId = metaViews.ViewId " +
+                        "WHERE [metaPages.Position] = 0"
+                    );
+
+                DataTable pageIds = db.Select(query);
+
+                query = db.CreateQuery
+                    (
+                        "SELECT [metaFields.Name] as Name, [metaFields.PageId] as PageId, [metaFields.ViewId] as ViewId, [metaFields.TabIndex] as TabIndex " +
+                        "FROM [metaFields] " +
+                        "LEFT OUTER JOIN [metaPages] ON metaPages.ViewId = metaFields.ViewId " +
+                        "WHERE [metaFields.HasTabStop] = true AND [metaPages.Position] = 0 " +
+                        "ORDER BY [metaFields.ViewId], [metaFields.TabIndex]"
+                    );
+
+                DataTable fields = db.Select(query);
+
+                List<string> list = fields.AsEnumerable().Select(r => r.Field<string>(0)).ToList();
+
                 string uniqueKeys = "";
                 string parens = "";
                 string joins = "";
                 foreach (View view in enterMainForm.View.Project.Views)
                 {
-                    // IF statement added by E. Knudsen 4/5/2011 to prevent errors in Enter if another view (form) in the
-                    // same project didn't have a data table.
-                    //if (!string.IsNullOrEmpty(view.TableName) && db.TableExists(view.TableName)) 
-                    //{
-                    if (!view.IsRelatedView)
+                    if (!string.IsNullOrEmpty(view.TableName) && db.TableExists(view.TableName))
                     {
-                        uniqueKeys += "t" + view.Id + ".UniqueKey as Key" + view.Id + ", ";
-                        parens += "(";
-                        joins += "left outer join " + view.TableName + " t" + view.Id + " on m.FromRecordGuid = t" + view.Id + ".GlobalRecordId) ";
+                        if (!view.IsRelatedView)
+                        {
+                            uniqueKeys += "t" + view.Id + ".UniqueKey as Key" + view.Id + ", ";
+                            parens += "(";
+                            joins += "left outer join " + view.TableName + " t" + view.Id + " on m.FromRecordGuid = t" + view.Id + ".GlobalRecordId) ";
+                        }
                     }
-                    //}
                 }
                 uniqueKeys = uniqueKeys.Substring(0, uniqueKeys.Length - 2) + " ";
 
-                Query query = db.CreateQuery(@"Select FromRecordGuid, ToRecordGuid, FromViewId, ToViewId, " + uniqueKeys + " from " + parens + "metaLinks m " + joins + " where m.ToRecordGuid = @GlobalRecordId");
+                query = db.CreateQuery(@"Select FromRecordGuid, ToRecordGuid, FromViewId, ToViewId, " + uniqueKeys + " from " + parens + "metaLinks m " + joins + " where m.ToRecordGuid = @GlobalRecordId");
                 QueryParameter parameter = new QueryParameter("@GlobalRecordId", DbType.StringFixedLength, enterMainForm.View.CurrentGlobalRecordId);
                 parameter.Size = enterMainForm.View.CurrentGlobalRecordId.Length;
                 query.Parameters.Add(parameter);
@@ -605,30 +702,71 @@ namespace Epi.Windows.Enter
 
                 List<string> names = new List<string>();
 
+                string fromViewId = string.Empty;
+                string fromRecordGuid = string.Empty;
+                string fieldPrint = string.Empty;
+                DataRow[] fieldRows = null;
+                List<string> fieldPrintList;
+                string collectedDataTableName = string.Empty;
+
                 foreach (DataRow row in data.Rows)
                 {
-                    ListViewItem item = new ListViewItem(row["Key" + row["FromViewId"].ToString()].ToString());
+                    ListViewItem item = new ListViewItem();
+
+                    fromViewId = row["FromViewId"].ToString();
+                    fromRecordGuid = row["FromRecordGuid"].ToString();
+
+                    DataRow[] oneRow = pageIds.Select("ViewId = '" + fromViewId + "'");
+                    collectedDataTableName = ((string)oneRow[0]["Name"]) + ((string)oneRow[0]["PageId"].ToString());
+
+                    fieldRows = fields.Select("ViewId = " + fromViewId);
+
+                    fieldPrintList = fieldRows.Select(r => r.Field<string>(0)).ToList();
+                    fieldPrintList.Add("GlobalRecordId");
+
+                    var datatable = db.GetTableData(collectedDataTableName, fieldPrintList);
+                    var theRow = datatable.Select("GlobalRecordId = '" + fromRecordGuid + "'");
+
+                    fieldPrint = row["Key" + row["FromViewId"].ToString()].ToString(); ;
+
+                    if (theRow != null)
+                    {
+                        fieldPrint += " :: ";
+                        fieldPrint += theRow[0][0].ToString() + "; " + theRow[0][1].ToString() + "; " + theRow[0][2].ToString();
+                    }
+
+                    item = new ListViewItem(fieldPrint);
+                    item.Tag = row["Key" + row["FromViewId"].ToString()].ToString();
+                    item.Name = fromRecordGuid;
+
                     for (int x = 0; x < data.Columns.Count; x++)
                     {
                         item.SubItems.Add(row[x].ToString());
                     }
+
                     item.ImageIndex = 0;
                     item.Group = lvLinkedFrom.Groups[row["FromViewId"].ToString()];
 
-                    if(names.Contains(item.Text) == false)
+                    if (names.Contains(fromRecordGuid) == false)
                     {
-                        names.Add(item.Text);
+                        names.Add(fromRecordGuid);
 
                         if (lvLinkedFrom.InvokeRequired)
                         {
                             lvLinkedFrom.Invoke(new MethodInvoker(delegate
                             {
-                                lvLinkedFrom.Items.Add(item);
+                                if (lvLinkedFrom.Items.ContainsKey(fromRecordGuid) == false)
+                                {
+                                    lvLinkedFrom.Items.Add(item);
+                                }
                             }));
                         }
                         else
                         {
-                            lvLinkedFrom.Items.Add(item);
+                            if (lvLinkedFrom.Items.Contains(item) == false)
+                            {
+                                lvLinkedFrom.Items.Add(item);
+                            }
                         }
                     }
                 }
@@ -662,6 +800,5 @@ namespace Epi.Windows.Enter
         }
 
         #endregion
-        
     }
 }

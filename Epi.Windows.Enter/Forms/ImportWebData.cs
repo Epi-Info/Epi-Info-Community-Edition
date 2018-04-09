@@ -683,8 +683,9 @@ namespace Epi.Enter.Forms
 
                 if (field is NumberField && !string.IsNullOrEmpty(value.ToString()))
                 {
-                    double result = -1;                   
-                    if (double.TryParse(value.ToString(), out result))
+                    double result = -1;
+                    //  if (double.TryParse(value.ToString(), out result))
+                    if (double.TryParse(value.ToString(), NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out result))
                     {
                         value = result;
                     }

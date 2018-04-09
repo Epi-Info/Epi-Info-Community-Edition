@@ -169,9 +169,11 @@
             // 
             resources.ApplyResources(this.lvLinkedFrom, "lvLinkedFrom");
             this.lvLinkedFrom.FullRowSelect = true;
+            this.lvLinkedFrom.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvLinkedFrom.LargeImageList = this.imageList1;
             this.lvLinkedFrom.Name = "lvLinkedFrom";
             this.lvLinkedFrom.UseCompatibleStateImageBehavior = false;
+            this.lvLinkedFrom.View = System.Windows.Forms.View.SmallIcon;
             // 
             // imageList1
             // 
@@ -223,6 +225,7 @@
             this.lvLinkedTo.LargeImageList = this.imageList1;
             this.lvLinkedTo.Name = "lvLinkedTo";
             this.lvLinkedTo.UseCompatibleStateImageBehavior = false;
+            this.lvLinkedTo.View = System.Windows.Forms.View.SmallIcon;
             // 
             // btnViewSNA
             // 

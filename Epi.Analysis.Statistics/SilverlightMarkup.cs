@@ -54,7 +54,7 @@ namespace Epi
             sb.AppendLine(@"<param name=""source"" value=""SilverlightApplication.xap"" />");
             sb.AppendLine(@"<param name=""minRuntimeVersion"" value=""4.0.50826.0"" />");
             sb.AppendLine(@"<param name=""autoUpgrade"" value=""true"" />");
-            sb.AppendLine(@"<a href=""http://go.microsoft.com/fwlink/?LinkID=149156&v=4.0.50826.0"" style=""text-decoration: none"">");
+            sb.AppendLine(@"<a href=""http://go.microsoft.com/fwlink/?LinkID=149156"" style=""text-decoration: none"">");
             sb.AppendLine(@"<img src=""http://go.microsoft.com/fwlink/?LinkId=161376"" alt=""Get Microsoft Silverlight""");
             sb.AppendLine(@"style=""border-style: none"" />");
             sb.AppendLine(@"</a>");

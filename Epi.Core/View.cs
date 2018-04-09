@@ -1438,7 +1438,7 @@ namespace Epi
                                     break;
 
                                 default:
-                                    return (false);
+                                    return false;
                             }
                         }
                         else continue;
@@ -1460,7 +1460,7 @@ namespace Epi
                 }
             }
 
-            return (true);
+            return true;
         }
 
 
