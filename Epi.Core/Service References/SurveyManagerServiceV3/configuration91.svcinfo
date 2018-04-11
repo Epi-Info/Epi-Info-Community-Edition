@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="d3JmeLnHMJkA6Z+Lolib0aNK764=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="J1uXPgGx0POd9HFb6nxQg0P3WnA=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IManagerServiceV31">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IManagerServiceV31" contract="SurveyManagerServiceV3.IManagerServiceV3" bindingType="basicHttpBinding" address="http://localhost:59905/SurveyManagerServiceV3.svc" bindingConfiguration="BasicHttpBinding_IManagerServiceV31">
+    <endpoint name="BasicHttpBinding_IManagerServiceV31" contract="SurveyManagerServiceV3.IManagerServiceV3" bindingType="basicHttpBinding" address="http://localhost:59584/SurveyManagerServiceV3.svc" bindingConfiguration="BasicHttpBinding_IManagerServiceV31">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:59905/SurveyManagerServiceV3.svc</serializedValue>
+          <serializedValue>http://localhost:59584/SurveyManagerServiceV3.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

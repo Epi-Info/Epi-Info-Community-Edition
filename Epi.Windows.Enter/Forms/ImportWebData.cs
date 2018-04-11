@@ -157,8 +157,11 @@ namespace Epi.Enter.Forms
             requestWorker.RunWorkerAsync();
         }
 
-        private QueryParameter GetQueryParameterForField(WebFieldData fieldData, Page sourcePage)
+        private QueryParameter GetQueryParameterForField(WebFieldData fieldData, Page sourcePage, View CurrentdestinationView = null)
         {
+            if (CurrentdestinationView != null) {
+                destinationView = CurrentdestinationView;
+            }
             Field dataField = destinationView.Fields[fieldData.FieldName];
             if (!(
                 dataField is GroupField ||
@@ -489,167 +492,387 @@ namespace Epi.Enter.Forms
         /// <param name="result">The web survey result</param>
         /// <param name="destinationView">The destination form</param>
         /// <param name="destinationGUIDList">The list of GUIDs that exist in the destination</param>
+        //private void ProcessBaseTable(Dictionary<string, Dictionary<string, WebFieldData>> result, View destinationView, List<string> destinationGUIDList)
+        //{
+        //    //sourceView.LoadFirstRecord();
+        //    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on base table...");
+
+        //    int recordsInserted = 0;
+        //    int recordsUpdated = 0;
+
+        //    //string sourceTable = sourceView.TableName;
+        //    string destinationTable = destinationView.TableName;
+
+        //    foreach (KeyValuePair<string,Dictionary<string, WebFieldData>> surveyAnswer in result)
+        //    {
+        //        if (surveyAnswer.Value.Count()>0) {
+        //            int ViewId = surveyAnswer.Value.Select(x => x.Value.ViewId).ToList().First();
+
+        //            View NewView = destinationProject.GetViewById(ViewId);
+        //            if (NewView != null)
+        //            {
+        //                destinationView = NewView;
+
+        //            }
+        //        }
+        //        destinationTable = destinationView.TableName;
+        //        QueryParameter paramRecordStatus = new QueryParameter("@RECSTATUS", DbType.Int32, 1);
+
+        //            if (importWorker.CancellationPending)
+        //            {
+        //                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
+        //                return;
+        //            }
+
+        //            WordBuilder fieldNames = new WordBuilder(StringLiterals.COMMA);
+        //            WordBuilder fieldValues = new WordBuilder(StringLiterals.COMMA);
+        //            List<QueryParameter> fieldValueParams = new List<QueryParameter>();
+
+        //            fieldNames.Append("GlobalRecordId");
+        //            fieldValues.Append("@GlobalRecordId");
+
+        //            string GUID = surveyAnswer.Key; // sourceReader["GlobalRecordId"].ToString();
+        //            string FKEY = string.Empty; // sourceReader["FKEY"].ToString(); // FKEY not needed, no related forms to process
+
+        //            QueryParameter paramFkey = new QueryParameter("@FKEY", DbType.String, FKEY); // don't add this yet
+        //            QueryParameter paramGUID = new QueryParameter("@GlobalRecordId", DbType.String, GUID);
+        //            fieldValueParams.Add(paramGUID);
+
+        //            fieldNames.Append("FirstSaveLogonName");
+        //            fieldValues.Append("@FirstSaveLogonName");
+        //            QueryParameter paramFirstSaveLogonName = new QueryParameter("@FirstSaveLogonName", DbType.String, System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
+        //            fieldValueParams.Add(paramFirstSaveLogonName);
+
+        //            fieldNames.Append("LastSaveLogonName");
+        //            fieldValues.Append("@LastSaveLogonName");
+        //            QueryParameter paramLastSaveLogonName = new QueryParameter("@LastSaveLogonName", DbType.String, System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
+        //            fieldValueParams.Add(paramLastSaveLogonName);
+
+        //            fieldNames.Append("FirstSaveTime");
+        //            fieldValues.Append("@FirstSaveTime");
+        //            QueryParameter paramFirstSaveTime = new QueryParameter("@FirstSaveTime", DbType.DateTime2, DateTime.Now);
+        //            fieldValueParams.Add(paramFirstSaveTime);
+
+
+        //            fieldNames.Append("LastSaveTime");
+        //            fieldValues.Append("@LastSaveTime");
+        //            QueryParameter paramLastSaveTime = new QueryParameter("@LastSaveTime", DbType.DateTime2, DateTime.Now);
+        //            fieldValueParams.Add(paramLastSaveTime);
+
+        //        if (destinationGUIDList.Contains(GUID.ToUpperInvariant()))
+        //            {
+        //            update = true;
+        //            append = false;
+        //            }
+        //            else
+        //            {
+        //                append = true;
+        //                update = false;
+
+        //             }
+        //                if (update)
+        //                {
+        //                    // UPDATE matching records
+        //                    string updateHeader = string.Empty;
+        //                    string whereClause = string.Empty;
+        //                    fieldValueParams = new List<QueryParameter>();
+        //                    StringBuilder sb = new StringBuilder();
+
+        //                    // Build the Update statement which will be reused
+        //                    sb.Append(SqlKeyWords.UPDATE);
+        //                    sb.Append(StringLiterals.SPACE);
+        //                    sb.Append(destinationProjectDataDriver.InsertInEscape(destinationTable));
+        //                    sb.Append(StringLiterals.SPACE);
+        //                    sb.Append(SqlKeyWords.SET);
+        //                    sb.Append(StringLiterals.SPACE);
+
+        //                    updateHeader = sb.ToString();
+
+        //                    sb.Remove(0, sb.ToString().Length);
+
+        //                    // Build the WHERE caluse which will be reused
+        //                    sb.Append(SqlKeyWords.WHERE);
+        //                    sb.Append(StringLiterals.SPACE);
+        //                    sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
+        //                    sb.Append(StringLiterals.EQUAL);
+        //                    sb.Append("'");
+        //                    sb.Append(GUID);
+        //                    sb.Append("'");
+        //                    whereClause = sb.ToString();
+
+        //                    sb.Remove(0, sb.ToString().Length);
+
+        //                    //if (sourceView.ForeignKeyFieldExists)
+        //                    if (!string.IsNullOrEmpty(FKEY))
+        //                    {
+        //                        sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
+        //                        sb.Append("FKEY");
+        //                        sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
+        //                        sb.Append(StringLiterals.EQUAL);
+
+        //                        sb.Append(StringLiterals.COMMERCIAL_AT);
+        //                        sb.Append("FKEY");                               
+        //                        fieldValueParams.Add(paramFkey);
+
+        //                        Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
+        //                        updateQuery.Parameters = fieldValueParams;
+
+        //                        destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
+
+        //                        sb.Remove(0, sb.ToString().Length);
+        //                        fieldValueParams.Clear();
+
+        //                        //recordsUpdated++;
+        //                    }
+        //                    recordsUpdated++;
+        //                }
+        //            //}
+        //            //else
+        //            //{
+        //                if (append)
+        //                {
+        //                try
+        //                    {
+        //                    if (!string.IsNullOrEmpty(FKEY))
+        //                    {
+        //                        fieldNames.Append("FKEY");
+        //                        fieldValues.Append("@FKEY");
+        //                        fieldValueParams.Add(paramFkey);
+        //                    }
+        //                    fieldNames.Append("RECSTATUS");
+        //                    fieldValues.Append("@RECSTATUS");
+        //                    fieldValueParams.Add(paramRecordStatus);
+
+        //                    // Concatenate the query clauses into one SQL statement.
+        //                    StringBuilder sb = new StringBuilder();
+        //                    sb.Append(" insert into ");
+        //                    sb.Append(destinationProjectDataDriver.InsertInEscape(destinationTable));
+        //                    sb.Append(StringLiterals.SPACE);
+        //                    sb.Append(Util.InsertInParantheses(fieldNames.ToString()));
+        //                    sb.Append(" values (");
+        //                    sb.Append(fieldValues.ToString());
+        //                    sb.Append(") ");
+        //                    Query insertQuery = destinationProjectDataDriver.CreateQuery(sb.ToString());
+        //                    insertQuery.Parameters = fieldValueParams;
+
+        //                    System.Diagnostics.Debug.Print(insertQuery.SqlStatement);
+        //                    destinationProjectDataDriver.ExecuteNonQuery(insertQuery);
+
+        //                    foreach (Page page in destinationView.Pages)
+        //                    {
+        //                        sb = new StringBuilder();
+        //                        sb.Append(" insert into ");
+        //                        sb.Append(destinationProjectDataDriver.InsertInEscape(page.TableName));
+        //                        sb.Append(StringLiterals.SPACE);
+        //                        sb.Append("([GlobalRecordId])");
+        //                        sb.Append(" values (");
+        //                        sb.Append("'" + GUID + "'");
+        //                        sb.Append(") ");
+        //                        insertQuery = destinationProjectDataDriver.CreateQuery(sb.ToString());
+        //                        destinationProjectDataDriver.ExecuteNonQuery(insertQuery);
+        //                    }
+
+        //                    recordsInserted++;
+        //                    }
+        //                    catch(Exception ex)
+        //                    {
+        //                     throw ex;
+
+        //                    }
+        //               // }
+        //            }
+        //            this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
+        //        }
+        //        //sourceReader.Close();
+        //        //sourceReader.Dispose();
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
+        //    //    return false;
+        //    //}
+        //    //finally
+        //    //{
+        //    //}
+        //    this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On base table '" + destinationTable + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");
+        //}
         private void ProcessBaseTable(Dictionary<string, Dictionary<string, WebFieldData>> result, View destinationView, List<string> destinationGUIDList)
         {
             //sourceView.LoadFirstRecord();
-            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on base table...");
+            this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_PROCESSING_RECS);
 
             int recordsInserted = 0;
             int recordsUpdated = 0;
 
             //string sourceTable = sourceView.TableName;
-            string destinationTable = destinationView.TableName;
+            // string destinationTable = destinationView.TableName;
+            string destinationTable = "";
 
-            foreach (KeyValuePair<string,Dictionary<string, WebFieldData>> surveyAnswer in result)
-            {                    
-                    QueryParameter paramRecordStatus = new QueryParameter("@RECSTATUS", DbType.Int32, 1);
+            foreach (KeyValuePair<string, Dictionary<string, WebFieldData>> surveyAnswer in result)
+            {
+                int ViewId = surveyAnswer.Value.Select(x => x.Value.ViewId).ToList().First();
 
-                    if (importWorker.CancellationPending)
-                    {
-                        this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
-                        return;
-                    }
+                View NewView = destinationProject.GetViewById(ViewId);
+                if (NewView != null)
+                {
+                    destinationView = NewView;
 
-                    WordBuilder fieldNames = new WordBuilder(StringLiterals.COMMA);
-                    WordBuilder fieldValues = new WordBuilder(StringLiterals.COMMA);
-                    List<QueryParameter> fieldValueParams = new List<QueryParameter>();
-
-                    fieldNames.Append("GlobalRecordId");
-                    fieldValues.Append("@GlobalRecordId");
-
-                    string GUID = surveyAnswer.Key; // sourceReader["GlobalRecordId"].ToString();
-                    string FKEY = string.Empty; // sourceReader["FKEY"].ToString(); // FKEY not needed, no related forms to process
-
-                    QueryParameter paramFkey = new QueryParameter("@FKEY", DbType.String, FKEY); // don't add this yet
-                    QueryParameter paramGUID = new QueryParameter("@GlobalRecordId", DbType.String, GUID);
-                    fieldValueParams.Add(paramGUID);
-
-                    if (destinationGUIDList.Contains(GUID.ToUpperInvariant()))
-                    {
-                    update = true;
-                    append = false;
-                    }
-                    else
-                    {
-                        append = true;
-                        update = false;
-                        
-                     }
-                        if (update)
-                        {
-                            // UPDATE matching records
-                            string updateHeader = string.Empty;
-                            string whereClause = string.Empty;
-                            fieldValueParams = new List<QueryParameter>();
-                            StringBuilder sb = new StringBuilder();
-
-                            // Build the Update statement which will be reused
-                            sb.Append(SqlKeyWords.UPDATE);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(destinationProjectDataDriver.InsertInEscape(destinationTable));
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(SqlKeyWords.SET);
-                            sb.Append(StringLiterals.SPACE);
-
-                            updateHeader = sb.ToString();
-
-                            sb.Remove(0, sb.ToString().Length);
-
-                            // Build the WHERE caluse which will be reused
-                            sb.Append(SqlKeyWords.WHERE);
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
-                            sb.Append(StringLiterals.EQUAL);
-                            sb.Append("'");
-                            sb.Append(GUID);
-                            sb.Append("'");
-                            whereClause = sb.ToString();
-
-                            sb.Remove(0, sb.ToString().Length);
-
-                            //if (sourceView.ForeignKeyFieldExists)
-                            if (!string.IsNullOrEmpty(FKEY))
-                            {
-                                sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
-                                sb.Append("FKEY");
-                                sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
-                                sb.Append(StringLiterals.EQUAL);
-
-                                sb.Append(StringLiterals.COMMERCIAL_AT);
-                                sb.Append("FKEY");                               
-                                fieldValueParams.Add(paramFkey);
-
-                                Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
-                                updateQuery.Parameters = fieldValueParams;
-
-                                destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
-
-                                sb.Remove(0, sb.ToString().Length);
-                                fieldValueParams.Clear();
-
-                                //recordsUpdated++;
-                            }
-                            recordsUpdated++;
-                        }
-                    //}
-                    //else
-                    //{
-                        if (append)
-                        {
-                        try
-                            {
-                            if (!string.IsNullOrEmpty(FKEY))
-                            {
-                                fieldNames.Append("FKEY");
-                                fieldValues.Append("@FKEY");
-                                fieldValueParams.Add(paramFkey);
-                            }
-                            fieldNames.Append("RECSTATUS");
-                            fieldValues.Append("@RECSTATUS");
-                            fieldValueParams.Add(paramRecordStatus);
-
-                            // Concatenate the query clauses into one SQL statement.
-                            StringBuilder sb = new StringBuilder();
-                            sb.Append(" insert into ");
-                            sb.Append(destinationProjectDataDriver.InsertInEscape(destinationTable));
-                            sb.Append(StringLiterals.SPACE);
-                            sb.Append(Util.InsertInParantheses(fieldNames.ToString()));
-                            sb.Append(" values (");
-                            sb.Append(fieldValues.ToString());
-                            sb.Append(") ");
-                            Query insertQuery = destinationProjectDataDriver.CreateQuery(sb.ToString());
-                            insertQuery.Parameters = fieldValueParams;
-
-                            System.Diagnostics.Debug.Print(insertQuery.SqlStatement);
-                            destinationProjectDataDriver.ExecuteNonQuery(insertQuery);
-
-                            foreach (Page page in destinationView.Pages)
-                            {
-                                sb = new StringBuilder();
-                                sb.Append(" insert into ");
-                                sb.Append(destinationProjectDataDriver.InsertInEscape(page.TableName));
-                                sb.Append(StringLiterals.SPACE);
-                                sb.Append("([GlobalRecordId])");
-                                sb.Append(" values (");
-                                sb.Append("'" + GUID + "'");
-                                sb.Append(") ");
-                                insertQuery = destinationProjectDataDriver.CreateQuery(sb.ToString());
-                                destinationProjectDataDriver.ExecuteNonQuery(insertQuery);
-                            }
-                            
-                            recordsInserted++;
-                            }
-                            catch(Exception ex)
-                            {
-                             throw ex;
-                                
-                            }
-                       // }
-                    }
-                    this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
                 }
-                //sourceReader.Close();
-                //sourceReader.Dispose();
+                destinationTable = destinationView.TableName;
+                QueryParameter paramRecordStatus = new QueryParameter("@RECSTATUS", DbType.Int32, 1);
+
+                if (importWorker.CancellationPending)
+                {
+                    this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_CANCELLED);
+                    return;
+                }
+
+                WordBuilder fieldNames = new WordBuilder(StringLiterals.COMMA);
+                WordBuilder fieldValues = new WordBuilder(StringLiterals.COMMA);
+                List<QueryParameter> fieldValueParams = new List<QueryParameter>();
+
+                fieldNames.Append("GlobalRecordId");
+                fieldValues.Append("@GlobalRecordId");
+
+                string GUID = surveyAnswer.Key; // sourceReader["GlobalRecordId"].ToString();
+                                                // string FKEY = string.Empty; // sourceReader["FKEY"].ToString(); // FKEY not needed, no related forms to process
+                string FKEY = surveyAnswer.Value.Select(x => x.Value.ParentId).ToList().First();
+
+                QueryParameter paramFkey = new QueryParameter("@FKEY", DbType.String, FKEY); // don't add this yet
+                QueryParameter paramGUID = new QueryParameter("@GlobalRecordId", DbType.String, GUID);
+                fieldValueParams.Add(paramGUID);
+
+
+                fieldNames.Append("FirstSaveLogonName");
+                fieldValues.Append("@FirstSaveLogonName");
+                QueryParameter paramFirstSaveLogonName = new QueryParameter("@FirstSaveLogonName", DbType.String, System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
+                fieldValueParams.Add(paramFirstSaveLogonName);
+
+                fieldNames.Append("LastSaveLogonName");
+                fieldValues.Append("@LastSaveLogonName");
+                QueryParameter paramLastSaveLogonName = new QueryParameter("@LastSaveLogonName", DbType.String, System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString());
+                fieldValueParams.Add(paramLastSaveLogonName);
+
+                fieldNames.Append("FirstSaveTime");
+                fieldValues.Append("@FirstSaveTime");
+                QueryParameter paramFirstSaveTime = new QueryParameter("@FirstSaveTime", DbType.DateTime2, DateTime.Now);
+                fieldValueParams.Add(paramFirstSaveTime);
+
+
+                fieldNames.Append("LastSaveTime");
+                fieldValues.Append("@LastSaveTime");
+                QueryParameter paramLastSaveTime = new QueryParameter("@LastSaveTime", DbType.DateTime2, DateTime.Now);
+                fieldValueParams.Add(paramLastSaveTime);
+
+                if (destinationGUIDList.Contains(GUID))
+                {
+                    recordsUpdated++;
+                    if (update)
+                    {
+                        // UPDATE matching records
+                        //    string updateHeader = string.Empty;
+                        //    string whereClause = string.Empty;
+                        //    fieldValueParams = new List<QueryParameter>();
+                        //    StringBuilder sb = new StringBuilder();
+
+                        //    // Build the Update statement which will be reused
+                        //    sb.Append(SqlKeyWords.UPDATE);
+                        //    sb.Append(StringLiterals.SPACE);
+                        //    sb.Append(destinationProjectDataDriver.InsertInEscape(destinationTable));
+                        //    sb.Append(StringLiterals.SPACE);
+                        //    sb.Append(SqlKeyWords.SET);
+                        //    sb.Append(StringLiterals.SPACE);
+
+                        //    updateHeader = sb.ToString();
+
+                        //    sb.Remove(0, sb.ToString().Length);
+
+                        //    // Build the WHERE caluse which will be reused
+                        //    sb.Append(SqlKeyWords.WHERE);
+                        //    sb.Append(StringLiterals.SPACE);
+                        //    sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
+                        //    sb.Append(StringLiterals.EQUAL);
+                        //    sb.Append("'");
+                        //    sb.Append(GUID);
+                        //    sb.Append("'");
+                        //    whereClause = sb.ToString();
+
+                        //    sb.Remove(0, sb.ToString().Length);
+
+                        //    //if (sourceView.ForeignKeyFieldExists)
+                        //    if (!string.IsNullOrEmpty(FKEY))
+                        //    {
+                        //        sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
+                        //        sb.Append("FKEY");
+                        //        sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
+                        //        sb.Append(StringLiterals.EQUAL);
+
+                        //        sb.Append(StringLiterals.COMMERCIAL_AT);
+                        //        sb.Append("FKEY");                               
+                        //        fieldValueParams.Add(paramFkey);
+
+                        //        Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
+                        //        updateQuery.Parameters = fieldValueParams;
+
+                        //        //destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
+
+                        //        sb.Remove(0, sb.ToString().Length);
+                        //        fieldValueParams.Clear();
+
+                        //        recordsUpdated++;
+                        //    }
+                    }
+                }
+                else
+                {
+                    if (append)
+                    {
+                        if (!string.IsNullOrEmpty(FKEY))
+                        {
+                            fieldNames.Append("FKEY");
+                            fieldValues.Append("@FKEY");
+                            fieldValueParams.Add(paramFkey);
+                        }
+                        fieldNames.Append("RECSTATUS");
+                        fieldValues.Append("@RECSTATUS");
+                        fieldValueParams.Add(paramRecordStatus);
+
+                        // Concatenate the query clauses into one SQL statement.
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append(" insert into ");
+                        sb.Append(destinationProjectDataDriver.InsertInEscape(destinationTable));
+                        sb.Append(StringLiterals.SPACE);
+                        sb.Append(Util.InsertInParantheses(fieldNames.ToString()));
+                        sb.Append(" values (");
+                        sb.Append(fieldValues.ToString());
+                        sb.Append(") ");
+                        Query insertQuery = destinationProjectDataDriver.CreateQuery(sb.ToString());
+                        insertQuery.Parameters = fieldValueParams;
+
+                        System.Diagnostics.Debug.Print(insertQuery.SqlStatement);
+                        destinationProjectDataDriver.ExecuteNonQuery(insertQuery);
+
+                        foreach (Page page in destinationView.Pages)
+                        {
+                            sb = new StringBuilder();
+                            sb.Append(" insert into ");
+                            sb.Append(destinationProjectDataDriver.InsertInEscape(page.TableName));
+                            sb.Append(StringLiterals.SPACE);
+                            sb.Append("([GlobalRecordId])");
+                            sb.Append(" values (");
+                            sb.Append("'" + GUID + "'");
+                            sb.Append(") ");
+                            insertQuery = destinationProjectDataDriver.CreateQuery(sb.ToString());
+                            destinationProjectDataDriver.ExecuteNonQuery(insertQuery);
+                        }
+
+                        recordsInserted++;
+                    }
+                }
+                this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
+            }
+            //sourceReader.Close();
+            //sourceReader.Dispose();
             //}
             //catch (Exception ex)
             //{
@@ -661,7 +884,6 @@ namespace Epi.Enter.Forms
             //}
             this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On base table '" + destinationTable + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");
         }
-
         private object FormatWebFieldData(string fieldName, object value)
         {
             if (destinationView.Fields.Contains(fieldName))
@@ -767,12 +989,37 @@ namespace Epi.Enter.Forms
             Dictionary<string, Dictionary<string, WebFieldData>> result = new Dictionary<string, Dictionary<string, WebFieldData>>(StringComparer.OrdinalIgnoreCase);
             // SetFilterProperties(DownLoadType);
 
+            //foreach (SurveyManagerServiceV3.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
+            //{
+
+            //    AddSurveyAnswerResultV3(result, surveyAnswer);
+            //}
             foreach (SurveyManagerServiceV3.SurveyAnswerDTO surveyAnswer in pSurveyAnswer.SurveyResponseList)
             {
-                 
-                AddSurveyAnswerResultV3(result, surveyAnswer);
+                if (SurveyStatus == 0)
+                {
+                    if ((surveyAnswer.IsDraftMode == IsDraftMode))
+                    {
+                        // AddSurveyAnswerResult(result, surveyAnswer);
+                        foreach (var item in surveyAnswer.ResponseHierarchyIds)
+                        {
+                            AddSurveyAnswerResultV3(result, item);
+                        }
+                    }
+                }
+                else
+                {
+                    //     if ((surveyAnswer.IsDraftMode == IsDraftMode) && (surveyAnswer.Status == SurveyStatus))
+                    if ((surveyAnswer.IsDraftMode == IsDraftMode))
+                    {
+                        // AddSurveyAnswerResult(result, surveyAnswer);
+                        foreach (var item in surveyAnswer.ResponseHierarchyIds)
+                        {
+                            AddSurveyAnswerResultV3(result, item);
+                        }
+                    }
+                }
             }
-
             return result;
         }
         private void AddSurveyAnswerResult(Dictionary<string, Dictionary<string, WebFieldData>> result, SurveyManagerService.SurveyAnswerDTO surveyAnswer)
@@ -792,6 +1039,7 @@ namespace Epi.Enter.Forms
                 wfData.FieldName = fieldName;
                 wfData.FieldValue = fieldValue;
                 wfData.Status = surveyAnswer.Status;
+               
 
                 if (result[surveyAnswer.ResponseId].Keys.Contains(wfData.FieldName) == false)
                 {
@@ -815,6 +1063,7 @@ namespace Epi.Enter.Forms
                 wfData.FieldName = fieldName;
                 wfData.FieldValue = fieldValue;
                 wfData.Status = surveyAnswer.Status;
+                 
 
                 if (result[surveyAnswer.ResponseId].Keys.Contains(wfData.FieldName) == false)
                 {
@@ -838,6 +1087,8 @@ namespace Epi.Enter.Forms
                 wfData.FieldName = fieldName;
                 wfData.FieldValue = fieldValue;
                 wfData.Status = surveyAnswer.Status;
+                wfData.ViewId = surveyAnswer.ViewId;
+                wfData.ParentId = surveyAnswer.RelateParentId;
 
                 if (result[surveyAnswer.ResponseId].Keys.Contains(wfData.FieldName) == false)
                 {
@@ -908,108 +1159,124 @@ namespace Epi.Enter.Forms
         /// <param name="destinationGUIDList">The list of GUIDs that exist in the destination</param>
         private void ProcessPages(Dictionary<string, Dictionary<string, WebFieldData>> pFieldDataList, View destinationView, List<string> destinationGUIDList)
         {
-            Dictionary<int, List<WebFieldData>> pagedFieldDataDictionary = new Dictionary<int, List<WebFieldData>>();
+            //  Dictionary<int, List<WebFieldData>> pagedFieldDataDictionary = new Dictionary<int, List<WebFieldData>>();
+
+
+
+            //for (int i = 0; i < destinationView.Pages.Count; i++)
+            //    {
+            //    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on page " + (i + 1).ToString() + " of " + destinationView.Pages.Count.ToString() + "...");
+
+            //    int recordsInserted = 0;
+
+            //    Page destinationPage = destinationView.Pages[i];
             List<string> GUIDList = new List<string>();
-            for (int i = 0; i < destinationView.Pages.Count; i++)
+            foreach (KeyValuePair<string, Dictionary<string, WebFieldData>> kvp in pFieldDataList)
             {
-                this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Processing records on page " + (i + 1).ToString() + " of " + destinationView.Pages.Count.ToString() + "...");
+                int ViewId = kvp.Value.Select(x => x.Value.ViewId).ToList().First();
 
-                int recordsInserted = 0;
-
-                Page destinationPage = destinationView.Pages[i];
-               
-                foreach(KeyValuePair<string, Dictionary<string, WebFieldData>> kvp in pFieldDataList)
+                View NewView = destinationProject.GetViewById(ViewId);
+                if (NewView != null)
                 {
-                    string currentGUID = string.Empty;
-                    string lastGUID = string.Empty;
-                    string FieldName = string.Empty;
-                    WordBuilder fieldNames = new WordBuilder(StringLiterals.COMMA);
-                    WordBuilder fieldValues = new WordBuilder(StringLiterals.COMMA);
-                    List<QueryParameter> fieldValueParams = new List<QueryParameter>();
+                    destinationView = NewView;
+                }
+                string currentGUID = string.Empty;
+                string lastGUID = string.Empty;
 
-                   
+                WordBuilder fieldNames = new WordBuilder(StringLiterals.COMMA);
+                WordBuilder fieldValues = new WordBuilder(StringLiterals.COMMA);
+                List<QueryParameter> fieldValueParams = new List<QueryParameter>();
 
+
+                for (int i = 0; i < destinationView.Pages.Count; i++)
+                {
+                    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), string.Format(SharedStrings.IMPORT_DATA_PROCESSING_RECS_PAGE, (i + 1).ToString(), destinationView.Pages.Count.ToString()));
+
+                    int recordsInserted = 0;
+
+                    Page destinationPage = destinationView.Pages[i];
                     foreach (Field PageField in destinationPage.Fields)
                     {
-                        try
+
+                        if (PageField is IDataField)
                         {
-                            if (PageField is IDataField)
+                            IDataField field = PageField as IDataField;
+                            string FieldName = ((Epi.INamedObject)field).Name;
+
+                            currentGUID = kvp.Key;//fieldDataList[FieldName].RecordGUID;
+
+                            if (importWorker.CancellationPending)
                             {
-                                IDataField field = PageField as IDataField;
-                                  FieldName = ((Epi.INamedObject)field).Name;
+                                this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), SharedStrings.IMPORT_DATA_CANCELLED);
+                                return;
+                            }
 
-                                currentGUID = kvp.Key;//fieldDataList[FieldName].RecordGUID;
+                            if (kvp.Value.ContainsKey(FieldName))
+                            {
+                                string GUID = kvp.Value[FieldName].RecordGUID;
 
-                                if (importWorker.CancellationPending)
+                                string updateHeader = string.Empty;
+                                string whereClause = string.Empty;
+                                fieldValueParams = new List<QueryParameter>();
+                                StringBuilder sb = new StringBuilder();
+
+                                // Build the Update statement which will be reused
+                                sb.Append(SqlKeyWords.UPDATE);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(destinationProjectDataDriver.InsertInEscape(destinationPage.TableName));
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(SqlKeyWords.SET);
+                                sb.Append(StringLiterals.SPACE);
+
+                                updateHeader = sb.ToString();
+
+                                sb.Remove(0, sb.ToString().Length);
+
+                                // Build the WHERE caluse which will be reused
+                                sb.Append(SqlKeyWords.WHERE);
+                                sb.Append(StringLiterals.SPACE);
+                                sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
+                                sb.Append(StringLiterals.EQUAL);
+                                sb.Append("'");
+                                sb.Append(GUID);
+                                sb.Append("'");
+                                whereClause = sb.ToString();
+
+                                sb.Remove(0, sb.ToString().Length);
+
+                                sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
+                                sb.Append(FieldName);
+                                sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
+                                sb.Append(StringLiterals.EQUAL);
+
+                                sb.Append(StringLiterals.COMMERCIAL_AT);
+                                sb.Append(FieldName);
+
+                                QueryParameter param = GetQueryParameterForField(kvp.Value[FieldName], destinationPage, NewView);
+                                if (param != null)
                                 {
-                                    this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "Import cancelled.");
-                                    return;
-                                }
-
-                                if (kvp.Value.ContainsKey(FieldName))
-                                {
-                                    string GUID = kvp.Value[FieldName].RecordGUID;
-
-                                    string updateHeader = string.Empty;
-                                    string whereClause = string.Empty;
-                                    fieldValueParams = new List<QueryParameter>();
-                                    StringBuilder sb = new StringBuilder();
-
-                                    // Build the Update statement which will be reused
-                                    sb.Append(SqlKeyWords.UPDATE);
-                                    sb.Append(StringLiterals.SPACE);
-                                    sb.Append(destinationProjectDataDriver.InsertInEscape(destinationPage.TableName));
-                                    sb.Append(StringLiterals.SPACE);
-                                    sb.Append(SqlKeyWords.SET);
-                                    sb.Append(StringLiterals.SPACE);
-
-                                    updateHeader = sb.ToString();
-
-                                    sb.Remove(0, sb.ToString().Length);
-
-                                    // Build the WHERE caluse which will be reused
-                                    sb.Append(SqlKeyWords.WHERE);
-                                    sb.Append(StringLiterals.SPACE);
-                                    sb.Append(destinationProjectDataDriver.InsertInEscape(ColumnNames.GLOBAL_RECORD_ID));
-                                    sb.Append(StringLiterals.EQUAL);
-                                    sb.Append("'");
-                                    sb.Append(GUID);
-                                    sb.Append("'");
-                                    whereClause = sb.ToString();
-
-                                    sb.Remove(0, sb.ToString().Length);
-
-                                    sb.Append(StringLiterals.LEFT_SQUARE_BRACKET);
-                                    sb.Append(FieldName);
-                                    sb.Append(StringLiterals.RIGHT_SQUARE_BRACKET);
-                                    sb.Append(StringLiterals.EQUAL);
-
-                                    sb.Append(StringLiterals.COMMERCIAL_AT);
-                                    sb.Append(FieldName);
-
-                                    QueryParameter param = GetQueryParameterForField(kvp.Value[FieldName], destinationPage);
-                                    if (param != null)
+                                    Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
+                                    updateQuery.Parameters.Add(param);
+                                    try
                                     {
-                                        Query updateQuery = destinationProjectDataDriver.CreateQuery(updateHeader + StringLiterals.SPACE + sb.ToString() + StringLiterals.SPACE + whereClause);
-                                        updateQuery.Parameters.Add(param);
                                         destinationProjectDataDriver.ExecuteNonQuery(updateQuery);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Error Processing record number " + GUID.ToString() + " Field Name:" + FieldName);
 
-                                        if (!GUIDList.Contains(GUID))
-                                        {
-                                            GUIDList.Add(GUID);
-                                            recordsInserted++;
-                                            this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
-                                        }
+                                    }
+                                    if (!GUIDList.Contains(GUID))
+                                    {
+                                        GUIDList.Add(GUID);
+                                        recordsInserted++;
+                                        this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
                                     }
                                 }
                             }
                         }
-                        catch (Exception ex)
-                        {
-
-                            this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message + "RecordId: " + currentGUID + " FieldName: " + FieldName);
-                        }
                     }
+                }
                 //}
                 //catch (Exception ex)
                 //{
@@ -1019,16 +1286,11 @@ namespace Epi.Enter.Forms
                 //{
                 //}
                 //this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");                
-                }
             }
-          //  var tempClient = this.client;
-            var ServiceVersion = config.Settings.WebServiceEndpointAddress.ToLowerInvariant();
-            if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev3)))
+            // }
+            if (GUIDList.Count > 0)
             {
-                if (GUIDList.Count > 0)
-                {
-                    UpdateRecordStatus(GUIDList);
-                }
+                UpdateRecordStatus(GUIDList);
             }
         }
 
@@ -1036,6 +1298,7 @@ namespace Epi.Enter.Forms
             {
                 Epi.SurveyManagerServiceV3.SurveyAnswerRequest Request = new Epi.SurveyManagerServiceV3.SurveyAnswerRequest();
                 List<Epi.SurveyManagerServiceV3.SurveyAnswerDTO> DTOList = new List<Epi.SurveyManagerServiceV3.SurveyAnswerDTO>();
+            
             foreach (var Id in GUIDList)
                 {
 
@@ -1045,7 +1308,8 @@ namespace Epi.Enter.Forms
                 DTO.Status = 4;
                 DTOList.Add(DTO);
                 }
-            Request.SurveyAnswerList = DTOList;
+             
+            Request.SurveyAnswerList = DTOList.ToArray(); ;
             var MyClient = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
             MyClient.UpdateRecordStatus(Request);
            // client.UpdateRecordStatus(Request);
@@ -1424,8 +1688,8 @@ namespace Epi.Enter.Forms
             Request.Criteria.ReturnSizeInfoOnly = ReturnSizeInfoOnly;
             Request.Criteria.StatusId = SurveyStatus;
             Request.Criteria.IsDraftMode = this.IsDraftMode;
-            Request.Criteria.SurveyAnswerIdList = new List<string>();
-            Request.SurveyAnswerList = new List<SurveyManagerServiceV3.SurveyAnswerDTO>();
+            Request.Criteria.SurveyAnswerIdList = new List<string>().ToArray();
+            Request.SurveyAnswerList = new List<SurveyManagerServiceV3.SurveyAnswerDTO>().ToArray();
 
 
             return Request;
@@ -1498,12 +1762,30 @@ namespace Epi.Enter.Forms
                                             destinationGUIDList.Add(destReader[0].ToString().ToUpperInvariant());
                                         }
 
+                                        //wfList = ParseXML(Result);
+
+                                        //ProcessBaseTable(wfList, destinationView, destinationGUIDList);
+                                        //ProcessPages(wfList, destinationView, destinationGUIDList);
+                                        ////ProcessGridFields(sourceView, destinationView);
+                                        ////ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+                                        foreach (View v in destinationView.GetDescendantViews())
+                                        {
+                                            selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + v.TableName + "]");
+                                            destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
+                                            while (destReader.Read())
+                                            {
+                                                destinationGUIDList.Add(destReader[0].ToString());
+                                            }
+                                        }
                                         wfList = ParseXML(Result);
 
                                         ProcessBaseTable(wfList, destinationView, destinationGUIDList);
                                         ProcessPages(wfList, destinationView, destinationGUIDList);
-                                        //ProcessGridFields(sourceView, destinationView);
-                                        //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+
+
+
+
+
                                     }
                                     catch (Exception ex)
                                     {
@@ -1535,14 +1817,30 @@ namespace Epi.Enter.Forms
                                            destinationGUIDList.Add(destReader[0].ToString().ToUpperInvariant());
                                        }
 
-                                       wfList = ParseXMLV2(Result);
+                                        //wfList = ParseXMLV2(Result);
 
-                                       ProcessBaseTable(wfList, destinationView, destinationGUIDList);
-                                       ProcessPages(wfList, destinationView, destinationGUIDList);
-                                       //ProcessGridFields(sourceView, destinationView);
-                                       //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
-                                   }
-                                   catch (Exception ex)
+                                        //ProcessBaseTable(wfList, destinationView, destinationGUIDList);
+                                        //ProcessPages(wfList, destinationView, destinationGUIDList);
+                                        ////ProcessGridFields(sourceView, destinationView);
+                                        ////ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+                                        foreach (View v in destinationView.GetDescendantViews())
+                                        {
+                                            selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + v.TableName + "]");
+                                            destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
+                                            while (destReader.Read())
+                                            {
+                                                destinationGUIDList.Add(destReader[0].ToString());
+                                            }
+                                        }
+                                        wfList = ParseXMLV2(Result);
+
+                                        ProcessBaseTable(wfList, destinationView, destinationGUIDList);
+                                        ProcessPages(wfList, destinationView, destinationGUIDList);
+
+
+
+                                    }
+                                    catch (Exception ex)
                                    {
                                        this.BeginInvoke(new SetStatusDelegate(AddErrorStatusMessage), ex.Message);
                                        e.Result = ex;
@@ -1572,12 +1870,29 @@ namespace Epi.Enter.Forms
                                             destinationGUIDList.Add(destReader[0].ToString().ToUpperInvariant());
                                         }
 
+                                        //wfList = ParseXMLV3(Result);
+
+                                        //ProcessBaseTable(wfList, destinationView, destinationGUIDList);
+                                        //ProcessPages(wfList, destinationView, destinationGUIDList);
+                                        ////ProcessGridFields(sourceView, destinationView);
+                                        ////ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+                                      foreach (View v in destinationView.GetDescendantViews())    
+                                           // foreach (View v in destinationView.GetProject().views)    
+                                            {
+                                            selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + v.TableName + "]");
+                                            destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
+                                            while (destReader.Read())
+                                            {
+                                                destinationGUIDList.Add(destReader[0].ToString());
+                                            }
+                                        }
                                         wfList = ParseXMLV3(Result);
 
                                         ProcessBaseTable(wfList, destinationView, destinationGUIDList);
                                         ProcessPages(wfList, destinationView, destinationGUIDList);
-                                        //ProcessGridFields(sourceView, destinationView);
-                                        //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
+
+
+
                                     }
                                     catch (Exception ex)
                                     {

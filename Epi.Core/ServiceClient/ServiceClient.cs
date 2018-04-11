@@ -605,11 +605,11 @@ namespace Epi.Core.ServiceClient
         {
             try
             {
-                SurveyManagerServiceV2.ManagerServiceV2Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV2();
+                SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
                 Configuration config = Configuration.GetNewInstance();
 
-                SurveyManagerServiceV2.SurveyInfoRequest request = new SurveyManagerServiceV2.SurveyInfoRequest();
-                request.Criteria = new SurveyManagerServiceV2.SurveyInfoCriteria();
+                Epi.SurveyManagerServiceV3.SurveyInfoRequest request = new Epi.SurveyManagerServiceV3.SurveyInfoRequest();
+                request.Criteria = new SurveyManagerServiceV3.SurveyInfoCriteria();
                 //tbOrgKey
                 if (!string.IsNullOrEmpty(pOrganizationKey))
                 {

@@ -3087,9 +3087,24 @@ namespace Epi.Windows.MakeView.Forms
 
             try
             {
+                //if (view.Project.CollectedData.TableExists(view.TableName) == false)//checking if no table is created in Epi7
+                //{
+                //    CreateViewDataTable(view);
+                //}
                 if (view.Project.CollectedData.TableExists(view.TableName) == false)//checking if no table is created in Epi7
                 {
                     CreateViewDataTable(view);
+                }
+                else  //checking if any Relate forms are added during republish
+                {
+                    foreach (View v in view.GetDescendantViews())
+                    {
+                        if (!this.mediator.Project.CollectedData.TableExists(v.TableName))
+                        {
+                            view.SetTableName(v.Name);
+                            this.mediator.Project.CollectedData.CreateDataTableForView(v, 1);
+                        }
+                    }
                 }
 
                 if (config.Settings.Republish_IsRepbulishable == true)

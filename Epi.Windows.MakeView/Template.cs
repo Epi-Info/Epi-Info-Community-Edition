@@ -365,17 +365,30 @@ namespace Epi.Windows.MakeView
             }
         public string CreateWebSurveyTemplate()
         {
+            //StringWriter sw = new StringWriter();
+
+            //XmlWriter writer = XmlWriter.Create(sw); //CreateWriter(nameWithSubfolders, "Forms");
+            //writer.WriteStartDocument();
+            //writer.WriteStartElement("Template");
+            //writer.WriteAttributeString("Level", "View");
+            //writer.WriteStartElement("Project");
+            //CreateViewTemplate("web", writer);
+            //writer.WriteEndElement();
+            //AddCodeTableTemplates(writer);
+            //writer.WriteEndElement();
+            //writer.Close();
+            //return sw.ToString();
             StringWriter sw = new StringWriter();
 
-            XmlWriter writer = XmlWriter.Create(sw); //CreateWriter(nameWithSubfolders, "Forms");
+            XmlWriter writer = XmlWriter.Create(sw);
             writer.WriteStartDocument();
-            writer.WriteStartElement("Template");
-            writer.WriteAttributeString("Level", "View");
-            writer.WriteStartElement("Project");
-            CreateViewTemplate("web", writer);
-            writer.WriteEndElement();
+            //writer.WriteStartElement("Template");
+            //writer.WriteAttributeString("Level", "View");
+            //writer.WriteStartElement("Project");
+            CreateProjectTemplate("web", "dis", writer);
+            // writer.WriteEndElement();
             AddCodeTableTemplates(writer);
-            writer.WriteEndElement();
+            // writer.WriteEndElement();
             writer.Close();
             return sw.ToString();
         }
