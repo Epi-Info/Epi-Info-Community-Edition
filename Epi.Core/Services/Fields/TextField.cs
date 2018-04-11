@@ -68,6 +68,7 @@ namespace Epi.Fields
         {
             (field as TextField).maxLength = this.MaxLength;
             (field as TextField).sourceFieldId = this.sourceFieldId;
+            (field as TextField).isEncrypted = this.IsEncrypted;
             base.AssignMembers(field);
         }
 

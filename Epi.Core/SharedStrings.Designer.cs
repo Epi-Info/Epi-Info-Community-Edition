@@ -6181,6 +6181,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please make sure the table for this form exists..
+        /// </summary>
+        public static string MAKE_SURE_TABLE_EXISTS {
+            get {
+                return ResourceManager.GetString("MAKE_SURE_TABLE_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Form Designer.
         /// </summary>
         public static string MAKE_VIEW {
@@ -7347,6 +7356,15 @@ namespace Epi {
         public static string PRINT {
             get {
                 return ResourceManager.GetString("PRINT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was a problem loading the form.
+        /// </summary>
+        public static string PROBLEM_LOADING_FORM {
+            get {
+                return ResourceManager.GetString("PROBLEM_LOADING_FORM", resourceCulture);
             }
         }
         

@@ -952,6 +952,9 @@ ErrorHandler:
             columnNames.Add(psuVar)
             psu = New CSField()
             psu.FieldLabel = psuVar
+            If confidenceLevel = 0 Then
+                confidenceLevel = 0.95
+            End If
         End If
 
         columnNamesArray = columnNames.ToArray()

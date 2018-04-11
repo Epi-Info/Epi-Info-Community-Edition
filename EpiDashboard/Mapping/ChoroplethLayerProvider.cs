@@ -719,10 +719,14 @@ namespace EpiDashboard.Mapping
 
             thematicItem.RowCount = loadedData.Rows.Count;
 
+            string filterExpression = "";
+
             for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
             {
                 Graphic graphicFeature = graphicsLayer.Graphics[i];
 
+                if(graphicFeature.Symbol is TextSymbol) { continue; }
+                
                 string shapeValue = string.Empty;
 
                 shapeValue = GetShapeValue(graphicFeature, shapeValue);
@@ -734,7 +738,7 @@ namespace EpiDashboard.Mapping
 
                 usedShapeValues.Add(shapeValue);
 
-                string filterExpression = "";
+                filterExpression = "";
 
                 if (_dataKey.Contains(" ") || _dataKey.Contains("$") || _dataKey.Contains("#"))
                 {
@@ -813,7 +817,9 @@ namespace EpiDashboard.Mapping
             if(valueList.Count == 0)
             {
                 //MessageBox.Show(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
-                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount));
+                throw new System.ArgumentException(string.Format(DashboardSharedStrings.GADGET_MAP_NOT_ENOUGH_VALUES_TO_GENERATE_N_CLASSES, classCount) 
+                    + Environment.NewLine + Environment.NewLine
+                    + "[" + filterExpression + "]?");
             }
 
             valueList.Sort(); 
@@ -862,6 +868,8 @@ namespace EpiDashboard.Mapping
                 {
                     PopulateRangeValues();
                 }
+
+                GraphicCollection textGraphics = new GraphicCollection();
 
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
@@ -918,10 +926,26 @@ namespace EpiDashboard.Mapping
                             symbol.Fill = fill;
                             symbol.BorderBrush = new SolidColorBrush(Colors.Black);
                             symbol.BorderThickness = 1;
-
+                            
                             graphicFeature.Symbol = symbol;
                         }
 
+                        TextSymbol textSymbol = new TextSymbol();
+                        double xmin = graphicFeature.Geometry.Extent.XMin;
+                        double xmax = graphicFeature.Geometry.Extent.XMax;
+                        double ymin = graphicFeature.Geometry.Extent.YMin;
+                        double ymax = graphicFeature.Geometry.Extent.YMax;
+                        double xmid = (xmin + xmax) / 2.0;
+                        double ymid = (ymin + ymax) / 2.0;
+                        textSymbol.Foreground = new SolidColorBrush(Colors.Black);
+                        textSymbol.FontSize = 11;
+                        textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
+                        textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
+                        MapPoint mapPoint = new MapPoint(xmid, ymid, new SpatialReference(4326));
+                        Graphic graphic = new Graphic() { Geometry = mapPoint, Symbol = textSymbol };
+
+                        textGraphics.Add(graphic);
+                        
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;
 
@@ -954,6 +978,8 @@ namespace EpiDashboard.Mapping
                         }
                     }
 
+                    graphicsLayer.Graphics.AddRange(textGraphics);
+                                                            
                     if (graphicsLayer is FeatureLayer)
                     {
                         ClassBreaksRenderer renderer = new ClassBreaksRenderer();
@@ -969,7 +995,7 @@ namespace EpiDashboard.Mapping
                             BorderThickness = 1
                         };
 
-                        for(int i = 0;  i < _thematicItem.RangeStarts.Count; i++)
+                        for (int i = 0; i < _thematicItem.RangeStarts.Count; i++)
                         {
                             ClassBreakInfo classBreakInfo = new ClassBreakInfo();
                             classBreakInfo.MinimumValue = double.Parse(RangeValues[i, 0]);

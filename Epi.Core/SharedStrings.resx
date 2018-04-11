@@ -3263,4 +3263,10 @@ GlobalRecordId = [FKEY]</value>
   <data name="UNLINK_PRE" xml:space="preserve">
     <value>You are about to unlink the following record number:</value>
   </data>
+  <data name="MAKE_SURE_TABLE_EXISTS" xml:space="preserve">
+    <value>Please make sure the table for this form exists.</value>
+  </data>
+  <data name="PROBLEM_LOADING_FORM" xml:space="preserve">
+    <value>There was a problem loading the form</value>
+  </data>
 </root>

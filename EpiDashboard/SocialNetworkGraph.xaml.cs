@@ -193,11 +193,15 @@ namespace EpiDashboard
             string uniqueKeys = "";
             string parens = "";
             string joins = "";
+
             foreach (Epi.View epiView in view.Project.Views)
             {
-                uniqueKeys += "t" + epiView.Id + ".UniqueKey as Key" + epiView.Id + ", ";
-                parens += "(";
-                joins += "left outer join " + epiView.TableName + " t" + epiView.Id + " on m.ToRecordGuid = t" + epiView.Id + ".GlobalRecordId) ";
+                if (!string.IsNullOrEmpty(epiView.TableName) && db.TableExists(epiView.TableName))
+                {
+                    uniqueKeys += "t" + epiView.Id + ".UniqueKey as Key" + epiView.Id + ", ";
+                    parens += "(";
+                    joins += "left outer join " + epiView.TableName + " t" + epiView.Id + " on m.ToRecordGuid = t" + epiView.Id + ".GlobalRecordId) ";
+                }
             }
             uniqueKeys = uniqueKeys.Substring(0, uniqueKeys.Length - 2) + " ";
 
@@ -213,9 +217,12 @@ namespace EpiDashboard
             string joins = "";
             foreach (Epi.View epiView in view.Project.Views)
             {
-                uniqueKeys += "t" + epiView.Id + ".UniqueKey as Key" + epiView.Id + ", ";
-                parens += "(";
-                joins += "left outer join " + epiView.TableName + " t" + epiView.Id + " on m.FromRecordGuid = t" + epiView.Id + ".GlobalRecordId) ";
+                if (!string.IsNullOrEmpty(epiView.TableName) && db.TableExists(epiView.TableName))
+                {
+                    uniqueKeys += "t" + epiView.Id + ".UniqueKey as Key" + epiView.Id + ", ";
+                    parens += "(";
+                    joins += "left outer join " + epiView.TableName + " t" + epiView.Id + " on m.FromRecordGuid = t" + epiView.Id + ".GlobalRecordId) ";
+                }
             }
             uniqueKeys = uniqueKeys.Substring(0, uniqueKeys.Length - 2) + " ";
 

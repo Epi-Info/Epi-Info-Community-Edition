@@ -1080,7 +1080,7 @@ namespace Epi.Data.Services
                     "P.[Name] AS PageName, P.[CheckCodeBefore] As PageBeforeCheckCode, P.[CheckCodeAfter] As PageAfterCheckCode, P.[Position], " +
                     "F.[ControlTopPositionPercentage], F.[ControlLeftPositionPercentage], F.[ControlHeightPercentage], F.[ControlWidthPercentage] , F.[ControlFontFamily], F.[ControlFontSize], F.[ControlFontStyle], F.[ControlScriptName], " +
                     "F.[PromptTopPositionPercentage], F.[PromptLeftPositionPercentage], F.[PromptText], F.[PromptFontFamily], F.[PromptFontSize], F.[PromptFontStyle], F.[ControlFontFamily], F.[ControlFontSize], F.[ControlFontStyle], F.[PromptScriptName], " +
-                    "F.[ShouldRepeatLast], F.[IsRequired], F.[IsReadOnly],  " +
+                    "F.[ShouldRepeatLast], F.[IsRequired], F.[IsReadOnly], F.[IsEncrypted],  " +
                     "F.[ShouldRetainImageSize], F.[Pattern], F.[MaxLength], F.[ShowTextOnRight], " +
                     "F.[Lower], F.[Upper], F.[RelateCondition], F.[ShouldReturnToParent], F.[RelatedViewId], F.[List]," +
                     "F.[SourceTableName], F.[CodeColumnName], F.[TextColumnName],  F.[BackgroundColor], " +
@@ -1143,7 +1143,17 @@ namespace Epi.Data.Services
             try
             {
                 string queryString =
-                    "select * from metaFields F where F.[ViewId] = @viewId " +
+                    "select F.[FieldId], F.[UniqueId], F.[Name] As Name, F.[PageId], F.[ViewId], F.[FieldTypeId], F.[CheckCodeAfter] As ControlAfterCheckCode, F.[CheckCodeBefore] As ControlBeforeCheckCode,  " +
+                    "F.[ControlTopPositionPercentage], F.[ControlLeftPositionPercentage], F.[ControlHeightPercentage], F.[ControlWidthPercentage], " +
+                    "F.[ControlFontFamily] As ControlFontFamily, F.[ControlFontSize] As ControlFontSize, F.[ControlFontStyle] As ControlFontStyle, F.[ControlScriptName], " +
+                    "F.[PromptTopPositionPercentage], F.[PromptLeftPositionPercentage], F.[PromptText], F.[PromptFontFamily], F.[PromptFontSize], F.[PromptFontStyle], F.[ControlFontFamily], F.[ControlFontSize], F.[ControlFontStyle], F.[PromptScriptName], " +
+                    "F.[ShouldRepeatLast], F.[IsRequired], F.[IsReadOnly], F.[IsEncrypted], " +
+                    "F.[ShouldRetainImageSize], F.[Pattern], F.[MaxLength], F.[ShowTextOnRight], " +
+                    "F.[Lower], F.[Upper], F.[RelateCondition], F.[ShouldReturnToParent], F.[RelatedViewId], " +
+                    "F.[SourceTableName], F.[CodeColumnName], F.[TextColumnName], " +
+                    "F.[List], F.[BackgroundColor], " +
+                    "F.[Sort], F.[IsExclusiveTable], F.[TabIndex], F.[HasTabStop],F.[SourceFieldId], F.[DataTableName] " +
+                    "from metaFields F where F.[ViewId] = @viewId " +
                     "order by F.[ControlTopPositionPercentage], F.[ControlLeftPositionPercentage]";
 
                 Query query = db.CreateQuery(queryString);
@@ -3917,8 +3927,8 @@ namespace Epi.Data.Services
                 }
                 #endregion
 
-                Query insertQuery = db.CreateQuery("insert into metaFields([DataTableName], [ViewId], [UniqueId], [CheckCodeAfter], [CheckCodeBefore], [ControlFontFamily], [ControlFontStyle], [ControlFontSize], [ControlHeightPercentage], [ControlLeftPositionPercentage], [ControlTopPositionPercentage], [ControlWidthPercentage], [FieldTypeId], [HasTabStop], [IsReadOnly], [IsRequired], [MaxLength], [Name], [PageId], [PromptFontFamily], [PromptFontStyle], [PromptFontSize], [PromptLeftPositionPercentage], [PromptText], [PromptTopPositionPercentage], [ShouldRepeatLast], [TabIndex]) " +
-                    "values (@DataTableName, @ViewId, @UniqueId, @CheckCodeAfter, @CheckCodeBefore, @ControlFontFamily, @ControlFontStyle, @ControlFontSize, @ControlHeightPercentage, @ControlLeftPositionPercentage, @ControlTopPositionPercentage, @ControlWidthPercentage, @FieldTypeId, @HasTabStop, @IsReadOnly, @IsRequired, @MaxLength, @Name, @PageId, @PromptFontFamily, @PromptFontStyle, @PromptFontSize, @PromptLeftPositionPercentage, @PromptText, @PromptTopPositionPercentage, @ShouldRepeatLast, @TabIndex)");
+                Query insertQuery = db.CreateQuery("insert into metaFields([DataTableName], [ViewId], [UniqueId], [CheckCodeAfter], [CheckCodeBefore], [ControlFontFamily], [ControlFontStyle], [ControlFontSize], [ControlHeightPercentage], [ControlLeftPositionPercentage], [ControlTopPositionPercentage], [ControlWidthPercentage], [FieldTypeId], [HasTabStop], [IsReadOnly], [IsRequired], [IsEncrypted], [MaxLength], [Name], [PageId], [PromptFontFamily], [PromptFontStyle], [PromptFontSize], [PromptLeftPositionPercentage], [PromptText], [PromptTopPositionPercentage], [ShouldRepeatLast], [TabIndex]) " +
+                    "values (@DataTableName, @ViewId, @UniqueId, @CheckCodeAfter, @CheckCodeBefore, @ControlFontFamily, @ControlFontStyle, @ControlFontSize, @ControlHeightPercentage, @ControlLeftPositionPercentage, @ControlTopPositionPercentage, @ControlWidthPercentage, @FieldTypeId, @HasTabStop, @IsReadOnly, @IsRequired, @IsEncrypted, @MaxLength, @Name, @PageId, @PromptFontFamily, @PromptFontStyle, @PromptFontSize, @PromptLeftPositionPercentage, @PromptText, @PromptTopPositionPercentage, @ShouldRepeatLast, @TabIndex)");
 
                 insertQuery.Parameters.Add(new QueryParameter("@DataTableName", DbType.String, field.TableName));
                 insertQuery.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, field.GetView().Id));
@@ -3945,6 +3955,7 @@ namespace Epi.Data.Services
                 insertQuery.Parameters.Add(new QueryParameter("@HasTabStop", DbType.Boolean, field.HasTabStop));
                 insertQuery.Parameters.Add(new QueryParameter("@IsReadOnly", DbType.Boolean, field.IsReadOnly));
                 insertQuery.Parameters.Add(new QueryParameter("@IsRequired", DbType.Boolean, field.IsRequired));
+                insertQuery.Parameters.Add(new QueryParameter("@IsEncrypted", DbType.Boolean, field.IsEncrypted));
                 insertQuery.Parameters.Add(new QueryParameter("@MaxLength", DbType.Int16, field.MaxLength));
                 insertQuery.Parameters.Add(new QueryParameter("@Name", DbType.String, field.Name));
                 insertQuery.Parameters.Add(new QueryParameter("@PageId", DbType.Int32, field.Page.Id));
@@ -9107,6 +9118,11 @@ namespace Epi.Data.Services
                 {
                     TableColumn tableEWEFormIdColumn = new TableColumn(ColumnNames.EWEForm_ID, GenericDbColumnType.StringLong, true);
                     db.AddColumn("metaViews", tableEWEFormIdColumn);
+                }
+                if (db.ColumnExists("metaFields", ColumnNames.IS_ENCRYPTED) == false)
+                {
+                    TableColumn isEncryptedColumm = new TableColumn(ColumnNames.IS_ENCRYPTED, GenericDbColumnType.Boolean, false);
+                    db.AddColumn("metaFields", isEncryptedColumm);
                 }
             }
             catch (Exception ex)

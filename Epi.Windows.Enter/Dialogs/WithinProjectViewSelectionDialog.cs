@@ -85,12 +85,17 @@ namespace Epi.Enter.Dialogs
 		/// <param name="e">.NET supplied event parameters</param>
 		private void btnOK_Click(object sender, System.EventArgs e)
 		{
+            btnOK_Click();
+		}
+
+        private void btnOK_Click()
+        {
             string viewName = lbxViews.SelectedValue.ToString();
-            View view = CurrentProject.Metadata.GetViewByFullName(":" + viewName );
+            View view = CurrentProject.Metadata.GetViewByFullName(":" + viewName);
             ViewId = view.Id;
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
-		}
+        }
 
 		#endregion
 
@@ -144,6 +149,9 @@ namespace Epi.Enter.Dialogs
             btnOk.Focus();
         }
 
-
+        private void LbxViews_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            btnOK_Click();
+        }
     }
 }

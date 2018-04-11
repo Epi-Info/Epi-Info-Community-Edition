@@ -1934,6 +1934,11 @@ namespace Epi.Windows.MakeView
                     ((InputFieldWithSeparatePrompt)field).ShouldRepeatLast = (bool)row["ShouldRepeatLast"];
                     ((InputFieldWithSeparatePrompt)field).IsRequired = (bool)row["IsRequired"];
                     ((InputFieldWithSeparatePrompt)field).IsReadOnly = (bool)row["IsReadOnly"];
+
+                    if (field is TextField && row.Table.Columns.Contains("IsEncrypted") && row["IsEncrypted"] != DBNull.Value )
+                    {
+                        ((TextField)field).IsEncrypted = (bool)row["IsEncrypted"];
+                    }
                 }
 
                 if (field is GridField)
