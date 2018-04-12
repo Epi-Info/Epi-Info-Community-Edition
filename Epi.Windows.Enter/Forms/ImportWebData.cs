@@ -999,7 +999,7 @@ namespace Epi.Enter.Forms
             {
                 if (SurveyStatus == 0)
                 {
-                    if ((surveyAnswer.IsDraftMode == IsDraftMode))
+                    if ((surveyAnswer.IsDraftMode == IsDraftMode) && surveyAnswer.ResponseHierarchyIds != null)
                     {
                         // AddSurveyAnswerResult(result, surveyAnswer);
                         foreach (var item in surveyAnswer.ResponseHierarchyIds)
@@ -1007,17 +1007,26 @@ namespace Epi.Enter.Forms
                             AddSurveyAnswerResultV3(result, item);
                         }
                     }
+                    else {
+                        AddSurveyAnswerResultV3(result, surveyAnswer);
+
+                    }
                 }
                 else
                 {
                     //     if ((surveyAnswer.IsDraftMode == IsDraftMode) && (surveyAnswer.Status == SurveyStatus))
-                    if ((surveyAnswer.IsDraftMode == IsDraftMode))
+                    if ((surveyAnswer.IsDraftMode == IsDraftMode) && surveyAnswer.ResponseHierarchyIds != null)
                     {
                         // AddSurveyAnswerResult(result, surveyAnswer);
                         foreach (var item in surveyAnswer.ResponseHierarchyIds)
                         {
                             AddSurveyAnswerResultV3(result, item);
                         }
+                    }
+                    else
+                    {
+                        AddSurveyAnswerResultV3(result, surveyAnswer);
+
                     }
                 }
             }
