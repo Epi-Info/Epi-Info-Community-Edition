@@ -543,7 +543,9 @@ namespace Epi.Windows.Enter
 
                     fieldRows = fields.Select("ViewId = " + toViewId);
 
+                    List<string> columnNames = db.GetTableColumnNames(collectedDataTableName);
                     fieldPrintList = fieldRows.Select(r => r.Field<string>(0)).ToList();
+                    fieldPrintList = fieldPrintList.Intersect(columnNames).ToList();
                     fieldPrintList.Add("GlobalRecordId");
 
                     var datatable = db.GetTableData(collectedDataTableName, fieldPrintList);
@@ -721,7 +723,9 @@ namespace Epi.Windows.Enter
 
                     fieldRows = fields.Select("ViewId = " + fromViewId);
 
+                    List<string> columnNames = db.GetTableColumnNames(collectedDataTableName);
                     fieldPrintList = fieldRows.Select(r => r.Field<string>(0)).ToList();
+                    fieldPrintList = fieldPrintList.Intersect(columnNames).ToList();
                     fieldPrintList.Add("GlobalRecordId");
 
                     var datatable = db.GetTableData(collectedDataTableName, fieldPrintList);
