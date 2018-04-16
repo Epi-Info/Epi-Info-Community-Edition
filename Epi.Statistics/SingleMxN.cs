@@ -417,7 +417,7 @@ namespace Epi.Statistics
                 }
                 obs = obs + fact[ico[mj]] - dd;
             }
-            double dro = f9xact(nro, ntot, iro, fact);
+            double dro = f9xact(nro, ntot, iro, 1, fact);
             prt = Math.Exp(obs - dro);
 
             // Initializa pointers
@@ -481,7 +481,6 @@ namespace Epi.Statistics
 
             //            bool goto150 = true;
             goto150:
-            int[] irnhatt = new int[nro];
             for (int i = 1; i <= nro; i++)
             { // Line 150
                 irn[i] = iro[i] - idif[i];
@@ -584,8 +583,8 @@ namespace Epi.Statistics
             // I think it does important things besides sorting an array
 
             // Some table values
-            double ddf = f9xact(nro, n, idif, fact);
-            double drn = f9xact(nro2, ntot, irn, fact) - dro + ddf;
+            double ddf = f9xact(nro, n, idif, 1, fact);
+            double drn = f9xact(nro2, ntot, irn, nrb, fact) - dro + ddf;
 
             // Get hash values
             int itp = 0;
@@ -762,7 +761,7 @@ namespace Epi.Statistics
             {
                 pre = pre + ifreq * Math.Exp(pastp + drn);
                 preops++;
-                if (preops % 106 == 0 || preops % 107 == 0)
+                if (preops == 106 || preops == 13)
                 {
                     bool checkpoint = true;
                 }
@@ -1903,7 +1902,7 @@ namespace Epi.Statistics
             return maxTableCell;
         }
 
-        private static double f9xact(int n, int mm, int[] ir, double[] fact)
+        private static double f9xact(int n, int mm, int[] ir, int iroffset, double[] fact)
         {
             //System.out.println("f9xact: mm = " + mm);
             double f9xact = fact[mm];
@@ -1912,7 +1911,7 @@ namespace Epi.Statistics
             //System.out.println("f9xact: ir[n-1] = " + ir[n-1]);
             for (int k = 1; k <= n; k++)
             {
-                f9xact = f9xact - fact[ir[k]];
+                f9xact = f9xact - fact[ir[k + iroffset - 1]];
             }
             return f9xact;
         }
