@@ -1260,12 +1260,12 @@ namespace Epi.Statistics
             int i = 1;
             int j = 1;
             int[][] irstk = new int[nrow + ncol + 1][];
-            for (i = 1; i <= nrow; i++)
+            for (i = 1; i <= nrow + ncol; i++)
             {
                 irstk[i] = new int[nrow + ncol + 1];
             }
             int[][] icstk = new int[nrow + ncol + 1][];
-            for (i = 1; i <= ncol; i++)
+            for (i = 1; i <= ncol + nrow; i++)
             {
                 icstk[i] = new int[nrow + ncol + 1];
             }
@@ -1304,11 +1304,11 @@ namespace Epi.Statistics
             // initialization before loop
             for (i = 1; i <= nrow; i++)
             {
-                irstk[i][1] = irow[nrow - i + 1 + irowoffset - 1];
+                irstk[1][i] = irow[nrow - i + 1 + irowoffset - 1];
             }
             for (j = 1; j <= ncol; j++)
             {
-                icstk[j][1] = icol[ncol - j + 1 + icoloffset - 1];
+                icstk[1][j] = icol[ncol - j + 1 + icoloffset - 1];
             }
 
             int nro = nrow;
@@ -1322,8 +1322,8 @@ namespace Epi.Statistics
             double amx = 0.0;
 
             goto50:
-            int ir1 = irstk[1][istk];
-            int ic1 = icstk[1][istk];
+            int ir1 = irstk[istk][1];
+            int ic1 = icstk[istk][1];
             int m = 0;
             int n = 0;
             int k = 0;
@@ -1380,8 +1380,8 @@ namespace Epi.Statistics
                 j = l;
             }
 
-            int irt = irstk[i][istk];
-            int ict = icstk[j][istk];
+            int irt = irstk[istk][i];
+            int ict = icstk[istk][j];
             mn = irt;
             if (mn > ict)
             {
@@ -1392,27 +1392,27 @@ namespace Epi.Statistics
             {
                 nro = nro - 1;
                 nco = nco - 1;
-                f11act(irstk[1], istk, i, nro, irstk[1], istk + 1);
-                f11act(icstk[1], istk, j, nco, icstk[1], istk + 1);
+                f11act(irstk[istk], 1, i, nro, irstk[istk + 1], 1);
+                f11act(icstk[istk], 1, j, nco, icstk[istk + 1], 1);
             }
             else if (irt >= ict)
             {
                 nco = nco - 1;
-                f11act(icstk[1], istk, j, nco, icstk[1], istk + 1);
-                f8xact(irstk[1], istk, irt - ict, i, nro, ref irstk[1], istk+1);
+                f11act(icstk[istk], 1, j, nco, icstk[istk + 1], 1);
+                f8xact(irstk[istk], 1, irt - ict, i, nro, ref irstk[istk + 1], 1);
             }
             else
             {
                 nro = nro - 1;
-                f11act(irstk[1], istk, i, nro, irstk[1], istk + 1);
-                f8xact(icstk[1], istk, ict - irt, j, nco, ref icstk[1], istk + 1);
+                f11act(irstk[istk], 1, i, nro, irstk[istk + 1], 1);
+                f8xact(icstk[istk], 1, ict - irt, j, nco, ref icstk[istk + 1], 1);
             }
 
             if (nro == 1)
             {
                 for (k = 1; k <= nco; k++)
                 {
-                    y = y + fact[icstk[k][istk + 1]];
+                    y = y + fact[icstk[istk + 1][k]];
                 }
                 goto goto90;
             }
@@ -1421,7 +1421,7 @@ namespace Epi.Statistics
             {
                 for (k = 1; k <= nro; k++)
                 {
-                    y = y + fact[irstk[k][istk + 1]];
+                    y = y + fact[irstk[istk + 1][k]];
                 }
                 goto goto90;
             }
@@ -1471,14 +1471,14 @@ namespace Epi.Statistics
             y = ystk[istk];
             if (n == 1)
             {
-                if (irstk[l][istk] < irstk[l - 1][istk])
+                if (irstk[istk][l] < irstk[istk][l - 1])
                 {
                     goto goto60;
                 }
             }
             else if (n == 2)
             {
-                if (icstk[l][istk] < icstk[l - 1][istk])
+                if (icstk[istk][l] < icstk[istk][l - 1])
                 {
                     goto goto60;
                 }
