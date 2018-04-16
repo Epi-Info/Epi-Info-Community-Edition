@@ -27,6 +27,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            // 
             // baseImageList
             // 
             this.baseImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("baseImageList.ImageStream")));
@@ -120,14 +124,13 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             // YesNoFieldDefinition
             // 
-            this.AcceptButton = this.btnOk;
             resources.ApplyResources(this, "$this");
-            this.CancelButton = this.btnCancel;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "YesNoFieldDefinition";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

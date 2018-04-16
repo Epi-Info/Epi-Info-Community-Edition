@@ -45,6 +45,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             resources.ApplyResources(this.chkRepeatLast, "chkRepeatLast");
             // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            // 
             // txtFieldName
             // 
             resources.ApplyResources(this.txtFieldName, "txtFieldName");
@@ -66,6 +70,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.groupBox1.Controls.Add(this.labelUpperRange);
             this.groupBox1.Controls.Add(this.upperDatePicker);
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.SetChildIndex(this.chkEncrypted, 0);
             this.groupBox1.Controls.SetChildIndex(this.upperDatePicker, 0);
             this.groupBox1.Controls.SetChildIndex(this.labelUpperRange, 0);
             this.groupBox1.Controls.SetChildIndex(this.lowerDatePicker, 0);
