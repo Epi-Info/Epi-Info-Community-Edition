@@ -50,6 +50,8 @@ namespace EpiDashboard.Controls.GadgetProperties
         private List<string> YesValues;
         private List<string> NoValues;
 
+        public System.Threading.Thread fisherThread { get; set; }
+
         #endregion
 
         public CrosstabProperties(
@@ -263,6 +265,14 @@ namespace EpiDashboard.Controls.GadgetProperties
         /// </summary> 
         protected override void CreateInputVariableList()
         {
+            // Stop the fisherThread if it is running
+            if (this.fisherThread != null)
+            {
+                if (this.fisherThread.IsAlive)
+                {
+                    this.fisherThread.Abort();
+                }
+            }
             // Set data filters!
             this.DataFilters = RowFilterControl.DataFilters;
 

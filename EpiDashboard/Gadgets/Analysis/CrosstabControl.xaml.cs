@@ -66,6 +66,7 @@ namespace EpiDashboard
         //private delegate void AddGridRowDelegate(string strataValue, int height);
         private delegate void FillPercentsDelegate(Grid grid);
         private delegate void AddChiSquareDelegate(double tableChiSq, double tableChiSqDf, double tableChiSqP, double tableFisherP, string disclaimer, string value);
+        private delegate void AddFisherDelegate(DataRow[] SortedRows, double tableFisherP, string value);
         //private delegate void DrawFrequencyBordersDelegate(string strataValue);  
         protected new delegate void SetGridTextDelegate(string strataValue, TextBlockConfig textBlockConfig, FontWeight fontWeight, double total);
 
@@ -1215,8 +1216,9 @@ namespace EpiDashboard
                             double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, false);
                             double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
                             double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
-//                            double fisherTestResult = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+//                            double /*fisherTe*/stResult = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
                             double fisherTestResult = 0.0;
+//                            fisherTestResult = Epi.Statistics.SingleMxN.FisherTest(SortedRows, false);
                             String disclaimer = "";
                             if (tableChiSq[1] == 5.0)
                                 disclaimer = "An expected cell value is <5. X" + '\u00B2' + " may not be valid.";
@@ -1224,6 +1226,9 @@ namespace EpiDashboard
                                 disclaimer = "An expected cell value is <1. X" + '\u00B2' + " may not be valid.";
 
                             this.Dispatcher.BeginInvoke(new AddChiSquareDelegate(RenderChiSquare), tableChiSq[0], tableChiSqDF, tableChiSqP, fisherTestResult, disclaimer, strataValue);
+                            //                            this.Dispatcher.BeginInvoke(new AddFisherDelegate(RenderFisherResults), SortedRows, tableChiSq[0], tableChiSqDF, tableChiSqP, fisherTestResult, disclaimer, strataValue);
+                            properties.fisherThread = new System.Threading.Thread(()=>ComputeFisherResults(SortedRows, fisherTestResult, strataValue));
+                            properties.fisherThread.Start();
                             this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, rowCount, totals);
                             this.Dispatcher.BeginInvoke(drawBorders, strataValue);
                         }
@@ -2326,7 +2331,7 @@ namespace EpiDashboard
             grid.Children.Add(txt6);
 
             // Commenting out Fisher's Exact rendering for now.
-/*
+
             grid.RowDefinitions.Add(new RowDefinition());
             TextBlock txt1b = new TextBlock();
             txt1b.Text = "Fisher's Exact";
@@ -2338,13 +2343,13 @@ namespace EpiDashboard
             grid.Children.Add(txt1b);
 
             TextBlock txt2b = new TextBlock();
-            txt2b.Text = tableFisherP.ToString("F4");
+            txt2b.Text = "computing...";
             txt2b.Margin = margin;
             txt2b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             Grid.SetRow(txt2b, 2);
             Grid.SetColumn(txt2b, 2);
             grid.Children.Add(txt2b);
-
+/*
             grid.RowDefinitions.Add(new RowDefinition());
             TextBlock txt4b = new TextBlock();
             txt4b.Text = "(Computed by R)";
@@ -2377,6 +2382,64 @@ namespace EpiDashboard
                     g.Children.Add(txt7);
                 }
             }
+        }
+        private void ComputeFisherResults(DataRow[] SortedRows, double tableFisherP, string value)
+        {
+            try
+            {
+                tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+            }
+            catch (Exception except)
+            {
+                tableFisherP = Epi.Statistics.SingleMxN.FisherTest(SortedRows, false);
+            }
+            this.Dispatcher.BeginInvoke(new AddFisherDelegate(RenderFisherResults), SortedRows, tableFisherP, value);
+        }
+
+        private void RenderFisherResults(DataRow[] SortedRows, double tableFisherP, string value)
+        {
+            //EI-146
+            if (!((CrosstabParameters)Parameters).DisplayChiSq)
+            {
+                return;
+            }
+
+            Grid grid = GetStrataChiSquareGrid(value);
+            grid.Visibility = System.Windows.Visibility.Visible;
+
+            Thickness margin = new Thickness(4);
+
+            // Commenting out Fisher's Exact rendering for now.
+
+            foreach (TextBlock text_b in grid.Children)
+            {
+                if (Grid.GetRow(text_b) == 2 && Grid.GetColumn(text_b) == 2)
+                {
+                    if (Double.IsNegativeInfinity(tableFisherP))
+                        text_b.Text = "Too many cells to compute.";
+                    else
+                        text_b.Text = tableFisherP.ToString("F4");
+                }
+            }
+/*
+            grid.RowDefinitions.Add(new RowDefinition());
+            TextBlock txt1b = new TextBlock();
+            txt1b.Text = "Fisher's Exact";
+            txt1b.FontWeight = FontWeights.Bold;
+            txt1b.Margin = margin;
+            txt1b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            Grid.SetRow(txt1b, 2);
+            Grid.SetColumn(txt1b, 0);
+            grid.Children.Add(txt1b);
+
+            TextBlock txt2b = new TextBlock();
+            txt2b.Text = tableFisherP.ToString("F4");
+            txt2b.Margin = margin;
+            txt2b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            Grid.SetRow(txt2b, 2);
+            Grid.SetColumn(txt2b, 2);
+            grid.Children.Add(txt2b);
+*/
         }
 
         private void RenderFrequencyFooter(string strataValue, int footerRowIndex, int[] totalRows)
