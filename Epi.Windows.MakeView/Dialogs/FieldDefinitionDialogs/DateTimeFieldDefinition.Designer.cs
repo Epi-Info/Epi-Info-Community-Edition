@@ -51,6 +51,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             resources.ApplyResources(this.chkRepeatLast, "chkRepeatLast");
             // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            // 
             // txtPrompt
             // 
             resources.ApplyResources(this.txtPrompt, "txtPrompt");
@@ -174,13 +178,9 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // DateTimeFieldDefinition
             // 
             resources.ApplyResources(this, "$this");
-            this.CancelButton = this.btnCancel;
             this.Name = "DateTimeFieldDefinition";
             this.groupBox1.ResumeLayout(false);
-
-            this.cbxPattern.Visible = false;
-            this.lblPattern.Visible = false;
-
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

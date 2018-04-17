@@ -35,7 +35,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // btnDataSource
             // 
             resources.ApplyResources(this.btnDataSource, "btnDataSource");
-            //this.btnDataSource.Click += new System.EventHandler(this.btnDataSource_Click);
+            // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
             // 
             // baseImageList
             // 

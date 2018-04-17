@@ -58,10 +58,13 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             resources.ApplyResources(this.chkRepeatLast, "chkRepeatLast");
             // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            // 
             // txtPrompt
             // 
             resources.ApplyResources(this.txtPrompt, "txtPrompt");
-            this.txtPrompt.Leave += new System.EventHandler(this.txtPrompt_Leave);
             // 
             // txtFieldName
             // 
@@ -80,6 +83,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.groupBox1.Controls.Add(this.lblSelectFields);
             this.groupBox1.Controls.Add(this.lbxLinkedFields);
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.SetChildIndex(this.chkEncrypted, 0);
             this.groupBox1.Controls.SetChildIndex(this.lbxLinkedFields, 0);
             this.groupBox1.Controls.SetChildIndex(this.lblSelectFields, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnDataSource, 0);

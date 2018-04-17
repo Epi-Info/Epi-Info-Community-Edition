@@ -31,6 +31,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             resources.ApplyResources(this.cbxPattern, "cbxPattern");
             // 
+            // lblPattern
+            // 
+            resources.ApplyResources(this.lblPattern, "lblPattern");
+            // 
             // chkReadOnly
             // 
             resources.ApplyResources(this.chkReadOnly, "chkReadOnly");
@@ -42,6 +46,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // chkRepeatLast
             // 
             resources.ApplyResources(this.chkRepeatLast, "chkRepeatLast");
+            // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
             // 
             // txtPrompt
             // 
@@ -153,15 +161,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             // TimeFieldDefinition
             // 
-            this.AcceptButton = this.btnOk;
             resources.ApplyResources(this, "$this");
-            this.CancelButton = this.btnCancel;
             this.Name = "TimeFieldDefinition";
             this.groupBox1.ResumeLayout(false);
-
-            this.cbxPattern.Visible = false;
-            this.lblPattern.Visible = false;
-
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

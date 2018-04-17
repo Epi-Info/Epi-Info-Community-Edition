@@ -37,13 +37,13 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            // 
             // txtFieldName
             // 
-            resources.ApplyResources(this.txtFieldName, "txtFieldName");
-            this.txtFieldName.TextChanged += new System.EventHandler(txtFieldName_TextChanged);
-            // 
-            // txtFieldName
-            // 
+            this.txtFieldName.TextChanged += new System.EventHandler(this.txtFieldName_TextChanged);
             this.txtFieldName.Leave += new System.EventHandler(this.txtFieldName_Leave);
             // 
             // btnCancel
@@ -60,6 +60,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.groupBox1.Controls.Add(this.txtDataSource);
             this.groupBox1.Controls.Add(this.btnDataSource);
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.SetChildIndex(this.chkEncrypted, 0);
             this.groupBox1.Controls.SetChildIndex(this.btnDataSource, 0);
             this.groupBox1.Controls.SetChildIndex(this.txtDataSource, 0);
             this.groupBox1.Controls.SetChildIndex(this.lblDataSource, 0);

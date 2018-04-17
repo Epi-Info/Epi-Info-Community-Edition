@@ -127,11 +127,11 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;chkReadOnly.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkRequired.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 42</value>
+    <value>8, 46</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="chkRequired.Visible" type="System.Boolean, mscorlib">
@@ -147,7 +147,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;chkRequired.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;chkRepeatLast.Name" xml:space="preserve">
     <value>chkRepeatLast</value>
@@ -159,7 +159,25 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;chkRepeatLast.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="chkEncrypted.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 46</value>
+  </data>
+  <data name="chkEncrypted.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;chkEncrypted.Name" xml:space="preserve">
+    <value>chkEncrypted</value>
+  </data>
+  <data name="&gt;&gt;chkEncrypted.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkEncrypted.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;chkEncrypted.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
@@ -214,7 +232,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 184</value>
+    <value>240, 220</value>
   </data>
   <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
     <value>btnCancel</value>
@@ -232,7 +250,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 184</value>
+    <value>152, 220</value>
   </data>
   <data name="&gt;&gt;btnOk.Name" xml:space="preserve">
     <value>btnOk</value>
@@ -247,7 +265,7 @@
     <value>2</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 51</value>
+    <value>304, 94</value>
   </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
@@ -271,10 +289,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;btnPromptFont.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btnFieldFont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 31</value>
+    <value>208, 45</value>
   </data>
   <data name="btnFieldFont.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -289,7 +307,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;btnFieldFont.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -299,7 +317,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABC
-        twAAAk1TRnQBSQFMAgEBVwEAAVkBAAE0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        twAAAk1TRnQBSQFMAgEBVwEAAVkBAAE8AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABNAEBAgABAQEAASAGAAE0AQH/ABkAAf8DAAH/AwAB/xcAAf8DAAH/AwAB/wMAAf8DAAH/IAAQ/xgA
         PP9PAAH/HwAB/wMAAf8DAAH/HAAI/wPAAf8DwAH/A8AB/wPACf8TAAH/A8AB/wPAAf8DwAH/A8AB/wPA
         Af8DwAH/A8AB/wPAAf8DwAH/A8AB/wPAAf8DwAH/A8AF/1MAAf8XAAH/AwAB/wMAAf8cAAOAAf8DwAH/
@@ -1120,7 +1138,7 @@
     <value>5, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>320, 216</value>
+    <value>320, 252</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -1138,6 +1156,6 @@
     <value>CheckBoxFieldDefinition</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs.TextFieldDefinition, MakeView, Version=7.1.5241.24745, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs.TextFieldDefinition, MakeView, Version=7.2.6680.17730, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
