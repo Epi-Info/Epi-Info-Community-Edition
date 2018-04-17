@@ -198,10 +198,10 @@ namespace Epi.Core.ServiceClient
                 {
                     System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                     binding.Name = "BasicHttpBinding";
-                    binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                    binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                    binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                    binding.OpenTimeout = new TimeSpan(0, 10, 0);
                     binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                    binding.SendTimeout = new TimeSpan(0, 1, 0);
+                    binding.SendTimeout = new TimeSpan(0, 10, 0);
                     binding.AllowCookies = false;
                     binding.BypassProxyOnLocal = false;
                     binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
@@ -252,10 +252,10 @@ namespace Epi.Core.ServiceClient
                     {
                         System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
                         binding.Name = "WSHttpBinding";
-                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                        binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                        binding.OpenTimeout = new TimeSpan(0, 10, 0);
                         binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                        binding.SendTimeout = new TimeSpan(0, 1, 0);
+                        binding.SendTimeout = new TimeSpan(0, 10, 0);
                         binding.BypassProxyOnLocal = false;
                         binding.TransactionFlow = false;
                         binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
@@ -294,10 +294,10 @@ namespace Epi.Core.ServiceClient
                     {
                         System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                         binding.Name = "BasicHttpBinding";
-                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                        binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                        binding.OpenTimeout = new TimeSpan(0, 10, 0);
                         binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                        binding.SendTimeout = new TimeSpan(0, 1, 0);
+                        binding.SendTimeout = new TimeSpan(0, 10, 0);
                         binding.AllowCookies = false;
                         binding.BypassProxyOnLocal = false;
                         binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
@@ -432,10 +432,10 @@ namespace Epi.Core.ServiceClient
                 {
                     System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                     binding.Name = "BasicHttpBinding";
-                    binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                    binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                    binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                    binding.OpenTimeout = new TimeSpan(0, 10, 0);
                     binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                    binding.SendTimeout = new TimeSpan(0, 1, 0);
+                    binding.SendTimeout = new TimeSpan(0, 10, 0);
                     binding.AllowCookies = false;
                     binding.BypassProxyOnLocal = false;
                     binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
@@ -488,10 +488,10 @@ namespace Epi.Core.ServiceClient
                     {
                         System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
                         binding.Name = "WSHttpBinding";
-                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                        binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                        binding.OpenTimeout = new TimeSpan(0, 10, 0);
                         binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                        binding.SendTimeout = new TimeSpan(0, 1, 0);
+                        binding.SendTimeout = new TimeSpan(0, 10, 0);
                         binding.BypassProxyOnLocal = false;
                         binding.TransactionFlow = false;
                         binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
@@ -529,10 +529,10 @@ namespace Epi.Core.ServiceClient
                     {
                         System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                         binding.Name = "BasicHttpBinding";
-                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                        binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                        binding.OpenTimeout = new TimeSpan(0, 10, 0);
                         binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                        binding.SendTimeout = new TimeSpan(0, 1, 0);
+                        binding.SendTimeout = new TimeSpan(0, 10, 0);
                         binding.AllowCookies = false;
                         binding.BypassProxyOnLocal = false;
                         binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
@@ -652,10 +652,10 @@ namespace Epi.Core.ServiceClient
                 {
                     System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                     binding.Name = "BasicHttpBinding";
-                    binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                    binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                    binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                    binding.OpenTimeout = new TimeSpan(0, 10, 0);
                     binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                    binding.SendTimeout = new TimeSpan(0, 1, 0);
+                    binding.SendTimeout = new TimeSpan(0, 10, 0);
                     binding.AllowCookies = false;
                     binding.BypassProxyOnLocal = false;
                     binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
@@ -708,10 +708,10 @@ namespace Epi.Core.ServiceClient
                     {
                         System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
                         binding.Name = "WSHttpBinding";
-                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                        binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                        binding.OpenTimeout = new TimeSpan(0, 10, 0);
                         binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                        binding.SendTimeout = new TimeSpan(0, 1, 0);
+                        binding.SendTimeout = new TimeSpan(0, 10, 0);
                         binding.BypassProxyOnLocal = false;
                         binding.TransactionFlow = false;
                         binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
@@ -748,10 +748,10 @@ namespace Epi.Core.ServiceClient
                     {
                         System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                         binding.Name = "BasicHttpBinding";
-                        binding.CloseTimeout = new TimeSpan(0, 1, 0);
-                        binding.OpenTimeout = new TimeSpan(0, 1, 0);
+                        binding.CloseTimeout = new TimeSpan(0, 10, 0);
+                        binding.OpenTimeout = new TimeSpan(0, 10, 0);
                         binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-                        binding.SendTimeout = new TimeSpan(0, 1, 0);
+                        binding.SendTimeout = new TimeSpan(0, 10, 0);
                         binding.AllowCookies = false;
                         binding.BypassProxyOnLocal = false;
                         binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
