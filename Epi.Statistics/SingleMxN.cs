@@ -633,6 +633,8 @@ namespace Epi.Statistics
                         goto goto240;
                     }
                 }
+//                pre = Double.NaN;
+//                return;
             }
 
             goto240:
@@ -1201,55 +1203,6 @@ namespace Epi.Statistics
             }
 
             dlp = dlp - vmn;
-        }
-
-        static class gotos
-        {
-            public static void goto90(ref int nrow, ref int[] irow, ref int ncol, ref int[] icol, ref double dlp, ref int mm,
-                            ref double[] fact, ref int[] ico, ref int[] iro, ref int[] it, ref int[] lb, ref int[] nr,
-                            ref int[] nt, ref int[] nu, ref int[] itc, ref int[] ist, ref double[] stv, ref double[] alen,
-                            ref double tol, ref bool xmin, ref int nro, ref int nco, ref int irl, ref double val, ref double vmn)
-            {
-                xmin = false;
-                if (iro[nro-1] <= iro[irl-1]+nco)
-                {
-                    f10act(nro, iro, 1, nco, ico, 1, ref val, ref xmin, fact, lb, nu, nr);
-                }
-                if (!xmin)
-                {
-                    if (ico[nco-1] <= ico[0]+nro)
-                    {
-                        f10act(nco, ico, 1, nro, iro, 1, ref val, ref xmin, fact, lb, nu, nr);
-                    }
-                }
-                if (xmin)
-                {
-                    if (val < vmn)
-                    {
-                        vmn = val;
-                    }
-                    goto200(ref nrow, ref irow, ref ncol, ref icol, ref dlp, ref mm,
-                            ref fact, ref ico, ref iro, ref it, ref lb, ref nr,
-                            ref nt, ref nu, ref itc, ref ist, ref stv, ref alen,
-                            ref tol, ref xmin, ref nro, ref nco, ref irl, ref val, ref vmn);
-                }
-                goto100(ref nrow, ref irow, ref ncol, ref icol, ref dlp, ref mm,
-                        ref fact, ref ico, ref iro, ref it, ref lb, ref nr,
-                        ref nt, ref nu, ref itc, ref ist, ref stv, ref alen,
-                        ref tol, ref xmin, ref nro, ref nco, ref irl, ref val, ref vmn);
-            }
-            public static void goto100(ref int nrow, ref int[] irow, ref int ncol, ref int[] icol, ref double dlp, ref int mm,
-                            ref double[] fact, ref int[] ico, ref int[] iro, ref int[] it, ref int[] lb, ref int[] nr,
-                            ref int[] nt, ref int[] nu, ref int[] itc, ref int[] ist, ref double[] stv, ref double[] alen,
-                            ref double tol, ref bool xmin, ref int nro, ref int nco, ref int irl, ref double val, ref double vmn)
-            {
-            }
-            public static void goto200(ref int nrow, ref int[] irow, ref int ncol, ref int[] icol, ref double dlp, ref int mm,
-                            ref double[] fact, ref int[] ico, ref int[] iro, ref int[] it, ref int[] lb, ref int[] nr,
-                            ref int[] nt, ref int[] nu, ref int[] itc, ref int[] ist, ref double[] stv, ref double[] alen,
-                            ref double tol, ref bool xmin, ref int nro, ref int nco, ref int irl, ref double val, ref double vmn)
-            {
-            }
         }
 
         private static void f4xact(int nrow, int[] irow, int irowoffset, int ncol, int[] icol, int icoloffset, ref double dsp,
@@ -2302,8 +2255,8 @@ namespace Epi.Statistics
         public static double CalcFisher(System.Data.DataRow[] SortedRows, Boolean classic)
         {
             double fortranPRE = FEXACT(SortedRows);
-//            return fortranPRE;
-
+            return fortranPRE;
+/*
             REngine engine = REngine.GetInstance();
             StringBuilder strb = new StringBuilder();
             strb.Append("c(");
@@ -2323,7 +2276,7 @@ namespace Epi.Statistics
                 "fisher.test(aggregates)").AsList();
 
             return fisherResults[0].AsNumeric().ToArray()[0];
-
+*/
         }
 
         public static double[] CalcChiSq(System.Data.DataRow[] SortedRows, Boolean classic)

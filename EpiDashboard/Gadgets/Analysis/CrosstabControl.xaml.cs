@@ -2391,7 +2391,7 @@ namespace EpiDashboard
             }
             catch (Exception except)
             {
-                tableFisherP = Epi.Statistics.SingleMxN.FisherTest(SortedRows, false);
+                tableFisherP = Double.NaN;
             }
             this.Dispatcher.BeginInvoke(new AddFisherDelegate(RenderFisherResults), SortedRows, tableFisherP, value);
         }
