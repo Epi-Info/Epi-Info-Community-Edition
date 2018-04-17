@@ -1184,7 +1184,7 @@ namespace Epi.Enter.Forms
             foreach (KeyValuePair<string, Dictionary<string, WebFieldData>> kvp in pFieldDataList)
             {
                 int ViewId = kvp.Value.Select(x => x.Value.ViewId).ToList().First();
-
+                int recordsInserted = 0;
                 View NewView = destinationProject.GetViewById(ViewId);
                 if (NewView != null)
                 {
@@ -1202,7 +1202,7 @@ namespace Epi.Enter.Forms
                 {
                     this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), string.Format(SharedStrings.IMPORT_DATA_PROCESSING_RECS_PAGE, (i + 1).ToString(), destinationView.Pages.Count.ToString()));
 
-                    int recordsInserted = 0;
+                   
 
                     Page destinationPage = destinationView.Pages[i];
                     foreach (Field PageField in destinationPage.Fields)
@@ -1276,12 +1276,7 @@ namespace Epi.Enter.Forms
                                         this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), "Error Processing record number " + GUID.ToString() + " Field Name:" + FieldName);
 
                                     }
-                                    if (!GUIDList.Contains(GUID))
-                                    {
-                                        GUIDList.Add(GUID);
-                                        recordsInserted++;
-                                        this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
-                                    }
+                                    
                                 }
                             }
                         }
@@ -1296,7 +1291,16 @@ namespace Epi.Enter.Forms
                 //{
                 //}
                 //this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");                
+                if (!GUIDList.Contains(currentGUID))
+                {
+                    GUIDList.Add(currentGUID);
+                    recordsInserted++;
+                    this.BeginInvoke(new SetProgressBarDelegate(IncrementProgressBarValue), 1);
+                }
+
             }
+
+
             // }
             if (GUIDList.Count > 0)
             {
@@ -1320,8 +1324,15 @@ namespace Epi.Enter.Forms
                 }
              
             Request.SurveyAnswerList = DTOList.ToArray(); ;
-            var MyClient = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
-            MyClient.UpdateRecordStatus(Request);
+            try
+            {
+                var MyClient = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+                MyClient.UpdateRecordStatus(Request);
+            }
+            catch (Exception ex) {
+                throw ex;
+
+            }
            // client.UpdateRecordStatus(Request);
             }
 
@@ -1565,20 +1576,23 @@ namespace Epi.Enter.Forms
                 if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservice)))
                 {
                     SurveyManagerService.SurveyAnswerRequest Request = (SurveyManagerService.SurveyAnswerRequest)e.Result;
-                    AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
+                   
                     DoImport(Request);
+                   // AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
                 }
                 if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev2)))
                 {
                     SurveyManagerServiceV2.SurveyAnswerRequest Request = (SurveyManagerServiceV2.SurveyAnswerRequest)e.Result;
-                    AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
+                   
                     DoImportV2(Request);
+                    //AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
                 }
                 if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev3)))
                 {
                     SurveyManagerServiceV3.SurveyAnswerRequest Request = (SurveyManagerServiceV3.SurveyAnswerRequest)e.Result;
-                    AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
+                    
                     DoImportV3(Request);
+                    //AddStatusMessage(SharedStrings.IMPORT_DATA_COMPLETE);
                 }
             }
             else
