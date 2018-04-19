@@ -1483,7 +1483,9 @@ namespace Epi.Statistics
                 itop++;
                 ipoin[itp + ipoinoffset - 1] = itop;
                 if (itop > ldstp)
-                    return;
+                {
+//                    return;
+                }
                 npoin[itop + npoinoffset - 1] = -1;
                 nr[itop + nroffset - 1] = -1;
                 nl[itop + nloffset - 1] = -1;
@@ -1521,7 +1523,9 @@ namespace Epi.Statistics
 
             itop++;
             if (itop > ldstp)
-                return;
+            {
+//                return;
+            }
 
             ipn = ipoin[itp + ipoinoffset - 1];
             int itmp = ipn;

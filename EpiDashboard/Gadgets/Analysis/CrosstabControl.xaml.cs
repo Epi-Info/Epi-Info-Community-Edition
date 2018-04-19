@@ -2391,7 +2391,7 @@ namespace EpiDashboard
             }
             catch (Exception except)
             {
-                tableFisherP = Double.NaN;
+                tableFisherP = Double.NegativeInfinity;
             }
             this.Dispatcher.BeginInvoke(new AddFisherDelegate(RenderFisherResults), SortedRows, tableFisherP, value);
         }
