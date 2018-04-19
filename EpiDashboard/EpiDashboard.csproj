@@ -615,6 +615,7 @@
     </Compile>
     <Compile Include="Mapping\KmlLayerProvider.cs" />
     <Compile Include="Mapping\MapBackgroundType.cs" />
+    <Compile Include="Mapping\PolyLabel.cs" />
     <Compile Include="Mapping\TimeLapse.xaml.cs">
       <DependentUpon>TimeLapse.xaml</DependentUpon>
     </Compile>

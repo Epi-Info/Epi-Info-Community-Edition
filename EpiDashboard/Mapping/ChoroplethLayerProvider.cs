@@ -13,6 +13,7 @@ using ESRI.ArcGIS.Client.Symbols;
 using ESRI.ArcGIS.Client.Toolkit.DataSources;
 using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using EpiDashboard.Mapping.ShapeFileReader;
+using System.Collections.ObjectModel;
 
 namespace EpiDashboard.Mapping
 {
@@ -931,20 +932,30 @@ namespace EpiDashboard.Mapping
                         }
 
                         TextSymbol textSymbol = new TextSymbol();
-                        double xmin = graphicFeature.Geometry.Extent.XMin;
-                        double xmax = graphicFeature.Geometry.Extent.XMax;
-                        double ymin = graphicFeature.Geometry.Extent.YMin;
-                        double ymax = graphicFeature.Geometry.Extent.YMax;
-                        double xmid = (xmin + xmax) / 2.0;
-                        double ymid = (ymin + ymax) / 2.0;
                         textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                         textSymbol.FontSize = 11;
                         textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
                         textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
-                        MapPoint mapPoint = new MapPoint(xmid, ymid, new SpatialReference(4326));
-                        Graphic graphic = new Graphic() { Geometry = mapPoint, Symbol = textSymbol };
 
-                        textGraphics.Add(graphic);
+                        Envelope extentEnvelope = graphicFeature.Geometry.Extent;
+                        MapPoint pole = extentEnvelope.GetCenter();
+
+                        ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
+
+                        if (graphicFeature.Geometry is ESRI.ArcGIS.Client.Geometry.Polygon)
+                        {
+                            rings = ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings;
+                            var coords = PolyLabel.PoleOfInaccessibility(rings);
+                            pole.X = coords.Item1;
+                            pole.Y = coords.Item2;
+                        }
+
+                        Graphic textGraphic = new Graphic();
+
+                        textGraphic.Symbol = textSymbol;
+                        textGraphic.Geometry = pole;
+
+                        textGraphics.Add(textGraphic);
                         
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;
