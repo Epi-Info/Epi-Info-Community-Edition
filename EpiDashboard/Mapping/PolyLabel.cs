@@ -14,17 +14,17 @@ namespace EpiDashboard.Mapping
     {
         public double X { get; set; }
         public double Y { get; set; }
-        public double H { get; set; }
-        public double D { get; set; }
+        public double Half { get; set; }
+        public double Distance { get; set; }
         public double Max { get; set; }
 
-        public Cell(double x, double y, double h, ObservableCollection<PointCollection> polygon)
+        public Cell(double x, double y, double half, ObservableCollection<PointCollection> polygon)
         {
             X = x; 
             Y = y;
-            H = h; 
-            D = Adjunct.PointToPolygonDist(x, y, polygon);
-            Max = D + H * Math.Sqrt(2);
+            Half = half; 
+            Distance = Adjunct.PointToPolygonDistance(x, y, polygon);
+            Max = Distance + Half * Math.Sqrt(2);
         }
     }
 
@@ -38,7 +38,7 @@ namespace EpiDashboard.Mapping
 
     public static class Adjunct
     {
-        public static double PointToPolygonDist(double x, double y, ObservableCollection<PointCollection> polygon)
+        public static double PointToPolygonDistance(double x, double y, ObservableCollection<PointCollection> polygon)
         {
             bool inside = false;
             double minDistSq = double.MaxValue;
@@ -55,7 +55,7 @@ namespace EpiDashboard.Mapping
                     MapPoint a = ring[i];
                     MapPoint b = ring[j];
 
-                    if ((a.Y > y != b.Y > y) && (x < (b.X - a.X) * (y - a.Y) / (b.Y - a.Y + a.X)))
+                    if (((a.Y > y) != (b.Y > y)) && (x < ((b.X - a.X) * (y - a.Y) / (b.Y - a.Y + a.X))))
                     {
                         inside = !inside;
                     }
@@ -118,11 +118,11 @@ namespace EpiDashboard.Mapping
             double width = maxX - minX;
             double height = maxY - minY;
             double cellSize = Math.Min(width, height);
-            double h = cellSize / 2;
+            double half = cellSize / 2;
 
-            List<Cell> cellQueue = new List<Cell>();
+            List<Cell> cellList = new List<Cell>();
             CellMaxComparer comp = new CellMaxComparer();
-            cellQueue.Sort(comp);
+
 
             if (cellSize == 0)
             {
@@ -133,45 +133,64 @@ namespace EpiDashboard.Mapping
             {
                 for (double y = minY; y < maxY; y += cellSize)
                 {
-                    cellQueue.Add(new Cell(x + h, y + h, h, polygon));
+                    cellList.Add(new Cell(x + half, y + half, half, polygon));
                 }
             }
+
+            cellList.Sort(comp);
+
+            Console.WriteLine(string.Format("first sort"));
+            cellList.ForEach(delegate (Cell queueCell)
+            {
+                Console.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}", queueCell.X, queueCell.Y, queueCell.Half, queueCell.Distance, queueCell.Max));
+            });
 
             Cell bestCell = GetCentroidCell(polygon);
 
             Cell bboxCell = new Cell(minX + width / 2, minY + height / 2, 0, polygon);
-            if (bboxCell.D > bestCell.D)
+            if (bboxCell.Distance > bestCell.Distance)
             {
                 bestCell = bboxCell;
-
             }
 
-            int numProbes = cellQueue.Count;
+            int numProbes = cellList.Count;
 
-            while (cellQueue.Count != 0)
+            while (cellList.Count != 0)
             {
-                Cell cell = cellQueue[0];
+                Console.WriteLine(string.Format("cellQueue.Count = {0}", cellList.Count));
 
-                cellQueue.RemoveAt(0);
+                cellList.ForEach(delegate (Cell queueCell)
+                {
+                    Console.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}", queueCell.X, queueCell.Y, queueCell.Half, queueCell.Distance, queueCell.Max));
+                });
 
-                if (cell.D > bestCell.D)
+                int i = cellList.Count - 1;
+
+                Cell cell = cellList[i];
+
+                cellList.RemoveAt(i);
+
+                if (cell.Distance > bestCell.Distance)
                 {
                     bestCell = cell;
-                    Console.WriteLine(string.Format("found best {0} after {1} probes", Math.Round(1e4 * cell.D) / 1e4, numProbes));
+                    Console.WriteLine(string.Format("found best {0} after {1} probes", Math.Round(1e4 * cell.Distance) / 1e4, numProbes));
                 }
 
-                if (cell.Max - bestCell.D <= precision) continue;
+                if (cell.Max - bestCell.Distance <= precision) continue;
 
-                h = cell.H / 2;
-                cellQueue.Add(new Cell(cell.X - h, cell.Y - h, h, polygon));
-                cellQueue.Add(new Cell(cell.X + h, cell.Y - h, h, polygon));
-                cellQueue.Add(new Cell(cell.X - h, cell.Y + h, h, polygon));
-                cellQueue.Add(new Cell(cell.X + h, cell.Y + h, h, polygon));
+                Console.WriteLine(string.Format("add four more"));
+
+                half = cell.Half / 2;
+                cellList.Add(new Cell(cell.X - half, cell.Y - half, half, polygon));
+                cellList.Add(new Cell(cell.X + half, cell.Y - half, half, polygon));
+                cellList.Add(new Cell(cell.X - half, cell.Y + half, half, polygon));
+                cellList.Add(new Cell(cell.X + half, cell.Y + half, half, polygon));
+                cellList.Sort(comp);
                 numProbes += 4;
             }
 
             Console.WriteLine("num probes: " + numProbes);
-            Console.WriteLine("best distance: " + bestCell.D);
+            Console.WriteLine("best distance: " + bestCell.Distance);
 
             return Tuple.Create<double, double>(bestCell.X, bestCell.Y);
         }
@@ -204,4 +223,11 @@ namespace EpiDashboard.Mapping
             return new Cell(x / area, y / area, 0, polygon);
         }
     }
+
+    public class PriorityQueue
+    {
+
+    }
+
+
 }
