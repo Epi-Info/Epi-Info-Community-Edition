@@ -2416,7 +2416,7 @@ namespace EpiDashboard
                 if (Grid.GetRow(text_b) == 2 && Grid.GetColumn(text_b) == 2)
                 {
                     if (Double.IsNegativeInfinity(tableFisherP))
-                        text_b.Text = "Too many cells to compute.";
+                        text_b.Text = "Cannot compute. Too many iterations.";
                     else
                         text_b.Text = tableFisherP.ToString("F4");
                 }
