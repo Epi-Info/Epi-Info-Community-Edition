@@ -942,12 +942,17 @@ namespace EpiDashboard.Mapping
 
                         ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
 
-                        if (graphicFeature.Geometry is ESRI.ArcGIS.Client.Geometry.Polygon)
+                        bool usePoleOfInaccessibility = false;
+
+                        if (usePoleOfInaccessibility)
                         {
-                            rings = ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings;
-                            var coords = PolyLabel.PoleOfInaccessibility(rings);
-                            pole.X = coords.Item1;
-                            pole.Y = coords.Item2;
+                            if (graphicFeature.Geometry is ESRI.ArcGIS.Client.Geometry.Polygon)
+                            {
+                                rings = ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings;
+                                var coords = PolyLabel.PoleOfInaccessibility(rings);
+                                pole.X = coords.Item1;
+                                pole.Y = coords.Item2;
+                            }
                         }
 
                         Graphic textGraphic = new Graphic();
