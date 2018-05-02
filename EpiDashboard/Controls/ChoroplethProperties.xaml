@@ -44,7 +44,7 @@
             <Controls:SettingsToggleButton  x:Name="tbtnDisplay" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsEnabled="False" IsChecked="False" Checked="tbtnDisplay_Checked" />
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Data Source</Label>
                 <StackPanel Orientation="Horizontal">
@@ -251,7 +251,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="lblPanelHdrColorsAndStyles" Style="{StaticResource PropertiesHeading}" Margin="0 0 0 10">Colors and Ranges</Label>
             </StackPanel>
@@ -264,7 +264,13 @@
                         <TextBox  Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="legTitle" Margin="5, 0, 0, 0" />
                     </StackPanel>
 
-                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 16, 0, 0">Colors</Label>
+                    <Label x:Name="tblockLabelSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 10, 0, 0">Labels</Label>
+
+                    <StackPanel Margin="0 10 0 10">
+                        <CheckBox x:Name="showPolyLabels" Style="{StaticResource PropertiesPanelCheckbox}" HorizontalAlignment="Left" Margin="5, 0, 0, 0">Show Polygon Labels</CheckBox>
+                    </StackPanel>
+
+                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 10, 0, 0">Colors</Label>
 
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical" Margin="0 0 30 0">
