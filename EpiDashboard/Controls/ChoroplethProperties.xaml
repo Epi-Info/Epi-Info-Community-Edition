@@ -44,7 +44,7 @@
             <Controls:SettingsToggleButton  x:Name="tbtnDisplay" Title="Colors &amp; Ranges" Description="Set class breaks and color representations." IsEnabled="False" IsChecked="False" Checked="tbtnDisplay_Checked" />
         </StackPanel>
 
-        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="tblockPanelDataSource" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 0">Data Source</Label>
                 <StackPanel Orientation="Horizontal">
@@ -251,7 +251,7 @@
             </ScrollViewer>
         </DockPanel>
 
-        <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
+        <DockPanel x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel DockPanel.Dock="Top">
                 <Label x:Name="lblPanelHdrColorsAndStyles" Style="{StaticResource PropertiesHeading}" Margin="0 0 0 10">Colors and Ranges</Label>
             </StackPanel>
