@@ -892,6 +892,8 @@ namespace EpiDashboard.Mapping
                     }
                 }
 
+                bool usePoleOfInaccessibility = true;
+
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
                     for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
@@ -899,6 +901,7 @@ namespace EpiDashboard.Mapping
                         Graphic graphicFeature = graphicsLayer.Graphics[i];
 
                         if (graphicFeature.Symbol is TextSymbol) continue;
+                        if (graphicFeature.Attributes.Count == 0) continue;
 
                         string filterExpression = "";
 
@@ -966,17 +969,29 @@ namespace EpiDashboard.Mapping
 
                             ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
 
-                            bool usePoleOfInaccessibility = false;
-
                             if (usePoleOfInaccessibility)
                             {
                                 if (graphicFeature.Geometry is ESRI.ArcGIS.Client.Geometry.Polygon)
                                 {
                                     rings = ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings;
-                                    var coords = PolyLabel.PoleOfInaccessibility(rings);
+                                    Tuple<double, double> coords;
+
+                                    bool showDebugCells = true;
+
+                                    if(showDebugCells)
+                                    {
+                                        coords = PolyLabel.PoleOfInaccessibility(rings, graphicsLayer: graphicsLayer);
+                                    }
+                                    else
+                                    {
+                                        coords = PolyLabel.PoleOfInaccessibility(rings);
+                                    }
+
                                     pole.X = coords.Item1;
                                     pole.Y = coords.Item2;
                                 }
+
+                                usePoleOfInaccessibility = false;
                             }
 
                             Graphic textGraphic = new Graphic();

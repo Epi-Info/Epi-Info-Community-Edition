@@ -6,7 +6,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using ESRI.ArcGIS.Client;
 using ESRI.ArcGIS.Client.Geometry;
+using System.Windows.Media;
 
 namespace EpiDashboard.Mapping
 {
@@ -15,14 +18,16 @@ namespace EpiDashboard.Mapping
         public double X { get; set; }
         public double Y { get; set; }
         public double Half { get; set; }
+        public double Width { get; set; }
         public double Distance { get; set; }
         public double Max { get; set; }
 
-        public Cell(double x, double y, double half, ObservableCollection<PointCollection> polygon)
+        public Cell(double x, double y, double half, ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> polygon)
         {
             X = x; 
             Y = y;
-            Half = half; 
+            Half = half;
+            Width = half + half;
             Distance = Adjunct.PointToPolygonDistance(x, y, polygon);
             Max = Distance + Half * Math.Sqrt(2);
         }
@@ -38,14 +43,14 @@ namespace EpiDashboard.Mapping
 
     public static class Adjunct
     {
-        public static double PointToPolygonDistance(double x, double y, ObservableCollection<PointCollection> polygon)
+        public static double PointToPolygonDistance(double x, double y, ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> polygon)
         {
             bool inside = false;
             double minDistSq = double.MaxValue;
 
             for (int k = 0; k < polygon.Count; k++)
             {
-                PointCollection ring = polygon[k];
+                ESRI.ArcGIS.Client.Geometry.PointCollection ring = polygon[k];
 
                 int count = ring.Count;
                 int j = count - 1;
@@ -99,16 +104,18 @@ namespace EpiDashboard.Mapping
 
     static class PolyLabel
     {
-        public static Tuple<double, double> PoleOfInaccessibility(ObservableCollection<PointCollection> polygon, double precision = 1.0, bool debug = false)
+        public static Tuple<double, double> PoleOfInaccessibility(ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> polygon, double precision = 1.0, bool debug = false, GraphicsLayer graphicsLayer = null)
         {
+            //precision = 0.15;
+
             double minY = double.MaxValue;
             double maxY = double.MinValue;
             double minX = double.MaxValue;
             double maxX = double.MinValue;
 
-            for (int i = 0; i < polygon[0].Count; i++)
+            for (int i = 0; i < polygon[polygon.Count - 1].Count; i++)
             {
-                MapPoint p = polygon[0][i];
+                MapPoint p = polygon[polygon.Count - 1][i];
                 if (p.X < minX) minX = p.X;
                 if (p.Y < minY) minY = p.Y;
                 if (p.X > maxX) maxX = p.X;
@@ -122,8 +129,7 @@ namespace EpiDashboard.Mapping
 
             List<Cell> cellList = new List<Cell>();
             CellMaxComparer comp = new CellMaxComparer();
-
-
+            
             if (cellSize == 0)
             {
                 return Tuple.Create<double, double>(minX, minY);
@@ -133,7 +139,9 @@ namespace EpiDashboard.Mapping
             {
                 for (double y = minY; y < maxY; y += cellSize)
                 {
-                    cellList.Add(new Cell(x + half, y + half, half, polygon));
+                    Cell cell = new Cell(x + half, y + half, half, polygon);
+                    cellList.Add(cell);
+                    AddDebugGraphic(cell, graphicsLayer);
                 }
             }
 
@@ -181,10 +189,23 @@ namespace EpiDashboard.Mapping
                 Console.WriteLine(string.Format("add four more"));
 
                 half = cell.Half / 2;
-                cellList.Add(new Cell(cell.X - half, cell.Y - half, half, polygon));
-                cellList.Add(new Cell(cell.X + half, cell.Y - half, half, polygon));
-                cellList.Add(new Cell(cell.X - half, cell.Y + half, half, polygon));
-                cellList.Add(new Cell(cell.X + half, cell.Y + half, half, polygon));
+
+                Cell debugCell = new Cell(cell.X - half, cell.Y - half, half, polygon);
+                cellList.Add(debugCell);
+                AddDebugGraphic(debugCell, graphicsLayer);
+
+                debugCell = new Cell(cell.X + half, cell.Y - half, half, polygon);
+                cellList.Add(debugCell);
+                AddDebugGraphic(debugCell, graphicsLayer);
+
+                debugCell = new Cell(cell.X - half, cell.Y + half, half, polygon);
+                cellList.Add(debugCell);
+                AddDebugGraphic(debugCell, graphicsLayer);
+
+                debugCell = new Cell(cell.X + half, cell.Y + half, half, polygon);
+                cellList.Add(debugCell);
+                AddDebugGraphic(debugCell, graphicsLayer);
+
                 cellList.Sort(comp);
                 numProbes += 4;
             }
@@ -194,13 +215,52 @@ namespace EpiDashboard.Mapping
 
             return Tuple.Create<double, double>(bestCell.X, bestCell.Y);
         }
-        
-        public static Cell GetCentroidCell(ObservableCollection<PointCollection> polygon)
+
+        private static void AddDebugGraphic(Cell c, GraphicsLayer graphicsLayer)
+        {
+            if (graphicsLayer == null) return;
+
+            Graphic graphic = new Graphic();
+            ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
+
+            ESRI.ArcGIS.Client.Geometry.PointCollection pointList = new ESRI.ArcGIS.Client.Geometry.PointCollection();
+
+            pointList.Add(new MapPoint(c.X, c.Y));
+            pointList.Add(new MapPoint(c.X + c.Width, c.Y));
+            pointList.Add(new MapPoint(c.X + c.Width, c.Y + c.Width));
+            pointList.Add(new MapPoint(c.X, c.Y + c.Width));
+            pointList.Add(new MapPoint(c.X, c.Y));
+
+            rings.Add(new ESRI.ArcGIS.Client.Geometry.PointCollection(pointList));
+
+            Color color = Colors.Black;
+            Brush fill = new SolidColorBrush(Colors.Transparent); 
+
+            ESRI.ArcGIS.Client.Symbols.SimpleFillSymbol symbol = new ESRI.ArcGIS.Client.Symbols.SimpleFillSymbol();
+
+            symbol.Fill = fill;
+            symbol.BorderBrush = new SolidColorBrush(Colors.Black);
+            symbol.BorderThickness = 1;
+
+            graphic.Symbol = symbol;
+ 
+            Polygon polygon = new Polygon();
+            SpatialReference geoReference = new SpatialReference(4326);
+            polygon.SpatialReference = geoReference;
+            polygon.Rings.Add(pointList);
+
+            graphic.Geometry = polygon;
+
+            graphicsLayer.Graphics.Add(graphic);
+        }
+
+
+        public static Cell GetCentroidCell(ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> polygon)
         {
             double area = 0;
             double x = 0;
             double y = 0;
-            PointCollection points = polygon[0];
+            ESRI.ArcGIS.Client.Geometry.PointCollection points = polygon[0];
 
             int count = points.Count;
             int j = count - 1;
