@@ -18,7 +18,6 @@ namespace EpiDashboard.Mapping
         public double X { get; set; }
         public double Y { get; set; }
         public double Half { get; set; }
-        public double Width { get; set; }
         public double Distance { get; set; }
         public double Max { get; set; }
 
@@ -27,7 +26,6 @@ namespace EpiDashboard.Mapping
             X = x; 
             Y = y;
             Half = half;
-            Width = half + half;
             Distance = Adjunct.PointToPolygonDistance(x, y, polygon);
             Max = Distance + Half * Math.Sqrt(2);
         }
@@ -60,7 +58,7 @@ namespace EpiDashboard.Mapping
                     MapPoint a = ring[i];
                     MapPoint b = ring[j];
 
-                    if (((a.Y > y) != (b.Y > y)) && (x < ((b.X - a.X) * (y - a.Y) / (b.Y - a.Y + a.X))))
+                    if ((a.Y > y != b.Y > y) && (x < (b.X - a.X) * (y - a.Y) / (b.Y - a.Y) + a.X))
                     {
                         inside = !inside;
                     }
@@ -106,27 +104,40 @@ namespace EpiDashboard.Mapping
     {
         public static Tuple<double, double> PoleOfInaccessibility(ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> polygon, double precision = 1.0, bool debug = false, GraphicsLayer graphicsLayer = null)
         {
-            //precision = 0.15;
+            precision = 0.05;
 
-            double minY = double.MaxValue;
-            double maxY = double.MinValue;
-            double minX = double.MaxValue;
-            double maxX = double.MinValue;
+            double minY = 0;
+            double maxY = 0;
+            double minX = 0;
+            double maxX = 0;
 
-            for (int i = 0; i < polygon[polygon.Count - 1].Count; i++)
+            ESRI.ArcGIS.Client.Geometry.PointCollection points = polygon[polygon.Count - 1];
+
+            int pointCount = 0;
+
+            foreach(var ring in polygon)
             {
-                MapPoint p = polygon[polygon.Count - 1][i];
-                if (p.X < minX) minX = p.X;
-                if (p.Y < minY) minY = p.Y;
-                if (p.X > maxX) maxX = p.X;
-                if (p.Y > maxY) maxY = p.Y;
+                if(ring.Count > pointCount)
+                {
+                    pointCount = ring.Count;
+                    points = ring;
+                }
+            }
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                MapPoint p = points[i];
+                if (i == 0 || p.X < minX) minX = p.X;
+                if (i == 0 || p.Y < minY) minY = p.Y;
+                if (i == 0 || p.X > maxX) maxX = p.X;
+                if (i == 0 || p.Y > maxY) maxY = p.Y;
             }
 
             double width = maxX - minX;
             double height = maxY - minY;
             double cellSize = Math.Min(width, height);
             double half = cellSize / 2;
-
+            
             List<Cell> cellList = new List<Cell>();
             CellMaxComparer comp = new CellMaxComparer();
             
@@ -135,23 +146,29 @@ namespace EpiDashboard.Mapping
                 return Tuple.Create<double, double>(minX, minY);
             }
 
+            bool isFirst = true;
+
             for (double x = minX; x < maxX; x += cellSize)
             {
                 for (double y = minY; y < maxY; y += cellSize)
                 {
                     Cell cell = new Cell(x + half, y + half, half, polygon);
                     cellList.Add(cell);
-                    AddDebugGraphic(cell, graphicsLayer);
+                    if (isFirst)
+                    {
+                        AddDebugGraphic(cell, graphicsLayer);
+                        isFirst = false;
+                    }
                 }
             }
-
+            
             cellList.Sort(comp);
 
-            Console.WriteLine(string.Format("first sort"));
-            cellList.ForEach(delegate (Cell queueCell)
-            {
-                Console.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}", queueCell.X, queueCell.Y, queueCell.Half, queueCell.Distance, queueCell.Max));
-            });
+            //Console.WriteLine(string.Format("first sort"));
+            //cellList.ForEach(delegate (Cell queueCell)
+            //{
+            //    Console.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}", queueCell.X, queueCell.Y, queueCell.Half, queueCell.Distance, queueCell.Max));
+            //});
 
             Cell bestCell = GetCentroidCell(polygon);
 
@@ -165,12 +182,12 @@ namespace EpiDashboard.Mapping
 
             while (cellList.Count != 0)
             {
-                Console.WriteLine(string.Format("cellQueue.Count = {0}", cellList.Count));
+                //Console.WriteLine(string.Format("cellQueue.Count = {0}", cellList.Count));
 
-                cellList.ForEach(delegate (Cell queueCell)
-                {
-                    Console.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}", queueCell.X, queueCell.Y, queueCell.Half, queueCell.Distance, queueCell.Max));
-                });
+                //cellList.ForEach(delegate (Cell queueCell)
+                //{
+                 //   Console.WriteLine(string.Format("{0}, {1}, {2}, {3}, {4}", queueCell.X, queueCell.Y, queueCell.Half, queueCell.Distance, queueCell.Max));
+                //});
 
                 int i = cellList.Count - 1;
 
@@ -181,12 +198,12 @@ namespace EpiDashboard.Mapping
                 if (cell.Distance > bestCell.Distance)
                 {
                     bestCell = cell;
-                    Console.WriteLine(string.Format("found best {0} after {1} probes", Math.Round(1e4 * cell.Distance) / 1e4, numProbes));
+                    //Console.WriteLine(string.Format("found best {0} after {1} probes", Math.Round(1e4 * cell.Distance) / 1e4, numProbes));
                 }
 
                 if (cell.Max - bestCell.Distance <= precision) continue;
 
-                Console.WriteLine(string.Format("add four more"));
+                //Console.WriteLine(string.Format("add four more"));
 
                 half = cell.Half / 2;
 
@@ -210,26 +227,29 @@ namespace EpiDashboard.Mapping
                 numProbes += 4;
             }
 
-            Console.WriteLine("num probes: " + numProbes);
-            Console.WriteLine("best distance: " + bestCell.Distance);
+            //Console.WriteLine("num probes: " + numProbes);
+            //Console.WriteLine("best distance: " + bestCell.Distance);
 
             return Tuple.Create<double, double>(bestCell.X, bestCell.Y);
         }
 
-        private static void AddDebugGraphic(Cell c, GraphicsLayer graphicsLayer)
+        public static void AddDebugGraphic(Cell c, GraphicsLayer graphicsLayer)
         {
+            return; // COMMENT OUT TO SHOW CELLS
+
             if (graphicsLayer == null) return;
 
             Graphic graphic = new Graphic();
             ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
 
             ESRI.ArcGIS.Client.Geometry.PointCollection pointList = new ESRI.ArcGIS.Client.Geometry.PointCollection();
+            SpatialReference geoReference = new SpatialReference(4326);
 
-            pointList.Add(new MapPoint(c.X, c.Y));
-            pointList.Add(new MapPoint(c.X + c.Width, c.Y));
-            pointList.Add(new MapPoint(c.X + c.Width, c.Y + c.Width));
-            pointList.Add(new MapPoint(c.X, c.Y + c.Width));
-            pointList.Add(new MapPoint(c.X, c.Y));
+            pointList.Add(new MapPoint(c.X - c.Half, c.Y - c.Half, geoReference));
+            pointList.Add(new MapPoint(c.X - c.Half , c.Y + c.Half, geoReference));
+            pointList.Add(new MapPoint(c.X + c.Half, c.Y + c.Half, geoReference));
+            pointList.Add(new MapPoint(c.X + c.Half, c.Y - c.Half, geoReference));
+            pointList.Add(new MapPoint(c.X - c.Half, c.Y - c.Half, geoReference));
 
             rings.Add(new ESRI.ArcGIS.Client.Geometry.PointCollection(pointList));
 
@@ -245,7 +265,7 @@ namespace EpiDashboard.Mapping
             graphic.Symbol = symbol;
  
             Polygon polygon = new Polygon();
-            SpatialReference geoReference = new SpatialReference(4326);
+            
             polygon.SpatialReference = geoReference;
             polygon.Rings.Add(pointList);
 
@@ -260,7 +280,18 @@ namespace EpiDashboard.Mapping
             double area = 0;
             double x = 0;
             double y = 0;
-            ESRI.ArcGIS.Client.Geometry.PointCollection points = polygon[0];
+            ESRI.ArcGIS.Client.Geometry.PointCollection points = polygon[polygon.Count - 1];
+
+            int pointCount = 0;
+
+            foreach (var ring in polygon)
+            {
+                if (ring.Count > pointCount)
+                {
+                    pointCount = ring.Count;
+                    points = ring;
+                }
+            }
 
             int count = points.Count;
             int j = count - 1;
@@ -283,11 +314,4 @@ namespace EpiDashboard.Mapping
             return new Cell(x / area, y / area, 0, polygon);
         }
     }
-
-    public class PriorityQueue
-    {
-
-    }
-
-
 }

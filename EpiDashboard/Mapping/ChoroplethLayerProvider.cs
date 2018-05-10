@@ -962,12 +962,15 @@ namespace EpiDashboard.Mapping
                             textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                             textSymbol.FontSize = 11;
                             textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
+                            Console.WriteLine(textSymbol.Text);
                             textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
 
                             Envelope extentEnvelope = graphicFeature.Geometry.Extent;
                             MapPoint pole = extentEnvelope.GetCenter();
 
                             ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
+
+                            // if (textSymbol.Text == "Quintana Roo") usePoleOfInaccessibility = true;
 
                             if (usePoleOfInaccessibility)
                             {
@@ -981,6 +984,10 @@ namespace EpiDashboard.Mapping
                                     if(showDebugCells)
                                     {
                                         coords = PolyLabel.PoleOfInaccessibility(rings, graphicsLayer: graphicsLayer);
+
+                                        //Envelope extent = graphicFeature.Geometry.Extent;
+                                        //Cell extentCell = new Cell(extent.XMin, extent.YMin, extent.Width / 2, rings);
+                                        //PolyLabel.AddDebugGraphic(extentCell, graphicsLayer);
                                     }
                                     else
                                     {
@@ -991,7 +998,7 @@ namespace EpiDashboard.Mapping
                                     pole.Y = coords.Item2;
                                 }
 
-                                usePoleOfInaccessibility = false;
+                                //usePoleOfInaccessibility = false;
                             }
 
                             Graphic textGraphic = new Graphic();
