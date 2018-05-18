@@ -961,7 +961,7 @@ namespace EpiDashboard.Mapping
                             TextSymbol textSymbol = new TextSymbol();
                             textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                             textSymbol.FontSize = 11;
-                            textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
+                            textSymbol.Text = "0";// graphicFeature.Attributes[shapeKey].ToString().Trim();
                             Console.WriteLine(textSymbol.Text);
                             textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
 
@@ -970,7 +970,7 @@ namespace EpiDashboard.Mapping
 
                             ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
 
-                            // if (textSymbol.Text == "Quintana Roo") usePoleOfInaccessibility = true;
+                            if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Pembroke") usePoleOfInaccessibility = true;
 
                             if (usePoleOfInaccessibility)
                             {
@@ -983,7 +983,13 @@ namespace EpiDashboard.Mapping
 
                                     if(showDebugCells)
                                     {
-                                        coords = PolyLabel.PoleOfInaccessibility(rings, graphicsLayer: graphicsLayer);
+                                        double precision = 0.1;
+                                        double denom = 10.0;
+
+                                        precision = extentEnvelope.Width / denom < precision? extentEnvelope.Width / denom : precision;
+                                        precision = extentEnvelope.Height / denom < precision ? extentEnvelope.Height / denom : precision;
+
+                                        coords = PolyLabel.PoleOfInaccessibility(rings, precision, graphicsLayer: graphicsLayer);
 
                                         //Envelope extent = graphicFeature.Geometry.Extent;
                                         //Cell extentCell = new Cell(extent.XMin, extent.YMin, extent.Width / 2, rings);
@@ -998,7 +1004,7 @@ namespace EpiDashboard.Mapping
                                     pole.Y = coords.Item2;
                                 }
 
-                                //usePoleOfInaccessibility = false;
+                                usePoleOfInaccessibility = false;
                             }
 
                             Graphic textGraphic = new Graphic();

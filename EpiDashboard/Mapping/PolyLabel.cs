@@ -102,9 +102,8 @@ namespace EpiDashboard.Mapping
 
     static class PolyLabel
     {
-        public static Tuple<double, double> PoleOfInaccessibility(ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> polygon, double precision = 1.0, bool debug = false, GraphicsLayer graphicsLayer = null)
+        public static Tuple<double, double> PoleOfInaccessibility(ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> polygon, double precision = 0.025, bool debug = false, GraphicsLayer graphicsLayer = null)
         {
-            precision = 0.05;
 
             double minY = 0;
             double maxY = 0;
@@ -235,7 +234,7 @@ namespace EpiDashboard.Mapping
 
         public static void AddDebugGraphic(Cell c, GraphicsLayer graphicsLayer)
         {
-            return; // COMMENT OUT TO SHOW CELLS
+            //return; // COMMENT OUT TO SHOW CELLS
 
             if (graphicsLayer == null) return;
 
