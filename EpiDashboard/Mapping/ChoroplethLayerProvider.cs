@@ -984,7 +984,7 @@ namespace EpiDashboard.Mapping
                                     if(showDebugCells)
                                     {
                                         double precision = 0.1;
-                                        double denom = 10.0;
+                                        double denom = 24.0;
 
                                         precision = extentEnvelope.Width / denom < precision? extentEnvelope.Width / denom : precision;
                                         precision = extentEnvelope.Height / denom < precision ? extentEnvelope.Height / denom : precision;
