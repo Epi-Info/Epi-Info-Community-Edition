@@ -82,6 +82,12 @@
         Dim u As Integer
         Dim maxuldiff As Double
 
+        For i = 0 To a.Length - 1
+            If a(i) > 999999 Or b(i) > 999999 Or c(i) > 999999 Or d(i) > 999999 Then
+                Return Double.NaN
+            End If
+        Next
+
 
         xs = a
         x = 0
@@ -361,6 +367,12 @@
         'ReDim ls(0 To Tables) As Integer
         'ReDim us(0 To Tables) As Integer
 
+        For i = 0 To aas.Length - 1
+            If aas(i) > 999999 Or bbs(i) > 999999 Or ccs(i) > 999999 Or dds(i) > 999999 Then
+                Return Double.NaN
+            End If
+        Next
+
         For i = 0 To Tables
             M1(i) = aas(i) + ccs(i)
             M0(i) = bbs(i) + dds(i)
@@ -520,6 +532,12 @@
         '    ReDim N0(0 To Tables) As Integer
         '    ReDim ls(0 To Tables) As Integer
         '    ReDim us(0 To Tables) As Integer
+
+        For i = 0 To aas.Length - 1
+            If aas(i) > 999999 Or bbs(i) > 999999 Or ccs(i) > 999999 Or dds(i) > 999999 Then
+                Return Double.NaN
+            End If
+        Next
 
         For i = 0 To Tables
             M1(i) = aas(i) + ccs(i)
