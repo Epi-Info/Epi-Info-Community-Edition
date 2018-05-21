@@ -353,7 +353,8 @@ namespace EpiDashboard.Controls
                             cmbValue.SelectedItem.ToString(),
                             brushList,
                             classCount,
-                            legTitle.Text);
+                            legTitle.Text,
+                            showPolyLabels.IsChecked);
 
                         if (LayerProvider.RangeCount != classCount)
                         {
@@ -500,6 +501,7 @@ namespace EpiDashboard.Controls
                             flagquintiles,
                             numclasses,
                             legTitle.Text,
+                            showPolyLabels.IsChecked,
                             Opacity);
                     }
                     else if ((radMapServer.IsChecked == true && LayerProvider != null) || (LayerProvider is ChoroplethServerLayerProvider))
@@ -1041,7 +1043,8 @@ namespace EpiDashboard.Controls
                         brushList,
                         classCount,
                         missingText,
-                        legTitle.Text);
+                        legTitle.Text,
+                        showPolyLabels.IsChecked);
                 }
 
             }
@@ -1684,6 +1687,15 @@ namespace EpiDashboard.Controls
             {
                 LayerProvider.LegendText = legTitle.Text;
             }
+            
+            if (LayerProvider.ShowPolyLabels == true)
+            {
+                showPolyLabels.IsChecked = true;
+            }
+            else
+            {
+                showPolyLabels.IsChecked = false;
+            }
 
             try
             {
@@ -2016,6 +2028,15 @@ namespace EpiDashboard.Controls
                 }
 
                 legTitle.Text = LayerProvider.LegendText;
+                
+                if (LayerProvider.ShowPolyLabels == true)
+                {
+                    showPolyLabels.IsChecked = true;
+                }
+                else
+                {
+                    showPolyLabels.IsChecked = false;
+                }
             }
         }
 
@@ -2441,7 +2462,8 @@ namespace EpiDashboard.Controls
                             cmbValue.SelectedItem.ToString(),
                             brushList,
                             classCount,
-                            legTitle.Text);
+                            legTitle.Text,
+                            showPolyLabels.IsChecked);
                     }
 
                     validationText.Text = validationMessage;

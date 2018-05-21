@@ -264,7 +264,13 @@
                         <TextBox  Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="legTitle" Margin="5, 0, 0, 0" />
                     </StackPanel>
 
-                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 16, 0, 0">Colors</Label>
+                    <Label x:Name="tblockLabelSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 10, 0, 0">Labels</Label>
+
+                    <StackPanel Margin="0 10 0 10">
+                        <CheckBox x:Name="showPolyLabels" Style="{StaticResource PropertiesPanelCheckbox}" HorizontalAlignment="Left" Margin="5, 0, 0, 0">Show Polygon Labels (beta)</CheckBox>
+                    </StackPanel>
+
+                    <Label x:Name="tblockColorsSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 10, 0, 0">Colors</Label>
 
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical" Margin="0 0 30 0">

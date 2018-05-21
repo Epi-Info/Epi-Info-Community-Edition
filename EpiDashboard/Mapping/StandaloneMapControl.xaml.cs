@@ -2055,6 +2055,8 @@ namespace EpiDashboard.Mapping
 
                 choroplethproperties.legTitle.Text = choroplethLayerProperties.Provider.LegendText;
 
+                choroplethproperties.showPolyLabels.IsChecked = choroplethLayerProperties.Provider.ShowPolyLabels;
+
                 choroplethproperties.cmbShapeKey.Text = choroplethLayerProperties.cbxShapeKey.Text;
                 choroplethproperties.cmbDataKey.Text = choroplethLayerProperties.cbxDataKey.Text;
                 choroplethproperties.cmbValue.Text = choroplethLayerProperties.cbxValue.Text;

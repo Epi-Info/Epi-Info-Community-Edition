@@ -117,8 +117,14 @@ namespace EpiDashboard.Mapping
                 {
                     provider.LegendText = child.InnerText;
                 }
-            }
 
+                if(child.Name.Equals("showPolyLabels"))
+                {
+                    bool show = false;
+                    bool.TryParse(child.InnerText, out show);
+                    provider.ShowPolyLabels = show;
+                }
+            }
         }
 
         private static void AddRangeStarts(ChoroplethLayerProvider provider, List<double> rangeStartsFromMapFile, string rampKey)
@@ -192,6 +198,7 @@ namespace EpiDashboard.Mapping
                 string xmlString = uniqueXmlString +
                                    "<highColor>" + highColor.Color.ToString() + "</highColor>" + Environment.NewLine +
                                    "<legTitle>" + provider.LegendText + "</legTitle>" + Environment.NewLine +
+                                   "<showPolyLabels>" + provider.ShowPolyLabels + "</showPolyLabels>" + Environment.NewLine +
                                    classTitles +
                                    classRanges +
                                    useCustomColorsTag +
@@ -286,8 +293,8 @@ namespace EpiDashboard.Mapping
                 choroplethprop.choroplethServerLayerProvider = (ChoroplethServerLayerProvider)provider;
             }
            
-
             choroplethprop.legTitle.Text = provider.LegendText;
+            choroplethprop.showPolyLabels.IsChecked = provider.ShowPolyLabels;
             choroplethprop.ListLegendText = provider.ListLegendText;
 
             choroplethprop.SetProperties();

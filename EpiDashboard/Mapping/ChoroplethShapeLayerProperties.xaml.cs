@@ -45,6 +45,12 @@ namespace EpiDashboard.Mapping
             get { return _useCustomColors; }
         }
 
+        private bool _showPolyLabels;
+        public bool ShowMapLabels
+        {
+            get { return _showPolyLabels; }
+        }
+
         public ChoroplethShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
@@ -128,7 +134,8 @@ namespace EpiDashboard.Mapping
                     null,
                     int.Parse(((ComboBoxItem)cbxClasses.SelectedItem).Content.ToString()),
                     "",
-                    "");
+                    "",
+                    _showPolyLabels);
 
                 if (MapGenerated != null)
                 {
@@ -235,7 +242,7 @@ namespace EpiDashboard.Mapping
 
         public void SetValues(string shapefilepath, string shapekey, string datakey, string val,
             string classes, Brush Highcolor, Brush Lowcolor, Brush Missingcolor, IDictionary<string, object> shapeAttributes,
-            Dictionary<int, object> classAttrib, bool quintilesChecked, int numclasses, string LegendText, byte opacity)
+            Dictionary<int, object> classAttrib, bool quintilesChecked, int numclasses, string LegendText, bool? showLabels, byte opacity)
         {
             FillComboBoxes();
             
@@ -258,6 +265,7 @@ namespace EpiDashboard.Mapping
             cbxClasses.Text = classes;
             cbxShapeKey.Text = shapekey;
             cbxDataKey.Text = datakey;
+            _showPolyLabels = (bool)showLabels;
             cbxValue.Text = val;
             grdMain.Width = 700;
             Provider.LegendText = LegendText;

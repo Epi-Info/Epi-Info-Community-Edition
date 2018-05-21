@@ -90,6 +90,13 @@ namespace EpiDashboard.Mapping
             set { _useQuantiles = value; }
         }
 
+        bool _showPolyLabels = false;
+        public bool ShowPolyLabels
+        {
+            get { return _showPolyLabels; }
+            set { _showPolyLabels = value; }
+        }
+
         CustomColorsDictionary _customColorsDictionary = new CustomColorsDictionary();
         public CustomColorsDictionary CustomColorsDictionary
         {
@@ -441,7 +448,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public string PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string legendText)
+        public string PopulateRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> colors, int classCount, string legendText, bool? showPolyLabels = false)
         {
             _classCount = classCount;
             _dashboardHelper = dashboardHelper;
@@ -450,6 +457,7 @@ namespace EpiDashboard.Mapping
             _valueField = valueField;
             LegendText = legendText;
             _colors = colors;
+            _showPolyLabels = (bool)showPolyLabels;
 
             try
             {
@@ -838,7 +846,7 @@ namespace EpiDashboard.Mapping
             return thematicItem;
         }
 
-        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> brushList, int classCount, string missingText, string legendText)
+        public void SetShapeRangeValues(DashboardHelper dashboardHelper, string shapeKey, string dataKey, string valueField, List<SolidColorBrush> brushList, int classCount, string missingText, string legendText, bool? showPolyLabels = false)
         {
             try
             {
@@ -849,6 +857,7 @@ namespace EpiDashboard.Mapping
                 _valueField = valueField;
                 _missingText = missingText;
                 _legendText = legendText;
+                _showPolyLabels = (bool)showPolyLabels;
 
                 if (brushList != null) _colors = brushList;
 
@@ -874,9 +883,25 @@ namespace EpiDashboard.Mapping
 
                 if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
                 {
+                    for (int i = graphicsLayer.Graphics.Count -1; i > -1; i--)
+                    {
+                        if (graphicsLayer.Graphics[i].Symbol is TextSymbol)
+                        {
+                            graphicsLayer.Graphics.RemoveAt(i);
+                        }
+                    }
+                }
+
+                bool usePoleOfInaccessibility = true;
+
+                if (graphicsLayer.Graphics != null && graphicsLayer.Graphics.Count > 0)
+                {
                     for (int i = 0; i < graphicsLayer.Graphics.Count; i++)
                     {
                         Graphic graphicFeature = graphicsLayer.Graphics[i];
+
+                        if (graphicFeature.Symbol is TextSymbol) continue;
+                        if (graphicFeature.Attributes.Count == 0) continue;
 
                         string filterExpression = "";
 
@@ -931,31 +956,64 @@ namespace EpiDashboard.Mapping
                             graphicFeature.Symbol = symbol;
                         }
 
-                        TextSymbol textSymbol = new TextSymbol();
-                        textSymbol.Foreground = new SolidColorBrush(Colors.Black);
-                        textSymbol.FontSize = 11;
-                        textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
-                        textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
-
-                        Envelope extentEnvelope = graphicFeature.Geometry.Extent;
-                        MapPoint pole = extentEnvelope.GetCenter();
-
-                        ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
-
-                        if (graphicFeature.Geometry is ESRI.ArcGIS.Client.Geometry.Polygon)
+                        if (ShowPolyLabels)
                         {
-                            rings = ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings;
-                            var coords = PolyLabel.PoleOfInaccessibility(rings);
-                            pole.X = coords.Item1;
-                            pole.Y = coords.Item2;
+                            TextSymbol textSymbol = new TextSymbol();
+                            textSymbol.Foreground = new SolidColorBrush(Colors.Black);
+                            textSymbol.FontSize = 11;
+                            textSymbol.Text = "0";// graphicFeature.Attributes[shapeKey].ToString().Trim();
+                            Console.WriteLine(textSymbol.Text);
+                            textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
+
+                            Envelope extentEnvelope = graphicFeature.Geometry.Extent;
+                            MapPoint pole = extentEnvelope.GetCenter();
+
+                            ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
+
+                            if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Pembroke") usePoleOfInaccessibility = true;
+
+                            if (usePoleOfInaccessibility)
+                            {
+                                if (graphicFeature.Geometry is ESRI.ArcGIS.Client.Geometry.Polygon)
+                                {
+                                    rings = ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings;
+                                    Tuple<double, double> coords;
+
+                                    bool showDebugCells = true;
+
+                                    if(showDebugCells)
+                                    {
+                                        double precision = 0.1;
+                                        double denom = 24.0;
+
+                                        precision = extentEnvelope.Width / denom < precision? extentEnvelope.Width / denom : precision;
+                                        precision = extentEnvelope.Height / denom < precision ? extentEnvelope.Height / denom : precision;
+
+                                        coords = PolyLabel.PoleOfInaccessibility(rings, precision, graphicsLayer: graphicsLayer);
+
+                                        //Envelope extent = graphicFeature.Geometry.Extent;
+                                        //Cell extentCell = new Cell(extent.XMin, extent.YMin, extent.Width / 2, rings);
+                                        //PolyLabel.AddDebugGraphic(extentCell, graphicsLayer);
+                                    }
+                                    else
+                                    {
+                                        coords = PolyLabel.PoleOfInaccessibility(rings);
+                                    }
+
+                                    pole.X = coords.Item1;
+                                    pole.Y = coords.Item2;
+                                }
+
+                                usePoleOfInaccessibility = false;
+                            }
+
+                            Graphic textGraphic = new Graphic();
+
+                            textGraphic.Symbol = textSymbol;
+                            textGraphic.Geometry = pole;
+
+                            textGraphics.Add(textGraphic);
                         }
-
-                        Graphic textGraphic = new Graphic();
-
-                        textGraphic.Symbol = textSymbol;
-                        textGraphic.Geometry = pole;
-
-                        textGraphics.Add(textGraphic);
                         
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;

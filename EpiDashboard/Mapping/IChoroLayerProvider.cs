@@ -15,7 +15,7 @@ namespace EpiDashboard.Mapping
         ClassRangeDictionary ClassRangesDictionary { get; }
 
         string PopulateRangeValues();
-        string PopulateRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string text);
+        string PopulateRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string text, bool? showPolyLabels);
 
         string[,] RangeValues { get; set; }
 
@@ -27,11 +27,12 @@ namespace EpiDashboard.Mapping
         bool RangesLoadedFromMapFile { get; set; }
         bool UseQuantiles { get; set; }
         Guid LayerId { get; }
-        void SetShapeRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string missingText, string legendText);
+        void SetShapeRangeValues(DashboardHelper dashboardHelper, string toString, string s, string toString1, List<SolidColorBrush> brushList, int classCount, string missingText, string legendText, bool? showPolyLabels);
         void ResetRangeValues(string toString, string s, string toString1, int classCount);
         object[] Load();
         object[] Load(string boundrySourceLocation);
         string LegendText { get; set; }
+        bool ShowPolyLabels { get; set; }
 
     }
 }
