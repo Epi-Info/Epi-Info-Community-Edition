@@ -962,7 +962,7 @@ namespace EpiDashboard.Mapping
                             textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                             textSymbol.FontSize = 11;
                             textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
-                            Console.WriteLine(textSymbol.Text);
+                            //Console.WriteLine(textSymbol.Text);
                             textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
                             textSymbol.OffsetY = textSymbol.FontSize / 2.0;
 
@@ -971,7 +971,7 @@ namespace EpiDashboard.Mapping
 
                             ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
 
-                            //if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Pembroke") usePoleOfInaccessibility = true;
+                            //if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Richmond Hill") usePoleOfInaccessibility = true;
 
                             if (usePoleOfInaccessibility)
                             {
@@ -985,7 +985,7 @@ namespace EpiDashboard.Mapping
                                     if(showDebugCells)
                                     {
                                         double precision = 0.1;
-                                        double denom = 24.0;
+                                        double denom = 64.0;
 
                                         precision = extentEnvelope.Width / denom < precision? extentEnvelope.Width / denom : precision;
                                         precision = extentEnvelope.Height / denom < precision ? extentEnvelope.Height / denom : precision;
