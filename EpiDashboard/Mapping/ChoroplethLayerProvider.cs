@@ -961,16 +961,17 @@ namespace EpiDashboard.Mapping
                             TextSymbol textSymbol = new TextSymbol();
                             textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                             textSymbol.FontSize = 11;
-                            textSymbol.Text = "0";// graphicFeature.Attributes[shapeKey].ToString().Trim();
+                            textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
                             Console.WriteLine(textSymbol.Text);
                             textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
+                            textSymbol.OffsetY = textSymbol.FontSize / 2.0;
 
                             Envelope extentEnvelope = graphicFeature.Geometry.Extent;
                             MapPoint pole = extentEnvelope.GetCenter();
 
                             ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
 
-                            if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Pembroke") usePoleOfInaccessibility = true;
+                            //if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Pembroke") usePoleOfInaccessibility = true;
 
                             if (usePoleOfInaccessibility)
                             {
@@ -1004,7 +1005,7 @@ namespace EpiDashboard.Mapping
                                     pole.Y = coords.Item2;
                                 }
 
-                                usePoleOfInaccessibility = false;
+                                //usePoleOfInaccessibility = false;
                             }
 
                             Graphic textGraphic = new Graphic();
