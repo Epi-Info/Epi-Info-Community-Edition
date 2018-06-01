@@ -1227,8 +1227,8 @@ namespace EpiDashboard
 
                             this.Dispatcher.BeginInvoke(new AddChiSquareDelegate(RenderChiSquare), tableChiSq[0], tableChiSqDF, tableChiSqP, fisherTestResult, disclaimer, strataValue);
                             //                            this.Dispatcher.BeginInvoke(new AddFisherDelegate(RenderFisherResults), SortedRows, tableChiSq[0], tableChiSqDF, tableChiSqP, fisherTestResult, disclaimer, strataValue);
-                            properties.fisherThread = new System.Threading.Thread(()=>ComputeFisherResults(SortedRows, fisherTestResult, strataValue));
-                            properties.fisherThread.Start();
+                            System.Threading.Thread fisherThread = new System.Threading.Thread(()=>ComputeFisherResults(SortedRows, fisherTestResult, strataValue));
+                            fisherThread.Start();
                             this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, rowCount, totals);
                             this.Dispatcher.BeginInvoke(drawBorders, strataValue);
                         }
