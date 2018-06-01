@@ -961,16 +961,17 @@ namespace EpiDashboard.Mapping
                             TextSymbol textSymbol = new TextSymbol();
                             textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                             textSymbol.FontSize = 11;
-                            textSymbol.Text = "0";// graphicFeature.Attributes[shapeKey].ToString().Trim();
-                            Console.WriteLine(textSymbol.Text);
+                            textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
+                            //Console.WriteLine(textSymbol.Text);
                             textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
+                            textSymbol.OffsetY = textSymbol.FontSize / 2.0;
 
                             Envelope extentEnvelope = graphicFeature.Geometry.Extent;
                             MapPoint pole = extentEnvelope.GetCenter();
 
                             ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
 
-                            if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Pembroke") usePoleOfInaccessibility = true;
+                            //if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Richmond Hill") usePoleOfInaccessibility = true;
 
                             if (usePoleOfInaccessibility)
                             {
@@ -984,7 +985,7 @@ namespace EpiDashboard.Mapping
                                     if(showDebugCells)
                                     {
                                         double precision = 0.1;
-                                        double denom = 24.0;
+                                        double denom = 64.0;
 
                                         precision = extentEnvelope.Width / denom < precision? extentEnvelope.Width / denom : precision;
                                         precision = extentEnvelope.Height / denom < precision ? extentEnvelope.Height / denom : precision;
@@ -1004,7 +1005,7 @@ namespace EpiDashboard.Mapping
                                     pole.Y = coords.Item2;
                                 }
 
-                                usePoleOfInaccessibility = false;
+                                //usePoleOfInaccessibility = false;
                             }
 
                             Graphic textGraphic = new Graphic();

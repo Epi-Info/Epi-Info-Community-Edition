@@ -234,7 +234,7 @@ namespace EpiDashboard.Mapping
 
         public static void AddDebugGraphic(Cell c, GraphicsLayer graphicsLayer)
         {
-            //return; // COMMENT OUT TO SHOW CELLS
+            return; // COMMENT OUT TO SHOW CELLS
 
             if (graphicsLayer == null) return;
 
@@ -245,7 +245,7 @@ namespace EpiDashboard.Mapping
             SpatialReference geoReference = new SpatialReference(4326);
 
             pointList.Add(new MapPoint(c.X - c.Half, c.Y - c.Half, geoReference));
-            pointList.Add(new MapPoint(c.X - c.Half , c.Y + c.Half, geoReference));
+            pointList.Add(new MapPoint(c.X - c.Half, c.Y + c.Half, geoReference));
             pointList.Add(new MapPoint(c.X + c.Half, c.Y + c.Half, geoReference));
             pointList.Add(new MapPoint(c.X + c.Half, c.Y - c.Half, geoReference));
             pointList.Add(new MapPoint(c.X - c.Half, c.Y - c.Half, geoReference));
