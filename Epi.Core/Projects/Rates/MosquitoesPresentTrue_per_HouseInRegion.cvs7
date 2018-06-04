@@ -32,6 +32,7 @@
       <listFields>
         <listField>HouseID</listField>
         <listField>MosquitoesPresent</listField>
+        <listField>Region</listField>
       </listFields>
     </lineListGadget>
     <ratesGadget top="54" left="108" collapsed="False" gadgetType="EpiDashboard.RatesControl" id="056fbfe5-7cd2-4f63-9986-fea651b034dd" actualHeight="342">
