@@ -7,16 +7,16 @@
 
 !----------------------------------------------------------------------------------------------------------------------------
 !-------------------------------- CHARACTER SETS ----------------------------------------------------------------------------
-{String Chars}          = {Printable}+ {Letter Extended} - ["]
+{String Chars}          = {Printable}+ {Letter Extended} - ["] + {Cyrillic}
 {Char Ch}               = {Printable}+ {Letter Extended} - ['']
 {WS}                    = {Whitespace}
 {ServerName}                = {AlphaNumeric} + ['-''_'] + {Letter Extended}
 !{DatabaseVar}          = {Printable} - ['.''!''`''['']''"']  - {WS} - {Control Codes}
-{ID Head}               = {Letter} + ['_''@'] + {Letter Extended}
-{ID Tail}               = {Alphanumeric} + ['_''@''#''$'] + {Letter Extended}
+{ID Head}               = {Letter} + ['_''@'] + {Letter Extended} + {Cyrillic}
+{ID Tail}               = {Alphanumeric} + ['_''@''#''$'] + {Letter Extended} + {Cyrillic}
 !{Hex Digit}                = {Digit} + [abcdef] + [ABCDEF]
 {Url Chars}             = {Printable}+ {Letter Extended} - {WhiteSpace}
-{Valid Chars}               = {All Valid} - {CR} - {LF}
+{Valid Chars}               = {All Valid} - {CR} - {LF} + {Cyrillic}
 !----------------------------------------------------------------------------------------------------------------------------
 !-------------------------------- TERMINALS ---------------------------------------------------------------------------------
 !             = ({CR}{LF})+|{CR}+ | {LF}+

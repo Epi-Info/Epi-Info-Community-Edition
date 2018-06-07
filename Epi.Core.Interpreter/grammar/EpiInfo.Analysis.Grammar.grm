@@ -6,18 +6,18 @@
 
 !----------------------------------------------------------------------------------------------------------------------------
 !-------------------------------- CHARACTER SETS ----------------------------------------------------------------------------
-{String Chars}          = {Printable}+ {Letter Extended} - ["] + {HT}
+{String Chars}          = {Printable}+ {Letter Extended} - ["] + {HT} + {Cyrillic}
 {ConnectionString Chars} = {Printable}+ {Letter Extended} - ['{''}'\] + {cr} + {lf}
 {Char Ch}               = {Printable}+ {Letter Extended} - ['']
 {WS}                    = {Whitespace}! - {CR} - {LF}
 {ServerName}                = {AlphaNumeric} + ['-''_'] + {Letter Extended}
 !{DatabaseVar}          = {Printable} - ['.''!''`''['']''"']  - {WS} - {Control Codes}
-{ID Head}               = {Letter} + ['_''@'] + {Letter Extended}
-{ID Tail}               = {Alphanumeric} + ['_''@''#''$'] + {Letter Extended}
+{ID Head}               = {Letter} + ['_''@'] + {Letter Extended} + {Cyrillic}
+{ID Tail}               = {Alphanumeric} + ['_''@''#''$'] + {Letter Extended} + {Cyrillic}
 !{Hex Digit}                = {Digit} + [abcdef] + [ABCDEF]
 {Identifier Extras} = {Printable}+ {Letter Extended} - {WhiteSpace} - ['['']']  + {space}
 {Url Chars}             = {Printable}+ {Letter Extended} - {WhiteSpace}
-{Valid Chars}               = {All Valid} - {CR} - {LF}
+{Valid Chars}               = {All Valid} - {CR} - {LF} + {Cyrillic}
 !----------------------------------------------------------------------------------------------------------------------------
 !-------------------------------- TERMINALS ---------------------------------------------------------------------------------
 !             = ({CR}{LF})+|{CR}+ | {LF}+
