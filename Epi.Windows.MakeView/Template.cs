@@ -457,6 +457,7 @@ namespace Epi.Windows.MakeView
             writer.WriteAttributeString("Height", view.PageHeight.ToString());
             writer.WriteAttributeString("Orientation", view.PageOrientation.ToString());
             writer.WriteAttributeString("LabelAlign", view.PageLabelAlign.ToString());
+            writer.WriteAttributeString("SurveyId", view.WebSurveyId.ToString());
 
             List<Page> pages = view.GetMetadata().GetViewPages(view);
 
