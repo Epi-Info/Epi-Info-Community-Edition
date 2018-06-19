@@ -37,12 +37,14 @@
       <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
       <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyType" type="xs:int" />
       <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
+      <xs:element minOccurs="0" name="ViewId" type="xs:int" />
       <xs:element minOccurs="0" name="XML" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -82,6 +84,7 @@
       <xs:element minOccurs="0" name="IsPulished" type="xs:boolean" />
       <xs:element minOccurs="0" name="StatusText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ViewIdAndFormIdList" nillable="true" type="q2:ArrayOfKeyValueOfintstring" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PublishInfoDTO" nillable="true" type="tns:PublishInfoDTO" />
@@ -110,7 +113,7 @@
       <xs:extension base="tns:Criteria">
         <xs:sequence>
           <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
-          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Web" minOccurs="0" name="FileInputStream" nillable="true" type="q2:HttpPostedFileBase" />
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Web" minOccurs="0" name="FileInputStream" nillable="true" type="q3:HttpPostedFileBase" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
           <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
@@ -118,7 +121,7 @@
           <xs:element minOccurs="0" name="PageSize" type="xs:int" />
           <xs:element minOccurs="0" name="ReturnSizeInfoOnly" type="xs:boolean" />
           <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
-          <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyIdList" nillable="true" type="q3:ArrayOfstring" />
+          <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyIdList" nillable="true" type="q4:ArrayOfstring" />
           <xs:element minOccurs="0" name="SurveyType" type="xs:int" />
           <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
         </xs:sequence>
@@ -155,7 +158,7 @@
       <xs:extension base="tns:RequestBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="AdminSecurityKey" type="ser:guid" />
-          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="Organization" nillable="true" type="q4:OrganizationDTO" />
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="Organization" nillable="true" type="q5:OrganizationDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -166,7 +169,7 @@
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="OrganizationList" nillable="true" type="q5:ArrayOfOrganizationDTO" />
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="OrganizationList" nillable="true" type="q6:ArrayOfOrganizationDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -188,16 +191,28 @@
       <xs:extension base="tns:Criteria">
         <xs:sequence>
           <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="GetAllColumns" type="xs:boolean" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsChild" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDeleteMode" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsDownLoadFromApp" type="xs:boolean" />
           <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsEditMode" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsMobile" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsSqlProject" type="xs:boolean" />
           <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
           <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
           <xs:element minOccurs="0" name="PageSize" type="xs:int" />
+          <xs:element minOccurs="0" name="ParentResponseId" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="ReturnSizeInfoOnly" type="xs:boolean" />
+          <xs:element minOccurs="0" name="SearchCriteria" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SortOrder" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Sortfield" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="StatusId" type="xs:int" />
-          <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyAnswerIdList" nillable="true" type="q6:ArrayOfstring" />
+          <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyAnswerIdList" nillable="true" type="q7:ArrayOfstring" />
           <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserId" type="xs:int" />
+          <xs:element minOccurs="0" name="UserOrganizationId" type="xs:int" />
           <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
         </xs:sequence>
       </xs:extension>
@@ -215,22 +230,16 @@
       <xs:element minOccurs="0" name="DateCompleted" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateUpdated" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FormOwnerId" type="xs:int" />
       <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
-      <xs:element minOccurs="0" name="IsLocked" type="xs:boolean" />
-      <xs:element minOccurs="0" name="LastActiveUserId" type="xs:int" />
-      <xs:element minOccurs="0" name="LoggedInUserId" type="xs:int" />
       <xs:element minOccurs="0" name="ParentRecordId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RecordBeforeFlag" type="xs:boolean" />
       <xs:element minOccurs="0" name="RecordSourceId" type="xs:int" />
-      <xs:element minOccurs="0" name="RecoverLastRecordVersion" type="xs:boolean" />
       <xs:element minOccurs="0" name="RelateParentId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ResponseHierarchyIds" nillable="true" type="tns:ArrayOfSurveyAnswerDTO" />
       <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
-      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SqlData" nillable="true" type="q7:ArrayOfKeyValueOfstringstring" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SqlData" nillable="true" type="q8:ArrayOfKeyValueOfstringstring" />
       <xs:element minOccurs="0" name="Status" type="xs:int" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UserEmail" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
       <xs:element minOccurs="0" name="ViewId" type="xs:int" />
       <xs:element minOccurs="0" name="XML" nillable="true" type="xs:string" />
@@ -242,7 +251,9 @@
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="NumberOfPages" type="xs:int" />
+          <xs:element minOccurs="0" name="NumberOfResponses" type="xs:int" />
           <xs:element minOccurs="0" name="PageSize" type="xs:int" />
+          <xs:element minOccurs="0" name="SurveyInfo" nillable="true" type="tns:SurveyInfoDTO" />
           <xs:element minOccurs="0" name="SurveyResponseList" nillable="true" type="tns:ArrayOfSurveyAnswerDTO" />
         </xs:sequence>
       </xs:extension>
@@ -263,14 +274,14 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
       <xs:element minOccurs="0" name="SurveyId" type="ser:guid" />
-      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyQuestionAnswerList" nillable="true" type="q8:ArrayOfKeyValueOfstringstring" />
+      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyQuestionAnswerList" nillable="true" type="q9:ArrayOfKeyValueOfstringstring" />
       <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PreFilledAnswerDTO" nillable="true" type="tns:PreFilledAnswerDTO" />
   <xs:complexType name="PreFilledAnswerResponse">
     <xs:sequence>
-      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessageList" nillable="true" type="q9:ArrayOfKeyValueOfstringstring" />
+      <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ErrorMessageList" nillable="true" type="q10:ArrayOfKeyValueOfstringstring" />
       <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyResponseID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyResponsePassCode" nillable="true" type="xs:string" />
@@ -293,7 +304,7 @@
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="SurveyControlList" nillable="true" type="q10:ArrayOfSurveyControlDTO" />
+          <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="SurveyControlList" nillable="true" type="q11:ArrayOfSurveyControlDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

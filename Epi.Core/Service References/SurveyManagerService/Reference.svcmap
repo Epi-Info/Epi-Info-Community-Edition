@@ -18,16 +18,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:59905/surveymanagerservice.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:59584/surveymanagerservice.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SurveyManagerService5.xsd" MetadataType="Schema" ID="f020dd81-7c85-400f-bd4d-00f5051bd7b7" SourceId="1" SourceUrl="http://localhost:59905/SurveyManagerService.svc?xsd=xsd4" />
-    <MetadataFile FileName="SurveyManagerService51.xsd" MetadataType="Schema" ID="ce701f96-721c-4089-989d-263a6bc2a301" SourceId="1" SourceUrl="http://localhost:59905/SurveyManagerService.svc?xsd=xsd2" />
-    <MetadataFile FileName="ManagerService1.wsdl" MetadataType="Wsdl" ID="8fa322aa-4e9e-40a2-87e3-9aadf708d24a" SourceId="1" SourceUrl="http://localhost:59905/SurveyManagerService.svc?wsdl" />
-    <MetadataFile FileName="SurveyManagerService52.xsd" MetadataType="Schema" ID="db0380b7-154f-48e7-8eae-b2b6a152ad1d" SourceId="1" SourceUrl="http://localhost:59905/SurveyManagerService.svc?xsd=xsd1" />
-    <MetadataFile FileName="SurveyManagerService53.xsd" MetadataType="Schema" ID="d7e4f4ab-463d-4a8f-a485-d760cdd6bc4d" SourceId="1" SourceUrl="http://localhost:59905/SurveyManagerService.svc?xsd=xsd3" />
-    <MetadataFile FileName="SurveyManagerService1.disco" MetadataType="Disco" ID="11052360-4eba-45a0-a131-5923699181bd" SourceId="1" SourceUrl="http://localhost:59905/SurveyManagerService.svc?disco" />
-    <MetadataFile FileName="SurveyManagerService54.xsd" MetadataType="Schema" ID="8bcae162-de86-486d-be82-dc3fb49d928c" SourceId="1" SourceUrl="http://localhost:59905/SurveyManagerService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SurveyManagerService1.disco" MetadataType="Disco" ID="d071bf58-ee32-4d72-9706-5f67891f6e81" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerService.svc?disco" />
+    <MetadataFile FileName="SurveyManagerService5.xsd" MetadataType="Schema" ID="3492e8af-a070-439c-b5c1-dcbedb433e1f" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerService.svc?xsd=xsd5" />
+    <MetadataFile FileName="ManagerService1.wsdl" MetadataType="Wsdl" ID="5aaf6f78-daf1-4f9c-a1c6-7eeb7ca2931d" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerService.svc?wsdl" />
+    <MetadataFile FileName="SurveyManagerService6.xsd" MetadataType="Schema" ID="c3d009fd-fefb-4524-8000-8941cf7cb89f" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SurveyManagerService7.xsd" MetadataType="Schema" ID="07873745-46cc-4c26-ae3e-cb5bcb2115ae" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SurveyManagerService8.xsd" MetadataType="Schema" ID="9fafc8da-9a2c-49cc-b306-d535d148579a" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerService.svc?xsd=xsd4" />
+    <MetadataFile FileName="SurveyManagerService9.xsd" MetadataType="Schema" ID="928bb425-ff9c-49ce-a0a2-23ef30cf7210" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SurveyManagerService10.xsd" MetadataType="Schema" ID="a4dac1a4-1ccf-4d9e-a016-a11f01bf7829" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerService.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

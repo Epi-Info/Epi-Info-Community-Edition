@@ -346,6 +346,9 @@ namespace Epi.SurveyManagerServiceV3 {
         private string OrganizationNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ParentIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime StartDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -362,6 +365,9 @@ namespace Epi.SurveyManagerServiceV3 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid UserPublishKeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ViewIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string XMLField;
@@ -507,6 +513,19 @@ namespace Epi.SurveyManagerServiceV3 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ParentId {
+            get {
+                return this.ParentIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParentIdField, value) != true)) {
+                    this.ParentIdField = value;
+                    this.RaisePropertyChanged("ParentId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime StartDate {
             get {
                 return this.StartDateField;
@@ -580,6 +599,19 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((this.UserPublishKeyField.Equals(value) != true)) {
                     this.UserPublishKeyField = value;
                     this.RaisePropertyChanged("UserPublishKey");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ViewId {
+            get {
+                return this.ViewIdField;
+            }
+            set {
+                if ((this.ViewIdField.Equals(value) != true)) {
+                    this.ViewIdField = value;
+                    this.RaisePropertyChanged("ViewId");
                 }
             }
         }
@@ -863,13 +895,31 @@ namespace Epi.SurveyManagerServiceV3 {
         private System.DateTime DateCompletedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool GetAllColumnsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IncludeOrderStatisticsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsChildField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDeleteModeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsDownLoadFromAppField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsDraftModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsEditModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsMobileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsSqlProjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid OrganizationKeyField;
@@ -881,7 +931,19 @@ namespace Epi.SurveyManagerServiceV3 {
         private int PageSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ParentResponseIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool ReturnSizeInfoOnlyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SearchCriteriaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SortOrderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SortfieldField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StatusIdField;
@@ -891,6 +953,12 @@ namespace Epi.SurveyManagerServiceV3 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SurveyIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserOrganizationIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid UserPublishKeyField;
@@ -909,6 +977,19 @@ namespace Epi.SurveyManagerServiceV3 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool GetAllColumns {
+            get {
+                return this.GetAllColumnsField;
+            }
+            set {
+                if ((this.GetAllColumnsField.Equals(value) != true)) {
+                    this.GetAllColumnsField = value;
+                    this.RaisePropertyChanged("GetAllColumns");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IncludeOrderStatistics {
             get {
                 return this.IncludeOrderStatisticsField;
@@ -917,6 +998,32 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((this.IncludeOrderStatisticsField.Equals(value) != true)) {
                     this.IncludeOrderStatisticsField = value;
                     this.RaisePropertyChanged("IncludeOrderStatistics");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsChild {
+            get {
+                return this.IsChildField;
+            }
+            set {
+                if ((this.IsChildField.Equals(value) != true)) {
+                    this.IsChildField = value;
+                    this.RaisePropertyChanged("IsChild");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDeleteMode {
+            get {
+                return this.IsDeleteModeField;
+            }
+            set {
+                if ((this.IsDeleteModeField.Equals(value) != true)) {
+                    this.IsDeleteModeField = value;
+                    this.RaisePropertyChanged("IsDeleteMode");
                 }
             }
         }
@@ -943,6 +1050,45 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((this.IsDraftModeField.Equals(value) != true)) {
                     this.IsDraftModeField = value;
                     this.RaisePropertyChanged("IsDraftMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsEditMode {
+            get {
+                return this.IsEditModeField;
+            }
+            set {
+                if ((this.IsEditModeField.Equals(value) != true)) {
+                    this.IsEditModeField = value;
+                    this.RaisePropertyChanged("IsEditMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsMobile {
+            get {
+                return this.IsMobileField;
+            }
+            set {
+                if ((this.IsMobileField.Equals(value) != true)) {
+                    this.IsMobileField = value;
+                    this.RaisePropertyChanged("IsMobile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsSqlProject {
+            get {
+                return this.IsSqlProjectField;
+            }
+            set {
+                if ((this.IsSqlProjectField.Equals(value) != true)) {
+                    this.IsSqlProjectField = value;
+                    this.RaisePropertyChanged("IsSqlProject");
                 }
             }
         }
@@ -987,6 +1133,19 @@ namespace Epi.SurveyManagerServiceV3 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ParentResponseId {
+            get {
+                return this.ParentResponseIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParentResponseIdField, value) != true)) {
+                    this.ParentResponseIdField = value;
+                    this.RaisePropertyChanged("ParentResponseId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool ReturnSizeInfoOnly {
             get {
                 return this.ReturnSizeInfoOnlyField;
@@ -995,6 +1154,45 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((this.ReturnSizeInfoOnlyField.Equals(value) != true)) {
                     this.ReturnSizeInfoOnlyField = value;
                     this.RaisePropertyChanged("ReturnSizeInfoOnly");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SearchCriteria {
+            get {
+                return this.SearchCriteriaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SearchCriteriaField, value) != true)) {
+                    this.SearchCriteriaField = value;
+                    this.RaisePropertyChanged("SearchCriteria");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SortOrder {
+            get {
+                return this.SortOrderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SortOrderField, value) != true)) {
+                    this.SortOrderField = value;
+                    this.RaisePropertyChanged("SortOrder");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Sortfield {
+            get {
+                return this.SortfieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SortfieldField, value) != true)) {
+                    this.SortfieldField = value;
+                    this.RaisePropertyChanged("Sortfield");
                 }
             }
         }
@@ -1034,6 +1232,32 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((object.ReferenceEquals(this.SurveyIdField, value) != true)) {
                     this.SurveyIdField = value;
                     this.RaisePropertyChanged("SurveyId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserOrganizationId {
+            get {
+                return this.UserOrganizationIdField;
+            }
+            set {
+                if ((this.UserOrganizationIdField.Equals(value) != true)) {
+                    this.UserOrganizationIdField = value;
+                    this.RaisePropertyChanged("UserOrganizationId");
                 }
             }
         }
@@ -1177,19 +1401,7 @@ namespace Epi.SurveyManagerServiceV3 {
         private System.DateTime DateUpdatedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int FormOwnerIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsDraftModeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsLockedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int LastActiveUserIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int LoggedInUserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ParentRecordIdField;
@@ -1199,9 +1411,6 @@ namespace Epi.SurveyManagerServiceV3 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RecordSourceIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool RecoverLastRecordVersionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RelateParentIdField;
@@ -1220,9 +1429,6 @@ namespace Epi.SurveyManagerServiceV3 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SurveyIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserEmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid UserPublishKeyField;
@@ -1283,19 +1489,6 @@ namespace Epi.SurveyManagerServiceV3 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int FormOwnerId {
-            get {
-                return this.FormOwnerIdField;
-            }
-            set {
-                if ((this.FormOwnerIdField.Equals(value) != true)) {
-                    this.FormOwnerIdField = value;
-                    this.RaisePropertyChanged("FormOwnerId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsDraftMode {
             get {
                 return this.IsDraftModeField;
@@ -1304,45 +1497,6 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((this.IsDraftModeField.Equals(value) != true)) {
                     this.IsDraftModeField = value;
                     this.RaisePropertyChanged("IsDraftMode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsLocked {
-            get {
-                return this.IsLockedField;
-            }
-            set {
-                if ((this.IsLockedField.Equals(value) != true)) {
-                    this.IsLockedField = value;
-                    this.RaisePropertyChanged("IsLocked");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int LastActiveUserId {
-            get {
-                return this.LastActiveUserIdField;
-            }
-            set {
-                if ((this.LastActiveUserIdField.Equals(value) != true)) {
-                    this.LastActiveUserIdField = value;
-                    this.RaisePropertyChanged("LastActiveUserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int LoggedInUserId {
-            get {
-                return this.LoggedInUserIdField;
-            }
-            set {
-                if ((this.LoggedInUserIdField.Equals(value) != true)) {
-                    this.LoggedInUserIdField = value;
-                    this.RaisePropertyChanged("LoggedInUserId");
                 }
             }
         }
@@ -1382,19 +1536,6 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((this.RecordSourceIdField.Equals(value) != true)) {
                     this.RecordSourceIdField = value;
                     this.RaisePropertyChanged("RecordSourceId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool RecoverLastRecordVersion {
-            get {
-                return this.RecoverLastRecordVersionField;
-            }
-            set {
-                if ((this.RecoverLastRecordVersionField.Equals(value) != true)) {
-                    this.RecoverLastRecordVersionField = value;
-                    this.RaisePropertyChanged("RecoverLastRecordVersion");
                 }
             }
         }
@@ -1473,19 +1614,6 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((object.ReferenceEquals(this.SurveyIdField, value) != true)) {
                     this.SurveyIdField = value;
                     this.RaisePropertyChanged("SurveyId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string UserEmail {
-            get {
-                return this.UserEmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserEmailField, value) != true)) {
-                    this.UserEmailField = value;
-                    this.RaisePropertyChanged("UserEmail");
                 }
             }
         }
@@ -1899,7 +2027,13 @@ namespace Epi.SurveyManagerServiceV3 {
         private int NumberOfPagesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumberOfResponsesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PageSizeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerServiceV3.SurveyInfoDTO SurveyInfoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Epi.SurveyManagerServiceV3.SurveyAnswerDTO[] SurveyResponseListField;
@@ -1918,6 +2052,19 @@ namespace Epi.SurveyManagerServiceV3 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumberOfResponses {
+            get {
+                return this.NumberOfResponsesField;
+            }
+            set {
+                if ((this.NumberOfResponsesField.Equals(value) != true)) {
+                    this.NumberOfResponsesField = value;
+                    this.RaisePropertyChanged("NumberOfResponses");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int PageSize {
             get {
                 return this.PageSizeField;
@@ -1926,6 +2073,19 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((this.PageSizeField.Equals(value) != true)) {
                     this.PageSizeField = value;
                     this.RaisePropertyChanged("PageSize");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerServiceV3.SurveyInfoDTO SurveyInfo {
+            get {
+                return this.SurveyInfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyInfoField, value) != true)) {
+                    this.SurveyInfoField = value;
+                    this.RaisePropertyChanged("SurveyInfo");
                 }
             }
         }
@@ -2058,6 +2218,9 @@ namespace Epi.SurveyManagerServiceV3 {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string URLField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<int, string> ViewIdAndFormIdListField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -2103,6 +2266,19 @@ namespace Epi.SurveyManagerServiceV3 {
                 if ((object.ReferenceEquals(this.URLField, value) != true)) {
                     this.URLField = value;
                     this.RaisePropertyChanged("URL");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<int, string> ViewIdAndFormIdList {
+            get {
+                return this.ViewIdAndFormIdListField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ViewIdAndFormIdListField, value) != true)) {
+                    this.ViewIdAndFormIdListField = value;
+                    this.RaisePropertyChanged("ViewIdAndFormIdList");
                 }
             }
         }

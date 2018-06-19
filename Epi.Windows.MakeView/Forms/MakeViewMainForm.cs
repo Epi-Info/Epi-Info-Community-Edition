@@ -3192,8 +3192,10 @@ namespace Epi.Windows.MakeView.Forms
                     else
                     {
                         if (!string.IsNullOrEmpty(this.OrganizationKey) && (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.Trim())))
+
                         {
-                            WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
+                            string Xml = template.CreateWebSurveyTemplate();
+                            WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, Xml);
                             dialog.ShowDialog();
                         }
                         else
