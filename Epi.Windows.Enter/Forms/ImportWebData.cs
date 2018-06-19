@@ -1675,11 +1675,11 @@ namespace Epi.Enter.Forms
             Request.Criteria.ReturnSizeInfoOnly = ReturnSizeInfoOnly;
             Request.Criteria.StatusId = SurveyStatus;
             Request.Criteria.IsDraftMode = this.IsDraftMode;
-            Request.Criteria.SurveyAnswerIdList = new List<string>();
+            Request.Criteria.SurveyAnswerIdList = new SurveyManagerService.SurveyAnswerCriteria().SurveyAnswerIdList;
 
-            List<SurveyManagerService.SurveyAnswerDTO> DTOList = new List<SurveyManagerService.SurveyAnswerDTO>();
+           
              
-            Request.SurveyAnswerList = DTOList ;
+            Request.SurveyAnswerList = new  List<SurveyManagerService.SurveyAnswerDTO>().ToArray() ;
            
             
             return Request;
@@ -1695,8 +1695,8 @@ namespace Epi.Enter.Forms
             Request.Criteria.ReturnSizeInfoOnly = ReturnSizeInfoOnly;
             Request.Criteria.StatusId = SurveyStatus;
             Request.Criteria.IsDraftMode = this.IsDraftMode;
-            Request.Criteria.SurveyAnswerIdList = new List<string>();
-            Request.SurveyAnswerList = new List<SurveyManagerServiceV2.SurveyAnswerDTO>();
+            Request.Criteria.SurveyAnswerIdList = new List<string>().ToArray();
+            Request.SurveyAnswerList = new List<SurveyManagerServiceV2.SurveyAnswerDTO>().ToArray();
 
 
             return Request;
