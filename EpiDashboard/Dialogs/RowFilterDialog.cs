@@ -9,6 +9,9 @@ using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using EpiDashboard;
 using EpiDashboard.Rules;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
 
 namespace EpiDashboard.Dialogs
 {
@@ -35,7 +38,12 @@ namespace EpiDashboard.Dialogs
             Construct();
 
             rfc = new EpiDashboard.RowFilterControl(dashboardHelper, Mode, null, includeUserDefinedVars);
-            host.Child = rfc;            
+            host.Child = rfc;
+
+            System.Windows.Size elementSize = GetElementPixelSize(host.Child);
+
+            this.Width = (int)elementSize.Width + 90;
+            this.Height = (int)elementSize.Height + 90;
         }
 
         public RowFilterDialog(DashboardHelper dashboardHelper, FilterDialogMode pMode, DataFilters filters, bool includeUserDefinedVars)
@@ -47,7 +55,36 @@ namespace EpiDashboard.Dialogs
             Construct();
 
             rfc = new EpiDashboard.RowFilterControl(dashboardHelper, Mode, filters, includeUserDefinedVars);
-            host.Child = rfc;            
+            host.Child = rfc;
+
+            System.Windows.Size elementSize = GetElementPixelSize(host.Child);
+
+            this.Width = (int)elementSize.Width + 90;
+            this.Height = (int)elementSize.Height + 90;
+        }
+
+        public System.Windows.Size GetElementPixelSize(System.Windows.UIElement element)
+        {
+            Matrix transformToDevice;
+            var source = PresentationSource.FromVisual(element);
+            if (source != null)
+            { 
+                transformToDevice = source.CompositionTarget.TransformToDevice;
+            }
+            else
+            {
+                using (var Hwndsource = new HwndSource(new HwndSourceParameters()))
+                {
+                    transformToDevice = Hwndsource.CompositionTarget.TransformToDevice;
+                }
+            }
+
+            if (element.DesiredSize == new System.Windows.Size())
+            {
+                element.Measure(new System.Windows.Size(double.PositiveInfinity, double.PositiveInfinity));
+            }
+
+            return (System.Windows.Size)transformToDevice.Transform((Vector)element.DesiredSize);
         }
 
         private FilterDialogMode Mode
@@ -75,10 +112,6 @@ namespace EpiDashboard.Dialogs
             host = new ElementHost();
             host.Dock = DockStyle.Fill;
             this.Controls.Add(host);
-
-            this.Width = 587;
-            this.Height = 660;
-            
         }
 
         public DataFilters DataFilters
