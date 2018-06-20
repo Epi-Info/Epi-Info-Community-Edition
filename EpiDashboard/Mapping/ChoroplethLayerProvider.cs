@@ -961,9 +961,26 @@ namespace EpiDashboard.Mapping
                             TextSymbol textSymbol = new TextSymbol();
                             textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                             textSymbol.FontSize = 11;
-                            textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
+                            //textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
+                            string sShapekey = graphicFeature.Attributes[shapeKey].ToString().Trim();
+                            int indexShapeKey = sShapekey.LastIndexOfAny(new char[] { ' ', '-' });
+                            int iShapeKeyLen = sShapekey.Length;
+
+                            //  Break up label if possible and put on new line.  Adjust offsets as needed.
+                            if (indexShapeKey != -1) //& iShapeKeyLen > 10)
+                            {
+                                textSymbol.Text = sShapekey.Substring(0, indexShapeKey) + "\r\n    " + sShapekey.Substring(indexShapeKey + 1, (iShapeKeyLen - (indexShapeKey + 1)));
+                                textSymbol.OffsetX = iShapeKeyLen / 0.8;
+                                textSymbol.OffsetY = 6;
+                            }
+                            else
+                            {
+                                textSymbol.Text = sShapekey;
+                                textSymbol.OffsetX = iShapeKeyLen / 0.4;
+                                textSymbol.OffsetY = 3;
+                            }
                             //Console.WriteLine(textSymbol.Text);
-                            textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
+                            //textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
                             textSymbol.OffsetY = textSymbol.FontSize / 2.0;
 
                             Envelope extentEnvelope = graphicFeature.Geometry.Extent;
