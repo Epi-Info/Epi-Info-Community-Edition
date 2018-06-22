@@ -45,7 +45,6 @@
             this.lbxStatus = new System.Windows.Forms.ListBox();
             this.cmsStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWarning = new System.Windows.Forms.Label();
             this.lblWarningMessage = new System.Windows.Forms.Label();
             this.rdbFinalMode = new System.Windows.Forms.RadioButton();
@@ -57,11 +56,12 @@
             this.rdbSubmittedFull = new System.Windows.Forms.RadioButton();
             this.lblFullImport = new System.Windows.Forms.Label();
             this.lblIncrementalImport = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupImportInfo.SuspendLayout();
             this.cmsStatus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpImportMode.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblDescription
@@ -141,9 +141,9 @@
             // 
             // lbxStatus
             // 
-            resources.ApplyResources(this.lbxStatus, "lbxStatus");
             this.lbxStatus.ContextMenuStrip = this.cmsStatus;
             this.lbxStatus.FormattingEnabled = true;
+            resources.ApplyResources(this.lbxStatus, "lbxStatus");
             this.lbxStatus.Name = "lbxStatus";
             this.lbxStatus.TabStop = false;
             // 
@@ -159,13 +159,6 @@
             // 
             this.toolStripMenuItem_Copy.Name = "toolStripMenuItem_Copy";
             resources.ApplyResources(this.toolStripMenuItem_Copy, "toolStripMenuItem_Copy");
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Epi.Enter.Properties.Resources.warning;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
             // 
             // lblWarning
             // 
@@ -215,12 +208,12 @@
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.rdbSubmittedFull);
             this.groupBox1.Controls.Add(this.lblFullImport);
             this.groupBox1.Controls.Add(this.lblIncrementalImport);
             this.groupBox1.Controls.Add(this.rdbSubmittedIncremental);
             this.groupBox1.Controls.Add(this.rdbAllRecords);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -240,6 +233,13 @@
             // 
             resources.ApplyResources(this.lblIncrementalImport, "lblIncrementalImport");
             this.lblIncrementalImport.Name = "lblIncrementalImport";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Epi.Enter.Properties.Resources.warning;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
             // 
             // ImportWebDataForm
             // 
@@ -268,9 +268,9 @@
             this.groupImportInfo.ResumeLayout(false);
             this.groupImportInfo.PerformLayout();
             this.cmsStatus.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grpImportMode.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,7 +287,6 @@
         private System.Windows.Forms.ListBox lbxStatus;
         private System.Windows.Forms.TextBox textProgress;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblWarning;
         private System.Windows.Forms.Label lblWarningMessage;
         private System.Windows.Forms.TextBox textData;
@@ -305,5 +304,6 @@
         private System.Windows.Forms.RadioButton rdbSubmittedFull;
         private System.Windows.Forms.Label lblFullImport;
         private System.Windows.Forms.Label lblIncrementalImport;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
