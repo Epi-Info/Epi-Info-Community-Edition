@@ -4360,6 +4360,8 @@ namespace EpiDashboard
                     dataDisplay.Visibility = System.Windows.Visibility.Collapsed;
                     dataDictionary.Visibility = System.Windows.Visibility.Collapsed;
                     duplicatesDisplay.Visibility = Visibility.Collapsed;
+
+                    RefreshResults();
                 }
                 else if (cmbView.SelectedIndex == 1)
                 {
