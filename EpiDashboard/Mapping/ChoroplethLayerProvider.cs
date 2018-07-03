@@ -37,6 +37,9 @@ namespace EpiDashboard.Mapping
         public string _missingText;
         public List<SolidColorBrush> _colors;
         public int _classCount;
+        public double _resolution;
+        public double _centerPoint_X;
+        public double _centerPoint_Y;
         public ThematicItem _thematicItem;
         public bool AreRangesSet { get; set; }
         public List<GraphicsLayer> _graphicsLayers;

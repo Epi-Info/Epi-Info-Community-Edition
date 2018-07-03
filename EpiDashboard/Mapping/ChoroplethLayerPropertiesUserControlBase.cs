@@ -63,6 +63,24 @@ namespace EpiDashboard.Mapping
                     provider._classCount = legacyClassCountIndex + 3;
                 }
 
+                if (child.Name.Equals("resolution"))
+                {
+                    string resolution = child.InnerText;
+                    provider._resolution = double.Parse(resolution);
+                }
+
+                if (child.Name.Equals("centerPoint_X"))
+                {
+                    string centerPoint_X = child.InnerText;
+                    provider._centerPoint_X = double.Parse(centerPoint_X);
+                }
+
+                if (child.Name.Equals("centerPoint_Y"))
+                {
+                    string centerPoint_Y = child.InnerText;
+                    provider._centerPoint_Y = double.Parse(centerPoint_Y);
+                }
+
                 if (child.Name.Equals("opacity"))
                 {
                     byte opacity = 115;
@@ -177,6 +195,11 @@ namespace EpiDashboard.Mapping
                 string asQuintileTag = "<partitionUsingQuantiles>" + provider.UseQuantiles + "</partitionUsingQuantiles>" + Environment.NewLine;
                 string classRanges = "";
 
+                string resolution = "<resolution>" + provider.ArcGIS_Map.Resolution.ToString() + "</resolution>" + Environment.NewLine;
+                string centerPoint_X = "<centerPoint_X>" + provider.ArcGIS_Map.Extent.GetCenter().X.ToString() + "</centerPoint_X>" + Environment.NewLine;
+                string centerPoint_Y = "<centerPoint_Y>" + provider.ArcGIS_Map.Extent.GetCenter().Y.ToString() + "</centerPoint_Y>" + Environment.NewLine;
+
+
                 if (provider.UseQuantiles == false)
                 {
                     if (provider.ClassRangesDictionary != null)
@@ -202,6 +225,9 @@ namespace EpiDashboard.Mapping
                                    classTitles +
                                    classRanges +
                                    useCustomColorsTag +
+                                   resolution +
+                                   centerPoint_X +
+                                   centerPoint_Y +
                                    asQuintileTag +
                                    customColors +
                                    "<lowColor>" + lowColor.Color.ToString() + "</lowColor>" + Environment.NewLine +
@@ -298,6 +324,11 @@ namespace EpiDashboard.Mapping
             choroplethprop.ListLegendText = provider.ListLegendText;
 
             choroplethprop.SetProperties();
+
+            if (provider._resolution != 0)
+            { 
+                provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y));
+            }
 
             choroplethprop.RenderMap();
         }
