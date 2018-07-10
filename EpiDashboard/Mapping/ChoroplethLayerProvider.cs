@@ -40,6 +40,12 @@ namespace EpiDashboard.Mapping
         public double _resolution;
         public double _centerPoint_X;
         public double _centerPoint_Y;
+        public Int32 _spatialRef;
+        public Envelope _envExtent;
+        public double _envMinX;
+        public double _envMinY;
+        public double _envMaxX;
+        public double _envMaxY;
         public ThematicItem _thematicItem;
         public bool AreRangesSet { get; set; }
         public List<GraphicsLayer> _graphicsLayers;

@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Windows.Media;
 
+
 namespace EpiDashboard.Mapping
 {
     public class ChoroplethLayerPropertiesUserControlBase : UserControl
@@ -15,6 +16,7 @@ namespace EpiDashboard.Mapping
         public string boundryFilePath;
         public IMapControl mapControl;
         public bool partitionSetUsingQuantiles;
+       
 
         private Dictionary<int, object> _classAttribList;
         public Dictionary<int, object> ClassAttributeList
@@ -80,6 +82,21 @@ namespace EpiDashboard.Mapping
                     string centerPoint_Y = child.InnerText;
                     provider._centerPoint_Y = double.Parse(centerPoint_Y);
                 }
+
+                if (child.Name.Equals("spatialRef"))
+                {
+                    string spatialRef = child.InnerText;
+                    provider._spatialRef = int.Parse(spatialRef);
+                }
+
+                //if (child.Name.Equals("mapExtent"))
+                //{
+                //    foreach (System.Xml.XmlElement coord in child)
+                //    {
+
+                //    }
+                //}
+
 
                 if (child.Name.Equals("opacity"))
                 {
@@ -198,6 +215,11 @@ namespace EpiDashboard.Mapping
                 string resolution = "<resolution>" + provider.ArcGIS_Map.Resolution.ToString() + "</resolution>" + Environment.NewLine;
                 string centerPoint_X = "<centerPoint_X>" + provider.ArcGIS_Map.Extent.GetCenter().X.ToString() + "</centerPoint_X>" + Environment.NewLine;
                 string centerPoint_Y = "<centerPoint_Y>" + provider.ArcGIS_Map.Extent.GetCenter().Y.ToString() + "</centerPoint_Y>" + Environment.NewLine;
+                string spatialRef = "<spatialRef>" + provider.ArcGIS_Map.SpatialReference.WKID.ToString() + "</spatialRef>" + Environment.NewLine;
+                string envMinX = "<envMinX>" + provider.ArcGIS_Map.Extent.XMin + "</envMinX>" + Environment.NewLine;
+                string envMinY = "<envMinY>" + provider.ArcGIS_Map.Extent.YMin + "</envMinY>" + Environment.NewLine;
+                string envMaxX = "<envMaxX>" + provider.ArcGIS_Map.Extent.XMax + "</envMaxX>" + Environment.NewLine;
+                string envMaxY = "<envMaxY>" + provider.ArcGIS_Map.Extent.YMax + "</envMaxY>" + Environment.NewLine;
 
 
                 if (provider.UseQuantiles == false)
@@ -228,6 +250,11 @@ namespace EpiDashboard.Mapping
                                    resolution +
                                    centerPoint_X +
                                    centerPoint_Y +
+                                   spatialRef +
+                                   envMinX +
+                                   envMinY +
+                                   envMaxX +
+                                   envMaxY +
                                    asQuintileTag +
                                    customColors +
                                    "<lowColor>" + lowColor.Color.ToString() + "</lowColor>" + Environment.NewLine +
@@ -326,9 +353,24 @@ namespace EpiDashboard.Mapping
             choroplethprop.SetProperties();
 
             if (provider._resolution != 0)
-            { 
-                provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y));
+            {
+                //provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y));
+                //provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
+                //provider.ArcGIS_Map.PanTo(new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference.));
+
+                //ESRI.ArcGIS.Client.Geometry.MapPoint renderCenter = new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference);
+
+
+                //provider.ArcGIS_Map.PanTo(new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
+                //provider.ArcGIS_Map.ZoomToResolution(provider._resolution, renderCenter);
+                //provider.ArcGIS_Map.Extent.Equals(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
+                ESRI.ArcGIS.Client.Geometry.Envelope showExtent = new ESRI.ArcGIS.Client.Geometry.Envelope(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
+                provider.ArcGIS_Map.ZoomTo(showExtent);    // It could be that the extent never changes.
+                provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
+                //provider.ArcGIS_Map.PanTo(new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
+
             }
+
 
             choroplethprop.RenderMap();
         }

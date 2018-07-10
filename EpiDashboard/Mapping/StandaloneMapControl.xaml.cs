@@ -1670,9 +1670,17 @@ namespace EpiDashboard.Mapping
                 element.Attributes.Append(baseMapType);
 
                 System.Xml.XmlTextWriter writer = new System.Xml.XmlTextWriter(dlg.FileName, null);
+                writer.Formatting = System.Xml.Formatting.Indented;
                 element.WriteTo(writer);
                 writer.Close();
                 MessageBox.Show(DashboardSharedStrings.MAP_SAVED, DashboardSharedStrings.SAVE_SUCCESSFUL, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                System.Xml.XmlTextWriter writer2 = new System.Xml.XmlTextWriter(Console.Out);
+                writer2.Formatting = System.Xml.Formatting.Indented;
+                element.WriteTo(writer2);
+                writer2.Flush();
+                Console.WriteLine();
+                writer2.Close();
             }
         }
 
