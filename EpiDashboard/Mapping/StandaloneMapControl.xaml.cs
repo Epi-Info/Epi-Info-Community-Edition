@@ -1281,6 +1281,10 @@ namespace EpiDashboard.Mapping
             }
         }
 
+        //     Put in ViewPoint change here  -- zyp9
+        //     https://developers.arcgis.com/net/latest/wpf/api-reference/html/M_Esri_ArcGISRuntime_Geometry_Envelope_GetCenter.htm
+        //     **  Allows viewpoint / extent to change. If extent changes, then the center of the extent will follow.
+
         void mnuTimeLapse_Click(object sender, RoutedEventArgs e)
         {
             CreateTimeLapse();
