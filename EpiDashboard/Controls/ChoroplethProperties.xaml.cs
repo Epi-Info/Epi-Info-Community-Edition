@@ -104,7 +104,7 @@ namespace EpiDashboard.Controls
             _currentColor_rampStart = (SolidColorBrush)rctLowColor.Fill;
             _currentColor_rampEnd = (SolidColorBrush)rctHighColor.Fill;
             _initialRampCalc = true;
-            mapOriginalExtent = myMap.Extent;
+            //mapOriginalExtent = myMap.Extent;
 
             #region Translation
 
@@ -1591,7 +1591,27 @@ namespace EpiDashboard.Controls
 
             EnableDisableClassRangeInput();
         }
-        
+
+        private void CheckBox_showPolylabels_Click(object sender, RoutedEventArgs e)
+        {
+            OnShowPolylabelsChanged();
+        }
+
+        public void OnShowPolylabelsChanged()
+        {
+            if (LayerProvider != null)
+            {
+                LayerProvider.ShowPolyLabels = (bool)showPolyLabels.IsChecked;
+            }
+
+            //if (showPolyLabels.IsChecked == true)
+            //{
+            //    Reset_Legend();
+            //}
+            //PropertyChanged_EnableDisable();
+        }
+
+
         public void cmbShapeKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbShapeKey.SelectedItem != null)

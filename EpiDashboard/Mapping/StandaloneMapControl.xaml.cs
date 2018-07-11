@@ -1679,6 +1679,7 @@ namespace EpiDashboard.Mapping
                 writer.Close();
                 MessageBox.Show(DashboardSharedStrings.MAP_SAVED, DashboardSharedStrings.SAVE_SUCCESSFUL, MessageBoxButton.OK, MessageBoxImage.Information);
 
+                // For debug purposes - remove for release (zyp9)
                 System.Xml.XmlTextWriter writer2 = new System.Xml.XmlTextWriter(Console.Out);
                 writer2.Formatting = System.Xml.Formatting.Indented;
                 element.WriteTo(writer2);

@@ -366,7 +366,7 @@ namespace EpiDashboard.Mapping
                 //provider.ArcGIS_Map.Extent.Equals(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
                 ESRI.ArcGIS.Client.Geometry.Envelope showExtent = new ESRI.ArcGIS.Client.Geometry.Envelope(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
                 provider.ArcGIS_Map.ZoomTo(showExtent);    // It could be that the extent never changes.
-                provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
+                //provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
                 //provider.ArcGIS_Map.PanTo(new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
 
             }
