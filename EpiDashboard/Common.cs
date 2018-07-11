@@ -60,6 +60,39 @@ namespace EpiDashboard
             }
         }
 
+        public void CreateMapImage(string mapFilePath)
+        {
+            Mapping.StandaloneMapControl mapControl = new Mapping.StandaloneMapControl();
+
+            mapControl.OpenMap(mapFilePath);
+
+            
+            //MessageBox.Show("assert");
+
+            //FrameworkElement visual
+
+            //if (dlg.ShowDialog().Value)
+            //{
+            //    BitmapSource img = (BitmapSource)ToImageSource(visual);
+
+            //    FileStream stream = new FileStream(dlg.FileName, FileMode.Create);
+            //    BitmapEncoder encoder = null; // new BitmapEncoder();
+
+            //    if (dlg.SafeFileName.ToLowerInvariant().EndsWith(".png"))
+            //    {
+            //        encoder = new PngBitmapEncoder();
+            //    }
+            //    else
+            //    {
+            //        encoder = new JpegBitmapEncoder();
+            //    }
+
+            //    encoder.Frames.Add(BitmapFrame.Create(img));
+            //    encoder.Save(stream);
+            //    stream.Close();
+            //}
+        }
+
         public static ImageSource ToImageSource(FrameworkElement obj)
         {
             Transform transform = obj.LayoutTransform;
