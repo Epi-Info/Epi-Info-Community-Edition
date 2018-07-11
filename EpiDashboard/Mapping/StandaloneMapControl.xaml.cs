@@ -2705,33 +2705,51 @@ namespace EpiDashboard.Mapping
                     if (myMap.Layers[0] is OpenStreetMapLayer)
                     {
                         bool sparse_connection = false;
-
-                        try
-                        {
-                            Configuration config = Configuration.GetNewInstance();
-                            if (config.Settings.SparseConnection == true)
-                            {
-                                sparse_connection = true;
-                            }
-                        }
-                        catch { }
-
-                        if(sparse_connection == true)
-                        {
-                            ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
-                        }
-                        else
+                        Configuration config = Configuration.GetNewInstance();
+                        if (config.Settings.SparseConnection == false)
                         {
                             if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
                                 ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
                             }
-                            else
+                        }
+                    }
+                    else
+                    {
+                        //try
+                        //{
+                        //    Configuration config = Configuration.GetNewInstance();
+                        //    if (config.Settings.SparseConnection == true)
+                        //    {
+                        bool sparse_connection = true;
+                        Configuration config = Configuration.GetNewInstance();
+                        if (config.Settings.SparseConnection == true)
+                        {
+                            if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
                                 ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
                             }
                         }
+                        //    }
+                        //}
+                        //catch { }
                     }
+
+                    //if (sparse_connection)
+                    //{
+                    //     ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
+                    //}
+                    //else
+                    //{
+                    //    if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                    //    {
+                    //       ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
+                    //    }
+                    //    else
+                    //    {
+                    //       ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
+                    //    }
+                    //}
 
                     ((OpenStreetMapLayer)myMap.Layers[0]).Refresh();
                 }

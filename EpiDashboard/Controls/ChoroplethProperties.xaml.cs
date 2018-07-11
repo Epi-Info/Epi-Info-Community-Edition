@@ -581,7 +581,7 @@ namespace EpiDashboard.Controls
                 {
                     ESRI.ArcGIS.Client.GraphicsLayer graphicsLayer = _myMap.Layers[id] as ESRI.ArcGIS.Client.GraphicsLayer;
                     if (graphicsLayer != null)
-                        _myMap.Layers.Remove(graphicsLayer);
+                       _myMap.Layers.Remove(graphicsLayer);
                 }
             }
             if (choroplethServerLayerProperties != null && shapeAttributes != null & !string.IsNullOrEmpty(ShapeKey))
@@ -597,7 +597,8 @@ namespace EpiDashboard.Controls
                     choroplethServerLayerProperties.cbxShapeKey.Text = ShapeKey;                                
             }
             
-           // _myMap.Extent = mapOriginalExtent;
+           _myMap.Extent = mapOriginalExtent;
+           
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
