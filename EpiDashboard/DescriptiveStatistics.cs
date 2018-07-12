@@ -56,6 +56,14 @@ namespace EpiDashboard
         public double pEqual;
         public double tStatisticUnequal;
         public double pUneqal;
+        public double tStatisticPaired;
+        public double tStatisticPairedP;
+        public double pairedDifferenceMean;
+        public double pairedDifferenceVariance;
+        public double pairedDifferenceSD;
+        public double pairedDifferenceSE;
+        public double pairedDifferenceLCL;
+        public double pairedDifferenceUCL;
         public int crosstabs;
     }
 }

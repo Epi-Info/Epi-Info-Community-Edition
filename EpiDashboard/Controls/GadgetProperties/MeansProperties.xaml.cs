@@ -35,9 +35,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             List<string> fields = new List<string>();
             List<FieldInfo> items = new List<FieldInfo>();
             List<string> crosstabFields = new List<string>();
+            List<string> pairIDFields = new List<string>();
             List<string> strataFields = new List<string>();
 
             crosstabFields.Add(string.Empty);
+            pairIDFields.Add(string.Empty);
             items.Add(new FieldInfo()
             {
                 Name = "",
@@ -57,6 +59,7 @@ namespace EpiDashboard.Controls.GadgetProperties
                 });
 
                 crosstabFields.Add(fieldName);
+                pairIDFields.Add(fieldName);
                 strataFields.Add(fieldName);
             }
             foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
@@ -79,6 +82,13 @@ namespace EpiDashboard.Controls.GadgetProperties
                 if (crosstabFields.Contains("LastSaveTime")) crosstabFields.Remove("LastSaveTime");
                 if (crosstabFields.Contains("SYSTEMDATE")) crosstabFields.Remove("SYSTEMDATE");
 
+                if (pairIDFields.Contains("RecStatus")) crosstabFields.Remove("RecStatus");
+                if (pairIDFields.Contains("FKEY")) crosstabFields.Remove("FKEY");
+                if (pairIDFields.Contains("GlobalRecordId")) crosstabFields.Remove("GlobalRecordId");
+                if (pairIDFields.Contains("FirstSaveTime")) crosstabFields.Remove("FirstSaveTime");
+                if (pairIDFields.Contains("LastSaveTime")) crosstabFields.Remove("LastSaveTime");
+                if (pairIDFields.Contains("SYSTEMDATE")) crosstabFields.Remove("SYSTEMDATE");
+
                 if (strataFields.Contains("RecStatus")) strataFields.Remove("RecStatus");
                 if (strataFields.Contains("FKEY")) fields.Remove("FKEY");
                 if (strataFields.Contains("GlobalRecordId")) strataFields.Remove("GlobalRecordId");
@@ -90,10 +100,12 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             fields.Sort();
             crosstabFields.Sort();
+            pairIDFields.Sort();
 
             cbxField.ItemsSource = fields;
             cbxFieldWeight.ItemsSource = fields;
             cbxFieldCrosstab.ItemsSource = crosstabFields;
+            cbxFieldPairID.ItemsSource = pairIDFields;
             lvFieldStrata.ItemsSource = strataFields;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxField.ItemsSource);
@@ -166,6 +178,39 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
         }
 
+        private void cbxFieldCrosstab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxFieldCrosstab.SelectedIndex > 0)
+            {
+                System.Data.DataView mydv = this.DashboardHelper.DataSet.Tables[0].DefaultView;
+                List<object> distinctCrosstabValues = new List<object>();
+                for (int i = 0; i < mydv.Count; i++)
+                {
+                    System.Data.DataRow dr = mydv[i].Row;
+                    object ob = dr[cbxFieldCrosstab.SelectedItem + ""];
+                    if (!distinctCrosstabValues.Contains(ob))
+                        distinctCrosstabValues.Add(ob);
+                }
+                if (distinctCrosstabValues.Count == 2)
+                {
+                    cbxFieldPairID.Visibility = Visibility.Visible;
+                    tblockPairID.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    cbxFieldPairID.SelectedIndex = 0;
+                    cbxFieldPairID.Visibility = Visibility.Collapsed;
+                    tblockPairID.Visibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                cbxFieldPairID.SelectedIndex = 0;
+                cbxFieldPairID.Visibility = Visibility.Collapsed;
+                tblockPairID.Visibility = Visibility.Collapsed;
+            }
+        }
+
         public MeansParameters Parameters { get; private set; }
 
         /// <summary>
@@ -232,6 +277,16 @@ namespace EpiDashboard.Controls.GadgetProperties
                 Parameters.CrosstabVariableName = String.Empty;
             }
 
+            if (cbxFieldPairID.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxFieldPairID.SelectedItem.ToString()))
+            {
+                Parameters.PairIDVariableName = cbxFieldPairID.SelectedItem.ToString();
+                Parameters.ColumnNames.Add(Parameters.PairIDVariableName.ToString());
+            }
+            else
+            {
+                Parameters.PairIDVariableName = String.Empty;
+            }
+
             if (checkboxShowANOVA.IsChecked == true)
             {
                 inputVariableList.Add("showanova", "true");
@@ -275,6 +330,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
             cbxFieldCrosstab.SelectedItem = Parameters.CrosstabVariableName;
+            cbxFieldPairID.SelectedItem = Parameters.PairIDVariableName;
             checkboxShowANOVA.IsChecked = Parameters.ShowANOVA;
             checkboxListLabels.IsChecked = Parameters.ShowCommentLegalLabels;
             cbxFieldPrecision.SelectedIndex = Convert.ToInt32(Parameters.Precision);

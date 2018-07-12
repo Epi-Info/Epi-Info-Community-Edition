@@ -5140,6 +5140,25 @@ namespace EpiDashboard
                                 ds.equalUCLMean = ds.meansDiff + (double)intervalLength;
                                 ds.unequalLCLMean = ds.meansDiff - SEu * unEqualIntervalT;
                                 ds.unequalUCLMean = ds.meansDiff + SEu * unEqualIntervalT;
+
+                                ds.tStatisticPaired = Double.NegativeInfinity;
+                                ds.tStatisticPairedP = Double.NegativeInfinity;
+                                if (!String.IsNullOrEmpty(((MeansParameters)inputs).PairIDVariableName)) // Do Paired T-Test
+                                {
+                                    List<double> pairedDifferences = DoPairedDifferencess(dv,
+                                        inputs,
+                                        ((MeansParameters)inputs).PairIDVariableName);
+                                    ds.tStatisticPaired = pairedDifferences.ElementAt<double>(0);
+                                    ds.tStatisticPairedP = pairedDifferences.ElementAt<double>(1);
+                                    ds.pairedDifferenceMean = pairedDifferences.ElementAt<double>(2);
+                                    ds.pairedDifferenceVariance = pairedDifferences.ElementAt<double>(3);
+                                    ds.pairedDifferenceSD = pairedDifferences.ElementAt<double>(4);
+                                    ds.pairedDifferenceSE = pairedDifferences.ElementAt<double>(5);
+                                    short pairedDifferenceDF = (short)pairedDifferences.ElementAt<double>(6);
+                                    double tfromp = new StatisticsRepository.statlib().TfromP(ref tProbability, ref pairedDifferenceDF);
+                                    ds.pairedDifferenceLCL = ds.pairedDifferenceMean - tfromp * ds.pairedDifferenceSE;
+                                    ds.pairedDifferenceUCL = ds.pairedDifferenceMean + tfromp * ds.pairedDifferenceSE;
+                                }
                             }
 
                             string nullFilter = AddBracketsToString(freqVar) + " is not null";
@@ -9758,6 +9777,94 @@ namespace EpiDashboard
                 //Debug.Print("DoMeans took " + sw1.Elapsed.ToString() + " seconds to complete.");
             }
             return means;
+        }
+
+        private List<double> DoPairedDifferencess(DataView dv_input,
+            FrequencyParametersBase inputs,
+            string pairID)
+        {
+            List<double> pairedDifferences = new List<double>();
+            List<double> pairWeights = new List<double>();
+
+            DataTable mydt = dv_input.Table;
+
+            var valuesAndCounts =
+                from row in mydt.AsEnumerable()
+                group row by row.Field<object>(pairID) into idcounts
+                orderby idcounts.Key
+                select new
+                {
+                    IDValue = idcounts.Key,
+                    IDValueCount = idcounts.Count()
+                };
+            List<string> IDsWithNotTwo = new List<string>();
+            bool firstID = true;
+            StringBuilder IDsb = new StringBuilder();
+            foreach (var IDValueAndCount in valuesAndCounts)
+            {
+                if (IDValueAndCount.IDValueCount != 2)
+                {
+                    IDsWithNotTwo.Add(IDValueAndCount.IDValue.ToString());
+                    if (firstID)
+                        firstID = false;
+                    else
+                        IDsb.Append(" AND ");
+                    IDsb.AppendFormat(pairID + " <> '{0}'", IDValueAndCount.IDValue.ToString());
+                }
+            }
+
+            DataView mydv = mydt.DefaultView;
+            mydv.Sort = pairID + ", " + inputs.CrosstabVariableName;
+            mydv.RowFilter = IDsb.ToString();
+            double sumdiffs = 0.0;
+            double sumweights = 0.0;
+            for (int i = 1; i < mydv.Count; i += 2)
+            {
+                if (String.IsNullOrEmpty(inputs.WeightVariableName))
+                {
+                    double difference = (double)mydv[i - 1].Row[inputs.ColumnNames[0]] -
+                        (double)mydv[i].Row[inputs.ColumnNames[0]];
+                    pairedDifferences.Add(difference);
+                    pairWeights.Add(1.0);
+                    sumdiffs += difference;
+                    sumweights += 1.0;
+                }
+                else
+                {
+                    object lagweight = mydv[i - 1].Row["weightvar"];
+                    int lagweightint = (int)lagweight;
+                    double lagweightdbl = (double)lagweightint;
+                    double difference = (double)mydv[i - 1].Row[inputs.ColumnNames[0]] -
+                        (double)mydv[i].Row[inputs.ColumnNames[0]];
+                    pairedDifferences.Add(difference);
+                    pairWeights.Add((double)(int)mydv[i - 1].Row[inputs.WeightVariableName]);
+                    sumdiffs += difference *
+                        (double)(int)mydv[i - 1].Row[inputs.WeightVariableName];
+                    sumweights += (double)(int)mydv[i - 1].Row[inputs.WeightVariableName];
+                }
+            }
+            double meandifference = sumdiffs / sumweights;
+            double diffsumsquares = 0.0;
+            for (int i = 0; i < pairedDifferences.Count; i++)
+            {
+                diffsumsquares += Math.Pow(meandifference - pairedDifferences.ElementAt(i), 2) * pairWeights.ElementAt(i);
+            }
+            double diffvariance = diffsumsquares / (pairedDifferences.Count - 1);
+            double diffstandarddiff = Math.Sqrt(diffvariance);
+            double sedbar = diffstandarddiff / Math.Sqrt(sumweights);
+            double pairedT = meandifference / sedbar;
+            double pairedTP = 2.0 * Epi.Statistics.SharedResources.PFromT(pairedT, pairedDifferences.Count - 1);
+
+            List<double> pairedTResults = new List<double>();
+            pairedTResults.Add(pairedT);
+            pairedTResults.Add(pairedTP);
+            pairedTResults.Add(meandifference);
+            pairedTResults.Add(diffvariance);
+            pairedTResults.Add(diffstandarddiff);
+            pairedTResults.Add(sedbar);
+            pairedTResults.Add((double)pairedDifferences.Count - 1);
+
+            return pairedTResults;
         }
 
         /// <summary>

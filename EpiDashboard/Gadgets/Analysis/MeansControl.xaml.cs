@@ -1244,6 +1244,224 @@ namespace EpiDashboard
                         }
                         rdcountT++;
                     }
+                if (!Double.IsNegativeInfinity(stats.tStatisticPaired))
+                {
+                    Grid tGrid3 = new Grid();
+                    tGrid3.Margin = new Thickness(5);
+                    tGrid3.SnapsToDevicePixels = true;
+                    tGrid3.HorizontalAlignment = HorizontalAlignment.Center;
+                    tGrid3.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(30) });
+                    tGrid3.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(30) });
+                    tGrid3.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    tGrid3.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    tGrid3.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    tGrid3.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    tGrid3.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    tGrid3.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    tGrid3.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    tGrid3.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+
+                    pnlT.Children.Add(tGrid3);
+
+                    for (int y = 0; y < tGrid3.ColumnDefinitions.Count; y++)
+                    {
+                        Rectangle rctHeader = new Rectangle();
+                        rctHeader.Style = this.Resources["gridHeaderCellRectangle"] as Style;
+                        Grid.SetRow(rctHeader, 0);
+                        Grid.SetColumn(rctHeader, y);
+                        tGrid3.Children.Add(rctHeader);
+                    }
+
+                    TextBlock methodHeaderG3 = new TextBlock();
+                    methodHeaderG3.Text = "Paired Results";
+                    methodHeaderG3.Margin = new Thickness(4, 0, 4, 0);
+                    methodHeaderG3.FontWeight = FontWeights.Bold;
+                    methodHeaderG3.Foreground = Brushes.White;
+                    methodHeaderG3.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    methodHeaderG3.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(methodHeaderG3);
+                    Grid.SetRow(methodHeaderG3, 0);
+                    Grid.SetColumn(methodHeaderG3, 0);
+
+                    TextBlock diffValueHeader3 = new TextBlock();
+                    diffValueHeader3.Text = "Mean";
+                    diffValueHeader3.Margin = new Thickness(4, 0, 4, 0);
+                    diffValueHeader3.FontWeight = FontWeights.Bold;
+                    diffValueHeader3.Foreground = Brushes.White;
+                    diffValueHeader3.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    diffValueHeader3.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(diffValueHeader3);
+                    Grid.SetRow(diffValueHeader3, 0);
+                    Grid.SetColumn(diffValueHeader3, 1);
+
+                    TextBlock sdValueHeader3 = new TextBlock();
+                    sdValueHeader3.Text = "StdDev";
+                    sdValueHeader3.Margin = new Thickness(4, 0, 4, 0);
+                    sdValueHeader3.FontWeight = FontWeights.Bold;
+                    sdValueHeader3.Foreground = Brushes.White;
+                    sdValueHeader3.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    sdValueHeader3.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(sdValueHeader3);
+                    Grid.SetRow(sdValueHeader3, 0);
+                    Grid.SetColumn(sdValueHeader3, 2);
+
+                    TextBlock seHeader3 = new TextBlock();
+                    seHeader3.Text = "StdErr";
+                    seHeader3.Margin = new Thickness(4, 0, 4, 0);
+                    seHeader3.FontWeight = FontWeights.Bold;
+                    seHeader3.Foreground = Brushes.White;
+                    seHeader3.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    seHeader3.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(seHeader3);
+                    Grid.SetRow(seHeader3, 0);
+                    Grid.SetColumn(seHeader3, 3);
+
+                    TextBlock pairedclHeader = new TextBlock();
+                    pairedclHeader.Text = "95%";
+                    pairedclHeader.Margin = new Thickness(4, 0, 4, 0);
+                    pairedclHeader.FontWeight = FontWeights.Bold;
+                    pairedclHeader.Foreground = Brushes.White;
+                    pairedclHeader.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                    pairedclHeader.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(pairedclHeader);
+                    Grid.SetRow(pairedclHeader, 0);
+                    Grid.SetColumn(pairedclHeader, 4);
+
+                    TextBlock paireduclHeader = new TextBlock();
+                    paireduclHeader.Text = "CL";
+                    paireduclHeader.Margin = new Thickness(4, 0, 4, 0);
+                    paireduclHeader.FontWeight = FontWeights.Bold;
+                    paireduclHeader.Foreground = Brushes.White;
+                    paireduclHeader.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    paireduclHeader.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(paireduclHeader);
+                    Grid.SetRow(paireduclHeader, 0);
+                    Grid.SetColumn(paireduclHeader, 5);
+
+                    TextBlock tValueHeader3 = new TextBlock();
+                    tValueHeader3.Text = "t Value";
+                    tValueHeader3.Margin = new Thickness(4, 0, 4, 0);
+                    tValueHeader3.FontWeight = FontWeights.Bold;
+                    tValueHeader3.Foreground = Brushes.White;
+                    tValueHeader3.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    tValueHeader3.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(tValueHeader3);
+                    Grid.SetRow(tValueHeader3, 0);
+                    Grid.SetColumn(tValueHeader3, 6);
+
+                    TextBlock prHeader3 = new TextBlock();
+                    prHeader3.Text = "Pr > |t|";
+                    prHeader3.Margin = new Thickness(4, 0, 4, 0);
+                    prHeader3.FontWeight = FontWeights.Bold;
+                    prHeader3.Foreground = Brushes.White;
+                    prHeader3.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    prHeader3.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(prHeader3);
+                    Grid.SetRow(prHeader3, 0);
+                    Grid.SetColumn(prHeader3, 7);
+
+                    TextBlock diffGrp1MinusGrp2 = new TextBlock();
+                    diffGrp1MinusGrp2.Text = "Diff (Group1 - Group2)";
+                    diffGrp1MinusGrp2.Margin = new Thickness(4, 0, 4, 0);
+                    diffGrp1MinusGrp2.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    diffGrp1MinusGrp2.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(diffGrp1MinusGrp2);
+                    Grid.SetRow(diffGrp1MinusGrp2, 1);
+                    Grid.SetColumn(diffGrp1MinusGrp2, 0);
+
+                    TextBlock pairedMeanDiff = new TextBlock();
+                    pairedMeanDiff.Text = stats.pairedDifferenceMean.ToString(precisionFormat);
+                    pairedMeanDiff.Margin = new Thickness(4, 0, 4, 0);
+                    pairedMeanDiff.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    pairedMeanDiff.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(pairedMeanDiff);
+                    Grid.SetRow(pairedMeanDiff, 1);
+                    Grid.SetColumn(pairedMeanDiff, 1);
+
+                    TextBlock pairedDiffSD = new TextBlock();
+                    pairedDiffSD.Text = stats.pairedDifferenceSD.ToString(precisionFormat);
+                    pairedDiffSD.Margin = new Thickness(4, 0, 4, 0);
+                    pairedDiffSD.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    pairedDiffSD.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(pairedDiffSD);
+                    Grid.SetRow(pairedDiffSD, 1);
+                    Grid.SetColumn(pairedDiffSD, 2);
+
+                    TextBlock pairedDiffSE = new TextBlock();
+                    pairedDiffSE.Text = stats.pairedDifferenceSE.ToString(precisionFormat);
+                    pairedDiffSE.Margin = new Thickness(4, 0, 4, 0);
+                    pairedDiffSE.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    pairedDiffSE.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(pairedDiffSE);
+                    Grid.SetRow(pairedDiffSE, 1);
+                    Grid.SetColumn(pairedDiffSE, 3);
+
+                    TextBlock pairedLCL = new TextBlock();
+                    pairedLCL.Text = stats.pairedDifferenceLCL.ToString(precisionFormat);
+                    pairedLCL.Margin = new Thickness(4, 0, 4, 0);
+                    pairedLCL.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    pairedLCL.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(pairedLCL);
+                    Grid.SetRow(pairedLCL, 1);
+                    Grid.SetColumn(pairedLCL, 4);
+
+                    TextBlock pairedUCL = new TextBlock();
+                    pairedUCL.Text = stats.pairedDifferenceUCL.ToString(precisionFormat);
+                    pairedUCL.Margin = new Thickness(4, 0, 4, 0);
+                    pairedUCL.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    pairedUCL.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(pairedUCL);
+                    Grid.SetRow(pairedUCL, 1);
+                    Grid.SetColumn(pairedUCL, 5);
+
+                    TextBlock pairedT = new TextBlock();
+                    pairedT.Text = stats.tStatisticPaired.ToString(precisionFormat);
+                    pairedT.Margin = new Thickness(4, 0, 4, 0);
+                    pairedT.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    pairedT.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(pairedT);
+                    Grid.SetRow(pairedT, 1);
+                    Grid.SetColumn(pairedT, 6);
+
+                    TextBlock pairedTP = new TextBlock();
+                    pairedTP.Text = stats.tStatisticPairedP.ToString(precisionFormat);
+                    pairedTP.Margin = new Thickness(4, 0, 4, 0);
+                    pairedTP.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                    pairedTP.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    tGrid3.Children.Add(pairedTP);
+                    Grid.SetRow(pairedTP, 1);
+                    Grid.SetColumn(pairedTP, 7);
+
+                    int rdcountPT = 0;
+                    foreach (RowDefinition rd in tGrid3.RowDefinitions)
+                    {
+                        int cdcount = 0;
+                        foreach (ColumnDefinition cd in tGrid3.ColumnDefinitions)
+                        {
+                            Border b = new Border();
+                            b.Style = this.Resources["gridCellBorder"] as Style;
+
+                            if (rdcountPT == 0)
+                            {
+                                b.BorderThickness = new Thickness(b.BorderThickness.Left, 1, b.BorderThickness.Right, b.BorderThickness.Bottom);
+                            }
+                            if (cdcount == 0)
+                            {
+                                b.BorderThickness = new Thickness(1, b.BorderThickness.Top, b.BorderThickness.Right, b.BorderThickness.Bottom);
+                            }
+                            if (cdcount == 4 && rdcountPT == 0)
+                            {
+                                b.BorderThickness = new Thickness(b.BorderThickness.Left, 1, 0, b.BorderThickness.Bottom);
+                            }
+
+                            Grid.SetRow(b, rdcountPT);
+                            Grid.SetColumn(b, cdcount);
+                            tGrid3.Children.Add(b);
+                            cdcount++;
+                        }
+                        rdcountPT++;
+                    }
+                }
             }
 
             Expander anovaExpander = new Expander();
@@ -2510,6 +2728,10 @@ namespace EpiDashboard
             crosstabElement.InnerText = meansParameters.CrosstabVariableName.ToString();
             element.AppendChild(crosstabElement);
 
+            XmlElement pairedTTestVariableElement = doc.CreateElement("pairedttestvariable");
+            pairedTTestVariableElement.InnerText = meansParameters.PairIDVariableName.ToString();
+            element.AppendChild(pairedTTestVariableElement);
+
             //"<columnsToShow>" + wb.ToString() + "</columnsToShow>" +
             //columnsToShow
 
@@ -2648,6 +2870,10 @@ namespace EpiDashboard
                         case "crosstabvariable":
                             //cbxFieldCrosstab.Text = child.InnerText.Replace("&lt;", "<");
                             ((MeansParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
+                            break;
+                        case "pairedttestvariable":
+                            //cbxFieldCrosstab.Text = child.InnerText.Replace("&lt;", "<");
+                            ((MeansParameters)Parameters).PairIDVariableName = child.InnerText.Replace("&lt;", "<");
                             break;
                         case "precision":
                             int precision = 4;

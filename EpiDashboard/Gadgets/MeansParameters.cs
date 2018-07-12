@@ -11,6 +11,7 @@ namespace EpiDashboard
     {
         public bool ShowANOVA { get; set; }
         public List<int> columnsToHide;
+        public string PairIDVariableName { get; set; }
 
         public MeansParameters()
             : base()

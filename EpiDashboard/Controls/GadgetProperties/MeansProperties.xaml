@@ -58,7 +58,11 @@
                     <Label x:Name="tblockCrossTabulateBy">
                         <TextBlock TextWrapping="Wrap" x:Name="tblockCrossTabulateByTxt">Cross-tabulate by:</TextBlock>
                     </Label>
-                    <ComboBox x:Name="cbxFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" />
+                    <ComboBox x:Name="cbxFieldCrosstab" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFieldCrosstab_SelectionChanged" />
+                    <Label x:Name="tblockPairID">
+                        <TextBlock TextWrapping="Wrap" x:Name="tblockPairIDTxt">Group ID for Paired t-Test:</TextBlock>
+                    </Label>
+                    <ComboBox x:Name="cbxFieldPairID" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" Height="28" />
                     <Label x:Name="tblockWeight">
                         <TextBlock TextWrapping="Wrap" x:Name="tblockWeightTxt">Weight:</TextBlock>
                     </Label>
