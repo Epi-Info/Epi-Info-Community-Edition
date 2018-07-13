@@ -470,7 +470,7 @@ namespace EpiDashboard.Mapping
                 //Set the alignment properties relative the hosting Grid Control
                 ScaleLine1.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
                 ScaleLine1.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                ScaleLine1.Margin = new System.Windows.Thickness { Right=10 };
+                ScaleLine1.Margin = new System.Windows.Thickness { Right = 10 };
 
                 //Set the Map units for the ScaleLine
                 ScaleLine1.MapUnit = ESRI.ArcGIS.Client.Toolkit.ScaleLine.ScaleLineUnit.DecimalDegrees;
@@ -884,12 +884,12 @@ namespace EpiDashboard.Mapping
                     }
                     else
                     {
-                        dashboardHelper = new DashboardHelper(dataMember, sqlQuery,dbDriver);
+                        dashboardHelper = new DashboardHelper(dataMember, sqlQuery, dbDriver);
                         try
                         {
                             dashboardHelper.PopulateDataSet();
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             Epi.Windows.MsgBox.ShowInformation("Query is not valid. Please try again.");
                             return dashboardHelper;
@@ -1193,7 +1193,7 @@ namespace EpiDashboard.Mapping
                 {
                     iconTimeLapse.Visibility = Visibility.Collapsed;
                 }
-                if (layerList.Layers.Count==0)
+                if (layerList.Layers.Count == 0)
                     stkLegends.Children.Clear();
             }
         }
@@ -1442,7 +1442,7 @@ namespace EpiDashboard.Mapping
         {
             if (areaChartDataPoints != null)
             {
-                List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
+                List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate (KeyValuePair<DateTime, int> pair)
                 {
                     return pair.Key < slider.Value.End;
                 });
@@ -1477,7 +1477,7 @@ namespace EpiDashboard.Mapping
                 {
                     if (layerList.ClusterLayers.Count == 1)
                     {
-                        List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate(KeyValuePair<DateTime, int> pair)
+                        List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate (KeyValuePair<DateTime, int> pair)
                         {
                             return pair.Key < e.NewValue.End;
                         });
@@ -1645,7 +1645,7 @@ namespace EpiDashboard.Mapping
 
                 SetBackgroundImageType();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 MessageBox.Show(DashboardSharedStrings.MAP_OPEN_UNSUCCESSFUL, DashboardSharedStrings.MAP_OPEN, MessageBoxButton.OK, MessageBoxImage.Information);
                 Logger.Log(DashboardSharedStrings.MAP_OPEN_UNSUCCESSFUL + Environment.NewLine + exception.Message);
@@ -2037,12 +2037,12 @@ namespace EpiDashboard.Mapping
                 dashboardHelper = choroplethLayerProperties.GetDashboardHelper();
                 choroplethproperties.SetDashboardHelper(dashboardHelper);
                 choroplethproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
-               
+
                 if (choroplethLayerProperties.partitionSetUsingQuantiles == true)
                 {
                     choroplethproperties.OnQuintileOptionChanged();
                 }
-               
+
                 choroplethproperties.panelBoundaries.IsEnabled = true;
 
                 if (choroplethLayerProperties.datafilters != null)
@@ -2098,7 +2098,7 @@ namespace EpiDashboard.Mapping
                 choroplethproperties.Cancelled += new EventHandler(properties_Cancelled);
                 choroplethproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }
@@ -2135,7 +2135,7 @@ namespace EpiDashboard.Mapping
         {
             if (string.IsNullOrEmpty(choroplethLayerProperties.boundryFilePath) == false)
             {
-                choroplethproperties.txtMapSeverpath.Text = choroplethLayerProperties.boundryFilePath.Substring(0,choroplethLayerProperties.boundryFilePath.LastIndexOf("/"));
+                choroplethproperties.txtMapSeverpath.Text = choroplethLayerProperties.boundryFilePath.Substring(0, choroplethLayerProperties.boundryFilePath.LastIndexOf("/"));
                 choroplethproperties.shapeAttributes = choroplethLayerProperties.curfeatureAttributes;
                 choroplethproperties.cmbShapeKey.Items.Clear();
                 choroplethproperties.MapServerConnect();
@@ -2149,7 +2149,7 @@ namespace EpiDashboard.Mapping
                     {
                         FeatureLayer featureLayer = (FeatureLayer)shapeFileProperties[1];
 
-                        if(featureLayer.Graphics.Count > 0)
+                        if (featureLayer.Graphics.Count > 0)
                         {
                             choroplethproperties.shapeAttributes = featureLayer.Graphics[0].Attributes;
                         }
@@ -2705,51 +2705,33 @@ namespace EpiDashboard.Mapping
                     if (myMap.Layers[0] is OpenStreetMapLayer)
                     {
                         bool sparse_connection = false;
-                        Configuration config = Configuration.GetNewInstance();
-                        if (config.Settings.SparseConnection == false)
+
+                        try
                         {
-                            if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                            Configuration config = Configuration.GetNewInstance();
+                            if (config.Settings.SparseConnection == true)
                             {
-                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
+                                sparse_connection = true;
                             }
                         }
-                    }
-                    else
-                    {
-                        //try
-                        //{
-                        //    Configuration config = Configuration.GetNewInstance();
-                        //    if (config.Settings.SparseConnection == true)
-                        //    {
-                        bool sparse_connection = true;
-                        Configuration config = Configuration.GetNewInstance();
-                        if (config.Settings.SparseConnection == true)
+                        catch { }
+
+                        if (sparse_connection == true)
+                        {
+                            ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
+                        }
+                        else
                         {
                             if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
                                 ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
                             }
+                            else
+                            {
+                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
+                            }
                         }
-                        //    }
-                        //}
-                        //catch { }
                     }
-
-                    //if (sparse_connection)
-                    //{
-                    //     ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
-                    //}
-                    //else
-                    //{
-                    //    if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                    //    {
-                    //       ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
-                    //    }
-                    //    else
-                    //    {
-                    //       ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
-                    //    }
-                    //}
 
                     ((OpenStreetMapLayer)myMap.Layers[0]).Refresh();
                 }
