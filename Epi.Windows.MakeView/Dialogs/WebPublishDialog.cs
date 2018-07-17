@@ -955,8 +955,10 @@ namespace Epi.Windows.MakeView.Dialogs
                     ////this.view.WebSurveyId = txtSurveyKey.Text;
                     ////this.view.SaveToDb();
                     ////this.view.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                    if (Result.PublishInfo.ViewIdAndFormIdList != null)
+                    {
 
-                    foreach (var item in Result.PublishInfo.ViewIdAndFormIdList)
+                        foreach (var item in Result.PublishInfo.ViewIdAndFormIdList)
                     {
                         // save survey id to metadata
 
@@ -965,11 +967,32 @@ namespace Epi.Windows.MakeView.Dialogs
                         NewView = this.mediater.Project.GetViewById(item.Key);
 
 
-                        NewView.WebSurveyId = item.Value;
-                        NewView.EIWSFormId = item.Value;
-                        NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
-                        NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
-                        NewView.SaveToDb();
+                            if (item.Key == 1)
+                            {
+                                this.view.WebSurveyId = item.Value;
+                                this.view.SaveToDb();
+                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
+                                NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                                NewView.SaveToDb();
+                            }
+                            else
+                            {
+                                NewView.WebSurveyId = item.Value;
+                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
+                                NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                                NewView.SaveToDb();
+                            }
+
+                        }
+                    }
+                    else
+                    {
+
+                        this.view.WebSurveyId = txtSurveyKey.Text;
+                        this.view.SaveToDb();
+                        this.view.CheckCodeBefore = txtOrganizationKey.Text.ToString();
 
                     }
                 }
@@ -1049,8 +1072,10 @@ namespace Epi.Windows.MakeView.Dialogs
                     //this.view.WebSurveyId = txtSurveyKey.Text;
                     //this.view.SaveToDb();
                     //this.view.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                    if (Result.PublishInfo.ViewIdAndFormIdList != null)
+                    {
 
-                    foreach (var item in Result.PublishInfo.ViewIdAndFormIdList)
+                        foreach (var item in Result.PublishInfo.ViewIdAndFormIdList)
                     {
                         // save survey id to metadata
 
@@ -1059,14 +1084,35 @@ namespace Epi.Windows.MakeView.Dialogs
                         NewView = this.mediater.Project.GetViewById(item.Key);
 
 
-                        NewView.WebSurveyId = item.Value;
-                        NewView.EIWSFormId = item.Value;
-                        NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
-                        NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
-                        NewView.SaveToDb();
+                            if (item.Key == 1)
+                            {
+                                this.view.WebSurveyId = item.Value;
+                                this.view.SaveToDb();
+                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
+                                NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                                NewView.SaveToDb();
+                            }
+                            else
+                            {
+                                NewView.WebSurveyId = item.Value;
+                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
+                                NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                                NewView.SaveToDb();
+                            }
 
-                    }
+                        }
                 }
+                else
+                {
+
+                    this.view.WebSurveyId = txtSurveyKey.Text;
+                    this.view.SaveToDb();
+                    this.view.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+
+                }
+            }
             }
             else
             {
@@ -1143,21 +1189,40 @@ namespace Epi.Windows.MakeView.Dialogs
                     //this.view.WebSurveyId = txtSurveyKey.Text;
                     //this.view.SaveToDb();
                     //this.view.CheckCodeBefore = txtOrganizationKey.Text.ToString();
-
-                    foreach (var item in Result.PublishInfo.ViewIdAndFormIdList)
+                    if (Result.PublishInfo.ViewIdAndFormIdList != null)
                     {
-                        // save survey id to metadata
+                        foreach (var item in Result.PublishInfo.ViewIdAndFormIdList)
+                        {
+                            // save survey id to metadata
 
-                        View NewView = new View(this.mediater.Project);
+                            View NewView = new View(this.mediater.Project);
 
-                        NewView = this.mediater.Project.GetViewById(item.Key);
+                            NewView = this.mediater.Project.GetViewById(item.Key);
 
-
-                        NewView.WebSurveyId = item.Value;
-                        NewView.EIWSFormId = item.Value;
-                        NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
-                        NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
-                        NewView.SaveToDb();
+                            if (item.Key == 1)
+                            {
+                                this.view.WebSurveyId = item.Value;
+                                this.view.SaveToDb();
+                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
+                                NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                                NewView.SaveToDb();
+                            }
+                            else
+                            { 
+                                NewView.WebSurveyId = item.Value;
+                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
+                                NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
+                                NewView.SaveToDb();
+                            }
+                        }
+                    }
+                    else {
+                        
+                        this.view.WebSurveyId = txtSurveyKey.Text;
+                        this.view.SaveToDb();
+                        this.view.CheckCodeBefore = txtOrganizationKey.Text.ToString();
 
                     }
                 }
