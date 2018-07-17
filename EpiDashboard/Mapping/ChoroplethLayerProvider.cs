@@ -40,7 +40,7 @@ namespace EpiDashboard.Mapping
         public double _resolution;
         public double _centerPoint_X;
         public double _centerPoint_Y;
-        public Int32 _spatialRef;
+        public int _spatialRef;
         public Envelope _envExtent;
         public double _envMinX;
         public double _envMinY;
@@ -85,7 +85,7 @@ namespace EpiDashboard.Mapping
             set { _rangeStarts_FromControls = value; }
         }
 
-        byte _opacity;
+        public byte _opacity;
         public byte Opacity
         {
             get { return _opacity; }

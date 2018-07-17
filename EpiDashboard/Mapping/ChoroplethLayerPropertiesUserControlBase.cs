@@ -5,6 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Windows.Media;
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Graphics;
+using ESRI.ArcGIS.Client.Symbols;
+
 
 
 namespace EpiDashboard.Mapping
@@ -16,7 +21,7 @@ namespace EpiDashboard.Mapping
         public string boundryFilePath;
         public IMapControl mapControl;
         public bool partitionSetUsingQuantiles;
-       
+
 
         private Dictionary<int, object> _classAttribList;
         public Dictionary<int, object> ClassAttributeList
@@ -89,13 +94,29 @@ namespace EpiDashboard.Mapping
                     provider._spatialRef = int.Parse(spatialRef);
                 }
 
-                //if (child.Name.Equals("mapExtent"))
-                //{
-                //    foreach (System.Xml.XmlElement coord in child)
-                //    {
+                if (child.Name.Equals("envMinX"))
+                {
+                    string envMinX= child.InnerText;
+                    provider._envMinX = double.Parse(envMinX);
+                }
 
-                //    }
-                //}
+                if (child.Name.Equals("envMinY"))
+                {
+                    string envMinY = child.InnerText;
+                    provider._envMinY = double.Parse(envMinY);
+                }
+
+                if (child.Name.Equals("envMaxX"))
+                {
+                    string envMaxX = child.InnerText;
+                    provider._envMaxX = double.Parse(envMaxX);
+                }
+
+                if (child.Name.Equals("envMaxY"))
+                {
+                    string envMaxY = child.InnerText;
+                    provider._envMaxY = double.Parse(envMaxY);
+                }
 
 
                 if (child.Name.Equals("opacity"))
@@ -121,7 +142,7 @@ namespace EpiDashboard.Mapping
                 if (child.Name.Equals("classRanges"))
                 {
                     provider.ClassRangesDictionary.RangeDictionary = new Dictionary<string, string>();
-                    
+
                     foreach (System.Xml.XmlElement classRangElement in child)
                     {
                         provider.ClassRangesDictionary.Add(classRangElement.Name, classRangElement.InnerText);
@@ -153,7 +174,7 @@ namespace EpiDashboard.Mapping
                     provider.LegendText = child.InnerText;
                 }
 
-                if(child.Name.Equals("showPolyLabels"))
+                if (child.Name.Equals("showPolyLabels"))
                 {
                     bool show = false;
                     bool.TryParse(child.InnerText, out show);
@@ -212,15 +233,16 @@ namespace EpiDashboard.Mapping
                 string asQuintileTag = "<partitionUsingQuantiles>" + provider.UseQuantiles + "</partitionUsingQuantiles>" + Environment.NewLine;
                 string classRanges = "";
 
+
                 string resolution = "<resolution>" + provider.ArcGIS_Map.Resolution.ToString() + "</resolution>" + Environment.NewLine;
                 string centerPoint_X = "<centerPoint_X>" + provider.ArcGIS_Map.Extent.GetCenter().X.ToString() + "</centerPoint_X>" + Environment.NewLine;
                 string centerPoint_Y = "<centerPoint_Y>" + provider.ArcGIS_Map.Extent.GetCenter().Y.ToString() + "</centerPoint_Y>" + Environment.NewLine;
-                string spatialRef = "<spatialRef>" + provider.ArcGIS_Map.SpatialReference.WKID.ToString() + "</spatialRef>" + Environment.NewLine;
+                string spatialRef = "<spatialRef>" + provider.ArcGIS_Map.Extent.SpatialReference.WKID.ToString() + "</spatialRef>" + Environment.NewLine;
+                //string spatialRef = "<spatialRef>" + provider.ArcGIS_Map.SpatialReference.WKID.ToString() + "</spatialRef>" + Environment.NewLine;
                 string envMinX = "<envMinX>" + provider.ArcGIS_Map.Extent.XMin + "</envMinX>" + Environment.NewLine;
                 string envMinY = "<envMinY>" + provider.ArcGIS_Map.Extent.YMin + "</envMinY>" + Environment.NewLine;
                 string envMaxX = "<envMaxX>" + provider.ArcGIS_Map.Extent.XMax + "</envMaxX>" + Environment.NewLine;
                 string envMaxY = "<envMaxY>" + provider.ArcGIS_Map.Extent.YMax + "</envMaxY>" + Environment.NewLine;
-
 
                 if (provider.UseQuantiles == false)
                 {
@@ -263,7 +285,7 @@ namespace EpiDashboard.Mapping
                                    "<dataKey>" + dataKey + "</dataKey>" + Environment.NewLine +
                                    "<shapeKey>" + shapeKey + "</shapeKey>" + Environment.NewLine +
                                    "<value>" + value + "</value>" + Environment.NewLine +
-                                   "<opacity>" + opacity.ToString() + "</opacity>" + Environment.NewLine; ;
+                                   "<opacity>" + opacity + "</opacity>" + Environment.NewLine;
 
                 doc.PreserveWhitespace = true;
 
@@ -305,8 +327,8 @@ namespace EpiDashboard.Mapping
             choroplethprop.cmbClasses.Text = layerPropertiesControl.cbxClasses.Text;
 
             foreach (string str in layerPropertiesControl.cbxShapeKey.Items)
-            { 
-                choroplethprop.cmbShapeKey.Items.Add(str); 
+            {
+                choroplethprop.cmbShapeKey.Items.Add(str);
             }
 
             foreach (string str in layerPropertiesControl.cbxDataKey.Items)
@@ -330,7 +352,7 @@ namespace EpiDashboard.Mapping
             choroplethprop.rctLowColor.Fill = layerPropertiesControl.rctLowColor.Fill;
             choroplethprop.rctMissingColor.Fill = layerPropertiesControl.rctMissingColor.Fill;
 
-            if(provider is ChoroplethShapeLayerProvider)
+            if (provider is ChoroplethShapeLayerProvider)
             {
                 choroplethprop.radShapeFile.IsChecked = true;
                 choroplethprop.choroplethShapeLayerProvider = (ChoroplethShapeLayerProvider)provider;
@@ -345,7 +367,7 @@ namespace EpiDashboard.Mapping
                 choroplethprop.radMapServer.IsChecked = true;
                 choroplethprop.choroplethServerLayerProvider = (ChoroplethServerLayerProvider)provider;
             }
-           
+
             choroplethprop.legTitle.Text = provider.LegendText;
             choroplethprop.showPolyLabels.IsChecked = provider.ShowPolyLabels;
             choroplethprop.ListLegendText = provider.ListLegendText;
@@ -353,26 +375,20 @@ namespace EpiDashboard.Mapping
             choroplethprop.SetProperties();
 
             if (provider._resolution != 0)
-            {
-                //provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y));
-                //provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
-                //provider.ArcGIS_Map.PanTo(new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference.));
-
-                //ESRI.ArcGIS.Client.Geometry.MapPoint renderCenter = new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference);
-
-
-                //provider.ArcGIS_Map.PanTo(new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
-                //provider.ArcGIS_Map.ZoomToResolution(provider._resolution, renderCenter);
-                //provider.ArcGIS_Map.Extent.Equals(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
-                ESRI.ArcGIS.Client.Geometry.Envelope showExtent = new ESRI.ArcGIS.Client.Geometry.Envelope(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
-                provider.ArcGIS_Map.ZoomTo(showExtent);    // It could be that the extent never changes.
-                //provider.ArcGIS_Map.ZoomToResolution(provider._resolution, new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
-                //provider.ArcGIS_Map.PanTo(new ESRI.ArcGIS.Client.Geometry.MapPoint(provider._centerPoint_X, provider._centerPoint_Y, provider.ArcGIS_Map.SpatialReference));
-
-            }
-
 
             choroplethprop.RenderMap();
+
+                {
+
+                // Define extent from map7 file
+                ESRI.ArcGIS.Client.Geometry.Envelope myExtent = new ESRI.ArcGIS.Client.Geometry.Envelope(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
+
+
+                // Zoom to location
+                provider.ArcGIS_Map.ZoomTo(myExtent);
+
+               }
         }
+
     }
 }
