@@ -5,15 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Windows.Media;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Graphics;
-using ESRI.ArcGIS.Client.Symbols;
+using Epi;
 
 
 
 namespace EpiDashboard.Mapping
 {
+
     public class ChoroplethLayerPropertiesUserControlBase : UserControl
     {
         public ESRI.ArcGIS.Client.Map myMap;
@@ -21,7 +19,6 @@ namespace EpiDashboard.Mapping
         public string boundryFilePath;
         public IMapControl mapControl;
         public bool partitionSetUsingQuantiles;
-
 
         private Dictionary<int, object> _classAttribList;
         public Dictionary<int, object> ClassAttributeList
@@ -42,6 +39,8 @@ namespace EpiDashboard.Mapping
                 return false;
             }
         }
+
+
 
         public void CreateFromXml(System.Xml.XmlElement element, ChoroplethLayerProvider provider)
         {
@@ -98,6 +97,9 @@ namespace EpiDashboard.Mapping
                 {
                     string envMinX= child.InnerText;
                     provider._envMinX = double.Parse(envMinX);
+                    // Check to see if map7 file has new extent info, if not--it is an old map
+                    bool newMapFile = true;
+                    provider.NewMap7File = newMapFile;
                 }
 
                 if (child.Name.Equals("envMinY"))
@@ -117,7 +119,6 @@ namespace EpiDashboard.Mapping
                     string envMaxY = child.InnerText;
                     provider._envMaxY = double.Parse(envMaxY);
                 }
-
 
                 if (child.Name.Equals("opacity"))
                 {
@@ -197,8 +198,10 @@ namespace EpiDashboard.Mapping
 
         public static XmlNode Serialize(System.Xml.XmlDocument doc, ChoroplethLayerProvider provider, string dataKey, string shapeKey, string value, string legacyClassCountIndex, SolidColorBrush highColor, SolidColorBrush lowColor, SolidColorBrush missingColor, string uniqueXmlString, DashboardHelper dashboardHelper, XmlAttribute type, double opacity)
         {
+            Epi.ApplicationIdentity appId = new Epi.ApplicationIdentity(typeof(Configuration).Assembly);
+
             try
-            {
+            {   
                 string classTitles = "<classTitles>" + Environment.NewLine;
                 long classTitleCount = 0;
                 string classTitleTagName = "";
@@ -285,7 +288,8 @@ namespace EpiDashboard.Mapping
                                    "<dataKey>" + dataKey + "</dataKey>" + Environment.NewLine +
                                    "<shapeKey>" + shapeKey + "</shapeKey>" + Environment.NewLine +
                                    "<value>" + value + "</value>" + Environment.NewLine +
-                                   "<opacity>" + opacity + "</opacity>" + Environment.NewLine;
+                                   "<opacity>" + opacity + "</opacity>" + Environment.NewLine +
+                                   "<versionTag>" + appId.Version.ToString() + "</versionTag>" + Environment.NewLine;
 
                 doc.PreserveWhitespace = true;
 
@@ -379,15 +383,15 @@ namespace EpiDashboard.Mapping
             choroplethprop.RenderMap();
 
                 {
+                if (provider._mapIsNew)
+                {
+                        // Define extent from map7 file
+                        ESRI.ArcGIS.Client.Geometry.Envelope myExtent = new ESRI.ArcGIS.Client.Geometry.Envelope(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
 
-                // Define extent from map7 file
-                ESRI.ArcGIS.Client.Geometry.Envelope myExtent = new ESRI.ArcGIS.Client.Geometry.Envelope(provider._envMinX, provider._envMinY, provider._envMaxX, provider._envMaxY);
-
-
-                // Zoom to location
-                provider.ArcGIS_Map.ZoomTo(myExtent);
-
-               }
+                        // Zoom to location
+                        provider.ArcGIS_Map.ZoomTo(myExtent);
+                 }
+            }
         }
 
     }

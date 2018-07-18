@@ -106,6 +106,13 @@ namespace EpiDashboard.Mapping
             set { _showPolyLabels = value; }
         }
 
+        public bool _mapIsNew = true;
+        public bool NewMap7File
+        {
+            get { return _mapIsNew; }
+            set { _mapIsNew = value; }
+        }
+
         CustomColorsDictionary _customColorsDictionary = new CustomColorsDictionary();
         public CustomColorsDictionary CustomColorsDictionary
         {

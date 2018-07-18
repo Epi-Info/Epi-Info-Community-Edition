@@ -348,27 +348,6 @@ namespace EpiDashboard.Mapping
                 }
                 catch { }
 
-                //////if (sparse_connection == true)
-                //////{
-                //////    layer.Token = null;
-                //////}
-                //////else
-                //////{
-                //////    if (ImageryRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                //////    {
-                //////        layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                //////        layer.LayerStyle = TileLayer.LayerType.AerialWithLabels;
-                //////    }
-                //////    else if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
-                //////    {
-                //////        layer.Token = Configuration.GetNewInstance().Settings.MapServiceKey;
-                //////        layer.LayerStyle = TileLayer.LayerType.Road;
-                //////    }
-                //////    else
-                //////    {
-                //////        layer.Token = null;
-                //////    }
-                //////}
 
                 GraphicsLayer pointLayer = new GraphicsLayer();
                 pointLayer.ID = "pointLayer";
@@ -1281,10 +1260,6 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        //     Put in ViewPoint change here  -- zyp9
-        //     https://developers.arcgis.com/net/latest/wpf/api-reference/html/M_Esri_ArcGISRuntime_Geometry_Envelope_GetCenter.htm
-        //     **  Allows viewpoint / extent to change. If extent changes, then the center of the extent will follow.
-
         void mnuTimeLapse_Click(object sender, RoutedEventArgs e)
         {
             CreateTimeLapse();
@@ -1663,7 +1638,7 @@ namespace EpiDashboard.Mapping
                 System.Xml.XmlElement element = layerList.SerializeLayers();
                 System.Xml.XmlAttribute baseMapType = element.OwnerDocument.CreateAttribute("baseMapType");
 
-                if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                if (StreetsRadioButton.Visibility == System.Windows.Visibility.Visible)
                 {
                     baseMapType.Value = "street";
                 }
