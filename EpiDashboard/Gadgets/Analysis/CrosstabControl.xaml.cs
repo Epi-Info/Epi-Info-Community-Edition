@@ -2342,6 +2342,14 @@ namespace EpiDashboard
             Grid.SetColumn(txt1b, 0);
             grid.Children.Add(txt1b);
 
+            TextBlock txt15b = new TextBlock();
+            txt15b.Text = "";
+            txt15b.Margin = margin;
+            txt15b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            Grid.SetRow(txt15b, 2);
+            Grid.SetColumn(txt15b, 1);
+            grid.Children.Add(txt15b);
+
             TextBlock txt2b = new TextBlock();
             txt2b.Text = "computing...";
             txt2b.Margin = margin;
@@ -2349,21 +2357,25 @@ namespace EpiDashboard
             Grid.SetRow(txt2b, 2);
             Grid.SetColumn(txt2b, 2);
             grid.Children.Add(txt2b);
-/*
-            grid.RowDefinitions.Add(new RowDefinition());
-            TextBlock txt4b = new TextBlock();
-            txt4b.Text = "(Computed by R)";
-            txt4b.Margin = margin;
-            txt4b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            Grid.SetRow(txt4b, 3);
-            Grid.SetColumn(txt4b, 2);
-            grid.Children.Add(txt4b);
-*/
+            /*
+                        grid.RowDefinitions.Add(new RowDefinition());
+                        TextBlock txt4b = new TextBlock();
+                        txt4b.Text = "(Computed by R)";
+                        txt4b.Margin = margin;
+                        txt4b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                        Grid.SetRow(txt4b, 3);
+                        Grid.SetColumn(txt4b, 2);
+                        grid.Children.Add(txt4b);
+            */
             if (!string.IsNullOrEmpty(disclaimer) && !Double.IsNaN(tableChiSq))
             {
-//                grid.RowDefinitions.Add(new RowDefinition());
+                //                grid.RowDefinitions.Add(new RowDefinition());
+//                foreach (TextBlock t in gridDisclaimerList)
+//                {
+//                    t.Text = disclaimer;
+//                }
 
-                StackPanel g = (StackPanel)grid.Parent;
+                    StackPanel g = (StackPanel)grid.Parent;
 
                 TextBlock txt7 = new TextBlock();
                 txt7.Text = disclaimer;
@@ -2377,7 +2389,7 @@ namespace EpiDashboard
                 if (g == null) { }
                 else
                 {
-                    textBlock.Text = string.Empty;
+//                    textBlock.Text = string.Empty;
                     textBlock.Visibility = System.Windows.Visibility.Collapsed;
                     g.Children.Add(txt7);
                 }
@@ -4075,7 +4087,12 @@ namespace EpiDashboard
                             {
                                 rowNumber = Grid.GetRow(control);
                                 columnNumber = Grid.GetColumn(control);
+                                int numchildren = (control as StackPanel).Children.Count;
                                 value = (((control as StackPanel).Children[0]) as TextBlock).Text;
+                                for (int i = 1; i < numchildren; i++)
+                                {
+                                    value = value + "<br>" + (((control as StackPanel).Children[i]) as TextBlock).Text;
+                                }
                                 StackPanel panel = control as StackPanel;
                                 foreach (UIElement element in panel.Children)
                                 {
