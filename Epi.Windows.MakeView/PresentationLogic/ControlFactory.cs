@@ -255,10 +255,19 @@ namespace Epi.Windows.MakeView.PresentationLogic
                 {
                     RadioButton radioButton = new RadioButton();
                     radioButton.Text = item;
-                    radioButton.AutoSize = true;
+                    radioButton.Font = field.ControlFont;
+                    radioButton.MaximumSize = new Size(proposedSize.Width + 4, int.MaxValue);
+
+                    proposedSize = new Size(groupWidthEstimate, int.MaxValue);
+                    SizeF optionMeasuredSize = graphics.MeasureString(radioButton.Text, radioButton.Font, radioButton.MaximumSize.Width - 20);
+
+                    radioButton.Width = (int)optionMeasuredSize.Width + 20;
+                    radioButton.Height = (int)optionMeasuredSize.Height + 1;
+
+                    radioButton.AutoSize = false;
                     radioButton.Enabled = true;
                     radioButton.Visible = false;
-                    radioButton.Font = field.ControlFont;
+
                     groupBox.Controls.Add(radioButton);
 
                     if (radioButton.Width > widestOptionWidth)
@@ -307,10 +316,30 @@ namespace Epi.Windows.MakeView.PresentationLogic
                 }
 
                 int topOfLastControlDown = 0;
+                int bottomOfLastControlDown = 0;
 
                 foreach (Control control in groupBox.Controls)
                 {
-                    control.Top = row * (tallestControlHeight) + topMargin;
+                    if(columnCount == 1)
+                    {
+                        if(row == 0)
+                        {
+                            control.Top = bottomOfLastControlDown + topMargin;
+                        }
+                        else
+                        {
+                            control.Top = bottomOfLastControlDown + 6;
+                        }
+
+                        topOfLastControlDown = control.Top;
+                        bottomOfLastControlDown = control.Top + control.Height;
+
+                        control.Width = (int)control.MaximumSize.Width;
+                    }
+                    else
+                    {
+                        control.Top = row * (tallestControlHeight + 4) + topMargin;
+                    }
 
                     if (row == (rowCount - 1) || isVertical == false)
                     { 
