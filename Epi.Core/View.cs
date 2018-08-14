@@ -882,7 +882,7 @@ namespace Epi
                     for (int i = 0; i < viewName.Length; i++)
                     {
                         string viewChar = viewName.Substring(i, 1);
-                        Match m = Regex.Match(viewChar, "[A-Za-z0-9]");
+                        Match m = Regex.Match(viewChar, "[A-Za-z0-9_]");
                         // if the view name does not consist of only letters and numbers...
                         if (!m.Success)
                         {

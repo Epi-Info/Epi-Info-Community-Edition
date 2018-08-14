@@ -350,9 +350,9 @@ namespace Epi.Windows.MakeView.Dialogs
                 }
                 else if (underscoreMatch.Success)
                 {
-                    MsgBox.ShowError(SharedStrings.DATA_TABLE_NAME_BEGIN_UNDERSCORE);
-                    txtDataTableName.Clear();
-                    valid = false;
+                    //MsgBox.ShowError(SharedStrings.DATA_TABLE_NAME_BEGIN_UNDERSCORE);
+                    //txtDataTableName.Clear();
+                    //valid = false;
                 }
                 else if (currentView.Project.CollectedData.TableExists(txtDataTableName.Text.Trim()))
                 {
