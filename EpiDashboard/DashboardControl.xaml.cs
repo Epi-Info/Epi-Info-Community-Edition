@@ -3993,7 +3993,11 @@ namespace EpiDashboard
             htmlBuilder.AppendLine("</body>");
             htmlBuilder.AppendLine("</html>");
 
-            RefreshResults();
+            if (IsGeneratingHTMLFromCommandLine == false)
+            {
+                RefreshResults();
+            }
+
             return htmlBuilder.ToString();
         }
 
