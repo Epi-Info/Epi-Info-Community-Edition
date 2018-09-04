@@ -4705,7 +4705,7 @@ namespace Epi.Windows.MakeView.Forms
         }
         private void toolStripPublishToWebEnter_Click(object sender, EventArgs e)
         {
-            DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.projectExplorer.CurrentView.Id);
+            DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(this.CurrentView.Id);
             DataRow ViewRow = table.Rows[0];
             // this.OrganizationKey = this.projectExplorer.CurrentView.EWEOrganizationKey;
             if (!string.IsNullOrEmpty(ViewRow.ItemArray[2].ToString()))//Checking if the OrgKey is encrypted in the database
@@ -5185,7 +5185,7 @@ namespace Epi.Windows.MakeView.Forms
                 //}
                 //else
                 //{
-                    IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey, this.projectExplorer.CurrentView.WebSurveyId);
+                    IsValidOKey = Epi.Core.ServiceClient.ServiceClient.IsValidOrgKey(this.OrganizationKey, this.CurrentView.WebSurveyId);
                 // }
                     if (string.IsNullOrEmpty(this.CurrentView.WebSurveyId) && this.projectExplorer.CurrentView.WebSurveyId != null)
                     {
@@ -5271,10 +5271,10 @@ namespace Epi.Windows.MakeView.Forms
             }
 
             DataTable table;
-            View RootView = this.mediator.Project.Metadata.GetParentView(this.mediator.ProjectExplorer.CurrentView.Id);
+            View RootView = this.mediator.Project.Metadata.GetParentView(this.CurrentView.Id);
             if (RootView == null)
             {
-                table = this.mediator.Project.Metadata.GetPublishedViewKeys(this.mediator.ProjectExplorer.CurrentView.Id);
+                table = this.mediator.Project.Metadata.GetPublishedViewKeys(this.CurrentView.Id);
             }
             else
             {
