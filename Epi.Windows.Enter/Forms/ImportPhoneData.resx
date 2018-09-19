@@ -117,12 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblDescription.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
+    <value>12, 17</value>
   </data>
   <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 77</value>
+    <value>504, 51</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblDescription.TabIndex" type="System.Int32, mscorlib">
@@ -143,18 +147,104 @@
   <data name="&gt;&gt;lblDescription.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="groupImportInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;txtPassword.Name" xml:space="preserve">
+    <value>txtPassword</value>
+  </data>
+  <data name="&gt;&gt;txtPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtPassword.Parent" xml:space="preserve">
+    <value>groupImportInfo</value>
+  </data>
+  <data name="&gt;&gt;txtPassword.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblPassword.Name" xml:space="preserve">
+    <value>lblPassword</value>
+  </data>
+  <data name="&gt;&gt;lblPassword.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPassword.Parent" xml:space="preserve">
+    <value>groupImportInfo</value>
+  </data>
+  <data name="&gt;&gt;lblPassword.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Name" xml:space="preserve">
+    <value>btnBrowse</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Parent" xml:space="preserve">
+    <value>groupImportInfo</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtPhoneDataFile.Name" xml:space="preserve">
+    <value>txtPhoneDataFile</value>
+  </data>
+  <data name="&gt;&gt;txtPhoneDataFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtPhoneDataFile.Parent" xml:space="preserve">
+    <value>groupImportInfo</value>
+  </data>
+  <data name="&gt;&gt;txtPhoneDataFile.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblProjectFile.Name" xml:space="preserve">
+    <value>lblProjectFile</value>
+  </data>
+  <data name="&gt;&gt;lblProjectFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblProjectFile.Parent" xml:space="preserve">
+    <value>groupImportInfo</value>
+  </data>
+  <data name="&gt;&gt;lblProjectFile.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 139</value>
+  </data>
+  <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 127</value>
+  </data>
+  <data name="groupImportInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="groupImportInfo.Text" xml:space="preserve">
+    <value>Import Information</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.Name" xml:space="preserve">
+    <value>groupImportInfo</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="txtPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="txtPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 95</value>
+    <value>9, 88</value>
   </data>
   <data name="txtPassword.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
     <value>*</value>
   </data>
   <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>487, 20</value>
+    <value>484, 20</value>
   </data>
   <data name="txtPassword.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -172,7 +262,7 @@
     <value>0</value>
   </data>
   <data name="lblPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 79</value>
+    <value>6, 72</value>
   </data>
   <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>487, 13</value>
@@ -195,8 +285,11 @@
   <data name="&gt;&gt;lblPassword.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btnBrowse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="btnBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>370, 40</value>
+    <value>367, 38</value>
   </data>
   <data name="btnBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 23</value>
@@ -218,6 +311,9 @@
   </data>
   <data name="&gt;&gt;btnBrowse.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="txtPhoneDataFile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="txtPhoneDataFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 40</value>
@@ -264,38 +360,14 @@
   <data name="&gt;&gt;lblProjectFile.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 169</value>
-  </data>
-  <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 126</value>
-  </data>
-  <data name="groupImportInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="groupImportInfo.Text" xml:space="preserve">
-    <value>Import Information</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Name" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="textProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="textProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 551</value>
+    <value>8, 478</value>
   </data>
   <data name="textProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 20</value>
+    <value>504, 20</value>
   </data>
   <data name="textProgress.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -316,13 +388,13 @@
     <value>5</value>
   </data>
   <data name="progressBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 577</value>
+    <value>8, 504</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 23</value>
+    <value>504, 23</value>
   </data>
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -346,7 +418,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 607</value>
+    <value>422, 533</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -376,7 +448,7 @@
     <value>False</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 607</value>
+    <value>325, 533</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -400,17 +472,11 @@
     <value>8</value>
   </data>
   <data name="lbxStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <metadata name="cmsStatus.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="toolStripMenuItem_Copy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
-  </data>
-  <data name="toolStripMenuItem_Copy.Text" xml:space="preserve">
-    <value>Copy to Clipboard</value>
-  </data>
   <data name="cmsStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 26</value>
   </data>
@@ -424,10 +490,10 @@
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 424</value>
+    <value>8, 403</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 121</value>
+    <value>504, 69</value>
   </data>
   <data name="lbxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -444,8 +510,17 @@
   <data name="&gt;&gt;lbxStatus.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="toolStripMenuItem_Copy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="toolStripMenuItem_Copy.Text" xml:space="preserve">
+    <value>Copy to Clipboard</value>
+  </data>
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 90</value>
+    <value>14, 70</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 18</value>
@@ -468,8 +543,11 @@
   <data name="lblWarning.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
+  <data name="lblWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 90</value>
+    <value>35, 70</value>
   </data>
   <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 18</value>
@@ -492,11 +570,17 @@
   <data name="&gt;&gt;lblWarning.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="lblWarningMessage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lblWarningMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblWarningMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 111</value>
+    <value>12, 88</value>
   </data>
   <data name="lblWarningMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 55</value>
+    <value>504, 48</value>
   </data>
   <data name="lblWarningMessage.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -516,11 +600,98 @@
   <data name="&gt;&gt;lblWarningMessage.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="grpTypeOfImport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;viewsList.Name" xml:space="preserve">
+    <value>viewsList</value>
+  </data>
+  <data name="&gt;&gt;viewsList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;viewsList.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;viewsList.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Name" xml:space="preserve">
+    <value>rdbAppend</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbAppend.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Name" xml:space="preserve">
+    <value>rdbUpdate</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdate.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Name" xml:space="preserve">
+    <value>rdbUpdateAndAppend</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.Parent" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;rdbUpdateAndAppend.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpTypeOfImport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 272</value>
+  </data>
+  <data name="grpTypeOfImport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 116</value>
+  </data>
+  <data name="grpTypeOfImport.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="grpTypeOfImport.Text" xml:space="preserve">
+    <value>Type of Import</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Name" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 21</value>
+    <value>244, 15</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -543,11 +714,14 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="viewsList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="viewsList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 44</value>
+    <value>247, 34</value>
   </data>
   <data name="viewsList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+    <value>246, 21</value>
   </data>
   <data name="viewsList.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -595,7 +769,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 54</value>
+    <value>24, 56</value>
   </data>
   <data name="rdbUpdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 25</value>
@@ -622,7 +796,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbUpdateAndAppend.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 21</value>
+    <value>24, 27</value>
   </data>
   <data name="rdbUpdateAndAppend.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 25</value>
@@ -645,30 +819,6 @@
   <data name="&gt;&gt;rdbUpdateAndAppend.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="grpTypeOfImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 302</value>
-  </data>
-  <data name="grpTypeOfImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 116</value>
-  </data>
-  <data name="grpTypeOfImport.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="grpTypeOfImport.Text" xml:space="preserve">
-    <value>Type of Import</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Name" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -676,7 +826,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>529, 642</value>
+    <value>524, 568</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4472,6 +4622,9 @@
         AAAAAAAf//////wAAAAAAAA///////8AAAAAAAD////////AAAAAAAP////////wAAAAAAf////////8
         AAAAAD//////////AAAAAP//////////4AAAB////////////wAA//////////////////////8=
 </value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>540, 590</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

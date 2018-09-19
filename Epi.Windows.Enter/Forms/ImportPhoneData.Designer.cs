@@ -170,12 +170,12 @@
             // 
             // grpTypeOfImport
             // 
+            resources.ApplyResources(this.grpTypeOfImport, "grpTypeOfImport");
             this.grpTypeOfImport.Controls.Add(this.label1);
             this.grpTypeOfImport.Controls.Add(this.viewsList);
             this.grpTypeOfImport.Controls.Add(this.rdbAppend);
             this.grpTypeOfImport.Controls.Add(this.rdbUpdate);
             this.grpTypeOfImport.Controls.Add(this.rdbUpdateAndAppend);
-            resources.ApplyResources(this.grpTypeOfImport, "grpTypeOfImport");
             this.grpTypeOfImport.Name = "grpTypeOfImport";
             this.grpTypeOfImport.TabStop = false;
             // 
@@ -187,8 +187,8 @@
             // 
             // viewsList
             // 
-            this.viewsList.FormattingEnabled = true;
             resources.ApplyResources(this.viewsList, "viewsList");
+            this.viewsList.FormattingEnabled = true;
             this.viewsList.Name = "viewsList";
             this.viewsList.SelectedIndexChanged += new System.EventHandler(this.viewsList_SelectedIndexChanged);
             // 
@@ -231,10 +231,10 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.groupImportInfo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportPhoneDataForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImportDataForm_FormClosing);
             this.Load += new System.EventHandler(this.ImportDataForm_Load);
             this.groupImportInfo.ResumeLayout(false);
