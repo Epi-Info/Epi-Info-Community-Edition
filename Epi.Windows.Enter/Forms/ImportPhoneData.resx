@@ -150,90 +150,6 @@
   <data name="groupImportInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;txtPassword.Name" xml:space="preserve">
-    <value>txtPassword</value>
-  </data>
-  <data name="&gt;&gt;txtPassword.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtPassword.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;txtPassword.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblPassword.Name" xml:space="preserve">
-    <value>lblPassword</value>
-  </data>
-  <data name="&gt;&gt;lblPassword.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblPassword.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;lblPassword.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnBrowse.Name" xml:space="preserve">
-    <value>btnBrowse</value>
-  </data>
-  <data name="&gt;&gt;btnBrowse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnBrowse.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;btnBrowse.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtPhoneDataFile.Name" xml:space="preserve">
-    <value>txtPhoneDataFile</value>
-  </data>
-  <data name="&gt;&gt;txtPhoneDataFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtPhoneDataFile.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;txtPhoneDataFile.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblProjectFile.Name" xml:space="preserve">
-    <value>lblProjectFile</value>
-  </data>
-  <data name="&gt;&gt;lblProjectFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblProjectFile.Parent" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;lblProjectFile.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 139</value>
-  </data>
-  <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 127</value>
-  </data>
-  <data name="groupImportInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="groupImportInfo.Text" xml:space="preserve">
-    <value>Import Information</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Name" xml:space="preserve">
-    <value>groupImportInfo</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupImportInfo.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="txtPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -360,14 +276,38 @@
   <data name="&gt;&gt;lblProjectFile.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 139</value>
+  </data>
+  <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 127</value>
+  </data>
+  <data name="groupImportInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="groupImportInfo.Text" xml:space="preserve">
+    <value>Import Information</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.Name" xml:space="preserve">
+    <value>groupImportInfo</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupImportInfo.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="textProgress.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
   <data name="textProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 478</value>
+    <value>12, 478</value>
   </data>
   <data name="textProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 20</value>
+    <value>500, 20</value>
   </data>
   <data name="textProgress.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -391,10 +331,10 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 504</value>
+    <value>12, 504</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 23</value>
+    <value>500, 23</value>
   </data>
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -477,6 +417,12 @@
   <metadata name="cmsStatus.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="toolStripMenuItem_Copy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="toolStripMenuItem_Copy.Text" xml:space="preserve">
+    <value>Copy to Clipboard</value>
+  </data>
   <data name="cmsStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 26</value>
   </data>
@@ -490,10 +436,10 @@
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 403</value>
+    <value>12, 403</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 69</value>
+    <value>500, 69</value>
   </data>
   <data name="lbxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -510,17 +456,11 @@
   <data name="&gt;&gt;lbxStatus.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="toolStripMenuItem_Copy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
-  </data>
-  <data name="toolStripMenuItem_Copy.Text" xml:space="preserve">
-    <value>Copy to Clipboard</value>
-  </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 70</value>
+    <value>12, 70</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 18</value>
@@ -602,90 +542,6 @@
   </data>
   <data name="grpTypeOfImport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;viewsList.Name" xml:space="preserve">
-    <value>viewsList</value>
-  </data>
-  <data name="&gt;&gt;viewsList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;viewsList.Parent" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;viewsList.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdbAppend.Name" xml:space="preserve">
-    <value>rdbAppend</value>
-  </data>
-  <data name="&gt;&gt;rdbAppend.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdbAppend.Parent" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;rdbAppend.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdate.Name" xml:space="preserve">
-    <value>rdbUpdate</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdate.Parent" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdate.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdateAndAppend.Name" xml:space="preserve">
-    <value>rdbUpdateAndAppend</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdateAndAppend.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdateAndAppend.Parent" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdateAndAppend.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="grpTypeOfImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 272</value>
-  </data>
-  <data name="grpTypeOfImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 116</value>
-  </data>
-  <data name="grpTypeOfImport.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="grpTypeOfImport.Text" xml:space="preserve">
-    <value>Type of Import</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Name" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -818,6 +674,30 @@
   </data>
   <data name="&gt;&gt;rdbUpdateAndAppend.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="grpTypeOfImport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 272</value>
+  </data>
+  <data name="grpTypeOfImport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 116</value>
+  </data>
+  <data name="grpTypeOfImport.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="grpTypeOfImport.Text" xml:space="preserve">
+    <value>Type of Import</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Name" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
