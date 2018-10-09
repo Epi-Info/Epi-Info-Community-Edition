@@ -65,6 +65,8 @@ namespace EpiDashboard.Mapping
                 start_str = GetAt(key_Start);
                 end_str = GetAt(key_End);
 
+                if (end_str == "") end_str = float.MaxValue.ToString();
+
                 if (float.TryParse(start_str, out start) && float.TryParse(end_str, out end))
                 {
                     _rangeValues.Add(new ClassLimits(start, end, key_Start, key_End));
