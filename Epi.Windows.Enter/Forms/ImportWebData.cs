@@ -764,7 +764,7 @@ namespace Epi.Enter.Forms
                 QueryParameter paramLastSaveTime = new QueryParameter("@LastSaveTime", DbType.DateTime2, DateTime.Now);
                 fieldValueParams.Add(paramLastSaveTime);
 
-                if (destinationGUIDList.Contains(GUID))
+                if (destinationGUIDList.Contains(GUID, StringComparer.CurrentCultureIgnoreCase))
                 {
                     recordsUpdated++;
                     if (update)
@@ -922,6 +922,51 @@ namespace Epi.Enter.Forms
                     }
                    
                 }
+            }
+            else
+            {
+                foreach (View v in destinationView.GetDescendantViews())
+                {
+                    if (v.Fields.Contains(fieldName))
+                    {
+                        Field field = v.Fields[fieldName];
+
+                        if (field is CheckBoxField || field is YesNoField)
+                        {
+                            if (value.ToString().ToLowerInvariant().Equals("yes"))
+                            {
+                                value = true;
+                            }
+                            else if (value.ToString().ToLowerInvariant().Equals("no"))
+                            {
+                                value = false;
+                            }
+                        }
+
+                        if (field is NumberField && !string.IsNullOrEmpty(value.ToString()))
+                        {
+                            double result = -1;
+                            // if (double.TryParse(value.ToString(), out result))
+                            if (double.TryParse(value.ToString(), NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out result))
+                            {
+                                value = result;
+                            }
+                        }
+                        if (field is OptionField && !string.IsNullOrEmpty(value.ToString()))
+                        {
+
+                            var Options = ((Epi.Fields.OptionField)(field)).Options.Select(x => x.Trim()).ToList();
+                            if (Options.Contains(value.ToString()))
+                            {
+                                value = Options.IndexOf(value.ToString());
+                            }
+
+                        }
+                        return value;
+
+                    }
+                }
+
             }
             return value;
         }
@@ -1291,7 +1336,7 @@ namespace Epi.Enter.Forms
                 //{
                 //}
                 //this.BeginInvoke(new SetStatusDelegate(AddStatusMessage), "On page '" + destinationPage.Name + "', " + recordsInserted.ToString() + " record(s) inserted and " + recordsUpdated.ToString() + " record(s) updated.");                
-                if (!GUIDList.Contains(currentGUID))
+                if (!GUIDList.Contains(currentGUID, StringComparer.CurrentCultureIgnoreCase))
                 {
                     GUIDList.Add(currentGUID);
                     recordsInserted++;

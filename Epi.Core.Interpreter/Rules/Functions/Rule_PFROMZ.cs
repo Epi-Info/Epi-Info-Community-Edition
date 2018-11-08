@@ -39,7 +39,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     result = -99.999;
                 }
-                return null;
+                return result;
             }
             else
             {
