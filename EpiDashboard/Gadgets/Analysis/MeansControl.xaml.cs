@@ -3165,7 +3165,33 @@ namespace EpiDashboard
                         htmlBuilder.AppendLine("   <td>" + statistics.pUneqal.ToString("F" + precision) + "</td>");
                         htmlBuilder.AppendLine(" </tr>");
                         htmlBuilder.AppendLine("</table>");
-                    }
+
+						if (!String.IsNullOrEmpty(((MeansParameters)Parameters).PairIDVariableName))
+						{
+							htmlBuilder.AppendLine("<br><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" summary=\"" + summaryText + "\">");
+							htmlBuilder.AppendLine(" <tr>");
+							htmlBuilder.AppendLine("   <th>Paired Results</th>");
+							htmlBuilder.AppendLine("   <th>Mean</th>");
+							htmlBuilder.AppendLine("   <th colspan=2>95% CL</th>");
+							htmlBuilder.AppendLine("   <th>Std. Dev.</th>");
+							htmlBuilder.AppendLine("   <th>Std. Err.</th>");
+							htmlBuilder.AppendLine("   <th>t Value</th>");
+							htmlBuilder.AppendLine("   <th>Pr > |t|</th>");
+							htmlBuilder.AppendLine(" </tr>");
+
+							htmlBuilder.AppendLine(" <tr>");
+							htmlBuilder.AppendLine("   <th>Diff (Group 1 - Group 2)</th>");
+							htmlBuilder.AppendLine("   <td>" + statistics.pairedDifferenceMean.ToString("F" + precision) + "</td>");
+							htmlBuilder.AppendLine("   <td>" + statistics.pairedDifferenceLCL.ToString("F" + precision) + "</td>");
+							htmlBuilder.AppendLine("   <td>" + statistics.pairedDifferenceUCL.ToString("F" + precision) + "</td>");
+							htmlBuilder.AppendLine("   <td>" + statistics.pairedDifferenceSD.ToString("F" + precision) + "</td>");
+							htmlBuilder.AppendLine("   <td>" + statistics.pairedDifferenceSE.ToString("F" + precision) + "</td>");
+							htmlBuilder.AppendLine("   <td>" + statistics.tStatisticPaired.ToString("F" + precision) + "</td>");
+							htmlBuilder.AppendLine("   <td>" + statistics.tStatisticPairedP.ToString("F" + precision) + "</td>");
+							htmlBuilder.AppendLine(" </tr>");
+							htmlBuilder.AppendLine("</table>");
+						}
+					}
 
                     string strssBetweenValue = SharedStrings.UNDEFINED;
                     string strdfBetweenValue = SharedStrings.UNDEFINED;
