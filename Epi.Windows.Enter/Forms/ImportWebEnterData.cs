@@ -1058,22 +1058,21 @@ namespace Epi.Enter.Forms
                     }
             }
         private void UpdateRecordStatus(List<string> GUIDList)
-            {
+        {
             Epi.EWEManagerService.SurveyAnswerRequest Request = new Epi.EWEManagerService.SurveyAnswerRequest();
             List<Epi.EWEManagerService.SurveyAnswerDTO> DTOList = new List<Epi.EWEManagerService.SurveyAnswerDTO>();
+
             foreach (var Id in GUIDList)
-                {
-
+            {
                 Epi.EWEManagerService.SurveyAnswerDTO DTO = new EWEManagerService.SurveyAnswerDTO();
-
                 DTO.ResponseId = Id;
                 DTO.Status = 4;
                 DTOList.Add(DTO);
-                }
-            Request.SurveyAnswerList = DTOList;
-
-            client.UpdateRecordStatus(Request);
             }
+
+            Request.SurveyAnswerList = DTOList.ToArray();
+            client.UpdateRecordStatus(Request);
+        }
 
         /// <summary>
         /// Adds a status message to the status list box
