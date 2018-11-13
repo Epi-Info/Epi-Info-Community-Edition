@@ -17,7 +17,7 @@
             public string GetMaskByPattern(string pattern)
             {
                 foreach (DataPatternsRow row in this.Rows)
-                {                               
+                {
                     if (row.Expression.Equals(pattern))
                     {
                         return row["Mask"].ToString();
@@ -55,7 +55,7 @@
                 }
                 return pattern;
             }
-            
+
             /// <summary>
             /// Retrieves the default pattern's expression
             /// </summary>
@@ -97,7 +97,7 @@
             /// <returns></returns>
             public bool IsReservedWord(string name)
             {
-                ReservedWordsRow row = (ReservedWordsRow) this.Rows.Find(new object[] { name });
+                ReservedWordsRow row = (ReservedWordsRow)this.Rows.Find(new object[] { name });
                 return (row != null);
             }
             #endregion Public Methods
@@ -113,7 +113,7 @@
         /// <summary>
         /// Class VariableScopesDataTable (nested)
         /// </summary>
-        public partial class VariableScopesDataTable : global::System.Data.TypedTableBase<VariableScopesRow> 
+        public partial class VariableScopesDataTable : global::System.Data.TypedTableBase<VariableScopesRow>
         {
 
             #region public methods
@@ -144,7 +144,7 @@
         /// <summary>
         /// Class DataTypesDataTable (nested)
         /// </summary>
-        public partial class DataTypesDataTable : global::System.Data.TypedTableBase<DataTypesRow> 
+        public partial class DataTypesDataTable : global::System.Data.TypedTableBase<DataTypesRow>
         {
             #region public methods
             /// <summary>
@@ -172,7 +172,7 @@
         /// <summary>
         /// Class FieldTypesDataTable (nested)
         /// </summary>
-        public partial class FieldTypesDataTable : global::System.Data.TypedTableBase<FieldTypesRow> 
+        public partial class FieldTypesDataTable : global::System.Data.TypedTableBase<FieldTypesRow>
         {
 
             #region public methods
@@ -207,14 +207,14 @@
                 int fieldType = 99;
                 foreach (FieldTypesRow row in this.Rows)
                 {
-                    fieldType = (int) row[ColumnNames.DATA_TYPE];
+                    fieldType = (int)row[ColumnNames.DATA_TYPE];
                     if (fieldType == id)
                     {
                         return fieldType;
                     }
                 }
                 return fieldType;
-            }            
+            }
 
             /// <summary>
             /// Getss the default pattern id of a field type

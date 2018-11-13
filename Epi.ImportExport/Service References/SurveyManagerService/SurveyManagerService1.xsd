@@ -1,144 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://isd-v-osel-eiw.cdc.gov/EIWSService/SurveyManagerService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
-  <xs:element name="PublishSurvey">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://www.yourcompany.com/types/" minOccurs="0" name="pRequestMessage" nillable="true" type="q1:PublishRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="PublishSurveyResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://www.yourcompany.com/types/" minOccurs="0" name="PublishSurveyResult" nillable="true" type="q2:PublishResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q3:SurveyInfoRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyInfoResult" nillable="true" type="q4:SurveyInfoResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganization">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q5:OrganizationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganizationResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://www.yourcompany.com/types/" minOccurs="0" name="GetOrganizationResult" nillable="true" type="q6:OrganizationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganizationInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q7:OrganizationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganizationInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://www.yourcompany.com/types/" minOccurs="0" name="GetOrganizationInfoResult" nillable="true" type="q8:OrganizationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganizationNames">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q9:OrganizationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganizationNamesResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://www.yourcompany.com/types/" minOccurs="0" name="GetOrganizationNamesResult" nillable="true" type="q10:OrganizationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganizationByKey">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q11:OrganizationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganizationByKeyResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://www.yourcompany.com/types/" minOccurs="0" name="GetOrganizationByKeyResult" nillable="true" type="q12:OrganizationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetSurveyInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q13:SurveyInfoRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetSurveyInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyInfoResult" nillable="true" type="q14:SurveyInfoResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyAnswer">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q15="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q15:SurveyAnswerRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyAnswerResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q16="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyAnswerResult" nillable="true" type="q16:SurveyAnswerResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetOrganization">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q17="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q17:OrganizationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetOrganizationResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q18="http://www.yourcompany.com/types/" minOccurs="0" name="SetOrganizationResult" nillable="true" type="q18:OrganizationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateOrganizationInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q19="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q19:OrganizationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateOrganizationInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q20="http://www.yourcompany.com/types/" minOccurs="0" name="UpdateOrganizationInfoResult" nillable="true" type="q20:OrganizationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfstring">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+  <xs:complexType name="ArrayOfKeyValueOfintstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfintstring">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" type="xs:int" />
+            <xs:element name="Value" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfintstring" nillable="true" type="tns:ArrayOfKeyValueOfintstring" />
+  <xs:complexType name="ArrayOfKeyValueOfstringstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringstring">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" nillable="true" type="xs:string" />
+            <xs:element name="Value" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfstringstring" nillable="true" type="tns:ArrayOfKeyValueOfstringstring" />
 </xs:schema>

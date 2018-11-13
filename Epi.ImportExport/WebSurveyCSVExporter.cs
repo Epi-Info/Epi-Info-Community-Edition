@@ -30,7 +30,7 @@ namespace Epi.ImportExport
         #endregion // Constants
 
         #region Events
-        public event SetMaxProgressBarValueDelegate SetMaxProgressBarValue;     
+        public event SetMaxProgressBarValueDelegate SetMaxProgressBarValue;
         public event SimpleEventHandler FinishExport;
         public event UpdateStatusEventHandler ExportFailed;
         #endregion // Events
@@ -44,7 +44,7 @@ namespace Epi.ImportExport
         /// <param name="pSecurityToken">The security token associated with this survey</param>
         /// <param name="pFileName">The CSV file to be created. Use a full path and name.</param>
         public WebSurveyCSVExporter(Guid pSurveyKey, Guid pOrganizationKey, Guid pSecurityToken, string pFileName)
-        {            
+        {
             this.fileName = pFileName;
             this.secToken = pSecurityToken;
             this.orgKey = pOrganizationKey;
@@ -79,12 +79,12 @@ namespace Epi.ImportExport
             WordBuilder wb = new WordBuilder(SEPARATOR);
             StreamWriter sw = null;
 
-            Epi.Web.Common.Message.SurveyAnswerRequest Request = new Epi.Web.Common.Message.SurveyAnswerRequest();
+            SurveyManagerService.SurveyAnswerRequest Request = new SurveyManagerService.SurveyAnswerRequest();
             Request.Criteria.SurveyId = surveyKey.ToString();
             Request.Criteria.UserPublishKey = secToken;
             Request.Criteria.OrganizationKey = orgKey;
-            Request.Criteria.ReturnSizeInfoOnly = true;                    
-            Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
+            Request.Criteria.ReturnSizeInfoOnly = true;
+            SurveyManagerService.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
             Pages = Result.NumberOfPages;
             PageSize = Result.PageSize;
 
@@ -92,7 +92,7 @@ namespace Epi.ImportExport
 
             int count = 0;
 
-            List<SurveyAnswerResponse> Results = new List<SurveyAnswerResponse>();
+            List<SurveyManagerService.SurveyAnswerResponse> Results = new List<SurveyManagerService.SurveyAnswerResponse>();
 
             OnSetStatusMessage(ImportExportSharedStrings.WEB_CSV_EXPORT_BUILDING_COLUMN_HEADINGS);
 
@@ -104,7 +104,7 @@ namespace Epi.ImportExport
                 Result = client.GetSurveyAnswer(Request);
                 Results.Add(Result);
 
-                foreach (Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer in Result.SurveyResponseList)
+                foreach (SurveyManagerService.SurveyAnswerDTO surveyAnswer in Result.SurveyResponseList)
                 {
                     if (surveyAnswer.Status == 3)
                     {
@@ -121,8 +121,8 @@ namespace Epi.ImportExport
 
             List<string> columnHeaders = new List<string>();
 
-            foreach (SurveyAnswerResponse R in Results)
-            {                
+            foreach (SurveyManagerService.SurveyAnswerResponse R in Results)
+            {
                 wfList = ParseXML(R);
 
                 foreach (WebFieldData wfData in wfList)
@@ -138,13 +138,13 @@ namespace Epi.ImportExport
                 }
 
                 break;
-            }            
+            }
 
             try
             {
                 OnSetStatusMessage(ImportExportSharedStrings.WEB_CSV_EXPORTING);
 
-                sw = File.CreateText(fileName);                
+                sw = File.CreateText(fileName);
 
                 foreach (string s in columnHeaders)
                 {
@@ -155,7 +155,7 @@ namespace Epi.ImportExport
                 rowsExported = 0;
 
 
-                foreach (SurveyAnswerResponse R in Results)
+                foreach (SurveyManagerService.SurveyAnswerResponse R in Results)
                 {
                     string currentGUID = string.Empty;
                     string lastGUID = string.Empty;
@@ -182,7 +182,7 @@ namespace Epi.ImportExport
                             rowValue = rowValue.Replace("\"", "\"\"");
                             rowValue = Util.InsertIn(rowValue, "\"");
                         }
-                        wb.Add(rowValue);                        
+                        wb.Add(rowValue);
 
                         lastGUID = wfData.RecordGUID;
                     }
@@ -225,11 +225,12 @@ namespace Epi.ImportExport
         /// Parses XML from the web survey
         /// </summary>
         /// <param name="result">The parsed results in dictionary format</param>
-        private List<WebFieldData> ParseXML(SurveyAnswerResponse result)
+        //  private List<WebFieldData> ParseXML(SurveyAnswerResponse result)
+        private List<WebFieldData> ParseXML(SurveyManagerService.SurveyAnswerResponse result)
         {
             List<WebFieldData> surveyResponses = new List<WebFieldData>();
 
-            foreach (Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer in result.SurveyResponseList)
+            foreach (SurveyManagerService.SurveyAnswerDTO surveyAnswer in result.SurveyResponseList)
             {
                 WebFieldData wfData = new WebFieldData();
 
@@ -282,7 +283,7 @@ namespace Epi.ImportExport
         private void Construct()
         {
             try
-            {                
+            {
                 this.config = Configuration.GetNewInstance();
 
                 //this.importWorker = new BackgroundWorker();
@@ -341,7 +342,7 @@ namespace Epi.ImportExport
                     binding.BypassProxyOnLocal = false;
                     binding.TransactionFlow = false;
                     binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                    
+
                     binding.MaxBufferPoolSize = config.Settings.WebServiceMaxBufferPoolSize;
                     binding.MaxReceivedMessageSize = config.Settings.WebServiceMaxReceivedMessageSize;
 
