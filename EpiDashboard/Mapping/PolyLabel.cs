@@ -7,9 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Geometry;
 using System.Windows.Media;
+using Esri.ArcGISRuntime;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Mapping
 {

@@ -21,7 +21,7 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class DotDensityKmlLayerProperties : UserControl, ILayerProperties
     {
-        private ESRI.ArcGIS.Client.Map myMap;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
         private DashboardHelper dashboardHelper;
         public DotDensityKmlLayerProvider provider;
         private System.Xml.XmlElement currentElement;
@@ -36,7 +36,7 @@ namespace EpiDashboard.Mapping
         public DataFilters datafilters { get; set; }
         public IDictionary<string, object> curfeatureAttributes;
 
-        public DotDensityKmlLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public DotDensityKmlLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
             this.myMap = myMap;

@@ -13,10 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Tasks;
 
 namespace EpiDashboard.Mapping
 {
@@ -57,7 +53,7 @@ namespace EpiDashboard.Mapping
 
         public IDictionary<string, object> curfeatureAttributes;
 
-        public ChoroplethServerLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethServerLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
             this.myMap = myMap;

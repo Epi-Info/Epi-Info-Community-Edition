@@ -12,15 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Bing;
-using ESRI.ArcGIS.Client.Geometry;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Controls;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Windows.Media.Color;
@@ -35,7 +29,11 @@ using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 using UserControl = System.Windows.Controls.UserControl;
 using View = Epi.View;
-using ESRI.ArcGIS.Client.Toolkit.DataSources;
+using Esri.ArcGISRuntime;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Mapping
 {

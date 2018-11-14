@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
 
 namespace EpiDashboard.Mapping
 {

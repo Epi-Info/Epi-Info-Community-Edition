@@ -16,28 +16,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Bing;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
 using System.Windows.Controls.DataVisualization.Charting;
+using Esri.ArcGISRuntime;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Mapping
 {
 
     public class MapServerLayerProvider : ILayerProvider
     {
-        private Map myMap;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
         private Guid layerId;
         private string url;
         private int[] visibleLayers;
 
-        public MapServerLayerProvider(Map myMap)
+        public MapServerLayerProvider(Esri.ArcGISRuntime.Mapping.Map myMap)
         {
             this.myMap = myMap;
             this.layerId = Guid.NewGuid();

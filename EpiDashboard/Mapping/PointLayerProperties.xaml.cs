@@ -13,7 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
 using Epi.Fields;
-using ESRI.ArcGIS.Client.Symbols;
 
 namespace EpiDashboard.Mapping
 {
@@ -24,7 +23,7 @@ namespace EpiDashboard.Mapping
     {
 
         public PointLayerProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
         private DashboardHelper dashboardHelper;
 
         public event EventHandler MapGenerated;
@@ -36,7 +35,7 @@ namespace EpiDashboard.Mapping
         private bool flagrunedit;
         private StackPanel legendStackPanel;
 
-        public PointLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public PointLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
 

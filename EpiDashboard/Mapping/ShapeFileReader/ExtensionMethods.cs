@@ -1,13 +1,15 @@
 using System;
-using ESRI.ArcGIS.Client;
 using EpiDashboard.Mapping.ShapeFileReader;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
 using System.Collections;
+using Esri.ArcGISRuntime;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Mapping.ShapeFileReader
 {
@@ -19,13 +21,13 @@ namespace EpiDashboard.Mapping.ShapeFileReader
         public static double rightMostPoint;
         public static double bottomMostPoint;
 
-        public static SimpleMarkerSymbol DEFAULT_MARKER_SYMBOL = new SimpleMarkerSymbol()
+        public static Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol DEFAULT_MARKER_SYMBOL = new Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol()
         {
             Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle,
             Color = new SolidColorBrush( Colors.Red )
         };
 
-        public static SimpleLineSymbol DEFAULT_LINE_SYMBOL = new SimpleLineSymbol()
+        public static Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol DEFAULT_LINE_SYMBOL = new Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol()
         {
             Color = new SolidColorBrush( Colors.Red ),
             Style = SimpleLineSymbol.LineStyle.Solid,

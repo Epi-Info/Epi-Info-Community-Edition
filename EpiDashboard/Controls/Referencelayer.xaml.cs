@@ -24,7 +24,7 @@ namespace EpiDashboard.Controls
     {
 
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
         public event EventHandler Cancelled;
         public event EventHandler ChangesAccepted;
         private EpiDashboard.Mapping.KmlLayerProvider KMLprovider;
@@ -43,7 +43,7 @@ namespace EpiDashboard.Controls
         public int[] KMLMapVisibleLayers { get; set; }
         #endregion
 
-        public Referencelayer(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public Referencelayer(EpiDashboard.Mapping.StandaloneMapControl mapControl, Esri.ArcGISRuntime.Mapping.Map myMap)
         {
             InitializeComponent();
             this.mapControl = mapControl;

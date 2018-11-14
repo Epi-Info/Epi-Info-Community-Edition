@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client.Symbols;
 using Epi;
 using Epi.Fields;
 
@@ -24,8 +23,8 @@ namespace EpiDashboard.Mapping
     {
 
         private MarkerProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
-        private ESRI.ArcGIS.Client.Geometry.MapPoint point;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private Esri.ArcGISRuntime.Geometry.MapPoint point;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -33,7 +32,7 @@ namespace EpiDashboard.Mapping
         
         private bool isReadOnlyMode;
 
-        public MarkerProperties(ESRI.ArcGIS.Client.Map myMap, ESRI.ArcGIS.Client.Geometry.MapPoint point)
+        public MarkerProperties(Esri.ArcGISRuntime.Mapping.Map myMap, Esri.ArcGISRuntime.Geometry.MapPoint point)
         {
             InitializeComponent();
 

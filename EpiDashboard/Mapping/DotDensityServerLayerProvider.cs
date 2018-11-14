@@ -16,14 +16,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Toolkit;
-using ESRI.ArcGIS.Client.Bing;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
+using Esri.ArcGISRuntime;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Mapping
 {
@@ -242,7 +241,7 @@ namespace EpiDashboard.Mapping
         {
             get
             {
-                SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
+                Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol symbol = new Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol();
                 symbol.Color = new SolidColorBrush(dotColor);
                 symbol.Size = 5;
                 symbol.Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle;

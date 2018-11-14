@@ -21,8 +21,12 @@ using Epi.Fields;
 using EpiDashboard.Mapping;
 using System.Net;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Geometry;
+using Esri.ArcGISRuntime;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
+
 namespace EpiDashboard.Controls
 {
     /// <summary>
@@ -31,7 +35,7 @@ namespace EpiDashboard.Controls
     public partial class DotDensityProperties : System.Windows.Controls.UserControl
     {      
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
         private DashboardHelper dashboardHelper;
         public EpiDashboard.Mapping.DotDensityLayerProvider provider;       
         //public RowFilterControl rowFilterControl { get; protected set; }                  
@@ -108,7 +112,7 @@ namespace EpiDashboard.Controls
         #endregion
 
         # region Constructors
-        public DotDensityProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public DotDensityProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, Esri.ArcGISRuntime.Mapping.Map myMap)
         {
             InitializeComponent();
             this.mapControl = mapControl;

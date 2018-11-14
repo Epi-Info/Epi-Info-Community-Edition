@@ -42,7 +42,7 @@ namespace EpiDashboard.Mapping
             } 
         }
         
-        public LayerList(ESRI.ArcGIS.Client.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper)
+        public LayerList(Esri.ArcGISRuntime.Mapping.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper)
         {
             InitializeComponent();
 

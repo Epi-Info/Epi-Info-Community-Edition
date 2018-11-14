@@ -43,7 +43,7 @@ namespace EpiDashboard.Mapping
         }
 
         # region Constructors
-        public TimeLapse(List<DashboardHelper> dashboardHelpers, StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public TimeLapse(List<DashboardHelper> dashboardHelpers, StandaloneMapControl mapControl, Esri.ArcGISRuntime.Mapping.Map myMap)
         {
             InitializeComponent();
             provider = new ClusterLayerProvider(myMap);

@@ -24,7 +24,7 @@ namespace EpiDashboard.Mapping
     {
 
         public ShapeLayerProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -33,7 +33,7 @@ namespace EpiDashboard.Mapping
 
         private bool isReadOnlyMode;
 
-        public ShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap)
+        public ShapeLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap)
         {
             InitializeComponent();
 

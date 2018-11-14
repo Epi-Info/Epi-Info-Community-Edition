@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client.Symbols;
 using Epi;
 using Epi.Fields;
 
@@ -24,7 +23,7 @@ namespace EpiDashboard.Mapping
     {
 
         public MapServerLayerProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
         private string serverName;
         private int[] visibleLayers;
         private bool flagrunedit;
@@ -34,7 +33,7 @@ namespace EpiDashboard.Mapping
         
         private bool isReadOnlyMode;
 
-        public MapServerLayerProperties(ESRI.ArcGIS.Client.Map myMap)
+        public MapServerLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap)
         {
             InitializeComponent();
 

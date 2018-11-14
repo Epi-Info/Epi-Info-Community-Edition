@@ -12,8 +12,11 @@ using Epi;
 using EpiDashboard.Mapping;
 using System.Windows.Forms;
 using System.Net;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Toolkit;
+using Esri.ArcGISRuntime;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Controls
 {
@@ -32,7 +35,7 @@ namespace EpiDashboard.Controls
     public partial class ChoroplethProperties : System.Windows.Controls.UserControl
     {
         private EpiDashboard.Mapping.StandaloneMapControl _mapControl;
-        private ESRI.ArcGIS.Client.Map _myMap;
+        private Esri.ArcGISRuntime.Mapping.Map _myMap;
         private DashboardHelper _dashboardHelper;
         private int _currentStratCount;
         private SolidColorBrush _currentColor_rampMissing;
@@ -81,7 +84,7 @@ namespace EpiDashboard.Controls
             public string legendText;
         }
 
-        public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap)
+        public ChoroplethProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, Esri.ArcGISRuntime.Mapping.Map myMap)
         {
             InitializeComponent();
             _mapControl = mapControl;

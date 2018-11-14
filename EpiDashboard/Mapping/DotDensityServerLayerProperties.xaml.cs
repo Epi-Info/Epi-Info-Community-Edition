@@ -21,7 +21,7 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class DotDensityServerLayerProperties : UserControl, ILayerProperties
     {
-        private ESRI.ArcGIS.Client.Map myMap;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
         private DashboardHelper dashboardHelper;
         public DotDensityServerLayerProvider provider;
         private System.Xml.XmlElement currentElement;
@@ -39,7 +39,7 @@ namespace EpiDashboard.Mapping
        
         public IDictionary<string, object> curfeatureAttributes;
 
-        public DotDensityServerLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public DotDensityServerLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
             this.myMap = myMap;

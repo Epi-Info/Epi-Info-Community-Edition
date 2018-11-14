@@ -24,8 +24,8 @@ namespace EpiDashboard.Mapping
     {
 
         private ZoneProvider provider;
-        private ESRI.ArcGIS.Client.Map myMap;
-        private ESRI.ArcGIS.Client.Geometry.MapPoint point;
+        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private Esri.ArcGISRuntime.Geometry.MapPoint point;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -33,7 +33,7 @@ namespace EpiDashboard.Mapping
         
         private bool isReadOnlyMode;
 
-        public ZoneProperties(ESRI.ArcGIS.Client.Map myMap, ESRI.ArcGIS.Client.Geometry.MapPoint point)
+        public ZoneProperties(Esri.ArcGISRuntime.Mapping.Map myMap, Esri.ArcGISRuntime.Geometry.MapPoint point)
         {
             InitializeComponent();
 

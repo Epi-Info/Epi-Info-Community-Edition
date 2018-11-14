@@ -7,19 +7,19 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using ESRI.ArcGIS.Client;
-using ESRI.ArcGIS.Client.Geometry;
-using ESRI.ArcGIS.Client.Symbols;
-using ESRI.ArcGIS.Client.Toolkit.DataSources;
-using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using EpiDashboard.Mapping.ShapeFileReader;
 using System.Collections.ObjectModel;
+using Esri.ArcGISRuntime;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Mapping
 {
     public abstract class ChoroplethLayerProvider
     {
-        public ChoroplethLayerProvider(Map myMap)
+        public ChoroplethLayerProvider(Esri.ArcGISRuntime.Mapping.Map myMap)
         {
             ArcGIS_Map = myMap;
             if (_layerId == Guid.Empty)
