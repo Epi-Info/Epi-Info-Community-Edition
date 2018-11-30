@@ -339,7 +339,7 @@ namespace EpiDashboard.Mapping
                 txtLoading.Visibility = Visibility.Collapsed;
                 waitCursor.Visibility = Visibility.Collapsed;
 
-                //''OpenStreetMapLayer layer = new OpenStreetMapLayer();
+                OpenStreetMapLayer layer = new OpenStreetMapLayer();
                 //''layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
 
                 bool sparse_connection = false;
@@ -394,9 +394,10 @@ namespace EpiDashboard.Mapping
                 menu.Items.Add(mnuClear);
 
                 _mapView = new MapView();
-
                 _map = new Map();
-                _mapView.Background = Brushes.White;
+                _mapView.Map = _map;
+
+                _mapView.Background = Brushes.Gray;
                 _mapView.Height = MapContainer.ActualHeight;
                 _mapView.Width = MapContainer.ActualWidth;
                 _mapView.WrapAroundMode = WrapAroundMode.EnabledWhenSupported;
@@ -404,16 +405,17 @@ namespace EpiDashboard.Mapping
 
                 if (sparse_connection == false)
                 {
-                    //''_map.OperationalLayers.Add(layer);
+                    _map.OperationalLayers.Add(layer);
                 }
+
 
                 //''_map.Layers.Add(pointLayer);
                 //''_map.Layers.Add(textLayer);
                 //''_map.Layers.Add(zoneLayer);
 
-                _mapView.MouseMove += new MouseEventHandler(myMap_MouseMove);
-                _mapView.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
-                _mapView.Loaded += new RoutedEventHandler(myMap_Loaded);
+                //_mapView.MouseMove += new MouseEventHandler(myMap_MouseMove);
+                //_mapView.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
+                //_mapView.Loaded += new RoutedEventHandler(myMap_Loaded);
                 //''_map.ExtentChanged += myMap_ExtentChanged;
 
                 //''_map.RotationChanged += myMap_RotationChanged;
@@ -423,9 +425,9 @@ namespace EpiDashboard.Mapping
                 //''ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
                 //''extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
 
-                Esri.ArcGISRuntime.Geometry.Envelope envelope = new Esri.ArcGISRuntime.Geometry.Envelope(
-                    new MapPoint(int.MinValue, -12000000),
-                    new MapPoint(int.MaxValue, 12000000));
+                //''Esri.ArcGISRuntime.Geometry.Envelope envelope = new Esri.ArcGISRuntime.Geometry.Envelope(
+                //''new MapPoint(int.MinValue, -12000000),
+                //''new MapPoint(int.MaxValue, 12000000));
 
                 //''System.Windows.Interactivity.Interaction.GetBehaviors(_mapView).Add(extentBehavior);
 
