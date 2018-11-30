@@ -23,7 +23,7 @@ namespace EpiDashboard.Mapping
     {
 
         public ClusterLayerProvider provider;
-        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
 
         public event EventHandler MapGenerated;
@@ -33,7 +33,7 @@ namespace EpiDashboard.Mapping
 
         private IMapControl mapControl;
 
-        public ClusterLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ClusterLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
 

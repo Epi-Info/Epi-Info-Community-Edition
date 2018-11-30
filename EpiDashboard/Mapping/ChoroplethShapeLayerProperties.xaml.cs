@@ -51,7 +51,7 @@ namespace EpiDashboard.Mapping
             get { return _showPolyLabels; }
         }
 
-        public ChoroplethShapeLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public ChoroplethShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
             this.myMap = myMap;

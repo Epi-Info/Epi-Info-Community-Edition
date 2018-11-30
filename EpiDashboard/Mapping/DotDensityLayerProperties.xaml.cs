@@ -21,7 +21,7 @@ namespace EpiDashboard.Mapping
     /// </summary>
     public partial class DotDensityLayerProperties : UserControl, ILayerProperties
     {
-        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
         public DotDensityLayerProvider provider;
         private System.Xml.XmlElement currentElement;
@@ -35,7 +35,7 @@ namespace EpiDashboard.Mapping
         public string shapeFilePath;
         public IDictionary<string, object> shapeAttributes;
 
-        public DotDensityLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
+        public DotDensityLayerProperties(ESRI.ArcGIS.Client.Map myMap, DashboardHelper dashboardHelper, IMapControl mapControl)
         {
             InitializeComponent();
             this.myMap = myMap;

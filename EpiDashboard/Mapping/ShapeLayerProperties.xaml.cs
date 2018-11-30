@@ -24,7 +24,7 @@ namespace EpiDashboard.Mapping
     {
 
         public ShapeLayerProvider provider;
-        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private ESRI.ArcGIS.Client.Map myMap;
 
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
@@ -33,7 +33,7 @@ namespace EpiDashboard.Mapping
 
         private bool isReadOnlyMode;
 
-        public ShapeLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap)
+        public ShapeLayerProperties(ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
 
@@ -142,7 +142,7 @@ namespace EpiDashboard.Mapping
             }
             if (provider == null)
             {
-                provider = new ShapeLayerProvider(myMap);
+                //''provider = new ShapeLayerProvider(myMap);
             }
             provider.RenderShape(lblFileName.Content.ToString());
             if (MapGenerated != null)

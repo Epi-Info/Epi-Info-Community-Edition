@@ -22,13 +22,13 @@ namespace EpiDashboard.Mapping
 
         private LayerList layerList;
         private LayerListItem item;
-        Esri.ArcGISRuntime.Mapping.Map myMap;
+        ESRI.ArcGIS.Client.Map myMap;
         Epi.View view;
         Epi.Data.IDbDriver db;
         DashboardHelper dashboardHelper;
         private MapControl mapControl;
 
-        public LayerAdder(Esri.ArcGISRuntime.Mapping.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper, LayerList layerList, MapControl mapControl)
+        public LayerAdder(ESRI.ArcGIS.Client.Map myMap, Epi.View view, Epi.Data.IDbDriver db, DashboardHelper dashboardHelper, LayerList layerList, MapControl mapControl)
         {
             InitializeComponent();
 

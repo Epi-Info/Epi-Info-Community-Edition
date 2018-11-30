@@ -16,15 +16,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Bing;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
 using System.Windows.Controls.DataVisualization.Charting;
-using Esri.ArcGISRuntime;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Mapping
 {
@@ -34,7 +35,7 @@ namespace EpiDashboard.Mapping
         public event RecordSelectedHandler RecordSelected;
         public event DateRangeDefinedHandler DateRangeDefined;
 
-        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private Map myMap;
         private List<KeyValuePair<DateTime, int>> intervalCounts;
         private double minX;
         private double minY;
@@ -49,16 +50,16 @@ namespace EpiDashboard.Mapping
         private string description;
         private Guid layerId;
         private SolidColorBrush pointColor;
-        private Esri.ArcGISRuntime.Geometry.SpatialReference geoReference;
-        private Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbolStyle style;
+        private SpatialReference geoReference;
+        private SimpleMarkerSymbol.SimpleMarkerStyle style;
         private StackPanel legendStackPanel;
 
 
-        public PointLayerProvider(Esri.ArcGISRuntime.Mapping.Map myMap)
+        public PointLayerProvider(Map myMap)
         {
             this.myMap = myMap;
             this.layerId = Guid.NewGuid();
-            this.geoReference = new Esri.ArcGISRuntime.Geometry.SpatialReference(4326);
+            this.geoReference = new SpatialReference(4326);
         }
 
         public string TimeVar
@@ -78,7 +79,7 @@ namespace EpiDashboard.Mapping
 
         public void Refresh()
         {
-            Esri.ArcGISRuntime.UI.GraphicsOverlay pointLayer = myMap.OperationalLayers[layerId.ToString()] as Esri.ArcGISRuntime.UI.GraphicsOverlay;
+            GraphicsLayer pointLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
             if (pointLayer != null)
             {
                 pointLayer.ClearGraphics();
@@ -108,7 +109,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        public void RenderPointMap(DashboardHelper dashboardHelper, string latVar, string longVar, Brush pointColor, string timeVar, Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbolStyle style, string description)
+        public void RenderPointMap(DashboardHelper dashboardHelper, string latVar, string longVar, Brush pointColor, string timeVar, SimpleMarkerSymbol.SimpleMarkerStyle style, string description)
         {
             this.dashboardHelper = dashboardHelper;
             this.latVar = latVar;
@@ -250,11 +251,11 @@ namespace EpiDashboard.Mapping
             }
         }
 
-        private Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol MarkerSymbol
+        private SimpleMarkerSymbol MarkerSymbol
         {
             get
             {
-                Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol symbol = new Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol();
+                SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
                 symbol.Color = pointColor;
                 symbol.Size = 15;
                 symbol.Style = style;

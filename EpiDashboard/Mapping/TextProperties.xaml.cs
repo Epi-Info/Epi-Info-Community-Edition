@@ -24,9 +24,9 @@ namespace EpiDashboard.Mapping
     {
 
         private TextProvider provider;
-        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private ESRI.ArcGIS.Client.Map myMap;
         private System.Drawing.Font font;
-        private Esri.ArcGISRuntime.Geometry.MapPoint point;
+        private ESRI.ArcGIS.Client.Geometry.MapPoint point;
         private bool isReadOnlyMode;
 
         public event EventHandler MapGenerated;
@@ -34,7 +34,7 @@ namespace EpiDashboard.Mapping
         public event EventHandler EditRequested;
 
 
-        public TextProperties(Esri.ArcGISRuntime.Mapping.Map myMap, Esri.ArcGISRuntime.Geometry.MapPoint point)
+        public TextProperties(ESRI.ArcGIS.Client.Map myMap, ESRI.ArcGIS.Client.Geometry.MapPoint point)
         {
             InitializeComponent();
             isReadOnlyMode = false;

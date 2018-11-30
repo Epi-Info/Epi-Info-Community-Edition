@@ -7,11 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Esri.ArcGISRuntime;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.UI;
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 
 namespace EpiDashboard.Mapping
 {
@@ -57,7 +56,7 @@ namespace EpiDashboard.Mapping
                 }
 
                 graphicsLayer = new FeatureLayer();
-                graphicsLayer.Id = LayerId.ToString();
+                graphicsLayer.ID = LayerId.ToString();
                 graphicsLayer.UpdateCompleted += new EventHandler(graphicsLayer_UpdateCompleted);
                 graphicsLayer.Initialized += new EventHandler<EventArgs>(graphicsLayer_Initialized);
                 graphicsLayer.InitializationFailed += new EventHandler<EventArgs>(graphicsLayer_InitializationFailed);

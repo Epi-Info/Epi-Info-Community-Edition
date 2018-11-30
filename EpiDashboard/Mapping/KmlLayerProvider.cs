@@ -16,15 +16,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Epi;
-using Epi.Data;
-using EpiDashboard.Mapping.ShapeFileReader;
-using System.Windows.Controls.DataVisualization.Charting;
+//using ESRI.ArcGIS.Client;
+//using ESRI.ArcGIS.Client.Toolkit;
+//using ESRI.ArcGIS.Client.Toolkit.DataSources;
+//using ESRI.ArcGIS.Client.Bing;
+//using ESRI.ArcGIS.Client.Geometry;
+//using ESRI.ArcGIS.Client.Symbols;
+//using ESRI.ArcGIS.Client.Tasks;
 using Esri.ArcGISRuntime;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.UI;
+
+using Epi;
+using Epi.Data;
+using EpiDashboard.Mapping.ShapeFileReader;
+using System.Windows.Controls.DataVisualization.Charting;
 
 namespace EpiDashboard.Mapping
 {
@@ -35,44 +43,44 @@ namespace EpiDashboard.Mapping
         private Guid layerId;
         private string url;
         private int[] visibleLayers;
-        private List<GraphicsLayer> graphicsLayers;
+        //private List<GraphicsLayer> graphicsLayers;
 
         public KmlLayerProvider(Map myMap)
         {
             this.myMap = myMap;
             this.layerId = Guid.NewGuid();
-            graphicsLayers = new List<GraphicsLayer>();
+            //graphicsLayers = new List<GraphicsLayer>();
         }
 
         public void Refresh()
         {
-            KmlLayer layer = myMap.Layers[layerId.ToString()] as KmlLayer;
+            KmlLayer layer = myMap.OperationalLayers[layerId.ToString()] as KmlLayer;
             if (layer != null)
             {
-                myMap.Layers.Remove(layer);
+                myMap.OperationalLayers.Remove(layer);
                 RenderServerImage(this.url, this.visibleLayers);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
-            if (currentIndex < myMap.Layers.Count - 1)
+            Layer layer = myMap.OperationalLayers[layerId.ToString()];
+            int currentIndex = myMap.OperationalLayers.IndexOf(layer);
+            if (currentIndex < myMap.OperationalLayers.Count - 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex + 1, layer);
+                myMap.OperationalLayers.Remove(layer);
+                myMap.OperationalLayers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.Layers[layerId.ToString()];
-            int currentIndex = myMap.Layers.IndexOf(layer);
+            Layer layer = myMap.OperationalLayers[layerId.ToString()];
+            int currentIndex = myMap.OperationalLayers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.Layers.Remove(layer);
-                myMap.Layers.Insert(currentIndex - 1, layer);
+                myMap.OperationalLayers.Remove(layer);
+                myMap.OperationalLayers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -80,29 +88,28 @@ namespace EpiDashboard.Mapping
         {
             this.url = url;
 
-            KmlLayer shapeLayer = myMap.Layers[layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = myMap.OperationalLayers[layerId.ToString()] as KmlLayer;
             if (shapeLayer != null)
             {
-                myMap.Layers.Remove(shapeLayer);
+                myMap.OperationalLayers.Remove(shapeLayer);
             }
 
-            shapeLayer = new KmlLayer();
-            shapeLayer.ID = layerId.ToString();
-            shapeLayer.Url = new Uri(url);
-            shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
+            shapeLayer = new KmlLayer(new Uri(url));
+            shapeLayer.Id = layerId.ToString();
+            //shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
             if (visibleLayers != null)
             {
                 //shapeLayer.VisibleLayers = visibleLayers;
             }
-            myMap.Layers.Add(shapeLayer);
+            myMap.OperationalLayers.Add(shapeLayer);
 
-            myMap.Extent = shapeLayer.FullExtent;
+            //myMap.Extent = shapeLayer.FullExtent;
         }
 
         void shapeLayer_Initialized(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
-            KmlLayer shapeLayer = myMap.Layers[layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = myMap.OperationalLayers[layerId.ToString()] as KmlLayer;
 
             FindGraphicsLayers(shapeLayer);
             int x = 5;
@@ -111,17 +118,18 @@ namespace EpiDashboard.Mapping
 
         private void FindGraphicsLayers(KmlLayer kmlLayer)
         {
-            foreach (Layer layer in kmlLayer.ChildLayers)
-            {
-                if (layer is GraphicsLayer)
-                {
-                    graphicsLayers.Add((GraphicsLayer)layer);
-                }
-                else if (layer is KmlLayer)
-                {
-                    FindGraphicsLayers((KmlLayer)layer);
-                }
-            }
+            System.Diagnostics.Debug.Assert(true);
+            //foreach (Layer layer in kmlLayer.ChildLayers)
+            //{
+            //    if (layer is GraphicsLayer)
+            //    {
+            //        graphicsLayers.Add((GraphicsLayer)layer);
+            //    }
+            //    else if (layer is KmlLayer)
+            //    {
+            //        FindGraphicsLayers((KmlLayer)layer);
+            //    }
+            //}
         }
 
         public KmlDialog RenderServerImage()
@@ -135,12 +143,12 @@ namespace EpiDashboard.Mapping
             return null;
         }
 
-        public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
+        public SimpleFillSymbol GetFillSymbol(System.Drawing.Color fillColor)
         {
             SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Fill = brush;
-            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
-            symbol.BorderThickness = 1;
+            symbol.Color = fillColor;
+            symbol.Outline.Color = System.Drawing.Color.Gray;
+            symbol.Outline.Width = 1;
             return symbol;
         }
 
@@ -148,10 +156,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            KmlLayer graphicsLayer = myMap.Layers[layerId.ToString()] as KmlLayer;
+            KmlLayer graphicsLayer = myMap.OperationalLayers[layerId.ToString()] as KmlLayer;
             if (graphicsLayer != null)
             {
-                myMap.Layers.Remove(graphicsLayer);
+                myMap.OperationalLayers.Remove(graphicsLayer);
             }
         }
 

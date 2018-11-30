@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ESRI.ArcGIS.Client.Symbols;
 
 namespace EpiDashboard.Mapping
 {
@@ -18,11 +19,11 @@ namespace EpiDashboard.Mapping
             //cbxStyle.SelectedIndex = 35;
         }
 
-        public Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol Marker
+        public SimpleMarkerSymbol Marker
         {
             get
             {
-                Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol symbol = new Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol();
+                SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
                 symbol.Color = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(pictureBox1.BackColor.R, pictureBox1.BackColor.G, pictureBox1.BackColor.B));
                 symbol.Size = double.Parse(txtSize.Text);
                 symbol.Style = (SimpleMarkerSymbol.SimpleMarkerStyle)Enum.Parse(typeof(SimpleMarkerSymbol.SimpleMarkerStyle), cbxStyle.SelectedItem.ToString());

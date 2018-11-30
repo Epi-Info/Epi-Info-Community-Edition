@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Epi;
+using ESRI.ArcGIS.Client.Symbols;
 using EpiDashboard.Mapping;
 
 namespace EpiDashboard.Controls
@@ -26,14 +27,14 @@ namespace EpiDashboard.Controls
     public partial class CaseClusterProperties : UserControl, ILayerProperties
     {
 
-        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private ESRI.ArcGIS.Client.Map myMap;
         private DashboardHelper dashboardHelper;
         public event EventHandler MapGenerated;
         public event EventHandler FilterRequested;
         public event EventHandler EditRequested;
 
         private EpiDashboard.Mapping.ClusterLayerProvider provider;
-        private Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbolStyle style;
+        private SimpleMarkerSymbol.SimpleMarkerStyle style;
         private EpiDashboard.Mapping.StandaloneMapControl mapControl;
         private IMapControl imapcontrol;
         public ClusterLayerProperties layerprop;
@@ -41,7 +42,7 @@ namespace EpiDashboard.Controls
         private RowFilterControl rowfiltercontrol;
         private DataFilters datafilters;
 
-        public CaseClusterProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, Esri.ArcGISRuntime.Mapping.Map myMap, ClusterLayerProperties clusterprop)
+        public CaseClusterProperties(EpiDashboard.Mapping.StandaloneMapControl mapControl, ESRI.ArcGIS.Client.Map myMap, ClusterLayerProperties clusterprop)
         {
             InitializeComponent();
 

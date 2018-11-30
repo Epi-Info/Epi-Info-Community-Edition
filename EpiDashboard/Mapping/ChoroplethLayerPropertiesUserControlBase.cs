@@ -14,7 +14,7 @@ namespace EpiDashboard.Mapping
 
     public class ChoroplethLayerPropertiesUserControlBase : UserControl
     {
-        public Esri.ArcGISRuntime.Mapping.Map myMap;
+        public ESRI.ArcGIS.Client.Map myMap;
         public DashboardHelper dashboardHelper;
         public string boundryFilePath;
         public IMapControl mapControl;

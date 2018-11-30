@@ -16,14 +16,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Bing;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
-using Esri.ArcGISRuntime;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.UI;
 
 namespace EpiDashboard.Mapping
 {
@@ -157,28 +158,28 @@ namespace EpiDashboard.Mapping
                 int counter = 0;
                 foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
                 {
-                    Graphic graphic = record.ToGraphic();
-                    if (graphic != null)
-                    {
-                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
-                        graphicsLayer.Graphics.Add(graphic);
-                    }
+                    //''Graphic graphic = record.ToGraphic();
+                    //if (graphic != null)
+                    //{
+                    //    graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
+                    //    graphicsLayer.Graphics.Add(graphic);
+                    //}
                     counter += rgbFactor;
                 }
                 if (graphicsLayer.FullExtent == null)
                 {
-                    Envelope shapeFileExtent = shapeFileReader.GetExtent();
-                    if (shapeFileExtent.SpatialReference == null)
-                    {
-                        myMap.Extent = shapeFileExtent;
-                    }
-                    else
-                    {
-                        if (shapeFileExtent.SpatialReference.WKID == 4326)
-                        {
-                            myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
-                        }
-                    }
+                    //''Envelope shapeFileExtent = shapeFileReader.GetExtent();
+                    //if (shapeFileExtent.SpatialReference == null)
+                    //{
+                    //    myMap.Extent = shapeFileExtent;
+                    //}
+                    //else
+                    //{
+                    //    if (shapeFileExtent.SpatialReference.WKID == 4326)
+                    //    {
+                    //        myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                    //    }
+                    //}
                 }
                 else
                 {
@@ -262,26 +263,26 @@ namespace EpiDashboard.Mapping
                 int counter = 0;
                 foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
                 {
-                    Graphic graphic = record.ToGraphic();
-                    if (graphic != null)
-                    {
-                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
-                        graphicsLayer.Graphics.Add(graphic);
-                    }
+                    //''Graphic graphic = record.ToGraphic();
+                    //if (graphic != null)
+                    //{
+                    //    graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
+                    //    graphicsLayer.Graphics.Add(graphic);
+                    //}
                     counter += rgbFactor;
                 }
-                Envelope shapeFileExtent = shapeFileReader.GetExtent();
-                if (shapeFileExtent.SpatialReference == null)
-                {
-                    myMap.Extent = shapeFileExtent;
-                }
-                else
-                {
-                    if (shapeFileExtent.SpatialReference.WKID == 4326)
-                    {
-                        myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
-                    }
-                }
+                //''Envelope shapeFileExtent = shapeFileReader.GetExtent();
+                //if (shapeFileExtent.SpatialReference == null)
+                //{
+                //    myMap.Extent = shapeFileExtent;
+                //}
+                //else
+                //{
+                //    if (shapeFileExtent.SpatialReference.WKID == 4326)
+                //    {
+                //        myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                //    }
+                //}
 
                 return new object[] { ofd.FileName, graphicsLayer.Graphics[0].Attributes };
             }
@@ -311,7 +312,7 @@ namespace EpiDashboard.Mapping
         {
             get
             {
-                Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol symbol = new Esri.ArcGISRuntime.Symbology.SimpleMarkerSymbol();
+                SimpleMarkerSymbol symbol = new SimpleMarkerSymbol();
                 symbol.Color = new SolidColorBrush(dotColor);
                 symbol.Size = 5;
                 symbol.Style = SimpleMarkerSymbol.SimpleMarkerStyle.Circle;
