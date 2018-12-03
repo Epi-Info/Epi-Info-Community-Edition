@@ -77,7 +77,7 @@ namespace EpiDashboard.Mapping
         private string currentTimeVariable;
         private ESRI.ArcGIS.Client.Toolkit.Navigation nav;
         private string defaultMapPath = string.Empty;
-        private MapBackgroundType defaultBackgroundType = MapBackgroundType.Satellite;
+        private MapBackgroundType defaultBackgroundType = MapBackgroundType.Street;
         private bool bypassInternetCheck;
         private Brush defaultBackgroundColor = Brushes.White;
         private bool hidePanels = false;
@@ -90,7 +90,7 @@ namespace EpiDashboard.Mapping
         public double ResizedHeight { get; set; }
 
         //Create a new ScaleLine Control and add it to the LayoutRoot (a Grid in the XAML)
-        ESRI.ArcGIS.Client.Toolkit.ScaleLine ScaleLine1 = new ESRI.ArcGIS.Client.Toolkit.ScaleLine();
+        Esri.ArcGISRuntime.Toolkit.UI.Controls.ScaleLine ScaleLine1 = new Esri.ArcGISRuntime.Toolkit.UI.Controls.ScaleLine();
 
         public StandaloneMapControl()
         {
@@ -342,6 +342,10 @@ namespace EpiDashboard.Mapping
                 OpenStreetMapLayer layer = new OpenStreetMapLayer();
                 //''layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
 
+                Esri.ArcGISRuntime.License license =  ArcGISRuntimeEnvironment.GetLicense();
+                LicenseResult licenseResult = ArcGISRuntimeEnvironment.SetLicense("runtimelite,1000,rud7563569473,none,9TJC7XLS1H4M003AD031");
+                license = ArcGISRuntimeEnvironment.GetLicense();
+
                 bool sparse_connection = false;
 
                 try
@@ -397,7 +401,7 @@ namespace EpiDashboard.Mapping
                 _map = new Map();
                 _mapView.Map = _map;
 
-                _mapView.Background = Brushes.Gray;
+                _mapView.Background = Brushes.White;
                 _mapView.Height = MapContainer.ActualHeight;
                 _mapView.Width = MapContainer.ActualWidth;
                 _mapView.WrapAroundMode = WrapAroundMode.EnabledWhenSupported;
@@ -413,10 +417,13 @@ namespace EpiDashboard.Mapping
                 //''_map.Layers.Add(textLayer);
                 //''_map.Layers.Add(zoneLayer);
 
-                //_mapView.MouseMove += new MouseEventHandler(myMap_MouseMove);
-                //_mapView.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
-                //_mapView.Loaded += new RoutedEventHandler(myMap_Loaded);
-                //''_map.ExtentChanged += myMap_ExtentChanged;
+                _mapView.MouseMove += new MouseEventHandler(myMap_MouseMove);
+                _mapView.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
+                _mapView.Loaded += new RoutedEventHandler(myMap_Loaded);
+                _mapView.ViewpointChanged += _mapView_ViewpointChanged;
+
+                
+                //                _mapView.ViewpointChanged +  += myMap_ExtentChanged;
 
                 //''_map.RotationChanged += myMap_RotationChanged;
 
@@ -461,7 +468,7 @@ namespace EpiDashboard.Mapping
                 System.Windows.Controls.Grid.SetRow(ScaleLine1, 2);
 
                 //Associate the ScaleLine with Map Control (analagous to a OneTime Binding). Most common coding pattern.
-                //''ScaleLine1.Map = _map;
+                ScaleLine1.MapView = _mapView;
 
                 //Set the alignment properties relative the hosting Grid Control
                 ScaleLine1.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
@@ -469,7 +476,7 @@ namespace EpiDashboard.Mapping
                 ScaleLine1.Margin = new System.Windows.Thickness { Right = 10 };
 
                 //Set the Map units for the ScaleLine
-                ScaleLine1.MapUnit = ESRI.ArcGIS.Client.Toolkit.ScaleLine.ScaleLineUnit.DecimalDegrees;
+                //''ScaleLine1.MapUnit = ESRI.ArcGIS.Client.Toolkit.ScaleLine.ScaleLineUnit.DecimalDegrees;
 
                 //Set the target width for the ScaleLine
                 ScaleLine1.TargetWidth = 200;
@@ -501,6 +508,7 @@ namespace EpiDashboard.Mapping
             }
         }
 
+
         void mnuScaleContextItem_Click(object sender, RoutedEventArgs e)
         {
             autoContrast = ((MenuItem)sender).IsChecked;
@@ -519,6 +527,23 @@ namespace EpiDashboard.Mapping
         void mnuAutoContrastItem_Click(object sender, RoutedEventArgs e)
         {
             autoContrast = ((MenuItem)sender).IsChecked;
+        }
+        
+        private void _mapView_ViewpointChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (false)
+                {
+                    return;
+                }
+
+                if (autoContrast)
+                {
+                    AdjustScaleLine();
+                }
+            }
+            catch { }
         }
 
         //''void myMap_ExtentChanged(object sender, ExtentEventArgs e)
@@ -2712,22 +2737,20 @@ namespace EpiDashboard.Mapping
 
                         if (sparse_connection == true)
                         {
-                            //''((OpenStreetMapLayer)_map.OperationalLayers[0]).Visible = false;
+                            ((OpenStreetMapLayer)_map.OperationalLayers[0]).IsVisible = false;
                         }
                         else
                         {
                             if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
-                                //''((OpenStreetMapLayer)_map.OperationalLayers[0]).Visible = false;
+                                ((OpenStreetMapLayer)_map.OperationalLayers[0]).IsVisible = true;
                             }
                             else
                             {
-                                //''((OpenStreetMapLayer)_map.OperationalLayers[0]).Visible = true;
+                                ((OpenStreetMapLayer)_map.OperationalLayers[0]).IsVisible = false;
                             }
                         }
                     }
-
-                    //'' ((OpenStreetMapLayer)_map.OperationalLayers[0]).Refresh();
                 }
             }
         }
