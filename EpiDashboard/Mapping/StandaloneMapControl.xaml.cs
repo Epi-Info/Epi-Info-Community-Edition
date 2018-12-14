@@ -85,6 +85,7 @@ namespace EpiDashboard.Mapping
         private CaseClusterProperties caseclusterproperties;
         private DotDensityProperties dotdensityproperties;
         private ChoroplethProperties choroplethproperties;
+        private OpenStreetMapLayer _openStreetMapLayer;
 
         public double ResizedWidth { get; set; }
         public double ResizedHeight { get; set; }
@@ -241,13 +242,13 @@ namespace EpiDashboard.Mapping
 
         void MapContainer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_map != null)
+            if (_mapView != null)
             {
-                //''if (_map.IsEnabled)
-                //''{
-                //''    _map.Width = e.NewSize.Width;
-                //''    _map.Height = e.NewSize.Height;
-                //''}
+                if (_mapView.IsEnabled)
+                {
+                    _mapView.Width = e.NewSize.Width;
+                    _mapView.Height = e.NewSize.Height;
+                }
             }
 
             if (dataFilteringControl != null)
@@ -339,7 +340,7 @@ namespace EpiDashboard.Mapping
                 txtLoading.Visibility = Visibility.Collapsed;
                 waitCursor.Visibility = Visibility.Collapsed;
 
-                OpenStreetMapLayer layer = new OpenStreetMapLayer();
+                _openStreetMapLayer = new OpenStreetMapLayer();
                 //''layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
 
                 Esri.ArcGISRuntime.License license =  ArcGISRuntimeEnvironment.GetLicense();
@@ -357,7 +358,6 @@ namespace EpiDashboard.Mapping
                     }
                 }
                 catch { }
-
 
                 //''GraphicsLayer pointLayer = new GraphicsLayer();
                 //''pointLayer.ID = "pointLayer";
@@ -401,7 +401,8 @@ namespace EpiDashboard.Mapping
                 _map = new Map();
                 _mapView.Map = _map;
 
-                _mapView.Background = Brushes.White;
+                _mapView.BackgroundGrid.IsVisible = false;
+                _mapView.BackgroundGrid.Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
                 _mapView.Height = MapContainer.ActualHeight;
                 _mapView.Width = MapContainer.ActualWidth;
                 _mapView.WrapAroundMode = WrapAroundMode.EnabledWhenSupported;
@@ -409,9 +410,8 @@ namespace EpiDashboard.Mapping
 
                 if (sparse_connection == false)
                 {
-                    _map.OperationalLayers.Add(layer);
+                    _map.OperationalLayers.Add(_openStreetMapLayer);
                 }
-
 
                 //''_map.Layers.Add(pointLayer);
                 //''_map.Layers.Add(textLayer);
@@ -421,10 +421,8 @@ namespace EpiDashboard.Mapping
                 _mapView.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
                 _mapView.Loaded += new RoutedEventHandler(myMap_Loaded);
                 _mapView.ViewpointChanged += _mapView_ViewpointChanged;
-
                 
-                //                _mapView.ViewpointChanged +  += myMap_ExtentChanged;
-
+                //_mapView.ViewpointChanged +  += myMap_ExtentChanged;
                 //''_map.RotationChanged += myMap_RotationChanged;
 
                 MapContainer.Children.Add(_mapView);
@@ -2721,7 +2719,17 @@ namespace EpiDashboard.Mapping
             {
                 if (_map.OperationalLayers.Count > 0)
                 {
-                    if (_map.OperationalLayers[0] is OpenStreetMapLayer)
+                    OpenStreetMapLayer osmLayer = null;
+
+                    foreach (Layer layer in _map.OperationalLayers)
+                    {
+                        if(layer is OpenStreetMapLayer)
+                        {
+                            osmLayer = layer as OpenStreetMapLayer;
+                        }
+                    }
+
+                    if (osmLayer != null)
                     {
                         bool sparse_connection = false;
 
@@ -2737,17 +2745,17 @@ namespace EpiDashboard.Mapping
 
                         if (sparse_connection == true)
                         {
-                            ((OpenStreetMapLayer)_map.OperationalLayers[0]).IsVisible = false;
+                            osmLayer.IsVisible = false;
                         }
                         else
                         {
                             if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
-                                ((OpenStreetMapLayer)_map.OperationalLayers[0]).IsVisible = true;
+                                osmLayer.IsVisible = true;
                             }
                             else
                             {
-                                ((OpenStreetMapLayer)_map.OperationalLayers[0]).IsVisible = false;
+                                osmLayer.IsVisible = false;
                             }
                         }
                     }
@@ -2934,7 +2942,7 @@ namespace EpiDashboard.Mapping
             DashboardHelper dashboardHelper = new DashboardHelper();
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
-            EpiDashboard.Controls.Referencelayer properties = new EpiDashboard.Controls.Referencelayer(this, _map);
+            EpiDashboard.Controls.Referencelayer properties = new EpiDashboard.Controls.Referencelayer(this, _mapView);
             properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             //properties.Width = 800;
             //properties.Height = 600;

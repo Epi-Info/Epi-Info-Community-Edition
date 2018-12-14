@@ -39,77 +39,114 @@ namespace EpiDashboard.Mapping
 
     public class KmlLayerProvider : ILayerProvider
     {
-        private Map myMap;
+        private Map _map;
+        private Esri.ArcGISRuntime.UI.Controls.MapView _mapView;
         private Guid layerId;
         private string url;
         private int[] visibleLayers;
         //private List<GraphicsLayer> graphicsLayers;
 
-        public KmlLayerProvider(Map myMap)
+        //''public KmlLayerProvider(Esri.ArcGISRuntime.Mapping.Map map)
+        public KmlLayerProvider(Esri.ArcGISRuntime.UI.Controls.MapView mapView)
         {
-            this.myMap = myMap;
+            this._map = mapView.Map;
+            this._mapView = mapView;
             this.layerId = Guid.NewGuid();
             //graphicsLayers = new List<GraphicsLayer>();
         }
 
         public void Refresh()
         {
-            KmlLayer layer = myMap.OperationalLayers[layerId.ToString()] as KmlLayer;
+            KmlLayer layer = _map.OperationalLayers[layerId.ToString()] as KmlLayer;
             if (layer != null)
             {
-                myMap.OperationalLayers.Remove(layer);
+                _map.OperationalLayers.Remove(layer);
                 RenderServerImage(this.url, this.visibleLayers);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = myMap.OperationalLayers[layerId.ToString()];
-            int currentIndex = myMap.OperationalLayers.IndexOf(layer);
-            if (currentIndex < myMap.OperationalLayers.Count - 1)
+            Layer layer = _map.OperationalLayers[layerId.ToString()];
+            int currentIndex = _map.OperationalLayers.IndexOf(layer);
+            if (currentIndex < _map.OperationalLayers.Count - 1)
             {
-                myMap.OperationalLayers.Remove(layer);
-                myMap.OperationalLayers.Insert(currentIndex + 1, layer);
+                _map.OperationalLayers.Remove(layer);
+                _map.OperationalLayers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.OperationalLayers[layerId.ToString()];
-            int currentIndex = myMap.OperationalLayers.IndexOf(layer);
+            Layer layer = _map.OperationalLayers[layerId.ToString()];
+            int currentIndex = _map.OperationalLayers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.OperationalLayers.Remove(layer);
-                myMap.OperationalLayers.Insert(currentIndex - 1, layer);
+                _map.OperationalLayers.Remove(layer);
+                _map.OperationalLayers.Insert(currentIndex - 1, layer);
             }
         }
 
-        public void RenderServerImage(string url, int[] visibleLayers)
+        public async void RenderServerImage(string url, int[] visibleLayers)
         {
             this.url = url;
 
-            KmlLayer shapeLayer = myMap.OperationalLayers[layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = _map.OperationalLayers[layerId.ToString()] as KmlLayer;
             if (shapeLayer != null)
             {
-                myMap.OperationalLayers.Remove(shapeLayer);
+                _map.OperationalLayers.Remove(shapeLayer);
             }
 
             shapeLayer = new KmlLayer(new Uri(url));
             shapeLayer.Id = layerId.ToString();
-            //shapeLayer.Initialized += new EventHandler<EventArgs>(shapeLayer_Initialized);
+
+            shapeLayer.Loaded += new EventHandler<EventArgs>(shapeLayer_Initialized);
+
+            Esri.ArcGISRuntime.License license = ArcGISRuntimeEnvironment.GetLicense();
+            //await shapeLayer.LoadAsync();
+
             if (visibleLayers != null)
             {
                 //shapeLayer.VisibleLayers = visibleLayers;
             }
-            myMap.OperationalLayers.Add(shapeLayer);
 
+            // Create a graphics overlay.
+            GraphicsOverlay graphicOverlay = new GraphicsOverlay();
+
+            MapPoint oldFaithfulPoint = new MapPoint(-110.828140, 44.460458, SpatialReferences.Wgs84);
+            Graphic oldFaithfulGraphic = new Graphic(oldFaithfulPoint);
+            graphicOverlay.Graphics.Add(oldFaithfulGraphic);
+
+            // Create a simple marker symbol - red, cross, size 12.
+            SimpleMarkerSymbol mySymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Cross, System.Drawing.Color.Red, 12);
+
+            // Create a simple renderer based on the simple marker symbol.
+            SimpleRenderer myRenderer = new SimpleRenderer(mySymbol);
+
+            // Apply the renderer to the graphics overlay (all graphics use the same symbol).
+            graphicOverlay.Renderer = myRenderer;
+
+            _mapView.GraphicsOverlays.Add(graphicOverlay);
+
+            GraphicsOverlay kmlGraphicsOverlay = new GraphicsOverlay();
+            
+
+            //kmlGraphicsOverlay.Graphics.Add()
+
+
+            _mapView.GraphicsOverlays.Add(kmlGraphicsOverlay);
+
+            //_map.OperationalLayers.Add(shapeLayer);
+
+            Envelope _usEnvelope = new Envelope(-144.619561355187, 18.0328662832097, -66.0903762761083, 67.6390975806745, SpatialReferences.Wgs84);
+            await _mapView.SetViewpointAsync(new Viewpoint(_usEnvelope));
             //myMap.Extent = shapeLayer.FullExtent;
         }
 
         void shapeLayer_Initialized(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
-            KmlLayer shapeLayer = myMap.OperationalLayers[layerId.ToString()] as KmlLayer;
+            KmlLayer shapeLayer = _map.OperationalLayers[layerId.ToString()] as KmlLayer;
 
             FindGraphicsLayers(shapeLayer);
             int x = 5;
@@ -156,10 +193,10 @@ namespace EpiDashboard.Mapping
 
         public void CloseLayer()
         {
-            KmlLayer graphicsLayer = myMap.OperationalLayers[layerId.ToString()] as KmlLayer;
+            KmlLayer graphicsLayer = _map.OperationalLayers[layerId.ToString()] as KmlLayer;
             if (graphicsLayer != null)
             {
-                myMap.OperationalLayers.Remove(graphicsLayer);
+                _map.OperationalLayers.Remove(graphicsLayer);
             }
         }
 
