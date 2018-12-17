@@ -3058,7 +3058,7 @@ namespace Epi.Windows.MakeView.Forms
         }
 
         private void publishNewSurveyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {          
             Template template = new Template(this.mediator);
             string InvalidForPublishing = ListFieldsNotSupportedForWeb(true);
             View view;
@@ -3136,7 +3136,7 @@ namespace Epi.Windows.MakeView.Forms
                                     if (!string.IsNullOrWhiteSpace(OrganizationKey))
                                     {
                                         SetSurveyInfo();
-                                        dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
+                                        dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view);
                                         dialog.ShowDialog();
                                     }
                                 }
@@ -3155,7 +3155,7 @@ namespace Epi.Windows.MakeView.Forms
                                         if (!string.IsNullOrWhiteSpace(OrganizationKey))
                                         {
                                             SetSurveyInfo();
-                                            dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
+                                            dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view);
                                             dialog.ShowDialog();
                                         }
                                     }
@@ -3175,7 +3175,7 @@ namespace Epi.Windows.MakeView.Forms
                                         if (!string.IsNullOrWhiteSpace(OrganizationKey))
                                         {
                                             SetSurveyInfo();
-                                            dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
+                                            dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view);
                                             dialog.ShowDialog();
                                         }
                                     }
@@ -3184,7 +3184,7 @@ namespace Epi.Windows.MakeView.Forms
 
                             case Epi.Core.ServiceClient.ServiceClient.IsValidOrganizationKeyEnum.Yes:
                                 SetSurveyInfo();
-                                dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
+                                dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view);
                                 dialog.ShowDialog();
                                 break;
                         }
@@ -3194,8 +3194,8 @@ namespace Epi.Windows.MakeView.Forms
                         if (!string.IsNullOrEmpty(this.OrganizationKey) && (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress.Trim())))
 
                         {
-                            string Xml = template.CreateWebSurveyTemplate();
-                            WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, Xml);
+                           // string Xml = template.CreateWebSurveyTemplate();
+                            WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view);
                             dialog.ShowDialog();
                         }
                         else
@@ -3208,7 +3208,7 @@ namespace Epi.Windows.MakeView.Forms
                                 Request.Organization = orgDTO;
                                 var TestService = client.GetOrganization(Request);
 
-                                WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view, template.CreateWebSurveyTemplate());
+                                WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view);
                                 DialogResult result = dialog.ShowDialog();
 
                                 if (result == System.Windows.Forms.DialogResult.Cancel)
@@ -3224,7 +3224,7 @@ namespace Epi.Windows.MakeView.Forms
                                 {
                                     Configuration Newconfig = Configuration.GetNewInstance();
                                     ShowHideWebButtons(Newconfig);
-                                    WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
+                                    WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view);
                                     DialogResult result = dialog.ShowDialog();
                                     if (result == System.Windows.Forms.DialogResult.Cancel)
                                     {
@@ -3245,7 +3245,7 @@ namespace Epi.Windows.MakeView.Forms
                         Request.Organization = orgDTO;
                         var TestService = client.GetOrganization(Request);
 
-                        WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view, template.CreateWebSurveyTemplate());
+                        WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view);
                         DialogResult result = dialog.ShowDialog();
                         if (result == System.Windows.Forms.DialogResult.Cancel)
                         {
@@ -3261,7 +3261,7 @@ namespace Epi.Windows.MakeView.Forms
                             DialogResult result3 = dialog2.ShowDialog();
                             if (result3 == System.Windows.Forms.DialogResult.OK)
                             {
-                                WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view, template.CreateWebSurveyTemplate());
+                                WebPublishDialog dialog = new WebPublishDialog(this.OrganizationKey, this.mediator, view);
                                 DialogResult result = dialog.ShowDialog();
                                 if (result == System.Windows.Forms.DialogResult.Cancel)
                                 {
@@ -3271,7 +3271,7 @@ namespace Epi.Windows.MakeView.Forms
                         }
                         else
                         {
-                            WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view, template.CreateWebSurveyTemplate());
+                            WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view);
                             dialog.ShowDialog();
                         }
                     }
@@ -3279,11 +3279,11 @@ namespace Epi.Windows.MakeView.Forms
             }
             catch
             {
-                WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view, template.CreateWebSurveyTemplate());
+                WebPublishDialog dialog = new WebPublishDialog(null, this.mediator, view);
                 dialog.ShowDialog();
-            }
-            
+            }           
             this.SetPublishMenuItems(view);
+           
         }
 
         private void changePublishModeToolStripMenuItem_Click(object sender, EventArgs e)

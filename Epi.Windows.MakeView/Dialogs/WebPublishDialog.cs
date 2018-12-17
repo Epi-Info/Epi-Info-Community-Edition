@@ -65,12 +65,11 @@ namespace Epi.Windows.MakeView.Dialogs
             {
             get { return this.OrganizationKey; }
         }
-        public WebPublishDialog(string pOrganizationKey,GuiMediator pMediator, Epi.View pView, string pTemplate, bool pIsMetaDataOnly = false)
+        public WebPublishDialog(string pOrganizationKey,GuiMediator pMediator, Epi.View pView, bool pIsMetaDataOnly = false)
         {
             InitializeComponent();
             this.mediater = pMediator;
-            this.view = pView;
-            this.template = pTemplate;
+            this.view = pView;          
             this.OrganizationKey = pOrganizationKey;
             this.IsMetaDataOnly = pIsMetaDataOnly;
 
@@ -147,7 +146,8 @@ namespace Epi.Windows.MakeView.Dialogs
           
             btnPublishForm.Enabled = true;
             progressBar.Visible = true;
-
+            Template templatmediator = new Template(this.mediater);
+            this.template = templatmediator.CreateWebSurveyTemplate();
             stopwatch = new Stopwatch();
             stopwatch.Start();
             var config = Configuration.GetNewInstance();
@@ -487,9 +487,10 @@ namespace Epi.Windows.MakeView.Dialogs
 
             progressBar.Visible = true;
 
+            Template templatmediator = new Template(this.mediater);
+            this.template = templatmediator.CreateWebSurveyTemplate();
 
 
-           
 
             this.config = Configuration.GetNewInstance();
            

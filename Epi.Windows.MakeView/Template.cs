@@ -15,7 +15,7 @@ using Epi.Windows.MakeView.PresentationLogic;
 
 namespace Epi.Windows.MakeView
 {
-    class Template
+  public  class Template
     {
         GuiMediator mediator = null;
         ICommandContext context = null;
