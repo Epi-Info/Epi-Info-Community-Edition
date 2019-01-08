@@ -16,13 +16,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Esri.ArcGISRuntime;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.UI;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Bing;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Tasks;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Mapping.ShapeFileReader;
@@ -46,33 +45,33 @@ namespace EpiDashboard.Mapping
 
         public void Refresh()
         {
-            Layer layer = myMap.OperationalLayers[layerId.ToString()] as Layer;
+            ArcGISDynamicMapServiceLayer layer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (layer != null)
             {
-                myMap.OperationalLayers.Remove(layer);
+                myMap.Layers.Remove(layer);
                 RenderServerImage(this.url, this.visibleLayers);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = myMap.OperationalLayers[layerId.ToString()];
-            int currentIndex = myMap.OperationalLayers.IndexOf(layer);
-            if (currentIndex < myMap.OperationalLayers.Count - 1)
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
+            if (currentIndex < myMap.Layers.Count - 1)
             {
-                myMap.OperationalLayers.Remove(layer);
-                myMap.OperationalLayers.Insert(currentIndex + 1, layer);
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = myMap.OperationalLayers[layerId.ToString()];
-            int currentIndex = myMap.OperationalLayers.IndexOf(layer);
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                myMap.OperationalLayers.Remove(layer);
-                myMap.OperationalLayers.Insert(currentIndex - 1, layer);
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -80,21 +79,22 @@ namespace EpiDashboard.Mapping
         {
             this.url = url;
 
-            Layer shapeLayer = myMap.OperationalLayers[layerId.ToString()] as Layer;
+            ArcGISDynamicMapServiceLayer shapeLayer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (shapeLayer != null)
             {
-                myMap.OperationalLayers.Remove(shapeLayer);
+                myMap.Layers.Remove(shapeLayer);
             }
 
-            //'shapeLayer = new Layer()
-            //shapeLayer.Id = layerId.ToString();
-            //if (visibleLayers != null)
-            //{
-            //    //'shapeLayer.VisibleLayers = visibleLayers;
-            //}
-            //myMap.OperationalLayers.Add(shapeLayer);
+            shapeLayer = new ArcGISDynamicMapServiceLayer();
+            shapeLayer.ID = layerId.ToString();
+            shapeLayer.Url = url;
+            if (visibleLayers != null)
+            {
+                shapeLayer.VisibleLayers = visibleLayers;
+            }
+            myMap.Layers.Add(shapeLayer);
 
-            //myMap.FullExtent = shapeLayer.FullExtent;
+            myMap.Extent = shapeLayer.FullExtent;
         }
 
         public MapServerDialog RenderServerImage()
@@ -108,24 +108,23 @@ namespace EpiDashboard.Mapping
             return null;
         }
 
-        public SimpleFillSymbol GetFillSymbol(System.Drawing.Color fillColor)
+        public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
             SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Color = fillColor;
-            symbol.Outline.Color = System.Drawing.Color.Gray;
-            symbol.Outline.Width = 1;
+            symbol.Fill = brush;
+            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
+            symbol.BorderThickness = 1;
             return symbol;
         }
-
 
         #region ILayerProvider Members
 
         public void CloseLayer()
         {
-            Layer graphicsLayer = myMap.OperationalLayers[layerId.ToString()] as Layer;
+            ArcGISDynamicMapServiceLayer graphicsLayer = myMap.Layers[layerId.ToString()] as ArcGISDynamicMapServiceLayer;
             if (graphicsLayer != null)
             {
-                myMap.OperationalLayers.Remove(graphicsLayer);
+                myMap.Layers.Remove(graphicsLayer);
             }
         }
 

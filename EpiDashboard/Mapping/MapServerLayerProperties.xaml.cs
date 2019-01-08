@@ -24,7 +24,7 @@ namespace EpiDashboard.Mapping
     {
 
         public MapServerLayerProvider provider;
-        private Esri.ArcGISRuntime.Mapping.Map myMap;
+        private ESRI.ArcGIS.Client.Map myMap;
         private string serverName;
         private int[] visibleLayers;
         private bool flagrunedit;
@@ -34,7 +34,7 @@ namespace EpiDashboard.Mapping
         
         private bool isReadOnlyMode;
 
-        public MapServerLayerProperties(Esri.ArcGISRuntime.Mapping.Map myMap)
+        public MapServerLayerProperties(ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
 

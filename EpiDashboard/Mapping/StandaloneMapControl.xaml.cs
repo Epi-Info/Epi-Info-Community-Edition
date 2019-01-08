@@ -12,9 +12,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Bing;
+using ESRI.ArcGIS.Client.Geometry;
 using Epi;
 using Epi.Data;
 using EpiDashboard.Controls;
+using ESRI.ArcGIS.Client.Symbols;
+using ESRI.ArcGIS.Client.Toolkit.DataSources.Kml;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Windows.Media.Color;
@@ -29,18 +35,7 @@ using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 using UserControl = System.Windows.Controls.UserControl;
 using View = Epi.View;
-using Esri.ArcGISRuntime;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.UI;
-using Esri.ArcGISRuntime.UI.Controls;
-using Esri.ArcGISRuntime.Toolkit.UI.Controls;
-//using ESRI.ArcGIS.Client;
-//using ESRI.ArcGIS.Client.Geometry;
-//using ESRI.ArcGIS.Client.Symbols;
-//using ESRI.ArcGIS.Client.Tasks;
-using ESRI.ArcGIS.Client.Toolkit;
+using ESRI.ArcGIS.Client.Toolkit.DataSources;
 
 namespace EpiDashboard.Mapping
 {
@@ -65,19 +60,18 @@ namespace EpiDashboard.Mapping
 
         private BackgroundWorker worker;
         private BackgroundWorker openDefaultMapWorker;
-        private MapView _mapView;
-        private Map _map;
+        private Map myMap;
         private MapPoint rightClickedPoint;
         private delegate void RenderMapDelegate(string url);
         private delegate void SimpleDelegate();
         private delegate void DebugDelegate(string debugMsg);
-        private Esri.ArcGISRuntime.Toolkit.UI.Controls.TimeSlider slider;
+        private TimeSlider slider;
         private DataFilteringControl dataFilteringControl;
         private LayerList layerList;
         private string currentTimeVariable;
-        private ESRI.ArcGIS.Client.Toolkit.Navigation nav;
+        private Navigation nav;
         private string defaultMapPath = string.Empty;
-        private MapBackgroundType defaultBackgroundType = MapBackgroundType.Street;
+        private MapBackgroundType defaultBackgroundType = MapBackgroundType.Satellite;
         private bool bypassInternetCheck;
         private Brush defaultBackgroundColor = Brushes.White;
         private bool hidePanels = false;
@@ -85,13 +79,12 @@ namespace EpiDashboard.Mapping
         private CaseClusterProperties caseclusterproperties;
         private DotDensityProperties dotdensityproperties;
         private ChoroplethProperties choroplethproperties;
-        private OpenStreetMapLayer _openStreetMapLayer;
 
         public double ResizedWidth { get; set; }
         public double ResizedHeight { get; set; }
 
         //Create a new ScaleLine Control and add it to the LayoutRoot (a Grid in the XAML)
-        Esri.ArcGISRuntime.Toolkit.UI.Controls.ScaleLine ScaleLine1 = new Esri.ArcGISRuntime.Toolkit.UI.Controls.ScaleLine();
+        ESRI.ArcGIS.Client.Toolkit.ScaleLine ScaleLine1 = new ESRI.ArcGIS.Client.Toolkit.ScaleLine();
 
         public StandaloneMapControl()
         {
@@ -216,7 +209,7 @@ namespace EpiDashboard.Mapping
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(1));
             anim.Completed += new EventHandler(anim_Completed);
-            grdLayerConfig.BeginAnimation(System.Windows.Controls.Grid.OpacityProperty, anim);
+            grdLayerConfig.BeginAnimation(Grid.OpacityProperty, anim);
         }
 
         void anim_Completed(object sender, EventArgs e)
@@ -242,12 +235,12 @@ namespace EpiDashboard.Mapping
 
         void MapContainer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (_mapView != null)
+            if (myMap != null)
             {
-                if (_mapView.IsEnabled)
+                if (myMap.IsEnabled)
                 {
-                    _mapView.Width = e.NewSize.Width;
-                    _mapView.Height = e.NewSize.Height;
+                    myMap.Width = e.NewSize.Width;
+                    myMap.Height = e.NewSize.Height;
                 }
             }
 
@@ -340,12 +333,8 @@ namespace EpiDashboard.Mapping
                 txtLoading.Visibility = Visibility.Collapsed;
                 waitCursor.Visibility = Visibility.Collapsed;
 
-                _openStreetMapLayer = new OpenStreetMapLayer();
-                //''layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
-
-                Esri.ArcGISRuntime.License license =  ArcGISRuntimeEnvironment.GetLicense();
-                LicenseResult licenseResult = ArcGISRuntimeEnvironment.SetLicense("runtimelite,1000,rud7563569473,none,9TJC7XLS1H4M003AD031");
-                license = ArcGISRuntimeEnvironment.GetLicense();
+                OpenStreetMapLayer layer = new OpenStreetMapLayer();
+                layer.InitializationFailed += new EventHandler<EventArgs>(layer_InitializationFailed);
 
                 bool sparse_connection = false;
 
@@ -359,14 +348,15 @@ namespace EpiDashboard.Mapping
                 }
                 catch { }
 
-                //''GraphicsLayer pointLayer = new GraphicsLayer();
-                //''pointLayer.ID = "pointLayer";
 
-                //''GraphicsLayer zoneLayer = new GraphicsLayer();
-                //''zoneLayer.ID = "zoneLayer";
+                GraphicsLayer pointLayer = new GraphicsLayer();
+                pointLayer.ID = "pointLayer";
 
-                //''GraphicsLayer textLayer = new GraphicsLayer();
-                //''textLayer.ID = "textLayer";
+                GraphicsLayer zoneLayer = new GraphicsLayer();
+                zoneLayer.ID = "zoneLayer";
+
+                GraphicsLayer textLayer = new GraphicsLayer();
+                textLayer.ID = "textLayer";
 
                 ContextMenu menu = new ContextMenu();
 
@@ -397,76 +387,64 @@ namespace EpiDashboard.Mapping
                 mnuClear.Click += new RoutedEventHandler(mnuClear_Click);
                 menu.Items.Add(mnuClear);
 
-                _mapView = new MapView();
-                _map = new Map();
-                _mapView.Map = _map;
-
-                _mapView.BackgroundGrid.IsVisible = false;
-                _mapView.BackgroundGrid.Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
-                _mapView.Height = MapContainer.ActualHeight;
-                _mapView.Width = MapContainer.ActualWidth;
-                _mapView.WrapAroundMode = WrapAroundMode.EnabledWhenSupported;
-                _mapView.ContextMenu = menu;
-
+                myMap = new Map();
+                myMap.Background = Brushes.White;
+                myMap.Height = MapContainer.ActualHeight;
+                myMap.Width = MapContainer.ActualWidth;
+                myMap.WrapAround = true;
+                myMap.ContextMenu = menu;
                 if (sparse_connection == false)
                 {
-                    _map.OperationalLayers.Add(_openStreetMapLayer);
+                    myMap.Layers.Add(layer);
                 }
+                myMap.Layers.Add(pointLayer);
+                myMap.Layers.Add(textLayer);
+                myMap.Layers.Add(zoneLayer);
 
-                //''_map.Layers.Add(pointLayer);
-                //''_map.Layers.Add(textLayer);
-                //''_map.Layers.Add(zoneLayer);
+                myMap.MouseMove += new MouseEventHandler(myMap_MouseMove);
+                myMap.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
+                myMap.Loaded += new RoutedEventHandler(myMap_Loaded);
+                myMap.ExtentChanged += myMap_ExtentChanged;
 
-                _mapView.MouseMove += new MouseEventHandler(myMap_MouseMove);
-                _mapView.MouseRightButtonDown += new MouseButtonEventHandler(myMap_MouseRightButtonDown);
-                _mapView.Loaded += new RoutedEventHandler(myMap_Loaded);
-                _mapView.ViewpointChanged += _mapView_ViewpointChanged;
-                
-                //_mapView.ViewpointChanged +  += myMap_ExtentChanged;
-                //''_map.RotationChanged += myMap_RotationChanged;
+                myMap.RotationChanged += myMap_RotationChanged;
 
-                MapContainer.Children.Add(_mapView);
+                MapContainer.Children.Add(myMap);
 
-                //''ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
-                //''extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
+                ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior extentBehavior = new ESRI.ArcGIS.Client.Behaviors.ConstrainExtentBehavior();
+                extentBehavior.ConstrainedExtent = new Envelope(new MapPoint(int.MinValue, -12000000), new MapPoint(int.MaxValue, 12000000));
+                System.Windows.Interactivity.Interaction.GetBehaviors(myMap).Add(extentBehavior);
 
-                //''Esri.ArcGISRuntime.Geometry.Envelope envelope = new Esri.ArcGISRuntime.Geometry.Envelope(
-                //''new MapPoint(int.MinValue, -12000000),
-                //''new MapPoint(int.MaxValue, 12000000));
+                nav = new Navigation();
+                nav.Margin = new Thickness(5);
+                nav.HorizontalAlignment = HorizontalAlignment.Left;
+                nav.VerticalAlignment = VerticalAlignment.Top;
+                nav.Map = myMap;
+                MapContainer.Children.Add(nav);
 
-                //''System.Windows.Interactivity.Interaction.GetBehaviors(_mapView).Add(extentBehavior);
-
-                //''nav = new Navigation();
-                //''nav.Margin = new Thickness(5);
-                //''nav.HorizontalAlignment = HorizontalAlignment.Left;
-                //''nav.VerticalAlignment = VerticalAlignment.Top;
-                //''nav.Map = _map;
-                //''MapContainer.Children.Add(nav);
-
-                //''slider = new Esri.ArcGISRuntime.Toolkit.UI.Controls.TimeSlider();
-                //''slider.Name = "slider";
-                //''slider.PlaySpeed = new TimeSpan(0, 0, 1);
-                //''slider.Height = 20;
-                //''slider.TimeMode = TimeMode.CumulativeFromStart;
-                //''slider.MinimumValue = DateTime.Now.Subtract(TimeSpan.FromDays(7)).ToUniversalTime();
-                //''slider.MaximumValue = DateTime.Now.ToUniversalTime();
-                //''slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
-                //''slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(0, 2, 0, 0));
-                //''slider.Padding = new Thickness(0, 100, 0, 0);
-                //''slider.ValueChanged += new EventHandler<TimeSlider.ValueChangedEventArgs>(slider_ValueChanged);
-                //''areaSeries.Loaded += new RoutedEventHandler(areaSeries_Loaded);
-                //''stkTimeLapse.Children.Add(slider);
+                slider = new TimeSlider();
+                slider.Name = "slider";
+                slider.PlaySpeed = new TimeSpan(0, 0, 1);
+                slider.Height = 20;
+                slider.TimeMode = TimeMode.CumulativeFromStart;
+                slider.MinimumValue = DateTime.Now.Subtract(TimeSpan.FromDays(7)).ToUniversalTime();
+                slider.MaximumValue = DateTime.Now.ToUniversalTime();
+                slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
+                slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(0, 2, 0, 0));
+                slider.Padding = new Thickness(0, 100, 0, 0);
+                slider.ValueChanged += new EventHandler<TimeSlider.ValueChangedEventArgs>(slider_ValueChanged);
+                areaSeries.Loaded += new RoutedEventHandler(areaSeries_Loaded);
+                stkTimeLapse.Children.Add(slider);
 
                 SetBackgroundColor(defaultBackgroundColor);
 
                 AddLayerList();
 
-                //''ScaleLine1.MouseDoubleClick += ScaleLine1_MouseDoubleClick;
+                ScaleLine1.MouseDoubleClick += ScaleLine1_MouseDoubleClick;
                 grdScale.Children.Add(ScaleLine1);
-                System.Windows.Controls.Grid.SetRow(ScaleLine1, 2);
+                Grid.SetRow(ScaleLine1, 2);
 
                 //Associate the ScaleLine with Map Control (analagous to a OneTime Binding). Most common coding pattern.
-                ScaleLine1.MapView = _mapView;
+                ScaleLine1.Map = myMap;
 
                 //Set the alignment properties relative the hosting Grid Control
                 ScaleLine1.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
@@ -474,7 +452,7 @@ namespace EpiDashboard.Mapping
                 ScaleLine1.Margin = new System.Windows.Thickness { Right = 10 };
 
                 //Set the Map units for the ScaleLine
-                //''ScaleLine1.MapUnit = ESRI.ArcGIS.Client.Toolkit.ScaleLine.ScaleLineUnit.DecimalDegrees;
+                ScaleLine1.MapUnit = ESRI.ArcGIS.Client.Toolkit.ScaleLine.ScaleLineUnit.DecimalDegrees;
 
                 //Set the target width for the ScaleLine
                 ScaleLine1.TargetWidth = 200;
@@ -506,7 +484,6 @@ namespace EpiDashboard.Mapping
             }
         }
 
-
         void mnuScaleContextItem_Click(object sender, RoutedEventArgs e)
         {
             autoContrast = ((MenuItem)sender).IsChecked;
@@ -517,7 +494,7 @@ namespace EpiDashboard.Mapping
             NorthArrowText.RenderTransformOrigin = new Point(0.5, 0.5);
             var rt = (RotateTransform)NorthArrowText.RenderTransform;
 
-            //''rt.Angle = _map.Rotation;
+            rt.Angle = myMap.Rotation;
         }
 
         private bool autoContrast = true;
@@ -526,12 +503,12 @@ namespace EpiDashboard.Mapping
         {
             autoContrast = ((MenuItem)sender).IsChecked;
         }
-        
-        private void _mapView_ViewpointChanged(object sender, EventArgs e)
+
+        void myMap_ExtentChanged(object sender, ExtentEventArgs e)
         {
             try
             {
-                if (false)
+                if (e.NewExtent.Equals(e.OldExtent))
                 {
                     return;
                 }
@@ -543,23 +520,6 @@ namespace EpiDashboard.Mapping
             }
             catch { }
         }
-
-        //''void myMap_ExtentChanged(object sender, ExtentEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (e.NewExtent.Equals(e.OldExtent))
-        //        {
-        //            return;
-        //        }
-
-        //        if (autoContrast)
-        //        {
-        //            AdjustScaleLine();
-        //        }
-        //    }
-        //    catch { }
-        //}
 
         private void AdjustScaleLine()
         {
@@ -795,17 +755,17 @@ namespace EpiDashboard.Mapping
 
         #endregion //Code from MSDN
 
-        //''void ScaleLine1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (autoContrast == false)
-        //    {
-        //        ColorDialog dialog = new ColorDialog();
-        //        if (dialog.ShowDialog() == DialogResult.OK)
-        //        {
-        //            ((ScaleLine)sender).Foreground = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
-        //        }
-        //    }
-        //}
+        void ScaleLine1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (autoContrast == false)
+            {
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ((ScaleLine)sender).Foreground = new SolidColorBrush(Color.FromRgb(dialog.Color.R, dialog.Color.G, dialog.Color.B));
+                }
+            }
+        }
 
         void mnuScale_Click(object sender, RoutedEventArgs e)
         {
@@ -821,16 +781,16 @@ namespace EpiDashboard.Mapping
 
         private void SetBackgroundColor(Brush brush)
         {
-            if (grdMapDef != null && _map != null)
+            if (grdMapDef != null && myMap != null)
             {
                 grdMapDef.Background = brush;
-                _mapView.Background = brush;
+                myMap.Background = brush;
             }
         }
 
         void layer_InitializationFailed(object sender, EventArgs e)
         {
-            _mapView.IsEnabled = false;
+            myMap.IsEnabled = false;
             nav.Visibility = System.Windows.Visibility.Collapsed;
         }
 
@@ -931,13 +891,13 @@ namespace EpiDashboard.Mapping
             switch (layerType)
             {
                 case LayerType.Marker:
-                    //''layerProperties = new MarkerProperties(_map, rightClickedPoint);
+                    layerProperties = new MarkerProperties(myMap, rightClickedPoint);
                     break;
                 case LayerType.Zone:
-                    //''layerProperties = new ZoneProperties(_map, rightClickedPoint);
+                    layerProperties = new ZoneProperties(myMap, rightClickedPoint);
                     break;
                 case LayerType.Text:
-                    //''layerProperties = new TextProperties(_map, rightClickedPoint);
+                    layerProperties = new TextProperties(myMap, rightClickedPoint);
                     break;
                 default:
                     if (DataSourceRequested != null)
@@ -965,31 +925,31 @@ namespace EpiDashboard.Mapping
                             switch (layerType)
                             {
                                 case LayerType.CaseCluster:
-                                    //''layerProperties = new ClusterLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethShapeFile:
-                                    //''layerProperties = new ChoroplethShapeLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethMapServer:
-                                    //''layerProperties = new ChoroplethServerLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new ChoroplethServerLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.ChoroplethKml:
-                                    //''layerProperties = new ChoroplethKmlLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new ChoroplethKmlLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityKml:
-                                    //''layerProperties = new DotDensityKmlLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new DotDensityKmlLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityShapeFile:
-                                    //''layerProperties = new DotDensityLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new DotDensityLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.DotDensityMapServer:
-                                    //''layerProperties = new DotDensityServerLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new DotDensityServerLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 case LayerType.PointMap:
-                                    //''layerProperties = new PointLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new PointLayerProperties(myMap, dashboardHelper, this);
                                     break;
                                 default:
-                                    //''layerProperties = new ClusterLayerProperties(_map, dashboardHelper, this);
+                                    layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
                                     break;
                             }
                         }
@@ -1031,10 +991,10 @@ namespace EpiDashboard.Mapping
                 thicknessAnim.AccelerationRatio = 0.8;
                 thicknessAnim.Duration = new Duration(TimeSpan.FromSeconds(0.3));
 
-                grdLayerConfig.BeginAnimation(System.Windows.Controls.Grid.MarginProperty, thicknessAnim);
-                grdLayerConfig.BeginAnimation(System.Windows.Controls.Grid.OpacityProperty, opacityAnim);
-                grdLayerConfig.BeginAnimation(System.Windows.Controls.Grid.WidthProperty, widthAnim);
-                grdLayerConfig.BeginAnimation(System.Windows.Controls.Grid.HeightProperty, heightAnim);
+                grdLayerConfig.BeginAnimation(Grid.MarginProperty, thicknessAnim);
+                grdLayerConfig.BeginAnimation(Grid.OpacityProperty, opacityAnim);
+                grdLayerConfig.BeginAnimation(Grid.WidthProperty, widthAnim);
+                grdLayerConfig.BeginAnimation(Grid.HeightProperty, heightAnim);
             }
         }
 
@@ -1116,8 +1076,8 @@ namespace EpiDashboard.Mapping
                 layerConfigCompleteAnim.Duration = new Duration(TimeSpan.FromSeconds(1));
                 layerConfigCompleteAnim.Completed += new EventHandler(layerConfigCompleteAnim_Completed);
 
-                grdLayerConfig.BeginAnimation(System.Windows.Controls.Grid.OpacityProperty, layerConfigCompleteAnim);
-                grdLayerConfig.BeginAnimation(System.Windows.Controls.Grid.MarginProperty, thicknessAnim);
+                grdLayerConfig.BeginAnimation(Grid.OpacityProperty, layerConfigCompleteAnim);
+                grdLayerConfig.BeginAnimation(Grid.MarginProperty, thicknessAnim);
 
                 grdLayerConfigContainer.Children.Remove((UIElement)sender);
                 layerList.AddListItem((ILayerProperties)sender, 0);
@@ -1183,7 +1143,7 @@ namespace EpiDashboard.Mapping
                 }
             }
 
-            layerList = new LayerList(_map, null, null, null);
+            layerList = new LayerList(myMap, null, null, null);
             layerList.Loaded += new RoutedEventHandler(layerList_Loaded);
             layerList.SizeChanged += new SizeChangedEventHandler(layerList_SizeChanged);
             layerList.MouseEnter += new MouseEventHandler(layerList_MouseEnter);
@@ -1361,18 +1321,17 @@ namespace EpiDashboard.Mapping
 
         void myMap_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point point = e.GetPosition(_mapView);
-            //''rightClickedPoint = _mapView.ScreenToMap(e.GetPosition(_map));
+            rightClickedPoint = myMap.ScreenToMap(e.GetPosition(myMap));
         }
 
         public void UnSubscribe()
         {
-            if (_map != null)
+            if (myMap != null)
             {
-                //''_map.MouseMove -= new MouseEventHandler(myMap_MouseMove);
+                myMap.MouseMove -= new MouseEventHandler(myMap_MouseMove);
             }
 
-            this._map = null;
+            this.myMap = null;
             this.worker = null;
         }
 
@@ -1380,20 +1339,20 @@ namespace EpiDashboard.Mapping
         {
             try
             {
-                //''Map myMap = (Map)e.Source;
+                Map myMap = (Map)e.Source;
 
-                //''if (!myMap.IsFocused)
+                if (!myMap.IsFocused)
                 {
-                    //''    myMap.Focus();
+                    myMap.Focus();
                 }
 
-                //''MapPoint wmPoint = myMap.ScreenToMap(e.GetPosition(myMap));
+                MapPoint wmPoint = myMap.ScreenToMap(e.GetPosition(myMap));
 
                 if (MouseCoordinatesChanged != null)
                 {
-                    //''if (wmPoint != null)
+                    if (wmPoint != null)
                     {
-                        //''    MouseCoordinatesChanged(wmPoint.Y, wmPoint.X);
+                        MouseCoordinatesChanged(wmPoint.Y, wmPoint.X);
                     }
                 }
             }
@@ -1430,13 +1389,13 @@ namespace EpiDashboard.Mapping
             }
 
             this.areaChartDataPoints = areaChartDataPoints;
-            //''
-            //_map.TimeExtent = new TimeExtent(start.AddHours(-1), end.AddHours(1));
 
-            //slider.MinimumValue = _map.TimeExtent.Start;
-            //slider.MaximumValue = _map.TimeExtent.End;
-            //slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
-            //slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(1, 0, 0, 0));
+            myMap.TimeExtent = new TimeExtent(start.AddHours(-1), end.AddHours(1));
+
+            slider.MinimumValue = myMap.TimeExtent.Start;
+            slider.MaximumValue = myMap.TimeExtent.End;
+            slider.Value = new TimeExtent(slider.MinimumValue, slider.MinimumValue.AddHours(2));
+            slider.Intervals = TimeSlider.CreateTimeStopsByTimeInterval(new TimeExtent(slider.MinimumValue, slider.MaximumValue), new TimeSpan(1, 0, 0, 0));
 
             if (layerList.ClusterLayers.Count == 1)
             {
@@ -1453,55 +1412,55 @@ namespace EpiDashboard.Mapping
                 areaSeries.LegendItems.Clear();
             }
         }
-        //''
-        //void areaSeries_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    if (areaChartDataPoints != null)
-        //    {
-        //        List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate (KeyValuePair<DateTime, int> pair)
-        //        {
-        //            return pair.Key < slider.Value.End;
-        //        });
-        //        areaSeries.ItemsSource = test;
-        //    }
-        //}
-        //''
-        //void slider_ValueChanged(object sender, TimeSlider.ValueChangedEventArgs e)
-        //{
-        //    if (currentTimeVariable != null)
-        //    {
-        //        grdLapse.Visibility = Visibility.Visible;
-        //        grdTimeLapse.Visibility = Visibility.Visible;
-        //        stkTimeLapse.Visibility = Visibility.Visible;
 
-        //        if (layerList.ClusterLayers.Count == 1)
-        //        {
-        //            chrtTimeLapse.Visibility = Visibility.Visible;
-        //            grdTimeLapseBorder.Height = 120;
-        //        }
-        //        else
-        //        {
-        //            grdTimeLapseBorder.Height = 50;
-        //        }
+        void areaSeries_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (areaChartDataPoints != null)
+            {
+                List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate (KeyValuePair<DateTime, int> pair)
+                {
+                    return pair.Key < slider.Value.End;
+                });
+                areaSeries.ItemsSource = test;
+            }
+        }
 
-        //        txtSliderStartDate.Text = e.NewValue.Start.ToShortDateString();
-        //        txtSliderEndDate.Text = e.NewValue.End.ToShortDateString();
+        void slider_ValueChanged(object sender, TimeSlider.ValueChangedEventArgs e)
+        {
+            if (currentTimeVariable != null)
+            {
+                grdLapse.Visibility = Visibility.Visible;
+                grdTimeLapse.Visibility = Visibility.Visible;
+                stkTimeLapse.Visibility = Visibility.Visible;
 
-        //        _map.TimeExtent = new TimeExtent(e.NewValue.Start, e.NewValue.End);
+                if (layerList.ClusterLayers.Count == 1)
+                {
+                    chrtTimeLapse.Visibility = Visibility.Visible;
+                    grdTimeLapseBorder.Height = 120;
+                }
+                else
+                {
+                    grdTimeLapseBorder.Height = 50;
+                }
 
-        //        if (areaChartDataPoints != null)
-        //        {
-        //            if (layerList.ClusterLayers.Count == 1)
-        //            {
-        //                List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate (KeyValuePair<DateTime, int> pair)
-        //                {
-        //                    return pair.Key < e.NewValue.End;
-        //                });
-        //                areaSeries.ItemsSource = test;
-        //            }
-        //        }
-        //    }
-        //}
+                txtSliderStartDate.Text = e.NewValue.Start.ToShortDateString();
+                txtSliderEndDate.Text = e.NewValue.End.ToShortDateString();
+
+                myMap.TimeExtent = new TimeExtent(e.NewValue.Start, e.NewValue.End);
+
+                if (areaChartDataPoints != null)
+                {
+                    if (layerList.ClusterLayers.Count == 1)
+                    {
+                        List<KeyValuePair<DateTime, int>> test = areaChartDataPoints.FindAll(delegate (KeyValuePair<DateTime, int> pair)
+                        {
+                            return pair.Key < e.NewValue.End;
+                        });
+                        areaSeries.ItemsSource = test;
+                    }
+                }
+            }
+        }
 
         public void OnRecordSelected(int id)
         {
@@ -1553,7 +1512,7 @@ namespace EpiDashboard.Mapping
 
                     if (element.Name.Equals("referenceLayer"))
                     {
-                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { _map });
+                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap });
                         layerProperties.MakeReadOnly();
                         layerProperties.CreateFromXml(element);
                         layerList.AddListItem(layerProperties, 0);
@@ -1561,7 +1520,7 @@ namespace EpiDashboard.Mapping
 
                     if (element.Name.Equals("graphicsLayer"))
                     {
-                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { _map, new MapPoint(double.Parse(element.Attributes["locationX"].Value), double.Parse(element.Attributes["locationY"].Value)) });
+                        ILayerProperties layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, new MapPoint(double.Parse(element.Attributes["locationX"].Value), double.Parse(element.Attributes["locationY"].Value)) });
                         layerProperties.MakeReadOnly();
                         layerProperties.CreateFromXml(element);
                         layerList.AddListItem(layerProperties, 0);
@@ -1629,11 +1588,11 @@ namespace EpiDashboard.Mapping
 
                         if (element.Attributes["layerType"].Value.ToString() == "EpiDashboard.Mapping.ChoroplethLayerProperties")
                         {
-                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType("EpiDashboard.Mapping.ChoroplethShapeLayerProperties"), new object[] { _map, helper, this });
+                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType("EpiDashboard.Mapping.ChoroplethShapeLayerProperties"), new object[] { myMap, helper, this });
                         }
                         else
                         {
-                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { _map, helper, this });
+                            layerProperties = (ILayerProperties)Activator.CreateInstance(Type.GetType(element.Attributes["layerType"].Value), new object[] { myMap, helper, this });
                         }
 
                         layerProperties.MakeReadOnly();
@@ -1754,21 +1713,21 @@ namespace EpiDashboard.Mapping
 
         public void AddShapeFileLayer()
         {
-            //''ShapeLayerProperties layerProperties = new ShapeLayerProperties(_map);
-            //''layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
-            //''layerProperties.AddShapeFile();
+            ShapeLayerProperties layerProperties = new ShapeLayerProperties(myMap);
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.AddShapeFile();
         }
 
         public void AddMapServerLayer()
         {
-            //''MapServerLayerProperties layerProperties = new MapServerLayerProperties(_map);
-            //''layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
-            //''layerProperties.AddServerImage();
+            MapServerLayerProperties layerProperties = new MapServerLayerProperties(myMap);
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.AddServerImage();
         }
 
         public void AddKmlLayer()
         {
-            KmlLayerProperties layerProperties = new KmlLayerProperties(_map);
+            KmlLayerProperties layerProperties = new KmlLayerProperties(myMap);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.AddServerImage();
         }
@@ -1782,52 +1741,51 @@ namespace EpiDashboard.Mapping
 
         public void GeneratePointofInterestMap(PointLayerProperties pointlayerprop)
         {
-            //''
-            //ILayerProperties layerProperties = null;
-            //DashboardHelper dashboardHelper;
+            ILayerProperties layerProperties = null;
+            DashboardHelper dashboardHelper;
 
-            //popup = new DashboardPopup();
-            //popup.Parent = LayoutRoot;
+            popup = new DashboardPopup();
+            popup.Parent = LayoutRoot;
 
-            //layerProperties = (PointLayerProperties)pointlayerprop;
-            //layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
-            //layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
-            //layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
-            //pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, _map, (PointLayerProperties)layerProperties);
+            layerProperties = (PointLayerProperties)pointlayerprop;
+            layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+            pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap, (PointLayerProperties)layerProperties);
 
-            //dashboardHelper = pointlayerprop.GetDashboardHelper();
-            //pointofinterestproperties.SetDashboardHelper(dashboardHelper);
-            //pointofinterestproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
-            //pointofinterestproperties.FillComboBoxes();
-            //pointofinterestproperties.SetFilter();
+            dashboardHelper = pointlayerprop.GetDashboardHelper();
+            pointofinterestproperties.SetDashboardHelper(dashboardHelper);
+            pointofinterestproperties.txtProjectPath.Text = dashboardHelper.Database.DataSource;
+            pointofinterestproperties.FillComboBoxes();
+            pointofinterestproperties.SetFilter();
 
-            //pointofinterestproperties.txtDescription.Text = pointlayerprop.txtDescription.Text;
-            //pointofinterestproperties.cmbLatitude.Text = pointlayerprop.cbxLatitude.Text;
-            //pointofinterestproperties.cmbLongitude.Text = pointlayerprop.cbxLongitude.Text;
-            //pointofinterestproperties.cmbStyle.Text = pointlayerprop.cbxStyle.Text;
-            //pointofinterestproperties.rctSelectColor.Fill = pointlayerprop.rctColor.Fill;
-            //pointofinterestproperties.ColorSelected = pointlayerprop.rctColor.Fill;
+            pointofinterestproperties.txtDescription.Text = pointlayerprop.txtDescription.Text;
+            pointofinterestproperties.cmbLatitude.Text = pointlayerprop.cbxLatitude.Text;
+            pointofinterestproperties.cmbLongitude.Text = pointlayerprop.cbxLongitude.Text;
+            pointofinterestproperties.cmbStyle.Text = pointlayerprop.cbxStyle.Text;
+            pointofinterestproperties.rctSelectColor.Fill = pointlayerprop.rctColor.Fill;
+            pointofinterestproperties.ColorSelected = pointlayerprop.rctColor.Fill;
 
-            //pointlayerprop.FlagRunEdit = true;
+            pointlayerprop.FlagRunEdit = true;
 
-            //pointofinterestproperties.Width = 800;
-            //pointofinterestproperties.Height = 600;
+            pointofinterestproperties.Width = 800;
+            pointofinterestproperties.Height = 600;
 
-            //if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > pointofinterestproperties.Width)
-            //{
-            //    pointofinterestproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-            //}
+            if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > pointofinterestproperties.Width)
+            {
+                pointofinterestproperties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+            }
 
-            //if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > pointofinterestproperties.Height)
-            //{
-            //    pointofinterestproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
-            //}
+            if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > pointofinterestproperties.Height)
+            {
+                pointofinterestproperties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+            }
 
-            //pointofinterestproperties.Cancelled += new EventHandler(properties_Cancelled);
-            //pointofinterestproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            pointofinterestproperties.Cancelled += new EventHandler(properties_Cancelled);
+            pointofinterestproperties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
 
-            //popup.Content = pointofinterestproperties;
-            //popup.Show();
+            popup.Content = pointofinterestproperties;
+            popup.Show();
         }
 
         public void GeneratePointofInterestMap()
@@ -1839,12 +1797,12 @@ namespace EpiDashboard.Mapping
             popup.Parent = LayoutRoot;
 
 
-            //''layerProperties = new PointLayerProperties(_map, dashboardHelper, this);
+            layerProperties = new PointLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            //''pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, _map, (PointLayerProperties)layerProperties);
+            pointofinterestproperties = new EpiDashboard.Controls.PointofInterestProperties(this, myMap, (PointLayerProperties)layerProperties);
             pointofinterestproperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
@@ -1881,12 +1839,12 @@ namespace EpiDashboard.Mapping
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
 
-            //''layerProperties = new ClusterLayerProperties(_map, dashboardHelper, this);
+            layerProperties = new ClusterLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            //''EpiDashboard.Controls.CaseClusterProperties caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, _map, (ClusterLayerProperties)layerProperties);
+            EpiDashboard.Controls.CaseClusterProperties caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, myMap, (ClusterLayerProperties)layerProperties);
             caseclusterproperties.layerprop = (ClusterLayerProperties)layerProperties;
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
@@ -1928,7 +1886,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            //''caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, _map, (ClusterLayerProperties)layerProperties);
+            caseclusterproperties = new EpiDashboard.Controls.CaseClusterProperties(this, myMap, (ClusterLayerProperties)layerProperties);
             caseclusterproperties.layerprop = (ClusterLayerProperties)layerProperties;
 
             dashboardHelper = clusterlayerprop.GetDashboardHelper();
@@ -1969,15 +1927,15 @@ namespace EpiDashboard.Mapping
             ILayerProperties layerProperties = null;
 
             DashboardHelper dashboardHelper = new DashboardHelper();
-            //''layerProperties = new ChoroplethShapeLayerProperties(_map, dashboardHelper, this);
+            layerProperties = new ChoroplethShapeLayerProperties(myMap, dashboardHelper, this);
             layerProperties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
-            //''EpiDashboard.Controls.ChoroplethProperties properties = new EpiDashboard.Controls.ChoroplethProperties(this, _map);
-            //''properties.choroplethShapeLayerProperties = (ChoroplethShapeLayerProperties)layerProperties;
+            EpiDashboard.Controls.ChoroplethProperties properties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
+            properties.choroplethShapeLayerProperties = (ChoroplethShapeLayerProperties)layerProperties;
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
             {
@@ -1988,20 +1946,20 @@ namespace EpiDashboard.Mapping
                 f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
-                //''properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
-                //''properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
+                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
 
             }
             else
             {
-                //''properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-                //''properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
-            //''properties.Cancelled += new EventHandler(properties_Cancelled);
-            //''properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
             grdLayerConfigContainer.Children.Add((UIElement)layerProperties);
-            //''popup.Content = properties;
+            popup.Content = properties;
             popup.Show();
         }
 
@@ -2020,7 +1978,7 @@ namespace EpiDashboard.Mapping
                 popup = new DashboardPopup();
                 popup.Parent = LayoutRoot;
 
-                //''choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, _map);
+                choroplethproperties = new EpiDashboard.Controls.ChoroplethProperties(this, myMap);
 
                 choroplethproperties.radShapeFile.IsEnabled = false;
                 choroplethproperties.radKML.IsEnabled = false;
@@ -2166,9 +2124,9 @@ namespace EpiDashboard.Mapping
                     {
                         FeatureLayer featureLayer = (FeatureLayer)shapeFileProperties[1];
 
-                        //''if (featureLayer.Graphics.Count > 0)
+                        if (featureLayer.Graphics.Count > 0)
                         {
-                            //''choroplethproperties.shapeAttributes = featureLayer.Graphics[0].Attributes;
+                            choroplethproperties.shapeAttributes = featureLayer.Graphics[0].Attributes;
                         }
                         choroplethproperties.MapServerConnect();
                     }
@@ -2373,11 +2331,11 @@ namespace EpiDashboard.Mapping
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
 
-            //''EpiDashboard.Controls.DotDensityProperties properties = new EpiDashboard.Controls.DotDensityProperties(this, _map);
+            EpiDashboard.Controls.DotDensityProperties properties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
 
-            //''properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
-            //''properties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
-            //''properties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
+            properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
+            properties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
+            properties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
             if (ResizedWidth != 0 & ResizedHeight != 0)
             {
@@ -2388,19 +2346,19 @@ namespace EpiDashboard.Mapping
                 f_HeightRatio = (float)((float)ResizedHeight / (float)i_StandardHeight);
                 f_WidthRatio = (float)((float)ResizedWidth / (float)i_StandardWidth);
 
-                //''properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
-                //''properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
+                properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.16;
+                properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.13;
             }
             else
             {
-                //''properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-                //''properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
+                properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
+                properties.Height = (System.Windows.SystemParameters.PrimaryScreenHeight / 1.2);
             }
 
-            //''properties.Cancelled += new EventHandler(properties_Cancelled);
-            //''properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            properties.Cancelled += new EventHandler(properties_Cancelled);
+            properties.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
 
-            //''popup.Content = properties;
+            popup.Content = properties;
             popup.Show();
         }
 
@@ -2416,7 +2374,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            //''dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, _map);
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
             dotdensityproperties.layerprop = densitylayerprop;
             dotdensityproperties.provider = densitylayerprop.provider;
 
@@ -2501,7 +2459,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            //''dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, _map);
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
 
             dotdensityproperties.Width = 800;
             dotdensityproperties.Height = 600;
@@ -2616,7 +2574,7 @@ namespace EpiDashboard.Mapping
             layerProperties.FilterRequested += new EventHandler(ILayerProperties_FilterRequested);
             layerProperties.EditRequested += new EventHandler(ILayerProperties_EditRequested);
 
-            //''dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, _map);
+            dotdensityproperties = new EpiDashboard.Controls.DotDensityProperties(this, myMap);
 
             dotdensityproperties.Width = 800;
             dotdensityproperties.Height = 600;
@@ -2715,21 +2673,11 @@ namespace EpiDashboard.Mapping
 
         private void SetBackgroundImageType()
         {
-            if (_map != null)
+            if (myMap != null)
             {
-                if (_map.OperationalLayers.Count > 0)
+                if (myMap.Layers.Count > 0)
                 {
-                    OpenStreetMapLayer osmLayer = null;
-
-                    foreach (Layer layer in _map.OperationalLayers)
-                    {
-                        if(layer is OpenStreetMapLayer)
-                        {
-                            osmLayer = layer as OpenStreetMapLayer;
-                        }
-                    }
-
-                    if (osmLayer != null)
+                    if (myMap.Layers[0] is OpenStreetMapLayer)
                     {
                         bool sparse_connection = false;
 
@@ -2745,20 +2693,22 @@ namespace EpiDashboard.Mapping
 
                         if (sparse_connection == true)
                         {
-                            osmLayer.IsVisible = false;
+                            ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
                         }
                         else
                         {
                             if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
                             {
-                                osmLayer.IsVisible = true;
+                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
                             }
                             else
                             {
-                                osmLayer.IsVisible = false;
+                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
                             }
                         }
                     }
+
+                    ((OpenStreetMapLayer)myMap.Layers[0]).Refresh();
                 }
             }
         }
@@ -2802,11 +2752,11 @@ namespace EpiDashboard.Mapping
         {
             if (grdLayerTypeChooser.Margin.Left == 0)
             {
-                grdLayerTypeChooser.BeginAnimation(System.Windows.Controls.Grid.MarginProperty, new ThicknessAnimation(new Thickness(-310, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
+                grdLayerTypeChooser.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(-310, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
             }
             else
             {
-                grdLayerTypeChooser.BeginAnimation(System.Windows.Controls.Grid.MarginProperty, new ThicknessAnimation(new Thickness(0, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
+                grdLayerTypeChooser.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(0, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
             }
         }
 
@@ -2814,11 +2764,11 @@ namespace EpiDashboard.Mapping
         {
             if (grdLegend.Margin.Left == 0)
             {
-                grdLegend.BeginAnimation(System.Windows.Controls.Grid.MarginProperty, new ThicknessAnimation(new Thickness(-310, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
+                grdLegend.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(-310, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
             }
             else
             {
-                grdLegend.BeginAnimation(System.Windows.Controls.Grid.MarginProperty, new ThicknessAnimation(new Thickness(0, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
+                grdLegend.BeginAnimation(Grid.MarginProperty, new ThicknessAnimation(new Thickness(0, 0, 0, 0), new Duration(TimeSpan.FromSeconds(0.2))));
             }
         }
 
@@ -2925,15 +2875,15 @@ namespace EpiDashboard.Mapping
                     dashboardHelpers.Add(layer.GetDashboardHelper());
                 }
             }
-            //''timeLaspe = new EpiDashboard.Mapping.TimeLapse(dashboardHelpers, this, _map);
-            //''timeLaspe.btnOK.Click += new RoutedEventHandler(btn_TimeLapseClick);
+            timeLaspe = new EpiDashboard.Mapping.TimeLapse(dashboardHelpers, this, myMap);
+            timeLaspe.btnOK.Click += new RoutedEventHandler(btn_TimeLapseClick);
 
-            //''timeLaspe.Width = 305;
-            //''timeLaspe.Height = 160;
+            timeLaspe.Width = 305;
+            timeLaspe.Height = 160;
 
-            //''timeLaspe.Cancelled += new EventHandler(properties_Cancelled);
-            //''timeLaspe.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
-            //''popup.Content = timeLaspe;
+            timeLaspe.Cancelled += new EventHandler(properties_Cancelled);
+            timeLaspe.ChangesAccepted += new EventHandler(properties_ChangesAccepted);
+            popup.Content = timeLaspe;
             popup.Show();
         }
 
@@ -2942,7 +2892,7 @@ namespace EpiDashboard.Mapping
             DashboardHelper dashboardHelper = new DashboardHelper();
             popup = new DashboardPopup();
             popup.Parent = LayoutRoot;
-            EpiDashboard.Controls.Referencelayer properties = new EpiDashboard.Controls.Referencelayer(this, _mapView);
+            EpiDashboard.Controls.Referencelayer properties = new EpiDashboard.Controls.Referencelayer(this, myMap);
             properties.MapGenerated += new EventHandler(ILayerProperties_MapGenerated);
             //properties.Width = 800;
             //properties.Height = 600;

@@ -142,7 +142,7 @@ namespace EpiDashboard.Mapping
             }
             if (provider == null)
             {
-                //''provider = new ShapeLayerProvider(myMap);
+                provider = new ShapeLayerProvider(myMap);
             }
             provider.RenderShape(lblFileName.Content.ToString());
             if (MapGenerated != null)

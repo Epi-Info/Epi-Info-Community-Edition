@@ -1,13 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Media;
-
-using Esri.ArcGISRuntime;
-using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Symbology;
-using Esri.ArcGISRuntime.UI;
-
+using ESRI.ArcGIS.Client;
+using ESRI.ArcGIS.Client.Geometry;
+using ESRI.ArcGIS.Client.Symbols;
 using EpiDashboard.Mapping.ShapeFileReader;
 
 namespace EpiDashboard.Mapping
@@ -15,46 +11,45 @@ namespace EpiDashboard.Mapping
 
     public class ShapeLayerProvider : ILayerProvider
     {
-        private Map map;
-
+        private Map myMap;
         private Guid layerId;
         private string fileName;
 
         public ShapeLayerProvider(Map myMap)
         {
-            this.map = myMap;
+            this.myMap = myMap;
             this.layerId = Guid.NewGuid();
         }
 
         public void Refresh()
         {
-            Layer markerLayer = map.OperationalLayers[layerId.ToString()] as Layer;
+            GraphicsLayer markerLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
             if (markerLayer != null)
             {
-                //''markerLayer.ClearGraphics();
+                markerLayer.ClearGraphics();
                 RenderShape(this.fileName);
             }
         }
 
         public void MoveUp()
         {
-            Layer layer = map.OperationalLayers[layerId.ToString()];
-            int currentIndex = map.OperationalLayers.IndexOf(layer);
-            if (currentIndex < map.OperationalLayers.Count - 1)
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
+            if (currentIndex < myMap.Layers.Count - 1)
             {
-                map.OperationalLayers.Remove(layer);
-                map.OperationalLayers.Insert(currentIndex + 1, layer);
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex + 1, layer);
             }
         }
 
         public void MoveDown()
         {
-            Layer layer = map.OperationalLayers[layerId.ToString()];
-            int currentIndex = map.OperationalLayers.IndexOf(layer);
+            Layer layer = myMap.Layers[layerId.ToString()];
+            int currentIndex = myMap.Layers.IndexOf(layer);
             if (currentIndex > 1)
             {
-                map.OperationalLayers.Remove(layer);
-                map.OperationalLayers.Insert(currentIndex - 1, layer);
+                myMap.Layers.Remove(layer);
+                myMap.Layers.Insert(currentIndex - 1, layer);
             }
         }
 
@@ -62,14 +57,14 @@ namespace EpiDashboard.Mapping
         {
             this.fileName = fileName;
 
-            Layer shapeLayer = map.OperationalLayers[layerId.ToString()] as Layer;
+            GraphicsLayer shapeLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
             if (shapeLayer != null)
             {
-                map.OperationalLayers.Remove(shapeLayer);
+                myMap.Layers.Remove(shapeLayer);
             }
-            shapeLayer = new FeatureLayer();
-            shapeLayer.Id = layerId.ToString();
-            map.OperationalLayers.Add(shapeLayer);
+            shapeLayer = new GraphicsLayer();
+            shapeLayer.ID = layerId.ToString();
+            myMap.Layers.Add(shapeLayer);
 
             //Get the file info objects for the SHP and the DBF file selected by the user
             FileInfo shapeFile = new FileInfo(fileName);
@@ -111,29 +106,26 @@ namespace EpiDashboard.Mapping
             int recCount = shapeFileReader.Records.Count;
             int rgbFactor = 255 / recCount;
             int counter = 0;
-
             foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
             {
                 Graphic graphic = record.ToGraphic();
                 if (graphic != null)
                 {
-                    graphic.Symbol = GetFillSymbol(System.Drawing.Color.FromArgb(192, 255, 255, 255));
-                    //''shapeLayer.Graphics.Add(graphic);
+                    graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
+                    shapeLayer.Graphics.Add(graphic);
                 }
                 counter += rgbFactor;
             }
-
             Envelope shapeFileExtent = shapeFileReader.GetExtent();
-
             if (shapeFileExtent.SpatialReference == null)
             {
-                //''MapView map.Extent = shapeFileExtent;
+                myMap.Extent = shapeFileExtent;
             }
             else
             {
-                //''if (shapeFileExtent.SpatialReference.WKID == 4326)
+                if (shapeFileExtent.SpatialReference.WKID == 4326)
                 {
-                    //'' map.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                    myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
                 }
             }
         }
@@ -156,36 +148,21 @@ namespace EpiDashboard.Mapping
 
         public SimpleFillSymbol GetFillSymbol(SolidColorBrush brush)
         {
-            System.Drawing.Color fillColor = System.Drawing.Color.FromArgb(
-                brush.Color.A,
-                brush.Color.R,
-                brush.Color.G,
-                brush.Color.B            
-            );
-
-            SimpleFillSymbol symbol = GetFillSymbol(fillColor);
-
-            return symbol;
-        }
-
-        public SimpleFillSymbol GetFillSymbol(System.Drawing.Color fillColor)
-        {
             SimpleFillSymbol symbol = new SimpleFillSymbol();
-            symbol.Color = fillColor;
-            symbol.Outline.Color = System.Drawing.Color.Gray;
-            symbol.Outline.Width = 1;
+            symbol.Fill = brush;
+            symbol.BorderBrush = new SolidColorBrush(Colors.Gray);
+            symbol.BorderThickness = 1;
             return symbol;
         }
-
 
         #region ILayerProvider Members
 
         public void CloseLayer()
         {
-            Layer graphicsLayer = map.OperationalLayers[layerId.ToString()] as Layer;
+            GraphicsLayer graphicsLayer = myMap.Layers[layerId.ToString()] as GraphicsLayer;
             if (graphicsLayer != null)
             {
-                map.OperationalLayers.Remove(graphicsLayer);
+                myMap.Layers.Remove(graphicsLayer);
             }
         }
 

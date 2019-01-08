@@ -24,8 +24,7 @@ namespace EpiDashboard.Mapping
     {
 
         public KmlLayerProvider provider;
-        private Esri.ArcGISRuntime.Mapping.Map _map;
-        private Esri.ArcGISRuntime.UI.Controls.MapView _mapView;
+        private ESRI.ArcGIS.Client.Map myMap;
         private string serverName;
         private int[] visibleLayers;
 
@@ -35,11 +34,11 @@ namespace EpiDashboard.Mapping
 
         private bool isReadOnlyMode;
 
-        public KmlLayerProperties(Esri.ArcGISRuntime.Mapping.Map map)
+        public KmlLayerProperties(ESRI.ArcGIS.Client.Map myMap)
         {
             InitializeComponent();
 
-            this._map = map;
+            this.myMap = myMap;
 
             //  provider = new KmlLayerProvider(myMap);
             #region Translation
@@ -161,7 +160,7 @@ namespace EpiDashboard.Mapping
             }
             if (provider == null)
             {
-                provider = new KmlLayerProvider(_mapView);
+                provider = new KmlLayerProvider(myMap);
             }
             provider.RenderServerImage(serverName, visibleLayers);
             if (MapGenerated != null)

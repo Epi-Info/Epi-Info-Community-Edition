@@ -263,12 +263,12 @@ namespace EpiDashboard.Mapping
 
         void AddLayerList()
         {
-            //''layerList = new LayerList(myMap, view, db, dashboardHelper);
-            //layerList.Loaded += new RoutedEventHandler(layerList_Loaded);
-            //layerList.SizeChanged += new SizeChangedEventHandler(layerList_SizeChanged);
-            //layerList.MouseEnter += new MouseEventHandler(layerList_MouseEnter);
-            //layerList.MouseLeave += new MouseEventHandler(layerList_MouseLeave);
-            //MapContainer.Children.Add(layerList);
+            layerList = new LayerList(myMap, view, db, dashboardHelper);
+            layerList.Loaded += new RoutedEventHandler(layerList_Loaded);
+            layerList.SizeChanged += new SizeChangedEventHandler(layerList_SizeChanged);
+            layerList.MouseEnter += new MouseEventHandler(layerList_MouseEnter);
+            layerList.MouseLeave += new MouseEventHandler(layerList_MouseLeave);
+            MapContainer.Children.Add(layerList);
 
             layerAdder = new LayerAdder(myMap, view, db, dashboardHelper, layerList, this);
             layerAdder.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;

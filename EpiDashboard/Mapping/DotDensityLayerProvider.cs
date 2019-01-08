@@ -158,28 +158,28 @@ namespace EpiDashboard.Mapping
                 int counter = 0;
                 foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
                 {
-                    //''Graphic graphic = record.ToGraphic();
-                    //if (graphic != null)
-                    //{
-                    //    graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
-                    //    graphicsLayer.Graphics.Add(graphic);
-                    //}
+                    Graphic graphic = record.ToGraphic();
+                    if (graphic != null)
+                    {
+                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
+                        graphicsLayer.Graphics.Add(graphic);
+                    }
                     counter += rgbFactor;
                 }
                 if (graphicsLayer.FullExtent == null)
                 {
-                    //''Envelope shapeFileExtent = shapeFileReader.GetExtent();
-                    //if (shapeFileExtent.SpatialReference == null)
-                    //{
-                    //    myMap.Extent = shapeFileExtent;
-                    //}
-                    //else
-                    //{
-                    //    if (shapeFileExtent.SpatialReference.WKID == 4326)
-                    //    {
-                    //        myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
-                    //    }
-                    //}
+                    Envelope shapeFileExtent = shapeFileReader.GetExtent();
+                    if (shapeFileExtent.SpatialReference == null)
+                    {
+                        myMap.Extent = shapeFileExtent;
+                    }
+                    else
+                    {
+                        if (shapeFileExtent.SpatialReference.WKID == 4326)
+                        {
+                            myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                        }
+                    }
                 }
                 else
                 {
@@ -263,26 +263,26 @@ namespace EpiDashboard.Mapping
                 int counter = 0;
                 foreach (ShapeFileReader.ShapeFileRecord record in shapeFileReader.Records)
                 {
-                    //''Graphic graphic = record.ToGraphic();
-                    //if (graphic != null)
-                    //{
-                    //    graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
-                    //    graphicsLayer.Graphics.Add(graphic);
-                    //}
+                    Graphic graphic = record.ToGraphic();
+                    if (graphic != null)
+                    {
+                        graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
+                        graphicsLayer.Graphics.Add(graphic);
+                    }
                     counter += rgbFactor;
                 }
-                //''Envelope shapeFileExtent = shapeFileReader.GetExtent();
-                //if (shapeFileExtent.SpatialReference == null)
-                //{
-                //    myMap.Extent = shapeFileExtent;
-                //}
-                //else
-                //{
-                //    if (shapeFileExtent.SpatialReference.WKID == 4326)
-                //    {
-                //        myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
-                //    }
-                //}
+                Envelope shapeFileExtent = shapeFileReader.GetExtent();
+                if (shapeFileExtent.SpatialReference == null)
+                {
+                    myMap.Extent = shapeFileExtent;
+                }
+                else
+                {
+                    if (shapeFileExtent.SpatialReference.WKID == 4326)
+                    {
+                        myMap.Extent = new Envelope(ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMin, shapeFileExtent.YMin)), ESRI.ArcGIS.Client.Bing.Transform.GeographicToWebMercator(new MapPoint(shapeFileExtent.XMax, shapeFileExtent.YMax)));
+                    }
+                }
 
                 return new object[] { ofd.FileName, graphicsLayer.Graphics[0].Attributes };
             }
