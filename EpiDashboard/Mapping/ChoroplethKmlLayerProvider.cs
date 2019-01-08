@@ -133,11 +133,11 @@ namespace EpiDashboard.Mapping
         {
             KmlLayer shapeLayer = ArcGIS_Map.Layers[LayerId.ToString()] as KmlLayer;
             GraphicsLayer graphicsLayer = GetGraphicsLayer(shapeLayer);
-
+            Dictionary<string, object> allAttributes = new Dictionary<string, object>();
+            
             if (graphicsLayer != null)
             {
                 IDictionary<string, object> coreAttributes = graphicsLayer.Graphics[0].Attributes;
-                Dictionary<string, object> allAttributes = new Dictionary<string, object>();
 
                 foreach (KeyValuePair<string, object> attr in coreAttributes)
                 {
@@ -160,6 +160,11 @@ namespace EpiDashboard.Mapping
                 {
                     FeatureLoaded(_kmlURL, allAttributes);
                 }
+            }
+
+            if(allAttributes.Count == 0)
+            {
+
             }
 
             double xmin = graphicsLayer.Graphics[0].Geometry.Extent.XMin;
