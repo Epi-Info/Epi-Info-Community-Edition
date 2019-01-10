@@ -100,9 +100,9 @@ namespace EpiDashboard.Mapping
             //ImageryRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SATELLITE;
             //ImageryRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_SATELLITE;
             StreetsRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_STREETS;
-            StreetsRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_STREETS;
+            StreetsRadioButton_notSelected.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_STREETS;
             BlankRadioButton.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_BLANK;
-            BlankRadioButton_alt.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_BLANK;
+            BlankRadioButton_notSelected.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_BLANK;
             tooltipExpandHeader.Content = DashboardSharedStrings.MENU_FULLSCREEN;
             tooltipExpand.Text = DashboardSharedStrings.MENU_FULLSCREEN_MODE;
             tooltipRestoreHeader.Content = DashboardSharedStrings.MENU_WINDOW;
@@ -261,13 +261,13 @@ namespace EpiDashboard.Mapping
             switch (this.defaultBackgroundType)
             {
                 case MapBackgroundType.Satellite:
-                    ToggleSatellite();
-                    break;
+                    //ToggleSatellite();
+                    //break;
                 case MapBackgroundType.Street:
-                    ToggleStreet();
+                    ShowStreetSelected();
                     break;
                 case MapBackgroundType.None:
-                    ToggleBlank();
+                    ShowBlankSelected();
                     break;
             }
         }
@@ -276,30 +276,28 @@ namespace EpiDashboard.Mapping
         {
             //ImageryRadioButton.Visibility = System.Windows.Visibility.Collapsed;
             //ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
-            StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            StreetsRadioButton.Visibility = System.Windows.Visibility.Visible;
-            BlankRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            BlankRadioButton.Visibility = System.Windows.Visibility.Visible;
+            //StreetsRadioButton_notSelected.Visibility = System.Windows.Visibility.Collapsed;
+            //StreetsRadioButton.Visibility = System.Windows.Visibility.Visible;
+            //BlankRadioButton_notSelected.Visibility = System.Windows.Visibility.Collapsed;
+            //BlankRadioButton.Visibility = System.Windows.Visibility.Visible;
         }
 
-        private void ToggleStreet()
+        private void ShowStreetSelected()
         {
-            StreetsRadioButton.Visibility = System.Windows.Visibility.Collapsed;
-            StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
-            //ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            //ImageryRadioButton.Visibility = System.Windows.Visibility.Visible;
-            BlankRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            BlankRadioButton.Visibility = System.Windows.Visibility.Visible;
+            Street_Selected.Visibility = System.Windows.Visibility.Visible;
+            Street_NotSelected.Visibility = System.Windows.Visibility.Collapsed;
+
+            Blank_Selected.Visibility = System.Windows.Visibility.Collapsed;
+            Blank_NotSelected.Visibility = System.Windows.Visibility.Visible;
         }
 
-        private void ToggleBlank()
+        private void ShowBlankSelected()
         {
-            BlankRadioButton.Visibility = System.Windows.Visibility.Collapsed;
-            BlankRadioButton_alt.Visibility = System.Windows.Visibility.Visible;
-            //ImageryRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            //ImageryRadioButton.Visibility = System.Windows.Visibility.Visible;
-            StreetsRadioButton_alt.Visibility = System.Windows.Visibility.Collapsed;
-            StreetsRadioButton.Visibility = System.Windows.Visibility.Visible;
+            Street_Selected.Visibility = System.Windows.Visibility.Collapsed;
+            Street_NotSelected.Visibility = System.Windows.Visibility.Visible;
+
+            Blank_Selected.Visibility = System.Windows.Visibility.Visible;
+            Blank_NotSelected.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         void openDefaultMapWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -393,10 +391,17 @@ namespace EpiDashboard.Mapping
                 myMap.Width = MapContainer.ActualWidth;
                 myMap.WrapAround = true;
                 myMap.ContextMenu = menu;
+
                 if (sparse_connection == false)
                 {
                     myMap.Layers.Add(layer);
+                    ShowStreetSelected();
                 }
+                else
+                {
+                    ShowBlankSelected();
+                }
+
                 myMap.Layers.Add(pointLayer);
                 myMap.Layers.Add(textLayer);
                 myMap.Layers.Add(zoneLayer);
@@ -1610,11 +1615,11 @@ namespace EpiDashboard.Mapping
 
                     if (baseMapType.Equals("blank"))
                     {
-                        ToggleBlank();
+                        ShowBlankSelected();
                     }
                     else
                     {
-                        ToggleStreet();
+                        ShowStreetSelected();
                     }
                 }
 
@@ -2697,13 +2702,13 @@ namespace EpiDashboard.Mapping
                         }
                         else
                         {
-                            if (StreetsRadioButton.Visibility == System.Windows.Visibility.Collapsed)
+                            if (Street_Selected.Visibility == System.Windows.Visibility.Visible)
                             {
-                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
+                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
                             }
                             else
                             {
-                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = true;
+                                ((OpenStreetMapLayer)myMap.Layers[0]).Visible = false;
                             }
                         }
                     }
@@ -2813,39 +2818,18 @@ namespace EpiDashboard.Mapping
             CollapseExpandLayerChooser();
             GenerateCaseClusterMap();
         }
-        private void ImageryRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+
+
+
+        private void Street_NotSelected_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            ToggleSatellite();
+            ShowStreetSelected();
             SetBackgroundImageType();
         }
 
-        private void StreetsRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Blank_NotSelected_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            ToggleStreet();
-            SetBackgroundImageType();
-        }
-
-        private void BlankRadioButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleBlank();
-            SetBackgroundImageType();
-        }
-
-        private void borderSat_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleSatellite();
-            SetBackgroundImageType();
-        }
-
-        private void borderStr_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleStreet();
-            SetBackgroundImageType();
-        }
-
-        private void borderBln_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleBlank();
+            ShowBlankSelected();
             SetBackgroundImageType();
         }
 
