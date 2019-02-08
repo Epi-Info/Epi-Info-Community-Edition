@@ -151,6 +151,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                     Context.AnalysisCheckCodeInterface.Display(args);
                 }
+                catch (DuplicateNameException exception)
+                {
+                    throw new Exception(exception.Message);
+                }
                 catch (GeneralException exception)
                 {
                     throw new GeneralException(exception.Message);
@@ -539,12 +543,17 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                         else
                         {
-                            int count = 0;
+                            int count = 1;
                             foreach (DataColumn column in result.Columns)
                             {
                                 if (column.ColumnName.StartsWith(childTable.Columns[i].ColumnName))
                                 {
                                     count++;
+                                }
+
+                                if (false == result.Columns.Contains(childTable.Columns[i].ColumnName + count.ToString()))
+                                {
+                                    break;
                                 }
                             }
                             result.Columns.Add(childTable.Columns[i].ColumnName + count.ToString(), childTable.Columns[i].DataType);
