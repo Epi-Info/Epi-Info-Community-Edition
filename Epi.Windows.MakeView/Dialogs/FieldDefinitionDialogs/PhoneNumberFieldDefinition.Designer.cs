@@ -43,6 +43,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             resources.ApplyResources(this.chkRequired, "chkRequired");
             // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            // 
             // txtPrompt
             // 
             resources.ApplyResources(this.txtPrompt, "txtPrompt");
@@ -154,9 +158,9 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // PhoneNumberFieldDefinition
             // 
             resources.ApplyResources(this, "$this");
-            this.CancelButton = this.btnCancel;
             this.Name = "PhoneNumberFieldDefinition";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

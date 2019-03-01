@@ -170,6 +170,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
             this.chkEncrypted.Name = "chkEncrypted";
             this.chkEncrypted.UseVisualStyleBackColor = true;
+            this.chkEncrypted.CheckedChanged += new System.EventHandler(this.chkEncrypted_CheckedChanged);
             // 
             // TextFieldDefinition
             // 

@@ -38,6 +38,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             resources.ApplyResources(this.mtbSize, "mtbSize");
             // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
@@ -162,6 +166,7 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             resources.ApplyResources(this, "$this");
             this.Name = "UpperCaseTextFieldDefinition";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

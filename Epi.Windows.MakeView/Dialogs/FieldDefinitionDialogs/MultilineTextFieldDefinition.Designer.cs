@@ -35,6 +35,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // chkEncrypted
+            // 
+            resources.ApplyResources(this.chkEncrypted, "chkEncrypted");
+            // 
             // txtPrompt
             // 
             resources.ApplyResources(this.txtPrompt, "txtPrompt");
@@ -136,14 +140,13 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
             // 
             // MultilineTextFieldDefinition
             // 
-            this.AcceptButton = this.btnOk;
             resources.ApplyResources(this, "$this");
-            this.CancelButton = this.btnCancel;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MultilineTextFieldDefinition";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

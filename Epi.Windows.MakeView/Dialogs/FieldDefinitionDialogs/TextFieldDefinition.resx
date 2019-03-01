@@ -204,7 +204,7 @@
     <value>88, 44</value>
   </data>
   <data name="chkEncrypted.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 17</value>
+    <value>62, 17</value>
   </data>
   <data name="chkEncrypted.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -353,7 +353,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABC
-        twAAAk1TRnQBSQFMAgEBVwEAAVkBAAEUAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        twAAAk1TRnQBSQFMAgEBVwEAAVkBAAEcAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABNAEBAgABAQEAASAGAAE0AQH/ABkAAf8DAAH/AwAB/xcAAf8DAAH/AwAB/wMAAf8DAAH/IAAQ/xgA
         PP9PAAH/HwAB/wMAAf8DAAH/HAAI/wPAAf8DwAH/A8AB/wPACf8TAAH/A8AB/wPAAf8DwAH/A8AB/wPA
         Af8DwAH/A8AB/wPAAf8DwAH/A8AB/wPAAf8DwAH/A8AF/1MAAf8XAAH/AwAB/wMAAf8cAAOAAf8DwAH/
@@ -1159,6 +1159,6 @@
     <value>TextFieldDefinition</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs.GenericFieldDefinition, MakeView, Version=7.2.6613.23812, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs.GenericFieldDefinition, MakeView, Version=7.2.6992.21820, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

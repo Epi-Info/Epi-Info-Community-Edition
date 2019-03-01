@@ -48,5 +48,12 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
         }
         #endregion Public Events
 
+        private void chkEncrypted_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is CheckBox && ((CheckBox)sender).Checked == true)
+            {
+                MessageBox.Show("Warning: When you check 'Encrypt', the Enter tool encrypts data entered in this text box. Data is readable only in the Epi Info Enter tool. Data is not available for analyses or line lists and cannot be exported in a usable form to other tools outside of the Enter tool.", "Warning");
+            }
+        }
     }
 }
