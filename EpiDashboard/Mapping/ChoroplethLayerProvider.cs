@@ -977,77 +977,82 @@ namespace EpiDashboard.Mapping
                             TextSymbol textSymbol = new TextSymbol();
                             textSymbol.Foreground = new SolidColorBrush(Colors.Black);
                             textSymbol.FontSize = 11;
-                            //textSymbol.Text = graphicFeature.Attributes[shapeKey].ToString().Trim();
-                            string sShapekey = graphicFeature.Attributes[shapeKey].ToString().Trim();
-                            int indexShapeKey = sShapekey.LastIndexOfAny(new char[] { ' ', '-' });
-                            int iShapeKeyLen = sShapekey.Length;
 
-                            //  Break up label if possible and put on new line.  Adjust offsets as needed.
-                            if (indexShapeKey != -1) //& iShapeKeyLen > 10)
+                            if (graphicFeature.Attributes[shapeKey] != null)
                             {
-                                textSymbol.Text = sShapekey.Substring(0, indexShapeKey) + "\r\n    " + sShapekey.Substring(indexShapeKey + 1, (iShapeKeyLen - (indexShapeKey + 1)));
-                                textSymbol.OffsetX = iShapeKeyLen / 0.8;
-                                textSymbol.OffsetY = 6;
-                            }
-                            else
-                            {
-                                textSymbol.Text = sShapekey;
-                                textSymbol.OffsetX = iShapeKeyLen / 0.4;
-                                textSymbol.OffsetY = 3;
-                            }
-                            //Console.WriteLine(textSymbol.Text);
-                            //textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
-                            textSymbol.OffsetY = textSymbol.FontSize / 2.0;
+                                string sShapekey = graphicFeature.Attributes[shapeKey].ToString().Trim();
+                                int indexShapeKey = sShapekey.LastIndexOfAny(new char[] { ' ', '-' });
+                                int iShapeKeyLen = sShapekey.Length;
 
-                            Envelope extentEnvelope = graphicFeature.Geometry.Extent;
-                            MapPoint pole = extentEnvelope.GetCenter();
-
-                            ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
-
-                            //if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Richmond Hill") usePoleOfInaccessibility = true;
-
-                            if (usePoleOfInaccessibility)
-                            {
-                                if (graphicFeature.Geometry is ESRI.ArcGIS.Client.Geometry.Polygon)
+                                //  Break up label if possible and put on new line.  Adjust offsets as needed.
+                                if (indexShapeKey != -1) //& iShapeKeyLen > 10)
                                 {
-                                    rings = ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings;
-                                    Tuple<double, double> coords;
+                                    textSymbol.Text = sShapekey.Substring(0, indexShapeKey) + "\r\n    " + sShapekey.Substring(indexShapeKey + 1, (iShapeKeyLen - (indexShapeKey + 1)));
+                                    textSymbol.OffsetX = iShapeKeyLen / 0.8;
+                                    textSymbol.OffsetY = 6;
+                                }
+                                else
+                                {
+                                    textSymbol.Text = sShapekey;
+                                    textSymbol.OffsetX = iShapeKeyLen / 0.4;
+                                    textSymbol.OffsetY = 3;
+                                }
+                                //Console.WriteLine(textSymbol.Text);
+                                //textSymbol.OffsetX = textSymbol.Text.Length / 0.4;
+                                textSymbol.OffsetY = textSymbol.FontSize / 2.0;
 
-                                    bool showDebugCells = true;
+                                Envelope extentEnvelope = graphicFeature.Geometry.Extent;
+                                MapPoint pole = extentEnvelope.GetCenter();
 
-                                    if(showDebugCells)
+                                ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection> rings = new ObservableCollection<ESRI.ArcGIS.Client.Geometry.PointCollection>();
+
+                                //if (graphicFeature.Attributes[shapeKey].ToString().Trim() == "Richmond Hill") usePoleOfInaccessibility = true;
+
+                                if (usePoleOfInaccessibility)
+                                {
+                                    if (graphicFeature.Geometry is ESRI.ArcGIS.Client.Geometry.Polygon)
                                     {
-                                        double precision = 0.1;
-                                        double denom = 64.0;
+                                        rings = ((ESRI.ArcGIS.Client.Geometry.Polygon)graphicFeature.Geometry).Rings;
+                                        Tuple<double, double> coords;
 
-                                        precision = extentEnvelope.Width / denom < precision? extentEnvelope.Width / denom : precision;
-                                        precision = extentEnvelope.Height / denom < precision ? extentEnvelope.Height / denom : precision;
+                                        bool showDebugCells = true;
 
-                                        coords = PolyLabel.PoleOfInaccessibility(rings, precision, graphicsLayer: graphicsLayer);
+                                        if(showDebugCells)
+                                        {
+                                            double precision = 0.1;
+                                            double denom = 64.0;
 
-                                        //Envelope extent = graphicFeature.Geometry.Extent;
-                                        //Cell extentCell = new Cell(extent.XMin, extent.YMin, extent.Width / 2, rings);
-                                        //PolyLabel.AddDebugGraphic(extentCell, graphicsLayer);
+                                            precision = extentEnvelope.Width / denom < precision? extentEnvelope.Width / denom : precision;
+                                            precision = extentEnvelope.Height / denom < precision ? extentEnvelope.Height / denom : precision;
+
+                                            coords = PolyLabel.PoleOfInaccessibility(rings, precision, graphicsLayer: graphicsLayer);
+
+                                            //Envelope extent = graphicFeature.Geometry.Extent;
+                                            //Cell extentCell = new Cell(extent.XMin, extent.YMin, extent.Width / 2, rings);
+                                            //PolyLabel.AddDebugGraphic(extentCell, graphicsLayer);
+                                        }
+                                        else
+                                        {
+                                            coords = PolyLabel.PoleOfInaccessibility(rings);
+                                        }
+
+                                        pole.X = coords.Item1;
+                                        pole.Y = coords.Item2;
                                     }
-                                    else
-                                    {
-                                        coords = PolyLabel.PoleOfInaccessibility(rings);
-                                    }
 
-                                    pole.X = coords.Item1;
-                                    pole.Y = coords.Item2;
+                                    //usePoleOfInaccessibility = false;
                                 }
 
-                                //usePoleOfInaccessibility = false;
+                                Graphic textGraphic = new Graphic();
+
+                                textGraphic.Symbol = textSymbol;
+                                textGraphic.Geometry = pole;
+
+                                textGraphics.Add(textGraphic);
+
+                                }
+
                             }
-
-                            Graphic textGraphic = new Graphic();
-
-                            textGraphic.Symbol = textSymbol;
-                            textGraphic.Geometry = pole;
-
-                            textGraphics.Add(textGraphic);
-                        }
                         
                         TextBlock t = new TextBlock();
                         t.Background = Brushes.White;
