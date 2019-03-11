@@ -972,7 +972,7 @@ namespace Epi.Windows.MakeView.Dialogs
                             {
                                 this.view.WebSurveyId = item.Value;
                                 this.view.SaveToDb();
-                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSFormId = item.Value; NewView.WebSurveyId = item.Value;
                                 NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
                                 NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
                                 NewView.SaveToDb();
@@ -1089,7 +1089,7 @@ namespace Epi.Windows.MakeView.Dialogs
                             {
                                 this.view.WebSurveyId = item.Value;
                                 this.view.SaveToDb();
-                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSFormId = item.Value; NewView.WebSurveyId = item.Value;
                                 NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
                                 NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
                                 NewView.SaveToDb();
@@ -1097,7 +1097,7 @@ namespace Epi.Windows.MakeView.Dialogs
                             else
                             {
                                 NewView.WebSurveyId = item.Value;
-                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSFormId = item.Value; 
                                 NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
                                 NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
                                 NewView.SaveToDb();
@@ -1204,7 +1204,7 @@ namespace Epi.Windows.MakeView.Dialogs
                             {
                                 this.view.WebSurveyId = item.Value;
                                 this.view.SaveToDb();
-                                NewView.EIWSFormId = item.Value;
+                                NewView.EIWSFormId = item.Value; NewView.WebSurveyId = item.Value;
                                 NewView.EIWSOrganizationKey = Configuration.Encrypt(txtOrganizationKey.Text.ToString());////Encrypting the OrgKey
                                 NewView.CheckCodeBefore = txtOrganizationKey.Text.ToString();
                                 NewView.SaveToDb();
