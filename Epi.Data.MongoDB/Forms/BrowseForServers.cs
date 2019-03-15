@@ -9,8 +9,11 @@ using System.Windows.Forms;
 using System.Runtime;
 using System.Diagnostics;
 using System.Data.OleDb;
+using Epi.Data.MongoDB;
+using System.Data.CData.MongoDB;
 
-namespace Epi.Data.MySQL.Forms
+
+namespace Epi.Data.MongoDB.Forms
 {
     public partial class BrowseForServers : Form
     {
@@ -151,8 +154,8 @@ namespace Epi.Data.MySQL.Forms
         {
             if (!(txtFileName.Text.Equals(String.Empty)))
             {
-                MySQLDatabase mySQLDatabase = new MySQLDatabase();
-                mySQLDatabase.SetDataSourceFilePath(this.txtFileName.Text);
+                MongoDBDatabase mongoDBDatabase = new MongoDBDatabase();
+                mongoDBDatabase.SetDataSourceFilePath(this.txtFileName.Text);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

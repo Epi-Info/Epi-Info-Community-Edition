@@ -8,14 +8,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Epi.Data;
-using Epi.Data.MySQL;
-using MySql.Data.MySqlClient;
-using MySql.Data;
+using Epi.Data.MongoDB;
+using System.Data.CData.MongoDB;
 
 using Epi.Windows.Dialogs;
 
 
-namespace Epi.Data.MySQL.Forms
+namespace Epi.Data.MongoDB.Forms
 {
     /// <summary>
     /// Dialog for building a MySQL connection string
@@ -38,7 +37,7 @@ namespace Epi.Data.MySQL.Forms
             InitializeComponent();
             this.cmbServerName.Items.Add("<Browse for more>");
             this.cmbServerName.Text = "";
-            dbConnectionStringBuilder = new MySqlConnectionStringBuilder();
+            dbConnectionStringBuilder = new MongoDBConnectionStringBuilder();
         }
 
         #endregion  //Constructors
@@ -58,7 +57,7 @@ namespace Epi.Data.MySQL.Forms
         /// <summary>
         /// Module-level SqlDBConnectionString object member.
         /// </summary>
-        protected MySqlConnectionStringBuilder dbConnectionStringBuilder;
+        protected MongoDBConnectionStringBuilder dbConnectionStringBuilder;
         /// <summary>
         /// Gets or sets the SqlDBConnectionString Object
         /// </summary>
@@ -232,14 +231,14 @@ namespace Epi.Data.MySQL.Forms
         {
             if (ValidateInput())
             {
-                dbConnectionStringBuilder = new MySqlConnectionStringBuilder();
+                dbConnectionStringBuilder = new MongoDBConnectionStringBuilder();
                 dbConnectionStringBuilder.Database = txtDatabaseName.Text.Trim();
                 dbConnectionStringBuilder.Server = cmbServerName.Text.Trim();
-                dbConnectionStringBuilder.UserID = txtUserName.Text.Trim();
+                dbConnectionStringBuilder.User = txtUserName.Text.Trim();
                 dbConnectionStringBuilder.Password = txtPassword.Text.Trim();
                 if (!string.IsNullOrEmpty(txtPort.Text))
                 {
-                    dbConnectionStringBuilder.Port = uint.Parse(txtPort.Text);
+                    dbConnectionStringBuilder.Port = txtPort.Text;
                 }
                 this.DialogResult = DialogResult.OK;
                 this.Hide();

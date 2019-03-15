@@ -1,4 +1,4 @@
-namespace Epi.Data.MySQL.Forms
+namespace Epi.Data.MongoDB.Forms
 {
     /// <summary>
     /// 
@@ -65,7 +65,8 @@ namespace Epi.Data.MySQL.Forms
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(423, 27);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Select a MySQL Server instance in the network for your connection:";
+            this.label1.Text = "Select a MongoDB Server instance in the network for your connection:";
+            this.label1.UseMnemonic = false;
             // 
             // btnBrowse
             // 

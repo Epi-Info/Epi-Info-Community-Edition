@@ -4,19 +4,19 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Text;
 using System.Data.Common;
-using Epi.Data.MySQL.Forms;
+using Epi.Data.MongoDB.Forms;
 using System.IO;
-using MySql.Data.MySqlClient;
-using MySql.Data;
+using Epi.Data.MongoDB;
+using System.Data.CData.MongoDB;
 using Epi;
 using System.Windows.Forms;
 
-namespace Epi.Data.MySQL
+namespace Epi.Data.MongoDB
 {
     /// <summary>
-    /// MySQLDBFactory - Database Factory for MySQL Databases
+    /// MongoDBColumnType - Database Factory for MySQL Databases
     /// </summary>
-    public class MySQLDBFactory : IDbDriverFactory
+    public class MongoDBFactory : IDbDriverFactory
     {
 
         #region Connection string on different OS 
@@ -26,7 +26,7 @@ namespace Epi.Data.MySQL
         //   "database=myDB;server=/var/lib/mysql/mysql.sock;user id=myUser; pwd=myPass";
         #endregion
 
-        private MySqlConnectionStringBuilder mySQLConnBuild = new MySqlConnectionStringBuilder();
+        private MongoDBConnectionStringBuilder mySQLConnBuild = new MongoDBConnectionStringBuilder();
 
         public bool ArePrerequisitesMet()
         {
@@ -46,18 +46,18 @@ namespace Epi.Data.MySQL
         /// <param name="dbInfo">DbDriverInfo</param>
         public void CreatePhysicalDatabase(DbDriverInfo dbInfo)
         {
-            MySqlConnectionStringBuilder masterBuilder = new MySqlConnectionStringBuilder(dbInfo.DBCnnStringBuilder.ToString());
-            MySqlConnectionStringBuilder tempBuilder = new MySqlConnectionStringBuilder(dbInfo.DBCnnStringBuilder.ToString());
+            MongoDBConnectionStringBuilder masterBuilder = new MongoDBConnectionStringBuilder(dbInfo.DBCnnStringBuilder.ToString());
+            MongoDBConnectionStringBuilder tempBuilder = new MongoDBConnectionStringBuilder(dbInfo.DBCnnStringBuilder.ToString());
             
-            //tempBuilder = dbInfo.DBCnnStringBuilder as MySqlConnectionStringBuilder;
+            //tempBuilder = dbInfo.DBCnnStringBuilder as MongoDBConnectionStringBuilder;
             //The "test" database is installed by default with MySQL.  System needs to login to this database to create a new database.
             tempBuilder.Database = "information_schema"; 
             
-            MySqlConnection masterConnection = new MySqlConnection(tempBuilder.ToString());
+            MongoDBConnection masterConnection = new MongoDBConnection(tempBuilder.ToString());
             
             try
             {
-                MySqlCommand command = masterConnection.CreateCommand();
+                MongoDBCommand command = masterConnection.CreateCommand();
                 if(dbInfo.DBName != null)
                 {
                     command.CommandText = "create database " + dbInfo.DBName + ";";
@@ -87,7 +87,7 @@ namespace Epi.Data.MySQL
         /// <returns>IDbDriver instance</returns>
         public IDbDriver CreateDatabaseObject(System.Data.Common.DbConnectionStringBuilder connectionStringBuilder)
         {
-            IDbDriver instance = new MySQLDatabase();
+            IDbDriver instance = new MongoDBDatabase();
             instance.ConnectionString = connectionStringBuilder.ConnectionString;
             
             return instance;
@@ -107,8 +107,8 @@ namespace Epi.Data.MySQL
             if (result.Length == 1)
             {
                 Epi.DataSets.Config.DatabaseRow dbConnection = (Epi.DataSets.Config.DatabaseRow)result[0];
-                MySqlConnectionStringBuilder mySqlConnectionBuilder = new MySqlConnectionStringBuilder(dbConnection.ConnectionString);
-                instance = CreateDatabaseObject(mySqlConnectionBuilder);
+                MongoDBConnectionStringBuilder MongoDBConnectionBuilder = new MongoDBConnectionStringBuilder(dbConnection.ConnectionString);
+                instance = CreateDatabaseObject(MongoDBConnectionBuilder);
             }
             else
             {
@@ -175,7 +175,7 @@ namespace Epi.Data.MySQL
         public System.Data.Common.DbConnectionStringBuilder RequestDefaultConnection(string databaseName, string projectName = "")
         {
             DbConnectionStringBuilder dbStringBuilder = new DbConnectionStringBuilder(false);
-            dbStringBuilder.ConnectionString = MySQLDatabase.BuildDefaultConnectionString(databaseName);
+            dbStringBuilder.ConnectionString = MongoDBDatabase.BuildDefaultConnectionString(databaseName);
             return dbStringBuilder;
         }
 
@@ -189,10 +189,10 @@ namespace Epi.Data.MySQL
         /// <returns>Strongly typed connection string builder.</returns>
         public System.Data.Common.DbConnectionStringBuilder RequestDefaultConnection(string database, string server, string user, string password)
         {
-            mySQLConnBuild.PersistSecurityInfo = false;
+            mySQLConnBuild.AutoCache = false; //.PersistSecurityInfo = false;
             mySQLConnBuild.Database = database;
             mySQLConnBuild.Server = server;
-            mySQLConnBuild.UserID = user;
+            mySQLConnBuild.User = user;
             mySQLConnBuild.Password = password;
 
             return (mySQLConnBuild as DbConnectionStringBuilder); 

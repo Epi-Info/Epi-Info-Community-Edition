@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Epi.Data.MySQL
+namespace Epi.Data.MongoDB
 {
     /// <summary>
     /// Enumerates all column types used by MySQL
     /// </summary>
-    public static class MySQLDbColumnType
+    public static class MongoDBColumnType
     {
         /// <summary>
         /// TEXT

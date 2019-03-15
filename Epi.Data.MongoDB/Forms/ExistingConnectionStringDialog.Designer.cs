@@ -1,4 +1,4 @@
-namespace Epi.Data.MySQL.Forms
+namespace Epi.Data.MongoDB.Forms
 {
     partial class ExistingConnectionStringDialog
     {

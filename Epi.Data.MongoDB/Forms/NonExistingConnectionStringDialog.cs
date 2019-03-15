@@ -9,16 +9,15 @@ using System.Text;
 using System.Windows.Forms;
 using Epi;
 using Epi.Data;
-using Epi.Data.MySQL;
-using MySql.Data.MySqlClient;
-using MySql.Data;
+using Epi.Data.MongoDB;
+using System.Data.CData.MongoDB;
 
-namespace Epi.Data.MySQL.Forms
+namespace Epi.Data.MongoDB.Forms
 {   
     /// <summary>
     /// Partial class for Data.SqlServer form NonExistingConnectionStringDialog
     /// </summary>
-    public partial class NonExistingConnectionStringDialog : Epi.Data.MySQL.Forms.ConnectionStringDialog
+    public partial class NonExistingConnectionStringDialog : Epi.Data.MongoDB.Forms.ConnectionStringDialog
     {
         #region Constructors
 
@@ -101,11 +100,11 @@ namespace Epi.Data.MySQL.Forms
         {
             if (ValidateInput())
             {
-                dbConnectionStringBuilder = new MySqlConnectionStringBuilder();
-                dbConnectionStringBuilder.PersistSecurityInfo = false;
+                dbConnectionStringBuilder = new MongoDBConnectionStringBuilder();
+                dbConnectionStringBuilder.AutoCache = false; //.PersistSecurityInfo = false;
                 dbConnectionStringBuilder.Server = cmbServerName.Text.Trim();
                 dbConnectionStringBuilder.Database = txtDatabaseName.Text.Trim();
-                dbConnectionStringBuilder.UserID = txtUserName.Text;
+                dbConnectionStringBuilder.User = txtUserName.Text;
                 dbConnectionStringBuilder.Password = txtPassword.Text;
                 this.DialogResult = DialogResult.OK;
                 this.Hide();

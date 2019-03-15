@@ -261,7 +261,7 @@ namespace Epi.Windows.Dialogs
 
                     foreach (Epi.DataSets.Config.DataDriverRow row in config.DataDrivers)
                     { 
-                        cmbDataSourcePlugIns.Items.Add(new ComboBoxItem(row.Type,row.DisplayName,null));
+                            cmbDataSourcePlugIns.Items.Add(new ComboBoxItem(row.Type,row.DisplayName,null));
                     }
                 }
                 cmbDataSourcePlugIns.SelectedIndex = 0; 

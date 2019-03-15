@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using EpiInfo.Plugin;
 
-namespace Epi.Data.MySQL
+namespace Epi.Data.MongoDB
 {
-    public partial class MySQLDatabase : IDataSource 
+    public partial class MongoDBDatabase : IDataSource 
     {
         /// <summary>
         /// executes sql against the datasource and will return a datatablereader of the results
@@ -22,7 +22,7 @@ namespace Epi.Data.MySQL
             }
             catch (Exception e)
             {
-                Logger.Log("Error MySQLDatabase.IDataSource.GetDataTableReader:\n" + e.ToString());
+                Logger.Log("Error MongoDBDatabase.IDataSource.GetDataTableReader:\n" + e.ToString());
             }
             return result;
         }
@@ -43,7 +43,7 @@ namespace Epi.Data.MySQL
             }
             catch (Exception e)
             {
-                Logger.Log("Error MySQLDatabase.IDataSource.Execute:\n" + e.ToString());
+                Logger.Log("Error MongoDBDatabase.IDataSource.Execute:\n" + e.ToString());
             }
             return result;
         }
@@ -70,7 +70,7 @@ namespace Epi.Data.MySQL
             }
             catch (Exception e)
             {
-                Logger.Log("Error MySQLDatabase.IDataSource.GetDataTableReader:\n" + e.ToString());
+                Logger.Log("Error MongoDBDatabase.IDataSource.GetDataTableReader:\n" + e.ToString());
             }
             return result;
         }

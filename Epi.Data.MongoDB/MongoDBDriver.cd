@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Epi.Data.MySQL.MySQLQuery">
+  <Class Name="Epi.Data.MongoDB.MongoDBQuery">
     <Position X="4.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MySQLQuery.cs</FileName>
+      <FileName>MongoDBQuery.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Epi.Data.MySQL.MySQLDBFactory" BaseTypeListCollapsed="true">
+  <Class Name="Epi.Data.MongoDB.MongoDBColumnType" BaseTypeListCollapsed="true">
     <Position X="3.5" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQABgAAACAAAAAAAAAAAAIAAAAEAAgAgAA=</HashCode>
-      <FileName>MySQLDBFactory.cs</FileName>
+      <FileName>MongoDBColumnType.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Epi.Data.MySQL.MySQLDbColumnType">
+  <Class Name="Epi.Data.MongoDB.MongoDBColumnType">
     <Position X="4.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
-      <FileName>MySQLDbColumnType.cs</FileName>
+      <FileName>MongoDBColumnType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Epi.Data.MySQL.MySQLDatabase">
+  <Class Name="Epi.Data.MongoDB.MongoDBDatabase">
     <Position X="0.5" Y="8.25" Width="3" />
     <TypeIdentifier>
       <HashCode>ABwEAAIUBAAICqyJBAAhElCDARFCEAABAiAQRRJAQAg=</HashCode>
-      <FileName>MySQLDatabase.cs</FileName>
+      <FileName>MongoDBDatabase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Epi.Data.DbDriverBase">

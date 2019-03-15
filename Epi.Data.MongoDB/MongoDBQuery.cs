@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Collections;
-using MySql.Data.MySqlClient;
+using Epi.Data.MongoDB;
+using System.Data.CData.MongoDB;
 
-namespace Epi.Data.MySQL
+namespace Epi.Data.MongoDB
 {
     /// <summary>
     /// MySQL statement and related parameters.
     /// </summary>
-    public class MySQLQuery : Query
+    public class MongoDBQuery : Query
     {
         #region Constructors
 
@@ -18,7 +19,7 @@ namespace Epi.Data.MySQL
         /// Constructor with parameter queryStatement
         /// </summary>
         /// <param name="queryStatement">Query</param>
-        public MySQLQuery(string queryStatement)
+        public MongoDBQuery(string queryStatement)
             : base(queryStatement)
         {
             //catch non-ansi statements here

@@ -2,23 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using MySql.Data.MySqlClient;
-using MySql.Data;
+using Epi.Data.MongoDB;
+using System.Data.CData.MongoDB;
 using System.Data;
 using Epi.Data;
 
 
-namespace Epi.Data.MySQL
+namespace Epi.Data.MongoDB
 {
     /// <summary>
     /// MySQL implementation of DbDriverBase implementation of IDbDriver implementation.
     /// </summary>
-    public partial class MySQLDatabase : DbDriverBase
+    public partial class MongoDBDatabase : DbDriverBase
     {
         /// <summary>
         /// MySQL Database Constructor
         /// </summary>
-        public MySQLDatabase():base(){}
+        public MongoDBDatabase():base(){}
 
 
 
@@ -103,8 +103,8 @@ namespace Epi.Data.MySQL
             }
             #endregion
 
-            MySqlCommand command = new MySqlCommand(sb.ToString());
-            MySqlConnection conn = new MySqlConnection(this.ConnectionString);
+            MongoDBCommand command = new MongoDBCommand(sb.ToString());
+            MongoDBConnection conn = new MongoDBConnection(this.ConnectionString);
 
             try
             {
@@ -216,7 +216,7 @@ namespace Epi.Data.MySQL
                 case GenericDbColumnType.Decimal:
                     return "decimal";
                 case GenericDbColumnType.Image:
-                    return MySQLDbColumnType.Longblob;
+                    return MongoDBColumnType.Longblob;
                 case GenericDbColumnType.Int16:
                 case GenericDbColumnType.UInt16:
                     return "smallint";
@@ -314,11 +314,11 @@ namespace Epi.Data.MySQL
         /// <returns></returns>
         public string BuildDefaultConnectionString(string database, string server, string user, string password)
         {
-            MySqlConnectionStringBuilder mySQLConnBuild = new MySqlConnectionStringBuilder();
-            mySQLConnBuild.PersistSecurityInfo = false;
+            MongoDBConnectionStringBuilder mySQLConnBuild = new MongoDBConnectionStringBuilder();
+            mySQLConnBuild.AutoCache = false; //.PersistSecurityInfo = false;
             mySQLConnBuild.Database = database;
             mySQLConnBuild.Server = server;
-            mySQLConnBuild.UserID = user;
+            mySQLConnBuild.User = user;
             mySQLConnBuild.Password = password;
 
             return mySQLConnBuild.ToString();
@@ -361,7 +361,7 @@ namespace Epi.Data.MySQL
         protected bool TestConnection(string connectionString)
         {
 
-            MySqlConnection testConnection = GetConnection(connectionString);
+            MongoDBConnection testConnection = GetConnection(connectionString);
             try
             {
                 OpenConnection(testConnection);
@@ -388,10 +388,10 @@ namespace Epi.Data.MySQL
         /// Gets an connection instance based on current ConnectionString value
         /// </summary>
         /// <returns>Connection instance</returns>
-        protected MySqlConnection GetConnection(string connectionString)
+        protected MongoDBConnection GetConnection(string connectionString)
         {
-            MySqlConnectionStringBuilder mySQLConnectionStringBuilder = new MySqlConnectionStringBuilder(connectionString);
-            return new MySqlConnection(mySQLConnectionStringBuilder.ToString());
+            MongoDBConnectionStringBuilder MongoDBConnectionStringBuilder = new MongoDBConnectionStringBuilder(connectionString);
+            return new MongoDBConnection(MongoDBConnectionStringBuilder.ToString());
         }
 
         public override bool IsBulkOperation
@@ -438,7 +438,7 @@ namespace Epi.Data.MySQL
         {
             get
             {
-                MySqlConnection sqlconn = GetConnection(connectionString) as MySqlConnection;
+                MongoDBConnection sqlconn = GetConnection(connectionString) as MongoDBConnection;
                 if (sqlconn != null)
                 {
                     return sqlconn.DataSource;
@@ -457,7 +457,7 @@ namespace Epi.Data.MySQL
         public override Epi.DataSets.TableSchema.TablesDataTable GetTableSchema()
         {
 
-            MySqlConnection conn = this.GetNativeConnection();
+            MongoDBConnection conn = this.GetNativeConnection();
 
             try
             {
@@ -478,7 +478,7 @@ namespace Epi.Data.MySQL
         /// Returns a native equivalent of a DbParameter
         /// </summary>
         /// <returns>A native equivalent of a DbParameter</returns>
-        protected virtual MySqlParameter ConvertToNativeParameter(QueryParameter parameter)
+        protected virtual MongoDBParameter ConvertToNativeParameter(QueryParameter parameter)
         {
             //TODO: Test this when MySQL comes back on the radar.
             if (parameter.DbType.Equals(DbType.Guid))
@@ -486,14 +486,19 @@ namespace Epi.Data.MySQL
                 parameter.Value = new Guid(parameter.Value.ToString());
             }
 
-            return new MySqlParameter(parameter.ParameterName, CovertToNativeDbType(parameter.DbType), parameter.Size, parameter.Direction, parameter.IsNullable, parameter.Precision, parameter.Scale, parameter.SourceColumn, parameter.SourceVersion, parameter.Value);
+            //return new MongoDBParameter(parameter.ParameterName, CovertToNativeDbType(parameter.DbType), parameter.Size, parameter.Direction, parameter.IsNullable, parameter.Precision, parameter.Scale, parameter.SourceColumn, parameter.SourceVersion, parameter.Value);
+            return new MongoDBParameter(
+                parameter.ParameterName, 
+                parameter.DbType, 
+                parameter.Size, 
+                parameter.SourceColumn);
         }
 
         /// <summary>
         /// Gets a native connection instance based on current ConnectionString value
         /// </summary>
         /// <returns>Native connection object</returns>
-        protected virtual MySqlConnection GetNativeConnection()
+        protected virtual MongoDBConnection GetNativeConnection()
         {
             return GetNativeConnection(connectionString);
         }
@@ -502,9 +507,9 @@ namespace Epi.Data.MySQL
         /// Gets a native connection instance from supplied connection string
         /// </summary>
         /// <returns>Native connection object</returns>
-        protected virtual MySqlConnection GetNativeConnection(string connectionString)
+        protected virtual MongoDBConnection GetNativeConnection(string connectionString)
         {
-            return new MySqlConnection(connectionString);
+            return new MongoDBConnection(connectionString);
         }
 
         /// <summary>
@@ -512,9 +517,9 @@ namespace Epi.Data.MySQL
         /// </summary>
         /// <param name="transaction">Null is not allowed. </param>
         /// <returns></returns>
-        protected MySqlCommand GetNativeCommand(IDbTransaction transaction)
+        protected MongoDBCommand GetNativeCommand(IDbTransaction transaction)
         {
-            MySqlTransaction mySqltransaction = transaction as MySqlTransaction;
+            MongoDBTransaction mySqltransaction = transaction as MongoDBTransaction;
 
             #region Input Validation
             if (mySqltransaction == null)
@@ -523,7 +528,7 @@ namespace Epi.Data.MySQL
             }
             #endregion
 
-            return new MySqlCommand(null, (MySqlConnection)transaction.Connection, (MySqlTransaction)transaction);
+            return new MongoDBCommand(null, (MongoDBConnection)transaction.Connection, (MongoDBTransaction)transaction);
 
         }
 
@@ -552,8 +557,8 @@ namespace Epi.Data.MySQL
             }
 
             IDbConnection connection = GetConnection(connectionString);
-            MySqlDataAdapter adapter = new MySqlDataAdapter();
-            adapter.SelectCommand = (MySqlCommand)GetCommand(selectQuery.SqlStatement, connection, selectQuery.Parameters);
+            MongoDBDataAdapter adapter = new MongoDBDataAdapter();
+            adapter.SelectCommand = (MongoDBCommand)GetCommand(selectQuery.SqlStatement, connection, selectQuery.Parameters);
 
             try
             {
@@ -599,15 +604,15 @@ namespace Epi.Data.MySQL
             #endregion Input Validation
 
             IDbConnection connection = GetConnection(connectionString);
-            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            MongoDBDataAdapter adapter = new MongoDBDataAdapter();
 
             string edittedUpdateQuery = updateQuery.SqlStatement;
             //edittedUpdateQuery = updateQuery.SqlStatement.Replace("@OldValue", "`@OldValue`");
             //edittedUpdateQuery = edittedUpdateQuery.Replace("@NewValue", "`@NewValue`");
 
 
-            adapter.InsertCommand = (MySqlCommand)GetCommand(insertQuery.SqlStatement, connection, insertQuery.Parameters);
-            adapter.UpdateCommand = (MySqlCommand)GetCommand(edittedUpdateQuery, connection, updateQuery.Parameters);
+            adapter.InsertCommand = (MongoDBCommand)GetCommand(insertQuery.SqlStatement, connection, insertQuery.Parameters);
+            adapter.UpdateCommand = (MongoDBCommand)GetCommand(edittedUpdateQuery, connection, updateQuery.Parameters);
 
             try
             {
@@ -949,7 +954,7 @@ namespace Epi.Data.MySQL
         private DataTable GetSchema(string collectionName, string tableName)
         {
 
-            MySqlConnection conn = this.GetNativeConnection();
+            MongoDBConnection conn = this.GetNativeConnection();
 
             try
             {
@@ -971,7 +976,7 @@ namespace Epi.Data.MySQL
         private DataTable GetSchema(string collectionName)
         {
 
-            MySqlConnection conn = this.GetNativeConnection();
+            MongoDBConnection conn = this.GetNativeConnection();
 
             try
             {
@@ -993,7 +998,7 @@ namespace Epi.Data.MySQL
         public override Epi.DataSets.TableKeysSchema.Primary_KeysDataTable GetTableKeysSchema(string tableName)
         {
             DataSets.TableKeysSchema schema = new Epi.DataSets.TableKeysSchema();
-            MySqlConnection conn = this.GetNativeConnection();
+            MongoDBConnection conn = this.GetNativeConnection();
             bool alreadyOpen = (conn.State != ConnectionState.Closed);
             try
             {
@@ -1010,7 +1015,7 @@ namespace Epi.Data.MySQL
                               "TC.CONSTRAINT_NAME = KU.CONSTRAINT_NAME " +
                               "where KU.TABLE_NAME = '" + tableName +
                               "' order by KU.ORDINAL_POSITION;";
-                MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                MongoDBDataAdapter da = new MongoDBDataAdapter(query, conn);
                 //Logger.Log(query);
                 da.Fill(schema.Primary_Keys);
                 da.Dispose();
@@ -1280,7 +1285,7 @@ namespace Epi.Data.MySQL
         /// <returns>Query</returns>
         public override Query CreateQuery(string ansiSqlStatement)
         {
-            return new MySQLQuery(ansiSqlStatement);
+            return new MongoDBQuery(ansiSqlStatement);
         }
 
         /// <summary>
@@ -1325,66 +1330,7 @@ namespace Epi.Data.MySQL
             }
         }
 
-        /// <summary>
-        /// Gets the MySQL version of a generic DbType
-        /// </summary>
-        /// <returns>MySQL version of the generic DbType</returns>
-        public MySqlDbType CovertToNativeDbType(DbType dbType)
-        {
-            switch (dbType)
-            {
-                case DbType.AnsiString:
-                    return MySqlDbType.Text;
-                case DbType.AnsiStringFixedLength:
-                    return MySqlDbType.Text;
-                case DbType.Binary:
-                    return MySqlDbType.Binary;
-                case DbType.Boolean:
-                    return MySqlDbType.Bit;
-                case DbType.Byte:
-                    return MySqlDbType.Text;
-                case DbType.Currency:
-                    return MySqlDbType.Double;
-                case DbType.Date:
-                    return MySqlDbType.Date;
-                case DbType.DateTime:
-                    return MySqlDbType.DateTime;
-                case DbType.Decimal:
-                    return MySqlDbType.Decimal;
-                case DbType.Double:
-                    return MySqlDbType.Double;
-                case DbType.Guid:
-                    return MySqlDbType.Text;
-                case DbType.Int16:
-                    return MySqlDbType.Int16;
-                case DbType.Int32:
-                    return MySqlDbType.Int32;
-                case DbType.Int64:
-                    return MySqlDbType.Int64;
-                case DbType.Object:
-                    return MySqlDbType.VarBinary;
-                case DbType.SByte:
-                    return MySqlDbType.Int16;
-                case DbType.Single:
-                    return MySqlDbType.Float;
-                case DbType.String:
-                    return MySqlDbType.Text;
-                case DbType.StringFixedLength:
-                    return MySqlDbType.Text;
-                case DbType.Time:
-                    return MySqlDbType.Time;
-                case DbType.UInt16:
-                    return MySqlDbType.UInt16;
-                case DbType.UInt32:
-                    return MySqlDbType.UInt32;
-                case DbType.UInt64:
-                    return MySqlDbType.UInt64;
-                case DbType.VarNumeric:
-                    return MySqlDbType.Decimal;
-                default:
-                    return MySqlDbType.Text;
-            }
-        }
+        
 
         /// <summary>
         /// Gets a new command using an existing transaction

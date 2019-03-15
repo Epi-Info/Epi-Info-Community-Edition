@@ -57,6 +57,11 @@ namespace Epi
         public const string MySQLDriver = "Epi.Data.MySQL.MySQLDBFactory, Epi.Data.MySQL";
 
         /// <summary>
+        /// Identifier for MongoDB driver that is built into Epi Info
+        /// </summary>
+        public const string MongoDBDriver = "Epi.Data.MongoDB.MongoDBDBFactory, Epi.Data.MongoDB";
+
+        /// <summary>
         /// Identifier for PostgreSQL driver that is built into Epi Info
         /// </summary>
         public const string PostgreSQLDriver = "Epi.Data.PostgreSQL.PostgreSQLDBFactory, Epi.Data.PostgreSQL";
@@ -793,6 +798,14 @@ namespace Epi
             dataDriverRowMySql.DataProvider = true;
             dataDriverRowMySql.MetadataProvider = false;
             configDataSet.DataDriver.Rows.Add(dataDriverRowMySql);
+
+            Config.DataDriverRow dataDriverRowMongoDB = configDataSet.DataDriver.NewDataDriverRow();
+            dataDriverRowMongoDB.DataDriversRow = parentDataDriversRow;
+            dataDriverRowMongoDB.DisplayName = "MongoDB Database";
+            dataDriverRowMongoDB.Type = MongoDBDriver;
+            dataDriverRowMongoDB.DataProvider = true;
+            dataDriverRowMongoDB.MetadataProvider = false;
+            configDataSet.DataDriver.Rows.Add(dataDriverRowMongoDB);
 
             Config.DataDriverRow dataDriverRowPostgreSql = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowPostgreSql.DataDriversRow = parentDataDriversRow;

@@ -6,16 +6,15 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Epi.Data;
-using Epi.Data.MySQL;
-using MySql.Data.MySqlClient;
-using MySql.Data;
+using Epi.Data.MongoDB;
+using System.Data.CData.MongoDB;
 
-namespace Epi.Data.MySQL.Forms
+namespace Epi.Data.MongoDB.Forms
 {
     /// <summary>
     /// Partial class for Data.SqlServer form ExistingConnectionStringDialog 
     /// </summary>
-    public partial class ExistingConnectionStringDialog : Epi.Data.MySQL.Forms.ConnectionStringDialog
+    public partial class ExistingConnectionStringDialog : Epi.Data.MongoDB.Forms.ConnectionStringDialog
     {   
         /// <summary>
         /// Default constructor
