@@ -40,8 +40,8 @@ namespace Epi.Data.MongoDB.Forms
         /// <param name="e">.NET supplied event parameters</param>
         private void NonExistingConnectionStringDialog_Load(object sender, EventArgs e)
         {
-            this.Text = "Create a MySQL database";
-            lblInstructions.Text = "Enter information to create the MySQL database.";
+            this.Text = "Create a MongoDB database";
+            lblInstructions.Text = "Enter information to create the MongoDB database.";
 
            // this.txtDatabaseName2.Visible = false;
             this.txtDatabaseName.Visible = true;

@@ -16,7 +16,7 @@ namespace Epi.Data.MongoDB
     /// <summary>
     /// MongoDBColumnType - Database Factory for MySQL Databases
     /// </summary>
-    public class MongoDBFactory : IDbDriverFactory
+    public class MongoDBDBFactory : IDbDriverFactory
     {
 
         #region Connection string on different OS 

@@ -6388,6 +6388,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Epi.Data.MongoDB.MongoDBDBFactory, Epi.Data.MongoDB.
+        /// </summary>
+        public static string MONGODB_DATABASE_INFO {
+            get {
+                return ResourceManager.GetString("MONGODB_DATABASE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microsoft Access Files.
         /// </summary>
         public static string MS_ACCESS_FILES {

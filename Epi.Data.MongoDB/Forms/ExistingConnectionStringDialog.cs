@@ -26,8 +26,8 @@ namespace Epi.Data.MongoDB.Forms
 
         private void ExistingConnectionStringDialog_Load(object sender, EventArgs e)
         {
-            this.Text = "Connect to a MySQL database";
-            lblInstructions.Text = "Enter information to connect to the MySQL database.";
+            this.Text = "Connect to a MongoDB database";
+            lblInstructions.Text = "Enter information to connect to the MongoDB database.";
         }
     }
 }

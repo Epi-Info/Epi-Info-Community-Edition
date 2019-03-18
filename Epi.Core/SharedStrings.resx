@@ -1163,6 +1163,9 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="MYSQL_DATABASE_INFO" xml:space="preserve">
     <value>Epi.Data.MySQL.MySQLDBFactory, Epi.Data.MySQL</value>
   </data>
+  <data name="MONGODB_DATABASE_INFO" xml:space="preserve">
+    <value>Epi.Data.MongoDB.MongoDBDBFactory, Epi.Data.MongoDB</value>
+  </data>
   <data name="WARNING_ADD_RELATED_VIEW_NAME" xml:space="preserve">
     <value>Add Related Form name please.</value>
   </data>
