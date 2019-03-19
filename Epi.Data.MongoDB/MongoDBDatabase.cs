@@ -11,12 +11,12 @@ using Epi.Data;
 namespace Epi.Data.MongoDB
 {
     /// <summary>
-    /// MySQL implementation of DbDriverBase implementation of IDbDriver implementation.
+    /// MongoDB implementation of DbDriverBase implementation of IDbDriver implementation.
     /// </summary>
     public partial class MongoDBDatabase : DbDriverBase
     {
         /// <summary>
-        /// MySQL Database Constructor
+        /// MongoDB Database Constructor
         /// </summary>
         public MongoDBDatabase():base(){}
 
@@ -24,7 +24,7 @@ namespace Epi.Data.MongoDB
 
 
         /// <summary>
-        /// Set MySQL path
+        /// Set MongoDB path
         /// </summary>
         /// <param name="filePath"></param>
         public void SetDataSourceFilePath(string filePath)
@@ -48,7 +48,7 @@ namespace Epi.Data.MongoDB
         /// </summary>
         public override string ConnectionDescription
         {
-            get { return "MySQL Database: " + this.DbName; }
+            get { return "MongoDB Database: " + this.DbName; }
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Epi.Data.MongoDB
 
         #region Private Members
 
-        // Add columns to a My SQL Database
+        // Add columns to a MongoDB Database
         private StringBuilder AddColumns(StringBuilder sb, string tableName, List<TableColumn> columns)
         {
             foreach (TableColumn column in columns)
@@ -187,7 +187,7 @@ namespace Epi.Data.MongoDB
         }
 
         /// <summary>
-        /// Set MySQL Data Type mapping
+        /// Set MongoDB Data Type mapping
         /// </summary>
         /// <param name="dataType">DataType</param>
         /// <returns>String</returns>
@@ -285,7 +285,7 @@ namespace Epi.Data.MongoDB
             //Windows
             //   "Persist Security Info=False;database=myDB;server=myHost;Connect Timeout=30;user id=myUser; pwd=myPass";
             //Linux with MONO: filepath is all of the below statement
-            // "database=myDB;server=/var/lib/mysql/mysql.sock;user id=myUser; pwd=myPass"; 
+            // "database=myDB;server=/var/lib/MongoDB/MongoDB.sock;user id=myUser; pwd=myPass"; 
 
             return string.Empty;
         }
@@ -299,7 +299,7 @@ namespace Epi.Data.MongoDB
         {
 
             //This method may need to be deprecated
-            //Linux: return BuildConnectionString("database=" + databaseName + ";server=//var/lib/mysql/mysql.sock;user id=myUser; pwd=myPass","");
+            //Linux: return BuildConnectionString("database=" + databaseName + ";server=//var/lib/MongoDB/MongoDB.sock;user id=myUser; pwd=myPass","");
             return null;
 
         }
@@ -314,14 +314,14 @@ namespace Epi.Data.MongoDB
         /// <returns></returns>
         public string BuildDefaultConnectionString(string database, string server, string user, string password)
         {
-            MongoDBConnectionStringBuilder mySQLConnBuild = new MongoDBConnectionStringBuilder();
-            mySQLConnBuild.AutoCache = false; //.PersistSecurityInfo = false;
-            mySQLConnBuild.Database = database;
-            mySQLConnBuild.Server = server;
-            mySQLConnBuild.User = user;
-            mySQLConnBuild.Password = password;
+            MongoDBConnectionStringBuilder MongoDBConnBuild = new MongoDBConnectionStringBuilder();
+            MongoDBConnBuild.AutoCache = false; //.PersistSecurityInfo = false;
+            MongoDBConnBuild.Database = database;
+            MongoDBConnBuild.Server = server;
+            MongoDBConnBuild.User = user;
+            MongoDBConnBuild.Password = password;
 
-            return mySQLConnBuild.ToString();
+            return MongoDBConnBuild.ToString();
         }
 
         /// <summary>
@@ -349,7 +349,7 @@ namespace Epi.Data.MongoDB
             }
             catch (Exception ex)
             {
-                throw new GeneralException("Could not connect to MySQL Database.", ex);
+                throw new GeneralException("Could not connect to MongoDB Database.", ex);
             }
         }
 
@@ -432,7 +432,7 @@ namespace Epi.Data.MongoDB
         }
 
         /// <summary>
-        /// MySQL data source.
+        /// MongoDB data source.
         /// </summary>
         public override string DataSource
         {
@@ -462,7 +462,7 @@ namespace Epi.Data.MongoDB
             try
             {
                 OpenConnection(conn);
-                DataTable table = conn.GetSchema("Tables", new string[0]);
+                DataTable table = conn.GetSchema("Tables");
                 DataSets.TableSchema tableSchema = new Epi.DataSets.TableSchema();
                 tableSchema.Merge(table);
                 return tableSchema._Tables;
@@ -480,7 +480,7 @@ namespace Epi.Data.MongoDB
         /// <returns>A native equivalent of a DbParameter</returns>
         protected virtual MongoDBParameter ConvertToNativeParameter(QueryParameter parameter)
         {
-            //TODO: Test this when MySQL comes back on the radar.
+            //TODO: Test this when MongoDB comes back on the radar.
             if (parameter.DbType.Equals(DbType.Guid))
             {
                 parameter.Value = new Guid(parameter.Value.ToString());
@@ -519,12 +519,12 @@ namespace Epi.Data.MongoDB
         /// <returns></returns>
         protected MongoDBCommand GetNativeCommand(IDbTransaction transaction)
         {
-            MongoDBTransaction mySqltransaction = transaction as MongoDBTransaction;
+            MongoDBTransaction MongoDBtransaction = transaction as MongoDBTransaction;
 
             #region Input Validation
-            if (mySqltransaction == null)
+            if (MongoDBtransaction == null)
             {
-                throw new ArgumentException("Transaction parameter must be a MySqlTransaction.", "transaction");
+                throw new ArgumentException("Transaction parameter must be a MongoDBTransaction.", "transaction");
             }
             #endregion
 
@@ -890,7 +890,7 @@ namespace Epi.Data.MongoDB
         }
 
         /// <summary>
-        /// Gets column schema information about an MySQL table
+        /// Gets column schema information about an MongoDB table
         /// </summary>
         /// <param name="tableName">Name of the table</param>
         /// <returns>DataTable with schema information</returns>
@@ -991,7 +991,7 @@ namespace Epi.Data.MongoDB
         }
 
         /// <summary>
-        /// Gets Primary_Keys schema information about a MySQL table
+        /// Gets Primary_Keys schema information about a MongoDB table
         /// </summary>
         /// <param name="tableName">Name of the table</param>
         /// <returns>DataTable with schema information</returns>
@@ -1269,17 +1269,20 @@ namespace Epi.Data.MongoDB
         public override List<string> GetTableNames()
         {
             List<string> tableNames = new List<string>();
-            DataTable schemaTable = Select(this.CreateQuery("use " + this.DbName + "; show tables;"));
 
-            foreach (DataRow row in schemaTable.Rows)
+            Epi.DataSets.TableSchema.TablesDataTable tableSchema = GetTableSchema();
+
+            //DataTable schemaTable = Select(this.CreateQuery("use " + this.DbName + "; SELECT * FROM sys_catalogs;"));
+
+            foreach (DataRow row in tableSchema.Rows)
             {
-                tableNames.Add(row[0].ToString());
+                tableNames.Add(row[tableSchema.TABLE_NAMEColumn].ToString());
             }
             return tableNames;
         }
 
         /// <summary>
-        /// Create MySQL query object
+        /// Create MongoDB query object
         /// </summary>
         /// <param name="ansiSqlStatement">Query string</param>
         /// <returns>Query</returns>
@@ -1330,7 +1333,7 @@ namespace Epi.Data.MongoDB
             }
         }
 
-        
+
 
         /// <summary>
         /// Gets a new command using an existing transaction
@@ -1338,7 +1341,7 @@ namespace Epi.Data.MongoDB
         /// <param name="sqlStatement">The query to be executed against the database</param>
         /// <param name="transaction">Transction</param>
         /// <param name="parameters">parameters">Parameters for the query to be executed</param>
-        /// <returns>An MySQL command object</returns>
+        /// <returns>An MongoDB command object</returns>
         protected virtual IDbCommand GetCommand(string sqlStatement, IDbTransaction transaction, List<QueryParameter> parameters)
         {
 
@@ -1444,14 +1447,14 @@ namespace Epi.Data.MongoDB
         /// <summary>
         /// Identity which type of database drive is in use.
         /// </summary>
-        /// <returns>MYSQL</returns>
+        /// <returns>MongoDB</returns>
         public override string IdentifyDatabase()
         {
-            return "MYSQL";
+            return "MongoDB";
         }
 
         /// <summary>
-        /// Inserts the string in escape characters. [] for SQL server and `` for MySQL etc.
+        /// Inserts the string in escape characters. [] for SQL server and `` for MongoDB etc.
         /// </summary>
         /// <param name="str">string</param>
         /// <returns>string</returns>

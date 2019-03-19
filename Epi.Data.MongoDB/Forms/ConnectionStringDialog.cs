@@ -17,7 +17,7 @@ using Epi.Windows.Dialogs;
 namespace Epi.Data.MongoDB.Forms
 {
     /// <summary>
-    /// Dialog for building a MySQL connection string
+    /// Dialog for building a MongoDB connection string
     /// </summary>
     public partial class ConnectionStringDialog : DialogBase, IConnectionStringGui 
     {

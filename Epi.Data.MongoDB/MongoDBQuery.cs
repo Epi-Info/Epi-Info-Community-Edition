@@ -9,7 +9,7 @@ using System.Data.CData.MongoDB;
 namespace Epi.Data.MongoDB
 {
     /// <summary>
-    /// MySQL statement and related parameters.
+    /// MongoDB statement and related parameters.
     /// </summary>
     public class MongoDBQuery : Query
     {
@@ -46,7 +46,7 @@ namespace Epi.Data.MongoDB
         #region Public Methods
 
         /// <summary>
-        /// Get MYSQL Syntax Insert Into Query Value part
+        /// Get MongoDB Syntax Insert Into Query Value part
         /// </summary>
         /// <param name="pvalues"> Semicolon delaminated string groups (value1, value2, ... ,valueN)</param>
         /// <returns>Insert Into Query Value part : VALUES (v11,v12,...,v1n), (v21,v22,...,v2n), ... (vm1,vm2,...,vmn)</returns>
@@ -67,7 +67,7 @@ namespace Epi.Data.MongoDB
 
         #region Deprecated Code
         //// <summary>
-        //// Return MySQL syntax query for Recode
+        //// Return MongoDB syntax query for Recode
         //// </summary>
         //// <param name="variable">Source variable</param>
         //// <param name="assignToVariable">Destination variable</param>

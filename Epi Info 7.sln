@@ -50,6 +50,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Mapping", "Epi.Windows.Mapping\Epi.Windows.Mapping.csproj", "{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.AnalysisDashboard", "Epi.Windows.AnalysisDashboard\Epi.Windows.AnalysisDashboard.csproj", "{05079D2E-76A7-418C-8192-6C7A6D956686}"
+	ProjectSection(ProjectDependencies) = postProject
+		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E} = {043E85C3-C95A-481F-A3BB-D86BEA8BA06E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.CommandLine.Config", "Epi.CommandLine.Config\Epi.CommandLine.Config.csproj", "{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}"
 EndProject

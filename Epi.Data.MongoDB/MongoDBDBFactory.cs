@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace Epi.Data.MongoDB
 {
     /// <summary>
-    /// MongoDBColumnType - Database Factory for MySQL Databases
+    /// MongoDBColumnType - Database Factory for MongoDB Databases
     /// </summary>
     public class MongoDBDBFactory : IDbDriverFactory
     {
@@ -23,10 +23,10 @@ namespace Epi.Data.MongoDB
         //Windows
         //   "Persist Security Info=False;database=myDB;server=myHost;Connect Timeout=30;user id=myUser; pwd=myPass";
         //Linux with MONO: filepath is all of the below statement
-        //   "database=myDB;server=/var/lib/mysql/mysql.sock;user id=myUser; pwd=myPass";
+        //   "database=myDB;server=/var/lib/MongoDB/MongoDB.sock;user id=myUser; pwd=myPass";
         #endregion
 
-        private MongoDBConnectionStringBuilder mySQLConnBuild = new MongoDBConnectionStringBuilder();
+        private MongoDBConnectionStringBuilder MongoDBConnBuild = new MongoDBConnectionStringBuilder();
 
         public bool ArePrerequisitesMet()
         {
@@ -48,9 +48,9 @@ namespace Epi.Data.MongoDB
         {
             MongoDBConnectionStringBuilder masterBuilder = new MongoDBConnectionStringBuilder(dbInfo.DBCnnStringBuilder.ToString());
             MongoDBConnectionStringBuilder tempBuilder = new MongoDBConnectionStringBuilder(dbInfo.DBCnnStringBuilder.ToString());
-            
+
             //tempBuilder = dbInfo.DBCnnStringBuilder as MongoDBConnectionStringBuilder;
-            //The "test" database is installed by default with MySQL.  System needs to login to this database to create a new database.
+            //The "test" database is installed by default with MongoDB.  System needs to login to this database to create a new database.
             tempBuilder.Database = "information_schema"; 
             
             MongoDBConnection masterConnection = new MongoDBConnection(tempBuilder.ToString());
@@ -72,7 +72,7 @@ namespace Epi.Data.MongoDB
             }
             catch (Exception ex)
             {
-                throw new System.ApplicationException("Could not create new MySQL Database", ex);//(Epi.SharedStrings.CAN_NOT_CREATE_NEW_MYSQL, ex); 
+                throw new System.ApplicationException("Could not create new MongoDB Database", ex);//(Epi.SharedStrings.CAN_NOT_CREATE_NEW_MYSQL, ex); 
             }
             finally
             {
@@ -180,7 +180,7 @@ namespace Epi.Data.MongoDB
         }
 
         /// <summary>
-        /// Default MySQL ConnectionString request.
+        /// Default MongoDB ConnectionString request.
         /// </summary>
         /// <param name="database">Data store.</param>
         /// <param name="server">Server location of database.</param>
@@ -189,13 +189,13 @@ namespace Epi.Data.MongoDB
         /// <returns>Strongly typed connection string builder.</returns>
         public System.Data.Common.DbConnectionStringBuilder RequestDefaultConnection(string database, string server, string user, string password)
         {
-            mySQLConnBuild.AutoCache = false; //.PersistSecurityInfo = false;
-            mySQLConnBuild.Database = database;
-            mySQLConnBuild.Server = server;
-            mySQLConnBuild.User = user;
-            mySQLConnBuild.Password = password;
+            MongoDBConnBuild.AutoCache = false; //.PersistSecurityInfo = false;
+            MongoDBConnBuild.Database = database;
+            MongoDBConnBuild.Server = server;
+            MongoDBConnBuild.User = user;
+            MongoDBConnBuild.Password = password;
 
-            return (mySQLConnBuild as DbConnectionStringBuilder); 
+            return (MongoDBConnBuild as DbConnectionStringBuilder); 
         }
 
         public bool CanClaimConnectionString(string connectionString)

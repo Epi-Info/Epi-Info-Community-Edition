@@ -39,7 +39,7 @@ namespace Epi.Data.MongoDB.Forms
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
 
         /// <summary>
-        /// Get Network MySQL Instances
+        /// Get Network MongoDB Instances
         /// </summary>
         public void GetNetworkServerInstances()
         {

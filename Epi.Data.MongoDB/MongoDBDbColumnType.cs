@@ -5,7 +5,7 @@ using System.Text;
 namespace Epi.Data.MongoDB
 {
     /// <summary>
-    /// Enumerates all column types used by MySQL
+    /// Enumerates all column types used by MongoDB
     /// </summary>
     public static class MongoDBColumnType
     {
