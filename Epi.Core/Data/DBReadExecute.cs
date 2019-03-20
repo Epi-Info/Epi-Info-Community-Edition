@@ -340,38 +340,69 @@ namespace Epi.Data
         }
 
         /// <summary>
+        /// GetDataDriver
+        /// </summary>
+        /// <param name="fileString">File string</param>
+        /// <returns>IDbDriver</returns>
+        public static IDbDriver GetDataDriver(string fileString, string databaseType, bool pIsConnectionString = false)
+        {
+            string connString = null;
+            connString = ParseConnectionString(fileString, databaseType);
+
+            if (DataSource != null)
+            {
+                IDbDriver driver = DataSource.CreateDatabaseObject(new System.Data.Common.DbConnectionStringBuilder());
+                driver.ConnectionString = connString;
+                return driver;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Parse Connection String
         /// </summary>
         /// <param name="pConnectionString">Connection String</param>
         /// <returns>string</returns>
-        public static string ParseConnectionString(string pConnectionString)
+        public static string ParseConnectionString(string pConnectionString, string databaseType = "")
         {
             string result = null;
             string Test = pConnectionString.Trim(new char[] { '\'' });
 
             DBReadExecute.ProjectFileName = "";
 
-            if (Test.ToLowerInvariant().EndsWith(".prj"))
+            if(databaseType == "MongoDB")
             {
-                Project P = new Project(Test);
+                DataSets.Config.DataDriverDataTable dataDrivers = Configuration.GetNewInstance().DataDrivers;
 
-                Test = P.CollectedDataConnectionString;
-                result = Test;
-
-                DBReadExecute.DataSource = DbDriverFactoryCreator.GetDbDriverFactory(P.CollectedDataDriver);
-                DBReadExecute.ProjectFileName = pConnectionString.Trim(new char[] { '\'' });
+                IDbDriverFactory dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(SharedStrings.MONGODB_DATABASE_INFO);
+                DBReadExecute.DataSource = dbFactory;
+                result = dbFactory.ConvertFileStringToConnectionString(Test);
             }
             else
             {
-                DataSets.Config.DataDriverDataTable dataDrivers = Configuration.GetNewInstance().DataDrivers;
-                foreach (DataSets.Config.DataDriverRow dataDriver in dataDrivers)
+                if (Test.ToLowerInvariant().EndsWith(".prj"))
                 {
-                    IDbDriverFactory dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(dataDriver.Type);
-                    if (dbFactory.CanClaimConnectionString(Test))
+                    Project P = new Project(Test);
+
+                    Test = P.CollectedDataConnectionString;
+                    result = Test;
+
+                    DBReadExecute.DataSource = DbDriverFactoryCreator.GetDbDriverFactory(P.CollectedDataDriver);
+                    DBReadExecute.ProjectFileName = pConnectionString.Trim(new char[] { '\'' });
+                }
+                else
+                {
+                    DataSets.Config.DataDriverDataTable dataDrivers = Configuration.GetNewInstance().DataDrivers;
+                    foreach (DataSets.Config.DataDriverRow dataDriver in dataDrivers)
                     {
-                        DBReadExecute.DataSource = dbFactory;
-                        result = dbFactory.ConvertFileStringToConnectionString(Test);
-                        break;
+                        IDbDriverFactory dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(dataDriver.Type);
+                        if (dbFactory.CanClaimConnectionString(Test))
+                        {
+                            DBReadExecute.DataSource = dbFactory;
+                            result = dbFactory.ConvertFileStringToConnectionString(Test);
+                            break;
+                        }
                     }
                 }
             }

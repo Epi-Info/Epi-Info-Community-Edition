@@ -3320,6 +3320,10 @@ namespace EpiDashboard
                                 }
                             }
                         }
+                        else if (child.Name.Equals("databaseTypeIdentifier") && !string.IsNullOrEmpty(child.InnerText))
+                        {
+                            helper.DatabaseTypeIdentifier = child.InnerText;
+                        }
                     }
 
                     try

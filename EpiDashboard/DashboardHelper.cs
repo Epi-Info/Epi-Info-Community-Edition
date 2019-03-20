@@ -138,6 +138,9 @@ namespace EpiDashboard
         #endregion // Constructors
 
         #region Public Properties
+
+        public string DatabaseTypeIdentifier { get; set; }
+
         /// <summary>
         /// Gets/sets whether the Dashboard is going to automatically close. Needed to set timers for some specific gadgets.
         /// </summary>
@@ -399,6 +402,12 @@ namespace EpiDashboard
             {
                 xmlString =                                        
                     "<connectionString>" + Configuration.Encrypt(this.Database.ConnectionString) + "</connectionString>";
+
+                if (!string.IsNullOrEmpty(this.Database.IdentifyDatabase()))
+                {
+                    xmlString += "<databaseTypeIdentifier>" + this.Database.IdentifyDatabase().Replace("&", "&amp;") + "</databaseTypeIdentifier>";
+                }
+
                 if (!string.IsNullOrEmpty(this.TableName))
                 {
                     xmlString += "<tableName>" + this.TableName.Replace("&", "&amp;") + "</tableName>";
@@ -458,6 +467,12 @@ namespace EpiDashboard
                         if (!string.IsNullOrEmpty(child.InnerText)) 
                         { 
                             connectionString = Configuration.Decrypt(child.InnerText); 
+                        }
+                        break;
+                    case "databasetypeidentifier":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            DatabaseTypeIdentifier = child.InnerText;
                         }
                         break;
                     case "tablename":
@@ -702,7 +717,7 @@ namespace EpiDashboard
             }
             else if (!string.IsNullOrEmpty(connectionString))
             {
-                IDbDriver database = DBReadExecute.GetDataDriver(connectionString);
+                IDbDriver database = DBReadExecute.GetDataDriver(connectionString, DatabaseTypeIdentifier);
 
                 this.db = database;
                 if (!string.IsNullOrEmpty(table))
