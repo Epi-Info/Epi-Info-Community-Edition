@@ -10,8 +10,8 @@ using Epi;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyCompany("Centers for Disease Control and Prevention")]
-[assembly: AssemblyProduct("Epi Info™")]
-[assembly: AssemblyCopyright("© Centers for Disease Control and Prevention")]
+[assembly: AssemblyProduct("Epi Infoï¿½")]
+[assembly: AssemblyCopyright("ï¿½ Centers for Disease Control and Prevention")]
 [assembly: AssemblyTrademark("Epi Info is a trademark of CDC")]
 [assembly: AssemblyCulture("")]
 
@@ -37,10 +37,10 @@ using Epi;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("7.2.*")]
-[assembly: AssemblyFileVersion("7.2.2.17")]
-[assembly: AssemblyInformationalVersion("7.2.2.17")]
+[assembly: AssemblyFileVersion("7.2.2.18")]
+[assembly: AssemblyInformationalVersion("7.2.2.18")]
 [assembly: SatelliteContractVersion("7.0.0.0")]
-[assembly: Epi.AssemblyReleaseDateAttribute("01/08/2019")]
+[assembly: Epi.AssemblyReleaseDateAttribute("03/21/2019")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
