@@ -1579,15 +1579,15 @@ namespace Epi.Windows.MakeView.Forms
                     switch (field.FieldType.ToString())
                     {
                         //case "Codes":
-                        case "TextUppercase":
+                       // case "TextUppercase":
                         case "GUID":
                         case "PhoneNumber":
                         case "DateTime":
                         case "Image":
-                        case "Mirror":
+                       // case "Mirror":
                         case "Grid":
                         case "CommandButton":
-                        case "Relate":
+                       // case "Relate":
                             if (PublishingToWebSurvey)
                             {
                                 invalidFields += field.Name + " (" + field.FieldType + ");";
