@@ -4,7 +4,6 @@ using System.Text;
 using System.Data;
 using System.Collections;
 using Epi.Data.MongoDB;
-using System.Data.CData.MongoDB;
 
 namespace Epi.Data.MongoDB
 {

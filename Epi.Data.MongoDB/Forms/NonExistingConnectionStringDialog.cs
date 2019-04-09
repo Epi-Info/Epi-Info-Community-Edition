@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using Epi;
 using Epi.Data;
 using Epi.Data.MongoDB;
-using System.Data.CData.MongoDB;
 
 namespace Epi.Data.MongoDB.Forms
 {   

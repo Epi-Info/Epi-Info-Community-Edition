@@ -7,7 +7,6 @@ using System.Data.Common;
 using Epi.Data.MongoDB.Forms;
 using System.IO;
 using Epi.Data.MongoDB;
-using System.Data.CData.MongoDB;
 using Epi;
 using System.Windows.Forms;
 
@@ -57,7 +56,7 @@ namespace Epi.Data.MongoDB
             
             try
             {
-                MongoDBCommand command = masterConnection.CreateCommand();
+                MongoDBCommand command = masterConnection.CreateCommand() as MongoDBCommand;
                 if(dbInfo.DBName != null)
                 {
                     command.CommandText = "create database " + dbInfo.DBName + ";";

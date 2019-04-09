@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Epi.Data.MongoDB;
-using System.Data.CData.MongoDB;
 using System.Data;
 using Epi.Data;
 
@@ -19,9 +17,6 @@ namespace Epi.Data.MongoDB
         /// MongoDB Database Constructor
         /// </summary>
         public MongoDBDatabase():base(){}
-
-
-
 
         /// <summary>
         /// Set MongoDB path
@@ -478,7 +473,7 @@ namespace Epi.Data.MongoDB
         /// Returns a native equivalent of a DbParameter
         /// </summary>
         /// <returns>A native equivalent of a DbParameter</returns>
-        protected virtual MongoDBParameter ConvertToNativeParameter(QueryParameter parameter)
+        protected virtual Epi.Data.MongoDB.MongoDBParameter ConvertToNativeParameter(QueryParameter parameter)
         {
             //TODO: Test this when MongoDB comes back on the radar.
             if (parameter.DbType.Equals(DbType.Guid))
@@ -563,8 +558,8 @@ namespace Epi.Data.MongoDB
             try
             {
                 //Logger.Log(selectQuery);
-                adapter.Fill(dataTable);
-                adapter.FillSchema(dataTable, SchemaType.Source);
+                adapter.Fill(dataTable.DataSet);
+                adapter.FillSchema(dataTable.DataSet, SchemaType.Source);
                 return dataTable;
             }
             catch (Exception ex)
@@ -618,7 +613,7 @@ namespace Epi.Data.MongoDB
             {
                 //Logger.Log(insertQuery);
                 //Logger.Log(updateQuery);
-                adapter.Update(dataTable);
+                adapter.Update(dataTable.DataSet);
             }
             catch (Exception ex)
             {
