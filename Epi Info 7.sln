@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Menu", "Epi.Windows.Menu\Epi.Windows.Menu.csproj", "{532CF511-35F4-4EC9-B21B-E2B59BB2F796}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -50,9 +50,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Mapping", "Epi.Windows.Mapping\Epi.Windows.Mapping.csproj", "{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.AnalysisDashboard", "Epi.Windows.AnalysisDashboard\Epi.Windows.AnalysisDashboard.csproj", "{05079D2E-76A7-418C-8192-6C7A6D956686}"
-	ProjectSection(ProjectDependencies) = postProject
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E} = {043E85C3-C95A-481F-A3BB-D86BEA8BA06E}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.CommandLine.Config", "Epi.CommandLine.Config\Epi.CommandLine.Config.csproj", "{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}"
 EndProject
@@ -82,8 +79,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatCalc", "StatCalc\StatCa
 		{EBD2B961-A952-4670-96CA-50BAA12C7F29} = {EBD2B961-A952-4670-96CA-50BAA12C7F29}
 		{D120296B-493B-46AC-8657-4D32A9604231} = {D120296B-493B-46AC-8657-4D32A9604231}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Data.MongoDB", "Epi.Data.MongoDB\Epi.Data.MongoDB.csproj", "{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1367,48 +1362,6 @@ Global
 		{B7DDC22F-4E01-4795-81F5-7019B3C4E3B0}.Utilities only|Mixed Platforms.Build.0 = Release|Any CPU
 		{B7DDC22F-4E01-4795-81F5-7019B3C4E3B0}.Utilities only|x86.ActiveCfg = Release|Any CPU
 		{B7DDC22F-4E01-4795-81F5-7019B3C4E3B0}.Utilities only|x86.Build.0 = Release|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug (Exclude EpiMap)|Any CPU.ActiveCfg = Debug (Exclude EpiMap)|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug (Exclude EpiMap)|Any CPU.Build.0 = Debug (Exclude EpiMap)|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug (Exclude EpiMap)|Mixed Platforms.ActiveCfg = Debug (Exclude EpiMap)|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug (Exclude EpiMap)|Mixed Platforms.Build.0 = Debug (Exclude EpiMap)|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug (Exclude EpiMap)|x86.ActiveCfg = Debug (Exclude EpiMap)|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug (Exclude EpiMap)|x86.Build.0 = Debug (Exclude EpiMap)|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug|x86.ActiveCfg = Debug|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Debug|x86.Build.0 = Debug|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Epi.Enter.ServiceApplication|Any CPU.ActiveCfg = Epi.Enter.ServiceApplication|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Epi.Enter.ServiceApplication|Any CPU.Build.0 = Epi.Enter.ServiceApplication|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Epi.Enter.ServiceApplication|Mixed Platforms.ActiveCfg = Epi.Enter.ServiceApplication|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Epi.Enter.ServiceApplication|Mixed Platforms.Build.0 = Epi.Enter.ServiceApplication|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Epi.Enter.ServiceApplication|x86.ActiveCfg = Epi.Enter.ServiceApplication|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Epi.Enter.ServiceApplication|x86.Build.0 = Epi.Enter.ServiceApplication|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Linux|Any CPU.ActiveCfg = Linux|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Linux|Any CPU.Build.0 = Linux|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Linux|Mixed Platforms.ActiveCfg = Linux|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Linux|Mixed Platforms.Build.0 = Linux|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Linux|x86.ActiveCfg = Linux|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Linux|x86.Build.0 = Linux|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Release|Mixed Platforms.Build.0 = Release|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Release|x86.ActiveCfg = Release|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Release|x86.Build.0 = Release|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Setup (Release)|Any CPU.ActiveCfg = Release|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Setup (Release)|Any CPU.Build.0 = Release|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Setup (Release)|Mixed Platforms.ActiveCfg = Release|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Setup (Release)|Mixed Platforms.Build.0 = Release|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Setup (Release)|x86.ActiveCfg = Release|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Setup (Release)|x86.Build.0 = Release|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|Any CPU.ActiveCfg = Epi.Enter.ServiceApplication|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|Any CPU.Build.0 = Epi.Enter.ServiceApplication|Any CPU
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|Mixed Platforms.ActiveCfg = Epi.Enter.ServiceApplication|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|Mixed Platforms.Build.0 = Epi.Enter.ServiceApplication|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|x86.ActiveCfg = Epi.Enter.ServiceApplication|x86
-		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|x86.Build.0 = Epi.Enter.ServiceApplication|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

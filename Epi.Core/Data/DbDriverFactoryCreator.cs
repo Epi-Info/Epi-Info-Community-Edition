@@ -59,17 +59,17 @@ namespace Epi.Data
                     throw new Exception("Csn not load assembly for MySQL.  " + ex.StackTrace);
                 }
             }
-            else if (dataDriverType.Equals(SharedStrings.MONGODB_DATABASE_INFO))
-            {
-                try
-                {
-                    typeFactory = Type.GetType(Configuration.MongoDBDriver);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Can not load assembly for MongoDB. " + ex.StackTrace);
-                }
-            }
+            //else if (dataDriverType.Equals(SharedStrings.MONGODB_DATABASE_INFO))
+            //{
+            //    try
+            //    {
+            //        typeFactory = Type.GetType(Configuration.MongoDBDriver);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        throw new Exception("Can not load assembly for MongoDB. " + ex.StackTrace);
+            //    }
+            //}
             else
             {
                 try
