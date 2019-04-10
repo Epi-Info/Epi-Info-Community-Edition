@@ -2745,11 +2745,6 @@ namespace Epi.Windows.Enter
             {
                 if (this.View != null)
                 {
-                    if (IsRecordCloseable == false)
-                    {
-                        return;
-                    }
-
                     if (CloseView() == false)
                     {
                         return;
