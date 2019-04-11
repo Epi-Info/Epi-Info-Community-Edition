@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Data;
+using Epi.Data.MongoDB.Wrappers;
 using Epi.Data;
 
 
@@ -255,8 +256,11 @@ namespace Epi.Data.MongoDB
             set
             {
                 this.connectionString = value;
-
-                try
+                if (value != null && value.Contains("~"))
+                {
+                    this.DbName = value.Split('~')[1];
+                }
+                /*try
                 {
                     IDbConnection conn = GetConnection();
                     this.DbName = conn.Database;
@@ -264,7 +268,7 @@ namespace Epi.Data.MongoDB
                 catch
                 {
                     this.connectionString = null;
-                }
+                }*/
             }
         }
 
@@ -355,19 +359,8 @@ namespace Epi.Data.MongoDB
         /// <returns></returns>
         protected bool TestConnection(string connectionString)
         {
-
             MongoDBConnection testConnection = GetConnection(connectionString);
-            try
-            {
-                OpenConnection(testConnection);
-            }
-            finally
-            {
-                CloseConnection(testConnection);
-            }
-
-            return true;
-
+            return new MongoDBWrapper(connectionString).TestConnection();
         }
 
         /// <summary>
@@ -1058,6 +1051,7 @@ namespace Epi.Data.MongoDB
         /// <returns>DataTable</returns>
         public override System.Data.DataTable GetTableData(string tableName, string columnNames, string sortCriteria)
         {
+            /*
             #region Input Validation
             if (tableName == null)
             {
@@ -1080,7 +1074,9 @@ namespace Epi.Data.MongoDB
             }
             finally
             {
-            }
+            }*/
+
+            return new MongoDBWrapper(connectionString).GetDataTableAsync(tableName).Result;
         }
 
         /// <summary>
@@ -1263,7 +1259,7 @@ namespace Epi.Data.MongoDB
         /// <returns>Names of all tables in the database</returns>
         public override List<string> GetTableNames()
         {
-            List<string> tableNames = new List<string>();
+            /*List<string> tableNames = new List<string>();
 
             Epi.DataSets.TableSchema.TablesDataTable tableSchema = GetTableSchema();
 
@@ -1273,7 +1269,9 @@ namespace Epi.Data.MongoDB
             {
                 tableNames.Add(row[tableSchema.TABLE_NAMEColumn].ToString());
             }
-            return tableNames;
+            return tableNames;*/
+            return new MongoDBWrapper(connectionString).GetTableNames();
+
         }
 
         /// <summary>
@@ -1292,6 +1290,7 @@ namespace Epi.Data.MongoDB
         /// <param name="conn"></param>
         protected void OpenConnection(IDbConnection conn)
         {
+            /*
             try
             {
                 if (conn.State != ConnectionState.Open)
@@ -1303,6 +1302,7 @@ namespace Epi.Data.MongoDB
             {
                 throw new System.ApplicationException("Error opening connection.", ex);
             }
+            */
         }
 
         /// <summary>
@@ -1311,6 +1311,7 @@ namespace Epi.Data.MongoDB
         /// <param name="conn"></param>
         protected void CloseConnection(IDbConnection conn)
         {
+            /*
             try
             {
                 if (conn != null)
@@ -1326,6 +1327,7 @@ namespace Epi.Data.MongoDB
                 conn = null;
                 throw new System.ApplicationException("Error closing connection.", ex);
             }
+            */
         }
 
 

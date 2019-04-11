@@ -187,18 +187,6 @@ namespace Epi.Data.MongoDB.Forms
             string databaseName = txtDatabaseName.Text.Trim();
             Epi.Validator.ValidateDatabaseName(databaseName, ErrorMessages);
 
-            // User Id            
-            if (Util.IsEmpty(this.txtUserName.Text.Trim()))
-            {
-                ErrorMessages.Add("User name is required"); // TODO: Hard coded string
-            }
-
-            // Password
-            if (Util.IsEmpty(txtPassword.Text.Trim()))
-            {
-                ErrorMessages.Add("Password is required"); // TODO: Hard coded string
-            }
-
             if (!string.IsNullOrEmpty(txtPort.Text))
             {
                 uint result;

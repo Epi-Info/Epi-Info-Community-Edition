@@ -13,15 +13,34 @@ namespace Epi.Data.MongoDB
 {
     public class MongoDBConnectionStringBuilder : DbConnectionStringBuilder
     {
+
+        private string connString;
+        private string database;
+        private string server;
+        private string port;
+        private string userName;
+        private string password;
+
         public MongoDBConnectionStringBuilder() { }
-        public MongoDBConnectionStringBuilder(string connString) { }
+        public MongoDBConnectionStringBuilder(string connString) { this.connString = connString; }
 
         public string Verbosity { get; set; }
         public string PoolIdleTimeout { get; set; }
         public string PoolMaxSize { get; set; }
         public string PoolMinSize { get; set; }
         public string PoolWaitTime { get; set; }
-        public string Port { get; set; }
+        public string Port
+        {
+            get
+            {
+                return port;
+            }
+            set
+            {
+                connString = "";
+                port = value;
+            }
+        }
         public string PseudoColumns { get; set; }
         public bool QueryPassthrough { get; set; }
         public bool Readonly { get; set; }
@@ -30,8 +49,30 @@ namespace Epi.Data.MongoDB
         public string RowScanDepth { get; set; }
         public string RTK { get; set; }
         public string Views { get; set; }
-        public string Server { get; set; }
-        public string Password { get; set; }
+        public string Server
+        {
+            get
+            {
+                return server;
+            }
+            set
+            {
+                connString = "";
+                server = value;
+            }
+        }
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+            set
+            {
+                connString = "";
+                password = value;
+            }
+        }
         public string SSLClientCertPassword { get; set; }
         public string SSLClientCertSubject { get; set; }
         public string SSLClientCertType { get; set; }
@@ -41,7 +82,18 @@ namespace Epi.Data.MongoDB
         public string Timeout { get; set; }
         public string TypeDetectionScheme { get; set; }
         public bool UseConnectionPooling { get; set; }
-        public string User { get; set; }
+        public string User
+        {
+            get
+            {
+                return userName;
+            }
+            set
+            {
+                connString = "";
+                userName = value;
+            }
+        }
         public bool UseSSL { get; set; }
         public bool SlaveOK { get; set; }
         public string SSLClientCert { get; set; }
@@ -57,7 +109,18 @@ namespace Epi.Data.MongoDB
         public string CacheProvider { get; set; }
         public bool CacheQueryResult { get; set; }
         public bool Offline { get; set; }
-        public string Database { get; set; }
+        public string Database
+        {
+            get
+            {
+                return database;
+            }
+            set
+            {
+                connString = "";
+                database = value;
+            }
+        }
         public string ConnectionLifeTime { get; set; }
         public string FirewallPort { get; set; }
         public string MaxRows { get; set; }
@@ -79,6 +142,13 @@ namespace Epi.Data.MongoDB
         {
             value = null;
             return false;
+        }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(connString))
+                connString = "mongodb://" + ((!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password)) ? userName + ":" + password + "@" : "") + server + ((!string.IsNullOrEmpty(port) ? ":" + port : ":27017")) + "~" + database;
+            return connString;
         }
     }
 }

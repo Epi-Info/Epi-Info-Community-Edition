@@ -13,9 +13,10 @@ namespace Epi.Data.MongoDB
 {
     public class MongoDBConnection : IDbConnection, IDisposable, ICloneable
     {
+        private string connectionString;
         public MongoDBConnection() { }
         public MongoDBConnection(MongoDBConnectionStringBuilder settings) { }
-        public MongoDBConnection(string connectionString) { }
+        public MongoDBConnection(string connectionString) { this.connectionString = connectionString; }
         public MongoDBConnection(MongoDBConnectionStringBuilder settings, string rtk) { }
         public MongoDBConnection(string connectionString, string rtk) { }
 
@@ -27,7 +28,19 @@ namespace Epi.Data.MongoDB
 
         public ConnectionState State => throw new NotImplementedException();
 
-        public string DataSource { get; internal set; }
+        public string DataSource
+        {
+            get
+            {
+                if (connectionString.Contains("~"))
+                    return connectionString.Split('~')[1];
+                else
+                    return "";
+            }
+            internal set
+            {
+            }
+        }
 
         public IDbTransaction BeginTransaction()
         {
