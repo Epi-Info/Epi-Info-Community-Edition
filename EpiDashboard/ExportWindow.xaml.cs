@@ -742,6 +742,13 @@ namespace EpiDashboard
                     SetGadgetStatusHandler requestUpdateStatus = new SetGadgetStatusHandler(RequestUpdateStatusMessage);
                     CheckForCancellationHandler checkForCancellation = new CheckForCancellationHandler(IsCancelled);
 
+                    if (db.ConnectionDescription.ToLower().Contains("mongodb"))
+                    {
+                        dashboardHelper.PopulateDataSet();
+                        db.InsertBulkRows(tableName, dashboardHelper.DataSet.Tables[0].DefaultView.ToTable(false).Copy().CreateDataReader(), requestUpdateStatus, checkForCancellation);
+                        return; //the rest of this doesn't apply to NoSQL databases
+                    }
+
                     if (db.TableExists(tableName) && IsReplace)// && !db.ConnectionDescription.ToLowerInvariant().Contains("excel"))
                     {
                         db.DeleteTable(tableName);

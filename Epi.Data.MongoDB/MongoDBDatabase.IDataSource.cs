@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EpiInfo.Plugin;
+using Epi.Data.MongoDB.Wrappers;
 
 namespace Epi.Data.MongoDB
 {
@@ -144,9 +145,9 @@ namespace Epi.Data.MongoDB
         /// <param name="pTableName"></param>
         /// <param name="pIsConnectionString"></param>
         /// <returns></returns>
-        public override bool CheckDatabaseExistance(string pFileString, string pTableName, bool pIsConnectionString = false)
+        public override bool CheckDatabaseExistance(string connectionString, string pTableName, bool pIsConnectionString = false)
         {
-            throw new Exception("Method NOT implemented");
+            return new MongoDBWrapper(connectionString).GetDatabaseNames().Contains(connectionString.Split('~')[1]);
         }
     }
 }

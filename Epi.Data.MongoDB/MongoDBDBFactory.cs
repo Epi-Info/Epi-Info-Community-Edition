@@ -161,7 +161,7 @@ namespace Epi.Data.MongoDB
         public System.Data.Common.DbConnectionStringBuilder RequestNewConnection(string fileName)
         {
             DbConnectionStringBuilder dbStringBuilder = new DbConnectionStringBuilder(false);
-            dbStringBuilder.ConnectionString = fileName;
+            //dbStringBuilder.ConnectionString = fileName;
 
             return dbStringBuilder;
         }

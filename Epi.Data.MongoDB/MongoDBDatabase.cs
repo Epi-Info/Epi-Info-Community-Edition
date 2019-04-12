@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Data;
 using Epi.Data.MongoDB.Wrappers;
+using MongoDB.Bson;
 using Epi.Data;
 
 
@@ -82,6 +83,10 @@ namespace Epi.Data.MongoDB
         /// <param name="columns">Collection of columns for the table</param>
         public override void CreateTable(string tableName, List<TableColumn> columns)
         {
+
+            new MongoDBWrapper(connectionString).CreateCollection(tableName);
+
+            /*
             StringBuilder sb = new StringBuilder();
 
             sb.Append("create table if not exists ");
@@ -112,6 +117,7 @@ namespace Epi.Data.MongoDB
             {
                 CloseConnection(conn);
             }
+            */
         }
 
         #region Private Members
@@ -386,11 +392,11 @@ namespace Epi.Data.MongoDB
         {
             get
             {
-                throw new NotImplementedException();
+                return true;
             }
             set
             {
-                throw new NotImplementedException();
+                
             }
         }
 
@@ -704,26 +710,7 @@ namespace Epi.Data.MongoDB
         /// <returns>An integer</returns>
         public override int ExecuteNonQuery(Query nonQueryStatement)
         {
-            #region Input Validation
-            if (nonQueryStatement == null)
-            {
-                throw new ArgumentNullException("query");
-            }
-            #endregion
-            
-            //Logger.Log(nonQueryStatement);
-            IDbConnection conn = this.GetConnection(connectionString);
-            IDbCommand command = GetCommand(nonQueryStatement.SqlStatement, conn, nonQueryStatement.Parameters);
-
-            try
-            {
-                OpenConnection(conn);
-                return command.ExecuteNonQuery();
-            }
-            finally
-            {
-                CloseConnection(conn);
-            }
+            return 1;
         }
 
         /// <summary>
@@ -733,29 +720,7 @@ namespace Epi.Data.MongoDB
         /// <param name="transaction">The transaction to be performed at a data source.</param>
         public override int ExecuteNonQuery(Query nonQueryStatement, System.Data.IDbTransaction transaction)
         {
-            #region Input Validation
-            if (nonQueryStatement == null)
-            {
-                throw new ArgumentNullException("query");
-            }
-            if (transaction == null)
-            {
-                throw new ArgumentNullException("transaction");
-            }
-            #endregion
-
-            //Logger.Log(nonQueryStatement);
-            IDbCommand command = GetCommand(nonQueryStatement.SqlStatement, transaction, nonQueryStatement.Parameters);
-
-            try
-            {
-                // do not try to open connection, we are inside a transaction
-                return command.ExecuteNonQuery();
-            }
-            finally
-            {
-                // do not close connection, we are inside a transaction
-            }
+            return 1;
         }
 
         /// <summary>
@@ -856,25 +821,7 @@ namespace Epi.Data.MongoDB
         /// <returns>Boolean</returns>
         public override bool TableExists(string tableName)
         {
-            Query query = this.CreateQuery("select * from information_schema.tables where TABLE_NAME=@Name and TABLE_SCHEMA=@DatabaseName");
-            query.Parameters.Add(new QueryParameter("@Name", DbType.String, tableName));
-            query.Parameters.Add(new QueryParameter("@DatabaseName", DbType.String, this.DbName));
-
-            try
-            {
-                if (Select(query).Rows.Count > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new System.ApplicationException("Error checking table status.", ex);
-            }
+            return new MongoDBWrapper(connectionString).GetTableNames().Contains(tableName);
         }
 
         /// <summary>
@@ -1568,10 +1515,84 @@ namespace Epi.Data.MongoDB
             throw new NotImplementedException();
         }
 
-        public override bool InsertBulkRows(string pSelectSQL, System.Data.Common.DbDataReader pDataReader, SetGadgetStatusHandler pStatusDelegate = null, CheckForCancellationHandler pCancellationDelegate = null)
+        public override bool InsertBulkRows(string tableName, System.Data.Common.DbDataReader reader, SetGadgetStatusHandler pStatusDelegate = null, CheckForCancellationHandler pCancellationDelegate = null)
         {
-            throw new NotImplementedException();
+
+            bool result = false;
+            MongoDBWrapper wrapper = new MongoDBWrapper(connectionString);
+            DataSet dataSet = new DataSet();
+            DataTable Temp = new DataTable();
+
+            try
+            {
+                int rowCount = 0;
+                int skippedRows = 0;
+                int totalRows = 0;
+
+                if (pStatusDelegate != null && dataSet.Tables.Count > 0)
+                {
+                    totalRows = dataSet.Tables[0].Rows.Count;
+                }
+
+                while (reader.Read())
+                {
+                    BsonDocument document = new BsonDocument();
+                    
+                    for (int y=0; y<reader.FieldCount; y++)
+                    {
+                        if (!reader.IsDBNull(y))
+                        {
+                            if (reader.GetFieldType(y) == typeof(double) || reader.GetFieldType(y) == typeof(Single) || reader.GetFieldType(y) == typeof(decimal))
+                                document.Add(reader.GetName(y), new BsonDouble(double.Parse(reader[y].ToString())));
+                            else if (reader.GetFieldType(y) == typeof(int))
+                                document.Add(reader.GetName(y), new BsonInt32((int)reader[y]));
+                            else if (reader.GetFieldType(y) == typeof(bool))
+                                document.Add(reader.GetName(y), new BsonBoolean((bool)reader[y]));
+                            else if (reader.GetFieldType(y) == typeof(DateTime))
+                                document.Add(reader.GetName(y), new BsonDateTime((DateTime)reader[y]));
+                            else
+                                document.Add(reader.GetName(y), new BsonString(reader[y].ToString()));
+                        }
+                    }
+
+                    try
+                    {
+                        wrapper.Insert(document, tableName);
+                        rowCount++;
+                    }
+                    catch (Exception ex)
+                    {
+                        skippedRows++;
+                        continue;
+                    }
+
+                    if (pStatusDelegate != null)
+                    {
+                        pStatusDelegate.Invoke(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, rowCount.ToString(), totalRows.ToString()), (double)rowCount);
+                    }
+
+                    if (pCancellationDelegate != null && pCancellationDelegate.Invoke())
+                    {
+                        pStatusDelegate.Invoke(string.Format(SharedStrings.DASHBOARD_EXPORT_CANCELLED, rowCount.ToString()));
+                        break;
+                    }
+                }
+
+
+                if (pStatusDelegate != null)
+                {
+                    pStatusDelegate.Invoke(string.Format(SharedStrings.DASHBOARD_EXPORT_SUCCESS, rowCount.ToString()));
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Logger.Log(DateTime.Now + ":  " + ex.Message);
+            }
+
+            result = true;
+            return result;
         }
+
 
         public override bool Insert_1_Row(string pSelectSQL, System.Data.Common.DbDataReader pDataReader)
         {

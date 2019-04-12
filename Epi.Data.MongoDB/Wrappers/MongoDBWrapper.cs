@@ -90,6 +90,41 @@ namespace Epi.Data.MongoDB.Wrappers
             }
         }
 
+        public List<string> GetDatabaseNames()
+        {
+            try
+            {
+                var client = new MongoClient(connectionString);
+                return client.ListDatabaseNames().ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async void CreateCollection(string collectionName)
+        {
+            try
+            {
+                var client = new MongoClient(connectionString);
+                var database = client.GetDatabase(databaseName);
+                await database.CreateCollectionAsync(collectionName);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public async void Insert(BsonDocument document, string collectionName)
+        {
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase(databaseName);
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+            await collection.InsertOneAsync(document);
+        }
+
         public async Task<DataTable> GetDataTableAsync(string collectionName)
         {
             var client = new MongoClient(connectionString);
