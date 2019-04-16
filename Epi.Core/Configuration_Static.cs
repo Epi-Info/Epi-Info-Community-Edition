@@ -801,7 +801,7 @@ namespace Epi
 
             Config.DataDriverRow dataDriverRowMongoDB = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowMongoDB.DataDriversRow = parentDataDriversRow;
-            dataDriverRowMongoDB.DisplayName = "MongoDB Database";
+            dataDriverRowMongoDB.DisplayName = "MongoDB (Beta)";
             dataDriverRowMongoDB.Type = MongoDBDriver;
             dataDriverRowMongoDB.DataProvider = true;
             dataDriverRowMongoDB.MetadataProvider = false;
