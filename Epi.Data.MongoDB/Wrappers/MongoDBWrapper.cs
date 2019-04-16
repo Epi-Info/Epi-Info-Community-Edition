@@ -181,7 +181,7 @@ namespace Epi.Data.MongoDB.Wrappers
             {
                 if (elm.Value.IsBsonDocument)
                 {
-                    SetValue(dr, elm.Value.AsBsonDocument, prefix);
+                    SetValue(dr, elm.Value.AsBsonDocument, prefix + elm.Name + "_");
                 }
                 else if (elm.Value.IsBsonArray)
                 {
@@ -214,7 +214,7 @@ namespace Epi.Data.MongoDB.Wrappers
             {
                 if (elm.Value.IsBsonDocument)
                 {
-                    AddColumns(dt, elm.Value.AsBsonDocument, prefix);
+                    AddColumns(dt, elm.Value.AsBsonDocument, prefix + elm.Name + "_");
                 }
                 else if (elm.Value.IsBsonArray)
                 {
