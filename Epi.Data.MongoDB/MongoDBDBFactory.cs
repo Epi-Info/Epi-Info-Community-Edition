@@ -200,7 +200,7 @@ namespace Epi.Data.MongoDB
         public bool CanClaimConnectionString(string connectionString)
         {
             string conn = connectionString.ToLowerInvariant();
-            if (conn.Contains("database") && conn.Contains("server") && !conn.Contains("syncnotification"))
+            if (conn.Contains("mongodb"))
             {
                 return true;
             }

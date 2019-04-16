@@ -264,7 +264,8 @@ namespace Epi.Data.MongoDB
                 this.connectionString = value;
                 if (value != null && value.Contains("~"))
                 {
-                    this.DbName = value.Split('~')[1];
+                    string[] splits = value.Split('~');
+                    this.DbName = splits[splits.Length - 1];
                 }
                 /*try
                 {
@@ -534,7 +535,7 @@ namespace Epi.Data.MongoDB
         /// <returns>A data table object</returns>
         public override DataTable Select(Query selectQuery, DataTable dataTable)
         {
-            #region Input Validation
+            /*#region Input Validation
             if (selectQuery == null)
             {
                 throw new ArgumentNullException("selectQuery");
@@ -547,7 +548,7 @@ namespace Epi.Data.MongoDB
 
             if (selectQuery.SqlStatement.Contains("TOP 2"))
             {
-                selectQuery = CreateQuery(selectQuery.SqlStatement.Replace("TOP 2 ", string.Empty).Replace(";",string.Empty) + " LIMIT 2");
+                selectQuery = CreateQuery(selectQuery.SqlStatement.Replace("TOP 2 ", string.Empty).Replace(";", string.Empty) + " LIMIT 2");
             }
 
             IDbConnection connection = GetConnection(connectionString);
@@ -564,7 +565,20 @@ namespace Epi.Data.MongoDB
             catch (Exception ex)
             {
                 throw new System.ApplicationException("Error executing select query against the database.", ex);
+            }*/
+
+            string tableName = selectQuery.SqlStatement.Substring(selectQuery.SqlStatement.ToLower().IndexOf(" from ") + 6).Split(' ')[0].Replace("`", "").Replace("'", "").Replace(";", "").Replace("[", "").Replace("]", "");
+
+            if (selectQuery.SqlStatement.ToLower().Contains("top 2") || selectQuery.SqlStatement.ToLower().Contains("limit 2"))
+            {
+                dataTable.Merge(new MongoDBWrapper(connectionString).GetFirstDataRow(tableName));
             }
+            else
+            {
+                dataTable.Merge(new MongoDBWrapper(connectionString).GetDataTableAsync(tableName).Result);
+            }
+
+            return dataTable;
         }
 
         /// <summary>
@@ -730,7 +744,7 @@ namespace Epi.Data.MongoDB
         /// <returns></returns>
         public override object ExecuteScalar(Query scalarStatement)
         {
-            #region Input Validation
+            /*#region Input Validation
             if (scalarStatement == null)
             {
                 throw new ArgumentNullException("query");
@@ -739,7 +753,7 @@ namespace Epi.Data.MongoDB
 
             object result;
             IDbConnection conn = GetConnection(connectionString);
-            IDbCommand command = GetCommand(scalarStatement.SqlStatement, conn, scalarStatement.Parameters);
+            IDbCommand command = GetCommand(scalarStatement.SqlStatement, conn, scalarStatement.Parameters)
 
             try
             {
@@ -752,7 +766,18 @@ namespace Epi.Data.MongoDB
                 CloseConnection(conn);
             }
 
-            return result;
+            return result;*/
+
+            string tableName = scalarStatement.SqlStatement.Substring(scalarStatement.SqlStatement.ToLower().IndexOf(" from ") + 6).Split(' ')[0].Replace("`", "").Replace("'", "").Replace(";", "").Replace("[", "").Replace("]", "");
+
+            if (scalarStatement.SqlStatement.ToLower().Contains(" count(") || scalarStatement.SqlStatement.ToLower().Contains(" count "))
+            {
+                return new MongoDBWrapper(connectionString).GetCollectionSize(tableName).Result;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         /// <summary>

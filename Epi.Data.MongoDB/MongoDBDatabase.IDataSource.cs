@@ -16,7 +16,7 @@ namespace Epi.Data.MongoDB
         /// <returns></returns>
         public System.Data.IDataReader GetDataTableReader(string pSQL)
         {
-            System.Data.IDataReader result = null;
+            /*System.Data.IDataReader result = null;
             try
             {
                 result = (System.Data.IDataReader)this.ExecuteReader(this.CreateQuery(pSQL));
@@ -25,7 +25,11 @@ namespace Epi.Data.MongoDB
             {
                 Logger.Log("Error MongoDBDatabase.IDataSource.GetDataTableReader:\n" + e.ToString());
             }
-            return result;
+            return result;*/
+
+            string tableName = pSQL.Substring(pSQL.ToLower().IndexOf(" from ") + 6).Split(' ')[0].Replace("`", "").Replace("'", "").Replace(";", "").Replace("[", "").Replace("]", "");
+
+            return new MongoDBWrapper(connectionString).GetDataTableAsync(tableName).Result.CreateDataReader();
         }
 
 
@@ -147,7 +151,9 @@ namespace Epi.Data.MongoDB
         /// <returns></returns>
         public override bool CheckDatabaseExistance(string connectionString, string pTableName, bool pIsConnectionString = false)
         {
-            return new MongoDBWrapper(connectionString).GetDatabaseNames().Contains(connectionString.Split('~')[1]);
+            string[] splits = connectionString.Split('~');
+            string databaseName = splits[splits.Length - 1];
+            return new MongoDBWrapper(connectionString).GetDatabaseNames().Contains(databaseName);
         }
     }
 }

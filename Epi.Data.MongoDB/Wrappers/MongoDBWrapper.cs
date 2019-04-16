@@ -26,8 +26,9 @@ namespace Epi.Data.MongoDB.Wrappers
         {
             if (connectionString.Contains("~"))
             {
-                this.connectionString = connectionString.Split('~')[0];
-                this.databaseName = connectionString.Split('~')[1];
+                string[] splits = connectionString.Split('~');
+                this.connectionString = connectionString.Substring(0, connectionString.IndexOf("~" + splits[splits.Length - 1]));
+                this.databaseName = splits[splits.Length - 1];
             }
             else
             {
@@ -140,6 +141,27 @@ namespace Epi.Data.MongoDB.Wrappers
                 });
 
             return dt;
+        }
+
+        public DataTable GetFirstDataRow(string collectionName)
+        {
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase(databaseName);
+
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+            DataTable dt = new DataTable(collectionName);
+
+            return GetDataTableFromBson(dt, collection.Find(new BsonDocument()).FirstAsync().Result);
+        }
+
+        public async Task<long> GetCollectionSize(string collectionName)
+        {
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase(databaseName);
+
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+
+            return await collection.CountDocumentsAsync(new BsonDocument());
         }
 
         private DataTable GetDataTableFromBson(DataTable dt, BsonDocument doc)

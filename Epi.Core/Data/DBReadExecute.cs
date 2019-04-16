@@ -371,41 +371,31 @@ namespace Epi.Data
 
             DBReadExecute.ProjectFileName = "";
 
-            if(databaseType == "MongoDB")
+            if (Test.ToLowerInvariant().EndsWith(".prj"))
             {
-                DataSets.Config.DataDriverDataTable dataDrivers = Configuration.GetNewInstance().DataDrivers;
+                Project P = new Project(Test);
 
-                IDbDriverFactory dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(SharedStrings.MONGODB_DATABASE_INFO);
-                DBReadExecute.DataSource = dbFactory;
-                result = dbFactory.ConvertFileStringToConnectionString(Test);
+                Test = P.CollectedDataConnectionString;
+                result = Test;
+
+                DBReadExecute.DataSource = DbDriverFactoryCreator.GetDbDriverFactory(P.CollectedDataDriver);
+                DBReadExecute.ProjectFileName = pConnectionString.Trim(new char[] { '\'' });
             }
             else
             {
-                if (Test.ToLowerInvariant().EndsWith(".prj"))
+                DataSets.Config.DataDriverDataTable dataDrivers = Configuration.GetNewInstance().DataDrivers;
+                foreach (DataSets.Config.DataDriverRow dataDriver in dataDrivers)
                 {
-                    Project P = new Project(Test);
-
-                    Test = P.CollectedDataConnectionString;
-                    result = Test;
-
-                    DBReadExecute.DataSource = DbDriverFactoryCreator.GetDbDriverFactory(P.CollectedDataDriver);
-                    DBReadExecute.ProjectFileName = pConnectionString.Trim(new char[] { '\'' });
-                }
-                else
-                {
-                    DataSets.Config.DataDriverDataTable dataDrivers = Configuration.GetNewInstance().DataDrivers;
-                    foreach (DataSets.Config.DataDriverRow dataDriver in dataDrivers)
+                    IDbDriverFactory dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(dataDriver.Type);
+                    if (dbFactory.CanClaimConnectionString(Test))
                     {
-                        IDbDriverFactory dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(dataDriver.Type);
-                        if (dbFactory.CanClaimConnectionString(Test))
-                        {
-                            DBReadExecute.DataSource = dbFactory;
-                            result = dbFactory.ConvertFileStringToConnectionString(Test);
-                            break;
-                        }
+                        DBReadExecute.DataSource = dbFactory;
+                        result = dbFactory.ConvertFileStringToConnectionString(Test);
+                        break;
                     }
                 }
             }
+
 
             return result;
         }
