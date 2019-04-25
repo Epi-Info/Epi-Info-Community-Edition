@@ -61,6 +61,12 @@ namespace Epi
         /// </summary>
         public const string MongoDBDriver = "Epi.Data.MongoDB.MongoDBDBFactory, Epi.Data.MongoDB";
 
+
+        /// <summary>
+        /// Identifier for Epi Info Web driver that is built into Epi Info
+        /// </summary>
+        public const string EpiInfoWebDriver = "Epi.Data.EpiWeb.EpiWebFactory, Epi.Data.EpiWeb";
+
         /// <summary>
         /// Identifier for PostgreSQL driver that is built into Epi Info
         /// </summary>
@@ -736,6 +742,14 @@ namespace Epi
             // Data Drivers
             Config.DataDriversRow parentDataDriversRow = configDataSet.DataDrivers.NewDataDriversRow();
             configDataSet.DataDrivers.Rows.Add(parentDataDriversRow);
+
+            Config.DataDriverRow dataDriverRowEpiWeb = configDataSet.DataDriver.NewDataDriverRow();
+            dataDriverRowEpiWeb.DataDriversRow = parentDataDriversRow;
+            dataDriverRowEpiWeb.DisplayName = "Epi Info Web & Cloud Services";
+            dataDriverRowEpiWeb.Type = EpiInfoWebDriver;
+            dataDriverRowEpiWeb.DataProvider = true;
+            dataDriverRowEpiWeb.MetadataProvider = false;
+            configDataSet.DataDriver.Rows.Add(dataDriverRowEpiWeb);
 
             // Access driver
             Config.DataDriverRow dataDriverRow1 = configDataSet.DataDriver.NewDataDriverRow();

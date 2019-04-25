@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatCalc", "StatCalc\StatCa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Data.MongoDB", "Epi.Data.MongoDB\Epi.Data.MongoDB.csproj", "{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Data.EpiWeb", "Epi.Data.EpiWeb\Epi.Data.EpiWeb.csproj", "{2BF30720-78CF-4600-A28A-FF1A6756FE3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Exclude EpiMap)|Any CPU = Debug (Exclude EpiMap)|Any CPU
@@ -1409,6 +1411,48 @@ Global
 		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|Mixed Platforms.Build.0 = Epi.Enter.ServiceApplication|x86
 		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|x86.ActiveCfg = Epi.Enter.ServiceApplication|x86
 		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}.Utilities only|x86.Build.0 = Epi.Enter.ServiceApplication|x86
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug (Exclude EpiMap)|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug (Exclude EpiMap)|Any CPU.Build.0 = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug (Exclude EpiMap)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug (Exclude EpiMap)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug (Exclude EpiMap)|x86.ActiveCfg = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug (Exclude EpiMap)|x86.Build.0 = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Debug|x86.Build.0 = Debug|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Epi.Enter.ServiceApplication|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Epi.Enter.ServiceApplication|Any CPU.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Epi.Enter.ServiceApplication|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Epi.Enter.ServiceApplication|Mixed Platforms.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Epi.Enter.ServiceApplication|x86.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Epi.Enter.ServiceApplication|x86.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Linux|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Linux|Any CPU.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Linux|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Linux|Mixed Platforms.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Linux|x86.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Linux|x86.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Release|x86.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Release|x86.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Setup (Release)|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Setup (Release)|Any CPU.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Setup (Release)|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Setup (Release)|Mixed Platforms.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Setup (Release)|x86.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Setup (Release)|x86.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|Any CPU.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|Mixed Platforms.Build.0 = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|x86.ActiveCfg = Release|Any CPU
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
