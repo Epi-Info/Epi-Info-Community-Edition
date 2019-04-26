@@ -302,6 +302,25 @@ namespace Epi
             }
         }
 
+        public static void AddNewDataDrivers()
+        {
+            try
+            {
+                AssertConfigurationLoaded();
+                Configuration defaultConfig = Configuration.CreateDefaultConfiguration();
+                current.configDataSet.DataDriver.Clear();
+
+                foreach (Epi.DataSets.Config.DataDriverRow row in defaultConfig.DataDrivers)
+                {
+                    current.configDataSet.DataDriver.ImportRow(row);
+                }
+
+                current.configDataSet.DataDriver.AcceptChanges();
+                Save();
+            }
+            catch { }
+        }
+
         /// <summary>
         /// Parent row for gadgets
         /// </summary>
