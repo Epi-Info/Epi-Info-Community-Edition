@@ -70,21 +70,43 @@ namespace Epi.Data.EpiWeb.Forms
 
         private void txtCertFile_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCertFile.Text))
+            if (string.IsNullOrEmpty(txtCertFile.Text) || string.IsNullOrEmpty(txtOrgKey.Text))
             {
                 btnOk.Enabled = false;
             }
             else
             {
-                this.connBuilder = new EpiWebConnectionStringBuilder("epiweb://" + txtCertFile.Text);
                 btnOk.Enabled = true;
             }
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Guid.Parse(txtOrgKey.Text);
+            }
+            catch (Exception ex)
+            {
+                Epi.Windows.MsgBox.ShowError("Invalid org key");
+                return;
+            }
+
+            this.connBuilder = new EpiWebConnectionStringBuilder("epiweb://" + txtCertFile.Text + "@" + txtOrgKey.Text);
             this.DialogResult = DialogResult.OK;
             this.Hide();
+        }
+
+        private void txtOrgKey_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCertFile.Text) || string.IsNullOrEmpty(txtOrgKey.Text))
+            {
+                btnOk.Enabled = false;
+            }
+            else
+            {
+                btnOk.Enabled = true;
+            }
         }
     }
 }

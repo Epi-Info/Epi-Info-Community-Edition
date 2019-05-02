@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -13,6 +14,7 @@ namespace Epi.Data.EpiWeb.Wrappers
     public class EpiWebWrapper
     {
         private CertInfo certInfo;
+        private bool expired;
 
         private EpiWebWrapper()
         {
@@ -23,23 +25,44 @@ namespace Epi.Data.EpiWeb.Wrappers
         {
             try
             {
-                string certFile = config.Substring(9);
-                string contents = System.IO.File.ReadAllText(certFile);
+                expired = false;
+                string certFile = config.Substring(9).Split('@')[0];
+                string key = config.Substring(9).Split('@')[1];
+                string contents = Epi.Configuration.DecryptFileToString(certFile, key);
                 certInfo = JsonConvert.DeserializeObject<CertInfo>(contents);
+                if (certInfo.ExpirationDate < DateTime.Now)
+                {
+                    expired = true;
+                }
+            }
+            catch (CryptographicException ce)
+            {
+                Epi.Windows.MsgBox.ShowError("Invalid org key or certificate file");
+            }
+            catch (JsonSerializationException je)
+            {
+                Epi.Windows.MsgBox.ShowError("Certificate file is malformed. Please ask your Epi Info administrator for a new certificate file.");
             }
             catch (Exception ex)
             {
-
+                Epi.Windows.MsgBox.ShowError(ex.ToString());
             }
         }
 
 
         public bool TestConnection()
         {
+            if (expired)
+                return false;
+
             SqlConnection conn = new SqlConnection(certInfo.ConnectionString);
             try
             {
                 conn.Open();
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
             finally
             {
@@ -53,19 +76,28 @@ namespace Epi.Data.EpiWeb.Wrappers
         {
             List<string> names = new List<string>();
 
-            using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
+            if (expired)
             {
-                connection.Open();
-                string commandString = "select o.Organization, m.SurveyId, m.SurveyName, m.DateCreated from surveymetadata m inner join organization o on m.OrganizationId = o.OrganizationId where o.OrganizationId = '" + certInfo.OrganizationId + "'";
-                using (SqlCommand command = new SqlCommand(commandString, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
+                Epi.Windows.MsgBox.ShowError("Your certificate file has expired. Please ask your Epi Info administrator for a new certificate file.");
+                return names;
+            }
 
-                        while (reader.Read())
+            if (certInfo != null)
+            {
+                using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
+                {
+                    connection.Open();
+                    string commandString = "select o.Organization, m.SurveyId, m.SurveyName, m.DateCreated from surveymetadata m inner join organization o on m.OrganizationId = o.OrganizationId where o.OrganizationId = '" + certInfo.OrganizationId + "'";
+                    using (SqlCommand command = new SqlCommand(commandString, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            string name = reader.GetFieldValue<string>(2) + " (" + reader.GetFieldValue<DateTime>(3) + ")" + " {{" + reader.GetFieldValue<Guid>(1) + "}}";
-                            names.Add(name);
+
+                            while (reader.Read())
+                            {
+                                string name = reader.GetFieldValue<string>(2) + " (" + reader.GetFieldValue<DateTime>(3) + ")" + " {{" + reader.GetFieldValue<Guid>(1) + "}}";
+                                names.Add(name);
+                            }
                         }
                     }
                 }
@@ -77,6 +109,10 @@ namespace Epi.Data.EpiWeb.Wrappers
         public async Task<DataTable> GetDataTableAsync(string collectionName)
         {
             DataTable dataTable = new DataTable("Table1");
+
+            if (expired)
+                return dataTable;
+
             string surveyId = collectionName.Substring(collectionName.IndexOf("{{") + 2, 36);
             using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
             {
@@ -101,6 +137,10 @@ namespace Epi.Data.EpiWeb.Wrappers
         public DataTable GetFirstDataRow(string collectionName)
         {
             DataTable dataTable = new DataTable("Table1");
+
+            if (expired)
+                return dataTable;
+
             string surveyId = collectionName.Substring(collectionName.IndexOf("{{") + 2, 36);
             using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
             {
@@ -124,6 +164,10 @@ namespace Epi.Data.EpiWeb.Wrappers
 
         public async Task<long> GetCollectionSize(string collectionName)
         {
+
+            if (expired)
+                return 0;
+
             string surveyId = collectionName.Substring(collectionName.IndexOf("{{") + 2, 36);
 
             using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
@@ -160,6 +204,7 @@ namespace Epi.Data.EpiWeb.Wrappers
         {
             public string OrganizationId;
             public string OrganizationName;
+            public DateTime ExpirationDate;
             public int DataSourceType;
             public string ConnectionString;
         }
@@ -183,7 +228,14 @@ namespace Epi.Data.EpiWeb.Wrappers
 
         internal string GetOrgName()
         {
-            return certInfo.OrganizationName;
+            if (certInfo != null)
+            {
+                return certInfo.OrganizationName;
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }
