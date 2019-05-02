@@ -161,9 +161,13 @@ namespace Epi.CommandLine.Config
                     // create a default configuration file and save it
                     Configuration defaultConfig = Configuration.CreateDefaultConfiguration();
                     Configuration.Save(defaultConfig);
+                    Configuration.Load(configFilePath);
                 }
-
-                Configuration.Load(configFilePath);
+                else
+                {
+                    Configuration.Load(configFilePath);
+                    Configuration.AddNewDataDrivers();
+                }
             }
             catch (ConfigurationException)
             {

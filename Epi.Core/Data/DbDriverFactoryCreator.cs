@@ -56,7 +56,7 @@ namespace Epi.Data
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Csn not load assembly for MySQL.  " + ex.StackTrace);
+                    throw new Exception("Can not load assembly for MySQL.  " + ex.StackTrace);
                 }
             }
             else if (dataDriverType.Equals(SharedStrings.MONGODB_DATABASE_INFO))
@@ -70,7 +70,18 @@ namespace Epi.Data
                     throw new Exception("Can not load assembly for MongoDB. " + ex.StackTrace);
                 }
             }
-            else
+            else if (dataDriverType.Equals("Epi.Data.EpiWeb.EpiWebFactory, Epi.Data.EpiWeb"))
+            {
+                try
+                {
+                    typeFactory = Type.GetType(Configuration.EpiInfoWebDriver);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Can not load assembly for EpiInfoWeb. " + ex.StackTrace);
+                }
+            }
+            else 
             {
                 try
                 {
