@@ -33,7 +33,7 @@ namespace Epi.Data.EpiWeb
 
         public string ConvertFileStringToConnectionString(string fileString)
         {
-            throw new NotImplementedException();
+            return fileString;
         }
 
         public IDbDriver CreateDatabaseObject(System.Data.Common.DbConnectionStringBuilder connectionStringBuilder)
