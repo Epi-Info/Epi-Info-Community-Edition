@@ -145,7 +145,7 @@ namespace Epi.Data.EpiWeb.Wrappers
             using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
             {
                 connection.Open();
-                string commandString = "select top ResponseJson from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyId + "'";
+                string commandString = "select top 1 ResponseJson from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyId + "'";
                 using (SqlCommand command = new SqlCommand(commandString, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())

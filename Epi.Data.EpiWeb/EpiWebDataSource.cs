@@ -515,7 +515,7 @@ namespace Epi.Data.EpiWeb
                 throw new System.ApplicationException("Error executing select query against the database.", ex);
             }*/
 
-            string tableName = selectQuery.SqlStatement.Substring(selectQuery.SqlStatement.ToLower().IndexOf(" from ") + 6).Split(' ')[0].Replace("`", "").Replace("'", "").Replace(";", "").Replace("[", "").Replace("]", "");
+            string tableName = selectQuery.SqlStatement.Substring(selectQuery.SqlStatement.IndexOf("{{"), 40);
 
             if (selectQuery.SqlStatement.ToLower().Contains("top 2") || selectQuery.SqlStatement.ToLower().Contains("limit 2"))
             {
@@ -675,7 +675,7 @@ namespace Epi.Data.EpiWeb
 
             return result;*/
 
-            string tableName = scalarStatement.SqlStatement.Substring(scalarStatement.SqlStatement.ToLower().IndexOf(" from ") + 6).Split(' ')[0].Replace("`", "").Replace("'", "").Replace(";", "").Replace("[", "").Replace("]", "");
+            string tableName = scalarStatement.SqlStatement.Substring(scalarStatement.SqlStatement.IndexOf("{{"), 40);
 
             if (scalarStatement.SqlStatement.ToLower().Contains(" count(") || scalarStatement.SqlStatement.ToLower().Contains(" count "))
             {
@@ -997,7 +997,21 @@ namespace Epi.Data.EpiWeb
         /// <returns>Query</returns>
         public override Query CreateQuery(string ansiSqlStatement)
         {
-            return null;
+            return new EpiWebQuery(ansiSqlStatement);
+        }
+
+        public class EpiWebQuery : Query
+        {
+
+            public EpiWebQuery(string queryStatement): base(queryStatement)
+            {
+                
+            }
+
+            public override string GetInsertValue(string pvalues)
+            {
+                return pvalues;
+            }
         }
 
         /// <summary>

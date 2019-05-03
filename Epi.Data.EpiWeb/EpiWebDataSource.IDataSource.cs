@@ -29,7 +29,7 @@ namespace Epi.Data.EpiWeb
             }
             return result;*/
 
-            string tableName = pSQL.Substring(pSQL.ToLower().IndexOf(" from ") + 6).Split(' ')[0].Replace("`", "").Replace("'", "").Replace(";", "").Replace("[", "").Replace("]", "");
+            string tableName = pSQL.Substring(pSQL.IndexOf("{{"), 40);
 
             return new EpiWebWrapper(connectionString).GetDataTableAsync(tableName).Result.CreateDataReader();
         }
