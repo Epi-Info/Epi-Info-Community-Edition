@@ -850,7 +850,7 @@ namespace Epi.Core.ServiceClient
 
         public static SurveyManagerServiceV5.ManagerServiceV5Client GetClientV5(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
         {
-            SurveyManagerServiceV3.ManagerServiceV3Client result = null;
+            SurveyManagerServiceV5.ManagerServiceV5Client result = null;
             try
             {
 
@@ -898,7 +898,7 @@ namespace Epi.Core.ServiceClient
 
 
 
-                    result = new SurveyManagerServiceV3.ManagerServiceV3Client(binding, endpoint);
+                    result = new SurveyManagerServiceV5.ManagerServiceV5Client(binding, endpoint);
 
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -948,7 +948,7 @@ namespace Epi.Core.ServiceClient
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                        result = new SurveyManagerServiceV3.ManagerServiceV3Client(binding, endpoint);
+                        result = new SurveyManagerServiceV5.ManagerServiceV5Client(binding, endpoint);
 
                     }
                     else
@@ -992,7 +992,7 @@ namespace Epi.Core.ServiceClient
 
 
 
-                        result = new SurveyManagerServiceV3.ManagerServiceV3Client(binding, endpoint);
+                        result = new SurveyManagerServiceV5.ManagerServiceV5Client(binding, endpoint);
                         System.Net.ServicePointManager.ServerCertificateValidationCallback +=
                         (se, cert, chain, sslerror) =>
                         {

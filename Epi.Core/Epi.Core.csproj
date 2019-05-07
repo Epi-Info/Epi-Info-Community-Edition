@@ -310,6 +310,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SurveyManagerServiceV5\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SurveyManagerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -880,6 +885,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Resources\ImagesNotToBeDeployed\viaEmail.bmp" />
     <None Include="Projects\Salmonellosis\Salmonellosis.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1061,6 +1067,34 @@
     <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV35.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\SurveyManagerServiceV5\Epi.SurveyManagerServiceV5.UserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV5\ManagerServiceV5.wsdl" />
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV52.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV53.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV54.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV55.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV56.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV57.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.OrganizationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -1092,6 +1126,13 @@
     <None Include="Service References\SurveyManagerService\SurveyManagerService1.disco" />
     <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServicev21.disco" />
     <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServicev211.disco" />
+    <None Include="Service References\SurveyManagerServiceV5\SurveyManagerServiceV5.disco" />
+    <None Include="Service References\SurveyManagerServiceV5\configuration91.svcinfo" />
+    <None Include="Service References\SurveyManagerServiceV5\configuration.svcinfo" />
+    <None Include="Service References\SurveyManagerServiceV5\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="StatCalc.resources.dll" />
     <Content Include="Templates\Fields\debug - one of each field with different widths.xml" />
     <Content Include="Templates\Fields\debug - one of each field.xml" />
@@ -1673,6 +1714,7 @@
     <WCFMetadataStorage Include="Service References\EWEManagerService\" />
     <WCFMetadataStorage Include="Service References\SurveyManagerServiceV2\" />
     <WCFMetadataStorage Include="Service References\SurveyManagerServiceV3\" />
+    <WCFMetadataStorage Include="Service References\SurveyManagerServiceV5\" />
     <WCFMetadataStorage Include="Service References\SurveyManagerService\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
