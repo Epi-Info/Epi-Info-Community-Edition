@@ -214,6 +214,10 @@ namespace Epi.Data.EpiWeb.Wrappers
             try
             {
                 Message msg = JsonConvert.DeserializeObject<Message>(json);
+
+                if (msg.ResponseQA.ToString().Length < 5)
+                    return dt;
+
                 DataSet dataSet = JsonConvert.DeserializeObject<DataSet>("{'Table1': [" + msg.ResponseQA.ToString() + "]}");
                 DataTable dataTable = dataSet.Tables["Table1"];
                 dt.Merge(dataTable);
