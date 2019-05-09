@@ -1446,7 +1446,14 @@ namespace EpiDashboard
             }
             else if (string.IsNullOrEmpty(DashboardHelper.CustomQuery))
             {
-                tblockDataSource.Text = DashboardHelper.Database.DbName + "\\" + DashboardHelper.TableName;
+                if (DashboardHelper.TableName.Length < 25)
+                {
+                    tblockDataSource.Text = DashboardHelper.Database.DbName + "\\" + DashboardHelper.TableName;
+                }
+                else
+                {
+                    tblockDataSource.Text = DashboardHelper.Database.DbName + "\\" + DashboardHelper.TableName.Substring(0,22) + "...";
+                }
             }
             else
             {
