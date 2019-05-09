@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Menu", "Epi.Windows.Menu\Epi.Windows.Menu.csproj", "{532CF511-35F4-4EC9-B21B-E2B59BB2F796}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -51,6 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Mapping", "Epi.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.AnalysisDashboard", "Epi.Windows.AnalysisDashboard\Epi.Windows.AnalysisDashboard.csproj", "{05079D2E-76A7-418C-8192-6C7A6D956686}"
 	ProjectSection(ProjectDependencies) = postProject
+		{2BF30720-78CF-4600-A28A-FF1A6756FE3F} = {2BF30720-78CF-4600-A28A-FF1A6756FE3F}
 		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E} = {043E85C3-C95A-481F-A3BB-D86BEA8BA06E}
 	EndProjectSection
 EndProject
