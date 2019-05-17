@@ -1586,7 +1586,7 @@ namespace Epi.Windows.MakeView.Forms
                         case "Image":
                        // case "Mirror":
                         case "Grid":
-                        case "CommandButton":
+                       // case "CommandButton":
                        // case "Relate":
                             if (PublishingToWebSurvey)
                             {
@@ -3412,7 +3412,39 @@ namespace Epi.Windows.MakeView.Forms
                             toolStripPublishToWebEnter.Enabled = false;
                         else
                             toolStripPublishToWebEnter.Enabled = true;
-                    }
+
+                        if (CheckforRepublishWebSurveyMenuItem())
+                        {                           
+                            mnuPublishToWeb.Text = SharedStrings.WEBFORM_MENU_REPUB_WEB;                          
+                            if (pView.IsRelatedView == true)
+                            {
+                                toWebSurveyToolStripMenuItem.Enabled = false;
+                                EIWSToolStripMenuItem.Enabled = false;
+                            }
+                            else
+                            {
+                                toWebSurveyToolStripMenuItem.Enabled = true;
+                                EIWSToolStripMenuItem.Enabled = true;
+                            }                            
+                        }
+                        else
+                        {
+                            mnuPublishToWeb.Text = SharedStrings.WEBFORM_MENU_PUB_WEB;                            
+                            toWebSurveyToolStripMenuItem.Enabled = false;
+                            EIWSToolStripMenuItem.Enabled = false;
+                        }
+
+                        if (pView.IsRelatedView == true)
+                        {
+                            toolStripPublishToWebEnter.Enabled = false;
+                            mnuPublishToWeb.Enabled = false;
+                        }
+                        else
+                        {
+                            toolStripPublishToWebEnter.Enabled = true;
+                            mnuPublishToWeb.Enabled = true;
+                        }
+                    } 
                 }
                 else
                 {
@@ -3420,7 +3452,10 @@ namespace Epi.Windows.MakeView.Forms
                     mnuPublishToWeb.Enabled = true;
                     toolStripPublishToWebEnter.Text = SharedStrings.WEBFORM_MENU_PUB_WEBENTER;
                     if (pView.IsRelatedView == true)
+                    {
                         toolStripPublishToWebEnter.Enabled = false;
+                        mnuPublishToWeb.Enabled = false;
+                    }
                     else
                         toolStripPublishToWebEnter.Enabled = true;
                     QuickPublishtoolStripButton.Enabled = false;
@@ -3454,6 +3489,27 @@ namespace Epi.Windows.MakeView.Forms
                         RepublishOrgKey = Configuration.Decrypt(ViewRow.ItemArray[2].ToString());
                     else
                         RepublishOrgKey = ViewRow.ItemArray[2].ToString();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CheckforRepublishWebSurveyMenuItem()
+        {
+            foreach (View view in this.mediator.Project.Views)
+            {
+                DataTable table = mediator.Project.Metadata.GetPublishedViewKeys(view.Id);
+
+                DataRow ViewRow = table.Rows[0];
+                if (!string.IsNullOrWhiteSpace(ViewRow.ItemArray[0].ToString()))//Checking if the OrgKey is encrypted in the database
+                {
+                    Guid guid;
+                    bool isValid = Guid.TryParse(ViewRow.ItemArray[0].ToString(), out guid);
+                    if (!isValid)
+                        RepublishOrgKey = Configuration.Decrypt(ViewRow.ItemArray[0].ToString());
+                    else
+                        RepublishOrgKey = ViewRow.ItemArray[0].ToString();
                     return true;
                 }
             }
