@@ -61,7 +61,7 @@ namespace Epi.Windows.Dialogs
 
 				// App Name 
 				WordBuilder appNameBuilder = new WordBuilder();
-                appNameBuilder.Add(appId.SuiteName);
+                appNameBuilder.Add("Epi Info\u2122");
                 appNameBuilder.Add(appId.Version);
 				lblAppName.Text = appNameBuilder.ToString();
 				
