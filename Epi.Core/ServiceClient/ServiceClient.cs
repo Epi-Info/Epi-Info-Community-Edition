@@ -229,7 +229,8 @@ namespace Epi.Core.ServiceClient
                     else
                     {
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                     }
@@ -325,7 +326,8 @@ namespace Epi.Core.ServiceClient
                         else
                         {
                             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                         }
@@ -463,7 +465,8 @@ namespace Epi.Core.ServiceClient
                     else
                     {
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                     }
@@ -560,7 +563,8 @@ namespace Epi.Core.ServiceClient
                         else
                         {
                             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                         }
@@ -682,7 +686,8 @@ namespace Epi.Core.ServiceClient
                     else
                     {
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                     }
@@ -777,10 +782,10 @@ namespace Epi.Core.ServiceClient
                         }
                         else
                         {
-                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
-
-
+                             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                            // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                             binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                         
                         }
 
                      
@@ -889,7 +894,8 @@ namespace Epi.Core.ServiceClient
                     else
                     {
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                     }
@@ -985,7 +991,8 @@ namespace Epi.Core.ServiceClient
                         else
                         {
                             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                         }
