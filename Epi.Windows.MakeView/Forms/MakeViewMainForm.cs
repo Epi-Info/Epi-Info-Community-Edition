@@ -5553,5 +5553,148 @@ namespace Epi.Windows.MakeView.Forms
 
             return configurationOk;
         }
+
+        private void OpenProjectFromWebToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenProjectFromWebDialog dialog = new OpenProjectFromWebDialog("");
+
+            string projectName = string.Empty;
+            string projectDescription = string.Empty;
+            string projectLocation = string.Empty;
+            string dataDBInfo = string.Empty;
+            Data.DbDriverInfo dbDriverInfo = new Data.DbDriverInfo();
+            string projectTemplatePath = string.Empty;
+
+            try
+            {
+                dialog.ShowDialog();
+
+                if (dialog.DialogResult == DialogResult.OK)
+                {
+                    CloseCurrentProject();
+                    projectName = dialog.ProjectName;
+                    projectLocation = dialog.ProjectLocation;
+                    dataDBInfo = dialog.DataDBInfo;
+                    dbDriverInfo = dialog.DriverInfo;
+                    projectTemplatePath = dialog.ProjectTemplatePath;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            finally
+            {
+                dialog.Dispose();
+                GC.Collect();
+                Refresh();
+            }
+
+            canvas.HideUpdateStart(SharedStrings.CREATING_PROJECT);
+
+            Project newProject = new Project();
+
+            newProject = newProject.CreateProject(
+                projectName,
+                projectDescription,
+                projectLocation,
+                dataDBInfo,
+                dbDriverInfo);
+
+            if (newProject != null)
+            {
+                mediator.Project = newProject;
+                if (this.Interpreter == null)
+                {
+                    Assembly assembly = Assembly.Load(newProject.EnterMakeviewIntepreter);
+                    Type myType = assembly.GetType(newProject.EnterMakeviewIntepreter + ".EpiInterpreterParser");
+                    this.Interpreter = (IEnterInterpreter)Activator.CreateInstance(myType, new object[] { this.mediator });
+                    this.Interpreter.Host = this.mediator;
+                }
+
+                canvas.UpdateHidePanel(SharedStrings.LOADING_PROJECT);
+
+                projectExplorer.LoadProject(newProject);
+
+                Template template = new Template(this.mediator);
+                template.CreateFromTemplate(projectTemplatePath);
+
+                //EnableFeatures();
+                OnProjectAccessed(newProject);
+
+                // The code below is needed to catch a condition where the ParentView property of each View object is
+                // not set during the creation of the template. Instead of re-writing this code in the template creation
+                // process, we simply force the metadata to be refreshed (which assigns the ParentView property correctly).
+                newProject.views = null;
+                newProject.LoadViews();
+            }
+
+            canvas.HideUpdateEnd();
+            EnableFeatures();
+
+
+
+
+
+
+
+
+
+
+
+            /*
+            DialogResult dialogResult = dialog.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    if (projectExplorer.IsProjectLoaded)
+                    {
+                        if (CloseCurrentProject() == false)
+                        {
+                            return;
+                        }
+                    }
+
+                    if(string.IsNullOrEmpty(dialog.Template) == false)
+                    {
+
+
+                    }
+                    
+                    //string filePath = openFileDialog.FileName.Trim();
+                    //if (filePath.ToLowerInvariant().EndsWith(FileExtensions.EPI_PROJ))
+                    //{
+                    //    // This is an Epi 7 project. Open it.
+                    //    Project project = new Project(filePath);
+
+                    //    if (project.CollectedData.FullName.Contains("MS Access"))
+                    //    {
+                    //        string databaseFileName = project.CollectedData.DataSource.Replace("Data Source=".ToLowerInvariant(), string.Empty);
+                    //        if (System.IO.File.Exists(databaseFileName) == false)
+                    //        {
+                    //            MsgBox.ShowError(string.Format(SharedStrings.DATASOURCE_NOT_FOUND, databaseFileName));
+                    //            return;
+                    //        }
+                    //    }
+
+                    //    OpenProject(project);
+                    //}
+                }
+                catch (System.Security.Cryptography.CryptographicException ex)
+                {
+                    MsgBox.ShowError(string.Format(SharedStrings.ERROR_CRYPTO_KEYS, ex.Message));
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    MsgBox.ShowException(ex);
+                    return;
+                }
+            }
+            */
+        }
+
     }
 }

@@ -152,6 +152,7 @@ namespace Epi.Windows.MakeView.Forms
             this.btnCut = new System.Windows.Forms.ToolStripButton();
             this.btnCopy = new System.Windows.Forms.ToolStripButton();
             this.btnPaste = new System.Windows.Forms.ToolStripButton();
+            this.openProjectFromWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainToolStripContainer.ContentPanel.SuspendLayout();
             this.MainToolStripContainer.TopToolStripPanel.SuspendLayout();
             this.MainToolStripContainer.SuspendLayout();
@@ -311,6 +312,7 @@ namespace Epi.Windows.MakeView.Forms
             this.NewPageMenuItem,
             this.toolStripSeparator9,
             this.openProjectToolStripMenuItem,
+            this.openProjectFromWebToolStripMenuItem,
             this.closeProjectToolStripMenuItem,
             this.mnuImportTemplate,
             this.toolStripMenuItemPrint,
@@ -987,6 +989,12 @@ namespace Epi.Windows.MakeView.Forms
             resources.ApplyResources(this.btnPaste, "btnPaste");
             this.btnPaste.Name = "btnPaste";
             // 
+            // openProjectFromWebToolStripMenuItem
+            // 
+            this.openProjectFromWebToolStripMenuItem.Name = "openProjectFromWebToolStripMenuItem";
+            resources.ApplyResources(this.openProjectFromWebToolStripMenuItem, "openProjectFromWebToolStripMenuItem");
+            this.openProjectFromWebToolStripMenuItem.Click += new System.EventHandler(this.OpenProjectFromWebToolStripMenuItem_Click);
+            // 
             // MakeViewMainForm
             // 
             this.AllowDrop = true;
@@ -1138,5 +1146,6 @@ namespace Epi.Windows.MakeView.Forms
         private ToolStripMenuItem tabOrderToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator12;
         private ToolStripMenuItem NewProjectFromExcelMenuItem;
+        private ToolStripMenuItem openProjectFromWebToolStripMenuItem;
     }
 }

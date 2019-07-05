@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="OrganizationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrganizationKey" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
+  <xs:complexType name="ArrayOfOrganizationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrganizationDTO" nillable="true" type="tns:ArrayOfOrganizationDTO" />
+  <xs:complexType name="ArrayOfSurveyControlDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SurveyControlDTO" nillable="true" type="tns:SurveyControlDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSurveyControlDTO" nillable="true" type="tns:ArrayOfSurveyControlDTO" />
+  <xs:complexType name="SurveyControlDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ControlId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ControlPrompt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ControlType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceTableName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SurveyControlDTO" nillable="true" type="tns:SurveyControlDTO" />
+</xs:schema>
