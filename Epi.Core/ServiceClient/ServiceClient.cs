@@ -828,8 +828,9 @@ namespace Epi.Core.ServiceClient
             Configuration config = Configuration.GetNewInstance();
 
             string configServiceEndpoint = config.Settings.WebServiceEndpointAddress;
-            int length = configServiceEndpoint.IndexOf(Environment.NewLine);
-            string pEndPointAddress = configServiceEndpoint.Substring(0, length);
+            //int length = configServiceEndpoint.IndexOf(Environment.NewLine);
+            //string pEndPointAddress = configServiceEndpoint.Substring(0, length);
+            string pEndPointAddress = configServiceEndpoint;
             bool pIsAuthenticated = false;
             bool pIsWsHTTPBinding = true;
             //string s = config.Settings.WebServiceAuthMode;// "Authentication_Use_Windows"];r
@@ -1039,6 +1040,10 @@ namespace Epi.Core.ServiceClient
             Configuration config = Configuration.GetNewInstance();
 
             string configServiceEndpoint = config.Settings.WebServiceEndpointAddress;
+            if(string.IsNullOrEmpty(configServiceEndpoint) == true)
+            {
+                return null;
+            }
             int length = configServiceEndpoint.IndexOf(Environment.NewLine);
             string pEndPointAddress = configServiceEndpoint.Substring(0, length);
             bool pIsAuthenticated = false;

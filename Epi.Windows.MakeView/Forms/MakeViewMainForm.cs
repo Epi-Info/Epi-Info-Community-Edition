@@ -5556,6 +5556,26 @@ namespace Epi.Windows.MakeView.Forms
 
         private void OpenProjectFromWebToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+                SurveyManagerServiceV3.OrganizationRequest Request = new SurveyManagerServiceV3.OrganizationRequest();
+                SurveyManagerServiceV3.OrganizationDTO orgDTO = new SurveyManagerServiceV3.OrganizationDTO();
+                Request.Organization = orgDTO;
+                var Result = client.GetOrganization(Request);
+            }
+            catch(System.ServiceModel.EndpointNotFoundException ex)
+            {
+                MessageBox.Show
+                (   SharedStrings.WEBSURVEY_SETTINGS_INVALID + Environment.NewLine + Environment.NewLine + "(" + ex.InnerException.Message + ")",
+                    "Epi Info 7",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                return;
+            }
+
             OpenProjectFromWebDialog dialog = new OpenProjectFromWebDialog("");
 
             string projectName = string.Empty;
@@ -5631,16 +5651,6 @@ namespace Epi.Windows.MakeView.Forms
 
             canvas.HideUpdateEnd();
             EnableFeatures();
-
-
-
-
-
-
-
-
-
-
 
             /*
             DialogResult dialogResult = dialog.ShowDialog();
