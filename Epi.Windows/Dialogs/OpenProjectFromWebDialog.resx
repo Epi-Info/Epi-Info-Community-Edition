@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACs
-        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAGsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAG0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABJgEBAgABAQEAASAGAAEmAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AbgAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8IAAPfAf8BHQGCAbUB/wEbAYEBswH/ARgBfgGw
         Af8BFgF8Aa4B/wETAXkBqwH/ARABdgGoAf8BDQFzAaUB/wELAXEBowH/AQgBbgGgAf8BBgFsAZ4B/wEE
@@ -957,7 +957,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADi
-        lgAAAk1TRnQBSQFMAwEBAAGsAQABrAEAAUgBAAFiAQAE/wEZAQAI/wFCAU0BNgcAATYDAAEoAwABIAEB
+        lgAAAk1TRnQBSQFMAwEBAAG0AQABtAEAAUgBAAFiAQAE/wEZAQAI/wFCAU0BNgcAATYDAAEoAwABIAEB
         AgABYgMAAQEBAAEYBQABwAFKAQERANj//wD/AIoAA/8BuQGkAZYBYAFIATABYAFIATABYAFIATABYAFI
         ATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFI
         ATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFIATABYAFI
@@ -1708,6 +1708,93 @@
   <data name="grpProject.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
+  <data name="&gt;&gt;btnBrowseProjectLocation.Name" xml:space="preserve">
+    <value>btnBrowseProjectLocation</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseProjectLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseProjectLocation.Parent" xml:space="preserve">
+    <value>grpProject</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseProjectLocation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtProjectLocation.Name" xml:space="preserve">
+    <value>txtProjectLocation</value>
+  </data>
+  <data name="&gt;&gt;txtProjectLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtProjectLocation.Parent" xml:space="preserve">
+    <value>grpProject</value>
+  </data>
+  <data name="&gt;&gt;txtProjectLocation.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblProjectName.Name" xml:space="preserve">
+    <value>lblProjectName</value>
+  </data>
+  <data name="&gt;&gt;lblProjectName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblProjectName.Parent" xml:space="preserve">
+    <value>grpProject</value>
+  </data>
+  <data name="&gt;&gt;lblProjectName.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtProjectName.Name" xml:space="preserve">
+    <value>txtProjectName</value>
+  </data>
+  <data name="&gt;&gt;txtProjectName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtProjectName.Parent" xml:space="preserve">
+    <value>grpProject</value>
+  </data>
+  <data name="&gt;&gt;txtProjectName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblLocation.Name" xml:space="preserve">
+    <value>lblLocation</value>
+  </data>
+  <data name="&gt;&gt;lblLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLocation.Parent" xml:space="preserve">
+    <value>grpProject</value>
+  </data>
+  <data name="&gt;&gt;lblLocation.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpProject.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 282</value>
+  </data>
+  <data name="grpProject.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 7, 7, 7</value>
+  </data>
+  <data name="grpProject.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 111</value>
+  </data>
+  <data name="grpProject.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="grpProject.Text" xml:space="preserve">
+    <value>New Project</value>
+  </data>
+  <data name="&gt;&gt;grpProject.Name" xml:space="preserve">
+    <value>grpProject</value>
+  </data>
+  <data name="&gt;&gt;grpProject.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpProject.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpProject.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="btnBrowseProjectLocation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
@@ -1851,33 +1938,6 @@
   </data>
   <data name="&gt;&gt;lblLocation.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="grpProject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 282</value>
-  </data>
-  <data name="grpProject.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 7, 7, 7</value>
-  </data>
-  <data name="grpProject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 111</value>
-  </data>
-  <data name="grpProject.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="grpProject.Text" xml:space="preserve">
-    <value>New Project</value>
-  </data>
-  <data name="&gt;&gt;grpProject.Name" xml:space="preserve">
-    <value>grpProject</value>
-  </data>
-  <data name="&gt;&gt;grpProject.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpProject.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpProject.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="grpData.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -2054,6 +2114,6 @@
     <value>OpenProjectFromWebDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.7121.23908, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.7128.28724, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -205,6 +205,7 @@ namespace Epi.Windows.Dialogs
             resources.ApplyResources(this.btnBrowseProjectLocation, "btnBrowseProjectLocation");
             this.btnBrowseProjectLocation.Name = "btnBrowseProjectLocation";
             this.btnBrowseProjectLocation.UseVisualStyleBackColor = true;
+            this.btnBrowseProjectLocation.Click += new System.EventHandler(this.btnBrowseProjectLocation_Click);
             // 
             // txtProjectLocation
             // 
@@ -241,6 +242,7 @@ namespace Epi.Windows.Dialogs
             resources.ApplyResources(this.btnBuildCollectedDataConnectionString, "btnBuildCollectedDataConnectionString");
             this.btnBuildCollectedDataConnectionString.Name = "btnBuildCollectedDataConnectionString";
             this.btnBuildCollectedDataConnectionString.UseVisualStyleBackColor = true;
+            this.btnBuildCollectedDataConnectionString.Click += new System.EventHandler(this.btnBuildCollectedDataConnectionString_Click);
             // 
             // lblCollectedData
             // 

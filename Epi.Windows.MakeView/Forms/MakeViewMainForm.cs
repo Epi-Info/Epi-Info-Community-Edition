@@ -2946,6 +2946,92 @@ namespace Epi.Windows.MakeView.Forms
             }
         }
 
+        public string SaveTemplate(XmlDocument xml, string saveAs)
+        {
+            string safeFileName = saveAs;
+            string templatePath = string.Empty;
+            string saveTo = string.Empty;
+
+            try
+            {
+                string targetFolderName = "Projects";
+                string newNameCandidate = string.Empty;
+
+                string programFilesDirectoryName = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles).ToLowerInvariant();
+                string installFolder = AppDomain.CurrentDomain.BaseDirectory.ToLowerInvariant();
+
+                Configuration config = Configuration.GetNewInstance();
+                string configPath = config.Directories.Templates;
+
+                if (configPath != string.Empty)
+                {
+                    templatePath = Path.Combine(configPath, targetFolderName);
+                }
+                else if (installFolder.ToLowerInvariant().StartsWith(programFilesDirectoryName))
+                {
+                    templatePath = Path.Combine(installFolder, "Templates\\" + targetFolderName);
+                }
+                else
+                {
+                    string asmPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    templatePath = asmPath + targetFolderName;
+                }
+
+                if (Directory.Exists(templatePath) == false)
+                {
+                    Directory.CreateDirectory(templatePath);
+                }
+
+                saveTo = Path.Combine(templatePath, safeFileName + ".xml");
+
+                if (File.Exists(saveTo))
+                {
+                    newNameCandidate = string.Format("{0}_{1}.xml", safeFileName.Replace(".xml", "").Replace(".eit", ""), DateTime.Now.ToString("yyyyMMddhmmsstt"));
+                    string text = SharedStrings.TEMPLATE_GET_ALREADY_EXISTS
+                        + Environment.NewLine
+                        + string.Format("[{0}]", safeFileName)
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + SharedStrings.TEMPLATE_GET_RENAME_TEMPLATE
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + SharedStrings.TEMPLATE_GET_YES_RENAME
+                        + Environment.NewLine
+                        + string.Format("[{0}]", newNameCandidate)
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + SharedStrings.TEMPLATE_GET_NO_OVERWRITE
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + SharedStrings.TEMPLATE_GET_CANCEL;
+
+                    DialogResult overwrite = MessageBox.Show(text, SharedStrings.TEMPLATE_GET_TITLE, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                    if (overwrite == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        saveTo = Path.Combine(templatePath, newNameCandidate);
+                    }
+                    else if (overwrite == System.Windows.Forms.DialogResult.Cancel)
+                    {
+                        return "";
+                    }
+                }
+
+                xml.Save(saveTo);
+
+                if (string.IsNullOrEmpty(targetFolderName) == false)
+                {
+                    projectExplorer.UpdateTemplates();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SharedStrings.ERROR + ": " + SharedStrings.TEMPLATE_CANNOT_READ_FILE + Environment.NewLine + ex.Message);
+            }
+
+            return saveTo;
+        }
+
         private void makeAccessProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -5556,7 +5642,6 @@ namespace Epi.Windows.MakeView.Forms
 
         private void OpenProjectFromWebToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             try
             {
                 SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
@@ -5583,7 +5668,7 @@ namespace Epi.Windows.MakeView.Forms
             string projectLocation = string.Empty;
             string dataDBInfo = string.Empty;
             Data.DbDriverInfo dbDriverInfo = new Data.DbDriverInfo();
-            string projectTemplatePath = string.Empty;
+            string templateXML = string.Empty;
 
             try
             {
@@ -5596,7 +5681,7 @@ namespace Epi.Windows.MakeView.Forms
                     projectLocation = dialog.ProjectLocation;
                     dataDBInfo = dialog.DataDBInfo;
                     dbDriverInfo = dialog.DriverInfo;
-                    projectTemplatePath = dialog.ProjectTemplatePath;
+                    templateXML = dialog.Template;
                 }
                 else
                 {
@@ -5637,7 +5722,12 @@ namespace Epi.Windows.MakeView.Forms
                 projectExplorer.LoadProject(newProject);
 
                 Template template = new Template(this.mediator);
-                template.CreateFromTemplate(projectTemplatePath);
+                XmlDocument xml = new XmlDocument();
+                xml.LoadXml(templateXML);
+                string templatePath = SaveTemplate(xml, projectName);
+                template.CreateFromTemplate(templatePath);
+
+                //template.CreateFromTemplate(xml);
 
                 //EnableFeatures();
                 OnProjectAccessed(newProject);

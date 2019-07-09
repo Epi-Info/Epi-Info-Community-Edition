@@ -58,12 +58,10 @@ namespace Epi.Windows.Dialogs
         protected String projectTemplatePath;
         #endregion  //Protected Data Members
 
-
         private delegate void PublishDelegate(Epi.Web.Common.Message.PublishResponse Result);
         private BackgroundWorker SurveyInfoWorker;
         private BackgroundWorker UpdateWorker;
 
-        //private Epi.SurveyManagerServiceV4.SurveyInfoDTO[] SurveyInfoList;
         private List<SurveyManagerServiceV4.SurveyInfoDTO> SurveyInfoList;
 
         private static object syncLock = new object(); 
@@ -83,10 +81,9 @@ namespace Epi.Windows.Dialogs
         private string UserPublishKey;
         private int SurveyType;
         bool ignoreDataFormatIndexChange = false;
-
-        public String ProjectName { get; set; }
-        public String ProjectLocation { get; set; }
-        public String DataDBInfo { get; set; }
+        private string projectName;
+        private string projectLocation;
+        private string dataDBInfo;
 
         ColumnHeader surveyIdHeader = new ColumnHeader();
         ColumnHeader surveyNameHeader = new ColumnHeader();
@@ -99,11 +96,22 @@ namespace Epi.Windows.Dialogs
             get { return collectedDataConnectionString; }
         }
 
+        public String ProjectName
+        {
+            get { return txtProjectName.Text; }
+        }
+        public String ProjectLocation
+        {
+            get { return txtProjectLocation.Text; }
+        }
         public DbDriverInfo DriverInfo
         {
             get { return collectedDataDBInfo; }
         }
-
+        public String DataDBInfo
+        {
+            get { return cbxCollectedDataDriver.SelectedValue.ToString(); }
+        }
         public string Template
         {
             get { return TemplateXML; }
@@ -305,6 +313,117 @@ namespace Epi.Windows.Dialogs
         #region Event Handlers
 
         /// <summary>
+        /// Handles the Change event of the project location's text
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        private void txtProjectLocation_TextChanged(object sender, EventArgs e)
+        {
+            PrepopulateDatabaseLocations();
+            projectLocationChanged = true;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the Browse button
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        private void btnBrowseProjectLocation_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.SelectedPath = txtProjectLocation.Text;
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                txtProjectLocation.Text = dialog.SelectedPath;
+                OnProjectLocationChanged();
+                PrepopulateDatabaseLocations();
+            }
+        }
+
+        protected void PrepopulateDatabaseLocations()
+        {
+            if (!string.IsNullOrEmpty(txtProjectName.Text) && !string.IsNullOrEmpty(txtProjectLocation.Text))
+            {
+                if (cbxCollectedDataDriver.SelectedValue != null)
+                {
+                    if (true)
+                    {
+                        try
+                        {
+                            if (collectedDataDBInfo.DBCnnStringBuilder != null)
+                            {
+                                if (String.IsNullOrEmpty(collectedDataDBInfo.DBCnnStringBuilder.ToString()))
+                                {
+                                    collectedDataDBInfo.DBCnnStringBuilder = GetSelectedCollectedDataDriver().RequestDefaultConnection(txtProjectName.Text.Trim(), txtProjectName.Text.Trim());
+                                }
+                            }
+                            else
+                            {
+                                collectedDataDBInfo.DBCnnStringBuilder = GetSelectedCollectedDataDriver().RequestDefaultConnection(txtProjectName.Text.Trim(), txtProjectName.Text.Trim());
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            collectedDataDBInfo.DBCnnStringBuilder = null;
+                            MsgBox.ShowWarning(SharedStrings.WARNING_CANNOT_CONNECT_TO_COLLECTED_DATA_DATABASE + "  " + ex.StackTrace);
+                        }
+
+                        try
+                        {
+                            metaDbInfo.DBCnnStringBuilder = collectedDataDBInfo.DBCnnStringBuilder;
+                        }
+                        catch (Exception ex)
+                        {
+                            metaDbInfo.DBCnnStringBuilder = null;
+                            MsgBox.ShowWarning(SharedStrings.WARNING_CANNOT_CONNECT_TO_METADATA_DATABASE + "  " + ex.StackTrace);
+                        }
+
+                        try
+                        {
+                            txtCollectedData.Text = collectedDataDBInfo.DBCnnStringBuilder.ConnectionString;
+
+                        }
+                        catch (Exception ex)
+                        {
+                            metaDbInfo.DBCnnStringBuilder = null;
+                            collectedDataDBInfo.DBCnnStringBuilder = null;
+                            txtCollectedData.Text = null;
+                            MsgBox.ShowWarning(SharedStrings.WARNING_CANNOT_SET_COLLECTED_DATA_TEXT + "  " + ex.StackTrace);
+                        }
+
+                        collectedDataConnectionString = txtCollectedData.Text;
+                        metadataConnectionString = collectedDataConnectionString;
+                    }
+                    else
+                    {
+                        metaDbInfo.DBCnnStringBuilder = null;
+                        metadataConnectionString = string.Empty;
+                    }
+                }
+            }
+            else
+            {
+                metaDbInfo.DBCnnStringBuilder = null;
+                collectedDataDBInfo.DBCnnStringBuilder = null;
+                txtCollectedData.Text = string.Empty;
+                collectedDataConnectionString = string.Empty;
+            }
+        }
+        /// <summary>
+        /// Handles the Leave event of the Project location textbox
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        private void txtProjectLocation_Leave(object sender, EventArgs e)
+        {
+            if (projectLocationChanged)
+            {
+                OnProjectLocationChanged();
+            }
+        }
+
+        /// <summary>
         /// Handles the Click event to select a meta data repository
         /// </summary>
         /// <param name="sender">Object that fired the event</param>
@@ -321,7 +440,24 @@ namespace Epi.Windows.Dialogs
         /// <param name="e">.NET supplied event parameters</param>
         private void btnBuildCollectedDataConnectionString_Click(object sender, EventArgs e)
         {
+            //if (this.projectTemplateListView.SelectedItems.Count == 0)
+            //{
+            //    Epi.Windows.MsgBox.ShowInformation("Please select a project template.");
+            //    return;
+            //}
 
+            GetCollectedDataConnectionString();
+
+            metaDbInfo.DBCnnStringBuilder = collectedDataDBInfo.DBCnnStringBuilder;
+            metaDbInfo.DBName = collectedDataDBInfo.DBName;
+            if (collectedDataDBInfo.DBCnnStringBuilder != null)
+            {
+                metadataConnectionString = collectedDataDBInfo.DBCnnStringBuilder.ConnectionString;
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>
@@ -329,11 +465,11 @@ namespace Epi.Windows.Dialogs
         /// </summary>
         /// <param name="sender">Object that fired the event</param>
         /// <param name="e">.NET supplied event parameters</param>
-        private void txtProjectLocation_TextChanged(object sender, EventArgs e)
-        {
-            //PrepopulateDatabaseLocations();
-            projectLocationChanged = true;
-        }
+        //private void txtProjectLocation_TextChanged(object sender, EventArgs e)
+        //{
+        //    //PrepopulateDatabaseLocations();
+        //    projectLocationChanged = true;
+        //}
 
         /// <summary>
         /// Handles the Click event of the Browse button
@@ -346,10 +482,10 @@ namespace Epi.Windows.Dialogs
         /// </summary>
         /// <param name="sender">Object that fired the event</param>
         /// <param name="e">.NET supplied event parameters</param>
-        private void txtProjectLocation_Leave(object sender, EventArgs e)
-        {
+        //private void txtProjectLocation_Leave(object sender, EventArgs e)
+        //{
 
-        }
+        //}
 
         /// <summary>
         /// Loads the Project Creation Dialog
@@ -360,25 +496,25 @@ namespace Epi.Windows.Dialogs
         {
             if (!this.DesignMode)
             {
-                //txtProjectLocation.Text = Configuration.GetNewInstance().Directories.Project;
-                //WinUtil.FillMetadataDriversList(cbxCollectedDataDriver);
+                txtProjectLocation.Text = Configuration.GetNewInstance().Directories.Project;
+                WinUtil.FillMetadataDriversList(cbxCollectedDataDriver);
 
-                //Configuration config = Configuration.GetNewInstance();
-                //cbxCollectedDataDriver.SelectedValue = config.Settings.DefaultDataDriver;
-                //txtProjectName.Focus();
+                Configuration config = Configuration.GetNewInstance();
+                cbxCollectedDataDriver.SelectedValue = config.Settings.DefaultDataDriver;
+                txtProjectName.Focus();
             }
 
-            foreach (ListViewItem item in SurveyList.Items)
-            {
-                string fullPath = item.SubItems[3].Text;
+            //foreach (ListViewItem item in SurveyList.Items)
+            //{
+            //    string fullPath = item.SubItems[3].Text;
 
-                //if (fullPath.Contains(SurveyId))
-                {
-                    item.Selected = true;
-                    item.Focused = true;
-                    break;
-                }
-            }
+            //    if (fullPath.Contains(SurveyId))
+            //    {
+            //        item.Selected = true;
+            //        item.Focused = true;
+            //        break;
+            //    }
+            //}
 
             SurveyList.ColumnClick += new ColumnClickEventHandler(projectTemplateListView_ColumnClick);
         }
@@ -401,7 +537,7 @@ namespace Epi.Windows.Dialogs
         /// <param name="e">.NET supplied event parameters</param>
         protected virtual void btnOk_Click(object sender, EventArgs e)
         {
-            if (ValidateInput() == true)
+            if (this.ValidateInput() == true)
             {
                 this.DialogResult = DialogResult.OK;
                 this.Hide();
@@ -442,9 +578,7 @@ namespace Epi.Windows.Dialogs
         private void txtProjectName_TextChanged(object sender, EventArgs e)
         {
             EnableDisableOkButton();
-
             PrepopulateCollectedDataLocation();
-
         }
 
         /// <summary>
@@ -465,28 +599,73 @@ namespace Epi.Windows.Dialogs
         private void txtProjectName_Leave(object sender, EventArgs e)
         {            
             bool valid = ValidateProjectName();
-            //if (!string.IsNullOrEmpty(txtProjectLocation.Text) && valid == true)
-            //{
-            //    bool isValidFile = IsValidFile();
-            //    if (isValidFile)
-            //    {
-            //        PrepopulateDatabaseLocations();
-            //    }         
-            //}
+            if (!string.IsNullOrEmpty(txtProjectLocation.Text) && valid == true)
+            {
+                bool isValidFile = IsValidFile();
+                if (isValidFile)
+                {
+                    PrepopulateDatabaseLocations();
+                }
+            }
+        }
+
+        private bool IsValidFile()
+        {
+            bool exists = false;
+            if (CheckIfProjectDirectoryExists())
+            {
+                exists = true;
+            }
+            return exists;
+        }
+
+        private bool CheckIfProjectDirectoryExists()
+        {
+            bool valid = true;
+            string path = txtProjectLocation.Text.Trim();
+            try
+            {
+                if (!Directory.Exists(path) && !string.IsNullOrEmpty(path))
+                {
+                    bool validDrive = false;
+                    String[] dirs = Directory.GetLogicalDrives();
+                    foreach (string dir in dirs)
+                    {
+                        if (dir == @path.Substring(0, 3))
+                        {
+                            validDrive = true;
+                            break;
+                        }
+                    }
+
+                    if (validDrive == false)
+                    {
+                        MessageBox.Show(SharedStrings.INVALID_PROJECT_LOCATION, SharedStrings.INVALID_PROJECT_LOCATION_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtProjectLocation.Text = string.Empty;
+                        txtProjectLocation.Focus();
+                        valid = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MsgBox.ShowException(ex);
+                valid = false;
+            }
+            return valid;
         }
 
         private void cbxCollectedDataDriver_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            //if (!cbxCollectedDataDriver.SelectedValue.Equals(Configuration.AccessDriver))
-            //{
-            //    btnBuildCollectedDataConnectionString.Enabled = true;
-            //}
-            //else
-            //{
-            //    btnBuildCollectedDataConnectionString.Enabled = false;
-            //    GetMetaConnectionString();
-            //}
+            if (!cbxCollectedDataDriver.SelectedValue.Equals(Configuration.AccessDriver))
+            {
+                btnBuildCollectedDataConnectionString.Enabled = true;
+            }
+            else
+            {
+                btnBuildCollectedDataConnectionString.Enabled = false;
+                GetMetaConnectionString();
+            }
 
             PrepopulateCollectedDataLocation();
         }
@@ -523,42 +702,7 @@ namespace Epi.Windows.Dialogs
         #endregion  //Event Handlers
 
         #region Protected Methods
-        ///// <summary>
-        ///// Validates input provided on the dialog.
-        ///// </summary>
-        ///// <returns></returns>
-        //protected override bool ValidateInput()
-        //{
-        //    base.ValidateInput();
 
-        //    // Validate Project name
-        //    if (txtProjectName.Text.Trim() == string.Empty)
-        //    {
-        //        if (ErrorMessages.Count == 0) txtProjectName.Focus();
-        //        ErrorMessages.Add(SharedStrings.PROJECT_NAME_MISSING);
-        //    }
-        //    else
-        //    {                
-        //        bool valid = ValidateProjectName();
-        //        if (valid == false) ErrorMessages.Add(SharedStrings.INVALID_PROJECT_NAME);
-        //    }
-
-        //    // Validate project location
-        //    if (txtProjectLocation.Text.Trim() == string.Empty)
-        //    {
-        //        if (ErrorMessages.Count == 0) txtProjectLocation.Focus();
-        //        ErrorMessages.Add(SharedStrings.PROJECT_LOCATION_REQUIRED);
-        //    }
-
-        //    // Validate database
-        //    if (txtCollectedData.Text.Trim() == string.Empty)
-        //    {
-        //        if (ErrorMessages.Count == 0) txtCollectedData.Focus();
-        //        ErrorMessages.Add(SharedStrings.COLLECTED_DATA_INFORMATION_REQUIRED);
-        //    }
-
-        //    return (ErrorMessages.Count == 0);
-        //}
 
         #endregion Protected Methods
 
@@ -588,12 +732,30 @@ namespace Epi.Windows.Dialogs
             //bool isValid = IsValidFile();
             //if (isValid)
             //{
-            //    //Configuration config = Configuration.GetNewInstance();
-            //    //config.Directories.Project = txtProjectLocation.Text.Trim();
-            //    //Configuration.Save(config);
-            //    //projectLocationChanged = false;
+            //    Configuration config = Configuration.GetNewInstance();
+            //    config.Directories.Project = txtProjectLocation.Text.Trim();
+            //    Configuration.Save(config);
+            //    projectLocationChanged = false;
             //}
 
+        }
+
+        /// <summary>
+        /// Obtains the meta data driver factory
+        /// </summary>
+        /// <returns>Instance of the metadata driver factory</returns>
+        private IDbDriverFactory GetSelectedMetadataDriver()
+        {
+            try
+            {
+                string dataDriverType = cbxCollectedDataDriver.SelectedValue.ToString();
+                return DbDriverFactoryCreator.GetDbDriverFactory(dataDriverType);
+            }
+            catch (Exception ex)
+            {
+                MsgBox.ShowWarning(SharedStrings.UNABLE_CREATE_DATABASE + "  " + ex.Message);
+                return null;
+            }
         }
 
         /// <summary>
@@ -601,14 +763,14 @@ namespace Epi.Windows.Dialogs
         /// </summary>
         private void GetMetadataConnectionString()
         {
-            //IConnectionStringGui metaDataCnnDialog = GetSelectedMetadataDriver().GetConnectionStringGuiForNewDb();
-            //DialogResult result = ((Form)metaDataCnnDialog).ShowDialog();
-            //if (result == DialogResult.OK)
-            //{
-            //    metaDbInfo.DBCnnStringBuilder = metaDataCnnDialog.DbConnectionStringBuilder;
-            //    metaDbInfo.DBName = metaDataCnnDialog.PreferredDatabaseName;
-            //    metadataConnectionString = metaDbInfo.DBCnnStringBuilder.ConnectionString;
-            //}
+            IConnectionStringGui metaDataCnnDialog = GetSelectedMetadataDriver().GetConnectionStringGuiForNewDb();
+            DialogResult result = ((Form)metaDataCnnDialog).ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                metaDbInfo.DBCnnStringBuilder = metaDataCnnDialog.DbConnectionStringBuilder;
+                metaDbInfo.DBName = metaDataCnnDialog.PreferredDatabaseName;
+                metadataConnectionString = metaDbInfo.DBCnnStringBuilder.ConnectionString;
+            }
         }
 
         /// <summary>
@@ -627,25 +789,25 @@ namespace Epi.Windows.Dialogs
             }
             if (collectedDataCnnDialog != null)
             {
-                //collectedDataCnnDialog.SetDatabaseName(this.ProjectName);
-                
-                //DialogResult result = ((Form)collectedDataCnnDialog).ShowDialog();
-                //if (result == DialogResult.OK)
-                //{
-                //    txtCollectedData.Text = collectedDataCnnDialog.DbConnectionStringBuilder.ToString();
-                //    collectedDataConnectionString = collectedDataCnnDialog.DbConnectionStringBuilder.ToString();
-                //    CollectedDataDBInfo.DBCnnStringBuilder = collectedDataCnnDialog.DbConnectionStringBuilder;
+                collectedDataCnnDialog.SetDatabaseName(this.ProjectName);
 
-                //    if (CollectedDataDBInfo.DBCnnStringBuilder != null)
-                //    {
-                //        CollectedDataDBInfo.DBCnnStringBuilder.ConnectionString = collectedDataConnectionString;
-                //    }
-                //    else
-                //    {
-                //        CollectedDataDBInfo.DBCnnStringBuilder = GetSelectedCollectedDataDriver().RequestDefaultConnection("Collected_" + txtProjectName.Text.Trim());
-                //    }
-                //    CollectedDataDBInfo.DBName = collectedDataCnnDialog.PreferredDatabaseName;
-                //}
+                DialogResult result = ((Form)collectedDataCnnDialog).ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    txtCollectedData.Text = collectedDataCnnDialog.DbConnectionStringBuilder.ToString();
+                    collectedDataConnectionString = collectedDataCnnDialog.DbConnectionStringBuilder.ToString();
+                    CollectedDataDBInfo.DBCnnStringBuilder = collectedDataCnnDialog.DbConnectionStringBuilder;
+
+                    if (CollectedDataDBInfo.DBCnnStringBuilder != null)
+                    {
+                        CollectedDataDBInfo.DBCnnStringBuilder.ConnectionString = collectedDataConnectionString;
+                    }
+                    else
+                    {
+                        CollectedDataDBInfo.DBCnnStringBuilder = GetSelectedCollectedDataDriver().RequestDefaultConnection("Collected_" + txtProjectName.Text.Trim());
+                    }
+                    CollectedDataDBInfo.DBName = collectedDataCnnDialog.PreferredDatabaseName;
+                }
             }
             else
             {
@@ -661,8 +823,30 @@ namespace Epi.Windows.Dialogs
         /// Obtains the meta data driver factory
         /// </summary>
         /// <returns>Instance of the metadata driver factory</returns>
+        private IDbDriverFactory GetSelectedCollectedDataDriver()
+        {
+            string dataDriverType = null;
 
+            try
+            {
+                if (cbxCollectedDataDriver.SelectedValue != null)
+                {
+                    dataDriverType = cbxCollectedDataDriver.SelectedValue.ToString();
+                }
+                else
+                {
+                    throw new Exception(SharedStrings.SELECT_DATABASE_TYPE);
+                }
 
+                IDbDriverFactory dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(dataDriverType);
+                return dbFactory;
+            }
+            catch (Exception ex)
+            {
+                MsgBox.ShowWarning(SharedStrings.UNABLE_CREATE_DATABASE + "  " + ex.Message);
+                return null;
+            }
+        }
 
         /// <summary>
         /// Saves project information
@@ -699,7 +883,6 @@ namespace Epi.Windows.Dialogs
             project.CollectedDataDriver = "cbxCollectedDataDriver.SelectedValue.ToString()";
             project.CollectedDataConnectionString = this.collectedDataDBInfo.DBCnnStringBuilder.ToString();
             project.CollectedData.Initialize(collectedDataDBInfo, "cbxCollectedDataDriver.SelectedValue.ToString()", true);
-
 
             // Check that there isn't an Epi 7 project already here.
             if (project.CollectedDataDriver != "Epi.Data.Office.AccessDBFactory, Epi.Data.Office")
@@ -768,22 +951,20 @@ namespace Epi.Windows.Dialogs
             }
         }
 
-
-
         //DbConnectionStringBuilder cnnInfo;
         /// <summary>
         /// Obtains the meta data collection string of the project file path input by the user
         /// </summary>
         private void GetMetaConnectionString()
         {
-            //IDbDriverFactory metaDBFactory = GetSelectedCollectedDataDriver();
-            //DbDriverInfo dbInfo = new DbDriverInfo();
-            //dbInfo.DBCnnStringBuilder = metaDBFactory.RequestNewConnection(txtCollectedData.Text.Trim());
-            //this.MetaDBInfo = dbInfo;
-            //if (this.metaDbInfo.DBCnnStringBuilder != null)
-            //{
-            //    metadataConnectionString = this.metaDbInfo.DBCnnStringBuilder.ConnectionString;
-            //}
+            IDbDriverFactory metaDBFactory = GetSelectedCollectedDataDriver();
+            DbDriverInfo dbInfo = new DbDriverInfo();
+            dbInfo.DBCnnStringBuilder = metaDBFactory.RequestNewConnection(txtCollectedData.Text.Trim());
+            this.MetaDBInfo = dbInfo;
+            if (this.metaDbInfo.DBCnnStringBuilder != null)
+            {
+                metadataConnectionString = this.metaDbInfo.DBCnnStringBuilder.ConnectionString;
+            }
         }
 
         /// <summary>
@@ -791,15 +972,15 @@ namespace Epi.Windows.Dialogs
         /// </summary>
         private void GetCollectedConnectionString()
         {
-            //IDbDriverFactory collectedDBFactory = GetSelectedCollectedDataDriver();
+            IDbDriverFactory collectedDBFactory = GetSelectedCollectedDataDriver();
 
-            //DbDriverInfo dbInfo = new DbDriverInfo();
-            //dbInfo.DBCnnStringBuilder = collectedDBFactory.RequestNewConnection(txtCollectedData.Text.Trim());
-            //this.CollectedDataDBInfo = dbInfo;
-            //if (this.CollectedDataDBInfo.DBCnnStringBuilder != null)
-            //{
-            //    collectedDataConnectionString = this.CollectedDataDBInfo.DBCnnStringBuilder.ToString();
-            //}
+            DbDriverInfo dbInfo = new DbDriverInfo();
+            dbInfo.DBCnnStringBuilder = collectedDBFactory.RequestNewConnection(txtCollectedData.Text.Trim());
+            this.CollectedDataDBInfo = dbInfo;
+            if (this.CollectedDataDBInfo.DBCnnStringBuilder != null)
+            {
+                collectedDataConnectionString = this.CollectedDataDBInfo.DBCnnStringBuilder.ToString();
+            }
         }
 
         /// <summary>
@@ -807,20 +988,20 @@ namespace Epi.Windows.Dialogs
         /// </summary>
         private void PrepopulateCollectedDataLocation()
         {
-            //if (!string.IsNullOrEmpty(txtProjectName.Text) && !string.IsNullOrEmpty(txtProjectLocation.Text))
-            //{
-            //    {
-            //        collectedDataDBInfo.DBCnnStringBuilder = GetSelectedCollectedDataDriver().RequestDefaultConnection(txtProjectName.Text.Trim(), txtProjectName.Text.Trim());
-            //        txtCollectedData.Text = collectedDataDBInfo.DBCnnStringBuilder.ConnectionString;
-            //        collectedDataConnectionString = txtCollectedData.Text;
-            //    }
-            //}
-            //else
-            //{
-            //    collectedDataDBInfo.DBCnnStringBuilder = null;
-            //    txtCollectedData.Text = string.Empty;
-            //    collectedDataConnectionString = string.Empty;
-            //}
+            if (!string.IsNullOrEmpty(txtProjectName.Text) && !string.IsNullOrEmpty(txtProjectLocation.Text))
+            {
+                {
+                    collectedDataDBInfo.DBCnnStringBuilder = GetSelectedCollectedDataDriver().RequestDefaultConnection(txtProjectName.Text.Trim(), txtProjectName.Text.Trim());
+                    txtCollectedData.Text = collectedDataDBInfo.DBCnnStringBuilder.ConnectionString;
+                    collectedDataConnectionString = txtCollectedData.Text;
+                }
+            }
+            else
+            {
+                collectedDataDBInfo.DBCnnStringBuilder = null;
+                txtCollectedData.Text = string.Empty;
+                collectedDataConnectionString = string.Empty;
+            }
         }
 
         /// <summary>
@@ -828,22 +1009,22 @@ namespace Epi.Windows.Dialogs
         /// </summary>
         private void BuildCollectedData()
         {
-            //if (!string.IsNullOrEmpty(txtProjectName.Text) && !string.IsNullOrEmpty(txtProjectLocation.Text))
-            //{
-            //    if (cbxCollectedDataDriver.SelectedValue != null)
-            //    {
-            //        if (cbxCollectedDataDriver.SelectedValue.Equals(Configuration.AccessDriver))
-            //        {
-            //            collectedDataDBInfo.DBCnnStringBuilder = GetSelectedCollectedDataDriver().RequestDefaultConnection(txtProjectName.Text.Trim(), txtProjectName.Text.Trim());
-            //            txtCollectedData.Text = CollectedDataDBInfo.DBCnnStringBuilder.ConnectionString;
-            //        }
-            //        else
-            //        {
-            //            CollectedDataDBInfo.DBCnnStringBuilder = null;
-            //            txtCollectedData.Text = string.Empty;
-            //        }
-            //    }
-            //}
+            if (!string.IsNullOrEmpty(txtProjectName.Text) && !string.IsNullOrEmpty(txtProjectLocation.Text))
+            {
+                if (cbxCollectedDataDriver.SelectedValue != null)
+                {
+                    if (cbxCollectedDataDriver.SelectedValue.Equals(Configuration.AccessDriver))
+                    {
+                        collectedDataDBInfo.DBCnnStringBuilder = GetSelectedCollectedDataDriver().RequestDefaultConnection(txtProjectName.Text.Trim(), txtProjectName.Text.Trim());
+                        txtCollectedData.Text = CollectedDataDBInfo.DBCnnStringBuilder.ConnectionString;
+                    }
+                    else
+                    {
+                        CollectedDataDBInfo.DBCnnStringBuilder = null;
+                        txtCollectedData.Text = string.Empty;
+                    }
+                }
+            }
         }
 
         private MetadataSource GetSelectedMetadataSource()
@@ -883,7 +1064,36 @@ namespace Epi.Windows.Dialogs
                 DoGetSurveyInfo(OrganizationKey, id);
             }
         }
+        private bool IsValid_NEW_ProjectName(string projectNameCandidate)
+        {
+            string validationMessage = string.Empty;
+            txtProjectName.Text = projectNameCandidate;
+            BuildCollectedData();
 
+            if (Project.IsValidProjectName(projectNameCandidate, ref validationMessage) == false)
+            {
+                return false;
+            }
+
+            project = new Project();
+            project.Name = projectNameCandidate;
+
+            project.Location = Path.Combine(txtProjectLocation.Text, projectNameCandidate);
+
+            if (collectedDataDBInfo.DBCnnStringBuilder != null
+                && collectedDataDBInfo.DBCnnStringBuilder.ContainsKey("Provider")
+                && collectedDataDBInfo.DBCnnStringBuilder["Provider"] == "Microsoft.Jet.OLEDB.4.0")
+            {
+                collectedDataDBInfo.DBCnnStringBuilder["Data Source"] = project.FilePath.Substring(0, project.FilePath.Length - 4) + ".mdb";
+            }
+
+            if (File.Exists(project.FilePath))
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// Validates input provided on the dialog.
@@ -897,19 +1107,19 @@ namespace Epi.Windows.Dialogs
             bool validProjectName = ValidateProjectName();
             if (validProjectName == false) { return false; }
 
-            //// Validate project location
-            //if (txtProjectLocation.Text.Trim() == string.Empty)
-            //{
-            //    if (ErrorMessages.Count == 0) txtProjectLocation.Focus();
-            //    ErrorMessages.Add(SharedStrings.PROJECT_LOCATION_REQUIRED);
-            //}
+            // Validate project location
+            if (txtProjectLocation.Text.Trim() == string.Empty)
+            {
+                if (ErrorMessages.Count == 0) txtProjectLocation.Focus();
+                ErrorMessages.Add(SharedStrings.PROJECT_LOCATION_REQUIRED);
+            }
 
-            //// Validate database
-            //if (txtCollectedData.Text.Trim() == string.Empty)
-            //{
-            //    if (ErrorMessages.Count == 0) txtCollectedData.Focus();
-            //    ErrorMessages.Add(SharedStrings.COLLECTED_DATA_INFORMATION_REQUIRED);
-            //}
+            // Validate database
+            if (txtCollectedData.Text.Trim() == string.Empty)
+            {
+                if (ErrorMessages.Count == 0) txtCollectedData.Focus();
+                ErrorMessages.Add(SharedStrings.COLLECTED_DATA_INFORMATION_REQUIRED);
+            }
 
             return (ErrorMessages.Count == 0);
         }
@@ -922,12 +1132,12 @@ namespace Epi.Windows.Dialogs
             bool valid = true;
             string validationMessage = string.Empty;
 
-            //valid = Project.IsValidProjectName(ProjectName, ref validationMessage);
+            valid = Project.IsValidProjectName(ProjectName, ref validationMessage);
 
-            //if (!valid)
-            //{
-            //    txtProjectName.Focus();
-            //}
+            if (!valid)
+            {
+                txtProjectName.Focus();
+            }
 
             return valid;
         }
@@ -1025,10 +1235,7 @@ namespace Epi.Windows.Dialogs
                     }    
                 }
             }
-            catch 
-            {
-
-            }
+            catch { }
 
             return orgs;
         }
@@ -1071,7 +1278,12 @@ namespace Epi.Windows.Dialogs
             //    this.BeginInvoke(new SetStatusDelegate(SetStatusMessage), SharedStrings.IMPORT_DATA_COMPLETE + " " + SharedStrings.IMPORT_DATA_TIME_ELAPSED + ": " + stopwatch.Elapsed.ToString());
             }
 
-            txtProjectName.Text = SurveyName;
+            if (string.IsNullOrEmpty(SurveyName) == false)
+            {
+                txtProjectName.Text = SurveyName;
+                txtProjectName_TextChanged(new Object(), new EventArgs());
+                txtProjectName_Leave(new Object(), new EventArgs());
+            }
         }
 
         private void DoGetSurveyInfo(string orgKey, string surveyId)
@@ -1240,7 +1452,5 @@ namespace Epi.Windows.Dialogs
                 //StopImport();
             }
         }
-
-
     }
 }
