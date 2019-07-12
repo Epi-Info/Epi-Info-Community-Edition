@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="96c636b9-7658-49cc-9fcd-05860047b40a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SurveyManagerServiceV46.xsd" MetadataType="Schema" ID="40214c86-c9f9-43a8-b51e-4562623b711e" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd5" />
+    <MetadataFile FileName="SurveyManagerServiceV461.xsd" MetadataType="Schema" ID="6ba9c72e-944c-4ffd-afac-eb4b5163b12f" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd0" />
+    <MetadataFile FileName="ManagerServiceV41.wsdl" MetadataType="Wsdl" ID="0cc236e9-ee99-4bae-86cd-8f69fe910acf" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?wsdl" />
+    <MetadataFile FileName="SurveyManagerServiceV41.disco" MetadataType="Disco" ID="34028879-e3ac-4405-bd19-895914bfe48b" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?disco" />
+    <MetadataFile FileName="SurveyManagerServiceV462.xsd" MetadataType="Schema" ID="a9c57181-2308-4b38-af63-2a689d1e5a45" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd2" />
+    <MetadataFile FileName="SurveyManagerServiceV463.xsd" MetadataType="Schema" ID="ec637aab-2ea2-429b-9f5a-787eca0b76e4" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd1" />
+    <MetadataFile FileName="SurveyManagerServiceV464.xsd" MetadataType="Schema" ID="52d126e2-0aae-4fbf-bf50-374022acbaa6" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd4" />
+    <MetadataFile FileName="SurveyManagerServiceV465.xsd" MetadataType="Schema" ID="7b0828ef-08ba-4079-9746-7db4f325671f" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

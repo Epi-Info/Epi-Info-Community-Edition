@@ -154,6 +154,17 @@ namespace Epi
         }
 
         /// <summary>
+        /// Gets a datatable for recent organizations
+        /// </summary>
+        public Config.RecentOrganizationDataTable RecentOrganization
+        {
+            get
+            {
+                return configDataSet.RecentOrganization;
+            }
+        }
+
+        /// <summary>
         /// Gets a datatable for data drivers
         /// </summary>
         public Config.DataDriverDataTable DataDrivers

@@ -284,6 +284,14 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="RecentOrganization" msprop:Generator_TableClassName="RecentOrganizationDataTable" msprop:Generator_TableVarName="tableRecentOrganization" msprop:Generator_TablePropName="RecentOrganization" msprop:Generator_RowDeletingName="RecentOrganizationRowDeleting" msprop:Generator_RowChangingName="RecentOrganizationRowChanging" msprop:Generator_RowEvHandlerName="RecentOrganizationRowChangeEventHandler" msprop:Generator_RowDeletedName="RecentOrganizationRowDeleted" msprop:Generator_UserTableName="RecentOrganization" msprop:Generator_RowChangedName="RecentOrganizationRowChanged" msprop:Generator_RowEvArgName="RecentOrganizationRowChangeEvent" msprop:Generator_RowClassName="RecentOrganizationRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Organization_Id" msprop:Generator_ColumnVarNameInTable="columnOrganization_Id" msprop:Generator_ColumnPropNameInRow="Organization_Id" msprop:Generator_ColumnPropNameInTable="Organization_IdColumn" msprop:Generator_UserColumnName="Organization_Id" type="xs:string" />
+              <xs:element name="LastAccessed" msprop:Generator_ColumnVarNameInTable="columnLastAccessed" msprop:Generator_ColumnPropNameInRow="LastAccessed" msprop:Generator_ColumnPropNameInTable="LastAccessedColumn" msprop:Generator_UserColumnName="LastAccessed" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -322,39 +330,43 @@
       <xs:selector xpath=".//Settings" />
       <xs:field xpath="BackgroundImage" />
     </xs:unique>
-    <xs:keyref name="Connections_File" refer="Connections_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="File" msprop:rel_Generator_ChildPropName="GetFileRows" msprop:rel_Generator_UserRelationName="Connections_File" msprop:rel_Generator_RelationVarName="relationConnections_File" msprop:rel_Generator_UserParentTable="Connections" msprop:rel_Generator_ParentPropName="ConnectionsRow">
+    <xs:unique name="RecentOrganization_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//RecentOrganization" />
+      <xs:field xpath="Organization_Id" />
+    </xs:unique>
+    <xs:keyref name="Connections_File" refer="Connections_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="File" msprop:rel_Generator_ChildPropName="GetFileRows" msprop:rel_Generator_UserRelationName="Connections_File" msprop:rel_Generator_ParentPropName="ConnectionsRow" msprop:rel_Generator_RelationVarName="relationConnections_File" msprop:rel_Generator_UserParentTable="Connections">
       <xs:selector xpath=".//File" />
       <xs:field xpath="@Connections_Id" />
     </xs:keyref>
-    <xs:keyref name="Connections_Database" refer="Connections_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="Database" msprop:rel_Generator_ChildPropName="GetDatabaseRows" msprop:rel_Generator_UserRelationName="Connections_Database" msprop:rel_Generator_RelationVarName="relationConnections_Database" msprop:rel_Generator_UserParentTable="Connections" msprop:rel_Generator_ParentPropName="ConnectionsRow">
+    <xs:keyref name="Connections_Database" refer="Connections_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="Database" msprop:rel_Generator_ChildPropName="GetDatabaseRows" msprop:rel_Generator_UserRelationName="Connections_Database" msprop:rel_Generator_ParentPropName="ConnectionsRow" msprop:rel_Generator_RelationVarName="relationConnections_Database" msprop:rel_Generator_UserParentTable="Connections">
       <xs:selector xpath=".//Database" />
       <xs:field xpath="@Connections_Id" />
     </xs:keyref>
-    <xs:keyref name="Gadgets_Gadget" refer="Gadgets_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="Gadget" msprop:rel_Generator_ChildPropName="GetGadgetRows" msprop:rel_Generator_UserRelationName="Gadgets_Gadget" msprop:rel_Generator_RelationVarName="relationGadgets_Gadget" msprop:rel_Generator_UserParentTable="Gadgets" msprop:rel_Generator_ParentPropName="GadgetsRow">
+    <xs:keyref name="Gadgets_Gadget" refer="Gadgets_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="Gadget" msprop:rel_Generator_ChildPropName="GetGadgetRows" msprop:rel_Generator_UserRelationName="Gadgets_Gadget" msprop:rel_Generator_ParentPropName="GadgetsRow" msprop:rel_Generator_RelationVarName="relationGadgets_Gadget" msprop:rel_Generator_UserParentTable="Gadgets">
       <xs:selector xpath=".//Gadget" />
       <xs:field xpath="@Gadgets_Id" />
     </xs:keyref>
-    <xs:keyref name="DataDrivers_DataDriver" refer="DataDrivers_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="DataDriver" msprop:rel_Generator_ChildPropName="GetDataDriverRows" msprop:rel_Generator_UserRelationName="DataDrivers_DataDriver" msprop:rel_Generator_RelationVarName="relationDataDrivers_DataDriver" msprop:rel_Generator_UserParentTable="DataDrivers" msprop:rel_Generator_ParentPropName="DataDriversRow">
+    <xs:keyref name="DataDrivers_DataDriver" refer="DataDrivers_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="DataDriver" msprop:rel_Generator_ChildPropName="GetDataDriverRows" msprop:rel_Generator_UserRelationName="DataDrivers_DataDriver" msprop:rel_Generator_ParentPropName="DataDriversRow" msprop:rel_Generator_RelationVarName="relationDataDrivers_DataDriver" msprop:rel_Generator_UserParentTable="DataDrivers">
       <xs:selector xpath=".//DataDriver" />
       <xs:field xpath="@DataDrivers_Id" />
     </xs:keyref>
-    <xs:keyref name="Variables_PermanentVariable" refer="Variables_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="PermanentVariable" msprop:rel_Generator_ChildPropName="GetPermanentVariableRows" msprop:rel_Generator_UserRelationName="Variables_PermanentVariable" msprop:rel_Generator_RelationVarName="relationVariables_PermanentVariable" msprop:rel_Generator_UserParentTable="Variables" msprop:rel_Generator_ParentPropName="VariablesRow">
+    <xs:keyref name="Variables_PermanentVariable" refer="Variables_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="PermanentVariable" msprop:rel_Generator_ChildPropName="GetPermanentVariableRows" msprop:rel_Generator_UserRelationName="Variables_PermanentVariable" msprop:rel_Generator_ParentPropName="VariablesRow" msprop:rel_Generator_RelationVarName="relationVariables_PermanentVariable" msprop:rel_Generator_UserParentTable="Variables">
       <xs:selector xpath=".//PermanentVariable" />
       <xs:field xpath="@Variables_Id" />
     </xs:keyref>
-    <xs:keyref name="Modules_Module" refer="Modules_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="Module" msprop:rel_Generator_ChildPropName="GetModuleRows" msprop:rel_Generator_UserRelationName="Modules_Module" msprop:rel_Generator_RelationVarName="relationModules_Module" msprop:rel_Generator_UserParentTable="Modules" msprop:rel_Generator_ParentPropName="ModulesRow">
+    <xs:keyref name="Modules_Module" refer="Modules_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="Module" msprop:rel_Generator_ChildPropName="GetModuleRows" msprop:rel_Generator_UserRelationName="Modules_Module" msprop:rel_Generator_ParentPropName="ModulesRow" msprop:rel_Generator_RelationVarName="relationModules_Module" msprop:rel_Generator_UserParentTable="Modules">
       <xs:selector xpath=".//Module" />
       <xs:field xpath="@Modules_Id" />
     </xs:keyref>
-    <xs:keyref name="DataSources_RecentDataSource" refer="DataSources_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="RecentDataSource" msprop:rel_Generator_ChildPropName="GetRecentDataSourceRows" msprop:rel_Generator_UserRelationName="DataSources_RecentDataSource" msprop:rel_Generator_RelationVarName="relationDataSources_RecentDataSource" msprop:rel_Generator_UserParentTable="DataSources" msprop:rel_Generator_ParentPropName="DataSourcesRow">
+    <xs:keyref name="DataSources_RecentDataSource" refer="DataSources_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="RecentDataSource" msprop:rel_Generator_ChildPropName="GetRecentDataSourceRows" msprop:rel_Generator_UserRelationName="DataSources_RecentDataSource" msprop:rel_Generator_ParentPropName="DataSourcesRow" msprop:rel_Generator_RelationVarName="relationDataSources_RecentDataSource" msprop:rel_Generator_UserParentTable="DataSources">
       <xs:selector xpath=".//RecentDataSource" />
       <xs:field xpath="@DataSources_Id_0" />
     </xs:keyref>
-    <xs:keyref name="Projects_RecentProject" refer="Projects_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="RecentProject" msprop:rel_Generator_ChildPropName="GetRecentProjectRows" msprop:rel_Generator_UserRelationName="Projects_RecentProject" msprop:rel_Generator_RelationVarName="relationProjects_RecentProject" msprop:rel_Generator_UserParentTable="Projects" msprop:rel_Generator_ParentPropName="ProjectsRow">
+    <xs:keyref name="Projects_RecentProject" refer="Projects_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="RecentProject" msprop:rel_Generator_ChildPropName="GetRecentProjectRows" msprop:rel_Generator_UserRelationName="Projects_RecentProject" msprop:rel_Generator_ParentPropName="ProjectsRow" msprop:rel_Generator_RelationVarName="relationProjects_RecentProject" msprop:rel_Generator_UserParentTable="Projects">
       <xs:selector xpath=".//RecentProject" />
       <xs:field xpath="@Projects_Id" />
     </xs:keyref>
-    <xs:keyref name="Views_RecentView" refer="Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="RecentView" msprop:rel_Generator_ChildPropName="GetRecentViewRows" msprop:rel_Generator_UserRelationName="Views_RecentView" msprop:rel_Generator_RelationVarName="relationViews_RecentView" msprop:rel_Generator_UserParentTable="Views" msprop:rel_Generator_ParentPropName="ViewsRow">
+    <xs:keyref name="Views_RecentView" refer="Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserChildTable="RecentView" msprop:rel_Generator_ChildPropName="GetRecentViewRows" msprop:rel_Generator_UserRelationName="Views_RecentView" msprop:rel_Generator_ParentPropName="ViewsRow" msprop:rel_Generator_RelationVarName="relationViews_RecentView" msprop:rel_Generator_UserParentTable="Views">
       <xs:selector xpath=".//RecentView" />
       <xs:field xpath="@Views_Id" />
     </xs:keyref>

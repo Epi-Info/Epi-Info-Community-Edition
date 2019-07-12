@@ -229,7 +229,8 @@ namespace Epi.Core.ServiceClient
                     else
                     {
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                     }
@@ -325,7 +326,8 @@ namespace Epi.Core.ServiceClient
                         else
                         {
                             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                         }
@@ -463,7 +465,8 @@ namespace Epi.Core.ServiceClient
                     else
                     {
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                     }
@@ -560,7 +563,8 @@ namespace Epi.Core.ServiceClient
                         else
                         {
                             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                         }
@@ -682,7 +686,8 @@ namespace Epi.Core.ServiceClient
                     else
                     {
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                     }
@@ -777,10 +782,10 @@ namespace Epi.Core.ServiceClient
                         }
                         else
                         {
-                            binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
-
-
+                             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                            // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                             binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
+                         
                         }
 
                      
@@ -822,7 +827,10 @@ namespace Epi.Core.ServiceClient
         {
             Configuration config = Configuration.GetNewInstance();
 
-            string pEndPointAddress = config.Settings.WebServiceEndpointAddress;
+            string configServiceEndpoint = config.Settings.WebServiceEndpointAddress;
+            //int length = configServiceEndpoint.IndexOf(Environment.NewLine);
+            //string pEndPointAddress = configServiceEndpoint.Substring(0, length);
+            string pEndPointAddress = configServiceEndpoint;
             bool pIsAuthenticated = false;
             bool pIsWsHTTPBinding = true;
             //string s = config.Settings.WebServiceAuthMode;// "Authentication_Use_Windows"];r
@@ -848,9 +856,9 @@ namespace Epi.Core.ServiceClient
         }
 
 
-        public static SurveyManagerServiceV5.ManagerServiceV5Client GetClientV5(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
+        public static SurveyManagerServiceV4.ManagerServiceV4Client GetClientV4(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
         {
-            SurveyManagerServiceV5.ManagerServiceV5Client result = null;
+            SurveyManagerServiceV4.ManagerServiceV4Client result = null;
             try
             {
 
@@ -889,7 +897,8 @@ namespace Epi.Core.ServiceClient
                     else
                     {
                         binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                        binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                     }
@@ -898,7 +907,7 @@ namespace Epi.Core.ServiceClient
 
 
 
-                    result = new SurveyManagerServiceV5.ManagerServiceV5Client(binding, endpoint);
+                    result = new SurveyManagerServiceV4.ManagerServiceV4Client(binding, endpoint);
 
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -948,7 +957,7 @@ namespace Epi.Core.ServiceClient
 
                         System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
 
-                        result = new SurveyManagerServiceV5.ManagerServiceV5Client(binding, endpoint);
+                        result = new SurveyManagerServiceV4.ManagerServiceV4Client(binding, endpoint);
 
                     }
                     else
@@ -985,14 +994,15 @@ namespace Epi.Core.ServiceClient
                         else
                         {
                             binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
-                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            // binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.None;
+                            binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
 
 
                         }
 
 
 
-                        result = new SurveyManagerServiceV5.ManagerServiceV5Client(binding, endpoint);
+                        result = new SurveyManagerServiceV4.ManagerServiceV4Client(binding, endpoint);
                         System.Net.ServicePointManager.ServerCertificateValidationCallback +=
                         (se, cert, chain, sslerror) =>
                         {
@@ -1025,11 +1035,17 @@ namespace Epi.Core.ServiceClient
             return result;
         }
 
-        public static SurveyManagerServiceV5.ManagerServiceV5Client GetClientV5()
+        public static SurveyManagerServiceV4.ManagerServiceV4Client GetClientV4()
         {
             Configuration config = Configuration.GetNewInstance();
 
-            string pEndPointAddress = config.Settings.WebServiceEndpointAddress;
+            string configServiceEndpoint = config.Settings.WebServiceEndpointAddress;
+            if(string.IsNullOrEmpty(configServiceEndpoint) == true)
+            {
+                return null;
+            }
+            int length = configServiceEndpoint.IndexOf(Environment.NewLine);
+            string pEndPointAddress = configServiceEndpoint.Substring(0, length);
             bool pIsAuthenticated = false;
             bool pIsWsHTTPBinding = true;
             //string s = config.Settings.WebServiceAuthMode;// "Authentication_Use_Windows"];r
@@ -1051,7 +1067,7 @@ namespace Epi.Core.ServiceClient
                 }
             }
 
-            return GetClientV5(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+            return GetClientV4(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
         }
 
     }

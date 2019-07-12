@@ -61,5 +61,6 @@ namespace Epi
         public const string surveyManagerservice = "surveymanagerservice.svc";
         public const string surveyManagerservicev2 = "surveymanagerservicev2.svc";
         public const string surveyManagerservicev3 = "surveymanagerservicev3.svc";
+        public const string surveyManagerservicev4 = "surveymanagerservicev4.svc";
     }
 }

@@ -2946,6 +2946,92 @@ namespace Epi.Windows.MakeView.Forms
             }
         }
 
+        public string SaveTemplate(XmlDocument xml, string saveAs)
+        {
+            string safeFileName = saveAs;
+            string templatePath = string.Empty;
+            string saveTo = string.Empty;
+
+            try
+            {
+                string targetFolderName = "Projects";
+                string newNameCandidate = string.Empty;
+
+                string programFilesDirectoryName = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles).ToLowerInvariant();
+                string installFolder = AppDomain.CurrentDomain.BaseDirectory.ToLowerInvariant();
+
+                Configuration config = Configuration.GetNewInstance();
+                string configPath = config.Directories.Templates;
+
+                if (configPath != string.Empty)
+                {
+                    templatePath = Path.Combine(configPath, targetFolderName);
+                }
+                else if (installFolder.ToLowerInvariant().StartsWith(programFilesDirectoryName))
+                {
+                    templatePath = Path.Combine(installFolder, "Templates\\" + targetFolderName);
+                }
+                else
+                {
+                    string asmPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    templatePath = asmPath + targetFolderName;
+                }
+
+                if (Directory.Exists(templatePath) == false)
+                {
+                    Directory.CreateDirectory(templatePath);
+                }
+
+                saveTo = Path.Combine(templatePath, safeFileName + ".xml");
+
+                if (File.Exists(saveTo))
+                {
+                    newNameCandidate = string.Format("{0}_{1}.xml", safeFileName.Replace(".xml", "").Replace(".eit", ""), DateTime.Now.ToString("yyyyMMddhmmsstt"));
+                    string text = SharedStrings.TEMPLATE_GET_ALREADY_EXISTS
+                        + Environment.NewLine
+                        + string.Format("[{0}]", safeFileName)
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + SharedStrings.TEMPLATE_GET_RENAME_TEMPLATE
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + SharedStrings.TEMPLATE_GET_YES_RENAME
+                        + Environment.NewLine
+                        + string.Format("[{0}]", newNameCandidate)
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + SharedStrings.TEMPLATE_GET_NO_OVERWRITE
+                        + Environment.NewLine
+                        + Environment.NewLine
+                        + SharedStrings.TEMPLATE_GET_CANCEL;
+
+                    DialogResult overwrite = MessageBox.Show(text, SharedStrings.TEMPLATE_GET_TITLE, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                    if (overwrite == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        saveTo = Path.Combine(templatePath, newNameCandidate);
+                    }
+                    else if (overwrite == System.Windows.Forms.DialogResult.Cancel)
+                    {
+                        return "";
+                    }
+                }
+
+                xml.Save(saveTo);
+
+                if (string.IsNullOrEmpty(targetFolderName) == false)
+                {
+                    projectExplorer.UpdateTemplates();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(SharedStrings.ERROR + ": " + SharedStrings.TEMPLATE_CANNOT_READ_FILE + Environment.NewLine + ex.Message);
+            }
+
+            return saveTo;
+        }
+
         private void makeAccessProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -5553,5 +5639,162 @@ namespace Epi.Windows.MakeView.Forms
 
             return configurationOk;
         }
+
+        private void OpenProjectFromWebToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
+                SurveyManagerServiceV3.OrganizationRequest Request = new SurveyManagerServiceV3.OrganizationRequest();
+                SurveyManagerServiceV3.OrganizationDTO orgDTO = new SurveyManagerServiceV3.OrganizationDTO();
+                Request.Organization = orgDTO;
+                var Result = client.GetOrganization(Request);
+            }
+            catch(System.ServiceModel.EndpointNotFoundException ex)
+            {
+                MessageBox.Show
+                (   SharedStrings.WEBSURVEY_SETTINGS_INVALID + Environment.NewLine + Environment.NewLine + "(" + ex.InnerException.Message + ")",
+                    "Epi Info 7",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+                return;
+            }
+
+            OpenProjectFromWebDialog dialog = new OpenProjectFromWebDialog("");
+
+            string projectName = string.Empty;
+            string projectDescription = string.Empty;
+            string projectLocation = string.Empty;
+            string dataDBInfo = string.Empty;
+            Data.DbDriverInfo dbDriverInfo = new Data.DbDriverInfo();
+            string templateXML = string.Empty;
+
+            try
+            {
+                dialog.ShowDialog();
+
+                if (dialog.DialogResult == DialogResult.OK)
+                {
+                    CloseCurrentProject();
+                    projectName = dialog.ProjectName;
+                    projectLocation = dialog.ProjectLocation;
+                    dataDBInfo = dialog.DataDBInfo;
+                    dbDriverInfo = dialog.DriverInfo;
+                    templateXML = dialog.Template;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            finally
+            {
+                dialog.Dispose();
+                GC.Collect();
+                Refresh();
+            }
+
+            canvas.HideUpdateStart(SharedStrings.CREATING_PROJECT);
+
+            Project newProject = new Project();
+
+            newProject = newProject.CreateProject(
+                projectName,
+                projectDescription,
+                projectLocation,
+                dataDBInfo,
+                dbDriverInfo);
+
+            if (newProject != null)
+            {
+                mediator.Project = newProject;
+                if (this.Interpreter == null)
+                {
+                    Assembly assembly = Assembly.Load(newProject.EnterMakeviewIntepreter);
+                    Type myType = assembly.GetType(newProject.EnterMakeviewIntepreter + ".EpiInterpreterParser");
+                    this.Interpreter = (IEnterInterpreter)Activator.CreateInstance(myType, new object[] { this.mediator });
+                    this.Interpreter.Host = this.mediator;
+                }
+
+                canvas.UpdateHidePanel(SharedStrings.LOADING_PROJECT);
+
+                projectExplorer.LoadProject(newProject);
+
+                Template template = new Template(this.mediator);
+                XmlDocument xml = new XmlDocument();
+                xml.LoadXml(templateXML);
+                string templatePath = SaveTemplate(xml, projectName);
+                template.CreateFromTemplate(templatePath);
+
+                //template.CreateFromTemplate(xml);
+
+                //EnableFeatures();
+                OnProjectAccessed(newProject);
+
+                // The code below is needed to catch a condition where the ParentView property of each View object is
+                // not set during the creation of the template. Instead of re-writing this code in the template creation
+                // process, we simply force the metadata to be refreshed (which assigns the ParentView property correctly).
+                newProject.views = null;
+                newProject.LoadViews();
+            }
+
+            canvas.HideUpdateEnd();
+            EnableFeatures();
+
+            /*
+            DialogResult dialogResult = dialog.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    if (projectExplorer.IsProjectLoaded)
+                    {
+                        if (CloseCurrentProject() == false)
+                        {
+                            return;
+                        }
+                    }
+
+                    if(string.IsNullOrEmpty(dialog.Template) == false)
+                    {
+
+
+                    }
+                    
+                    //string filePath = openFileDialog.FileName.Trim();
+                    //if (filePath.ToLowerInvariant().EndsWith(FileExtensions.EPI_PROJ))
+                    //{
+                    //    // This is an Epi 7 project. Open it.
+                    //    Project project = new Project(filePath);
+
+                    //    if (project.CollectedData.FullName.Contains("MS Access"))
+                    //    {
+                    //        string databaseFileName = project.CollectedData.DataSource.Replace("Data Source=".ToLowerInvariant(), string.Empty);
+                    //        if (System.IO.File.Exists(databaseFileName) == false)
+                    //        {
+                    //            MsgBox.ShowError(string.Format(SharedStrings.DATASOURCE_NOT_FOUND, databaseFileName));
+                    //            return;
+                    //        }
+                    //    }
+
+                    //    OpenProject(project);
+                    //}
+                }
+                catch (System.Security.Cryptography.CryptographicException ex)
+                {
+                    MsgBox.ShowError(string.Format(SharedStrings.ERROR_CRYPTO_KEYS, ex.Message));
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    MsgBox.ShowException(ex);
+                    return;
+                }
+            }
+            */
+        }
+
     }
 }

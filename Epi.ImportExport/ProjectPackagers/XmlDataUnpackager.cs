@@ -493,6 +493,8 @@ namespace Epi.ImportExport.ProjectPackagers
                     sb.Append(StringLiterals.COMMERCIAL_AT);
                     sb.Append(fieldData.FieldName);
 
+
+
                     if (fieldsInQuery.Count > 0 && fieldValueParams.Count > 0)
                     {
                         if (DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.office") == false)
@@ -509,37 +511,76 @@ namespace Epi.ImportExport.ProjectPackagers
                             IDbCommand command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
                             object obj = command.ExecuteNonQuery();
 
-                            if(obj is int && (int)obj == 0)
-                            {
-                                Query hasQuery = db.CreateQuery("SELECT [GlobalRecordId] FROM [" + previousPage.TableName + "] " + whereClause);
-                                IDataReader reader = db.ExecuteReader(hasQuery);
-                                bool hasRow = reader.Read();
-
-                                if (hasRow == false)
+                            //try
+                            //{ 
+                                if(obj is int && (int)obj == 0)
                                 {
-                                    StringBuilder insert = new StringBuilder();
-                                    insert.Append("INSERT INTO [");
-                                    insert.Append(previousPage.TableName);
-                                    insert.Append("] ([GlobalRecordId]) VALUES ('");
-                                    insert.Append(lastGuid);
-                                    insert.Append("')");
+                                    Query hasQuery = db.CreateQuery("SELECT [GlobalRecordId] FROM [" + previousPage.TableName + "] " + whereClause);
+                                    IDataReader reader = db.ExecuteReader(hasQuery);
+                                    bool hasRow = reader.Read();
 
-                                    Query insertQuery = db.CreateQuery(insert.ToString());
-                                    obj = db.ExecuteNonQuery(insertQuery);
+                                    if (hasRow == false)
+                                    {
+                                        StringBuilder insert = new StringBuilder();
+                                        insert.Append("INSERT INTO [");
+                                        insert.Append(previousPage.TableName);
+                                        insert.Append("] ([GlobalRecordId]) VALUES ('");
+                                        insert.Append(lastGuid);
+                                        insert.Append("')");
+
+                                        Query insertQuery = db.CreateQuery(insert.ToString());
+                                        obj = db.ExecuteNonQuery(insertQuery);
+                                    }
+
+                                    obj = command.ExecuteNonQuery();
                                 }
 
-                                obj = command.ExecuteNonQuery();
+                                if (fieldsInQuery.Count > 126)
+                                {
+                                    fieldNames = setFieldText.ToString(126);
+                                    updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + fieldNames + StringLiterals.SPACE + whereClause);
+                                    updateQuery.Parameters = fieldValueParams;
+                                    command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
+                                    obj = command.ExecuteNonQuery();
+                                }
                             }
+                        //    catch(Exception exception)
+                        //    {
+                        //        Logger.Log
+                        //        (
+                        //            exception.Message + Environment.NewLine +
+                        //            updateQuery.SqlStatement + Environment.NewLine +
+                        //            updateQuery.Parameters.ToString() + Environment.NewLine +
+                        //            whereClause
+                        //        );
 
-                            if (fieldsInQuery.Count > 126)
-                            {
-                                fieldNames = setFieldText.ToString(126);
-                                updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + fieldNames + StringLiterals.SPACE + whereClause);
-                                updateQuery.Parameters = fieldValueParams;
-                                command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
-                                obj = command.ExecuteNonQuery();
-                            }
-                        }
+                        //        string fieldName = string.Empty;
+                        //        try
+                        //        {
+                        //            foreach (string name in fieldsInQuery)
+                        //            {
+                        //                fieldName = name;
+                        //                updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + fieldName + StringLiterals.SPACE + whereClause);
+                        //                updateQuery.Parameters = fieldValueParams;
+                        //                command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
+                        //                obj = command.ExecuteNonQuery();
+                        //            }
+                        //        }
+                        //        catch(Exception singleFieldException)
+                        //        {
+                        //            Logger.Log
+                        //            (
+                        //                "Exception Message" + exception.Message + Environment.NewLine +
+                        //                "Field Name" + fieldName + Environment.NewLine +
+                        //                whereClause
+                        //            );
+
+                        //            throw (singleFieldException);
+                        //        }
+
+                        //        throw (exception);
+                        //    }
+                        //}
                     }
 
                     setFieldText = new WordBuilder(StringLiterals.COMMA);
