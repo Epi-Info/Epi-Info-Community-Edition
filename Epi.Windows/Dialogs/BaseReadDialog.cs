@@ -386,9 +386,9 @@ namespace Epi.Windows.Dialogs
                     {
                         this.savedConnectionStringDescription = dialog.ConnectionStringDescription;
                         bool success = false;
-                        db.ConnectionString = dialog.DbConnectionStringBuilder.ToString();
+						db.ConnectionString = dialog.DbConnectionStringBuilder.ToString();
 
-                        try
+						try
                         {
                             success = db.TestConnection();
                         }

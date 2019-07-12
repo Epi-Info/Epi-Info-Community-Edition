@@ -81,8 +81,19 @@ namespace Epi.Data
                     throw new Exception("Can not load assembly for EpiInfoWeb. " + ex.StackTrace);
                 }
             }
-            else 
-            {
+			else if (dataDriverType.Equals("Epi.Data.REDCap.REDCapFactory, Epi.Data.REDCap"))
+			{
+				try
+				{
+					typeFactory = Type.GetType(Configuration.EpiInfoREDCapDriver);
+				}
+				catch (Exception ex)
+				{
+					throw new Exception("Can not load assembly for REDCap. " + ex.StackTrace);
+				}
+			}
+			else
+			{
                 try
                 {
                     typeFactory = Type.GetType(dataDriverType);

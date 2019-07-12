@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Menu", "Epi.Windows.Menu\Epi.Windows.Menu.csproj", "{532CF511-35F4-4EC9-B21B-E2B59BB2F796}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -52,6 +52,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.AnalysisDashboard", "Epi.Windows.AnalysisDashboard\Epi.Windows.AnalysisDashboard.csproj", "{05079D2E-76A7-418C-8192-6C7A6D956686}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2BF30720-78CF-4600-A28A-FF1A6756FE3F} = {2BF30720-78CF-4600-A28A-FF1A6756FE3F}
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6} = {F9701A79-3A01-4566-BCAE-BB78E018DDA6}
 		{043E85C3-C95A-481F-A3BB-D86BEA8BA06E} = {043E85C3-C95A-481F-A3BB-D86BEA8BA06E}
 	EndProjectSection
 EndProject
@@ -87,6 +88,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Data.MongoDB", "Epi.Data.MongoDB\Epi.Data.MongoDB.csproj", "{043E85C3-C95A-481F-A3BB-D86BEA8BA06E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Data.EpiWeb", "Epi.Data.EpiWeb\Epi.Data.EpiWeb.csproj", "{2BF30720-78CF-4600-A28A-FF1A6756FE3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Data.REDCap", "Epi.Data.REDCap\Epi.Data.REDCap.csproj", "{F9701A79-3A01-4566-BCAE-BB78E018DDA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1454,6 +1457,48 @@ Global
 		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|Mixed Platforms.Build.0 = Release|Any CPU
 		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|x86.ActiveCfg = Release|Any CPU
 		{2BF30720-78CF-4600-A28A-FF1A6756FE3F}.Utilities only|x86.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug (Exclude EpiMap)|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug (Exclude EpiMap)|Any CPU.Build.0 = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug (Exclude EpiMap)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug (Exclude EpiMap)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug (Exclude EpiMap)|x86.ActiveCfg = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug (Exclude EpiMap)|x86.Build.0 = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Debug|x86.Build.0 = Debug|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Epi.Enter.ServiceApplication|Any CPU.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Epi.Enter.ServiceApplication|Any CPU.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Epi.Enter.ServiceApplication|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Epi.Enter.ServiceApplication|Mixed Platforms.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Epi.Enter.ServiceApplication|x86.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Epi.Enter.ServiceApplication|x86.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Linux|Any CPU.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Linux|Any CPU.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Linux|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Linux|Mixed Platforms.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Linux|x86.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Linux|x86.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Release|x86.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Setup (Release)|Any CPU.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Setup (Release)|Any CPU.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Setup (Release)|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Setup (Release)|Mixed Platforms.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Setup (Release)|x86.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Setup (Release)|x86.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Utilities only|Any CPU.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Utilities only|Any CPU.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Utilities only|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Utilities only|Mixed Platforms.Build.0 = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Utilities only|x86.ActiveCfg = Release|Any CPU
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6}.Utilities only|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

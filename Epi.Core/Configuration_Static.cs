@@ -67,10 +67,15 @@ namespace Epi
         /// </summary>
         public const string EpiInfoWebDriver = "Epi.Data.EpiWeb.EpiWebFactory, Epi.Data.EpiWeb";
 
-        /// <summary>
-        /// Identifier for PostgreSQL driver that is built into Epi Info
-        /// </summary>
-        public const string PostgreSQLDriver = "Epi.Data.PostgreSQL.PostgreSQLDBFactory, Epi.Data.PostgreSQL";
+		/// <summary>
+		/// Identifier for Epi Info Web driver that is built into Epi Info
+		/// </summary>
+		public const string EpiInfoREDCapDriver = "Epi.Data.REDCap.REDCapFactory, Epi.Data.REDCap";
+
+		/// <summary>
+		/// Identifier for PostgreSQL driver that is built into Epi Info
+		/// </summary>
+		public const string PostgreSQLDriver = "Epi.Data.PostgreSQL.PostgreSQLDBFactory, Epi.Data.PostgreSQL";
 
         /// <summary>
         /// Identifier for Web driver that is built into Epi Info
@@ -751,8 +756,16 @@ namespace Epi
             dataDriverRowEpiWeb.MetadataProvider = false;
             configDataSet.DataDriver.Rows.Add(dataDriverRowEpiWeb);
 
-            // Access driver
-            Config.DataDriverRow dataDriverRow1 = configDataSet.DataDriver.NewDataDriverRow();
+			Config.DataDriverRow dataDriverRowREDCap = configDataSet.DataDriver.NewDataDriverRow();
+			dataDriverRowREDCap.DataDriversRow = parentDataDriversRow;
+			dataDriverRowREDCap.DisplayName = "REDCap";
+			dataDriverRowREDCap.Type = EpiInfoREDCapDriver;
+			dataDriverRowREDCap.DataProvider = true;
+			dataDriverRowREDCap.MetadataProvider = false;
+			configDataSet.DataDriver.Rows.Add(dataDriverRowREDCap);
+
+			// Access driver
+			Config.DataDriverRow dataDriverRow1 = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRow1.DataDriversRow = parentDataDriversRow;
             dataDriverRow1.DisplayName = "Microsoft Access 2002-2003 (.mdb)";
             dataDriverRow1.Type = AccessDriver; 
