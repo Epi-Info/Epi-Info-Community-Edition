@@ -1178,16 +1178,11 @@ namespace Epi.Windows.Dialogs
         }
         private void ValidateEIWSSittings()
         {
-
-
             SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
             SurveyManagerServiceV3.OrganizationRequest Request = new SurveyManagerServiceV3.OrganizationRequest();
             SurveyManagerServiceV3.OrganizationDTO orgDTO = new SurveyManagerServiceV3.OrganizationDTO();
             Request.Organization = orgDTO;
             var Result = client.GetOrganization(Request);
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)

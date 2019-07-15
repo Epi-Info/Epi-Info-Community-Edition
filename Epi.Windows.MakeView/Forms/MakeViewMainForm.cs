@@ -2099,31 +2099,7 @@ namespace Epi.Windows.MakeView.Forms
             dialog.ShowDialog();
             Configuration config = Configuration.GetNewInstance();
 
-
             ShowHideWebButtons(config);
-             
-
-            //if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress)))
-            //{
-            //    QuickPublishtoolStripButton.Visible = true;
-            //    ChangeModetoolStripDropDownButton.Visible = true;
-            //    toolStripSeparator10.Visible = true;
-            //}
-
-            //if (config.Settings.Republish_IsRepbulishable && (!string.IsNullOrEmpty(config.Settings.EWEServiceEndpointAddress)))
-            //{
-            //    QuickPublishtoolStripButton.Visible = true;
-            //    ChangeModetoolStripDropDownButton.Visible = true;
-            //    toolStripSeparator11.Visible = true;
-            //}
-            //else
-            //{
-            //    QuickPublishtoolStripButton.Visible = false;
-            //    ChangeModetoolStripDropDownButton.Visible = false;
-            //    toolStripSeparator10.Visible = false;
-            //    toolStripSeparator11.Visible = false;
-
-            //}
         }
 
         private void ShowHideWebButtons(Configuration config)
@@ -2143,7 +2119,6 @@ namespace Epi.Windows.MakeView.Forms
                     ChangeModetoolStripDropDownButton.Visible = false;
                     toolStripSeparator10.Visible = false;
                     toolStripSeparator11.Visible = false;
-
                 }
             }
             else
@@ -2152,7 +2127,6 @@ namespace Epi.Windows.MakeView.Forms
                 ChangeModetoolStripDropDownButton.Visible = false;
                 toolStripSeparator10.Visible = false;
                 toolStripSeparator11.Visible = false;
-
             }
         }
 
@@ -5642,18 +5616,12 @@ namespace Epi.Windows.MakeView.Forms
 
         private void OpenProjectFromWebToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                SurveyManagerServiceV3.ManagerServiceV3Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV3();
-                SurveyManagerServiceV3.OrganizationRequest Request = new SurveyManagerServiceV3.OrganizationRequest();
-                SurveyManagerServiceV3.OrganizationDTO orgDTO = new SurveyManagerServiceV3.OrganizationDTO();
-                Request.Organization = orgDTO;
-                var Result = client.GetOrganization(Request);
-            }
-            catch(System.ServiceModel.EndpointNotFoundException ex)
+            Configuration configuration = Configuration.GetNewInstance();
+            string ep = configuration.Settings.WebServiceEndpointAddress;
+            if((ep.Contains("V4") || ep.Contains("V5") || ep.Contains("V6") || ep.Contains("V7") || ep.Contains("V8")) == false) // dpbrown - replace with GetVersion
             {
                 MessageBox.Show
-                (   SharedStrings.WEBSURVEY_SETTINGS_INVALID + Environment.NewLine + Environment.NewLine + "(" + ex.InnerException.Message + ")",
+                (   SharedStrings.WEBSURVEY_SETTINGS_INVALID,
                     "Epi Info 7",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information

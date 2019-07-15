@@ -1044,17 +1044,16 @@ namespace Epi.Core.ServiceClient
             {
                 return null;
             }
-            int length = configServiceEndpoint.IndexOf(Environment.NewLine);
-            string pEndPointAddress = configServiceEndpoint.Substring(0, length);
+            
             bool pIsAuthenticated = false;
             bool pIsWsHTTPBinding = true;
-            //string s = config.Settings.WebServiceAuthMode;// "Authentication_Use_Windows"];r
+
             if (config.Settings.WebServiceAuthMode == 1)
             {
                 pIsAuthenticated = true;
             }
 
-            string s = config.Settings.WebServiceBindingMode;// ConfigurationManager.AppSettings["WCF_BINDING_TYPE"];
+            string s = config.Settings.WebServiceBindingMode;
             if (!String.IsNullOrEmpty(s))
             {
                 if (s.ToUpperInvariant() == "WSHTTP")
@@ -1067,7 +1066,7 @@ namespace Epi.Core.ServiceClient
                 }
             }
 
-            return GetClientV4(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+            return GetClientV4(configServiceEndpoint, pIsAuthenticated, pIsWsHTTPBinding);
         }
 
     }
