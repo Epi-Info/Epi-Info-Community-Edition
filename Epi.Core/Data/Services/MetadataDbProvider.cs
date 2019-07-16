@@ -5122,25 +5122,83 @@ namespace Epi.Data.Services
                 query.Parameters.Add(new QueryParameter("@Height", DbType.Int32, view.PageHeight));
                 query.Parameters.Add(new QueryParameter("@Orientation", DbType.String, view.PageOrientation));
                 query.Parameters.Add(new QueryParameter("@LabelAlign", DbType.String, view.PageLabelAlign));
-              //
+                //get config data if available 
+                var ConfigData = GetPublishedViewKeys(view.Id);
+                DataRow ViewRow = null;
+                if (ConfigData.Rows.Count>0) {
+                     ViewRow = ConfigData.Rows[0];
+
+                }
                 if (db.ColumnExists("metaViews", "EIWSOrganizationKey") != false)
                 {
-                    query.Parameters.Add(new QueryParameter("@EIWSOrganizationKey", DbType.String, view.EIWSOrganizationKey));
+                    string EIWSOrganizationKey = "";
+                    if (ViewRow!= null) {
+                        EIWSOrganizationKey = ViewRow.ItemArray[0].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(EIWSOrganizationKey))
+                    {
+                        query.Parameters.Add(new QueryParameter("@EIWSOrganizationKey", DbType.String, EIWSOrganizationKey));
+                    }
+                    else {
+                        query.Parameters.Add(new QueryParameter("@EIWSOrganizationKey", DbType.String, view.EIWSOrganizationKey));
+                    }
                 }
                 
                 ///
                 if (db.ColumnExists("metaViews", "EIWSFormId") != false){
-                query.Parameters.Add(new QueryParameter("@EIWSFormId", DbType.String, view.EIWSFormId));
+
+
+                    string EIWSFormId = "";
+                    if (ViewRow != null)
+                    {
+                        EIWSFormId = ViewRow.ItemArray[1].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(EIWSFormId))
+                    {
+                        query.Parameters.Add(new QueryParameter("@EIWSFormId", DbType.String, EIWSFormId));
+                    }
+                    else
+                    {
+                        query.Parameters.Add(new QueryParameter("@EIWSFormId", DbType.String, view.EIWSFormId));
+
+
+                    }
                 }
                  
                 ///
-                if (db.ColumnExists("metaViews", "EWEOrganizationKey") != false){
-                query.Parameters.Add(new QueryParameter("@EWEOrganizationKey", DbType.String, view.EWEOrganizationKey));
+                if (db.ColumnExists("metaViews", "EWEOrganizationKey") != false)
+                {
+                    string EWEOrganizationKey = "";
+                    if (ViewRow != null)
+                    {
+                        EWEOrganizationKey = ViewRow.ItemArray[2].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(EWEOrganizationKey))
+                    {
+                        query.Parameters.Add(new QueryParameter("@EWEOrganizationKey", DbType.String, EWEOrganizationKey));
+                    }
+                    else {
+                        query.Parameters.Add(new QueryParameter("@EWEOrganizationKey", DbType.String, view.EWEOrganizationKey));
+                    }
                 }
                
                 ///
-                if (db.ColumnExists("metaViews", "EWEFormId") != false){
-                query.Parameters.Add(new QueryParameter("@EWEFormId", DbType.String, view.EWEFormId));
+                if (db.ColumnExists("metaViews", "EWEFormId") != false)
+                {
+
+                    string EWEFormId = "";
+                    if (ViewRow != null)
+                    {
+                        EWEFormId = ViewRow.ItemArray[3].ToString();
+                    }
+                    if (!string.IsNullOrEmpty(EWEFormId))
+                    {
+                        query.Parameters.Add(new QueryParameter("@EWEFormId", DbType.String, EWEFormId));
+                    }
+                    else {
+                        query.Parameters.Add(new QueryParameter("@EWEFormId", DbType.String, view.EWEFormId));
+
+                    }
                   }
                  
                 query.Parameters.Add(new QueryParameter("@ViewId", DbType.Int32, view.Id));
