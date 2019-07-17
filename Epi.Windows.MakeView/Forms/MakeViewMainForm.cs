@@ -5616,12 +5616,10 @@ namespace Epi.Windows.MakeView.Forms
 
         private void OpenProjectFromWebToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Configuration configuration = Configuration.GetNewInstance();
-            string ep = configuration.Settings.WebServiceEndpointAddress;
-            if((ep.Contains("V4") || ep.Contains("V5") || ep.Contains("V6") || ep.Contains("V7") || ep.Contains("V8")) == false) // dpbrown - replace with GetVersion
+            if (Util.GetEndpointVersion() < 4) // dpbrown - replace with GetVersion
             {
                 MessageBox.Show
-                (   SharedStrings.WEBSURVEY_SETTINGS_INVALID,
+                (SharedStrings.WEBSURVEY_SETTINGS_INVALID,
                     "Epi Info 7",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information

@@ -209,7 +209,7 @@ namespace Epi.Windows.Dialogs
                 {
                     surveyId = si.SurveyId == null ? "" : si.SurveyId;
                     surveyName = si.SurveyName == null ? "" : si.SurveyName;
-                    draftMode = si.IsDraftMode == null ? "" : (IsDraftMode == true ? "Draft" : "Published");
+                    draftMode = si.IsDraftMode == null ? "" : (si.IsDraftMode == true ? "Draft" : "Final");
                     startDate = si.StartDate == null ? "" : si.StartDate.ToShortDateString();
                     closeDate = si.ClosingDate == null ? "" : si.ClosingDate.ToShortDateString();
 

@@ -1195,6 +1195,25 @@ namespace Epi
             else return obj.ToString();
         }
 
+
+        public static int GetEndpointVersion()
+        {
+            int endpointVersion = 0;
+            try
+            {
+                Configuration configuration = Configuration.GetNewInstance();
+                string webServiceEndpointAddress = configuration.Settings.WebServiceEndpointAddress;
+                int endIndex = webServiceEndpointAddress.IndexOf(".svc");
+                string withoutExtension = webServiceEndpointAddress.Substring(0, endIndex);
+                int vIndex = withoutExtension.LastIndexOf('V');
+                string version = withoutExtension.Substring(vIndex + 1);
+                endpointVersion = int.Parse(version);
+            }
+            catch { }
+
+            return endpointVersion;
+        }
+
         #endregion public static methods
 
     }
