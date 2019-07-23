@@ -164,7 +164,16 @@ namespace Epi.Data.REDCap.Wrappers
 				}
 			}
 			foreach (DataRow dr in dataTable.Rows)
+			{
+				for (int i = 0; i < dataTable.Columns.Count; i++)
+				{
+					if (String.IsNullOrEmpty((string)dr[i]))
+					{
+						dr[i] = null;
+					}
+				}
 				dataTableCloned.ImportRow(dr);
+			}
 			if (cloneAgain)
 			{
 				DataTable dataTableClonedCloned = dataTableCloned.Clone();
