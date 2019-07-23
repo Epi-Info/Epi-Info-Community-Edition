@@ -1381,7 +1381,7 @@ namespace Epi.Enter.Forms
                 MyClient.UpdateRecordStatus(Request);
             }
             catch (Exception ex) {
-                throw ex;
+                //throw ex;
 
             }
            // client.UpdateRecordStatus(Request);
