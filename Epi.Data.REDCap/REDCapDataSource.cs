@@ -13,6 +13,7 @@ namespace Epi.Data.REDCap
 {
     public partial class REDCapDataSource : DbDriverBase
     {
+		private int rowsInDataTable;
         /// <summary>
         /// REDCap Database Constructor
         /// </summary>
@@ -483,6 +484,12 @@ namespace Epi.Data.REDCap
         /// <returns>A data table object</returns>
         public override DataTable Select(Query selectQuery, DataTable dataTable)
         {
+			int openBracketIndex = selectQuery.SqlStatement.IndexOf("[");
+			string tablePlusCloseBracket = selectQuery.SqlStatement.Substring(openBracketIndex + 1);
+			int closeBracketIndex = tablePlusCloseBracket.IndexOf("]");
+			string tableNameWithoutBrackets = tablePlusCloseBracket.Substring(0, closeBracketIndex);
+			dataTable = GetTableData(tableNameWithoutBrackets, "", "");
+			return dataTable;
             /*#region Input Validation
             if (selectQuery == null)
             {
@@ -651,7 +658,7 @@ namespace Epi.Data.REDCap
         /// <returns></returns>
         public override object ExecuteScalar(Query scalarStatement)
         {
-            /*#region Input Validation
+			/*#region Input Validation
             if (scalarStatement == null)
             {
                 throw new ArgumentNullException("query");
@@ -674,10 +681,12 @@ namespace Epi.Data.REDCap
             }
 
             return result;*/
+			int openBracketIndex = scalarStatement.SqlStatement.IndexOf("[");
+			string tablePlusCloseBracket = scalarStatement.SqlStatement.Substring(openBracketIndex + 1);
+			int closeBracketIndex = tablePlusCloseBracket.IndexOf("]");
+			string tableName = tablePlusCloseBracket.Substring(0, closeBracketIndex);
 
-            string tableName = scalarStatement.SqlStatement.Substring(scalarStatement.SqlStatement.IndexOf("{{"), 40);
-
-            if (scalarStatement.SqlStatement.ToLower().Contains(" count(") || scalarStatement.SqlStatement.ToLower().Contains(" count "))
+			if (scalarStatement.SqlStatement.ToLower().Contains(" count(") || scalarStatement.SqlStatement.ToLower().Contains(" count "))
             {
                 return new REDCapWrapper(connectionString).GetCollectionSize(tableName).Result;
             }
@@ -803,7 +812,7 @@ namespace Epi.Data.REDCap
         /// <returns>DataTable</returns>
         public override System.Data.DataTable GetTableData(string tableName, string columnNames, string sortCriteria)
         {
-            /*
+			/*
             #region Input Validation
             if (tableName == null)
             {
@@ -827,8 +836,9 @@ namespace Epi.Data.REDCap
             finally
             {
             }*/
-
-            return new REDCapWrapper(connectionString).GetDataTableAsync(tableName).Result;
+			DataTable usefulDataTable = new REDCapWrapper(connectionString).GetDataTableAsync(tableName).Result;
+			rowsInDataTable = usefulDataTable.Rows.Count;
+            return usefulDataTable;
         }
 
         /// <summary>

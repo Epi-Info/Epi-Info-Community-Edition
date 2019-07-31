@@ -18,6 +18,7 @@ namespace Epi.Data.REDCap.Wrappers
 		private string redcapuri;
 		private string redcapapikey;
 		private string redcaptablename;
+		private int numberOfRows;
         private bool expired;
 
         private REDCapWrapper()
@@ -119,6 +120,7 @@ namespace Epi.Data.REDCap.Wrappers
 			var ExportRecordsAsync = red_cap_api.ExportRecordsAsync(redcapapikey, Content.Record).Result;
 			var ExportRecordsAsyncData = JsonConvert.DeserializeObject(ExportRecordsAsync);
 			dataTable = JsonConvert.DeserializeObject<System.Data.DataTable>(ExportRecordsAsyncData.ToString());
+			numberOfRows = dataTable.Rows.Count;
 			var ExportMetaDataAsync = red_cap_api.ExportMetaDataAsync(redcapapikey, Content.MetaData, ReturnFormat.json, null, null, OnErrorFormat.json).Result;
 			var ExportMetaDataAsyncData = JsonConvert.DeserializeObject(ExportMetaDataAsync);
 			DataTable metaDataTable =
@@ -247,8 +249,9 @@ namespace Epi.Data.REDCap.Wrappers
 
             if (expired)
                 return 0;
+			return numberOfRows;
 
-            string surveyId = collectionName.Substring(collectionName.IndexOf("{{") + 2, 36);
+            string surveyId = collectionName;
 
             using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
             {

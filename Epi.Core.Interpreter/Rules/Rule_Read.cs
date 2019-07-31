@@ -258,6 +258,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             Context.GetOutput();
 
+			if (Context.ConnectionList["_DB"].ToString().Contains("REDCap"))
+				recordCount = Context.GetOutput().Count;
+
             result = string.Format("number of records read {0}", recordCount);
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("COMMANDNAME", CommandNames.READ);

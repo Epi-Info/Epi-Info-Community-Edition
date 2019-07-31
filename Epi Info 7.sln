@@ -14,6 +14,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Enter", "Epi.Windows.Enter\Epi.Windows.Enter.csproj", "{21B32C8B-1D10-4C30-AD88-0687C4FF4AAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Analysis", "Epi.Windows.Analysis\Epi.Windows.Analysis.csproj", "{25C3FD50-2315-4129-AB2B-E8CD4EE33C22}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9701A79-3A01-4566-BCAE-BB78E018DDA6} = {F9701A79-3A01-4566-BCAE-BB78E018DDA6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows", "Epi.Windows\Epi.Windows.csproj", "{D120296B-493B-46AC-8657-4D32A9604231}"
 EndProject

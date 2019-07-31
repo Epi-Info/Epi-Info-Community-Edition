@@ -18,7 +18,7 @@ namespace Epi.Data.REDCap
         /// <returns></returns>
         public System.Data.IDataReader GetDataTableReader(string pSQL)
         {
-            /*System.Data.IDataReader result = null;
+			/*System.Data.IDataReader result = null;
             try
             {
                 result = (System.Data.IDataReader)this.ExecuteReader(this.CreateQuery(pSQL));
@@ -29,9 +29,12 @@ namespace Epi.Data.REDCap
             }
             return result;*/
 
-            string tableName = pSQL.Substring(pSQL.IndexOf("{{"), 40);
+			int openBracketIndex = pSQL.IndexOf("[");
+			string tablePlusCloseBracket = pSQL.Substring(openBracketIndex + 1);
+			int closeBracketIndex = tablePlusCloseBracket.IndexOf("]");
+			string tableName = tablePlusCloseBracket.Substring(0, closeBracketIndex);
 
-            return new REDCapWrapper(connectionString).GetDataTableAsync(tableName).Result.CreateDataReader();
+			return new REDCapWrapper(connectionString).GetDataTableAsync(tableName).Result.CreateDataReader();
         }
 
 
