@@ -3573,7 +3573,14 @@ namespace Epi.Windows.MakeView.Forms
                     return true;
                 }
             }
-            return false;
+            // When false check CheckCode_After value
+            DataTable table1 = mediator.Project.Metadata.GetViewCheckCode_After(1);
+            DataRow ViewRow1 = table1.Rows[0];
+            if (!string.IsNullOrWhiteSpace(ViewRow1.ItemArray[2].ToString()))
+            {
+                return true;
+            }
+                return false;
         }
 
         //private void QuickPublishtoolStripButton_Click(object sender, EventArgs e)
