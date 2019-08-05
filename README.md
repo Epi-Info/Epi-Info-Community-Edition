@@ -1,4 +1,5 @@
 # Epi-Info-Community-Edition
 
-Currently migrating ArcGIS Runtime from 10.2 to 100.4.
+Epi Info™ for Windows Download
+https://www.cdc.gov/epiinfo/pc.html
 
