@@ -208,7 +208,7 @@ namespace StatCalc
             if (e.Key == Key.Space)
             {
                
-                System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/");
+                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/");
             }
         }
 
@@ -232,7 +232,7 @@ namespace StatCalc
         private void epiInfoWebsite_Click(object sender, EventArgs e)
         {
             
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/");
         }
     }
 }

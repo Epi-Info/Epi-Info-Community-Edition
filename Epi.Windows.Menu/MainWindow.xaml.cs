@@ -211,7 +211,7 @@ namespace Epi.Windows.Menu
         private void epiInfoWebsite_Click(object sender, EventArgs e)
         {
             HideStoryBoard();
-            System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/");
         }
 
         private void howToVideo_Click(object sender, EventArgs e)
@@ -612,7 +612,7 @@ namespace Epi.Windows.Menu
             if (e.Key == Key.Space)
             {
                 HideStoryBoard();
-                System.Diagnostics.Process.Start("http://wwwn.cdc.gov/epiinfo/");
+                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/");
             }
         }
 
