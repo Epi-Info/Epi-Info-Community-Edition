@@ -168,10 +168,13 @@ namespace Epi.Windows.MakeView.Forms
 
         private void SetFieldLists(EpiInfo.Plugin.IEnterInterpreter MR)
         {
+            if (view == null || view.Fields == null) return;
+
             List<string> CommandButtonFieldList = new List<string>();
             List<string> MerrorFieldList = new List<string>();
             List<string> GroupFieldList = new List<string>();
             List<string> GridFieldList = new List<string>();
+
             foreach (Field field in view.Fields)
             {
                 if (field is IDataField)
