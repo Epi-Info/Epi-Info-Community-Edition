@@ -892,7 +892,7 @@ namespace EpiDashboard
 				foreach (System.Data.DataRowView drv in sddv)
 				{
 					double proportion = (double)drv.Row["Percent"];
-					drv.Row[2] = 100.0 * proportion;
+					drv.Row[2] = Math.Round(100.0 * proportion, 2);
 				}
                 htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sddv as DataView, useAlternatingColors));
 
