@@ -887,7 +887,14 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
                 htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
 
-                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
+				System.Data.DataTable sddt = ((System.Data.DataView)dg.ItemsSource).Table.Copy();
+				System.Data.DataView sddv = new System.Data.DataView(sddt);
+				foreach (System.Data.DataRowView drv in sddv)
+				{
+					double proportion = (double)drv.Row["Percent"];
+					drv.Row[2] = 100.0 * proportion;
+				}
+                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sddv as DataView, useAlternatingColors));
 
                 htmlBuilder.AppendLine("</table>");
             }
