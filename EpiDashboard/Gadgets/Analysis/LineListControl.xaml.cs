@@ -1404,23 +1404,26 @@ namespace EpiDashboard
                                 DataView dgItemSource = dg.ItemsSource as DataView;
                                 int dgtcindex = 0;
 
+                                List<string> usedColumnNames = new List<string>();
+
                                 foreach (DataColumn dc in dgItemSource.Table.Columns)
                                 {
                                     try
                                     {
                                         if (dg.Columns.Count > dgtcindex)
                                         {
-                                            string nombre = dg.Columns[dgtcindex].Header.ToString();
+                                            string columnHeaderText = dg.Columns[dgtcindex].Header.ToString();
 
                                             for (int i = 2; i < 24; i++)
                                             {
-                                                if (dgItemSource.Table.Columns.Contains(nombre) && dc.Ordinal != 0)
+                                                if (usedColumnNames.Contains(columnHeaderText) && dc.Ordinal != 0)
                                                 {
-                                                    nombre = nombre + '(' + i + ')';
+                                                    columnHeaderText = columnHeaderText + '(' + i + ')';
                                                 }
                                                 else
                                                 {
-                                                    dc.ColumnName = nombre;
+                                                    dc.ColumnName = columnHeaderText;
+                                                    usedColumnNames.Add(columnHeaderText);
                                                     break;
                                                 }
                                             }
