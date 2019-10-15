@@ -728,6 +728,16 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
         }
 
         /// <summary>
+        /// Handles the Click event of the Iocode menu item
+        /// </summary>
+        /// <param name="sender">Object that fired the event</param>
+        /// <param name="e">.NET supplied event parameters</param>
+        void mnuIocode_Click(object sender, EventArgs e)
+        {
+            DesignStatement(new IocodeDialog(MainForm));
+        }
+
+        /// <summary>
         /// Handles the Click event of the NewRecord menu item
         /// </summary>
         /// <param name="sender">Object that fired the event</param>
@@ -825,6 +835,8 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             mnuExecute.Click += new EventHandler(mnuExecute_Click);
             ToolStripMenuItem mnuGeocode = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_GEOCODE);
             mnuGeocode.Click += new EventHandler(mnuGeocode_Click);
+            ToolStripMenuItem mnuIocode = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_IOCODE);
+            mnuIocode.Click += new EventHandler(mnuIocode_Click);
             ToolStripMenuItem mnuGoto = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_GOTO);
             mnuGoto.Click += new EventHandler(mnuGoto_Click);
             ToolStripMenuItem mnuHelp = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_HELP);
@@ -848,7 +860,7 @@ namespace Epi.Windows.MakeView.Dialogs.CheckCodeCommandDialogs
             mnuSetNotRequired.Click += new EventHandler(mnuSetNotRequired_Click);
             ToolStripMenuItem mnuCallcommand = new ToolStripMenuItem(SharedStrings.CNTXT_CMD_CALL);
             mnuCallcommand.Click += new EventHandler(mnuCallcommand_Click);
-            contextMenu.Items.AddRange(new ToolStripMenuItem[] { mnuAssign, mnuAutosearch, mnuClear, mnuDialog, mnuDisable, mnuEnable, mnuExecute, mnuGeocode, mnuGoto, mnuHelp, mnuHide, mnuUnhide, mnuHighlight, mnuUnhighlight, mnuNewRecord, mnuIf, mnuSetRequired, mnuSetNotRequired, mnuCallcommand });
+            contextMenu.Items.AddRange(new ToolStripMenuItem[] { mnuAssign, mnuAutosearch, mnuClear, mnuDialog, mnuDisable, mnuEnable, mnuExecute, mnuGeocode, mnuIocode, mnuGoto, mnuHelp, mnuHide, mnuUnhide, mnuHighlight, mnuUnhighlight, mnuNewRecord, mnuIf, mnuSetRequired, mnuSetNotRequired, mnuCallcommand });
 
             return contextMenu;
         }

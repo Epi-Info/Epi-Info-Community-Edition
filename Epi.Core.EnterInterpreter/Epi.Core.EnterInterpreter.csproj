@@ -109,6 +109,7 @@
     <Compile Include="Rules\Functions\Rule_SystemBarcode.cs" />
     <Compile Include="Rules\Functions\Rule_SystemLatitude.cs" />
     <Compile Include="Rules\Functions\Rule_SystemLongitude.cs" />
+    <Compile Include="Rules\Rule_IOCode.cs" />
     <Compile Include="Rules\Rule_SaveRecord.cs" />
     <Compile Include="Rules\Functions\Rule_GetCoordinates.cs" />
     <Compile Include="Rules\Functions\Rule_SendSMS.cs" />

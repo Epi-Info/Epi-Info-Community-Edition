@@ -116,6 +116,7 @@ Comment End = '*/'
         | <Exit_Statement>
         | <File_Dialog_Statement>
         | <Geocode_Statement>
+        | <IOCode_Statement>
         | <Get_Path_Statement>
         | <Go_To_Variable_Statement>
         | <Go_To_Page_Statement>
@@ -633,6 +634,8 @@ Comment End = '*/'
 !********* Check Code Blocks - End *********************************!
 
 <Geocode_Statement> ::= Geocode Identifier ',' Identifier ',' Identifier
+
+<IOCode_Statement> ::= Iocode Identifier ',' Identifier ',' Identifier ',' Identifier ',' Identifier ',' Identifier ',' Identifier
 
 <Subroutine_Statement> ::= Sub Identifier <Statements> End-Sub | Sub Identifier End-Sub
 

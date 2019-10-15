@@ -471,6 +471,7 @@ namespace Epi.Windows.Dialogs
 			//settingsPanel.ShowSettings();
 			txtWorkingDirectory.Text = config.Directories.Working;
             txtMapKey.Text = config.Settings.MapServiceKey;
+            txtIOCoding.Text = config.Settings.IOCodeFile;
             object selectedItem = null;
             foreach (object item in lbxLanguages.Items)
             {
@@ -617,6 +618,7 @@ namespace Epi.Windows.Dialogs
 
             config.Directories.Working = txtWorkingDirectory.Text;
             config.Settings.MapServiceKey = txtMapKey.Text;
+            config.Settings.IOCodeFile = txtIOCoding.Text;
 
             if (lbxLanguages.SelectedItem != null)
             {
@@ -859,6 +861,11 @@ namespace Epi.Windows.Dialogs
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.bingmapsportal.com/");
+        }
+
+        private void linkIOCoding_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(linkIOCoding.Text);
         }
 
         private void btnManageLanguages_Click(object sender, EventArgs e)

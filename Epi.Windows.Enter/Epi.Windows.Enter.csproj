@@ -209,6 +209,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Epi.Core\GoldParserEngine.dll</HintPath>
     </Reference>
+    <Reference Include="NIOSH.IOCode">
+      <HintPath>..\Epi.Core\NIOSH.IOCode.dll</HintPath>
+    </Reference>
     <Reference Include="PortableDevices, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Epi.Windows.MakeView\PortableDeviceApi\PortableDevices.dll</HintPath>
@@ -288,6 +291,9 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Controls\CueTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ListFieldComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -317,6 +323,12 @@
     </Compile>
     <Compile Include="Dialogs\GeocodeSelectionDialog.Designer.cs">
       <DependentUpon>GeocodeSelectionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\IOCoderDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\IOCoderDialog.Designer.cs">
+      <DependentUpon>IOCoderDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\NewRecordDialog.Designer.cs">
       <DependentUpon>NewRecordDialog.cs</DependentUpon>
@@ -470,6 +482,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\GeocodeSelectionDialog.resx">
       <DependentUpon>GeocodeSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\IOCoderDialog.resx">
+      <DependentUpon>IOCoderDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\NewRecordDialog.resx">
       <DependentUpon>NewRecordDialog.cs</DependentUpon>

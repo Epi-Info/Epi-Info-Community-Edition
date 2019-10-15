@@ -702,6 +702,7 @@ namespace Epi
             row.ShowStatusBar = true;
             row.PrecisionForStatistics = 2;
             row.MapServiceKey = "Aua5s8kFcEZMx5lsd8Vkerz3frboU1CwzvOyzX_vgSnzsnbqV7xlQ4WTRUlN19_Q";
+            row.IOCodeFile = "Resources\\NIOSH.IOCoder.C12.190829.bin";
             row.LastAlertDate = new DateTime(2011, 9, 23);
             row.WebServiceAuthMode = 0; // 0 = Anon, 1 = NT
             row.EWEServiceAuthMode = 0; // 0 = Anon, 1 = NT

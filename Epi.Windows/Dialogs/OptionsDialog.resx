@@ -2353,6 +2353,165 @@
   <data name="&gt;&gt;tabPageWebEnter.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="linkIOCoding.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="linkIOCoding.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="linkIOCoding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 88</value>
+  </data>
+  <data name="linkIOCoding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 13</value>
+  </data>
+  <data name="linkIOCoding.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="linkIOCoding.Text" xml:space="preserve">
+    <value>https://www.cdc.gov/niosh/topics/coding/</value>
+  </data>
+  <data name="&gt;&gt;linkIOCoding.Name" xml:space="preserve">
+    <value>linkIOCoding</value>
+  </data>
+  <data name="&gt;&gt;linkIOCoding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkIOCoding.Parent" xml:space="preserve">
+    <value>groupBoxIOCoding</value>
+  </data>
+  <data name="&gt;&gt;linkIOCoding.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelIOCodingInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelIOCodingInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 60</value>
+  </data>
+  <data name="labelIOCodingInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 29</value>
+  </data>
+  <data name="labelIOCodingInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelIOCodingInfo.Text" xml:space="preserve">
+    <value>For more information about industry and occupation coding, please visit the link below:</value>
+  </data>
+  <data name="&gt;&gt;labelIOCodingInfo.Name" xml:space="preserve">
+    <value>labelIOCodingInfo</value>
+  </data>
+  <data name="&gt;&gt;labelIOCodingInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelIOCodingInfo.Parent" xml:space="preserve">
+    <value>groupBoxIOCoding</value>
+  </data>
+  <data name="&gt;&gt;labelIOCodingInfo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtIOCoding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 37</value>
+  </data>
+  <data name="txtIOCoding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>471, 20</value>
+  </data>
+  <data name="txtIOCoding.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtIOCoding.Name" xml:space="preserve">
+    <value>txtIOCoding</value>
+  </data>
+  <data name="&gt;&gt;txtIOCoding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtIOCoding.Parent" xml:space="preserve">
+    <value>groupBoxIOCoding</value>
+  </data>
+  <data name="&gt;&gt;txtIOCoding.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 21</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 13</value>
+  </data>
+  <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>I&amp;&amp;O Coding Resource File:</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBoxIOCoding</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupBoxIOCoding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="groupBoxIOCoding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>483, 120</value>
+  </data>
+  <data name="groupBoxIOCoding.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="groupBoxIOCoding.Text" xml:space="preserve">
+    <value>Industry and Occupation Coding</value>
+  </data>
+  <data name="&gt;&gt;groupBoxIOCoding.Name" xml:space="preserve">
+    <value>groupBoxIOCoding</value>
+  </data>
+  <data name="&gt;&gt;groupBoxIOCoding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxIOCoding.Parent" xml:space="preserve">
+    <value>tabIOCoding</value>
+  </data>
+  <data name="&gt;&gt;groupBoxIOCoding.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabIOCoding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabIOCoding.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabIOCoding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>512, 413</value>
+  </data>
+  <data name="tabIOCoding.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="tabIOCoding.Text" xml:space="preserve">
+    <value>I&amp;O Coding</value>
+  </data>
+  <data name="&gt;&gt;tabIOCoding.Name" xml:space="preserve">
+    <value>tabIOCoding</value>
+  </data>
+  <data name="&gt;&gt;tabIOCoding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabIOCoding.Parent" xml:space="preserve">
+    <value>tabControlDateTime</value>
+  </data>
+  <data name="&gt;&gt;tabIOCoding.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="tabControlDateTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 12</value>
   </data>
@@ -3719,6 +3878,6 @@
     <value>OptionsDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.7128.18667, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.7186.32009, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

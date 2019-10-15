@@ -168,13 +168,10 @@ namespace Epi.Windows.MakeView.Forms
 
         private void SetFieldLists(EpiInfo.Plugin.IEnterInterpreter MR)
         {
-            if (view == null || view.Fields == null) return;
-
             List<string> CommandButtonFieldList = new List<string>();
             List<string> MerrorFieldList = new List<string>();
             List<string> GroupFieldList = new List<string>();
             List<string> GridFieldList = new List<string>();
-
             foreach (Field field in view.Fields)
             {
                 if (field is IDataField)
@@ -447,6 +444,7 @@ namespace Epi.Windows.MakeView.Forms
             this.keywords.Add("highlight");
 
             this.keywords.Add("if");
+            this.keywords.Add("iocode");
 
             this.keywords.Add("newrecord");
             this.keywords.Add("page");
@@ -1764,6 +1762,25 @@ namespace Epi.Windows.MakeView.Forms
 
                     }
                     break;
+                case Enums.FieldCommands.IOCode:
+                    try
+                    {
+                        if (this.PreValidateCommand("Iocode Industry, Occupation, Icode, Ocode, Ititle, Otitle, Scheme"))
+                        {
+                            DesignStatement(new IocodeDialog(mainForm));
+                        }
+                        else
+                        {
+                            AddStatusErrorMessage("Iocode command: invalid cursor location.\nPlease place cursor inside a code block.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //AddStatusErrorMessage(ex.Message);
+                        DesignStatement(new IocodeDialog(mainForm));
+
+                    }
+                    break;
                 case Enums.FieldCommands.Set_Required:
                     try
                     {
@@ -2231,6 +2248,9 @@ namespace Epi.Windows.MakeView.Forms
                         break;
                     case "geocode":
                         DesignFieldCommand(Enums.FieldCommands.Geocode);
+                        break;
+                    case "iocode":
+                        DesignFieldCommand(Enums.FieldCommands.IOCode);
                         break;
                     case "set-required":
                         DesignFieldCommand(Enums.FieldCommands.Set_Required);

@@ -14,6 +14,7 @@ namespace EpiInfo.Plugin
         bool AssignColor(string pName, object pValue);
         bool AssignGrid(string pName, object pValue, int pIndex0, object pIndex1);
         bool Geocode(string address, string latName, string longName);
+        bool IOCode(string iinput, string oinput, string industry, string occupation, string icodeName, string ocodeName, string ititleName, string otitleName, string schemeName);
         void AutoSearch(string[] pIdentifierList, string[] pDisplayList, bool pAlwaysShow);
         int AutosearchFunction(string[] pIdentifierList, string[] pDisplayList, bool pAlwaysShow);
         bool IsUnique(string[] pIdentifierList);

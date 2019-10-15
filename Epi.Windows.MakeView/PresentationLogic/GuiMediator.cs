@@ -4008,6 +4008,10 @@ namespace Epi.Windows.MakeView.PresentationLogic
         {
             return false;
         }
+        public bool IOCode(string iinput, string oinput, string industry, string occupation, string iCode, string iTitle, string oCode, string oTitle, string codingScheme)
+        {
+            return false;
+        }
 
         /// <summary>
         /// AutoSearch

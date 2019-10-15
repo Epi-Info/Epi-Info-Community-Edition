@@ -347,6 +347,9 @@ namespace Epi.Core.EnterInterpreter
                     case "<Geocode_Statement>":
                         result  = new Rule_Geocode(pContext, NT);
                         break;
+                    case "<IOCode_Statement>":
+                        result = new Rule_IOCode(pContext, NT);
+                        break;
                     case "<DefineVariables_Statement>":
                         result  = new Rule_DefineVariables_Statement(pContext, NT);
                         break;

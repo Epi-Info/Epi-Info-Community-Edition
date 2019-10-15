@@ -84,13 +84,17 @@ namespace Epi.Windows.MakeView.Enums
          /// <summary>
         /// Select FieldSelector
         /// </summary>
-        FieldSelector
-	}
+        FieldSelector,
+        /// <summary>
+        /// IOCode a field
+        /// </summary>
+        IOCode
+    }
 
-	/// <summary>
-	/// Commands in the Program category
-	/// </summary>
-	public enum ProgramCommands
+    /// <summary>
+    /// Commands in the Program category
+    /// </summary>
+    public enum ProgramCommands
 	{
         /// <summary>
         /// calls a subroutine

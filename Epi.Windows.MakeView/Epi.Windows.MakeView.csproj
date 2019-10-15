@@ -250,6 +250,12 @@
     <Compile Include="Dialogs\CheckCodeCommandDialogs\GoToFormDialog.designer.cs">
       <DependentUpon>GoToFormDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\IocodeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CheckCodeCommandDialogs\IocodeDialog.designer.cs">
+      <DependentUpon>IocodeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\CheckCodeCommandDialogs\SetNotRequiredDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1065,6 +1071,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\GoToFormDialog.resx">
       <DependentUpon>GoToFormDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\IocodeDialog.resx">
+      <DependentUpon>IocodeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CheckCodeCommandDialogs\SetNotRequiredDialog.resx">
       <DependentUpon>SetNotRequiredDialog.cs</DependentUpon>

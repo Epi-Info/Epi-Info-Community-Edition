@@ -91,6 +91,36 @@ namespace Epi.Windows.Enter.PresentationLogic
             return true;
         }
 
+
+        public bool IOCode(string iinput, string oinput, string industry, string occupation, string iCodeName, string oCodeName, string iTitleName, string oTitleName, string codingSchemeName)
+        {
+            try
+            {
+                string ioCoderFileName = Configuration.GetNewInstance().Settings.IOCodeFile;
+                NIOSH.IOCode.IOCoder ioCoder = new NIOSH.IOCode.IOCoder(ioCoderFileName);
+
+                Epi.Enter.Dialogs.IOCoderDialog dialog = new Epi.Enter.Dialogs.IOCoderDialog(ioCoder, iinput, oinput, selectionThreshold: 0.800F, maxItems: 10);
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Assign(industry, dialog.Industry);
+                    Assign(iCodeName, dialog.IndustryCode);
+                    Assign(iTitleName, dialog.IndustryTitle);
+                    Assign(occupation, dialog.Occupation);
+                    Assign(oCodeName, dialog.OccupationCode);
+                    Assign(oTitleName, dialog.OccupationTitle);
+                    Assign(codingSchemeName, dialog.CodingScheme);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Dialog(string.Format("There was a problem running the IO Coding service:\n{0} {1}", ex.Message, (ex.InnerException != null) ? " -- " + ex.InnerException.Message : ""), "IOCoder");
+                return false;
+            }
+
+        }
+
         public bool AssignGrid(string pName, object pValue, int pIndex0, object pIndex1)
         {
             if (string.IsNullOrEmpty(pName)) return false;

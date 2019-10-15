@@ -1144,6 +1144,7 @@
     <Content Include="StatCalc.resources.dll" />
     <Content Include="Templates\Fields\debug - one of each field with different widths.xml" />
     <Content Include="Templates\Fields\debug - one of each field.xml" />
+    <Content Include="Templates\Fields\IOCode.xml" />
     <Content Include="Templates\Fields\NBS %28Landscape Page Layout%29\NBS - Case - Binational Reporting.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

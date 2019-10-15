@@ -126,7 +126,7 @@
     <value>6, 13</value>
   </data>
   <data name="tvCodeBlocks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 130</value>
+    <value>196, 133</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tvCodeBlocks.TabIndex" type="System.Int32, mscorlib">
@@ -151,25 +151,25 @@
     <value>233, 0</value>
   </metadata>
   <data name="cutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 24</value>
+    <value>107, 22</value>
   </data>
   <data name="cutToolStripMenuItem.Text" xml:space="preserve">
     <value>Cut</value>
   </data>
   <data name="copyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 24</value>
+    <value>107, 22</value>
   </data>
   <data name="copyToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="pasteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 24</value>
+    <value>107, 22</value>
   </data>
   <data name="pasteToolStripMenuItem.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="deleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 24</value>
+    <value>107, 22</value>
   </data>
   <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete</value>
@@ -178,7 +178,7 @@
     <value>False</value>
   </data>
   <data name="CommandContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 100</value>
+    <value>108, 92</value>
   </data>
   <data name="&gt;&gt;CommandContextMenu.Name" xml:space="preserve">
     <value>CommandContextMenu</value>
@@ -190,7 +190,7 @@
     <value>0, 0</value>
   </data>
   <data name="codeText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 235</value>
+    <value>493, 242</value>
   </data>
   <data name="codeText.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -217,31 +217,31 @@
     <value>400, 0</value>
   </metadata>
   <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
+    <value>32, 17</value>
   </data>
   <data name="toolStripStatusLabel1.Text" xml:space="preserve">
     <value>Line:</value>
   </data>
   <data name="LineNumberLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 20</value>
+    <value>19, 17</value>
   </data>
   <data name="LineNumberLabel.Text" xml:space="preserve">
     <value>01</value>
   </data>
   <data name="toolStripStatusLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 20</value>
+    <value>53, 17</value>
   </data>
   <data name="toolStripStatusLabel2.Text" xml:space="preserve">
     <value>Column:</value>
   </data>
   <data name="ColumnNumberLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 20</value>
+    <value>19, 17</value>
   </data>
   <data name="ColumnNumberLabel.Text" xml:space="preserve">
     <value>01</value>
   </data>
   <data name="ContextLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>49, 21</value>
   </data>
   <data name="ContextLabel.Text" xml:space="preserve">
     <value>context:</value>
@@ -250,7 +250,7 @@
     <value>False</value>
   </data>
   <data name="toolStripStatusLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 21</value>
+    <value>64, 21</value>
   </data>
   <data name="toolStripStatusLabel6.Text" xml:space="preserve">
     <value>Field Block</value>
@@ -260,28 +260,28 @@
   </data>
   <data name="basicToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAYAAADQ4S5JAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAEBJREFUKFPFy8EJ
-        ADAIQ1HXdf8BUnooVBu1njw8xMAXAC10zJhHVVF5gvv3BoN9vbPTIDIUVEzwg44ZOmboGIMs3A39xQNg
-        epMAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAYAAADQ4S5JAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAQElEQVQoU8XLwQkAMAhDUdd1/wFSeihU
+        G7WePDzEwBcALXTMmEdVUXmC+/cGg329s9MgMhRUTPCDjhk6ZugYgyzcDf3FA2B6kwAAAABJRU5ErkJg
+        gg==
 </value>
   </data>
   <data name="basicToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="basicToolStripMenuItem.Text" xml:space="preserve">
     <value>basic</value>
   </data>
   <data name="advancedToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAYAAADQ4S5JAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAExJREFUKFOVi0EO
-        ACAMwvzu/v8APLHoxKGHhrQJA8AXMnZsEhFwHIfVK/agPIXBeQoDt8IuD52nMDhPYVi9Ig+O7fCCjB0y
-        dsh4B2MC74b6uabH5iwAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAYAAADQ4S5JAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAATElEQVQoU5WLQQ4AIAzC/O7+/wA8sejE
+        oYeGtAkDwBcydmwSEXAch9Ur9qA8hcF5CgO3wi4PnacwOE9hWL0iD47t8IKMHTJ2yHgHYwLvhvq5psfm
+        LAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="advancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 26</value>
+    <value>125, 22</value>
   </data>
   <data name="advancedToolStripMenuItem.Text" xml:space="preserve">
     <value>advanced</value>
@@ -289,7 +289,7 @@
   <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAACGSURBVDhP7ZBLDoAgDAV7J07LabUv0PgCtHwWbnSSiUTq
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACGSURBVDhP7ZBLDoAgDAV7J07LabUv0PgCtHwWbnSSiUTq
         QJSU0rWrRGBgFZsNozaUc8aQK+DD3agN6TIUcBAMo20wog2CLtoGPW2mBrqnWrDgyj8cvScLFtwBh7Oa
         6YMrN2SmQV2GekyDu7x3Q9oY6uEGT/mDnw1CbJyIbzXzBAnbOFURuQGA2xOMpwVdCQAAAABJRU5ErkJg
         gg==
@@ -299,7 +299,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 24</value>
+    <value>94, 24</value>
   </data>
   <data name="toolStripDropDownButton1.Text" xml:space="preserve">
     <value>Edit Mode</value>
@@ -308,22 +308,22 @@
     <value>False</value>
   </data>
   <data name="toolStripStatusLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
+    <value>53, 17</value>
   </data>
   <data name="toolStripStatusLabel3.Text" xml:space="preserve">
     <value>Position:</value>
   </data>
   <data name="PositionNumberLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 20</value>
+    <value>19, 17</value>
   </data>
   <data name="PositionNumberLabel.Text" xml:space="preserve">
     <value>01</value>
   </data>
   <data name="CheckCodeStatusBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 423</value>
+    <value>0, 426</value>
   </data>
   <data name="CheckCodeStatusBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>727, 25</value>
+    <value>727, 22</value>
   </data>
   <data name="CheckCodeStatusBar.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -349,7 +349,7 @@
   <data name="ValidateCodeToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACoAAAAlCAYAAAA0lXuOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAASySURBVFhH1Zd9TFNXFMAJXRwYYEoGKWtpy6YdsUClZRmZ
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASySURBVFhH1Zd9TFNXFMAJXRwYYEoGKWtpy6YdsUClZRmZ
         LkM0fMMUWaNDSqkgsAFbdSEM44Yji9nIQDRDQAl+gMKQMCANIzgbYIwxgsAoVkKQhJkQNcuWLPFPzu55
         nIcldXFWpW+/5CXtu+ddfpxz73m3bv8HJhaH/OmjMDF0JA5HNajq6aswyTOn9Wd1JH98rr82hm4JD2NX
         0tCnlpx9sRXRDXRLeOR1pfUfHyjs9C/YME63hAeWu/wnU4fY5D05aB2U0W3hAAAvFPW8/yNmMvQrhSXj
@@ -376,7 +376,7 @@
     <value>Magenta</value>
   </data>
   <data name="ValidateCodeToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 24</value>
+    <value>139, 24</value>
   </data>
   <data name="ValidateCodeToolStripButton.Text" xml:space="preserve">
     <value>&amp;Validate Check Code</value>
@@ -384,7 +384,7 @@
   <data name="btnCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAE1SURBVDhPnZA/S8NQFMXzkbJ3yeyURaiLZgxOGetgCA4i
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE1SURBVDhPnZA/S8NQFMXzkbJ3yeyURaiLZgxOGetgCA4i
         iJBFKO1SrZSmoAQSTSGoof5DaiGILk6ZNU3yDY7vvoSAJFjjgTs87j2/c+8TftPiI8b4NsHkJoU7T7B4
         W6JorRYZTTtD30txZOdlMZAzS+sh5jgrG+5jzM3qcQpJCyGpNlqqgzU9wpmfwntIqhCDAS6elvCeP7lZ
         MSNmDpg5wNbeNdb1K0jKAPJBBqsOoHUjaN0M2qBIVmxevfOXcrilDPkW/WlcBVCibFByDtnesSpDtA0B
@@ -399,7 +399,7 @@
     <value>128, 0, 255</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 24</value>
+    <value>56, 24</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>&amp;Close</value>
@@ -407,7 +407,7 @@
   <data name="btnSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAFfSURBVDhPfZKhcsMwEET9Cf2EfIJhoGCgYKBgoKChYKBh
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFfSURBVDhPfZKhcsMwEET9Cf2EfIJhoGCgYKBgoKChYKBh
         oGCgYKBgoWChYKFg2XX37CSKm+nN7HjG8j7d7XlgpVsTVVp1bRIjdKkyz6vOVUKApiKe8kXUzKIpZ8GH
         8m+1HxF7zOKOSbXaO8C5rZ/+LZpba2JslnF0AHWAiJYJYIvv6m6u301GmzBGFWtjB8C8BHgcbKs3ly8A
         DknnfwUgLAXgoK+tOZcqOxPFnTYApkwAD+71zpw/q3zsAXBZ7GHuAFhRvglWCYgDnR8gbQ0MM7Nt3vww
@@ -423,7 +423,7 @@
     <value>128, 0, 255</value>
   </data>
   <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 24</value>
+    <value>51, 24</value>
   </data>
   <data name="btnSave.Text" xml:space="preserve">
     <value>&amp;Save</value>
@@ -431,7 +431,7 @@
   <data name="btnPrint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAFQSURBVDhPjVEtTwUxEOxP4KfwE5DIkwR1CQZZiSwJycMQ
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFQSURBVDhPjVEtTwUxEOxP4KfwE5DIkwR1CQZZiSwJycMQ
         KoAQVCU5TCW4JphnSBrUE4iTyErcMrO9Cxz3jrxJ9j7a3ZmdXbOEmLL8F0Padry/fcgMXyL9Z5H4nKVp
         3TIBE4hSiqR11uBZjEnyppfWOjk+Od9O8Nq9qMoEUAaX5H4H9QAVgiQTdXjOGeqnTgn8fRQf4pSIxWnd
         KwFVR+Uejx7q4TFpsfNBmDvp5Pq2w2HWJL59SEiMYl2AZ6/JTWvVP5XtZfghYHKh4gJ4x044VFpzKG7P
@@ -447,7 +447,7 @@
     <value>128, 0, 255</value>
   </data>
   <data name="btnPrint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 24</value>
+    <value>52, 24</value>
   </data>
   <data name="btnPrint.Text" xml:space="preserve">
     <value>&amp;Print</value>
@@ -456,7 +456,7 @@
     <value>23, 24</value>
   </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 28</value>
+    <value>0, 24</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>727, 27</value>
@@ -487,68 +487,68 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABS
-        DwAAAk1TRnQBSQFMAgEBBAEAAVQBAAFUAQABEAEAAQ4BAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBAEAAWQBAAFkAQABEAEAAQ4BAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABHAMAAQEBAAEgBgABHP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wDQAAHwAe0B6wH/AdYBzgHJ
-        Af9IAAGBAYQBjwH/AoEBjwH/AoEBhwH/A4EB/wOBAf8BdQKBAf8BagKBAf8BXwFrAXQB/wFWAV8BZgH/
-        AUwBUwFaAf8BRQFKAU8B/wE/AUMBRwH/AT8BRAFJAf8MAAGBAYQBjwH/AoEBhQH/A4EB/wOBAf8BcwKB
-        Af8BYgFrAXIB/wFUAVsBYQH/AUcBTQFSAf8BPwFEAUkB/wE/AUQBSQH/AT8BRAFJAf8BPwFEAUkB/wE/
-        AUQBSQH/AT8BRAFJAf8BPwFEAUkB/xgAAfAB7QHrAf8B4gHdAdkB/wHiAd0B2QH/CAAB8AHtAesB/wHK
-        AcEBugH/A4EB/wKBAWoB/zwAAyoB/wgAAYEBhwGSAf8BiQGhAasB/wGBAbIB1AH/ATEBjwHNAf8BMQGP
-        Ac0B/wExAY8BzQH/ATUBjAHHAf8BOQGIAb4B/wFAAYIBtAH/AUYBgQGpAf8BTAGBAZ8B/wFQAYEBlgH/
-        AVMCgQH/AZsBrQG1Af8IAAGBAYcBkgH/AaIB3wHwAf8BgQHNAeoB/wGBAbgB4gH/AWgBrgHbAf8BXgGp
-        AdkB/wFXAaEB0gH/AVIBmAHHAf8BUQGOAbwB/wFPAYMBrgH/AUoBgQGrAf8BRgGBAakB/wFMAYEBnwH/
-        AVABgQGWAf8BRwFNAVIB/xQAAagBmQGNAf8BhQKBAf8CgQFqAf8BhQKBAf8BygHBAboB/wHwAe0B6wH/
-        AcABtQGtAf8CgQFqAf8ByAG0AacB/wKBAWoB/xQAAyoB/zAAAYEBigGVAf8BgQG+AdMB/wGKAaQBrgH/
-        AYEB3AL/AYEBzwL/AYEBywL/AYEBxAH6Af8BcgG8AfUB/wFoAbMB8AH/AV8BqgHrAf8BVQGgAeUB/wFE
-        AYwB1AH/AVQCgQH/A4EB/wgAAYEBigGVAf8BqgHoAfYB/wGVAeUB/AH/AYQB3wH7Af8BgQHWAfoB/wGB
-        AdAB9wH/AYEBxgH0Af8BgQG+AfAB/wFyAbQB7AH/AWYBqgHoAf8BXAGkAeYB/wFRAZoB3wH/AUcBkAHX
-        Af8BTAGBAZ8B/wFRAVgBXgH/EAACgQFqAf8CgQFqAf8BuwGpAZwB/wHZAc0BxQH/AasBlwGIAf8DgQH/
-        AoEBagH/A4EB/wHUAcQBuwH/AcgBtAGnAf8CgQFmAf8QAAMqAf8DKgH/AyoB/xwAAyoB/wwAAYEBjgGY
+        Af9IAAGBAYQBjwH/AoEBjwH/AoEBhwH/A4EB/wOBAf8BcwKBAf8BaAKBAf8BXQFpAXIB/wFUAV0BZAH/
+        AUoBUQFYAf8BQwFIAU0B/wE9AUEBRQH/AT0BQgFHAf8MAAGBAYQBjwH/AoEBhQH/A4EB/wOBAf8BcQKB
+        Af8BYAFpAXAB/wFSAVkBXwH/AUUBSwFQAf8BPQFCAUcB/wE9AUIBRwH/AT0BQgFHAf8BPQFCAUcB/wE9
+        AUIBRwH/AT0BQgFHAf8BPQFCAUcB/xgAAfAB7QHrAf8B4gHdAdkB/wHiAd0B2QH/CAAB8AHtAesB/wHK
+        AcEBugH/A4EB/wKBAWgB/zwAAygB/wgAAYEBhwGSAf8BiQGhAasB/wGBAbIB1AH/AS8BjwHNAf8BLwGP
+        Ac0B/wEvAY8BzQH/ATMBjAHHAf8BNwGIAb4B/wE+AYIBtAH/AUQBgQGpAf8BSgGBAZ8B/wFOAYEBlgH/
+        AVECgQH/AZsBrQG1Af8IAAGBAYcBkgH/AaIB3wHwAf8BgQHNAeoB/wGBAbgB4gH/AWYBrgHbAf8BXAGp
+        AdkB/wFVAaEB0gH/AVABmAHHAf8BTwGOAbwB/wFNAYMBrgH/AUgBgQGrAf8BRAGBAakB/wFKAYEBnwH/
+        AU4BgQGWAf8BRQFLAVAB/xQAAagBmQGNAf8BhQKBAf8CgQFoAf8BhQKBAf8BygHBAboB/wHwAe0B6wH/
+        AcABtQGtAf8CgQFoAf8ByAG0AacB/wKBAWgB/xQAAygB/zAAAYEBigGVAf8BgQG+AdMB/wGKAaQBrgH/
+        AYEB3AL/AYEBzwL/AYEBywL/AYEBxAH6Af8BcAG8AfUB/wFmAbMB8AH/AV0BqgHrAf8BUwGgAeUB/wFC
+        AYwB1AH/AVICgQH/A4EB/wgAAYEBigGVAf8BqgHoAfYB/wGVAeUB/AH/AYQB3wH7Af8BgQHWAfoB/wGB
+        AdAB9wH/AYEBxgH0Af8BgQG+AfAB/wFwAbQB7AH/AWQBqgHoAf8BWgGkAeYB/wFPAZoB3wH/AUUBkAHX
+        Af8BSgGBAZ8B/wFPAVYBXAH/EAACgQFoAf8CgQFoAf8BuwGpAZwB/wHZAc0BxQH/AasBlwGIAf8DgQH/
+        AoEBaAH/A4EB/wHUAcQBuwH/AcgBtAGnAf8CgQFkAf8QAAMoAf8DKAH/AygB/xwAAygB/wwAAYEBjgGY
         Af8BgQHSAewB/wGLAaQBrQH/AYkBwgHOAf8BgQHYAv8BgQHTAv8BgQHOAv8BgQHJAf4B/wGBAcEB+gH/
-        AXABuQH1Af8BZQGwAe4B/wFaAagB6QH/AUEBhQHNAf8BUwKBAf8BsgHAAcYB/wQAAYEBjgGYAf8BsAHq
+        AW4BuQH1Af8BYwGwAe4B/wFYAagB6QH/AT8BhQHNAf8BUQKBAf8BsgHAAcYB/wQAAYEBjgGYAf8BsAHq
         AfYB/wGfAekB+wH/AZIB5AH8Af8BgQHdAfsB/wGBAdYB+gH/AYEBzgH3Af8BgQHGAfQB/wGBAbwB8AH/
-        AXIBtAHsAf8BZgGqAegB/wFbAaMB5gH/AU4BlgHcAf8BRgGBAakB/wFeAWUBbAH/EAABuAGeAZAB/wHg
+        AXABtAHsAf8BZAGqAegB/wFZAaMB5gH/AUwBlgHcAf8BRAGBAakB/wFcAWMBagH/EAABuAGeAZAB/wHg
         AdUBzwH/AfMB7wHsBf8B/QH8AfsB/wHmAd4B2AH/AdgBzAHEAf8B3AHPAcgB/wHnAdUBywH/AcwBuQGu
-        Af8CgQFmAf8QAAMqAf8DKgH/AyoB/xgAAyoB/xAAAYEBkQGcAf8BgQHXAe8B/wGBAcUB4AH/AYwBpgGw
-        Af8BgQHdAf4B/wGBAdMC/wGBAdQC/wGBAdEC/wGBAc0C/wGBAccB/AH/AYEBvgH3Af8BbAG2AfIB/wFi
-        AawB7AH/AVYCgQH/AYEBlQGhAf8EAAGBAZEBnAH/AbYB7QH4Af8BqgHsAfsB/wGbAegB+wH/AY8B4wH8
-        Af8BgQHdAfsB/wGBAdUB+QH/AYEBzgH3Af8BgQHFAfQB/wGBAbwB8AH/AW4BsgHsAf8BYwGpAegB/wFV
-        AZ4B4gH/AUEBggG0Af8BbAF0AYEB/xAAAboBpQGWBf8B6gGcAYEB/wHqAZIBgQH/AeoBhwGBAf8B6AGB
-        AYAB/wHiAYEBawH/AdkBgQFkAf8B6wHbAdMB/wHRAb8BtQH/AoEBZgH/FAADKgH/AyoB/wMqAf8QAAMq
-        Af8DKgH/EAABgwGVAZ8B/wGJAdwB8QH/AYwB4gL/AY0BqAGxAf8BjAG6AccB/wGBAdgC/wGBAdQC/wGB
-        AdQC/wGBAdQC/wGBAdAC/wGBAc0C/wGBAcUB/AH/AXIBuwH3Af8BXwGiAdsB/wOBAf8BsgHAAcYB/wGD
+        Af8CgQFkAf8QAAMoAf8DKAH/AygB/xgAAygB/xAAAYEBkQGcAf8BgQHXAe8B/wGBAcUB4AH/AYwBpgGw
+        Af8BgQHdAf4B/wGBAdMC/wGBAdQC/wGBAdEC/wGBAc0C/wGBAccB/AH/AYEBvgH3Af8BagG2AfIB/wFg
+        AawB7AH/AVQCgQH/AYEBlQGhAf8EAAGBAZEBnAH/AbYB7QH4Af8BqgHsAfsB/wGbAegB+wH/AY8B4wH8
+        Af8BgQHdAfsB/wGBAdUB+QH/AYEBzgH3Af8BgQHFAfQB/wGBAbwB8AH/AWwBsgHsAf8BYQGpAegB/wFT
+        AZ4B4gH/AT8BggG0Af8BagFyAYEB/xAAAboBpQGWBf8B6gGcAYEB/wHqAZIBgQH/AeoBhwGBAf8B6AGB
+        AYAB/wHiAYEBaQH/AdkBgQFiAf8B6wHbAdMB/wHRAb8BtQH/AoEBZAH/FAADKAH/AygB/wMoAf8QAAMo
+        Af8DKAH/EAABgwGVAZ8B/wGJAdwB8QH/AYwB4gL/AY0BqAGxAf8BjAG6AccB/wGBAdgC/wGBAdQC/wGB
+        AdQC/wGBAdQC/wGBAdAC/wGBAc0C/wGBAcUB/AH/AXABuwH3Af8BXQGiAdsB/wOBAf8BsgHAAcYB/wGD
         AZUBnwH/Ab4B8AH5Af8BqwHwAfcB/wGlAewB+wH/AZgB5wH7Af8BiQHhAfwB/wGBAd0B+wH/AYEB1QH5
-        Af8BgQHNAfcB/wGBAcQB8wH/AYEBuwHwAf8BbgGyAewB/wFdAaQB4wH/AT0BigG/Af8DgQH/EAABvgGp
-        AZoR/wH+Af0B/AH/AfkB9QHyAf8B9AHrAeYB/wHuAeEB2gH/AdYBxAG8Af8CgQFmAf8YAAMqAf8DKgH/
-        AyoB/wgAAyoB/wMqAf8UAAGGAZoBowH/AZIB4QHyAf8BmAHoAf0B/wGBAcQB3gH/AY4BpwGwAf8BgQHe
+        Af8BgQHNAfcB/wGBAcQB8wH/AYEBuwHwAf8BbAGyAewB/wFbAaQB4wH/ATsBigG/Af8DgQH/EAABvgGp
+        AZoR/wH+Af0B/AH/AfkB9QHyAf8B9AHrAeYB/wHuAeEB2gH/AdYBxAG8Af8CgQFkAf8YAAMoAf8DKAH/
+        AygB/wgAAygB/wMoAf8UAAGGAZoBowH/AZIB4QHyAf8BmAHoAf0B/wGBAcQB3gH/AY4BpwGwAf8BgQHe
         Af0B/wGEAeAC/wGEAeAC/wGEAeAC/wGEAeAC/wGBAd8C/wGBAd0C/wGBAdgC/wGBAdYC/wGBAakB0QH/
         AY8BmwGkAf8BhgGZAaMB/wG+AfAB+QH/AbYB7QH4Af8BsAHuAfoB/wGkAesB+gH/AZUB5gH7Af8BiQHh
-        AfwB/wGBAdwB/AH/AYEB1QH5Af8BgQHNAfcB/wGBAcQB8wH/AYEBuQHvAf8BZgGpAecB/wE9AY8BxwH/
-        A4EB/xAAAcMBrgGeBf8B6gGbAYEB/wHqAZIBgQH/AeoBhwGBAf8B6AGBAYAB/wHiAYEBawH/AdkBgQFk
-        Af8B8QHnAeEB/wHaAcsBwwH/AoEBZgH/HAADKgH/AyoB/wMqAf8DKgH/AyoB/xgAAYgBnAGlAf8BmgHm
+        AfwB/wGBAdwB/AH/AYEB1QH5Af8BgQHNAfcB/wGBAcQB8wH/AYEBuQHvAf8BZAGpAecB/wE7AY8BxwH/
+        A4EB/xAAAcMBrgGeBf8B6gGbAYEB/wHqAZIBgQH/AeoBhwGBAf8B6AGBAYAB/wHiAYEBaQH/AdkBgQFi
+        Af8B8QHnAeEB/wHaAcsBwwH/AoEBZAH/HAADKAH/AygB/wMoAf8DKAH/AygB/xgAAYgBnAGlAf8BmgHm
         AfMB/wGfAesB+wH/AZgB6AH+Af8BiwGsAbkB/wGLAawBuQH/AYoBqgG3Af8BiAGmAbMB/wGGAaMBrwH/
         AYMBnwGqAf8BgQGaAaYB/wGBAZUBoQH/AYEBkQGdAf8BgQGOAZkB/wGBAYsBlQH/AYEBiAGTAf8BiQGc
         AaYB/wG+AfAB+QH/AbYB7QH4Af8BtgHtAfgB/wGrAfAB9wH/AaIB7AH6Af8BlQHmAfsB/wGJAeEB/AH/
-        AYEB3AH8Af8BgQHTAfoB/wGBAcwB9wH/AYEBwwHzAf8BgQG5Ae8B/wFKAZkBzwH/A4EB/xAAAcgBsgGj
-        Ff8D/gH/AfoB9wH1Af8B9QHtAekB/wHfAdIBywH/AoEBZgH/IAADKgH/AyoB/wMqAf8cAAGLAaABqAH/
+        AYEB3AH8Af8BgQHTAfoB/wGBAcwB9wH/AYEBwwHzAf8BgQG5Ae8B/wFIAZkBzwH/A4EB/xAAAcgBsgGj
+        Ff8D/gH/AfoB9wH1Af8B9QHtAekB/wHfAdIBywH/AoEBZAH/IAADKAH/AygB/wMoAf8cAAGLAaABqAH/
         AaAB6gH2Af8BpgHuAfkB/wGfAesB+wH/AZgB6AH+Af8BgQHaAv8BgQHUAv8BgQHUAv8BgQHUAv8BgQHU
         Av8BgQHUAv8BgQHUAv8BgQGIAZMB/wwAAYsBoAGoAf8BvgHwAfkB/wG+AfAB+QH/Ab4B8AH5Af8BvgHw
         AfkB/wG0AfIB+AH/AaoB7AH7Af8BoAHpAfsB/wGVAeUB/AH/AYoB3wH8Af8BgQHYAfsB/wGBAdIB+AH/
         AYEBygH0Af8BgQHAAfEB/wOBAf8QAAHMAbYBpwX/AeoBnAGBAf8B6gGSAYEB/wHqAYcBgQH/AegBgQGA
-        Bf8B/QH8AfsB/wHmAdwB1gH/AeMB2AHSAf8CgQFnAf8cAAMqAf8DKgH/AyoB/wMqAf8DKgH/GAABjgGi
+        Bf8B/QH8AfsB/wHmAdwB1gH/AeMB2AHSAf8CgQFlAf8cAAMoAf8DKAH/AygB/wMoAf8DKAH/GAABjgGi
         AasB/wGnAe4B9gH/AasB8AH3Af8BpgHuAfkB/wGfAesB+wH/AZgB6AH9Af8BgQHUAfsB/wGJAZ4BpwH/
         AYYBmQGjAf8BggGUAZ8B/wGBAZABmgH/AYEBjAGXAf8BgQGIAZMB/wwAAY0BoQGqAf8BjQGhAaoB/wGN
         AaEBqgH/AY0BoQGqAf8BjQGhAaoB/wGLAZ8BqAH/AYkBnAGmAf8BiQGbAaYB/wGHAZoBpAH/AYYBmQGj
         Af8BhAGWAaAB/wGEAZYBoAH/AYMBlQGgAf8BgwGVAaAB/wGBAYQBjwH/EAAB0QG7AasZ/wG3AaIBkwH/
-        AoEBZwH/AoEBZwH/AoEBZwH/GAADKgH/AyoB/wMqAf8IAAMqAf8YAAGPAaQBrAH/AaAB0gHaAf8BqwHw
+        AoEBZQH/AoEBZQH/AoEBZQH/GAADKAH/AygB/wMoAf8IAAMoAf8YAAGPAaQBrAH/AaAB0gHaAf8BqwHw
         AfcB/wGrAfAB9wH/AaYB7gH5Af8BnwHrAfsB/wGNAaEBqgH/AdUB3AHgAf8gAAGPAaQBrAH/AbIB5AHs
         Af8BtgHtAfgB/wG2Ae0B+AH/AakB7AH2Af8BkgHhAfMB/wGNAaEBqgH/AdUB3AHgAf8sAAHVAb8Brxn/
-        AbkBpAGVAf8B1AHFAboB/wKBAWYB/wHBAbIBpwH/EAADKgH/AyoB/wMqAf8DKgH/EAADKgH/AyoB/xAA
+        AbkBpAGVAf8B1AHFAboB/wKBAWQB/wHBAbIBpwH/EAADKAH/AygB/wMoAf8DKAH/EAADKAH/AygB/xAA
         AdoB3gHhAf8BjwGkAawB/wGPAaQBrAH/AY8BpAGsAf8BjwGkAawB/wGPAaQBrAH/AdUB3AHgAf8kAAHa
         Ad4B4QH/AY8BpAGsAf8BjwGkAawB/wGPAaQBrAH/AY8BpAGsAf8BjwGkAawB/wHVAdwB4AH/MAAB2AHC
-        AbIZ/wHAAasBnAH/AoEBZgH/AcIBswGnAf8QAAMqAf8DKgH/AyoB/wMqAf8YAAMqAf8DKgH/mAAB2AHC
+        AbIZ/wHAAasBnAH/AoEBZAH/AcIBswGnAf8QAAMoAf8DKAH/AygB/wMoAf8YAAMoAf8DKAH/mAAB2AHC
         AbIB/wHYAcIBsgH/AdgBwgGyAf8B2AHCAbIB/wHYAcIBsgH/AdQBvgGuAf8BzwG5AakB/wHJAbMBpAH/
-        AeIB1gHNAf8UAAMqAf8DKgH/JAADKgH/AyoB/wgAAUIBTQE+BwABPgMAASgDAAFAAwABHAMAAQEBAAEB
+        AeIB1gHNAf8UAAMoAf8DKAH/JAADKAH/AygB/wgAAUIBTQE+BwABPgMAASgDAAFAAwABHAMAAQEBAAEB
         BQAB4BcAA/9xAAX/AfMC/wEAAQcBAAEBAfgBwwH/AfsBAAEDAQABAQHwAQMB7wH/AQABAwEAAQEB4AED
         AccB9wEAAQEBAAEBAeABAwHHAe8BAAEBAQABAQHgAQMB4wHPAwABAQHgAQMB8QGfAwABAQHgAQMB+AE/
         AwABAQHgAQMB/AF/AQABBwEAAQEB4AEDAfgBPwEAAQcBAAEBAeABAwHxAb8BAAH/AQAB/wHgAQMBwwHP
@@ -592,7 +592,7 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="btnAddBlock.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 145</value>
+    <value>6, 148</value>
   </data>
   <data name="btnAddBlock.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 23</value>
@@ -619,7 +619,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 174</value>
+    <value>208, 177</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -644,9 +644,6 @@
   </data>
   <data name="Commands.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="Commands.ItemHeight" type="System.Int32, mscorlib">
-    <value>16</value>
   </data>
   <data name="Commands.Items" xml:space="preserve">
     <value>Assign</value>
@@ -679,49 +676,52 @@
     <value>Geocode</value>
   </data>
   <data name="Commands.Items10" xml:space="preserve">
-    <value>GoTo</value>
+    <value>Iocode</value>
   </data>
   <data name="Commands.Items11" xml:space="preserve">
-    <value>Help</value>
+    <value>GoTo</value>
   </data>
   <data name="Commands.Items12" xml:space="preserve">
-    <value>Hide</value>
+    <value>Help</value>
   </data>
   <data name="Commands.Items13" xml:space="preserve">
-    <value>Unhide</value>
+    <value>Hide</value>
   </data>
   <data name="Commands.Items14" xml:space="preserve">
-    <value>FieldSelector</value>
+    <value>Unhide</value>
   </data>
   <data name="Commands.Items15" xml:space="preserve">
-    <value>Highlight</value>
+    <value>FieldSelector</value>
   </data>
   <data name="Commands.Items16" xml:space="preserve">
-    <value>Unhighlight</value>
+    <value>Highlight</value>
   </data>
   <data name="Commands.Items17" xml:space="preserve">
-    <value>If</value>
+    <value>Unhighlight</value>
   </data>
   <data name="Commands.Items18" xml:space="preserve">
-    <value>NewRecord</value>
+    <value>If</value>
   </data>
   <data name="Commands.Items19" xml:space="preserve">
-    <value>Quit</value>
+    <value>NewRecord</value>
   </data>
   <data name="Commands.Items20" xml:space="preserve">
-    <value>Set-Required</value>
+    <value>Quit</value>
   </data>
   <data name="Commands.Items21" xml:space="preserve">
-    <value>Set-Not-Required</value>
+    <value>Set-Required</value>
   </data>
   <data name="Commands.Items22" xml:space="preserve">
+    <value>Set-Not-Required</value>
+  </data>
+  <data name="Commands.Items23" xml:space="preserve">
     <value>GoToForm</value>
   </data>
   <data name="Commands.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 20</value>
   </data>
   <data name="Commands.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 116</value>
+    <value>195, 108</value>
   </data>
   <data name="Commands.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -742,7 +742,7 @@
     <value>0, 3</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 168</value>
+    <value>208, 172</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -766,7 +766,7 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 241</value>
+    <value>3, 248</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>496, 118</value>
@@ -793,7 +793,7 @@
     <value>Fill</value>
   </data>
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 55</value>
+    <value>0, 51</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -841,10 +841,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 356</value>
+    <value>211, 363</value>
   </data>
   <data name="splitContainer2.SplitterDistance" type="System.Int32, mscorlib">
-    <value>181</value>
+    <value>184</value>
   </data>
   <data name="splitContainer2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -874,7 +874,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>727, 368</value>
+    <value>727, 375</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>502</value>
@@ -898,7 +898,7 @@
     <value>99, 0</value>
   </metadata>
   <data name="mnuFileValidate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 24</value>
+    <value>149, 22</value>
   </data>
   <data name="mnuFileValidate.Text" xml:space="preserve">
     <value>Validate</value>
@@ -907,7 +907,7 @@
     <value>Ctrl+S</value>
   </data>
   <data name="mnuFileSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 24</value>
+    <value>149, 22</value>
   </data>
   <data name="mnuFileSave.Text" xml:space="preserve">
     <value>&amp;Save</value>
@@ -916,7 +916,7 @@
     <value>F12</value>
   </data>
   <data name="mnuFileSaveAs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 24</value>
+    <value>149, 22</value>
   </data>
   <data name="mnuFileSaveAs.Text" xml:space="preserve">
     <value>Save &amp;As...</value>
@@ -925,7 +925,7 @@
     <value>Ctrl+P</value>
   </data>
   <data name="mnuFilePrint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 24</value>
+    <value>149, 22</value>
   </data>
   <data name="mnuFilePrint.Text" xml:space="preserve">
     <value>Print...</value>
@@ -934,13 +934,13 @@
     <value>F10</value>
   </data>
   <data name="mnuFileClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 24</value>
+    <value>149, 22</value>
   </data>
   <data name="mnuFileClose.Text" xml:space="preserve">
     <value>&amp;Close</value>
   </data>
   <data name="mnuFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 24</value>
+    <value>37, 20</value>
   </data>
   <data name="mnuFile.Text" xml:space="preserve">
     <value>&amp;File</value>
@@ -949,7 +949,7 @@
     <value>Ctrl+Z</value>
   </data>
   <data name="mnuEditUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 24</value>
+    <value>156, 22</value>
   </data>
   <data name="mnuEditUndo.Text" xml:space="preserve">
     <value>Undo</value>
@@ -958,19 +958,19 @@
     <value>Ctrl+Y</value>
   </data>
   <data name="mnuEditRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 24</value>
+    <value>156, 22</value>
   </data>
   <data name="mnuEditRedo.Text" xml:space="preserve">
     <value>Redo</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 6</value>
+    <value>153, 6</value>
   </data>
   <data name="mnuEditCut.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+X</value>
   </data>
   <data name="mnuEditCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 24</value>
+    <value>156, 22</value>
   </data>
   <data name="mnuEditCut.Text" xml:space="preserve">
     <value>Cut</value>
@@ -979,7 +979,7 @@
     <value>Ctrl+C</value>
   </data>
   <data name="mnuEditCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 24</value>
+    <value>156, 22</value>
   </data>
   <data name="mnuEditCopy.Text" xml:space="preserve">
     <value>Copy</value>
@@ -988,19 +988,19 @@
     <value>Ctrl+V</value>
   </data>
   <data name="mnuEditPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 24</value>
+    <value>156, 22</value>
   </data>
   <data name="mnuEditPaste.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 6</value>
+    <value>153, 6</value>
   </data>
   <data name="mnuEditFind.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+F</value>
   </data>
   <data name="mnuEditFind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 24</value>
+    <value>156, 22</value>
   </data>
   <data name="mnuEditFind.Text" xml:space="preserve">
     <value>&amp;Find</value>
@@ -1009,7 +1009,7 @@
     <value>F3</value>
   </data>
   <data name="mnuEditFindNext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 24</value>
+    <value>156, 22</value>
   </data>
   <data name="mnuEditFindNext.Text" xml:space="preserve">
     <value>Find Next</value>
@@ -1018,37 +1018,37 @@
     <value>Ctrl+R</value>
   </data>
   <data name="mnuEditReplace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 24</value>
+    <value>156, 22</value>
   </data>
   <data name="mnuEditReplace.Text" xml:space="preserve">
     <value>&amp;Replace</value>
   </data>
   <data name="mnuEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 24</value>
+    <value>39, 20</value>
   </data>
   <data name="mnuEdit.Text" xml:space="preserve">
     <value>&amp;Edit</value>
   </data>
   <data name="mnuFontsSetEditorFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 24</value>
+    <value>149, 22</value>
   </data>
   <data name="mnuFontsSetEditorFont.Text" xml:space="preserve">
     <value>Set editor font</value>
   </data>
   <data name="mnuFonts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 24</value>
+    <value>48, 20</value>
   </data>
   <data name="mnuFonts.Text" xml:space="preserve">
     <value>F&amp;onts</value>
   </data>
   <data name="enableVariableValidationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 24</value>
+    <value>208, 22</value>
   </data>
   <data name="enableVariableValidationToolStripMenuItem.Text" xml:space="preserve">
     <value>Enable Variable Validation</value>
   </data>
   <data name="validationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 24</value>
+    <value>47, 20</value>
   </data>
   <data name="validationToolStripMenuItem.Text" xml:space="preserve">
     <value>Tools</value>
@@ -1057,7 +1057,7 @@
     <value>0, 0</value>
   </data>
   <data name="CheckCodeMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>727, 28</value>
+    <value>727, 24</value>
   </data>
   <data name="CheckCodeMenu.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>

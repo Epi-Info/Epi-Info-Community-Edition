@@ -3272,4 +3272,7 @@ GlobalRecordId = [FKEY]</value>
   <data name="PROBLEM_LOADING_FORM" xml:space="preserve">
     <value>There was a problem loading the form</value>
   </data>
+  <data name="CNTXT_CMD_IOCODE" xml:space="preserve">
+    <value>Iocode</value>
+  </data>
 </root>

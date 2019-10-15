@@ -115,6 +115,12 @@ namespace Epi.Windows.Dialogs
             this.EWErbNoWindows = new System.Windows.Forms.RadioButton();
             this.EWErbUseWindows = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
+            this.tabIOCoding = new System.Windows.Forms.TabPage();
+            this.groupBoxIOCoding = new System.Windows.Forms.GroupBox();
+            this.linkIOCoding = new System.Windows.Forms.LinkLabel();
+            this.labelIOCodingInfo = new System.Windows.Forms.Label();
+            this.txtIOCoding = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRestoreDefaults = new System.Windows.Forms.Button();
@@ -142,6 +148,8 @@ namespace Epi.Windows.Dialogs
             this.tabPageWebEnter.SuspendLayout();
             this.EWEgbBindingProtocol.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.tabIOCoding.SuspendLayout();
+            this.groupBoxIOCoding.SuspendLayout();
             this.SuspendLayout();
             // 
             // baseImageList
@@ -158,6 +166,7 @@ namespace Epi.Windows.Dialogs
             this.tabControlDateTime.Controls.Add(this.tabPlugIns);
             this.tabControlDateTime.Controls.Add(this.tabPageWebSurvey);
             this.tabControlDateTime.Controls.Add(this.tabPageWebEnter);
+            this.tabControlDateTime.Controls.Add(this.tabIOCoding);
             resources.ApplyResources(this.tabControlDateTime, "tabControlDateTime");
             this.tabControlDateTime.Name = "tabControlDateTime";
             this.tabControlDateTime.SelectedIndex = 0;
@@ -750,6 +759,45 @@ namespace Epi.Windows.Dialogs
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
             // 
+            // tabIOCoding
+            // 
+            this.tabIOCoding.Controls.Add(this.groupBoxIOCoding);
+            resources.ApplyResources(this.tabIOCoding, "tabIOCoding");
+            this.tabIOCoding.Name = "tabIOCoding";
+            this.tabIOCoding.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxIOCoding
+            // 
+            this.groupBoxIOCoding.Controls.Add(this.linkIOCoding);
+            this.groupBoxIOCoding.Controls.Add(this.labelIOCodingInfo);
+            this.groupBoxIOCoding.Controls.Add(this.txtIOCoding);
+            this.groupBoxIOCoding.Controls.Add(this.label11);
+            resources.ApplyResources(this.groupBoxIOCoding, "groupBoxIOCoding");
+            this.groupBoxIOCoding.Name = "groupBoxIOCoding";
+            this.groupBoxIOCoding.TabStop = false;
+            // 
+            // linkIOCoding
+            // 
+            resources.ApplyResources(this.linkIOCoding, "linkIOCoding");
+            this.linkIOCoding.Name = "linkIOCoding";
+            this.linkIOCoding.TabStop = true;
+            this.linkIOCoding.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkIOCoding_LinkClicked);
+            // 
+            // labelIOCodingInfo
+            // 
+            resources.ApplyResources(this.labelIOCodingInfo, "labelIOCodingInfo");
+            this.labelIOCodingInfo.Name = "labelIOCodingInfo";
+            // 
+            // txtIOCoding
+            // 
+            resources.ApplyResources(this.txtIOCoding, "txtIOCoding");
+            this.txtIOCoding.Name = "txtIOCoding";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -832,6 +880,9 @@ namespace Epi.Windows.Dialogs
             this.EWEgbBindingProtocol.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.tabIOCoding.ResumeLayout(false);
+            this.groupBoxIOCoding.ResumeLayout(false);
+            this.groupBoxIOCoding.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -930,5 +981,11 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox autoTouchKeyboard;
         private System.Windows.Forms.CheckBox checkBoxSparseConnection;
+        private System.Windows.Forms.TabPage tabIOCoding;
+        private System.Windows.Forms.GroupBox groupBoxIOCoding;
+        private System.Windows.Forms.LinkLabel linkIOCoding;
+        private System.Windows.Forms.Label labelIOCodingInfo;
+        private System.Windows.Forms.TextBox txtIOCoding;
+        private System.Windows.Forms.Label label11;
     }
 }
