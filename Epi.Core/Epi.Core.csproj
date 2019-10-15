@@ -893,6 +893,9 @@
     <None Include="Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
+    <None Include="Resources\NIOSH.IOCoder.C12.190829.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Service References\EWEManagerService\Epi.EWEManagerService.FormSettingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
