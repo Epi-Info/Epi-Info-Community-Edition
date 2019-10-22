@@ -3578,7 +3578,7 @@ namespace Epi.Windows.MakeView.Forms
             {
                 var checkCodeAfters = mediator.Project.Metadata.GetViewsAsDataTable()
                     .AsEnumerable()
-                    .Where(row => row.Field<string>("CheckCodeAfter").Length > 0);
+                    .Where(row => (row.Field<string>("CheckCodeAfter")??"").Length > 0);
 
                 if (checkCodeAfters.Count() > 0) { return true; }
             }
