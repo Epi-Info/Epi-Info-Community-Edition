@@ -209,7 +209,7 @@ namespace Epi.Windows.Analysis.Dialogs
 
         private void lbxOther_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbxOther.SelectedItems.Count >= 1 && lbxOther.SelectedItems.Count <= 2)
+            if (lbxOther.SelectedItems.Count >= 1)
             {
                 btnModifyTerm.Enabled = true;
             }
@@ -218,7 +218,7 @@ namespace Epi.Windows.Analysis.Dialogs
                 btnModifyTerm.Enabled = false;
             }
 
-            if (lbxOther.SelectedItems.Count == 2)
+            if (lbxOther.SelectedItems.Count >= 2)
             {
                 btnModifyTerm.Text = "Make Interaction";
             }
@@ -325,9 +325,23 @@ namespace Epi.Windows.Analysis.Dialogs
                     lbxOther.SelectedItems.Clear();
                 }
             }
-        }
+			else if (lbxOther.SelectedItems.Count >= 2)
+			{
+				if (lbxOther.SelectedItems[0].ToString().Contains("("))
+					return;
+				string interactionTerm = lbxOther.SelectedItems[0].ToString();
+				for (int i = 1; i < lbxOther.SelectedItems.Count; i++)
+				{
+					if (lbxOther.SelectedItems[i].ToString().Contains("("))
+						return;
+					interactionTerm = interactionTerm + StringLiterals.STAR + lbxOther.SelectedItems[i].ToString();
+				}
+				lbxInteractionTerms.Items.Add(interactionTerm);
+				lbxOther.SelectedItems.Clear();
+			}
+		}
 
-        private void cmbWeight_SelectedIndexChanged(object sender, EventArgs e)
+		private void cmbWeight_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Get the old variable chosen that was saved to the txt string.
             string strOld = txtWeightVar;
