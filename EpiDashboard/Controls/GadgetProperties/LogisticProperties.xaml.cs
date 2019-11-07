@@ -189,11 +189,21 @@ namespace EpiDashboard.Controls.GadgetProperties
                     lbxInteractionTerms.Items.Add(term);
                 }
             }
-        }
+			else if (lbxOtherFields.SelectedItems.Count > 2)
+			{
+				string term = lbxOtherFields.SelectedItems[0] + "*" + lbxOtherFields.SelectedItems[1];
+				for (int i = 2; i < lbxOtherFields.SelectedItems.Count; i++)
+					term = term + "*" + lbxOtherFields.SelectedItems[i];
+				if (!lbxInteractionTerms.Items.Contains(term))
+				{
+					lbxInteractionTerms.Items.Add(term);
+				}
+			}
+		}
 
-        private void lbxOtherFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void lbxOtherFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbxOtherFields.SelectedItems.Count == 1 || lbxOtherFields.SelectedItems.Count == 2)
+            if (lbxOtherFields.SelectedItems.Count == 1 || lbxOtherFields.SelectedItems.Count >= 2)
             {
                 btnMakeDummy.IsEnabled = true;
             }
@@ -202,11 +212,11 @@ namespace EpiDashboard.Controls.GadgetProperties
                 btnMakeDummy.IsEnabled = false;
             }
 
-            if (lbxOtherFields.SelectedItems.Count == 1 || lbxOtherFields.SelectedItems.Count > 2)
+            if (lbxOtherFields.SelectedItems.Count == 1)
             {
                 btnMakeDummyTxt.Text= "Make Dummy";
             }
-            else if (lbxOtherFields.SelectedItems.Count == 2)
+            else if (lbxOtherFields.SelectedItems.Count >= 2)
             {
                 btnMakeDummyTxt.Text= "Make Interaction";
             }
