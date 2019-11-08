@@ -81,18 +81,40 @@ namespace Epi.Data
                     throw new Exception("Can not load assembly for EpiInfoWeb. " + ex.StackTrace);
                 }
             }
-			else if (dataDriverType.Equals("Epi.Data.REDCap.REDCapFactory, Epi.Data.REDCap"))
-			{
-				try
-				{
-					typeFactory = Type.GetType(Configuration.EpiInfoREDCapDriver);
-				}
-				catch (Exception ex)
-				{
-					throw new Exception("Can not load assembly for REDCap. " + ex.StackTrace);
-				}
-			}
-			else
+            else if (dataDriverType.Equals("Epi.Data.REDCap.REDCapFactory, Epi.Data.REDCap"))
+            {
+                try
+                {
+                    typeFactory = Type.GetType(Configuration.EpiInfoREDCapDriver);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Can not load assembly for REDCap. " + ex.StackTrace);
+                }
+            }
+            else if (dataDriverType.Equals("Epi.Data.RimportSPSS.RimportSPSSFactory, Epi.Data.RimportSPSS"))
+            {
+                try
+                {
+                    typeFactory = Type.GetType(Configuration.RimportSPSSDriver);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Can not load assembly for RimportSPSS. " + ex.StackTrace);
+                }
+            }
+            else if (dataDriverType.Equals("Epi.Data.RimportSAS.RimportSASFactory, Epi.Data.RimportSAS"))
+            {
+                try
+                {
+                    /// typeFactory = Type.GetType(Configuration.RimportSASDriver);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Can not load assembly for RimportSAS. " + ex.StackTrace);
+                }
+            }
+            else
 			{
                 try
                 {

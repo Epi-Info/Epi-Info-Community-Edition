@@ -61,6 +61,15 @@ namespace Epi
         /// </summary>
         public const string MongoDBDriver = "Epi.Data.MongoDB.MongoDBDBFactory, Epi.Data.MongoDB";
 
+        /// <summary>
+        /// Identifier for R driver that is built into Epi Info
+        /// </summary>
+        public const string RimportSPSSDriver = "Epi.Data.RimportSPSS.RimportSPSSDBFactory, Epi.Data.RimportSPSS";
+
+        /// <summary>
+        /// Identifier for SAS driver that is built into Epi Info
+        /// </summary>
+        //public const string RimportSASDriver = "Epi.Data.RimportSAS.RimportSASDBFactory, Epi.Data.RimportSAS";
 
         /// <summary>
         /// Identifier for Epi Info Web driver that is built into Epi Info
@@ -152,11 +161,7 @@ namespace Epi
             return new Configuration(filePath, configDataSet);
         }
 
-
-
-        
-
-            /// <summary>
+        /// <summary>
         /// Returns a new instance of the configuration class
         /// </summary>
         /// <returns></returns>
@@ -261,7 +266,6 @@ namespace Epi
                     throw new ApplicationException(String.Format(SharedStrings.ERROR_LOADING_DEFINED_VARS, aex.Message));
                 }
             }
-
 
             Save();
         }
@@ -485,7 +489,6 @@ namespace Epi
 
             try
             {
-
                 // prevent this method from being called concurrently 
                 System.Threading.Monitor.Enter(syncLock);
 
@@ -834,6 +837,22 @@ namespace Epi
             dataDriverRowMongoDB.DataProvider = true;
             dataDriverRowMongoDB.MetadataProvider = false;
             configDataSet.DataDriver.Rows.Add(dataDriverRowMongoDB);
+
+            Config.DataDriverRow dataDriverRowRimportSPSS = configDataSet.DataDriver.NewDataDriverRow();
+            dataDriverRowRimportSPSS.DataDriversRow = parentDataDriversRow;
+            dataDriverRowRimportSPSS.DisplayName = "RimportSPSS (Beta)";
+            dataDriverRowRimportSPSS.Type = RimportSPSSDriver;
+            dataDriverRowRimportSPSS.DataProvider = true;
+            dataDriverRowRimportSPSS.MetadataProvider = false;
+            configDataSet.DataDriver.Rows.Add(dataDriverRowRimportSPSS);
+
+            //Config.DataDriverRow dataDriverRowRimportSAS = configDataSet.DataDriver.NewDataDriverRow();
+            //dataDriverRowMongoDB.DataDriversRow = parentDataDriversRow;
+            //dataDriverRowMongoDB.DisplayName = "RimportSAS (Beta)";
+            //dataDriverRowMongoDB.Type = RimportSASDriver;
+            //dataDriverRowMongoDB.DataProvider = true;
+            //dataDriverRowMongoDB.MetadataProvider = false;
+            //configDataSet.DataDriver.Rows.Add(dataDriverRowRimportSAS);
 
             Config.DataDriverRow dataDriverRowPostgreSql = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowPostgreSql.DataDriversRow = parentDataDriversRow;
