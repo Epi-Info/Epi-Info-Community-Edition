@@ -152,6 +152,12 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Forms\SPSSConnectionStringDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SPSSConnectionStringDialog.Designer.cs">
+      <DependentUpon>SPSSConnectionStringDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="RimportSPSSType.cs" />
     <Compile Include="RimportSPSSParameter.cs" />
     <Compile Include="RimportSPSSConnectionStringBuilder.cs" />
@@ -186,7 +192,7 @@
     </Compile>
     <Compile Include="RimportSPSSDatabase.IDataSource.cs" />
     <Compile Include="RimportSPSSDbColumnType.cs" />
-    <Compile Include="RimportSPSSDBFactory.cs" />
+    <Compile Include="RimportSPSSFactory.cs" />
     <Compile Include="RimportSPSSDatabase.cs" />
     <Compile Include="RimportSPSSQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -229,6 +235,9 @@
     <EmbeddedResource Include="Forms\NonExistingConnectionStringDialog.resx">
       <DependentUpon>NonExistingConnectionStringDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SPSSConnectionStringDialog.resx">
+      <DependentUpon>SPSSConnectionStringDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

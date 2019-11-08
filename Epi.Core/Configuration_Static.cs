@@ -64,7 +64,7 @@ namespace Epi
         /// <summary>
         /// Identifier for R driver that is built into Epi Info
         /// </summary>
-        public const string RimportSPSSDriver = "Epi.Data.RimportSPSS.RimportSPSSDBFactory, Epi.Data.RimportSPSS";
+        public const string RimportSPSSDriver = "Epi.Data.RimportSPSS.RimportSPSSFactory, Epi.Data.RimportSPSS";
 
         /// <summary>
         /// Identifier for SAS driver that is built into Epi Info
@@ -840,7 +840,7 @@ namespace Epi
 
             Config.DataDriverRow dataDriverRowRimportSPSS = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowRimportSPSS.DataDriversRow = parentDataDriversRow;
-            dataDriverRowRimportSPSS.DisplayName = "RimportSPSS (Beta)";
+            dataDriverRowRimportSPSS.DisplayName = "SPSS (Beta) (.sav)";
             dataDriverRowRimportSPSS.Type = RimportSPSSDriver;
             dataDriverRowRimportSPSS.DataProvider = true;
             dataDriverRowRimportSPSS.MetadataProvider = false;
@@ -848,7 +848,7 @@ namespace Epi
 
             //Config.DataDriverRow dataDriverRowRimportSAS = configDataSet.DataDriver.NewDataDriverRow();
             //dataDriverRowMongoDB.DataDriversRow = parentDataDriversRow;
-            //dataDriverRowMongoDB.DisplayName = "RimportSAS (Beta)";
+            //dataDriverRowMongoDB.DisplayName = "SAS (Beta) (.sas7bat)";
             //dataDriverRowMongoDB.Type = RimportSASDriver;
             //dataDriverRowMongoDB.DataProvider = true;
             //dataDriverRowMongoDB.MetadataProvider = false;

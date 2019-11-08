@@ -15,7 +15,7 @@ namespace Epi.Data.RimportSPSS
     /// <summary>
     /// RimportSPSSColumnType - Database Factory for RimportSPSS Databases
     /// </summary>
-    public class RimportSPSSDBFactory : IDbDriverFactory
+    public class RimportSPSSFactory : IDbDriverFactory
     {
 
         #region Connection string on different OS 
@@ -126,7 +126,7 @@ namespace Epi.Data.RimportSPSS
         {
             if (Configuration.Environment == ExecutionEnvironment.WindowsApplication)
             {
-                return new ExistingConnectionStringDialog();
+                return new SPSSConnectionStringDialog();
             }
             else
             {
