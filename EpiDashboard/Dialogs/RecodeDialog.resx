@@ -112,20 +112,20 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="baseImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="baseImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACs
-        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAF0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAGcAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABJgEBAgABAQEAASAGAAEmAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AbgAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8IAAPfAf8BHQGCAbUB/wEbAYEBswH/ARgBfgGw
         Af8BFgF8Aa4B/wETAXkBqwH/ARABdgGoAf8BDQFzAaUB/wELAXEBowH/AQgBbgGgAf8BBgFsAZ4B/wEE
@@ -856,11 +856,15 @@
         AQEB8AEBAfcD/wGPAf8WAAs=
 </value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSource.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblSource.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSource.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 13</value>
   </data>
@@ -877,7 +881,7 @@
     <value>lblSource</value>
   </data>
   <data name="&gt;&gt;lblSource.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblSource.Parent" xml:space="preserve">
     <value>$this</value>
@@ -885,16 +889,19 @@
   <data name="&gt;&gt;lblSource.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="cbxSourceField.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="cbxSourceField.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 29</value>
   </data>
   <data name="cbxSourceField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+    <value>484, 21</value>
   </data>
   <data name="cbxSourceField.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <metadata name="toolTipRecodeDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolTipRecodeDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>146, 17</value>
   </metadata>
   <data name="cbxSourceField.ToolTip" xml:space="preserve">
@@ -905,13 +912,16 @@ that will have its values recoded.</value>
     <value>cbxSourceField</value>
   </data>
   <data name="&gt;&gt;cbxSourceField.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbxSourceField.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbxSourceField.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="lblDestination.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="lblDestination.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -932,7 +942,7 @@ that will have its values recoded.</value>
     <value>lblDestination</value>
   </data>
   <data name="&gt;&gt;lblDestination.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblDestination.Parent" xml:space="preserve">
     <value>$this</value>
@@ -940,12 +950,11 @@ that will have its values recoded.</value>
   <data name="&gt;&gt;lblDestination.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 494</value>
+    <value>263, 498</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -960,7 +969,7 @@ that will have its values recoded.</value>
     <value>btnOK</value>
   </data>
   <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>$this</value>
@@ -972,7 +981,7 @@ that will have its values recoded.</value>
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 494</value>
+    <value>425, 498</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -987,7 +996,7 @@ that will have its values recoded.</value>
     <value>btnCancel</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -995,11 +1004,14 @@ that will have its values recoded.</value>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="txtDestinationField.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="txtDestinationField.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 69</value>
   </data>
   <data name="txtDestinationField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
+    <value>483, 20</value>
   </data>
   <data name="txtDestinationField.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1012,7 +1024,7 @@ created in the current data source to store the recoded values.</value>
     <value>txtDestinationField</value>
   </data>
   <data name="&gt;&gt;txtDestinationField.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtDestinationField.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1021,16 +1033,16 @@ created in the current data source to store the recoded values.</value>
     <value>8</value>
   </data>
   <data name="dataGridViewRecode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="dataGridViewRecode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 188</value>
+    <value>16, 198</value>
   </data>
   <data name="dataGridViewRecode.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="dataGridViewRecode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 247</value>
+    <value>483, 241</value>
   </data>
   <data name="dataGridViewRecode.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1039,7 +1051,7 @@ created in the current data source to store the recoded values.</value>
     <value>dataGridViewRecode</value>
   </data>
   <data name="&gt;&gt;dataGridViewRecode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dataGridViewRecode.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1051,7 +1063,7 @@ created in the current data source to store the recoded values.</value>
     <value>Bottom, Right</value>
   </data>
   <data name="btnFillRanges.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 494</value>
+    <value>344, 498</value>
   </data>
   <data name="btnFillRanges.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1070,7 +1082,7 @@ field and is a very quick way to create numeric groupings such as age categories
     <value>btnFillRanges</value>
   </data>
   <data name="&gt;&gt;btnFillRanges.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnFillRanges.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1078,11 +1090,14 @@ field and is a very quick way to create numeric groupings such as age categories
   <data name="&gt;&gt;btnFillRanges.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="cbxFieldType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="cbxFieldType.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 108</value>
   </data>
   <data name="cbxFieldType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+    <value>483, 21</value>
   </data>
   <data name="cbxFieldType.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1098,7 +1113,7 @@ select Text.</value>
     <value>cbxFieldType</value>
   </data>
   <data name="&gt;&gt;cbxFieldType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbxFieldType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1125,7 +1140,7 @@ select Text.</value>
     <value>lblType</value>
   </data>
   <data name="&gt;&gt;lblType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1137,7 +1152,7 @@ select Text.</value>
     <value>True</value>
   </data>
   <data name="checkboxMaintainSortOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 137</value>
+    <value>15, 140</value>
   </data>
   <data name="checkboxMaintainSortOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 17</value>
@@ -1158,7 +1173,7 @@ alphabetically.</value>
     <value>checkboxMaintainSortOrder</value>
   </data>
   <data name="&gt;&gt;checkboxMaintainSortOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkboxMaintainSortOrder.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1173,7 +1188,7 @@ alphabetically.</value>
     <value>NoControl</value>
   </data>
   <data name="checkboxUseWildcards.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 160</value>
+    <value>15, 163</value>
   </data>
   <data name="checkboxUseWildcards.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 17</value>
@@ -1193,7 +1208,7 @@ with .gov.</value>
     <value>checkboxUseWildcards</value>
   </data>
   <data name="&gt;&gt;checkboxUseWildcards.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkboxUseWildcards.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1201,11 +1216,14 @@ with .gov.</value>
   <data name="&gt;&gt;checkboxUseWildcards.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="txtElseValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="txtElseValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 454</value>
+    <value>16, 464</value>
   </data>
   <data name="txtElseValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>411, 20</value>
+    <value>483, 20</value>
   </data>
   <data name="txtElseValue.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1219,13 +1237,16 @@ will be left null.</value>
     <value>txtElseValue</value>
   </data>
   <data name="&gt;&gt;txtElseValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtElseValue.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtElseValue.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="lblElseValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="lblElseValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1234,7 +1255,7 @@ will be left null.</value>
     <value>NoControl</value>
   </data>
   <data name="lblElseValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 438</value>
+    <value>13, 447</value>
   </data>
   <data name="lblElseValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
@@ -1249,7 +1270,7 @@ will be left null.</value>
     <value>lblElseValue</value>
   </data>
   <data name="&gt;&gt;lblElseValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblElseValue.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1257,17 +1278,20 @@ will be left null.</value>
   <data name="&gt;&gt;lblElseValue.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>55</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>440, 529</value>
+    <value>512, 533</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>528, 572</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1279,18 +1303,18 @@ will be left null.</value>
     <value>baseImageList</value>
   </data>
   <data name="&gt;&gt;baseImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolTipRecodeDialog.Name" xml:space="preserve">
     <value>toolTipRecodeDialog</value>
   </data>
   <data name="&gt;&gt;toolTipRecodeDialog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>RecodeDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.0.4285.14112, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.7257.14133, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
