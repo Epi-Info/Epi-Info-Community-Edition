@@ -9207,7 +9207,7 @@ namespace Epi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This feature is available when using an endpoint version of four (V4) or highter..
+        ///   Looks up a localized string similar to This feature is available when using an endpoint version of four (V4) or higher..
         /// </summary>
         public static string WEBSURVEY_REQ_VER {
             get {
