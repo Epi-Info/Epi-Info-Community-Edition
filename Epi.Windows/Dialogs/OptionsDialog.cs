@@ -470,8 +470,19 @@ namespace Epi.Windows.Dialogs
             cbxIncludeMissing.Checked = settings.IncludeMissingValues;
 			//settingsPanel.ShowSettings();
 			txtWorkingDirectory.Text = config.Directories.Working;
-            txtMapKey.Text = config.Settings.MapServiceKey;
-            txtIOCoding.Text = config.Settings.IOCodeFile;
+
+            try
+            {
+                txtMapKey.Text = config.Settings.MapServiceKey;
+            }
+            catch { }
+
+            try
+            {
+                txtIOCoding.Text = config.Settings.IOCodeFile;
+            }
+            catch { }
+
             object selectedItem = null;
             foreach (object item in lbxLanguages.Items)
             {
