@@ -139,9 +139,9 @@
             // 
             // cbxSourceField
             // 
+            resources.ApplyResources(this.cbxSourceField, "cbxSourceField");
             this.cbxSourceField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSourceField.FormattingEnabled = true;
-            resources.ApplyResources(this.cbxSourceField, "cbxSourceField");
             this.cbxSourceField.Name = "cbxSourceField";
             this.toolTipRecodeDialog.SetToolTip(this.cbxSourceField, resources.GetString("cbxSourceField.ToolTip"));
             this.cbxSourceField.SelectedIndexChanged += new System.EventHandler(this.cbxSourceField_SelectedIndexChanged);
@@ -190,9 +190,9 @@
             // 
             // cbxFieldType
             // 
+            resources.ApplyResources(this.cbxFieldType, "cbxFieldType");
             this.cbxFieldType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFieldType.FormattingEnabled = true;
-            resources.ApplyResources(this.cbxFieldType, "cbxFieldType");
             this.cbxFieldType.Name = "cbxFieldType";
             this.toolTipRecodeDialog.SetToolTip(this.cbxFieldType, resources.GetString("cbxFieldType.ToolTip"));
             this.cbxFieldType.SelectedIndexChanged += new System.EventHandler(this.cbxFieldType_SelectedIndexChanged);
@@ -253,12 +253,11 @@
             this.Controls.Add(this.lblDestination);
             this.Controls.Add(this.cbxSourceField);
             this.Controls.Add(this.lblSource);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RecodeDialog";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRecode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
