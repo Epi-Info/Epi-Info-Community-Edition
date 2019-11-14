@@ -3275,4 +3275,10 @@ GlobalRecordId = [FKEY]</value>
   <data name="CNTXT_CMD_IOCODE" xml:space="preserve">
     <value>Iocode</value>
   </data>
+  <data name="WEBSURVEY_REQ_VER" xml:space="preserve">
+    <value>This feature is available when using an endpoint version of four (V4) or highter.</value>
+  </data>
+  <data name="WEBSURVEY_VER_IS" xml:space="preserve">
+    <value>The version of the endpoint you are currently using is</value>
+  </data>
 </root>
