@@ -5627,14 +5627,27 @@ namespace Epi.Windows.MakeView.Forms
 
         private void OpenProjectFromWebToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Util.GetEndpointVersion() < 4) // dpbrown - replace with GetVersion
+            config = Configuration.GetNewInstance();
+
+            if (string.IsNullOrEmpty(config.Settings.WebServiceEndpointAddress))
             {
-                MessageBox.Show
-                (SharedStrings.WEBSURVEY_SETTINGS_INVALID,
+                MessageBox.Show(SharedStrings.WEBSURVEY_SETTINGS_INVALID,
+                        "Epi Info 7",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                return;
+            }
+
+            int endpointVersion = Util.GetEndpointVersion();
+
+            if (endpointVersion < 4) 
+            {
+                MessageBox.Show(SharedStrings.WEBSURVEY_REQ_VER + "\n\n\r" +
+                    SharedStrings.WEBSURVEY_VER_IS + 
+                    $" {endpointVersion}.\n\n\r{config.Settings.WebServiceEndpointAddress}",
                     "Epi Info 7",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+                    MessageBoxIcon.Information);
                 return;
             }
 

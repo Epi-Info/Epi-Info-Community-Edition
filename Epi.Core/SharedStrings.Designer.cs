@@ -19,7 +19,7 @@ namespace Epi {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class SharedStrings {
@@ -9207,6 +9207,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This feature is available when using an endpoint version of four (V4) or highter..
+        /// </summary>
+        public static string WEBSURVEY_REQ_VER {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_REQ_VER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more settings are invalid. Enter the correct settings and try again..
         /// </summary>
         public static string WEBSURVEY_SETTINGS_INVALID {
@@ -9221,6 +9230,15 @@ namespace Epi {
         public static string WEBSURVEY_UPDATE_SUCCESS {
             get {
                 return ResourceManager.GetString("WEBSURVEY_UPDATE_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The version of the endpoint you are currently using is.
+        /// </summary>
+        public static string WEBSURVEY_VER_IS {
+            get {
+                return ResourceManager.GetString("WEBSURVEY_VER_IS", resourceCulture);
             }
         }
         
