@@ -10,6 +10,8 @@ using System.Runtime;
 using System.Diagnostics;
 using System.Data.OleDb;
 using Epi.Data.RimportSPSS;
+using RDotNet;
+
 
 namespace Epi.Data.RimportSPSS.Forms
 {
@@ -50,59 +52,6 @@ namespace Epi.Data.RimportSPSS.Forms
 
             OleDbCommand command = new OleDbCommand(commandBuilder.ToString());
 
-
-            //foreach (DataRow dataSource in dataSources.Rows)
-            //{
-            //    string dataSourceName = dataSource["ServerName"].ToString();
-            //    if (!string.IsNullOrEmpty(dataSource["InstanceName"].ToString()))
-            //    {
-            //        dataSourceName += Path.DirectorySeparatorChar + dataSource["InstanceName"].ToString();
-            //    }
-            //    listBox.Items.Add(dataSourceName);
-            //}
-
-            //List<string> osqlPaths = new List<string>();
-
-            //try
-            //{
-            //    DirSearch(@"c:\program files\microsoft sql server\", ref osqlPaths);
-            //}
-            //catch { }
-
-            //if (osqlPaths.Count == 0)
-            //{
-            //    MessageBox.Show("Cannot browse for servers because SQL Server Client is not installed.");
-            //    this.Close();
-            //    return;
-            //}
-
-            //string filePath = osqlPaths[0];
-
-            //Process cmd = new Process();
-            //cmd.StartInfo.WorkingDirectory = Path.GetDirectoryName(filePath);
-            //cmd.StartInfo.CreateNoWindow = true;
-            //cmd.StartInfo.FileName = filePath;
-            //cmd.StartInfo.Arguments = "-L";
-            //cmd.StartInfo.UseShellExecute = false;
-            //cmd.StartInfo.RedirectStandardOutput = true;
-            //cmd.Start();
-
-            //string output = cmd.StandardOutput.ReadToEnd();
-            //cmd.WaitForExit(30 * 1000);
-
-            //int startIndex = output.IndexOf("Servers:");
-            //if (startIndex > -1)
-            //{
-            //    StringReader reader = new StringReader(output.Substring(startIndex + "Servers:".Length));
-            //    //skip first line
-            //    reader.ReadLine();
-            //    while (true)
-            //    {
-            //        string line = reader.ReadLine();
-            //        if (string.IsNullOrEmpty(line)) break;
-            //        this.listBox.Items.Add(line.Trim());
-            //    }
-            //}
         }
 
         private static void DirSearch(string sDir, ref List<string> found)
@@ -123,30 +72,17 @@ namespace Epi.Data.RimportSPSS.Forms
             this.btnOK.Enabled = true;
         }
 
-        /// <summary>
-        /// Return all network servers
-        /// </summary>
-        /// <returns></returns>
         public static string BrowseNetworkServers()
         {
             BrowseForServers dialog = new BrowseForServers();
             if (DialogResult.OK == dialog.ShowDialog())
             {
-               // return dialog.listBox.Text;
+                // return dialog.listBox.Text;
                 return null;
             }
 
             return null;
         }
-
-        //private void listBox_DoubleClick(object sender, EventArgs e)
-        //{
-        //    if (!string.IsNullOrEmpty(listBox.SelectedItem as string))
-        //    {
-        //        DialogResult = DialogResult.OK;
-        //        this.Close();
-        //    }
-        //}
 
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -170,7 +106,28 @@ namespace Epi.Data.RimportSPSS.Forms
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
 
+            using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
+            {
+                openFileDialog1.InitialDirectory = "c:\\";
+                openFileDialog1.Filter = "SPSS files (*.sav)";
+                openFileDialog1.FilterIndex = 1;  // default is 1--use if multiple types
+                openFileDialog1.RestoreDirectory = true;
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog1.FileName;
+                }
+            }
+
+            MessageBox.Show(fileContent, "File path: " + filePath, MessageBoxButtons.OK);
         }
+    
+    
+    
+    
     }
 }

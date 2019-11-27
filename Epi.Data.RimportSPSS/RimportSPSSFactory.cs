@@ -18,18 +18,11 @@ namespace Epi.Data.RimportSPSS
     public class RimportSPSSFactory : IDbDriverFactory
     {
 
-        #region Connection string on different OS 
-        //Windows
-        //   "Persist Security Info=False;database=myDB;server=myHost;Connect Timeout=30;user id=myUser; pwd=myPass";
-        //Linux with MONO: filepath is all of the below statement
-        //   "database=myDB;server=/var/lib/RimportSPSS/RimportSPSS.sock;user id=myUser; pwd=myPass";
-        #endregion
-
         private RimportSPSSConnectionStringBuilder RimportSPSSConnBuild = new RimportSPSSConnectionStringBuilder();
 
         public bool ArePrerequisitesMet()
         {
-            return true;
+            return true;  // This might be a good place to check to see if R present.
         }
 
         public string PrerequisiteMessage
