@@ -21,8 +21,7 @@ namespace Epi.Data.RimportSPSS.Forms
         {
             InitializeComponent();
 
-
-            if (string.IsNullOrEmpty(txtCertFile.Text))
+            if (string.IsNullOrEmpty(fileName.Text))
             {
                 btnOk.Enabled = true;
             }
@@ -65,13 +64,13 @@ namespace Epi.Data.RimportSPSS.Forms
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                txtCertFile.Text = dialog.FileName;
+                fileName.Text = dialog.FileName;
             }
         }
 
         private void txtCertFile_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCertFile.Text) || string.IsNullOrEmpty(txtOrgKey.Text))
+            if (string.IsNullOrEmpty(fileName.Text))
             {
                 btnOk.Enabled = false;
             }
@@ -108,7 +107,7 @@ namespace Epi.Data.RimportSPSS.Forms
 
         private void txtOrgKey_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCertFile.Text) || string.IsNullOrEmpty(txtOrgKey.Text))
+            if (string.IsNullOrEmpty(fileName.Text))
             {
                 btnOk.Enabled = false;
             }
@@ -116,6 +115,11 @@ namespace Epi.Data.RimportSPSS.Forms
             {
                 btnOk.Enabled = true;
             }
+        }
+
+        private void findFile_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
