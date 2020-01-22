@@ -126,6 +126,13 @@
             this.baseImageList.Images.SetKeyName(78, "");
             this.baseImageList.Images.SetKeyName(79, "");
             // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(0, 0);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.TabIndex = 0;
+            // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -161,7 +168,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 17);
+            this.label3.Location = new System.Drawing.Point(68, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(16, 13);
             this.label3.TabIndex = 8;
