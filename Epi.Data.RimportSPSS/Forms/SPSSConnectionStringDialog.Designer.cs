@@ -126,16 +126,6 @@
             this.baseImageList.Images.SetKeyName(78, "");
             this.baseImageList.Images.SetKeyName(79, "");
             // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Location = new System.Drawing.Point(476, 107);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 2;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -212,6 +202,7 @@
             this.fileName.Name = "fileName";
             this.fileName.Size = new System.Drawing.Size(327, 20);
             this.fileName.TabIndex = 29;
+            this.fileName.TextChanged += new System.EventHandler(this.fileName_TextChanged);
             // 
             // label4
             // 
@@ -245,6 +236,7 @@
             this.Name = "SPSSConnectionStringDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Connect to an SPSS file";
+            this.Load += new System.EventHandler(this.SPSSConnectionStringDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Epi.Windows.Dialogs;
 
+
 namespace Epi.Data.RimportSPSS.Forms
 {
     public partial class SPSSConnectionStringDialog : DialogBase, IConnectionStringGui
     {
 
-        private DbConnectionStringBuilder connBuilder;
+        private RimportSPSSConnectionStringBuilder connBuilder;
 
         public SPSSConnectionStringDialog()
         {
@@ -54,49 +55,34 @@ namespace Epi.Data.RimportSPSS.Forms
 
         public void SetUserName(string userName)
         {
-            
+
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Epi Info Web Certificate Files (*.wcert)|*.wcert";
-            DialogResult result = dialog.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                fileName.Text = dialog.FileName;
-            }
-        }
+        //private void btnBrowse_Click(object sender, EventArgs e)
+        //{
 
-        private void txtCertFile_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(fileName.Text))
-            {
-                btnOk.Enabled = false;
-            }
-            else
-            {
-                btnOk.Enabled = true;
-            }
-        }
+        //}
 
-        private async void btnOk_Click(object sender, EventArgs e)
+        //private void txtCertFile_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (string.IsNullOrEmpty(fileName.Text))
+        //    {
+        //        btnOk.Enabled = false;
+        //    }
+        //    else
+        //    {
+        //        btnOk.Enabled = true;
+        //    }
+        //}
+
+        private void btnOk_Click(object sender, EventArgs e)
         {
             try
             {
-				//var red_cap_api = new RedcapApi(txtCertFile.Text);
+                string pwd = "Password is: " + password.Text;
+                string filePath = "File path is: " + fileName.Text;
+                MessageBox.Show(pwd.Trim() + filePath.Trim());
 
-				//var ExportInstrumentsAsync = await red_cap_api.ExportInstrumentsAsync(txtOrgKey.Text, Content.Instrument, ReturnFormat.json);
-				//var ExportInstrumentsAsyncData = JsonConvert.DeserializeObject(ExportInstrumentsAsync);
-				//System.Data.DataTable instrumentTable =
-				//	JsonConvert.DeserializeObject<System.Data.DataTable>(ExportInstrumentsAsyncData.ToString());
-				//string tableName = (string)instrumentTable.Rows[0]["instrument_name"];
-
-				//this.connBuilder = new REDCapConnectionStringBuilder(txtCertFile.Text + "@" +
-				//	txtOrgKey.Text + "@" +
-				//	tableName);
-				//this.DialogResult = DialogResult.OK;
-				//this.Hide();
 			}
 			catch (Exception ex)
             {
@@ -105,7 +91,28 @@ namespace Epi.Data.RimportSPSS.Forms
             }
         }
 
-        private void txtOrgKey_TextChanged(object sender, EventArgs e)
+        //private void txtOrgKey_TextChanged(object sender, EventArgs e)
+        //{
+
+        //}
+
+        private void findFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "SPSS Data Files (*.sav)|*.sav";
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                fileName.Text = dialog.FileName;
+            }
+        }
+
+        private void SPSSConnectionStringDialog_Load(object sender, EventArgs e)
+        {
+            btnOk.Enabled = false;
+        }
+
+        private void fileName_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(fileName.Text))
             {
@@ -115,11 +122,6 @@ namespace Epi.Data.RimportSPSS.Forms
             {
                 btnOk.Enabled = true;
             }
-        }
-
-        private void findFile_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
