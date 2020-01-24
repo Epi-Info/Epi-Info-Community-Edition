@@ -114,6 +114,10 @@
     <Content Include="RDotNet.dll" />
     <Content Include="RDotNet.NativeLibrary.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Engines\Python\" />
+    <Folder Include="Engines\R\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
