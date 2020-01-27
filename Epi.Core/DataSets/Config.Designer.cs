@@ -8716,6 +8716,7 @@ namespace Epi.DataSets {
                 this.columnAutoTouchKeyboard.DefaultValue = ((bool)(false));
                 this.columnSparseConnection.DefaultValue = ((bool)(false));
                 this.columnClientToken.DefaultValue = ((string)(""));
+                this.columnIOCodeFile.DefaultValue = ((string)("\"\""));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11937,11 +11938,11 @@ namespace Epi.DataSets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string IOCodeFile {
                 get {
-                    try {
-                        return ((string)(this[this.tableSettings.IOCodeFileColumn]));
+                    if (this.IsIOCodeFileNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IOCodeFile\' in table \'Settings\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableSettings.IOCodeFileColumn]));
                     }
                 }
                 set {
