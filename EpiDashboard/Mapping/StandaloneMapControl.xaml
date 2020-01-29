@@ -286,7 +286,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border x:Name="borderDataSource" Visibility="Visible" Grid.Column="0" Grid.ColumnSpan="7" CornerRadius="0" BorderThickness="0" Background="#6a6a6a" ></Border>
-            <!--Border x:Name="borderSat" Cursor="Hand" Visibility="Visible" Grid.Column="0" BorderThickness="0" Background="#6a6a6a" MouseLeftButtonUp="borderSat_MouseLeftButtonUp" ></-->
+
             <Border x:Name="Street_NotSelected" Cursor="Hand" Visibility="Collapsed" Grid.Column="2" BorderThickness="0" Background="#6a6a6a" MouseLeftButtonUp="Street_NotSelected_MouseLeftButtonUp" >
                 <TextBlock x:Name="StreetsRadioButton_notSelected"  Cursor="Hand" Grid.Column="2" VerticalAlignment="Center" Tag="1" Margin="5,0,5,0" Foreground="White" FontWeight="Light" FontSize="16">Street</TextBlock>
             </Border>
@@ -295,13 +295,13 @@
                 <TextBlock x:Name="BlankRadioButton_notSelected"  Cursor="Hand" Grid.Column="4" VerticalAlignment="Center" Tag="1" Margin="5,0,5,0" Foreground="White" FontWeight="Light" FontSize="16">Blank</TextBlock>
             </Border>
             
-            <!--Border x:Name="borderSat_alt" Visibility="Visible" Grid.Column="1" BorderThickness="0" Background="White" ></-->
+
             <Border x:Name="Street_Selected" Visibility="Collapsed" Grid.Column="3" BorderThickness="0" Background="White" >
-                <TextBlock x:Name="StreetsRadioButton"  Visibility="Visible" Grid.Column="3" VerticalAlignment="Center" Tag="1" Margin="5,0,5,0" Foreground="#6a6a6a" FontWeight="Light" FontSize="16">Street</TextBlock>
+                <TextBlock x:Name="StreetsRadioButton"  Visibility="Collapsed" Grid.Column="3" VerticalAlignment="Center" Tag="1" Margin="5,0,5,0" Foreground="#6a6a6a" FontWeight="Light" FontSize="16">Street</TextBlock>
             </Border>
 
             <Border x:Name="Blank_Selected" Visibility="Collapsed" Grid.Column="5" BorderThickness="0" Background="White" >
-                <TextBlock x:Name="BlankRadioButton"  Visibility="Visible" Grid.Column="5" VerticalAlignment="Center" Tag="1" Margin="5,0,5,0" Foreground="#6a6a6a" FontWeight="Light" FontSize="16">Blank</TextBlock>
+                <TextBlock x:Name="BlankRadioButton"  Visibility="Collapsed" Grid.Column="5" VerticalAlignment="Center" Tag="1" Margin="5,0,5,0" Foreground="#6a6a6a" FontWeight="Light" FontSize="16">Blank</TextBlock>
             </Border>
 
             <DockPanel x:Name="iconExpand" 

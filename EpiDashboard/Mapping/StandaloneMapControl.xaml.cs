@@ -284,20 +284,20 @@ namespace EpiDashboard.Mapping
 
         private void ShowStreetSelected()
         {
-            Street_Selected.Visibility = System.Windows.Visibility.Visible;
-            Street_NotSelected.Visibility = System.Windows.Visibility.Collapsed;
+            //Street_Selected.Visibility = System.Windows.Visibility.Visible;
+            //Street_NotSelected.Visibility = System.Windows.Visibility.Collapsed;
 
-            Blank_Selected.Visibility = System.Windows.Visibility.Collapsed;
-            Blank_NotSelected.Visibility = System.Windows.Visibility.Visible;
+            //Blank_Selected.Visibility = System.Windows.Visibility.Collapsed;
+            //Blank_NotSelected.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void ShowBlankSelected()
         {
-            Street_Selected.Visibility = System.Windows.Visibility.Collapsed;
-            Street_NotSelected.Visibility = System.Windows.Visibility.Visible;
+            //Street_Selected.Visibility = System.Windows.Visibility.Collapsed;
+            //Street_NotSelected.Visibility = System.Windows.Visibility.Visible;
 
-            Blank_Selected.Visibility = System.Windows.Visibility.Visible;
-            Blank_NotSelected.Visibility = System.Windows.Visibility.Collapsed;
+            //Blank_Selected.Visibility = System.Windows.Visibility.Visible;
+            //Blank_NotSelected.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         void openDefaultMapWorker_DoWork(object sender, DoWorkEventArgs e)
