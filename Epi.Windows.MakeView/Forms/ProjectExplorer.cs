@@ -2236,6 +2236,10 @@ namespace Epi.Windows.MakeView.Forms
                 {
                     return this.mainForm.CurrentView;
                 }
+                else if (SelectedPage != null && SelectedPage is Page)
+                {
+                    return SelectedPage.view;
+                }
                 else
                 {
                     return null;
