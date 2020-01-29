@@ -158,7 +158,7 @@ namespace Epi.Data.Office
         {
             get 
             {
-                return "One or more components needed to open this file were not found on this computer. Please install the free \"2007 Office System Driver Data Connectivity Components\" found here: http://www.microsoft.com/download/en/details.aspx?id=23734"; 
+                return "One or more components needed to open this file were not found on this computer. \"2007 Office System Driver Data Connectivity Components\" not found."; 
             }
         }
 
