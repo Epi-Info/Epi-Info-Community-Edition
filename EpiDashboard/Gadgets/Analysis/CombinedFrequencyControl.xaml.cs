@@ -246,8 +246,8 @@ namespace EpiDashboard
 											freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 95.0, ref lower, ref upper);
 										}
 									}
-									row["LCL"] = lower;
-									row["UCL"] = upper;
+									row["LCL"] = String.Format("{0:P2}", lower);
+									row["UCL"] = String.Format("{0:P2}", upper);
 								}
 							}
                         }
