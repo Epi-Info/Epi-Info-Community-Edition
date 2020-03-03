@@ -35,11 +35,16 @@ namespace EpiDashboard
         /// </summary>
         private double currentWidth;
 
-        #endregion // Private Variables
+		/// <summary>
+		/// Used for calculating the 95% confidence intervals
+		/// </summary>
+		private StatisticsRepository.cFreq freq = new StatisticsRepository.cFreq();
 
-        #region Delegates
+		#endregion // Private Variables
 
-        private new delegate void AddGridFooterDelegate(string strataValue, int denominator, int fields = -1, bool isBoolean = false);
+		#region Delegates
+
+		private new delegate void AddGridFooterDelegate(string strataValue, int denominator, int fields = -1, bool isBoolean = false);
 
         #endregion // Delegates
 
@@ -205,7 +210,9 @@ namespace EpiDashboard
                         dt.Columns[1].ColumnName = DashboardSharedStrings.COL_HEADER_FREQUENCY;
                         dt.Columns.Add(new DataColumn(DashboardSharedStrings.COL_HEADER_PERCENT, typeof(double)));
 
-                        foreach (System.Data.DataRow row in dt.Rows)
+						dt.Columns.Add("LCL");
+						dt.Columns.Add("UCL");
+						foreach (System.Data.DataRow row in dt.Rows)
                         {
                             if (!row[DashboardSharedStrings.COL_HEADER_VALUE].Equals(DBNull.Value))
                             {   
@@ -214,8 +221,35 @@ namespace EpiDashboard
                                 {
                                     pct = Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]) / (double)denominator;
                                     row[DashboardSharedStrings.COL_HEADER_PERCENT] = pct;
-                                }
-                            }
+									double lower = 0;
+									double upper = 0;
+									if (Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]) == (double)count)
+									{
+										lower = 0;
+										freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)count, 95.0, ref lower, ref upper);
+										upper = 1;
+									}
+									else if (Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]) == 0.0)
+									{
+										upper = 0;
+										freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)count, 95.0, ref lower, ref upper);
+										lower = 1;
+									}
+									else
+									{
+										if (count > 300)
+										{
+											freq.WILSON(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 1.96, ref lower, ref upper);
+										}
+										else
+										{
+											freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 95.0, ref lower, ref upper);
+										}
+									}
+									row["LCL"] = lower;
+									row["UCL"] = upper;
+								}
+							}
                         }
 
                         this.Dispatcher.BeginInvoke(addDataGrid, dt.AsDataView(), dt.TableName);
