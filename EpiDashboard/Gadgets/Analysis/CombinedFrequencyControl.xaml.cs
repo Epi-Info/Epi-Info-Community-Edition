@@ -226,18 +226,18 @@ namespace EpiDashboard
 									if (Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]) == (double)count)
 									{
 										lower = 0;
-										freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)count, 95.0, ref lower, ref upper);
+										freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 95.0, ref lower, ref upper);
 										upper = 1;
 									}
 									else if (Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]) == 0.0)
 									{
 										upper = 0;
-										freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)count, 95.0, ref lower, ref upper);
+										freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 95.0, ref lower, ref upper);
 										lower = 1;
 									}
 									else
 									{
-										if (count > 300)
+										if (denominator > 300)
 										{
 											freq.WILSON(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 1.96, ref lower, ref upper);
 										}
