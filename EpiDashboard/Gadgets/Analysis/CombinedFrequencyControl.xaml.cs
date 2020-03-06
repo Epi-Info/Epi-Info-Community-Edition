@@ -210,14 +210,14 @@ namespace EpiDashboard
                         dt.Columns[1].ColumnName = DashboardSharedStrings.COL_HEADER_FREQUENCY;
                         dt.Columns.Add(new DataColumn(DashboardSharedStrings.COL_HEADER_PERCENT, typeof(double)));
 
-						dt.Columns.Add("LCL");
-						dt.Columns.Add("UCL");
+						dt.Columns.Add("LCL", typeof(System.Double));
+						dt.Columns.Add("UCL", typeof(System.Double));
 						foreach (System.Data.DataRow row in dt.Rows)
                         {
                             if (!row[DashboardSharedStrings.COL_HEADER_VALUE].Equals(DBNull.Value))
                             {   
                                 double pct = 0;
-                                if (count > 0)
+                                if (denominator > 0)
                                 {
                                     pct = Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]) / (double)denominator;
                                     row[DashboardSharedStrings.COL_HEADER_PERCENT] = pct;
@@ -233,7 +233,7 @@ namespace EpiDashboard
 									{
 										upper = 0;
 										freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 95.0, ref lower, ref upper);
-										lower = 1;
+										lower = 0;
 									}
 									else
 									{
@@ -246,8 +246,8 @@ namespace EpiDashboard
 											freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 95.0, ref lower, ref upper);
 										}
 									}
-									row["LCL"] = String.Format("{0:P2}", lower);
-									row["UCL"] = String.Format("{0:P2}", upper);
+									row["LCL"] = lower;
+									row["UCL"] = upper;
 								}
 							}
                         }
@@ -371,7 +371,7 @@ namespace EpiDashboard
                 }
             }
 
-            if (e.PropertyName == DashboardSharedStrings.COL_HEADER_PERCENT || e.PropertyName == "Percent")
+            if (e.PropertyName == DashboardSharedStrings.COL_HEADER_PERCENT || e.PropertyName == "Percent" || e.PropertyName == "LCL" || e.PropertyName == "UCL")
             {
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "P2";
             }
@@ -927,8 +927,12 @@ namespace EpiDashboard
 				{
 					double proportion = (double)drv.Row["Percent"];
 					drv.Row[2] = Math.Round(100.0 * proportion, 2);
+					double llccll = (double)drv.Row["LCL"];
+					drv.Row[3] = Math.Round(100.0 * llccll, 2);
+					double uuccll = (double)drv.Row["UCL"];
+					drv.Row[4] = Math.Round(100.0 * uuccll, 2);
 				}
-                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sddv as DataView, useAlternatingColors));
+				htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sddv as DataView, useAlternatingColors));
 
                 htmlBuilder.AppendLine("</table>");
             }
