@@ -850,6 +850,7 @@ namespace EpiDashboard
                     case "datafilters":
                         this.DataFilters = new DataFilters(this.DashboardHelper);
                         this.DataFilters.CreateFromXml(child);
+						Parameters.CustomFilter = this.DataFilters.GenerateDataFilterString();
                         break;                   
                 }
             }
