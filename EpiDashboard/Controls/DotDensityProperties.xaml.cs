@@ -1213,6 +1213,19 @@ namespace EpiDashboard.Controls
             bool isControl = ((Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers != ModifierKeys.Shift) || e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Up || e.Key == Key.Tab || e.Key == Key.PageDown || e.Key == Key.PageUp || e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Home || e.Key == Key.End);
             e.Handled = !isControl && !isNumeric && !isNumPadNumeric;
         }
-              
+
+        private void btnShowMapServer_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_SERVER_NOT_SUPPORTED, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+            else
+            {
+                spanelmapserver.Visibility = Visibility.Visible;
+                btnShowMapServer.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }

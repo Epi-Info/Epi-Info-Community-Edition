@@ -2622,7 +2622,7 @@ namespace EpiDashboard.Controls
 
         private void btnShowMapServer_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = System.Windows.MessageBox.Show("Map Server Settings are only for pre-existing maps that used this feature. In 2019, the previously supported map servers went to a fee structure which is not supported in Epi Info. We seek an alternative which may be available in a future update. Show Map Server Settings anyway?", DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
+            MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_SERVER_NOT_SUPPORTED, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
             if (result == MessageBoxResult.No)
             {
                 return;
