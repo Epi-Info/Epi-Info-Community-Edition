@@ -951,7 +951,12 @@ namespace Epi.Windows.ImportExport.Dialogs
                     wb.Add(rfc.Description);
                 }
                 filter = filter + wb.ToString();
-                CallbackAddStatusMessage(filter);
+
+                try
+                {
+                    CallbackAddStatusMessage(filter);
+                }
+                catch { }
             }
         }
 

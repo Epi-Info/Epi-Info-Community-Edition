@@ -2729,15 +2729,21 @@ namespace EpiDashboard
             element.AppendChild(crosstabElement);
 
             XmlElement pairedTTestVariableElement = doc.CreateElement("pairedttestvariable");
-            pairedTTestVariableElement.InnerText = meansParameters.PairIDVariableName.ToString();
-            element.AppendChild(pairedTTestVariableElement);
+
+            try
+            {
+                pairedTTestVariableElement.InnerText = meansParameters.PairIDVariableName.ToString();
+                element.AppendChild(pairedTTestVariableElement);
+
+            }
+            catch { }
 
             //"<columnsToShow>" + wb.ToString() + "</columnsToShow>" +
             //columnsToShow
 
 
             WordBuilder wb = new WordBuilder(",");
-            
+           
             List<int> columnsToShowList = new List<int>();
             columnsToShowList.Add(1);
             columnsToShowList.Add(2);
