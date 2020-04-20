@@ -198,7 +198,11 @@ namespace EpiDashboard
 
                         if (!string.IsNullOrEmpty(Parameters.CustomFilter.Trim()))
                         {
-                            denominator = DashboardHelper.DataSet.Tables[0].Select(Parameters.CustomFilter.Trim()).Count();
+							string globalFilter = DashboardHelper.DataFilters.GenerateDataFilterString(false);
+							string gadgetFilter = Parameters.CustomFilter.Trim();
+							if (DashboardHelper.DataFilters.Count > 0)
+								gadgetFilter = "(" + gadgetFilter + ") AND (" + globalFilter + ")";
+							denominator = DashboardHelper.DataSet.Tables[0].Select(gadgetFilter).Count();
                         }
                         
                         if (!booleanResults)
