@@ -1400,18 +1400,7 @@ namespace EpiDashboard {
                 return ResourceManager.GetString("DASHBOARD_MAP_NO_DATA", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Map Server Settings are only for pre-existing maps that used this feature. In 2019, the previously supported map servers went to a fee structure which is not supported in Epi Info. We seek an alternative which may be available in a future update. Show Map Server Settings anyway?.
-        /// </summary>
-        public static string DASHBOARD_MAP_SERVER_NOT_SUPPORTED
-        {
-            get
-            {
-                return ResourceManager.GetString("DASHBOARD_MAP_SERVER_NOT_SUPPORTED", resourceCulture);
-            }
-        }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Unable to set the range values..
         /// </summary>

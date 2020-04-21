@@ -37,7 +37,7 @@
             </Border>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-
+           
 
             <!--<ToggleButton x:Name="tbtnDataSource" Style="{StaticResource ToggleSidebarButtonStyle}" IsChecked="True" Checked="tbtnDataSource_Checked">
                 <StackPanel>
@@ -146,58 +146,57 @@
                                 </Grid>
                             </StackPanel>
                         </StackPanel>
-
+                        
                         <WrapPanel Orientation="Horizontal">
-                            <StackPanel Margin="0 20 0 0">
-                                <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KML File" Checked="radKML_Checked" />
-                                <StackPanel Margin="18 10 0 0" x:Name="panelKml" IsEnabled="False" >
-                                    <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
-
-                                    <Grid>
-                                        <WrapPanel Orientation="Horizontal">
-                                            <StackPanel Margin="0 0 20 10">
-                                                <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="PropertyChanged_EnableDisable" ></TextBox>
-                                            </StackPanel>
-                                            <StackPanel>
-                                                <Button x:Name="btnKMLFile" Height="25" Click="btnKMLFile_Click">Browse</Button>
-                                            </StackPanel>
-                                        </WrapPanel>
-                                    </Grid>
-                                    <TextBox  TextWrapping="Wrap" MinWidth="320" Width="320" HorizontalAlignment="Left" IsReadOnly="True" x:Name="lblExampleKMLFile" Margin="0 0 0 0" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
-                                </StackPanel>
-                            </StackPanel>
-                            <StackPanel x:Name="spanelmapserver" Margin="0 20 20 0" Visibility="Hidden">
-                                <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
-                                <StackPanel x:Name="panelmap" IsEnabled="False" Margin="0 0 0 0 "   >
-                                    <StackPanel Margin="18 5 0 0" x:Name="panelmapconnect" IsEnabled="False"/>
-                                    <StackPanel Margin="0 0 0 0 ">
-                                        <StackPanel Margin="18 5 0 0" x:Name="panelmapserver" IsEnabled="False" HorizontalAlignment="Left">
-                                            <Label Padding="0" x:Name="lblURL">URL:</Label>
-                                            <Grid>
-                                                <WrapPanel Orientation="Horizontal">
-                                                    <StackPanel Margin="0 0 20 10">
-                                                        <TextBox MinWidth="200" Width="200" TextWrapping="Wrap" x:Name="txtMapSeverpath"  TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
-                                                    </StackPanel>
-                                                    <StackPanel>
-                                                        <Button Height="25" x:Name="btnMapserverlocate" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
-                                                    </StackPanel>
-                                                </WrapPanel>
-                                            </Grid>
+                        <StackPanel Margin="0 20 20 0">
+                            <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
+                            <StackPanel x:Name="panelmap" IsEnabled="False" Margin="0 0 0 0 "   >
+                                <StackPanel Margin="18 5 0 0" x:Name="panelmapconnect" IsEnabled="False"/>
+                                <StackPanel Margin="0 0 0 0 ">
+                                    <StackPanel Margin="18 5 0 0" x:Name="panelmapserver" IsEnabled="False" HorizontalAlignment="Left">
+                                        <Label Padding="0" x:Name="lblURL">URL:</Label>
+                                        <Grid>
+                                            <WrapPanel Orientation="Horizontal">
+                                                <StackPanel Margin="0 0 20 10">
+                                                    <TextBox MinWidth="200" Width="200" TextWrapping="Wrap" x:Name="txtMapSeverpath"  TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
+                                                </StackPanel>
+                                                <StackPanel>
+                                                    <Button Height="25" x:Name="btnMapserverlocate" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                                                </StackPanel>
+                                            </WrapPanel>
+                                        </Grid>
 
                                             <TextBox TextWrapping="Wrap" MinWidth="320" Width="320" IsReadOnly="True" HorizontalAlignment="Left" x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>
                                             <StackPanel Margin="0 15 0 0">
                                                 <Label Padding="0" x:Name="lblSelectFeature">Select Feature:</Label>
                                                 <ComboBox MinWidth="320" Width="Auto" MaxWidth="600" x:Name="cbxmapfeature" HorizontalAlignment="Left" SelectionChanged="cbxmapfeature_SelectionChanged"></ComboBox>
                                             </StackPanel>
-                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                        </WrapPanel>
-                        <StackPanel Margin="0 30 0 0" HorizontalAlignment="Left">
-                            <Button x:Name="btnShowMapServer" Height="25"  Click="btnShowMapServer_Click" Width="318" Content="Show Map Server Boundary Settings"/>
                         </StackPanel>
+
+                        <StackPanel Margin="0 20 0 0">
+                            <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KML File" Checked="radKML_Checked" />
+                            <StackPanel Margin="18 10 0 0" x:Name="panelKml" IsEnabled="False" >
+                                <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
+                                
+                                <Grid>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <StackPanel Margin="0 0 20 10">
+                                            <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="PropertyChanged_EnableDisable" ></TextBox>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Button x:Name="btnKMLFile" Height="25" Click="btnKMLFile_Click">Browse</Button>
+                                        </StackPanel>
+                                    </WrapPanel>
+                                </Grid>
+                                    <TextBox  TextWrapping="Wrap" MinWidth="320" Width="320" HorizontalAlignment="Left" IsReadOnly="True" x:Name="lblExampleKMLFile" Margin="0 0 0 0" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                        </WrapPanel>
                     </StackPanel>
+                        
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
@@ -276,10 +275,10 @@
                 <StackPanel Style="{StaticResource FieldSpacer}"></StackPanel>
 
                 <Rectangle x:Name="rctDotColor" MouseLeftButtonUp="rctDotColor_MouseLeftButtonUp"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00000FF">
-                    <Rectangle.ToolTip>
-                        <Label Content="Color"/>
-                    </Rectangle.ToolTip>
-                </Rectangle>
+                <Rectangle.ToolTip>
+                    <Label Content="Color"/>
+                </Rectangle.ToolTip>
+            </Rectangle>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="lblDotValue" Margin="0,0,15,0">Dot Value:</Label>
@@ -290,12 +289,12 @@
 
         <DockPanel x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
             <StackPanel Grid.Column="2" DockPanel.Dock="Top" >
-                <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
-                <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this layer.</Label>
-                <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
-
-            </StackPanel>
-        </DockPanel>
+            <Label x:Name="tblockPanelDataFilter" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters</Label>
+            <Label x:Name="tblockSetDataFilter" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 10">Set data filters for this layer.</Label>
+            <Label x:Name="tblockAnyFilterGadgetOnly" Margin="0, 0, 0, 20">Note: First select a data source to add a filter to layer.</Label>
+           
+        </StackPanel>
+          </DockPanel>
         <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
 
         <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
