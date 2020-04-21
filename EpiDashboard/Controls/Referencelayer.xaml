@@ -74,7 +74,7 @@
                                                 <Button x:Name="btnMapserverlocate" Height="25" Margin="0 0 0 0" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
                                             </StackPanel>
                                         </WrapPanel>
-                                        <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" MinWidth="320" Width="320" x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>
+                                        <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" MinWidth="320" Width="320" x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer</TextBox>
                                         <StackPanel Margin="0 15 0 0">
                                             <Label Padding="0" x:Name="lblSelectFeature">Select Feature:</Label>
                                             <!--<ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>-->

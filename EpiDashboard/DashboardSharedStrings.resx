@@ -2260,4 +2260,7 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAPHELP_HEADERTITLE" xml:space="preserve">
     <value>Help</value>
   </data>
+  <data name="GADGET_EXAMPLE_MAPSERVER_TILE" xml:space="preserve">
+    <value>Example: https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer</value>
+  </data>
 </root>

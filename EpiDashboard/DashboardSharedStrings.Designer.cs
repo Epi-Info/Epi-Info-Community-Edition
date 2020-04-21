@@ -2983,7 +2983,18 @@ namespace EpiDashboard {
                 return ResourceManager.GetString("GADGET_EXAMPLE_MAPSERVER", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Example: https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer.
+        /// </summary>
+        public static string GADGET_EXAMPLE_MAPSERVER_TILE
+        {
+            get
+            {
+                return ResourceManager.GetString("GADGET_EXAMPLE_MAPSERVER_TILE", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Exposure:.
         /// </summary>

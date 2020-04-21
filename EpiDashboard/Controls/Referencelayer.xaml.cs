@@ -63,7 +63,7 @@ namespace EpiDashboard.Controls
             radMapServer.Content = DashboardSharedStrings.GADGET_MAPSERVER;
             lblURL.Content = DashboardSharedStrings.GADGET_URL;
             btnMapserverlocate.Content = DashboardSharedStrings.BUTTON_CONNECT;
-            lblExampleMapServerURL.Text = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER;
+            lblExampleMapServerURL.Text = DashboardSharedStrings.GADGET_EXAMPLE_MAPSERVER_TILE;
             lblSelectFeature.Content = DashboardSharedStrings.GADGET_SELECT_FEATURE;
             radKML.Content = DashboardSharedStrings.GADGET_KMLFILE;
             lblURLOfKMLFile.Content = DashboardSharedStrings.GADGET_KMLFILE_LOCATION;
