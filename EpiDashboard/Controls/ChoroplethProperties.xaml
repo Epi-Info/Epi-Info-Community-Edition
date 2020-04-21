@@ -90,7 +90,7 @@
                         <TextBox HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" x:Name="txtSQLQuery"></TextBox>
                     </StackPanel>
                     <StackPanel x:Name="panelBoundaries" IsEnabled="False" Margin="0 20 0 0">
-
+                        
                         <WrapPanel Orientation="Horizontal">
                             <Label x:Name="lblBoundaries"  Style="{StaticResource PropertiesSubHeading}">Boundaries</Label>
                             <TextBlock VerticalAlignment="Top" Style="{StaticResource requiredFieldInd}" Margin="2 0 0 0" Text="*">
@@ -116,25 +116,7 @@
                         </StackPanel>
 
                         <WrapPanel Orientation="Horizontal">
-                            <StackPanel Margin="0 20 0 0">
-                                <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
-                                <StackPanel Margin="18 10 0 0" x:Name="panelKml" IsEnabled="False" >
-                                    <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
-
-                                    <Grid >
-                                        <WrapPanel Orientation="Horizontal">
-                                            <StackPanel Margin="0 0 20 10">
-                                                <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="PropertyChanged_EnableDisable" ></TextBox>
-                                            </StackPanel>
-                                            <StackPanel>
-                                                <Button x:Name="btnKMLFile" Height="25"  Click="btnKMLFile_Click">Browse</Button>
-                                            </StackPanel>
-                                        </WrapPanel>
-                                    </Grid>
-                                    <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" MinWidth="320" Width="320" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleKMLFile">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
-                                </StackPanel>
-                            </StackPanel>
-                            <StackPanel x:Name="spanelmapserver" Margin="0 20 20 0" Visibility="Hidden">
+                            <StackPanel Margin="0 20 20 0">
                                 <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="Map Server" Checked="radMapServer_Checked" />
                                 <StackPanel x:Name="panelmap" IsEnabled="False" Margin="0 0 0 0 ">
                                     <StackPanel  Margin="18 5 0 0" x:Name="panelmapconnect" IsEnabled="False"/>
@@ -156,15 +138,31 @@
                                                 <Label Padding="0" x:Name="lblSelectFeature">Select Feature:</Label>
                                                 <ComboBox MinWidth="320"  x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged"></ComboBox>
                                             </StackPanel>
+
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                        </WrapPanel>
-                        <StackPanel Margin="0 30 0 0" HorizontalAlignment="Left">
-                            <Button x:Name="btnShowMapServer" Height="25"  Click="btnShowMapServer_Click" Width="318" Content="Show Map Server Boundary Settings"/>
-                        </StackPanel>
 
+                            <StackPanel Margin="0 20 0 0">
+                                <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
+                                <StackPanel Margin="18 10 0 0" x:Name="panelKml" IsEnabled="False" >
+                                    <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL of KML File:</Label>
+
+                                    <Grid >
+                                        <WrapPanel Orientation="Horizontal">
+                                            <StackPanel Margin="0 0 20 10">
+                                                <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" x:Name="txtKMLpath" IsReadOnly="False" TextChanged="PropertyChanged_EnableDisable" ></TextBox>
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <Button x:Name="btnKMLFile" Height="25"  Click="btnKMLFile_Click">Browse</Button>
+                                            </StackPanel>
+                                        </WrapPanel>
+                                    </Grid>
+                                    <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" MinWidth="320" Width="320" IsReadOnly="True" Style="{StaticResource PropertiesExampleText}" Margin="0 0 0 0" x:Name="lblExampleKMLFile">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </WrapPanel>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

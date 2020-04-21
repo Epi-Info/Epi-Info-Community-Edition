@@ -2619,20 +2619,6 @@ namespace EpiDashboard.Controls
 
             return false;
         }
-
-        private void btnShowMapServer_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = System.Windows.MessageBox.Show(DashboardSharedStrings.DASHBOARD_MAP_SERVER_NOT_SUPPORTED, DashboardSharedStrings.ALERT, MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.No)
-            {
-                return;
-            }
-            else
-            { 
-                spanelmapserver.Visibility = Visibility.Visible;
-                btnShowMapServer.Visibility = Visibility.Hidden;
-            }
-        }
     }
 }
 

@@ -2260,7 +2260,4 @@ of records or select fewer fields for the group.</value>
   <data name="GADGET_MAPHELP_HEADERTITLE" xml:space="preserve">
     <value>Help</value>
   </data>
-  <data name="DASHBOARD_MAP_SERVER_NOT_SUPPORTED" xml:space="preserve">
-    <value>Map Server Settings are only for pre-existing maps that used this feature. In 2019, the previously supported map servers went to a fee structure which is not supported in Epi Info. We seek an alternative which may be available in a future update. Show Map Server Settings anyway?</value>
-  </data>
 </root>
