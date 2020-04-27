@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 17</value>
+    <value>12, 14</value>
   </data>
   <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 51</value>
+    <value>678, 82</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblDescription.TabIndex" type="System.Int32, mscorlib">
@@ -160,7 +160,7 @@
     <value>*</value>
   </data>
   <data name="txtPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>484, 20</value>
+    <value>658, 20</value>
   </data>
   <data name="txtPassword.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -205,7 +205,7 @@
     <value>Top, Right</value>
   </data>
   <data name="btnBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>367, 38</value>
+    <value>541, 38</value>
   </data>
   <data name="btnBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 23</value>
@@ -235,7 +235,7 @@
     <value>9, 40</value>
   </data>
   <data name="txtPhoneDataFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 20</value>
+    <value>526, 20</value>
   </data>
   <data name="txtPhoneDataFile.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -277,10 +277,10 @@
     <value>4</value>
   </data>
   <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 139</value>
+    <value>12, 185</value>
   </data>
   <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 127</value>
+    <value>678, 127</value>
   </data>
   <data name="groupImportInfo.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -304,10 +304,10 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="textProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 478</value>
+    <value>12, 624</value>
   </data>
   <data name="textProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 20</value>
+    <value>674, 20</value>
   </data>
   <data name="textProgress.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -331,10 +331,10 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 504</value>
+    <value>12, 650</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 23</value>
+    <value>674, 23</value>
   </data>
   <data name="progressBar.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -358,7 +358,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>422, 533</value>
+    <value>596, 679</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -388,7 +388,7 @@
     <value>False</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 533</value>
+    <value>499, 679</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -436,10 +436,10 @@
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 403</value>
+    <value>12, 455</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 69</value>
+    <value>674, 160</value>
   </data>
   <data name="lbxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -460,7 +460,7 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 70</value>
+    <value>12, 104</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 18</value>
@@ -487,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 70</value>
+    <value>35, 104</value>
   </data>
   <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 18</value>
@@ -517,10 +517,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblWarningMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 88</value>
+    <value>12, 122</value>
   </data>
   <data name="lblWarningMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 48</value>
+    <value>678, 48</value>
   </data>
   <data name="lblWarningMessage.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -577,7 +577,7 @@
     <value>247, 34</value>
   </data>
   <data name="viewsList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 21</value>
+    <value>420, 21</value>
   </data>
   <data name="viewsList.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -676,10 +676,10 @@
     <value>4</value>
   </data>
   <data name="grpTypeOfImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 272</value>
+    <value>12, 326</value>
   </data>
   <data name="grpTypeOfImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 116</value>
+    <value>678, 116</value>
   </data>
   <data name="grpTypeOfImport.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -706,7 +706,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>524, 568</value>
+    <value>698, 714</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 10</value>
+    <value>12, 15</value>
   </data>
   <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 45</value>
+    <value>832, 65</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblDescription.TabIndex" type="System.Int32, mscorlib">
@@ -289,7 +289,7 @@
     <value>3</value>
   </data>
   <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 128</value>
+    <value>11, 175</value>
   </data>
   <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>318, 149</value>
@@ -313,7 +313,7 @@
     <value>12</value>
   </data>
   <data name="textProgress.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 410</value>
+    <value>11, 457</value>
   </data>
   <data name="textProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>831, 20</value>
@@ -337,7 +337,7 @@
     <value>6</value>
   </data>
   <data name="progressBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 436</value>
+    <value>11, 483</value>
   </data>
   <data name="progressBar.Size" type="System.Drawing.Size, System.Drawing">
     <value>831, 23</value>
@@ -364,7 +364,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 470</value>
+    <value>754, 522</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -394,7 +394,7 @@
     <value>False</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>657, 470</value>
+    <value>658, 522</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -439,7 +439,7 @@
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 283</value>
+    <value>11, 330</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>831, 121</value>
@@ -462,8 +462,11 @@
   <data name="lblWarning.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
+  <data name="lblWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 62</value>
+    <value>36, 99</value>
   </data>
   <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 18</value>
@@ -486,11 +489,14 @@
   <data name="&gt;&gt;lblWarning.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="lblWarningMessage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblWarningMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 87</value>
+    <value>12, 124</value>
   </data>
   <data name="lblWarningMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 21</value>
+    <value>830, 44</value>
   </data>
   <data name="lblWarningMessage.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -619,7 +625,7 @@
     <value>3</value>
   </data>
   <data name="grpImportMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 128</value>
+    <value>336, 175</value>
   </data>
   <data name="grpImportMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 149</value>
@@ -721,7 +727,7 @@
     <value>2</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>475, 128</value>
+    <value>476, 175</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>365, 149</value>
@@ -748,7 +754,7 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 61</value>
+    <value>12, 98</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>18, 18</value>
@@ -775,7 +781,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>855, 505</value>
+    <value>856, 557</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4571,9 +4577,6 @@
         AAAAAAAf//////wAAAAAAAA///////8AAAAAAAD////////AAAAAAAP////////wAAAAAAf////////8
         AAAAAD//////////AAAAAP//////////4AAAB////////////wAA//////////////////////8=
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Import Data From Web Survey</value>

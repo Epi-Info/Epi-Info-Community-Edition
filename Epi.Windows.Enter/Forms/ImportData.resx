@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACs
-        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAFEAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        qgAAAk1TRnQBSQFMAgEBUAEAAVQBAAFMAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABJgEBAgABAQEAASAGAAEmAQH/AP8A/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AbgAB/wMAAf8DAAH/
         AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8IAAPfAf8BHQGCAbUB/wEbAYEBswH/ARgBfgGw
         Af8BFgF8Aa4B/wETAXkBqwH/ARABdgGoAf8BDQFzAaUB/wELAXEBowH/AQgBbgGgAf8BBgFsAZ4B/wEE
@@ -1001,7 +1001,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="groupImportInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 169</value>
+    <value>12, 176</value>
   </data>
   <data name="groupImportInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>502, 127</value>
@@ -1160,10 +1160,10 @@
     <value>True</value>
   </data>
   <data name="lbxStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 424</value>
+    <value>12, 437</value>
   </data>
   <data name="lbxStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 121</value>
+    <value>505, 108</value>
   </data>
   <data name="lbxStatus.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1181,10 +1181,10 @@
     <value>7</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 90</value>
+    <value>15, 96</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>18, 20</value>
+    <value>18, 18</value>
   </data>
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1205,10 +1205,10 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="lblWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 90</value>
+    <value>36, 96</value>
   </data>
   <data name="lblWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 20</value>
+    <value>475, 21</value>
   </data>
   <data name="lblWarning.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1229,10 +1229,10 @@
     <value>3</value>
   </data>
   <data name="lblWarningMessage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 111</value>
+    <value>12, 117</value>
   </data>
   <data name="lblWarningMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>508, 55</value>
+    <value>508, 47</value>
   </data>
   <data name="lblWarningMessage.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1251,66 +1251,6 @@
   </data>
   <data name="&gt;&gt;lblWarningMessage.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdbAppend.Name" xml:space="preserve">
-    <value>rdbAppend</value>
-  </data>
-  <data name="&gt;&gt;rdbAppend.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdbAppend.Parent" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;rdbAppend.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdate.Name" xml:space="preserve">
-    <value>rdbUpdate</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdate.Parent" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdate.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdateAndAppend.Name" xml:space="preserve">
-    <value>rdbUpdateAndAppend</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdateAndAppend.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdateAndAppend.Parent" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;rdbUpdateAndAppend.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="grpTypeOfImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 302</value>
-  </data>
-  <data name="grpTypeOfImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 116</value>
-  </data>
-  <data name="grpTypeOfImport.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="grpTypeOfImport.Text" xml:space="preserve">
-    <value>Type of Import</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Name" xml:space="preserve">
-    <value>grpTypeOfImport</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpTypeOfImport.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="rdbAppend.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1392,6 +1332,30 @@
   </data>
   <data name="&gt;&gt;rdbUpdateAndAppend.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="grpTypeOfImport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 311</value>
+  </data>
+  <data name="grpTypeOfImport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>505, 116</value>
+  </data>
+  <data name="grpTypeOfImport.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="grpTypeOfImport.Text" xml:space="preserve">
+    <value>Type of Import</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Name" xml:space="preserve">
+    <value>grpTypeOfImport</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpTypeOfImport.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2566,6 +2530,9 @@
         JgAAACYA
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Import Data From Form</value>
   </data>
@@ -2585,6 +2552,6 @@
     <value>ImportDataForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.1.5745.29050, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Dialogs.DialogBase, Epi.Windows, Version=7.2.7422.33459, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
