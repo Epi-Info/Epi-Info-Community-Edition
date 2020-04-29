@@ -648,7 +648,7 @@ namespace Epi.Windows.Analysis.Forms
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/classic-analysis/Introduction.html");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/classic-analysis/classicanalysisintro.html");
         }
     }
 
