@@ -930,12 +930,24 @@ namespace EpiDashboard
 				System.Data.DataView sddv = new System.Data.DataView(sddt);
 				foreach (System.Data.DataRowView drv in sddv)
 				{
-					double proportion = (double)drv.Row["Percent"];
-					drv.Row[2] = Math.Round(100.0 * proportion, 2);
-					double llccll = (double)drv.Row["LCL"];
-					drv.Row[3] = Math.Round(100.0 * llccll, 2);
-					double uuccll = (double)drv.Row["UCL"];
-					drv.Row[4] = Math.Round(100.0 * uuccll, 2);
+					try
+					{
+						double proportion = (double)drv.Row["Percent"];
+						drv.Row[2] = Math.Round(100.0 * proportion, 2);
+					}
+					catch (InvalidCastException excep) { continue; }
+					try
+					{
+						double llccll = (double)drv.Row["LCL"];
+						drv.Row[3] = Math.Round(100.0 * llccll, 2);
+					}
+					catch (InvalidCastException excep) { }
+					try
+					{
+						double uuccll = (double)drv.Row["UCL"];
+						drv.Row[4] = Math.Round(100.0 * uuccll, 2);
+					}
+					catch (InvalidCastException excep) { }
 				}
 				htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sddv as DataView, useAlternatingColors));
 
