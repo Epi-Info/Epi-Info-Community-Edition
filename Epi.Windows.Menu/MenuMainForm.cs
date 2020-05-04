@@ -351,7 +351,7 @@ namespace Epi.Windows.Menu
         private void Contents_Activate(object sender, System.EventArgs e)
         {
             //base.DisplayFeatureNotImplementedMessage();
-            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/support/userguide.html");
         }
 
         private void Exit_Activate(object sender, EventArgs e)

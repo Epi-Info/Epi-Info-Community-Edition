@@ -205,7 +205,7 @@ namespace Epi.Windows.Menu
         private void contents_Click(object sender, EventArgs e)
         {
             HideStoryBoard();
-            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
+            System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/support/userguide.html");
         }
 
         private void epiInfoWebsite_Click(object sender, EventArgs e)
@@ -671,7 +671,7 @@ namespace Epi.Windows.Menu
             if (e.Key == Key.Space)
             {
                 HideStoryBoard();
-                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
+                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/support/userguide.html");
             }
         }
 

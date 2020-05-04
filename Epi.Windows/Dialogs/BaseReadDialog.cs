@@ -833,7 +833,7 @@ namespace Epi.Windows.Dialogs
 
                             else
                             {
-                                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/user-guide/index.htm");
+                                System.Diagnostics.Process.Start("http://www.cdc.gov/epiinfo/support/userguide.html");
                             }
                 }
             }
