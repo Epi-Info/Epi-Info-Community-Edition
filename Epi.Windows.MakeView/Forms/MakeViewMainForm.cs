@@ -4507,7 +4507,21 @@ namespace Epi.Windows.MakeView.Forms
 
                 }
 
+                if (!string.IsNullOrEmpty(ServiceVersion) && (ServiceVersion.Contains(Epi.Constants.surveyManagerservicev4)))
+                {
+                    SurveyManagerServiceV4.SurveyInfoRequest Request;
+                    SurveyManagerServiceV4.SurveyInfoResponse Result;
+                    SurveyManagerServiceV4.ManagerServiceV4Client client;
+                    SetMessageObjectV4(template, out Request, out Result, out client);
+                    Result = client.SetSurveyInfo(Request);
+                    if (Result != null && Result.SurveyInfoList.Length > 0)
+                    {
+                        //this.UpdateStatus("Survey was successfully updated!");
 
+                        MessageBox.Show("Survey was successfully updated.", "", MessageBoxButtons.OK);
+                    }
+
+                }
 
             }
             catch (FaultException<CustomFaultException> cfe)
@@ -4630,6 +4644,52 @@ namespace Epi.Windows.MakeView.Forms
             Request.Criteria.IsDraftMode = true;
             SurveyInfoDTO.IsDraftMode = this.IsDraftMode;
             Request.SurveyInfoList = new SurveyManagerServiceV3.SurveyInfoDTO[] { SurveyInfoDTO };
+
+        }
+        private void SetMessageObjectV4(Template template, out SurveyManagerServiceV4.SurveyInfoRequest Request, out SurveyManagerServiceV4.SurveyInfoResponse Result, out SurveyManagerServiceV4.ManagerServiceV4Client client)
+        {
+
+
+
+            client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+
+
+
+            Request = new SurveyManagerServiceV4.SurveyInfoRequest();//(Epi.Web.Common.Message.SurveyInfoRequest)((object[])e.Argument)[0];
+            Result = new SurveyManagerServiceV4.SurveyInfoResponse();//(Epi.Web.Common.Message.SurveyInfoResponse)((object[])e.Argument)[1];
+
+            Request.Criteria = new SurveyManagerServiceV4.SurveyInfoCriteria();
+            Request.Criteria.ClosingDate = this.CloseDate;
+            Request.Criteria.OrganizationKey = new Guid(this.OrganizationKey);
+            Request.Criteria.UserPublishKey = new Guid(this.UserPublishKey);
+            Request.Criteria.SurveyIdList = new string[] { this.SurveyId };
+            Request.Action = "Update";
+
+            SurveyManagerServiceV4.SurveyInfoDTO SurveyInfoDTO = new SurveyManagerServiceV4.SurveyInfoDTO();
+
+            SurveyInfoDTO.ClosingDate = this.CloseDate;
+            SurveyInfoDTO.StartDate = this.StartDate;
+            SurveyInfoDTO.SurveyId = new Guid(this.CurrentView.WebSurveyId).ToString();
+            SurveyInfoDTO.SurveyType = this.SurveyType;
+            SurveyInfoDTO.SurveyNumber = this.SurveyNumber;
+            SurveyInfoDTO.SurveyName = this.SurveyName;
+            SurveyInfoDTO.OrganizationKey = new Guid(OrganizationKey);
+            SurveyInfoDTO.OrganizationName = this.OrganizationName;
+            SurveyInfoDTO.UserPublishKey = new Guid(this.UserPublishKey);
+            SurveyInfoDTO.XML = template.CreateWebSurveyTemplate();
+            SurveyInfoDTO.ExitText = this.ExitText;
+            SurveyInfoDTO.IntroductionText = this.IntroductionText;
+            SurveyInfoDTO.DepartmentName = this.DepartmentName;
+            if (this.mediator.Project.CollectedData.GetDbDriver().ConnectionDescription.ToString().Contains("Microsoft SQL Server:"))
+            {
+                SurveyInfoDTO.IsSqlProject = true;
+                SurveyInfoDTO.DBConnectionString = this.mediator.Project.CollectedDataConnectionString;
+            }
+
+            Request.Criteria.SurveyType = this.SurveyType;
+            Request.Criteria.IsDraftMode = true;
+            SurveyInfoDTO.IsDraftMode = this.IsDraftMode;
+            Request.SurveyInfoList = new SurveyManagerServiceV4.SurveyInfoDTO[] { SurveyInfoDTO };
 
         }
         private void SetMessageObjectV2(Template template, out SurveyManagerServiceV2.SurveyInfoRequest Request, out SurveyManagerServiceV2.SurveyInfoResponse Result, out  SurveyManagerServiceV2.ManagerServiceV2Client client)
