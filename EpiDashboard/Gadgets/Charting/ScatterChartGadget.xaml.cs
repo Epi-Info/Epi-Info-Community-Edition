@@ -1413,7 +1413,13 @@ namespace EpiDashboard.Gadgets.Charting
                     inputVariableList.Add("p", "0.95");
                     inputVariableList.Add(freqVar, "unsorted");
 
-                    StatisticsRepository.LinearRegression.LinearRegressionResults regresResults = linearRegression.LinearRegression(inputVariableList, dv.Table);
+					DataRow[] drs = dv.Table.Select(dv.RowFilter);
+					DataTable regressTable = dv.Table.Clone();
+					foreach (DataRow dr in drs)
+					{
+						regressTable.ImportRow(dr);
+					}
+					StatisticsRepository.LinearRegression.LinearRegressionResults regresResults = linearRegression.LinearRegression(inputVariableList, regressTable);
 
                     this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, regresResults, maxValue, minValue);
                     this.Dispatcher.BeginInvoke(new SimpleCallback(RenderFinish));
