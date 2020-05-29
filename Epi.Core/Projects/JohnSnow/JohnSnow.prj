@@ -1,6 +1,6 @@
-<Project id="ead2b1f5-b650-cc2a-47d0-88c80ddf937c" name="JohnSnow" location="C:\Work\DirectorDemo\JohnSnow" description="" schemaVersion="102" epiVersion="" createDate="05/12/2011 07:18:32" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+<Project id="333419f4-37db-4475-e21d-8772bc7bd8eb" name="JohnSnow" location="Projects\JohnSnow" description="" schemaVersion="102" epiVersion="" createDate="11/23/2016 14:42:57" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
   <CollectedData>
-    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8HklzHp5WfrIeS2eZrTpV7kdCBKTkdVqAVj8anRH1yQ+6izIENv1wNTg9ww6V3nVLBD/aDvjqXtw3PqjQ9VTRgVn3mtjrdxYqN6gDB09WPH59OsaioH01w38ZRXH1mA84=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7csqJucXA0eUm4ILZ7oROEjrnivQAfaAQZGiX42PBxqOc/ISdltMDIF78MlJbPV6PDvcjQiS2smG6dx4yMxDhYU/6aGbmeRiKh001cInyFbIhPXkDZxV70H5QZaj1hHWIWXIYlH7dX+uV53uKC9Hr8" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
   </CollectedData>
   <Metadata source="2" />
   <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />

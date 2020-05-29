@@ -1,6 +1,6 @@
-<Project id="c16ab0a4-4c4f-0bba-ce33-d4d15147ef48" name="Sample" location="C:\TFSCode\Epi Info 7\build\debug\Projects\Sample" description="" schemaVersion="102" epiVersion="" createDate="11/18/2015 09:16:19" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+<Project id="95ce9039-5f8e-1a9f-a36a-075a53e9053c" name="Sample" location="Projects\Sample" description="" schemaVersion="102" epiVersion="" createDate="11/23/2016 14:44:28" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
   <CollectedData>
-    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8dqPQQ3Q3c2YBcemsDyfxV9lImMI3tlxHrJvbIpFBvV1aIeHvnxWGQ79t2IAbY8r0j+gKVJKMFgi7Whisx/4AwrNhRqyhwniipm/fTHrL5MJHNoia7BJ3LRlWxWJdNK6s=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7csqJucXA0eUm4ILZ7oROEjrnivQAfaAQZGiX42PBxqOc/ISdltMDIF78MlJbPV6OLIWdoDgguljbFynF5S0YlxzxwkVU+Y409ymRgOOzPM0Ni29mUvnuCShS65NZR0oM=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
   </CollectedData>
   <Metadata source="2" />
   <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />

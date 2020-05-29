@@ -1,6 +1,6 @@
 ﻿<DashboardCanvas>
   <dashboardHelper>
-    <projectPath>C:\Epi Info 7\Projects\EColi\EColi.prj</projectPath>
+    <projectPath>EColi.prj</projectPath>
     <viewName>FoodHistory</viewName>
     <advancedDataFilterCondition>
     </advancedDataFilterCondition>

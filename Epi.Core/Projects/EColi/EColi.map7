@@ -1,1 +1,25 @@
-<Layers baseMapType="street"><dataLayer layerType="EpiDashboard.Mapping.ClusterLayerProperties"><latitude>Latitude</latitude><longitude>Longitude</longitude><color>#99FF1100</color><dashboardHelper><projectPath>C:\TFSCode\Epi Info 7\build\debug\Projects\EColi\EColi.prj</projectPath><viewName>FoodHistory</viewName><connectionString></connectionString><tableName></tableName><advancedDataFilterCondition></advancedDataFilterCondition><useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition><relatedDataConnections /><dataFilters recordProcessScope="undeleted" /><dashboardRules /></dashboardHelper></dataLayer></Layers>
+<Layers baseMapType="blank">
+  <dataLayer layerType="EpiDashboard.Mapping.ClusterLayerProperties">
+    <description>
+    </description>
+    <color>#99FF1100</color>
+    <latitude>Latitude</latitude>
+    <longitude>Longitude</longitude>
+    <dashboardHelper>
+      <projectPath>EColi.prj</projectPath>
+      <viewName>FoodHistory</viewName>
+      <useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition>
+      <advancedDataFilterCondition>
+      </advancedDataFilterCondition>
+      <relatedDataConnections />
+      <dataFilters recordProcessScope="undeleted" />
+      <dashboardRules />
+    </dashboardHelper>
+  </dataLayer>
+  <referenceLayer layerType="EpiDashboard.Mapping.MapServerLayerProperties">
+    <referenceLayer>
+      <serverName>https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer</serverName>
+      <visibleLayers />
+    </referenceLayer>
+  </referenceLayer>
+</Layers>

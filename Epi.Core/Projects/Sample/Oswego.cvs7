@@ -1,6 +1,6 @@
 ﻿<DashboardCanvas>
   <dashboardHelper>
-    <projectPath>C:\Epi Info 7\Projects\Sample\Sample.prj</projectPath>
+    <projectPath>Sample.prj</projectPath>
     <viewName>Oswego</viewName>
     <advancedDataFilterCondition>
     </advancedDataFilterCondition>

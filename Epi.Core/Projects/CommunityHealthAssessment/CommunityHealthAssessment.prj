@@ -1,4 +1,4 @@
-<Project id="77c3ca71-97f3-9759-dfa7-eca30c89aec2" name="CommunityHealthAssessment" location="\\cdc.gov\project\OPHSS_Epi_Info_Development\EpiInfoEcosystem\EpiInfoTraining\4_Documentation\Community_Health_Assessment\Database files\CommunityHealthAssessment" description="" schemaVersion="102" epiVersion="" createDate="08/23/2012 06:52:21" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+<Project id="77c3ca71-97f3-9759-dfa7-eca30c89aec2" name="CommunityHealthAssessment" location="Projects\CommunityHealthAssessment" description="" schemaVersion="102" epiVersion="" createDate="08/23/2012 06:52:21" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
   <CollectedData>
     <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7csqJucXA0eUm4ILZ7oROEjrnivQAfaAQZGiX42PBxqJ/1Boh1FhKjnL8nVlHmKey/TGimtob9vc6/9DX7c7s9Z8sHGeW7a2xbFBNntRwPdK79Z+Q5OpLypRBJFuppBvnrzeEyQTaBY5Mq8XDn3dx6qYTgmL8NVdu5EglYdeADqHFHmJC9C68RU6Jg/gzmWWBhpboFJR10lf1WPtYf3oF1" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
   </CollectedData>

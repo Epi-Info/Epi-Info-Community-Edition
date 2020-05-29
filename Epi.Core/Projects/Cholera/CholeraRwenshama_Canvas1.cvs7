@@ -1,6 +1,6 @@
 ﻿<DashboardCanvas>
   <dashboardHelper>
-    <projectPath>\\cdc.gov\project\OPHSS_Epi_Info_Development\EpiInfoEcosystem\EpiInfoTraining\4_Documentation\Cholera in Rwenshama\Database\Cholera_in_Rwenshama_2.prj</projectPath>
+    <projectPath>Cholera_in_Rwenshama_2.prj</projectPath>
     <viewName>Questionnaire</viewName>
     <useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition>
     <advancedDataFilterCondition>

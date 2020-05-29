@@ -1,0 +1,58 @@
+<Layers baseMapType="blank">
+  <dataLayer layerType="EpiDashboard.Mapping.ChoroplethLayerProperties">
+    <shapeFile>.\Projects\Sample\MXState.shp</shapeFile>
+<highColor>#F00011FF</highColor>
+<legTitle></legTitle>
+<showPolyLabels>True</showPolyLabels>
+<classTitles>
+<legendText1></legendText1>
+<legendText2></legendText2>
+<legendText3></legendText3>
+<legendText4></legendText4>
+<legendText5></legendText5>
+<legendText6></legendText6>
+<legendText7></legendText7>
+<legendText8></legendText8>
+<legendText9></legendText9>
+<legendText10></legendText10>
+</classTitles>
+<useCustomColors>False</useCustomColors>
+<resolution>2183.72510691668</resolution>
+<centerPoint_X>-11346649.6508763</centerPoint_X>
+<centerPoint_Y>2747880.29900804</centerPoint_Y>
+<spatialRef>102100</spatialRef>
+<envMinX>-13379697.7254158</envMinX>
+<envMinY>1637456.08214091</envMinY>
+<envMaxX>-9313601.57633691</envMaxX>
+<envMaxY>3858304.51587517</envMaxY>
+<partitionUsingQuantiles>True</partitionUsingQuantiles>
+<customColors>
+<rctColor1>0,255,0</rctColor1>
+<rctColor2>0,196,63</rctColor2>
+<rctColor3>0,137,126</rctColor3>
+<rctColor4>0,78,189</rctColor4>
+<rctColor5>0,19,252</rctColor5>
+<rctColor6>0,216,59</rctColor6>
+<rctColor7>0,157,122</rctColor7>
+<rctColor8>0,98,185</rctColor8>
+<rctColor9>0,39,248</rctColor9>
+<rctColor10>0,236,55</rctColor10>
+<rctLowColor>0,255,0</rctLowColor>
+<rctMissingColor>255,128,0</rctMissingColor>
+</customColors>
+<lowColor>#FF00FF00</lowColor>
+<missingColor>#FFFF8000</missingColor>
+<classes>2</classes>
+<dataKey>STATE</dataKey>
+<shapeKey>name</shapeKey>
+<value>PerTeenBirths95</value>
+<opacity>178</opacity>
+<versionTag>7.2.3.10</versionTag>
+<dashboardHelper><projectPath>.\Projects\Sample\Sample.prj</projectPath><viewName>MexMap95</viewName><useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition><advancedDataFilterCondition></advancedDataFilterCondition><relatedDataConnections /><dataFilters recordProcessScope="undeleted" /><dashboardRules /></dashboardHelper></dataLayer>
+  <referenceLayer layerType="EpiDashboard.Mapping.MapServerLayerProperties">
+    <referenceLayer>
+      <serverName>https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer</serverName>
+      <visibleLayers />
+    </referenceLayer>
+  </referenceLayer>
+</Layers>

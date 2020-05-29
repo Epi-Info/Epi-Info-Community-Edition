@@ -1,6 +1,6 @@
-<Project id="8f110443-e050-6501-92c7-885bfb88bdf2" name="Mumps" location="C:\TFSCode\Epi.Core\Projects\Mumps" description="" schemaVersion="102" epiVersion="" createDate="05/12/2011 06:22:46" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+<Project id="dc412c5e-cca6-d073-fd9c-59ae7b9a26fd" name="Mumps" location="Projects\Mumps" description="" schemaVersion="102" epiVersion="" createDate="11/23/2016 14:43:48" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
   <CollectedData>
-    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8HklzHp5WfrIeS2eZrTpV7kdCBKTkdVqAVj8anRH1yQ+6izIENv1wNTg9ww6V3nVLUX/e/klKxVpDnc8twvGdWRUcVGuLrX+q//ElIJ+uFYw==" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7csqJucXA0eUm4ILZ7oROEjrnivQAfaAQZGiX42PBxqOc/ISdltMDIF78MlJbPV6PS47TJ8D4RH6U1P9JozkU6U/Of+cOJCH+cG9LtPJaW+5kvW7lFdaPkGADxin39JQM=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
   </CollectedData>
   <Metadata source="2" />
   <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
