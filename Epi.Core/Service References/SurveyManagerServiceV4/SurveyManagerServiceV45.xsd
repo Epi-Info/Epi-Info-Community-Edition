@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+  <xs:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+  <xs:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" />
   <xs:element name="PublishSurvey">
     <xs:complexType>
       <xs:sequence>
@@ -223,17 +225,160 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllSurveysByOrgKey">
+  <xs:element name="GetAllSurveysByOrg">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="OrgKey" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllSurveysByOrgKeyResponse">
+  <xs:element name="GetAllSurveysByOrgResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://www.yourcompany.com/types/" minOccurs="0" name="GetAllSurveysByOrgKeyResult" nillable="true" type="q30:SurveyInfoResponse" />
+        <xs:element xmlns:q30="http://www.yourcompany.com/types/" minOccurs="0" name="GetAllSurveysByOrgResult" nillable="true" type="q30:SurveyInfoResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetJsonColumn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyIds" nillable="true" type="q31:ArrayOfstring" />
+        <xs:element minOccurs="0" name="OrgId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetJsonColumnResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SetJsonColumnResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetJsonColumnAll">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AdminKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetJsonColumnAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SetJsonColumnAllResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLoginToken">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="UserInfo" nillable="true" type="q32:UserRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLoginTokenResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="GetLoginTokenResult" nillable="true" type="q33:UserResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetUserInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="UserInfo" nillable="true" type="q34:UserRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetUserInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SetUserInfoResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExistingUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="UserInfo" nillable="true" type="q35:UserRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetExistingUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetExistingUserResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserListByOrganization">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="UserInfo" nillable="true" type="q36:UserRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserListByOrganizationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="GetUserListByOrganizationResult" nillable="true" type="q37:UserResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="UserInfo" nillable="true" type="q38:UserRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteUserResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateUserInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="UserInfo" nillable="true" type="q39:UserRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateUserInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateUserInfoResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserByUserId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="UserInfo" nillable="true" type="q40:UserRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserByUserIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="GetUserByUserIdResult" nillable="true" type="q41:UserResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetJsonResponseAll">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="OrganizationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PublisherKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetJsonResponseAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetJsonResponseAllResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

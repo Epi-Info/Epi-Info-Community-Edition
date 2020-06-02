@@ -1087,23 +1087,32 @@
     <None Include="Service References\SurveyManagerServiceV4\Epi.SurveyManagerServiceV4.SurveyInfoResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.SurveyManagerServiceV4.UserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SurveyManagerServiceV4\ManagerServiceV41.wsdl" />
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV422.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV423.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV424.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV425.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV426.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV427.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV428.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV46.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV461.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV462.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV463.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV464.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV465.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerService\Epi.SurveyManagerService.OrganizationResponse.datasource">

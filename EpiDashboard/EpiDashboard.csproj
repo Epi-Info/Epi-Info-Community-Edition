@@ -373,6 +373,12 @@
     <Compile Include="Dialogs\ValueMapperDialog.Designer.cs">
       <DependentUpon>ValueMapperDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\WebSurveyOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\WebSurveyOptions.Designer.cs">
+      <DependentUpon>WebSurveyOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="FieldFlags.cs" />
     <Compile Include="FontFamilyListItem.cs" />
     <Compile Include="FontSizeListItem.cs" />
@@ -1574,6 +1580,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ValueMapperDialog.resx">
       <DependentUpon>ValueMapperDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\WebSurveyOptions.resx">
+      <DependentUpon>WebSurveyOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LineListSharedStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>

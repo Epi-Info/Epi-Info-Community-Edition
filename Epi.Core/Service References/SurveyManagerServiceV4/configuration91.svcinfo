@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="b1Civ0tP+Zu7xI6yr8Rn4bjFIJI=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="4dzk15Bo0M/2gAznRk6Yuz5Jg8A=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IManagerServiceV4">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IManagerServiceV4" contract="SurveyManagerServiceV4.IManagerServiceV4" bindingType="basicHttpBinding" address="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc" bindingConfiguration="BasicHttpBinding_IManagerServiceV4">
+    <endpoint name="BasicHttpBinding_IManagerServiceV4" contract="SurveyManagerServiceV4.IManagerServiceV4" bindingType="basicHttpBinding" address="http://localhost:59584/SurveyManagerServiceV4.svc" bindingConfiguration="BasicHttpBinding_IManagerServiceV4">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc</serializedValue>
+          <serializedValue>http://localhost:59584/SurveyManagerServiceV4.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

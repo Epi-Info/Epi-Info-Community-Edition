@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using EpiDashboard.Dialogs;
+using System.Windows.Forms;
 
 namespace Epi.Data.EpiWeb.Wrappers
 {
@@ -15,7 +17,8 @@ namespace Epi.Data.EpiWeb.Wrappers
     {
         private CertInfo certInfo;
         private bool expired;
-
+        public string system;
+        public Guid OrgId;
         private EpiWebWrapper()
         {
 
@@ -25,24 +28,29 @@ namespace Epi.Data.EpiWeb.Wrappers
         {
             try
             {
-                expired = false;
-                string certFile = config.Substring(9).Split('@')[0];
-                string key = config.Substring(9).Split('@')[1];
-                string contents = Epi.Configuration.DecryptFileToString(certFile, key);
-                certInfo = JsonConvert.DeserializeObject<CertInfo>(contents);
-                if (certInfo.ExpirationDate < DateTime.Now)
-                {
-                    expired = true;
-                }
+                //expired = false;
+                //string certFile = config.Substring(9).Split('@')[0];
+                //string key = config.Substring(9).Split('@')[1];
+                //string contents = Epi.Configuration.DecryptFileToString(certFile, key);
+                //certInfo = JsonConvert.DeserializeObject<CertInfo>(contents);
+                //if (certInfo.ExpirationDate < DateTime.Now)
+                //{
+                //    expired = true;
+                //}
+                ////new code 
+                var ConfigInfo = config.Split('@');
+                system = ConfigInfo[0];
+                OrgId = Guid.Parse(ConfigInfo[1].ToString());
+
             }
             catch (CryptographicException ce)
             {
                 Epi.Windows.MsgBox.ShowError("Invalid org key or certificate file");
             }
-            catch (JsonSerializationException je)
-            {
-                Epi.Windows.MsgBox.ShowError("Certificate file is malformed. Please ask your Epi Info administrator for a new certificate file.");
-            }
+            //catch (JsonSerializationException je)
+            //{
+            //    Epi.Windows.MsgBox.ShowError("Certificate file is malformed. Please ask your Epi Info administrator for a new certificate file.");
+            //}
             catch (Exception ex)
             {
                 Epi.Windows.MsgBox.ShowError(ex.ToString());
@@ -75,33 +83,58 @@ namespace Epi.Data.EpiWeb.Wrappers
         public List<string> GetTableNames()
         {
             List<string> names = new List<string>();
-
-            if (expired)
-            {
-                Epi.Windows.MsgBox.ShowError("Your certificate file has expired. Please ask your Epi Info administrator for a new certificate file.");
-                return names;
+            Epi.SurveyManagerServiceV4.SurveyInfoResponse Response = new Epi.SurveyManagerServiceV4.SurveyInfoResponse();
+            try
+            { 
+            var Client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+               
+                Response = Client.GetAllSurveysByOrgKey(OrgId.ToString());
             }
-
-            if (certInfo != null)
+            catch (Exception ex)
             {
-                using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
-                {
-                    connection.Open();
-                    string commandString = "select o.Organization, m.SurveyId, m.SurveyName, m.DateCreated from surveymetadata m inner join organization o on m.OrganizationId = o.OrganizationId where o.OrganizationId = '" + certInfo.OrganizationId + "'";
-                    using (SqlCommand command = new SqlCommand(commandString, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
 
-                            while (reader.Read())
-                            {
-                                string name = reader.GetFieldValue<string>(2) + " (" + reader.GetFieldValue<DateTime>(3) + ")" + " {{" + reader.GetFieldValue<Guid>(1) + "}}";
-                                names.Add(name);
-                            }
-                        }
-                    }
+                WebSurveyOptions dialog1 = new WebSurveyOptions();
+                DialogResult result1 = dialog1.ShowDialog();
+                if (result1 == System.Windows.Forms.DialogResult.OK)
+                {
+                    
+                    var Client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+
+                    Response = Client.GetAllSurveysByOrgKey(OrgId.ToString());
                 }
             }
+           // List<SurveyManagerServiceV4.SurveyInfoDTO> DTOList = Response.SurveyInfoList.OrderBy(o => o.SurveyName).ToList();
+            foreach (var items in Response.SurveyInfoList)
+            {
+                names.Add(items.SurveyId + "_" + items.SurveyName);
+
+            }
+            //if (expired)
+            //{
+            //    Epi.Windows.MsgBox.ShowError("Your certificate file has expired. Please ask your Epi Info administrator for a new certificate file.");
+            //    return names;
+            //}
+
+            //if (certInfo != null)
+            //{
+            //    using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
+            //    {
+            //        connection.Open();
+            //        string commandString = "select o.Organization, m.SurveyId, m.SurveyName, m.DateCreated from surveymetadata m inner join organization o on m.OrganizationId = o.OrganizationId where o.OrganizationId = '" + certInfo.OrganizationId + "'";
+            //        using (SqlCommand command = new SqlCommand(commandString, connection))
+            //        {
+            //            using (SqlDataReader reader = command.ExecuteReader())
+            //            {
+
+            //                while (reader.Read())
+            //                {
+            //                    string name = reader.GetFieldValue<string>(2) + " (" + reader.GetFieldValue<DateTime>(3) + ")" + " {{" + reader.GetFieldValue<Guid>(1) + "}}";
+            //                    names.Add(name);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
             return names;
         }
@@ -112,25 +145,62 @@ namespace Epi.Data.EpiWeb.Wrappers
 
             if (expired)
                 return dataTable;
-
-            string surveyId = collectionName.Substring(collectionName.IndexOf("{{") + 2, 36);
-            using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
+            var SurveyId = collectionName.Split('_')[0];
+            string json = "";
+          
+            try
             {
-                await connection.OpenAsync();
-                string commandString = "select ResponseJson from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyId + "'";
-                using (SqlCommand command = new SqlCommand(commandString, connection))
-                {
-                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                    {
+                var Client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
 
-                        while (await reader.ReadAsync())
-                        {
-                            string json = reader.GetFieldValue<string>(0);
-                            dataTable = GetDataTableFromJson(dataTable, json);
-                        }
-                    }
+                   json = Client.GetJsonResponseAll(SurveyId, "", "");
+            }
+            catch (Exception ex)
+            {
+
+                WebSurveyOptions dialog1 = new WebSurveyOptions();
+                DialogResult result1 = dialog1.ShowDialog();
+                if (result1 == System.Windows.Forms.DialogResult.OK)
+                {
+                    //OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
+                    //DialogResult result2 = OrgKeyDialog.ShowDialog();
+                    //if (result2 == System.Windows.Forms.DialogResult.OK)
+                    //{
+                    //    this.OrganizationKey = OrgKeyDialog.OrganizationKey;
+                    //    if (!string.IsNullOrWhiteSpace(OrganizationKey))
+                    //    {
+                    //        SetSurveyInfo();
+                    //        QuickSurveyInfoUpdate();
+                    //    }
+                    //}
                 }
             }
+                var msg = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(json);
+
+                foreach (var item in msg)
+                {
+                    dataTable = GetDataTableFromJson(dataTable, JsonConvert.SerializeObject(item)); ;
+
+                }
+           
+         
+            //string surveyId = collectionName.Substring(collectionName.IndexOf("{{") + 2, 36);
+            //using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
+            //{
+            //    await connection.OpenAsync();
+            //    string commandString = "select ResponseJson from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyId + "'";
+            //    using (SqlCommand command = new SqlCommand(commandString, connection))
+            //    {
+            //        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+            //        {
+
+            //            while (await reader.ReadAsync())
+            //            {
+            //                string json = reader.GetFieldValue<string>(0);
+            //                dataTable = GetDataTableFromJson(dataTable, json);
+            //            }
+            //        }
+            //    }
+            //}
             return dataTable;
         }
 
@@ -213,12 +283,13 @@ namespace Epi.Data.EpiWeb.Wrappers
         {
             try
             {
-                Message msg = JsonConvert.DeserializeObject<Message>(json);
+                //Message msg = JsonConvert.DeserializeObject<Message>(json);
 
-                if (msg.ResponseQA.ToString().Length < 5)
-                    return dt;
+                //if (msg.ResponseQA.ToString().Length < 5)
+                //    return dt;
 
-                DataSet dataSet = JsonConvert.DeserializeObject<DataSet>("{'Table1': [" + msg.ResponseQA.ToString() + "]}");
+                //DataSet dataSet = JsonConvert.DeserializeObject<DataSet>("{'Table1': [" + msg.ResponseQA.ToString() + "]}");
+                DataSet dataSet = JsonConvert.DeserializeObject<DataSet>("{'Table1': [" + json + "]}");
                 DataTable dataTable = dataSet.Tables["Table1"];
                 dt.Merge(dataTable);
 

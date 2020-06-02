@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ManagerServiceV4" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ManagerServiceV4" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
-      <xsd:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Web" />
-      <xsd:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" />
+      <xsd:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+      <xsd:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Web" />
+      <xsd:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" />
+      <xsd:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" />
+      <xsd:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Constants" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IManagerServiceV4_PublishSurvey_InputMessage">
@@ -163,6 +165,96 @@
   <wsdl:message name="IManagerServiceV4_GetAllSurveysByOrgKey_CustomFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q17="http://www.yourcompany.com/types/" name="detail" element="q17:CustomFaultException" />
   </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetJsonColumn_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetJsonColumn" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetJsonColumn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetJsonColumnResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetJsonColumn_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://www.yourcompany.com/types/" name="detail" element="q18:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetJsonColumnAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetJsonColumnAll" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetJsonColumnAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetJsonColumnAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetJsonColumnAll_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://www.yourcompany.com/types/" name="detail" element="q19:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetLoginToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoginToken" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetLoginToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoginTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetLoginToken_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://www.yourcompany.com/types/" name="detail" element="q20:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_SetUserInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q21="http://www.yourcompany.com/types/" name="detail" element="q21:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetExistingUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetExistingUser" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetExistingUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetExistingUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetExistingUser_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q22="http://www.yourcompany.com/types/" name="detail" element="q22:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetUserListByOrganization_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByOrganization" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetUserListByOrganization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByOrganizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetUserListByOrganization_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q23="http://www.yourcompany.com/types/" name="detail" element="q23:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_DeleteUser_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q24="http://www.yourcompany.com/types/" name="detail" element="q24:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_UpdateUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_UpdateUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_UpdateUserInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q25="http://www.yourcompany.com/types/" name="detail" element="q25:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetUserByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetUserByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetUserByUserId_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q26="http://www.yourcompany.com/types/" name="detail" element="q26:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetJsonResponseAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJsonResponseAll" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetJsonResponseAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJsonResponseAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_GetJsonResponseAll_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q27="http://www.yourcompany.com/types/" name="detail" element="q27:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="IManagerServiceV4">
     <wsdl:operation name="PublishSurvey">
       <wsdl:input wsaw:Action="http://tempuri.org/IManagerService/PublishSurvey" message="tns:IManagerServiceV4_PublishSurvey_InputMessage" />
@@ -248,6 +340,56 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/GetAllSurveysByOrgKey" message="tns:IManagerServiceV4_GetAllSurveysByOrgKey_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/GetAllSurveysByOrgKeyResponse" message="tns:IManagerServiceV4_GetAllSurveysByOrgKey_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/GetAllSurveysByOrgKeyCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_GetAllSurveysByOrgKey_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetJsonColumn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/SetJsonColumn" message="tns:IManagerServiceV4_SetJsonColumn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/SetJsonColumnResponse" message="tns:IManagerServiceV4_SetJsonColumn_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/SetJsonColumnCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_SetJsonColumn_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetJsonColumnAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/SetJsonColumnAll" message="tns:IManagerServiceV4_SetJsonColumnAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/SetJsonColumnAllResponse" message="tns:IManagerServiceV4_SetJsonColumnAll_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/SetJsonColumnAllCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_SetJsonColumnAll_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/GetLoginToken" message="tns:IManagerServiceV4_GetLoginToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/GetLoginTokenResponse" message="tns:IManagerServiceV4_GetLoginToken_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/GetLoginTokenCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_GetLoginToken_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/SetUserInfo" message="tns:IManagerServiceV4_SetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/SetUserInfoResponse" message="tns:IManagerServiceV4_SetUserInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/SetUserInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_SetUserInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExistingUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/GetExistingUser" message="tns:IManagerServiceV4_GetExistingUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/GetExistingUserResponse" message="tns:IManagerServiceV4_GetExistingUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/GetExistingUserCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_GetExistingUser_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByOrganization">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/GetUserListByOrganization" message="tns:IManagerServiceV4_GetUserListByOrganization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/GetUserListByOrganizationResponse" message="tns:IManagerServiceV4_GetUserListByOrganization_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/GetUserListByOrganizationCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_GetUserListByOrganization_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/DeleteUser" message="tns:IManagerServiceV4_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/DeleteUserResponse" message="tns:IManagerServiceV4_DeleteUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/DeleteUserCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_DeleteUser_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/UpdateUserInfo" message="tns:IManagerServiceV4_UpdateUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/UpdateUserInfoResponse" message="tns:IManagerServiceV4_UpdateUserInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/UpdateUserInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_UpdateUserInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/GetUserByUserId" message="tns:IManagerServiceV4_GetUserByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/GetUserByUserIdResponse" message="tns:IManagerServiceV4_GetUserByUserId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/GetUserByUserIdCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_GetUserByUserId_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJsonResponseAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/GetJsonResponseAll" message="tns:IManagerServiceV4_GetJsonResponseAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/GetJsonResponseAllResponse" message="tns:IManagerServiceV4_GetJsonResponseAll_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/GetJsonResponseAllCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_GetJsonResponseAll_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IManagerServiceV4" type="tns:IManagerServiceV4">
@@ -456,10 +598,130 @@
         <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="SetJsonColumn">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/SetJsonColumn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetJsonColumnAll">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/SetJsonColumnAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginToken">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/GetLoginToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/SetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetExistingUser">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/GetExistingUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByOrganization">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/GetUserListByOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/UpdateUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUserId">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/GetUserByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetJsonResponseAll">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/GetJsonResponseAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ManagerServiceV4">
     <wsdl:port name="BasicHttpBinding_IManagerServiceV4" binding="tns:BasicHttpBinding_IManagerServiceV4">
-      <soap:address location="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyManagerServiceV4.svc" />
+      <soap:address location="http://localhost:59584/SurveyManagerServiceV4.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

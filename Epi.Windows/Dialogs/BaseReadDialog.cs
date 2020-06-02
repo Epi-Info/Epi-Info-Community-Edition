@@ -163,7 +163,13 @@ namespace Epi.Windows.Dialogs
             if (selectedDataSource is IDbDriver)
             {
                 IDbDriver db = selectedDataSource as IDbDriver;
-                this.txtDataSource.Text = db.DataSource;                
+                this.txtDataSource.Text = db.DataSource;
+                var SelectedDataSource = db.ConnectionString.Split('@');
+
+                if (SelectedDataSource[0].Contains("Epi Info Web Survey"))
+                {
+                    this.txtDataSource.Text = "Epi Info Web & Cloud Services";
+                }
 
                 List<string> tableNames = db.GetTableNames();
 
@@ -381,8 +387,8 @@ namespace Epi.Windows.Dialogs
                     }
 
                     DialogResult result = ((Form)dialog).ShowDialog();
-                    
-                    if (result == DialogResult.OK)
+                  //  dialog.UseManagerService 
+                    if (result == DialogResult.OK && dialog.DbConnectionStringBuilder!=null)
                     {
                         this.savedConnectionStringDescription = dialog.ConnectionStringDescription;
                         bool success = false;
@@ -402,6 +408,7 @@ namespace Epi.Windows.Dialogs
                         {
                             this.selectedDataSource = db;
                             formNeedsRefresh = true;
+                           
                         }
                         else
                         {
@@ -410,7 +417,15 @@ namespace Epi.Windows.Dialogs
                     }
                     else
                     {
-                        this.selectedDataSource = null;
+                        if (selectedPlugIn.Text == "Epi Info Web & Cloud Services")
+                        {
+
+                        }
+
+                        else
+                        {
+                            this.selectedDataSource = null;
+                        }
                     }
                 }
                 else

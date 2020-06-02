@@ -73,7 +73,8 @@ namespace Epi.Data.EpiWeb
         {
             if (Configuration.Environment == ExecutionEnvironment.WindowsApplication)
             {
-                return new ConnectionStringDialog();
+                  //return new ConnectionStringDialog();
+                return new ServiceConnectionDialog();
             }
             else
             {
@@ -86,8 +87,8 @@ namespace Epi.Data.EpiWeb
 
             if (Configuration.Environment == ExecutionEnvironment.WindowsApplication)
             {
-                return new ConnectionStringDialog();
-
+               // return new ConnectionStringDialog();
+                return new ServiceConnectionDialog();
             }
             else
             {
