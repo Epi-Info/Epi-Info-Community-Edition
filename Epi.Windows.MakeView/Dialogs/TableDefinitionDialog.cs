@@ -348,12 +348,6 @@ namespace Epi.Windows.MakeView.Dialogs
                     txtDataTableName.Clear();
                     valid = false;
                 }
-                else if (underscoreMatch.Success)
-                {
-                    //MsgBox.ShowError(SharedStrings.DATA_TABLE_NAME_BEGIN_UNDERSCORE);
-                    //txtDataTableName.Clear();
-                    //valid = false;
-                }
                 else if (currentView.Project.CollectedData.TableExists(txtDataTableName.Text.Trim()))
                 {
                     MsgBox.ShowError(string.Format(SharedStrings.DATA_TABLE_NAME_ALREADY_EXISTS, txtDataTableName.Text.Trim()));
