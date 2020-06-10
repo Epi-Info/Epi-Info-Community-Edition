@@ -8861,7 +8861,6 @@ namespace EpiDashboard
                     foreach (KeyValuePair<DDLFieldOfCommentLegal, int> kvp in optionFields)
                     {
                         string fValue = fRow[kvp.Value].ToString();
-                        //DataTable codeDataTable = kvp.Key.GetSourceData();
                         DataTable codeDataTable = optionFieldData[kvp.Key];
                         Dictionary<string, string> fieldValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
@@ -8869,9 +8868,13 @@ namespace EpiDashboard
                         {
                             string key = row[kvp.Key.TextColumnName.Trim()].ToString();
                             int dash = key.IndexOf('-');
-                            string newKey = key.Substring(0, dash);
 
-                            if (fValue.Equals(newKey))
+                            if (dash > 0)
+                            {
+                                key = key.Substring(0, dash);
+                            }
+
+                            if (fValue.Equals(key))
                             {
                                 fRow[kvp.Value] = key;
                             }
