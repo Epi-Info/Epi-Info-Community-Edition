@@ -132,8 +132,20 @@ namespace Epi.Windows.Analysis.Dialogs
 
             foreach (object obj in lbxOther.Items)
             {
-                string s = obj.ToString();
-                sb.Append(FieldNameNeedsBrackets(s) ? Util.InsertInSquareBrackets(s) : s); 
+                string fieldName = obj.ToString();
+                if(fieldName.StartsWith("(") && fieldName.EndsWith(")"))
+                {
+                    sb.Append(StringLiterals.PARANTHESES_OPEN);
+                    char[] parens = { '(', ')'};
+                    string trimmed = fieldName.Trim(parens);
+                    sb.Append(FieldNameNeedsBrackets(trimmed) ? Util.InsertInSquareBrackets(trimmed) : trimmed);
+                    sb.Append(StringLiterals.PARANTHESES_CLOSE);
+                }
+                else
+                {
+                    sb.Append(FieldNameNeedsBrackets(fieldName) ? Util.InsertInSquareBrackets(fieldName) : fieldName);
+                }
+
                 sb.Append(StringLiterals.SPACE);
             }
 
