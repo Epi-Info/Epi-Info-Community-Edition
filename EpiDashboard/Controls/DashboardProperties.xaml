@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:EpiDashboard.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="460" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
+             d:DesignHeight="1162.425" d:DesignWidth="1564.64" FontFamily="Global User Interface" FontSize="16" Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -35,7 +35,7 @@
             </Border>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
-            
+
 
             <!--<ToggleButton x:Name="tbtnDataSource" Style="{StaticResource ToggleSidebarButtonStyle}" IsChecked="True" Checked="tbtnDataSource_Checked">
                 <StackPanel>
@@ -78,7 +78,7 @@
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel>
                     <StackPanel x:Name="panelDataSourceProject" Visibility="Visible">
-                           
+
                         <StackPanel>
                             <Label x:Name="tblockEpiInfoPro" Content="Epi Info 7 Project:" />
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
@@ -94,7 +94,8 @@
 
                         <StackPanel Margin="0 20 0 0 ">
                             <Label x:Name="lblRelatedDataSources" Content="Related Data Sources:"/>
-                            <ListBox Width="Auto" MinWidth="300" MaxWidth="400" HorizontalAlignment="Left" x:Name="lbxRelatedDataSources" MinHeight="100"/>
+                            <ListBox Width="407"  MinWidth="300" HorizontalAlignment="Left" x:Name="lbxRelatedDataSources" MinHeight="100" SelectionChanged="LbxRelatedDataSources_SelectionChanged" SelectionMode="Single"/>
+                            <Button Content="Remove Data Source" IsEnabled="False" Width="200" Margin="0 8 0 60"  x:Name="btnClear" Height="25" HorizontalAlignment="Left" Click="BtnClear_Click"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel x:Name="panelDataSourceOther" Visibility="Visible">
@@ -120,7 +121,7 @@
                     </StackPanel>
                     <StackPanel x:Name="panelAdvancedSQLQuery" Visibility="Visible">
                         <Label>Advanced Query:</Label>
-                        <TextBox x:Name="txtAdvancedSQLQuery" ></TextBox>
+                        <TextBox x:Name="txtAdvancedSQLQuery" />
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
@@ -131,7 +132,7 @@
                 <Label x:Name="tblockHTMLOutput" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display</Label>
             </StackPanel>
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
-                
+
                 <StackPanel>
                     <Label x:Name="tblockHTMLSetting" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">HTML Output Settings</Label>
                     <StackPanel>
@@ -169,7 +170,7 @@
                         <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartHeight">500</TextBox>
                     </StackPanel>
                 </StackPanel>
-                
+
             </ScrollViewer>
         </DockPanel>
 
@@ -196,7 +197,8 @@
 
             <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <StackPanel >
-                    --><!--<StackPanel>
+                    -->
+        <!--<StackPanel>
                         <Label>Default Width:</Label>
                         <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartWidth">800</TextBox>
                     </StackPanel>
@@ -204,7 +206,8 @@
                     <StackPanel Margin="0 10 0 0">
                         <Label>Default Height:</Label>
                         <TextBox Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" x:Name="txtDefaultChartHeight">500</TextBox>
-                    </StackPanel>--><!--
+                    </StackPanel>-->
+        <!--
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>-->
