@@ -94,8 +94,8 @@
 
                         <StackPanel Margin="0 20 0 0 ">
                             <Label x:Name="lblRelatedDataSources" Content="Related Data Sources:"/>
-                            <ListBox Width="407"  MinWidth="300" HorizontalAlignment="Left" x:Name="lbxRelatedDataSources" MinHeight="100" SelectionChanged="LbxRelatedDataSources_SelectionChanged" SelectionMode="Single"/>
-                            <Button Content="Remove Data Source" IsEnabled="False" Width="200" Margin="0 8 0 60"  x:Name="btnClear" Height="25" HorizontalAlignment="Left" Click="BtnClear_Click"/>
+                            <ListBox Width="Auto"  MinWidth="300" HorizontalAlignment="Left" x:Name="lbxRelatedDataSources" MinHeight="100" SelectionChanged="LbxRelatedDataSources_SelectionChanged" SelectionMode="Single"/>
+                            <Button Content="Remove Related Data Source" IsEnabled="False" Width="278" Margin="0 8 0 60"  x:Name="btnClear" Height="25" HorizontalAlignment="Left" Click="BtnClear_Click"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel x:Name="panelDataSourceOther" Visibility="Visible">

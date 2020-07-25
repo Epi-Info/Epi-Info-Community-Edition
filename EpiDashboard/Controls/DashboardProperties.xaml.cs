@@ -120,13 +120,14 @@ namespace EpiDashboard.Controls
             lbxRelatedDataSources.Items.Clear();
             if (dashboardHelper.ConnectionsForRelate.Count > 0)
             {
-                // Related Data
                 foreach (RelatedConnection rConn in dashboardHelper.ConnectionsForRelate)
                 {
-                    lbxRelatedDataSources.Items.Add("Database Name:" + rConn.db.DbName + "; Key:" + rConn.ChildKeyField + "; Description:" + rConn.db.ConnectionDescription);
+                    lbxRelatedDataSources.Items.Add(
+                        "Name: " + rConn.db.DbName + Environment.NewLine +
+                        "Key: " + rConn.ChildKeyField + Environment.NewLine +
+                        "Description: " + rConn.db.ConnectionDescription);
                 }
             }
-
 
             #region Translation
 
