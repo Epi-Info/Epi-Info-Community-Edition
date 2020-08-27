@@ -21,7 +21,7 @@ namespace Epi.Data.REDCap
         public bool CanClaimConnectionString(string connectionString)
         {
             string conn = connectionString.ToLowerInvariant();
-            if (conn.Contains("epiweb"))
+            if (conn.Contains("redcap"))
             {
                 return true;
             }
