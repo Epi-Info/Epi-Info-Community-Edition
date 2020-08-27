@@ -227,7 +227,7 @@ namespace EpiDashboard
         /// <summary>
         /// Gets the list of related connections
         /// </summary>
-        public List<RelatedConnection> ConnectionsForRelate { get; private set; }
+        public List<RelatedConnection> ConnectionsForRelate { get; set; }
 
         /// <summary>
         /// Gets the currently-attached database

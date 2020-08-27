@@ -120,13 +120,14 @@ namespace EpiDashboard.Controls
             lbxRelatedDataSources.Items.Clear();
             if (dashboardHelper.ConnectionsForRelate.Count > 0)
             {
-                // Related Data
                 foreach (RelatedConnection rConn in dashboardHelper.ConnectionsForRelate)
                 {
-                    lbxRelatedDataSources.Items.Add(rConn.db.ConnectionString);
+                    lbxRelatedDataSources.Items.Add(
+                        "Name: " + rConn.db.DbName + Environment.NewLine +
+                        "Key: " + rConn.ChildKeyField + Environment.NewLine +
+                        "Description: " + rConn.db.ConnectionDescription);
                 }
             }
-
 
             #region Translation
 
@@ -636,5 +637,23 @@ namespace EpiDashboard.Controls
             }
         }
 
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            this.DashboardHelper.ConnectionsForRelate.RemoveAt(lbxRelatedDataSources.SelectedIndex);
+            lbxRelatedDataSources.Items.Remove(lbxRelatedDataSources.SelectedItem);
+        }
+
+        private void LbxRelatedDataSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(((System.Windows.Controls.ListBox)sender).SelectedItems.Count > 0)
+            {
+                btnClear.IsEnabled = true;
+            }
+            else
+            {
+                btnClear.IsEnabled = false;
+            }
+
+        }
     }
 }

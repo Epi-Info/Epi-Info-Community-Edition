@@ -111,7 +111,7 @@ namespace EpiDashboard.Mapping
                 Graphic graphic = record.ToGraphic();
                 if (graphic != null)
                 {
-                    graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(192, 255, 255, 255)));
+                    graphic.Symbol = GetFillSymbol(new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)));
                     shapeLayer.Graphics.Add(graphic);
                 }
                 counter += rgbFactor;
