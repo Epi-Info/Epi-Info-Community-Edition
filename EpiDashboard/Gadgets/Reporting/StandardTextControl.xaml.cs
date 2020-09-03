@@ -350,7 +350,7 @@ namespace EpiDashboard.Gadgets.Reporting
             base.CreateFromXml(element);
         }
 
-        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false, bool ForWeb = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
             htmlBuilder.AppendLine("<p>");

@@ -939,7 +939,7 @@ namespace Epi.Core.ServiceClient
                         binding.AllowCookies = false;
 
                         binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
-                        binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
+                        binding.ReaderQuotas.MaxStringContentLength = 999999999; //config.Settings.WebServiceReaderMaxStringContentLength;
                         binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
                         binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                         binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;
@@ -978,7 +978,7 @@ namespace Epi.Core.ServiceClient
                         binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
                         binding.UseDefaultWebProxy = true;
                         binding.ReaderQuotas.MaxDepth = config.Settings.WebServiceReaderMaxDepth;
-                        binding.ReaderQuotas.MaxStringContentLength = config.Settings.WebServiceReaderMaxStringContentLength;
+                        binding.ReaderQuotas.MaxStringContentLength =999999999;// config.Settings.WebServiceReaderMaxStringContentLength;
                         binding.ReaderQuotas.MaxArrayLength = config.Settings.WebServiceReaderMaxArrayLength;
                         binding.ReaderQuotas.MaxBytesPerRead = config.Settings.WebServiceReaderMaxBytesPerRead;
                         binding.ReaderQuotas.MaxNameTableCharCount = config.Settings.WebServiceReaderMaxNameTableCharCount;

@@ -11,7 +11,7 @@ namespace EpiDashboard.Controls.Charting
 {
     public interface IChart
     {
-        string ToHTML(string htmlFileName = "", int count = 0, bool includeImage = true, bool includeFullData = false);
+        string ToHTML(string htmlFileName = "", int count = 0, bool includeImage = true, bool includeFullData = false,bool ForWeb =false);
         void ToImageFile(string fileName, bool includeGrid = true);
         BitmapSource ToBitmapSource(bool includeGrid = true);
         void SaveImageToFile();

@@ -743,7 +743,7 @@ namespace EpiDashboard.StatCalc
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
+        public string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false, bool ForWeb = false)
         {
             if (string.IsNullOrEmpty(txtYesYesVal1.Text) || string.IsNullOrEmpty(txtYesNoVal1.Text) || string.IsNullOrEmpty(txtNoYesVal1.Text) || string.IsNullOrEmpty(txtNoNoVal1.Text))
             {

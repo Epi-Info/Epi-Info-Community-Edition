@@ -2,6 +2,7 @@
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Constants" />
   <xs:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:59584/SurveyManagerServiceV4.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="OrganizationDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
@@ -56,4 +57,44 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUserDTO" nillable="true" type="tns:ArrayOfUserDTO" />
+  <xs:complexType name="ReportInfoDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DataSource" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EditedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Gadgets" nillable="true" type="tns:ArrayOfGadgetDTO" />
+      <xs:element minOccurs="0" name="RecordCount" type="xs:int" />
+      <xs:element minOccurs="0" name="ReportId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportVersion" type="xs:int" />
+      <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReportInfoDTO" nillable="true" type="tns:ReportInfoDTO" />
+  <xs:complexType name="ArrayOfGadgetDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GadgetDTO" nillable="true" type="tns:GadgetDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGadgetDTO" nillable="true" type="tns:ArrayOfGadgetDTO" />
+  <xs:complexType name="GadgetDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EditedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GadgetHtml" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GadgetId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GadgetNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="GadgetURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GadgetVersion" type="xs:int" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GadgetsScript" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ReportId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GadgetDTO" nillable="true" type="tns:GadgetDTO" />
+  <xs:complexType name="ArrayOfReportInfoDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReportInfoDTO" nillable="true" type="tns:ReportInfoDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReportInfoDTO" nillable="true" type="tns:ArrayOfReportInfoDTO" />
 </xs:schema>

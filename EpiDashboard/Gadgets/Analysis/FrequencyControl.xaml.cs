@@ -1588,7 +1588,7 @@ namespace EpiDashboard
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false, bool ForWeb = false)
         {
             if (IsCollapsed) return string.Empty;
 
@@ -1607,32 +1607,33 @@ namespace EpiDashboard
             {
                 htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">" + CustomOutputHeading + "</h2>");
             }
-
-            htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
-            htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + freqParameters.ColumnNames[0] + "</strong>");
-            htmlBuilder.AppendLine("<br />");
-
-            if (!String.IsNullOrEmpty(freqParameters.WeightVariableName))
+            if (!ForWeb)
             {
-                htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + freqParameters.WeightVariableName + "</strong>");
+                htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
+                htmlBuilder.AppendLine("<em>Frequency variable:</em> <strong>" + freqParameters.ColumnNames[0] + "</strong>");
                 htmlBuilder.AppendLine("<br />");
-            }
 
-            if (freqParameters.StrataVariableNames.Count > 0)
-            {
-                WordBuilder wb = new WordBuilder(", ");
-                foreach (string s in freqParameters.StrataVariableNames)
+                if (!String.IsNullOrEmpty(freqParameters.WeightVariableName))
                 {
-                    wb.Add(s);
+                    htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + freqParameters.WeightVariableName + "</strong>");
+                    htmlBuilder.AppendLine("<br />");
                 }
-                htmlBuilder.AppendLine("<em>Strata variable(s):</em> <strong>" + wb.ToString() + "</strong>");
+
+                if (freqParameters.StrataVariableNames.Count > 0)
+                {
+                    WordBuilder wb = new WordBuilder(", ");
+                    foreach (string s in freqParameters.StrataVariableNames)
+                    {
+                        wb.Add(s);
+                    }
+                    htmlBuilder.AppendLine("<em>Strata variable(s):</em> <strong>" + wb.ToString() + "</strong>");
+                    htmlBuilder.AppendLine("<br />");
+                }
+
+                htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + freqParameters.IncludeMissing.ToString() + "</strong>");
                 htmlBuilder.AppendLine("<br />");
+                htmlBuilder.AppendLine("</small></p>");
             }
-
-            htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + freqParameters.IncludeMissing.ToString() + "</strong>");
-            htmlBuilder.AppendLine("<br />");
-            htmlBuilder.AppendLine("</small></p>");
-
             if (!string.IsNullOrEmpty(CustomOutputDescription))
             {
                 htmlBuilder.AppendLine("<p class=\"gadgetsummary\">" + CustomOutputDescription + "</p>");
@@ -1715,7 +1716,12 @@ namespace EpiDashboard
                             if (rct != null && j > 0 && i > 0)
                             {
                                 double barWidth = rct.ActualWidth;
-                                htmlBuilder.AppendLine("<td class=\"value\"><div class=\"percentBar\" style=\"width: " + ((int)barWidth * 2).ToString() + "px;\"></td>");
+                                if (!ForWeb) {
+                                    htmlBuilder.AppendLine("<td class=\"value\"><div class=\"percentBar\" style=\"width: " + ((int)barWidth * 2).ToString() + "px;\"></td>");
+                                }
+                                else {
+                                    htmlBuilder.AppendLine("<td class=\"value\"><div class=\"percentBar\" style=\"width: " + ((int)barWidth).ToString() + "px;\"></td>");
+                                }
                             }
                             else
                             {

@@ -246,7 +246,7 @@ namespace EpiDashboard.Controls
             }
         }
 
-        public string ToHTML()
+        public string ToHTML(bool Forweb = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
 
@@ -278,113 +278,298 @@ namespace EpiDashboard.Controls
             string riskRatioEstimate = txtRiskRatioEstimate.Text;
             string midPExact = txtMidPExact.Text;
 
-            htmlBuilder.AppendLine("<h4 align=\"Left\"> Single Table Analysis </h4>");
+            if (!Forweb)
+            {
+                htmlBuilder.AppendLine("<h4 align=\"Left\"> Single Table Analysis </h4>");
+                htmlBuilder.AppendLine("<table align=\"left\" border=\"0\" class=\"TwoByTwoTable \" cellpadding=\"0\" cellspacing=\"0\">");
+                htmlBuilder.AppendLine(" <tr  >");
+                htmlBuilder.AppendLine("  <th></th>");
+                htmlBuilder.AppendLine("  <th align=\"center\">Point</th>");
+                htmlBuilder.AppendLine("  <th colspan=\"2\" align=\"center\">95% Confidence Interval</th>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr  >");
+                htmlBuilder.AppendLine("  <th></th>");
+                htmlBuilder.AppendLine("  <th align=\"center\">Estimate</th>");
+                htmlBuilder.AppendLine("  <th align=\"right\">Lower</th>");
+                htmlBuilder.AppendLine("  <th align=\"right\">Upper</th>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr  >");
+                htmlBuilder.AppendLine("  <td>PARAMETERS: Odds-based</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Odds Ratio (cross product)</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioEstimate + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioUpper + "<tt> (T)</tt></td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr> ");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Odds Ratio (MLE)</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEEstimate + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEMidPLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEMidPUpper + "<tt> (M)</tt></td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherUpper + "<tt> (F)</tt></td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">PARAMETERS: Risk-based</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Risk Ratio (RR)</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioEstimate + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioUpper + "<tt> (T)</tt></td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Risk Difference (RD%)</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceEstimate + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceUpper + "<tt> (T)</tt></td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr> ");
+                htmlBuilder.AppendLine("  <td class=\"stats\" colspan=\"4\"><p align=\"center\"><tt> (T=Taylor series; C=Cornfield; M=Mid-P; F=Fisher Exact)</tt></p>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr />");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <th>STATISTICAL TESTS</th>");
+                htmlBuilder.AppendLine("  <th>Chi-square</th>");
+                htmlBuilder.AppendLine("  <th>1-tailed p</th>");
+                htmlBuilder.AppendLine("  <th>2-tailed p</th>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - uncorrected</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqUncVal + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqUncP + "</td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - Mantel-Haenszel</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqManVal + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqManP + "</td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - corrected (Yates)</td> ");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqCorVal + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqCorP + "</td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Mid-p exact</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + midPExact + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr >");
+                htmlBuilder.AppendLine("  <td class=\"stats\">Fisher exact 1-tailed</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherExact + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherExact2 + "</td>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine("</table>");
+            }
+            else
+            {
+                //htmlBuilder.AppendLine("<div class=\"col-md-6\">");
+                htmlBuilder.AppendLine("<table align=\"left\" border=\"0\" class=\"TwoByTwoTable \" cellpadding=\"0\" cellspacing=\"0\">");
 
-            htmlBuilder.AppendLine("<table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <th></th>");
-            htmlBuilder.AppendLine("  <th align=\"center\">Point</th>");
-            htmlBuilder.AppendLine("  <th colspan=\"2\" align=\"center\">95% Confidence Interval</th>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <th></th>");
-            htmlBuilder.AppendLine("  <th align=\"center\">Estimate</th>");
-            htmlBuilder.AppendLine("  <th align=\"right\">Lower</th>");
-            htmlBuilder.AppendLine("  <th align=\"right\">Upper</th>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td>PARAMETERS: Odds-based</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Odds Ratio (cross product)</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioEstimate + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioLower + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioUpper + "<tt> (T)</tt></td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Odds Ratio (MLE)</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEEstimate + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEMidPLower + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEMidPUpper + "<tt> (M)</tt></td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherLower + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherUpper + "<tt> (F)</tt></td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">PARAMETERS: Risk-based</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Risk Ratio (RR)</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioEstimate + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioLower + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioUpper + "<tt> (T)</tt></td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Risk Difference (RD%)</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceEstimate + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceLower + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceUpper + "<tt> (T)</tt></td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr> ");
-            htmlBuilder.AppendLine("  <td class=\"stats\" colspan=\"4\"><p align=\"center\"><tt> (T=Taylor series; C=Cornfield; M=Mid-P; F=Fisher Exact)</tt></p>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr />");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <th>STATISTICAL TESTS</th>");
-            htmlBuilder.AppendLine("  <th>Chi-square</th>");
-            htmlBuilder.AppendLine("  <th>1-tailed p</th>");
-            htmlBuilder.AppendLine("  <th>2-tailed p</th>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - uncorrected</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqUncVal + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqUncP + "</td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - Mantel-Haenszel</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqManVal + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqManP + "</td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - corrected (Yates)</td> ");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqCorVal + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqCorP + "</td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Mid-p exact</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + midPExact + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td class=\"stats\">Fisher exact 1-tailed</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherExact + "</td>");
-            htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherExact2 + "</td>");
-            htmlBuilder.AppendLine(" </tr>");
-            htmlBuilder.AppendLine("</table>");
-
+                ///////////////////////////
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <th style =\"border-bottom: 1px solid #ddd !important; font-size:16px ; border-top: 1px solid #ddd !important;\" colspan=\"7\"> Single Table Analysis</th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <th colspan=\"4\">Odds- and Risk-based parameters</th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                htmlBuilder.AppendLine("  <th colspan=\"3\">Statistical Tests </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                htmlBuilder.AppendLine(" </tr>");
+                ///////////////////////////
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <th></th>");
+                //htmlBuilder.AppendLine("  <th align=\"center\">Point</th>");
+                //htmlBuilder.AppendLine("  <th colspan=\"2\" align=\"center\">95% Confidence Interval</th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine("  <th> </th>");
+                //htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <th></th>");
+                htmlBuilder.AppendLine("  <th style =\"border-bottom: 1px solid #ddd !important;\" align=\"center\">Estimate</th>");
+                htmlBuilder.AppendLine("  <th style =\"border-bottom: 1px solid #ddd !important;\" align=\"right\">Lower</th>");
+                htmlBuilder.AppendLine("  <th style =\"border-bottom: 1px solid #ddd !important;\" align=\"right\">Upper</th>");
+                htmlBuilder.AppendLine("  <th></th>");
+                htmlBuilder.AppendLine("  <th style =\"border-bottom: 1px solid #ddd !important;\" align=\"right\">X²</th>");
+                htmlBuilder.AppendLine("  <th style =\"border-bottom: 1px solid #ddd !important;\" align=\"right\">2 Tailed P</th>");
+                htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <td>PARAMETERS: Odds-based</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; \">Odds Ratio </td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioEstimate + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioUpper + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; padding-left: 15px;\">Uncorrected</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\"> " + chiSqUncVal + "</td>");//
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqUncP + "</td>");//
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; \">MLE Odds Ratio(Mid-P)</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEEstimate + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEMidPLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + oddsRatioMLEMidPUpper + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; padding-left: 15px;\">Mantel-Haenszel</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqManVal + "</td>");//
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\"> " + chiSqManP + "</td>");//
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; \">Fisher-Exact</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherUpper + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; padding-left: 15px;\">Corrected</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\"> " + chiSqCorVal + "</td>");//
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\" >" + chiSqCorP + "</td>");//
+                htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <td class=\"stats\">PARAMETERS: Risk-based</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; \">Risk Ratio</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioEstimate + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskRatioUpper + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");//
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");//
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; \">Risk Difference</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceEstimate + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceLower + "</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + riskDifferenceUpper + "</td>");
+                htmlBuilder.AppendLine("  <th></th>");
+                htmlBuilder.AppendLine("  <th style =\"border-bottom: 1px solid #ddd !important;\" align=\"right\">1 Tailed p</th>");
+                htmlBuilder.AppendLine("  <th style =\"border-bottom: 1px solid #ddd !important;\" align=\"right\">2 Tailed P</th>");
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <th colspan=\"4\" style=\"text-align: left!important; \" class=\"stats\">Sparse data.Use exact confidence limits.</th>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; padding-left: 15px; \">Mid-P Exact</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\">" + midPExact + " </td>");//
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");//
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <td   class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\" style=\"text-align: left!important; padding-left: 15px; \">Fisher- Exact</td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"> " + fisherExact + " </td>");//
+                htmlBuilder.AppendLine("  <td class=\"stats\"> " + fisherExact2 + "</td>");//
+                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                htmlBuilder.AppendLine("  <td   class=\"stats\"></td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");
+                htmlBuilder.AppendLine("  <th colspan=\"3\" style=\"text-align: left!important; padding-left: 15px; \" class=\"stats\">An expected cell count is < 5. X² may not be valid</th>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");//
+                //htmlBuilder.AppendLine("  <td class=\"stats\"> </td>");//
+                htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr> ");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" colspan=\"4\"><p align=\"center\"><tt> (T=Taylor series; C=Cornfield; M=Mid-P; F=Fisher Exact)</tt></p>");
+                //htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr />");
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <th>STATISTICAL TESTS</th>");
+                //htmlBuilder.AppendLine("  <th>Chi-square</th>");
+                //htmlBuilder.AppendLine("  <th>1-tailed p</th>");
+                //htmlBuilder.AppendLine("  <th>2-tailed p</th>");
+                //htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - uncorrected</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqUncVal + "</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqUncP + "</td>");
+                //htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - Mantel-Haenszel</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqManVal + "</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqManP + "</td>");
+                //htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <td class=\"stats\">Chi-square - corrected (Yates)</td> ");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqCorVal + "</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + chiSqCorP + "</td>");
+                //htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <td class=\"stats\">Mid-p exact</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + midPExact + "</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine(" </tr>");
+                //htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr1  CenterText\">");
+                //htmlBuilder.AppendLine("  <td class=\"stats\">Fisher exact 1-tailed</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\"></td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherExact + "</td>");
+                //htmlBuilder.AppendLine("  <td class=\"stats\" align=\"right\">" + fisherExact2 + "</td>");
+                //htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine("</table>");
+                //htmlBuilder.AppendLine("</div>");
+            }
+            
+            
+          
+            
+         
+            
             htmlBuilder.AppendLine("<br clear=\"all\" /><br clear=\"all\" />");
 
             return htmlBuilder.ToString();

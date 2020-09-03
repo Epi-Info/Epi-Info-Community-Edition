@@ -712,7 +712,7 @@ namespace Epi
             row.WebServiceMaxBufferPoolSize = 524288;
             row.WebServiceMaxReceivedMessageSize = 999999999;
             row.WebServiceReaderMaxDepth = 32;
-            row.WebServiceReaderMaxStringContentLength = 2048000;
+            row.WebServiceReaderMaxStringContentLength = 999999999;
             row.WebServiceReaderMaxArrayLength = 16384;
             row.WebServiceReaderMaxBytesPerRead = 4096;
             row.WebServiceReaderMaxNameTableCharCount = 16384;
@@ -720,7 +720,7 @@ namespace Epi
             row.EWEServiceMaxBufferPoolSize = 524288;
             row.EWEServiceMaxReceivedMessageSize = 999999999;
             row.EWEServiceReaderMaxDepth = 32;
-            row.EWEServiceReaderMaxStringContentLength = 2048000;
+            row.EWEServiceReaderMaxStringContentLength = 999999999;
             row.EWEServiceReaderMaxArrayLength = 16384;
             row.EWEServiceReaderMaxBytesPerRead = 4096;
             row.EWEServiceReaderMaxNameTableCharCount = 16384;

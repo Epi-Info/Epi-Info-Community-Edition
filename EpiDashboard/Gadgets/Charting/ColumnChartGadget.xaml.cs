@@ -1394,7 +1394,7 @@ namespace EpiDashboard.Gadgets.Charting
             /// Converts the gadget's output to Html
             /// </summary>
             /// <returns></returns>
-            public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
+            public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false, bool ForWeb = false)
             {
                 ColumnChartParameters chtParameters = (ColumnChartParameters)Parameters;
                 if (chtParameters.ColumnNames.Count < 1) return string.Empty;	

@@ -276,6 +276,7 @@
                     <MenuItem x:Name="mnuSendOutputTo" Header="Send output to" IsEnabled="False">
                         <MenuItem x:Name="mnuSendOutputToExcel" Header="Microsoft Excel" IsEnabled="False" />
                         <MenuItem x:Name="mnuSendOutputToWord" Header="Microsoft Word" IsEnabled="False" />
+                        <MenuItem x:Name="mnuSendOutputToWeb" Header="Web" IsEnabled="False" />
                     </MenuItem>
                     <MenuItem x:Name="mnuExport" Header="Export data" IsEnabled="False" />
                     <Separator/>

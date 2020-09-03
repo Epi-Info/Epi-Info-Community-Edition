@@ -21,6 +21,8 @@ namespace Epi.SurveyManagerServiceV4 {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV4.OrganizationRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV4.SurveyAnswerRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV4.PreFilledAnswerRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV4.PublishReportRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV4.PublishReportResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV4.PublishRequest))]
     public partial class RequestBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -278,6 +280,84 @@ namespace Epi.SurveyManagerServiceV4 {
                 if ((object.ReferenceEquals(this.AnswerInfoField, value) != true)) {
                     this.AnswerInfoField = value;
                     this.RaisePropertyChanged("AnswerInfo");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PublishReportRequest", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PublishReportRequest : Epi.SurveyManagerServiceV4.RequestBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IncludHTMLField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerServiceV4.ReportInfoDTO ReportInfoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IncludHTML {
+            get {
+                return this.IncludHTMLField;
+            }
+            set {
+                if ((this.IncludHTMLField.Equals(value) != true)) {
+                    this.IncludHTMLField = value;
+                    this.RaisePropertyChanged("IncludHTML");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerServiceV4.ReportInfoDTO ReportInfo {
+            get {
+                return this.ReportInfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportInfoField, value) != true)) {
+                    this.ReportInfoField = value;
+                    this.RaisePropertyChanged("ReportInfo");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PublishReportResponse", Namespace="http://www.yourcompany.com/types/")]
+    [System.SerializableAttribute()]
+    public partial class PublishReportResponse : Epi.SurveyManagerServiceV4.RequestBase {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerServiceV4.ReportInfoDTO[] ReportsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerServiceV4.ReportInfoDTO[] Reports {
+            get {
+                return this.ReportsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportsField, value) != true)) {
+                    this.ReportsField = value;
+                    this.RaisePropertyChanged("Reports");
                 }
             }
         }
@@ -1810,6 +1890,352 @@ namespace Epi.SurveyManagerServiceV4 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReportInfoDTO", Namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO")]
+    [System.SerializableAttribute()]
+    public partial class ReportInfoDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreatedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DataSourceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EditedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Epi.SurveyManagerServiceV4.GadgetDTO[] GadgetsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RecordCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReportIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReportURLField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ReportVersionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurveyIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreatedDate {
+            get {
+                return this.CreatedDateField;
+            }
+            set {
+                if ((this.CreatedDateField.Equals(value) != true)) {
+                    this.CreatedDateField = value;
+                    this.RaisePropertyChanged("CreatedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DataSource {
+            get {
+                return this.DataSourceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataSourceField, value) != true)) {
+                    this.DataSourceField = value;
+                    this.RaisePropertyChanged("DataSource");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EditedDate {
+            get {
+                return this.EditedDateField;
+            }
+            set {
+                if ((this.EditedDateField.Equals(value) != true)) {
+                    this.EditedDateField = value;
+                    this.RaisePropertyChanged("EditedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Epi.SurveyManagerServiceV4.GadgetDTO[] Gadgets {
+            get {
+                return this.GadgetsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GadgetsField, value) != true)) {
+                    this.GadgetsField = value;
+                    this.RaisePropertyChanged("Gadgets");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RecordCount {
+            get {
+                return this.RecordCountField;
+            }
+            set {
+                if ((this.RecordCountField.Equals(value) != true)) {
+                    this.RecordCountField = value;
+                    this.RaisePropertyChanged("RecordCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReportId {
+            get {
+                return this.ReportIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportIdField, value) != true)) {
+                    this.ReportIdField = value;
+                    this.RaisePropertyChanged("ReportId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReportURL {
+            get {
+                return this.ReportURLField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportURLField, value) != true)) {
+                    this.ReportURLField = value;
+                    this.RaisePropertyChanged("ReportURL");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ReportVersion {
+            get {
+                return this.ReportVersionField;
+            }
+            set {
+                if ((this.ReportVersionField.Equals(value) != true)) {
+                    this.ReportVersionField = value;
+                    this.RaisePropertyChanged("ReportVersion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurveyId {
+            get {
+                return this.SurveyIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurveyIdField, value) != true)) {
+                    this.SurveyIdField = value;
+                    this.RaisePropertyChanged("SurveyId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GadgetDTO", Namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO")]
+    [System.SerializableAttribute()]
+    public partial class GadgetDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreatedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EditedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GadgetHtmlField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GadgetIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GadgetNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GadgetURLField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GadgetVersionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> GadgetsScriptField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReportIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreatedDate {
+            get {
+                return this.CreatedDateField;
+            }
+            set {
+                if ((this.CreatedDateField.Equals(value) != true)) {
+                    this.CreatedDateField = value;
+                    this.RaisePropertyChanged("CreatedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EditedDate {
+            get {
+                return this.EditedDateField;
+            }
+            set {
+                if ((this.EditedDateField.Equals(value) != true)) {
+                    this.EditedDateField = value;
+                    this.RaisePropertyChanged("EditedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GadgetHtml {
+            get {
+                return this.GadgetHtmlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GadgetHtmlField, value) != true)) {
+                    this.GadgetHtmlField = value;
+                    this.RaisePropertyChanged("GadgetHtml");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GadgetId {
+            get {
+                return this.GadgetIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GadgetIdField, value) != true)) {
+                    this.GadgetIdField = value;
+                    this.RaisePropertyChanged("GadgetId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GadgetNumber {
+            get {
+                return this.GadgetNumberField;
+            }
+            set {
+                if ((this.GadgetNumberField.Equals(value) != true)) {
+                    this.GadgetNumberField = value;
+                    this.RaisePropertyChanged("GadgetNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GadgetURL {
+            get {
+                return this.GadgetURLField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GadgetURLField, value) != true)) {
+                    this.GadgetURLField = value;
+                    this.RaisePropertyChanged("GadgetURL");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GadgetVersion {
+            get {
+                return this.GadgetVersionField;
+            }
+            set {
+                if ((this.GadgetVersionField.Equals(value) != true)) {
+                    this.GadgetVersionField = value;
+                    this.RaisePropertyChanged("GadgetVersion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> GadgetsScript {
+            get {
+                return this.GadgetsScriptField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GadgetsScriptField, value) != true)) {
+                    this.GadgetsScriptField = value;
+                    this.RaisePropertyChanged("GadgetsScript");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReportId {
+            get {
+                return this.ReportIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportIdField, value) != true)) {
+                    this.ReportIdField = value;
+                    this.RaisePropertyChanged("ReportId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://www.yourcompany.com/types/")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Epi.SurveyManagerServiceV4.SurveyInfoResponse))]
@@ -3189,6 +3615,10 @@ namespace Epi.SurveyManagerServiceV4 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV4/GetJsonResponseAll", ReplyAction="http://tempuri.org/IManagerServiceV4/GetJsonResponseAllResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV4.CustomFaultException), Action="http://tempuri.org/IManagerServiceV4/GetJsonResponseAllCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         string GetJsonResponseAll(string SurveyId, string OrganizationId, string PublisherKey);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV4/PublishReport", ReplyAction="http://tempuri.org/IManagerServiceV4/PublishReportResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV4.CustomFaultException), Action="http://tempuri.org/IManagerServiceV4/PublishReportCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV4.PublishReportResponse PublishReport(Epi.SurveyManagerServiceV4.PublishReportRequest Request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3324,6 +3754,10 @@ namespace Epi.SurveyManagerServiceV4 {
         
         public string GetJsonResponseAll(string SurveyId, string OrganizationId, string PublisherKey) {
             return base.Channel.GetJsonResponseAll(SurveyId, OrganizationId, PublisherKey);
+        }
+        
+        public Epi.SurveyManagerServiceV4.PublishReportResponse PublishReport(Epi.SurveyManagerServiceV4.PublishReportRequest Request) {
+            return base.Channel.PublishReport(Request);
         }
     }
 }

@@ -2698,7 +2698,7 @@ namespace EpiDashboard
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false, bool ForWeb = false)
         {
             // Check to see if a chart has been created.
             if (pnlMain.ActualHeight == 0 || pnlMain.ActualWidth == 0)

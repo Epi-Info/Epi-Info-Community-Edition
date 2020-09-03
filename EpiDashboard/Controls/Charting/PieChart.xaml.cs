@@ -29,9 +29,10 @@ namespace EpiDashboard.Controls.Charting
         /// The percent at which to show annotations outside of the slice it is associated with.
         /// </summary>
         public double AnnotationPercentCutoff { get; set; }
-
+        public List<XYColumnChartData> _dataList { get; set; }
         public PieChart(DashboardHelper dashboardHelper, PieChartParameters parameters, List<XYColumnChartData> dataList)
         {
+            _dataList = dataList;
             InitializeComponent();
             PieChartParameters = parameters;
             this.DashboardHelper = dashboardHelper;
@@ -338,34 +339,77 @@ namespace EpiDashboard.Controls.Charting
             }
         }
 
-        public override string ToHTML(string htmlFileName = "", int count = 0, bool includeImage = true, bool includeFullData = false)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool includeImage = true, bool includeFullData = false, bool ForWeb = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
-
-            string imageFileName = string.Empty;
-
-            if (htmlFileName.EndsWith(".html"))
+            ForWeb = true;
+            if (!ForWeb)
             {
-                imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
+                string imageFileName = string.Empty;
+
+                if (htmlFileName.EndsWith(".html"))
+                {
+                    imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
+                }
+                else if (htmlFileName.EndsWith(".htm"))
+                {
+                    imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
+                }
+
+                imageFileName = imageFileName + "_" + count.ToString() + ".png";
+
+                System.IO.FileInfo fi = new System.IO.FileInfo(imageFileName);
+
+                ToImageFile(imageFileName, false);
+
+                htmlBuilder.AppendLine("<h3>" + this.StrataTitle + "</h3>");
+                if (includeImage) htmlBuilder.AppendLine("<img src=\"" + fi.Name + "\" />");
+
+                htmlBuilder.AppendLine("<p>&nbsp;</p>");
+                htmlBuilder.AppendLine("<p>&nbsp;</p>");
+                htmlBuilder.AppendLine("<p>&nbsp;</p>");
             }
-            else if (htmlFileName.EndsWith(".htm"))
-            {
-                imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
+            else {
+                double top =  Canvas.GetTop(this);
+                double left = Canvas.GetBottom(this);
+                htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">" + this.PieChartParameters.GadgetTitle + "</h2>");
+                htmlBuilder.AppendLine("<div id=\"piechart"+count+"\"></div>");
+                
+                htmlBuilder.AppendLine("<script>");
+
+
+                  htmlBuilder.AppendLine(" var piechart"+count+" = c3.generate({bindto: '#piechart"+count+"',data: { columns: ["); 
+                var temp =_dataList;
+                var color = PieChartParameters.PaletteColors;
+                foreach (var item in _dataList)
+                {
+                    htmlBuilder.AppendLine("['"+ item.S + "', " + item.Y + "], ");
+
+                }
+                //string colorString = "";
+                if (this.PieChartParameters.PieChartKind.ToString() == "Donut2D") {
+                    htmlBuilder.AppendLine(" ],  type : 'donut'  },");
+                }
+                else {
+                    htmlBuilder.AppendLine(" ],  type : 'pie'  },");
+
+                }
+
+                htmlBuilder.AppendLine(" color: { pattern: [");
+                for (int i =0; i< _dataList.Count();i++)
+                {
+                    htmlBuilder.AppendLine(" '"+ color[i].Remove(1,2)+ "' ,");
+                }
+
+
+                htmlBuilder.AppendLine(" ]},");
+
+               htmlBuilder.AppendLine(" legend: { show: true , position: top }, size: { width: " + this.ActualWidth + ", height: "+ this.ActualHeight + " },label: { format: function(value, ratio, id){return d3.format('$')(value);}}});");
+
+             
+                htmlBuilder.AppendLine(" </script> ");
+
             }
-
-            imageFileName = imageFileName + "_" + count.ToString() + ".png";
-
-            System.IO.FileInfo fi = new System.IO.FileInfo(imageFileName);
-
-            ToImageFile(imageFileName, false);
-
-            htmlBuilder.AppendLine("<h3>" + this.StrataTitle + "</h3>");
-            if (includeImage) htmlBuilder.AppendLine("<img src=\"" + fi.Name + "\" />");
-
-            htmlBuilder.AppendLine("<p>&nbsp;</p>");
-            htmlBuilder.AppendLine("<p>&nbsp;</p>");
-            htmlBuilder.AppendLine("<p>&nbsp;</p>");
-
             return htmlBuilder.ToString();
         }
 

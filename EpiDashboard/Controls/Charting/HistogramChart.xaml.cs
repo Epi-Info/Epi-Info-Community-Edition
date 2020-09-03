@@ -41,7 +41,7 @@ namespace EpiDashboard.Controls.Charting
             xyChart.Legend.BorderBrush = Brushes.Gray;
         }
 
-        private class XYHistogramChartData
+        public class XYHistogramChartData
         {
             public string X { get; set; }
             public double Y { get; set; }

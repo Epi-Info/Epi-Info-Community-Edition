@@ -22,7 +22,7 @@ using EpiDashboard;
 using EpiDashboard.NutStat;
 using EpiDashboard.Controls;
 using EpiDashboard.Gadgets.Reporting;
-
+using System.Text.RegularExpressions;
 
 namespace EpiDashboard 
 {
@@ -179,6 +179,10 @@ namespace EpiDashboard
             mnuSave.Click += new RoutedEventHandler(mnuSave_Click);
             mnuSaveAs.Click += new RoutedEventHandler(mnuSaveAs_Click);
 
+
+            mnuSendOutputToWeb.Click += new RoutedEventHandler(mnuSendOutputToWeb_Click);
+            mnuSendOutputToWeb.Visibility = Visibility.Visible;
+            mnuSendOutputTo.Visibility = Visibility.Visible;
             foreach (Epi.DataSets.Config.GadgetRow row in Configuration.GetNewInstance().Gadget.Rows)
             {
                 string type = row.Type;
@@ -541,7 +545,99 @@ namespace EpiDashboard
         {
             OpenCanvas();
         }
+        private void mnuSendOutputToWeb_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.DashboardHelper == null)
+            {
+                return;
+            }
 
+            try
+            {
+                string fileName = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString("N") + ".html";//GetHTMLLineListing();
+
+                System.IO.FileStream stream = System.IO.File.OpenWrite(fileName);
+                System.IO.StreamWriter sw = new System.IO.StreamWriter(stream);
+                var Html = this.ToHTML(fileName);
+              //  sw.WriteLine(Html);
+              //  sw.Close();
+               /// sw.Dispose();
+
+                //DashboardProperties properties = popup.Content as DashboardProperties;
+
+                //var Table = DashboardHelper.TableName;
+
+                //Epi.SurveyManagerServiceV4.ManagerServiceV4Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+                //Epi.SurveyManagerServiceV4.PublishReportRequest  Request = new Epi.SurveyManagerServiceV4.PublishReportRequest();//(Epi.SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
+                //Request.ReportInfo = new Epi.SurveyManagerServiceV4.ReportDTO();
+                //Request.ReportInfo.ReportVersion = 1;
+                ////5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing 
+                //Guid SurveyId = Guid.Empty;
+                //Guid.TryParse(Table.Split('_')[0], out SurveyId);
+                //if (SurveyId == Guid.Empty) {
+
+                //    SurveyId = Guid.Parse("5f73decc-791f-4216-b10d-7f8e10b1207a");
+                //}
+                //Request.ReportInfo.SurveyId = SurveyId.ToString();
+                //Request.ReportInfo.ReportId = Guid.Empty.ToString();
+                //Request.ReportInfo.ReportHtml = Html.ToString();
+                //Request.ReportInfo.CreatedDate = DateTime.Now;
+                //Request.ReportInfo.EditedDate = DateTime.Now;
+
+
+                
+              
+                //var Result = client.PublishReport(Request);
+
+
+            }
+            finally
+            {
+            }
+        }
+        private void PublishReport(string Html,string GadgetId , int GadgetNumber = 0) {
+
+            var Table = DashboardHelper.TableName;
+
+            Epi.SurveyManagerServiceV4.ManagerServiceV4Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+            Epi.SurveyManagerServiceV4.PublishReportRequest Request = new Epi.SurveyManagerServiceV4.PublishReportRequest();//(Epi.SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
+            Request.ReportInfo = new Epi.SurveyManagerServiceV4.ReportInfoDTO();
+
+            Epi.SurveyManagerServiceV4.GadgetDTO GadgetDTO = new Epi.SurveyManagerServiceV4.GadgetDTO();
+
+            List<Epi.SurveyManagerServiceV4.GadgetDTO> GadgetDTOList = new List<Epi.SurveyManagerServiceV4.GadgetDTO>();
+
+            Request.ReportInfo.ReportVersion = 1;
+            //5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing 
+            Guid SurveyId = Guid.Empty;
+            Guid.TryParse(Table.Split('_')[0], out SurveyId);
+            if (SurveyId == Guid.Empty)
+            {
+
+                SurveyId = Guid.Parse("5f73decc-791f-4216-b10d-7f8e10b1207a");
+            }
+            Request.ReportInfo.SurveyId = SurveyId.ToString();
+            Request.ReportInfo.ReportId = SurveyId.ToString();// Guid.Empty.ToString(); // will need to change
+          
+            Request.ReportInfo.CreatedDate = DateTime.Now;
+            Request.ReportInfo.EditedDate = DateTime.Now;
+            Request.ReportInfo.DataSource = "DataSource";
+            Request.ReportInfo.RecordCount = 100;
+            GadgetDTO.GadgetHtml = Html.ToString();
+            GadgetDTO.GadgetId = GadgetId;
+            GadgetDTO.GadgetNumber = GadgetNumber;
+            GadgetDTO.CreatedDate = DateTime.Now;
+            GadgetDTO.EditedDate = DateTime.Now;
+            GadgetDTO.ReportId = SurveyId.ToString(); // will need to change
+            GadgetDTOList.Add(GadgetDTO);
+            Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
+
+            var Result = client.PublishReport(Request);
+
+
+
+
+        }
         private void mnuSendOutputToWord_Click(object sender, RoutedEventArgs e)
         {
             if (this.DashboardHelper == null)
@@ -1703,6 +1799,7 @@ namespace EpiDashboard
             mnuSendOutputTo.IsEnabled = enabled;
             mnuSendOutputToExcel.IsEnabled = enabled;
             mnuSendOutputToWord.IsEnabled = enabled;
+            mnuSendOutputToWeb.IsEnabled = enabled;
         }
 
         void DashboardControl_Loaded(object sender, RoutedEventArgs e)
@@ -3784,7 +3881,7 @@ namespace EpiDashboard
             htmlBuilder.AppendLine("	padding-bottom: 3px;");
             htmlBuilder.AppendLine("	border-right: 1px solid rgb(23, 54, 93);");
             htmlBuilder.AppendLine("	border-bottom: 1px solid rgb(23, 54, 93);");
-            htmlBuilder.AppendLine("	min-width: 50px;");
+           // htmlBuilder.AppendLine("	min-width: 50px;");
             htmlBuilder.AppendLine("}");
             htmlBuilder.AppendLine("    ");
             htmlBuilder.AppendLine("h1");
@@ -3879,7 +3976,7 @@ namespace EpiDashboard
         public string ToHTML(string htmlFileName = "")
         {
             StringBuilder htmlBuilder = new StringBuilder();
-
+            bool ForWeb = true;
             htmlBuilder.AppendLine("<!DOCTYPE html>");
             htmlBuilder.AppendLine("<html>");
             htmlBuilder.AppendLine(" <head>");
@@ -3887,7 +3984,10 @@ namespace EpiDashboard
             htmlBuilder.AppendLine("  <meta name=\"keywords\" content=\"Epi, Info, Dashboard\" />");
             htmlBuilder.AppendLine("  <meta name=\"author\" content=\"Epi Info 7\" />");
             htmlBuilder.AppendLine("  <meta http-equiv=\"content-type\" content=\"text/html;charset=UTF-8\" />");
-            GenerateStandardHTMLStyle(htmlBuilder);
+            htmlBuilder.AppendLine(" <script src = \"c3.min.js\" type = \"text/javascript\" ></script>");
+            htmlBuilder.AppendLine(" <script src = \"d3-5.8.2.min.js\" type = \"text/javascript\" ></script>");
+            htmlBuilder.AppendLine(" <link href =  \"c3.min.css\"  rel = \"Stylesheet\" type = \"text/css\"/>");
+                                    GenerateStandardHTMLStyle(htmlBuilder);
             htmlBuilder.AppendLine("    ");
 
             htmlBuilder.AppendLine("  <title>" + SharedStrings.DASHBOARD_HTML_TITLE + "</title>");
@@ -3920,7 +4020,7 @@ namespace EpiDashboard
             {
                 htmlBuilder.AppendLine(this.DashboardHelper.ToHTML());
             }
-
+      
             //gadgets
             if (SortGadgetsTopToBottom)
             {
@@ -3931,6 +4031,7 @@ namespace EpiDashboard
                     if (control is IGadget && ((IGadget)control).IsProcessing == false)
                     {
                         double top = Canvas.GetTop(control);
+                       // double left = Canvas.GetLeft(control);
                         if (!sortedGadgets.ContainsKey(top))
                         {
                             sortedGadgets.Add(top, control as IGadget);
@@ -3958,13 +4059,55 @@ namespace EpiDashboard
                 int count = 0;
                 foreach (KeyValuePair<double, IGadget> kvp in sortedGadgets)
                 {
+                   
+
                     IGadget gadget = kvp.Value;
+                    double left = Canvas.GetLeft((UIElement)gadget);
+                    double top = Canvas.GetTop((UIElement)gadget) + 150;
+                    double Right = Canvas.GetRight((System.Windows.FrameworkElement)gadget);
+                    double Bottom = Canvas.GetBottom((System.Windows.FrameworkElement)gadget);
+                    double Width = ((System.Windows.FrameworkElement)kvp.Value).ActualWidth + 5;
+                    double Height = ((System.Windows.FrameworkElement)kvp.Value).ActualHeight;
+                    var GadgetId = ((EpiDashboard.GadgetBase)kvp.Value).UniqueIdentifier.ToString();
                     if (gadget.IsProcessing == false)
                     {
-                        htmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput));
-                        htmlBuilder.AppendLine("");
-                        htmlBuilder.AppendLine("<p>&nbsp;</p>");
-                        count++;
+                        if (!ForWeb) {
+                            htmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput,false));
+                            htmlBuilder.AppendLine("");
+                            htmlBuilder.AppendLine("<p>&nbsp;</p>");
+                            count++;
+                        }
+                        else {
+                            StringBuilder GadgethtmlBuilder = new StringBuilder();
+                            //< span class="border"></span>
+                            GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;  width:" + Width + "px;  height:auto; overflow-x: auto;  overflow-y: auto; \">"); // width:"+Width+"px; height:"+Height+"px;
+                            GadgethtmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput,true));
+                            GadgethtmlBuilder.AppendLine("</div");
+                            GadgethtmlBuilder.AppendLine("");
+                            GadgethtmlBuilder.AppendLine("<p>&nbsp;</p>");
+
+                            if (count == 0)
+                            {
+
+                                htmlBuilder.Append(GadgethtmlBuilder);
+                                PublishReport(htmlBuilder.ToString(), GadgetId, count);
+                            }
+                            else if (count == this.Gadgets.Count()-1)
+                            {
+
+                                GadgethtmlBuilder.Append(GetHtmlFooter());
+                                PublishReport(GadgethtmlBuilder.ToString(), GadgetId, count);
+                            }
+                            else
+                            {
+
+                                PublishReport(GadgethtmlBuilder.ToString(), GadgetId, count);
+
+                            }
+
+                            count++;
+
+                        }
                     }
                 }
             }
@@ -3973,16 +4116,58 @@ namespace EpiDashboard
                 int count = 0;
                 foreach (UserControl control in this.Gadgets)
                 {
+                    IGadget gadget = control as IGadget;
+                    double left = Canvas.GetLeft((UIElement)gadget);
+                    double top = Canvas.GetTop((UIElement)gadget) + 150;
+
+                    double Width = ((System.Windows.FrameworkElement)gadget).ActualWidth + 5;
+                    double Height = ((System.Windows.FrameworkElement)gadget).ActualHeight;
+                    double Right = Canvas.GetRight((System.Windows.FrameworkElement)gadget);
+                    double Bottom = Canvas.GetBottom((System.Windows.FrameworkElement)gadget);
+                    var GadgetId = ((EpiDashboard.GadgetBase)control).UniqueIdentifier.ToString();
                     if (control is IGadget && ((IGadget)control).IsProcessing == false)
                     {
-                        IGadget gadget = control as IGadget;
+                        
                         if (gadget != null)
                         {
-                            htmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput));
+                            if (!ForWeb)
+                            {
+                                htmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput));
                             htmlBuilder.AppendLine("");
                             htmlBuilder.AppendLine("<p>&nbsp;</p>");
                             count++;
-                        }
+                            }
+                            else
+                            {
+                                StringBuilder GadgethtmlBuilder = new StringBuilder();
+                                //< span class="border"></span>
+                                GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;   width:" + Width + "px; height:auto; overflow-x: auto;  overflow-y: auto;\">"); // width:" + Width + "px; height:" + Height + "px;
+                                GadgethtmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput, true));
+                                GadgethtmlBuilder.AppendLine("</div>");
+                                GadgethtmlBuilder.AppendLine("");
+                                GadgethtmlBuilder.AppendLine("<p>&nbsp;</p>");
+                                if (count == 0)
+                                {
+
+                                    htmlBuilder.Append(GadgethtmlBuilder);
+                                    PublishReport(htmlBuilder.ToString(), GadgetId, count);
+                                }
+                                else if (count == this.Gadgets.Count()-1)
+                                {
+
+                                    GadgethtmlBuilder.Append(GetHtmlFooter());
+                                    PublishReport(GadgethtmlBuilder.ToString(), GadgetId, count);
+                                }
+                                else {
+
+                                    PublishReport(GadgethtmlBuilder.ToString(), GadgetId, count);
+
+                                }
+                                
+                                count++;
+
+                            }
+                     }
                     }
                 }
             }
@@ -4011,7 +4196,29 @@ namespace EpiDashboard
 
             return htmlBuilder.ToString();
         }
+        private string GetHtmlFooter()
+        {
+            StringBuilder htmlBuilder = new StringBuilder();
 
+            htmlBuilder.AppendLine(" ");
+
+            if (!string.IsNullOrEmpty(CustomOutputConclusionText))
+            {
+                htmlBuilder.AppendLine("<hr>");
+                htmlBuilder.AppendLine(" ");
+                htmlBuilder.AppendLine("<p class=\"summary\">");
+                htmlBuilder.AppendLine(CustomOutputConclusionText);
+                htmlBuilder.AppendLine("</p>");
+                htmlBuilder.AppendLine(" ");
+                htmlBuilder.AppendLine("<hr>");
+                htmlBuilder.AppendLine(" ");
+            }
+
+            htmlBuilder.AppendLine("</body>");
+            htmlBuilder.AppendLine("</html>");
+            return htmlBuilder.ToString();
+
+        }
         private void buttonZoomOut_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             sliderZoom.Value = sliderZoom.Value - 5;

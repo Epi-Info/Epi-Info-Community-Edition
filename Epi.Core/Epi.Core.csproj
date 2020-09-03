@@ -1075,6 +1075,9 @@
     <None Include="Service References\SurveyManagerServiceV4\Epi.SurveyManagerServiceV4.PreFilledAnswerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.SurveyManagerServiceV4.PublishReportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SurveyManagerServiceV4\Epi.SurveyManagerServiceV4.PublishResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

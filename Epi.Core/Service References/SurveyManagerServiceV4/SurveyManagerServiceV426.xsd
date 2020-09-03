@@ -382,4 +382,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="PublishReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q42:PublishReportRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PublishReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://www.yourcompany.com/types/" minOccurs="0" name="PublishReportResult" nillable="true" type="q43:PublishReportResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

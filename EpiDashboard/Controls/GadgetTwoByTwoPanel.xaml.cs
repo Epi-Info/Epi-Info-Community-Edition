@@ -809,84 +809,185 @@ namespace EpiDashboard.Controls
             }
         }
 
-        public string ToHTML(string htmlFileName = "", int count = 0)
+        public string ToHTML(string htmlFileName = "", int count = 0, bool ForWeb = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
+            if (ForWeb) {
+                //htmlBuilder.AppendLine("<div  class=\"col-sm-1 rotate-text\"><p>"+ tblockExposure.Text + "</p></div>");
+               
 
-            htmlBuilder.AppendLine("<table align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-            //htmlBuilder.AppendLine("<caption>" + gridName + "</caption>");
+                if (this.Orientation != System.Windows.Controls.Orientation.Horizontal)
+                {
+                    htmlBuilder.AppendLine("<div class=\"row col-lg-6\">");
+                }
+                else
+                {
+                    htmlBuilder.AppendLine("<div class=\"row col-sm-12\">");
+                }
 
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <td></td>");
-            htmlBuilder.AppendLine("  <th colspan=\"2\">" + tblockOutcome.Text + "</th>");
-            htmlBuilder.AppendLine("  <td></td>");
-            htmlBuilder.AppendLine(" </tr>");
-
-            htmlBuilder.AppendLine(" <tr>");
-            htmlBuilder.AppendLine("  <th>" + tblockExposure.Text + "</th>");
-            htmlBuilder.AppendLine("  <th>" + tblockOutcomeYesLabel.Text + "</th>");
-            htmlBuilder.AppendLine("  <th>" + tblockOutcomeNoLabel.Text + "</th>");
-            htmlBuilder.AppendLine("  <th>Total</th>");
-            htmlBuilder.AppendLine(" </tr>");
-
-            if (ShowRowColumnPercents == false)
-            {
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>" + tblockExposureYesLabel.Text + "</th>");
-                htmlBuilder.AppendLine("  <td>" + tblockYYValue.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockYNValue.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockYTRowCount.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine(" </tr>");
-
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>" + tblockExposureNoLabel.Text + "</th>");
-                htmlBuilder.AppendLine("  <td>" + tblockNYValue.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockNNValue.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockNTRowCount.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine(" </tr>");
-
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Total</th>");
-                htmlBuilder.AppendLine("  <td>" + tblockYTColCount.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockNTColCount.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockTotalCount.Text + "<br/><br/></td>");
-                htmlBuilder.AppendLine(" </tr>");
+                htmlBuilder.AppendLine("<div style=\"background-color: white; \" class=\"col-lg-9\">");
             }
-            else
-            {
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>" + tblockExposureYesLabel.Text + "<br/><small>Row %<br/>Col %</small></th>");
-                htmlBuilder.AppendLine("  <td>" + tblockYYValue.Text + "<br/><small>" + tblockYYRowP.Text + "<br/>" + tblockYYColP.Text + "</small></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockYNValue.Text + "<br/><small>" + tblockYNRowP.Text + "<br/>" + tblockYNColP.Text + "</small></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockYTRowCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + tblockYTColP.Text + "</small></td>");
+         
+           
+            if (ForWeb) {
+                htmlBuilder.AppendLine("<table class=\"TwoByTwoTable \" align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+                //htmlBuilder.AppendLine("<caption>" + gridName + "</caption>");
+
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr CenterText \">");
+                htmlBuilder.AppendLine("  <td class=\"rotate-text CenterText \" rowsan = \"5\">" + tblockExposure.Text + "</td>");
+                htmlBuilder.AppendLine("  <td></td>");
+                htmlBuilder.AppendLine("  <th style=\"font-size:12px !important; font-weight:bold ;  \" colspan=\"2\">" + tblockOutcome.Text + "</th>");
+                htmlBuilder.AppendLine("  <td></td>");
                 htmlBuilder.AppendLine(" </tr>");
 
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>" + tblockExposureNoLabel.Text + "<br/><small>Row %<br/>Col %</small></th>");
-                htmlBuilder.AppendLine("  <td>" + tblockNYValue.Text + "<br/><small>" + tblockNYRowP.Text + "<br/>" + tblockNYColP.Text + "</small></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockNNValue.Text + "<br/><small>" + tblockNNRowP.Text + "<br/>" + tblockNNColP.Text + "</small></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockNTRowCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + tblockNTColP.Text + "</small></td>");
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr CenterText \">");
+                //htmlBuilder.AppendLine("  <th >" + tblockExposure.Text + "</th>");
+                htmlBuilder.AppendLine("  <td></td>");
+                htmlBuilder.AppendLine("  <th ></th>");
+                htmlBuilder.AppendLine("  <th style=\" border-right: 1px solid lightgray !important; font-size:12px !important; font-weight:bold ; color:gray !important;\">" + tblockOutcomeYesLabel.Text + "</th>");
+                htmlBuilder.AppendLine("  <th style=\"font-size:12px !important; font-weight:bold ; color:gray !important;\">" + tblockOutcomeNoLabel.Text + "</th>");
+                htmlBuilder.AppendLine("  <th></th>");
+                //htmlBuilder.AppendLine("  <th>Total</th>");
                 htmlBuilder.AppendLine(" </tr>");
+                if (ShowRowColumnPercents == false)
+                {
+                    
+                    htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr CenterText\">");
+                    htmlBuilder.AppendLine("  <td></td>");
+                    htmlBuilder.AppendLine("  <th  style=\" border-bottom: 1px solid lightgray !important;font-size:12px !important; font-weight:bold !important;color:gray !important;\">" + tblockExposureYesLabel.Text + "</th>");
+                    htmlBuilder.AppendLine("  <td   class=\" CenterText\" style=\" font-size:bold; width: 150px; height:100px; border-radius: 2em 0 0 0; !important; border-right: 1px solid lightgray !important; border-bottom: 1px solid lightgray !important; font-size:20px !important; background-color: aliceblue !important;\">" + tblockYYValue.Text + "</td>");
+                    htmlBuilder.AppendLine("  <td  class=\" CenterText\" style=\"  font-size:bold; width: 150px; height:100px; border-radius:0 2em  0 0; !important; border-bottom: 1px solid lightgray !important; font-size:20px !important; background-color: aliceblue !important;\" >" + tblockYNValue.Text + "</td>");
+                    htmlBuilder.AppendLine("  <td  class=\" CenterText\" style=\" border-bottom: 1px solid lightgray !important; color:gray !important;\" >" + tblockYTRowCount.Text + "</td>");
+                    htmlBuilder.AppendLine(" </tr>");
 
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Total<br/><small>Row %<br/>Col %</small></th>");
-                htmlBuilder.AppendLine("  <td>" + tblockYTColCount.Text + "<br/><small>" + tblockYTRowP.Text + "<br/>" + 1.ToString("P") + "</small></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockNTColCount.Text + "<br/><small>" + tblockNTRowP.Text + "<br/>" + 1.ToString("P") + "</small></td>");
-                htmlBuilder.AppendLine("  <td>" + tblockTotalCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + 1.ToString("P") + "</small></td>");
-                htmlBuilder.AppendLine(" </tr>");
+                    htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr  CenterText\">");
+                    htmlBuilder.AppendLine("  <td></td>");
+                    htmlBuilder.AppendLine("  <th style=\"font-size:12px !important; font-weight:bold ; color:gray !important;\">" + tblockExposureNoLabel.Text + "</th>");
+                    htmlBuilder.AppendLine("  <td class=\" CenterText\"  style=\"  font-size:bold; border-radius:0 0 0 2em; !important;  height:100px; width: 150px;border-right: 1px solid lightgray !important;font-size:20px !important; background-color: aliceblue !important;\">" + tblockNYValue.Text + "</td>");
+                    htmlBuilder.AppendLine("  <td  class=\" CenterText\"  style =\" font-size:bold; border-radius: 0 0 2em 0; !important; height:100px;  width: 150px; font-size:20px !important; background-color: aliceblue !important; \">" + tblockNNValue.Text + "</td>");
+                    htmlBuilder.AppendLine("  <td class=\" CenterText\" style=\"color:gray !important;\">" + tblockNTRowCount.Text + "</td>");
+                    htmlBuilder.AppendLine(" </tr>");
+
+                    htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr CenterText \">");
+                    htmlBuilder.AppendLine("  <td></td>");
+                    htmlBuilder.AppendLine("  <th></th>");
+                    htmlBuilder.AppendLine("  <td class=\" CenterText\" style=\"color:gray !important; border-right: 1px solid lightgray !important;\">" + tblockYTColCount.Text + "</td>");
+                    htmlBuilder.AppendLine("  <td class=\" CenterText\" style=\"color:gray !important;\">" + tblockNTColCount.Text + "</td>");
+                    htmlBuilder.AppendLine("  <td class=\" CenterText\" style=\"color:gray !important;\">" + tblockTotalCount.Text + "</td>");
+                    htmlBuilder.AppendLine(" </tr>");
+                }
+                else
+                {
+                    htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr CenterText\">");
+                    htmlBuilder.AppendLine("  <td></td>");
+                    htmlBuilder.AppendLine("  <th  style=\" border-bottom: 1px solid lightgray !important;font-size:12px !important; font-weight:bold !important;color:gray !important;\">" + tblockExposureYesLabel.Text + "</th>");
+                    htmlBuilder.AppendLine("  <td   class=\" CenterText\" style=\" font-size:bold; width: 150px;  border-radius: 2em 0 0 0; !important; border-right: 1px solid lightgray !important; border-bottom: 1px solid lightgray !important; font-size:20px !important; background-color: aliceblue !important;\">" + tblockYYValue.Text + "<br/><small style=\"font-size:11px\">" + tblockYYRowP.Text + "<br/>" + tblockYYColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine("  <td  class=\" CenterText\" style=\"  font-size:bold; width: 150px; border-radius:0 2em  0 0; !important; border-bottom: 1px solid lightgray !important; font-size:20px !important; background-color: aliceblue !important;\" >" + tblockYNValue.Text + "<br/><small style=\"font-size:11px\">" + tblockYNRowP.Text + "<br/>" + tblockYNColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine("  <td  style=\" border-bottom: 1px solid lightgray !important; color:gray !important;\" >" + tblockYTRowCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + tblockYTColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+
+                    htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr  CenterText\">");
+                    htmlBuilder.AppendLine("  <td></td>");
+                    htmlBuilder.AppendLine("  <th style=\"font-size:12px !important; font-weight:bold ; color:gray !important;\">" + tblockExposureNoLabel.Text + "</th>");
+                    htmlBuilder.AppendLine("  <td class=\" CenterText\"  style=\"  font-size:bold; border-radius:0 0 0 2em; !important; width: 150px;border-right: 1px solid lightgray !important;font-size:20px !important; background-color: aliceblue !important;\">" + tblockNYValue.Text + "<br/><small style=\"font-size:11px\">" + tblockNYRowP.Text + "<br/>" + tblockNYColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine("  <td  class=\" CenterText\"  style =\" font-size:bold; border-radius: 0 0 2em 0; !important; width: 150px; font-size:20px !important; background-color: aliceblue !important; \">" + tblockNNValue.Text + "<br/><small style=\"font-size:11px\">" + tblockNNRowP.Text + "<br/>" + tblockNNColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine("  <td style=\"color:gray !important;\">" + tblockNTRowCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + tblockNTColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+
+                    htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr CenterText \">");
+                    htmlBuilder.AppendLine("  <td></td>");
+                    htmlBuilder.AppendLine("  <th></th>");
+                    htmlBuilder.AppendLine("  <td class=\" CenterText\" style=\"color:gray !important; border-right: 1px solid lightgray !important;\">" + tblockYTColCount.Text + "<br/><small>" + tblockYTRowP.Text + "<br/>" + 1.ToString("P") + "</small></td>");
+                    htmlBuilder.AppendLine("  <td class=\" CenterText\" style=\"color:gray !important;\">" + tblockNTColCount.Text + "<br/><small>" + tblockNTRowP.Text + "<br/>" + 1.ToString("P") + "</small></td>");
+                    htmlBuilder.AppendLine("  <td style=\"color:gray !important;\">" + tblockTotalCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + 1.ToString("P") + "</small></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+                }
             }
+            else {
+                htmlBuilder.AppendLine("<table class=\"TwoByTwoTable \" align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+                //htmlBuilder.AppendLine("<caption>" + gridName + "</caption>");
 
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr CenterText \">");
+                htmlBuilder.AppendLine("  <td></td>");
+                htmlBuilder.AppendLine("  <th colspan=\"2\">" + tblockOutcome.Text + "</th>");
+                htmlBuilder.AppendLine("  <td></td>");
+                htmlBuilder.AppendLine(" </tr>");
+
+                htmlBuilder.AppendLine(" <tr class=\"TwoByTwoTr CenterText \">");
+                htmlBuilder.AppendLine("  <th>" + tblockExposure.Text + "</th>");
+                htmlBuilder.AppendLine("  <th>" + tblockOutcomeYesLabel.Text + "</th>");
+                htmlBuilder.AppendLine("  <th>" + tblockOutcomeNoLabel.Text + "</th>");
+                htmlBuilder.AppendLine("  <th></th>");
+                //htmlBuilder.AppendLine("  <th>Total</th>");
+                htmlBuilder.AppendLine(" </tr>");
+                if (ShowRowColumnPercents == false)
+                {
+                    htmlBuilder.AppendLine(" <tr>");
+                    htmlBuilder.AppendLine("  <th>" + tblockExposureYesLabel.Text + "</th>");
+                    htmlBuilder.AppendLine("  <td>" + tblockYYValue.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockYNValue.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockYTRowCount.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+
+                    htmlBuilder.AppendLine(" <tr>");
+                    htmlBuilder.AppendLine("  <th>" + tblockExposureNoLabel.Text + "</th>");
+                    htmlBuilder.AppendLine("  <td>" + tblockNYValue.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockNNValue.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockNTRowCount.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+
+                    htmlBuilder.AppendLine(" <tr>");
+                    htmlBuilder.AppendLine("  <th>Total</th>");
+                    htmlBuilder.AppendLine("  <td>" + tblockYTColCount.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockNTColCount.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockTotalCount.Text + "<br/><br/></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+                }
+                else
+                {
+                    htmlBuilder.AppendLine(" <tr>");
+                    htmlBuilder.AppendLine("  <th>" + tblockExposureYesLabel.Text + "<br/><small>Row %<br/>Col %</small></th>");
+                    htmlBuilder.AppendLine("  <td>" + tblockYYValue.Text + "<br/><small>" + tblockYYRowP.Text + "<br/>" + tblockYYColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockYNValue.Text + "<br/><small>" + tblockYNRowP.Text + "<br/>" + tblockYNColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockYTRowCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + tblockYTColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+
+                    htmlBuilder.AppendLine(" <tr>");
+                    htmlBuilder.AppendLine("  <th>" + tblockExposureNoLabel.Text + "<br/><small>Row %<br/>Col %</small></th>");
+                    htmlBuilder.AppendLine("  <td>" + tblockNYValue.Text + "<br/><small>" + tblockNYRowP.Text + "<br/>" + tblockNYColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockNNValue.Text + "<br/><small>" + tblockNNRowP.Text + "<br/>" + tblockNNColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockNTRowCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + tblockNTColP.Text + "</small></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+
+                    htmlBuilder.AppendLine(" <tr>");
+                    htmlBuilder.AppendLine("  <th>Total<br/><small>Row %<br/>Col %</small></th>");
+                    htmlBuilder.AppendLine("  <td>" + tblockYTColCount.Text + "<br/><small>" + tblockYTRowP.Text + "<br/>" + 1.ToString("P") + "</small></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockNTColCount.Text + "<br/><small>" + tblockNTRowP.Text + "<br/>" + 1.ToString("P") + "</small></td>");
+                    htmlBuilder.AppendLine("  <td>" + tblockTotalCount.Text + "<br/><small>" + 1.ToString("P") + "<br/>" + 1.ToString("P") + "</small></td>");
+                    htmlBuilder.AppendLine(" </tr>");
+                }
+
+
+            }
             htmlBuilder.AppendLine("</table>");
+            if (ForWeb)
+            {
+                htmlBuilder.AppendLine("</div>");
 
+            }
             double Total = (double)(YesYesValue.Value + YesNoValue.Value + NoYesValue.Value + NoNoValue.Value);
 
             if (Total > 0)
             {
-                int redValue = (int)(((double)YesYesValue.Value / Total * 200));
-                int orangeValue = (int)(((double)YesNoValue.Value / Total * 200));
-                int yellowValue = (int)(((double)NoYesValue.Value / Total * 200));
-                int greenValue = (int)(((double)NoNoValue.Value / Total * 200));
-
+               
+                int redValue = (int)(((double)YesYesValue.Value / Total * 100));
+                int orangeValue = (int)(((double)YesNoValue.Value / Total * 100));
+                int yellowValue = (int)(((double)NoYesValue.Value / Total * 100));
+                int greenValue = (int)(((double)NoNoValue.Value / Total * 100));
+                if (ForWeb)
+                {
+                        htmlBuilder.AppendLine("<div class=\"col-lg-3\"  style=\"padding-right: 5px; padding-left: 5px; \" >");
+                }
                 htmlBuilder.AppendLine("<table class=\"twoByTwoColoredSquares\" align=\"left\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
                 htmlBuilder.AppendLine(" <tr>");
                 htmlBuilder.AppendLine("  <td class=\"twobyTwoColoredSquareCell\" style=\"vertical-align: bottom; text-align: right;\">");
@@ -905,13 +1006,39 @@ namespace EpiDashboard.Controls
                 htmlBuilder.AppendLine("  </td>");
                 htmlBuilder.AppendLine(" </tr>");
                 htmlBuilder.AppendLine("</table>");
+                if (ForWeb)
+                {
+                    htmlBuilder.AppendLine("</div>");
+                    htmlBuilder.AppendLine("</div>");
+                }
             }
+            if (!ForWeb)
+            {
+                htmlBuilder.AppendLine("<br style=\"clear: all\">");
+                htmlBuilder.AppendLine("<br clear=\"all\" />");
+                htmlBuilder.AppendLine(this.panelSingleTableResults.ToHTML(false));
+            }
+            else
+            {
+                //htmlBuilder.AppendLine("<div class=\"row col-lg-7\">");
+                //htmlBuilder.AppendLine("<hr>");
+                //htmlBuilder.AppendLine("<h4 align=\"Left\"> Single Table Analysis </h4>");
+                //htmlBuilder.AppendLine("<hr>");
+                //htmlBuilder.AppendLine("</div>");
 
-            htmlBuilder.AppendLine("<br style=\"clear: all\">");
-            htmlBuilder.AppendLine("<br clear=\"all\" />");
 
-            htmlBuilder.AppendLine(this.panelSingleTableResults.ToHTML());
+                if (this.Orientation != System.Windows.Controls.Orientation.Horizontal)
+                {
+                    htmlBuilder.AppendLine("<div class=\"row col-lg-6\">");
+                }
+                else
+                {
+                    htmlBuilder.AppendLine("<div class=\"row col-sm-12\">");
+                }
 
+                htmlBuilder.AppendLine(this.panelSingleTableResults.ToHTML(ForWeb));
+                htmlBuilder.AppendLine("</div>");
+            }
             return htmlBuilder.ToString();
         }
 

@@ -23,6 +23,7 @@ using Epi.Data;
 using Epi.Fields;
 using EpiDashboard.Rules;
 using EpiDashboard.Controls;
+using System.Net;
 
 namespace EpiDashboard
 {
@@ -3898,8 +3899,9 @@ namespace EpiDashboard
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false, bool ForWeb = false)
         {
+             
             if (IsCollapsed) return string.Empty;
             CrosstabParameters crosstabParameters = (CrosstabParameters)Parameters;
             if (crosstabParameters.ColumnNames.Count < 1) return string.Empty;
@@ -3909,13 +3911,19 @@ namespace EpiDashboard
 
             using (HtmlTextWriter writer = new HtmlTextWriter(stringWriter))
             {
+
                 //StringBuilder htmlBuilder = new StringBuilder();
 
                 //CustomOutputHeading = headerPanel.Text;
                 //CustomOutputDescription = descriptionPanel.Text;
                 CustomOutputHeading = headerPanel.Text;
                 CustomOutputDescription = descriptionPanel.Text;
-
+                if (ForWeb) {
+                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "row col-lg-12");
+                    writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                    //writer.AddAttribute(HtmlTextWriterAttribute.Class, "col-md-4");
+                    //writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                }
                 if (CustomOutputHeading == null || (string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)")))
                 {
                     //htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Crosstabulation</h2>");
@@ -3932,86 +3940,100 @@ namespace EpiDashboard
                     writer.Write(CustomOutputHeading);
                     writer.RenderEndTag(); // End #1
                 }
-
-                //htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
-                writer.AddAttribute(HtmlTextWriterAttribute.Class, "gadgetOptions");
-                writer.RenderBeginTag(HtmlTextWriterTag.P);  //Begin (B) #1
-                writer.RenderBeginTag(HtmlTextWriterTag.Small);  //B 2
-
-                //htmlBuilder.AppendLine("<em>Main variable:</em> <strong>" + cbxExposureField.Text + "</strong>");
-                writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
-                writer.Write("Main variable:");
-                writer.RenderEndTag();  //E 3
-                writer.RenderBeginTag(HtmlTextWriterTag.Strong); //B 3
-                writer.Write(crosstabParameters.ColumnNames[0].ToString());
-                writer.RenderEndTag();  //E 3
-
-                //htmlBuilder.AppendLine("<br />");
-                writer.WriteBreak();
-
-                //htmlBuilder.AppendLine("<em>Crosstab variable:</em> <strong>" + cbxOutcomeField.Text + "</strong>");
-                //htmlBuilder.AppendLine("<br />");
-                writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
-                writer.Write("Main variable:");
-                writer.RenderEndTag();  //E 3
-                writer.RenderBeginTag(HtmlTextWriterTag.Strong); //B 3
-                writer.Write(crosstabParameters.CrosstabVariableName.ToString());
-                writer.RenderEndTag();  //E 3
-                writer.WriteBreak();
-
-                //if (cbxFieldWeight.SelectedIndex >= 0)
-                if (!String.IsNullOrEmpty(crosstabParameters.WeightVariableName))
+                if (!ForWeb)
                 {
-                    //htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + cbxFieldWeight.Text + "</strong>");
-                    //htmlBuilder.AppendLine("<br />");
+                    //htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
+                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "gadgetOptions");
+                    writer.RenderBeginTag(HtmlTextWriterTag.P);  //Begin (B) #1
+                    writer.RenderBeginTag(HtmlTextWriterTag.Small);  //B 2
+
+                    //htmlBuilder.AppendLine("<em>Main variable:</em> <strong>" + cbxExposureField.Text + "</strong>");
                     writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
-                    writer.Write("Weight variable:");
+                    writer.Write("Main variable:");
                     writer.RenderEndTag();  //E 3
                     writer.RenderBeginTag(HtmlTextWriterTag.Strong); //B 3
-                    writer.Write(crosstabParameters.WeightVariableName.ToString());
+                    writer.Write(crosstabParameters.ColumnNames[0].ToString());
+                    writer.RenderEndTag();  //E 3
+
+                    //htmlBuilder.AppendLine("<br />");
+                    writer.WriteBreak();
+
+                    //htmlBuilder.AppendLine("<em>Crosstab variable:</em> <strong>" + cbxOutcomeField.Text + "</strong>");
+                    //htmlBuilder.AppendLine("<br />");
+                    writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
+                    writer.Write("Main variable:");
+                    writer.RenderEndTag();  //E 3
+                    writer.RenderBeginTag(HtmlTextWriterTag.Strong); //B 3
+                    writer.Write(crosstabParameters.CrosstabVariableName.ToString());
                     writer.RenderEndTag();  //E 3
                     writer.WriteBreak();
-                }
 
-                //if (lbxFieldStrata.SelectedItems.Count > 0)
-                if (crosstabParameters.StrataVariableNames.Count > 0)
-                {
-                    WordBuilder wb = new WordBuilder(", ");
-                    foreach (string s in crosstabParameters.StrataVariableNames)
+                    //if (cbxFieldWeight.SelectedIndex >= 0)
+                    if (!String.IsNullOrEmpty(crosstabParameters.WeightVariableName))
                     {
-                        wb.Add(s);
+                        //htmlBuilder.AppendLine("<em>Weight variable:</em> <strong>" + cbxFieldWeight.Text + "</strong>");
+                        //htmlBuilder.AppendLine("<br />");
+                        writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
+                        writer.Write("Weight variable:");
+                        writer.RenderEndTag();  //E 3
+                        writer.RenderBeginTag(HtmlTextWriterTag.Strong); //B 3
+                        writer.Write(crosstabParameters.WeightVariableName.ToString());
+                        writer.RenderEndTag();  //E 3
+                        writer.WriteBreak();
                     }
-                    //htmlBuilder.AppendLine("<em>Strata variable(s):</em> <strong>" + wb.ToString() + "</strong>");
+
+                    //if (lbxFieldStrata.SelectedItems.Count > 0)
+                    if (crosstabParameters.StrataVariableNames.Count > 0)
+                    {
+                        WordBuilder wb = new WordBuilder(", ");
+                        foreach (string s in crosstabParameters.StrataVariableNames)
+                        {
+                            wb.Add(s);
+                        }
+                        //htmlBuilder.AppendLine("<em>Strata variable(s):</em> <strong>" + wb.ToString() + "</strong>");
+                        //htmlBuilder.AppendLine("<br />");
+                        writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
+                        writer.Write("Strata variable(s):");
+                        writer.RenderEndTag();  //E 3
+                        writer.RenderBeginTag(HtmlTextWriterTag.Strong); //B 3
+                        writer.Write(wb.ToString());
+                        writer.RenderEndTag();  //E 3
+                        writer.WriteBreak();
+                    }
+
+                    //htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + checkboxIncludeMissing.IsChecked.ToString() + "</strong>");
                     //htmlBuilder.AppendLine("<br />");
+                    //htmlBuilder.AppendLine("</small></p>");
                     writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
-                    writer.Write("Strata variable(s):");
+                    writer.Write("Include missing:");
                     writer.RenderEndTag();  //E 3
                     writer.RenderBeginTag(HtmlTextWriterTag.Strong); //B 3
-                    writer.Write(wb.ToString());
+                    writer.Write(crosstabParameters.IncludeMissing.ToString());
                     writer.RenderEndTag();  //E 3
                     writer.WriteBreak();
+                    writer.RenderEndTag();  //E 2
+                    writer.RenderEndTag();  //E 1
                 }
-
-                //htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + checkboxIncludeMissing.IsChecked.ToString() + "</strong>");
-                //htmlBuilder.AppendLine("<br />");
-                //htmlBuilder.AppendLine("</small></p>");
-                writer.RenderBeginTag(HtmlTextWriterTag.Em);  //B 3
-                writer.Write("Include missing:");
-                writer.RenderEndTag();  //E 3
-                writer.RenderBeginTag(HtmlTextWriterTag.Strong); //B 3
-                writer.Write(crosstabParameters.IncludeMissing.ToString());
-                writer.RenderEndTag();  //E 3
-                writer.WriteBreak();
-                writer.RenderEndTag();  //E 2
-                writer.RenderEndTag();  //E 1
-
                 if (!string.IsNullOrEmpty(CustomOutputDescription))
                 {
-                    //htmlBuilder.AppendLine("<p class=\"gadgetsummary\">" + CustomOutputDescription + "</p>");
-                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "gadgetsummary");
-                    writer.RenderBeginTag(HtmlTextWriterTag.P);  // B1
-                    writer.Write(CustomOutputDescription);
-                    writer.RenderEndTag();  //E1
+                    if (!ForWeb) {
+                        //htmlBuilder.AppendLine("<p class=\"gadgetsummary\">" + CustomOutputDescription + "</p>");
+                        writer.AddAttribute(HtmlTextWriterAttribute.Class, "gadgetsummary");
+                        writer.RenderBeginTag(HtmlTextWriterTag.P);  // B1
+                        writer.Write(CustomOutputDescription);
+                        writer.RenderEndTag();  //E1
+                    }
+                    else {
+                        //<div class="row col-lg-12" style="color:gray">
+                        writer.AddAttribute(HtmlTextWriterAttribute.Class, "row col-lg-12");
+                        writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                        writer.AddAttribute(HtmlTextWriterAttribute.Class, "gadgetsummary");
+                        writer.RenderBeginTag(HtmlTextWriterTag.P);  // B1
+                        writer.Write(CustomOutputDescription);
+                        writer.RenderEndTag();  //E1
+                        writer.RenderEndTag();
+
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(messagePanel.Text) && messagePanel.Visibility == Visibility.Visible)
@@ -4037,40 +4059,87 @@ namespace EpiDashboard
                     writer.RenderEndTag();  //E2
                     writer.RenderEndTag(); // E1
                 }
+                if (ForWeb)
+                {
+                    
+                   // writer.RenderEndTag();  //col-xs-8 
+                    //writer.AddAttribute(HtmlTextWriterAttribute.Class, "col-md-8 CenterText");
+                    //writer.RenderBeginTag(HtmlTextWriterTag.Div);
 
+                    //writer.WriteBreak();
+                    //writer.WriteBreak();
+                    //writer.WriteBreak();
+                    //writer.Write("<hr>");
+                    //writer.RenderBeginTag(HtmlTextWriterTag.Strong);  //B 3
+                    //writer.Write("Single Table Analysis");
+                    //writer.Write("<hr>");
+                    //writer.RenderEndTag();  //E 3
+
+
+                   /* writer.RenderEndTag();*/ // col-xs-4
+                   
+                    writer.RenderEndTag();  //row 
+
+
+                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "row col-lg-12");
+                    writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                }
                 foreach (Grid grid in this.StrataGridList)
                 {
                     string gridName = grid.Tag.ToString();
-
+                   
                     //htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
                     if (!string.IsNullOrEmpty(gridName))
                     {
                         //htmlBuilder.AppendLine("<h3>" + gridName + "</h3>");
+                        //rotate-text
+                        writer.AddAttribute(HtmlTextWriterAttribute.Class, "col-sm-1");
+                        writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                        writer.AddAttribute(HtmlTextWriterAttribute.Class, "rotate-text");
                         writer.RenderBeginTag(HtmlTextWriterTag.H3);
                         writer.Write(gridName);
                         writer.RenderEndTag();
+                        writer.RenderEndTag();
 
                     }
-                    writer.AddAttribute(HtmlTextWriterAttribute.Style, "height: 7px;");
-                    writer.RenderBeginTag(HtmlTextWriterTag.Div);
-                    writer.RenderEndTag();
+                    if (!ForWeb)
+                    {
+                        writer.AddAttribute(HtmlTextWriterAttribute.Style, "height: 7px;");
+
+
+                        writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                        writer.RenderEndTag();
+                    }
 
                     //htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-//                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "left");
+                    //                    writer.AddAttribute(HtmlTextWriterAttribute.Align, "left");
+                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "col-lg-12");
+                    writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "CenterText");
+                    writer.AddAttribute(HtmlTextWriterAttribute.Style, "font-weight: bold;");
+                    writer.RenderBeginTag(HtmlTextWriterTag.H6);
+                    writer.Write(crosstabParameters.CrosstabVariableName.ToString());
+                    writer.RenderEndTag();
+                    writer.RenderEndTag();
+
+
+                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "col-sm-11");
+                    writer.RenderBeginTag(HtmlTextWriterTag.Div);
                     writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
                     writer.RenderBeginTag(HtmlTextWriterTag.Table);
 
                     //htmlBuilder.AppendLine("<caption>" + cbxExposureField.Text + " * " + cbxOutcomeField.Text + "</caption>");
-                    writer.RenderBeginTag(HtmlTextWriterTag.Caption);
-                    writer.Write(crosstabParameters.ColumnNames[0].ToString() + " * " + crosstabParameters.CrosstabVariableName.ToString());
-                    writer.RenderEndTag();
+                    //writer.RenderBeginTag(HtmlTextWriterTag.Caption);
+                    //writer.Write(crosstabParameters.ColumnNames[0].ToString() + " * " + crosstabParameters.CrosstabVariableName.ToString());
+                    //writer.RenderEndTag();
 
                     SolidColorBrush backColor = Brushes.White;
 
                     foreach (UIElement control in grid.Children)
                     {
+                         
                         string value = string.Empty;
                         int rowNumber = -1;
                         int columnNumber = -1;
@@ -4115,17 +4184,28 @@ namespace EpiDashboard
                             if (columnNumber == 0)
                             {
                                 //htmlBuilder.AppendLine("<tr>");
+                                //writer.AddAttribute(HtmlTextWriterAttribute.Class, "TwoByTwoTr1 CenterText");
                                 writer.RenderBeginTag(HtmlTextWriterTag.Tr);
                             }
 
                             //tableDataTagOpen
                             if (rowNumber == 0 && columnNumber < grid.ColumnDefinitions.Count - 1)
+                          
                             {
                                 tableDataTagOpen = "<th>";
                                 tableDataTagClose = "</th>";
-                                writer.RenderBeginTag(HtmlTextWriterTag.Th);
-                                writer.Write(value);
-                                writer.RenderEndTag();
+                                if (columnNumber == 0)
+                                {
+                                    writer.AddAttribute(HtmlTextWriterAttribute.Class,"NoBorders");
+                                    writer.RenderBeginTag(HtmlTextWriterTag.Td);
+                                    writer.Write("");
+                                    writer.RenderEndTag();
+                                }
+                                else {
+                                    writer.RenderBeginTag(HtmlTextWriterTag.Th);
+                                    writer.Write(value);
+                                    writer.RenderEndTag();
+                                }
                             }
                             else if (rowNumber == 0 && columnNumber >= grid.ColumnDefinitions.Count - 1)
                             {
@@ -4135,8 +4215,14 @@ namespace EpiDashboard
                             {
                                 //tableDataTagOpen = "<td class=\"value\">";
                                 writer.AddAttribute(HtmlTextWriterAttribute.Class, "value");
-                                writer.RenderBeginTag(HtmlTextWriterTag.Td);
-                                writer.Write(value);
+                                if (columnNumber == 0) {
+                                    writer.RenderBeginTag(HtmlTextWriterTag.Th);
+                                }
+                                else {
+                                    writer.RenderBeginTag(HtmlTextWriterTag.Td);
+                                }
+
+                                writer.Write(WebUtility.HtmlEncode(value));
                                 writer.RenderEndTag();
                             }
                             else if (rowNumber > 0 && rowNumber < grid.RowDefinitions.Count - 1 && columnNumber < grid.ColumnDefinitions.Count - 1)
@@ -4155,7 +4241,14 @@ namespace EpiDashboard
                             else if (rowNumber >= grid.RowDefinitions.Count - 1)
                             {
                                 //tableDataTagOpen = "<td style=\"background-color: rgb(" + backColor.Color.R.ToString() + ", " + backColor.Color.G.ToString() + ", " + backColor.Color.B.ToString() + ");\">";
-                                writer.RenderBeginTag(HtmlTextWriterTag.Td);
+                                if (value.ToLower() == "total")
+                                {
+                                    writer.RenderBeginTag(HtmlTextWriterTag.Th);
+                                }
+                                else {
+
+                                    writer.RenderBeginTag(HtmlTextWriterTag.Td);
+                                }
                             }
 
                             string formattedValue = value;
@@ -4199,6 +4292,7 @@ namespace EpiDashboard
                     try
                     {
                         writer.RenderEndTag();
+                        writer.RenderEndTag();// Div outer table
                     }
                     catch (Exception ex)
                     {
@@ -4214,7 +4308,14 @@ namespace EpiDashboard
                     writer.RenderBeginTag(HtmlTextWriterTag.P);
                     // </p>
                     writer.RenderEndTag();
-                    writer.RenderBeginTag(HtmlTextWriterTag.Br);
+                    //writer.RenderBeginTag(HtmlTextWriterTag.Br);
+                    //writer.RenderBeginTag(HtmlTextWriterTag.Br);
+                    //writer.RenderBeginTag(HtmlTextWriterTag.Br);
+                    
+                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "row col-md-9 offset-md-2 ");
+                    writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                    
+                    writer.AddAttribute(HtmlTextWriterAttribute.Class, "ChiSquareTable ");
                     writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "0");
                     writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
@@ -4222,6 +4323,7 @@ namespace EpiDashboard
 
                     foreach (UIElement control in chiSquareGrid.Children)
                     {
+                         
                         if (control is TextBlock)
                         {
                             int rowNumber = Grid.GetRow(control);
@@ -4233,6 +4335,8 @@ namespace EpiDashboard
                             if (columnNumber == 0)
                             {
                                 //htmlBuilder.AppendLine("<tr>");
+                               
+                                writer.AddAttribute(HtmlTextWriterAttribute.Class, "ChiSquare");
                                 writer.RenderBeginTag(HtmlTextWriterTag.Tr);
                             }
 
@@ -4244,7 +4348,14 @@ namespace EpiDashboard
                             }
                             else
                             {
-                                writer.RenderBeginTag(HtmlTextWriterTag.Td);
+                                writer.AddAttribute(HtmlTextWriterAttribute.Class, "CenterText");
+                                if (((TextBlock)control).Text == "Fisher's Exact")
+                                { 
+                                writer.RenderBeginTag(HtmlTextWriterTag.Th);
+                                }
+                                else {
+                                    writer.RenderBeginTag(HtmlTextWriterTag.Td);
+                                }
                             }
 
                             string value = ((TextBlock)control).Text;
@@ -4261,11 +4372,12 @@ namespace EpiDashboard
                             }
                         }
                     }
-
+                    
                     //htmlBuilder.AppendLine("</table>");
                     try
                     {
                         writer.RenderEndTag();
+                        writer.RenderEndTag(); // outer Table Div
                     }
                     catch (Exception ex)
                     {
@@ -4286,10 +4398,12 @@ namespace EpiDashboard
                     }
 
                     // End Chi Square
+                   
                 }
 
                 foreach (GadgetTwoByTwoPanel grid2x2 in this.strata2x2GridList)
                 {
+                     
                     //string gridName = grid.Tag.ToString();
                     string gridName = string.Empty;
                     if (grid2x2.Tag != null)
@@ -4305,18 +4419,25 @@ namespace EpiDashboard
 
                     }
                     //htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
-                    writer.AddAttribute(HtmlTextWriterAttribute.Style, "height: 7px;");
-                    writer.RenderBeginTag(HtmlTextWriterTag.Div);
-                    writer.RenderEndTag();
+                    if (!ForWeb) {
+                        writer.AddAttribute(HtmlTextWriterAttribute.Style, "height: 7px;");
+                        writer.RenderBeginTag(HtmlTextWriterTag.Div);
+                        writer.RenderEndTag();
+                    }
+                  //  writer.AddAttribute(HtmlTextWriterAttribute.Class, " col-md-4");
+                   // writer.RenderBeginTag(HtmlTextWriterTag.Div);
                     //htmlBuilder.AppendLine(grid2x2.ToHTML());
                     //htmlBuilder.AppendLine("<p></p>");
-                    writer.Write(grid2x2.ToHTML());
-                    writer.RenderBeginTag(HtmlTextWriterTag.P);
-                    writer.RenderEndTag();
+                    writer.Write(grid2x2.ToHTML("",0,ForWeb));
+
+                    //writer.RenderBeginTag(HtmlTextWriterTag.P);
+                    //writer.RenderEndTag();
+                   // writer.RenderEndTag();
                 }
 
                 foreach (UIElement element in panelMain.Children)
                 {
+                     
                     if (element is StratifiedTableAnalysisPanel)
                     {
                         StratifiedTableAnalysisPanel stap = element as StratifiedTableAnalysisPanel;
@@ -4331,6 +4452,10 @@ namespace EpiDashboard
                         writer.RenderBeginTag(HtmlTextWriterTag.P);
                         writer.RenderEndTag();
                     }
+                }
+                if (ForWeb  ) {
+                    writer.RenderEndTag(); // row div
+
                 }
                 //return htmlBuilder.ToString();
                 return stringWriter.ToString();

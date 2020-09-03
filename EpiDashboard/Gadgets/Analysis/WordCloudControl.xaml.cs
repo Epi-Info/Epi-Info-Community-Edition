@@ -1298,7 +1298,7 @@ namespace EpiDashboard
         /// Converts the gadget's output to Html
         /// </summary>
         /// <returns></returns>
-        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false)
+        public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false, bool ForWeb = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
             CustomOutputHeading = headerPanel.Text;

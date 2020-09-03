@@ -466,34 +466,315 @@ namespace EpiDashboard.Controls.Charting
             }
         }
                 
-        public virtual string ToHTML(string htmlFileName = "", int count = 0, bool includeImage = true, bool includeFullData = false)
+        public virtual string ToHTML(string htmlFileName = "", int count = 0, bool includeImage = true, bool includeFullData = false, bool ForWeb = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
-
-            string imageFileName = string.Empty;
-
-            if (htmlFileName.EndsWith(".html"))
+            StringBuilder _color = new StringBuilder();
+            StringBuilder _Groups = new StringBuilder();
+            string Composition = "";
+            ForWeb = true;
+            if (!ForWeb)
             {
-                imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
+                string imageFileName = string.Empty;
+
+                if (htmlFileName.EndsWith(".html"))
+                {
+                    imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
+                }
+                else if (htmlFileName.EndsWith(".htm"))
+                {
+                    imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
+                }
+
+                imageFileName = imageFileName + "_" + count.ToString() + ".png";
+
+                System.IO.FileInfo fi = new System.IO.FileInfo(imageFileName);
+
+                ToImageFile(imageFileName, false);
+
+                htmlBuilder.AppendLine("<h3>" + this.StrataTitle + "</h3>");
+                if (includeImage) htmlBuilder.AppendLine("<img src=\"" + fi.Name + "\" />");
+
+                htmlBuilder.AppendLine("<p>&nbsp;</p>");
+                htmlBuilder.AppendLine("<p>&nbsp;</p>");
+                htmlBuilder.AppendLine("<p>&nbsp;</p>");
             }
-            else if (htmlFileName.EndsWith(".htm"))
+            else
             {
-                imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
+               
+
+                List<string> color = new List<string>();
+                var ChartType = this.GetType().Name;
+                if (ChartType == "LineChart")
+                {
+                    htmlBuilder.AppendLine("<h2  class=\"gadgetHeading\">" + ((EpiDashboard.Controls.Charting.LineChartBase)this).LineChartParameters.GadgetTitle + "</h2>");
+                    color = ((EpiDashboard.Controls.Charting.LineChartBase)this).LineChartParameters.PaletteColors;
+                }
+                else if (ChartType == "ColumnChart")
+                {
+                    htmlBuilder.AppendLine("<h2  class=\"gadgetHeading\">" + ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.GadgetTitle + "</h2>");
+                    color = ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.PaletteColors;
+                    Composition = ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.Composition.ToString();
+                    bool UseDiffColors = ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.UseDiffColors;
+                    if (UseDiffColors) {
+                        _color.AppendLine(" var colors =  [");
+                        for (int i = 0; i < color.Count(); i++)
+                        {
+                            if (color[i].Length == 9)
+                            {
+                                _color.AppendLine(" '" + color[i].Remove(1, 2) + "' ,");
+                            }
+                        }
+
+
+                        _color.AppendLine(" ];");
+                    }
+                }
+                else if (ChartType == "AreaChart")
+                {
+                    htmlBuilder.AppendLine("<h2  class=\"gadgetHeading\">" + ((EpiDashboard.Controls.Charting.AreaChartBase)this).AreaChartParameters.GadgetTitle + "</h2>");
+                    color = ((EpiDashboard.Controls.Charting.AreaChartBase)this).AreaChartParameters.PaletteColors;
+                } else if (ChartType == "HistogramChart")
+                {
+                    color = ((EpiDashboard.Controls.Charting.HistogramChartBase)this).HistogramChartParameters.PaletteColors;
+
+                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">" + ((EpiDashboard.Controls.Charting.HistogramChartBase)this).HistogramChartParameters.GadgetTitle + "</h2>");
+
+                }
+                htmlBuilder.AppendLine("<div id=\"Linechart"+count+"\" style=\"float:left\"></div>");
+
+                if (!string.IsNullOrEmpty(_color.ToString()))
+                {
+                   
+                    htmlBuilder.AppendLine("<script>  " + _color.ToString() );
+                }
+                else
+                {
+                    htmlBuilder.AppendLine("<script> ");
+                }
+
+              
+
+              
+
+              
+             
+                htmlBuilder.AppendLine(" var Linechart"+ count + " = c3.generate({bindto: '#Linechart"+ count + "',data: {  columns: [");
+
+                try{
+                    try
+                    {
+                       
+
+                        if (ChartType == "HistogramChart")
+                        {
+                            List<EpiDashboard.Controls.Charting.HistogramChart.XYHistogramChartData> _HChartdataList = (List<EpiDashboard.Controls.Charting.HistogramChart.XYHistogramChartData>)this.Chart.DataSource;
+                            var HChartGroups = _HChartdataList.GroupBy(x => x.X);
+
+                            foreach (var DataItem in HChartGroups)
+                            {
+                                htmlBuilder.AppendLine("['" + DataItem.ToList()[0].X + "', ");
+                                _Groups.AppendLine("'" + DataItem.ToList()[0].X + "', ");
+                                foreach (var item in DataItem)
+                                {
+                                    htmlBuilder.AppendLine(item.Y + ", ");
+
+                                }
+
+
+                                htmlBuilder.AppendLine("],");
+                            }
+
+                            htmlBuilder.AppendLine("]");
+                        }
+                        else
+                        {
+                            List<EpiDashboard.Gadgets.Charting.XYColumnChartData> _dataList = (List<EpiDashboard.Gadgets.Charting.XYColumnChartData>)this.Chart.DataSource;
+                            var Groups = _dataList.GroupBy(x => x.X);
+
+                            foreach (var DataItem in Groups)
+                            {
+                                htmlBuilder.AppendLine("['" + DataItem.ToList()[0].X + "', ");
+                                _Groups.AppendLine("'" + DataItem.ToList()[0].X + "', ");
+                                foreach (var item in DataItem)
+                                {
+                                    htmlBuilder.AppendLine(item.Y + ", ");
+
+                                }
+
+
+                                htmlBuilder.AppendLine("],");
+                            }
+
+                            htmlBuilder.AppendLine("]");
+                        }
+                        if (ChartType == "LineChart")
+                        {
+
+                            htmlBuilder.AppendLine(" ,  type : 'line'  }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+                        }
+                        else if (ChartType == "ColumnChart")
+                        {
+                            bool UseDiffColors = ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.UseDiffColors;
+                           
+                            if (UseDiffColors)
+                            {
+                                
+
+
+                                htmlBuilder.AppendLine(" ,  type : 'bar' ,color: function (color, d) { return colors[d.index];} }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+                            }
+                            else {
+
+                                htmlBuilder.AppendLine(" ,  type : 'bar'   }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+                            }
+                        }
+                        else if (ChartType == "AreaChart")
+                        {
+                            htmlBuilder.AppendLine(" ,  type : 'area'  }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+                        }
+                        else if (ChartType == "HistogramChart")
+                        {
+
+
+                            htmlBuilder.AppendLine(" ,  type : 'bar'   }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+
+                        }
+
+                        if (ChartType == "HistogramChart")
+                        {
+                            List<EpiDashboard.Controls.Charting.HistogramChart.XYHistogramChartData> _HChartdataList = (List<EpiDashboard.Controls.Charting.HistogramChart.XYHistogramChartData>)this.Chart.DataSource;
+                            HistogramChartParameters HistogramChartParameters = new HistogramChartParameters();
+                            //  (List<EpiDashboard.Controls.Charting.HistogramChart.XYHistogramChartData>)this.Parameters.Parameters = new HistogramChartParameters();
+                            //this.Parameters = new HistogramChartParameters();
+                            EpiDashboard.Controls.Charting.HistogramChart _HCharList = (EpiDashboard.Controls.Charting.HistogramChart) this;
+                            if (color.Count()>0) {
+                                htmlBuilder.AppendLine(" color: { pattern: [");
+                                for (int i = 0; i < color.Count(); i++)
+                                {
+                                    if (color[i].Length == 9)
+                                    {
+                                        htmlBuilder.AppendLine(" '" + color[i].Remove(1, 2) + "' ,");
+                                    }
+                                }
+
+
+                                htmlBuilder.AppendLine(" ]},");
+                            }
+                           // htmlBuilder.AppendLine("axis: { x : {type: 'timeseries',  tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false}}}");
+                            htmlBuilder.AppendLine("axis: { x : {type: 'category', categories:  [");
+                            foreach (var item in _HChartdataList)
+                            {
+                                htmlBuilder.AppendLine("'" + item.S + "', ");
+
+                            }
+                        }
+                        else
+                        {
+                            List<EpiDashboard.Gadgets.Charting.XYColumnChartData> _dataList = (List<EpiDashboard.Gadgets.Charting.XYColumnChartData>)this.Chart.DataSource;
+                            htmlBuilder.AppendLine(" color: { pattern: [");
+                            for (int i = 0; i < color.Count(); i++)
+                            {
+                                if (color[i].Length == 9)
+                                {
+                                    htmlBuilder.AppendLine(" '" + color[i].Remove(1, 2) + "' ,");
+                                }
+                            }
+
+
+                            htmlBuilder.AppendLine(" ]},");
+
+                            htmlBuilder.AppendLine("axis: { x : {type: 'category', categories:  [");
+                            foreach (var item in _dataList)
+                            {
+                                htmlBuilder.AppendLine("'" + item.S + "', ");
+
+                            }
+                        }
+
+                       
+
+                        htmlBuilder.AppendLine("]}");
+                        if (ChartType == "LineChart")
+                        {
+                            htmlBuilder.AppendLine(" , y: {  label: '" + ((EpiDashboard.Controls.Charting.LineChartBase)this).LineChartParameters.YAxisLabel + "'}");
+
+                        }
+                        else if (ChartType == "ColumnChart")
+                        {
+                            htmlBuilder.AppendLine(", y: {  label: '" + ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.YAxisLabel + "'}");
+
+                        }
+                        else if (ChartType == "AreaChart")
+                        {
+                            htmlBuilder.AppendLine(", y: {  label: '" + ((EpiDashboard.Controls.Charting.AreaChartBase)this).AreaChartParameters.YAxisLabel + "'}");
+
+
+                        }
+                        // tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false}
+                       // htmlBuilder.AppendLine(",tick: {  x:{ multiline:true, culling: { max: 1 }, }, label : { text: 'Days', position: 'center-bottom', }, },");
+                        htmlBuilder.AppendLine(",tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false},");
+                        htmlBuilder.AppendLine("}}); ");
+                        if (!string.IsNullOrEmpty(_Groups.ToString()) && Composition== "Stacked")
+                        {
+                            htmlBuilder.AppendLine("setTimeout(function() {  Linechart" + count +".groups([[" + _Groups + "]])}, 000);");
+                        }
+                       
+                        htmlBuilder.AppendLine("</script> ");
+
+
+                    }
+                    catch (Exception ex) {
+
+                        //var _dataList = this.Chart.DataSource;
+                    //    if (ChartType == "HistogramChart")
+                    //    {
+                    //        List<EpiDashboard.Controls.Charting.HistogramChart.XYHistogramChartData> _dataList = (List<EpiDashboard.Controls.Charting.HistogramChart.XYHistogramChartData>)this.Chart.DataSource;
+
+                    //        htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">" + this.ChartTitle + "</h2>");
+                    //        htmlBuilder.AppendLine("<div id=\"piechart" + count + "\"></div>");
+
+                    //        htmlBuilder.AppendLine("<script>");
+
+
+                    //        htmlBuilder.AppendLine(" var piechart" + count + " = c3.generate({bindto: '#piechart" + count + "',data: { columns: [");
+                    //        var temp = _dataList;
+
+                    //        foreach (var item in _dataList)
+                    //        {
+                    //            htmlBuilder.AppendLine("['" + item.S + "', " + item.Y + "], ");
+
+                    //        }
+                    //        //string colorString = "";
+
+                    //        htmlBuilder.AppendLine(" ],  type : 'bar'  },");
+
+                    //        htmlBuilder.AppendLine(" color: { pattern: [");
+                    //        if (color.Count() > 0)
+                    //        {
+                    //            for (int i = 0; i < _dataList.Count(); i++)
+                    //        {
+                                 
+                                
+                    //            htmlBuilder.AppendLine(" '" + color[i].Remove(1,2) + "' ,");
+                    //        }
+                    //        }
+
+
+                    //        htmlBuilder.AppendLine(" ]},");
+
+                    //        htmlBuilder.AppendLine(" legend: { show: true , position: top }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },label: { format: function(value, ratio, id){return d3.format('$')(value);}}});");
+                          
+                    //        htmlBuilder.AppendLine(" </script> ");
+
+
+
+                    //    }
+                    }
+
+                }
+                catch (Exception ex) { throw ex; }
             }
-
-            imageFileName = imageFileName + "_" + count.ToString() + ".png";
-
-            System.IO.FileInfo fi = new System.IO.FileInfo(imageFileName);
-            
-            ToImageFile(imageFileName, false);
-
-            htmlBuilder.AppendLine("<h3>" + this.StrataTitle + "</h3>");
-            if (includeImage) htmlBuilder.AppendLine("<img src=\"" + fi.Name + "\" />");
-
-            htmlBuilder.AppendLine("<p>&nbsp;</p>");
-            htmlBuilder.AppendLine("<p>&nbsp;</p>");
-            htmlBuilder.AppendLine("<p>&nbsp;</p>");
-            
             return htmlBuilder.ToString();
         }
 

@@ -255,6 +255,15 @@
   <wsdl:message name="IManagerServiceV4_GetJsonResponseAll_CustomFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q27="http://www.yourcompany.com/types/" name="detail" element="q27:CustomFaultException" />
   </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_PublishReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:PublishReport" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_PublishReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PublishReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV4_PublishReport_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q28="http://www.yourcompany.com/types/" name="detail" element="q28:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="IManagerServiceV4">
     <wsdl:operation name="PublishSurvey">
       <wsdl:input wsaw:Action="http://tempuri.org/IManagerService/PublishSurvey" message="tns:IManagerServiceV4_PublishSurvey_InputMessage" />
@@ -390,6 +399,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/GetJsonResponseAll" message="tns:IManagerServiceV4_GetJsonResponseAll_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/GetJsonResponseAllResponse" message="tns:IManagerServiceV4_GetJsonResponseAll_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/GetJsonResponseAllCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_GetJsonResponseAll_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PublishReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV4/PublishReport" message="tns:IManagerServiceV4_PublishReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV4/PublishReportResponse" message="tns:IManagerServiceV4_PublishReport_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV4/PublishReportCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV4_PublishReport_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IManagerServiceV4" type="tns:IManagerServiceV4">
@@ -708,6 +722,18 @@
     </wsdl:operation>
     <wsdl:operation name="GetJsonResponseAll">
       <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/GetJsonResponseAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PublishReport">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV4/PublishReport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
