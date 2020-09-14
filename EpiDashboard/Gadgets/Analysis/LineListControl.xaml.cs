@@ -396,30 +396,34 @@ namespace EpiDashboard
                 {
                    dataGridTextColumn.Header = dataGridTextColumn.Header.ToString().Substring(0, ((LineListParameters)Parameters).MaxColumnLength) + StringLiterals.ELLIPSIS;
                 }
-                                
+
                 if (e.PropertyType == typeof(DateTime))
                 {
                     dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
                     Field field = DashboardHelper.GetAssociatedField(e.Column.Header.ToString());
                     if (field != null && field is DateField)
                     {
-                        dataGridTextColumn.Binding.StringFormat = "{0:d}";
+                        dataGridTextColumn.Binding.StringFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
                     }
                     else if (field != null && field is TimeField)
                     {
-                        dataGridTextColumn.Binding.StringFormat = "{0:t}";
+                        dataGridTextColumn.Binding.StringFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
+                    }
+                    else
+                    {
+                        dataGridTextColumn.Binding.StringFormat = CultureInfo.CurrentCulture.DateTimeFormat.SortableDateTimePattern; 
                     }
                 }
                 else if (e.PropertyType == typeof(int) ||
-                    e.PropertyType == typeof(byte) ||
-                    e.PropertyType == typeof(decimal) ||
-                    e.PropertyType == typeof(double) ||
-                    e.PropertyType == typeof(float))
+                         e.PropertyType == typeof(byte) ||
+                         e.PropertyType == typeof(decimal) ||
+                         e.PropertyType == typeof(double) ||
+                         e.PropertyType == typeof(float))
                 {
                     dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
                 }
                 
-                 if(((LineListParameters)Parameters).ShowNullLabels)
+                if(((LineListParameters)Parameters).ShowNullLabels)
                 {
                     dataGridTextColumn.Binding.TargetNullValue = DashboardHelper.Config.Settings.RepresentationOfMissing;
                 }
