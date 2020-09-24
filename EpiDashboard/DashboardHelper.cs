@@ -51,6 +51,7 @@ namespace EpiDashboard
         public DashboardHelper()
         {            
             this.TableName = string.Empty;
+          //  this.ReportId = string.Empty;
             Construct();
         }
 
@@ -304,6 +305,7 @@ namespace EpiDashboard
 
         public double ResizedWidth { get; set; }
         public double ResizedHeight { get; set; }
+        public object ReportId { get; private set; }
         #endregion // Public Properties
 
         #region Events
@@ -427,8 +429,17 @@ namespace EpiDashboard
             xmlString +=
             "<useAdvancedDataFilterCondition>" + this.UseAdvancedUserDataFilter.ToString() + "</useAdvancedDataFilterCondition>" +
             "<advancedDataFilterCondition>" + this.AdvancedUserDataFilter.ToString().Replace("&", "&amp;").Replace(">", "&gt;").Replace("<", "&lt;") + "</advancedDataFilterCondition>";
+            //ReportId
+            if (this.ReportId!=null)
+            {
+                xmlString += "<ReportId>" + this.ReportId.ToString() + "</ReportId>";
+            }
+            else {
 
-            root.InnerXml = xmlString;
+                xmlString += "<ReportId>" + Guid.NewGuid().ToString() + "</ReportId>";
+
+            }
+           root.InnerXml = xmlString;
             root.AppendChild(SerializeRelatedDataConnections(doc));
             root.AppendChild(SerializeFilters(doc));
             root.AppendChild(SerializeRules(doc));
@@ -467,6 +478,16 @@ namespace EpiDashboard
                         if (!string.IsNullOrEmpty(child.InnerText)) 
                         { 
                             connectionString = Configuration.Decrypt(child.InnerText); 
+                        }
+                        break;
+                    case "reportid":
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            ReportId = child.InnerText;
+                        }
+                        else {
+                            ReportId = Guid.NewGuid().ToString();
+
                         }
                         break;
                     case "databasetypeidentifier":

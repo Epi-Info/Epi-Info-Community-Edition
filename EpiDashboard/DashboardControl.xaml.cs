@@ -180,7 +180,7 @@ namespace EpiDashboard
             mnuSaveAs.Click += new RoutedEventHandler(mnuSaveAs_Click);
 
 
-            mnuSendOutputToWeb.Click += new RoutedEventHandler(mnuSendOutputToWeb_Click);
+            mnuSendOutputToWebUpdateCurrent.Click += new RoutedEventHandler(mnuSendOutputToWebUpdateCurrent_Click);
             mnuSendOutputToWeb.Visibility = Visibility.Visible;
             mnuSendOutputTo.Visibility = Visibility.Visible;
             foreach (Epi.DataSets.Config.GadgetRow row in Configuration.GetNewInstance().Gadget.Rows)
@@ -545,7 +545,7 @@ namespace EpiDashboard
         {
             OpenCanvas();
         }
-        private void mnuSendOutputToWeb_Click(object sender, RoutedEventArgs e)
+        private void mnuSendOutputToWebUpdateCurrent_Click(object sender, RoutedEventArgs e)
         {
             if (this.DashboardHelper == null)
             {
@@ -558,7 +558,7 @@ namespace EpiDashboard
 
                 System.IO.FileStream stream = System.IO.File.OpenWrite(fileName);
                 System.IO.StreamWriter sw = new System.IO.StreamWriter(stream);
-                var Html = this.ToHTML(fileName);
+                var Html = this.ToHTML(fileName,true);
               //  sw.WriteLine(Html);
               //  sw.Close();
                /// sw.Dispose();
@@ -617,18 +617,30 @@ namespace EpiDashboard
                 SurveyId = Guid.Parse("5f73decc-791f-4216-b10d-7f8e10b1207a");
             }
             Request.ReportInfo.SurveyId = SurveyId.ToString();
-            Request.ReportInfo.ReportId = SurveyId.ToString();// Guid.Empty.ToString(); // will need to change
-          
+            if (this.DashboardHelper.ReportId != null) {
+                Request.ReportInfo.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+            }
+            else {
+                Request.ReportInfo.ReportId = SurveyId.ToString();
+            }
             Request.ReportInfo.CreatedDate = DateTime.Now;
             Request.ReportInfo.EditedDate = DateTime.Now;
-            Request.ReportInfo.DataSource = "DataSource";
-            Request.ReportInfo.RecordCount = 100;
+            Request.ReportInfo.DataSource = this.DashboardHelper.Database.DbName +" \\ " + this.DashboardHelper.TableName;//this.DashboardHelper.DatabaseTypeIdentifier;
+            Request.ReportInfo.RecordCount = this.DashboardHelper.RecordCount;
             GadgetDTO.GadgetHtml = Html.ToString();
             GadgetDTO.GadgetId = GadgetId;
             GadgetDTO.GadgetNumber = GadgetNumber;
             GadgetDTO.CreatedDate = DateTime.Now;
             GadgetDTO.EditedDate = DateTime.Now;
-            GadgetDTO.ReportId = SurveyId.ToString(); // will need to change
+           
+            if (this.DashboardHelper.ReportId != null)
+            {
+                GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+            }
+            else
+            {
+                GadgetDTO.ReportId = SurveyId.ToString();
+            }
             GadgetDTOList.Add(GadgetDTO);
             Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
 
@@ -2559,7 +2571,7 @@ namespace EpiDashboard
         public string CustomOutputSummaryText { get; set; }
         public string CustomOutputConclusionText { get; set; }
         public string CustomOutputTableFontFamily { get; set; }
-
+        public string ReportId { get; set; }
         public int TableFontSize
         {
             get
@@ -3580,6 +3592,9 @@ namespace EpiDashboard
                                 case "tablefontsize":
                                     TableFontSize = int.Parse(child.InnerText);
                                     break;
+                                case "reportid":
+                                    ReportId = child.InnerText;
+                                    break;
                             }
                         }
                     }
@@ -3973,10 +3988,10 @@ namespace EpiDashboard
             htmlBuilder.AppendLine("  </style>");
         }
 
-        public string ToHTML(string htmlFileName = "")
+        public string ToHTML(string htmlFileName = "",bool forWeb = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
-            bool ForWeb = true;
+            bool ForWeb = forWeb;// true;
             htmlBuilder.AppendLine("<!DOCTYPE html>");
             htmlBuilder.AppendLine("<html>");
             htmlBuilder.AppendLine(" <head>");

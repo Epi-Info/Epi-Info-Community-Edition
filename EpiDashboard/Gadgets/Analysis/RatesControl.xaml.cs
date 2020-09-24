@@ -1829,98 +1829,219 @@ namespace EpiDashboard
                 {
                     groupValues.Add("", true);
                 }
-                foreach (String groupValue in groupValues.Keys)
-                {
-                    htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
-                    if (!String.IsNullOrEmpty(groupField))
+                if (!ForWeb)
+                { 
+                    foreach (String groupValue in groupValues.Keys)
                     {
-                        htmlBuilder.AppendLine("<h3>" + groupField + " = " + groupValue + "</h3>");
-                    }
-                    htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                    if (string.IsNullOrEmpty(CustomOutputCaption) && this.StrataGridList.Count > 1)
-                    {
-                        //htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
-                    }
-                    else if (!string.IsNullOrEmpty(CustomOutputCaption))
-                    {
-                        htmlBuilder.AppendLine("<caption>" + CustomOutputCaption + "</caption>");
-                    }
 
-                    if (dg.ItemsSource is DataView)
-                    {
-                        if (!String.IsNullOrEmpty(groupField))
-                        {
-                            DataView sdv = dg.ItemsSource as DataView;
-                            if (groupValue.Equals(""))
-                                sdv.RowFilter = groupField + " is null";
-                            else
-                                sdv.RowFilter = groupField + " = '" + groupValue + "'";
-                            DataTable sdvTable = sdv.ToTable();
-                            if (!Parameters.ColumnNames.Contains(groupField))
-                            {
-                                sdvTable.Columns.Remove(groupField);
-                            }
-                            htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView, useAlternatingColors));
-                        }
-                        else
-                        {
-                            if (dg.ItemsSource is DataView)
-                            {
-                                DataView dgItemSource = dg.ItemsSource as DataView;
-                                int dgtcindex = 0;
-                                foreach (DataColumn dc in dgItemSource.Table.Columns)
-                                {
-                                    string nombre = dg.Columns[dgtcindex].Header.ToString();
-                                    if (dg.Columns.Count > dgtcindex)
-                                    {
-                                        for (int i = 2; i < 24; i++)
-                                        {
-                                            if (dgItemSource.Table.Columns.Contains(nombre) && dc.Ordinal != 0)
-                                            {
-                                                nombre = nombre + '(' + i + ')';
-                                            }
-                                            else
-                                            {
-                                                dc.ColumnName = nombre;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    dgtcindex++;
-                                }
-
-                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
-                            }
-                        }
-                    }
-                    else if (dg.ItemsSource is ListCollectionView)
-                    {
-                        ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
-                        if (lcv.SourceCollection is DataView)
-                        {
+                        
+                            htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
                             if (!String.IsNullOrEmpty(groupField))
                             {
-                                DataView sdv = lcv.SourceCollection as DataView;
-                                if (groupValue.Equals(""))
-                                    sdv.RowFilter = groupField + " is null";
-                                else
-                                    sdv.RowFilter = groupField + " = '" + groupValue + "'";
-                                DataTable sdvTable = sdv.ToTable();
-                                if (!Parameters.ColumnNames.Contains(groupField))
-                                {
-                                    sdvTable.Columns.Remove(groupField);
-                                }
-                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView, useAlternatingColors));
+                                htmlBuilder.AppendLine("<h3>" + groupField + " = " + groupValue + "</h3>");
                             }
-                            else
+                            htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+                            if (string.IsNullOrEmpty(CustomOutputCaption) && this.StrataGridList.Count > 1)
                             {
-                                htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(lcv.SourceCollection as DataView, useAlternatingColors));
+                                //htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
                             }
+                            else if (!string.IsNullOrEmpty(CustomOutputCaption))
+                            {
+                                htmlBuilder.AppendLine("<caption>" + CustomOutputCaption + "</caption>");
+                            }
+
+                            if (dg.ItemsSource is DataView)
+                            {
+                                if (!String.IsNullOrEmpty(groupField))
+                                {
+                                    DataView sdv = dg.ItemsSource as DataView;
+                                    if (groupValue.Equals(""))
+                                        sdv.RowFilter = groupField + " is null";
+                                    else
+                                        sdv.RowFilter = groupField + " = '" + groupValue + "'";
+                                    DataTable sdvTable = sdv.ToTable();
+                                    if (!Parameters.ColumnNames.Contains(groupField))
+                                    {
+                                        sdvTable.Columns.Remove(groupField);
+                                    }
+                                    htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView, useAlternatingColors));
+                                }
+                                else
+                                {
+                                    if (dg.ItemsSource is DataView)
+                                    {
+                                        DataView dgItemSource = dg.ItemsSource as DataView;
+                                        int dgtcindex = 0;
+                                        foreach (DataColumn dc in dgItemSource.Table.Columns)
+                                        {
+                                            string nombre = dg.Columns[dgtcindex].Header.ToString();
+                                            if (dg.Columns.Count > dgtcindex)
+                                            {
+                                                for (int i = 2; i < 24; i++)
+                                                {
+                                                    if (dgItemSource.Table.Columns.Contains(nombre) && dc.Ordinal != 0)
+                                                    {
+                                                        nombre = nombre + '(' + i + ')';
+                                                    }
+                                                    else
+                                                    {
+                                                        dc.ColumnName = nombre;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            dgtcindex++;
+                                        }
+
+                                        htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(dg.ItemsSource as DataView, useAlternatingColors));
+                                    }
+                                }
+                            }
+                            else if (dg.ItemsSource is ListCollectionView)
+                            {
+                                ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
+                                if (lcv.SourceCollection is DataView)
+                                {
+                                    if (!String.IsNullOrEmpty(groupField))
+                                    {
+                                        DataView sdv = lcv.SourceCollection as DataView;
+                                        if (groupValue.Equals(""))
+                                            sdv.RowFilter = groupField + " is null";
+                                        else
+                                            sdv.RowFilter = groupField + " = '" + groupValue + "'";
+                                        DataTable sdvTable = sdv.ToTable();
+                                        if (!Parameters.ColumnNames.Contains(groupField))
+                                        {
+                                            sdvTable.Columns.Remove(groupField);
+                                        }
+                                        htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(sdvTable.DefaultView, useAlternatingColors));
+                                    }
+                                    else
+                                    {
+                                        htmlBuilder.AppendLine(Common.ConvertDataViewToHtmlString(lcv.SourceCollection as DataView, useAlternatingColors));
+                                    }
+                                }
+                            }
+
+                            htmlBuilder.AppendLine("</table>");
+                        }
+
+                    
+
+
+               }
+
+            else
+            {
+
+
+                if (dg.ItemsSource is DataView)
+                {
+                    if (!String.IsNullOrEmpty(groupField))
+                    {
+                        DataView sdv = dg.ItemsSource as DataView;
+                        //if (groupValue.Equals(""))
+                        //    sdv.RowFilter = groupField + " is null";
+                        //else
+                        //    sdv.RowFilter = groupField + " = '" + groupValue + "'";
+                        DataTable sdvTable = sdv.ToTable();
+                        if (!Parameters.ColumnNames.Contains(groupField))
+                        {
+                            sdvTable.Columns.Remove(groupField);
+                        }
+                        htmlBuilder.AppendLine("<div  class=\"donut - container\" style=\"background: #9C0;\">");
+
+
+                        htmlBuilder.AppendLine("</div>");
+                    }
+                    else
+                    {
+                        if (dg.ItemsSource is DataView)
+                        {
+                            DataView dgItemSource = dg.ItemsSource as DataView;
+                            int dgtcindex = 0;
+                            foreach (DataColumn dc in dgItemSource.Table.Columns)
+                            {
+                                string nombre = dg.Columns[dgtcindex].Header.ToString();
+                                if (dg.Columns.Count > dgtcindex)
+                                {
+                                    for (int i = 2; i < 24; i++)
+                                    {
+                                        if (dgItemSource.Table.Columns.Contains(nombre) && dc.Ordinal != 0)
+                                        {
+                                            nombre = nombre + '(' + i + ')';
+                                        }
+                                        else
+                                        {
+                                            dc.ColumnName = nombre;
+                                            break;
+                                        }
+                                    }
+                                }
+                                dgtcindex++;
+                            }
+
+                            htmlBuilder.AppendLine("<div  class=\"donut - container\" style=\"background: #9C0;\">");
+
+
+                            htmlBuilder.AppendLine("</div>");
                         }
                     }
-
-                    htmlBuilder.AppendLine("</table>");
                 }
+                else if (dg.ItemsSource is ListCollectionView)
+                {
+                    ListCollectionView lcv = dg.ItemsSource as ListCollectionView;
+
+                    if (lcv.SourceCollection is DataView)
+                    {
+                        DataView sdv = lcv.SourceCollection as DataView;
+                        DataTable dt = sdv.Table;
+
+
+
+
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            string color = "";
+                            string rate = "";
+                            string text = "";
+                            foreach (DataColumn dc in dt.Columns)
+                            {
+
+                                if (dc.ToString() == "Rate")
+                                {
+                                    rate = row[dc].ToString().Trim();
+                                }
+                                else if (dc.ToString() == "hexColor")
+                                {
+                                    color = row[dc].ToString().Trim().Remove(1, 2);
+                                }
+                                else if (dc.ToString() == "Rate_Description")
+                                {
+                                    text = row[dc].ToString().Trim();
+                                }
+                            }
+                            htmlBuilder.AppendLine("<div  class=\"row col-sm-12\"  style=\"padding-bottom: 15px; \">");
+
+                            htmlBuilder.AppendLine("<div  class=\"col-sm-3\"  >");
+                            htmlBuilder.AppendLine("<div  class=\"donut-container\" style=\"background: " + color + ";\">");
+                            htmlBuilder.AppendLine("<div  class=\"donut-inner\"  >");
+                            htmlBuilder.AppendLine("<div  class=\"donut-label\"  >");
+                            htmlBuilder.AppendLine(rate + "</div>");
+                            htmlBuilder.AppendLine("</div>");
+                            htmlBuilder.AppendLine("</div>");
+                            htmlBuilder.AppendLine("</div>");
+                            htmlBuilder.AppendLine("<div  class=\"col-sm-9 CenterText\" style=\"padding-top: 40px;\" >");
+
+                            htmlBuilder.AppendLine(text + "</div>");
+
+                            htmlBuilder.AppendLine("</div>");
+                        }
+
+
+                    }
+                }
+            }
             }
 
             return htmlBuilder.ToString();

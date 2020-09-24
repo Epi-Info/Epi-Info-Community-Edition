@@ -1300,6 +1300,7 @@ namespace EpiDashboard
         /// <returns></returns>
         public override string ToHTML(string htmlFileName = "", int count = 0, bool useAlternatingColors = false, bool ForWeb = false)
         {
+            
             StringBuilder htmlBuilder = new StringBuilder();
             CustomOutputHeading = headerPanel.Text;
             CustomOutputDescription = descriptionPanel.Text;
@@ -1340,26 +1341,72 @@ namespace EpiDashboard
             {
                 htmlBuilder.AppendLine("<p><small><strong>" + infoPanel.Text + "</strong></small></p>");
             }
+            if (!ForWeb) {
+                string imageFileName = string.Empty;
 
-            string imageFileName = string.Empty;
+                if (htmlFileName.EndsWith(".html"))
+                {
+                    imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
+                }
+                else if (htmlFileName.EndsWith(".htm"))
+                {
+                    imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
+                }
 
-            if (htmlFileName.EndsWith(".html"))
-            {
-                imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
+                imageFileName = imageFileName + "_" + count.ToString() + ".png";
+
+                System.IO.FileInfo fi = new System.IO.FileInfo(imageFileName);
+
+                ToImageFile(imageFileName, false);
+
+                htmlBuilder.AppendLine("<img src=\"" + fi.Name + "\" />");
             }
-            else if (htmlFileName.EndsWith(".htm"))
-            {
-                imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
+            else {
+                WordCloudParameters WordCloudParameters = (WordCloudParameters)Parameters;
+                var gadget = this;
+                //  var _color = Parameters..;
+                StringBuilder colorString = new StringBuilder();
+                double Width = gadget.ActualWidth ;
+                double Height = gadget.ActualHeight;
+                //htmlBuilder.AppendLine("<canvas id=\""+ gadget.UniqueIdentifier + "\"></canvas>");
+               // htmlBuilder.AppendLine("<canvas id =\"myCanvas\"></canvas>");
+                htmlBuilder.AppendLine("<canvas id=\"myCanvas" + count + "\"  width=\"" + Width + "px\"   height =\""+ Height + "px\" \"></canvas>");
+                htmlBuilder.AppendLine("<script> $(document).ready(function () {");
+                //htmlBuilder.AppendLine("var list_"+ gadget.UniqueIdentifier +" = [");
+                htmlBuilder.AppendLine("var list_"+ count + "  = [");
+                foreach (var item in gadget.wordCloudDictionary)
+                {
+                    htmlBuilder.AppendLine("[");
+                    htmlBuilder.AppendLine("'"+ item.Key + "' , "+item.Value +"");
+                    htmlBuilder.AppendLine("],");
+
+                }
+                htmlBuilder.AppendLine("];");
+
+
+             //   colorString.AppendLine("var Colorlist_" + count + "  = [");
+                colorString.AppendLine("[");
+                if (WordCloudParameters.ColorList != null) {
+                    foreach (var item in WordCloudParameters.ColorList)
+                    {
+                        // htmlBuilder.AppendLine("[");
+                        colorString.AppendLine("'" + item + "' ,");
+                        //  htmlBuilder.AppendLine("],");
+
+                    }
+                }
+                colorString.AppendLine("]");
+                if (WordCloudParameters.ColorList != null)
+                {
+                    htmlBuilder.AppendLine(" WordCloud(document.getElementById('myCanvas" + count + "'), { list: list_" + count + " , color: function() { return ( " + colorString + ")[Math.floor(Math.random() * " + WordCloudParameters.ColorList.Count() + ")]},    });");
+                }
+                else {
+
+                    htmlBuilder.AppendLine(" WordCloud(document.getElementById('myCanvas" + count + "'), { list: list_" + count + "   });");
+                }
+                htmlBuilder.AppendLine("});</script>");
+
             }
-
-            imageFileName = imageFileName + "_" + count.ToString() + ".png";
-
-            System.IO.FileInfo fi = new System.IO.FileInfo(imageFileName);
-
-            ToImageFile(imageFileName, false);
-
-            htmlBuilder.AppendLine("<img src=\"" + fi.Name + "\" />");
-
             return htmlBuilder.ToString();
         }
 
@@ -1855,6 +1902,8 @@ namespace EpiDashboard
                 
                 int iterations = 0;
                 bool gaveUp = false;
+                WordCloudParameters WordCloudParameters = (WordCloudParameters)Parameters;
+                WordCloudParameters.ColorList = new List<string>();
                 while (intersects)
                 {
                     if (iterations > 50)
@@ -1898,7 +1947,9 @@ namespace EpiDashboard
                     {
                         color = new SolidColorBrush(Color.FromRgb(235, 14, 0));
                     }
-
+                    if (!WordCloudParameters.ColorList.Contains(color.ToString().Remove(1, 2))) {
+                        WordCloudParameters.ColorList.Add(color.ToString().Remove(1, 2));
+                    }
                     geoDrawing = new GeometryDrawing(color, new Pen(color, 1.0), geo);
                     intersects = false;
                     foreach (GeometryDrawing d in drawingGroup.Children)
