@@ -28,15 +28,15 @@ namespace EpiDashboard
     public class DashboardHelper
     {
         #region Private Members
-        private int Combined_Frequency_Row_Limit = 250;        
+        private int Combined_Frequency_Row_Limit = 250;
         private int Frequency_Row_Limit = 200;
         private int LineList_Row_Limit = 2000;
         private int Aberration_Row_Limit = 366;
         private int Frequency_Strata_Limit = 100;
-        private int Frequency_Crosstab_Limit = 100;             
-        private IDbDriver db;                
+        private int Frequency_Crosstab_Limit = 100;
+        private IDbDriver db;
         private DashboardControl dashboardControl;
-        private CaseInsensitiveEqualityComparer caseInsensitiveEqualityComparer = new CaseInsensitiveEqualityComparer();       
+        private CaseInsensitiveEqualityComparer caseInsensitiveEqualityComparer = new CaseInsensitiveEqualityComparer();
         private DataTable mainTable;
         private DataSet ds;
         private object syncLock = new object();
@@ -49,7 +49,7 @@ namespace EpiDashboard
         /// Default constructor
         /// </summary>
         public DashboardHelper()
-        {            
+        {
             this.TableName = string.Empty;
           //  this.ReportId = string.Empty;
             Construct();
@@ -402,7 +402,7 @@ namespace EpiDashboard
             }
             else
             {
-                xmlString =                                        
+                xmlString =
                     "<connectionString>" + Configuration.Encrypt(this.Database.ConnectionString) + "</connectionString>";
 
                 if (!string.IsNullOrEmpty(this.Database.IdentifyDatabase()))
@@ -413,7 +413,7 @@ namespace EpiDashboard
                 if (!string.IsNullOrEmpty(this.TableName))
                 {
                     xmlString += "<tableName>" + this.TableName.Replace("&", "&amp;") + "</tableName>";
-                }                    
+                }
 
                 if (!string.IsNullOrEmpty(this.CustomQuery))
                 {
@@ -456,7 +456,7 @@ namespace EpiDashboard
             string projectPath = string.Empty;
             string viewName = string.Empty;
             string connectionString = string.Empty;
-            string table = string.Empty;            
+            string table = string.Empty;
 
             TableColumnNames.Clear();
 
@@ -475,9 +475,9 @@ namespace EpiDashboard
                         viewName = child.InnerText;
                         break;
                     case "connectionstring":
-                        if (!string.IsNullOrEmpty(child.InnerText)) 
-                        { 
-                            connectionString = Configuration.Decrypt(child.InnerText); 
+                        if (!string.IsNullOrEmpty(child.InnerText))
+                        {
+                            connectionString = Configuration.Decrypt(child.InnerText);
                         }
                         break;
                     case "reportid":
@@ -679,7 +679,7 @@ namespace EpiDashboard
             }
 
             if (!string.IsNullOrEmpty(projectPath) && !string.IsNullOrEmpty(viewName))
-            {                
+            {
                 if (System.IO.File.Exists(projectPath))
                 {
                     Project newProject = new Project(projectPath);
@@ -831,11 +831,11 @@ namespace EpiDashboard
             string rawColumnName = columnName;
 
             columnName = AddBracketsToString(columnName);
-           
-                if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
+
+            if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO))
+            {
+                try
                 {
-                     try
-                    {
                     DateTime lowVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
                     string friendlyLowValue = lowVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
@@ -844,100 +844,100 @@ namespace EpiDashboard
 
                     FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyLowValue, friendlyHighValue);
                     DataFilters.AddFilterCondition(newCondition, joinType);
-                     }
-                     catch(Exception ex)
-                    {
-
-                        Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
-                        return added; // cancelled
-                    }
-
                 }
-                else if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
 
-                        if (dateVal.Hour == 0)
-                            dateVal = dateVal.AddHours(23);
-                        if (dateVal.Minute == 0)
-                            dateVal = dateVal.AddMinutes(59);
-                        if (dateVal.Second == 0)
-                            dateVal = dateVal.AddSeconds(59);
-                        if (dateVal.Millisecond == 0)
-                            dateVal = dateVal.AddMilliseconds(999);
-
-                        friendlyValue = dateVal.ToString("M/d/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-
-                        FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
-                        DataFilters.AddFilterCondition(newCondition, joinType);
-                    }
-                     catch(Exception ex)
-                    {
-
-                        Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
-                        return added; // cancelled
-                    }
+                    Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
+                    return added; // cancelled
                 }
-                else if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
+
+            }
+            else if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL))
+            {
+                try
                 {
-                    try
-                    {
-                        DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
+                    DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
 
-                        if (dateVal.Hour == 0)
-                            dateVal = dateVal.AddHours(23);
-                        if (dateVal.Minute == 0)
-                            dateVal = dateVal.AddMinutes(59);
-                        if (dateVal.Second == 0)
-                            dateVal = dateVal.AddSeconds(59);
-                        if (dateVal.Millisecond == 0)
-                            dateVal = dateVal.AddMilliseconds(999);
+                    if (dateVal.Hour == 0)
+                        dateVal = dateVal.AddHours(23);
+                    if (dateVal.Minute == 0)
+                        dateVal = dateVal.AddMinutes(59);
+                    if (dateVal.Second == 0)
+                        dateVal = dateVal.AddSeconds(59);
+                    if (dateVal.Millisecond == 0)
+                        dateVal = dateVal.AddMilliseconds(999);
 
-                        friendlyValue = dateVal.ToString("M/d/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    friendlyValue = dateVal.ToString("M/d/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-                        FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
-                        DataFilters.AddFilterCondition(newCondition, joinType);
-                    }
-                     catch(Exception ex)
-                    {
-
-                        Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
-                        return added; // cancelled
-                    }
-                }
-                else if (columnType.Equals("System.DateTime"))
-                {
-                    try
-                    {
-                        if (string.IsNullOrEmpty(friendlyValue))
-                        {
-                            friendlyValue = Config.Settings.RepresentationOfMissing;
-                        }
-                        else
-                        {
-                            DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
-                            friendlyValue = dateVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                        }
-
-                        FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
-                        DataFilters.AddFilterCondition(newCondition, joinType);
-                    }
-                     catch(Exception ex)
-                    {
-
-                        Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
-                        return added; // cancelled
-                    }
-                }
-                else
-                {
                     FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
                     DataFilters.AddFilterCondition(newCondition, joinType);
                 }
+                catch (Exception ex)
+                {
 
-                return added;                     
+                    Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
+                    return added; // cancelled
+                }
+            }
+            else if (columnType.Equals("System.DateTime") && friendlyOperand.Equals(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN))
+            {
+                try
+                {
+                    DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
+
+                    if (dateVal.Hour == 0)
+                        dateVal = dateVal.AddHours(23);
+                    if (dateVal.Minute == 0)
+                        dateVal = dateVal.AddMinutes(59);
+                    if (dateVal.Second == 0)
+                        dateVal = dateVal.AddSeconds(59);
+                    if (dateVal.Millisecond == 0)
+                        dateVal = dateVal.AddMilliseconds(999);
+
+                    friendlyValue = dateVal.ToString("M/d/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+                    FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
+                    DataFilters.AddFilterCondition(newCondition, joinType);
+                }
+                catch (Exception ex)
+                {
+
+                    Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
+                    return added; // cancelled
+                }
+            }
+            else if (columnType.Equals("System.DateTime"))
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(friendlyValue))
+                    {
+                        friendlyValue = Config.Settings.RepresentationOfMissing;
+                    }
+                    else
+                    {
+                        DateTime dateVal = DateTime.Parse(friendlyValue, System.Globalization.CultureInfo.CurrentCulture);
+                        friendlyValue = dateVal.ToString("M/d/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    }
+
+                    FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
+                    DataFilters.AddFilterCondition(newCondition, joinType);
+                }
+                catch (Exception ex)
+                {
+
+                    Epi.Windows.MsgBox.ShowError(SharedStrings.ENTER_VALID_DATE_AND_TIME, ex);
+                    return added; // cancelled
+                }
+            }
+            else
+            {
+                FilterCondition newCondition = DataFilters.GenerateFilterCondition(columnName, rawColumnName, columnType, friendlyOperand, friendlyValue);
+                DataFilters.AddFilterCondition(newCondition, joinType);
+            }
+
+            return added;
         }
 
         /// <summary>
@@ -1333,7 +1333,7 @@ namespace EpiDashboard
                 IDbDriver lastDb = this.db;
                 string lastTableName = this.TableName;
                 string lastCustomQuery = this.CustomQuery;
-                
+
                 this.db = db;
                 this.TableName = tableName;
                 this.CustomQuery = customQuery;
@@ -1630,7 +1630,7 @@ namespace EpiDashboard
             foreach (IDashboardRule rule in rules)
             {
                 if (rule is Rule_Recode)
-                {                    
+                {
                     return true;
                 }
             }
@@ -1960,7 +1960,7 @@ namespace EpiDashboard
             dashboardFields.Sort();
 
             return dashboardFields;
-        }        
+        }
 
         /// <summary>
         /// Gets a list of all the group fields on the form as a list of strings
@@ -2039,7 +2039,7 @@ namespace EpiDashboard
         /// </summary>        
         /// <returns>List of strings</returns>
         public Rule_VariableGroup GetGroupVariable(string groupVariableName)
-        {            
+        {
             foreach (IDashboardRule rule in this.Rules)
             {
                 if (rule is Rule_VariableGroup && (rule as Rule_VariableGroup).GroupName.Equals(groupVariableName))
@@ -2163,7 +2163,7 @@ namespace EpiDashboard
                 {
                     foreach (RelatedConnection conn in ConnectionsForRelate)
                     {
-                        if(conn.view.Name==vw.Name)
+                        if (conn.view.Name == vw.Name)
                         {
                             unfilteredTable = conn.db.Select(conn.db.CreateQuery("SELECT * " + vw.FromViewSQL));
                             break;
@@ -2173,27 +2173,27 @@ namespace EpiDashboard
                 else
                     unfilteredTable = db.Select(db.CreateQuery("SELECT * " + vw.FromViewSQL));
 
-                    if (unfilteredTable.Columns["RecStatus"] == null && unfilteredTable.Columns["t.RecStatus"] != null)
-                    {
-                        unfilteredTable.Columns["t.RecStatus"].ColumnName = "RecStatus";
-                    }
+                if (unfilteredTable.Columns["RecStatus"] == null && unfilteredTable.Columns["t.RecStatus"] != null)
+                {
+                    unfilteredTable.Columns["t.RecStatus"].ColumnName = "RecStatus";
+                }
 
-                    if (unfilteredTable.Columns.Contains("t.GlobalRecordId"))
+                if (unfilteredTable.Columns.Contains("t.GlobalRecordId"))
+                {
+                    unfilteredTable.Columns["t.GlobalRecordId"].ColumnName = "GlobalRecordId";
+                }
+                if (unfilteredTable.Columns.Contains("t.UniqueKey"))
+                {
+                    unfilteredTable.Columns["t.UniqueKey"].ColumnName = "UniqueKey";
+                }
+                foreach (Page page in vw.Pages)
+                {
+                    string pageGUIDName = page.TableName + "." + "GlobalRecordId";
+                    if (unfilteredTable.Columns.Contains(pageGUIDName))
                     {
-                        unfilteredTable.Columns["t.GlobalRecordId"].ColumnName = "GlobalRecordId";
+                        unfilteredTable.Columns.Remove(pageGUIDName);
                     }
-                    if (unfilteredTable.Columns.Contains("t.UniqueKey"))
-                    {
-                        unfilteredTable.Columns["t.UniqueKey"].ColumnName = "UniqueKey";
-                    }
-                    foreach (Page page in vw.Pages)
-                    {
-                        string pageGUIDName = page.TableName + "." + "GlobalRecordId";
-                        if (unfilteredTable.Columns.Contains(pageGUIDName))
-                        {
-                            unfilteredTable.Columns.Remove(pageGUIDName);
-                        }
-                    }
+                }
             }
             else
             {
@@ -2375,8 +2375,8 @@ namespace EpiDashboard
                             relatedTable.CaseSensitive = true;
 
                             if (conn.IsEpiInfoProject)
-                            {                                                                   
-                                relatedTable = JoinPageTables(conn.view, true, inputs);                               
+                            {
+                                relatedTable = JoinPageTables(conn.view, true, inputs);
 
                                 if (relatedTable == null)
                                 {
@@ -2394,7 +2394,7 @@ namespace EpiDashboard
                             RelateInto(unfilteredTable, relatedTable, conn.ParentKeyField, conn.ChildKeyField, conn.UseUnmatched, inputs);
                         }
                     }
-                   
+
                     AddSystemVariablesToTable(unfilteredTable);
                     AddPermanentVariablesToTable(unfilteredTable);
                     ds = new DataSet();
@@ -2514,7 +2514,7 @@ namespace EpiDashboard
                 }
 
                 ds.Tables[0].CaseSensitive = true;
-               // ds.Tables[0].DefaultView.RowFilter = filterCriteria; // GenerateFilterCriteria(); VHF-54
+                // ds.Tables[0].DefaultView.RowFilter = filterCriteria; // GenerateFilterCriteria(); VHF-54
                 ds.Tables[0].DefaultView.RowFilter = GenerateFilterCriteria(); // GenerateFilterCriteria(); VHF-54
                 ds.Tables[0].DefaultView.Sort = sortOrder;
 
@@ -2547,9 +2547,9 @@ namespace EpiDashboard
             }
             else
             {
-                List<Strata> stratas = new List<Strata>();            
+                List<Strata> stratas = new List<Strata>();
                 DataTable distinctTable = new DataTable();
-                DataTable sortedDistinctTable = new DataTable();            
+                DataTable sortedDistinctTable = new DataTable();
                 stratas = GetStrataValuesAsDictionary(inputs.StrataVariableNames, false, false);
                 foreach (Strata strata in stratas)
                 {
@@ -2604,14 +2604,14 @@ namespace EpiDashboard
                 {
                     object GadgetParameters = ((EpiDashboard.GadgetParametersBase)(inputs));
                     object MeanParameters = ((EpiDashboard.FrequencyParametersBase)(((EpiDashboard.MeansParameters)(GadgetParameters))));
-                   
-                    if (MeanParameters != null )
+
+                    if (MeanParameters != null)
                     {
-                     string CrosstabVariableName = ((EpiDashboard.FrequencyParametersBase)(MeanParameters)).CrosstabVariableName;
-                     if (!string.IsNullOrEmpty(CrosstabVariableName) && !columnNames.Contains(CrosstabVariableName))
-                     {
-                         columnNames.Add(CrosstabVariableName);
-                     }
+                        string CrosstabVariableName = ((EpiDashboard.FrequencyParametersBase)(MeanParameters)).CrosstabVariableName;
+                        if (!string.IsNullOrEmpty(CrosstabVariableName) && !columnNames.Contains(CrosstabVariableName))
+                        {
+                            columnNames.Add(CrosstabVariableName);
+                        }
                     }
                 }
                 foreach (string strataVariableName in inputs.StrataVariableNames)
@@ -2772,7 +2772,7 @@ namespace EpiDashboard
 
             trueValue = inputs.TrueValue;
             CombineModeTypes combineMode = inputs.CombineMode;
-            
+
 
             //if (inputs.InputVariableList.ContainsKey("combinemode"))
             //{
@@ -2896,7 +2896,7 @@ namespace EpiDashboard
                     {
                         cmbDv.RowFilter = originalFilter;
 
-                        cmbDv.RowFilter = CombineFilters(AddBracketsToString(otherField) + " = '" + trueValue.Replace("'", "''") + "'" , cmbDv);
+                        cmbDv.RowFilter = CombineFilters(AddBracketsToString(otherField) + " = '" + trueValue.Replace("'", "''") + "'", cmbDv);
                         double sum = cmbDv.Count;
 
                         Field field = GetAssociatedField(otherField);
@@ -2912,7 +2912,7 @@ namespace EpiDashboard
                     booleanOutput = true;
                 }
             }
-            else if(booleanFields.Count > 0)
+            else if (booleanFields.Count > 0)
             {
                 foreach (string booleanField in booleanFields)
                 {
@@ -3507,7 +3507,7 @@ namespace EpiDashboard
             //    }
             //}
 
-            foreach(KeyValuePair<string, SortOrder> kvp in parameters.SortVariables) 
+            foreach (KeyValuePair<string, SortOrder> kvp in parameters.SortVariables)
             {
                 string sortFieldName = kvp.Key;
 
@@ -3700,7 +3700,7 @@ namespace EpiDashboard
             {
                 dt.Columns.Remove(dc);
             }
-            
+
             OrderColumns(dt, parameters.SortColumnsByTabOrder);
 
             if (parameters.ShowCommentLegalLabels)
@@ -4230,7 +4230,7 @@ namespace EpiDashboard
                 useFieldPrompts = true;
             }
 
-            if(inputs.InputVariableList.ContainsKey("NeedsOutputGrid")) 
+            if (inputs.InputVariableList.ContainsKey("NeedsOutputGrid"))
             {
                 if (inputs.InputVariableList["NeedsOutputGrid"] == "false") needsOutputTable = false;
             }
@@ -4240,7 +4240,7 @@ namespace EpiDashboard
                 int.TryParse(inputs.InputVariableList["timeperiod"], out timePeriod);
             }
 
-            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);            
+            inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CREATING_VARIABLES);
 
             bool doStratification = true;
             bool doCrossTab = true;
@@ -4329,13 +4329,13 @@ namespace EpiDashboard
 
             inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
             DataView dv = GenerateView(inputs);
-            
+
             DateTime? minDate = null;
 
             if (isAberrationRoutine)
             {
                 try
-                {                    
+                {
                     DateTime? maxDate = null;
                     FindUpperLowerDateValues(freqVar, ref minDate, ref maxDate, dv);
 
@@ -4351,7 +4351,7 @@ namespace EpiDashboard
 
                         dt1 = minDate.Value;
                         dts1 = dt1.ToShortDateString();
-                    }                    
+                    }
                 }
                 catch
                 {
@@ -4433,10 +4433,10 @@ namespace EpiDashboard
                         stratas.Add(new Strata(new List<string>(), new List<object>(), freqVar, freqVar));///*new KeyValuePair<string, string>(freqVar, freqVar)*/);
                     }
                 },
-                () => 
-                {   
+                () =>
+                {
                     if (doCrossTab)
-                    {   
+                    {
                         crosstabValues = GetCrosstabValuesAsDictionary(crosstabVar, freqVar, includeMissing);
 
                         if (!inputs.IgnoreRowLimits && crosstabValues.Count > Frequency_Crosstab_Limit)
@@ -4481,7 +4481,7 @@ namespace EpiDashboard
             }
 
             //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_FINDING_FREQ_VALUES);
-            
+
 
             if (inputs.Worker != null && inputs.Worker.CancellationPending == true)
             {
@@ -4489,7 +4489,7 @@ namespace EpiDashboard
             }
 
             //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_SORTING_FREQ_VALUES);
-            
+
             //inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_COMPARING_FREQ_VALUES);
 
             int count = 0;
@@ -4517,7 +4517,7 @@ namespace EpiDashboard
                             freqValues.Add(string.Empty);
                     }
                     else
-                    freqValues.Add(row[0].ToString().TrimEnd());                    
+                        freqValues.Add(row[0].ToString().TrimEnd());
                 }
 
                 count++;
@@ -4664,7 +4664,7 @@ namespace EpiDashboard
 
                         if (formatRule.FormatType == FormatTypes.FullMonthName || formatRule.FormatType == FormatTypes.ShortMonthName)
                         {
-                            DateTime[] dts = new DateTime[] { 
+                            DateTime[] dts = new DateTime[] {
                                 new DateTime(2000, 1, 1) ,
                                 new DateTime(2000, 2, 1) ,
                                 new DateTime(2000, 3, 1) ,
@@ -4687,14 +4687,14 @@ namespace EpiDashboard
                         }
                         else if (formatRule.FormatType == FormatTypes.FullDayName || formatRule.FormatType == FormatTypes.ShortDayName)
                         {
-                            DateTime[] dts = new DateTime[] { 
+                            DateTime[] dts = new DateTime[] {
                                 new DateTime(2000, 1, 1) ,
                                 new DateTime(2000, 1, 2) ,
                                 new DateTime(2000, 1, 3) ,
                                 new DateTime(2000, 1, 4) ,
                                 new DateTime(2000, 1, 5) ,
                                 new DateTime(2000, 1, 6) ,
-                                new DateTime(2000, 1, 7) 
+                                new DateTime(2000, 1, 7)
                             };
 
                             foreach (DateTime dt in dts)
@@ -4857,7 +4857,7 @@ namespace EpiDashboard
                                 else
                                 {
                                     string combinedFilter = CombineFilters(filter, dv);
-                                    sum = mainTable.Select(combinedFilter, "", DataViewRowState.CurrentRows).Length;                                   
+                                    sum = mainTable.Select(combinedFilter, "", DataViewRowState.CurrentRows).Length;
 
                                     //DataView sumView = new DataView(mainTable, combinedFilter, "", DataViewRowState.CurrentRows);
                                     //sum = sumView.Count;
@@ -4991,7 +4991,7 @@ namespace EpiDashboard
                             {
                                 try
                                 {
-                                    sum = mainTable.Select(CombineFilters(filter, dv), "", DataViewRowState.CurrentRows).Length; 
+                                    sum = mainTable.Select(CombineFilters(filter, dv), "", DataViewRowState.CurrentRows).Length;
                                     //DataView sumView = new DataView(mainTable, CombineFilters(filter, dv), string.Empty, DataViewRowState.CurrentRows);
                                     //sum = sumView.Count;
                                 }
@@ -5082,7 +5082,7 @@ namespace EpiDashboard
                                 filter = filter.Remove(0, 4);
                             }
                             inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CALCULATING_DESCRIPTIVE_STATISTICS);
-                            DataTable filteredTable = GenerateTable(inputs );
+                            DataTable filteredTable = GenerateTable(inputs);
                             DescriptiveStatistics means = DoMeans(inputs, filteredTable, freqTable, filter, outerFilter);
                             //if (means.observations > -1)
                             //{
@@ -5263,7 +5263,7 @@ namespace EpiDashboard
                             newInputs.IncludeFullSummaryStatistics = false;
                             newInputs.IncludeMissing = false;
                             newInputs.IgnoreRowLimits = true;
-                            newInputs.ColumnNames.Add(crosstabVar);                            
+                            newInputs.ColumnNames.Add(crosstabVar);
                             if (!string.IsNullOrEmpty(inputs.CustomFilter.Trim()))
                             {
                                 newInputs.CustomFilter = inputs.CustomFilter.Trim() + " and " + fullFilter;
@@ -5795,7 +5795,7 @@ namespace EpiDashboard
 
                         if (formatRule.FormatType == FormatTypes.FullMonthName || formatRule.FormatType == FormatTypes.ShortMonthName)
                         {
-                            DateTime[] dts = new DateTime[] { 
+                            DateTime[] dts = new DateTime[] {
                                 new DateTime(2000, 1, 1) ,
                                 new DateTime(2000, 2, 1) ,
                                 new DateTime(2000, 3, 1) ,
@@ -5818,14 +5818,14 @@ namespace EpiDashboard
                         }
                         else if (formatRule.FormatType == FormatTypes.FullDayName || formatRule.FormatType == FormatTypes.ShortDayName)
                         {
-                            DateTime[] dts = new DateTime[] { 
+                            DateTime[] dts = new DateTime[] {
                                 new DateTime(2000, 1, 1) ,
                                 new DateTime(2000, 1, 2) ,
                                 new DateTime(2000, 1, 3) ,
                                 new DateTime(2000, 1, 4) ,
                                 new DateTime(2000, 1, 5) ,
                                 new DateTime(2000, 1, 6) ,
-                                new DateTime(2000, 1, 7) 
+                                new DateTime(2000, 1, 7)
                             };
 
                             foreach (DateTime dt in dts)
@@ -7436,7 +7436,7 @@ namespace EpiDashboard
             else
             {
                 stackedBarTable.Columns.Add(xAxisColumn, typeof(string));
-            }            
+            }
 
             stackedBarTable.Columns.Add(yAxisColumn, typeof(string));
 
@@ -7519,7 +7519,7 @@ namespace EpiDashboard
 
                     // With case sensitivity turned on, apparently the filters aren't applied by the time we ask for a row count. This seems to fix that problem. This method
                     // should only ever be called on its own thread, so we shouldn't have to worry about a Sleep call killing UI responsiveness. -- E. Knudsen 6/10/2012
-                    System.Threading.Thread.Sleep(50); 
+                    System.Threading.Thread.Sleep(50);
 
                     RecordCount = ds.Tables[0].DefaultView.Count;
                 }
@@ -7533,8 +7533,8 @@ namespace EpiDashboard
 
                     if (useFilters)
                     {
-                         //Get the first column in the data set and use that, that way we're not potentially pulling in millions 
-                         //of records and thousands of columns just to get the filtered count
+                        //Get the first column in the data set and use that, that way we're not potentially pulling in millions 
+                        //of records and thousands of columns just to get the filtered count
                         ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.DateTime;
                         List<string> allFieldNames = GetFieldsAsList(columnDataType);
                         List<string> columnNames = new List<string>();
@@ -7821,7 +7821,7 @@ namespace EpiDashboard
             this.Rules = new DashboardRules(this);
             this.RecordCount = 0;
             this.RecordProcessScope = RecordProcessingScope.Undeleted;
-            this.ConnectionsForRelate = new List<RelatedConnection>();            
+            this.ConnectionsForRelate = new List<RelatedConnection>();
             this.UserVarsNeedUpdating = true;
             this.LastCacheTime = DateTime.Now;
 
@@ -7879,10 +7879,10 @@ namespace EpiDashboard
                             else if (View.Fields.Contains(dc.ColumnName))
                             {
                                 TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
-                                FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), page.TableName, View.Name, View.Fields[dc.ColumnName]);                                
+                                FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), page.TableName, View.Name, View.Fields[dc.ColumnName]);
                             }
-                        }                        
-                    }                  
+                        }
+                    }
                 }
 
                 // Get group fields too
@@ -7911,12 +7911,12 @@ namespace EpiDashboard
                             TableColumnNames.Add("UniqueKey", dc.DataType.ToString());
                             FieldTable.Rows.Add("UniqueKey", dc.DataType.ToString(), TableName, string.Empty, null);
                         }
-                        else if(!TableColumnNames.ContainsKey(dc.ColumnName))
+                        else if (!TableColumnNames.ContainsKey(dc.ColumnName))
                         {
                             TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
                             FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), TableName, string.Empty, null);
                         }
-                    }                      
+                    }
                 }
             }
 
@@ -7934,7 +7934,7 @@ namespace EpiDashboard
                             foreach (DataColumn dc in mainTable.Columns)
                             {
                                 if (!TableColumnNames.ContainsKey(dc.ColumnName) && !dc.ColumnName.Equals("RECSTATUS"))
-                                {                                   
+                                {
                                     if (conn.view.Fields.Contains(dc.ColumnName))
                                     {
                                         if (!FieldTable.Columns.Contains(dc.ColumnName))
@@ -7969,7 +7969,7 @@ namespace EpiDashboard
                                     TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
                                     FieldTable.Rows.Add(dc.ColumnName, dc.DataType.ToString(), conn.TableName, string.Empty, null);
                                 }
-                            }        
+                            }
                         }
                     }
                 }
@@ -8872,7 +8872,7 @@ namespace EpiDashboard
             if (optionFields.Count > 0)
             {
                 foreach (KeyValuePair<DDLFieldOfCommentLegal, int> kvp in optionFields)
-                {                    
+                {
                     DataTable codeDataTable = kvp.Key.GetSourceData();
                     optionFieldData.Add(kvp.Key, codeDataTable);
                 }
@@ -9024,14 +9024,14 @@ namespace EpiDashboard
                 else
 
                 {
-                 allColumnNames.Add(s);
+                    allColumnNames.Add(s);
                 }
             }
             //--ei-275
-             // string[] keyColumnNames = parameters.KeyColumnNames.ToArray();
+            // string[] keyColumnNames = parameters.KeyColumnNames.ToArray();
             List<string> lstkeyColumnNames = new List<string>();
             foreach (string s in parameters.KeyColumnNames)
-             {
+            {
                 List<string> groupvars = GetVariablesInGroup(s);
                 if (groupvars.Count > 0)
                 {
@@ -9039,9 +9039,9 @@ namespace EpiDashboard
                 }
                 else
                 {
-                   lstkeyColumnNames.Add(s);
+                    lstkeyColumnNames.Add(s);
                 }
-             }
+            }
             //--
 
             string[] keyColumnNames = lstkeyColumnNames.ToArray();
@@ -9183,9 +9183,9 @@ namespace EpiDashboard
             {
                 Type type = sourceTable.Columns[columnName].DataType;
                 distinctTable.Columns.Add(columnName, type);
-               // if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
+                // if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
                 //{
-                   // distinctTable.Columns[columnName].DataType = typeof(decimal);
+                // distinctTable.Columns[columnName].DataType = typeof(decimal);
                 //}
             }
 
@@ -9299,9 +9299,9 @@ namespace EpiDashboard
                 Type type = mainTable.Columns[columnName].DataType;
                 distinctTable.Columns.Add(columnName, type);
 
-               // if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
+                // if (type.ToString().Equals("System.Single") || type.ToString().Equals("System.Double"))
                 //{
-                  //  distinctTable.Columns[columnName].DataType = typeof(decimal);
+                //  distinctTable.Columns[columnName].DataType = typeof(decimal);
                 //}
             }
 
@@ -9322,7 +9322,7 @@ namespace EpiDashboard
                     SetLastValues(lastValues, row, columnNames);
                 }
             }
-            
+
             return distinctTable;
         }
 
@@ -10423,14 +10423,14 @@ namespace EpiDashboard
 
                 foreach (Page page in View.Pages)
                 {
-                    List<string> pageColumnsToSelect = new List<string>();                    
+                    List<string> pageColumnsToSelect = new List<string>();
                     foreach (Field field in page.Fields)
                     {
                         if (columnNames.Contains(field.Name, caseInsensitiveEqualityComparer))
-                        {                            
+                        {
                             pageColumnsToSelect.Add(field.Name);
                         }
-                    }                    
+                    }
                     pageColumnsToSelect.Add("GlobalRecordId");
 
                     DataTable pageTable = Database.GetTableData(page.TableName, pageColumnsToSelect);
@@ -10629,9 +10629,9 @@ namespace EpiDashboard
             string parentKeyDataType = parentTable.Columns[parentKey].DataType.ToString();
             string childKeyDataType = childTable.Columns[childKey].DataType.ToString();
 
-            if (toMany == false && 
-                parentTable.PrimaryKey.Contains(parentTable.Columns[parentKey]) && 
-                parentTable.PrimaryKey.Length == 1 && 
+            if (toMany == false &&
+                parentTable.PrimaryKey.Contains(parentTable.Columns[parentKey]) &&
+                parentTable.PrimaryKey.Length == 1 &&
                 parentKeyDataType == childKeyDataType)
             {
                 int counter = 0;
@@ -10675,7 +10675,7 @@ namespace EpiDashboard
                 if (false == useUnmatched) // ALL
                 {
                     List<DataRow> rowsToRemove = new List<DataRow>();
-                    
+
                     foreach (DataRow parentRow in parentTable.Rows)
                     {
                         var RHO = parentRow[parentKey];
@@ -10729,7 +10729,7 @@ namespace EpiDashboard
                                 {
                                     //for (int i = 1; i < count; i++)
                                     //{
-                                    if (!objects.ContainsKey(childRow["__INT__TRK__ID__"].ToString()) && count >= 2)
+                                    if (!objects.ContainsKey(childRow["__INT__TRK__ID__"].ToString()) && count >= 1)
                                     {
                                         objects.Add(childRow["__INT__TRK__ID__"].ToString(), parentRow.ItemArray);
                                         if (!rowsToRemove.Contains(parentRow))
@@ -10970,7 +10970,7 @@ namespace EpiDashboard
                 string s = string.Empty;
                 string epiValue = string.Empty;
                 string rawStrataValue = string.Empty;
-                
+
                 for (int i = 0; i < sortedDistinctTable.Columns.Count; i++)
                 {
                     string strataColumnType = GetColumnType(sortedDistinctTable.Columns[i].ColumnName);
@@ -11247,7 +11247,7 @@ namespace EpiDashboard
             }
         }
         #endregion // Classes
-      
+
 
     }
 

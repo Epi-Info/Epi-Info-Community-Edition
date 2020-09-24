@@ -12,6 +12,7 @@ using Epi.Core.AnalysisInterpreter;
 using Epi.Data;
 using Epi.Windows.Dialogs;
 using Epi.Windows.Analysis;
+using Epi;
 
 namespace Epi.Windows.Analysis.Dialogs
 {
@@ -188,25 +189,31 @@ namespace Epi.Windows.Analysis.Dialogs
                     }
                     else
                     {
-                        relatedFields = db.GetTableColumnNames(RelatedTable); 
+                        relatedFields = db.GetTableColumnNames(RelatedTable);
                     }
                     //---
-                    
+
                 }
                 else if (SelectedDataSource is Project)
                 {
                     Project project = SelectedDataSource as Project;
 
-                    if(project.Views.Exists(relatedTable))
+                    if (project.Views.Exists(relatedTable))
                     {
-                        foreach(Epi.Fields.IField field in project.Views[RelatedTable].Fields)
+                        foreach (Epi.Fields.IField field in project.Views[RelatedTable].Fields)
                         {
-                            if (!(field is Epi.Fields.LabelField) & !(field is Epi.Fields.CommandButtonField) & !(field is Epi.Fields.PhoneNumberField)//EI-705
-                                & !(field is Epi.Fields.MultilineTextField) & !(field is Epi.Fields.GroupField) & !(field is Epi.Fields.CheckBoxField)
-                                & !(field is Epi.Fields.ImageField) & !(field is Epi.Fields.OptionField) & !(field is Epi.Fields.GridField)
-                                & !(field is Epi.Fields.MirrorField))
+                            if (!(field is Epi.Fields.LabelField) &
+                                !(field is Epi.Fields.CommandButtonField) & 
+                                !(field is Epi.Fields.PhoneNumberField) &
+                                !(field is Epi.Fields.MultilineTextField) & 
+                                !(field is Epi.Fields.GroupField) & 
+                                !(field is Epi.Fields.CheckBoxField) & 
+                                !(field is Epi.Fields.ImageField) & 
+                                !(field is Epi.Fields.OptionField) & 
+                                !(field is Epi.Fields.GridField) & 
+                                !(field is Epi.Fields.MirrorField))
 
-                                    relatedFields.Add(field.Name);
+                                relatedFields.Add(field.Name);
                         }
                     }
                     else
@@ -214,47 +221,14 @@ namespace Epi.Windows.Analysis.Dialogs
                         relatedFields = project.GetTableColumnNames(RelatedTable);
                     }
                 }
-                if (this.EpiInterpreter.Context.DataSet != null)
-                {    
-                    View CurrentView = null;
-                    bool currentReadIdentifierIsView = false;
 
-                    if(this.EpiInterpreter.Context.CurrentProject != null)
-                    {
-                        currentReadIdentifierIsView = this.EpiInterpreter.Context.CurrentProject.IsView(this.EpiInterpreter.Context.CurrentRead.Identifier);
-                    }
-
-                    if (currentReadIdentifierIsView)
-                    {
-                         CurrentView = this.EpiInterpreter.Context.CurrentProject.GetViewByName(this.EpiInterpreter.Context.CurrentRead.Identifier);//EI-705
-                         foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
-                         {
-                             if ((CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.LabelField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.CommandButtonField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.PhoneNumberField))
-                                & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.MultilineTextField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.GroupField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.CheckBoxField))
-                                & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.ImageField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.OptionField)) & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.GridField))
-                                & (CurrentView.Fields.Exists(column.ColumnName) && !(CurrentView.Fields[column.ColumnName] is Epi.Fields.MirrorField)))
-
-                                 currentFields.Add(column.ColumnName);
-                         }
-                     }
-                     else
-                     {                        
-                         foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
-                         {
-                             currentFields.Add(column.ColumnName);
-                         }
-                     }
-                }
-                currentFields.Sort();
+                currentFields = GetCurrentFields();
             }
-            //rdbCurrentTable.Checked = true;
 
             relatedFields.Sort();
             currentFields.Sort();
 
-            //cmbAvailableVariables2.DataSource = relatedFields;
             lbxRelatedTableFields.DataSource = relatedFields;
-            //cmbAvailableVariables.DataSource = currentFields;
             lbxCurrentTableFields.DataSource = currentFields;
             
             lbxCurrentTableFields.SelectedIndex = -1;
@@ -273,6 +247,66 @@ namespace Epi.Windows.Analysis.Dialogs
 
         }
 
+        /// <summary>
+        /// Returns a list of field names that can be selected from the parent table and be used in a Relate command.
+        /// Care is take to remove fields from Project Views that do not contain data like MirrorFields, GroupFields, etc.
+        /// 
+        /// </summary>
+        private List<String> GetCurrentFields()
+        {
+            List<String> fieldNames = new List<string>();
+            int numberOfBaseTableFields = 5; // {FirstSaveLogonName}, {FirstSaveTime}, {LastSaveLogonName}, {LastSaveTime}, {FKEY}
+
+            if (this.EpiInterpreter.Context.DataSet != null)
+            {
+                View currentView = null;
+
+                if (this.EpiInterpreter.Context.CurrentProject != null)
+                {
+                    currentView = this.EpiInterpreter.Context.CurrentProject.GetViewByName(this.EpiInterpreter.Context.CurrentRead.Identifier);
+
+                    bool isPreRelateCommand = this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns.Count == currentView.TableColumnNames.Count + numberOfBaseTableFields;
+
+                    if (isPreRelateCommand && this.EpiInterpreter.Context.CurrentProject.IsView(this.EpiInterpreter.Context.CurrentRead.Identifier))
+                    {
+                        foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
+                        {
+                            if ((currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.LabelField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.CommandButtonField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.PhoneNumberField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.MultilineTextField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.GroupField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.CheckBoxField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.ImageField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.OptionField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.GridField)) &
+                                (currentView.Fields.Exists(column.ColumnName) && !(currentView.Fields[column.ColumnName] is Epi.Fields.MirrorField))
+                            )
+                            {
+                                fieldNames.Add(column.ColumnName);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
+                        {
+                            fieldNames.Add(column.ColumnName);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (DataColumn column in this.EpiInterpreter.Context.DataSet.Tables["Output"].Columns)
+                    {
+                        fieldNames.Add(column.ColumnName);
+                    }
+                }
+            }
+
+            return fieldNames;
+        }
+
         //private void selectedTable_CheckedChanged(object sender, EventArgs e)
         //{
         //    if (rdbRelatedTable.Checked)
@@ -281,7 +315,7 @@ namespace Epi.Windows.Analysis.Dialogs
         //        {
         //            lbxCurrentTableFields.Items.Add(txtKeyComponent.Text);
         //        }
-                
+
         //    }
         //    else
         //    {
@@ -289,7 +323,7 @@ namespace Epi.Windows.Analysis.Dialogs
         //        {
         //            lbxRelatedTableFields.Items.Add(txtKeyComponent.Text);
         //        }
-                
+
         //    }
 
         //    txtKeyComponent.Text = string.Empty;

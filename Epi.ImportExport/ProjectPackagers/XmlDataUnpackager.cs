@@ -535,15 +535,25 @@ namespace Epi.ImportExport.ProjectPackagers
                                     obj = command.ExecuteNonQuery();
                                 }
 
-                                if (fieldsInQuery.Count > 126)
+                            if (fieldsInQuery.Count > 126)
+                            {
+                                fieldNames = setFieldText.ToString(126);
+                                updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + fieldNames + StringLiterals.SPACE + whereClause);
+
+                                List<QueryParameter> subset = new List<QueryParameter>();
+                                foreach (QueryParameter param in fieldValueParams)
                                 {
-                                    fieldNames = setFieldText.ToString(126);
-                                    updateQuery = db.CreateQuery(updateHeader + StringLiterals.SPACE + fieldNames + StringLiterals.SPACE + whereClause);
-                                    updateQuery.Parameters = fieldValueParams;
-                                    command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
-                                    obj = command.ExecuteNonQuery();
+                                    if (fieldNames.Contains("[" + param.ParameterName.Trim('@') + "]"))
+                                    {
+                                        subset.Add(param);
+                                    }
                                 }
+
+                                updateQuery.Parameters = subset;
+                                command = GetCommand(updateQuery.SqlStatement, Conn, updateQuery.Parameters);
+                                obj = command.ExecuteNonQuery();
                             }
+                        }
                         //    catch(Exception exception)
                         //    {
                         //        Logger.Log
