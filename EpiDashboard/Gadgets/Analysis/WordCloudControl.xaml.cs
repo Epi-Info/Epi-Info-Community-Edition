@@ -1367,7 +1367,7 @@ namespace EpiDashboard
                 //  var _color = Parameters..;
                 StringBuilder colorString = new StringBuilder();
                 double Width = gadget.ActualWidth ;
-                double Height = gadget.ActualHeight;
+                double Height = gadget.ActualHeight - 110;
                 //htmlBuilder.AppendLine("<canvas id=\""+ gadget.UniqueIdentifier + "\"></canvas>");
                // htmlBuilder.AppendLine("<canvas id =\"myCanvas\"></canvas>");
                 htmlBuilder.AppendLine("<canvas id=\"myCanvas" + count + "\"  width=\"" + Width + "px\"   height =\""+ Height + "px\" \"></canvas>");
@@ -1376,10 +1376,12 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("var list_"+ count + "  = [");
                 foreach (var item in gadget.wordCloudDictionary)
                 {
-                    htmlBuilder.AppendLine("[");
-                    htmlBuilder.AppendLine("'"+ item.Key + "' , "+item.Value +"");
-                    htmlBuilder.AppendLine("],");
-
+                    if (!item.Key.Contains('.'))
+                    {
+                        htmlBuilder.AppendLine("[");
+                        htmlBuilder.AppendLine("'" + item.Key + "' , " + item.Value + "");
+                        htmlBuilder.AppendLine("],");
+                    }
                 }
                 htmlBuilder.AppendLine("];");
 

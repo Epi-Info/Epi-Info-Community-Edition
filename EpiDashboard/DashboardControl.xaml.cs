@@ -614,7 +614,7 @@ namespace EpiDashboard
             if (SurveyId == Guid.Empty)
             {
 
-                SurveyId = Guid.Parse("5f73decc-791f-4216-b10d-7f8e10b1207a");
+                SurveyId = Guid.Parse("b834ccf7-d061-45d3-9339-0f9569dba983");
             }
             Request.ReportInfo.SurveyId = SurveyId.ToString();
             if (this.DashboardHelper.ReportId != null) {
@@ -632,7 +632,7 @@ namespace EpiDashboard
             GadgetDTO.GadgetNumber = GadgetNumber;
             GadgetDTO.CreatedDate = DateTime.Now;
             GadgetDTO.EditedDate = DateTime.Now;
-           
+            GadgetDTO.GadgetVersion = 1;
             if (this.DashboardHelper.ReportId != null)
             {
                 GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
@@ -645,6 +645,53 @@ namespace EpiDashboard
             Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
 
             var Result = client.PublishReport(Request);
+
+
+
+
+        }
+        private void DeleteReport()
+        {
+
+            var Table = DashboardHelper.TableName;
+
+            Epi.SurveyManagerServiceV4.ManagerServiceV4Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+            Epi.SurveyManagerServiceV4.PublishReportRequest Request = new Epi.SurveyManagerServiceV4.PublishReportRequest();
+            Request.ReportInfo = new Epi.SurveyManagerServiceV4.ReportInfoDTO();
+
+            Epi.SurveyManagerServiceV4.GadgetDTO GadgetDTO = new Epi.SurveyManagerServiceV4.GadgetDTO();
+
+            List<Epi.SurveyManagerServiceV4.GadgetDTO> GadgetDTOList = new List<Epi.SurveyManagerServiceV4.GadgetDTO>();
+
+            Request.ReportInfo.ReportVersion = 1;
+             
+            Guid SurveyId = Guid.Empty;
+            Guid.TryParse(Table.Split('_')[0], out SurveyId);
+            
+            Request.ReportInfo.SurveyId = SurveyId.ToString();
+            if (this.DashboardHelper.ReportId != null)
+            {
+                Request.ReportInfo.ReportId = this.DashboardHelper.ReportId.ToString();
+            }
+            else
+            {
+                Request.ReportInfo.ReportId = SurveyId.ToString();
+            }
+
+            if (this.DashboardHelper.ReportId != null)
+            {
+                GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+            }
+            else
+            {
+                GadgetDTO.ReportId = SurveyId.ToString();
+            }
+            GadgetDTOList.Add(GadgetDTO);
+            Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
+
+
+
+            var Result = client.DeleteReport(Request);
 
 
 
@@ -4072,6 +4119,8 @@ namespace EpiDashboard
                 }
 
                 int count = 0;
+                // Delete old report 
+               DeleteReport();
                 foreach (KeyValuePair<double, IGadget> kvp in sortedGadgets)
                 {
                    
@@ -4083,7 +4132,16 @@ namespace EpiDashboard
                     double Bottom = Canvas.GetBottom((System.Windows.FrameworkElement)gadget);
                     double Width = ((System.Windows.FrameworkElement)kvp.Value).ActualWidth + 5;
                     double Height = ((System.Windows.FrameworkElement)kvp.Value).ActualHeight;
-                    var GadgetId = ((EpiDashboard.GadgetBase)kvp.Value).UniqueIdentifier.ToString();
+                    Guid GadgetGuid = ((EpiDashboard.GadgetBase)kvp.Value).UniqueIdentifier;
+                   string GadgetId = "";
+                    if (GadgetGuid != Guid.Empty)
+                    {
+                         GadgetId = ((EpiDashboard.GadgetBase)kvp.Value).UniqueIdentifier.ToString();
+                    }
+                    else
+                    {
+                         GadgetId = Guid.NewGuid().ToString();
+                    }
                     if (gadget.IsProcessing == false)
                     {
                         if (!ForWeb) {
@@ -4095,7 +4153,17 @@ namespace EpiDashboard
                         else {
                             StringBuilder GadgethtmlBuilder = new StringBuilder();
                             //< span class="border"></span>
-                            GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;  width:" + Width + "px;  height:auto; overflow-x: auto;  overflow-y: auto; \">"); // width:"+Width+"px; height:"+Height+"px;
+                              //GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;  width:" + Width + "px;  height:auto; overflow-x: auto;  overflow-y: auto; \">"); // width:"+Width+"px; height:"+Height+"px;
+                            if (gadget.GetType().Name == "StandardTextControl")
+                            {
+                                GadgethtmlBuilder.AppendLine("<div  class=\"  bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;   width:" + Width + "px; height:auto; overflow-x: auto;  overflow-y: auto;\">"); // width:" + Width + "px; height:" + Height + "px;
+
+                            }
+                            else
+                            {
+                                GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;   width:" + Width + "px; height:auto; overflow-x: auto;  overflow-y: auto;\">"); // width:" + Width + "px; height:" + Height + "px;
+
+                            }
                             GadgethtmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput,true));
                             GadgethtmlBuilder.AppendLine("</div");
                             GadgethtmlBuilder.AppendLine("");
@@ -4156,7 +4224,16 @@ namespace EpiDashboard
                             {
                                 StringBuilder GadgethtmlBuilder = new StringBuilder();
                                 //< span class="border"></span>
-                                GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;   width:" + Width + "px; height:auto; overflow-x: auto;  overflow-y: auto;\">"); // width:" + Width + "px; height:" + Height + "px;
+                                if (gadget.GetType().Name == "StandardTextControl")
+                                {
+                                    GadgethtmlBuilder.AppendLine("<div  class=\"  bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;   width:" + Width + "px; height:auto; overflow-x: auto;  overflow-y: auto;\">"); // width:" + Width + "px; height:" + Height + "px;
+
+                                }
+                                else
+                                {
+                                    GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;   width:" + Width + "px; height:auto; overflow-x: auto;  overflow-y: auto;\">"); // width:" + Width + "px; height:" + Height + "px;
+
+                                }
                                 GadgethtmlBuilder.Append(gadget.ToHTML(htmlFileName, count, UseAlternatingColorsInOutput, true));
                                 GadgethtmlBuilder.AppendLine("</div>");
                                 GadgethtmlBuilder.AppendLine("");

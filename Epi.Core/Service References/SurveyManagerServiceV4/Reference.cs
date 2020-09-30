@@ -3619,6 +3619,10 @@ namespace Epi.SurveyManagerServiceV4 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV4/PublishReport", ReplyAction="http://tempuri.org/IManagerServiceV4/PublishReportResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV4.CustomFaultException), Action="http://tempuri.org/IManagerServiceV4/PublishReportCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.SurveyManagerServiceV4.PublishReportResponse PublishReport(Epi.SurveyManagerServiceV4.PublishReportRequest Request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV4/DeleteReport", ReplyAction="http://tempuri.org/IManagerServiceV4/DeleteReportResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.SurveyManagerServiceV4.CustomFaultException), Action="http://tempuri.org/IManagerServiceV4/DeleteReportCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.SurveyManagerServiceV4.PublishReportResponse DeleteReport(Epi.SurveyManagerServiceV4.PublishReportRequest Request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3758,6 +3762,10 @@ namespace Epi.SurveyManagerServiceV4 {
         
         public Epi.SurveyManagerServiceV4.PublishReportResponse PublishReport(Epi.SurveyManagerServiceV4.PublishReportRequest Request) {
             return base.Channel.PublishReport(Request);
+        }
+        
+        public Epi.SurveyManagerServiceV4.PublishReportResponse DeleteReport(Epi.SurveyManagerServiceV4.PublishReportRequest Request) {
+            return base.Channel.DeleteReport(Request);
         }
     }
 }

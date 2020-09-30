@@ -1940,52 +1940,35 @@ namespace EpiDashboard
                     if (!String.IsNullOrEmpty(groupField))
                     {
                         DataView sdv = dg.ItemsSource as DataView;
-                        //if (groupValue.Equals(""))
-                        //    sdv.RowFilter = groupField + " is null";
-                        //else
-                        //    sdv.RowFilter = groupField + " = '" + groupValue + "'";
+                       
                         DataTable sdvTable = sdv.ToTable();
                         if (!Parameters.ColumnNames.Contains(groupField))
                         {
                             sdvTable.Columns.Remove(groupField);
                         }
-                        htmlBuilder.AppendLine("<div  class=\"donut - container\" style=\"background: #9C0;\">");
-
-
-                        htmlBuilder.AppendLine("</div>");
-                    }
+                            if (sdv is DataView)
+                            {
+                                DataTable dt = sdv.Table;
+                                GetRatesDiv(htmlBuilder, dt);
+                            }
+                        }
                     else
                     {
                         if (dg.ItemsSource is DataView)
                         {
                             DataView dgItemSource = dg.ItemsSource as DataView;
                             int dgtcindex = 0;
-                            foreach (DataColumn dc in dgItemSource.Table.Columns)
-                            {
-                                string nombre = dg.Columns[dgtcindex].Header.ToString();
-                                if (dg.Columns.Count > dgtcindex)
+                            
+
+                                if (dgItemSource is DataView)
                                 {
-                                    for (int i = 2; i < 24; i++)
-                                    {
-                                        if (dgItemSource.Table.Columns.Contains(nombre) && dc.Ordinal != 0)
-                                        {
-                                            nombre = nombre + '(' + i + ')';
-                                        }
-                                        else
-                                        {
-                                            dc.ColumnName = nombre;
-                                            break;
-                                        }
-                                    }
+
+                                    DataTable dt = dgItemSource.Table;
+
+                                   GetRatesDiv(htmlBuilder, dt);
+
                                 }
-                                dgtcindex++;
                             }
-
-                            htmlBuilder.AppendLine("<div  class=\"donut - container\" style=\"background: #9C0;\">");
-
-
-                            htmlBuilder.AppendLine("</div>");
-                        }
                     }
                 }
                 else if (dg.ItemsSource is ListCollectionView)
@@ -2000,51 +1983,56 @@ namespace EpiDashboard
 
 
 
-                        foreach (DataRow row in dt.Rows)
-                        {
-                            string color = "";
-                            string rate = "";
-                            string text = "";
-                            foreach (DataColumn dc in dt.Columns)
-                            {
+                            GetRatesDiv(htmlBuilder, dt);
 
-                                if (dc.ToString() == "Rate")
-                                {
-                                    rate = row[dc].ToString().Trim();
-                                }
-                                else if (dc.ToString() == "hexColor")
-                                {
-                                    color = row[dc].ToString().Trim().Remove(1, 2);
-                                }
-                                else if (dc.ToString() == "Rate_Description")
-                                {
-                                    text = row[dc].ToString().Trim();
-                                }
-                            }
-                            htmlBuilder.AppendLine("<div  class=\"row col-sm-12\"  style=\"padding-bottom: 15px; \">");
 
-                            htmlBuilder.AppendLine("<div  class=\"col-sm-3\"  >");
-                            htmlBuilder.AppendLine("<div  class=\"donut-container\" style=\"background: " + color + ";\">");
-                            htmlBuilder.AppendLine("<div  class=\"donut-inner\"  >");
-                            htmlBuilder.AppendLine("<div  class=\"donut-label\"  >");
-                            htmlBuilder.AppendLine(rate + "</div>");
-                            htmlBuilder.AppendLine("</div>");
-                            htmlBuilder.AppendLine("</div>");
-                            htmlBuilder.AppendLine("</div>");
-                            htmlBuilder.AppendLine("<div  class=\"col-sm-9 CenterText\" style=\"padding-top: 40px;\" >");
-
-                            htmlBuilder.AppendLine(text + "</div>");
-
-                            htmlBuilder.AppendLine("</div>");
                         }
-
-
-                    }
                 }
             }
             }
 
             return htmlBuilder.ToString();
+        }
+
+        private static void GetRatesDiv(StringBuilder htmlBuilder, DataTable dt)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                string color = "";
+                string rate = "";
+                string text = "";
+                foreach (DataColumn dc in dt.Columns)
+                {
+
+                    if (dc.ToString() == "Rate")
+                    {
+                        rate = row[dc].ToString().Trim();
+                    }
+                    else if (dc.ToString().Contains("hexColor"))
+                    {
+                        color = row[dc].ToString().Trim().Remove(1, 2);
+                    }
+                    else if (dc.ToString().Contains("Rate_Description"))
+                    {
+                        text = row[dc].ToString().Trim();
+                    }
+                }
+                htmlBuilder.AppendLine("<div  class=\"row col-sm-12\"  style=\"padding-bottom: 15px; \">");
+
+                htmlBuilder.AppendLine("<div  class=\"col-sm-3\"  >");
+                htmlBuilder.AppendLine("<div  class=\"donut-container\" style=\"background: " + color + ";\">");
+                htmlBuilder.AppendLine("<div  class=\"donut-inner\"  >");
+                htmlBuilder.AppendLine("<div  class=\"donut-label\"  >");
+                htmlBuilder.AppendLine(rate + "</div>");
+                htmlBuilder.AppendLine("</div>");
+                htmlBuilder.AppendLine("</div>");
+                htmlBuilder.AppendLine("</div>");
+                htmlBuilder.AppendLine("<div  class=\"col-sm-9 CenterText\" style=\"padding-top: 40px;\" >");
+
+                htmlBuilder.AppendLine(text + "</div>");
+
+                htmlBuilder.AppendLine("</div>");
+            }
         }
 
         private string customOutputHeading;

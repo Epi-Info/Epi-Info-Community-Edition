@@ -622,11 +622,11 @@ namespace EpiDashboard.Controls.Charting
                                 
 
 
-                                htmlBuilder.AppendLine(" ,  type : 'bar' ,color: function (color, d) { return colors[d.index];} }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+                                htmlBuilder.AppendLine(" ,  type : 'bar' ,color: function (color, d) { return colors[d.index];} }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },bar: {width: {ratio: .8}},");
                             }
                             else {
 
-                                htmlBuilder.AppendLine(" ,  type : 'bar'   }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+                                htmlBuilder.AppendLine(" ,  type : 'bar'   }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },bar: {width: {ratio: .8}},");
                             }
                         }
                         else if (ChartType == "AreaChart")
@@ -637,7 +637,7 @@ namespace EpiDashboard.Controls.Charting
                         {
 
 
-                            htmlBuilder.AppendLine(" ,  type : 'bar'   }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+                            htmlBuilder.AppendLine(" ,  type : 'bar'   }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " }, bar: {width: {ratio: .8}},");
 
                         }
 
@@ -662,7 +662,7 @@ namespace EpiDashboard.Controls.Charting
                                 htmlBuilder.AppendLine(" ]},");
                             }
                            // htmlBuilder.AppendLine("axis: { x : {type: 'timeseries',  tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false}}}");
-                            htmlBuilder.AppendLine("axis: { x : {type: 'category', categories:  [");
+                            htmlBuilder.AppendLine("axis: { x : {type: 'category' ,tick:  {   rotate: 90, multiline: false} , categories:  [");
                             foreach (var item in _HChartdataList)
                             {
                                 htmlBuilder.AppendLine("'" + item.S + "', ");
@@ -684,7 +684,7 @@ namespace EpiDashboard.Controls.Charting
 
                             htmlBuilder.AppendLine(" ]},");
 
-                            htmlBuilder.AppendLine("axis: { x : {type: 'category', categories:  [");
+                            htmlBuilder.AppendLine("axis: { x : {type: 'category'  , categories:  [");
                             foreach (var item in _dataList)
                             {
                                 htmlBuilder.AppendLine("'" + item.S + "', ");
@@ -713,7 +713,7 @@ namespace EpiDashboard.Controls.Charting
                         }
                         // tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false}
                        // htmlBuilder.AppendLine(",tick: {  x:{ multiline:true, culling: { max: 1 }, }, label : { text: 'Days', position: 'center-bottom', }, },");
-                        htmlBuilder.AppendLine(",tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false},");
+                       // htmlBuilder.AppendLine(",tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false},");
                         htmlBuilder.AppendLine("}}); ");
                         if (!string.IsNullOrEmpty(_Groups.ToString()) && Composition== "Stacked")
                         {

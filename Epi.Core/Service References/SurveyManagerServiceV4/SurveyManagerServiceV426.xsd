@@ -396,4 +396,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DeleteReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q44:PublishReportRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://www.yourcompany.com/types/" minOccurs="0" name="DeleteReportResult" nillable="true" type="q45:PublishReportResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
