@@ -933,7 +933,7 @@ namespace Epi.Windows.Enter
                     {
                         if (!control.Visible || !control.Enabled)  //if hidden by check code command or disabled due to read only property being set
                         {
-                            if (control.TabIndex != maxTabIndex)
+                            if (control.TabIndex != maxTabIndex && currentView.CurrentRecordStatus != 0)
                             {
                                 GoToNextControl(currentPage, currentView, control);
                             }
