@@ -505,10 +505,16 @@ namespace EpiDashboard.Controls.Charting
 
                 List<string> color = new List<string>();
                 var ChartType = this.GetType().Name;
+
                 if (ChartType == "LineChart")
                 {
                     htmlBuilder.AppendLine("<h2  class=\"gadgetHeading\">" + ((EpiDashboard.Controls.Charting.LineChartBase)this).LineChartParameters.GadgetTitle + "</h2>");
                     color = ((EpiDashboard.Controls.Charting.LineChartBase)this).LineChartParameters.PaletteColors;
+                }
+                else if(ChartType  == "ParetoChart")
+                {
+                    htmlBuilder.AppendLine("<h2  class=\"gadgetHeading\">" + ((EpiDashboard.Controls.Charting.ParetoChart)this).ParetoChartParameters.GadgetTitle + "</h2>");
+                    color = ((EpiDashboard.Controls.Charting.ParetoChart)this).ParetoChartParameters.PaletteColors;
                 }
                 else if (ChartType == "ColumnChart")
                 {
@@ -564,7 +570,7 @@ namespace EpiDashboard.Controls.Charting
                 try{
                     try
                     {
-                       
+
 
                         if (ChartType == "HistogramChart")
                         {
@@ -586,6 +592,43 @@ namespace EpiDashboard.Controls.Charting
                             }
 
                             htmlBuilder.AppendLine("]");
+                        }
+                        else if (ChartType == "ParetoChart")
+                        {
+                            List<EpiDashboard.Gadgets.Charting.XYParetoChartData> _ParetoChartList = (List<EpiDashboard.Gadgets.Charting.XYParetoChartData>)this.Chart.DataSource;
+                            var ParetoChartList = _ParetoChartList.GroupBy(x => x.X);
+                            htmlBuilder.AppendLine("['Percentage', ");
+                            foreach (var DataItem in ParetoChartList)
+                            {
+                                
+                              
+                                foreach (var item in DataItem)
+                                {
+                                    htmlBuilder.AppendLine(item.Z+ ", ");
+
+                                }
+
+
+                                
+                            }
+                            htmlBuilder.AppendLine("],");
+                            htmlBuilder.AppendLine("['Count', ");
+                            foreach (var DataItem in ParetoChartList)
+                            {
+                                
+                             
+                                foreach (var item in DataItem)
+                                {
+                                    htmlBuilder.AppendLine(item.Y + ", ");
+
+                                }
+
+
+                                
+                            }
+                            htmlBuilder.AppendLine("]");
+                            htmlBuilder.AppendLine("]");
+
                         }
                         else
                         {
@@ -616,10 +659,10 @@ namespace EpiDashboard.Controls.Charting
                         else if (ChartType == "ColumnChart")
                         {
                             bool UseDiffColors = ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.UseDiffColors;
-                           
+
                             if (UseDiffColors)
                             {
-                                
+
 
 
                                 htmlBuilder.AppendLine(" ,  type : 'bar' ,color: function (color, d) { return colors[d.index];} }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },bar: {width: {ratio: .8}},");
@@ -628,6 +671,15 @@ namespace EpiDashboard.Controls.Charting
 
                                 htmlBuilder.AppendLine(" ,  type : 'bar'   }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },bar: {width: {ratio: .8}},");
                             }
+                        }
+                        else if (ChartType == "ParetoChart")
+                        {
+                            htmlBuilder.AppendLine(" ,  type : 'bar' ,axes: { Percentage: 'y2'},types: {Percentage: 'line'}  }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },");
+
+
+
+
+
                         }
                         else if (ChartType == "AreaChart")
                         {
@@ -647,8 +699,9 @@ namespace EpiDashboard.Controls.Charting
                             HistogramChartParameters HistogramChartParameters = new HistogramChartParameters();
                             //  (List<EpiDashboard.Controls.Charting.HistogramChart.XYHistogramChartData>)this.Parameters.Parameters = new HistogramChartParameters();
                             //this.Parameters = new HistogramChartParameters();
-                            EpiDashboard.Controls.Charting.HistogramChart _HCharList = (EpiDashboard.Controls.Charting.HistogramChart) this;
-                            if (color.Count()>0) {
+                            EpiDashboard.Controls.Charting.HistogramChart _HCharList = (EpiDashboard.Controls.Charting.HistogramChart)this;
+                            if (color.Count() > 0)
+                            {
                                 htmlBuilder.AppendLine(" color: { pattern: [");
                                 for (int i = 0; i < color.Count(); i++)
                                 {
@@ -661,11 +714,34 @@ namespace EpiDashboard.Controls.Charting
 
                                 htmlBuilder.AppendLine(" ]},");
                             }
-                           // htmlBuilder.AppendLine("axis: { x : {type: 'timeseries',  tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false}}}");
+                            // htmlBuilder.AppendLine("axis: { x : {type: 'timeseries',  tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false}}}");
                             htmlBuilder.AppendLine("axis: { x : {type: 'category' ,tick:  {   rotate: 90, multiline: false} , categories:  [");
                             foreach (var item in _HChartdataList)
                             {
                                 htmlBuilder.AppendLine("'" + item.S + "', ");
+
+                            }
+                        }
+
+                        else if (ChartType == "ParetoChart")
+                        {
+                            List<EpiDashboard.Gadgets.Charting.XYParetoChartData> _dataList = (List<EpiDashboard.Gadgets.Charting.XYParetoChartData>)this.Chart.DataSource;
+                            htmlBuilder.AppendLine(" color: { pattern: [");
+                            for (int i = 0; i < color.Count(); i++)
+                            {
+                                if (color[i].Length == 9)
+                                {
+                                    htmlBuilder.AppendLine(" '" + color[i].Remove(1, 2) + "' ,");
+                                }
+                            }
+
+
+                            htmlBuilder.AppendLine(" ]},");
+
+                            htmlBuilder.AppendLine("axis: { x : { label:{ text:'" + ((EpiDashboard.Controls.Charting.ParetoChart)this).ParetoChartParameters.XAxisLabel + "' , position: 'outer-center'}, type: 'category'  , categories:  [");
+                            foreach (var item in _dataList)
+                            {
+                                htmlBuilder.AppendLine("'" + item.X + "', ");
 
                             }
                         }
@@ -697,19 +773,22 @@ namespace EpiDashboard.Controls.Charting
                         htmlBuilder.AppendLine("]}");
                         if (ChartType == "LineChart")
                         {
-                            htmlBuilder.AppendLine(" , y: {  label: '" + ((EpiDashboard.Controls.Charting.LineChartBase)this).LineChartParameters.YAxisLabel + "'}");
+                            htmlBuilder.AppendLine(" , y: {  label: { text:'" + ((EpiDashboard.Controls.Charting.LineChartBase)this).LineChartParameters.YAxisLabel + "' , position: 'outer-middle'}}");
 
                         }
                         else if (ChartType == "ColumnChart")
                         {
-                            htmlBuilder.AppendLine(", y: {  label: '" + ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.YAxisLabel + "'}");
+                            htmlBuilder.AppendLine(", y: {  label: { text: '" + ((EpiDashboard.Controls.Charting.ColumnChartBase)this).ColumnChartParameters.YAxisLabel + "', position: 'outer-middle'}}");
 
                         }
                         else if (ChartType == "AreaChart")
                         {
-                            htmlBuilder.AppendLine(", y: {  label: '" + ((EpiDashboard.Controls.Charting.AreaChartBase)this).AreaChartParameters.YAxisLabel + "'}");
+                            htmlBuilder.AppendLine(", y: {  label: { text:'" + ((EpiDashboard.Controls.Charting.AreaChartBase)this).AreaChartParameters.YAxisLabel + "', position: 'outer-middle'}}");
 
 
+                        } else if (ChartType == "ParetoChart") {
+
+                            htmlBuilder.AppendLine(", y: {  label:{ text:'" + ((EpiDashboard.Controls.Charting.ParetoChart)this).ParetoChartParameters.YAxisLabel + "' , position: 'outer-middle'}},y2: {show: true,label: {text: 'Percentage',position: 'outer-middle'},tick:{format:d3.format('100.0%')} }");
                         }
                         // tick:  {  format: '%m/%d/%Y', rotate: 90, multiline: false}
                        // htmlBuilder.AppendLine(",tick: {  x:{ multiline:true, culling: { max: 1 }, }, label : { text: 'Days', position: 'center-bottom', }, },");

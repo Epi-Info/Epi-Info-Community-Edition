@@ -4153,10 +4153,15 @@ namespace EpiDashboard
                         else {
                             StringBuilder GadgethtmlBuilder = new StringBuilder();
                             //< span class="border"></span>
-                              //GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;  width:" + Width + "px;  height:auto; overflow-x: auto;  overflow-y: auto; \">"); // width:"+Width+"px; height:"+Height+"px;
+                            //GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;  width:" + Width + "px;  height:auto; overflow-x: auto;  overflow-y: auto; \">"); // width:"+Width+"px; height:"+Height+"px;
                             if (gadget.GetType().Name == "StandardTextControl")
                             {
                                 GadgethtmlBuilder.AppendLine("<div  class=\"  bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;   width:" + Width + "px; height:auto; overflow-x: auto;  overflow-y: auto;\">"); // width:" + Width + "px; height:" + Height + "px;
+
+                            }
+                            else if (gadget.GetType().Name == "ScatterChartGadget") {
+                               // Width = Width + 30;
+                                GadgethtmlBuilder.AppendLine("<div  class=\"border rounded bg-light text-dark GadgetDiv\"  style=\" position:absolute;left:" + left + "px ; top:" + top + "px;   width:" + Width+ "px; height:auto; overflow-x: auto;  overflow-y: auto;\">"); // width:" + Width + "px; height:" + Height + "px;
 
                             }
                             else

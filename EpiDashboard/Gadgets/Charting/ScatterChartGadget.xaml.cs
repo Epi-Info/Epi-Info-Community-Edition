@@ -749,32 +749,173 @@ namespace EpiDashboard.Gadgets.Charting
                 htmlBuilder.AppendLine("<em>Equation:</em> <strong>" + tblockEquation.Text + "</strong>");
                 htmlBuilder.AppendLine("<br />");
             }
-
-            string imageFileName = string.Empty;
-
-            if (htmlFileName.EndsWith(".html"))
+            if (!ForWeb)
             {
-                imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
-            }
-            else if (htmlFileName.EndsWith(".htm"))
-            {
-                imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
-            }
+                string imageFileName = string.Empty;
 
-            imageFileName = imageFileName + "_" + count.ToString() + ".png";
-            if (xyChart != null)
-            {
-                BitmapSource img = (BitmapSource)Common.ToImageSource(xyChart);
-                System.IO.FileStream stream = new System.IO.FileStream(imageFileName, System.IO.FileMode.Create);
-                //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                PngBitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(img));
-                encoder.Save(stream);
-                stream.Close();
+                if (htmlFileName.EndsWith(".html"))
+                {
+                    imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
+                }
+                else if (htmlFileName.EndsWith(".htm"))
+                {
+                    imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
+                }
+
+                imageFileName = imageFileName + "_" + count.ToString() + ".png";
+                if (xyChart != null)
+                {
+                    BitmapSource img = (BitmapSource)Common.ToImageSource(xyChart);
+                    System.IO.FileStream stream = new System.IO.FileStream(imageFileName, System.IO.FileMode.Create);
+                    //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(img));
+                    encoder.Save(stream);
+                    stream.Close();
+                }
+
+                htmlBuilder.AppendLine("<img src=\"" + imageFileName + "\" />");
             }
+            else {
+                htmlBuilder.AppendLine("<div id=\"Linechart" + count + "\" style=\"float:left\"></div>");
+                var _dataList = (List<XYChartData>)series0.DataSource;
+                var regressionDataList = (List<RegressionChartData>)series1.DataSource;
+                var _X = ((ScatterChartParameters)Parameters).ColumnNames[0];
+                var _Y = ((ScatterChartParameters)Parameters).YAxisLabel;
+                //  colo= xyChart..PaletteColors;
+                StringBuilder _color = new StringBuilder();
+                var color = ((ScatterChartParameters)Parameters).PaletteColors;
+                _color.AppendLine(" var colors =  [");
+                for (int i = 0; i < color.Count(); i++)
+                {
+                    if (color[i].Length == 9)
+                    {
+                        _color.AppendLine(" '" + color[i].Remove(1, 2) + "' ,");
+                    }
+                }
 
-            htmlBuilder.AppendLine("<img src=\"" + imageFileName + "\" />");
 
+                _color.AppendLine(" ];");
+
+                if (!string.IsNullOrEmpty(_color.ToString()))
+                {
+
+                    htmlBuilder.AppendLine("<script>  " + _color.ToString());
+                }
+                else
+                {
+                    htmlBuilder.AppendLine("<script> ");
+                }
+
+
+
+
+                //  htmlBuilder.AppendLine(" var Linechart" + count + " = c3.generate({bindto: '#Linechart" + count + "', data: { x:'"+_X+"', xs: { '"+_Y+"': '"+_X+ "', 'Regression_Y' : 'Regression_X' },  columns: [");
+
+                htmlBuilder.AppendLine(" var Linechart" + count + " = c3.generate({bindto: '#Linechart" + count + "', data: {  xs: { '" + _Y + "': '" + _X + "', 'Regression_Y' : 'Regression_X' },  columns: [");
+
+
+
+                htmlBuilder.AppendLine("['"+_X+"', ");
+                
+
+                    foreach (var item in _dataList)
+                    {
+                        htmlBuilder.AppendLine(item.X + ", ");
+
+                    }
+
+
+
+                
+                htmlBuilder.AppendLine("],");
+                htmlBuilder.AppendLine("['"+_Y+"', ");
+                 
+                    foreach (var item in _dataList)
+                    {
+                        htmlBuilder.AppendLine(item.Y + ", ");
+
+                    }
+
+
+ 
+                htmlBuilder.AppendLine("],");
+
+
+                htmlBuilder.AppendLine("['Regression_X', ");
+
+                foreach (var item in regressionDataList)
+                {
+                    htmlBuilder.AppendLine(item.X + ", ");
+
+                }
+
+
+
+                htmlBuilder.AppendLine("],");
+
+
+
+
+                htmlBuilder.AppendLine("['Regression_Y', ");
+
+                foreach (var item in regressionDataList)
+                {
+                    htmlBuilder.AppendLine(item.Z + ", ");
+
+                }
+
+
+
+                htmlBuilder.AppendLine("]");
+
+
+                htmlBuilder.AppendLine("]");
+
+                htmlBuilder.AppendLine(",names: {"+_Y+": '"+_X +" x "+_Y+"',Regression_Y: 'Linear Regression'}");
+                var Width = this.ActualWidth ;
+                var Height = this.ActualHeight -80;
+                //  htmlBuilder.AppendLine(" , axes: {  " + _Y + ": 'y'}, type: 'scatter',types: {Regression_X : 'line' }}, ");
+                htmlBuilder.AppendLine(", axes: {  "+_Y+": 'y', Regression_Y :'x'} ,types: {"+_Y+ ":'scatter',Regression_X : 'line' }}, ");
+                htmlBuilder.AppendLine(" axis: { y: {show: true,min:0,label:{ text:'" + _Y + "' , position: 'outer-middle'}}, y2: { show: false} ,x: {  label:{ text:'" + _X + "' , position: 'outer-center'}}  } , legend: { show: true,position: 'right' }, size: { width: " + Width + ", height: " + Height + " } ");
+                htmlBuilder.AppendLine("});");
+
+
+
+
+
+                ///htmlBuilder.AppendLine(" ,  type : 'scatter' ,color: function (color, d) { return colors[d.index];} }, legend: { show: true }, size: { width: " + this.ActualWidth + ", height: " + this.ActualHeight + " },bar: {width: {ratio: .8}},");
+
+
+                // List<XYChartData> dataList = new List<XYChartData>();
+
+                //htmlBuilder.AppendLine(" color: { pattern: [");
+                //for (int i = 0; i < color.Count(); i++)
+                //{
+                //    if (color[i].Length == 9)
+                //    {
+                //        htmlBuilder.AppendLine(" '" + color[i].Remove(1, 2) + "' ,");
+                //    }
+                //}
+
+
+                //htmlBuilder.AppendLine(" ]},");
+
+                //htmlBuilder.AppendLine("axis: { x : { label:{ text:'" + ((ScatterChartParameters)Parameters).XAxisLabel + "' , position: 'outer-center'}, type: 'category'  , categories:  [");
+                //foreach (var item in _dataList)
+                //{
+                //    htmlBuilder.AppendLine("'" + item.X + "', ");
+
+                //}
+
+
+                //htmlBuilder.AppendLine(", y: {  label:{ text:'" + ((ScatterChartParameters)Parameters).YAxisLabel + "' , position: 'outer-middle'}},y2: {show: true,label: {text: 'Percentage',position: 'outer-middle'},tick:{format:d3.format('100.0%')} }");
+                //htmlBuilder.AppendLine("}}); ");
+
+
+                htmlBuilder.AppendLine("</script> ");
+
+            }
             return htmlBuilder.ToString();
         }
 
