@@ -1038,7 +1038,7 @@ namespace EpiDashboard.Gadgets.Charting
             {
                 if (element is Controls.Charting.PieChart)
                 {
-                    sb.AppendLine(((Controls.Charting.PieChart)element).ToHTML(htmlFileName, count, true, false));
+                    sb.AppendLine(((Controls.Charting.PieChart)element).ToHTML(htmlFileName, count, true, false,ForWeb));
                     count++;
                 }
             }

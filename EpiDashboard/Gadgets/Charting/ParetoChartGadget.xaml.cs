@@ -896,7 +896,7 @@ namespace EpiDashboard.Gadgets.Charting
             {
                 if (element is EpiDashboard.Controls.Charting.ParetoChart)
                 {
-                    htmlBuilder.AppendLine(((EpiDashboard.Controls.Charting.ParetoChart)element).ToHTML(htmlFileName, count, true, false));
+                    htmlBuilder.AppendLine(((EpiDashboard.Controls.Charting.ParetoChart)element).ToHTML(htmlFileName, count, true, false, ForWeb));
                 }
             }
 

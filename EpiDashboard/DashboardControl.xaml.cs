@@ -4085,7 +4085,10 @@ namespace EpiDashboard
             {
                 htmlBuilder.AppendLine(this.DashboardHelper.ToHTML());
             }
-      
+            if (ForWeb)
+            {
+                DeleteReport();
+            }
             //gadgets
             if (SortGadgetsTopToBottom)
             {
@@ -4123,7 +4126,7 @@ namespace EpiDashboard
 
                 int count = 0;
                 // Delete old report 
-               DeleteReport();
+               
                 foreach (KeyValuePair<double, IGadget> kvp in sortedGadgets)
                 {
                    
