@@ -4046,9 +4046,12 @@ namespace EpiDashboard
             htmlBuilder.AppendLine("  <meta name=\"keywords\" content=\"Epi, Info, Dashboard\" />");
             htmlBuilder.AppendLine("  <meta name=\"author\" content=\"Epi Info 7\" />");
             htmlBuilder.AppendLine("  <meta http-equiv=\"content-type\" content=\"text/html;charset=UTF-8\" />");
-            htmlBuilder.AppendLine(" <script src = \"c3.min.js\" type = \"text/javascript\" ></script>");
-            htmlBuilder.AppendLine(" <script src = \"d3-5.8.2.min.js\" type = \"text/javascript\" ></script>");
-            htmlBuilder.AppendLine(" <link href =  \"c3.min.css\"  rel = \"Stylesheet\" type = \"text/css\"/>");
+            if (ForWeb)
+            {
+                htmlBuilder.AppendLine(" <script src = \"c3.min.js\" type = \"text/javascript\" ></script>");
+                htmlBuilder.AppendLine(" <script src = \"d3-5.8.2.min.js\" type = \"text/javascript\" ></script>");
+                htmlBuilder.AppendLine(" <link href =  \"c3.min.css\"  rel = \"Stylesheet\" type = \"text/css\"/>");
+            }
                                     GenerateStandardHTMLStyle(htmlBuilder);
             htmlBuilder.AppendLine("    ");
 

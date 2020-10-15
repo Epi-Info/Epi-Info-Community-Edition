@@ -472,7 +472,7 @@ namespace EpiDashboard.Controls.Charting
             StringBuilder _color = new StringBuilder();
             StringBuilder _Groups = new StringBuilder();
             string Composition = "";
-            ForWeb = true;
+            
             if (!ForWeb)
             {
                 string imageFileName = string.Empty;

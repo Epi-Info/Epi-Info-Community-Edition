@@ -342,7 +342,7 @@ namespace EpiDashboard.Controls.Charting
         public override string ToHTML(string htmlFileName = "", int count = 0, bool includeImage = true, bool includeFullData = false, bool ForWeb = false)
         {
             StringBuilder htmlBuilder = new StringBuilder();
-            ForWeb = true;
+           
             if (!ForWeb)
             {
                 string imageFileName = string.Empty;
