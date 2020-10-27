@@ -687,7 +687,7 @@ namespace Epi.ImportExport.ProjectPackagers
             if (form == null) { throw new ArgumentNullException("form"); }
             #endregion // Input Validation
 
-            XmlElement data = xmlDataPackage.CreateElement("Data");
+            XmlElement dataElement = xmlDataPackage.CreateElement("Data");
 
             OnStatusChanged(String.Format(PackagerStrings.GUID_LIST_SETUP, form.Name));
             OnResetProgress();
@@ -715,7 +715,10 @@ namespace Epi.ImportExport.ProjectPackagers
             if (form.IsRelatedView && PreviousDistanceFromRoot < CurrentDistanceFromRoot)
             {
                 ParentIdList.Clear();
-                foreach (KeyValuePair<string, XmlElement> kvp in IdList) { ParentIdList.Add(kvp.Key); }
+                foreach (KeyValuePair<string, XmlElement> kvp in IdList) 
+                { 
+                    ParentIdList.Add(kvp.Key); 
+                }
             }
 
             IdList.Clear(); // Very important, this needs to be re-set in case we've already processed a form (this is a class level variable)
@@ -746,7 +749,7 @@ namespace Epi.ImportExport.ProjectPackagers
             }
             else
             {
-                dataReader = SourceProject.CollectedData.GetDatabase().GetTableDataReader(form.TableName);
+                dataReader = SourceProject.CollectedData.GetDatabase().GetTableDataReader(form.TableName, "UniqueKey");
             }
 
             using (IDataReader guidReader = dataReader)
@@ -847,85 +850,87 @@ namespace Epi.ImportExport.ProjectPackagers
 
             foreach (Page page in form.Pages)
             {
-                using (IDataReader reader = SourceProject.CollectedData.GetDatabase().GetTableDataReader(page.TableName))
+                DataTable pageTable = SourceProject.CollectedData.GetDatabase().GetTableData(page.TableName);
+
+                foreach (KeyValuePair<string, XmlElement> guidElementPair in IdList)
                 {
-                    while (reader.Read())
+                    DataRow[] rows = pageTable.Select("GlobalRecordId = '" + guidElementPair.Key + "'");
+
+                    DataRow row = rows[0];
+
+                    string recordId = row.Field<string>("GlobalRecordId");
+
+                    XmlElement element = guidElementPair.Value;
+
+                    foreach (Field field in page.Fields)
                     {
-                        string guid = reader["GlobalRecordId"].ToString();
-
-                        if (IdList.ContainsKey(guid))
+                        if (page.Fields.Count == 1 && field is GridField) 
+                        { 
+                            dataElement.AppendChild(element); 
+                        }
+                    
+                        if (field is IDataField && field is RenderableField &&  !(field is GridField) && !(FieldsToNull.ContainsKey(form.Name) && FieldsToNull[form.Name].Contains(field.Name)))
                         {
-                            XmlElement element = IdList[guid];
-
+                            RenderableField renderableField = field as RenderableField;
                             
-                            foreach (Field field in page.Fields)
+                            if (renderableField != null)
                             {
-                                //--Ei-431
-                                if (page.Fields.Count == 1 && field is GridField) { data.AppendChild(element); }
-                                //--
+                                XmlElement fieldData = xmlDataPackage.CreateElement("Field");
 
-                                if (field is IDataField && field is RenderableField &&  !(field is GridField) && !(FieldsToNull.ContainsKey(form.Name) && FieldsToNull[form.Name].Contains(field.Name)))
+                                XmlAttribute name = xmlDataPackage.CreateAttribute("Name");
+                                name.Value = renderableField.Name;
+                                fieldData.Attributes.Append(name);
+
+                                string value = row[field.Name].ToString();
+
+                                if (!string.IsNullOrEmpty(value))
                                 {
-                                    RenderableField renderableField = field as RenderableField;
-                                    if (renderableField != null)
+                                    if (field is DateTimeField)
                                     {
-                                        XmlElement fieldData = xmlDataPackage.CreateElement("Field");
-
-                                        XmlAttribute name = xmlDataPackage.CreateAttribute("Name");
-                                        name.Value = renderableField.Name;
-                                        fieldData.Attributes.Append(name);
-
-                                        string value = reader[field.Name].ToString();
-
-                                        if (!string.IsNullOrEmpty(value))
-                                        {
-                                            if (field is DateTimeField)
-                                            {
-                                                DateTime dt = Convert.ToDateTime(value);
-                                                fieldData.InnerText = dt.Ticks.ToString();
-                                            }
-                                            else if (field is ImageField)
-                                            {
-                                                value = Convert.ToBase64String((Byte[])reader[field.Name]);
-                                                fieldData.InnerText = value;
-                                            }
-                                            else if (field is NumberField)
-                                            {
-                                                value = Convert.ToDouble(value).ToString(System.Globalization.CultureInfo.InvariantCulture);
-                                                fieldData.InnerText = value;
-                                            }
-                                            else
-                                            {
-                                                fieldData.InnerText = value;
-                                            }
-                                        }
-
-                                        if (String.IsNullOrEmpty(fieldData.InnerText) && IncludeNullFieldData == false)
-                                        {
-                                            // do nothing, for now...
-                                        }
-                                        else
-                                        {
-                                            element.AppendChild(fieldData);
-                                        }
-                                        data.AppendChild(element);
+                                        DateTime dt = Convert.ToDateTime(value);
+                                        fieldData.InnerText = dt.Ticks.ToString();
+                                    }
+                                    else if (field is ImageField)
+                                    {
+                                        value = Convert.ToBase64String((Byte[])row.Field<Byte[]>(field.Name));
+                                        fieldData.InnerText = value;
+                                    }
+                                    else if (field is NumberField)
+                                    {
+                                        value = Convert.ToDouble(value).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                                        fieldData.InnerText = value;
+                                    }
+                                    else
+                                    {
+                                        fieldData.InnerText = value;
                                     }
                                 }
+
+                                if (String.IsNullOrEmpty(fieldData.InnerText) && IncludeNullFieldData == false)
+                                {
+                                    // do nothing, for now...
+                                }
+                                else
+                                {
+                                    element.AppendChild(fieldData);
+                                }
+                                dataElement.AppendChild(element);
                             }
                         }
-                        processedRecords++;
-                        double progress = (((double)processedRecords) / ((double)totalRecords)) * 100;
-                        OnProgressChanged(progress);
                     }
                 }
+                processedRecords++;
+                double progress = (((double)processedRecords) / ((double)totalRecords)) * 100;
+                OnProgressChanged(progress);
             }
+
             foreach (GridField gridField in form.Fields.GridFields)
             {
-                data.AppendChild(CreateXmlGridElement(xmlDataPackage, form, gridField));
+                dataElement.AppendChild(CreateXmlGridElement(xmlDataPackage, form, gridField));
                 ExportInfo.GridsProcessed++;
             }
 
-            return data;
+            return dataElement;
         }
 
         /// <summary>

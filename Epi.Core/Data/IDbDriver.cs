@@ -324,6 +324,14 @@ namespace Epi.Data
         IDataReader GetTableDataReader(string tableName);
 
         /// <summary>
+        /// TODO: Add method description here.
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        IDataReader GetTableDataReader(string tableName, string sortColumnName);
+
+
+        /// <summary>
         /// TODO: Add method description here
         /// </summary>
         /// <param name="selectQuery"></param>

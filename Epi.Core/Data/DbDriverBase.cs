@@ -341,6 +341,8 @@ namespace Epi.Data
         /// <returns>An instance of an object that implements IDataReader</returns>
         public abstract IDataReader GetTableDataReader(string tableName);
 
+        public abstract IDataReader GetTableDataReader(string tableName, string sortColumnName);
+
         /// <summary>
         /// Create a DataReader on the specified table
         /// </summary>

@@ -1531,6 +1531,12 @@ namespace Epi.Data.SqlServer
             return this.ExecuteReader(query);
         }
 
+        public override IDataReader GetTableDataReader(string tableName, string sortColumnName)
+        {
+            Query query = this.CreateQuery("select * from " + tableName + " ORDER BY " + sortColumnName);
+            return this.ExecuteReader(query);
+        }
+
         /// <summary>
         /// Creates a new connection and executes a select query 
         /// </summary>

@@ -873,6 +873,17 @@ namespace Epi.Data.EpiWeb
         }
 
         /// <summary>
+        /// Create a reader from a table
+        /// </summary>
+        /// <param name="tableName">name of table</param>
+        /// <returns>IDataReader reader</returns>
+        public override IDataReader GetTableDataReader(string tableName, string sortColumnName)
+        {
+            Query query = this.CreateQuery("select * from " + tableName + " ORDER BY " + sortColumnName);
+            return this.ExecuteReader(query);
+        }
+
+        /// <summary>
         /// Executes a query and returns a stream of rows
         /// </summary>
         /// <param name="selectQuery">The query to be executed against the database</param>

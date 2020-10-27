@@ -882,6 +882,12 @@ namespace Epi.Data.REDCap
             return this.ExecuteReader(query);
         }
 
+        public override IDataReader GetTableDataReader(string tableName, string sortColumnName)
+        {
+            Query query = this.CreateQuery("select * from " + tableName + " ORDER BY " + sortColumnName);
+            return this.ExecuteReader(query);
+        }
+
         /// <summary>
         /// Executes a query and returns a stream of rows
         /// </summary>

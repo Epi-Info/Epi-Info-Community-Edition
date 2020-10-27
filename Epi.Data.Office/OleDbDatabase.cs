@@ -1122,7 +1122,18 @@ namespace Epi.Data.Office
         /// <returns></returns>
         public override IDataReader GetTableDataReader(string tableName)
         {
-            Query query = this.CreateQuery("select * from " + tableName);
+            Query query = this.CreateQuery("select * from " + tableName );
+            return this.ExecuteReader(query);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public override IDataReader GetTableDataReader(string tableName, string sortColumnName)
+        {
+            Query query = this.CreateQuery("select * from " + tableName + " ORDER BY " + sortColumnName);
             return this.ExecuteReader(query);
         }
 
