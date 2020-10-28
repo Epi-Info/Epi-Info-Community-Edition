@@ -435,8 +435,8 @@ namespace EpiDashboard
                 xmlString += "<ReportId>" + this.ReportId.ToString() + "</ReportId>";
             }
             else {
-
-                xmlString += "<ReportId>" + Guid.NewGuid().ToString() + "</ReportId>";
+                this.ReportId = Guid.NewGuid().ToString();
+                xmlString += "<ReportId>" + this.ReportId.ToString() + "</ReportId>";
 
             }
            root.InnerXml = xmlString;

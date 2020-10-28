@@ -65,6 +65,7 @@
       <xs:element minOccurs="0" name="Gadgets" nillable="true" type="tns:ArrayOfGadgetDTO" />
       <xs:element minOccurs="0" name="RecordCount" type="xs:int" />
       <xs:element minOccurs="0" name="ReportId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ReportURL" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ReportVersion" type="xs:int" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />

@@ -106,8 +106,8 @@ namespace Epi.Data.EpiWeb.Wrappers
            // List<SurveyManagerServiceV4.SurveyInfoDTO> DTOList = Response.SurveyInfoList.OrderBy(o => o.SurveyName).ToList();
             foreach (var items in Response.SurveyInfoList)
             {
-                names.Add(items.SurveyId + "_" + items.SurveyName);
-
+               // names.Add(items.SurveyId + "_" + items.SurveyName);
+                names.Add(items.SurveyName + "_" + items.SurveyId);
             }
             //if (expired)
             //{
@@ -145,7 +145,7 @@ namespace Epi.Data.EpiWeb.Wrappers
 
             if (expired)
                 return dataTable;
-            var SurveyId = collectionName.Split('_')[0];
+            var SurveyId = collectionName.Split('_').Last();
             string json = "";
           
             try

@@ -367,6 +367,12 @@
     <Compile Include="Dialogs\LayerDescriptionDialog.Designer.cs">
       <DependentUpon>LayerDescriptionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ReportURL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ReportURL.Designer.cs">
+      <DependentUpon>ReportURL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ValueMapperDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1572,6 +1578,9 @@
     <EmbeddedResource Include="Dialogs\FormatDialog.resx">
       <DependentUpon>FormatDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ReportURL.resx">
+      <DependentUpon>ReportURL.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RowFilterDialog.resx">
       <DependentUpon>RowFilterDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1620,6 +1629,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\App.ico" />
     <Resource Include="Images\x.png" />
     <Resource Include="Images\x_over.png" />
     <Resource Include="Images\refresh1.png" />

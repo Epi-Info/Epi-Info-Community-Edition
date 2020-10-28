@@ -1916,6 +1916,9 @@ namespace Epi.SurveyManagerServiceV4 {
         private string ReportIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReportNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ReportURLField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2008,6 +2011,19 @@ namespace Epi.SurveyManagerServiceV4 {
                 if ((object.ReferenceEquals(this.ReportIdField, value) != true)) {
                     this.ReportIdField = value;
                     this.RaisePropertyChanged("ReportId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReportName {
+            get {
+                return this.ReportNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportNameField, value) != true)) {
+                    this.ReportNameField = value;
+                    this.RaisePropertyChanged("ReportName");
                 }
             }
         }
