@@ -8044,6 +8044,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import initiated for {0} data packages in {1}..
+        /// </summary>
+        public static string START_BATCH_IMPORT {
+            get {
+                return ResourceManager.GetString("START_BATCH_IMPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start, End and By value must be specified..
         /// </summary>
         public static string START_END_BY_EMPTY {
@@ -8067,6 +8076,15 @@ namespace Epi {
         public static string START_NEW_TAB_ORDER {
             get {
                 return ResourceManager.GetString("START_NEW_TAB_ORDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import initiated for data package {0}..
+        /// </summary>
+        public static string START_SINGLE_IMPORT {
+            get {
+                return ResourceManager.GetString("START_SINGLE_IMPORT", resourceCulture);
             }
         }
         

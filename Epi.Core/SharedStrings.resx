@@ -3281,4 +3281,10 @@ GlobalRecordId = [FKEY]</value>
   <data name="WEBSURVEY_VER_IS" xml:space="preserve">
     <value>The version of the endpoint you are currently using is</value>
   </data>
+  <data name="START_BATCH_IMPORT" xml:space="preserve">
+    <value>Import initiated for {0} data packages in {1}.</value>
+  </data>
+  <data name="START_SINGLE_IMPORT" xml:space="preserve">
+    <value>Import initiated for data package {0}.</value>
+  </data>
 </root>

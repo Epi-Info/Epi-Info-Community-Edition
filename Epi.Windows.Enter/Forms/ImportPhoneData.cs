@@ -43,7 +43,8 @@ namespace Epi.Enter.Forms
         private bool importFinished = false;
         private Dictionary<string, List<PhoneFieldData>> _surveyResponses;
         private Dictionary<string, string> surveyGUIDs;
-       // private List<string> RelatedViews;
+        private List<string> packagePaths;
+        // private List<string> RelatedViews;
         #endregion // Private Members
 
         #region Delegates
@@ -1304,30 +1305,47 @@ namespace Epi.Enter.Forms
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = SharedStrings.SELECT_DATA_SOURCE;
-            openFileDialog.Filter = "\"Epi Info for Android\" sync files|*.epi7|Phone data sync files|*.xml";
-            //openFileDialog.Filter = "Phone data sync files|*.xml";
-
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.Multiselect = false;
-
-            DialogResult result = openFileDialog.ShowDialog();
-
-            if (result == DialogResult.OK)
+            if (checkboxBatchImport.Checked)
             {
-                string filePath = openFileDialog.FileName.Trim();
-                if (System.IO.File.Exists(filePath))
+                FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+
+                DialogResult result = folderBrowserDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
                 {
-                    try
+                    string directoryPath = folderBrowserDialog.SelectedPath;
+                    if (System.IO.Directory.Exists(directoryPath))
                     {
-                        txtPhoneDataFile.Text = filePath;
+                        txtPhoneDataFile.Text = directoryPath;
                     }
-                    catch (Exception ex)
+                }
+            }
+            else
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Title = SharedStrings.SELECT_DATA_SOURCE;
+                openFileDialog.Filter = "\"Epi Info for Android\" sync files|*.epi7|Phone data sync files|*.xml";
+
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.Multiselect = false;
+
+                DialogResult result = openFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    string filePath = openFileDialog.FileName.Trim();
+                    if (System.IO.File.Exists(filePath))
                     {
-                        Epi.Windows.MsgBox.ShowError(SharedStrings.IMPORT_DATA_DEVICE_FILE_ERROR, ex);
-                        txtPhoneDataFile.Text = string.Empty;
-                        return;
+                        try
+                        {
+                            txtPhoneDataFile.Text = filePath;
+                        }
+                        catch (Exception ex)
+                        {
+                            Epi.Windows.MsgBox.ShowError(SharedStrings.IMPORT_DATA_DEVICE_FILE_ERROR, ex);
+                            txtPhoneDataFile.Text = string.Empty;
+                            return;
+                        }
                     }
                 }
             }
@@ -1357,7 +1375,6 @@ namespace Epi.Enter.Forms
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
             if (!string.IsNullOrEmpty(txtPhoneDataFile.Text))
             {
                 progressBar.Style = ProgressBarStyle.Marquee;
@@ -1395,21 +1412,24 @@ namespace Epi.Enter.Forms
                 {
                     importWorker.CancelAsync();
                 }
-                ////////Related forms 
 
-               //var AllViewNames = destinationProject.GetViewNames();
-               // var AllViews = destinationProject.views;
-               //var RootView = this.viewsList.SelectedItem;
-             
-               //this.RelatedViews.Add(((Epi.View)(RootView)).Name);
-               // foreach(View view in AllViews)
-               // {
-               //     if (view.Name != RootView && view.IsRelatedView && (view.ParentView.Name == ((Epi.View)(RootView)).Name || RelatedViews.Contains(view.ParentView.Name)))
-               //     {
-               //         this.RelatedViews.Add(view.Name.ToString());
-               //     }
-               // }
-                ////////////////////////
+                packagePaths = new List<string>();
+
+                if (checkboxBatchImport.Checked)
+                {
+                    System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(txtPhoneDataFile.Text);
+                    foreach (System.IO.FileInfo f in dir.GetFiles("*.epi7"))
+                    {
+                        packagePaths.Add(f.FullName);
+                    }
+                    AddStatusMessage(string.Format(SharedStrings.START_BATCH_IMPORT, packagePaths.Count.ToString(), txtPhoneDataFile.Text));
+                }
+                else
+                {
+                    packagePaths.Add(txtPhoneDataFile.Text);
+                    AddStatusMessage(string.Format(SharedStrings.START_SINGLE_IMPORT, txtPhoneDataFile.Text));
+                }
+
                 this.Cursor = Cursors.WaitCursor;
 
                 importWorker = new BackgroundWorker();
@@ -1418,7 +1438,6 @@ namespace Epi.Enter.Forms
                 importWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(worker_WorkerCompleted);
                 importWorker.RunWorkerAsync(txtPhoneDataFile.Text);
             }
-            //DoImport();
         }
 
         /// <summary>
@@ -1445,30 +1464,33 @@ namespace Epi.Enter.Forms
         {
             lock (syncLock)
             {
-                //foreach (var ViewName in this.RelatedViews)
-                //{
-              //  View View = destinationProject.GetViewByName(ViewName);
-                string syncFilePath = (string)e.Argument;
-                stopwatch = new Stopwatch();
-                stopwatch.Start();
-               Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
-                //Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + ViewName + "]");
-                IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
-                List<string> destinationGUIDList = new List<string>();
-                while (destReader.Read())
+                foreach (string packagePath in packagePaths)
                 {
-                    destinationGUIDList.Add(destReader[0].ToString());
-                }
-                destReader.Close();
-                ParseXML(syncFilePath);
-                 ProcessBaseTable(destinationView, destinationGUIDList);
-                 ProcessPages(destinationView, destinationGUIDList, syncFilePath);
-                //ProcessBaseTable(View, destinationGUIDList);
-               // ProcessPages(View, destinationGUIDList, syncFilePath);
+                    //foreach (var ViewName in this.RelatedViews)
+                    //{
+                    //  View View = destinationProject.GetViewByName(ViewName);
+                    string syncFilePath = (string)e.Argument;
+                    stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + destinationView.TableName + "]");
+                    //Query selectQuery = destinationProjectDataDriver.CreateQuery("SELECT [GlobalRecordId] FROM [" + ViewName + "]");
+                    IDataReader destReader = destinationProjectDataDriver.ExecuteReader(selectQuery);
+                    List<string> destinationGUIDList = new List<string>();
+                    while (destReader.Read())
+                    {
+                        destinationGUIDList.Add(destReader[0].ToString());
+                    }
+                    destReader.Close();
+                    ParseXML(packagePath);
+                    ProcessBaseTable(destinationView, destinationGUIDList);
+                    ProcessPages(destinationView, destinationGUIDList, syncFilePath);
+                    //ProcessBaseTable(View, destinationGUIDList);
+                    // ProcessPages(View, destinationGUIDList, syncFilePath);
                 }
                 //ProcessGridFields(sourceView, destinationView);
                 //ProcessRelatedForms(sourceView, destinationView, viewsToProcess);
-            //}
+                //}
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
