@@ -932,7 +932,7 @@ namespace EpiDashboard
 				{
 					try
 					{
-						double proportion = (double)drv.Row["Percent"];
+						double proportion = (double)drv.Row[DashboardSharedStrings.COL_HEADER_PERCENT];
 						drv.Row[2] = Math.Round(100.0 * proportion, 2);
 					}
 					catch (InvalidCastException excep) { continue; }
