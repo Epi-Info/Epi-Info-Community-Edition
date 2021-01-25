@@ -4297,9 +4297,14 @@ namespace EpiDashboard
             htmlBuilder.AppendLine("</body>");
             htmlBuilder.AppendLine("</html>");
             //   NotificationMessage savedMessage = new NotificationMessage(ReportUrl, false, NotificationButtonType.None, false, 7);
-          //  Epi.Windows.MsgBox.Show(ReportUrl, "Report URL",System.Windows.Forms.MessageBoxButtons.OK);
-            EpiDashboard.Dialogs.ReportURL Dialog = new EpiDashboard.Dialogs.ReportURL(ReportUrl);
-            Dialog.ShowDialog();
+            //  Epi.Windows.MsgBox.Show(ReportUrl, "Report URL",System.Windows.Forms.MessageBoxButtons.OK);
+
+            if (!string.IsNullOrEmpty(ReportUrl) && ForWeb)
+            {
+
+                EpiDashboard.Dialogs.ReportURL Dialog = new EpiDashboard.Dialogs.ReportURL(ReportUrl);
+                Dialog.ShowDialog();
+            }
             if (IsGeneratingHTMLFromCommandLine == false)
             {
                 RefreshResults();
