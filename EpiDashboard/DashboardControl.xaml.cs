@@ -178,10 +178,10 @@ namespace EpiDashboard
             mnuOpen.Click += new RoutedEventHandler(mnuOpen_Click);
             mnuSave.Click += new RoutedEventHandler(mnuSave_Click);
             mnuSaveAs.Click += new RoutedEventHandler(mnuSaveAs_Click);
-
-            mnuSendOutputToWeb.Visibility = Visibility.Visible;
-            mnuSendOutputToWeb.Click += new RoutedEventHandler(mnuSendOutputToWebUpdateCurrent_Click);
-           
+         
+                mnuSendOutputToWeb.Visibility = Visibility.Visible;
+                mnuSendOutputToWeb.Click += new RoutedEventHandler(mnuSendOutputToWebUpdateCurrent_Click);
+        
             mnuSendOutputTo.Visibility = Visibility.Visible;
             foreach (Epi.DataSets.Config.GadgetRow row in Configuration.GetNewInstance().Gadget.Rows)
             {
@@ -1721,6 +1721,15 @@ namespace EpiDashboard
             }
             mnuDataDictionary.IsEnabled = true;
             EnableDisableMenus(true);
+            if (DashboardHelper.Database.ToString().Contains("EpiWebDataSource"))
+            {
+                mnuSendOutputToWeb.IsEnabled = true;
+            }
+            else {
+                mnuSendOutputToWeb.IsEnabled = false;
+
+
+            }
             EnableDisableOptions();
 
             UpdateRecordCount();
@@ -3559,6 +3568,9 @@ namespace EpiDashboard
 
                     RemoveAllGadgets();
                     EnableDisableMenus(true);
+
+                    //mnuSendOutputToWeb.IsEnabled = false;
+
                     AddFilterGadget();
                     AddDefinedVariablesGadget();
                     ResetCanvasProperties();
