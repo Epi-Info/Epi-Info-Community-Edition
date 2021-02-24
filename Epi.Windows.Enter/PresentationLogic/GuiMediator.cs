@@ -1907,7 +1907,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                 }
                 else if (field is DDLFieldOfCommentLegal)
                 {
-                    ((DDLFieldOfCommentLegal)field).CurrentRecordValueString = ((ComboBox)control).SelectedItem.ToString();
+                    ((DDLFieldOfCommentLegal)field).CurrentRecordValueString = ((ComboBox)control).SelectedItem.ToString().Trim();
                 }
                 else if (field is DDLFieldOfCodes)
                 {

@@ -117,7 +117,7 @@ namespace Epi.Fields
                 }
                 else
                 {
-                    return (string)base.currentRecordValueObject;
+                    return ((string)base.currentRecordValueObject).Trim();
                 }
             }
             set
