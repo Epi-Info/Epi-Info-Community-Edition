@@ -8889,13 +8889,14 @@ namespace EpiDashboard
                         {
                             string key = row[kvp.Key.TextColumnName.Trim()].ToString();
                             int dash = key.IndexOf('-');
+                            string newKey = "";
 
                             if (dash > 0)
                             {
-                                key = key.Substring(0, dash);
+                                newKey = key.Substring(0, dash);
                             }
 
-                            if (fValue.Equals(key))
+                            if (fValue.Equals(newKey))
                             {
                                 fRow[kvp.Value] = key;
                             }
