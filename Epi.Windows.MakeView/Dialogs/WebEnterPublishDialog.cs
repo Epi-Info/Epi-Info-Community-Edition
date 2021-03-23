@@ -472,7 +472,7 @@ namespace Epi.Windows.MakeView.Dialogs
                 }
               Request.SurveyInfo  = this.currentSurveyInfoDTO;
               Request.SurveyInfo.IsShareable = this.Shareable.Checked;
-              if (_DataAccessRuleIds.Count() > 0)
+              if (_DataAccessRuleIds != null && _DataAccessRuleIds.Count() > 0)
               {
                   foreach (var Rule in _DataAccessRuleIds)
                   {
