@@ -352,6 +352,10 @@ namespace Epi.Windows.Analysis.Dialogs
 			if (ValidateInput() == true)
 			{
 				GenerateCommand();
+				if (CommandText == string.Empty)
+				{
+					return;
+				}
 				PreProcess();				
 				this.DialogResult = DialogResult.OK;
 				this.Hide();

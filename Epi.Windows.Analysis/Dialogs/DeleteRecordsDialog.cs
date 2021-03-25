@@ -227,12 +227,14 @@ namespace Epi.Windows.Analysis.Dialogs
         protected override void GenerateCommand()
         {
             string expression = txtRecAffected.Text.Trim();
-            #region preconditions
-            if (expression.Trim() != "*" && !ValidExpression(expression))  //dcs0 8/1/2008
-            {
-                throw new GeneralException(string.Format(SharedStrings.INVALID_EXPRESSION, expression));
-            }
-            if (EpiInterpreter.Context.CurrentRead.File.Contains(".xlsx") || EpiInterpreter.Context.CurrentRead.File.Contains(".xls") || EpiInterpreter.Context.CurrentRead.File.Contains("FMT=Delimited"))
+			#region preconditions
+			if (expression.Trim() != "*" && !ValidExpression(expression))  //dcs0 8/1/2008
+			{
+				MessageBox.Show(string.Format(SharedStrings.INVALID_EXPRESSION, expression));
+				CommandText = "";
+				return;
+			}
+			if (EpiInterpreter.Context.CurrentRead.File.Contains(".xlsx") || EpiInterpreter.Context.CurrentRead.File.Contains(".xls") || EpiInterpreter.Context.CurrentRead.File.Contains("FMT=Delimited"))
             {
                 MessageBox.Show("Deletion not supported for this datasource", "DELETE RECORDS");
                 Close();
