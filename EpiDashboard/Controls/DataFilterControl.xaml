@@ -130,14 +130,14 @@
                         <TextBox x:Name="tbxLowValue" HorizontalAlignment="Left" Grid.Column="7" Width="200"  Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" Grid.ColumnSpan="3" RenderTransformOrigin="0.509,-0.904" Margin="4,9,0,11" Grid.RowSpan="2" />
                         <TextBox x:Name="tbxHighValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="7" Width="200"  Visibility="Visible" PreviewTextInput="tbxNumericValue_PreviewTextInput" Grid.ColumnSpan="3" Margin="4,21,0,6" Grid.RowSpan="3" />
 
-                        <DatePicker x:Name="dateLowValue" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="7" Width="203" Visibility="Hidden" Margin="4,21,-1,6" Grid.ColumnSpan="3" Grid.RowSpan="3" RenderTransformOrigin="0.502,0.714">
+                        <DatePicker x:Name="dateLowValue" HorizontalAlignment="Left" Grid.Column="7" Width="203" Visibility="Visible" Margin="4,8,0,11"  Grid.ColumnSpan="3" MinWidth="90" Grid.Row="0" Grid.RowSpan="2" >
                             <DatePicker.Resources>
                                 <Style TargetType="Button">
                                     <Setter Property="MaxHeight" Value="30" />
                                 </Style>
                             </DatePicker.Resources>
                         </DatePicker>
-                        <DatePicker x:Name="dateHighValue" HorizontalAlignment="Left" Grid.Column="7" MinWidth="90" Visibility="Hidden" Grid.ColumnSpan="3" Margin="4,9,0,11" Grid.RowSpan="2" Width="202">
+                        <DatePicker x:Name="dateHighValue" HorizontalAlignment="Left" Grid.Column="7"  Width="203" Visibility="Visible" Margin="4,0,0,2" Grid.ColumnSpan="3" MinWidth="90" Grid.Row="2" Grid.RowSpan="2" >
                             <DatePicker.Resources>
                                 <Style TargetType="Button">
                                     <Setter Property="MaxHeight" Value="30" />
