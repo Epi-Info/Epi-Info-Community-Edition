@@ -4115,6 +4115,8 @@ namespace EpiDashboard
                 {
                     if (control is IGadget && ((IGadget)control).IsProcessing == false)
                     {
+						if (control is EpiDashboard.Gadgets.Reporting.StandardImageControl)
+							continue;
                         double top = Canvas.GetTop(control);
                        // double left = Canvas.GetLeft(control);
                         if (!sortedGadgets.ContainsKey(top))
