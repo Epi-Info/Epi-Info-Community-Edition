@@ -745,6 +745,7 @@ namespace EpiDashboard.Controls.Charting
 
                             }
                         }
+                        
                         else
                         {
                             List<EpiDashboard.Gadgets.Charting.XYColumnChartData> _dataList = (List<EpiDashboard.Gadgets.Charting.XYColumnChartData>)this.Chart.DataSource;
@@ -760,7 +761,7 @@ namespace EpiDashboard.Controls.Charting
 
                             htmlBuilder.AppendLine(" ]},");
 
-                            htmlBuilder.AppendLine("axis: { x : {type: 'category'  , categories:  [");
+                            htmlBuilder.AppendLine("axis: { x : {show:false,type: 'category'  , categories:  [");
                             foreach (var item in _dataList)
                             {
                                 htmlBuilder.AppendLine("'" + item.S + "', ");
@@ -768,7 +769,7 @@ namespace EpiDashboard.Controls.Charting
                             }
                         }
 
-                       
+                        
 
                         htmlBuilder.AppendLine("]}");
                         if (ChartType == "LineChart")

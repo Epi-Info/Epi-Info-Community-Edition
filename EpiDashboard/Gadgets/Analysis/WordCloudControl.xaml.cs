@@ -1376,10 +1376,14 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("var list_"+ count + "  = [");
                 foreach (var item in gadget.wordCloudDictionary)
                 {
+                    double NewValue = 0;
+                     
+                        NewValue =  item.Value / 100;
+                    
                     if (!item.Key.Contains('.'))
                     {
                         htmlBuilder.AppendLine("[");
-                        htmlBuilder.AppendLine("'" + item.Key + "' , " + item.Value + "");
+                        htmlBuilder.AppendLine("'" + item.Key + "' , " + Math.Ceiling(NewValue) + "");
                         htmlBuilder.AppendLine("],");
                     }
                 }

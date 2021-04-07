@@ -19,6 +19,7 @@ using Epi.Data;
 using Epi.Fields;
 using EpiDashboard;
 using EpiDashboard.Rules;
+using System.Text.RegularExpressions;
 
 namespace EpiDashboard
 {
@@ -348,7 +349,27 @@ namespace EpiDashboard
             else
             {
                 htmlOutput.AppendLine("<em>Current data source:</em> ");
-                htmlOutput.AppendLine("<strong>" + this.Database.ConnectionDescription + "</strong>");
+                if (this.Database.ConnectionString.Contains("epiweb://Epi Info Web Survey@"))
+                {
+                    
+
+                   
+                    var SurveyName = "";
+                     
+                    MatchCollection guids = Regex.Matches(this.TableName, @"(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}"); //Match all substrings in findGuid
+                    for (int i = 0; i < guids.Count; i++)
+                    {
+                        string Match = guids[i].Value; //Set Match to the value from the match
+                        SurveyName = this.TableName.Remove(this.TableName.IndexOf("_"+Match));
+                    }
+                    htmlOutput.AppendLine("<strong>" + SurveyName + "</strong>");
+                }
+                else
+                {
+                   
+                    htmlOutput.AppendLine("<strong>" + this.Database.ConnectionDescription + "</strong>");
+
+                }
             }
 
             htmlOutput.AppendLine("<br/>");
