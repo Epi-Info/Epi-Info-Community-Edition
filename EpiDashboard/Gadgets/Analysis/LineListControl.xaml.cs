@@ -401,17 +401,20 @@ namespace EpiDashboard
                 {
                     dataGridTextColumn.CellStyle = this.Resources["RightAlignDataGridCellStyle"] as Style;
                     Field field = DashboardHelper.GetAssociatedField(e.Column.Header.ToString());
+
+                    System.Globalization.DateTimeFormatInfo formatInfo = System.Globalization.DateTimeFormatInfo.CurrentInfo;
+
                     if (field != null && field is DateField)
                     {
-                        dataGridTextColumn.Binding.StringFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+                        dataGridTextColumn.Binding.StringFormat = formatInfo.ShortDatePattern;
                     }
                     else if (field != null && field is TimeField)
                     {
-                        dataGridTextColumn.Binding.StringFormat = CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
+                        dataGridTextColumn.Binding.StringFormat = formatInfo.LongTimePattern;
                     }
                     else
                     {
-                        dataGridTextColumn.Binding.StringFormat = CultureInfo.CurrentCulture.DateTimeFormat.SortableDateTimePattern; 
+                        dataGridTextColumn.Binding.StringFormat = formatInfo.ShortDatePattern + " " + formatInfo.LongTimePattern;
                     }
                 }
                 else if (e.PropertyType == typeof(int) ||
