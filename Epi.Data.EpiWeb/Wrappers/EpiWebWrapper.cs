@@ -82,33 +82,69 @@ namespace Epi.Data.EpiWeb.Wrappers
 
         public List<string> GetTableNames()
         {
+            
             List<string> names = new List<string>();
-            Epi.SurveyManagerServiceV4.SurveyInfoResponse Response = new Epi.SurveyManagerServiceV4.SurveyInfoResponse();
-            try
-            { 
-            var Client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
-               
-                Response = Client.GetAllSurveysByOrgKey(OrgId.ToString());
-            }
-            catch (Exception ex)
-            {
+            if (this.system == "epiweb://Epi Info Web Survey") {
+                Epi.SurveyManagerServiceV4.SurveyInfoResponse Response = new Epi.SurveyManagerServiceV4.SurveyInfoResponse();
 
-                WebSurveyOptions dialog1 = new WebSurveyOptions();
-                DialogResult result1 = dialog1.ShowDialog();
-                if (result1 == System.Windows.Forms.DialogResult.OK)
+                try
                 {
-                    
                     var Client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
 
                     Response = Client.GetAllSurveysByOrgKey(OrgId.ToString());
                 }
+                catch (Exception ex)
+                {
+
+                    WebSurveyOptions dialog1 = new WebSurveyOptions();
+                    DialogResult result1 = dialog1.ShowDialog();
+                    if (result1 == System.Windows.Forms.DialogResult.OK)
+                    {
+
+                        var Client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+
+                        Response = Client.GetAllSurveysByOrgKey(OrgId.ToString());
+                    }
+                }
+                foreach (var items in Response.SurveyInfoList)
+                {
+                    // names.Add(items.SurveyId + "_" + items.SurveyName);
+                    names.Add(items.SurveyName + "_" + items.SurveyId);
+                }
             }
-           // List<SurveyManagerServiceV4.SurveyInfoDTO> DTOList = Response.SurveyInfoList.OrderBy(o => o.SurveyName).ToList();
-            foreach (var items in Response.SurveyInfoList)
+          
+
+            if (this.system == "epiweb://Epi Info Cloud Data Capture")
             {
-               // names.Add(items.SurveyId + "_" + items.SurveyName);
-                names.Add(items.SurveyName + "_" + items.SurveyId);
+                Epi.EWEManagerServiceV2.SurveyInfoResponse EWEResponse = new EWEManagerServiceV2.SurveyInfoResponse();
+                
+                try
+                {
+                    var EWEClient = Epi.Core.ServiceClient.EWEServiceClient.Get2Client();
+                   
+                    EWEResponse = EWEClient.GetAllSurveysByOrgKey(OrgId.ToString());
+                }
+                catch (Exception ex)
+                {
+
+                    WebSurveyOptions dialog1 = new WebSurveyOptions();
+                    DialogResult result1 = dialog1.ShowDialog();
+                    if (result1 == System.Windows.Forms.DialogResult.OK)
+                    {
+
+                        var EWEClient = Epi.Core.ServiceClient.EWEServiceClient.Get2Client();
+
+                        EWEResponse = EWEClient.GetAllSurveysByOrgKey(OrgId.ToString());
+                    }
+                }
+                foreach (var items in EWEResponse.SurveyInfoList)
+                {
+                    // names.Add(items.SurveyId + "_" + items.SurveyName);
+                    names.Add(items.SurveyName + "_" + items.SurveyId);
+                }
             }
+                // List<SurveyManagerServiceV4.SurveyInfoDTO> DTOList = Response.SurveyInfoList.OrderBy(o => o.SurveyName).ToList();
+           
             //if (expired)
             //{
             //    Epi.Windows.MsgBox.ShowError("Your certificate file has expired. Please ask your Epi Info administrator for a new certificate file.");
@@ -147,33 +183,34 @@ namespace Epi.Data.EpiWeb.Wrappers
                 return dataTable;
             var SurveyId = collectionName.Split('_').Last();
             string json = "";
-          
-            try
+            if (this.system == "epiweb://Epi Info Web Survey")
             {
-                var Client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
-
-                   json = Client.GetJsonResponseAll(SurveyId, "", "");
-            }
-            catch (Exception ex)
-            {
-
-                WebSurveyOptions dialog1 = new WebSurveyOptions();
-                DialogResult result1 = dialog1.ShowDialog();
-                if (result1 == System.Windows.Forms.DialogResult.OK)
+                try
                 {
-                    //OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
-                    //DialogResult result2 = OrgKeyDialog.ShowDialog();
-                    //if (result2 == System.Windows.Forms.DialogResult.OK)
-                    //{
-                    //    this.OrganizationKey = OrgKeyDialog.OrganizationKey;
-                    //    if (!string.IsNullOrWhiteSpace(OrganizationKey))
-                    //    {
-                    //        SetSurveyInfo();
-                    //        QuickSurveyInfoUpdate();
-                    //    }
-                    //}
+                    var Client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+
+                    json = Client.GetJsonResponseAll(SurveyId, "", "");
                 }
-            }
+                catch (Exception ex)
+                {
+
+                    WebSurveyOptions dialog1 = new WebSurveyOptions();
+                    DialogResult result1 = dialog1.ShowDialog();
+                    if (result1 == System.Windows.Forms.DialogResult.OK)
+                    {
+                        //OrgKey OrgKeyDialog = new OrgKey(this.CurrentView.WebSurveyId, false, SharedStrings.WEBFORM_ORG_KEY_SUCCESSFUL, SharedStrings.WEBFORM_ORG_KEY_REPUBLISH);
+                        //DialogResult result2 = OrgKeyDialog.ShowDialog();
+                        //if (result2 == System.Windows.Forms.DialogResult.OK)
+                        //{
+                        //    this.OrganizationKey = OrgKeyDialog.OrganizationKey;
+                        //    if (!string.IsNullOrWhiteSpace(OrganizationKey))
+                        //    {
+                        //        SetSurveyInfo();
+                        //        QuickSurveyInfoUpdate();
+                        //    }
+                        //}
+                    }
+                }
                 var msg = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(json);
 
                 foreach (var item in msg)
@@ -181,8 +218,35 @@ namespace Epi.Data.EpiWeb.Wrappers
                     dataTable = GetDataTableFromJson(dataTable, JsonConvert.SerializeObject(item)); ;
 
                 }
-           
-         
+
+            }
+            if (this.system == "epiweb://Epi Info Cloud Data Capture")
+            {
+                try
+                {
+                    var EWEClient = Epi.Core.ServiceClient.EWEServiceClient.Get2Client();
+
+                    json = EWEClient.GetJsonResponseAll(SurveyId, "", "");
+                }
+                catch (Exception ex)
+                {
+
+                    WebSurveyOptions dialog1 = new WebSurveyOptions();
+                    DialogResult result1 = dialog1.ShowDialog();
+                    if (result1 == System.Windows.Forms.DialogResult.OK)
+                    {
+                         
+                    }
+                }
+                var msg = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(json);
+
+                foreach (var item in msg)
+                {
+                    dataTable = GetDataTableFromJson(dataTable, JsonConvert.SerializeObject(item)); ;
+
+                }
+
+            }
             //string surveyId = collectionName.Substring(collectionName.IndexOf("{{") + 2, 36);
             //using (SqlConnection connection = new SqlConnection(certInfo.ConnectionString))
             //{

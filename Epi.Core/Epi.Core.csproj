@@ -294,6 +294,11 @@
     <Compile Include="ExecutionEnvironment.cs" />
     <Compile Include="MailUtility.cs" />
     <Compile Include="ProjectPermissions.cs" />
+    <Compile Include="Service References\EWEManagerServiceV2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\EWEManagerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -896,6 +901,49 @@
     <None Include="Resources\NIOSH.IOCoder.C12.190829.bin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Service References\EWEManagerServiceV2\Epi.EWEManagerServiceV2.FormSettingResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\Epi.EWEManagerServiceV2.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\Epi.EWEManagerServiceV2.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\Epi.EWEManagerServiceV2.PublishReportResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\Epi.EWEManagerServiceV2.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\Epi.EWEManagerServiceV2.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\Epi.EWEManagerServiceV2.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\Epi.EWEManagerServiceV2.UserAuthenticationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\EWEManagerServiceV2.wsdl" />
+    <None Include="Service References\EWEManagerServiceV2\EWEManagerServiceV2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\EWEManagerServiceV21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\EWEManagerServiceV22.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\EWEManagerServiceV23.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\EWEManagerServiceV24.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EWEManagerServiceV2\EWEManagerServiceV25.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\EWEManagerService\Epi.EWEManagerService.FormSettingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -1156,6 +1204,13 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV41.disco" />
+    <None Include="Service References\EWEManagerServiceV2\EWEManagerServiceV2.disco" />
+    <None Include="Service References\EWEManagerServiceV2\configuration91.svcinfo" />
+    <None Include="Service References\EWEManagerServiceV2\configuration.svcinfo" />
+    <None Include="Service References\EWEManagerServiceV2\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="StatCalc.resources.dll" />
     <Content Include="Templates\Fields\debug - one of each field with different widths.xml" />
     <Content Include="Templates\Fields\debug - one of each field.xml" />
@@ -1737,6 +1792,7 @@
     <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EWEManagerServiceV2\" />
     <WCFMetadataStorage Include="Service References\EWEManagerService\" />
     <WCFMetadataStorage Include="Service References\SurveyManagerServiceV2\" />
     <WCFMetadataStorage Include="Service References\SurveyManagerServiceV3\" />

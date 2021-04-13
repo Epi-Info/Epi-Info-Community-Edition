@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:5000/EWEManagerServiceV2.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Constants" />
+  <xs:import schemaLocation="http://localhost:5000/EWEManagerServiceV2.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:5000/EWEManagerServiceV2.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="OrganizationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
+      <xs:element minOccurs="0" name="OrganizationKey" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
+  <xs:complexType name="UserDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Constants" minOccurs="0" name="Operation" type="q1:Constant.OperationMode" />
+      <xs:element minOccurs="0" name="PasswordHash" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResetPassword" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Role" type="xs:int" />
+      <xs:element minOccurs="0" name="UGuid" type="ser:guid" />
+      <xs:element minOccurs="0" name="UserHighestRole" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserDTO" nillable="true" type="tns:UserDTO" />
+  <xs:complexType name="ArrayOfOrganizationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrganizationDTO" nillable="true" type="tns:ArrayOfOrganizationDTO" />
+  <xs:complexType name="ArrayOfUserDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDTO" nillable="true" type="tns:UserDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserDTO" nillable="true" type="tns:ArrayOfUserDTO" />
+  <xs:complexType name="ArrayOfFormSettingDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FormSettingDTO" nillable="true" type="tns:FormSettingDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFormSettingDTO" nillable="true" type="tns:ArrayOfFormSettingDTO" />
+  <xs:complexType name="FormSettingDTO">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AssignedUserList" nillable="true" type="q2:ArrayOfKeyValueOfintstring" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AvailableOrgList" nillable="true" type="q3:ArrayOfKeyValueOfintstring" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ColumnNameList" nillable="true" type="q4:ArrayOfKeyValueOfintstring" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DataAccessRuleDescription" nillable="true" type="q5:ArrayOfKeyValueOfstringstring" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DataAccessRuleIds" nillable="true" type="q6:ArrayOfKeyValueOfintstring" />
+      <xs:element minOccurs="0" name="DeleteDraftData" type="xs:boolean" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FormControlNameList" nillable="true" type="q7:ArrayOfKeyValueOfintstring" />
+      <xs:element minOccurs="0" name="FormId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDisabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsShareable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SelectedDataAccessRule" type="xs:int" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SelectedOrgList" nillable="true" type="q8:ArrayOfKeyValueOfintstring" />
+      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="UserList" nillable="true" type="q9:ArrayOfKeyValueOfintstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FormSettingDTO" nillable="true" type="tns:FormSettingDTO" />
+  <xs:complexType name="ReportInfoDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DataSource" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EditedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Gadgets" nillable="true" type="tns:ArrayOfGadgetDTO" />
+      <xs:element minOccurs="0" name="RecordCount" type="xs:int" />
+      <xs:element minOccurs="0" name="ReportId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportVersion" type="xs:int" />
+      <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReportInfoDTO" nillable="true" type="tns:ReportInfoDTO" />
+  <xs:complexType name="ArrayOfGadgetDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GadgetDTO" nillable="true" type="tns:GadgetDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGadgetDTO" nillable="true" type="tns:ArrayOfGadgetDTO" />
+  <xs:complexType name="GadgetDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EditedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GadgetHtml" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GadgetId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GadgetNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="GadgetURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GadgetVersion" type="xs:int" />
+      <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GadgetsScript" nillable="true" type="q10:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ReportId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GadgetDTO" nillable="true" type="tns:GadgetDTO" />
+  <xs:complexType name="ArrayOfReportInfoDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReportInfoDTO" nillable="true" type="tns:ReportInfoDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReportInfoDTO" nillable="true" type="tns:ArrayOfReportInfoDTO" />
+</xs:schema>

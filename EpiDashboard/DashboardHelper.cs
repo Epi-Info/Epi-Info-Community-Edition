@@ -349,7 +349,7 @@ namespace EpiDashboard
             else
             {
                 htmlOutput.AppendLine("<em>Current data source:</em> ");
-                if (this.Database.ConnectionString.Contains("epiweb://Epi Info Web Survey@"))
+                if (this.Database.ConnectionString.Contains("epiweb://Epi Info Web Survey@")|| this.Database.ConnectionString.Contains("epiweb://Epi Info Cloud Data Capture@"))
                 {
                     
 

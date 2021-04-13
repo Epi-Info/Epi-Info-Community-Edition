@@ -166,7 +166,7 @@ namespace Epi.Windows.Dialogs
                 this.txtDataSource.Text = db.DataSource;
                 var SelectedDataSource = db.ConnectionString.Split('@');
 
-                if (SelectedDataSource[0].Contains("Epi Info Web Survey"))
+                if (SelectedDataSource[0].Contains("Epi Info Web Survey") || SelectedDataSource[0].Contains("Epi Info Cloud Data Capture"))
                 {
                     this.txtDataSource.Text = "Epi Info Web & Cloud Services";
                 }

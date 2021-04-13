@@ -597,108 +597,210 @@ namespace EpiDashboard
             }
         }
         private string PublishReport(string Html,string GadgetId , int GadgetNumber = 0) {
-            
 
+            string URL = "";
             var Table = DashboardHelper.TableName;
 
-            Epi.SurveyManagerServiceV4.ManagerServiceV4Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
-            Epi.SurveyManagerServiceV4.PublishReportRequest Request = new Epi.SurveyManagerServiceV4.PublishReportRequest();//(Epi.SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
-            Request.ReportInfo = new Epi.SurveyManagerServiceV4.ReportInfoDTO();
-
-            Epi.SurveyManagerServiceV4.GadgetDTO GadgetDTO = new Epi.SurveyManagerServiceV4.GadgetDTO();
-
-            List<Epi.SurveyManagerServiceV4.GadgetDTO> GadgetDTOList = new List<Epi.SurveyManagerServiceV4.GadgetDTO>();
-
-            Request.ReportInfo.ReportVersion = 1;
-            //5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing 
-            Guid SurveyId = Guid.Empty;
-            Guid.TryParse(Table.Split('_').Last(), out SurveyId);
-            if (SurveyId == Guid.Empty)
+            if (this.DashboardHelper.Database.ConnectionString.Contains("epiweb://Epi Info Web Survey@"))
             {
 
-                SurveyId = Guid.Parse("b834ccf7-d061-45d3-9339-0f9569dba983");
+                Epi.SurveyManagerServiceV4.ManagerServiceV4Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+                Epi.SurveyManagerServiceV4.PublishReportRequest Request = new Epi.SurveyManagerServiceV4.PublishReportRequest();//(Epi.SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
+                Request.ReportInfo = new Epi.SurveyManagerServiceV4.ReportInfoDTO();
+
+                Epi.SurveyManagerServiceV4.GadgetDTO GadgetDTO = new Epi.SurveyManagerServiceV4.GadgetDTO();
+
+                List<Epi.SurveyManagerServiceV4.GadgetDTO> GadgetDTOList = new List<Epi.SurveyManagerServiceV4.GadgetDTO>();
+
+                Request.ReportInfo.ReportVersion = 1;
+                //5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing 
+                Guid SurveyId = Guid.Empty;
+                Guid.TryParse(Table.Split('_').Last(), out SurveyId);
+                if (SurveyId == Guid.Empty)
+                {
+
+                    SurveyId = Guid.Parse("b834ccf7-d061-45d3-9339-0f9569dba983");
+                }
+                Request.ReportInfo.SurveyId = SurveyId.ToString();
+                if (this.DashboardHelper.ReportId != null)
+                {
+                    Request.ReportInfo.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+                }
+                else
+                {
+                    Request.ReportInfo.ReportId = SurveyId.ToString();
+                }
+                Request.ReportInfo.CreatedDate = DateTime.Now;
+                Request.ReportInfo.EditedDate = DateTime.Now;
+                Request.ReportInfo.DataSource = this.DashboardHelper.Database.DbName + " \\ " + this.DashboardHelper.TableName;//this.DashboardHelper.DatabaseTypeIdentifier;
+                Request.ReportInfo.RecordCount = this.DashboardHelper.RecordCount;
+                Request.ReportInfo.ReportName = this.DashboardHelper.CurrentCanvas.ToString().Split('\\').Last();
+                GadgetDTO.GadgetHtml = Html.ToString();
+                GadgetDTO.GadgetId = GadgetId;
+                GadgetDTO.GadgetNumber = GadgetNumber;
+                GadgetDTO.CreatedDate = DateTime.Now;
+                GadgetDTO.EditedDate = DateTime.Now;
+
+                GadgetDTO.GadgetVersion = 1;
+                if (this.DashboardHelper.ReportId != null)
+                {
+                    GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+                }
+                else
+                {
+                    GadgetDTO.ReportId = SurveyId.ToString();
+                }
+                GadgetDTOList.Add(GadgetDTO);
+                Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
+
+                var Result = client.PublishReport(Request);
+                URL = Result.Reports[0].ReportURL;
             }
-            Request.ReportInfo.SurveyId = SurveyId.ToString();
-            if (this.DashboardHelper.ReportId != null) {
-                Request.ReportInfo.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
-            }
-            else {
-                Request.ReportInfo.ReportId = SurveyId.ToString();
-            }
-            Request.ReportInfo.CreatedDate = DateTime.Now;
-            Request.ReportInfo.EditedDate = DateTime.Now;
-            Request.ReportInfo.DataSource = this.DashboardHelper.Database.DbName +" \\ " + this.DashboardHelper.TableName;//this.DashboardHelper.DatabaseTypeIdentifier;
-            Request.ReportInfo.RecordCount = this.DashboardHelper.RecordCount;
-            Request.ReportInfo.ReportName = this.DashboardHelper.CurrentCanvas.ToString().Split('\\').Last();
-            GadgetDTO.GadgetHtml = Html.ToString();
-            GadgetDTO.GadgetId = GadgetId;
-            GadgetDTO.GadgetNumber = GadgetNumber;
-            GadgetDTO.CreatedDate = DateTime.Now;
-            GadgetDTO.EditedDate = DateTime.Now;
-            
-            GadgetDTO.GadgetVersion = 1;
-            if (this.DashboardHelper.ReportId != null)
+            if (this.DashboardHelper.Database.ConnectionString.Contains("epiweb://Epi Info Cloud Data Capture@"))
             {
-                GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+
+                Epi.EWEManagerServiceV2.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.Get2Client();
+                Epi.EWEManagerServiceV2.PublishReportRequest Request = new Epi.EWEManagerServiceV2.PublishReportRequest(); 
+                Request.ReportInfo = new Epi.EWEManagerServiceV2.ReportInfoDTO();
+
+                Epi.EWEManagerServiceV2.GadgetDTO GadgetDTO = new Epi.EWEManagerServiceV2.GadgetDTO();
+
+                List<Epi.EWEManagerServiceV2.GadgetDTO> GadgetDTOList = new List<Epi.EWEManagerServiceV2.GadgetDTO>();
+
+                Request.ReportInfo.ReportVersion = 1;
+                //5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing 
+                Guid SurveyId = Guid.Empty;
+                Guid.TryParse(Table.Split('_').Last(), out SurveyId);
+                if (SurveyId == Guid.Empty)
+                {
+
+                    SurveyId = Guid.Parse("b834ccf7-d061-45d3-9339-0f9569dba983");
+                }
+                Request.ReportInfo.SurveyId = SurveyId.ToString();
+                if (this.DashboardHelper.ReportId != null)
+                {
+                    Request.ReportInfo.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+                }
+                else
+                {
+                    Request.ReportInfo.ReportId = SurveyId.ToString();
+                }
+                Request.ReportInfo.CreatedDate = DateTime.Now;
+                Request.ReportInfo.EditedDate = DateTime.Now;
+                Request.ReportInfo.DataSource = this.DashboardHelper.Database.DbName + " \\ " + this.DashboardHelper.TableName;//this.DashboardHelper.DatabaseTypeIdentifier;
+                Request.ReportInfo.RecordCount = this.DashboardHelper.RecordCount;
+                Request.ReportInfo.ReportName = this.DashboardHelper.CurrentCanvas.ToString().Split('\\').Last();
+                GadgetDTO.GadgetHtml = Html.ToString();
+                GadgetDTO.GadgetId = GadgetId;
+                GadgetDTO.GadgetNumber = GadgetNumber;
+                GadgetDTO.CreatedDate = DateTime.Now;
+                GadgetDTO.EditedDate = DateTime.Now;
+
+                GadgetDTO.GadgetVersion = 1;
+                if (this.DashboardHelper.ReportId != null)
+                {
+                    GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+                }
+                else
+                {
+                    GadgetDTO.ReportId = SurveyId.ToString();
+                }
+                GadgetDTOList.Add(GadgetDTO);
+                Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
+
+                var Result = client.PublishReport(Request);
+                URL = Result.Reports[0].ReportURL;
             }
-            else
-            {
-                GadgetDTO.ReportId = SurveyId.ToString();
-            }
-            GadgetDTOList.Add(GadgetDTO);
-            Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
 
-            var Result = client.PublishReport(Request);
-
-
-            return Result.Reports[0].ReportURL;
+            return URL;
 
         }
         private void DeleteReport()
         {
 
             var Table = DashboardHelper.TableName;
-
-            Epi.SurveyManagerServiceV4.ManagerServiceV4Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
-            Epi.SurveyManagerServiceV4.PublishReportRequest Request = new Epi.SurveyManagerServiceV4.PublishReportRequest();
-            Request.ReportInfo = new Epi.SurveyManagerServiceV4.ReportInfoDTO();
-
-            Epi.SurveyManagerServiceV4.GadgetDTO GadgetDTO = new Epi.SurveyManagerServiceV4.GadgetDTO();
-
-            List<Epi.SurveyManagerServiceV4.GadgetDTO> GadgetDTOList = new List<Epi.SurveyManagerServiceV4.GadgetDTO>();
-
-            Request.ReportInfo.ReportVersion = 1;
-             
-            Guid SurveyId = Guid.Empty;
-            Guid.TryParse(Table.Split('_').Last(), out SurveyId);
-            
-            Request.ReportInfo.SurveyId = SurveyId.ToString();
-            if (this.DashboardHelper.ReportId != null)
+            if (this.DashboardHelper.Database.ConnectionString.Contains("epiweb://Epi Info Web Survey@"))
             {
-                Request.ReportInfo.ReportId = this.DashboardHelper.ReportId.ToString();
+                Epi.SurveyManagerServiceV4.ManagerServiceV4Client client = Epi.Core.ServiceClient.ServiceClient.GetClientV4();
+                Epi.SurveyManagerServiceV4.PublishReportRequest Request = new Epi.SurveyManagerServiceV4.PublishReportRequest();
+                Request.ReportInfo = new Epi.SurveyManagerServiceV4.ReportInfoDTO();
+
+                Epi.SurveyManagerServiceV4.GadgetDTO GadgetDTO = new Epi.SurveyManagerServiceV4.GadgetDTO();
+
+                List<Epi.SurveyManagerServiceV4.GadgetDTO> GadgetDTOList = new List<Epi.SurveyManagerServiceV4.GadgetDTO>();
+
+                Request.ReportInfo.ReportVersion = 1;
+
+                Guid SurveyId = Guid.Empty;
+                Guid.TryParse(Table.Split('_').Last(), out SurveyId);
+
+                Request.ReportInfo.SurveyId = SurveyId.ToString();
+                if (this.DashboardHelper.ReportId != null)
+                {
+                    Request.ReportInfo.ReportId = this.DashboardHelper.ReportId.ToString();
+                }
+                else
+                {
+                    Request.ReportInfo.ReportId = SurveyId.ToString();
+                }
+
+                if (this.DashboardHelper.ReportId != null)
+                {
+                    GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+                }
+                else
+                {
+                    GadgetDTO.ReportId = SurveyId.ToString();
+                }
+                GadgetDTOList.Add(GadgetDTO);
+                Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
+
+
+
+                var Result = client.DeleteReport(Request);
+
             }
-            else
+            if (this.DashboardHelper.Database.ConnectionString.Contains("epiweb://Epi Info Cloud Data Capture@"))
             {
-                Request.ReportInfo.ReportId = SurveyId.ToString();
+                Epi.EWEManagerServiceV2.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.Get2Client();
+                Epi.EWEManagerServiceV2.PublishReportRequest Request = new Epi.EWEManagerServiceV2.PublishReportRequest();
+                Request.ReportInfo = new Epi.EWEManagerServiceV2.ReportInfoDTO();
+
+                Epi.EWEManagerServiceV2.GadgetDTO GadgetDTO = new Epi.EWEManagerServiceV2.GadgetDTO();
+
+                List<Epi.EWEManagerServiceV2.GadgetDTO> GadgetDTOList = new List<Epi.EWEManagerServiceV2.GadgetDTO>();
+
+                Request.ReportInfo.ReportVersion = 1;
+
+                Guid SurveyId = Guid.Empty;
+                Guid.TryParse(Table.Split('_').Last(), out SurveyId);
+
+                Request.ReportInfo.SurveyId = SurveyId.ToString();
+                if (this.DashboardHelper.ReportId != null)
+                {
+                    Request.ReportInfo.ReportId = this.DashboardHelper.ReportId.ToString();
+                }
+                else
+                {
+                    Request.ReportInfo.ReportId = SurveyId.ToString();
+                }
+
+                if (this.DashboardHelper.ReportId != null)
+                {
+                    GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
+                }
+                else
+                {
+                    GadgetDTO.ReportId = SurveyId.ToString();
+                }
+                GadgetDTOList.Add(GadgetDTO);
+                Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
+
+
+
+                var Result = client.DeleteReport(Request);
+
             }
-
-            if (this.DashboardHelper.ReportId != null)
-            {
-                GadgetDTO.ReportId = this.DashboardHelper.ReportId.ToString();// Guid.Empty.ToString(); // will need to change
-            }
-            else
-            {
-                GadgetDTO.ReportId = SurveyId.ToString();
-            }
-            GadgetDTOList.Add(GadgetDTO);
-            Request.ReportInfo.Gadgets = GadgetDTOList.ToArray();
-
-
-
-            var Result = client.DeleteReport(Request);
-
-
-
 
         }
         private void mnuSendOutputToWord_Click(object sender, RoutedEventArgs e)
