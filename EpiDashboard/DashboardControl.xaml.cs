@@ -24,12 +24,12 @@ using EpiDashboard.Controls;
 using EpiDashboard.Gadgets.Reporting;
 using System.Text.RegularExpressions;
 
-namespace EpiDashboard 
+namespace EpiDashboard
 {
     public delegate void NotificationButtonHandler();
 
     public delegate void StatusStripButtonHandler();
-     
+
     public delegate void GadgetCloseButtonHandler();
     public delegate void GadgetConfigButtonHandler();
     public delegate void GadgetDescriptionButtonHandler();
@@ -178,10 +178,10 @@ namespace EpiDashboard
             mnuOpen.Click += new RoutedEventHandler(mnuOpen_Click);
             mnuSave.Click += new RoutedEventHandler(mnuSave_Click);
             mnuSaveAs.Click += new RoutedEventHandler(mnuSaveAs_Click);
-         
+
                 mnuSendOutputToWeb.Visibility = Visibility.Visible;
                 mnuSendOutputToWeb.Click += new RoutedEventHandler(mnuSendOutputToWebUpdateCurrent_Click);
-        
+
             mnuSendOutputTo.Visibility = Visibility.Visible;
             foreach (Epi.DataSets.Config.GadgetRow row in Configuration.GetNewInstance().Gadget.Rows)
             {
@@ -248,7 +248,7 @@ namespace EpiDashboard
             IsCanvasDirty = false;
             ResetCanvasProperties();
 #if LINUX_BUILD
-            
+
             mnuSendOutputTo.Visibility = Visibility.Collapsed;
 #else
             mnuSendOutputTo.Visibility = Visibility.Collapsed;
@@ -319,7 +319,7 @@ namespace EpiDashboard
 
             instructionsPanel.DescriptionText = DashboardSharedStrings.INSTRUCTIONS;
 
-            //statusStripButtonShowBorders.ToolTip = 
+            //statusStripButtonShowBorders.ToolTip =
 
 
             //tooltipHideGadgetBordersTitle.Content = DashboardSharedStrings.DASHBOARD_HIDE_BORDERS;
@@ -426,7 +426,7 @@ namespace EpiDashboard
         }
 
         private void DashboardControl_MouseDown(object sender, MouseButtonEventArgs e)
-        {           
+        {
         }
 
         void mnuAutoArrange_Click(object sender, RoutedEventArgs e)
@@ -572,7 +572,7 @@ namespace EpiDashboard
                 //Epi.SurveyManagerServiceV4.PublishReportRequest  Request = new Epi.SurveyManagerServiceV4.PublishReportRequest();//(Epi.SurveyManagerService.PublishRequest)((object[])e.Argument)[0];
                 //Request.ReportInfo = new Epi.SurveyManagerServiceV4.ReportDTO();
                 //Request.ReportInfo.ReportVersion = 1;
-                ////5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing 
+                ////5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing
                 //Guid SurveyId = Guid.Empty;
                 //Guid.TryParse(Table.Split('_')[0], out SurveyId);
                 //if (SurveyId == Guid.Empty) {
@@ -586,8 +586,8 @@ namespace EpiDashboard
                 //Request.ReportInfo.EditedDate = DateTime.Now;
 
 
-                
-              
+
+
                 //var Result = client.PublishReport(Request);
 
 
@@ -613,7 +613,7 @@ namespace EpiDashboard
                 List<Epi.SurveyManagerServiceV4.GadgetDTO> GadgetDTOList = new List<Epi.SurveyManagerServiceV4.GadgetDTO>();
 
                 Request.ReportInfo.ReportVersion = 1;
-                //5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing 
+                //5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing
                 Guid SurveyId = Guid.Empty;
                 Guid.TryParse(Table.Split('_').Last(), out SurveyId);
                 if (SurveyId == Guid.Empty)
@@ -660,7 +660,7 @@ namespace EpiDashboard
             {
 
                 Epi.EWEManagerServiceV2.EWEManagerServiceV2Client client = Epi.Core.ServiceClient.EWEServiceClient.Get2Client();
-                Epi.EWEManagerServiceV2.PublishReportRequest Request = new Epi.EWEManagerServiceV2.PublishReportRequest(); 
+                Epi.EWEManagerServiceV2.PublishReportRequest Request = new Epi.EWEManagerServiceV2.PublishReportRequest();
                 Request.ReportInfo = new Epi.EWEManagerServiceV2.ReportInfoDTO();
 
                 Epi.EWEManagerServiceV2.GadgetDTO GadgetDTO = new Epi.EWEManagerServiceV2.GadgetDTO();
@@ -668,7 +668,7 @@ namespace EpiDashboard
                 List<Epi.EWEManagerServiceV2.GadgetDTO> GadgetDTOList = new List<Epi.EWEManagerServiceV2.GadgetDTO>();
 
                 Request.ReportInfo.ReportVersion = 1;
-                //5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing 
+                //5f73decc-791f-4216-b10d-7f8e10b1207a PUI form for testing
                 Guid SurveyId = Guid.Empty;
                 Guid.TryParse(Table.Split('_').Last(), out SurveyId);
                 if (SurveyId == Guid.Empty)
@@ -1340,7 +1340,7 @@ namespace EpiDashboard
 
                             break;
                         }
-                        // condition for top anchoring                
+                        // condition for top anchoring
                         else if (Math.Abs(draggedLeft - targetLeft) < 15 && draggedTop >= targetBottom && draggedTop < (targetBottom + 15))
                         {
                             anchorLine.Visibility = System.Windows.Visibility.Visible;
@@ -4246,12 +4246,10 @@ namespace EpiDashboard
                 }
 
                 int count = 0;
-                // Delete old report 
-               
+                // Delete old report
+
                 foreach (KeyValuePair<double, IGadget> kvp in sortedGadgets)
                 {
-                   
-
                     IGadget gadget = kvp.Value;
                     double left = Canvas.GetLeft((UIElement)gadget);
                     double top = Canvas.GetTop((UIElement)gadget) + 150;
@@ -4259,8 +4257,18 @@ namespace EpiDashboard
                     double Bottom = Canvas.GetBottom((System.Windows.FrameworkElement)gadget);
                     double Width = ((System.Windows.FrameworkElement)kvp.Value).ActualWidth + 5;
                     double Height = ((System.Windows.FrameworkElement)kvp.Value).ActualHeight;
-                    Guid GadgetGuid = ((EpiDashboard.GadgetBase)kvp.Value).UniqueIdentifier;
-                   string GadgetId = "";
+
+                    Guid GadgetGuid = new Guid();
+                    if (kvp.Value is EpiDashboard.GadgetBase)
+                    {
+                        GadgetGuid = ((EpiDashboard.GadgetBase)kvp.Value).UniqueIdentifier;
+                    }
+                    else if (kvp.Value is EpiDashboard.NutritionChartControl)
+                    {
+                        GadgetGuid = ((EpiDashboard.NutritionChartControl)kvp.Value).UniqueIdentifier;
+                    }
+
+                    string GadgetId = "";
                     if (GadgetGuid != Guid.Empty)
                     {
                          GadgetId = ((EpiDashboard.GadgetBase)kvp.Value).UniqueIdentifier.ToString();
@@ -4342,7 +4350,7 @@ namespace EpiDashboard
                     var GadgetId = ((EpiDashboard.GadgetBase)control).UniqueIdentifier.ToString();
                     if (control is IGadget && ((IGadget)control).IsProcessing == false)
                     {
-                        
+
                         if (gadget != null)
                         {
                             if (!ForWeb)
@@ -4387,7 +4395,7 @@ namespace EpiDashboard
                                     ReportUrl = PublishReport(GadgethtmlBuilder.ToString(), GadgetId, count);
 
                                 }
-                                
+
                                 count++;
 
                             }
@@ -4425,7 +4433,7 @@ namespace EpiDashboard
             {
                 RefreshResults();
             }
-           
+
             return htmlBuilder.ToString();
         }
         private string GetHtmlFooter()
@@ -4484,7 +4492,7 @@ namespace EpiDashboard
             if ((System.Windows.SystemParameters.PrimaryScreenWidth / 1.2) > properties.Width)
             {
                 properties.Width = (System.Windows.SystemParameters.PrimaryScreenWidth / 1.2);
-                
+
             }
 
             if ((System.Windows.SystemParameters.PrimaryScreenHeight / 1.2) > properties.Height)
@@ -4719,7 +4727,7 @@ namespace EpiDashboard
         //}
 
         //private void tblockSaveAs_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{            
+        //{
         //}
 
         private void tblockSaveAs_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -4824,7 +4832,7 @@ namespace EpiDashboard
                     dataDisplay.Visibility = System.Windows.Visibility.Visible;
                     dataDictionary.Visibility = System.Windows.Visibility.Collapsed;
                     duplicatesDisplay.Visibility = Visibility.Collapsed;
-                    
+
                 }
                 else if (cmbView.SelectedIndex == 2)
                 {
@@ -4848,7 +4856,7 @@ namespace EpiDashboard
                 //    dataDisplay.Visibility = System.Windows.Visibility.Collapsed;
                 //    duplicatesDisplay.Visibility = Visibility.Visible;
                 //}
-            }            
+            }
         }
 
         private void HideBorderLabel_Loaded (object sender, RoutedEventArgs e)
@@ -4879,6 +4887,6 @@ namespace EpiDashboard
         {
            // introAvailableData.Visibility = Visibility.Collapsed;
         }
- 
+
     }
 }
