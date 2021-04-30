@@ -100,6 +100,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Data.REDCap", "Epi.Data
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "MSIX", "MSIX\MSIX.wapproj", "{BEDC9218-B86E-479B-BEF5-2CC13EAED452}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Exclude EpiMap)|Any CPU = Debug (Exclude EpiMap)|Any CPU
@@ -3209,6 +3211,48 @@ Global
 		{BEDC9218-B86E-479B-BEF5-2CC13EAED452}.Utilities only|x86.ActiveCfg = Debug|x86
 		{BEDC9218-B86E-479B-BEF5-2CC13EAED452}.Utilities only|x86.Build.0 = Debug|x86
 		{BEDC9218-B86E-479B-BEF5-2CC13EAED452}.Utilities only|x86.Deploy.0 = Debug|x86
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug (Exclude EpiMap)|Any CPU.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug (Exclude EpiMap)|ARM.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug (Exclude EpiMap)|ARM64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug (Exclude EpiMap)|Mixed Platforms.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug (Exclude EpiMap)|x64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug (Exclude EpiMap)|x86.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug|Any CPU.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug|ARM.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug|ARM64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug|x64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Debug|x86.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Epi.Enter.ServiceApplication|Any CPU.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Epi.Enter.ServiceApplication|ARM.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Epi.Enter.ServiceApplication|ARM64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Epi.Enter.ServiceApplication|Mixed Platforms.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Epi.Enter.ServiceApplication|x64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Epi.Enter.ServiceApplication|x86.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Linux|Any CPU.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Linux|ARM.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Linux|ARM64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Linux|Mixed Platforms.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Linux|x64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Linux|x86.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Release|Any CPU.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Release|ARM.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Release|ARM64.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Release|Mixed Platforms.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Release|x64.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Release|x86.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Setup (Release)|Any CPU.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Setup (Release)|ARM.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Setup (Release)|ARM64.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Setup (Release)|Mixed Platforms.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Setup (Release)|x64.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Setup (Release)|x86.ActiveCfg = Release
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Utilities only|Any CPU.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Utilities only|ARM.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Utilities only|ARM64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Utilities only|Mixed Platforms.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Utilities only|x64.ActiveCfg = Debug
+		{41580D95-0CDE-4EAE-B88B-B87A68F4DCE5}.Utilities only|x86.ActiveCfg = Debug
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
