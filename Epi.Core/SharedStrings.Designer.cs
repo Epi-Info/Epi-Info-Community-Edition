@@ -2576,6 +2576,15 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unexpected format for a date and/or time..
+        /// </summary>
+        public static string DASHBOARD_ERROR_PARSE_TO_DATETIME {
+            get {
+                return ResourceManager.GetString("DASHBOARD_ERROR_PARSE_TO_DATETIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified project file ({0}) is either missing or corrupt and cannot be opened..
         /// </summary>
         public static string DASHBOARD_ERROR_PROJECT_NOT_FOUND {

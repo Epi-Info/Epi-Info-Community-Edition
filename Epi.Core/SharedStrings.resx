@@ -3287,4 +3287,7 @@ GlobalRecordId = [FKEY]</value>
   <data name="START_SINGLE_IMPORT" xml:space="preserve">
     <value>Import initiated for data package {0}.</value>
   </data>
+  <data name="DASHBOARD_ERROR_PARSE_TO_DATETIME" xml:space="preserve">
+    <value>Unexpected format for a date and/or time.</value>
+  </data>
 </root>

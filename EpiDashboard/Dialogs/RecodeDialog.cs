@@ -35,7 +35,7 @@ namespace EpiDashboard.Dialogs
         public RecodeDialog(DashboardHelper dashboardHelper)
         {
             this.dashboardHelper = dashboardHelper;
-            this.editMode = false;            
+            this.editMode = false;
             InitializeComponent();
             FillComboBoxes();
             this.checkboxMaintainSortOrder.Checked = true;
@@ -49,6 +49,8 @@ namespace EpiDashboard.Dialogs
         {
             this.dashboardHelper = dashboardHelper;
             this.editMode = true;
+            this.recodeRule = rule;
+
             InitializeComponent();
 
             FillComboBoxes();
@@ -85,6 +87,8 @@ namespace EpiDashboard.Dialogs
             {
                 rule.RecodeInputTable.Columns[0].ColumnName = COL_FROM;
                 rule.RecodeInputTable.Columns[1].ColumnName = COL_TO;
+
+                rule.RecodeInputTable.Columns[1].ColumnName = COL_TO;
                 rule.RecodeInputTable.Columns[2].ColumnName = COL_REPRESENTATION;
             }
             else if (rule.RecodeInputTable.Columns.Count == 2)
@@ -93,15 +97,41 @@ namespace EpiDashboard.Dialogs
                 rule.RecodeInputTable.Columns[1].ColumnName = COL_REPRESENTATION;
             }
 
-            this.dataGridViewRecode.DataSource = rule.RecodeInputTable;
-        }
-        #endregion // Constructors
+            dataGridViewRecode.DataSource = rule.RecodeInputTable;
 
-        #region Public Properties
-        /// <summary>
-        /// Gets the dashboard helper object attached to this control
-        /// </summary>
-        public DashboardHelper DashboardHelper
+			dataGridViewRecode.CellValidating += DataGridViewRecode_CellValidating;
+        }
+
+		private void DataGridViewRecode_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+		{
+            if (dataGridViewRecode.IsCurrentCellDirty)
+            {
+                var editCell = dataGridViewRecode[e.ColumnIndex, e.RowIndex];
+                DateTime cellParse = new DateTime();
+
+                if(this.recodeRule.SourceColumnType == typeof(DateTime).ToString())
+                {
+                    if(e.ColumnIndex < (dataGridViewRecode.ColumnCount - 1))
+                    {
+                        if (false == DateTime.TryParse(editCell.EditedFormattedValue.ToString(), System.Globalization.CultureInfo.CurrentCulture, System.Globalization.DateTimeStyles.None, out cellParse))
+                        {
+                            editCell.ErrorText = SharedStrings.DASHBOARD_ERROR_PARSE_TO_DATETIME;
+                        }
+                        else
+                        {
+                            editCell.ErrorText = null;
+                        }
+                    }
+                }
+            }
+        }
+		#endregion // Constructors
+
+		#region Public Properties
+		/// <summary>
+		/// Gets the dashboard helper object attached to this control
+		/// </summary>
+		public DashboardHelper DashboardHelper
         {
             get
             {
@@ -183,7 +213,7 @@ namespace EpiDashboard.Dialogs
         {
             txtDestinationField.Text = string.Empty;
             cbxSourceField.Items.Clear();
-            cbxFieldType.Items.Clear();            
+            cbxFieldType.Items.Clear();
 
             List<string> fieldNames = new List<string>();
 
@@ -200,7 +230,7 @@ namespace EpiDashboard.Dialogs
 
             fieldNames.Sort();
             cbxSourceField.DataSource = fieldNames;
-            
+
             cbxFieldType.Items.Add("Text");
             cbxFieldType.Items.Add("Numeric");
             cbxFieldType.Items.Add("Yes/No");
@@ -223,7 +253,7 @@ namespace EpiDashboard.Dialogs
         {
             DataTable dt = new DataTable("recode");
             Configuration config = dashboardHelper.Config;
-            
+
             dataGridViewRecode.Columns.Clear();
             dataGridViewRecode.AllowUserToAddRows = true;
 
@@ -274,7 +304,7 @@ namespace EpiDashboard.Dialogs
             }
 
             if (DestinationFieldType.Equals(DashboardVariableType.Numeric))
-            {                
+            {
                 dt.Columns.Add(col3);
             }
             else if (DestinationFieldType.Equals(DashboardVariableType.YesNo) && !(isTableBasedDropDown))
@@ -296,7 +326,7 @@ namespace EpiDashboard.Dialogs
                 }
             }
             else
-            {   
+            {
                 dt.Columns.Add(col3);
             }
 
@@ -344,7 +374,7 @@ namespace EpiDashboard.Dialogs
                             dt.Rows.Add(kvp.Key, null);
                         }
                     }
-                }                
+                }
             }
             else if(dt.Rows.Count <= 0)
             {
@@ -364,7 +394,7 @@ namespace EpiDashboard.Dialogs
                 }
             }
 
-            dataGridViewRecode.DataSource = dt;            
+            dataGridViewRecode.DataSource = dt;
         }
 
         private void EnableDisableFillRanges()
@@ -425,7 +455,7 @@ namespace EpiDashboard.Dialogs
         private void cbxFieldType_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillDataGrid();
-            EnableDisableFillRanges();            
+            EnableDisableFillRanges();
         }
 
         private void btnFillRanges_Click(object sender, EventArgs e)
