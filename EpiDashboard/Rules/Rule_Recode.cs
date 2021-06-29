@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
+using System.Linq;
 using Epi;
 using Epi.Core;
 
@@ -33,6 +34,7 @@ namespace EpiDashboard.Rules
         private string sourceColumnType;
         private DataTable recodeInputTable;
         private DataTable recodeTable;
+        CultureInfo _parsingCultureInfo;
         private bool shouldMaintainSortOrder;
         private bool shouldUseWildcards;
         private string configYesValue = "Yes";
@@ -215,7 +217,7 @@ namespace EpiDashboard.Rules
             }
             foreach (DataRow row in this.RecodeTable.Rows)
             {
-                if(!toValues.Contains(row[column].ToString())) 
+                if (!toValues.Contains(row[column].ToString()))
                 {
                     toValues.Add(row[column].ToString());
                 }
@@ -328,7 +330,7 @@ namespace EpiDashboard.Rules
                         if (row[0].ToString().Equals("LOVALUE"))
                         {
                             switch (SourceColumnType)
-                            {                                
+                            {
                                 case "System.Single":
                                     lowerBound = Single.MinValue;
                                     break;
@@ -349,7 +351,7 @@ namespace EpiDashboard.Rules
                                     lowerBound = Double.MinValue;
                                     break;
                             }
-                            
+
                             firstSuccess = true;
                         }
                         else
@@ -386,7 +388,7 @@ namespace EpiDashboard.Rules
 
                             secondSuccess = true;
                         }
-                        
+
                         else
                         {
                             secondSuccess = Double.TryParse(row[1].ToString(), out upperBound);
@@ -452,7 +454,7 @@ namespace EpiDashboard.Rules
             s = Regex.Replace(s, @"\\\\\\\*", @"\*");
             s = Regex.Replace(s, @"(?<!\\)\\\?", @".");  // Negative Lookbehind
             s = Regex.Replace(s, @"\\\\\\\?", @"\?");
-            return Regex.Replace(s, @"\\\\\\\\", @"\\"); 
+            return Regex.Replace(s, @"\\\\\\\\", @"\\");
         }
         #endregion // Private Methods
 
@@ -477,17 +479,43 @@ namespace EpiDashboard.Rules
 
             xmlString = xmlString + "<recodeTable>";
 
-            foreach (DataRow row in recodeInputTable.Rows)
+            if (recodeInputTable.Columns.Count == 3)
             {
-                xmlString = xmlString + "<recodeTableRow>";
-                object[] objects = row.ItemArray;
-                foreach (object obj in objects)
+                foreach (DataRow row in recodeInputTable.Rows)
                 {
-                    xmlString = xmlString + "<recodeTableData>";
-                    xmlString = xmlString + obj.ToString().Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;");
-                    xmlString = xmlString + "</recodeTableData>";
+                    xmlString = xmlString + "<recodeTableRow>";
+                    object[] objects = row.ItemArray;
+
+                    if (sourceColumnType == "System.DateTime")
+                    {
+                        xmlString = xmlString + "<recodeTableData>" + ToUniversalSortable(objects[0].ToString()) + "</recodeTableData>";
+                        xmlString = xmlString + "<recodeTableData>" + ToUniversalSortable(objects[1].ToString()) + "</recodeTableData>";
+                        xmlString = xmlString + "<recodeTableData>" + objects[2].ToString().Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;") + "</recodeTableData>";
+                    }
+                    else
+                    {
+                        xmlString = xmlString + "<recodeTableData>" + objects[0].ToString().Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;") + "</recodeTableData>";
+                        xmlString = xmlString + "<recodeTableData>" + objects[1].ToString().Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;") + "</recodeTableData>";
+                        xmlString = xmlString + "<recodeTableData>" + objects[2].ToString().Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;") + "</recodeTableData>";
+                    }
+
+                    xmlString = xmlString + "</recodeTableRow>";
                 }
-                xmlString = xmlString + "</recodeTableRow>";
+            }
+            else
+            {
+                foreach (DataRow row in recodeInputTable.Rows)
+                {
+                    xmlString = xmlString + "<recodeTableRow>";
+                    object[] objects = row.ItemArray;
+                    foreach (object obj in objects)
+                    {
+                        xmlString = xmlString + "<recodeTableData>";
+                        xmlString = xmlString + obj.ToString().Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;");
+                        xmlString = xmlString + "</recodeTableData>";
+                    }
+                    xmlString = xmlString + "</recodeTableRow>";
+                }
             }
 
             xmlString = xmlString + "</recodeTable>";
@@ -502,6 +530,23 @@ namespace EpiDashboard.Rules
             element.Attributes.Append(type);
 
             return element;
+        }
+
+        private static string ToUniversalSortable(string userInput)
+        {
+            string asInvariantCulture = "";
+
+            try
+            {
+                DateTime dateVal = DateTime.Parse(userInput, System.Globalization.CultureInfo.CurrentCulture);
+                asInvariantCulture = dateVal.ToString("u", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+
+            }
+
+            return asInvariantCulture;
         }
 
         /// <summary>
@@ -558,21 +603,60 @@ namespace EpiDashboard.Rules
                 }
                 else if (child.Name.Equals("recodeTable"))
                 {
-                    foreach (XmlElement recodeRow in child.ChildNodes)
+                    if (sourceColumnType == "System.DateTime")
                     {
-                        if (recodeRow.Name.ToLowerInvariant().Equals("recodetablerow"))
+                        _parsingCultureInfo = GetSourceCultureInfo(RecodeInputTable, child);
+
+                        foreach (XmlElement recodeRow in child.ChildNodes)
                         {
-                            string[] itemArray = new string[columns];
-                            int count = 0;
-                            foreach (XmlElement recodeCell in recodeRow.ChildNodes)
+                            if (recodeRow.Name.ToLowerInvariant().Equals("recodetablerow"))
                             {
-                                if (recodeCell.Name.ToLowerInvariant().Equals("recodetabledata"))
+                                string[] itemArray = new string[columns];
+                                int count = 0;
+                                string cleanDateString = "";
+                                DateTime parsedDateTime;
+
+                                foreach (XmlElement recodeCell in recodeRow.ChildNodes)
                                 {
-                                    itemArray[count] = recodeCell.InnerText.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&");
-                                    count++;
+                                    if (recodeCell.Name.ToLowerInvariant().Equals("recodetabledata"))
+                                    {
+                                        if(count < (itemArray.Length - 1))
+                                        {
+                                            cleanDateString = recodeCell.InnerText.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&");
+
+                                            DateTime.TryParseExact(cleanDateString, "d", _parsingCultureInfo, DateTimeStyles.None, out parsedDateTime);
+                                            itemArray[count] = parsedDateTime.ToShortDateString();
+                                            count++;
+                                        }
+                                        else
+                                        {
+                                            itemArray[count] = recodeCell.InnerText.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&");
+                                            count++;
+                                        }
+                                    }
                                 }
+                                RecodeInputTable.Rows.Add(itemArray);
                             }
-                            RecodeInputTable.Rows.Add(itemArray);
+                        }
+                    }
+                    else
+                    {
+                        foreach (XmlElement recodeRow in child.ChildNodes)
+                        {
+                            if (recodeRow.Name.ToLowerInvariant().Equals("recodetablerow"))
+                            {
+                                string[] itemArray = new string[columns];
+                                int count = 0;
+                                foreach (XmlElement recodeCell in recodeRow.ChildNodes)
+                                {
+                                    if (recodeCell.Name.ToLowerInvariant().Equals("recodetabledata"))
+                                    {
+                                        itemArray[count] = recodeCell.InnerText.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&");
+                                        count++;
+                                    }
+                                }
+                                RecodeInputTable.Rows.Add(itemArray);
+                            }
                         }
                     }
                 }
@@ -591,10 +675,137 @@ namespace EpiDashboard.Rules
         }
 
         /// <summary>
-        /// Sets up the rule
+        /// Determine what culture datetime string was serialized with.
+        /// If indeterminate, ask user via modal.
         /// </summary>
-        /// <param name="table">The table in which to apply the rule</param>
-        public override void SetupRule(DataTable table)
+        ///
+        public CultureInfo GetSourceCultureInfo(DataTable table, XmlElement xmlElement)
+		{
+			CultureInfo ciIC = CultureInfo.InvariantCulture;
+			CultureInfo sourceCultureInfo = ciIC;
+
+			DataTable recodeInputTableClone = RecodeInputTable.Clone();
+
+			foreach (XmlElement recodeRow in xmlElement.ChildNodes)
+			{
+				if (recodeRow.Name.ToLowerInvariant().Equals("recodetablerow"))
+				{
+					string[] itemArray = new string[RecodeInputTable.Columns.Count];
+					int count = 0;
+					foreach (XmlElement recodeCell in recodeRow.ChildNodes)
+					{
+						if (recodeCell.Name.ToLowerInvariant().Equals("recodetabledata"))
+						{
+							itemArray[count] = recodeCell.InnerText.Replace("&lt;", "<").Replace("&gt;", ">").Replace("&amp;", "&");
+							count++;
+						}
+					}
+					recodeInputTableClone.Rows.Add(itemArray);
+				}
+			}
+
+			DateTime discard = new DateTime();
+			Dictionary<string, string> dateFormats = GetAllDistinctDateFormats();
+
+            string firstDate = recodeInputTableClone.Rows[0][0] as string;
+            Dictionary<string, string> standingFormats = GetWorkingParseStringFormats(dateFormats, firstDate);
+            Dictionary<string, string> workingFormats = new Dictionary<string, string>();
+
+            if (false == DateTime.TryParse(firstDate, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out discard))
+			{
+                sourceCultureInfo = CultureInfo.InvariantCulture;
+			}
+			else
+			{
+				foreach (DataRow row in recodeInputTableClone.Rows)
+				{
+                    workingFormats = GetWorkingParseStringFormats(dateFormats, row[0] as string);
+
+                    if (workingFormats.Count < standingFormats.Count )
+                    {
+                        standingFormats = workingFormats;
+					}
+
+                    workingFormats = GetWorkingParseStringFormats(dateFormats, row[1] as string);
+
+                    if (workingFormats.Count < standingFormats.Count)
+                    {
+                        standingFormats = workingFormats;
+                    }
+
+                    if (standingFormats.Count == 1)
+                    {
+                        sourceCultureInfo = CultureInfo.CreateSpecificCulture(standingFormats.First().Value); 
+                        return sourceCultureInfo;
+                    }
+                }
+
+				if (standingFormats.Count > 1)
+				{
+					System.Windows.Forms.DialogResult result = Epi.Windows.MsgBox.Show
+					(
+						"Indeterminiate Date Format - Select Format",
+						SharedStrings.ENTER,
+						System.Windows.Forms.MessageBoxButtons.YesNoCancel,
+						System.Windows.Forms.MessageBoxIcon.Information
+					);
+
+					if (result == System.Windows.Forms.DialogResult.Yes)
+					{
+						sourceCultureInfo = CultureInfo.CreateSpecificCulture(standingFormats.First().Value);
+					}
+				}
+			}
+
+			return sourceCultureInfo;
+		}
+
+		private static Dictionary<string, string> GetWorkingParseStringFormats(Dictionary<string, string> dateFormats, string dateString)
+		{
+            DateTime discard = new DateTime();
+            Dictionary<string, string> workingFormats = new Dictionary<string, string>();
+            
+            foreach (KeyValuePair<string, string> format in dateFormats)
+			{
+				if (DateTime.TryParseExact(dateString, format.Key, CultureInfo.InvariantCulture, DateTimeStyles.None, out discard))
+				{
+					workingFormats.Add(format.Key, format.Value);
+				}
+			}
+
+			return workingFormats;
+		}
+
+		/// <summary>
+		/// en-US: 6/1/2009
+		/// fr-FR: 01/06/2009
+		/// it-IT: 01/06/2009
+		/// de-DE: 01.06.2009
+		/// ja-JP: 2009/06/01 
+		/// ...
+		/// THERE ARE ~30 FORMATS
+		/// </summary>
+		private static Dictionary<string, string> GetAllDistinctDateFormats()
+		{
+			CultureInfo[] allCultureInfo = CultureInfo.GetCultures(CultureTypes.AllCultures);
+			Dictionary<string, string> dateFormats = new Dictionary<string, string>();
+
+			foreach (CultureInfo cultureInfo in allCultureInfo)
+			{
+				if (false == dateFormats.ContainsKey(cultureInfo.DateTimeFormat.ShortDatePattern) && cultureInfo.Name.Contains("-"))
+				{
+					dateFormats.Add(cultureInfo.DateTimeFormat.ShortDatePattern, cultureInfo.Name);
+				}
+			}
+
+			return dateFormats;
+		}
+
+		/// <summary>
+		/// Sets up the rule
+		/// </summary>
+		/// <param name="table">The table in which to apply the rule</param>
+		public override void SetupRule(DataTable table)
         {
             string destinationColumnType = this.DestinationColumnType;
             sourceColumnType = DashboardHelper.GetColumnType(this.SourceColumnName);

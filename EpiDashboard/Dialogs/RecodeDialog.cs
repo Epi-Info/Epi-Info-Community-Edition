@@ -35,7 +35,7 @@ namespace EpiDashboard.Dialogs
         public RecodeDialog(DashboardHelper dashboardHelper)
         {
             this.dashboardHelper = dashboardHelper;
-            this.editMode = false;
+            this.editMode = false;            
             InitializeComponent();
             FillComboBoxes();
             this.checkboxMaintainSortOrder.Checked = true;
@@ -50,7 +50,6 @@ namespace EpiDashboard.Dialogs
             this.dashboardHelper = dashboardHelper;
             this.editMode = true;
             this.recodeRule = rule;
-
             InitializeComponent();
 
             FillComboBoxes();
@@ -86,8 +85,6 @@ namespace EpiDashboard.Dialogs
             if (rule.RecodeInputTable.Columns.Count == 3)
             {
                 rule.RecodeInputTable.Columns[0].ColumnName = COL_FROM;
-                rule.RecodeInputTable.Columns[1].ColumnName = COL_TO;
-
                 rule.RecodeInputTable.Columns[1].ColumnName = COL_TO;
                 rule.RecodeInputTable.Columns[2].ColumnName = COL_REPRESENTATION;
             }
@@ -213,7 +210,7 @@ namespace EpiDashboard.Dialogs
         {
             txtDestinationField.Text = string.Empty;
             cbxSourceField.Items.Clear();
-            cbxFieldType.Items.Clear();
+            cbxFieldType.Items.Clear();            
 
             List<string> fieldNames = new List<string>();
 
@@ -230,7 +227,7 @@ namespace EpiDashboard.Dialogs
 
             fieldNames.Sort();
             cbxSourceField.DataSource = fieldNames;
-
+            
             cbxFieldType.Items.Add("Text");
             cbxFieldType.Items.Add("Numeric");
             cbxFieldType.Items.Add("Yes/No");
@@ -253,7 +250,7 @@ namespace EpiDashboard.Dialogs
         {
             DataTable dt = new DataTable("recode");
             Configuration config = dashboardHelper.Config;
-
+            
             dataGridViewRecode.Columns.Clear();
             dataGridViewRecode.AllowUserToAddRows = true;
 
@@ -261,10 +258,17 @@ namespace EpiDashboard.Dialogs
             {
                 Field sourceField = dashboardHelper.View.Fields[sourceColumnName];
 
-                if (sourceField is NumberField || sourceField is DateTimeField || sourceField is OptionField)
+                if (sourceField is NumberField || sourceField is OptionField)
                 {
                     DataColumn col1 = new DataColumn(COL_FROM, typeof(string));
                     DataColumn col2 = new DataColumn(COL_TO, typeof(string));
+                    dt.Columns.Add(col1);
+                    dt.Columns.Add(col2);
+                }
+                else if (sourceField is DateTimeField)
+                {
+                    DataColumn col1 = new DataColumn(COL_FROM, typeof(DateTime));
+                    DataColumn col2 = new DataColumn(COL_TO, typeof(DateTime));
                     dt.Columns.Add(col1);
                     dt.Columns.Add(col2);
                 }
@@ -276,10 +280,17 @@ namespace EpiDashboard.Dialogs
             }
             else
             {
-                if (dashboardHelper.IsColumnNumeric(sourceColumnName) || dashboardHelper.IsColumnDateTime(sourceColumnName))
+                if (dashboardHelper.IsColumnNumeric(sourceColumnName))
                 {
                     DataColumn col1 = new DataColumn(COL_FROM, typeof(string));
                     DataColumn col2 = new DataColumn(COL_TO, typeof(string));
+                    dt.Columns.Add(col1);
+                    dt.Columns.Add(col2);
+                }
+                else if (dashboardHelper.IsColumnDateTime(sourceColumnName))
+                {
+                    DataColumn col1 = new DataColumn(COL_FROM, typeof(DateTime));
+                    DataColumn col2 = new DataColumn(COL_TO, typeof(DateTime));
                     dt.Columns.Add(col1);
                     dt.Columns.Add(col2);
                 }
@@ -304,7 +315,7 @@ namespace EpiDashboard.Dialogs
             }
 
             if (DestinationFieldType.Equals(DashboardVariableType.Numeric))
-            {
+            {                
                 dt.Columns.Add(col3);
             }
             else if (DestinationFieldType.Equals(DashboardVariableType.YesNo) && !(isTableBasedDropDown))
@@ -326,7 +337,7 @@ namespace EpiDashboard.Dialogs
                 }
             }
             else
-            {
+            {   
                 dt.Columns.Add(col3);
             }
 
@@ -374,7 +385,7 @@ namespace EpiDashboard.Dialogs
                             dt.Rows.Add(kvp.Key, null);
                         }
                     }
-                }
+                }                
             }
             else if(dt.Rows.Count <= 0)
             {
@@ -394,7 +405,7 @@ namespace EpiDashboard.Dialogs
                 }
             }
 
-            dataGridViewRecode.DataSource = dt;
+            dataGridViewRecode.DataSource = dt;            
         }
 
         private void EnableDisableFillRanges()
@@ -455,7 +466,7 @@ namespace EpiDashboard.Dialogs
         private void cbxFieldType_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillDataGrid();
-            EnableDisableFillRanges();
+            EnableDisableFillRanges();            
         }
 
         private void btnFillRanges_Click(object sender, EventArgs e)
