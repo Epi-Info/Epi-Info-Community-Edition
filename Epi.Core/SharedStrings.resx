@@ -3290,4 +3290,19 @@ GlobalRecordId = [FKEY]</value>
   <data name="DASHBOARD_ERROR_PARSE_TO_DATETIME" xml:space="preserve">
     <value>Unexpected format for a date and/or time.</value>
   </data>
+  <data name="INDETERMINEATE_DATE_VALUES_1" xml:space="preserve">
+    <value>Indetermineate Date Values Found in Recode Rule</value>
+  </data>
+  <data name="INDETERMINEATE_DATE_VALUES_2" xml:space="preserve">
+    <value>There is a Recode Rule in this canvas that has date values which can be read in more than one way. The dates can be read with the following formats: {0}.</value>
+  </data>
+  <data name="INDETERMINEATE_DATE_VALUES_3" xml:space="preserve">
+    <value>The format {0} will be used to read the dates used in the rule.</value>
+  </data>
+  <data name="INDETERMINEATE_DATE_VALUES_4" xml:space="preserve">
+    <value>Please check that the dates used in the Recode Rule are the intended values.</value>
+  </data>
+  <data name="INDETERMINEATE_DATE_VALUES_5" xml:space="preserve">
+    <value>Indetermineate Date Values Found</value>
+  </data>
 </root>

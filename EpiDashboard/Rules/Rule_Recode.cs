@@ -742,11 +742,26 @@ namespace EpiDashboard.Rules
 
 				if (standingFormats.Count > 1)
 				{
-					System.Windows.Forms.DialogResult result = Epi.Windows.MsgBox.Show
+                    sourceCultureInfo = CultureInfo.CreateSpecificCulture(standingFormats.First().Value);
+                    string chosenFormat = standingFormats.First().Key;
+
+                    if(standingFormats.ContainsKey(CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern))
+                    {
+                        chosenFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+                        sourceCultureInfo = CultureInfo.CreateSpecificCulture(standingFormats[CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern]);
+                    }
+
+                    System.Windows.Forms.DialogResult result = Epi.Windows.MsgBox.Show
 					(
-						"Indeterminiate Date Format - Select Format",
-						SharedStrings.ENTER,
-						System.Windows.Forms.MessageBoxButtons.YesNoCancel,
+                        SharedStrings.INDETERMINEATE_DATE_VALUES_1 + Environment.NewLine +
+                        Environment.NewLine +
+                        string.Format(SharedStrings.INDETERMINEATE_DATE_VALUES_2, string.Join(",", standingFormats.Keys)) + Environment.NewLine +
+                        Environment.NewLine +
+                        string.Format(SharedStrings.INDETERMINEATE_DATE_VALUES_3, chosenFormat) + Environment.NewLine +
+                        Environment.NewLine +
+                        SharedStrings.INDETERMINEATE_DATE_VALUES_4 + Environment.NewLine,
+                        SharedStrings.INDETERMINEATE_DATE_VALUES_5,
+						System.Windows.Forms.MessageBoxButtons.OK,
 						System.Windows.Forms.MessageBoxIcon.Information
 					);
 

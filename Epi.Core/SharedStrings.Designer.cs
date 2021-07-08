@@ -5488,6 +5488,51 @@ namespace Epi {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indetermineate Date Values Found in Recode Rule.
+        /// </summary>
+        public static string INDETERMINEATE_DATE_VALUES_1 {
+            get {
+                return ResourceManager.GetString("INDETERMINEATE_DATE_VALUES_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is a Recode Rule in this canvas that has date values which can be read in more than one way. The dates can be read with the following formats: {0}..
+        /// </summary>
+        public static string INDETERMINEATE_DATE_VALUES_2 {
+            get {
+                return ResourceManager.GetString("INDETERMINEATE_DATE_VALUES_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The format {0} will be used to read the dates used in the rule..
+        /// </summary>
+        public static string INDETERMINEATE_DATE_VALUES_3 {
+            get {
+                return ResourceManager.GetString("INDETERMINEATE_DATE_VALUES_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please check that the dates used in the Recode Rule are the intended values..
+        /// </summary>
+        public static string INDETERMINEATE_DATE_VALUES_4 {
+            get {
+                return ResourceManager.GetString("INDETERMINEATE_DATE_VALUES_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indetermineate Date Values Found.
+        /// </summary>
+        public static string INDETERMINEATE_DATE_VALUES_5 {
+            get {
+                return ResourceManager.GetString("INDETERMINEATE_DATE_VALUES_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string INFORMATION {
