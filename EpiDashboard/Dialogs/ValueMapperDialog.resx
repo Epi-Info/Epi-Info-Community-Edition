@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 381</value>
+    <value>346, 423</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -151,7 +151,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 381</value>
+    <value>184, 423</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -174,11 +174,14 @@
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="lbxYesValues.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="lbxYesValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 29</value>
+    <value>226, 29</value>
   </data>
   <data name="lbxYesValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 160</value>
+    <value>194, 160</value>
   </data>
   <data name="lbxYesValues.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -199,7 +202,7 @@
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 13</value>
+    <value>227, 13</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
@@ -229,7 +232,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 195</value>
+    <value>227, 195</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -252,11 +255,14 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="lbxNoValues.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="lbxNoValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 211</value>
+    <value>226, 211</value>
   </data>
   <data name="lbxNoValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 160</value>
+    <value>194, 186</value>
   </data>
   <data name="lbxNoValues.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -273,11 +279,14 @@
   <data name="&gt;&gt;lbxNoValues.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="lbxAllValues.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
   <data name="lbxAllValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 29</value>
   </data>
   <data name="lbxAllValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 342</value>
+    <value>180, 368</value>
   </data>
   <data name="lbxAllValues.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -325,7 +334,7 @@
     <value>12</value>
   </data>
   <data name="btnAddYes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 83</value>
+    <value>198, 83</value>
   </data>
   <data name="btnAddYes.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 23</value>
@@ -349,7 +358,7 @@
     <value>4</value>
   </data>
   <data name="btnAddNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 263</value>
+    <value>198, 263</value>
   </data>
   <data name="btnAddNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 23</value>
@@ -376,7 +385,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnRemoveYes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 112</value>
+    <value>198, 112</value>
   </data>
   <data name="btnRemoveYes.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 23</value>
@@ -403,7 +412,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnRemoveNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 292</value>
+    <value>198, 292</value>
   </data>
   <data name="btnRemoveNo.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 23</value>
@@ -426,8 +435,11 @@
   <data name="&gt;&gt;btnRemoveNo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btnClear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 381</value>
+    <value>265, 423</value>
   </data>
   <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -457,7 +469,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>301, 416</value>
+    <value>433, 458</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Value Mappings</value>
