@@ -1,5 +1,5 @@
 CLS
-@ECHO OFF
+::@ECHO OFF
 COLOR 0A
 
 ECHO.
@@ -8,7 +8,8 @@ ECHO :: SET LOCAL VARIABLES
 ECHO :: ===============================================================
 ECHO.
 SETLOCAL ENABLEDELAYEDEXPANSION
-SET buildEXE="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\MSBuild.exe"
+:: Use \Bin\MSBuild.exe, which can be run on 64-bit machine and as x86 on a 32-bit.
+SET buildEXE="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe"
 SET batchRootDirectory=%CD%
 SET requiredFilesDirectory=C:\EpiInfo7ReleaseBuildFiles
 SET ei7=%batchRootDirectory%\Epi-Info-Community-Edition
@@ -239,7 +240,21 @@ IF NOT %QUIET%==TRUE PAUSE
 
 ECHO.
 ECHO :: ===============================================================
-ECHO :: PRUNE FILES RENAME AND ZIP
+ECHO :: COPY PROJECTS (NOT NEEDED IF BUILD CONFIG RIGHT)
+ECHO :: ===============================================================
+@ECHO ON
+::XCOPY %ei7%\Epi.Core\Projects %ei7%\build\release\Projects /I /S /V /F /Y
+::
+:: /S   Copies directories and subdirectories except empty ones.
+:: /V   Verifies the size of each new file.
+:: /I   If destination does not exist and copying more than one file,
+::      assumes that destination must be a directory.
+::
+@ECHO OFF
+
+ECHO.
+ECHO :: ===============================================================
+ECHO :: PRUNE FILES
 ECHO :: ===============================================================
 @ECHO ON
 RMDIR /S /Q  %ei7%\Build\release\app.publish
@@ -247,7 +262,6 @@ RMDIR /S /Q  %ei7%\Build\release\Configuration
 RMDIR /S /Q  %ei7%\Build\release\Logs
 RMDIR /S /Q  %ei7%\Build\release\TestCases
 RMDIR /S /Q  %ei7%\Build\release\Templates\Projects
-RMDIR /S /Q  %ei7%\Build\release\Projects
 RMDIR /S /Q  %ei7%\Build\release\de
 RMDIR /S /Q  %ei7%\Build\release\es
 RMDIR /S /Q  %ei7%\Build\release\fr
@@ -257,7 +271,6 @@ RMDIR /S /Q  %ei7%\Build\release\ko
 RMDIR /S /Q  %ei7%\Build\release\ru
 RMDIR /S /Q  %ei7%\Build\release\zh-Hans
 RMDIR /S /Q  %ei7%\Build\release\zh-Hant
-XCOPY %requiredFilesDirectory%\projectsRelease\Projects %ei7%\build\release\Projects /I /E /Q
 DEL /Q %ei7%\Build\release\Output\*.html
 DEL /Q %ei7%\Build\release\*.pdb
 @ECHO OFF
@@ -303,12 +316,12 @@ EXPLORER %ei7%\build
 
 ECHO.
 ECHO :: ===============================================================
-ECHO :: OPEN WINDOWS EXPLORER IN BUILD DIRECTORY
+ECHO :: WRITE COMMIT REPORT AND VIEW IN CODE
 ECHO :: ===============================================================
 @ECHO ON
 DEL commitReport.code
 git.exe log -100 --pretty=format:%%s > commitReport.code
-START commitReport.code
+code commitReport.code
 @ECHO OFF
 
 
