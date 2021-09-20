@@ -746,7 +746,9 @@
     <None Include="Projects\Cholera\Cholera_in_Rwenshama_2.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Projects\Cholera\Cholera_in_Rwenshama_2.prj" />
+    <None Include="Projects\Cholera\Cholera_in_Rwenshama_2.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\CommunityHealthAssessment\albany_demogz.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
