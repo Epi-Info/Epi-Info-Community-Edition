@@ -525,6 +525,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0254F8B478D84ECDACE6EA3302C85956"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_025BA98463FE4A76906DC6D166078342"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -592,6 +598,12 @@
         "Entry"
         {
         "MsmKey" = "8:_080633D3D1E1429CBB3A2A4584A1535F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_08683C3B9B2646D49DD02C27ACF0AB7C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -687,6 +699,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1088459D88AD4688B219D2941549B282"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1229505C2BF341538C90EC82FAA5B964"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -772,6 +790,12 @@
         "Entry"
         {
         "MsmKey" = "8:_1E7B0DA000EB445DBC4C9C5F8904E412"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1F4F5E959E7C4028BA78C6A9329BCD4A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -927,8 +951,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2E22E62EDB574FA98F6120620B8F9AB6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2F0786F8448BFD2E270D03A4193233D8"
         "OwnerKey" = "8:_B0D4DDF34D9C4E50834A3CDAB5A648B7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2F138FC6CFAF431F8E3C33AF678C02FA"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1037,6 +1073,12 @@
         {
         "MsmKey" = "8:_32D0B4882B4BFF29F9763D85410C2E67"
         "OwnerKey" = "8:_4CF6A19396544B48B2C3EF2915D2CF99"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_347A98B6146F4F42825A5021EF227D3A"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1257,8 +1299,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_4944B34AE9904E9CA06FC0E02562CAEC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4AEFD2DEF908C97AD6D323AAC466922E"
         "OwnerKey" = "8:_0173AD7DDB8E980C885D121EBEB9A33E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4B0B0B15953D43AB8BDB70D8CB413C28"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1473,6 +1527,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_4DED300ABEE94C7689880D081DB4F9DF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4E2A8FC5CD8D49BC8FBC3961E7B9B6D2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1635,6 +1695,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5B22666020F34F0B828B5239FF446FDB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5B2D76C1765E447186B259B903365C9F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1684,6 +1750,12 @@
         "Entry"
         {
         "MsmKey" = "8:_5EC6C082190F42BA85EA18033320B225"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6094A7CA467C49CC821396082404B9F2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1774,6 +1846,12 @@
         "Entry"
         {
         "MsmKey" = "8:_6606331B309A43FEA28A4BD37C7F4875"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_660CAE964FD347EC86325A0469FC34B4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2247,6 +2325,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_75DCB78CE82D47BD8E7939E99E751B4B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7719BCBD8E8F4527A6C23C48C39E3712"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2559,6 +2643,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8F84E91FB4CD4DFBB9A2D55F5FA0FC1E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8F8757297B694268B17AC12175682B3F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8FA9EC996FD44301B6C514CEC179257F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2703,6 +2799,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_9A8BD929CE0D404C985C166FCD811D63"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9AB57BEAE4C14D738336CFA1CFD8C29A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2734,6 +2836,12 @@
         "Entry"
         {
         "MsmKey" = "8:_9BD8F41390E44449B79FAA91AA6433D2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9C62C0264B624F9BA36B8A0E9A7CB2C4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3291,6 +3399,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BB0AF24ED7D445BCB1EBCA94AA9497A0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BB68151EB27F415FA2AB33F9F273854C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3299,6 +3413,12 @@
         {
         "MsmKey" = "8:_BB7FDE63D2DA80CD29FC2890FFDE7911"
         "OwnerKey" = "8:_6DB94D8C2FCE455AAD00E82E5EB87DE3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BBD59733F3DE41F7AE4E8DEB81D98D43"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3382,6 +3502,12 @@
         "Entry"
         {
         "MsmKey" = "8:_C16EE1EE3F654FD8A60982B2F862304D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C1CC6225FCF249F3BDE66780035C8BB3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3477,13 +3603,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C8436F86C3CE4AD78D652567FC05732A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C8E1C01C305B4ECFB25F043DC63FFCAB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_CA662FE8BDA84D928FA7871362BAB90F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_CA9FF27680BC469EAE3ACD87DDD9BEDA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CB12BC946069424486483A3DC4B5F37D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3514,6 +3658,12 @@
         "Entry"
         {
         "MsmKey" = "8:_CD5D4C14B0C447A78C92E9A1DD55694D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CDA132F0FCAA40AFABD7934D1C6D5819"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3699,6 +3849,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DE5A7441395E420692FE1748C7B84C8B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DEEBADF5E7DC4D14A239726B7BEAD1BB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3813,8 +3969,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EA735A35980CFFE11D1EC1BAB6CCE236"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EC3825BD1CF95EE490AD461896E7FC16"
         "OwnerKey" = "8:_0173AD7DDB8E980C885D121EBEB9A33E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ECC28FE72B5D4A8C9B06D5191DA8A9C4"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3850,6 +4018,12 @@
         "Entry"
         {
         "MsmKey" = "8:_EF70ED725CA947C9B00C130A030365A6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F0A1A1EF2C344F28A6B3789D28DDB8AF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3975,6 +4149,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F913057E75CA42B09664E059F9EA809E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F98EB3CA453A43A28D04E329D3BECB3F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3994,6 +4174,12 @@
         "Entry"
         {
         "MsmKey" = "8:_FB7FB391D56B4DE6B21F94C58B2252B3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FD20D1632F0F738CBD4D7AE5D5B224E3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4036,198 +4222,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4E35D22C36C049C2AFA07530C3F87AE7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0B1C2E94C8AD4397BC796B4AB1B7D407"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_44A7E8C94D684604865DAD42947D8CB3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C4023640AB744FD792F147ECE5F7BFF4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2B573872F2FF45DA97D5A541A5D165F7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F9D6E2DE1C8C48DDBD329EB6BB010642"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2028AB3DF02342B6884210420CF25D3A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D691FE47294B4C5DA1C94651B2F8EAB9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_60EC261A6ABA4279AEF3CF2CA7024F7F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5B2D76C1765E447186B259B903365C9F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1229505C2BF341538C90EC82FAA5B964"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B32E9D7B6A2B4D30B859EFCB043D76FF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_46A173EDC84249629698A99EF5676FD2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_81699DA2C94A424EB6D43927597E7985"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8354A2D544054C0380B3382C77EF10C7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1E6CEDA6F0314814AB0E19080DAB9750"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2002135AF59540DC905D9B0D365F7BDE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BB68151EB27F415FA2AB33F9F273854C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_82EE0BADA6A841FF80B669EF26F2320B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E9B6BEB69DDE4D89AB2E524467B13CE3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_28101A7F927C4E19B589680756179906"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2C414BBE921B42B0A588E27F1D56FD13"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5E6B0ECD4ADB4CBABF5D99E552F9BB91"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4E7095A9A13948C39E840403F73FD294"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3C2260D3EB3F438C9DD1A449284B991D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_18394B46BDEF425F997F070908E6BEB7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_087618015F7E4868B5E1F2B20686BEF4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_37EE3A601EBA4A7B841F44074524F1D2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_635B92EFDEE142C6ADDD8F1F8B62210C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D060E1FF0B5A495A85C1C8229184A715"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C57B5783A6A774DA741A19A951D5E58F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FE346B20E1D047FCBA90301F449AE8D7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4247,6 +4241,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_97C96E19DE6DBE1C44EE59DDCC928DA9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F9D6E2DE1C8C48DDBD329EB6BB010642"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4306,6 +4306,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E9B6BEB69DDE4D89AB2E524467B13CE3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_E8C5F87F6FF0418692FCEECA835F9403"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4354,6 +4360,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D691FE47294B4C5DA1C94651B2F8EAB9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D5376D77B0E74E66921AD0541AF8219E"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4361,6 +4373,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D13512BCCE9755381E5A46C876244678"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D060E1FF0B5A495A85C1C8229184A715"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4384,7 +4402,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EA735A35980CFFE11D1EC1BAB6CCE236"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C7E6F008E23E47D7B3E725DF81886163"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C4023640AB744FD792F147ECE5F7BFF4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4432,6 +4462,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BB68151EB27F415FA2AB33F9F273854C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B90F211487EC43F2B23EA1A3215933BC"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4451,6 +4487,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B63C75913BD64170A65F298886E627DE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B32E9D7B6A2B4D30B859EFCB043D76FF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4606,6 +4648,24 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8354A2D544054C0380B3382C77EF10C7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_82EE0BADA6A841FF80B669EF26F2320B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_81699DA2C94A424EB6D43927597E7985"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7E2B499B780B54617FD6013077316E0E"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4726,13 +4786,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_635B92EFDEE142C6ADDD8F1F8B62210C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_60EC261A6ABA4279AEF3CF2CA7024F7F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5E9803585D124F989393001E76E1D04D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5E6B0ECD4ADB4CBABF5D99E552F9BB91"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5D35726C17474758B15657FBA421C474"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5B2D76C1765E447186B259B903365C9F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4792,6 +4876,18 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4E7095A9A13948C39E840403F73FD294"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4E35D22C36C049C2AFA07530C3F87AE7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_4AEFD2DEF908C97AD6D323AAC466922E"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4804,7 +4900,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_46A173EDC84249629698A99EF5676FD2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_4536485CCB094848AD699E08D2E3F9BF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_44A7E8C94D684604865DAD42947D8CB3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4829,6 +4937,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_3C89626BE3244754BA30B93D463D1328"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3C2260D3EB3F438C9DD1A449284B991D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4870,6 +4984,24 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C57B5783A6A774DA741A19A951D5E58F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FD20D1632F0F738CBD4D7AE5D5B224E3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C57B5783A6A774DA741A19A951D5E58F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4883,6 +5015,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BAB90613DE085B4E553B80B1E51AECB3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_37EE3A601EBA4A7B841F44074524F1D2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4919,6 +5057,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_32C95D53BA6BE72F6CFEDF112DB79BB5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2C414BBE921B42B0A588E27F1D56FD13"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2B573872F2FF45DA97D5A541A5D165F7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -5014,6 +5164,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_28101A7F927C4E19B589680756179906"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_27860B5D9E8591DD506B589613ACF303"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -5026,13 +5182,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2028AB3DF02342B6884210420CF25D3A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2002135AF59540DC905D9B0D365F7BDE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1E7B0DA000EB445DBC4C9C5F8904E412"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1E6CEDA6F0314814AB0E19080DAB9750"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1906986B61AA487E85BABDE3A71272CE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_18394B46BDEF425F997F070908E6BEB7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -5086,7 +5266,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1229505C2BF341538C90EC82FAA5B964"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_104A570A62FA4CC9A14C01DAF31AADC6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0B1C2E94C8AD4397BC796B4AB1B7D407"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -5111,6 +5303,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_4BD18384DE205B2787E9D093A9A2ABCD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_087618015F7E4868B5E1F2B20686BEF4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -5360,6 +5558,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0254F8B478D84ECDACE6EA3302C85956"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Hospital.xml"
+            "TargetName" = "8:NBS - Case - Hospital.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_025BA98463FE4A76906DC6D166078342"
@@ -5687,6 +5905,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_08683C3B9B2646D49DD02C27ACF0AB7C"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Reporting Org.xml"
+            "TargetName" = "8:NBS - Case - Reporting Org.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6077,6 +6315,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1088459D88AD4688B219D2941549B282"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Key Report Dates.xml"
+            "TargetName" = "8:NBS - Case - Key Report Dates.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6498,6 +6756,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F4F5E959E7C4028BA78C6A9329BCD4A"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Condition.xml"
+            "TargetName" = "8:NBS - Case - Condition.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7086,6 +7364,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2E22E62EDB574FA98F6120620B8F9AB6"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\Geo_Location.xml"
+            "TargetName" = "8:Geo_Location.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_DEE62907F04C498CA73B1B9EEA960923"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2F0786F8448BFD2E270D03A4193233D8"
             {
             "AssemblyRegister" = "3:1"
@@ -7115,6 +7413,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F138FC6CFAF431F8E3C33AF678C02FA"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Patient Info - General Info.xml"
+            "TargetName" = "8:NBS - Patient Info - General Info.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2F802FA0F2014136BD404DDB13A60D95"
@@ -7321,6 +7639,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_347A98B6146F4F42825A5021EF227D3A"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Patient Info - Ethnicity and Race Info.xml"
+            "TargetName" = "8:NBS - Patient Info - Ethnicity and Race Info.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_34EFECEDE9E1C109E291636446CCE330"
@@ -8260,6 +8598,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4944B34AE9904E9CA06FC0E02562CAEC"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\Demographics.xml"
+            "TargetName" = "8:Demographics.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_DEE62907F04C498CA73B1B9EEA960923"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4AEFD2DEF908C97AD6D323AAC466922E"
             {
             "AssemblyRegister" = "3:1"
@@ -8289,6 +8647,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4B0B0B15953D43AB8BDB70D8CB413C28"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\IOCode.xml"
+            "TargetName" = "8:IOCode.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_DEE62907F04C498CA73B1B9EEA960923"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4BD18384DE205B2787E9D093A9A2ABCD"
@@ -8453,6 +8831,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4DED300ABEE94C7689880D081DB4F9DF"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Investigation Details.xml"
+            "TargetName" = "8:NBS - Case - Investigation Details.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4E2A8FC5CD8D49BC8FBC3961E7B9B6D2"
@@ -9153,6 +9551,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B22666020F34F0B828B5239FF446FDB"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Exposure Location.xml"
+            "TargetName" = "8:NBS - Case - Exposure Location.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5B2D76C1765E447186B259B903365C9F"
             {
             "AssemblyRegister" = "3:1"
@@ -9388,6 +9806,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6094A7CA467C49CC821396082404B9F2"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Reporting Provider.xml"
+            "TargetName" = "8:NBS - Case - Reporting Provider.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_60EC261A6ABA4279AEF3CF2CA7024F7F"
             {
             "AssemblyRegister" = "3:1"
@@ -9600,6 +10038,26 @@
             "TargetName" = "8:MongoDB.Driver.Core.xml"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_660CAE964FD347EC86325A0469FC34B4"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Patient Info - Telephone Info.xml"
+            "TargetName" = "8:NBS - Patient Info - Telephone Info.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -10247,6 +10705,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75DCB78CE82D47BD8E7939E99E751B4B"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Epi Link.xml"
+            "TargetName" = "8:NBS - Case - Epi Link.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -11378,6 +11856,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F84E91FB4CD4DFBB9A2D55F5FA0FC1E"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Pages\\Interview_Question.xml"
+            "TargetName" = "8:Interview_Question.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_932FE5BAA49943B6A08AE4DD1E7081E5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F8757297B694268B17AC12175682B3F"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\Medical_Facility.xml"
+            "TargetName" = "8:Medical_Facility.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_DEE62907F04C498CA73B1B9EEA960923"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8FA9EC996FD44301B6C514CEC179257F"
             {
             "AssemblyRegister" = "3:1"
@@ -11934,6 +12452,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A8BD929CE0D404C985C166FCD811D63"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Investigator.xml"
+            "TargetName" = "8:NBS - Case - Investigator.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9AB57BEAE4C14D738336CFA1CFD8C29A"
             {
             "AssemblyRegister" = "3:1"
@@ -12084,6 +12622,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C62C0264B624F9BA36B8A0E9A7CB2C4"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\States.xml"
+            "TargetName" = "8:States.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_DEE62907F04C498CA73B1B9EEA960923"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -13370,6 +13928,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BB0AF24ED7D445BCB1EBCA94AA9497A0"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Reporting County.xml"
+            "TargetName" = "8:NBS - Case - Reporting County.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BB68151EB27F415FA2AB33F9F273854C"
             {
             "AssemblyRegister" = "3:1"
@@ -13430,6 +14008,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BBD59733F3DE41F7AE4E8DEB81D98D43"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Case Status.xml"
+            "TargetName" = "8:NBS - Case - Case Status.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BC24CF64C8BC87ADDFCB54696B8B9CEA"
@@ -13780,6 +14378,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C1CC6225FCF249F3BDE66780035C8BB3"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Patient Info - Name Info.xml"
+            "TargetName" = "8:NBS - Patient Info - Name Info.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C1F4E1CBE32C4483AAC318B0769512E2"
             {
             "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Sample\\MXState.shp"
@@ -14046,6 +14664,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C8436F86C3CE4AD78D652567FC05732A"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Disease Acquisition.xml"
+            "TargetName" = "8:NBS - Case - Disease Acquisition.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C8E1C01C305B4ECFB25F043DC63FFCAB"
             {
             "AssemblyRegister" = "3:1"
@@ -14077,6 +14715,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CA662FE8BDA84D928FA7871362BAB90F"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\Diagnosis.xml"
+            "TargetName" = "8:Diagnosis.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_DEE62907F04C498CA73B1B9EEA960923"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CA9FF27680BC469EAE3ACD87DDD9BEDA"
             {
             "AssemblyRegister" = "3:1"
@@ -14094,6 +14752,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CB12BC946069424486483A3DC4B5F37D"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Physician.xml"
+            "TargetName" = "8:NBS - Case - Physician.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -14196,6 +14874,26 @@
             "TargetName" = "8:Nutrition.prj"
             "Tag" = "8:"
             "Folder" = "8:_5C955E9B2CEA47499744859B7DC0461C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CDA132F0FCAA40AFABD7934D1C6D5819"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\Hospital Code Table Example.xml"
+            "TargetName" = "8:Hospital Code Table Example.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_DEE62907F04C498CA73B1B9EEA960923"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -14773,6 +15471,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DE5A7441395E420692FE1748C7B84C8B"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Patient Info - Other Personal Details.xml"
+            "TargetName" = "8:NBS - Patient Info - Other Personal Details.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DEEBADF5E7DC4D14A239726B7BEAD1BB"
             {
             "AssemblyRegister" = "3:1"
@@ -15203,6 +15921,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EA735A35980CFFE11D1EC1BAB6CCE236"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_EA735A35980CFFE11D1EC1BAB6CCE236"
+                    {
+                    "Name" = "8:System.ComponentModel.Annotations.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.ComponentModel.Annotations.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EC3825BD1CF95EE490AD461896E7FC16"
             {
             "AssemblyRegister" = "3:1"
@@ -15232,6 +15981,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ECC28FE72B5D4A8C9B06D5191DA8A9C4"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Patient Info - Reporting Address.xml"
+            "TargetName" = "8:NBS - Patient Info - Reporting Address.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED18E16249DE479EAE1FFC59C258E106"
@@ -15353,6 +16122,26 @@
             "TargetName" = "8:MXState.shx"
             "Tag" = "8:"
             "Folder" = "8:_03168F2F414C4FBC89C2B875D4E7F810"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F0A1A1EF2C344F28A6B3789D28DDB8AF"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Gen Comments.xml"
+            "TargetName" = "8:NBS - Case - Gen Comments.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -15830,6 +16619,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F913057E75CA42B09664E059F9EA809E"
+            {
+            "SourcePath" = "8:..\\build\\Epi Info 7\\Templates\\Fields\\NBS (Landscape Page Layout)\\NBS - Case - Binational Reporting.xml"
+            "TargetName" = "8:NBS - Case - Binational Reporting.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F98EB3CA453A43A28D04E329D3BECB3F"
             {
             "SourcePath" = "8:..\\build\\Epi Info 7\\Serilog.xml"
@@ -15930,6 +16739,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FD20D1632F0F738CBD4D7AE5D5B224E3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Runtime.InteropServices.RuntimeInformation, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_FD20D1632F0F738CBD4D7AE5D5B224E3"
+                    {
+                    "Name" = "8:System.Runtime.InteropServices.RuntimeInformation.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Runtime.InteropServices.RuntimeInformation.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FD23A1D803C446728E8EEE4E3A1B5375"
@@ -16308,6 +17148,61 @@
                             "Property" = "8:_D089E89C17BC4247A17D2B4C51EA9C49"
                                 "Folders"
                                 {
+                                }
+                            }
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_EC0B6F2CCC2648808F1819B85261E61A"
+                    {
+                    "Name" = "8:Templates"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_050C8E9B242C4DA5B935F19F0B79E497"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_027821B176434C9C93B5EDF55EF13909"
+                            {
+                            "Name" = "8:Projects"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_3F8563F0589842729342B0F8EBCAE887"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_932FE5BAA49943B6A08AE4DD1E7081E5"
+                            {
+                            "Name" = "8:Pages"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_1DB66B6F418A426C9289C5B4008C31C7"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_DEE62907F04C498CA73B1B9EEA960923"
+                            {
+                            "Name" = "8:Fields"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_95E7D062D0E249B79B07EBDBB9D35B38"
+                                "Folders"
+                                {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_A641D8DCE7AD4980923D1EE5E3C52EB6"
+                                    {
+                                    "Name" = "8:NBS (Landscape Page Layout)"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_67048D0C46484423BE44CE6198BBD7F5"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
                                 }
                             }
                         }
