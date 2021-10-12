@@ -16923,7 +16923,7 @@
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_BA416E07503345DBB53B2F0C8586A0B2"
                     {
                     "Name" = "8:CDC"
-                    "AlwaysCreate" = "11:FALSE"
+                    "AlwaysCreate" = "11:TRUE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
                     "Property" = "8:_E69A634F4CB847F3AF99F1D7840AF847"
@@ -17225,8 +17225,8 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Epi Info 7"
-        "ProductCode" = "8:{6931C7E8-C61F-4C7C-8809-2DFB7D058758}"
-        "PackageCode" = "8:{43BFCFA7-4622-4DC4-BDDB-051E084C8C19}"
+        "ProductCode" = "8:{B9378351-E458-41CE-8D1C-441ADFDC51C0}"
+        "PackageCode" = "8:{7D7A8AEC-8EEF-429E-BB71-A2DA10A44452}"
         "UpgradeCode" = "8:{749A989B-67BC-4041-A632-85D0ABC9FB54}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -17234,7 +17234,7 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:7.2.5"
-        "Manufacturer" = "8:CDC Epi Info"
+        "Manufacturer" = "8:Epi Info 7.2.5.0"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:Epi Info 7 Setup Wizard"
@@ -17348,7 +17348,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9D576297A31441CCA00503960807213D"
             {
-            "Name" = "8:Epi Info 7"
+            "Name" = "8:Epi Info 7.2.5.0"
             "Arguments" = "8:"
             "Description" = "8:Launch Epi Info 7"
             "ShowCmd" = "3:1"
@@ -17559,7 +17559,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:WARNING: This computer program is protected by copyright law and international treaties. "
+                            "Value" = "8:"
                             "DefaultValue" = "8:#1202"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -17572,7 +17572,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:The installer will guide you through the steps required to install Epi Info 7 on your computer."
+                            "Value" = "8:Installing this version of Epi Info 7 will not uninstall or modify an earlier version of Epi Info 7."
                             "DefaultValue" = "8:#1203"
                             "UsePlugInResources" = "11:TRUE"
                             }
