@@ -59,8 +59,8 @@ namespace Epi.Data.Office
                 Epi.DataSets.Config.DatabaseRow dbConnection = (Epi.DataSets.Config.DatabaseRow)result[0];
                 OleDbConnectionStringBuilder cnnBuilder = new OleDbConnectionStringBuilder();
                 cnnBuilder.DataSource = dbConnection.ConnectionString;
-                //ToDo: Change code to read the configuration file, need to add provider information into the configuration file. 
-                cnnBuilder.Provider = "Microsoft.ACE.OLEDB.12.0";   //Zack: here just hard coded for debug  
+                //ToDo: Change code to read the configuration file, need to add provider information into the configuration file.
+                cnnBuilder.Provider = "Microsoft.ACE.OLEDB.12.0";   //Zack: here just hard coded for debug
                 cnnBuilder.Add("Extended Properties", "Excel 12.0 Xml;HDR=YES");
                 instance = CreateDatabaseObject(cnnBuilder);
             }
@@ -136,7 +136,7 @@ namespace Epi.Data.Office
             }
             catch
             {
-                //TEMP 
+                //TEMP
                 //Linux can not use Access - null will be caught in another exception
                 return null;
             }
@@ -151,7 +151,7 @@ namespace Epi.Data.Office
         {
             get
             {
-                return "One or more components needed to open this file were not found on this computer. \"2007 Office System Driver Data Connectivity Components\" not found.";
+                return "One or more components needed to open this file were not found on this computer. \"Microsoft Access Database Engine 2010 Redistributable\" found here: https://www.microsoft.com/en-us/download/details.aspx?id=13255";
             }
         }
 

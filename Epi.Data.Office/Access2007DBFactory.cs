@@ -10,13 +10,13 @@ using Epi.Windows;
 using System.Globalization;
 
 namespace Epi.Data.Office
-{   
+{
     /// <summary>
-    /// Concrete DBFactory for MS Access 
+    /// Concrete DBFactory for MS Access
     /// </summary>
-    public class Access2007DBFactory : IDbDriverFactory 
+    public class Access2007DBFactory : IDbDriverFactory
     {
-        
+
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -34,7 +34,7 @@ namespace Epi.Data.Office
             //string filepath = dbInfo.DBName;
             if (!string.IsNullOrEmpty(filepath))
             {
-                //TODO: refactor this, make one function for all: ExtractTemplate(FileType, FilePath) 
+                //TODO: refactor this, make one function for all: ExtractTemplate(FileType, FilePath)
                 if (filepath.EndsWith(".accdb", true, CultureInfo.InvariantCulture))
                 {
                     ResourceLoader.ExtractAccess2007Template(filepath);
@@ -71,15 +71,15 @@ namespace Epi.Data.Office
                 Epi.DataSets.Config.DatabaseRow dbConnection = (Epi.DataSets.Config.DatabaseRow)result[0];
                 OleDbConnectionStringBuilder cnnBuilder = new OleDbConnectionStringBuilder();
                 cnnBuilder.DataSource = dbConnection.ConnectionString;
-                //ToDo: Change code to read the configuration file, need to add provider information into the configuration file. 
-                cnnBuilder.Provider = "Microsoft.ACE.OLEDB.12.0";   //Zack: here just hard coded for debug  
+                //ToDo: Change code to read the configuration file, need to add provider information into the configuration file.
+                cnnBuilder.Provider = "Microsoft.ACE.OLEDB.12.0";   //Zack: here just hard coded for debug
                 instance = CreateDatabaseObject(cnnBuilder);
             }
             else
             {
                 throw new GeneralException("Database name is not configured.");
             }
-            
+
             return instance;
         }
 
@@ -158,7 +158,7 @@ namespace Epi.Data.Office
         {
             get 
             {
-                return "One or more components needed to open this file were not found on this computer. \"2007 Office System Driver Data Connectivity Components\" not found."; 
+                return "One or more components needed to open this file were not found on this computer. \"Microsoft Access Database Engine 2010 Redistributable\" found here: https://www.microsoft.com/en-us/download/details.aspx?id=13255";
             }
         }
 
