@@ -755,6 +755,9 @@
     <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\H1N1ShortForm\H1N1ShortForm.prj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\Rates\DeathsReported _per_Region.cvs7" />
     <None Include="Projects\Rates\DeathsReported _per_Region.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -827,6 +830,9 @@
     <Content Include="Mapping.resources.dll" />
     <Content Include="Menu.resources.dll" />
     <Content Include="Projects\Cholera\EpiChol.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\H1N1ShortForm\H1N1ShortForm.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ImagesNotToBeDeployed\App.ico" />
