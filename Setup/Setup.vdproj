@@ -514,12 +514,6 @@
         "Entry"
         {
         "MsmKey" = "8:_0173AD7DDB8E980C885D121EBEB9A33E"
-        "OwnerKey" = "8:_C7E6F008E23E47D7B3E725DF81886163"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0173AD7DDB8E980C885D121EBEB9A33E"
         "OwnerKey" = "8:_779FE6411A4947789D0B94F5527F2FCF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -550,12 +544,6 @@
         "Entry"
         {
         "MsmKey" = "8:_04868084D1B54BCBBC4C20663171BA41"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_053A888114144CD5A855ACC06185EF0B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -609,6 +597,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_08725714383549E4B0D5A596B692C48C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_087618015F7E4868B5E1F2B20686BEF4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -628,18 +622,6 @@
         "Entry"
         {
         "MsmKey" = "8:_090BADBBA7E4405B9310870A4B15E870"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_095FAF01E684429388F4DDD7E9348568"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0A6D9D8B44CA4C048DA4F9B68391DAFA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -759,19 +741,13 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1B30060FC5164BFA866A8AF14C8A021B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1B4E2F018DD241D8980169ACAF8936F2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1C90A911625B4E0BA0D98ECA274E6774"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1E4507E213C24B8FB685E33BEF827122"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -879,12 +855,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_28419F5B8548476CBF805C1781D8FBE6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2893F58ABA95438BA852837ED1FF5E15"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -958,7 +928,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2F0786F8448BFD2E270D03A4193233D8"
-        "OwnerKey" = "8:_B0D4DDF34D9C4E50834A3CDAB5A648B7"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1113,6 +1083,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3583CF074915491288454EF5DB56D43D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_36C7FD645FFC4515B758FD3A00D26DF0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1132,12 +1108,6 @@
         "Entry"
         {
         "MsmKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_386BD7088D694F29AEA953FC6B49110D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1215,6 +1185,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3D28A5C82ACF4464919AC329BD8A613C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3D785CC07CB84E3AAECB3E70CC193287"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1245,8 +1221,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_416C4BBB7CAE891C22E8D8190034885E"
-        "OwnerKey" = "8:_B0D4DDF34D9C4E50834A3CDAB5A648B7"
+        "MsmKey" = "8:_421EB9504AFE463FA596BF950D6B3BB1"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1307,6 +1283,12 @@
         {
         "MsmKey" = "8:_4AEFD2DEF908C97AD6D323AAC466922E"
         "OwnerKey" = "8:_0173AD7DDB8E980C885D121EBEB9A33E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4AEFD2DEF908C97AD6D323AAC466922E"
+        "OwnerKey" = "8:_B0D4DDF34D9C4E50834A3CDAB5A648B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2349,6 +2331,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7900AC87F28E440894287D83AA58B385"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_79D644A0601F4DF9AF64A26073CE8147"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2387,12 +2375,6 @@
         {
         "MsmKey" = "8:_7C3426E7F69469F1482E36728E9C8514"
         "OwnerKey" = "8:_9A31DBB01F9F302EB9FF745EC67F9DA2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7C5C8D05A8E843089B81B90CBF10E8D3"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2464,6 +2446,12 @@
         "Entry"
         {
         "MsmKey" = "8:_81699DA2C94A424EB6D43927597E7985"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_81A0A75E0FCE4569A62E16069C8E0CB7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2661,12 +2649,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9009D0E6F6384CA5B3C32865B4C825A9"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_90367C784F484CA293920B2BF63B364F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2693,6 +2675,12 @@
         {
         "MsmKey" = "8:_911BEE8897C0245C2271C2068F739CC2"
         "OwnerKey" = "8:_2B3B6E4040774E6DA4E0B1AE3A8D8234"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_91270AB69D2344E490A35EDCBCEC7001"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2793,12 +2781,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9A31DBB01F9F302EB9FF745EC67F9DA2"
-        "OwnerKey" = "8:_C7E6F008E23E47D7B3E725DF81886163"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9A8BD929CE0D404C985C166FCD811D63"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2829,7 +2811,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9B9BC4319D4146619C9B685DBCB5F078"
+        "MsmKey" = "8:_9B8FCBA2765E460FB44417D1CBA04FF2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2861,12 +2843,6 @@
         {
         "MsmKey" = "8:_9E02CABB58CCA8AA37935E39AD6F7062"
         "OwnerKey" = "8:_B0D4DDF34D9C4E50834A3CDAB5A648B7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9E02CABB58CCA8AA37935E39AD6F7062"
-        "OwnerKey" = "8:_C7E6F008E23E47D7B3E725DF81886163"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3057,6 +3033,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A024A3F9CDDF43BC9AB0C7D549F53D14"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A031D4D698F456B0FE9C2DFFFB331FFF"
         "OwnerKey" = "8:_2B3B6E4040774E6DA4E0B1AE3A8D8234"
         "MsmSig" = "8:_UNDEFINED"
@@ -3165,6 +3147,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A7EF1068E0BF462AA1B219572B7D315F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A80DA9195D1E4B08B694391F3CAF0B33"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3244,12 +3232,6 @@
         "Entry"
         {
         "MsmKey" = "8:_AE59BB419A4C4ACFBFFF729DC497FA17"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AF6DE8F6CC9B4475AED43997E11D079A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3495,6 +3477,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C102075BB3914BD5BBB8677F4E068D3F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C153A91DD79E4A779DA8168BA233AC3D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3569,12 +3557,6 @@
         {
         "MsmKey" = "8:_C7D3E56674BE8D88A210AD3CA7B1117C"
         "OwnerKey" = "8:_64B4A09FB4D54A23BE7A37CB9A71F796"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C7D3E56674BE8D88A210AD3CA7B1117C"
-        "OwnerKey" = "8:_C7E6F008E23E47D7B3E725DF81886163"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3807,12 +3789,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D79282E3F3314754AAAD213951B999BE"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D8C057EB71524AF386A3D0D369B5935D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3843,7 +3819,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DCBAFC60E2BC4C01BE3924AACF8EAF63"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DCBD20A9427941318DFC60E2F26028CC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DCE3FE0B417F485891DE65468B44A0BF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3969,12 +3957,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EA735A35980CFFE11D1EC1BAB6CCE236"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_EC3825BD1CF95EE490AD461896E7FC16"
         "OwnerKey" = "8:_0173AD7DDB8E980C885D121EBEB9A33E"
         "MsmSig" = "8:_UNDEFINED"
@@ -4036,6 +4018,12 @@
         "Entry"
         {
         "MsmKey" = "8:_F0E0614C661D4B84A3E0644F2724D5E0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F18FB45F5F524DB98B38293157A86DCF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4179,12 +4167,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FD20D1632F0F738CBD4D7AE5D5B224E3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_FD23A1D803C446728E8EEE4E3A1B5375"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -4217,6 +4199,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_269250CAB10A3C0795F76065DBDB1DC3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C57B5783A6A774DA741A19A951D5E58F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4402,18 +4396,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EA735A35980CFFE11D1EC1BAB6CCE236"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C7E6F008E23E47D7B3E725DF81886163"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C4023640AB744FD792F147ECE5F7BFF4"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4516,7 +4498,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_416C4BBB7CAE891C22E8D8190034885E"
+        "OwnerKey" = "8:_B0D4DDF34D9C4E50834A3CDAB5A648B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4984,24 +4966,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C57B5783A6A774DA741A19A951D5E58F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FD20D1632F0F738CBD4D7AE5D5B224E3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C57B5783A6A774DA741A19A951D5E58F"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -5423,7 +5387,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Setup\\Setup.msi"
+        "OutputFilename" = "8:Release\\Setup\\EI7_Setup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -5693,26 +5657,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_053A888114144CD5A855ACC06185EF0B"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\cb.shp"
-            "TargetName" = "8:cb.shp"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0549D8FEF3A4549429C804A64C6E7FCA"
             {
             "AssemblyRegister" = "3:1"
@@ -5939,6 +5883,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_08725714383549E4B0D5A596B692C48C"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\Albany County Boundary_region.shp"
+            "TargetName" = "8:Albany County Boundary_region.shp"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_087618015F7E4868B5E1F2B20686BEF4"
             {
             "AssemblyRegister" = "3:1"
@@ -6038,46 +6002,6 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_095FAF01E684429388F4DDD7E9348568"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\EpiChol.mdb"
-            "TargetName" = "8:EpiChol.mdb"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0A6D9D8B44CA4C048DA4F9B68391DAFA"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\Uganda_Cholera.png"
-            "TargetName" = "8:Uganda_Cholera.png"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6384,7 +6308,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows, Version=7.2.7933.22622, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows, Version=7.2.7962.16478, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_129D0CC087E7430E906481AED3235FD1"
@@ -6446,7 +6370,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows.ImportExport, Version=7.2.7933.22632, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows.ImportExport, Version=7.2.7962.16488, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_13C84E9B2AF345FAB2A875E7DC55949E"
@@ -6508,7 +6432,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Enter, Version=7.2.7933.22635, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Enter, Version=7.2.7962.16488, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_14AD1CD9E9BDD9E2D492490DE209888C"
@@ -6628,52 +6552,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1B30060FC5164BFA866A8AF14C8A021B"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\CommunityHealthAssessment.mdb"
+            "TargetName" = "8:CommunityHealthAssessment.mdb"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1B4E2F018DD241D8980169ACAF8936F2"
             {
             "SourcePath" = "8:..\\build\\Epi Info 7\\Epi.Enter.CheckCodeEngine.dll.config"
             "TargetName" = "8:Epi.Enter.CheckCodeEngine.dll.config"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1C90A911625B4E0BA0D98ECA274E6774"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\Case Studies English.xls"
-            "TargetName" = "8:Case Studies English.xls"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1E4507E213C24B8FB685E33BEF827122"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\cb.sbx"
-            "TargetName" = "8:cb.sbx"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7067,26 +6971,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_28419F5B8548476CBF805C1781D8FBE6"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\Advanced Analysis.mdb"
-            "TargetName" = "8:Advanced Analysis.mdb"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2893F58ABA95438BA852837ED1FF5E15"
             {
             "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Sample\\Sample.mdb"
@@ -7142,7 +7026,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DataUnpackager, Version=7.2.7933.22632, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:DataUnpackager, Version=7.2.7962.16488, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_29A2C0CDD3F44A05A89D718A02171092"
@@ -7173,7 +7057,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EpiDashboard, Version=7.2.7933.22629, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EpiDashboard, Version=7.2.7962.16485, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_2B3B6E4040774E6DA4E0B1AE3A8D8234"
@@ -7388,7 +7272,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_2F0786F8448BFD2E270D03A4193233D8"
@@ -7583,7 +7467,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EpiDashboard, Version=7.2.7933.22629, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EpiDashboard, Version=7.2.7962.16485, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_32C95D53BA6BE72F6CFEDF112DB79BB5"
@@ -7785,6 +7669,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3583CF074915491288454EF5DB56D43D"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\albany_demogz.mdb"
+            "TargetName" = "8:albany_demogz.mdb"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_36C7FD645FFC4515B758FD3A00D26DF0"
             {
             "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\KML_Example\\Maryland_Counties.kml"
@@ -7887,26 +7791,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_386BD7088D694F29AEA953FC6B49110D"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\Cholera_in_Rwenshama_2.prj"
-            "TargetName" = "8:Cholera_in_Rwenshama_2.prj"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_38878ED783DA4212A10BDDF0B9C20932"
             {
             "SourcePath" = "8:..\\build\\Epi Info 7\\xunit.core.xml"
@@ -7993,7 +7877,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MakeView, Version=7.2.7933.22634, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:MakeView, Version=7.2.7962.16490, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_3907D10E74BE4919A84DF0B7F8658CC7"
@@ -8206,6 +8090,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D28A5C82ACF4464919AC329BD8A613C"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\ALBZCTA_region.shp"
+            "TargetName" = "8:ALBZCTA_region.shp"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3D785CC07CB84E3AAECB3E70CC193287"
             {
             "AssemblyRegister" = "3:1"
@@ -8303,7 +8207,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.Office, Version=7.2.7933.22623, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.Office, Version=7.2.7962.16479, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_4135F7AC2AFA43138B345D6A60E9F1AB"
@@ -8330,23 +8234,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_416C4BBB7CAE891C22E8D8190034885E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_421EB9504AFE463FA596BF950D6B3BB1"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_416C4BBB7CAE891C22E8D8190034885E"
-                    {
-                    "Name" = "8:System.Net.Http.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:System.Net.Http.DLL"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\CommunityHealthAssessment_Canvas3.cvs7"
+            "TargetName" = "8:CommunityHealthAssessment_Canvas3.cvs7"
             "Tag" = "8:"
-            "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -8358,7 +8251,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_437E95B3CC434F0CB00538009D6B96E9"
@@ -8806,7 +8699,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows, Version=7.2.7933.22622, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows, Version=7.2.7962.16478, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_4CF6A19396544B48B2C3EF2915D2CF99"
@@ -9001,7 +8894,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Enter.CheckCodeEngine, Version=7.2.7933.22632, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Enter.CheckCodeEngine, Version=7.2.7962.16487, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_50066DC4E5A7FAFB7B8E7440FE0E3332"
@@ -9134,7 +9027,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Enter, Version=7.2.7933.22635, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Enter, Version=7.2.7962.16488, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_50A4B87506994F9E9726D6E4F565D1B3"
@@ -9196,7 +9089,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core.EnterInterpreter, Version=7.2.7933.22621, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core.EnterInterpreter, Version=7.2.7962.16476, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5217FFCE019C4B24950989944C9F6ED9"
@@ -9697,7 +9590,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Menu, Version=7.2.7933.22636, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Menu, Version=7.2.7962.16491, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5D35726C17474758B15657FBA421C474"
@@ -9759,7 +9652,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EpiMenu.CommandPlugin, Version=7.2.7933.22637, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EpiMenu.CommandPlugin, Version=7.2.7962.16492, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5E9803585D124F989393001E76E1D04D"
@@ -10198,7 +10091,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Updater, Version=7.2.7933.22637, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Updater, Version=7.2.7962.16492, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_6C20F7312A94449BAE7548DBB9C96F1A"
@@ -10229,7 +10122,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Statistics, Version=7.2.7933.22620, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Statistics, Version=7.2.7962.16475, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_6C8024D7850FCC1B93ED5896230350F9"
@@ -10291,7 +10184,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DataPackager, Version=7.2.7933.22632, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:DataPackager, Version=7.2.7962.16488, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_6CCE1FDFC8554B4181CA50643280B26B"
@@ -10322,7 +10215,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.MySQL, Version=7.2.7933.22622, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.MySQL, Version=7.2.7962.16479, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_6D97434547D441F19D7BF3804112D9C4"
@@ -10599,7 +10492,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core, Version=7.2.7933.22619, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core, Version=7.2.7962.16473, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_737CD235870EE3D30507677ED3E6332D"
@@ -10692,7 +10585,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.SqlServer, Version=7.2.7933.22623, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.SqlServer, Version=7.2.7962.16480, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_751D185CD428438E8EB5648561F31D56"
@@ -10807,6 +10700,26 @@
             "TargetName" = "8:HIV.mdb"
             "Tag" = "8:"
             "Folder" = "8:_A94DE09002E44780B6BB03E2776E82E5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7900AC87F28E440894287D83AA58B385"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\ALBZCTA_region.prj"
+            "TargetName" = "8:ALBZCTA_region.prj"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -10938,7 +10851,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Menu, Version=7.2.7933.22637, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Menu, Version=7.2.7962.16492, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_7BD9B957350C4E35AED14AB600DC6B63"
@@ -10996,31 +10909,11 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7C5C8D05A8E843089B81B90CBF10E8D3"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\cb.dbf"
-            "TargetName" = "8:cb.dbf"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7DB0F778F207DDCD34D0306EC4A6CAEC"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core.AnalysisInterpreter, Version=7.2.7933.22621, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core.AnalysisInterpreter, Version=7.2.7962.16477, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_7DB0F778F207DDCD34D0306EC4A6CAEC"
@@ -11122,7 +11015,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows.ImportExport, Version=7.2.7933.22632, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows.ImportExport, Version=7.2.7962.16488, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_8109565AE6F58E6D90A7F813171AF76E"
@@ -11166,6 +11059,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_153F02E98050473FB573DBF72D28AD08"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_81A0A75E0FCE4569A62E16069C8E0CB7"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\CommunityHealthAssessment.prj"
+            "TargetName" = "8:CommunityHealthAssessment.prj"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -11521,7 +11434,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core, Version=7.2.7933.22619, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core, Version=7.2.7962.16473, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_868646E86BC848DB971E8030FA393F8E"
@@ -11583,7 +11496,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows.Globalization, Version=7.2.7933.22620, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows.Globalization, Version=7.2.7962.16475, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_88475371CE134C019D6C99697D04AA65"
@@ -11927,26 +11840,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9009D0E6F6384CA5B3C32865B4C825A9"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\cb.sbn"
-            "TargetName" = "8:cb.sbn"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_90367C784F484CA293920B2BF63B364F"
             {
             "AssemblyRegister" = "3:1"
@@ -12009,11 +11902,31 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_91270AB69D2344E490A35EDCBCEC7001"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\ALBZCTA_region.dbf"
+            "TargetName" = "8:ALBZCTA_region.dbf"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_915ABD8102174FCF9F2B1E3261E8499B"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EpiInfo, Version=7.2.7933.22637, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EpiInfo, Version=7.2.7962.16492, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_915ABD8102174FCF9F2B1E3261E8499B"
@@ -12219,7 +12132,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_960F23BC60664F72BE1EAE10A22F1F3A"
@@ -12585,10 +12498,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B9BC4319D4146619C9B685DBCB5F078"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9B8FCBA2765E460FB44417D1CBA04FF2"
             {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\cb.shx"
-            "TargetName" = "8:cb.shx"
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\AsthmaTable.xls"
+            "TargetName" = "8:AsthmaTable.xls"
             "Tag" = "8:"
             "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
@@ -12660,7 +12573,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Config, Version=7.2.7933.22637, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Config, Version=7.2.7962.16492, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_9CC66FDE70104FAB874B556347EA4E58"
@@ -12806,6 +12719,26 @@
             "TargetName" = "8:GPS.xml"
             "Tag" = "8:"
             "Folder" = "8:_6DC3C15E5EF347499C8CAC9F391012C0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A024A3F9CDDF43BC9AB0C7D549F53D14"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\Albany County Boundary_region.dbf"
+            "TargetName" = "8:Albany County Boundary_region.dbf"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -13201,6 +13134,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A7EF1068E0BF462AA1B219572B7D315F"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\Albany County Boundary_region.prj"
+            "TargetName" = "8:Albany County Boundary_region.prj"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A80DA9195D1E4B08B694391F3CAF0B33"
             {
             "AssemblyRegister" = "3:1"
@@ -13369,7 +13322,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core.AnalysisInterpreter, Version=7.2.7933.22621, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core.AnalysisInterpreter, Version=7.2.7962.16477, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_AC3949912DB1499E92FFCCB5A400455C"
@@ -13433,26 +13386,6 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AF6DE8F6CC9B4475AED43997E11D079A"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\CholeraRwenshama_Canvas1.cvs7"
-            "TargetName" = "8:CholeraRwenshama_Canvas1.cvs7"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -13717,7 +13650,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Analysis, Version=7.2.7933.22628, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Analysis, Version=7.2.7962.16484, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_B90F211487EC43F2B23EA1A3215933BC"
@@ -14269,7 +14202,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.ImportExport, Version=7.2.7933.22620, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.ImportExport, Version=7.2.7962.16475, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_BECAE620BE8D4921A7858CD6AB8640D9"
@@ -14302,6 +14235,26 @@
             "TargetName" = "8:DataPackager.exe.config"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C102075BB3914BD5BBB8677F4E068D3F"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\ALBZCTA_region.shx"
+            "TargetName" = "8:ALBZCTA_region.shx"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -14620,11 +14573,6 @@
             "AssemblyAsmDisplayName" = "8:Redcap, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C7E6F008E23E47D7B3E725DF81886163"
-                    {
-                    "Name" = "8:Redcap.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:..\\build\\Epi Info 7\\Redcap.dll"
             "TargetName" = "8:"
@@ -14739,7 +14687,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Analysis.Statistics, Version=7.2.7933.22621, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Analysis.Statistics, Version=7.2.7962.16477, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_CA9FF27680BC469EAE3ACD87DDD9BEDA"
@@ -14810,7 +14758,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows.Globalization, Version=7.2.7933.22620, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows.Globalization, Version=7.2.7962.16475, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_CBDA95D39C5E389DF6A6A2E6A7F95AF4"
@@ -15065,7 +15013,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.ImportExport, Version=7.2.7933.22620, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.ImportExport, Version=7.2.7962.16475, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_D207B5148442C7DDDC64B1432969010C"
@@ -15287,26 +15235,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D79282E3F3314754AAAD213951B999BE"
-            {
-            "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\Cholera\\Cholera_in_Rwenshama_2.mdb"
-            "TargetName" = "8:Cholera_in_Rwenshama_2.mdb"
-            "Tag" = "8:"
-            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D8C057EB71524AF386A3D0D369B5935D"
             {
             "SourcePath" = "8:..\\build\\Epi Info 7\\Projects\\H1N1ShortForm\\H1N1ShortForm.prj"
@@ -15331,7 +15259,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WebSurveyExporter, Version=7.2.7933.22637, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:WebSurveyExporter, Version=7.2.7962.16492, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_DA1A2CE8EFCC45548395F55F9D62EE8E"
@@ -15362,7 +15290,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Statistics, Version=7.2.7933.22620, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Statistics, Version=7.2.7962.16475, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_DA1A89A4E283483E923413E52A5A5706"
@@ -15440,6 +15368,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCBAFC60E2BC4C01BE3924AACF8EAF63"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\Albany County Boundary_region.shx"
+            "TargetName" = "8:Albany County Boundary_region.shx"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DCBD20A9427941318DFC60E2F26028CC"
             {
             "AssemblyRegister" = "3:1"
@@ -15457,6 +15405,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCE3FE0B417F485891DE65468B44A0BF"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\CommunityHealthAssessment_Canvas1.cvs7"
+            "TargetName" = "8:CommunityHealthAssessment_Canvas1.cvs7"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -15526,7 +15494,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Enter.CheckCodeEngine, Version=7.2.7933.22632, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Enter.CheckCodeEngine, Version=7.2.7962.16487, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_DF0E5E30C74F4165B553601CDFB4BCF0"
@@ -15588,7 +15556,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.Office, Version=7.2.7933.22623, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.Office, Version=7.2.7962.16479, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_E21458AAC65FE55D4BF9E2260202702C"
@@ -15710,7 +15678,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnthStat, Version=7.2.7933.22620, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnthStat, Version=7.2.7962.16475, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_E5F1B08117B4461C9331114325F0320E"
@@ -15792,7 +15760,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnalysisDashboard, Version=7.2.7933.22632, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnalysisDashboard, Version=7.2.7962.16487, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_E8C5F87F6FF0418692FCEECA835F9403"
@@ -15843,7 +15811,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnthStat, Version=7.2.7933.22620, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnthStat, Version=7.2.7962.16475, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_E923DCF5A2AAD48AA5CA55256B18AADE"
@@ -15919,37 +15887,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EA735A35980CFFE11D1EC1BAB6CCE236"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_EA735A35980CFFE11D1EC1BAB6CCE236"
-                    {
-                    "Name" = "8:System.ComponentModel.Annotations.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:System.ComponentModel.Annotations.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EC3825BD1CF95EE490AD461896E7FC16"
@@ -16160,7 +16097,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.MongoDB, Version=7.2.7933.22623, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.MongoDB, Version=7.2.7962.16480, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_F0C48A96B3424F95931FF3B776ADCFC0"
@@ -16193,6 +16130,26 @@
             "TargetName" = "8:Epi.Windows.Globalization.dll.config"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F18FB45F5F524DB98B38293157A86DCF"
+            {
+            "SourcePath" = "8:..\\Epi.Core\\Projects\\CommunityHealthAssessment\\CommunityHealthAssessment_Canvas2.cvs7"
+            "TargetName" = "8:CommunityHealthAssessment_Canvas2.cvs7"
+            "Tag" = "8:"
+            "Folder" = "8:_BD43BB40F30848A6BFC251FBD603A4DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -16741,42 +16698,11 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FD20D1632F0F738CBD4D7AE5D5B224E3"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Runtime.InteropServices.RuntimeInformation, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_FD20D1632F0F738CBD4D7AE5D5B224E3"
-                    {
-                    "Name" = "8:System.Runtime.InteropServices.RuntimeInformation.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:System.Runtime.InteropServices.RuntimeInformation.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FD23A1D803C446728E8EEE4E3A1B5375"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Mapping, Version=7.2.7933.22632, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Mapping, Version=7.2.7962.16488, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_FD23A1D803C446728E8EEE4E3A1B5375"
@@ -16935,7 +16861,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_E7F22B0032DF43F3900910E3959CFFED"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
