@@ -658,7 +658,7 @@ namespace EpiDashboard
                         tcList,
                         fileName);
 
-                    if (dashboardHelper.IsUsingEpiProject)
+					if (dashboardHelper.IsUsingEpiProject)
                     {
                         csvExporter.IncludeDeletedRecords = false;
                     }
@@ -1277,13 +1277,16 @@ namespace EpiDashboard
 
             string fileName = db.DataSource + "\\" + tableName;
             
-            if (!fileName.ToLowerInvariant().EndsWith(".csv") && !fileName.ToLowerInvariant().EndsWith(".txt"))
+            if (!fileName.ToLowerInvariant().EndsWith(".csv") && !fileName.ToLowerInvariant().EndsWith(".txt") && !fileName.ToLowerInvariant().EndsWith(".json"))
             {
-                fileName = fileName + ".csv";
-            }
+				if (cmbDataFormats.SelectedItem.ToString().Contains("JSON"))
+					fileName = fileName + ".json";
+				else
+					fileName = fileName + ".csv";
+			}
 
             bool writeToFlatFile = false;
-            if (cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("csv file"))
+            if (cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("ascii") || cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("csv file") || cmbDataFormats.SelectedItem.ToString().ToLowerInvariant().Contains("json file"))
             {
                 writeToFlatFile = true;
             }

@@ -819,7 +819,15 @@ namespace Epi
             dataDriverRowCsv.MetadataProvider = false;
             configDataSet.DataDriver.Rows.Add(dataDriverRowCsv);
 
-            Config.DataDriverRow dataDriverRowMySql = configDataSet.DataDriver.NewDataDriverRow();
+			Config.DataDriverRow dataDriverRowJSON = configDataSet.DataDriver.NewDataDriverRow();
+			dataDriverRowJSON.DataDriversRow = parentDataDriversRow;
+			dataDriverRowJSON.DisplayName = "JSON File";
+			dataDriverRowJSON.Type = CsvDriver;
+			dataDriverRowJSON.DataProvider = true;
+			dataDriverRowJSON.MetadataProvider = false;
+			configDataSet.DataDriver.Rows.Add(dataDriverRowJSON);
+
+			Config.DataDriverRow dataDriverRowMySql = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowMySql.DataDriversRow = parentDataDriversRow;
             dataDriverRowMySql.DisplayName = "MySQL Database";
             dataDriverRowMySql.Type = MySQLDriver;
