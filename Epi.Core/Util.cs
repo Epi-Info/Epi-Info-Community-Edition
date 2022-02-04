@@ -35,7 +35,7 @@ namespace Epi
         /// </summary>
         public static DateTime NullDateTime
         {
-            get{return nullDateTime;}
+            get { return nullDateTime; }
         }
         #endregion public static properties
 
@@ -183,8 +183,8 @@ namespace Epi
         /// <summary>
         /// Creates a project file and project object for a database file.
         /// </summary>
-        /// <param name="databaseFileName">The database file name.</param>        
-        /// <param name="createPRJFile">Whether or not to create the PRJ file on disk.</param>        
+        /// <param name="databaseFileName">The database file name.</param>
+        /// <param name="createPRJFile">Whether or not to create the PRJ file on disk.</param>
         /// <returns>An Epi Info project object</returns>
         public static Project CreateProjectFileFromDatabase(string databaseFileName, bool createPRJFile)
         {
@@ -241,7 +241,7 @@ namespace Epi
                     {
                         return null;
                     }
-                }          
+                }
             }
 
             return project;
@@ -250,7 +250,7 @@ namespace Epi
         /// <summary>
         /// Creates a project file and project object for a given database.
         /// </summary>
-        /// <param name="connectionString">The database file name or connection string.</param>        
+        /// <param name="connectionString">The database file name or connection string.</param>
         /// <param name="createPRJFile">Whether or not to create the PRJ file on disk.</param>
         /// <param name="prjFileName">The name of the desired PRJ file</param>
         /// <param name="prjFileLocation">The directory to the desired PRJ file</param>
@@ -287,7 +287,7 @@ namespace Epi
                     collectedDataDBInfo.DBCnnStringBuilder[parts[0]] = password;
                 }
             }
-                                
+
             IDbDriver driver = collectedDBFactory.CreateDatabaseObject(collectedDataDBInfo.DBCnnStringBuilder);
             project.CollectedData.Initialize(collectedDataDBInfo, "Epi.Data.SqlServer.SqlDBFactory, Epi.Data.SqlServer", false);
 
@@ -299,7 +299,7 @@ namespace Epi
 
             project.CollectedDataDbInfo = collectedDataDBInfo;
             project.CollectedDataDriver = "Epi.Data.SqlServer.SqlDBFactory, Epi.Data.SqlServer";
-            project.CollectedDataConnectionString = connectionString;            
+            project.CollectedDataConnectionString = connectionString;
 
             project.MetadataSource = MetadataSource.SameDb;
             project.Metadata.AttachDbDriver(project.CollectedData.GetDbDriver());
@@ -314,7 +314,7 @@ namespace Epi
                 {
                     return null;
                 }
-            }            
+            }
 
             return project;
         }
@@ -417,7 +417,7 @@ namespace Epi
 
         /// <summary>
         /// Orders the columns in a data table by their corresponding tab order
-        /// </summary>        
+        /// </summary>
         /// <param name="table">The table whose columns should be re-ordered</param>
         /// <param name="view">The meta data from which to pull the tab order</param>
         public static void SortColumnsByTabOrder(DataTable table, View view)
@@ -462,7 +462,7 @@ namespace Epi
                     columnNames.Add(kvp.Value, runningTabIndex);
                     runningTabIndex++;
                 }
-            }            
+            }
 
             int newRunningTabIndex = 0; // to prevent arg exceptions; TODO: Fix this better
             foreach (KeyValuePair<string, int> kvp in columnNames)
@@ -472,7 +472,7 @@ namespace Epi
                     table.Columns[kvp.Key].SetOrdinal(newRunningTabIndex);
                     newRunningTabIndex++;
                 }
-            }            
+            }
         }
 
         /// <summary>
@@ -731,7 +731,7 @@ namespace Epi
             memStream.Close();
             return imageAsBytes;
         }
-        
+
         /// <summary>
         /// Import target DataTable rows into source DataTable rows.
         /// <remarks>Shouldn't this be the other way around?</remarks>
@@ -984,7 +984,7 @@ namespace Epi
                 throw new ArgumentNullException("Text");
             }
             #endregion
-            
+
             Regex regex = new Regex("[^A-Z0-9_]", RegexOptions.IgnoreCase);
             return (regex.Replace(text, string.Empty));
         }
@@ -1037,7 +1037,7 @@ namespace Epi
                 throw new ArgumentNullException("Text");
             }
             #endregion
-            
+
             decimal result;
             return decimal.TryParse(text, out result);
         }
@@ -1203,9 +1203,9 @@ namespace Epi
             {
                 Configuration configuration = Configuration.GetNewInstance();
                 string webServiceEndpointAddress = configuration.Settings.WebServiceEndpointAddress;
-                int endIndex = webServiceEndpointAddress.IndexOf(".svc");
+                int endIndex = webServiceEndpointAddress.IndexOf(".svc", StringComparison.OrdinalIgnoreCase);
                 string withoutExtension = webServiceEndpointAddress.Substring(0, endIndex);
-                int vIndex = withoutExtension.LastIndexOf('V');
+                int vIndex = withoutExtension.LastIndexOf("V", StringComparison.OrdinalIgnoreCase);
                 string version = withoutExtension.Substring(vIndex + 1);
                 endpointVersion = int.Parse(version);
             }
