@@ -143,7 +143,7 @@ namespace Epi.Windows.Enter.PresentationLogic
 
         public void CloseViewHandler(object returnHome, EventArgs e)
         {
-            this.canvas.UnsubscribeControlEventHandlers();
+
             this.SetFieldData();
             
             if (SaveRecord() == false)
@@ -151,6 +151,8 @@ namespace Epi.Windows.Enter.PresentationLogic
                 return;
             }
             
+            this.canvas.UnsubscribeControlEventHandlers();
+
             RunTimeView RTV = this.EnterCheckCodeEngine.CurrentView;
             this.IsClosingRelatedView = RTV.View.IsRelatedView;
             EpiInfo.Plugin.IScope scope = RTV.EpiInterpreter.Context.Scope.GetEnclosingScope();

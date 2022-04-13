@@ -21,7 +21,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             }
         }
 
-               /// <summary>
+        /// <summary>
         /// performs execute command
         /// </summary>
         /// <returns>object</returns>
