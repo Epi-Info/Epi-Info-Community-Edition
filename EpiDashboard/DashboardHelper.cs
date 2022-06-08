@@ -4350,6 +4350,7 @@ namespace EpiDashboard
 
             inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_GENERATING_TABLE);
             DataView dv = GenerateView(inputs);
+			DataView filteredDV = new DataView();
 
             DateTime? minDate = null;
 
@@ -5104,7 +5105,10 @@ namespace EpiDashboard
                             }
                             inputs.UpdateGadgetStatus(SharedStrings.DASHBOARD_GADGET_STATUS_CALCULATING_DESCRIPTIVE_STATISTICS);
                             DataTable filteredTable = GenerateTable(inputs);
-                            DescriptiveStatistics means = DoMeans(inputs, filteredTable, freqTable, filter, outerFilter);
+							filteredDV = new DataView(filteredTable);
+							filteredDV.RowFilter = outerFilter;
+							//filteredDV.RowStateFilter = DataViewRowState.ModifiedCurrent;
+							DescriptiveStatistics means = DoMeans(inputs, filteredTable, freqTable, filter, outerFilter);
                             //if (means.observations > -1)
                             //{
                             descriptiveStatistics.Add(means);
@@ -5200,9 +5204,11 @@ namespace EpiDashboard
 
                                 ds.tStatisticPaired = Double.NegativeInfinity;
                                 ds.tStatisticPairedP = Double.NegativeInfinity;
+								DataTable tablefromdv = filteredDV.ToTable();
+								DataView dvfromtablefromdv = new DataView(tablefromdv);
                                 if (!String.IsNullOrEmpty(((MeansParameters)inputs).PairIDVariableName)) // Do Paired T-Test
                                 {
-                                    List<double> pairedDifferences = DoPairedDifferencess(dv,
+                                    List<double> pairedDifferences = DoPairedDifferencess(dvfromtablefromdv,
                                         inputs,
                                         ((MeansParameters)inputs).PairIDVariableName);
                                     ds.tStatisticPaired = pairedDifferences.ElementAt<double>(0);
