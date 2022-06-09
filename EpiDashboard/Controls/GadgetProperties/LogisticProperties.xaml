@@ -81,7 +81,7 @@
                         <Label x:Name="tblockLinkFunction" Grid.Column="2" Grid.Row="2" Visibility="Hidden">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockLinkFunctionTxt">Link Function:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cbxFieldLink" Width="216" HorizontalAlignment="Left" Height="28" Visibility="Hidden" />
+                        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cbxFieldLink" Width="108" HorizontalAlignment="Left" Height="28" Visibility="Hidden" />
                         <Label x:Name="tblockIndependentVariables" Grid.Column="0" Grid.Row="2">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockIndependentVariablesTxt">Independent Variables:</TextBlock>
                         </Label>
@@ -96,12 +96,14 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Button x:Name="btnMakeDummy" Grid.Row="0" HorizontalAlignment="Left" Width="auto" Grid.Column="0" Click="btnMakeDummy_Click">
+                            <Label Height="5" Grid.Row="0" Grid.Column="0" />
+                            <Button x:Name="btnMakeDummy" Grid.Row="1" HorizontalAlignment="Left" Width="auto" Grid.Column="0" Click="btnMakeDummy_Click">
                                 <TextBlock TextWrapping="Wrap" x:Name="btnMakeDummyTxt">Make Dummy</TextBlock>
                             </Button>
-                            <Label Height="5" Grid.Row="1" Grid.Column="0" />
-                            <Button x:Name="btnClearInteractionTerms" Grid.Row="2" Grid.Column="0" Width="auto" HorizontalAlignment="Left" Click="btnClearInteractionTerms_Click">
+                            <Label Height="5" Grid.Row="2" Grid.Column="0" />
+                            <Button x:Name="btnClearInteractionTerms" Grid.Row="3" Grid.Column="0" Width="auto" HorizontalAlignment="Left" Click="btnClearInteractionTerms_Click">
                                 <TextBlock TextWrapping="Wrap" x:Name="btnClearInteractionTermsTxt">Clear Terms</TextBlock>
                             </Button>
                         </Grid>
