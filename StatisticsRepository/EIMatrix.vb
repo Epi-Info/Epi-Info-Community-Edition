@@ -15,10 +15,12 @@ Option Explicit On
     Private mdblScore As Double
     Private mintIterations As Integer
 
-    Public Event CalcLikelihood(ByRef lintOffset As Integer, ByRef ldblA As System.Array, ByRef ldblaB As System.Array, ByRef ldblaJacobian As System.Array, ByRef ldblaF As System.Array, ByRef nRows As Integer, ByRef likelihood As Double, ByRef strError As String, ByRef booStartAtZero As Boolean)
+	Public Event CalcLikelihood(ByRef lintOffset As Integer, ByRef ldblA As System.Array, ByRef ldblaB As System.Array, ByRef ldblaJacobian As System.Array, ByRef ldblaF As System.Array, ByRef nRows As Integer, ByRef likelihood As Double, ByRef strError As String, ByRef booStartAtZero As Boolean)
 
-    'Get the inverse of matrix A. The code is converted from "numerical recipes in C".
-    Public Function inv(ByRef a(,) As Double, ByRef invA(,) As Double) As Object
+	Public Event CalcLikelihoodLB(ByRef lintOffset As Integer, ByRef ldblA As System.Array, ByRef ldblaB As System.Array, ByRef ldblaJacobian As System.Array, ByRef ldblaF As System.Array, ByRef nRows As Integer, ByRef likelihood As Double, ByRef strError As String, ByRef booStartAtZero As Boolean)
+
+	'Get the inverse of matrix A. The code is converted from "numerical recipes in C".
+	Public Function inv(ByRef a(,) As Double, ByRef invA(,) As Double) As Object
         Dim indx() As Integer
         Dim n As Integer
         Dim col() As Double
@@ -303,204 +305,402 @@ Option Explicit On
         Next
     End Sub
 
-    Public Sub MaximizeLikelihood(ByRef nRows As Integer, ByRef nCols As Integer, ByRef dataArray(,) As Double, ByRef lintOffset As Integer, ByRef lintMatrixSize As Integer, ByRef llngIters As Integer, ByRef ldblToler As Double, ByRef ldblConv As Object, ByRef booStartAtZero As Boolean)
-        Dim ldbll As Double
-        Dim ldbllfst As Double
-        Dim ldbloldll As Double
-        Dim ldblDet As Double
-        Dim i As Integer
-        Dim k As Integer
-        Dim iterations As Integer
-        Dim lbconditional As Boolean
-        Dim ldblaInv() As Double
-        Dim lintWeight As Integer
+	Public Sub MaximizeLikelihoodLB(ByRef nRows As Integer, ByRef nCols As Integer, ByRef dataArray(,) As Double, ByRef lintOffset As Integer, ByRef lintMatrixSize As Integer, ByRef llngIters As Integer, ByRef ldblToler As Double, ByRef ldblConv As Object, ByRef booStartAtZero As Boolean)
+		Dim ldbll As Double
+		Dim ldbllfst As Double
+		Dim ldbloldll As Double
+		Dim ldblDet As Double
+		Dim i As Integer
+		Dim k As Integer
+		Dim iterations As Integer
+		Dim lbconditional As Boolean
+		Dim ldblaInv() As Double
+		Dim lintWeight As Integer
 
-        ' added by Eric Fontaine 07/28/03: Used to retrieve error message from CalcLikelihood
-        Dim strCalcLikelihoodError As String
+		' added by Eric Fontaine 07/28/03: Used to retrieve error message from CalcLikelihood
+		Dim strCalcLikelihoodError As String
 
-        Dim ldblaScore() As Double
-        'UPGRADE_WARNING: Lower bound of array ldblaScore was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
-        ReDim ldblaScore(lintMatrixSize - 1)
-        mdblScore = 0
-        Dim oldmdblScore As Double
-        oldmdblScore = CDbl(0)
-        mboolConverge = True
+		Dim ldblaScore() As Double
+		'UPGRADE_WARNING: Lower bound of array ldblaScore was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim ldblaScore(lintMatrixSize - 1)
+		mdblScore = 0
+		Dim oldmdblScore As Double
+		oldmdblScore = CDbl(0)
+		mboolConverge = True
 
-        On Error GoTo ERROR_Renamed
-        mboolErrorStatus = False
-        'Set Array sizes
-        'UPGRADE_WARNING: Lower bound of array mdblaJacobian was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
-        ReDim mdblaJacobian(lintMatrixSize - 1, lintMatrixSize - 1)
-        Dim oldmdblaJacobian(,) As Double
-        ReDim oldmdblaJacobian(lintMatrixSize - 1, lintMatrixSize - 1)
-        'UPGRADE_WARNING: Lower bound of array mdblaInv was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
-        ReDim mdblaInv(lintMatrixSize - 1, lintMatrixSize - 1)
-        'UPGRADE_WARNING: Lower bound of array mdblaF was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
-        ReDim mdblaF(lintMatrixSize - 1)
-        Dim oldmdblaF() As Double
-        ReDim oldmdblaF(lintMatrixSize - 1)
-        'UPGRADE_WARNING: Lower bound of array mdblaB was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
-        ReDim mdblaB(lintMatrixSize - 1)
-        'UPGRADE_WARNING: Lower bound of array ldblaScore was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
-        ReDim ldblaScore(lintMatrixSize - 1)
+		On Error GoTo ERROR_Renamed
+		mboolErrorStatus = False
+		'Set Array sizes
+		'UPGRADE_WARNING: Lower bound of array mdblaJacobian was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim mdblaJacobian(lintMatrixSize - 1, lintMatrixSize - 1)
+		Dim oldmdblaJacobian(,) As Double
+		ReDim oldmdblaJacobian(lintMatrixSize - 1, lintMatrixSize - 1)
+		'UPGRADE_WARNING: Lower bound of array mdblaInv was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim mdblaInv(lintMatrixSize - 1, lintMatrixSize - 1)
+		'UPGRADE_WARNING: Lower bound of array mdblaF was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim mdblaF(lintMatrixSize - 1)
+		Dim oldmdblaF() As Double
+		ReDim oldmdblaF(lintMatrixSize - 1)
+		'UPGRADE_WARNING: Lower bound of array mdblaB was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim mdblaB(lintMatrixSize - 1)
+		'UPGRADE_WARNING: Lower bound of array ldblaScore was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim ldblaScore(lintMatrixSize - 1)
 
-        'Calculate the likelihood
-        RaiseEvent CalcLikelihood(lintOffset, dataArray, mdblaB, mdblaJacobian, mdblaF, nRows, ldbllfst, strCalcLikelihoodError, booStartAtZero)
+		'Calculate the likelihood
+		RaiseEvent CalcLikelihoodLB(lintOffset, dataArray, mdblaB, mdblaJacobian, mdblaF, nRows, ldbllfst, strCalcLikelihoodError, booStartAtZero)
 
-        For i = 0 To UBound(mdblaB)
-            For j = 0 To UBound(mdblaB)
-                oldmdblaJacobian(i, j) = mdblaJacobian(i, j)
-            Next j
-            oldmdblaF(i) = mdblaF(i)
-        Next i
+		For i = 0 To UBound(mdblaB)
+			For j = 0 To UBound(mdblaB)
+				oldmdblaJacobian(i, j) = mdblaJacobian(i, j)
+			Next j
+			oldmdblaF(i) = mdblaF(i)
+		Next i
 
-        ' added by Eric Fontaine 07/28/03: raises an error if CalcLikelihood had an error
-        If strCalcLikelihoodError <> "" Then
-            Err.Raise(vbObjectError, , strCalcLikelihoodError)
-        End If
+		' added by Eric Fontaine 07/28/03: raises an error if CalcLikelihood had an error
+		If strCalcLikelihoodError <> "" Then
+			Err.Raise(vbObjectError, , strCalcLikelihoodError)
+		End If
 
-        'WE have the first likelihood estiamate
-        mintIterations = 1
-        ldbloldll = ldbllfst
-        ldbll = ldbllfst
-        If ldbllfst > 0 Then Err.Raise(vbObjectError, , "<tlt>Positive Log-Likelihood, regression is diverging</tlt>")
-        inv(mdblaJacobian, mdblaInv)
-        Dim oldmdblaInv(,) As Double
-        Dim oldmdblaB() As Double
-        ReDim oldmdblaInv(lintMatrixSize - 1, lintMatrixSize - 1)
-        ReDim oldmdblaB(lintMatrixSize - 1)
-        For i = 0 To UBound(mdblaB)
-            For j = 0 To UBound(mdblaB)
-                oldmdblaInv(i, j) = mdblaInv(i, j)
-            Next j
-            oldmdblaB(i) = mdblaB(i)
-        Next i
-        'find the determinant
-        'The matrix has already been lu decomposed.
-        ldblDet = 1
-        For i = 0 To UBound(mdblaB)
-            ldblDet = ldblDet * mdblaJacobian(i, i)
-        Next i
+		'WE have the first likelihood estiamate
+		mintIterations = 1
+		ldbloldll = ldbllfst
+		ldbll = ldbllfst
+		If ldbllfst > 0 Then Err.Raise(vbObjectError, , "<tlt>Positive Log-Likelihood, regression is diverging</tlt>")
+		inv(mdblaJacobian, mdblaInv)
+		Dim oldmdblaInv(,) As Double
+		Dim oldmdblaB() As Double
+		ReDim oldmdblaInv(lintMatrixSize - 1, lintMatrixSize - 1)
+		ReDim oldmdblaB(lintMatrixSize - 1)
+		For i = 0 To UBound(mdblaB)
+			For j = 0 To UBound(mdblaB)
+				oldmdblaInv(i, j) = mdblaInv(i, j)
+			Next j
+			oldmdblaB(i) = mdblaB(i)
+		Next i
+		'find the determinant
+		'The matrix has already been lu decomposed.
+		ldblDet = 1
+		For i = 0 To UBound(mdblaB)
+			ldblDet = ldblDet * mdblaJacobian(i, i)
+		Next i
 
-        If System.Math.Abs(ldblDet) < ldblToler Then
-            mboolConverge = False
-            Err.Raise(vbObjectError, , "<tlt>Matrix Tolerance Exceeded</tlt>")
-            GoTo EndProc
-        End If
+		If System.Math.Abs(ldblDet) < ldblToler Then
+			mboolConverge = False
+			Err.Raise(vbObjectError, , "<tlt>Matrix Tolerance Exceeded</tlt>")
+			GoTo EndProc
+		End If
 
-        'Now find the delta coefficients for this iteration
-        'And clear the arrays at the same time
-        For i = 0 To UBound(mdblaB)
-            For k = 0 To UBound(mdblaB)
-                ldblaScore(i) = ldblaScore(i) + mdblaF(k) * mdblaInv(i, k)
-                mdblaJacobian(i, k) = 0
-            Next
-            mdblaB(i) = mdblaB(i) + ldblaScore(i)
-            mdblScore = mdblScore + ldblaScore(i) * mdblaF(i)
-        Next
+		'Now find the delta coefficients for this iteration
+		'And clear the arrays at the same time
+		For i = 0 To UBound(mdblaB)
+			For k = 0 To UBound(mdblaB)
+				ldblaScore(i) = ldblaScore(i) + mdblaF(k) * mdblaInv(i, k)
+				mdblaJacobian(i, k) = 0
+			Next
+			mdblaB(i) = mdblaB(i) + ldblaScore(i)
+			mdblScore = mdblScore + ldblaScore(i) * mdblaF(i)
+		Next
 
-        Dim Ridge As Double
-        Ridge = CDbl(0)
+		Dim Ridge As Double
+		Ridge = CDbl(0)
 
-        For mintIterations = 2 To llngIters
-            'clear f
-            For i = 0 To UBound(mdblaF)
-                mdblaF(i) = 0
-            Next i
-            'do conditional or unconditional
-            RaiseEvent CalcLikelihood(lintOffset, dataArray, mdblaB, mdblaJacobian, mdblaF, nRows, ldbll, strCalcLikelihoodError, booStartAtZero)
+		For mintIterations = 2 To llngIters
+			'clear f
+			For i = 0 To UBound(mdblaF)
+				mdblaF(i) = 0
+			Next i
+			'do conditional or unconditional
+			RaiseEvent CalcLikelihoodLB(lintOffset, dataArray, mdblaB, mdblaJacobian, mdblaF, nRows, ldbll, strCalcLikelihoodError, booStartAtZero)
 
-            'test for exit time
-            If ldbloldll - ldbll > ldblConv Then
-                If Ridge > 0.0 And Ridge < 1000 Then
-                    mintIterations = mintIterations - 1
-                    Ridge = Ridge * 4.0
-                    For i = 0 To UBound(mdblaB)
-                        For j = 0 To UBound(mdblaB)
-                            mdblaJacobian(i, j) = oldmdblaJacobian(i, j) * (1 + Int(i = j) * Ridge)
-                        Next j
-                        mdblaB(i) = oldmdblaB(i)
-                        mdblaF(i) = oldmdblaF(i)
-                    Next i
-                    GoTo ContinuePoint
-                End If
-                If Ridge = 0.0 Then
-                    mintIterations = mintIterations - 1
-                    Ridge = 0.0001
-                    For i = 0 To UBound(mdblaB)
-                        For j = 0 To UBound(mdblaB)
-                            mdblaJacobian(i, j) = oldmdblaJacobian(i, j) * (1 + Int(i = j) * Ridge)
-                        Next j
-                        mdblaB(i) = oldmdblaB(i)
-                        mdblaF(i) = oldmdblaF(i)
-                    Next i
-                    GoTo ContinuePoint
-                End If
+			'test for exit time
+			If ldbloldll - ldbll > ldblConv Then
+				If Ridge > 0.0 And Ridge < 1000 Then
+					mintIterations = mintIterations - 1
+					Ridge = Ridge * 4.0
+					For i = 0 To UBound(mdblaB)
+						For j = 0 To UBound(mdblaB)
+							mdblaJacobian(i, j) = oldmdblaJacobian(i, j) * (1 + Int(i = j) * Ridge)
+						Next j
+						mdblaB(i) = oldmdblaB(i)
+						mdblaF(i) = oldmdblaF(i)
+					Next i
+					GoTo ContinuePoint
+				End If
+				If Ridge = 0.0 Then
+					mintIterations = mintIterations - 1
+					Ridge = 0.0001
+					For i = 0 To UBound(mdblaB)
+						For j = 0 To UBound(mdblaB)
+							mdblaJacobian(i, j) = oldmdblaJacobian(i, j) * (1 + Int(i = j) * Ridge)
+						Next j
+						mdblaB(i) = oldmdblaB(i)
+						mdblaF(i) = oldmdblaF(i)
+					Next i
+					GoTo ContinuePoint
+				End If
 
-                mboolConverge = False
-                mdblllfst = ldbllfst
+				mboolConverge = False
+				mdblllfst = ldbllfst
 
-                Err.Raise(vbObjectError, , "<tlt>Regression not converging</tlt>")
-                'UPGRADE_WARNING: Couldn't resolve default property of object ldblConv. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6A50421D-15FE-4896-8A1B-2EC21E9037B2"'
-            ElseIf ldbll - ldbloldll < ldblConv Then
-                mdblaB = oldmdblaB
-                '                mdblaInv = oldmdblaInv
-                mintIterations = mintIterations - 1
-                GoTo EndProc
-            End If
+				Err.Raise(vbObjectError, , "<tlt>Regression not converging</tlt>")
+				'UPGRADE_WARNING: Couldn't resolve default property of object ldblConv. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6A50421D-15FE-4896-8A1B-2EC21E9037B2"'
+			ElseIf ldbll - ldbloldll < ldblConv Then
+				'mdblaB = oldmdblaB
+				'                mdblaInv = oldmdblaInv
+				'mintIterations = mintIterations - 1
+				inv(mdblaJacobian, mdblaInv)
+				GoTo EndProc
+			End If
 
-            For i = 0 To UBound(mdblaB)
-                For j = 0 To UBound(mdblaB)
-                    oldmdblaInv(i, j) = mdblaInv(i, j)
-                    oldmdblaJacobian(i, j) = mdblaJacobian(i, j)
-                Next j
-                oldmdblaB(i) = mdblaB(i)
-                oldmdblaF(i) = mdblaF(i)
-            Next i
-            Ridge = 0.0
-            ldbloldll = ldbll
+			For i = 0 To UBound(mdblaB)
+				For j = 0 To UBound(mdblaB)
+					oldmdblaInv(i, j) = mdblaInv(i, j)
+					oldmdblaJacobian(i, j) = mdblaJacobian(i, j)
+				Next j
+				oldmdblaB(i) = mdblaB(i)
+				oldmdblaF(i) = mdblaF(i)
+			Next i
+			Ridge = 0.0
+			ldbloldll = ldbll
 
 ContinuePoint:
-            inv(mdblaJacobian, mdblaInv)
-            'find the determinant
-            'The matrix has already been ludecomposed.
-            ldblDet = 1
-            For i = 0 To UBound(mdblaB)
-                ldblDet = ldblDet * mdblaJacobian(i, i)
-            Next i
+			inv(mdblaJacobian, mdblaInv)
+			'find the determinant
+			'The matrix has already been ludecomposed.
+			ldblDet = 1
+			For i = 0 To UBound(mdblaB)
+				ldblDet = ldblDet * mdblaJacobian(i, i)
+			Next i
 
-            If System.Math.Abs(ldblDet) < ldblToler Then
-                mboolConverge = False
-                Err.Raise(vbObjectError, , "<tlt>Matrix Tolerance Exceeded</tlt>")
-                GoTo EndProc
-            End If
+			If System.Math.Abs(ldblDet) < ldblToler Then
+				mboolConverge = False
+				Err.Raise(vbObjectError, , "<tlt>Matrix Tolerance Exceeded</tlt>")
+				GoTo EndProc
+			End If
 
-            'Now find the delta coefficients for this iteration
-            'And clear the arrays at the same time
-            For i = 0 To UBound(mdblaB)
-                For k = 0 To UBound(mdblaB)
-                    mdblaB(i) = mdblaB(i) + mdblaF(k) * mdblaInv(i, k)
-                    mdblaJacobian(i, k) = 0
-                Next
+			'Now find the delta coefficients for this iteration
+			'And clear the arrays at the same time
+			For i = 0 To UBound(mdblaB)
+				For k = 0 To UBound(mdblaB)
+					mdblaB(i) = mdblaB(i) + mdblaF(k) * mdblaInv(i, k)
+					mdblaJacobian(i, k) = 0
+				Next
 
-            Next
+			Next
 
 
-        Next
+		Next
 EndProc:
 
-        mdblllfst = ldbllfst
-        mdbllllast = ldbll
-        Exit Sub
+		mdblllfst = ldbllfst
+		mdbllllast = ldbll
+		Exit Sub
 
 ERROR_Renamed:
-        mboolErrorStatus = True
-        mstrerror = Err.Description
-        '    Err.Raise vbObjectError, , Err.Description        
+		mboolErrorStatus = True
+		mstrerror = Err.Description
+		'    Err.Raise vbObjectError, , Err.Description        
 
-    End Sub
+	End Sub
 
-    Public Function GetCoefficients() As Double()
+	Public Sub MaximizeLikelihood(ByRef nRows As Integer, ByRef nCols As Integer, ByRef dataArray(,) As Double, ByRef lintOffset As Integer, ByRef lintMatrixSize As Integer, ByRef llngIters As Integer, ByRef ldblToler As Double, ByRef ldblConv As Object, ByRef booStartAtZero As Boolean)
+		Dim ldbll As Double
+		Dim ldbllfst As Double
+		Dim ldbloldll As Double
+		Dim ldblDet As Double
+		Dim i As Integer
+		Dim k As Integer
+		Dim iterations As Integer
+		Dim lbconditional As Boolean
+		Dim ldblaInv() As Double
+		Dim lintWeight As Integer
+
+		' added by Eric Fontaine 07/28/03: Used to retrieve error message from CalcLikelihood
+		Dim strCalcLikelihoodError As String
+
+		Dim ldblaScore() As Double
+		'UPGRADE_WARNING: Lower bound of array ldblaScore was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim ldblaScore(lintMatrixSize - 1)
+		mdblScore = 0
+		Dim oldmdblScore As Double
+		oldmdblScore = CDbl(0)
+		mboolConverge = True
+
+		On Error GoTo ERROR_Renamed
+		mboolErrorStatus = False
+		'Set Array sizes
+		'UPGRADE_WARNING: Lower bound of array mdblaJacobian was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim mdblaJacobian(lintMatrixSize - 1, lintMatrixSize - 1)
+		Dim oldmdblaJacobian(,) As Double
+		ReDim oldmdblaJacobian(lintMatrixSize - 1, lintMatrixSize - 1)
+		'UPGRADE_WARNING: Lower bound of array mdblaInv was changed from 1,1 to 0,0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim mdblaInv(lintMatrixSize - 1, lintMatrixSize - 1)
+		'UPGRADE_WARNING: Lower bound of array mdblaF was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim mdblaF(lintMatrixSize - 1)
+		Dim oldmdblaF() As Double
+		ReDim oldmdblaF(lintMatrixSize - 1)
+		'UPGRADE_WARNING: Lower bound of array mdblaB was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim mdblaB(lintMatrixSize - 1)
+		'UPGRADE_WARNING: Lower bound of array ldblaScore was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim ldblaScore(lintMatrixSize - 1)
+
+		'Calculate the likelihood
+		RaiseEvent CalcLikelihood(lintOffset, dataArray, mdblaB, mdblaJacobian, mdblaF, nRows, ldbllfst, strCalcLikelihoodError, booStartAtZero)
+
+		For i = 0 To UBound(mdblaB)
+			For j = 0 To UBound(mdblaB)
+				oldmdblaJacobian(i, j) = mdblaJacobian(i, j)
+			Next j
+			oldmdblaF(i) = mdblaF(i)
+		Next i
+
+		' added by Eric Fontaine 07/28/03: raises an error if CalcLikelihood had an error
+		If strCalcLikelihoodError <> "" Then
+			Err.Raise(vbObjectError, , strCalcLikelihoodError)
+		End If
+
+		'WE have the first likelihood estiamate
+		mintIterations = 1
+		ldbloldll = ldbllfst
+		ldbll = ldbllfst
+		If ldbllfst > 0 Then Err.Raise(vbObjectError, , "<tlt>Positive Log-Likelihood, regression is diverging</tlt>")
+		inv(mdblaJacobian, mdblaInv)
+		Dim oldmdblaInv(,) As Double
+		Dim oldmdblaB() As Double
+		ReDim oldmdblaInv(lintMatrixSize - 1, lintMatrixSize - 1)
+		ReDim oldmdblaB(lintMatrixSize - 1)
+		For i = 0 To UBound(mdblaB)
+			For j = 0 To UBound(mdblaB)
+				oldmdblaInv(i, j) = mdblaInv(i, j)
+			Next j
+			oldmdblaB(i) = mdblaB(i)
+		Next i
+		'find the determinant
+		'The matrix has already been lu decomposed.
+		ldblDet = 1
+		For i = 0 To UBound(mdblaB)
+			ldblDet = ldblDet * mdblaJacobian(i, i)
+		Next i
+
+		If System.Math.Abs(ldblDet) < ldblToler Then
+			mboolConverge = False
+			Err.Raise(vbObjectError, , "<tlt>Matrix Tolerance Exceeded</tlt>")
+			GoTo EndProc
+		End If
+
+		'Now find the delta coefficients for this iteration
+		'And clear the arrays at the same time
+		For i = 0 To UBound(mdblaB)
+			For k = 0 To UBound(mdblaB)
+				ldblaScore(i) = ldblaScore(i) + mdblaF(k) * mdblaInv(i, k)
+				mdblaJacobian(i, k) = 0
+			Next
+			mdblaB(i) = mdblaB(i) + ldblaScore(i)
+			mdblScore = mdblScore + ldblaScore(i) * mdblaF(i)
+		Next
+
+		Dim Ridge As Double
+		Ridge = CDbl(0)
+
+		For mintIterations = 2 To llngIters
+			'clear f
+			For i = 0 To UBound(mdblaF)
+				mdblaF(i) = 0
+			Next i
+			'do conditional or unconditional
+			RaiseEvent CalcLikelihood(lintOffset, dataArray, mdblaB, mdblaJacobian, mdblaF, nRows, ldbll, strCalcLikelihoodError, booStartAtZero)
+
+			'test for exit time
+			If ldbloldll - ldbll > ldblConv Then
+				If Ridge > 0.0 And Ridge < 1000 Then
+					mintIterations = mintIterations - 1
+					Ridge = Ridge * 4.0
+					For i = 0 To UBound(mdblaB)
+						For j = 0 To UBound(mdblaB)
+							mdblaJacobian(i, j) = oldmdblaJacobian(i, j) * (1 + Int(i = j) * Ridge)
+						Next j
+						mdblaB(i) = oldmdblaB(i)
+						mdblaF(i) = oldmdblaF(i)
+					Next i
+					GoTo ContinuePoint
+				End If
+				If Ridge = 0.0 Then
+					mintIterations = mintIterations - 1
+					Ridge = 0.0001
+					For i = 0 To UBound(mdblaB)
+						For j = 0 To UBound(mdblaB)
+							mdblaJacobian(i, j) = oldmdblaJacobian(i, j) * (1 + Int(i = j) * Ridge)
+						Next j
+						mdblaB(i) = oldmdblaB(i)
+						mdblaF(i) = oldmdblaF(i)
+					Next i
+					GoTo ContinuePoint
+				End If
+
+				mboolConverge = False
+				mdblllfst = ldbllfst
+
+				Err.Raise(vbObjectError, , "<tlt>Regression not converging</tlt>")
+				'UPGRADE_WARNING: Couldn't resolve default property of object ldblConv. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6A50421D-15FE-4896-8A1B-2EC21E9037B2"'
+			ElseIf ldbll - ldbloldll < ldblConv Then
+				mdblaB = oldmdblaB
+				'                mdblaInv = oldmdblaInv
+				mintIterations = mintIterations - 1
+				GoTo EndProc
+			End If
+
+			For i = 0 To UBound(mdblaB)
+				For j = 0 To UBound(mdblaB)
+					oldmdblaInv(i, j) = mdblaInv(i, j)
+					oldmdblaJacobian(i, j) = mdblaJacobian(i, j)
+				Next j
+				oldmdblaB(i) = mdblaB(i)
+				oldmdblaF(i) = mdblaF(i)
+			Next i
+			Ridge = 0.0
+			ldbloldll = ldbll
+
+ContinuePoint:
+			inv(mdblaJacobian, mdblaInv)
+			'find the determinant
+			'The matrix has already been ludecomposed.
+			ldblDet = 1
+			For i = 0 To UBound(mdblaB)
+				ldblDet = ldblDet * mdblaJacobian(i, i)
+			Next i
+
+			If System.Math.Abs(ldblDet) < ldblToler Then
+				mboolConverge = False
+				Err.Raise(vbObjectError, , "<tlt>Matrix Tolerance Exceeded</tlt>")
+				GoTo EndProc
+			End If
+
+			'Now find the delta coefficients for this iteration
+			'And clear the arrays at the same time
+			For i = 0 To UBound(mdblaB)
+				For k = 0 To UBound(mdblaB)
+					mdblaB(i) = mdblaB(i) + mdblaF(k) * mdblaInv(i, k)
+					mdblaJacobian(i, k) = 0
+				Next
+
+			Next
+
+
+		Next
+EndProc:
+
+		mdblllfst = ldbllfst
+		mdbllllast = ldbll
+		Exit Sub
+
+ERROR_Renamed:
+		mboolErrorStatus = True
+		mstrerror = Err.Description
+		'    Err.Raise vbObjectError, , Err.Description        
+
+	End Sub
+
+	Public Function GetCoefficients() As Double()
         GetCoefficients = VB6.CopyArray(mdblaB)
     End Function
     Public Function GetInverseMatrix() As Double(,)

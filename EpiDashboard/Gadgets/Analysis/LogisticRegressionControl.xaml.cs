@@ -399,9 +399,12 @@ namespace EpiDashboard
 
 //                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
 
-                            results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
+							if (inputVariableList.ContainsKey("Logit"))
+								results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
+							else if (inputVariableList.ContainsKey("Log"))
+								results.regressionResults = logisticRegression.LogBinomialRegression(inputVariableList, regressTable);
 
-                            results.casesIncluded = results.regressionResults.casesIncluded;
+							results.casesIncluded = results.regressionResults.casesIncluded;
                             results.convergence = results.regressionResults.convergence;
                             results.finalLikelihood = results.regressionResults.finalLikelihood;
                             results.iterations = results.regressionResults.iterations;
@@ -1084,7 +1087,16 @@ namespace EpiDashboard
                 }
                 inputVariableList.Add("P", p.ToString());
 
-                foreach (string s in lbxOtherFields.Items)
+				if (cbxFieldLink.SelectedItem != null)
+				{
+					inputVariableList.Add(cbxFieldLink.SelectedItem.ToString(), "linkfunction");
+				}
+				else
+				{
+					inputVariableList.Add("Logit", "linkfunction");
+				}
+
+				foreach (string s in lbxOtherFields.Items)
                 {
                     if (!string.IsNullOrEmpty(s))
                     {

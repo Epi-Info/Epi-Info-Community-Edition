@@ -78,6 +78,10 @@
                             <TextBlock TextWrapping="Wrap" x:Name="tblockWeightVariableTxt">Weight:</TextBlock>
                         </Label>
                         <ComboBox Grid.Column="2" Grid.Row="1" x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+                        <Label x:Name="tblockLinkFunction" Grid.Column="2" Grid.Row="2" Visibility="Hidden">
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockLinkFunctionTxt">Link Function:</TextBlock>
+                        </Label>
+                        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cbxFieldLink" Width="216" HorizontalAlignment="Left" Height="28" Visibility="Hidden" />
                         <Label x:Name="tblockIndependentVariables" Grid.Column="0" Grid.Row="2">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockIndependentVariablesTxt">Independent Variables:</TextBlock>
                         </Label>

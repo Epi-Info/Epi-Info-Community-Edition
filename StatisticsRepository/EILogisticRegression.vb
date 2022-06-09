@@ -51,163 +51,319 @@ Option Compare Text
         context = AnalysisStatisticContext
     End Sub
 
-    Public Function LogisticRegression(ByVal inputVariableList As Dictionary(Of String, String), ByVal dataTable As DataTable) As LogisticRegressionResults
+	Public Function LogBinomialRegression(ByVal inputVariableList As Dictionary(Of String, String), ByVal dataTable As DataTable) As LogisticRegressionResults
 
-        currentTable = dataTable
+		currentTable = dataTable
 
-        CreateSettings(inputVariableList)
+		CreateSettings(inputVariableList)
 
-        Dim logistic As String
-        Dim errorMessage As String
-        errorMessage = String.Empty
+		Dim logistic As String
+		Dim errorMessage As String
+		errorMessage = String.Empty
 
-        Dim regressionResults As New LogisticRegressionResults
-        regressionResults.errorMessage = String.Empty
+		Dim regressionResults As New LogisticRegressionResults
+		regressionResults.errorMessage = String.Empty
 
-        If GetRawData(errorMessage) = False Then
-            regressionResults.errorMessage = errorMessage
-            Return regressionResults 'Exit Function
-        End If
+		If GetRawData(errorMessage) = False Then
+			regressionResults.errorMessage = errorMessage
+			Return regressionResults 'Exit Function
+		End If
 
-        Dim lintConditional As Integer
-        Dim lintweight As Integer
-        Dim lstrError As String
+		Dim lintConditional As Integer
+		Dim lintweight As Integer
+		Dim lstrError As String
 
-        Dim ldblFirstLikelihood As Double
-        Dim ldblScore As Double
+		Dim ldblFirstLikelihood As Double
+		Dim ldblScore As Double
 
-        lstrError = String.Empty
+		lstrError = String.Empty
 
-        mMatrixlikelihood = New EIMatrix()
-        If Len(mstrWeightVar) > 0 Then
-            lintweight = 1
-        End If
-        If Len(mstrMatchVar) > 0 Then
-            lintConditional = 1
-        End If
-        mboolFirst = True
+		mMatrixlikelihood = New EIMatrix()
+		If Len(mstrWeightVar) > 0 Then
+			lintweight = 1
+		End If
+		If Len(mstrMatchVar) > 0 Then
+			lintConditional = 1
+		End If
+		mboolFirst = True
 
-        mMatrixlikelihood.MaximizeLikelihood(0 + NumRows, 0 + NumColumns, DataArray, lintweight + lintConditional + 1, NumColumns - (lintweight + lintConditional + 1), 0 + mlngIter, mdblToler, mdblConv, False)
+		mMatrixlikelihood.MaximizeLikelihoodLB(0 + NumRows, 0 + NumColumns, DataArray, lintweight + lintConditional + 1, NumColumns - (lintweight + lintConditional + 1), 0 + mlngIter, mdblToler, mdblConv, False)
 
-        If mMatrixlikelihood.GetConvergence = True Then
-            If (mMatrixlikelihood.getError(lstrError) = False) Then
-                logistic = CreateOutputString(mMatrixlikelihood.getFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, mMatrixlikelihood.getScore)
-                'TODO: Re-enable later? 'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
-            Else
-                '            Err.Raise vbObjectError, , lstrError
-                regressionResults.errorMessage = lstrError
-                Return regressionResults 'Exit Function
-            End If
-        Else
-            ' if convergence with inital estimate fails, then
-            ' try with initial estimate of 0
+		If mMatrixlikelihood.GetConvergence = True Then
+			If (mMatrixlikelihood.getError(lstrError) = False) Then
+				logistic = CreateOutputString(mMatrixlikelihood.getFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, mMatrixlikelihood.getScore)
+				'TODO: Re-enable later? 'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
+			Else
+				'            Err.Raise vbObjectError, , lstrError
+				regressionResults.errorMessage = lstrError
+				Return regressionResults 'Exit Function
+			End If
+		Else
+			' if convergence with inital estimate fails, then
+			' try with initial estimate of 0
 
-            ' remember these so we can calculate the score and
-            ' the likelihood ratio later...
-            ldblFirstLikelihood = mMatrixlikelihood.getFirstLikelihood
-            ldblScore = mMatrixlikelihood.getScore
+			' remember these so we can calculate the score and
+			' the likelihood ratio later...
+			ldblFirstLikelihood = mMatrixlikelihood.getFirstLikelihood
+			ldblScore = mMatrixlikelihood.getScore
 
-            mMatrixlikelihood = New EIMatrix
-            If Len(mstrWeightVar) > 0 Then
-                lintweight = 1
-            End If
-            If Len(mstrMatchVar) > 0 Then
-                lintConditional = 1
-            End If
-            mboolFirst = True
+			mMatrixlikelihood = New EIMatrix
+			If Len(mstrWeightVar) > 0 Then
+				lintweight = 1
+			End If
+			If Len(mstrMatchVar) > 0 Then
+				lintConditional = 1
+			End If
+			mboolFirst = True
 
-            ' redo regression with inital estimate of 0
-            mMatrixlikelihood.MaximizeLikelihood(0 + NumRows, 0 + NumColumns, DataArray, lintweight + lintConditional + 1, NumColumns - (lintweight + lintConditional + 1), 0 + mlngIter, mdblToler, mdblConv, True)
+			' redo regression with inital estimate of 0
+			mMatrixlikelihood.MaximizeLikelihoodLB(0 + NumRows, 0 + NumColumns, DataArray, lintweight + lintConditional + 1, NumColumns - (lintweight + lintConditional + 1), 0 + mlngIter, mdblToler, mdblConv, True)
 
-            'Check the error status
-            If (mMatrixlikelihood.getError(lstrError) = False) Then
-                'output results
-                logistic = CreateOutputString(ldblFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, ldblScore)
-                'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
-            Else
-                regressionResults.errorMessage = lstrError
-                Return regressionResults 'Exit Function
-            End If
+			'Check the error status
+			If (mMatrixlikelihood.getError(lstrError) = False) Then
+				'output results
+				logistic = CreateOutputString(ldblFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, ldblScore)
+				'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
+			Else
+				regressionResults.errorMessage = lstrError
+				Return regressionResults 'Exit Function
+			End If
 
-        End If
+		End If
 
-        'Results(0,0)
+		'Results(0,0)
 
-        regressionResults.variables = New List(Of VariableRow)
+		regressionResults.variables = New List(Of VariableRow)
 
-        Dim lvarCoeff(8, UBound(mMatrixlikelihood.GetCoefficients)) As Object
-        lvarCoeff = VB6.CopyArray(Results(1, 0))
+		Dim lvarCoeff(8, UBound(mMatrixlikelihood.GetCoefficients)) As Object
+		lvarCoeff = VB6.CopyArray(Results(1, 0))
 
-        For i = 0 To UBound(mMatrixlikelihood.GetCoefficients)
+		For i = 0 To UBound(mMatrixlikelihood.GetCoefficients)
 
-            Dim variableRow As VariableRow
-            variableRow.variableName = lvarCoeff(0, i).ToString()
-            If lvarCoeff(1, i).ToString().Equals("*") = True Then
-                variableRow.oddsRatio = -99999
-                variableRow.ninetyFivePercent = -99999
-                variableRow.ci = -99999
-            Else
-                variableRow.oddsRatio = lvarCoeff(1, i)
-                variableRow.ninetyFivePercent = lvarCoeff(2, i).ToString()
-                variableRow.ci = lvarCoeff(3, i).ToString()
-            End If
-            variableRow.coefficient = lvarCoeff(4, i).ToString()
-            variableRow.se = lvarCoeff(5, i).ToString()
-            variableRow.Z = lvarCoeff(6, i).ToString()
-            variableRow.P = lvarCoeff(7, i).ToString()
+			Dim variableRow As VariableRow
+			variableRow.variableName = lvarCoeff(0, i).ToString()
+			If lvarCoeff(1, i).ToString().Equals("*") = True Then
+				variableRow.oddsRatio = -99999
+				variableRow.ninetyFivePercent = -99999
+				variableRow.ci = -99999
+			Else
+				variableRow.oddsRatio = lvarCoeff(1, i)
+				variableRow.ninetyFivePercent = lvarCoeff(2, i).ToString()
+				variableRow.ci = lvarCoeff(3, i).ToString()
+			End If
+			variableRow.coefficient = lvarCoeff(4, i).ToString()
+			variableRow.se = lvarCoeff(5, i).ToString()
+			variableRow.Z = lvarCoeff(6, i).ToString()
+			variableRow.P = lvarCoeff(7, i).ToString()
 
-            regressionResults.variables.Add(variableRow)
+			regressionResults.variables.Add(variableRow)
 
-        Next
+		Next
 
-        Dim lvarStats(2, 4) As Object
-        lvarStats = VB6.CopyArray(Results(1, 1))
+		Dim lvarStats(2, 4) As Object
+		lvarStats = VB6.CopyArray(Results(1, 1))
 
-        regressionResults.iterations = lvarStats(1, 1)
-        regressionResults.convergence = lvarStats(0, 0)
-        regressionResults.finalLikelihood = lvarStats(1, 2)
-        regressionResults.casesIncluded = lvarStats(1, 3)
+		regressionResults.iterations = lvarStats(1, 1)
+		regressionResults.convergence = lvarStats(0, 0)
+		regressionResults.finalLikelihood = lvarStats(1, 2)
+		regressionResults.casesIncluded = lvarStats(1, 3)
 
-        Dim lvarTests(3, 1) As Object
-        lvarTests = VB6.CopyArray(Results(1, 2))
+		Dim lvarTests(3, 1) As Object
+		lvarTests = VB6.CopyArray(Results(1, 2))
 
-        regressionResults.scoreStatistic = lvarTests(1, 0)
-        regressionResults.scoreDF = lvarTests(2, 0)
-        regressionResults.scoreP = lvarTests(3, 0)
+		regressionResults.scoreStatistic = lvarTests(1, 0)
+		regressionResults.scoreDF = lvarTests(2, 0)
+		regressionResults.scoreP = lvarTests(3, 0)
 
-        regressionResults.LRStatistic = lvarTests(1, 1)
-        regressionResults.LRDF = lvarTests(2, 1)
-        regressionResults.LRP = lvarTests(3, 1)
+		regressionResults.LRStatistic = lvarTests(1, 1)
+		regressionResults.LRDF = lvarTests(2, 1)
+		regressionResults.LRP = lvarTests(3, 1)
 
-        Dim interactionindex As Int16
-        interactionindex = logistic.IndexOf("Interaction</strong>")
-        If (interactionindex > 0) Then
-            regressionResults.interactionOddsRatios = New List(Of InteractionRow)
-            Dim parsingString As String
-            parsingString = logistic.Substring(interactionindex + 20)
-            parsingString = parsingString.Substring(parsingString.IndexOf("Confidence Limits</strong>") + 36)
-            Dim trindex As Int16
-            trindex = parsingString.IndexOf("<tr>")
-            While (trindex >= 0)
-                Dim interactionRow As InteractionRow
-                parsingString = parsingString.Substring(parsingString.IndexOf("<strong>") + 8)
-                interactionRow.interactionName = parsingString.Substring(0, parsingString.IndexOf("</strong>"))
-                parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 39)
-                interactionRow.oddsRatio = parsingString.Substring(0, parsingString.IndexOf("</td>"))
-                parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 38)
-                interactionRow.ninetyFivePercent = parsingString.Substring(0, parsingString.IndexOf("</td>"))
-                parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 38)
-                interactionRow.ci = parsingString.Substring(0, parsingString.IndexOf("</td>"))
-                regressionResults.interactionOddsRatios.Add(interactionRow)
-                trindex = parsingString.IndexOf("<tr>")
-            End While
-        End If
+		Dim interactionindex As Int16
+		interactionindex = logistic.IndexOf("Interaction</strong>")
+		If (interactionindex > 0) Then
+			regressionResults.interactionOddsRatios = New List(Of InteractionRow)
+			Dim parsingString As String
+			parsingString = logistic.Substring(interactionindex + 20)
+			parsingString = parsingString.Substring(parsingString.IndexOf("Confidence Limits</strong>") + 36)
+			Dim trindex As Int16
+			trindex = parsingString.IndexOf("<tr>")
+			While (trindex >= 0)
+				Dim interactionRow As InteractionRow
+				parsingString = parsingString.Substring(parsingString.IndexOf("<strong>") + 8)
+				interactionRow.interactionName = parsingString.Substring(0, parsingString.IndexOf("</strong>"))
+				parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 39)
+				interactionRow.oddsRatio = parsingString.Substring(0, parsingString.IndexOf("</td>"))
+				parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 38)
+				interactionRow.ninetyFivePercent = parsingString.Substring(0, parsingString.IndexOf("</td>"))
+				parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 38)
+				interactionRow.ci = parsingString.Substring(0, parsingString.IndexOf("</td>"))
+				regressionResults.interactionOddsRatios.Add(interactionRow)
+				trindex = parsingString.IndexOf("<tr>")
+			End While
+		End If
 
-        Return regressionResults
+		Return regressionResults
 
-    End Function
+	End Function
 
-    Private Sub CreateSettings(ByVal inputVariableList As Dictionary(Of String, String))
+	Public Function LogisticRegression(ByVal inputVariableList As Dictionary(Of String, String), ByVal dataTable As DataTable) As LogisticRegressionResults
+
+		currentTable = dataTable
+
+		CreateSettings(inputVariableList)
+
+		Dim logistic As String
+		Dim errorMessage As String
+		errorMessage = String.Empty
+
+		Dim regressionResults As New LogisticRegressionResults
+		regressionResults.errorMessage = String.Empty
+
+		If GetRawData(errorMessage) = False Then
+			regressionResults.errorMessage = errorMessage
+			Return regressionResults 'Exit Function
+		End If
+
+		Dim lintConditional As Integer
+		Dim lintweight As Integer
+		Dim lstrError As String
+
+		Dim ldblFirstLikelihood As Double
+		Dim ldblScore As Double
+
+		lstrError = String.Empty
+
+		mMatrixlikelihood = New EIMatrix()
+		If Len(mstrWeightVar) > 0 Then
+			lintweight = 1
+		End If
+		If Len(mstrMatchVar) > 0 Then
+			lintConditional = 1
+		End If
+		mboolFirst = True
+
+		mMatrixlikelihood.MaximizeLikelihood(0 + NumRows, 0 + NumColumns, DataArray, lintweight + lintConditional + 1, NumColumns - (lintweight + lintConditional + 1), 0 + mlngIter, mdblToler, mdblConv, False)
+
+		If mMatrixlikelihood.GetConvergence = True Then
+			If (mMatrixlikelihood.getError(lstrError) = False) Then
+				logistic = CreateOutputString(mMatrixlikelihood.getFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, mMatrixlikelihood.getScore)
+				'TODO: Re-enable later? 'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
+			Else
+				'            Err.Raise vbObjectError, , lstrError
+				regressionResults.errorMessage = lstrError
+				Return regressionResults 'Exit Function
+			End If
+		Else
+			' if convergence with inital estimate fails, then
+			' try with initial estimate of 0
+
+			' remember these so we can calculate the score and
+			' the likelihood ratio later...
+			ldblFirstLikelihood = mMatrixlikelihood.getFirstLikelihood
+			ldblScore = mMatrixlikelihood.getScore
+
+			mMatrixlikelihood = New EIMatrix
+			If Len(mstrWeightVar) > 0 Then
+				lintweight = 1
+			End If
+			If Len(mstrMatchVar) > 0 Then
+				lintConditional = 1
+			End If
+			mboolFirst = True
+
+			' redo regression with inital estimate of 0
+			mMatrixlikelihood.MaximizeLikelihood(0 + NumRows, 0 + NumColumns, DataArray, lintweight + lintConditional + 1, NumColumns - (lintweight + lintConditional + 1), 0 + mlngIter, mdblToler, mdblConv, True)
+
+			'Check the error status
+			If (mMatrixlikelihood.getError(lstrError) = False) Then
+				'output results
+				logistic = CreateOutputString(ldblFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, ldblScore)
+				'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
+			Else
+				regressionResults.errorMessage = lstrError
+				Return regressionResults 'Exit Function
+			End If
+
+		End If
+
+		'Results(0,0)
+
+		regressionResults.variables = New List(Of VariableRow)
+
+		Dim lvarCoeff(8, UBound(mMatrixlikelihood.GetCoefficients)) As Object
+		lvarCoeff = VB6.CopyArray(Results(1, 0))
+
+		For i = 0 To UBound(mMatrixlikelihood.GetCoefficients)
+
+			Dim variableRow As VariableRow
+			variableRow.variableName = lvarCoeff(0, i).ToString()
+			If lvarCoeff(1, i).ToString().Equals("*") = True Then
+				variableRow.oddsRatio = -99999
+				variableRow.ninetyFivePercent = -99999
+				variableRow.ci = -99999
+			Else
+				variableRow.oddsRatio = lvarCoeff(1, i)
+				variableRow.ninetyFivePercent = lvarCoeff(2, i).ToString()
+				variableRow.ci = lvarCoeff(3, i).ToString()
+			End If
+			variableRow.coefficient = lvarCoeff(4, i).ToString()
+			variableRow.se = lvarCoeff(5, i).ToString()
+			variableRow.Z = lvarCoeff(6, i).ToString()
+			variableRow.P = lvarCoeff(7, i).ToString()
+
+			regressionResults.variables.Add(variableRow)
+
+		Next
+
+		Dim lvarStats(2, 4) As Object
+		lvarStats = VB6.CopyArray(Results(1, 1))
+
+		regressionResults.iterations = lvarStats(1, 1)
+		regressionResults.convergence = lvarStats(0, 0)
+		regressionResults.finalLikelihood = lvarStats(1, 2)
+		regressionResults.casesIncluded = lvarStats(1, 3)
+
+		Dim lvarTests(3, 1) As Object
+		lvarTests = VB6.CopyArray(Results(1, 2))
+
+		regressionResults.scoreStatistic = lvarTests(1, 0)
+		regressionResults.scoreDF = lvarTests(2, 0)
+		regressionResults.scoreP = lvarTests(3, 0)
+
+		regressionResults.LRStatistic = lvarTests(1, 1)
+		regressionResults.LRDF = lvarTests(2, 1)
+		regressionResults.LRP = lvarTests(3, 1)
+
+		Dim interactionindex As Int16
+		interactionindex = logistic.IndexOf("Interaction</strong>")
+		If (interactionindex > 0) Then
+			regressionResults.interactionOddsRatios = New List(Of InteractionRow)
+			Dim parsingString As String
+			parsingString = logistic.Substring(interactionindex + 20)
+			parsingString = parsingString.Substring(parsingString.IndexOf("Confidence Limits</strong>") + 36)
+			Dim trindex As Int16
+			trindex = parsingString.IndexOf("<tr>")
+			While (trindex >= 0)
+				Dim interactionRow As InteractionRow
+				parsingString = parsingString.Substring(parsingString.IndexOf("<strong>") + 8)
+				interactionRow.interactionName = parsingString.Substring(0, parsingString.IndexOf("</strong>"))
+				parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 39)
+				interactionRow.oddsRatio = parsingString.Substring(0, parsingString.IndexOf("</td>"))
+				parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 38)
+				interactionRow.ninetyFivePercent = parsingString.Substring(0, parsingString.IndexOf("</td>"))
+				parsingString = parsingString.Substring(parsingString.IndexOf("</td><td") + 38)
+				interactionRow.ci = parsingString.Substring(0, parsingString.IndexOf("</td>"))
+				regressionResults.interactionOddsRatios.Add(interactionRow)
+				trindex = parsingString.IndexOf("<tr>")
+			End While
+		End If
+
+		Return regressionResults
+
+	End Function
+
+	Private Sub CreateSettings(ByVal inputVariableList As Dictionary(Of String, String))
 
         Dim dist As New statlib
         dist = New statlib()
@@ -1163,135 +1319,330 @@ NoContrast:
         Next
     End Function
 
-    Private Function UnConditional(ByRef lintOffset As Integer, ByRef ldblaDataArray(,) As Double, ByRef ldblaJacobian(,) As Double, ByRef ldblaB() As Double, ByRef ldblaF() As Double, ByRef nRows As Integer) As Double
-        Dim x() As Double
-        'UPGRADE_WARNING: Lower bound of array x was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
-        ReDim x(UBound(ldblaB))
+	Private Function UnConditional(ByRef lintOffset As Integer, ByRef ldblaDataArray(,) As Double, ByRef ldblaJacobian(,) As Double, ByRef ldblaB() As Double, ByRef ldblaF() As Double, ByRef nRows As Integer) As Double
+		Dim x() As Double
+		'UPGRADE_WARNING: Lower bound of array x was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim x(UBound(ldblaB))
 
-        Dim ldblIthLikelihood As Double
-        Dim ldblIthContribution As Double
-        Dim ithcontribution As Double
-        Dim ldblweight As Double
+		Dim ldblIthLikelihood As Double
+		Dim ldblIthContribution As Double
+		Dim ithcontribution As Double
+		Dim ldblweight As Double
 
-        Dim i As Integer
-        Dim j As Integer
-        Dim k As Integer
+		Dim i As Integer
+		Dim j As Integer
+		Dim k As Integer
 
-        ldblweight = 1
+		ldblweight = 1
 
-        For i = 0 To nRows - 1
-            'Load x's
-            'For the constant term,  where it is always one
-            For j = 0 To UBound(x)
-                x(j) = ldblaDataArray(i, j + lintOffset)
-            Next
+		For i = 0 To nRows - 1
+			'Load x's
+			'For the constant term,  where it is always one
+			For j = 0 To UBound(x)
+				x(j) = ldblaDataArray(i, j + lintOffset)
+			Next
 
-            If lintOffset = 2 Then
-                ldblweight = ldblaDataArray(i, 1)
-            End If
-            'Now X's are loaded...
-            'Compute the ith likelihood function
-            ldblIthLikelihood = 0
-            For j = 0 To UBound(x)
-                ldblIthLikelihood = ldblIthLikelihood + x(j) * ldblaB(j)
-            Next
-            ldblIthLikelihood = 1 / (1 + System.Math.Exp(-ldblIthLikelihood))
-            If (ldblaDataArray(i, 0) = 0) Then
-                ldblIthContribution = 1 - ldblIthLikelihood
-            Else
-                ldblIthContribution = ldblIthLikelihood
-            End If
+			If lintOffset = 2 Then
+				ldblweight = ldblaDataArray(i, 1)
+			End If
+			'Now X's are loaded...
+			'Compute the ith likelihood function
+			ldblIthLikelihood = 0
+			For j = 0 To UBound(x)
+				ldblIthLikelihood = ldblIthLikelihood + x(j) * ldblaB(j)
+			Next
+			ldblIthLikelihood = 1 / (1 + System.Math.Exp(-ldblIthLikelihood))
+			If (ldblaDataArray(i, 0) = 0) Then
+				ldblIthContribution = 1 - ldblIthLikelihood
+			Else
+				ldblIthContribution = ldblIthLikelihood
+			End If
 
-            For k = 0 To UBound(x)
-                If ldblaDataArray(i, 0) > 0 Then
-                    ldblaF(k) = ldblaF(k) + (1 - ldblIthLikelihood) * x(k) * ldblweight
-                Else
-                    ldblaF(k) = ldblaF(k) + (0 - ldblIthLikelihood) * x(k) * ldblweight
-                End If
+			For k = 0 To UBound(x)
+				If ldblaDataArray(i, 0) > 0 Then
+					ldblaF(k) = ldblaF(k) + (1 - ldblIthLikelihood) * x(k) * ldblweight
+				Else
+					ldblaF(k) = ldblaF(k) + (0 - ldblIthLikelihood) * x(k) * ldblweight
+				End If
 
-                For j = 0 To UBound(x)
-                    ldblaJacobian(j, k) = ldblaJacobian(j, k) + (x(k) * x(j) * (1 - ldblIthLikelihood) * ldblIthLikelihood) * ldblweight
-                Next
-            Next
+				For j = 0 To UBound(x)
+					ldblaJacobian(j, k) = ldblaJacobian(j, k) + (x(k) * x(j) * (1 - ldblIthLikelihood) * ldblIthLikelihood) * ldblweight
+				Next
+			Next
 
-            'Multiply to get the likelihood
-            UnConditional = UnConditional + System.Math.Log(ldblIthContribution) * ldblweight
-        Next
-        UnConditional = UnConditional
+			'Multiply to get the likelihood
+			UnConditional = UnConditional + System.Math.Log(ldblIthContribution) * ldblweight
+		Next
+		UnConditional = UnConditional
 
-    End Function
+	End Function
 
-    
-    'Likelihood Callback
-    Private Sub mMatrixlikelihood_CalcLikelihood(ByRef lintOffset As Integer, ByRef ldblA As System.Array, ByRef ldblaB As System.Array, ByRef ldblaJacobian As System.Array, ByRef ldblaF As System.Array, ByRef nRows As Integer, ByRef likelihood As Double, ByRef strError As String, ByRef booStartAtZero As Boolean) Handles mMatrixlikelihood.CalcLikelihood
-        Dim i As Integer
-        Dim k As Boolean
+	Private Function UnConditionalLB(ByRef lintOffset As Integer, ByRef ldblaDataArray(,) As Double, ByRef ldblaJacobian(,) As Double, ByRef ldblaB() As Double, ByRef ldblaF() As Double, ByRef nRows As Integer) As Double
+		Dim x() As Double
+		'UPGRADE_WARNING: Lower bound of array x was changed from 1 to 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="0F1C9BE1-AF9D-476E-83B1-17D43BECFF20"'
+		ReDim x(UBound(ldblaB))
 
-        'for the constant term
-        Dim ncases As Double
-        Dim nrecs As Double
+		Dim ldblIthLikelihood As Double
+		Dim ldblIthContribution As Double
+		Dim ithcontribution As Double
+		Dim ldblweight As Double
 
-        ' added by Eric Fontaine 07/28/03: a value of "" means no error
-        strError = ""
+		Dim ysubi As Double
 
-        'if we are in the first likelihood loop
-        'set up the constant terms
-        If mboolFirst = True And mboolIntercept = True Then
+		Dim i As Integer
+		Dim j As Integer
+		Dim k As Integer
 
-            mboolFirst = False
-            ncases = 0
-            'count the records and observed failures
-            For i = 0 To UBound(ldblA, 1)
-                If Len(mstrWeightVar) > 0 Then
-                    If ldblA(i, 0) = 1 Then
+		ldblweight = 1
 
-                        ncases = ncases + ldblA(i, lintOffset)
-                    End If
-                    nrecs = nrecs + ldblA(i, lintOffset)
-                Else
-                    If ldblA(i, 0) = 1 Then
-                        ncases = ncases + 1
-                    End If
-                    nrecs = nrecs + 1
-                End If
-            Next i
-            'fix the nrecs
-            'nrecs = nrecs - 1
-            'if it is conditional the constant term does not exist
-            If Len(mstrMatchVar) > 0 Then
+		For i = 0 To nRows - 1
+			'Load x's
+			'For the constant term,  where it is always one
+			For j = 0 To UBound(x)
+				x(j) = ldblaDataArray(i, j + lintOffset)
+			Next
 
-            Else
-                'Check for log(0) and division by 0
-                If ncases <> 0 And nrecs - ncases <> 0 Then
+			If lintOffset = 2 Then
+				ldblweight = ldblaDataArray(i, 1)
+			End If
+			'Now X's are loaded...
+			'Compute the ith likelihood function
+			ldblIthLikelihood = 0
+			For j = 0 To UBound(x)
+				ldblIthLikelihood = ldblIthLikelihood + x(j) * ldblaB(j)
+			Next
+			ldblIthLikelihood = System.Math.Exp(ldblIthLikelihood)
+			If (ldblaDataArray(i, 0) = 0) Then
+				ldblIthContribution = 1 - ldblIthLikelihood
+			Else
+				ldblIthContribution = ldblIthLikelihood
+			End If
 
-                    ' added start at zero by Eric Fontaine 06/14/04
-                    If booStartAtZero Then
-                        ldblaB(UBound(ldblaB)) = 0
-                    Else
-                        ldblaB(UBound(ldblaB)) = System.Math.Log(ncases / (nrecs - ncases))
-                    End If
+			For k = 0 To UBound(x)
+				ysubi = 0.0
+				If ldblaDataArray(i, 0) > 0 Then
+					ldblaF(k) = ldblaF(k) + (1 - 0) * x(k) * ldblweight
+					ysubi = 1.0
+				Else
+					ldblaF(k) = ldblaF(k) + ((0 - ldblIthLikelihood) / (1 - ldblIthLikelihood)) * x(k) * ldblweight
+				End If
 
-                Else
-                    If ncases = 0 Then
-                        ' modified by Eric Fontaine 07/28/03: return an error
-                        strError = "<tlt>Dependent variable contains no cases</tlt>"
-                        Exit Sub
-                    Else
-                        'mmatrixlikelihood.
-                        ' modified by Eric Fontaine 07/28/03: return an error
-                        strError = "<tlt>Dependent variable contains no controls</tlt>"
-                        Exit Sub
-                    End If
-                End If
-            End If
-        End If
+				For j = 0 To UBound(x)
+					ldblaJacobian(j, k) = ldblaJacobian(j, k) + ((1.0 - ysubi) * x(k) * x(j) * (1 / (1 - ldblIthLikelihood) ^ 2.0) * ldblIthLikelihood) * ldblweight
+				Next
+			Next
 
-        'Choose Conditional or Unconditional
-        If Len(mstrMatchVar) > 0 Then
-            likelihood = Conditional(lintOffset, ldblA, ldblaJacobian, ldblaB, ldblaF, nRows)
-        Else
-            likelihood = UnConditional(lintOffset, ldblA, ldblaJacobian, ldblaB, ldblaF, nRows)
-        End If
+			'Multiply to get the likelihood
+			UnConditionalLB = UnConditionalLB + System.Math.Log(ldblIthContribution) * ldblweight
+		Next
+		UnConditionalLB = UnConditionalLB
 
-    End Sub
+	End Function
+
+	Private Function GetStartValues(ByRef ldblaDataArray(,) As Double, ByRef ldblaB() As Double) As List(Of Double)
+		Dim datamatrix(UBound(ldblaDataArray), 2 + UBound(ldblaB)) As Double
+		Dim inputVariableListForLinear As Dictionary(Of String, String)
+		Dim dtforlinear As DataTable
+		dtforlinear = New DataTable()
+		inputVariableListForLinear = New Dictionary(Of String, String)
+		inputVariableListForLinear("logy") = "dependvar"
+		dtforlinear.Columns.Add("logy", GetType(Double))
+		inputVariableListForLinear("wt") = "weightvar"
+		dtforlinear.Columns.Add("wt", GetType(Double))
+		inputVariableListForLinear("intercept") = "true"
+		inputVariableListForLinear("includemissing") = "false"
+		inputVariableListForLinear("p") = "0.95"
+		For i = 0 To UBound(ldblaB) - 1
+			'inputVariableListForLinear(Results(1, 0)(0, i)) = "unsorted"
+			inputVariableListForLinear(mStrAMatrixLabels(i)) = "unsorted"
+			'dtforlinear.Columns.Add("x" + Str(i).Trim(), GetType(Double))
+			'dtforlinear.Columns.Add(Results(1, 0)(0, i), GetType(Double))
+			dtforlinear.Columns.Add(mStrAMatrixLabels(i), GetType(Double))
+		Next
+		For i = 0 To UBound(ldblaDataArray)
+			Dim datarow(2 + UBound(ldblaB)) As Double
+			datarow(0) = 0
+			Dim rowforlinear As DataRow = dtforlinear.NewRow()
+			For j = 0 To 1 + UBound(ldblaB)
+				datarow(1 + j) = ldblaDataArray(i, j)
+			Next
+			Dim y As Double
+			y = 0.9 * datarow(1) + 0.1 * (1 - datarow(1))
+			datarow(0) = System.Math.Log(y)
+			datarow(1) = y / (1 - y)
+			rowforlinear("logy") = datarow(0)
+			rowforlinear("wt") = datarow(1)
+			For j = 0 To UBound(datarow) - 1
+				datamatrix(i, j) = datarow(j)
+				If j > 1 Then
+					'rowforlinear("x" + Str(j - 2).Trim()) = datamatrix(i, j)
+					'rowforlinear(Results(1, 0)(0, j - 2)) = datamatrix(i, j)
+					rowforlinear(mStrAMatrixLabels(j - 2)) = datamatrix(i, j)
+				End If
+			Next
+			dtforlinear.Rows.Add(rowforlinear)
+		Next
+		Dim eilr As StatisticsRepository.LinearRegression
+		eilr = New StatisticsRepository.LinearRegression
+		Dim linearResultsForStartValues As LinearRegression.LinearRegressionResults
+		linearResultsForStartValues = eilr.LinearRegression(inputVariableListForLinear, dtforlinear)
+
+		GetStartValues = New List(Of Double)
+		For i = 0 To linearResultsForStartValues.variables.Count - 1
+			GetStartValues.Add(linearResultsForStartValues.variables(i).coefficient)
+		Next
+
+	End Function
+
+
+	'Likelihood Callback
+	Private Sub mMatrixlikelihood_CalcLikelihood(ByRef lintOffset As Integer, ByRef ldblA As System.Array, ByRef ldblaB As System.Array, ByRef ldblaJacobian As System.Array, ByRef ldblaF As System.Array, ByRef nRows As Integer, ByRef likelihood As Double, ByRef strError As String, ByRef booStartAtZero As Boolean) Handles mMatrixlikelihood.CalcLikelihood
+		Dim i As Integer
+		Dim k As Boolean
+
+		'for the constant term
+		Dim ncases As Double
+		Dim nrecs As Double
+
+		' added by Eric Fontaine 07/28/03: a value of "" means no error
+		strError = ""
+
+		'if we are in the first likelihood loop
+		'set up the constant terms
+		If mboolFirst = True And mboolIntercept = True Then
+
+			mboolFirst = False
+			ncases = 0
+			'count the records and observed failures
+			For i = 0 To UBound(ldblA, 1)
+				If Len(mstrWeightVar) > 0 Then
+					If ldblA(i, 0) = 1 Then
+
+						ncases = ncases + ldblA(i, lintOffset)
+					End If
+					nrecs = nrecs + ldblA(i, lintOffset)
+				Else
+					If ldblA(i, 0) = 1 Then
+						ncases = ncases + 1
+					End If
+					nrecs = nrecs + 1
+				End If
+			Next i
+			'fix the nrecs
+			'nrecs = nrecs - 1
+			'if it is conditional the constant term does not exist
+			If Len(mstrMatchVar) > 0 Then
+
+			Else
+				'Check for log(0) and division by 0
+				If ncases <> 0 And nrecs - ncases <> 0 Then
+
+					' added start at zero by Eric Fontaine 06/14/04
+					If booStartAtZero Then
+						ldblaB(UBound(ldblaB)) = 0
+					Else
+						ldblaB(UBound(ldblaB)) = System.Math.Log(ncases / (nrecs - ncases))
+					End If
+
+				Else
+					If ncases = 0 Then
+						' modified by Eric Fontaine 07/28/03: return an error
+						strError = "<tlt>Dependent variable contains no cases</tlt>"
+						Exit Sub
+					Else
+						'mmatrixlikelihood.
+						' modified by Eric Fontaine 07/28/03: return an error
+						strError = "<tlt>Dependent variable contains no controls</tlt>"
+						Exit Sub
+					End If
+				End If
+			End If
+		End If
+
+		'Choose Conditional or Unconditional
+		If Len(mstrMatchVar) > 0 Then
+			likelihood = Conditional(lintOffset, ldblA, ldblaJacobian, ldblaB, ldblaF, nRows)
+		Else
+			likelihood = UnConditional(lintOffset, ldblA, ldblaJacobian, ldblaB, ldblaF, nRows)
+		End If
+
+	End Sub
+
+	'Likelihood Callback
+	Private Sub mMatrixlikelihood_CalcLikelihoodLB(ByRef lintOffset As Integer, ByRef ldblA As Array, ByRef ldblaB As Array, ByRef ldblaJacobian As Array, ByRef ldblaF As Array, ByRef nRows As Integer, ByRef likelihood As Double, ByRef strError As String, ByRef booStartAtZero As Boolean) Handles mMatrixlikelihood.CalcLikelihoodLB
+		Dim i As Integer
+		Dim k As Boolean
+
+		'for the constant term
+		Dim ncases As Double
+		Dim nrecs As Double
+
+		' added by Eric Fontaine 07/28/03: a value of "" means no error
+		strError = ""
+
+		'if we are in the first likelihood loop
+		'set up the constant terms
+		If mboolFirst = True And mboolIntercept = True Then
+
+			mboolFirst = False
+			ncases = 0
+			'count the records and observed failures
+			For i = 0 To UBound(ldblA, 1)
+				If Len(mstrWeightVar) > 0 Then
+					If ldblA(i, 0) = 1 Then
+
+						ncases = ncases + ldblA(i, lintOffset)
+					End If
+					nrecs = nrecs + ldblA(i, lintOffset)
+				Else
+					If ldblA(i, 0) = 1 Then
+						ncases = ncases + 1
+					End If
+					nrecs = nrecs + 1
+				End If
+			Next i
+			'fix the nrecs
+			'nrecs = nrecs - 1
+			'if it is conditional the constant term does not exist
+			If Len(mstrMatchVar) > 0 Then
+
+			Else
+				'Check for log(0) and division by 0
+				If ncases <> 0 And nrecs - ncases <> 0 Then
+
+					' added start at zero by Eric Fontaine 06/14/04
+					If booStartAtZero Then
+						ldblaB(UBound(ldblaB)) = 0
+					Else
+						ldblaB(UBound(ldblaB)) = System.Math.Log(ncases / nrecs)
+						Dim startValues As List(Of Double)
+						startValues = GetStartValues(ldblA, ldblaB)
+						For sv = 0 To UBound(ldblaB)
+							ldblaB(sv) = startValues(sv)
+						Next
+					End If
+
+				Else
+					If ncases = 0 Then
+						' modified by Eric Fontaine 07/28/03: return an error
+						strError = "<tlt>Dependent variable contains no cases</tlt>"
+						Exit Sub
+					Else
+						'mmatrixlikelihood.
+						' modified by Eric Fontaine 07/28/03: return an error
+						strError = "<tlt>Dependent variable contains no controls</tlt>"
+						Exit Sub
+					End If
+				End If
+			End If
+		End If
+
+		'Choose Conditional or Unconditional
+		If False Then
+			likelihood = Conditional(lintOffset, ldblA, ldblaJacobian, ldblaB, ldblaF, nRows)
+		Else
+			likelihood = UnConditionalLB(lintOffset, ldblA, ldblaJacobian, ldblaB, ldblaF, nRows)
+		End If
+
+	End Sub
 End Class
