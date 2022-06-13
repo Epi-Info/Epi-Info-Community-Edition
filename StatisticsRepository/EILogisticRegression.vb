@@ -1455,7 +1455,7 @@ NoContrast:
 		For i = 0 To UBound(ldblaB) - 1
 			'inputVariableListForLinear(Results(1, 0)(0, i)) = "unsorted"
 			If mStrAMatrixLabels(i).Contains(" * ") Then
-				inputVariableListForLinear(mStrAMatrixLabels(i)) = "term"
+				inputVariableListForLinear(mStrAMatrixLabels(i).Replace(" * ", "*")) = "term"
 			Else
 				inputVariableListForLinear(mStrAMatrixLabels(i)) = "unsorted"
 			End If
