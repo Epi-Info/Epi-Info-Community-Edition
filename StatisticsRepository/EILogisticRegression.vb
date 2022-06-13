@@ -1454,7 +1454,11 @@ NoContrast:
 		inputVariableListForLinear("p") = "0.95"
 		For i = 0 To UBound(ldblaB) - 1
 			'inputVariableListForLinear(Results(1, 0)(0, i)) = "unsorted"
-			inputVariableListForLinear(mStrAMatrixLabels(i)) = "unsorted"
+			If mStrAMatrixLabels(i).Contains(" * ") Then
+				inputVariableListForLinear(mStrAMatrixLabels(i)) = "term"
+			Else
+				inputVariableListForLinear(mStrAMatrixLabels(i)) = "unsorted"
+			End If
 			'dtforlinear.Columns.Add("x" + Str(i).Trim(), GetType(Double))
 			'dtforlinear.Columns.Add(Results(1, 0)(0, i), GetType(Double))
 			dtforlinear.Columns.Add(mStrAMatrixLabels(i), GetType(Double))
