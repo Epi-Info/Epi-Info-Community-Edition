@@ -401,7 +401,7 @@ namespace EpiDashboard
 
 							if (inputVariableList.ContainsKey("Logit"))
 								results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
-							else if (inputVariableList.ContainsKey("Log"))
+							else if (inputVariableList.ContainsKey("Log (For Evaluation)"))
 								results.regressionResults = logisticRegression.LogBinomialRegression(inputVariableList, regressTable);
 
 							results.casesIncluded = results.regressionResults.casesIncluded;
@@ -595,7 +595,15 @@ namespace EpiDashboard
                 txtIterationsLabel.Text ="Iterations:";
                 txtFinalLogLabel.Text = "Final -2*Log-Likelihood:";
                 txtCasesIncludedLabel.Text = "Cases Included:";
-            }
+				if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log (For Evaluation)"))
+				{
+					txtFinalLogLabel.Text = "Final Log-Likelihood:";
+					results.finalLikelihood *= -0.5;
+					txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
+					grdParameters.Visibility = System.Windows.Visibility.Collapsed;
+				}
+
+			}
 
             HideConfigPanel();
         }
@@ -623,7 +631,13 @@ namespace EpiDashboard
             grdRegress.Children.Add(txtVarHeader);
 
             TextBlock txtOddsHeader = new TextBlock();
+			headerPanel.Text = "Logistic Regression";
             txtOddsHeader.Text = "Odds Ratio";
+			if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log (For Evaluation)"))
+			{
+				txtOddsHeader.Text = "Risk Ratio";
+				headerPanel.Text = "Log-Binomial Regression (For Evaluation Only)";
+			}
             txtOddsHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtOddsHeader, 0);
             Grid.SetColumn(txtOddsHeader, 1);
