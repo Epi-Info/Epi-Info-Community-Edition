@@ -934,10 +934,17 @@ namespace EpiDashboard
                     Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
 
                     List<string> allGroupFields = DashboardHelper.GetAllGroupsAsList();
+					List<string> CRGFields = new List<string>();
+
+					bool useCRG = false;
+					if (useCRG)
+					{
+						CRGFields.Add(crosstabParameters.ColumnNames[0]);
+					}
 
                     //if (GadgetOptions.MainVariableNames != null && GadgetOptions.MainVariableNames.Count > 0)
                     if (crosstabParameters.ColumnNames[0] != null && crosstabParameters.ColumnNames.Count > 0 &&
-                        !(allGroupFields.Contains(crosstabParameters.ColumnNames[0])))
+                        !(allGroupFields.Contains(crosstabParameters.ColumnNames[0]) || CRGFields.Contains(crosstabParameters.ColumnNames[0])))
                     {
                         Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
                         CrosstabParameters newOptions = new CrosstabParameters(crosstabParameters);
