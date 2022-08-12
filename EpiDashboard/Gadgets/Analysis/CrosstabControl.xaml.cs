@@ -1023,15 +1023,13 @@ namespace EpiDashboard
 									for (int rv = 1; rv < kvp.Key.Rows.Count; rv++)
 									{
 										DataTable kvpKey = kvp.Key.Copy();
-										DataRow[] keydrs = kvpKey.Select();
-										DataRow dr0 = keydrs[0];
-										DataRow dri = keydrs[rv];
-										kvpKey.Rows.Clear();
-										kvpKey.Rows.Add(dr0);
-										kvpKey.Rows.Add(dri);
-										stratifiedFrequencyTables.Add(kvp.Key, kvp.Value);
+										for (int rtd = kvpKey.Rows.Count - 1; rtd > rv; rtd--)
+											kvpKey.Rows[rtd].Delete();
+										for (int rtd = kvpKey.Rows.Count - 2; rtd > 0; rtd--)
+											kvpKey.Rows[rtd].Delete();
+										stratifiedFrequencyTables.Add(kvpKey, kvp.Value);
 									}
-									stratifiedFrequencyTables.Add(kvp.Key, kvp.Value);
+									//stratifiedFrequencyTables.Add(kvp.Key, kvp.Value);
 								}
 							}
 						}
