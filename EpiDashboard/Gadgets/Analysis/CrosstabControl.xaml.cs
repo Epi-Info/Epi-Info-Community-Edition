@@ -936,7 +936,7 @@ namespace EpiDashboard
                     List<string> allGroupFields = DashboardHelper.GetAllGroupsAsList();
 					List<string> CRGFields = new List<string>();
 
-					bool useCRG = false;
+					bool useCRG = true;
 					if (useCRG)
 					{
 						CRGFields.Add(crosstabParameters.ColumnNames[0]);
@@ -999,8 +999,45 @@ namespace EpiDashboard
                             }
                         }
                         runGroup = true;
-                    }
-                    else
+					}
+					else if (CRGFields.Contains(crosstabParameters.ColumnNames[0]))
+					{
+						Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = new Dictionary<DataTable, List<DescriptiveStatistics>>();
+
+						//foreach (string variableName in DashboardHelper.GetVariablesInGroup(GadgetOptions.MainVariableName))
+						foreach (string variableName in CRGFields)
+						{
+							if (!allGroupFields.Contains(variableName) && DashboardHelper.TableColumnNames.ContainsKey(variableName))
+							{
+								//                              GadgetParameters newOptions = new GadgetParameters(GadgetOptions);
+								CrosstabParameters newOptions = new CrosstabParameters(crosstabParameters);
+								//newOptions.MainVariableNames = null;
+								//newOptions.MainVariableName = variableName;
+								newOptions.ColumnNames[0] = null;
+								newOptions.ColumnNames[0] = variableName;
+
+								grpTables = DashboardHelper.GenerateFrequencyTable(newOptions);
+
+								foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> kvp in grpTables)
+								{
+									for (int rv = 1; rv < kvp.Key.Rows.Count; rv++)
+									{
+										DataTable kvpKey = kvp.Key.Copy();
+										DataRow[] keydrs = kvpKey.Select();
+										DataRow dr0 = keydrs[0];
+										DataRow dri = keydrs[rv];
+										kvpKey.Rows.Clear();
+										kvpKey.Rows.Add(dr0);
+										kvpKey.Rows.Add(dri);
+										stratifiedFrequencyTables.Add(kvp.Key, kvp.Value);
+									}
+									stratifiedFrequencyTables.Add(kvp.Key, kvp.Value);
+								}
+							}
+						}
+						runGroup = true;
+					}
+					else
                     {
                         //                      stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(GadgetOptions/*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
                         stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(crosstabParameters/*, freqVar, weightVar, stratas, crosstabVar, useAllPossibleValues, sortHighLow, includeMissing, false*/);
