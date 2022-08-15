@@ -60,6 +60,8 @@
 
                     <TextBlock x:Name="tblockExposureField" HorizontalAlignment="Left" TextAlignment="Center" Text="Exposure:" Margin="0,5,0,0" TextWrapping="Wrap" />
                     <ComboBox x:Name="cbxExposureField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxExposureField_SelectionChanged" />
+                    <TextBlock x:Name="tblockCRGField" HorizontalAlignment="Left" TextAlignment="Center" Text="Use Common Reference Value:" Margin="0,5,0,0" TextWrapping="Wrap" />
+                    <CheckBox x:Name="checkCRG" HorizontalAlignment="Left" Click="checkCRG_Click" />
                     <StackPanel Height="12" />
                     <TextBlock x:Name="tblockOutcomeField" HorizontalAlignment="Left" TextAlignment="Center" Text="Outcome:" Margin="0,5,0,0"  TextWrapping="Wrap" />
                     <ComboBox x:Name="cbxOutcomeField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxOutcomeField_SelectionChanged" />

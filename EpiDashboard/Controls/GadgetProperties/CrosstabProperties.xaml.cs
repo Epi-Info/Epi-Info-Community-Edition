@@ -394,6 +394,14 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 cbxExposureField.SelectedItem = Parameters.ColumnNames[0];
             }
+			try
+			{
+				checkCRG.IsChecked = Parameters.UseCRG;
+			}
+			catch (Exception crgex)
+			{
+
+			}
             cbxOutcomeField.SelectedItem = Parameters.CrosstabVariableName;
             cbxFieldWeight.SelectedItem = Parameters.WeightVariableName;
             lbxFieldStrata.MaxHeight = lbxFieldStrata.MaxHeight + (System.Windows.SystemParameters.PrimaryScreenHeight - 868.0);
@@ -972,5 +980,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             e.Handled = !Util.IsWholeNumber(e.Text);
             base.OnPreviewTextInput(e);
         }
-    }
+
+		private void checkCRG_Click(object sender, RoutedEventArgs e)
+		{
+			Parameters.UseCRG = ((CheckBox)sender).IsChecked.Value;
+		}
+	}
 }

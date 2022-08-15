@@ -936,7 +936,15 @@ namespace EpiDashboard
                     List<string> allGroupFields = DashboardHelper.GetAllGroupsAsList();
 					List<string> CRGFields = new List<string>();
 
-					bool useCRG = true;
+					bool useCRG = false;
+					try
+					{
+						useCRG = crosstabParameters.UseCRG;
+					}
+					catch (Exception crgex)
+					{
+
+					}
 					if (useCRG)
 					{
 						CRGFields.Add(crosstabParameters.ColumnNames[0]);

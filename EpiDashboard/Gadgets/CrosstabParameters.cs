@@ -31,12 +31,13 @@ namespace EpiDashboard
         public bool OutcomeSwap { get; set; }
         public bool ExposureSwap { get; set; }
         public bool DisplayChiSq { get; set; }
-        
+		public bool UseCRG { get; set; }
 
-        //public FrequencyParametersBase fpbParameters { get; set; }
-        //public GadgetParametersBase gpbParameters { get; set; }
 
-        public CrosstabParameters()
+		//public FrequencyParametersBase fpbParameters { get; set; }
+		//public GadgetParametersBase gpbParameters { get; set; }
+
+		public CrosstabParameters()
             : base()
         {
             GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_CROSSTABULATION; ;
