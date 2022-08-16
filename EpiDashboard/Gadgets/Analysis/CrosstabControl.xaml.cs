@@ -3158,6 +3158,9 @@ namespace EpiDashboard
                 crosstabVarElement.InnerText = crosstabParameters.CrosstabVariableName.ToString();
                 element.AppendChild(crosstabVarElement);
             }
+			XmlElement checkCRGElement = doc.CreateElement("checkCRG");
+			checkCRGElement.InnerText = crosstabParameters.UseCRG.ToString();
+			element.AppendChild(checkCRGElement);
 
             //if(GadgetOptions.StrataVariableNames.Count == 1) 
             //{
@@ -3501,6 +3504,11 @@ namespace EpiDashboard
                         //cbxOutcomeField.Text = child.InnerText.Replace("&lt;", "<");
                         ((CrosstabParameters)Parameters).CrosstabVariableName = child.InnerText.Replace("&lt;", "<");
                         break;
+					case "checkcrg":
+						bool usecrg = false;
+						Boolean.TryParse(child.InnerText, out usecrg);
+						((CrosstabParameters)Parameters).UseCRG = usecrg;
+						break;
                     case "stratavariable":
                         //cbxFieldStrata.Text = child.InnerText.Replace("&lt;", "<");
                         //if (!string.IsNullOrEmpty(child.InnerText))
