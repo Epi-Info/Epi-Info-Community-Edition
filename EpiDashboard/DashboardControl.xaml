@@ -311,7 +311,7 @@
                             <Controls:GadgetMenuItem x:Name="mnuLinear" Header="Linear Regression" IsEnabled="True" GadgetType="EpiDashboard.LinearRegressionControl" Click="mnuGadgetMenuItem_Click" />
                             <Controls:GadgetMenuItem x:Name="mnuLogistic" Header="Logistic Regression" IsEnabled="True" GadgetType="EpiDashboard.LogisticRegressionControl" Click="mnuGadgetMenuItem_Click" />
                             <MenuItem x:Name="mnuCox" Header="Cox Proportional Hazards" IsEnabled="False" Visibility="Collapsed"/>
-                            <MenuItem x:Name="mnuKM" Header="Kaplan Meier Survival" IsEnabled="False" Visibility="Collapsed"/>
+                            <Controls:GadgetMenuItem x:Name="mnuKM" Header="Kaplan Meier Survival" IsEnabled="True" GadgetType="EpiDashboard.KaplanMeierControl" Click="mnuGadgetMenuItem_Click" />
                             <Controls:GadgetMenuItem x:Name="mnuCSFrequency" Header="Complex Sample Frequencies" IsEnabled="True" GadgetType="EpiDashboard.ComplexSampleFrequencyControl" Click="mnuGadgetMenuItem_Click" />
                             <Controls:GadgetMenuItem x:Name="mnuCSMeans" Header="Complex Sample Means" IsEnabled="True" GadgetType="EpiDashboard.ComplexSampleMeansControl" Click="mnuGadgetMenuItem_Click" />
                             <Controls:GadgetMenuItem x:Name="mnuCSTables" Header="Complex Sample Tables" IsEnabled="True" GadgetType="EpiDashboard.ComplexSampleTablesControl" Click="mnuGadgetMenuItem_Click" />
