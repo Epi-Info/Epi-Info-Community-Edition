@@ -659,6 +659,8 @@ namespace EpiDashboard.Controls.GadgetProperties
         private void CheckVariables()
         {
             lbxFieldStrata.IsEnabled = true;
+			checkCRG.IsEnabled = true;
+			tblockCRGField.Opacity = 1;
             if (cbxExposureField.SelectedIndex >= 0)
             {
                 string exposureFieldName = cbxExposureField.SelectedItem.ToString();
@@ -668,6 +670,9 @@ namespace EpiDashboard.Controls.GadgetProperties
                     {
                         lbxFieldStrata.IsEnabled = false;
                         lbxFieldStrata.SelectedItems.Clear();
+						checkCRG.IsEnabled = false;
+						checkCRG.IsChecked = false;
+						tblockCRGField.Opacity = 0.5;
                         //btnValueMappings.IsEnabled = true;
                     }
                     else if (DashboardHelper.IsColumnText(exposureFieldName) || DashboardHelper.IsColumnNumeric(exposureFieldName))
