@@ -70,7 +70,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label x:Name="tblockOutcomeVariable" Grid.Column="0" Grid.Row="0">
-                            <TextBlock TextWrapping="Wrap" x:Name="tblockOutcomeVariableTxt">Outcome:</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockOutcomeVariableTxt">Censored Variable:</TextBlock>
                         </Label>
                         <!--ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" /-->
                         <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="216" HorizontalAlignment="Left" Height="28" />

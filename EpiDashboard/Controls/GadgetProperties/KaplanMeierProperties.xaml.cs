@@ -80,7 +80,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             #region Translation
 
-            lblConfigExpandedTitleTxt.Text= DashboardSharedStrings.GADGET_CONFIG_TITLE_LOGISTIC_REGRESSION;
+            lblConfigExpandedTitleTxt.Text= "Kaplan-Meier Survival Analysis";
             tbtnVariables.Title = DashboardSharedStrings.GADGET_TABBUTTON_VARIABLES;
             tbtnVariables.Description = DashboardSharedStrings.GADGET_TABDESC_LOGISTIC_REGRESSION;
             tbtnDisplay.Title = DashboardSharedStrings.GADGET_TABBUTTON_DISPLAY;
@@ -88,7 +88,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             tbtnFilters.Title = DashboardSharedStrings.GADGET_TABBUTTON_FILTERS;
             tbtnFilters.Description = DashboardSharedStrings.GADGET_TABDESC_FILTERS;
             tblockPanelVariablesTxt.Text= DashboardSharedStrings.GADGET_PANELHEADER_VARIABLES;
-            tblockOutcomeVariableTxt.Text= DashboardSharedStrings.GADGET_OUTCOME_VARIABLE;
+            tblockOutcomeVariableTxt.Text= "Censored Variable:";
             tblockWeightVariableTxt.Text= DashboardSharedStrings.GADGET_WEIGHT_VARIABLE;
             checkboxIncludeMissingTxt.Text= DashboardSharedStrings.GADGET_INCLUDE_MISSING;
             tblockPanelSortingTxt.Text= DashboardSharedStrings.GADGET_PANELHEADER_SORTING;

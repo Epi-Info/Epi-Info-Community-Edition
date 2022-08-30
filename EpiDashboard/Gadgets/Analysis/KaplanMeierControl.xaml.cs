@@ -631,7 +631,7 @@ namespace EpiDashboard
             grdRegress.Children.Add(txtVarHeader);
 
             TextBlock txtOddsHeader = new TextBlock();
-			headerPanel.Text = "Logistic Regression";
+			headerPanel.Text = "Kaplan-Meier";
             txtOddsHeader.Text = "Odds Ratio";
 			if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log (For Evaluation)"))
 			{
@@ -1351,7 +1351,7 @@ namespace EpiDashboard
         /// <returns>string</returns>
         public override string ToString()
         {
-            return "Logistic Regression Gadget";
+            return "Kaplan-Meier Gadget";
         }
         #endregion
 
