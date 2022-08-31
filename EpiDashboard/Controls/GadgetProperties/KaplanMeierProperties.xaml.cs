@@ -383,8 +383,15 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxConf.Items.Add("99%");
             cbxConf.SelectedIndex = 1;
 
+			cbxFieldUncensored.ItemsSource = null;
+			cbxFieldUncensored.Items.Clear();
+
 			cbxFieldLink.ItemsSource = null;
 			cbxFieldLink.Items.Clear();
+
+			cbxFieldUncensored.Items.Add("0");
+			cbxFieldUncensored.Items.Add("1");
+			cbxFieldUncensored.SelectedIndex = 0;
 
 			cbxFieldLink.Items.Add("Logit");
 			cbxFieldLink.Items.Add("Log (For Evaluation)");
