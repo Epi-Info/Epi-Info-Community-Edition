@@ -1056,9 +1056,11 @@ namespace EpiDashboard
 
             try
             {
-                inputVariableList.Add(cbxFieldOutcome.SelectedItem.ToString(), "dependvar");
+                inputVariableList.Add("censoredvar", cbxFieldOutcome.SelectedItem.ToString());
+				inputVariableList.Add("uncensoredvalue", cbxFieldUncensored.SelectedItem.ToString());
+				inputVariableList.Add(cbxFieldOutcome.SelectedItem.ToString(), "dependvar");
 
-                if (cbxFieldWeight.SelectedIndex >= 0 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
+				if (cbxFieldWeight.SelectedIndex >= 0 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
                 {
                     inputVariableList.Add(cbxFieldWeight.SelectedItem.ToString(), "weightvar");
                 }
@@ -1083,8 +1085,9 @@ namespace EpiDashboard
 
                 if (cbxFieldMatch.SelectedIndex >= 0 && !string.IsNullOrEmpty(cbxFieldMatch.SelectedItem.ToString()))
                 {
-                    inputVariableList.Add(cbxFieldMatch.SelectedItem.ToString(), "MatchVar");
-                }
+                    inputVariableList.Add("timevar", cbxFieldMatch.SelectedItem.ToString());
+					inputVariableList.Add(cbxFieldMatch.SelectedItem.ToString(), "MatchVar");
+				}
 
                 double p = 0.95;
                 if (!string.IsNullOrEmpty(cbxConf.SelectedItem.ToString()))
@@ -1115,7 +1118,8 @@ namespace EpiDashboard
                     if (!string.IsNullOrEmpty(s))
                     {
                         inputVariableList.Add(s, "unsorted");
-                    }
+						inputVariableList.Add("treatmentvar", s);
+					}
                 }
 
                 foreach (string s in lbxInteractionTerms.Items)
