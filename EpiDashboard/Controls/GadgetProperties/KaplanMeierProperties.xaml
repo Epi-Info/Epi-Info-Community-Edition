@@ -83,11 +83,11 @@
                         </Label>
                         <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cbxFieldLink" Width="108" HorizontalAlignment="Left" Height="28" Visibility="Visible" />
                         <Label x:Name="tblockIndependentVariables" Grid.Column="0" Grid.Row="2">
-                            <TextBlock TextWrapping="Wrap" x:Name="tblockIndependentVariablesTxt">Independent Variables:</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockIndependentVariablesTxt">Test Group Variable:</TextBlock>
                         </Label>
                         <ComboBox Grid.Column="0" Grid.Row="3" x:Name="cbxFields" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFields_SelectionChanged" />
                         <!--ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" /-->
-                        <ListBox Grid.Column="0" Grid.Row="4" SelectionMode="Extended" Name="lbxOtherFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="216" SelectionChanged="lbxOtherFields_SelectionChanged" MouseDoubleClick="lbxOtherFields_MouseDoubleClick" />
+                        <ListBox Grid.Column="0" Grid.Row="4" SelectionMode="Extended" Name="lbxOtherFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="28" Width="216" SelectionChanged="lbxOtherFields_SelectionChanged" MouseDoubleClick="lbxOtherFields_MouseDoubleClick" />
                         <Grid Grid.Row="4" Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
@@ -125,7 +125,7 @@
                 </ListView.GroupStyle>
             </ListView>-->
                         <Label x:Name="tblockMatchVariable" Grid.Column="0" Grid.Row="5">
-                            <TextBlock TextWrapping="Wrap" x:Name="tblockMatchVariableTxt">Match Variable:</TextBlock>
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockMatchVariableTxt">Time Variable:</TextBlock>
                         </Label>
                         <!--ComboBox x:Name="cbxFieldCrosstab" Width="216" HorizontalAlignment="Left" Height="28" /-->
                         <ComboBox Grid.Column="0" Grid.Row="6" x:Name="cbxFieldMatch" Width="216" HorizontalAlignment="Left" Height="28" />

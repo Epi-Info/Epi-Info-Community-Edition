@@ -118,8 +118,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             tblockDummyVariables.Text = DashboardSharedStrings.GADGET_DUMMY_VARIABLES;
             tblockInteractionTerms.Text = DashboardSharedStrings.GADGET_INTERACTION_TERMS;
             checkboxNoInterceptTxt.Text= DashboardSharedStrings.GADGET_NO_INTERCEPT;
-            tblockIndependentVariablesTxt.Text= DashboardSharedStrings.GADGET_INDEPENDENT_VARIABLES;
-            tblockMatchVariableTxt.Text= DashboardSharedStrings.GADGET_MATCH_VARIABLE;
+            tblockIndependentVariablesTxt.Text= "Test Group Variable:";
+            tblockMatchVariableTxt.Text= "Time Variable:";
             btnRunTxt.Text= DashboardSharedStrings.BUTTON_OK;
             btnCancelTxt.Text= DashboardSharedStrings.BUTTON_CANCEL;
 
@@ -227,6 +227,7 @@ namespace EpiDashboard.Controls.GadgetProperties
         {
             if (cbxFields.SelectedIndex > -1)
             {
+				lbxOtherFields.Items.Clear();
                 if (!lbxOtherFields.Items.Contains(cbxFields.SelectedItem.ToString()))
                 {
                     lbxOtherFields.Items.Add(cbxFields.SelectedItem.ToString());
