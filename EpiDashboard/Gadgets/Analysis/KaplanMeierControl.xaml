@@ -196,6 +196,7 @@
                                 <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Weight:" Margin="0,5,0,0" Grid.Row="2" Grid.Column="0" />
                                 <ComboBox x:Name="cbxFieldWeight" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="3" Grid.Column="0" MaxWidth="120" Width="120" />
                                 <ComboBox x:Name="cbxFieldLink" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="3" Grid.Column="0" MaxWidth="120" Width="120" />
+                                <ComboBox x:Name="cbxFieldUncensored" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="3" Grid.Column="0" MaxWidth="120" Width="120" />
 
                                 <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Text="Match variable:" Margin="0,5,0,0" Grid.Row="4" Grid.Column="0" />
                                 <ComboBox x:Name="cbxFieldMatch" HorizontalAlignment="Left" SelectedIndex="0" Grid.Row="5" Grid.Column="0" MaxWidth="120" Width="120" />

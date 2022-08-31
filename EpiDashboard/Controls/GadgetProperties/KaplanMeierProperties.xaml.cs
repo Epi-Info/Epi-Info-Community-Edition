@@ -146,8 +146,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             lrc.lbxOtherFields = this.lbxOtherFields;
             lrc.lbxDummyTerms = this.lbxDummyTerms;
             lrc.cbxFieldWeight = this.cbxFieldWeight;
+			lrc.cbxFieldUncensored = this.cbxFieldUncensored;
 			lrc.cbxFieldLink = this.cbxFieldLink;
-            lrc.checkboxNoIntercept = this.checkboxNoIntercept;
+			lrc.checkboxNoIntercept = this.checkboxNoIntercept;
             lrc.checkboxIncludeMissing = this.checkboxIncludeMissing;
             lrc.cbxFieldMatch = this.cbxFieldMatch;
             lrc.cbxConf = this.cbxConf;
@@ -400,9 +401,11 @@ namespace EpiDashboard.Controls.GadgetProperties
 			cbxFieldWeight.SelectedItem = lrc.cbxFieldWeight.SelectedItem;
             cbxFieldMatch.SelectedItem = lrc.cbxFieldMatch.SelectedItem;
             cbxConf.SelectedItem = lrc.cbxConf.SelectedItem;
+			if (lrc.cbxFieldUncensored.SelectedItem != null)
+				cbxFieldUncensored.SelectedItem = lrc.cbxFieldUncensored.SelectedItem;
 			if (lrc.cbxFieldLink.SelectedItem != null)
 				cbxFieldLink.SelectedItem = lrc.cbxFieldLink.SelectedItem;
-            checkboxNoIntercept.IsChecked = lrc.checkboxNoIntercept.IsChecked;
+			checkboxNoIntercept.IsChecked = lrc.checkboxNoIntercept.IsChecked;
             checkboxIncludeMissing.IsChecked = lrc.checkboxIncludeMissing.IsChecked;
             checkboxShowANOVA.IsChecked = Parameters.ShowANOVA;
             cbxFieldPrecision.SelectedIndex = Convert.ToInt32(Parameters.Precision);
