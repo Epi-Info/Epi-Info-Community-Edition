@@ -144,6 +144,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             lrc = (EpiDashboard.KaplanMeierControl)Gadget;
             lrc.cbxFieldOutcome = this.cbxFieldOutcome;
             lrc.lbxOtherFields = this.lbxOtherFields;
+			lrc.cbxFields = this.cbxFields;
             lrc.lbxDummyTerms = this.lbxDummyTerms;
             lrc.cbxFieldWeight = this.cbxFieldWeight;
 			lrc.cbxFieldUncensored = this.cbxFieldUncensored;
@@ -438,6 +439,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
 
             cbxFieldOutcome.SelectedItem = lrc.cbxFieldOutcome.SelectedItem;
+			cbxFields.SelectedItem = lrc.cbxFields.SelectedItem;
             //checkboxShowAllListValues.IsChecked = Parameters.ShowAllListValues;
             //checkboxShowListLabels.IsChecked = Parameters.ShowListLabels;
             //checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;

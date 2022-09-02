@@ -342,6 +342,7 @@ namespace EpiDashboard
 
                 foreach (KeyValuePair<string, string> kvp in inputVariableList)
                 {
+					if (kvp.Value == null) continue;
                     if (kvp.Value.ToLowerInvariant().Equals("unsorted") || kvp.Value.ToLowerInvariant().Equals("dependvar") || kvp.Value.ToLowerInvariant().Equals("weightvar") || kvp.Value.ToLowerInvariant().Equals("matchvar"))
                     {
                         columnNames.Add(kvp.Key);
@@ -396,6 +397,15 @@ namespace EpiDashboard
                         else
                         {
                             StatisticsRepository.LogisticRegression logisticRegression = new StatisticsRepository.LogisticRegression();
+							StatisticsRepository.EIKaplanMeierSurvival kmSurvival = new StatisticsRepository.EIKaplanMeierSurvival();
+							IAnalysisStatisticContext contexxt = new Object() as IAnalysisStatisticContext;
+							kmSurvival.contextInputVariableList = inputVariableList;
+							Dictionary<string, string> contextSetProperties = new Dictionary<string, string>();
+							contextSetProperties.Add("TableName", "LEUKEM210");
+							contextSetProperties.Add("CommandText", "KMSURVIVAL SURVTIME = TREATMENT * CENSORED (0) GRAPHTYPE = \"Survival Probability\"");
+							contextSetProperties.Add("BLabels", "Yes;No;Missing");
+							kmSurvival.contextSetProperties = contextSetProperties;
+							kmSurvival.Execute();
 
 //                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
 
@@ -1056,14 +1066,21 @@ namespace EpiDashboard
 
             try
             {
-                inputVariableList.Add("censoredvar", cbxFieldOutcome.SelectedItem.ToString());
-				inputVariableList.Add("uncensoredvalue", cbxFieldUncensored.SelectedItem.ToString());
+                inputVariableList.Add("censor_variable", cbxFieldOutcome.SelectedItem.ToString());
+				inputVariableList.Add("uncensored_value", cbxFieldUncensored.SelectedItem.ToString());
+				inputVariableList.Add("time_unit", null);
+				inputVariableList.Add("out_table", null);
+				inputVariableList.Add("graph_type", null);
 				inputVariableList.Add(cbxFieldOutcome.SelectedItem.ToString(), "dependvar");
 
 				if (cbxFieldWeight.SelectedIndex >= 0 && !string.IsNullOrEmpty(cbxFieldWeight.SelectedItem.ToString()))
                 {
-                    inputVariableList.Add(cbxFieldWeight.SelectedItem.ToString(), "weightvar");
+                    inputVariableList.Add("weight_variable", cbxFieldWeight.SelectedItem.ToString());
                 }
+				else
+				{
+					inputVariableList.Add("weight_variable", null);
+				}
 
                 if (checkboxNoIntercept.IsChecked == true)
                 {
@@ -1085,8 +1102,7 @@ namespace EpiDashboard
 
                 if (cbxFieldMatch.SelectedIndex >= 0 && !string.IsNullOrEmpty(cbxFieldMatch.SelectedItem.ToString()))
                 {
-                    inputVariableList.Add("timevar", cbxFieldMatch.SelectedItem.ToString());
-					inputVariableList.Add(cbxFieldMatch.SelectedItem.ToString(), "MatchVar");
+                    inputVariableList.Add("time_variable", cbxFieldMatch.SelectedItem.ToString());
 				}
 
                 double p = 0.95;
@@ -1118,7 +1134,7 @@ namespace EpiDashboard
                     if (!string.IsNullOrEmpty(s))
                     {
                         inputVariableList.Add(s, "unsorted");
-						inputVariableList.Add("treatmentvar", s);
+						inputVariableList.Add("group_variable", s);
 					}
                 }
 

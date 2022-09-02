@@ -391,65 +391,68 @@ Option Compare Text
         terms = 0
         discrete = 0
 
-        For Each kvp As KeyValuePair(Of String, String) In inputVariableList
-            If kvp.Value.ToLowerInvariant().Equals("term") Then
-                ReDim Preserve mstraTerms(terms)
-                mstraTerms(terms) = kvp.Key
-                terms = terms + 1
-            End If
+		For Each kvp As KeyValuePair(Of String, String) In inputVariableList
+			If String.IsNullOrEmpty(kvp.Value) Then
+				Continue For
+			End If
+			If kvp.Value.ToLowerInvariant().Equals("term") Then
+				ReDim Preserve mstraTerms(terms)
+				mstraTerms(terms) = kvp.Key
+				terms = terms + 1
+			End If
 
-            If kvp.Value.ToLowerInvariant().Equals("discrete") Then
-                ReDim Preserve mStrADiscrete(discrete)
-                mStrADiscrete(discrete) = kvp.Key
-                discrete = discrete + 1
+			If kvp.Value.ToLowerInvariant().Equals("discrete") Then
+				ReDim Preserve mStrADiscrete(discrete)
+				mStrADiscrete(discrete) = kvp.Key
+				discrete = discrete + 1
 
-                ReDim Preserve mstraTerms(terms)
-                mstraTerms(terms) = kvp.Key
-                terms = terms + 1
-            End If
+				ReDim Preserve mstraTerms(terms)
+				mstraTerms(terms) = kvp.Key
+				terms = terms + 1
+			End If
 
-            If kvp.Value.ToLowerInvariant().Equals("matchvar") Then
-                mstrMatchVar = kvp.Key
-            End If
+			If kvp.Value.ToLowerInvariant().Equals("matchvar") Then
+				mstrMatchVar = kvp.Key
+			End If
 
-            If kvp.Value.ToLowerInvariant().Equals("weightvar") Then
-                mstrWeightVar = kvp.Key
-            End If
+			If kvp.Value.ToLowerInvariant().Equals("weightvar") Then
+				mstrWeightVar = kvp.Key
+			End If
 
-            If kvp.Value.ToLowerInvariant().Equals("dependvar") Then
-                mstrDependVar = kvp.Key
-            End If
+			If kvp.Value.ToLowerInvariant().Equals("dependvar") Then
+				mstrDependVar = kvp.Key
+			End If
 
-            If kvp.Value.ToLowerInvariant().Equals("unsorted") Then
-                Dim type As String
-                type = currentTable.Columns(kvp.Key).DataType.ToString()
-                If Not MoreThanTwoValues(currentTable.Columns(kvp.Key)) Or type.Equals("System.String") Then
-                    ReDim Preserve mStrADiscrete(discrete)
-                    mStrADiscrete(discrete) = kvp.Key
-                    discrete = discrete + 1
-                End If
-                ReDim Preserve mstraTerms(terms)
-                mstraTerms(terms) = kvp.Key
-                terms = terms + 1
+			If kvp.Value.ToLowerInvariant().Equals("unsorted") Then
+				Dim type As String
+				type = currentTable.Columns(kvp.Key).DataType.ToString()
+				If Not MoreThanTwoValues(currentTable.Columns(kvp.Key)) Or type.Equals("System.String") Then
+					ReDim Preserve mStrADiscrete(discrete)
+					mStrADiscrete(discrete) = kvp.Key
+					discrete = discrete + 1
+				End If
+				ReDim Preserve mstraTerms(terms)
+				mstraTerms(terms) = kvp.Key
+				terms = terms + 1
 
-            End If
+			End If
 
-            If kvp.Key.ToLowerInvariant().Equals("intercept") Then
-                Dim success As Boolean
-                success = Boolean.TryParse(kvp.Value, mboolIntercept) ' TODO: Test
-            End If
+			If kvp.Key.ToLowerInvariant().Equals("intercept") Then
+				Dim success As Boolean
+				success = Boolean.TryParse(kvp.Value, mboolIntercept) ' TODO: Test
+			End If
 
-            If kvp.Key.ToLowerInvariant().Equals("p") Then
-                Dim success As Boolean
-                success = Double.TryParse(kvp.Value.ToLowerInvariant(), mdblP)
-                If success = True Then
-                    mdblC = 1 - mdblP
-                    mstrC = Str(mdblP * 100)
-                    mdblP = dist.ZFROMP(mdblC * 0.5)
-                End If
-            End If
-        Next
-    End Sub
+			If kvp.Key.ToLowerInvariant().Equals("p") Then
+				Dim success As Boolean
+				success = Double.TryParse(kvp.Value.ToLowerInvariant(), mdblP)
+				If success = True Then
+					mdblC = 1 - mdblP
+					mstrC = Str(mdblP * 100)
+					mdblP = dist.ZFROMP(mdblC * 0.5)
+				End If
+			End If
+		Next
+	End Sub
 
     Public Sub Execute() Implements EpiInfo.Plugin.IAnalysisStatistic.Execute
 

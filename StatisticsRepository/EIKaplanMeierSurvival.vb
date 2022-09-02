@@ -13,9 +13,11 @@ Public Class EIKaplanMeierSurvival
     '  MTSTransactionMode = 0   'NotAnMTSObject
     'End
     Private dataTable As DataTable
-    Public context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Public context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Public contextInputVariableList As Dictionary(Of String, String)
+	Public contextSetProperties As Dictionary(Of String, String)
 
-    Public Sub Construct(ByVal AnalysisStatisticContext As EpiInfo.Plugin.IAnalysisStatisticContext) Implements EpiInfo.Plugin.IAnalysisStatistic.Construct
+	Public Sub Construct(ByVal AnalysisStatisticContext As EpiInfo.Plugin.IAnalysisStatisticContext) Implements EpiInfo.Plugin.IAnalysisStatistic.Construct
         context = AnalysisStatisticContext
         dataTable = New DataTable
 
@@ -236,28 +238,50 @@ erroRHandler:
         mstraBLabels(0) = "False"
         mstraBLabels(1) = "True"
 
-        'Extract data from context.SetProperties
+		'Extract data from context.SetProperties
+		If context Is Nothing Then
+			If contextSetProperties.ContainsKey("Database") Then
+				mstrConnString = conConnStr & contextSetProperties("Database") & ";"
+			End If
 
-        If context.SetProperties.ContainsKey("Database") Then
-            mstrConnString = conConnStr & context.SetProperties("Database") & ";"
-        End If
+			If contextSetProperties.ContainsKey("ConnectionString") Then
+				mstrConnString = contextSetProperties("ConnectionString")
+			End If
 
-        If context.SetProperties.ContainsKey("ConnectionString") Then
-            mstrConnString = context.SetProperties("ConnectionString")
-        End If
+			If contextSetProperties.ContainsKey("TableName") Then
+				mstrTableName = contextSetProperties("TableName")
+			End If
 
-        If context.SetProperties.ContainsKey("TableName") Then
-            mstrTableName = context.SetProperties("TableName")
-        End If
+			If contextSetProperties.ContainsKey("BLabels") Then
+				Dim booleanLabels() As String
+				booleanLabels = contextSetProperties("BLabels").ToString().Split(";")
 
-        If context.SetProperties.ContainsKey("BLabels") Then
-            Dim booleanLabels() As String
-            booleanLabels = context.SetProperties("BLabels").ToString().Split(";")
+				For i = 0 To UBound(mstraboolean)
+					mstraboolean(i) = booleanLabels(i)
+				Next
+			End If
+		Else
+			If context.SetProperties.ContainsKey("Database") Then
+				mstrConnString = conConnStr & context.SetProperties("Database") & ";"
+			End If
 
-            For i = 0 To UBound(mstraboolean)
-                mstraboolean(i) = booleanLabels(i)
-            Next
-        End If
+			If context.SetProperties.ContainsKey("ConnectionString") Then
+				mstrConnString = context.SetProperties("ConnectionString")
+			End If
+
+			If context.SetProperties.ContainsKey("TableName") Then
+				mstrTableName = context.SetProperties("TableName")
+			End If
+
+			If context.SetProperties.ContainsKey("BLabels") Then
+				Dim booleanLabels() As String
+				booleanLabels = context.SetProperties("BLabels").ToString().Split(";")
+
+				For i = 0 To UBound(mstraboolean)
+					mstraboolean(i) = booleanLabels(i)
+				Next
+			End If
+		End If
 
         'If context.SetProperties.ContainsKey("ShowBaseline") Then
         '    Dim success As Boolean
@@ -298,45 +322,82 @@ erroRHandler:
         discrete = 0
         covariate = 0
 
-        'Extract data from context.InputVariableList
-        'Currently, only one group variable is accepted for "covariates"
-        'In KMSurvival, Covariates and StrataVar are used interchangeably
+		'Extract data from context.InputVariableList
+		'Currently, only one group variable is accepted for "covariates"
+		'In KMSurvival, Covariates and StrataVar are used interchangeably
 
-        mstrGroupVar = context.InputVariableList("group_variable").ToString()
-        ReDim mstraCovariates(0)
+		If Not context Is Nothing Then
+			mstrGroupVar = context.InputVariableList("group_variable").ToString()
+		ElseIf Not contextInputVariableList Is Nothing Then
+			mstrGroupVar = contextInputVariableList("group_variable").ToString()
+		End If
+		ReDim mstraCovariates(0)
         mstraCovariates(0) = mstrGroupVar
 
         ReDim mstraStrataVar(0)
         mstraStrataVar(0) = mstrGroupVar
 
-        mstrTimeVar = context.InputVariableList("time_variable").ToString()
-        'ToDo: den4: eventually, remove next ReDim when ExtendVarList added to context
-        ReDim mstraTimeDependentVar(0)
-        'mstraTimeDependentVar = context.InputVariableList("ExtendVarList").ToString().Split(";")
-        mstrCensoredVar = context.InputVariableList("censor_variable").ToString()
-        Select Case (context.InputVariableList("uncensored_value").ToString())
-            Case "(+)"
-                mstrUncensoredVal = "1"
-            Case "(-)"
-                mstrUncensoredVal = "0"
-            Case "(.)"
-                mstrUncensoredVal = String.Empty
-            Case Else
-                mstrUncensoredVal = context.InputVariableList("uncensored_value").ToString()
-        End Select
-        If Not context.InputVariableList("weight_variable") Is Nothing Then
-            mstrWeightVar = context.InputVariableList("weight_variable").ToString()
-        Else
-            mstrWeightVar = String.Empty
-        End If
+		If Not context Is Nothing Then
+			mstrTimeVar = context.InputVariableList("time_variable").ToString()
+		ElseIf Not contextInputVariableList Is Nothing Then
+			mstrTimeVar = contextInputVariableList("time_variable").ToString()
+		End If
+		'ToDo: den4: eventually, remove next ReDim when ExtendVarList added to context
+		ReDim mstraTimeDependentVar(0)
+		'mstraTimeDependentVar = context.InputVariableList("ExtendVarList").ToString().Split(";")
+		If Not context Is Nothing Then
+			mstrCensoredVar = context.InputVariableList("censor_variable").ToString()
+		ElseIf Not contextInputVariableList Is Nothing Then
+			mstrCensoredVar = contextInputVariableList("censor_variable").ToString()
+		End If
+		If Not context Is Nothing Then
+			Select Case (context.InputVariableList("uncensored_value").ToString())
+				Case "(+)"
+					mstrUncensoredVal = "1"
+				Case "(-)"
+					mstrUncensoredVal = "0"
+				Case "(.)"
+					mstrUncensoredVal = String.Empty
+				Case Else
+					mstrUncensoredVal = context.InputVariableList("uncensored_value").ToString()
+			End Select
+		ElseIf Not contextInputVariableList Is Nothing Then
+			Select Case (contextInputVariableList("uncensored_value").ToString())
+				Case "(+)"
+					mstrUncensoredVal = "1"
+				Case "(-)"
+					mstrUncensoredVal = "0"
+				Case "(.)"
+					mstrUncensoredVal = String.Empty
+				Case Else
+					mstrUncensoredVal = contextInputVariableList("uncensored_value").ToString()
+			End Select
+		End If
+		If Not context Is Nothing Then
+			If Not context.InputVariableList("weight_variable") Is Nothing Then
+				mstrWeightVar = context.InputVariableList("weight_variable").ToString()
+			Else
+				mstrWeightVar = String.Empty
+			End If
 
-        If Not context.InputVariableList("graph_type") Is Nothing Then
-            mstrGraphType = context.InputVariableList("graph_type").ToString()
-        End If
+			If Not context.InputVariableList("graph_type") Is Nothing Then
+				mstrGraphType = context.InputVariableList("graph_type").ToString()
+			End If
+		ElseIf Not contextInputVariableList Is Nothing Then
+			If Not contextInputVariableList("weight_variable") Is Nothing Then
+				mstrWeightVar = contextInputVariableList("weight_variable").ToString()
+			Else
+				mstrWeightVar = String.Empty
+			End If
+
+			If Not contextInputVariableList("graph_type") Is Nothing Then
+				mstrGraphType = contextInputVariableList("graph_type").ToString()
+			End If
+		End If
 
 
 
-    End Sub
+	End Sub
 
     Public Sub SetStratified(ByRef lstraStrata() As String, ByRef lSVarArray() As StrataVariable)
         'Dim lconRS As ADODB.Recordset
