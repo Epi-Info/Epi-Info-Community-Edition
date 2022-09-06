@@ -343,19 +343,24 @@ namespace EpiDashboard
                 foreach (KeyValuePair<string, string> kvp in inputVariableList)
                 {
 					if (kvp.Value == null) continue;
-                    if (kvp.Value.ToLowerInvariant().Equals("unsorted") || kvp.Value.ToLowerInvariant().Equals("dependvar") || kvp.Value.ToLowerInvariant().Equals("weightvar") || kvp.Value.ToLowerInvariant().Equals("matchvar"))
-                    {
-                        columnNames.Add(kvp.Key);
-                        if (!kvp.Value.ToLowerInvariant().Equals("dependvar"))
-                        {
-                            customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Key + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
-                        }
-                    }
-                    else if (kvp.Value.ToLowerInvariant().Equals("discrete"))
-                    {
-                        columnNames.Add(kvp.Key);
-                        customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Key + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
-                    }
+					if (kvp.Value.ToLowerInvariant().Equals("unsorted") || kvp.Value.ToLowerInvariant().Equals("dependvar") || kvp.Value.ToLowerInvariant().Equals("weightvar") || kvp.Value.ToLowerInvariant().Equals("matchvar"))
+					{
+						columnNames.Add(kvp.Key);
+						if (!kvp.Value.ToLowerInvariant().Equals("dependvar"))
+						{
+							customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Key + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
+						}
+					}
+					else if (kvp.Value.ToLowerInvariant().Equals("discrete"))
+					{
+						columnNames.Add(kvp.Key);
+						customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Key + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
+					}
+					else if (kvp.Key.ToLowerInvariant().Equals("time_variable"))
+					{
+						columnNames.Add(kvp.Value);
+						customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Value + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
+					}
                 }
 
                 if (includeMissing)
@@ -402,9 +407,11 @@ namespace EpiDashboard
 							kmSurvival.contextInputVariableList = inputVariableList;
 							Dictionary<string, string> contextSetProperties = new Dictionary<string, string>();
 							contextSetProperties.Add("TableName", "LEUKEM210");
-							contextSetProperties.Add("CommandText", "KMSURVIVAL SURVTIME = TREATMENT * CENSORED (0) GRAPHTYPE = \"Survival Probability\"");
+							contextSetProperties.Add("CommandText", "KMSURVIVAL TIMEVAR = TESTVAR * CENSOREDVAR (0) GRAPHTYPE = \"Survival Probability\"");
 							contextSetProperties.Add("BLabels", "Yes;No;Missing");
 							kmSurvival.contextSetProperties = contextSetProperties;
+							kmSurvival.contextColumns = regressTable.Columns;
+							kmSurvival.contextDataTable = regressTable;
 							kmSurvival.Execute();
 
 //                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
