@@ -414,24 +414,22 @@ namespace EpiDashboard
 							kmSurvival.contextDataTable = regressTable;
 							kmSurvival.Execute();
 
-//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
+							Array KMResultsArray = (Array)kmSurvival.ResultArray;
+							Array KMRA1 = (Array)KMResultsArray.GetValue(1,1);
+							Double.TryParse(KMRA1.GetValue(0, 2).ToString(), out results.scoreDF);
+							Double.TryParse(KMRA1.GetValue(0, 3).ToString(), out results.scoreP);
+							Double.TryParse(KMRA1.GetValue(0, 1).ToString(), out results.scoreStatistic);
+							Double.TryParse(KMRA1.GetValue(1, 2).ToString(), out results.LRDF);
+							Double.TryParse(KMRA1.GetValue(1, 3).ToString(), out results.LRP);
+							Double.TryParse(KMRA1.GetValue(1, 1).ToString(), out results.LRStatistic);
 
-							if (inputVariableList.ContainsKey("Logit"))
-								results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
-							else if (inputVariableList.ContainsKey("Log (For Evaluation)"))
-								results.regressionResults = logisticRegression.LogBinomialRegression(inputVariableList, regressTable);
+							//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
 
-							results.casesIncluded = results.regressionResults.casesIncluded;
+							results.casesIncluded = 0;
                             results.convergence = results.regressionResults.convergence;
-                            results.finalLikelihood = results.regressionResults.finalLikelihood;
-                            results.iterations = results.regressionResults.iterations;
-                            results.LRDF = results.regressionResults.LRDF;
-                            results.LRP = results.regressionResults.LRP;
-                            results.LRStatistic = results.regressionResults.LRStatistic;
-                            results.scoreDF = results.regressionResults.scoreDF;
-                            results.scoreP = results.regressionResults.scoreP;
-                            results.scoreStatistic = results.regressionResults.scoreStatistic;
-                            results.errorMessage = results.regressionResults.errorMessage.Replace("<tlt>", string.Empty).Replace("</tlt>", string.Empty);
+                            results.finalLikelihood = 0;
+                            results.iterations = 0;
+                            results.errorMessage = "";
                             results.variables = new List<VariableRow>();
 
                             if (!string.IsNullOrEmpty(results.errorMessage))
