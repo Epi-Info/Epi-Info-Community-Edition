@@ -73,7 +73,7 @@
                             <TextBlock TextWrapping="Wrap" x:Name="tblockOutcomeVariableTxt">Censored Variable:</TextBlock>
                         </Label>
                         <!--ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" /-->
-                        <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="216" HorizontalAlignment="Left" Height="28" />
+                        <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxOutcome_SelectionChanged" />
                         <Label x:Name="tblockWeightVariable" Grid.Column="0" Grid.Row="5">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockWeightVariableTxt">Weight:</TextBlock>
                         </Label>

@@ -223,9 +223,33 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 btnMakeDummyTxt.Text= "Make Interaction";
             }
-        }
+		}
 
-        void cbxFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+
+		private List<string> GetValueLists(string fieldName)
+		{
+			if (!String.IsNullOrEmpty(fieldName))
+			{
+				List<string> distinctValueList = new List<string>();
+				if (DashboardHelper.GetAllGroupsAsList().Contains(fieldName))
+				{
+					foreach (string var in DashboardHelper.GetVariablesInGroup(fieldName))
+					{
+						distinctValueList = DashboardHelper.GetDistinctValuesAsList(var);
+					}
+					return distinctValueList;
+				}
+				else
+				{
+					distinctValueList = DashboardHelper.GetDistinctValuesAsList(fieldName);
+					return distinctValueList;
+				}
+			}
+			return new List<string>();
+		}
+
+		void cbxFields_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbxFields.SelectedIndex > -1)
             {
@@ -391,8 +415,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 			cbxFieldLink.ItemsSource = null;
 			cbxFieldLink.Items.Clear();
 
-			cbxFieldUncensored.Items.Add("0");
-			cbxFieldUncensored.Items.Add("1");
+			cbxFieldUncensored.Items.Add("");
 			cbxFieldUncensored.SelectedIndex = 0;
 
 			cbxFieldLink.Items.Add("Logit");
@@ -548,5 +571,16 @@ namespace EpiDashboard.Controls.GadgetProperties
             //    }
             //}
         }
-    }
+
+		private void cbxOutcome_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			List<string> censoredValues = GetValueLists(cbxFieldOutcome.SelectedValue.ToString());
+			cbxFieldUncensored.Items.Clear();
+			cbxFieldUncensored.Items.Add("");
+			foreach (string s in censoredValues)
+			{
+				cbxFieldUncensored.Items.Add(s);
+			}
+		}
+	}
 }
