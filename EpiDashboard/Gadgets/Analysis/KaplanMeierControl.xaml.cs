@@ -553,15 +553,15 @@ namespace EpiDashboard
 
         private void RenderRegressionResults(RegressionResults results)
         {
-            txtConvergence.Visibility = Visibility.Visible;
-            txtIterations.Visibility = Visibility.Visible;
-            txtFinalLog.Visibility = Visibility.Visible;
-            txtCasesIncluded.Visibility = Visibility.Visible;
+            txtConvergence.Visibility = Visibility.Collapsed;
+            txtIterations.Visibility = Visibility.Collapsed;
+            txtFinalLog.Visibility = Visibility.Collapsed;
+            txtCasesIncluded.Visibility = Visibility.Collapsed;
 
-            txtConvergenceLabel.Visibility = Visibility.Visible;
-            txtIterationsLabel.Visibility = Visibility.Visible;
-            txtFinalLogLabel.Visibility = Visibility.Visible;
-            txtCasesIncludedLabel.Visibility = Visibility.Visible;
+            txtConvergenceLabel.Visibility = Visibility.Collapsed;
+            txtIterationsLabel.Visibility = Visibility.Collapsed;
+            txtFinalLogLabel.Visibility = Visibility.Collapsed;
+            txtCasesIncludedLabel.Visibility = Visibility.Collapsed;
 
             grdRegress.Visibility = System.Windows.Visibility.Visible;
             grdIOR.Visibility = System.Windows.Visibility.Visible;
