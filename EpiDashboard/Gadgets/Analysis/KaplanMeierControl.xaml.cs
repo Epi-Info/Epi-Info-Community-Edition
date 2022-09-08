@@ -1449,7 +1449,7 @@ namespace EpiDashboard
             }
 
             htmlBuilder.AppendLine("<p class=\"gadgetOptions\"><small>");
-            htmlBuilder.AppendLine("<em>Outcome variable:</em> <strong>" + cbxFieldOutcome.Text + "</strong>");
+            htmlBuilder.AppendLine("<em>Censored variable:</em> <strong>" + cbxFieldOutcome.Text + "</strong>");
             htmlBuilder.AppendLine("<br />");
 
             if (cbxFieldWeight.SelectedIndex >= 0)
@@ -1459,7 +1459,7 @@ namespace EpiDashboard
             }
             if (cbxFieldMatch.SelectedIndex >= 0)
             {
-                htmlBuilder.AppendLine("<em>Match variable:</em> <strong>" + cbxFieldMatch.Text + "</strong>");
+                htmlBuilder.AppendLine("<em>Time variable:</em> <strong>" + cbxFieldMatch.Text + "</strong>");
                 htmlBuilder.AppendLine("<br />");
             }
 
@@ -1470,7 +1470,7 @@ namespace EpiDashboard
             }
             varList = varList.TrimEnd(',');
 
-            htmlBuilder.AppendLine("<em>Co-variates:</em> <strong>" + varList + "</strong>");
+            htmlBuilder.AppendLine("<em>Test variable:</em> <strong>" + varList + "</strong>");
             htmlBuilder.AppendLine("<br />");
 
             varList = string.Empty;
@@ -1480,9 +1480,6 @@ namespace EpiDashboard
             }
             varList = varList.TrimEnd(',');
 
-            htmlBuilder.AppendLine("<em>Dummy variables:</em> <strong>" + varList + "</strong>");
-            htmlBuilder.AppendLine("<br />");
-
             varList = string.Empty;
             foreach (string s in this.lbxInteractionTerms.Items)
             {
@@ -1490,11 +1487,6 @@ namespace EpiDashboard
             }
             varList = varList.TrimEnd(',');
 
-            htmlBuilder.AppendLine("<em>Interaction terms:</em> <strong>" + varList + "</strong>");
-            htmlBuilder.AppendLine("<br />");
-
-            htmlBuilder.AppendLine("<em>Include missing:</em> <strong>" + checkboxIncludeMissing.IsChecked.ToString() + "</strong>");
-            htmlBuilder.AppendLine("<br />");
             htmlBuilder.AppendLine("</small></p>");
 
             if (!string.IsNullOrEmpty(CustomOutputDescription))
@@ -1512,70 +1504,6 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("<p><small><strong>" + txtFilterString.Text + "</strong></small></p> ");
             }
 
-                htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
-                htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                //htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
-
-                foreach (UIElement control in grdRegress.Children)
-                {
-                    if (control is TextBlock)
-                    {
-                        int rowNumber = Grid.GetRow(control);
-                        int columnNumber = Grid.GetColumn(control);
-
-                        string tableDataTagOpen = "<td>";
-                        string tableDataTagClose = "</td>";
-
-                        if (rowNumber == 0)
-                        {
-                            tableDataTagOpen = "<th>";
-                            tableDataTagClose = "</th>";
-                        }
-
-                        if (columnNumber == 0)
-                        {
-                            htmlBuilder.AppendLine("<tr>");
-                        }
-                        if (columnNumber == 0 && rowNumber > 0)
-                        {
-                            tableDataTagOpen = "<td class=\"value\">";
-                        }
-
-                        string value = ((TextBlock)control).Text;
-                        string formattedValue = value;
-
-                        htmlBuilder.AppendLine(tableDataTagOpen + formattedValue + tableDataTagClose);
-
-                        if (columnNumber >= grdRegress.ColumnDefinitions.Count - 1)
-                        {
-                            htmlBuilder.AppendLine("</tr>");
-                        }
-                    }
-                }
-
-                htmlBuilder.AppendLine("</table>");
-
-                htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
-                htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <td>" + txtConvergenceLabel.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtConvergence.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <td>" + txtIterationsLabel.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtIterations.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <td>" + txtFinalLogLabel.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtFinalLog.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <td>" + txtCasesIncludedLabel.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtCasesIncluded.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine("</table>");
-
-
                 htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
                 htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
                 htmlBuilder.AppendLine(" <tr>");
@@ -1585,13 +1513,13 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("  <th>P-Value</th>");
                 htmlBuilder.AppendLine(" </tr>");
                 htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Score</th>");
+                htmlBuilder.AppendLine("  <th>Log-Rank Statistic</th>");
                 htmlBuilder.AppendLine("  <td>" + txtScoreStatistic.Text + "</td>");
                 htmlBuilder.AppendLine("  <td>" + txtScoreDF.Text + "</td>");
                 htmlBuilder.AppendLine("  <td>" + txtScoreP.Text + "</td>");
                 htmlBuilder.AppendLine(" </tr>");
                 htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Likelihood Ratio</th>");
+                htmlBuilder.AppendLine("  <th>Wilcoxon</th>");
                 htmlBuilder.AppendLine("  <td>" + txtLStatistic.Text + "</td>");
                 htmlBuilder.AppendLine("  <td>" + txtLDF.Text + "</td>");
                 htmlBuilder.AppendLine("  <td>" + txtLP.Text + "</td>");
