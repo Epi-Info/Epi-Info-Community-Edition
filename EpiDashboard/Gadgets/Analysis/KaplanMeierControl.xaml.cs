@@ -1177,6 +1177,7 @@ namespace EpiDashboard
         public override XmlNode Serialize(XmlDocument doc)
         {
             string dependVar = string.Empty;
+			string uncensoredValue = string.Empty;
             string weightVar = string.Empty;
             string matchVar = string.Empty;
             string pvalue = string.Empty;
@@ -1186,6 +1187,9 @@ namespace EpiDashboard
             {
                 dependVar = cbxFieldOutcome.SelectedItem.ToString();
             }
+
+			if (cbxFieldUncensored.SelectedItem != null)
+				uncensoredValue = cbxFieldUncensored.SelectedItem.ToString();
 
             if (cbxFieldWeight.SelectedItem != null)
             {
@@ -1227,6 +1231,7 @@ namespace EpiDashboard
             "<mainVariable>" + dependVar + "</mainVariable>" +
             "<weightVariable>" + weightVar + "</weightVariable>" +
             "<matchVariable>" + matchVar + "</matchVariable>" +
+			"<uncensoredValue>" + uncensoredValue + "</uncensoredValue>" +
             "<pvalue>" + pvalue + "</pvalue>" +
             "<intercept>" + intercept.ToString() + "</intercept>" +
             "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
@@ -1286,6 +1291,7 @@ namespace EpiDashboard
         {
             this.LoadingCombos = true;
 
+			string uncensoredValue = String.Empty;
             foreach (XmlElement child in element.ChildNodes)
             {
                 switch (child.Name.ToLowerInvariant())
@@ -1299,6 +1305,9 @@ namespace EpiDashboard
                     case "matchvariable":
                         cbxFieldMatch.Text = child.InnerText;
                         break;
+					case "uncensoredvalue":
+						uncensoredValue = child.InnerText;
+						break;
                     case "pvalue":
                         if (child.InnerText.Equals("90")) { cbxConf.SelectedIndex = 1; }
                         if (child.InnerText.Equals("95")) { cbxConf.SelectedIndex = 2; }
@@ -1313,6 +1322,11 @@ namespace EpiDashboard
                             if (covariate.Name.ToLowerInvariant().Equals("covariate"))
                             {
                                 lbxOtherFields.Items.Add(covariate.InnerText);
+								cbxFields.Text = covariate.InnerText;
+								cbxFieldUncensored.Items.Add("");
+								cbxFieldUncensored.Items.Add("0");
+								cbxFieldUncensored.Items.Add("1");
+								break;
                             }
                             if (covariate.Name.ToLowerInvariant().Equals("dummy"))
                             {
@@ -1347,9 +1361,10 @@ namespace EpiDashboard
                         }
                         break;
                 }
-            }
+			}
+			cbxFieldUncensored.Text = uncensoredValue;
 
-            foreach (XmlAttribute attribute in element.Attributes)
+			foreach (XmlAttribute attribute in element.Attributes)
             {
                 switch (attribute.Name.ToLowerInvariant())
                 {

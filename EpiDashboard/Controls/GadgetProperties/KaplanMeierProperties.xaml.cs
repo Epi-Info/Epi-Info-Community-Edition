@@ -160,7 +160,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (!String.IsNullOrEmpty(this.txtTitle.Text))
                 lrc.headerPanel.Text = this.txtTitle.Text;
             else
-                lrc.headerPanel.Text = DashboardSharedStrings.GADGET_CONFIG_TITLE_LOGISTIC_REGRESSION;
+                lrc.headerPanel.Text = "Kaplan-Meier Survival";
             this.Parameters.GadgetDescription = lrc.descriptionPanel.Text;
             this.Parameters.GadgetTitle = lrc.headerPanel.Text;
             lrc.RefreshResults();
@@ -463,6 +463,19 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             cbxFieldOutcome.SelectedItem = lrc.cbxFieldOutcome.SelectedItem;
 			cbxFields.SelectedItem = lrc.cbxFields.SelectedItem;
+			if (lrc.cbxFields.SelectedItem == null && lrc.lbxOtherFields.Items.Count > 0)
+				cbxFields.SelectedItem = lrc.lbxOtherFields.Items[0];
+			if (cbxFieldOutcome.SelectedItem != null && !String.IsNullOrEmpty(cbxFieldOutcome.SelectedItem.ToString()))
+			{
+				List<string> censoredValues = GetValueLists(cbxFieldOutcome.SelectedValue.ToString());
+				cbxFieldUncensored.Items.Clear();
+				cbxFieldUncensored.Items.Add("");
+				foreach (string s in censoredValues)
+				{
+					cbxFieldUncensored.Items.Add(s);
+				}
+			}
+			cbxFieldUncensored.SelectedValue = lrc.cbxFieldUncensored.SelectedValue;
             //checkboxShowAllListValues.IsChecked = Parameters.ShowAllListValues;
             //checkboxShowListLabels.IsChecked = Parameters.ShowListLabels;
             //checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;
