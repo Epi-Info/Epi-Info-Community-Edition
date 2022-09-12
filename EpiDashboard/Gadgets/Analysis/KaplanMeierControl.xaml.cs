@@ -1610,5 +1610,28 @@ namespace EpiDashboard
                 this.customOutputCaption = value;
             }
         }
-    }
+
+		private void xyChart_DataStructureCreated(object sender, EventArgs e)
+		{
+			ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
+			string sName = "";
+
+			if (chtParameters.StrataVariableNames.Count > 0)
+			{
+				foreach (ComponentArt.Win.DataVisualization.Charting.Series s0 in xyChart.DataSeries)
+				{
+					sName = s0.Label.Split('.')[1];
+					if (chtParameters.ShowLegendVarNames == false)
+					{
+						int index = sName.IndexOf(" = ");
+						s0.Label = sName.Substring(index + 3);
+					}
+					else
+					{
+						s0.Label = sName;
+					}
+				}
+			}
+		}
+	}
 }

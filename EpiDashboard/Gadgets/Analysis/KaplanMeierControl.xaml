@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:EpiDashboard="clr-namespace:EpiDashboard"          
     xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+    xmlns:charting="clr-namespace:ComponentArt.Win.DataVisualization.Charting;assembly=ComponentArt.Win.DataVisualization.Charting"
     Style="{DynamicResource gadgetBaseStyle}">
     <EpiDashboard:GadgetBase.Resources>
         <ResourceDictionary>
@@ -221,6 +222,37 @@
                             <Button x:Name="btnRun" Content="Run" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Click="btnRun_Click" />
                         </StackPanel>
                     </Grid>
+                    <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" DataPointSubsamplingEnabled="False" AllowFractionalPointXRange="True">
+                        <charting:XYChart.XAxisArea>
+                            <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
+                            </charting:AxisCoordinates>
+                        </charting:XYChart.XAxisArea>
+                        <charting:XYChart.Axes>
+                            <charting:Axis Id="YAxis" x:Name="yAxis" />
+                            <charting:Axis Id="XAxis" x:Name="xAxis" />
+                        </charting:XYChart.Axes>
+                        <charting:MarkerSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" />
+                        <charting:LineSeries x:Name="series1" Id="S1" XPath="X" YPath="Z" LineKind="Auto" />
+                        <!--<charting:SeriesAnnotationTracker SeriesIdsCSS="S0" />
+                            <charting:SeriesTracker SeriesId="S0" MarkerSize="6" />-->
+
+                        <!--<charting:CoordinateStripes AxisId="YAxis">
+                                <charting:CoordinateStripes.Coordinates>
+                                    <charting:NumericCoordinates x:Name="stripeCoordinates" From="30" To="40" />
+                                </charting:CoordinateStripes.Coordinates>
+                                <charting:CoordinateStripes.StripeTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#23FFB119">
+                                            <TextBlock x:Name="stripeText" Text="Warning" FontSize="26" FontWeight="Bold" FontFamily="Calibri" Foreground="#FFFFB119" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="10,0,0,0">
+									<TextBlock.Effect>
+										<DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity="0.25" />
+									</TextBlock.Effect>
+                                            </TextBlock>
+                                        </Border>
+                                    </DataTemplate>
+                                </charting:CoordinateStripes.StripeTemplate>
+                            </charting:CoordinateStripes>-->
+                    </charting:XYChart>
                 </StackPanel>
             </Grid>
         </Border>
