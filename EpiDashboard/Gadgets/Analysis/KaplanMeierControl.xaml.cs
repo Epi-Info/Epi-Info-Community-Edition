@@ -322,9 +322,91 @@ namespace EpiDashboard
             {
                 btnMakeDummy.Content = "Make Interaction";
             }
-        }
+		}
 
-        protected override void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+		private void SetChartData(List<XYChartData> dataList, NumericDataValue maxValue, NumericDataValue minValue)
+		{
+			List<RegressionChartData> regressionDataList = new List<RegressionChartData>();
+			//ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
+
+			if ((minValue != null) && (maxValue != null))
+			{
+				if (true)
+				{
+					NumericDataValue newMaxValue = new NumericDataValue();
+					newMaxValue.IndependentValue = maxValue.IndependentValue;
+					newMaxValue.DependentValue = ((decimal)0.25 * maxValue.IndependentValue) + (decimal)0.5;
+					NumericDataValue newMinValue = new NumericDataValue();
+					newMinValue.IndependentValue = minValue.IndependentValue;
+					newMinValue.DependentValue = ((decimal)0.25 * minValue.IndependentValue) + (decimal)0.5;
+
+					List<NumericDataValue> regresValues = new List<NumericDataValue>();
+					regresValues.Add(newMinValue);
+					regresValues.Add(newMaxValue);
+
+					RegressionChartData rChartData = new RegressionChartData();
+					rChartData.X = (double)newMinValue.IndependentValue;
+					rChartData.Z = (double)newMinValue.DependentValue;
+					regressionDataList.Add(rChartData);
+
+					rChartData = new RegressionChartData();
+					rChartData.X = (double)newMaxValue.IndependentValue;
+					rChartData.Z = (double)newMaxValue.DependentValue;
+					regressionDataList.Add(rChartData);
+
+					int newXminvalue = (int)newMinValue.IndependentValue;
+					int newXMaxvalue = (int)newMaxValue.IndependentValue;
+					SetXandYCoordinates(dataList, newXminvalue, newXMaxvalue);
+
+				}
+				series0.DataSource = dataList;
+				series1.DataSource = regressionDataList;
+				xyChart.Width = 800;
+				xyChart.Height = 500;
+
+			}
+		}
+
+		private void SetXandYCoordinates(List<XYChartData> dataList, int newMinXvalue, int newMaxXvalue)
+		{
+
+			//---Ei-196
+			//adds one step before
+			int remvalue = 2;
+			int value = newMinXvalue % 2;
+			if (value == 1) { remvalue = 1; };
+			xyChart.XRangeStart = newMinXvalue - remvalue;
+			remvalue = 2;
+			xyChart.XRangeEnd = newMaxXvalue + remvalue;
+
+			int Yminvalue = Int32.MaxValue;
+			int Ymaxvalue = Int32.MinValue;
+			remvalue = 0;
+			foreach (XYChartData xyc in dataList)
+			{
+				if (xyc.Y.HasValue)
+				{
+					int Tminvalue = (int)xyc.Y;
+					Yminvalue = Math.Min(Yminvalue, Tminvalue);
+					int Tmaxvalue = (int)xyc.Y;
+					Ymaxvalue = Math.Max(Ymaxvalue, Tmaxvalue);
+				}
+			}
+			value = Yminvalue % 10;
+			if (value > 0) { remvalue = value; }
+			ComponentArt.Win.DataVisualization.Charting.NumericCoordinates numy = new ComponentArt.Win.DataVisualization.Charting.NumericCoordinates();
+			numy.From = (int)Yminvalue - remvalue;
+			ComponentArt.Win.DataVisualization.Charting.AxisCoordinates ay = new ComponentArt.Win.DataVisualization.Charting.AxisCoordinates();
+			ay.Coordinates = numy;
+			ay.Visibility = System.Windows.Visibility.Visible;
+			xyChart.YAxisArea.Clear();
+			xyChart.YAxisArea.Add(ay);
+			//-- 
+		}
+
+		private delegate void SetChartDataDelegate(List<XYChartData> dataList, NumericDataValue maxValue, NumericDataValue minValue);
+
+		protected override void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             Configuration config = DashboardHelper.Config;
             Dictionary<string, string> setProperties = new Dictionary<string, string>();
@@ -471,10 +553,41 @@ namespace EpiDashboard
 									chartData.X = Convert.ToDouble(row["time"]);
 									chartData.Y = Convert.ToDouble(row["percent"]);
 									dataList.Add(chartData);
+
+									NumericDataValue currentValue = new NumericDataValue() { DependentValue = Convert.ToDecimal(row["percent"]), IndependentValue = Convert.ToDecimal(row["time"]) };
+									if (minValue == null)
+									{
+										minValue = currentValue;
+									}
+									else
+									{
+										if (currentValue.IndependentValue < minValue.IndependentValue)
+										{
+											minValue = currentValue;
+										}
+									}
+									if (maxValue == null)
+									{
+										maxValue = currentValue;
+									}
+									else
+									{
+										if (currentValue.IndependentValue > maxValue.IndependentValue)
+										{
+											maxValue = currentValue;
+										}
+									}
 								}
 							}
 
-								//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
+							DataRow[] drs = dv.Table.Select(dv.RowFilter);
+							DataTable cloneTable = dv.Table.Clone();
+							foreach (DataRow dr in drs)
+							{
+								cloneTable.ImportRow(dr);
+							}
+							this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, maxValue, minValue);
+							//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
 
 							results.casesIncluded = 0;
                             results.convergence = results.regressionResults.convergence;
