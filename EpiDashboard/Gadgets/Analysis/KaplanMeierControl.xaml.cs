@@ -182,11 +182,29 @@ namespace EpiDashboard
 
             GadgetOptions = null;
         }
-        #endregion
+		#endregion
 
-        #region Public Methods
+		private class XYChartData
+		{
+			public object X { get; set; }
+			public double? Y { get; set; }
+		}
 
-        public void ClearResults() 
+		private class RegressionChartData
+		{
+			public object X { get; set; }
+			public double Z { get; set; }
+		}
+
+		public class NumericDataValue
+		{
+			public decimal DependentValue { get; set; }
+			public decimal IndependentValue { get; set; }
+		}
+
+		#region Public Methods
+
+		public void ClearResults() 
         {
             grdRegress.Children.Clear();
             grdRegress.RowDefinitions.Clear();
@@ -422,8 +440,41 @@ namespace EpiDashboard
 							Double.TryParse(KMRA1.GetValue(1, 2).ToString(), out results.LRDF);
 							Double.TryParse(KMRA1.GetValue(1, 3).ToString(), out results.LRP);
 							Double.TryParse(KMRA1.GetValue(1, 1).ToString(), out results.LRStatistic);
+							
+							DataTable dattab = new DataTable();
+							dattab.Columns.Add("time");
+							dattab.Columns.Add("percent");
+							dattab.Columns.Add("treatment");
+							Array graphdata = (Array)KMResultsArray.GetValue(1, 0);
+							for (int pct = 0; pct < graphdata.Length / 8; pct++)
+							{
+								DataRow dr = dattab.NewRow();
+								dr[0] = graphdata.GetValue(0, pct);
+								dr[1] = graphdata.GetValue(5, pct);
+								dr[2] = graphdata.GetValue(1, pct);
+								dattab.Rows.Add(dr);
+							}
+							DataView dv = new DataView(dattab);
 
-							//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
+							List<XYChartData> dataList = new List<XYChartData>();
+
+							NumericDataValue minValue = null;
+							NumericDataValue maxValue = null;
+
+							foreach (DataRowView drv in dv)
+							{
+								DataRow row = drv.Row;
+
+								if (row["time"] != DBNull.Value && row["time"] != null && row["percent"] != DBNull.Value && row["percent"] != null)
+								{
+									XYChartData chartData = new XYChartData();
+									chartData.X = Convert.ToDouble(row["time"]);
+									chartData.Y = Convert.ToDouble(row["percent"]);
+									dataList.Add(chartData);
+								}
+							}
+
+								//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
 
 							results.casesIncluded = 0;
                             results.convergence = results.regressionResults.convergence;
