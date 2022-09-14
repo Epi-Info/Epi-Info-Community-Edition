@@ -362,9 +362,8 @@ namespace EpiDashboard
 				series0.DataSource = dataList;
 				xyChart.Width = 800;
 				xyChart.Height = 500;
+				series1.DataSource = dataList;
 				xyChart.Visibility = Visibility.Visible;
-				return;
-				series1.DataSource = regressionDataList;
 				return;
 
 			}
@@ -1780,6 +1779,7 @@ namespace EpiDashboard
 
 		private void xyChart_DataStructureCreated(object sender, EventArgs e)
 		{
+			return;
 			ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
 			string sName = "";
 
