@@ -90,18 +90,26 @@
                     <TextBlock x:Name="txtFinalLog" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="2" Grid.Column="1" Text=""/>
                     <TextBlock x:Name="txtCasesIncluded" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="3" Grid.Column="1" Text=""/>
                 </Grid>
-                <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="1" DataStructureCreated="xyChart_DataStructureCreated" DataPointSubsamplingEnabled="False" AllowFractionalPointXRange="True">
-                    <charting:XYChart.XAxisArea>
-                        <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
-                        </charting:AxisCoordinates>
-                    </charting:XYChart.XAxisArea>
-                    <charting:XYChart.Axes>
-                        <charting:Axis Id="YAxis" x:Name="yAxis" />
-                        <charting:Axis Id="XAxis" x:Name="xAxis" />
-                    </charting:XYChart.Axes>
-                    <charting:MarkerSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" />
-                    <charting:MarkerSeries x:Name="series1" Id="S1" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" />
-                </charting:XYChart>
+                <Grid SnapsToDevicePixels="True" Name="grdChart" Grid.Row="9" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Visible">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="500"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="800"/>
+                    </Grid.ColumnDefinitions>
+                    <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="0" DataStructureCreated="xyChart_DataStructureCreated" DataPointSubsamplingEnabled="False" AllowFractionalPointXRange="True">
+                        <charting:XYChart.XAxisArea>
+                            <charting:AxisCoordinates x:Name="xAxisCoordinates" Angle="0">
+                            </charting:AxisCoordinates>
+                        </charting:XYChart.XAxisArea>
+                        <charting:XYChart.Axes>
+                            <charting:Axis Id="YAxis" x:Name="yAxis" />
+                            <charting:Axis Id="XAxis" x:Name="xAxis" />
+                        </charting:XYChart.Axes>
+                        <charting:MarkerSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" />
+                        <charting:MarkerSeries x:Name="series1" Id="S1" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" />
+                    </charting:XYChart>
+                </Grid>
                 <Grid SnapsToDevicePixels="True" Name="grdParameters" Grid.Row="10" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>

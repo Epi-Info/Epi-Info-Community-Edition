@@ -360,9 +360,9 @@ namespace EpiDashboard
 
 				}
 				series0.DataSource = dataList;
+				series1.DataSource = dataList;
 				xyChart.Width = 800;
 				xyChart.Height = 500;
-				series1.DataSource = dataList;
 				xyChart.Visibility = Visibility.Visible;
 				return;
 
