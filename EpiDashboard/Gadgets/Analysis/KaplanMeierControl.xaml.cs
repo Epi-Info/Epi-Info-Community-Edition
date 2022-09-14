@@ -324,7 +324,7 @@ namespace EpiDashboard
             }
 		}
 
-		private void SetChartData(List<XYChartData> dataList, NumericDataValue maxValue, NumericDataValue minValue)
+		private void SetChartData(List<XYChartData> dataList, NumericDataValue maxValue, NumericDataValue minValue, List<int> treatmentStartIndexes)
 		{
 			List<RegressionChartData> regressionDataList = new List<RegressionChartData>();
 			//ScatterChartParameters chtParameters = (ScatterChartParameters)Parameters;
@@ -359,8 +359,19 @@ namespace EpiDashboard
 					SetXandYCoordinates(dataList, newXminvalue, newXMaxvalue);
 
 				}
-				series0.DataSource = dataList.GetRange(0, 9);
-				series1.DataSource = dataList.GetRange(9, 13);
+				if (treatmentStartIndexes != null && treatmentStartIndexes.Count > 1)
+				{
+					series0.DataSource = dataList.GetRange(0, treatmentStartIndexes[1]);
+					int series1end = dataList.Count;
+					if (treatmentStartIndexes.Count > 2)
+						series1end = treatmentStartIndexes[2];
+					series1.DataSource = dataList.GetRange(treatmentStartIndexes[1], series1end - treatmentStartIndexes[1]);
+				}
+				else
+				{
+					series0.DataSource = dataList;
+					series1.DataSource = dataList;
+				}
 				xyChart.Width = 640;
 				xyChart.Height = 400;
 				xyChart.Visibility = Visibility.Visible;
@@ -406,7 +417,7 @@ namespace EpiDashboard
 			//-- 
 		}
 
-		private delegate void SetChartDataDelegate(List<XYChartData> dataList, NumericDataValue maxValue, NumericDataValue minValue);
+		private delegate void SetChartDataDelegate(List<XYChartData> dataList, NumericDataValue maxValue, NumericDataValue minValue, List<int> treatmentStartIndexe);
 
 		protected override void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -530,6 +541,9 @@ namespace EpiDashboard
 							dattab.Columns.Add("percent");
 							dattab.Columns.Add("treatment");
 							Array graphdata = (Array)KMResultsArray.GetValue(1, 0);
+							string currentTreatment = graphdata.GetValue(1, 0).ToString();
+							List<int> treatmentStartIndexes = new List<int>();
+							treatmentStartIndexes.Add(0);
 							for (int pct = 0; pct < graphdata.Length / 8; pct++)
 							{
 								DataRow dr = dattab.NewRow();
@@ -537,6 +551,11 @@ namespace EpiDashboard
 								dr[1] = graphdata.GetValue(5, pct);
 								dr[2] = graphdata.GetValue(1, pct);
 								dattab.Rows.Add(dr);
+								if (!dr[2].ToString().Equals(currentTreatment))
+								{
+									treatmentStartIndexes.Add(pct);
+									currentTreatment = dr[2].ToString();
+								}
 							}
 							DataView dv = new DataView(dattab);
 
@@ -588,7 +607,7 @@ namespace EpiDashboard
 							{
 								cloneTable.ImportRow(dr);
 							}
-							this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, maxValue, minValue);
+							this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, maxValue, minValue, treatmentStartIndexes);
 							//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
 
 							results.casesIncluded = 0;
