@@ -359,10 +359,10 @@ namespace EpiDashboard
 					SetXandYCoordinates(dataList, newXminvalue, newXMaxvalue);
 
 				}
-				series0.DataSource = dataList;
-				series1.DataSource = dataList;
-				xyChart.Width = 800;
-				xyChart.Height = 500;
+				series0.DataSource = dataList.GetRange(0, 9);
+				series1.DataSource = dataList.GetRange(9, 13);
+				xyChart.Width = 640;
+				xyChart.Height = 400;
 				xyChart.Visibility = Visibility.Visible;
 				return;
 

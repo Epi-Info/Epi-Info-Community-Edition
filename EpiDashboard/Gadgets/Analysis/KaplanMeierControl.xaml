@@ -92,10 +92,10 @@
                 </Grid>
                 <Grid SnapsToDevicePixels="True" Name="grdChart" Grid.Row="9" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Visible">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="500"/>
+                        <RowDefinition Height="400"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="800"/>
+                        <ColumnDefinition Width="640"/>
                     </Grid.ColumnDefinitions>
                     <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="0" DataStructureCreated="xyChart_DataStructureCreated" DataPointSubsamplingEnabled="False" AllowFractionalPointXRange="True">
                         <charting:XYChart.XAxisArea>
@@ -106,8 +106,8 @@
                             <charting:Axis Id="YAxis" x:Name="yAxis" />
                             <charting:Axis Id="XAxis" x:Name="xAxis" />
                         </charting:XYChart.Axes>
-                        <charting:MarkerSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" />
-                        <charting:MarkerSeries x:Name="series1" Id="S1" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" />
+                        <charting:LineSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" LineKind="Step" />
+                        <charting:LineSeries x:Name="series1" Id="S1" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" LineKind="Step" />
                     </charting:XYChart>
                 </Grid>
                 <Grid SnapsToDevicePixels="True" Name="grdParameters" Grid.Row="10" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
