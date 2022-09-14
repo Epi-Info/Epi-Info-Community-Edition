@@ -360,9 +360,12 @@ namespace EpiDashboard
 
 				}
 				series0.DataSource = dataList;
-				series1.DataSource = regressionDataList;
 				xyChart.Width = 800;
 				xyChart.Height = 500;
+				xyChart.Visibility = Visibility.Visible;
+				return;
+				series1.DataSource = regressionDataList;
+				return;
 
 			}
 		}
