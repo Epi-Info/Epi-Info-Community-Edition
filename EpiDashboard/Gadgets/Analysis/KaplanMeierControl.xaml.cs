@@ -206,14 +206,7 @@ namespace EpiDashboard
 
 		public void ClearResults() 
         {
-            grdRegress.Children.Clear();
-            grdRegress.RowDefinitions.Clear();
-            grdIOR.Children.Clear();
-            grdIOR.RowDefinitions.Clear();
-
             grdParameters.Visibility = Visibility.Collapsed;
-            grdRegress.Visibility = Visibility.Collapsed;
-            grdIOR.Visibility = Visibility.Collapsed;
             grdStats.Visibility = Visibility.Collapsed;
 
             waitPanel.Visibility = System.Windows.Visibility.Visible;
@@ -225,8 +218,6 @@ namespace EpiDashboard
         public override void CollapseOutput()
         {
             grdParameters.Visibility = Visibility.Collapsed;
-            grdRegress.Visibility = Visibility.Collapsed;
-            grdIOR.Visibility = Visibility.Collapsed;
             grdStats.Visibility = Visibility.Collapsed;
 
             if (this.txtFilterString != null && !string.IsNullOrEmpty(this.txtFilterString.Text))
@@ -243,10 +234,8 @@ namespace EpiDashboard
         public override void ExpandOutput()
         {
             grdParameters.Visibility = Visibility.Visible;
-            grdRegress.Visibility = Visibility.Visible;
             grdStats.Visibility = Visibility.Visible;
-            grdIOR.Visibility = Visibility.Visible;
-
+            
             if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
             {
                 this.messagePanel.Visibility = System.Windows.Visibility.Visible;
@@ -579,60 +568,7 @@ namespace EpiDashboard
                                     results.variables.Add(nrow);
                                 }
 
-                                this.Dispatcher.BeginInvoke(new SimpleCallback(RenderRegressionHeader));
-
-                                int rowCount = 1;
-                                foreach (VariableRow row in results.variables)
-                                {
-                                    this.Dispatcher.Invoke(addRow, grdRegress, 30);
-
-                                    string displayValue = row.variableName;
-
-                                    this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(displayValue, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, Visibility.Visible));
-                                    if (row.oddsRatio <= -9999)
-                                    {
-                                        this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig("*", new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig("*", new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig("*", new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
-                                    }
-                                    else
-                                    {
-                                        this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(row.oddsRatio.ToString("F4"), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(row.ninetyFivePercent.ToString("F4"), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
-                                        if (row.ci > 1.0E12)
-                                        {
-                                            this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(">1.0E12", new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
-                                        }
-                                        else
-                                        {
-                                            this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(row.ci.ToString("F4"), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
-                                        }
-                                    }
-                                    this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(row.coefficient.ToString("F4"), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 4, Visibility.Visible));
-                                    this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(row.se.ToString("F4"), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 5, Visibility.Visible));
-                                    this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(row.Z.ToString("F4"), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 6, Visibility.Visible));
-                                    this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(row.P.ToString("F4"), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 7, Visibility.Visible));
-
-                                    rowCount++;
-                                }
-
-                                if (results.regressionResults.interactionOddsRatios != null)
-                                {
-                                    this.Dispatcher.BeginInvoke(new SimpleCallback(RenderIORHeader));
-                                    rowCount = 1;
-                                    foreach (StatisticsRepository.LogisticRegression.InteractionRow ir in results.regressionResults.interactionOddsRatios)
-                                    {
-                                        this.Dispatcher.Invoke(addRow, grdIOR, 30);
-                                        this.Dispatcher.BeginInvoke(setText, grdIOR, new TextBlockConfig(ir.interactionName.ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Right, rowCount, 0, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, grdIOR, new TextBlockConfig(ir.oddsRatio.ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Right, rowCount, 1, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, grdIOR, new TextBlockConfig(ir.ninetyFivePercent.ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Right, rowCount, 2, Visibility.Visible));
-                                        this.Dispatcher.BeginInvoke(setText, grdIOR, new TextBlockConfig(ir.ci.ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Right, rowCount, 3, Visibility.Visible));
-                                        rowCount++;
-                                    }
-                                }
-
-
-                                this.Dispatcher.BeginInvoke(new SimpleCallback(DrawRegressionBorders));
+                                
                             }
 
                         }
@@ -668,10 +604,8 @@ namespace EpiDashboard
             messagePanel.Text = errorMessage;
             messagePanel.Visibility = System.Windows.Visibility.Visible;
 
-            grdRegress.Visibility = System.Windows.Visibility.Collapsed;
             grdStats.Visibility = System.Windows.Visibility.Collapsed;
             grdParameters.Visibility = System.Windows.Visibility.Collapsed;
-            grdIOR.Visibility = System.Windows.Visibility.Collapsed;
 
             HideConfigPanel();
             CheckAndSetPosition();
@@ -679,8 +613,6 @@ namespace EpiDashboard
 
         private void RenderRegressionResults(RegressionResults results)
         {
-            grdRegress.Visibility = System.Windows.Visibility.Visible;
-            grdIOR.Visibility = System.Windows.Visibility.Visible;
             grdStats.Visibility = System.Windows.Visibility.Visible;
             grdParameters.Visibility = System.Windows.Visibility.Visible;
 
@@ -714,23 +646,12 @@ namespace EpiDashboard
         {
             RowDefinition rowDefHeader = new RowDefinition();
             rowDefHeader.Height = new GridLength(30);
-            grdRegress.RowDefinitions.Add(rowDefHeader);
-
-            for (int y = 0; y < grdRegress.ColumnDefinitions.Count; y++)
-            {
-                Rectangle rctHeader = new Rectangle();
-                rctHeader.Style = this.Resources["gridHeaderCellRectangle"] as Style;
-                Grid.SetRow(rctHeader, 0);
-                Grid.SetColumn(rctHeader, y);
-                grdRegress.Children.Add(rctHeader);
-            }
 
             TextBlock txtVarHeader = new TextBlock();
             txtVarHeader.Text = "Term";
             txtVarHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtVarHeader, 0);
             Grid.SetColumn(txtVarHeader, 0);
-            grdRegress.Children.Add(txtVarHeader);
 
             TextBlock txtOddsHeader = new TextBlock();
 			headerPanel.Text = "Kaplan-Meier";
@@ -743,7 +664,6 @@ namespace EpiDashboard
             txtOddsHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtOddsHeader, 0);
             Grid.SetColumn(txtOddsHeader, 1);
-            grdRegress.Children.Add(txtOddsHeader);
 
             TextBlock txt95Header = new TextBlock();
             string percentText = "95%";
@@ -757,72 +677,54 @@ namespace EpiDashboard
             txt95Header.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txt95Header, 0);
             Grid.SetColumn(txt95Header, 2);
-            grdRegress.Children.Add(txt95Header);
 
             TextBlock txtCIHeader = new TextBlock();
             txtCIHeader.Text = "C.I.";
             txtCIHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtCIHeader, 0);
             Grid.SetColumn(txtCIHeader, 3);
-            grdRegress.Children.Add(txtCIHeader);
 
             TextBlock txtCoefficientHeader = new TextBlock();
             txtCoefficientHeader.Text = "Coefficient";
             txtCoefficientHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtCoefficientHeader, 0);
             Grid.SetColumn(txtCoefficientHeader, 4);
-            grdRegress.Children.Add(txtCoefficientHeader);
 
             TextBlock txtSEHeader = new TextBlock();
             txtSEHeader.Text = "S.E.";
             txtSEHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtSEHeader, 0);
             Grid.SetColumn(txtSEHeader, 5);
-            grdRegress.Children.Add(txtSEHeader);
 
             TextBlock txtZHeader = new TextBlock();
             txtZHeader.Text = "Z-Statistic";
             txtZHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtZHeader, 0);
             Grid.SetColumn(txtZHeader, 6);
-            grdRegress.Children.Add(txtZHeader);
 
             TextBlock txtPHeader = new TextBlock();
             txtPHeader.Text = "P-Value";
             txtPHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtPHeader, 0);
             Grid.SetColumn(txtPHeader, 7);
-            grdRegress.Children.Add(txtPHeader);
         }
 
         private void RenderIORHeader()
         {
                 RowDefinition rowDefHeaderIOR = new RowDefinition();
                 rowDefHeaderIOR.Height = new GridLength(30);
-                grdIOR.RowDefinitions.Add(rowDefHeaderIOR);
-
-                for (int y = 0; y < grdIOR.ColumnDefinitions.Count; y++)
-                {
-                    Rectangle rctHeader = new Rectangle();
-                    rctHeader.Style = this.Resources["gridHeaderCellRectangle"] as Style;
-                    Grid.SetRow(rctHeader, 0);
-                    Grid.SetColumn(rctHeader, y);
-                    grdIOR.Children.Add(rctHeader);
-                }
 
                 TextBlock txtVarHeaderIOR = new TextBlock();
                 txtVarHeaderIOR.Text = "Interaction Terms";
                 txtVarHeaderIOR.Style = this.Resources["columnHeadingText"] as Style;
                 Grid.SetRow(txtVarHeaderIOR, 0);
                 Grid.SetColumn(txtVarHeaderIOR, 0);
-                grdIOR.Children.Add(txtVarHeaderIOR);
 
                 TextBlock txtOddsHeaderIOR = new TextBlock();
                 txtOddsHeaderIOR.Text = "Odds Ratio";
                 txtOddsHeaderIOR.Style = this.Resources["columnHeadingText"] as Style;
                 Grid.SetRow(txtOddsHeaderIOR, 0);
                 Grid.SetColumn(txtOddsHeaderIOR, 1);
-                grdIOR.Children.Add(txtOddsHeaderIOR);
 
                 TextBlock txt95HeaderIOR = new TextBlock();
                 string percentText = "95%";
@@ -836,14 +738,12 @@ namespace EpiDashboard
                 txt95HeaderIOR.Style = this.Resources["columnHeadingText"] as Style;
                 Grid.SetRow(txt95HeaderIOR, 0);
                 Grid.SetColumn(txt95HeaderIOR, 2);
-                grdIOR.Children.Add(txt95HeaderIOR);
 
                 TextBlock txtCIHeaderIOR = new TextBlock();
                 txtCIHeaderIOR.Text = "C.I.";
                 txtCIHeaderIOR.Style = this.Resources["columnHeadingText"] as Style;
                 Grid.SetRow(txtCIHeaderIOR, 0);
                 Grid.SetColumn(txtCIHeaderIOR, 3);
-                grdIOR.Children.Add(txtCIHeaderIOR);
         }
 
         #endregion
@@ -853,56 +753,7 @@ namespace EpiDashboard
         private void DrawRegressionBorders()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
-            int rdcount = 0;
-            foreach (RowDefinition rd in grdRegress.RowDefinitions)
-            {
-                int cdcount = 0;
-                foreach (ColumnDefinition cd in grdRegress.ColumnDefinitions)
-                {
-                    Border border = new Border();
-                    border.Style = this.Resources["gridCellBorder"] as Style;
-
-                    if (rdcount == 0 && cdcount > 0)
-                    {
-                        border.BorderThickness = new Thickness(border.BorderThickness.Left, border.BorderThickness.Bottom, border.BorderThickness.Right, border.BorderThickness.Bottom);
-                    }
-                    if (cdcount == 0 && rdcount > 0)
-                    {
-                        border.BorderThickness = new Thickness(border.BorderThickness.Right, border.BorderThickness.Top, border.BorderThickness.Right, border.BorderThickness.Bottom);
-                    }
-
-                    Grid.SetRow(border, rdcount);
-                    Grid.SetColumn(border, cdcount);
-                    grdRegress.Children.Add(border);
-                    cdcount++;
-                }
-                rdcount++;
-            }
-            rdcount = 0;
-            foreach (RowDefinition rd in grdIOR.RowDefinitions)
-            {
-                int cdcount = 0;
-                foreach (ColumnDefinition cd in grdIOR.ColumnDefinitions)
-                {
-                    Border border = new Border();
-                    border.Style = this.Resources["gridCellBorder"] as Style;
-
-                    if (rdcount == 0 && cdcount > 0)
-                    {
-                        border.BorderThickness = new Thickness(border.BorderThickness.Left, border.BorderThickness.Bottom, border.BorderThickness.Right, border.BorderThickness.Bottom);
-                    }
-                    if (cdcount == 0 && rdcount > 0)
-                    {
-                        border.BorderThickness = new Thickness(border.BorderThickness.Right, border.BorderThickness.Top, border.BorderThickness.Right, border.BorderThickness.Bottom);
-                    }
-
-                    Grid.SetRow(border, rdcount);
-                    Grid.SetColumn(border, cdcount);
-                    grdIOR.Children.Add(border);
-                    cdcount++;
-                }
-                rdcount++;
-            }
+            
         }
 
         private void FillComboboxes(bool update = false)
@@ -1031,7 +882,6 @@ namespace EpiDashboard
         private void AddGridRow(Grid grid, int height)
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
-            grdRegress.Visibility = Visibility.Visible;
             RowDefinition rowDef = new RowDefinition();
             rowDef.Height = new GridLength(height);
             grid.RowDefinitions.Add(rowDef);
@@ -1243,11 +1093,6 @@ namespace EpiDashboard
             catch (ArgumentException)
             {
                 grdParameters.Visibility = System.Windows.Visibility.Hidden;
-                grdRegress.Visibility = Visibility.Hidden;
-                grdRegress.RowDefinitions.Clear();
-
-                grdIOR.Visibility = System.Windows.Visibility.Hidden;
-                grdIOR.RowDefinitions.Clear();
 
                 Epi.Windows.MsgBox.ShowError("The same variable cannot be used more than once.");
             }
@@ -1606,45 +1451,6 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("  <td>" + txtLDF.Text + "</td>");
                 htmlBuilder.AppendLine("  <td>" + txtLP.Text + "</td>");
                 htmlBuilder.AppendLine(" </tr>");                
-                htmlBuilder.AppendLine("</table>");
-
-                htmlBuilder.AppendLine("<br><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                foreach (UIElement control in grdIOR.Children)
-                {
-                    if (control is TextBlock)
-                    {
-                        int rowNumber = Grid.GetRow(control);
-                        int columnNumber = Grid.GetColumn(control);
-
-                        string tableDataTagOpen = "<td>";
-                        string tableDataTagClose = "</td>";
-
-                        if (rowNumber == 0)
-                        {
-                            tableDataTagOpen = "<th>";
-                            tableDataTagClose = "</th>";
-                        }
-
-                        if (columnNumber == 0)
-                        {
-                            htmlBuilder.AppendLine("<tr>");
-                        }
-                        if (columnNumber == 0 && rowNumber > 0)
-                        {
-                            tableDataTagOpen = "<td class=\"value\">";
-                        }
-
-                        string value = ((TextBlock)control).Text;
-                        string formattedValue = value;
-
-                        htmlBuilder.AppendLine(tableDataTagOpen + formattedValue + tableDataTagClose);
-
-                        if (columnNumber >= grdRegress.ColumnDefinitions.Count - 1)
-                        {
-                            htmlBuilder.AppendLine("</tr>");
-                        }
-                    }
-                }
                 htmlBuilder.AppendLine("</table>");
             
 

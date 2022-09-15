@@ -46,32 +46,10 @@
                 <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" HorizontalAlignment="Center" Style="{DynamicResource gadgetWaitPanelStyle}" />
 
-                <Grid SnapsToDevicePixels="True" Name="grdRegress" Grid.Row="8" Width="Auto" HorizontalAlignment="Center" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-
-                <Grid SnapsToDevicePixels="True" Name="grdIOR" Grid.Row="11" Width="Auto" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
-
                 <Grid SnapsToDevicePixels="True" Name="grdStats" Grid.Row="9" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
                     
                 </Grid>
-                <Grid SnapsToDevicePixels="True" Name="grdChart" Grid.Row="9" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Visible">
+                <Grid SnapsToDevicePixels="True" Name="grdChart" Grid.Row="7" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Visible">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="400"/>
                     </Grid.RowDefinitions>
@@ -91,7 +69,7 @@
                         <charting:LineSeries x:Name="series1" Id="S1" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" LineKind="Step" />
                     </charting:XYChart>
                 </Grid>
-                <Grid SnapsToDevicePixels="True" Name="grdParameters" Grid.Row="10" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
+                <Grid SnapsToDevicePixels="True" Name="grdParameters" Grid.Row="8" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
