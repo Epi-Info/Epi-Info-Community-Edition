@@ -220,11 +220,6 @@ namespace EpiDashboard
             messagePanel.Text = string.Empty;
             messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
-
-            txtConvergenceLabel.Text = string.Empty;
-            txtIterationsLabel.Text = string.Empty;
-            txtFinalLogLabel.Text = string.Empty;
-            txtCasesIncludedLabel.Text = string.Empty;
         }
 
         public override void CollapseOutput()
@@ -684,16 +679,6 @@ namespace EpiDashboard
 
         private void RenderRegressionResults(RegressionResults results)
         {
-            txtConvergence.Visibility = Visibility.Collapsed;
-            txtIterations.Visibility = Visibility.Collapsed;
-            txtFinalLog.Visibility = Visibility.Collapsed;
-            txtCasesIncluded.Visibility = Visibility.Collapsed;
-
-            txtConvergenceLabel.Visibility = Visibility.Collapsed;
-            txtIterationsLabel.Visibility = Visibility.Collapsed;
-            txtFinalLogLabel.Visibility = Visibility.Collapsed;
-            txtCasesIncludedLabel.Visibility = Visibility.Collapsed;
-
             grdRegress.Visibility = System.Windows.Visibility.Visible;
             grdIOR.Visibility = System.Windows.Visibility.Visible;
             grdStats.Visibility = System.Windows.Visibility.Visible;
@@ -706,18 +691,6 @@ namespace EpiDashboard
             {                
                 grdParameters.Visibility = System.Windows.Visibility.Hidden;
                 grdStats.Visibility = System.Windows.Visibility.Visible;
-
-                txtConvergence.Text = string.Empty;
-                txtIterations.Text = string.Empty;
-                txtFinalLog.Text = string.Empty;
-                txtCasesIncluded.Text = string.Empty;
-
-                txtIterationsLabel.Text = string.Empty;
-                txtFinalLogLabel.Text = string.Empty;
-                txtCasesIncludedLabel.Text = string.Empty;
-
-                txtConvergenceLabel.Text = results.errorMessage;
-                txtConvergenceLabel.TextWrapping = TextWrapping.Wrap;
             }
             else
             {                
@@ -731,23 +704,6 @@ namespace EpiDashboard
                 txtLStatistic.Text = StringLiterals.SPACE + results.LRStatistic.ToString("F4") + StringLiterals.SPACE;
                 txtLDF.Text = StringLiterals.SPACE + results.LRDF.ToString() + StringLiterals.SPACE;
                 txtLP.Text = StringLiterals.SPACE + results.LRP.ToString("F4") + StringLiterals.SPACE;
-
-                txtConvergence.Text = results.convergence;
-                txtIterations.Text = StringLiterals.SPACE + results.iterations.ToString() + StringLiterals.SPACE;
-                txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
-                txtCasesIncluded.Text = StringLiterals.SPACE + results.casesIncluded.ToString() + StringLiterals.SPACE;
-
-                txtConvergenceLabel.Text = "Convergence:";
-                txtIterationsLabel.Text ="Iterations:";
-                txtFinalLogLabel.Text = "Final -2*Log-Likelihood:";
-                txtCasesIncludedLabel.Text = "Cases Included:";
-				if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log (For Evaluation)"))
-				{
-					txtFinalLogLabel.Text = "Final Log-Likelihood:";
-					results.finalLikelihood *= -0.5;
-					txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
-					grdParameters.Visibility = System.Windows.Visibility.Collapsed;
-				}
 
 			}
 
@@ -1286,11 +1242,6 @@ namespace EpiDashboard
             }
             catch (ArgumentException)
             {
-                txtConvergence.Visibility = Visibility.Hidden;
-                txtIterations.Visibility = Visibility.Hidden;
-                txtFinalLog.Visibility = Visibility.Hidden;
-                txtCasesIncluded.Visibility = Visibility.Hidden;
-
                 grdParameters.Visibility = System.Windows.Visibility.Hidden;
                 grdRegress.Visibility = Visibility.Hidden;
                 grdRegress.RowDefinitions.Clear();

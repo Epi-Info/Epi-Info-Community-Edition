@@ -69,33 +69,14 @@
                 </Grid>
 
                 <Grid SnapsToDevicePixels="True" Name="grdStats" Grid.Row="9" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock x:Name="txtConvergenceLabel" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="0" Grid.Column="0" Text="Convergence:"/>
-                    <TextBlock x:Name="txtIterationsLabel" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="1" Grid.Column="0"  Text="Iterations:"/>
-                    <TextBlock x:Name="txtFinalLogLabel" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="2" Grid.Column="0"  Text="Final -2*Log-Likelihood:"/>
-                    <TextBlock x:Name="txtCasesIncludedLabel" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="3" Grid.Column="0"  Text="Cases Included:"/>
-
-                    <TextBlock x:Name="txtConvergence" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="0" Grid.Column="1" Text=""/>
-                    <TextBlock x:Name="txtIterations" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="1" Grid.Column="1" Text=""/>
-                    <TextBlock x:Name="txtFinalLog" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="2" Grid.Column="1" Text=""/>
-                    <TextBlock x:Name="txtCasesIncluded" FontWeight="Bold" Margin="2, 2, 2, 2" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Hidden" Grid.Row="3" Grid.Column="1" Text=""/>
+                    
                 </Grid>
                 <Grid SnapsToDevicePixels="True" Name="grdChart" Grid.Row="9" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Visible">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="400"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="640"/>
+                        <ColumnDefinition Width="800"/>
                     </Grid.ColumnDefinitions>
                     <charting:XYChart x:Name="xyChart" Background="White" Grid.Row="0" Grid.Column="0" DataStructureCreated="xyChart_DataStructureCreated" DataPointSubsamplingEnabled="False" AllowFractionalPointXRange="True">
                         <charting:XYChart.XAxisArea>
