@@ -207,7 +207,6 @@ namespace EpiDashboard
 		public void ClearResults() 
         {
             grdParameters.Visibility = Visibility.Collapsed;
-            grdStats.Visibility = Visibility.Collapsed;
 
             waitPanel.Visibility = System.Windows.Visibility.Visible;
             messagePanel.Text = string.Empty;
@@ -218,7 +217,6 @@ namespace EpiDashboard
         public override void CollapseOutput()
         {
             grdParameters.Visibility = Visibility.Collapsed;
-            grdStats.Visibility = Visibility.Collapsed;
 
             if (this.txtFilterString != null && !string.IsNullOrEmpty(this.txtFilterString.Text))
             {
@@ -234,7 +232,6 @@ namespace EpiDashboard
         public override void ExpandOutput()
         {
             grdParameters.Visibility = Visibility.Visible;
-            grdStats.Visibility = Visibility.Visible;
             
             if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
             {
@@ -604,7 +601,6 @@ namespace EpiDashboard
             messagePanel.Text = errorMessage;
             messagePanel.Visibility = System.Windows.Visibility.Visible;
 
-            grdStats.Visibility = System.Windows.Visibility.Collapsed;
             grdParameters.Visibility = System.Windows.Visibility.Collapsed;
 
             HideConfigPanel();
@@ -613,7 +609,6 @@ namespace EpiDashboard
 
         private void RenderRegressionResults(RegressionResults results)
         {
-            grdStats.Visibility = System.Windows.Visibility.Visible;
             grdParameters.Visibility = System.Windows.Visibility.Visible;
 
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -622,12 +617,10 @@ namespace EpiDashboard
             if (!string.IsNullOrEmpty(results.errorMessage) || results.variables == null)
             {                
                 grdParameters.Visibility = System.Windows.Visibility.Hidden;
-                grdStats.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {                
                 grdParameters.Visibility = System.Windows.Visibility.Visible;
-                grdStats.Visibility = System.Windows.Visibility.Visible;
 
                 txtScoreStatistic.Text = StringLiterals.SPACE + results.scoreStatistic.ToString("F4") + StringLiterals.SPACE;
                 txtScoreDF.Text = StringLiterals.SPACE + results.scoreDF.ToString() + StringLiterals.SPACE;

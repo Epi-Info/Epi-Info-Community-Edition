@@ -46,9 +46,6 @@
                 <StackPanel Grid.Row="7" x:Name="panelMain" HorizontalAlignment="Left" VerticalAlignment="Top"></StackPanel>
                 <Controls:GadgetWaitPanel x:Name="waitPanel" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="6" HorizontalAlignment="Center" Style="{DynamicResource gadgetWaitPanelStyle}" />
 
-                <Grid SnapsToDevicePixels="True" Name="grdStats" Grid.Row="9" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
-                    
-                </Grid>
                 <Grid SnapsToDevicePixels="True" Name="grdChart" Grid.Row="7" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Visible">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="400"/>
