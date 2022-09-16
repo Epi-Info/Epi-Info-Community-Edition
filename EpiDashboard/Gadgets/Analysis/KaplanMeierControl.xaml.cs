@@ -329,6 +329,7 @@ namespace EpiDashboard
 						series.YPath = "Y";
 						series.ShowPointAnnotations = false;
 						series.LineKind = ComponentArt.Win.DataVisualization.Charting.LineKind.Step;
+						series.MarkerVisible = false;
 						series.Label = treatmentNames[t];
 						series.DataSource = dataList.GetRange(treatmentStartIndexes[t], seriesend - treatmentStartIndexes[t]);
 						xyChart.DataSeries.Add(series);
