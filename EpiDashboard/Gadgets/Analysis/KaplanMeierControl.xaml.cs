@@ -309,18 +309,35 @@ namespace EpiDashboard
 		{
 			if (treatmentStartIndexes != null && treatmentStartIndexes.Count > 1)
 			{
-				series0.DataSource = dataList.GetRange(0, treatmentStartIndexes[1]);
-				series0.Label = treatmentNames[0];
-				int series1end = dataList.Count;
-				if (treatmentStartIndexes.Count > 2)
-					series1end = treatmentStartIndexes[2];
-				series1.DataSource = dataList.GetRange(treatmentStartIndexes[1], series1end - treatmentStartIndexes[1]);
-				series1.Label = treatmentNames[1];
+				try
+				{
+					series0.DataSource = dataList.GetRange(0, treatmentStartIndexes[1]);
+					series0.Label = treatmentNames[0];
+					int seriesend = dataList.Count;
+					for (int t = 1; t < treatmentStartIndexes.Count; t++)
+					{
+						seriesend = dataList.Count;
+						if (treatmentStartIndexes.Count > t + 1)
+							seriesend = treatmentStartIndexes[t + 1];
+						ComponentArt.Win.DataVisualization.Charting.LineSeries series = new ComponentArt.Win.DataVisualization.Charting.LineSeries();
+						series.XPath = "X";
+						series.YPath = "Y";
+						series.ShowPointAnnotations = false;
+						series.LineKind = ComponentArt.Win.DataVisualization.Charting.LineKind.Step;
+						series.Label = treatmentNames[t];
+						series.DataSource = dataList.GetRange(treatmentStartIndexes[t], seriesend - treatmentStartIndexes[t]);
+						xyChart.DataSeries.Add(series);
+					}
+				}
+				catch (Exception e)
+				{
+
+				}
 			}
 			else
 			{
 				series0.DataSource = dataList;
-				series1.DataSource = dataList;
+				//series1.DataSource = dataList;
 			}
 			xyChart.LegendVisible = true;
 			xyChart.Width = 600;

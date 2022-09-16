@@ -63,7 +63,6 @@
                             <charting:Axis Id="XAxis" x:Name="xAxis" />
                         </charting:XYChart.Axes>
                         <charting:LineSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" LineKind="Step" />
-                        <charting:LineSeries x:Name="series1" Id="S1" XPath="X" YPath="Y" StrokeThickness="4" ShowPointAnnotations="False" LineKind="Step" />
                     </charting:XYChart>
                 </Grid>
                 <Grid SnapsToDevicePixels="True" Name="grdParameters" Grid.Row="8" HorizontalAlignment="Left" Margin="{DynamicResource genericElementMargin}" Visibility="Collapsed">
