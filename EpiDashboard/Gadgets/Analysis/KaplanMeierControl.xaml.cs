@@ -307,6 +307,11 @@ namespace EpiDashboard
 
 		private void SetChartData(List<XYChartData> dataList, List<int> treatmentStartIndexes, List<string> treatmentNames)
 		{
+			int serieses = 0;
+			for (int s = xyChart.DataSeries.Count - 1; s > 0; s--)
+			{
+				xyChart.DataSeries.Remove(xyChart.DataSeries[s]);
+			}
 			if (treatmentStartIndexes != null && treatmentStartIndexes.Count > 1)
 			{
 				try
