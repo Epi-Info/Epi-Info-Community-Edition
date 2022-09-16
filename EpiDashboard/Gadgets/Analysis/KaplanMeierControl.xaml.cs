@@ -349,6 +349,7 @@ namespace EpiDashboard
 			xyChart.Width = 600;
 			xyChart.Height = 400;
 			xyChart.Visibility = Visibility.Visible;
+			xyChart.YAxis.MaxValue = 1.2;
 		}
 
 		private void SetXandYCoordinates(List<XYChartData> dataList, int newMinXvalue, int newMaxXvalue)

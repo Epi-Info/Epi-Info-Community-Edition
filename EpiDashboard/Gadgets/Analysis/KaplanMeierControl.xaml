@@ -59,7 +59,7 @@
                             </charting:AxisCoordinates>
                         </charting:XYChart.XAxisArea>
                         <charting:XYChart.Axes>
-                            <charting:Axis Id="YAxis" x:Name="yAxis" ReferenceValue="1.1" />
+                            <charting:Axis Id="YAxis" x:Name="yAxis" />
                             <charting:Axis Id="XAxis" x:Name="xAxis" />
                         </charting:XYChart.Axes>
                         <charting:LineSeries x:Name="series0" Id="S0" XPath="X" YPath="Y" MarkerVisible="False" StrokeThickness="4" ShowPointAnnotations="False" LineKind="Step" />
