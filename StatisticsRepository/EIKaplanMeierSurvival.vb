@@ -13,9 +13,14 @@ Public Class EIKaplanMeierSurvival
     '  MTSTransactionMode = 0   'NotAnMTSObject
     'End
     Private dataTable As DataTable
-    Public context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Public context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Public contextInputVariableList As Dictionary(Of String, String)
+	Public contextSetProperties As Dictionary(Of String, String)
+	Public contextColumns As System.Data.DataColumnCollection
+	Public EpiViewVariableList As Dictionary(Of String, EpiInfo.Plugin.IVariable)
+	Public contextDataTable As System.Data.DataTable
 
-    Public Sub Construct(ByVal AnalysisStatisticContext As EpiInfo.Plugin.IAnalysisStatisticContext) Implements EpiInfo.Plugin.IAnalysisStatistic.Construct
+	Public Sub Construct(ByVal AnalysisStatisticContext As EpiInfo.Plugin.IAnalysisStatisticContext) Implements EpiInfo.Plugin.IAnalysisStatistic.Construct
         context = AnalysisStatisticContext
         dataTable = New DataTable
 
@@ -84,13 +89,17 @@ Public Class EIKaplanMeierSurvival
         args = New Dictionary(Of String, String)
 
         On Error GoTo erroRHandler
-        '''''''''''''''''''''''''''
+		'''''''''''''''''''''''''''
 
-        'DISABLE ERROR HANDLING
-        On Error Resume Next
-        NumRows = context.GetDataRows(Nothing).Count
+		'DISABLE ERROR HANDLING
+		On Error Resume Next
+		If context Is Nothing Then
+			NumRows = contextDataTable.Rows.Count
+		Else
+			NumRows = context.GetDataRows(Nothing).Count
+		End If
 
-        If NumRows <> 0 Then
+		If NumRows <> 0 Then
             p = 0
             d = TimeOfDay
 
@@ -177,12 +186,18 @@ Public Class EIKaplanMeierSurvival
                 Debug.Print(lstrdebug)
             Next i
 
-            args.Add("COMMANDNAME", "KMSURVIVAL")
-            args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
-            args.Add("HTMLRESULTS", strKaplanResults)
-            context.Display(args)
+			If context Is Nothing Then
+				args.Add("COMMANDNAME", "KMSURVIVAL")
+				args.Add("COMMANDTEXT", contextSetProperties("CommandText"))
+				args.Add("HTMLRESULTS", strKaplanResults)
+			Else
+				args.Add("COMMANDNAME", "KMSURVIVAL")
+				args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+				args.Add("HTMLRESULTS", strKaplanResults)
+				context.Display(args)
+			End If
 
-        End If
+		End If
 
 cleanup:
         Exit Sub
@@ -236,28 +251,50 @@ erroRHandler:
         mstraBLabels(0) = "False"
         mstraBLabels(1) = "True"
 
-        'Extract data from context.SetProperties
+		'Extract data from context.SetProperties
+		If context Is Nothing Then
+			If contextSetProperties.ContainsKey("Database") Then
+				mstrConnString = conConnStr & contextSetProperties("Database") & ";"
+			End If
 
-        If context.SetProperties.ContainsKey("Database") Then
-            mstrConnString = conConnStr & context.SetProperties("Database") & ";"
-        End If
+			If contextSetProperties.ContainsKey("ConnectionString") Then
+				mstrConnString = contextSetProperties("ConnectionString")
+			End If
 
-        If context.SetProperties.ContainsKey("ConnectionString") Then
-            mstrConnString = context.SetProperties("ConnectionString")
-        End If
+			If contextSetProperties.ContainsKey("TableName") Then
+				mstrTableName = contextSetProperties("TableName")
+			End If
 
-        If context.SetProperties.ContainsKey("TableName") Then
-            mstrTableName = context.SetProperties("TableName")
-        End If
+			If contextSetProperties.ContainsKey("BLabels") Then
+				Dim booleanLabels() As String
+				booleanLabels = contextSetProperties("BLabels").ToString().Split(";")
 
-        If context.SetProperties.ContainsKey("BLabels") Then
-            Dim booleanLabels() As String
-            booleanLabels = context.SetProperties("BLabels").ToString().Split(";")
+				For i = 0 To UBound(mstraboolean)
+					mstraboolean(i) = booleanLabels(i)
+				Next
+			End If
+		Else
+			If context.SetProperties.ContainsKey("Database") Then
+				mstrConnString = conConnStr & context.SetProperties("Database") & ";"
+			End If
 
-            For i = 0 To UBound(mstraboolean)
-                mstraboolean(i) = booleanLabels(i)
-            Next
-        End If
+			If context.SetProperties.ContainsKey("ConnectionString") Then
+				mstrConnString = context.SetProperties("ConnectionString")
+			End If
+
+			If context.SetProperties.ContainsKey("TableName") Then
+				mstrTableName = context.SetProperties("TableName")
+			End If
+
+			If context.SetProperties.ContainsKey("BLabels") Then
+				Dim booleanLabels() As String
+				booleanLabels = context.SetProperties("BLabels").ToString().Split(";")
+
+				For i = 0 To UBound(mstraboolean)
+					mstraboolean(i) = booleanLabels(i)
+				Next
+			End If
+		End If
 
         'If context.SetProperties.ContainsKey("ShowBaseline") Then
         '    Dim success As Boolean
@@ -298,45 +335,82 @@ erroRHandler:
         discrete = 0
         covariate = 0
 
-        'Extract data from context.InputVariableList
-        'Currently, only one group variable is accepted for "covariates"
-        'In KMSurvival, Covariates and StrataVar are used interchangeably
+		'Extract data from context.InputVariableList
+		'Currently, only one group variable is accepted for "covariates"
+		'In KMSurvival, Covariates and StrataVar are used interchangeably
 
-        mstrGroupVar = context.InputVariableList("group_variable").ToString()
-        ReDim mstraCovariates(0)
+		If Not context Is Nothing Then
+			mstrGroupVar = context.InputVariableList("group_variable").ToString()
+		ElseIf Not contextInputVariableList Is Nothing Then
+			mstrGroupVar = contextInputVariableList("group_variable").ToString()
+		End If
+		ReDim mstraCovariates(0)
         mstraCovariates(0) = mstrGroupVar
 
         ReDim mstraStrataVar(0)
         mstraStrataVar(0) = mstrGroupVar
 
-        mstrTimeVar = context.InputVariableList("time_variable").ToString()
-        'ToDo: den4: eventually, remove next ReDim when ExtendVarList added to context
-        ReDim mstraTimeDependentVar(0)
-        'mstraTimeDependentVar = context.InputVariableList("ExtendVarList").ToString().Split(";")
-        mstrCensoredVar = context.InputVariableList("censor_variable").ToString()
-        Select Case (context.InputVariableList("uncensored_value").ToString())
-            Case "(+)"
-                mstrUncensoredVal = "1"
-            Case "(-)"
-                mstrUncensoredVal = "0"
-            Case "(.)"
-                mstrUncensoredVal = String.Empty
-            Case Else
-                mstrUncensoredVal = context.InputVariableList("uncensored_value").ToString()
-        End Select
-        If Not context.InputVariableList("weight_variable") Is Nothing Then
-            mstrWeightVar = context.InputVariableList("weight_variable").ToString()
-        Else
-            mstrWeightVar = String.Empty
-        End If
+		If Not context Is Nothing Then
+			mstrTimeVar = context.InputVariableList("time_variable").ToString()
+		ElseIf Not contextInputVariableList Is Nothing Then
+			mstrTimeVar = contextInputVariableList("time_variable").ToString()
+		End If
+		'ToDo: den4: eventually, remove next ReDim when ExtendVarList added to context
+		ReDim mstraTimeDependentVar(0)
+		'mstraTimeDependentVar = context.InputVariableList("ExtendVarList").ToString().Split(";")
+		If Not context Is Nothing Then
+			mstrCensoredVar = context.InputVariableList("censor_variable").ToString()
+		ElseIf Not contextInputVariableList Is Nothing Then
+			mstrCensoredVar = contextInputVariableList("censor_variable").ToString()
+		End If
+		If Not context Is Nothing Then
+			Select Case (context.InputVariableList("uncensored_value").ToString())
+				Case "(+)"
+					mstrUncensoredVal = "1"
+				Case "(-)"
+					mstrUncensoredVal = "0"
+				Case "(.)"
+					mstrUncensoredVal = String.Empty
+				Case Else
+					mstrUncensoredVal = context.InputVariableList("uncensored_value").ToString()
+			End Select
+		ElseIf Not contextInputVariableList Is Nothing Then
+			Select Case (contextInputVariableList("uncensored_value").ToString())
+				Case "(+)"
+					mstrUncensoredVal = "1"
+				Case "(-)"
+					mstrUncensoredVal = "0"
+				Case "(.)"
+					mstrUncensoredVal = String.Empty
+				Case Else
+					mstrUncensoredVal = contextInputVariableList("uncensored_value").ToString()
+			End Select
+		End If
+		If Not context Is Nothing Then
+			If Not context.InputVariableList("weight_variable") Is Nothing Then
+				mstrWeightVar = context.InputVariableList("weight_variable").ToString()
+			Else
+				mstrWeightVar = String.Empty
+			End If
 
-        If Not context.InputVariableList("graph_type") Is Nothing Then
-            mstrGraphType = context.InputVariableList("graph_type").ToString()
-        End If
+			If Not context.InputVariableList("graph_type") Is Nothing Then
+				mstrGraphType = context.InputVariableList("graph_type").ToString()
+			End If
+		ElseIf Not contextInputVariableList Is Nothing Then
+			If Not contextInputVariableList("weight_variable") Is Nothing Then
+				mstrWeightVar = contextInputVariableList("weight_variable").ToString()
+			Else
+				mstrWeightVar = String.Empty
+			End If
+
+			If Not contextInputVariableList("graph_type") Is Nothing Then
+				mstrGraphType = contextInputVariableList("graph_type").ToString()
+			End If
+		End If
 
 
 
-    End Sub
+	End Sub
 
     Public Sub SetStratified(ByRef lstraStrata() As String, ByRef lSVarArray() As StrataVariable)
         'Dim lconRS As ADODB.Recordset
@@ -363,38 +437,63 @@ erroRHandler:
                     ReDim .straTerms(0)
                     'Open the record as a distinct set and count the non missing values
                     Dim tempTable As DataTable
-                    tempTable = New DataTable("output")
-                    tempTable.Columns.Add(lstraStrata(k), context.Columns(lstraStrata(k)).DataType)
+					tempTable = New DataTable("output")
+					If context Is Nothing Then
+						tempTable.Columns.Add(lstraStrata(k), contextColumns(lstraStrata(k)).DataType)
+					Else
+						tempTable.Columns.Add(lstraStrata(k), context.Columns(lstraStrata(k)).DataType)
+					End If
 
-                    Dim lastValue As Object
+					Dim lastValue As Object
                     lastValue = VariantType.Null
 
-                    ' We must be able to do a SELECT DISTINCT on the data table; this code will replicate
-                    ' that functionality using .NET code, since we can't do that operating directly against
-                    ' a DataTable object using SQL.
-                    For Each row As DataRow In dataTable.Select("", lstraStrata(k))
+					' We must be able to do a SELECT DISTINCT on the data table; this code will replicate
+					' that functionality using .NET code, since we can't do that operating directly against
+					' a DataTable object using SQL.
+					If dataTable Is Nothing Then
+						For Each row As DataRow In contextDataTable.Select("", lstraStrata(k))
 
-                        Dim columnEqual As Boolean
-                        columnEqual = False
+							Dim columnEqual As Boolean
+							columnEqual = False
 
-                        If lastValue Is Nothing And row(lstraStrata(k)) Is Nothing Then
-                            columnEqual = True
-                        ElseIf lastValue Is Nothing Or row(lstraStrata(k)) Is Nothing Then
-                            columnEqual = False
-                        Else
-                            columnEqual = lastValue.Equals(row(lstraStrata(k)))
-                        End If
+							If lastValue Is Nothing And row(lstraStrata(k)) Is Nothing Then
+								columnEqual = True
+							ElseIf lastValue Is Nothing Or row(lstraStrata(k)) Is Nothing Then
+								columnEqual = False
+							Else
+								columnEqual = lastValue.Equals(row(lstraStrata(k)))
+							End If
 
-                        If lastValue Is Nothing Or columnEqual = False Then
-                            lastValue = row(lstraStrata(k))
-                            tempTable.Rows.Add(row(lstraStrata(k)))
-                        End If
-                    Next
-                    '============================================================================================
+							If lastValue Is Nothing Or columnEqual = False Then
+								lastValue = row(lstraStrata(k))
+								tempTable.Rows.Add(row(lstraStrata(k)))
+							End If
+						Next
+					Else
+						For Each row As DataRow In dataTable.Select("", lstraStrata(k))
+
+							Dim columnEqual As Boolean
+							columnEqual = False
+
+							If lastValue Is Nothing And row(lstraStrata(k)) Is Nothing Then
+								columnEqual = True
+							ElseIf lastValue Is Nothing Or row(lstraStrata(k)) Is Nothing Then
+								columnEqual = False
+							Else
+								columnEqual = lastValue.Equals(row(lstraStrata(k)))
+							End If
+
+							If lastValue Is Nothing Or columnEqual = False Then
+								lastValue = row(lstraStrata(k))
+								tempTable.Rows.Add(row(lstraStrata(k)))
+							End If
+						Next
+					End If
+					'============================================================================================
 
 
-                    'Set the null value counter to 0
-                    lboolNull = False
+					'Set the null value counter to 0
+					lboolNull = False
 
                     For i = 0 To tempTable.Rows.Count - 1
                         lvarNullTest = tempTable.Rows(i)(lstraStrata(k))
@@ -491,8 +590,11 @@ erroRHandler:
         Debug.Print(lstrQuery & " order by " & lstrSortOrder)
 
 
-        table = dataTable
-        rows = table.Select(lstrQuery, lstrSortOrder)
+		table = dataTable
+		If table Is Nothing Then
+			table = contextDataTable
+		End If
+		rows = table.Select(lstrQuery, lstrSortOrder)
         k = rows.Count
         If k = 0 Then Err.Raise(vbObjectError + 2131, , "<tlt>No data in table</tlt>")
         'The data that is important, is the weight var, the  time var, the censored var

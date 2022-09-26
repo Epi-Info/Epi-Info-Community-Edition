@@ -236,6 +236,9 @@
     <Compile Include="Controls\GadgetProperties\LinearRegressionProperties.xaml.cs">
       <DependentUpon>LinearRegressionProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GadgetProperties\KaplanMeierProperties.xaml.cs">
+      <DependentUpon>KaplanMeierProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GadgetProperties\RatesProperties.xaml.cs">
       <DependentUpon>RatesProperties.xaml</DependentUpon>
     </Compile>
@@ -482,6 +485,9 @@
     <Compile Include="Gadgets\Analysis\DuplicatesListControl.xaml.cs">
       <DependentUpon>DuplicatesListControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Gadgets\Analysis\KaplanMeierControl.xaml.cs">
+      <DependentUpon>KaplanMeierControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gadgets\Analysis\RatesControl.xaml.cs">
       <DependentUpon>RatesControl.xaml</DependentUpon>
     </Compile>
@@ -536,6 +542,7 @@
     <Compile Include="Gadgets\ComplexSampleCrosstabParameters.cs" />
     <Compile Include="Gadgets\ComplexSampleFrequencyParameters.cs" />
     <Compile Include="Gadgets\ComplexSampleMeansParameters.cs" />
+    <Compile Include="Gadgets\KaplanMeierParameters.cs" />
     <Compile Include="Gadgets\RatesParameters.cs" />
     <Compile Include="Gadgets\PMCCParameters.cs" />
     <Compile Include="Gadgets\HistogramChartParameters.cs" />
@@ -1006,6 +1013,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\GadgetProperties\KaplanMeierProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\GadgetProperties\RatesProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1155,6 +1166,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GadgetPropertyStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\KaplanMeierControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
