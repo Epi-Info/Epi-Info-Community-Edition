@@ -167,10 +167,10 @@ namespace EpiDashboard.Mapping
             mnuMarker.Header = "Add marker";
             mnuMarker.Click += new RoutedEventHandler(mnuMarker_Click);
             menu.Items.Add(mnuMarker);
-            MenuItem mnuRadius = new MenuItem();
-            mnuRadius.Header = "Add zone";
-            mnuRadius.Click += new RoutedEventHandler(mnuRadius_Click);
-            menu.Items.Add(mnuRadius);
+            //MenuItem mnuRadius = new MenuItem();
+            //mnuRadius.Header = "Add zone";
+            //mnuRadius.Click += new RoutedEventHandler(mnuRadius_Click);
+            //menu.Items.Add(mnuRadius);
             MenuItem mnuText = new MenuItem();
             mnuText.Header = "Add label";
             mnuText.Click += new RoutedEventHandler(mnuText_Click);

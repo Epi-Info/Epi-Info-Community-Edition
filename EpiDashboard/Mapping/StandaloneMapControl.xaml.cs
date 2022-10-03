@@ -372,10 +372,10 @@ namespace EpiDashboard.Mapping
                 mnuScale.IsSubmenuOpen = true;
                 menu.Items.Add(mnuScale);
 
-                MenuItem mnuRadius = new MenuItem();
-                mnuRadius.Header = DashboardSharedStrings.GADGET_MAP_ADD_ZONE;
-                mnuRadius.Click += new RoutedEventHandler(mnuRadius_Click);
-                menu.Items.Add(mnuRadius);
+                //MenuItem mnuRadius = new MenuItem();
+                //mnuRadius.Header = DashboardSharedStrings.GADGET_MAP_ADD_ZONE;
+                //mnuRadius.Click += new RoutedEventHandler(mnuRadius_Click);
+                //menu.Items.Add(mnuRadius);
                 MenuItem mnuText = new MenuItem();
                 mnuText.Header = DashboardSharedStrings.GADGET_MAP_ADD_LABEL;
                 mnuText.Click += new RoutedEventHandler(mnuText_Click);
