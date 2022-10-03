@@ -603,7 +603,7 @@ namespace Epi.Windows.MakeView
                     break;
                 }
 
-                index = checkCode.LastIndexOf("\nPage ");
+                index = checkCode.LastIndexOf("\nPage");
                 index = index == -1 ? checkCode.LastIndexOf("\n\tPage ") : index;
                 index = index == -1 ? checkCode.LastIndexOf(" Page ") : index;
                 index = index == -1 ? checkCode.LastIndexOf("Page ") : index;
