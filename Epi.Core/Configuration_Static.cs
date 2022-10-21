@@ -109,6 +109,15 @@ namespace Epi
         private static ExecutionEnvironment environment = ExecutionEnvironment.Unknown;
         private static FileSystemEventHandler configUpdateCallback = new FileSystemEventHandler(OnConfigChanged);
 
+
+        public static bool IsRelease
+        {
+            get 
+            {
+                return passPhrase != passPhraseDebug;
+            }
+        }
+
         /// <summary>
         /// Environment
         /// </summary>

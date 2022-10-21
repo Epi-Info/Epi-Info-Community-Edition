@@ -31,14 +31,14 @@
 
 
     </UserControl.Resources>
-    
+
     <Grid  x:Name="grdMain" Background="White" Cursor="Arrow" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel Grid.Column="0"  Panel.ZIndex="2" DockPanel.Dock="Top"  Name="pnlRightMenu" Orientation="Horizontal" Height="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,15,0" Background="Transparent">
-            
+
             <Border BorderBrush="#5c5d5f" BorderThickness="1" Width="170" Height="Auto" Background="White"  >
                 <WrapPanel Orientation="Vertical">
                     <Button x:Name="optionsButton" Style="{StaticResource buttonMenuItemsRight}" Padding="0" TabIndex="10" KeyUp="options_Keydown" Click="options_Click">
@@ -89,8 +89,8 @@
                             <TextBlock x:Name="txtOtherEpiResources"  Style="{StaticResource setting_buttons}">
                                 
                                x_OTHER EPI RESOURCES
-                                
-                                           
+
+
                             </TextBlock>
                             <Image HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="11" Margin="-20 0 0 -1">
                                 <Image.Source>
@@ -106,7 +106,7 @@
                             </Button.ToolTip>
 
                             <TextBlock Background="#e6e7e8" Style="{StaticResource setting_buttons}">ACTIVEEPI.com</TextBlock>
-                          
+
                         </Button>
                         <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="17" KeyUp="openEpi_Keydown" Click="openEpi_Click">
                             <Button.ToolTip>
@@ -125,7 +125,7 @@
                             <TextBlock x:Name="txtEpiInfoLogs" Style="{StaticResource setting_buttons}">EPI INFO™ LOGS</TextBlock>
                         </StackPanel>
                     </Button>
-                    
+
                     <ContentControl  MouseDown="exit_Click" Visibility="Collapsed">
                         <StackPanel>
                             <TextBlock x:Name="txtExit" Style="{StaticResource setting_buttons}">EXIT</TextBlock>
@@ -150,7 +150,7 @@
                         </Image>
 
                     </StackPanel>
-                    
+
                     <StackPanel Grid.Column="1">
                         <Button Style="{StaticResource buttonMenuRight}" TabIndex="9" KeyUp="rightMenu_Keydown" Name="btnRightMenuHide"  Click="btnRightMenuHide_Click" Margin="0,15,0,0">
                             <Button.ToolTip >
@@ -285,9 +285,17 @@
                             </Grid>
                         </Border>
 
-                        <StackPanel  Background="#123b6a" Height="33" Margin="0 0 0 0">
-                            <StackPanel Orientation="Horizontal" Margin="15 12 15 0">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel x:Name="versionFooter" Background="#123b6a" Height="33">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Grid.Column="0" Margin="15, 10, 0,0"  Orientation="Horizontal" HorizontalAlignment="Left">
                                     <Button TabIndex="6" Style="{StaticResource buttonfooterLinks}" KeyUp="epiInfoWebsite_Keydown" Click="epiInfoWebsite_Click" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="#d2dfee " >
                                         <Button.ToolTip>
                                             <ToolTip Visibility="Hidden">EPI INFO™ WEBSITE</ToolTip>
@@ -302,22 +310,25 @@
                                         <TextBlock x:Name="aboutEpiInfo" Foreground="#d2dfee">ABOUT EPI INFO™</TextBlock>
                                     </Button>
                                 </StackPanel>
-                                <StackPanel x:Name="LangandVer"  HorizontalAlignment="Right" Orientation="Horizontal" Margin="245 0 0 0">
+                                <StackPanel Grid.Row="0" Grid.Column="1"  Margin="0,10,0,0">
+                                    <TextBlock x:Name="testingOnly" TextAlignment="Center" FontWeight="Bold" Foreground="#d2dfee" >FOR BETA TESTING</TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="2" Margin="0, 10, 15,0" x:Name="LangandVer" HorizontalAlignment="Right" Orientation="Horizontal" >
                                     <Button  Style="{StaticResource buttonfooterLinks}" TabIndex="8" KeyDown="language_Keydown"  Cursor="Hand" Click="btnLocaleClick">
                                         <Button.ToolTip>
                                             <ToolTip Visibility="Hidden">LANGUAGE</ToolTip>
                                         </Button.ToolTip>
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 5 0">
                                             <TextBlock x:Name="txtLanguage" Foreground="#d2dfee" Padding="0 0 5 0">LANGUAGE:</TextBlock>
                                             <TextBlock Foreground="#d2dfee" x:Name="tsslLocale" Padding="0 0 5 0"></TextBlock>
                                         </StackPanel>
                                     </Button>
                                     <StackPanel Orientation="Horizontal" Margin="0 0 5 0">
-                                        <TextBlock x:Name="txtVersion" Margin="0 0 3 0" Foreground="#8eafd5">VERSION:</TextBlock>
-                                        <TextBlock Foreground="#8eafd5" x:Name="tsslVersion"></TextBlock>
+                                        <TextBlock x:Name="txtVersion" Margin="0 0 3 0" Foreground="#d2dfee">VERSION:</TextBlock>
+                                        <TextBlock Foreground="#d2dfee" x:Name="tsslVersion"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
+                            </Grid>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

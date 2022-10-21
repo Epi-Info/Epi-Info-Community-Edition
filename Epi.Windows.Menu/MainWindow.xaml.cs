@@ -37,15 +37,26 @@ namespace Epi.Windows.Menu
 
         # region Constructor
 
-        public MainWindow()           
+        public MainWindow()
         {
-            InitializeComponent();          
-                ApplicationIdentity appId = new ApplicationIdentity(typeof(Configuration).Assembly);               
-                this.tsslLocale.Text = Thread.CurrentThread.CurrentUICulture.Name;
-                this.tsslVersion.Text = appId.Version;
-                mainform = new MainForm();
-            
+            InitializeComponent();
+            ApplicationIdentity appId = new ApplicationIdentity(typeof(Configuration).Assembly);
+            this.tsslLocale.Text = Thread.CurrentThread.CurrentUICulture.Name;
+            this.tsslVersion.Text = appId.Version;
 
+            if (Configuration.IsRelease)
+            {
+                versionFooter.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(18, 59, 106));
+                testingOnly.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                versionFooter.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(106, 21, 18));
+                testingOnly.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            mainform = new MainForm();
+         
             #region Translation
             
             txtlblCreateForms.Text = MenuSharedStrings.MENU_CREATE_FORMS;
