@@ -1931,6 +1931,9 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="DASHBOARD_CONTEXTMENU_ADD_KMSURVIVAL_GADGET" xml:space="preserve">
     <value>Kaplan Meier Survival</value>
   </data>
+  <data name="DASHBOARD_CONTEXTMENU_ADD_COXPH_GADGET" xml:space="preserve">
+    <value>Cox Proportional Hazards</value>
+  </data>
   <data name="DASHBOARD_CONTEXTMENU_ADD_CHART_GADGET" xml:space="preserve">
     <value>Chart</value>
   </data>
@@ -2296,6 +2299,9 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   </data>
   <data name="CNTXT_CMD_KMSURV" xml:space="preserve">
     <value>Kaplan Meier Survival</value>
+  </data>
+  <data name="CNTXT_CMD_COXPH" xml:space="preserve">
+    <value>Cox Proportional Hazards</value>
   </data>
   <data name="CNTXT_CMD_LINEARREGRESSION" xml:space="preserve">
     <value>Linear Regression</value>
