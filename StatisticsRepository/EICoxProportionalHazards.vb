@@ -39,11 +39,19 @@ Option Compare Text
 
 		Dim DT As System.Data.DataTable = New System.Data.DataTable()
 
-		For Each column As DataColumn In context.Columns
-			Dim newColumn As DataColumn = New DataColumn(column.ColumnName)
-			newColumn.DataType = column.DataType
-			DT.Columns.Add(newColumn)
-		Next
+		If context IsNot Nothing Then
+			For Each column As DataColumn In context.Columns
+				Dim newColumn As DataColumn = New DataColumn(column.ColumnName)
+				newColumn.DataType = column.DataType
+				DT.Columns.Add(newColumn)
+			Next
+		Else
+			For Each column As DataColumn In contextColumns
+				Dim newColumn As DataColumn = New DataColumn(column.ColumnName)
+				newColumn.DataType = column.DataType
+				DT.Columns.Add(newColumn)
+			Next
+		End If
 
 		Dim VariableList As List(Of String) = New List(Of String)
 

@@ -493,7 +493,7 @@ namespace EpiDashboard
 							kmSurvival.contextInputVariableList = inputVariableList;
 							coxPH.contextInputVariableList = inputVariableList;
 							Dictionary<string, string> contextSetProperties = new Dictionary<string, string>();
-							contextSetProperties.Add("TableName", "LEUKEM210");
+							contextSetProperties.Add("TableName", "Dash");
 							contextSetProperties.Add("CommandText", "KMSURVIVAL TIMEVAR = TESTVAR * CENSOREDVAR (0) GRAPHTYPE = \"Survival Probability\"");
 							contextSetProperties.Add("BLabels", "Yes;No;Missing");
 							kmSurvival.contextSetProperties = contextSetProperties;
@@ -503,7 +503,7 @@ namespace EpiDashboard
 							coxPH.contextColumns = regressTable.Columns;
 							coxPH.contextDataTable = regressTable;
 							kmSurvival.Execute();
-							coxPH.Execute();
+							//coxPH.Execute();
 
 							Array KMResultsArray = (Array)kmSurvival.ResultArray;
 							Array KMRA1 = (Array)KMResultsArray.GetValue(1,1);
