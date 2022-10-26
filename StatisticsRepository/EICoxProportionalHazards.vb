@@ -17,17 +17,25 @@ Option Compare Text
 
     Private Const ErrStart As Integer = &H3000
     Private Const conConnStr As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
-    Private context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Private context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Public contextInputVariableList As Dictionary(Of String, String)
+	Public contextSetProperties As Dictionary(Of String, String)
+	Public contextColumns As System.Data.DataColumnCollection
+	Public EpiViewVariableList As Dictionary(Of String, EpiInfo.Plugin.IVariable)
+	Public contextDataTable As System.Data.DataTable
 
-    Public Sub Construct(ByVal AnalysisStatisticContext As EpiInfo.Plugin.IAnalysisStatisticContext) Implements EpiInfo.Plugin.IAnalysisStatistic.Construct
+	Public Sub Construct(ByVal AnalysisStatisticContext As EpiInfo.Plugin.IAnalysisStatisticContext) Implements EpiInfo.Plugin.IAnalysisStatistic.Construct
         context = AnalysisStatisticContext
     End Sub
 
     Public Sub Execute() Implements EpiInfo.Plugin.IAnalysisStatistic.Execute
-        'Formerly EICoxRegress() --the main function running Cox Proportional Hazards statistic
+		'Formerly EICoxRegress() --the main function running Cox Proportional Hazards statistic
 
 		Dim config As Dictionary(Of String, String) = New Dictionary(Of String, String)
-		config = context.SetProperties
+		config = contextSetProperties
+		If context IsNot Nothing Then
+			config = context.SetProperties
+		End If
 
 		Dim DT As System.Data.DataTable = New System.Data.DataTable()
 

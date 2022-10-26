@@ -491,6 +491,7 @@ namespace EpiDashboard
 							StatisticsRepository.EICoxProportionalHazards coxPH = new StatisticsRepository.EICoxProportionalHazards();
 							IAnalysisStatisticContext contexxt = new Object() as IAnalysisStatisticContext;
 							kmSurvival.contextInputVariableList = inputVariableList;
+							coxPH.contextInputVariableList = inputVariableList;
 							Dictionary<string, string> contextSetProperties = new Dictionary<string, string>();
 							contextSetProperties.Add("TableName", "LEUKEM210");
 							contextSetProperties.Add("CommandText", "KMSURVIVAL TIMEVAR = TESTVAR * CENSOREDVAR (0) GRAPHTYPE = \"Survival Probability\"");
@@ -498,6 +499,9 @@ namespace EpiDashboard
 							kmSurvival.contextSetProperties = contextSetProperties;
 							kmSurvival.contextColumns = regressTable.Columns;
 							kmSurvival.contextDataTable = regressTable;
+							coxPH.contextSetProperties = contextSetProperties;
+							coxPH.contextColumns = regressTable.Columns;
+							coxPH.contextDataTable = regressTable;
 							kmSurvival.Execute();
 							coxPH.Execute();
 
