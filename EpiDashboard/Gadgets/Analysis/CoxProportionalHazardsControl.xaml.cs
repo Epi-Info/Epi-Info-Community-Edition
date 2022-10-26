@@ -488,6 +488,7 @@ namespace EpiDashboard
                         {
                             StatisticsRepository.LogisticRegression logisticRegression = new StatisticsRepository.LogisticRegression();
 							StatisticsRepository.EIKaplanMeierSurvival kmSurvival = new StatisticsRepository.EIKaplanMeierSurvival();
+							StatisticsRepository.EICoxProportionalHazards coxPH = new StatisticsRepository.EICoxProportionalHazards();
 							IAnalysisStatisticContext contexxt = new Object() as IAnalysisStatisticContext;
 							kmSurvival.contextInputVariableList = inputVariableList;
 							Dictionary<string, string> contextSetProperties = new Dictionary<string, string>();
