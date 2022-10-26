@@ -503,7 +503,7 @@ namespace EpiDashboard
 							coxPH.contextColumns = regressTable.Columns;
 							coxPH.contextDataTable = regressTable;
 							kmSurvival.Execute();
-							//coxPH.Execute();
+							coxPH.Execute();
 
 							Array KMResultsArray = (Array)kmSurvival.ResultArray;
 							Array KMRA1 = (Array)KMResultsArray.GetValue(1,1);
