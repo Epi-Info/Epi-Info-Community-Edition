@@ -119,18 +119,22 @@ Option Compare Text
                 strGraphResults = PlotGraphs(ldblB)
 			End If
 
-            args.Add("COMMANDNAME", "COXPH")
-            args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
-            args.Add("HTMLRESULTS", strGraphResults + strCoxPHResults)
+			args.Add("COMMANDNAME", "COXPH")
+			If context IsNot Nothing Then
+				args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+			End If
+			args.Add("HTMLRESULTS", strGraphResults + strCoxPHResults)
 
-            context.Display(args)
+			If context IsNot Nothing Then
+				context.Display(args)
+			End If
 
-            'If UBound(mstraPlotVar) > 0 Then
-            'If mlstPlotVar.Count > 0 Then
-            '    'ToDo: den4: Get Plots working when we have Graph set up.
-            '    PlotGraphs(ldblB)
-            'End If
-        Else
+			'If UBound(mstraPlotVar) > 0 Then
+			'If mlstPlotVar.Count > 0 Then
+			'    'ToDo: den4: Get Plots working when we have Graph set up.
+			'    PlotGraphs(ldblB)
+			'End If
+		Else
             Err.Raise(vbObjectError + 120, , lstrError)
             strCoxPHResults = "<B><TLT>ERROR: Colinear Data </TLT></B>"
             ReDim Results(2, 1)
@@ -138,11 +142,15 @@ Option Compare Text
             Results(1, 0) = "Colinear Data"
             strCoxPHResults = "<br clear=""all"" /><p align=""left""><b><tlt>Colinear Data</tlt></b></p>"
 
-            args.Add("COMMANDNAME", "COXPH")
-            args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
-            args.Add("HTMLRESULTS", strCoxPHResults)
-            context.Display(args)
-        End If
+			args.Add("COMMANDNAME", "COXPH")
+			If context IsNot Nothing Then
+				args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+			End If
+			args.Add("HTMLRESULTS", strCoxPHResults)
+			If context IsNot Nothing Then
+				context.Display(args)
+			End If
+		End If
         Exit Sub
 errorLikeLihood:
         strCoxPHResults = "<TLT>ERROR: " & Err.Description & "</TLT>"
@@ -151,12 +159,16 @@ errorLikeLihood:
         Results(1, 0) = Err.Description
         strCoxPHResults = "<br clear=""all"" /><p align=""left""><b><tlt> " & Err.Description & "</tlt></b></p>"
 
-        args.Add("COMMANDNAME", "COXPH")
-        args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
-        args.Add("HTMLRESULTS", strCoxPHResults)
-        context.Display(args)
-        'Resume
-        ReDim Results(1, 0) 'den4
+		args.Add("COMMANDNAME", "COXPH")
+		If context IsNot Nothing Then
+			args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+		End If
+		args.Add("HTMLRESULTS", strCoxPHResults)
+		If context IsNot Nothing Then
+			context.Display(args)
+		End If
+		'Resume
+		ReDim Results(1, 0) 'den4
         Exit Sub
         Resume
     End Sub
@@ -381,6 +393,10 @@ errorLikeLihood:
 			NumRows = context.GetDataRows(Nothing).Count
 		Else
 			NumRows = contextDataTable.Rows.Count
+			EICoxLoadData.contextColumns = contextColumns
+			EICoxLoadData.contextDataTable = contextDataTable
+			EICoxLoadData.contextInputVariableList = contextInputVariableList
+			EICoxLoadData.contextSetProperties = contextSetProperties
 		End If
 		EICoxLoadData.context = context
         EICoxLoadData.dataTable = New DataTable
