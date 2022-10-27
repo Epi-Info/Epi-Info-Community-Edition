@@ -100,9 +100,9 @@ Module EICoxLoadData
         lintTwoNulls = 0
 
         tempTable = New DataTable("output")
-        tempTable.Columns.Add(lstrName, context.Columns(lstrName).DataType)
+		tempTable.Columns.Add(lstrName, context.Columns(lstrName).DataType)
 
-        Dim lastValue As Object
+		Dim lastValue As Object
         lastValue = VariantType.Null
 
         'CHECK FOR VARIABLE IN THE DISCRETE ARRAY

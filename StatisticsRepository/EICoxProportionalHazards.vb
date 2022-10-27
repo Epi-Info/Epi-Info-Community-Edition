@@ -376,21 +376,35 @@ errorLikeLihood:
         Dim d As Date
         Dim lstraTimeDep() As String
 
-        Dim NumRows As Integer
-        NumRows = context.GetDataRows(Nothing).Count
-        EICoxLoadData.context = context
+		Dim NumRows As Integer
+		If context IsNot Nothing Then
+			NumRows = context.GetDataRows(Nothing).Count
+		Else
+			NumRows = contextDataTable.Rows.Count
+		End If
+		EICoxLoadData.context = context
         EICoxLoadData.dataTable = New DataTable
 
-        For Each column As DataColumn In context.Columns
-            dataTable.Columns.Add(column.ColumnName, column.DataType)
-        Next
+		If context IsNot Nothing Then
+			For Each column As DataColumn In context.Columns
+				dataTable.Columns.Add(column.ColumnName, column.DataType)
+			Next
 
-        For Each row As DataRow In context.GetDataRows(Nothing)
-            EICoxLoadData.dataTable.ImportRow(row)
-        Next
+			For Each row As DataRow In context.GetDataRows(Nothing)
+				EICoxLoadData.dataTable.ImportRow(row)
+			Next
+		Else
+			For Each column As DataColumn In contextColumns
+				dataTable.Columns.Add(column.ColumnName, column.DataType)
+			Next
+
+			For Each row As DataRow In contextDataTable.Rows
+				EICoxLoadData.dataTable.ImportRow(row)
+			Next
+		End If
 
 
-        If NumRows <> 0 Then
+		If NumRows <> 0 Then
 
             'Check to make sure DataBase has been updated
             p = 0
