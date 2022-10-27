@@ -206,61 +206,85 @@ errorLikeLihood:
         mstraBLabels(1) = "True"
         mstraBLabels(2) = "Missing"
 
-        'Extract data from context.SetProperties
+		'Extract data from context.SetProperties
 
-        If context.SetProperties.ContainsKey("Database") Then
-            mstrConnString = conConnStr & context.SetProperties("Database") & ";"
-        End If
+		If context IsNot Nothing Then
+			If context.SetProperties.ContainsKey("Database") Then
+				mstrConnString = conConnStr & context.SetProperties("Database") & ";"
+			End If
 
-        If context.SetProperties.ContainsKey("ConnectionString") Then
-            mstrConnString = context.SetProperties("ConnectionString")
-        End If
+			If context.SetProperties.ContainsKey("ConnectionString") Then
+				mstrConnString = context.SetProperties("ConnectionString")
+			End If
 
-        If context.SetProperties.ContainsKey("TableName") Then
-            mstrTableName = context.SetProperties("TableName")
-        End If
+			If context.SetProperties.ContainsKey("TableName") Then
+				mstrTableName = context.SetProperties("TableName")
+			End If
 
-        If context.SetProperties.ContainsKey("BLabels") Then
-            Dim booleanLabels() As String
-            booleanLabels = context.SetProperties("BLabels").ToString().Split(";")
+			If context.SetProperties.ContainsKey("BLabels") Then
+				Dim booleanLabels() As String
+				booleanLabels = context.SetProperties("BLabels").ToString().Split(";")
 
-            For i = 0 To UBound(mstraboolean)
-                mstraboolean(i) = booleanLabels(i)
-            Next
-            'mstrConnString = context.SetProperties("BLabels")
-        End If
+				For i = 0 To UBound(mstraboolean)
+					mstraboolean(i) = booleanLabels(i)
+				Next
+				'mstrConnString = context.SetProperties("BLabels")
+			End If
+		Else
+			If contextSetProperties.ContainsKey("Database") Then
+				mstrConnString = conConnStr & contextSetProperties("Database") & ";"
+			End If
 
-        'If context.SetProperties.ContainsKey("ShowBaseline") Then
-        '    Dim success As Boolean
-        '    success = Boolean.TryParse(context.SetProperties("ShowBaseline"), mboolShowBaseline)
-        'End If
+			If contextSetProperties.ContainsKey("ConnectionString") Then
+				mstrConnString = contextSetProperties("ConnectionString")
+			End If
 
-        'If context.SetProperties.ContainsKey("Iterations") Then
-        '    Dim success As Boolean
-        '    success = Boolean.TryParse(context.SetProperties("Iterations"), mlngIter)
-        'End If
+			If contextSetProperties.ContainsKey("TableName") Then
+				mstrTableName = contextSetProperties("TableName")
+			End If
 
-        'If context.SetProperties.ContainsKey("Convergence") Then
-        '    Dim success As Boolean
-        '    success = Boolean.TryParse(context.SetProperties("Convergence"), mdblConv)
-        'End If
+			If contextSetProperties.ContainsKey("BLabels") Then
+				Dim booleanLabels() As String
+				booleanLabels = contextSetProperties("BLabels").ToString().Split(";")
 
-        'If context.SetProperties.ContainsKey("Tolerance") Then
-        '    Dim success As Boolean
-        '    success = Boolean.TryParse(context.SetProperties("Tolerance"), mdblToler)
-        'End If
+				For i = 0 To UBound(mstraboolean)
+					mstraboolean(i) = booleanLabels(i)
+				Next
+				'mstrConnString = context.SetProperties("BLabels")
+			End If
+		End If
 
-        'If context.SetProperties.ContainsKey("P") Then
-        '    Dim success As Boolean
-        '    success = Double.TryParse(context.SetProperties("P"), mdblP)
-        '    If success = True Then
-        '        mdblC = 1 - mdblP
-        '        mdblP = dist1.ZFROMP((1 - mdblP) * 0.5)
-        '        mstrC = Str(context.SetProperties("P") * 100)
-        '    End If
-        'End If
+		'If context.SetProperties.ContainsKey("ShowBaseline") Then
+		'    Dim success As Boolean
+		'    success = Boolean.TryParse(context.SetProperties("ShowBaseline"), mboolShowBaseline)
+		'End If
 
-        ReDim mstraTerms(0)
+		'If context.SetProperties.ContainsKey("Iterations") Then
+		'    Dim success As Boolean
+		'    success = Boolean.TryParse(context.SetProperties("Iterations"), mlngIter)
+		'End If
+
+		'If context.SetProperties.ContainsKey("Convergence") Then
+		'    Dim success As Boolean
+		'    success = Boolean.TryParse(context.SetProperties("Convergence"), mdblConv)
+		'End If
+
+		'If context.SetProperties.ContainsKey("Tolerance") Then
+		'    Dim success As Boolean
+		'    success = Boolean.TryParse(context.SetProperties("Tolerance"), mdblToler)
+		'End If
+
+		'If context.SetProperties.ContainsKey("P") Then
+		'    Dim success As Boolean
+		'    success = Double.TryParse(context.SetProperties("P"), mdblP)
+		'    If success = True Then
+		'        mdblC = 1 - mdblP
+		'        mdblP = dist1.ZFROMP((1 - mdblP) * 0.5)
+		'        mstrC = Str(context.SetProperties("P") * 100)
+		'    End If
+		'End If
+
+		ReDim mstraTerms(0)
         Dim terms As Integer
         Dim discrete As Integer
         Dim covariate As Integer
@@ -269,38 +293,66 @@ errorLikeLihood:
         discrete = 0
         covariate = 0
 
-        'Extract data from context.InputVariableList
+		'Extract data from context.InputVariableList
 
-        mstraCovariates = context.InputVariableList("CovariateList").ToString().Split(";")
-        'mstraDiscrete is a subset of mstraCovariates, but not necessarily equal, 
-        'but may be equal if only one, GroupVar or if ALL OtherVar's are also specified as DummyVars
-        mstraDiscrete = context.InputVariableList("DiscreteList").ToString().Split(";")
-        mstraStrataVar = context.InputVariableList("StrataVarList").ToString().Split(";")
-        mstrTimeVar = context.InputVariableList("time_variable").ToString()
-        'ToDo: den4: eventually, remove next ReDim when ExtendVarList added to context
-        ReDim mstraTimeDependentVar(0)
-        'mstraTimeDependentVar = context.InputVariableList("ExtendVarList").ToString().Split(";")
-        mstrCensoredVar = context.InputVariableList("censor_variable").ToString()
-        Select Case (context.InputVariableList("censor_value").ToString())
-            Case "(+)"
-                mstrUncensoredVal = "1"
-            Case "(-)"
-                mstrUncensoredVal = "0"
-            Case "(.)"
-                mstrUncensoredVal = String.Empty
-            Case Else
-                mstrUncensoredVal = context.InputVariableList("censor_value").ToString()
-        End Select
-        If Not context.InputVariableList("weightvar") Is Nothing Then
-            mstrWeightVar = context.InputVariableList("weightvar").ToString()
-        Else
-            mstrWeightVar = String.Empty
-        End If
-        If Not context.InputVariableList("GraphVariableList") Is Nothing Then
-			mstraPlotVar = context.InputVariableList("GraphVariableList").ToString().Split(",")
-			mlstPlotVar = mstraPlotVar.ToList()
-        End If
-    End Sub
+		If context IsNot Nothing Then
+			mstraCovariates = context.InputVariableList("CovariateList").ToString().Split(";")
+			'mstraDiscrete is a subset of mstraCovariates, but not necessarily equal, 
+			'but may be equal if only one, GroupVar or if ALL OtherVar's are also specified as DummyVars
+			mStrADiscrete = context.InputVariableList("DiscreteList").ToString().Split(";")
+			mstraStrataVar = context.InputVariableList("StrataVarList").ToString().Split(";")
+			mstrTimeVar = context.InputVariableList("time_variable").ToString()
+			'ToDo: den4: eventually, remove next ReDim when ExtendVarList added to context
+			ReDim mstraTimeDependentVar(0)
+			'mstraTimeDependentVar = context.InputVariableList("ExtendVarList").ToString().Split(";")
+			mstrCensoredVar = context.InputVariableList("censor_variable").ToString()
+			Select Case (context.InputVariableList("censor_value").ToString())
+				Case "(+)"
+					mstrUncensoredVal = "1"
+				Case "(-)"
+					mstrUncensoredVal = "0"
+				Case "(.)"
+					mstrUncensoredVal = String.Empty
+				Case Else
+					mstrUncensoredVal = context.InputVariableList("censor_value").ToString()
+			End Select
+			If Not context.InputVariableList("weightvar") Is Nothing Then
+				mstrWeightVar = context.InputVariableList("weightvar").ToString()
+			Else
+				mstrWeightVar = String.Empty
+			End If
+			If Not context.InputVariableList("GraphVariableList") Is Nothing Then
+				mstraPlotVar = context.InputVariableList("GraphVariableList").ToString().Split(",")
+				mlstPlotVar = mstraPlotVar.ToList()
+			End If
+		Else
+			mstraCovariates = contextInputVariableList("CovariateList").ToString().Split(";")
+			mStrADiscrete = contextInputVariableList("DiscreteList").ToString().Split(";")
+			mstraStrataVar = contextInputVariableList("StrataVarList").ToString().Split(";")
+			mstrTimeVar = contextInputVariableList("time_variable").ToString()
+			ReDim mstraTimeDependentVar(0)
+			mstrCensoredVar = contextInputVariableList("censor_variable").ToString()
+			Select Case (contextInputVariableList("censor_value").ToString())
+				Case "(+)"
+					mstrUncensoredVal = "1"
+				Case "(-)"
+					mstrUncensoredVal = "0"
+				Case "(.)"
+					mstrUncensoredVal = String.Empty
+				Case Else
+					mstrUncensoredVal = contextInputVariableList("censor_value").ToString()
+			End Select
+			If Not contextInputVariableList("weightvar") Is Nothing Then
+				mstrWeightVar = contextInputVariableList("weightvar").ToString()
+			Else
+				mstrWeightVar = String.Empty
+			End If
+			If Not contextInputVariableList("GraphVariableList") Is Nothing Then
+				mstraPlotVar = contextInputVariableList("GraphVariableList").ToString().Split(",")
+				mlstPlotVar = mstraPlotVar.ToList()
+			End If
+		End If
+	End Sub
 
     Public Function GetRawData() As Boolean
         Dim lstrError As String

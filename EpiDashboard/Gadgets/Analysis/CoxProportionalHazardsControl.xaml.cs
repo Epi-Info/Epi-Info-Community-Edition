@@ -490,6 +490,12 @@ namespace EpiDashboard
 							StatisticsRepository.EIKaplanMeierSurvival kmSurvival = new StatisticsRepository.EIKaplanMeierSurvival();
 							StatisticsRepository.EICoxProportionalHazards coxPH = new StatisticsRepository.EICoxProportionalHazards();
 							IAnalysisStatisticContext contexxt = new Object() as IAnalysisStatisticContext;
+							inputVariableList.Add("CovariateList", "");
+							inputVariableList.Add("DiscreteList", "");
+							inputVariableList.Add("StrataVarList", "");
+							inputVariableList.Add("censor_value", inputVariableList["uncensored_value"]);
+							inputVariableList.Add("weightvar", inputVariableList["weight_variable"]);
+							inputVariableList.Add("GraphVariableList", inputVariableList["group_variable"]);
 							kmSurvival.contextInputVariableList = inputVariableList;
 							coxPH.contextInputVariableList = inputVariableList;
 							Dictionary<string, string> contextSetProperties = new Dictionary<string, string>();
