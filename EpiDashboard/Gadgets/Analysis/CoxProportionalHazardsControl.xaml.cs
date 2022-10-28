@@ -509,22 +509,25 @@ namespace EpiDashboard
 							coxPH.contextColumns = regressTable.Columns;
 							coxPH.contextDataTable = regressTable;
 							kmSurvival.Execute();
-							coxPH.Execute();
 
 							Array KMResultsArray = (Array)kmSurvival.ResultArray;
 							Array KMRA1 = (Array)KMResultsArray.GetValue(1,1);
-							Double.TryParse(KMRA1.GetValue(0, 2).ToString(), out results.scoreDF);
-							Double.TryParse(KMRA1.GetValue(0, 3).ToString(), out results.scoreP);
-							Double.TryParse(KMRA1.GetValue(0, 1).ToString(), out results.scoreStatistic);
-							Double.TryParse(KMRA1.GetValue(1, 2).ToString(), out results.LRDF);
-							Double.TryParse(KMRA1.GetValue(1, 3).ToString(), out results.LRP);
-							Double.TryParse(KMRA1.GetValue(1, 1).ToString(), out results.LRStatistic);
+							coxPH.Execute();
+							Array CoxResultsArray = (Array)coxPH.ResultArray;
+							Array CPHRA1 = (Array)CoxResultsArray.GetValue(1,2);
+							Double.TryParse(CPHRA1.GetValue(2, 0).ToString(), out results.scoreDF);
+							Double.TryParse(CPHRA1.GetValue(3, 0).ToString(), out results.scoreP);
+							Double.TryParse(CPHRA1.GetValue(1, 0).ToString(), out results.scoreStatistic);
+							Double.TryParse(CPHRA1.GetValue(2, 1).ToString(), out results.LRDF);
+							Double.TryParse(CPHRA1.GetValue(3, 1).ToString(), out results.LRP);
+							Double.TryParse(CPHRA1.GetValue(1, 1).ToString(), out results.LRStatistic);
 							
 							DataTable dattab = new DataTable();
 							dattab.Columns.Add("time");
 							dattab.Columns.Add("percent");
 							dattab.Columns.Add("treatment");
-							Array graphdata = (Array)KMResultsArray.GetValue(1, 0);
+							//Array graphdata = (Array)KMResultsArray.GetValue(1, 0);
+							Array graphdata = (Array)CoxResultsArray.GetValue(1, 3);
 							string currentTreatment = graphdata.GetValue(1, 0).ToString();
 							List<int> treatmentStartIndexes = new List<int>();
 							List<string> treatmentNames = new List<string>();
@@ -534,7 +537,7 @@ namespace EpiDashboard
 							{
 								DataRow dr = dattab.NewRow();
 								dr[0] = graphdata.GetValue(0, pct);
-								dr[1] = graphdata.GetValue(5, pct);
+								dr[1] = graphdata.GetValue(6, pct);
 								dr[2] = graphdata.GetValue(1, pct);
 								dattab.Rows.Add(dr);
 								if (!dr[2].ToString().Equals(currentTreatment))
