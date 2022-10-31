@@ -207,8 +207,10 @@ namespace EpiDashboard
 		public void ClearResults() 
         {
             grdParameters.Visibility = Visibility.Collapsed;
+			grdRegress.Visibility = Visibility.Collapsed;
 
-            waitPanel.Visibility = System.Windows.Visibility.Visible;
+
+			waitPanel.Visibility = System.Windows.Visibility.Visible;
             messagePanel.Text = string.Empty;
             messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -217,8 +219,10 @@ namespace EpiDashboard
         public override void CollapseOutput()
         {
             grdParameters.Visibility = Visibility.Collapsed;
+			grdRegress.Visibility = Visibility.Collapsed;
 
-            if (this.txtFilterString != null && !string.IsNullOrEmpty(this.txtFilterString.Text))
+
+			if (this.txtFilterString != null && !string.IsNullOrEmpty(this.txtFilterString.Text))
             {
                 this.txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
             }
@@ -232,8 +236,9 @@ namespace EpiDashboard
         public override void ExpandOutput()
         {
             grdParameters.Visibility = Visibility.Visible;
-            
-            if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
+			grdRegress.Visibility = Visibility.Visible;
+
+			if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
             {
                 this.messagePanel.Visibility = System.Windows.Visibility.Visible;
             }
@@ -514,6 +519,7 @@ namespace EpiDashboard
 							Array KMRA1 = (Array)KMResultsArray.GetValue(1,1);
 							coxPH.Execute();
 							Array CoxResultsArray = (Array)coxPH.ResultArray;
+							Array CPHRA0 = (Array)CoxResultsArray.GetValue(1,0);
 							Array CPHRA1 = (Array)CoxResultsArray.GetValue(1,2);
 							Double.TryParse(CPHRA1.GetValue(2, 0).ToString(), out results.scoreDF);
 							Double.TryParse(CPHRA1.GetValue(3, 0).ToString(), out results.scoreP);
@@ -588,21 +594,19 @@ namespace EpiDashboard
                                 throw new ApplicationException(results.errorMessage);
 
                             }
-                            if (results.regressionResults.variables != null)
+                            if (CPHRA0 != null)
                             {
-                                foreach (StatisticsRepository.LogisticRegression.VariableRow vrow in results.regressionResults.variables)
-                                {
-                                    VariableRow nrow = new VariableRow();
-                                    nrow.coefficient = vrow.coefficient;
-                                    nrow.ci = vrow.ci;
-                                    nrow.P = vrow.P;
-                                    nrow.ninetyFivePercent = vrow.ninetyFivePercent;
-                                    nrow.oddsRatio = vrow.oddsRatio;
-                                    nrow.se = vrow.se;
-                                    nrow.variableName = vrow.variableName;
-                                    nrow.Z = vrow.Z;
-                                    results.variables.Add(nrow);
-                                }
+								int j = 0;
+								VariableRow nrow = new VariableRow();
+								nrow.variableName = CPHRA0.GetValue(0, 0).ToString();
+								Double.TryParse(CPHRA0.GetValue(1, 0).ToString(), out nrow.coefficient);
+								Double.TryParse(CPHRA0.GetValue(2, 0).ToString(), out nrow.ci);
+								Double.TryParse(CPHRA0.GetValue(3, 0).ToString(), out nrow.P);
+								Double.TryParse(CPHRA0.GetValue(4, 0).ToString(), out nrow.ninetyFivePercent);
+								Double.TryParse(CPHRA0.GetValue(5, 0).ToString(), out nrow.oddsRatio);
+								Double.TryParse(CPHRA0.GetValue(6, 0).ToString(), out nrow.se);
+								Double.TryParse(CPHRA0.GetValue(7, 0).ToString(), out nrow.Z);
+								results.variables.Add(nrow);
 
                                 
                             }
@@ -649,14 +653,16 @@ namespace EpiDashboard
         private void RenderRegressionResults(RegressionResults results)
         {
             grdParameters.Visibility = System.Windows.Visibility.Visible;
+			grdRegress.Visibility = System.Windows.Visibility.Visible;
 
-            waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+			waitPanel.Visibility = System.Windows.Visibility.Collapsed;
             btnRun.IsEnabled = true;
 
             if (!string.IsNullOrEmpty(results.errorMessage) || results.variables == null)
             {                
                 grdParameters.Visibility = System.Windows.Visibility.Hidden;
-            }
+				grdRegress.Visibility = System.Windows.Visibility.Hidden;
+			}
             else
             {                
                 grdParameters.Visibility = System.Windows.Visibility.Visible;
@@ -669,6 +675,7 @@ namespace EpiDashboard
                 txtLDF.Text = StringLiterals.SPACE + results.LRDF.ToString() + StringLiterals.SPACE;
                 txtLP.Text = StringLiterals.SPACE + results.LRP.ToString("F4") + StringLiterals.SPACE;
 
+				grdRegress.Visibility = System.Windows.Visibility.Visible;
 			}
 
             HideConfigPanel();
@@ -1125,8 +1132,9 @@ namespace EpiDashboard
             catch (ArgumentException)
             {
                 grdParameters.Visibility = System.Windows.Visibility.Hidden;
+				grdRegress.Visibility = System.Windows.Visibility.Hidden;
 
-                Epi.Windows.MsgBox.ShowError("The same variable cannot be used more than once.");
+				Epi.Windows.MsgBox.ShowError("The same variable cannot be used more than once.");
             }
 
             //return inputVariableList;
