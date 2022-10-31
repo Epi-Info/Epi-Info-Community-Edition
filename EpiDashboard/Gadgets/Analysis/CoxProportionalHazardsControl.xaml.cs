@@ -521,6 +521,7 @@ namespace EpiDashboard
 							Array CoxResultsArray = (Array)coxPH.ResultArray;
 							Array CPHRA0 = (Array)CoxResultsArray.GetValue(1,0);
 							Array CPHRA1 = (Array)CoxResultsArray.GetValue(1,2);
+							Array CPHRA2 = (Array)CoxResultsArray.GetValue(1,1);
 							Double.TryParse(CPHRA1.GetValue(2, 0).ToString(), out results.scoreDF);
 							Double.TryParse(CPHRA1.GetValue(3, 0).ToString(), out results.scoreP);
 							Double.TryParse(CPHRA1.GetValue(1, 0).ToString(), out results.scoreStatistic);
@@ -599,19 +600,27 @@ namespace EpiDashboard
 								int j = 0;
 								VariableRow nrow = new VariableRow();
 								nrow.variableName = CPHRA0.GetValue(0, 0).ToString();
-								Double.TryParse(CPHRA0.GetValue(1, 0).ToString(), out nrow.coefficient);
-								Double.TryParse(CPHRA0.GetValue(2, 0).ToString(), out nrow.ci);
-								Double.TryParse(CPHRA0.GetValue(3, 0).ToString(), out nrow.P);
-								Double.TryParse(CPHRA0.GetValue(4, 0).ToString(), out nrow.ninetyFivePercent);
-								Double.TryParse(CPHRA0.GetValue(5, 0).ToString(), out nrow.oddsRatio);
-								Double.TryParse(CPHRA0.GetValue(6, 0).ToString(), out nrow.se);
-								Double.TryParse(CPHRA0.GetValue(7, 0).ToString(), out nrow.Z);
+								Double.TryParse(CPHRA0.GetValue(4, 0).ToString(), out nrow.coefficient);
+								Double.TryParse(CPHRA0.GetValue(3, 0).ToString(), out nrow.ci);
+								Double.TryParse(CPHRA0.GetValue(7, 0).ToString(), out nrow.P);
+								Double.TryParse(CPHRA0.GetValue(2, 0).ToString(), out nrow.ninetyFivePercent);
+								Double.TryParse(CPHRA0.GetValue(1, 0).ToString(), out nrow.oddsRatio);
+								Double.TryParse(CPHRA0.GetValue(5, 0).ToString(), out nrow.se);
+								Double.TryParse(CPHRA0.GetValue(6, 0).ToString(), out nrow.Z);
 								results.variables.Add(nrow);
+							}
+							if (CPHRA2 != null)
+							{
+								results.convergence = CPHRA2.GetValue(0).ToString();
+								double iters = 0.0;
+								Double.TryParse(CPHRA2.GetValue(1).ToString(), out iters);
+								results.iterations = (int)iters;
+								double ll = 0.0;
+								Double.TryParse(CPHRA2.GetValue(2).ToString(), out ll);
+								results.finalLikelihood = -2.0 * ll;
+							}
 
-                                
-                            }
-
-                        }
+						}
 
                         this.Dispatcher.BeginInvoke(new RenderGridDelegate(RenderRegressionResults), results);
                         this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
@@ -674,6 +683,15 @@ namespace EpiDashboard
                 txtLStatistic.Text = StringLiterals.SPACE + results.LRStatistic.ToString("F4") + StringLiterals.SPACE;
                 txtLDF.Text = StringLiterals.SPACE + results.LRDF.ToString() + StringLiterals.SPACE;
                 txtLP.Text = StringLiterals.SPACE + results.LRP.ToString("F4") + StringLiterals.SPACE;
+
+				txtVariableName.Text = results.variables[0].variableName;
+				txtHazardRatio.Text = results.variables[0].oddsRatio.ToString("F4");
+				txtNinetyFive.Text = results.variables[0].ninetyFivePercent.ToString("F4");
+				txtCI.Text = results.variables[0].ci.ToString("F4");
+				txtCoefficient.Text = results.variables[0].coefficient.ToString("F4");
+				txtSE.Text = results.variables[0].se.ToString("F4");
+				txtZ.Text = results.variables[0].Z.ToString("F4");
+				txtZPValue.Text = results.variables[0].P.ToString("F4");
 
 				grdRegress.Visibility = System.Windows.Visibility.Visible;
 			}
