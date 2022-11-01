@@ -206,9 +206,16 @@ namespace EpiDashboard
 
 		public void ClearResults() 
         {
-            grdParameters.Visibility = Visibility.Collapsed;
+			grdParameters.Visibility = Visibility.Collapsed;
 			grdRegress.Visibility = Visibility.Collapsed;
-
+			int rowNum = 0;
+			foreach (RowDefinition rd in grdRegress.RowDefinitions)
+			{
+				rowNum++;
+				if (rowNum == 1)
+					continue;
+				grdRegress.RowDefinitions.Remove(rd);
+			}
 
 			waitPanel.Visibility = System.Windows.Visibility.Visible;
             messagePanel.Text = string.Empty;
@@ -683,17 +690,26 @@ namespace EpiDashboard
                 txtLStatistic.Text = StringLiterals.SPACE + results.LRStatistic.ToString("F4") + StringLiterals.SPACE;
                 txtLDF.Text = StringLiterals.SPACE + results.LRDF.ToString() + StringLiterals.SPACE;
                 txtLP.Text = StringLiterals.SPACE + results.LRP.ToString("F4") + StringLiterals.SPACE;
-
-				txtVariableName.Text = results.variables[0].variableName;
-				txtHazardRatio.Text = results.variables[0].oddsRatio.ToString("F4");
-				txtNinetyFive.Text = results.variables[0].ninetyFivePercent.ToString("F4");
-				txtCI.Text = results.variables[0].ci.ToString("F4");
-				txtCoefficient.Text = results.variables[0].coefficient.ToString("F4");
-				txtSE.Text = results.variables[0].se.ToString("F4");
-				txtZ.Text = results.variables[0].Z.ToString("F4");
-				txtZPValue.Text = results.variables[0].P.ToString("F4");
+				
 
 				grdRegress.Visibility = System.Windows.Visibility.Visible;
+				SetGridTextDelegate setText = new SetGridTextDelegate(SetGridText);
+				int rowCount = 1;
+				foreach (VariableRow row in results.variables)
+				{
+					RowDefinition rowDef = new RowDefinition();
+					rowDef.Height = new GridLength(30);
+					grdRegress.RowDefinitions.Add(rowDef);
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.variableName + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.oddsRatio.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.ninetyFivePercent.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.ci.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.coefficient.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 4, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.se.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 5, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.Z.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 6, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.P.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 7, Visibility.Visible));
+					rowCount++;
+				}
 			}
 
             HideConfigPanel();
