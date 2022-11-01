@@ -208,12 +208,9 @@ namespace EpiDashboard
         {
 			grdParameters.Visibility = Visibility.Collapsed;
 			grdRegress.Visibility = Visibility.Collapsed;
-			int rowNum = 0;
-			foreach (RowDefinition rd in grdRegress.RowDefinitions)
+			for (int rowNum = grdRegress.RowDefinitions.Count - 1; rowNum > 0; rowNum--)
 			{
-				rowNum++;
-				if (rowNum == 1)
-					continue;
+				RowDefinition rd = grdRegress.RowDefinitions[rowNum];
 				grdRegress.RowDefinitions.Remove(rd);
 			}
 
@@ -498,9 +495,7 @@ namespace EpiDashboard
                         }
                         else
                         {
-                            StatisticsRepository.LogisticRegression logisticRegression = new StatisticsRepository.LogisticRegression();
-							StatisticsRepository.EIKaplanMeierSurvival kmSurvival = new StatisticsRepository.EIKaplanMeierSurvival();
-							StatisticsRepository.EICoxProportionalHazards coxPH = new StatisticsRepository.EICoxProportionalHazards();
+                            StatisticsRepository.EICoxProportionalHazards coxPH = new StatisticsRepository.EICoxProportionalHazards();
 							IAnalysisStatisticContext contexxt = new Object() as IAnalysisStatisticContext;
 							inputVariableList.Add("CovariateList", inputVariableList["group_variable"]);
 							inputVariableList.Add("DiscreteList", inputVariableList["group_variable"]);
@@ -508,22 +503,15 @@ namespace EpiDashboard
 							inputVariableList.Add("censor_value", inputVariableList["uncensored_value"]);
 							inputVariableList.Add("weightvar", inputVariableList["weight_variable"]);
 							inputVariableList.Add("GraphVariableList", inputVariableList["group_variable"]);
-							kmSurvival.contextInputVariableList = inputVariableList;
 							coxPH.contextInputVariableList = inputVariableList;
 							Dictionary<string, string> contextSetProperties = new Dictionary<string, string>();
 							contextSetProperties.Add("TableName", "Dash");
 							contextSetProperties.Add("CommandText", "KMSURVIVAL TIMEVAR = TESTVAR * CENSOREDVAR (0) GRAPHTYPE = \"Survival Probability\"");
 							contextSetProperties.Add("BLabels", "Yes;No;Missing");
-							kmSurvival.contextSetProperties = contextSetProperties;
-							kmSurvival.contextColumns = regressTable.Columns;
-							kmSurvival.contextDataTable = regressTable;
 							coxPH.contextSetProperties = contextSetProperties;
 							coxPH.contextColumns = regressTable.Columns;
 							coxPH.contextDataTable = regressTable;
-							kmSurvival.Execute();
 
-							Array KMResultsArray = (Array)kmSurvival.ResultArray;
-							Array KMRA1 = (Array)KMResultsArray.GetValue(1,1);
 							coxPH.Execute();
 							Array CoxResultsArray = (Array)coxPH.ResultArray;
 							Array CPHRA0 = (Array)CoxResultsArray.GetValue(1,0);
@@ -540,7 +528,6 @@ namespace EpiDashboard
 							dattab.Columns.Add("time");
 							dattab.Columns.Add("percent");
 							dattab.Columns.Add("treatment");
-							//Array graphdata = (Array)KMResultsArray.GetValue(1, 0);
 							Array graphdata = (Array)CoxResultsArray.GetValue(1, 3);
 							string currentTreatment = graphdata.GetValue(1, 0).ToString();
 							List<int> treatmentStartIndexes = new List<int>();
@@ -588,8 +575,7 @@ namespace EpiDashboard
 								cloneTable.ImportRow(dr);
 							}
 							this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, treatmentStartIndexes, treatmentNames);
-							//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
-
+							
 							results.casesIncluded = 0;
                             results.convergence = results.regressionResults.convergence;
                             results.finalLikelihood = 0;
