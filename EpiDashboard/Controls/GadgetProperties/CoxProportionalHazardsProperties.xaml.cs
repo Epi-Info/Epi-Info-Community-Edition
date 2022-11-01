@@ -67,6 +67,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxFieldMatch.ItemsSource = crosstabFields;
 //            lbxOtherFields.ItemsSource = strataFields;
             cbxFields.ItemsSource = fields;
+			cbxPredictors.ItemsSource = fields;
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(cbxFieldOutcome.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("VariableCategory");
@@ -593,6 +594,25 @@ namespace EpiDashboard.Controls.GadgetProperties
 			foreach (string s in censoredValues)
 			{
 				cbxFieldUncensored.Items.Add(s);
+			}
+		}
+
+		private void lbxPredictorFields_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (lbxPredictorFields.SelectedItems.Count == 1)
+			{
+				lbxPredictorFields.Items.Remove(lbxPredictorFields.SelectedItem);
+			}
+		}
+
+		private void cbxPredictors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (cbxPredictors.SelectedIndex > -1)
+			{
+				if (!lbxPredictorFields.Items.Contains(cbxPredictors.SelectedItem.ToString()))
+				{
+					lbxPredictorFields.Items.Add(cbxPredictors.SelectedItem.ToString());
+				}
 			}
 		}
 	}

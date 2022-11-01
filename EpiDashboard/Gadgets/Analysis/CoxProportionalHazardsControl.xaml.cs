@@ -212,6 +212,7 @@ namespace EpiDashboard
 			{
 				RowDefinition rd = grdRegress.RowDefinitions[rowNum];
 				grdRegress.RowDefinitions.Remove(rd);
+				rd = null;
 			}
 
 			waitPanel.Visibility = System.Windows.Visibility.Visible;

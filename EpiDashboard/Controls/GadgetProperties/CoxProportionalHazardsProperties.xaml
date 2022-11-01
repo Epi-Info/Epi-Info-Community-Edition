@@ -78,6 +78,12 @@
                             <TextBlock TextWrapping="Wrap" x:Name="tblockWeightVariableTxt">Weight:</TextBlock>
                         </Label>
                         <ComboBox Grid.Column="0" Grid.Row="6" x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+                        <Label x:Name="tblockCovariates" Grid.Column="0" Grid.Row="7">
+                            <TextBlock TextWrapping="Wrap" x:Name="tblockCovariatesTxt">Predictor Variables:</TextBlock>
+                        </Label>
+                        <ComboBox Grid.Column="0" Grid.Row="8" x:Name="cbxPredictors" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxPredictors_SelectionChanged" />
+                        <!--ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" /-->
+                        <ListBox Grid.Column="0" Grid.Row="9" SelectionMode="Extended" Name="lbxPredictorFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="216" MouseDoubleClick="lbxPredictorFields_MouseDoubleClick" />
                         <Label x:Name="tblockUncensoredValue" Grid.Column="2" Grid.Row="0" Visibility="Visible">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockUncensoredValueTxt">Value for Uncensored:</TextBlock>
                         </Label>
