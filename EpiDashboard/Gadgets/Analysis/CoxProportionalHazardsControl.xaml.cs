@@ -410,6 +410,15 @@ namespace EpiDashboard
             bool includeMissing = true;
 
             Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+			if (this.lbxPredictorFields.Items.Count > 0)
+			{
+				string additionalPredictors = "";
+				foreach (string pf in this.lbxPredictorFields.Items)
+				{
+					additionalPredictors += pf + ',';
+				}
+				inputVariableList["additionalPredictors"] = additionalPredictors.Substring(0, additionalPredictors.Length - 1);
+			}
 
             lock (syncLock)
             {
@@ -450,6 +459,14 @@ namespace EpiDashboard
 					{
 						columnNames.Add(kvp.Key);
 						customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Key + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
+					}
+					else if (kvp.Key.ToLowerInvariant().Equals("additionalpredictors"))
+					{
+						foreach (string ap in kvp.Value.Split(','))
+						{
+							columnNames.Add(ap);
+							customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + ap + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
+						}
 					}
 					else if (kvp.Key.ToLowerInvariant().Equals("time_variable"))
 					{
@@ -499,6 +516,8 @@ namespace EpiDashboard
                             StatisticsRepository.EICoxProportionalHazards coxPH = new StatisticsRepository.EICoxProportionalHazards();
 							IAnalysisStatisticContext contexxt = new Object() as IAnalysisStatisticContext;
 							inputVariableList.Add("CovariateList", inputVariableList["group_variable"]);
+							if (inputVariableList.ContainsKey("additionalPredictors"))
+								inputVariableList["CovariateList"] += "," + inputVariableList["additionalPredictors"];
 							inputVariableList.Add("DiscreteList", inputVariableList["group_variable"]);
 							inputVariableList.Add("StrataVarList", "");
 							inputVariableList.Add("censor_value", inputVariableList["uncensored_value"]);
@@ -591,17 +610,19 @@ namespace EpiDashboard
                             }
                             if (CPHRA0 != null)
                             {
-								int j = 0;
-								VariableRow nrow = new VariableRow();
-								nrow.variableName = CPHRA0.GetValue(0, 0).ToString();
-								Double.TryParse(CPHRA0.GetValue(4, 0).ToString(), out nrow.coefficient);
-								Double.TryParse(CPHRA0.GetValue(3, 0).ToString(), out nrow.ci);
-								Double.TryParse(CPHRA0.GetValue(7, 0).ToString(), out nrow.P);
-								Double.TryParse(CPHRA0.GetValue(2, 0).ToString(), out nrow.ninetyFivePercent);
-								Double.TryParse(CPHRA0.GetValue(1, 0).ToString(), out nrow.oddsRatio);
-								Double.TryParse(CPHRA0.GetValue(5, 0).ToString(), out nrow.se);
-								Double.TryParse(CPHRA0.GetValue(6, 0).ToString(), out nrow.Z);
-								results.variables.Add(nrow);
+								for (int j = 0; j < ((Array)CPHRA0).Length / 8; j++)
+								{
+									VariableRow nrow = new VariableRow();
+									nrow.variableName = CPHRA0.GetValue(0, j).ToString();
+									Double.TryParse(CPHRA0.GetValue(4, j).ToString(), out nrow.coefficient);
+									Double.TryParse(CPHRA0.GetValue(3, j).ToString(), out nrow.ci);
+									Double.TryParse(CPHRA0.GetValue(7, j).ToString(), out nrow.P);
+									Double.TryParse(CPHRA0.GetValue(2, j).ToString(), out nrow.ninetyFivePercent);
+									Double.TryParse(CPHRA0.GetValue(1, j).ToString(), out nrow.oddsRatio);
+									Double.TryParse(CPHRA0.GetValue(5, j).ToString(), out nrow.se);
+									Double.TryParse(CPHRA0.GetValue(6, j).ToString(), out nrow.Z);
+									results.variables.Add(nrow);
+								}
 							}
 							if (CPHRA2 != null)
 							{
