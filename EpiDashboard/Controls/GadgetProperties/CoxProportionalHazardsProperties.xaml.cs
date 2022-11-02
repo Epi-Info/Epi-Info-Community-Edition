@@ -146,7 +146,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             lrc.cbxFieldOutcome = this.cbxFieldOutcome;
             lrc.lbxOtherFields = this.lbxOtherFields;
 			lrc.cbxFields = this.cbxFields;
-            lrc.lbxDummyTerms = this.lbxDummyTerms;
+			lrc.lbxPredictorFields = this.lbxPredictorFields;
+			lrc.cbxPredictors = this.cbxPredictors;
+			lrc.lbxDummyTerms = this.lbxDummyTerms;
             lrc.cbxFieldWeight = this.cbxFieldWeight;
 			lrc.cbxFieldUncensored = this.cbxFieldUncensored;
 			lrc.cbxFieldLink = this.cbxFieldLink;
@@ -439,7 +441,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (lrc.lbxOtherFields.Items.Count > 0)
                 foreach (string s in lrc.lbxOtherFields.Items)
                     lbxOtherFields.Items.Add(s.ToString());
-            if (lrc.lbxDummyTerms.Items.Count > 0)
+			if (lrc.lbxPredictorFields.Items.Count > 0)
+				foreach (string s in lrc.lbxPredictorFields.Items)
+					lbxPredictorFields.Items.Add(s.ToString());
+			if (lrc.lbxDummyTerms.Items.Count > 0)
                 foreach (string s in lrc.lbxDummyTerms.Items)
                     lbxDummyTerms.Items.Add(s.ToString());
             if (lrc.lbxInteractionTerms.Items.Count > 0)
