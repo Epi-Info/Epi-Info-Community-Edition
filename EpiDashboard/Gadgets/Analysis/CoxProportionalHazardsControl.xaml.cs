@@ -207,13 +207,10 @@ namespace EpiDashboard
 		public void ClearResults() 
         {
 			grdParameters.Visibility = Visibility.Collapsed;
-			grdRegress.Visibility = Visibility.Collapsed;
-			for (int rowNum = grdRegress.RowDefinitions.Count - 1; rowNum > 0; rowNum--)
-			{
-				RowDefinition rd = grdRegress.RowDefinitions[rowNum];
-				grdRegress.RowDefinitions.Remove(rd);
-				rd = null;
-			}
+			RowDefinition firstRow = grdRegress.RowDefinitions[0];
+			grdRegress.Children.Clear();
+			grdRegress.RowDefinitions.Clear();
+			grdRegress.RowDefinitions.Add(firstRow);
 
 			waitPanel.Visibility = System.Windows.Visibility.Visible;
             messagePanel.Text = string.Empty;
@@ -701,6 +698,83 @@ namespace EpiDashboard
 				
 
 				grdRegress.Visibility = System.Windows.Visibility.Visible;
+				RowDefinition rowDefHeader = new RowDefinition();
+				rowDefHeader.Height = new GridLength(30);
+				grdRegress.RowDefinitions.Add(rowDefHeader);
+
+				for (int y = 0; y < grdRegress.ColumnDefinitions.Count ; y++)
+				{
+					Rectangle rctHeader = new Rectangle();
+					rctHeader.Style = this.Resources["gridHeaderCellRectangle"] as Style;
+					Grid.SetRow(rctHeader, 0);
+					Grid.SetColumn(rctHeader, y);
+					grdRegress.Children.Add(rctHeader);
+					Border rctBorder = new Border();
+					rctBorder.Style = this.Resources["gridCellBorder"] as Style;
+					rctBorder.BorderThickness = new Thickness(0, 1, 1, 1);
+					if (y == 0)
+						rctBorder.BorderThickness = new Thickness(1, 1, 1, 1);
+					Grid.SetRow(rctBorder, 0);
+					Grid.SetColumn(rctBorder, y);
+					grdRegress.Children.Add(rctBorder);
+				}
+
+				TextBlock txtVarHeader = new TextBlock();
+				txtVarHeader.Text = "Term";
+				txtVarHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtVarHeader, 0);
+				Grid.SetColumn(txtVarHeader, 0);
+				grdRegress.Children.Add(txtVarHeader);
+
+				TextBlock txtCoefHeader = new TextBlock();
+				txtCoefHeader.Text = "Hazard Ratio";
+				txtCoefHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtCoefHeader, 0);
+				Grid.SetColumn(txtCoefHeader, 1);
+				grdRegress.Children.Add(txtCoefHeader);
+
+				TextBlock txtCoefHeaderLL = new TextBlock();
+				txtCoefHeaderLL.Text = "95%";
+				txtCoefHeaderLL.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtCoefHeaderLL, 0);
+				Grid.SetColumn(txtCoefHeaderLL, 2);
+				grdRegress.Children.Add(txtCoefHeaderLL);
+
+				TextBlock txtCoefHeaderUL = new TextBlock();
+				txtCoefHeaderUL.Text = "C.I.";
+				txtCoefHeaderUL.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtCoefHeaderUL, 0);
+				Grid.SetColumn(txtCoefHeaderUL, 3);
+				grdRegress.Children.Add(txtCoefHeaderUL);
+
+				TextBlock txtStdErrorHeader = new TextBlock();
+				txtStdErrorHeader.Text = "Coefficient";
+				txtStdErrorHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtStdErrorHeader, 0);
+				Grid.SetColumn(txtStdErrorHeader, 4);
+				grdRegress.Children.Add(txtStdErrorHeader);
+
+				TextBlock txtFHeader = new TextBlock();
+				txtFHeader.Text = "SE";
+				txtFHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtFHeader, 0);
+				Grid.SetColumn(txtFHeader, 5);
+				grdRegress.Children.Add(txtFHeader);
+
+				TextBlock txtPHeader = new TextBlock();
+				txtPHeader.Text = "Z-Statistic";
+				txtPHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtPHeader, 0);
+				Grid.SetColumn(txtPHeader, 6);
+				grdRegress.Children.Add(txtPHeader);
+
+				TextBlock txtPValHeader = new TextBlock();
+				txtPValHeader.Text = "P-Value";
+				txtPValHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtPValHeader, 0);
+				Grid.SetColumn(txtPValHeader, 7);
+				grdRegress.Children.Add(txtPValHeader);
+
 				SetGridTextDelegate setText = new SetGridTextDelegate(SetGridText);
 				int rowCount = 1;
 				foreach (VariableRow row in results.variables)
