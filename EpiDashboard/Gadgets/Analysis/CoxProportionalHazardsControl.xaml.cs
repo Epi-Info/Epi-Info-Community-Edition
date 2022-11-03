@@ -1032,7 +1032,12 @@ namespace EpiDashboard
             Grid.SetRow(txt, textBlockConfig.RowNumber);
             Grid.SetColumn(txt, textBlockConfig.ColumnNumber);
             grid.Children.Add(txt);
-        }
+			Border rctBorder = new Border();
+			rctBorder.Style = this.Resources["gridCellBorder"] as Style;
+			Grid.SetRow(rctBorder, textBlockConfig.RowNumber);
+			Grid.SetColumn(rctBorder, textBlockConfig.ColumnNumber);
+			grid.Children.Add(rctBorder);
+		}
 
         private void AddGridRow(Grid grid, int height)
         {
