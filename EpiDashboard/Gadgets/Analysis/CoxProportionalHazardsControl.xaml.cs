@@ -687,6 +687,7 @@ namespace EpiDashboard
             else
             {                
                 grdParameters.Visibility = System.Windows.Visibility.Visible;
+				grdConvergence.Visibility = System.Windows.Visibility.Visible;
 
                 txtScoreStatistic.Text = StringLiterals.SPACE + results.scoreStatistic.ToString("F4") + StringLiterals.SPACE;
                 txtScoreDF.Text = StringLiterals.SPACE + results.scoreDF.ToString() + StringLiterals.SPACE;
@@ -695,7 +696,10 @@ namespace EpiDashboard
                 txtLStatistic.Text = StringLiterals.SPACE + results.LRStatistic.ToString("F4") + StringLiterals.SPACE;
                 txtLDF.Text = StringLiterals.SPACE + results.LRDF.ToString() + StringLiterals.SPACE;
                 txtLP.Text = StringLiterals.SPACE + results.LRP.ToString("F4") + StringLiterals.SPACE;
-				
+
+				txtConvergence.Text = StringLiterals.SPACE + results.convergence.ToString().Substring(5).Split('<')[0] + StringLiterals.SPACE;
+				txtIterations.Text = StringLiterals.SPACE + results.iterations.ToString() + StringLiterals.SPACE;
+				txtMinusTwoLogLikelihood.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
 
 				grdRegress.Visibility = System.Windows.Visibility.Visible;
 				RowDefinition rowDefHeader = new RowDefinition();
