@@ -25,10 +25,10 @@ using EpiDashboard.Rules;
 
 namespace EpiDashboard
 {
-    /// <summary>
-    /// Interaction logic for KaplanMeierControl.xaml
-    /// </summary>
-    public partial class KaplanMeierControl : GadgetBase
+	/// <summary>
+	/// Interaction logic for CoxProportionalHazardsControl.xaml
+	/// </summary>
+	public partial class CoxProportionalHazardsControl : GadgetBase
     {
         #region Private Variables
 
@@ -74,7 +74,7 @@ namespace EpiDashboard
         /// <summary>
         /// Default constructor
         /// </summary>
-        public KaplanMeierControl()
+        public CoxProportionalHazardsControl()
         {
             InitializeComponent();
             Construct();
@@ -85,7 +85,7 @@ namespace EpiDashboard
         /// </summary>
         /// <param name="db">The database to attach</param>
         /// <param name="view">The view to attach</param>
-        public KaplanMeierControl(DashboardHelper dashboardHelper)
+        public CoxProportionalHazardsControl(DashboardHelper dashboardHelper)
         {
             InitializeComponent();
             this.DashboardHelper = dashboardHelper;
@@ -206,9 +206,13 @@ namespace EpiDashboard
 
 		public void ClearResults() 
         {
-            grdParameters.Visibility = Visibility.Collapsed;
+			grdParameters.Visibility = Visibility.Collapsed;
+			RowDefinition firstRow = grdRegress.RowDefinitions[0];
+			grdRegress.Children.Clear();
+			grdRegress.RowDefinitions.Clear();
+			grdRegress.RowDefinitions.Add(firstRow);
 
-            waitPanel.Visibility = System.Windows.Visibility.Visible;
+			waitPanel.Visibility = System.Windows.Visibility.Visible;
             messagePanel.Text = string.Empty;
             messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
@@ -217,8 +221,10 @@ namespace EpiDashboard
         public override void CollapseOutput()
         {
             grdParameters.Visibility = Visibility.Collapsed;
+			grdRegress.Visibility = Visibility.Collapsed;
 
-            if (this.txtFilterString != null && !string.IsNullOrEmpty(this.txtFilterString.Text))
+
+			if (this.txtFilterString != null && !string.IsNullOrEmpty(this.txtFilterString.Text))
             {
                 this.txtFilterString.Visibility = System.Windows.Visibility.Collapsed;
             }
@@ -232,8 +238,9 @@ namespace EpiDashboard
         public override void ExpandOutput()
         {
             grdParameters.Visibility = Visibility.Visible;
-            
-            if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
+			grdRegress.Visibility = Visibility.Visible;
+
+			if (this.messagePanel.MessagePanelType != Controls.MessagePanelType.StatusPanel)
             {
                 this.messagePanel.Visibility = System.Windows.Visibility.Visible;
             }
@@ -400,6 +407,15 @@ namespace EpiDashboard
             bool includeMissing = true;
 
             Dictionary<string, string> inputVariableList = GadgetOptions.InputVariableList;
+			if (this.lbxPredictorFields.Items.Count > 0)
+			{
+				string additionalPredictors = "";
+				foreach (string pf in this.lbxPredictorFields.Items)
+				{
+					additionalPredictors += pf + ',';
+				}
+				inputVariableList["additionalPredictors"] = additionalPredictors.Substring(0, additionalPredictors.Length - 1);
+			}
 
             lock (syncLock)
             {
@@ -440,6 +456,14 @@ namespace EpiDashboard
 					{
 						columnNames.Add(kvp.Key);
 						customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + kvp.Key + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
+					}
+					else if (kvp.Key.ToLowerInvariant().Equals("additionalpredictors"))
+					{
+						foreach (string ap in kvp.Value.Split(','))
+						{
+							columnNames.Add(ap);
+							customFilter = customFilter + StringLiterals.PARANTHESES_OPEN + StringLiterals.LEFT_SQUARE_BRACKET + ap + StringLiterals.RIGHT_SQUARE_BRACKET + StringLiterals.SPACE + "is not null" + StringLiterals.PARANTHESES_CLOSE + " AND ";
+						}
 					}
 					else if (kvp.Key.ToLowerInvariant().Equals("time_variable"))
 					{
@@ -486,33 +510,42 @@ namespace EpiDashboard
                         }
                         else
                         {
-                            StatisticsRepository.LogisticRegression logisticRegression = new StatisticsRepository.LogisticRegression();
-							StatisticsRepository.EIKaplanMeierSurvival kmSurvival = new StatisticsRepository.EIKaplanMeierSurvival();
+                            StatisticsRepository.EICoxProportionalHazards coxPH = new StatisticsRepository.EICoxProportionalHazards();
 							IAnalysisStatisticContext contexxt = new Object() as IAnalysisStatisticContext;
-							kmSurvival.contextInputVariableList = inputVariableList;
+							inputVariableList.Add("CovariateList", inputVariableList["group_variable"]);
+							if (inputVariableList.ContainsKey("additionalPredictors"))
+								inputVariableList["CovariateList"] += "," + inputVariableList["additionalPredictors"];
+							inputVariableList.Add("DiscreteList", inputVariableList["group_variable"]);
+							inputVariableList.Add("StrataVarList", "");
+							inputVariableList.Add("censor_value", inputVariableList["uncensored_value"]);
+							inputVariableList.Add("weightvar", inputVariableList["weight_variable"]);
+							inputVariableList.Add("GraphVariableList", inputVariableList["group_variable"]);
+							coxPH.contextInputVariableList = inputVariableList;
 							Dictionary<string, string> contextSetProperties = new Dictionary<string, string>();
-							contextSetProperties.Add("TableName", "LEUKEM210");
+							contextSetProperties.Add("TableName", "Dash");
 							contextSetProperties.Add("CommandText", "KMSURVIVAL TIMEVAR = TESTVAR * CENSOREDVAR (0) GRAPHTYPE = \"Survival Probability\"");
 							contextSetProperties.Add("BLabels", "Yes;No;Missing");
-							kmSurvival.contextSetProperties = contextSetProperties;
-							kmSurvival.contextColumns = regressTable.Columns;
-							kmSurvival.contextDataTable = regressTable;
-							kmSurvival.Execute();
+							coxPH.contextSetProperties = contextSetProperties;
+							coxPH.contextColumns = regressTable.Columns;
+							coxPH.contextDataTable = regressTable;
 
-							Array KMResultsArray = (Array)kmSurvival.ResultArray;
-							Array KMRA1 = (Array)KMResultsArray.GetValue(1,1);
-							Double.TryParse(KMRA1.GetValue(0, 2).ToString(), out results.scoreDF);
-							Double.TryParse(KMRA1.GetValue(0, 3).ToString(), out results.scoreP);
-							Double.TryParse(KMRA1.GetValue(0, 1).ToString(), out results.scoreStatistic);
-							Double.TryParse(KMRA1.GetValue(1, 2).ToString(), out results.LRDF);
-							Double.TryParse(KMRA1.GetValue(1, 3).ToString(), out results.LRP);
-							Double.TryParse(KMRA1.GetValue(1, 1).ToString(), out results.LRStatistic);
+							coxPH.Execute();
+							Array CoxResultsArray = (Array)coxPH.ResultArray;
+							Array CPHRA0 = (Array)CoxResultsArray.GetValue(1,0);
+							Array CPHRA1 = (Array)CoxResultsArray.GetValue(1,2);
+							Array CPHRA2 = (Array)CoxResultsArray.GetValue(1,1);
+							Double.TryParse(CPHRA1.GetValue(2, 0).ToString(), out results.scoreDF);
+							Double.TryParse(CPHRA1.GetValue(3, 0).ToString(), out results.scoreP);
+							Double.TryParse(CPHRA1.GetValue(1, 0).ToString(), out results.scoreStatistic);
+							Double.TryParse(CPHRA1.GetValue(2, 1).ToString(), out results.LRDF);
+							Double.TryParse(CPHRA1.GetValue(3, 1).ToString(), out results.LRP);
+							Double.TryParse(CPHRA1.GetValue(1, 1).ToString(), out results.LRStatistic);
 							
 							DataTable dattab = new DataTable();
 							dattab.Columns.Add("time");
 							dattab.Columns.Add("percent");
 							dattab.Columns.Add("treatment");
-							Array graphdata = (Array)KMResultsArray.GetValue(1, 0);
+							Array graphdata = (Array)CoxResultsArray.GetValue(1, 3);
 							string currentTreatment = graphdata.GetValue(1, 0).ToString();
 							List<int> treatmentStartIndexes = new List<int>();
 							List<string> treatmentNames = new List<string>();
@@ -522,7 +555,7 @@ namespace EpiDashboard
 							{
 								DataRow dr = dattab.NewRow();
 								dr[0] = graphdata.GetValue(0, pct);
-								dr[1] = graphdata.GetValue(5, pct);
+								dr[1] = graphdata.GetValue(6, pct);
 								dr[2] = graphdata.GetValue(1, pct);
 								dattab.Rows.Add(dr);
 								if (!dr[2].ToString().Equals(currentTreatment))
@@ -559,8 +592,7 @@ namespace EpiDashboard
 								cloneTable.ImportRow(dr);
 							}
 							this.Dispatcher.BeginInvoke(new SetChartDataDelegate(SetChartData), dataList, treatmentStartIndexes, treatmentNames);
-							//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
-
+							
 							results.casesIncluded = 0;
                             results.convergence = results.regressionResults.convergence;
                             results.finalLikelihood = 0;
@@ -573,26 +605,34 @@ namespace EpiDashboard
                                 throw new ApplicationException(results.errorMessage);
 
                             }
-                            if (results.regressionResults.variables != null)
+                            if (CPHRA0 != null)
                             {
-                                foreach (StatisticsRepository.LogisticRegression.VariableRow vrow in results.regressionResults.variables)
-                                {
-                                    VariableRow nrow = new VariableRow();
-                                    nrow.coefficient = vrow.coefficient;
-                                    nrow.ci = vrow.ci;
-                                    nrow.P = vrow.P;
-                                    nrow.ninetyFivePercent = vrow.ninetyFivePercent;
-                                    nrow.oddsRatio = vrow.oddsRatio;
-                                    nrow.se = vrow.se;
-                                    nrow.variableName = vrow.variableName;
-                                    nrow.Z = vrow.Z;
-                                    results.variables.Add(nrow);
-                                }
+								for (int j = 0; j < ((Array)CPHRA0).Length / 8; j++)
+								{
+									VariableRow nrow = new VariableRow();
+									nrow.variableName = CPHRA0.GetValue(0, j).ToString();
+									Double.TryParse(CPHRA0.GetValue(4, j).ToString(), out nrow.coefficient);
+									Double.TryParse(CPHRA0.GetValue(3, j).ToString(), out nrow.ci);
+									Double.TryParse(CPHRA0.GetValue(7, j).ToString(), out nrow.P);
+									Double.TryParse(CPHRA0.GetValue(2, j).ToString(), out nrow.ninetyFivePercent);
+									Double.TryParse(CPHRA0.GetValue(1, j).ToString(), out nrow.oddsRatio);
+									Double.TryParse(CPHRA0.GetValue(5, j).ToString(), out nrow.se);
+									Double.TryParse(CPHRA0.GetValue(6, j).ToString(), out nrow.Z);
+									results.variables.Add(nrow);
+								}
+							}
+							if (CPHRA2 != null)
+							{
+								results.convergence = CPHRA2.GetValue(0).ToString();
+								double iters = 0.0;
+								Double.TryParse(CPHRA2.GetValue(1).ToString(), out iters);
+								results.iterations = (int)iters;
+								double ll = 0.0;
+								Double.TryParse(CPHRA2.GetValue(2).ToString(), out ll);
+								results.finalLikelihood = -2.0 * ll;
+							}
 
-                                
-                            }
-
-                        }
+						}
 
                         this.Dispatcher.BeginInvoke(new RenderGridDelegate(RenderRegressionResults), results);
                         this.Dispatcher.BeginInvoke(new SimpleCallback(SetGadgetToFinishedState));
@@ -634,17 +674,20 @@ namespace EpiDashboard
         private void RenderRegressionResults(RegressionResults results)
         {
             grdParameters.Visibility = System.Windows.Visibility.Visible;
+			grdRegress.Visibility = System.Windows.Visibility.Visible;
 
-            waitPanel.Visibility = System.Windows.Visibility.Collapsed;
+			waitPanel.Visibility = System.Windows.Visibility.Collapsed;
             btnRun.IsEnabled = true;
 
             if (!string.IsNullOrEmpty(results.errorMessage) || results.variables == null)
             {                
                 grdParameters.Visibility = System.Windows.Visibility.Hidden;
-            }
+				grdRegress.Visibility = System.Windows.Visibility.Hidden;
+			}
             else
             {                
                 grdParameters.Visibility = System.Windows.Visibility.Visible;
+				grdConvergence.Visibility = System.Windows.Visibility.Visible;
 
                 txtScoreStatistic.Text = StringLiterals.SPACE + results.scoreStatistic.ToString("F4") + StringLiterals.SPACE;
                 txtScoreDF.Text = StringLiterals.SPACE + results.scoreDF.ToString() + StringLiterals.SPACE;
@@ -654,6 +697,105 @@ namespace EpiDashboard
                 txtLDF.Text = StringLiterals.SPACE + results.LRDF.ToString() + StringLiterals.SPACE;
                 txtLP.Text = StringLiterals.SPACE + results.LRP.ToString("F4") + StringLiterals.SPACE;
 
+				txtConvergence.Text = StringLiterals.SPACE + results.convergence.ToString().Substring(5).Split('<')[0] + StringLiterals.SPACE;
+				txtIterations.Text = StringLiterals.SPACE + results.iterations.ToString() + StringLiterals.SPACE;
+				txtMinusTwoLogLikelihood.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
+
+				grdRegress.Visibility = System.Windows.Visibility.Visible;
+				RowDefinition rowDefHeader = new RowDefinition();
+				rowDefHeader.Height = new GridLength(30);
+				grdRegress.RowDefinitions.Add(rowDefHeader);
+
+				for (int y = 0; y < grdRegress.ColumnDefinitions.Count ; y++)
+				{
+					Rectangle rctHeader = new Rectangle();
+					rctHeader.Style = this.Resources["gridHeaderCellRectangle"] as Style;
+					Grid.SetRow(rctHeader, 0);
+					Grid.SetColumn(rctHeader, y);
+					grdRegress.Children.Add(rctHeader);
+					Border rctBorder = new Border();
+					rctBorder.Style = this.Resources["gridCellBorder"] as Style;
+					rctBorder.BorderThickness = new Thickness(0, 1, 1, 1);
+					if (y == 0)
+						rctBorder.BorderThickness = new Thickness(1, 1, 1, 1);
+					Grid.SetRow(rctBorder, 0);
+					Grid.SetColumn(rctBorder, y);
+					grdRegress.Children.Add(rctBorder);
+				}
+
+				TextBlock txtVarHeader = new TextBlock();
+				txtVarHeader.Text = "Term";
+				txtVarHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtVarHeader, 0);
+				Grid.SetColumn(txtVarHeader, 0);
+				grdRegress.Children.Add(txtVarHeader);
+
+				TextBlock txtCoefHeader = new TextBlock();
+				txtCoefHeader.Text = "Hazard Ratio";
+				txtCoefHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtCoefHeader, 0);
+				Grid.SetColumn(txtCoefHeader, 1);
+				grdRegress.Children.Add(txtCoefHeader);
+
+				TextBlock txtCoefHeaderLL = new TextBlock();
+				txtCoefHeaderLL.Text = "95%";
+				txtCoefHeaderLL.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtCoefHeaderLL, 0);
+				Grid.SetColumn(txtCoefHeaderLL, 2);
+				grdRegress.Children.Add(txtCoefHeaderLL);
+
+				TextBlock txtCoefHeaderUL = new TextBlock();
+				txtCoefHeaderUL.Text = "C.I.";
+				txtCoefHeaderUL.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtCoefHeaderUL, 0);
+				Grid.SetColumn(txtCoefHeaderUL, 3);
+				grdRegress.Children.Add(txtCoefHeaderUL);
+
+				TextBlock txtStdErrorHeader = new TextBlock();
+				txtStdErrorHeader.Text = "Coefficient";
+				txtStdErrorHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtStdErrorHeader, 0);
+				Grid.SetColumn(txtStdErrorHeader, 4);
+				grdRegress.Children.Add(txtStdErrorHeader);
+
+				TextBlock txtFHeader = new TextBlock();
+				txtFHeader.Text = "SE";
+				txtFHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtFHeader, 0);
+				Grid.SetColumn(txtFHeader, 5);
+				grdRegress.Children.Add(txtFHeader);
+
+				TextBlock txtPHeader = new TextBlock();
+				txtPHeader.Text = "Z-Statistic";
+				txtPHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtPHeader, 0);
+				Grid.SetColumn(txtPHeader, 6);
+				grdRegress.Children.Add(txtPHeader);
+
+				TextBlock txtPValHeader = new TextBlock();
+				txtPValHeader.Text = "P-Value";
+				txtPValHeader.Style = this.Resources["columnHeadingText"] as Style;
+				Grid.SetRow(txtPValHeader, 0);
+				Grid.SetColumn(txtPValHeader, 7);
+				grdRegress.Children.Add(txtPValHeader);
+
+				SetGridTextDelegate setText = new SetGridTextDelegate(SetGridText);
+				int rowCount = 1;
+				foreach (VariableRow row in results.variables)
+				{
+					RowDefinition rowDef = new RowDefinition();
+					rowDef.Height = new GridLength(30);
+					grdRegress.RowDefinitions.Add(rowDef);
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.variableName + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.oddsRatio.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 1, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.ninetyFivePercent.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 2, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.ci.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 3, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.coefficient.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 4, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.se.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 5, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.Z.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 6, Visibility.Visible));
+					this.Dispatcher.BeginInvoke(setText, grdRegress, new TextBlockConfig(StringLiterals.SPACE + row.P.ToString("F4") + StringLiterals.SPACE, new Thickness(2, 0, 2, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, 7, Visibility.Visible));
+					rowCount++;
+				}
 			}
 
             HideConfigPanel();
@@ -671,7 +813,7 @@ namespace EpiDashboard
             Grid.SetColumn(txtVarHeader, 0);
 
             TextBlock txtOddsHeader = new TextBlock();
-			headerPanel.Text = "Kaplan-Meier";
+			headerPanel.Text = "Cox Proportional Hazards";
             txtOddsHeader.Text = "Odds Ratio";
 			if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log (For Evaluation)"))
 			{
@@ -894,7 +1036,12 @@ namespace EpiDashboard
             Grid.SetRow(txt, textBlockConfig.RowNumber);
             Grid.SetColumn(txt, textBlockConfig.ColumnNumber);
             grid.Children.Add(txt);
-        }
+			Border rctBorder = new Border();
+			rctBorder.Style = this.Resources["gridCellBorder"] as Style;
+			Grid.SetRow(rctBorder, textBlockConfig.RowNumber);
+			Grid.SetColumn(rctBorder, textBlockConfig.ColumnNumber);
+			grid.Children.Add(rctBorder);
+		}
 
         private void AddGridRow(Grid grid, int height)
         {
@@ -953,13 +1100,13 @@ namespace EpiDashboard
             }
         }
 
-        Controls.GadgetProperties.KaplanMeierProperties properties = null;
+        Controls.GadgetProperties.CoxProportionalHazardsProperties properties = null;
         public override void ShowHideConfigPanel()
         {
             Popup = new DashboardPopup();
             Popup.Parent = ((this.Parent as DragCanvas).Parent as ScrollViewer).Parent as Grid;
 //            Controls.GadgetProperties.MeansProperties properties = new Controls.GadgetProperties.MeansProperties(this.DashboardHelper, this, (MeansParameters)Parameters);
-            properties = new Controls.GadgetProperties.KaplanMeierProperties(this.DashboardHelper, this, (KaplanMeierParameters)Parameters);
+            properties = new Controls.GadgetProperties.CoxProportionalHazardsProperties(this.DashboardHelper, this, (KaplanMeierParameters)Parameters);
 
             if (DashboardHelper.ResizedWidth != 0 & DashboardHelper.ResizedHeight != 0)
             {
@@ -996,7 +1143,7 @@ namespace EpiDashboard
             f_WidthRatio = (float)((float)width / (float)i_StandardWidth);
 
             if (properties == null)
-                properties = new Controls.GadgetProperties.KaplanMeierProperties(this.DashboardHelper, this, (KaplanMeierParameters)Parameters);
+                properties = new Controls.GadgetProperties.CoxProportionalHazardsProperties(this.DashboardHelper, this, (KaplanMeierParameters)Parameters);
             properties.Height = (Convert.ToInt32(i_StandardHeight * f_HeightRatio)) / 1.07;
             properties.Width = (Convert.ToInt32(i_StandardWidth * f_WidthRatio)) / 1.07;
 
@@ -1004,7 +1151,7 @@ namespace EpiDashboard
 
         private void properties_ChangesAccepted(object sender, EventArgs e)
         {
-            Controls.GadgetProperties.KaplanMeierProperties properties = Popup.Content as Controls.GadgetProperties.KaplanMeierProperties;
+            Controls.GadgetProperties.CoxProportionalHazardsProperties properties = Popup.Content as Controls.GadgetProperties.CoxProportionalHazardsProperties;
             this.Parameters = properties.Parameters;
             this.DataFilters = properties.DataFilters;
             Popup.Close();
@@ -1110,8 +1257,9 @@ namespace EpiDashboard
             catch (ArgumentException)
             {
                 grdParameters.Visibility = System.Windows.Visibility.Hidden;
+				grdRegress.Visibility = System.Windows.Visibility.Hidden;
 
-                Epi.Windows.MsgBox.ShowError("The same variable cannot be used more than once.");
+				Epi.Windows.MsgBox.ShowError("The same variable cannot be used more than once.");
             }
 
             //return inputVariableList;
@@ -1196,7 +1344,7 @@ namespace EpiDashboard
             locationY.Value = Canvas.GetTop(this).ToString("F0");
             locationX.Value = Canvas.GetLeft(this).ToString("F0");
             collapsed.Value = IsCollapsed.ToString();
-            type.Value = "EpiDashboard.KaplanMeierControl";
+            type.Value = "EpiDashboard.CoxProportionalHazardsControl";
 
             element.Attributes.Append(locationY);
             element.Attributes.Append(locationX);
@@ -1226,9 +1374,23 @@ namespace EpiDashboard
 
                 covariateElement.InnerXml = xmlCovariateString;
                 element.AppendChild(covariateElement);
-            }
+			}
 
-            return element;
+			if (lbxPredictorFields.Items.Count > 0)
+			{
+				string xmlCovariateString = string.Empty;
+				XmlElement covariateElement = doc.CreateElement("additionalcovariates");
+
+				foreach (string s in lbxPredictorFields.Items)
+				{
+					xmlCovariateString = xmlCovariateString + "<covariate>" + s + "</covariate>";
+				}
+
+				covariateElement.InnerXml = xmlCovariateString;
+				element.AppendChild(covariateElement);
+			}
+
+			return element;
         }
 
         public override void CreateFromXml(XmlElement element)
@@ -1282,7 +1444,16 @@ namespace EpiDashboard
                             }
                         }
                         break;
-                    case "customheading":
+					case "additionalcovariates":
+						foreach (XmlElement covariate in child.ChildNodes)
+						{
+							if (covariate.Name.ToLowerInvariant().Equals("covariate"))
+							{
+								lbxPredictorFields.Items.Add(covariate.InnerText);
+							}
+						}
+						break;
+					case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
@@ -1335,7 +1506,7 @@ namespace EpiDashboard
         /// <returns>string</returns>
         public override string ToString()
         {
-            return "Kaplan-Meier Gadget";
+            return "Cox Proportional Hazards Gadget";
         }
         #endregion
 
@@ -1387,11 +1558,11 @@ namespace EpiDashboard
             {
                 if (this.cbxFieldMatch.Text.Length <= 0)
                 {
-                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Kaplan-Meier Survival</h2>");
+                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Cox Proportional Hazards</h2>");
                 }
                 else
                 {
-                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Kaplan-Meier Survival</h2>");
+                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Cox Proportional Hazards</h2>");
                 }
             }
             else
@@ -1418,8 +1589,12 @@ namespace EpiDashboard
             foreach(string s in this.lbxOtherFields.Items)
             {
                 varList = varList + s + ",";
-            }
-            varList = varList.TrimEnd(',');
+			}
+			foreach (string s in this.lbxPredictorFields.Items)
+			{
+				varList = varList + s + ",";
+			}
+			varList = varList.TrimEnd(',');
 
             htmlBuilder.AppendLine("<em>Test variable:</em> <strong>" + varList + "</strong>");
             htmlBuilder.AppendLine("<br />");
@@ -1483,30 +1658,89 @@ namespace EpiDashboard
 				htmlBuilder.AppendLine("<img src=\"" + imageFileName + "\" />");
 			}
 
-			htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
-                htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Test</th>");
-                htmlBuilder.AppendLine("  <th>Statistic</th>");
-                htmlBuilder.AppendLine("  <th>D.F.</th>");
-                htmlBuilder.AppendLine("  <th>P-Value</th>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Log-Rank Statistic</th>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreStatistic.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreDF.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreP.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Wilcoxon</th>");
-                htmlBuilder.AppendLine("  <td>" + txtLStatistic.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtLDF.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtLP.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");                
-                htmlBuilder.AppendLine("</table>");
-            
+			htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
+			htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+			//htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
 
-            return htmlBuilder.ToString();
+			foreach (UIElement control in grdRegress.Children)
+			{
+				if (control is TextBlock)
+				{
+					int rowNumber = Grid.GetRow(control);
+					int columnNumber = Grid.GetColumn(control);
+
+					string tableDataTagOpen = "<td>";
+					string tableDataTagClose = "</td>";
+
+					if (rowNumber == 0)
+					{
+						tableDataTagOpen = "<th>";
+						tableDataTagClose = "</th>";
+					}
+
+					if (columnNumber == 0)
+					{
+						htmlBuilder.AppendLine("<tr>");
+					}
+					if (columnNumber == 0 && rowNumber > 0)
+					{
+						tableDataTagOpen = "<td class=\"value\">";
+					}
+
+					string value = ((TextBlock)control).Text;
+					string formattedValue = value;
+
+					htmlBuilder.AppendLine(tableDataTagOpen + formattedValue + tableDataTagClose);
+
+					if (columnNumber >= grdRegress.ColumnDefinitions.Count - 1)
+					{
+						htmlBuilder.AppendLine("</tr>");
+					}
+				}
+			}
+
+			htmlBuilder.AppendLine("</table>");
+
+			htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
+			htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Convergence:</th>");
+			htmlBuilder.AppendLine("  <td>" + txtConvergence.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Iterations:</th>");
+			htmlBuilder.AppendLine("  <td>" + txtIterations.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>-2 * Log-Likelihood:</th>");
+			htmlBuilder.AppendLine("  <td>" + txtMinusTwoLogLikelihood.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine("</table>");
+
+			htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
+			htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Test</th>");
+			htmlBuilder.AppendLine("  <th>Statistic</th>");
+			htmlBuilder.AppendLine("  <th>D.F.</th>");
+			htmlBuilder.AppendLine("  <th>P-Value</th>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Log-Rank Statistic</th>");
+			htmlBuilder.AppendLine("  <td>" + txtScoreStatistic.Text + "</td>");
+			htmlBuilder.AppendLine("  <td>" + txtScoreDF.Text + "</td>");
+			htmlBuilder.AppendLine("  <td>" + txtScoreP.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Wilcoxon</th>");
+			htmlBuilder.AppendLine("  <td>" + txtLStatistic.Text + "</td>");
+			htmlBuilder.AppendLine("  <td>" + txtLDF.Text + "</td>");
+			htmlBuilder.AppendLine("  <td>" + txtLP.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine("</table>");
+
+
+			return htmlBuilder.ToString();
         }
 
         private string customOutputHeading;

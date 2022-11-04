@@ -233,6 +233,9 @@
     <Compile Include="Controls\GadgetProperties\ComplexSampleFrequencyProperties.xaml.cs">
       <DependentUpon>ComplexSampleFrequencyProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GadgetProperties\CoxProportionalHazardsProperties.xaml.cs">
+      <DependentUpon>CoxProportionalHazardsProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GadgetProperties\LinearRegressionProperties.xaml.cs">
       <DependentUpon>LinearRegressionProperties.xaml</DependentUpon>
     </Compile>
@@ -484,6 +487,9 @@
     </Compile>
     <Compile Include="Gadgets\Analysis\DuplicatesListControl.xaml.cs">
       <DependentUpon>DuplicatesListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gadgets\Analysis\CoxProportionalHazardsControl.xaml.cs">
+      <DependentUpon>CoxProportionalHazardsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Gadgets\Analysis\KaplanMeierControl.xaml.cs">
       <DependentUpon>KaplanMeierControl.xaml</DependentUpon>
@@ -1009,6 +1015,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\GadgetProperties\CoxProportionalHazardsProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\GadgetProperties\LinearRegressionProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1166,6 +1176,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GadgetPropertyStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Gadgets\Analysis\CoxProportionalHazardsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

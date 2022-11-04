@@ -4,11 +4,16 @@ Option Compare Text
 
 Module EICoxLoadData
     Public dataTable As DataTable
-    'Private lconDB As ADODB.Connection
-    Public context As EpiInfo.Plugin.IAnalysisStatisticContext
+	'Private lconDB As ADODB.Connection
+	Public context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Public contextInputVariableList As Dictionary(Of String, String)
+	Public contextSetProperties As Dictionary(Of String, String)
+	Public contextColumns As System.Data.DataColumnCollection
+	Public EpiViewVariableList As Dictionary(Of String, EpiInfo.Plugin.IVariable)
+	Public contextDataTable As System.Data.DataTable
 
 
-    Public Sub RecursiveFactorializeCox(ByRef ldblA() As Double, ByRef r As Integer, ByRef ldblaData(,) As Double, ByRef lintOffset As Integer)
+	Public Sub RecursiveFactorializeCox(ByRef ldblA() As Double, ByRef r As Integer, ByRef ldblaData(,) As Double, ByRef lintOffset As Integer)
         Dim i As Integer
         Dim lpos As Integer
         'Set some Basic stuff
@@ -99,10 +104,14 @@ Module EICoxLoadData
         canBeDiscrete = 1
         lintTwoNulls = 0
 
-        tempTable = New DataTable("output")
-        tempTable.Columns.Add(lstrName, context.Columns(lstrName).DataType)
+		tempTable = New DataTable("output")
+		If context IsNot Nothing Then
+			tempTable.Columns.Add(lstrName, context.Columns(lstrName).DataType)
+		Else
+			tempTable.Columns.Add(lstrName, contextColumns(lstrName).DataType)
+		End If
 
-        Dim lastValue As Object
+		Dim lastValue As Object
         lastValue = VariantType.Null
 
         'CHECK FOR VARIABLE IN THE DISCRETE ARRAY

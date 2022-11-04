@@ -17,25 +17,41 @@ Option Compare Text
 
     Private Const ErrStart As Integer = &H3000
     Private Const conConnStr As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
-    Private context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Private context As EpiInfo.Plugin.IAnalysisStatisticContext
+	Public contextInputVariableList As Dictionary(Of String, String)
+	Public contextSetProperties As Dictionary(Of String, String)
+	Public contextColumns As System.Data.DataColumnCollection
+	Public EpiViewVariableList As Dictionary(Of String, EpiInfo.Plugin.IVariable)
+	Public contextDataTable As System.Data.DataTable
 
-    Public Sub Construct(ByVal AnalysisStatisticContext As EpiInfo.Plugin.IAnalysisStatisticContext) Implements EpiInfo.Plugin.IAnalysisStatistic.Construct
+	Public Sub Construct(ByVal AnalysisStatisticContext As EpiInfo.Plugin.IAnalysisStatisticContext) Implements EpiInfo.Plugin.IAnalysisStatistic.Construct
         context = AnalysisStatisticContext
     End Sub
 
     Public Sub Execute() Implements EpiInfo.Plugin.IAnalysisStatistic.Execute
-        'Formerly EICoxRegress() --the main function running Cox Proportional Hazards statistic
+		'Formerly EICoxRegress() --the main function running Cox Proportional Hazards statistic
 
 		Dim config As Dictionary(Of String, String) = New Dictionary(Of String, String)
-		config = context.SetProperties
+		config = contextSetProperties
+		If context IsNot Nothing Then
+			config = context.SetProperties
+		End If
 
 		Dim DT As System.Data.DataTable = New System.Data.DataTable()
 
-		For Each column As DataColumn In context.Columns
-			Dim newColumn As DataColumn = New DataColumn(column.ColumnName)
-			newColumn.DataType = column.DataType
-			DT.Columns.Add(newColumn)
-		Next
+		If context IsNot Nothing Then
+			For Each column As DataColumn In context.Columns
+				Dim newColumn As DataColumn = New DataColumn(column.ColumnName)
+				newColumn.DataType = column.DataType
+				DT.Columns.Add(newColumn)
+			Next
+		Else
+			For Each column As DataColumn In contextColumns
+				Dim newColumn As DataColumn = New DataColumn(column.ColumnName)
+				newColumn.DataType = column.DataType
+				DT.Columns.Add(newColumn)
+			Next
+		End If
 
 		Dim VariableList As List(Of String) = New List(Of String)
 
@@ -103,18 +119,22 @@ Option Compare Text
                 strGraphResults = PlotGraphs(ldblB)
 			End If
 
-            args.Add("COMMANDNAME", "COXPH")
-            args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
-            args.Add("HTMLRESULTS", strGraphResults + strCoxPHResults)
+			args.Add("COMMANDNAME", "COXPH")
+			If context IsNot Nothing Then
+				args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+			End If
+			args.Add("HTMLRESULTS", strGraphResults + strCoxPHResults)
 
-            context.Display(args)
+			If context IsNot Nothing Then
+				context.Display(args)
+			End If
 
-            'If UBound(mstraPlotVar) > 0 Then
-            'If mlstPlotVar.Count > 0 Then
-            '    'ToDo: den4: Get Plots working when we have Graph set up.
-            '    PlotGraphs(ldblB)
-            'End If
-        Else
+			'If UBound(mstraPlotVar) > 0 Then
+			'If mlstPlotVar.Count > 0 Then
+			'    'ToDo: den4: Get Plots working when we have Graph set up.
+			'    PlotGraphs(ldblB)
+			'End If
+		Else
             Err.Raise(vbObjectError + 120, , lstrError)
             strCoxPHResults = "<B><TLT>ERROR: Colinear Data </TLT></B>"
             ReDim Results(2, 1)
@@ -122,11 +142,15 @@ Option Compare Text
             Results(1, 0) = "Colinear Data"
             strCoxPHResults = "<br clear=""all"" /><p align=""left""><b><tlt>Colinear Data</tlt></b></p>"
 
-            args.Add("COMMANDNAME", "COXPH")
-            args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
-            args.Add("HTMLRESULTS", strCoxPHResults)
-            context.Display(args)
-        End If
+			args.Add("COMMANDNAME", "COXPH")
+			If context IsNot Nothing Then
+				args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+			End If
+			args.Add("HTMLRESULTS", strCoxPHResults)
+			If context IsNot Nothing Then
+				context.Display(args)
+			End If
+		End If
         Exit Sub
 errorLikeLihood:
         strCoxPHResults = "<TLT>ERROR: " & Err.Description & "</TLT>"
@@ -135,12 +159,16 @@ errorLikeLihood:
         Results(1, 0) = Err.Description
         strCoxPHResults = "<br clear=""all"" /><p align=""left""><b><tlt> " & Err.Description & "</tlt></b></p>"
 
-        args.Add("COMMANDNAME", "COXPH")
-        args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
-        args.Add("HTMLRESULTS", strCoxPHResults)
-        context.Display(args)
-        'Resume
-        ReDim Results(1, 0) 'den4
+		args.Add("COMMANDNAME", "COXPH")
+		If context IsNot Nothing Then
+			args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+		End If
+		args.Add("HTMLRESULTS", strCoxPHResults)
+		If context IsNot Nothing Then
+			context.Display(args)
+		End If
+		'Resume
+		ReDim Results(1, 0) 'den4
         Exit Sub
         Resume
     End Sub
@@ -190,61 +218,85 @@ errorLikeLihood:
         mstraBLabels(1) = "True"
         mstraBLabels(2) = "Missing"
 
-        'Extract data from context.SetProperties
+		'Extract data from context.SetProperties
 
-        If context.SetProperties.ContainsKey("Database") Then
-            mstrConnString = conConnStr & context.SetProperties("Database") & ";"
-        End If
+		If context IsNot Nothing Then
+			If context.SetProperties.ContainsKey("Database") Then
+				mstrConnString = conConnStr & context.SetProperties("Database") & ";"
+			End If
 
-        If context.SetProperties.ContainsKey("ConnectionString") Then
-            mstrConnString = context.SetProperties("ConnectionString")
-        End If
+			If context.SetProperties.ContainsKey("ConnectionString") Then
+				mstrConnString = context.SetProperties("ConnectionString")
+			End If
 
-        If context.SetProperties.ContainsKey("TableName") Then
-            mstrTableName = context.SetProperties("TableName")
-        End If
+			If context.SetProperties.ContainsKey("TableName") Then
+				mstrTableName = context.SetProperties("TableName")
+			End If
 
-        If context.SetProperties.ContainsKey("BLabels") Then
-            Dim booleanLabels() As String
-            booleanLabels = context.SetProperties("BLabels").ToString().Split(";")
+			If context.SetProperties.ContainsKey("BLabels") Then
+				Dim booleanLabels() As String
+				booleanLabels = context.SetProperties("BLabels").ToString().Split(";")
 
-            For i = 0 To UBound(mstraboolean)
-                mstraboolean(i) = booleanLabels(i)
-            Next
-            'mstrConnString = context.SetProperties("BLabels")
-        End If
+				For i = 0 To UBound(mstraboolean)
+					mstraboolean(i) = booleanLabels(i)
+				Next
+				'mstrConnString = context.SetProperties("BLabels")
+			End If
+		Else
+			If contextSetProperties.ContainsKey("Database") Then
+				mstrConnString = conConnStr & contextSetProperties("Database") & ";"
+			End If
 
-        'If context.SetProperties.ContainsKey("ShowBaseline") Then
-        '    Dim success As Boolean
-        '    success = Boolean.TryParse(context.SetProperties("ShowBaseline"), mboolShowBaseline)
-        'End If
+			If contextSetProperties.ContainsKey("ConnectionString") Then
+				mstrConnString = contextSetProperties("ConnectionString")
+			End If
 
-        'If context.SetProperties.ContainsKey("Iterations") Then
-        '    Dim success As Boolean
-        '    success = Boolean.TryParse(context.SetProperties("Iterations"), mlngIter)
-        'End If
+			If contextSetProperties.ContainsKey("TableName") Then
+				mstrTableName = contextSetProperties("TableName")
+			End If
 
-        'If context.SetProperties.ContainsKey("Convergence") Then
-        '    Dim success As Boolean
-        '    success = Boolean.TryParse(context.SetProperties("Convergence"), mdblConv)
-        'End If
+			If contextSetProperties.ContainsKey("BLabels") Then
+				Dim booleanLabels() As String
+				booleanLabels = contextSetProperties("BLabels").ToString().Split(";")
 
-        'If context.SetProperties.ContainsKey("Tolerance") Then
-        '    Dim success As Boolean
-        '    success = Boolean.TryParse(context.SetProperties("Tolerance"), mdblToler)
-        'End If
+				For i = 0 To UBound(mstraboolean)
+					mstraboolean(i) = booleanLabels(i)
+				Next
+				'mstrConnString = context.SetProperties("BLabels")
+			End If
+		End If
 
-        'If context.SetProperties.ContainsKey("P") Then
-        '    Dim success As Boolean
-        '    success = Double.TryParse(context.SetProperties("P"), mdblP)
-        '    If success = True Then
-        '        mdblC = 1 - mdblP
-        '        mdblP = dist1.ZFROMP((1 - mdblP) * 0.5)
-        '        mstrC = Str(context.SetProperties("P") * 100)
-        '    End If
-        'End If
+		'If context.SetProperties.ContainsKey("ShowBaseline") Then
+		'    Dim success As Boolean
+		'    success = Boolean.TryParse(context.SetProperties("ShowBaseline"), mboolShowBaseline)
+		'End If
 
-        ReDim mstraTerms(0)
+		'If context.SetProperties.ContainsKey("Iterations") Then
+		'    Dim success As Boolean
+		'    success = Boolean.TryParse(context.SetProperties("Iterations"), mlngIter)
+		'End If
+
+		'If context.SetProperties.ContainsKey("Convergence") Then
+		'    Dim success As Boolean
+		'    success = Boolean.TryParse(context.SetProperties("Convergence"), mdblConv)
+		'End If
+
+		'If context.SetProperties.ContainsKey("Tolerance") Then
+		'    Dim success As Boolean
+		'    success = Boolean.TryParse(context.SetProperties("Tolerance"), mdblToler)
+		'End If
+
+		'If context.SetProperties.ContainsKey("P") Then
+		'    Dim success As Boolean
+		'    success = Double.TryParse(context.SetProperties("P"), mdblP)
+		'    If success = True Then
+		'        mdblC = 1 - mdblP
+		'        mdblP = dist1.ZFROMP((1 - mdblP) * 0.5)
+		'        mstrC = Str(context.SetProperties("P") * 100)
+		'    End If
+		'End If
+
+		ReDim mstraTerms(0)
         Dim terms As Integer
         Dim discrete As Integer
         Dim covariate As Integer
@@ -253,38 +305,66 @@ errorLikeLihood:
         discrete = 0
         covariate = 0
 
-        'Extract data from context.InputVariableList
+		'Extract data from context.InputVariableList
 
-        mstraCovariates = context.InputVariableList("CovariateList").ToString().Split(";")
-        'mstraDiscrete is a subset of mstraCovariates, but not necessarily equal, 
-        'but may be equal if only one, GroupVar or if ALL OtherVar's are also specified as DummyVars
-        mstraDiscrete = context.InputVariableList("DiscreteList").ToString().Split(";")
-        mstraStrataVar = context.InputVariableList("StrataVarList").ToString().Split(";")
-        mstrTimeVar = context.InputVariableList("time_variable").ToString()
-        'ToDo: den4: eventually, remove next ReDim when ExtendVarList added to context
-        ReDim mstraTimeDependentVar(0)
-        'mstraTimeDependentVar = context.InputVariableList("ExtendVarList").ToString().Split(";")
-        mstrCensoredVar = context.InputVariableList("censor_variable").ToString()
-        Select Case (context.InputVariableList("censor_value").ToString())
-            Case "(+)"
-                mstrUncensoredVal = "1"
-            Case "(-)"
-                mstrUncensoredVal = "0"
-            Case "(.)"
-                mstrUncensoredVal = String.Empty
-            Case Else
-                mstrUncensoredVal = context.InputVariableList("censor_value").ToString()
-        End Select
-        If Not context.InputVariableList("weightvar") Is Nothing Then
-            mstrWeightVar = context.InputVariableList("weightvar").ToString()
-        Else
-            mstrWeightVar = String.Empty
-        End If
-        If Not context.InputVariableList("GraphVariableList") Is Nothing Then
-			mstraPlotVar = context.InputVariableList("GraphVariableList").ToString().Split(",")
-			mlstPlotVar = mstraPlotVar.ToList()
-        End If
-    End Sub
+		If context IsNot Nothing Then
+			mstraCovariates = context.InputVariableList("CovariateList").ToString().Split(";")
+			'mstraDiscrete is a subset of mstraCovariates, but not necessarily equal, 
+			'but may be equal if only one, GroupVar or if ALL OtherVar's are also specified as DummyVars
+			mStrADiscrete = context.InputVariableList("DiscreteList").ToString().Split(";")
+			mstraStrataVar = context.InputVariableList("StrataVarList").ToString().Split(";")
+			mstrTimeVar = context.InputVariableList("time_variable").ToString()
+			'ToDo: den4: eventually, remove next ReDim when ExtendVarList added to context
+			ReDim mstraTimeDependentVar(0)
+			'mstraTimeDependentVar = context.InputVariableList("ExtendVarList").ToString().Split(";")
+			mstrCensoredVar = context.InputVariableList("censor_variable").ToString()
+			Select Case (context.InputVariableList("censor_value").ToString())
+				Case "(+)"
+					mstrUncensoredVal = "1"
+				Case "(-)"
+					mstrUncensoredVal = "0"
+				Case "(.)"
+					mstrUncensoredVal = String.Empty
+				Case Else
+					mstrUncensoredVal = context.InputVariableList("censor_value").ToString()
+			End Select
+			If Not context.InputVariableList("weightvar") Is Nothing Then
+				mstrWeightVar = context.InputVariableList("weightvar").ToString()
+			Else
+				mstrWeightVar = String.Empty
+			End If
+			If Not context.InputVariableList("GraphVariableList") Is Nothing Then
+				mstraPlotVar = context.InputVariableList("GraphVariableList").ToString().Split(",")
+				mlstPlotVar = mstraPlotVar.ToList()
+			End If
+		Else
+			mstraCovariates = contextInputVariableList("CovariateList").ToString().Split(";")
+			mStrADiscrete = contextInputVariableList("DiscreteList").ToString().Split(";")
+			mstraStrataVar = contextInputVariableList("StrataVarList").ToString().Split(";")
+			mstrTimeVar = contextInputVariableList("time_variable").ToString()
+			ReDim mstraTimeDependentVar(0)
+			mstrCensoredVar = contextInputVariableList("censor_variable").ToString()
+			Select Case (contextInputVariableList("censor_value").ToString())
+				Case "(+)"
+					mstrUncensoredVal = "1"
+				Case "(-)"
+					mstrUncensoredVal = "0"
+				Case "(.)"
+					mstrUncensoredVal = String.Empty
+				Case Else
+					mstrUncensoredVal = contextInputVariableList("censor_value").ToString()
+			End Select
+			If Not contextInputVariableList("weightvar") Is Nothing Then
+				mstrWeightVar = contextInputVariableList("weightvar").ToString()
+			Else
+				mstrWeightVar = String.Empty
+			End If
+			If Not contextInputVariableList("GraphVariableList") Is Nothing Then
+				mstraPlotVar = contextInputVariableList("GraphVariableList").ToString().Split(",")
+				mlstPlotVar = mstraPlotVar.ToList()
+			End If
+		End If
+	End Sub
 
     Public Function GetRawData() As Boolean
         Dim lstrError As String
@@ -308,21 +388,39 @@ errorLikeLihood:
         Dim d As Date
         Dim lstraTimeDep() As String
 
-        Dim NumRows As Integer
-        NumRows = context.GetDataRows(Nothing).Count
-        EICoxLoadData.context = context
+		Dim NumRows As Integer
+		If context IsNot Nothing Then
+			NumRows = context.GetDataRows(Nothing).Count
+		Else
+			NumRows = contextDataTable.Rows.Count
+			EICoxLoadData.contextColumns = contextColumns
+			EICoxLoadData.contextDataTable = contextDataTable
+			EICoxLoadData.contextInputVariableList = contextInputVariableList
+			EICoxLoadData.contextSetProperties = contextSetProperties
+		End If
+		EICoxLoadData.context = context
         EICoxLoadData.dataTable = New DataTable
 
-        For Each column As DataColumn In context.Columns
-            dataTable.Columns.Add(column.ColumnName, column.DataType)
-        Next
+		If context IsNot Nothing Then
+			For Each column As DataColumn In context.Columns
+				dataTable.Columns.Add(column.ColumnName, column.DataType)
+			Next
 
-        For Each row As DataRow In context.GetDataRows(Nothing)
-            EICoxLoadData.dataTable.ImportRow(row)
-        Next
+			For Each row As DataRow In context.GetDataRows(Nothing)
+				EICoxLoadData.dataTable.ImportRow(row)
+			Next
+		Else
+			For Each column As DataColumn In contextColumns
+				dataTable.Columns.Add(column.ColumnName, column.DataType)
+			Next
+
+			For Each row As DataRow In contextDataTable.Rows
+				EICoxLoadData.dataTable.ImportRow(row)
+			Next
+		End If
 
 
-        If NumRows <> 0 Then
+		If NumRows <> 0 Then
 
             'Check to make sure DataBase has been updated
             p = 0
