@@ -1376,15 +1376,22 @@ namespace EpiDashboard
             CustomOutputHeading = headerPanel.Text;
             CustomOutputDescription = descriptionPanel.Text;
 
-            if (CustomOutputHeading == null || (string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)")))
+			ComponentArt.Win.DataVisualization.Charting.ChartBase xyChart = null;
+			object el = FindName("xyChart");
+			if (el is ComponentArt.Win.DataVisualization.Charting.XYChart)
+			{
+				xyChart = el as ComponentArt.Win.DataVisualization.Charting.XYChart;
+			}
+
+			if (CustomOutputHeading == null || (string.IsNullOrEmpty(CustomOutputHeading) && !CustomOutputHeading.Equals("(none)")))
             {
                 if (this.cbxFieldMatch.Text.Length <= 0)
                 {
-                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Unconditional Logistic Regression</h2>");
+                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Kaplan-Meier Survival</h2>");
                 }
                 else
                 {
-                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Conditional Logistic Regression</h2>");
+                    htmlBuilder.AppendLine("<h2 class=\"gadgetHeading\">Kaplan-Meier Survival</h2>");
                 }
             }
             else
@@ -1446,9 +1453,37 @@ namespace EpiDashboard
             if (txtFilterString != null && !string.IsNullOrEmpty(txtFilterString.Text) && txtFilterString.Visibility == Visibility.Visible)
             {
                 htmlBuilder.AppendLine("<p><small><strong>" + txtFilterString.Text + "</strong></small></p> ");
-            }
+			}
 
-                htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
+			if (!ForWeb)
+			{
+				string imageFileName = string.Empty;
+
+				if (htmlFileName.EndsWith(".html"))
+				{
+					imageFileName = htmlFileName.Remove(htmlFileName.Length - 5, 5);
+				}
+				else if (htmlFileName.EndsWith(".htm"))
+				{
+					imageFileName = htmlFileName.Remove(htmlFileName.Length - 4, 4);
+				}
+
+				imageFileName = imageFileName + "_" + count.ToString() + ".png";
+				if (xyChart != null)
+				{
+					BitmapSource img = (BitmapSource)Common.ToImageSource(xyChart);
+					System.IO.FileStream stream = new System.IO.FileStream(imageFileName, System.IO.FileMode.Create);
+					//JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+					PngBitmapEncoder encoder = new PngBitmapEncoder();
+					encoder.Frames.Add(BitmapFrame.Create(img));
+					encoder.Save(stream);
+					stream.Close();
+				}
+
+				htmlBuilder.AppendLine("<img src=\"" + imageFileName + "\" />");
+			}
+
+			htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
                 htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
                 htmlBuilder.AppendLine(" <tr>");
                 htmlBuilder.AppendLine("  <th>Test</th>");
