@@ -1582,8 +1582,12 @@ namespace EpiDashboard
             foreach(string s in this.lbxOtherFields.Items)
             {
                 varList = varList + s + ",";
-            }
-            varList = varList.TrimEnd(',');
+			}
+			foreach (string s in this.lbxPredictorFields.Items)
+			{
+				varList = varList + s + ",";
+			}
+			varList = varList.TrimEnd(',');
 
             htmlBuilder.AppendLine("<em>Test variable:</em> <strong>" + varList + "</strong>");
             htmlBuilder.AppendLine("<br />");
@@ -1617,32 +1621,91 @@ namespace EpiDashboard
             if (txtFilterString != null && !string.IsNullOrEmpty(txtFilterString.Text) && txtFilterString.Visibility == Visibility.Visible)
             {
                 htmlBuilder.AppendLine("<p><small><strong>" + txtFilterString.Text + "</strong></small></p> ");
-            }
+			}
 
-                htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
-                htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Test</th>");
-                htmlBuilder.AppendLine("  <th>Statistic</th>");
-                htmlBuilder.AppendLine("  <th>D.F.</th>");
-                htmlBuilder.AppendLine("  <th>P-Value</th>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Log-Rank Statistic</th>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreStatistic.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreDF.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreP.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Wilcoxon</th>");
-                htmlBuilder.AppendLine("  <td>" + txtLStatistic.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtLDF.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtLP.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");                
-                htmlBuilder.AppendLine("</table>");
-            
+			htmlBuilder.AppendLine("<div style=\"height: 7px;\"></div>");
+			htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+			//htmlBuilder.AppendLine("<caption>" + grid.Tag + "</caption>");
 
-            return htmlBuilder.ToString();
+			foreach (UIElement control in grdRegress.Children)
+			{
+				if (control is TextBlock)
+				{
+					int rowNumber = Grid.GetRow(control);
+					int columnNumber = Grid.GetColumn(control);
+
+					string tableDataTagOpen = "<td>";
+					string tableDataTagClose = "</td>";
+
+					if (rowNumber == 0)
+					{
+						tableDataTagOpen = "<th>";
+						tableDataTagClose = "</th>";
+					}
+
+					if (columnNumber == 0)
+					{
+						htmlBuilder.AppendLine("<tr>");
+					}
+					if (columnNumber == 0 && rowNumber > 0)
+					{
+						tableDataTagOpen = "<td class=\"value\">";
+					}
+
+					string value = ((TextBlock)control).Text;
+					string formattedValue = value;
+
+					htmlBuilder.AppendLine(tableDataTagOpen + formattedValue + tableDataTagClose);
+
+					if (columnNumber >= grdRegress.ColumnDefinitions.Count - 1)
+					{
+						htmlBuilder.AppendLine("</tr>");
+					}
+				}
+			}
+
+			htmlBuilder.AppendLine("</table>");
+
+			htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
+			htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Convergence:</th>");
+			htmlBuilder.AppendLine("  <td>" + txtConvergence.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Iterations:</th>");
+			htmlBuilder.AppendLine("  <td>" + txtIterations.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>-2 * Log-Likelihood:</th>");
+			htmlBuilder.AppendLine("  <td>" + txtMinusTwoLogLikelihood.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine("</table>");
+
+			htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
+			htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Test</th>");
+			htmlBuilder.AppendLine("  <th>Statistic</th>");
+			htmlBuilder.AppendLine("  <th>D.F.</th>");
+			htmlBuilder.AppendLine("  <th>P-Value</th>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Log-Rank Statistic</th>");
+			htmlBuilder.AppendLine("  <td>" + txtScoreStatistic.Text + "</td>");
+			htmlBuilder.AppendLine("  <td>" + txtScoreDF.Text + "</td>");
+			htmlBuilder.AppendLine("  <td>" + txtScoreP.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine(" <tr>");
+			htmlBuilder.AppendLine("  <th>Wilcoxon</th>");
+			htmlBuilder.AppendLine("  <td>" + txtLStatistic.Text + "</td>");
+			htmlBuilder.AppendLine("  <td>" + txtLDF.Text + "</td>");
+			htmlBuilder.AppendLine("  <td>" + txtLP.Text + "</td>");
+			htmlBuilder.AppendLine(" </tr>");
+			htmlBuilder.AppendLine("</table>");
+
+
+			return htmlBuilder.ToString();
         }
 
         private string customOutputHeading;
