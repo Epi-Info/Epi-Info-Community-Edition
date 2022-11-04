@@ -1374,9 +1374,23 @@ namespace EpiDashboard
 
                 covariateElement.InnerXml = xmlCovariateString;
                 element.AppendChild(covariateElement);
-            }
+			}
 
-            return element;
+			if (lbxPredictorFields.Items.Count > 0)
+			{
+				string xmlCovariateString = string.Empty;
+				XmlElement covariateElement = doc.CreateElement("additionalcovariates");
+
+				foreach (string s in lbxPredictorFields.Items)
+				{
+					xmlCovariateString = xmlCovariateString + "<covariate>" + s + "</covariate>";
+				}
+
+				covariateElement.InnerXml = xmlCovariateString;
+				element.AppendChild(covariateElement);
+			}
+
+			return element;
         }
 
         public override void CreateFromXml(XmlElement element)
@@ -1430,7 +1444,16 @@ namespace EpiDashboard
                             }
                         }
                         break;
-                    case "customheading":
+					case "additionalcovariates":
+						foreach (XmlElement covariate in child.ChildNodes)
+						{
+							if (covariate.Name.ToLowerInvariant().Equals("covariate"))
+							{
+								lbxPredictorFields.Items.Add(covariate.InnerText);
+							}
+						}
+						break;
+					case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
