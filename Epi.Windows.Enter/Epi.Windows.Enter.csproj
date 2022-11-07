@@ -35,7 +35,7 @@
     <SignManifests>false</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>\\Isd-v-con1\epiinfo\Enter\</PublishUrl>
     <Install>false</Install>

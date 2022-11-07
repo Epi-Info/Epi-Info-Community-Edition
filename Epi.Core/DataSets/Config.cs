@@ -2,9 +2,9 @@
 {
 
 
-    public partial class Config
-    {
-    }
+	public partial class Config
+	{
+	}
 }
 namespace Epi.DataSets {
     
