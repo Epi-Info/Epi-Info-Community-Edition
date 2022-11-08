@@ -1225,7 +1225,19 @@ namespace EpiDashboard
                 Grid.SetRow(txt12, 12);
                 Grid.SetColumn(txt12, 0);
                 statGrid.Children.Add(txt12);
-            }
+
+				if (results.NPQLT5)
+				{
+					statGrid.RowDefinitions.Add(new RowDefinition());
+					TextBlock txtNPQLT5 = new TextBlock();
+					int rowNumber = statGrid.Children.Count;
+					txtNPQLT5.Text = "An expected cell count is less than 5.";
+					txtNPQLT5.Margin = (Thickness)this.Resources["genericTextMarginAlt"];
+					Grid.SetRow(txtNPQLT5, rowNumber);
+					Grid.SetColumn(txtNPQLT5, 0);
+					statGrid.Children.Add(txtNPQLT5);
+				}
+			}
         }
 
         /// <summary>
