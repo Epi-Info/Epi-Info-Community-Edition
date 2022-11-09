@@ -358,6 +358,8 @@ namespace EpiDashboard
                             {
                                 string Key = row[codeColumnName].ToString();
                                 int dash = Key.IndexOf('-');
+									if (dash < 0)
+										continue;
                                 Key = Key.Substring(0, dash);
                                 if (!fieldValues.ContainsKey(Key))
                                 {
