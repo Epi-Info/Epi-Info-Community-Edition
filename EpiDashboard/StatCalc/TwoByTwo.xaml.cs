@@ -294,7 +294,9 @@ namespace EpiDashboard.StatCalc
                 TextBlock txtMidPExact = FindChild<TextBlock>(MainTab, "txtMidPExact" + strata);
                 TextBlock txtFisherExact2P = FindChild<TextBlock>(MainTab, "txtFisherExact2P" + strata);
 
-                int.TryParse(txtYesYesVal.Text, out yyVal);
+				TextBlock txtWarningMessage = FindChild<TextBlock>(MainTab, "txtWarningMessage" + strata);
+
+				int.TryParse(txtYesYesVal.Text, out yyVal);
                 int.TryParse(txtYesNoVal.Text, out ynVal);
                 int.TryParse(txtNoYesVal.Text, out nyVal);
                 int.TryParse(txtNoNoVal.Text, out nnVal);
@@ -425,7 +427,12 @@ namespace EpiDashboard.StatCalc
                         riskRatioUpper = ((double)singleTableResults.RiskRatioUpper).ToString("F4");
                     }
 
-                    txtChiSqCorP.Text = singleTableResults.ChiSquareYates2P.ToString("F8");
+					if (singleTableResults.LowestExpectedCellCount < 5)
+						txtWarningMessage.Text = "An expected cell count is < 5. X" + '\u00B2' + " may not be valid.";
+					else
+						txtWarningMessage.Text = String.Empty;
+
+					txtChiSqCorP.Text = singleTableResults.ChiSquareYates2P.ToString("F8");
                     txtChiSqCorVal.Text = singleTableResults.ChiSquareYatesVal.ToString("F4");
                     txtChiSqManP.Text = singleTableResults.ChiSquareMantel2P.ToString("F8");
                     txtChiSqManVal.Text = singleTableResults.ChiSquareMantelVal.ToString("F4");

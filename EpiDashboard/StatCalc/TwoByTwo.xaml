@@ -290,6 +290,7 @@
                                                     <RowDefinition Height="30"/>
                                                     <RowDefinition Height="30"/>
                                                     <RowDefinition Height="30"/>
+                                                    <RowDefinition Height="20"/>
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -322,6 +323,7 @@
                                                 <TextBlock Margin="6, 0, 6, 0" Name="txtFisherExact1" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="6, 0, 6, 0" Name="txtFisherExact2P1" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage1" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -628,6 +630,7 @@
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2P2" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage2" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -934,6 +937,7 @@
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact3" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2P3" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage3" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -1240,6 +1244,7 @@
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact4" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2P4" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage4" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -1546,6 +1551,7 @@
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact5" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2P5" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage5" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -1852,6 +1858,7 @@
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact6" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2P6" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage6" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -2158,6 +2165,7 @@
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact7" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2P7" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage7" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -2464,6 +2472,7 @@
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact8" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2P8" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage8" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -2770,6 +2779,7 @@
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact9" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
                                                 <TextBlock Margin="2, 0, 2, 0" Name="txtFisherExact2P9" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2" />
                                             </Grid>
+                                            <TextBlock Name="txtWarningMessage9" VerticalAlignment="Center" Text="" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
