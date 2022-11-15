@@ -19,10 +19,12 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 4.8
     - name: Restore dependencies
       run: dotnet restore
+    - name: Install dependencies
+      run: dotnet add package Newtonsoft.Json --version 13.0.1
     - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet build --no-restore --verbosity diagnostic
+#    - name: Test
+#      run: dotnet test --no-build --verbosity normal
