@@ -386,7 +386,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 			cbxFieldLink.Items.Clear();
 
 			cbxFieldLink.Items.Add("Logit");
-			cbxFieldLink.Items.Add("Log (For Evaluation)");
+			//cbxFieldLink.Items.Add("Log (For Evaluation)");
+			cbxFieldLink.Items.Add("Log");
 			cbxFieldLink.SelectedIndex = 0;
 
 			cbxFieldWeight.SelectedItem = lrc.cbxFieldWeight.SelectedItem;

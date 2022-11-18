@@ -401,7 +401,7 @@ namespace EpiDashboard
 
 							if (inputVariableList.ContainsKey("Logit"))
 								results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
-							else if (inputVariableList.ContainsKey("Log (For Evaluation)"))
+							else if (inputVariableList.ContainsKey("Log"))
 								results.regressionResults = logisticRegression.LogBinomialRegression(inputVariableList, regressTable);
 
 							results.casesIncluded = results.regressionResults.casesIncluded;
@@ -595,7 +595,7 @@ namespace EpiDashboard
                 txtIterationsLabel.Text ="Iterations:";
                 txtFinalLogLabel.Text = "Final -2*Log-Likelihood:";
                 txtCasesIncludedLabel.Text = "Cases Included:";
-				if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log (For Evaluation)"))
+				if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log"))
 				{
 					txtFinalLogLabel.Text = "Final Log-Likelihood:";
 					results.finalLikelihood *= -0.5;
@@ -633,10 +633,10 @@ namespace EpiDashboard
             TextBlock txtOddsHeader = new TextBlock();
 			headerPanel.Text = "Logistic Regression";
             txtOddsHeader.Text = "Odds Ratio";
-			if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log (For Evaluation)"))
+			if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log"))
 			{
 				txtOddsHeader.Text = "Risk Ratio";
-				headerPanel.Text = "Log-Binomial Regression (For Evaluation Only)";
+				headerPanel.Text = "Log-Binomial Regression";
 			}
             txtOddsHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtOddsHeader, 0);
@@ -1101,7 +1101,11 @@ namespace EpiDashboard
                 }
                 inputVariableList.Add("P", p.ToString());
 
-				if (cbxFieldLink.SelectedItem != null)
+				if (!String.IsNullOrEmpty(cbxFieldLink.Text))
+				{
+					inputVariableList.Add(cbxFieldLink.Text.ToString(), "linkfunction");
+				}
+				else if (cbxFieldLink.SelectedItem != null)
 				{
 					inputVariableList.Add(cbxFieldLink.SelectedItem.ToString(), "linkfunction");
 				}
@@ -1154,6 +1158,7 @@ namespace EpiDashboard
             string dependVar = string.Empty;
             string weightVar = string.Empty;
             string matchVar = string.Empty;
+			string linkFunction = string.Empty;
             string pvalue = string.Empty;
             bool intercept = true;
 
@@ -1171,6 +1176,11 @@ namespace EpiDashboard
             {
                 matchVar = cbxFieldMatch.SelectedItem.ToString();
             }
+
+			if (cbxFieldLink.SelectedItem != null)
+			{
+				linkFunction = cbxFieldLink.SelectedItem.ToString();
+			}
 
             if (checkboxNoIntercept.IsChecked == true)
             {
@@ -1202,7 +1212,8 @@ namespace EpiDashboard
             "<mainVariable>" + dependVar + "</mainVariable>" +
             "<weightVariable>" + weightVar + "</weightVariable>" +
             "<matchVariable>" + matchVar + "</matchVariable>" +
-            "<pvalue>" + pvalue + "</pvalue>" +
+			"<linkFunction>" + linkFunction + "</linkFunction>" +
+			"<pvalue>" + pvalue + "</pvalue>" +
             "<intercept>" + intercept.ToString() + "</intercept>" +
             "<customHeading>" + CustomOutputHeading.Replace("<", "&lt;") + "</customHeading>" +
             "<customDescription>" + CustomOutputDescription.Replace("<", "&lt;") + "</customDescription>";
@@ -1274,7 +1285,11 @@ namespace EpiDashboard
                     case "matchvariable":
                         cbxFieldMatch.Text = child.InnerText;
                         break;
-                    case "pvalue":
+					case "linkfunction":
+						cbxFieldLink.Text = child.InnerText;
+						cbxFieldLink.SelectedItem = child.InnerText;
+						break;
+					case "pvalue":
                         if (child.InnerText.Equals("90")) { cbxConf.SelectedIndex = 1; }
                         if (child.InnerText.Equals("95")) { cbxConf.SelectedIndex = 2; }
                         if (child.InnerText.Equals("99")) { cbxConf.SelectedIndex = 3; }
@@ -1534,30 +1549,7 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("  <td>" + txtCasesIncluded.Text + "</td>");
                 htmlBuilder.AppendLine(" </tr>");
                 htmlBuilder.AppendLine("</table>");
-
-
-                htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
-                htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Test</th>");
-                htmlBuilder.AppendLine("  <th>Statistic</th>");
-                htmlBuilder.AppendLine("  <th>D.F.</th>");
-                htmlBuilder.AppendLine("  <th>P-Value</th>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Score</th>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreStatistic.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreDF.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtScoreP.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");
-                htmlBuilder.AppendLine(" <tr>");
-                htmlBuilder.AppendLine("  <th>Likelihood Ratio</th>");
-                htmlBuilder.AppendLine("  <td>" + txtLStatistic.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtLDF.Text + "</td>");
-                htmlBuilder.AppendLine("  <td>" + txtLP.Text + "</td>");
-                htmlBuilder.AppendLine(" </tr>");                
-                htmlBuilder.AppendLine("</table>");
-
+			
                 htmlBuilder.AppendLine("<br><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
                 foreach (UIElement control in grdIOR.Children)
                 {
