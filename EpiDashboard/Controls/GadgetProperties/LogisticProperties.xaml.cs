@@ -395,6 +395,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxConf.SelectedItem = lrc.cbxConf.SelectedItem;
 			if (lrc.cbxFieldLink.SelectedItem != null)
 				cbxFieldLink.SelectedItem = lrc.cbxFieldLink.SelectedItem;
+			else if (!String.IsNullOrEmpty(lrc.cbxFieldLink.Text))
+				cbxFieldLink.SelectedItem = lrc.cbxFieldLink.Text;
             checkboxNoIntercept.IsChecked = lrc.checkboxNoIntercept.IsChecked;
             checkboxIncludeMissing.IsChecked = lrc.checkboxIncludeMissing.IsChecked;
             checkboxShowANOVA.IsChecked = Parameters.ShowANOVA;
