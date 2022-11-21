@@ -602,6 +602,13 @@ namespace EpiDashboard
 					txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
 					grdParameters.Visibility = System.Windows.Visibility.Collapsed;
 				}
+				else if (cbxFieldLink.Text.Equals("Log"))
+				{
+					txtFinalLogLabel.Text = "Final Log-Likelihood:";
+					results.finalLikelihood *= -0.5;
+					txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
+					grdParameters.Visibility = System.Windows.Visibility.Collapsed;
+				}
 
 			}
 
@@ -634,6 +641,11 @@ namespace EpiDashboard
 			headerPanel.Text = "Logistic Regression";
             txtOddsHeader.Text = "Odds Ratio";
 			if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log"))
+			{
+				txtOddsHeader.Text = "Risk Ratio";
+				headerPanel.Text = "Log-Binomial Regression";
+			}
+			else if (cbxFieldLink.Text.Equals("Log"))
 			{
 				txtOddsHeader.Text = "Risk Ratio";
 				headerPanel.Text = "Log-Binomial Regression";
@@ -1287,7 +1299,6 @@ namespace EpiDashboard
                         break;
 					case "linkfunction":
 						cbxFieldLink.Text = child.InnerText;
-						cbxFieldLink.SelectedItem = child.InnerText;
 						break;
 					case "pvalue":
                         if (child.InnerText.Equals("90")) { cbxConf.SelectedIndex = 1; }
@@ -1549,6 +1560,31 @@ namespace EpiDashboard
                 htmlBuilder.AppendLine("  <td>" + txtCasesIncluded.Text + "</td>");
                 htmlBuilder.AppendLine(" </tr>");
                 htmlBuilder.AppendLine("</table>");
+
+			if (cbxFieldLink.Text.Contains("Logit") || (cbxFieldLink.SelectedValue != null && cbxFieldLink.SelectedValue.ToString().Contains("Logit")))
+			{
+				htmlBuilder.AppendLine("<div style=\"height: 17px;\"></div>");
+				htmlBuilder.AppendLine("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+				htmlBuilder.AppendLine(" <tr>");
+				htmlBuilder.AppendLine("  <th>Test</th>");
+				htmlBuilder.AppendLine("  <th>Statistic</th>");
+				htmlBuilder.AppendLine("  <th>D.F.</th>");
+				htmlBuilder.AppendLine("  <th>P-Value</th>");
+				htmlBuilder.AppendLine(" </tr>");
+				htmlBuilder.AppendLine(" <tr>");
+				htmlBuilder.AppendLine("  <th>Score</th>");
+				htmlBuilder.AppendLine("  <td>" + txtScoreStatistic.Text + "</td>");
+				htmlBuilder.AppendLine("  <td>" + txtScoreDF.Text + "</td>");
+				htmlBuilder.AppendLine("  <td>" + txtScoreP.Text + "</td>");
+				htmlBuilder.AppendLine(" </tr>");
+				htmlBuilder.AppendLine(" <tr>");
+				htmlBuilder.AppendLine("  <th>Likelihood Ratio</th>");
+				htmlBuilder.AppendLine("  <td>" + txtLStatistic.Text + "</td>");
+				htmlBuilder.AppendLine("  <td>" + txtLDF.Text + "</td>");
+				htmlBuilder.AppendLine("  <td>" + txtLP.Text + "</td>");
+				htmlBuilder.AppendLine(" </tr>");
+				htmlBuilder.AppendLine("</table>");
+			}
 			
                 htmlBuilder.AppendLine("<br><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
                 foreach (UIElement control in grdIOR.Children)
