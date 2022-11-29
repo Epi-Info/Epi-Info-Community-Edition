@@ -54,8 +54,8 @@
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="261*" />
+                            <ColumnDefinition Width="199*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -73,31 +73,31 @@
                             <TextBlock TextWrapping="Wrap" x:Name="tblockOutcomeVariableTxt">Censored Variable:</TextBlock>
                         </Label>
                         <!--ComboBox x:Name="cbxField" Width="216" HorizontalAlignment="Left" Height="28" /-->
-                        <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxOutcome_SelectionChanged" />
+                        <ComboBox Grid.Column="0" Grid.Row="1" x:Name="cbxFieldOutcome" Width="256" HorizontalAlignment="Left" SelectionChanged="cbxOutcome_SelectionChanged" />
                         <Label x:Name="tblockWeightVariable" Grid.Column="0" Grid.Row="5">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockWeightVariableTxt">Weight:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="0" Grid.Row="6" x:Name="cbxFieldWeight" Width="216" HorizontalAlignment="Left" Height="28" />
+                        <ComboBox Grid.Column="0" Grid.Row="6" x:Name="cbxFieldWeight" Width="256" HorizontalAlignment="Left" />
                         <Label x:Name="tblockCovariates" Grid.Column="0" Grid.Row="7">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockCovariatesTxt">Predictor Variables:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="0" Grid.Row="8" x:Name="cbxPredictors" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxPredictors_SelectionChanged" />
+                        <ComboBox Grid.Column="0" Grid.Row="8" x:Name="cbxPredictors" Width="256" HorizontalAlignment="Left" SelectionChanged="cbxPredictors_SelectionChanged" />
                         <!--ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" /-->
-                        <ListBox Grid.Column="0" Grid.Row="9" SelectionMode="Extended" Name="lbxPredictorFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="216" MouseDoubleClick="lbxPredictorFields_MouseDoubleClick" />
-                        <Label x:Name="tblockUncensoredValue" Grid.Column="2" Grid.Row="0" Visibility="Visible">
+                        <ListBox Grid.Column="0" Grid.Row="9" SelectionMode="Extended" Name="lbxPredictorFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="256" MouseDoubleClick="lbxPredictorFields_MouseDoubleClick" />
+                        <Label x:Name="tblockUncensoredValue" Grid.Column="1" Grid.Row="0" Visibility="Visible">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockUncensoredValueTxt">Value for Uncensored:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="2" Grid.Row="1" x:Name="cbxFieldUncensored" Width="108" HorizontalAlignment="Left" Height="28" Visibility="Visible" />
-                        <Label x:Name="tblockLinkFunction" Grid.Column="2" Grid.Row="2" Visibility="Collapsed">
+                        <ComboBox Grid.Column="1" Grid.Row="1" x:Name="cbxFieldUncensored" Width="108" HorizontalAlignment="Left" Visibility="Visible" />
+                        <Label x:Name="tblockLinkFunction" Grid.Column="1" Grid.Row="2" Visibility="Collapsed">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockLinkFunctionTxt">Link Function:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cbxFieldLink" Width="108" HorizontalAlignment="Left" Height="28" Visibility="Collapsed" />
+                        <ComboBox Grid.Column="1" Grid.Row="3" x:Name="cbxFieldLink" Width="108" HorizontalAlignment="Left" Visibility="Collapsed" />
                         <Label x:Name="tblockIndependentVariables" Grid.Column="0" Grid.Row="2">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockIndependentVariablesTxt">Test Group Variable:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="0" Grid.Row="3" x:Name="cbxFields" Width="216" HorizontalAlignment="Left" Height="28" SelectionChanged="cbxFields_SelectionChanged" />
+                        <ComboBox Grid.Column="0" Grid.Row="3" x:Name="cbxFields" Width="256" HorizontalAlignment="Left" SelectionChanged="cbxFields_SelectionChanged" />
                         <!--ListBox SelectionMode="Multiple" Name="lvFieldStrata" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="90" /-->
-                        <ListBox Grid.Column="0" Grid.Row="4" SelectionMode="Extended" Name="lbxOtherFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="28" Width="216" SelectionChanged="lbxOtherFields_SelectionChanged" MouseDoubleClick="lbxOtherFields_MouseDoubleClick" Visibility="Collapsed" />
+                        <ListBox Grid.Column="0" Grid.Row="4" SelectionMode="Extended" Name="lbxOtherFields" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="216" SelectionChanged="lbxOtherFields_SelectionChanged" MouseDoubleClick="lbxOtherFields_MouseDoubleClick" Visibility="Collapsed" Margin="0,11" />
                         <Grid Grid.Row="4" Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
@@ -138,24 +138,24 @@
                             <TextBlock TextWrapping="Wrap" x:Name="tblockMatchVariableTxt">Time Variable:</TextBlock>
                         </Label>
                         <!--ComboBox x:Name="cbxFieldCrosstab" Width="216" HorizontalAlignment="Left" Height="28" /-->
-                        <ComboBox Grid.Column="0" Grid.Row="4" x:Name="cbxFieldMatch" Width="216" HorizontalAlignment="Left" Height="28" Margin="0,22,0,0" />
+                        <ComboBox Grid.Column="0" Grid.Row="4" x:Name="cbxFieldMatch" Width="256" HorizontalAlignment="Left" Margin="0,22,0,0" />
                         <CheckBox x:Name="checkboxShowANOVA" IsChecked="True" Margin="0,8,0,0" Visibility="Collapsed">
                             <TextBlock TextWrapping="Wrap" x:Name="checkboxShowANOVATxt">Display ANOVA statistics</TextBlock>
                         </CheckBox>
 
-                        <Label x:Name="tblockConfidenceLimits" Grid.Column="2" Grid.Row="5" Visibility="Collapsed">
+                        <Label x:Name="tblockConfidenceLimits" Grid.Column="1" Grid.Row="5" Visibility="Collapsed">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockConfidenceLimitsTxt">Confidence Limits:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="2" Grid.Row="6" x:Name="cbxConf" Width="216" HorizontalAlignment="Left" Height="28" Visibility="Collapsed" />
-                        <TextBlock x:Name="tblockDummyVariables" TextWrapping="Wrap" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" TextAlignment="Left" Text="Dummy variables:" Margin="0,5,0,0" Visibility="Collapsed" />
-                        <ListBox Height="40" Grid.Column="0" Grid.Row="8" x:Name="lbxDummyTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="216"  Margin="0,5,0,18.2" Grid.RowSpan="2" SelectionMode="Single" MouseDoubleClick="lbxDummyTerms_MouseDoubleClick" Visibility="Collapsed" />
-                        <TextBlock x:Name="tblockInteractionTerms" TextWrapping="Wrap" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" TextAlignment="Left" Text="Interaction terms:" Margin="0,5,0,0" Visibility="Collapsed" />
-                        <ListBox Height="40" Grid.Column="1" Grid.Row="8" x:Name="lbxInteractionTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="216"  Margin="0.4,5,0,18.2" Grid.RowSpan="2" SelectionMode="Single" MouseDoubleClick="lbxInteractionTerms_MouseDoubleClick" Visibility="Collapsed" />
+                        <ComboBox Grid.Column="1" Grid.Row="6" x:Name="cbxConf" Width="216" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,0,-17,0" />
+                        <TextBlock x:Name="tblockDummyVariables" TextWrapping="Wrap" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" TextAlignment="Left" Text="Dummy variables:" Margin="0,5,0,0" Visibility="Collapsed" Width="0" />
+                        <ListBox Grid.Column="0" Grid.Row="9" x:Name="lbxDummyTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="216"  Margin="0,4,0,0" SelectionMode="Single" MouseDoubleClick="lbxDummyTerms_MouseDoubleClick" Visibility="Collapsed" />
+                        <TextBlock x:Name="tblockInteractionTerms" TextWrapping="Wrap" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" TextAlignment="Left" Text="Interaction terms:" Margin="0,5,0,0" Visibility="Collapsed" Width="0" />
+                        <ListBox Grid.Column="1" Grid.Row="9" x:Name="lbxInteractionTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="216"  Margin="0,4,-17,0" SelectionMode="Single" MouseDoubleClick="lbxInteractionTerms_MouseDoubleClick" Visibility="Collapsed" />
 
-                        <CheckBox Grid.Column="0" Grid.Row="9" x:Name="checkboxNoIntercept" HorizontalAlignment="left" Visibility="Collapsed">
+                        <CheckBox Grid.Column="0" Grid.Row="9" x:Name="checkboxNoIntercept" HorizontalAlignment="left" Visibility="Collapsed" Width="0">
                             <TextBlock TextWrapping="Wrap" x:Name="checkboxNoInterceptTxt">No intercept</TextBlock>
                         </CheckBox>
-                        <CheckBox Grid.Column="2" Grid.Row="9" x:Name="checkboxIncludeMissing" HorizontalAlignment="left" Visibility="Collapsed">
+                        <CheckBox Grid.Column="1" Grid.Row="9" x:Name="checkboxIncludeMissing" HorizontalAlignment="left" Visibility="Collapsed" Width="0">
                             <TextBlock TextWrapping="Wrap" x:Name="checkboxIncludeMissingTxt">Include missing</TextBlock>
                         </CheckBox>
                     </Grid>
