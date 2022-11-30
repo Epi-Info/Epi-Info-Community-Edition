@@ -342,6 +342,7 @@ namespace Epi.Windows
 		{
 			PrepareToShow();
             Form topForm = TopMostMessageBox.GetTopMostInstance();
+			text = text.Replace("\\r\\n", Environment.NewLine);
             DialogResult dialogResult = MessageBox.Show(topForm, text, caption);
             topForm.Dispose();
             return dialogResult;
