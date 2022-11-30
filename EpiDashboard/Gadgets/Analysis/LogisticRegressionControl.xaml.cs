@@ -638,18 +638,22 @@ namespace EpiDashboard
             grdRegress.Children.Add(txtVarHeader);
 
             TextBlock txtOddsHeader = new TextBlock();
-			headerPanel.Text = "Logistic Regression";
+			if (String.IsNullOrEmpty(Parameters.GadgetTitle) || Parameters.GadgetTitle.Equals("Log-Binomial Regression"))
+				headerPanel.Text = "Logistic Regression";
             txtOddsHeader.Text = "Odds Ratio";
 			if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log"))
 			{
 				txtOddsHeader.Text = "Risk Ratio";
-				headerPanel.Text = "Log-Binomial Regression";
+				if (String.IsNullOrEmpty(Parameters.GadgetTitle) || Parameters.GadgetTitle.Equals("Logistic Regression"))
+					headerPanel.Text = "Log-Binomial Regression";
 			}
-			else if (cbxFieldLink.Text.Equals("Log"))
+			else if (cbxFieldLink.Text.Equals("Log") || Parameters.GadgetTitle.Equals("Logistic Regression"))
 			{
 				txtOddsHeader.Text = "Risk Ratio";
-				headerPanel.Text = "Log-Binomial Regression";
+				if (String.IsNullOrEmpty(Parameters.GadgetTitle))
+					headerPanel.Text = "Log-Binomial Regression";
 			}
+			Parameters.GadgetTitle = headerPanel.Text;
             txtOddsHeader.Style = this.Resources["columnHeadingText"] as Style;
             Grid.SetRow(txtOddsHeader, 0);
             Grid.SetColumn(txtOddsHeader, 1);
@@ -1328,15 +1332,17 @@ namespace EpiDashboard
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
-                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
-                        }
+                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<");
+							Parameters.GadgetTitle = CustomOutputHeading;
+						}
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
+							Parameters.GadgetDescription = CustomOutputDescription;
 
-                            if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
+							if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
                                 descriptionPanel.Text = CustomOutputDescription;
                                 descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.DisplayMode;
