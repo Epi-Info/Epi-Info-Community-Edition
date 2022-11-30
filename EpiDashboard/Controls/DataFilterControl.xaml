@@ -108,7 +108,7 @@
 
 
                         <TextBlock x:Name="lblFieldName" HorizontalAlignment="Left" TextAlignment="Left" Text="Field Name:" Margin="2,-7,0,12" Grid.Row="0" Width="196" Grid.ColumnSpan="5"  />
-                        <ComboBox x:Name="cbxFieldName" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxFieldName_SelectionChanged" Margin="0,9,0,11" Grid.RowSpan="2" Grid.ColumnSpan="5" Width="204" />
+                        <ComboBox x:Name="cbxFieldName" HorizontalAlignment="Left" SelectedIndex="0" SelectionChanged="cbxFieldName_SelectionChanged" Margin="0,9,0,11" Grid.RowSpan="2" Grid.ColumnSpan="5" Width="204" MaxDropDownHeight="192" />
 
                         <TextBlock x:Name="lblOperator" HorizontalAlignment="Left" TextAlignment="Left" Text="Operator:" Margin="2,-8,0,13" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Width="100"  />
                         <ComboBox x:Name="cbxOperator"  HorizontalAlignment="Left" SelectedIndex="0" Grid.Column="5" MaxWidth="110" MinWidth="110" SelectionChanged="cbxOperator_SelectionChanged" Margin="1,9,0,11" Grid.RowSpan="2" Width="110" Grid.ColumnSpan="2" />
