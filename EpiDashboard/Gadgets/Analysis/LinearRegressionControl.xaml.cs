@@ -1140,15 +1140,17 @@ namespace EpiDashboard
                     case "customheading":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
-                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<"); ;
-                        }
+                            this.CustomOutputHeading = child.InnerText.Replace("&lt;", "<");
+							Parameters.GadgetTitle = CustomOutputHeading;
+						}
                         break;
                     case "customdescription":
                         if (!string.IsNullOrEmpty(child.InnerText) && !child.InnerText.Equals("(none)"))
                         {
                             this.CustomOutputDescription = child.InnerText.Replace("&lt;", "<");
+							Parameters.GadgetDescription = CustomOutputDescription;
 
-                            if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
+							if (!string.IsNullOrEmpty(CustomOutputDescription) && !CustomOutputHeading.Equals("(none)"))
                             {
                                 descriptionPanel.Text = CustomOutputDescription;
                                 descriptionPanel.PanelMode = Controls.GadgetDescriptionPanel.DescriptionPanelMode.DisplayMode;
