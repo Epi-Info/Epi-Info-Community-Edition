@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Epi.Windows.Dialogs;
-using Redcap;
+
 using Epi.Data.REDCap.Models;
 using Newtonsoft.Json;
 
