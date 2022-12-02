@@ -2945,6 +2945,7 @@ namespace EpiDashboard
             DoubleAnimation anim = new DoubleAnimation();
             anim.From = Canvas.GetLeft(variablesControl);
             anim.To = -20;
+			anim.To = anim.From + 405;
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
@@ -2956,14 +2957,26 @@ namespace EpiDashboard
             DoubleAnimation anim = new DoubleAnimation();
             anim.BeginTime = new TimeSpan(0, 0, 0, 0, 250);
             anim.From = Canvas.GetLeft(variablesControl);
-            anim.To = -425;
+            anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value));
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
             this.isCreatingNewVariable = false;
-        }
+		}
 
-        void dataRecodingControl_MouseLeave(object sender, MouseEventArgs e)
+		void CollapseRecodingGadgetInstant()
+		{
+			DoubleAnimation anim = new DoubleAnimation();
+			anim.BeginTime = new TimeSpan(0, 0, 0, 0, 0);
+			anim.From = Canvas.GetLeft(variablesControl);
+			anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value));
+			anim.DecelerationRatio = 0.0;
+			anim.Duration = new Duration(TimeSpan.FromSeconds(0.0));
+			variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
+			this.isCreatingNewVariable = false;
+		}
+
+		void dataRecodingControl_MouseLeave(object sender, MouseEventArgs e)
         {
             CollapseRecodingGadget();
         }
@@ -3150,10 +3163,11 @@ namespace EpiDashboard
 
             if (dataFilteringControl != null && variablesControl != null)
             {
-                if (m_canvasTransform.ScaleX < 1)
+                if (m_canvasTransform.ScaleX <= 1)
                 {
-                    dataFilteringControl.Visibility = System.Windows.Visibility.Hidden;
-                    variablesControl.Visibility = System.Windows.Visibility.Hidden;
+                    dataFilteringControl.Visibility = System.Windows.Visibility.Visible;
+                    variablesControl.Visibility = System.Windows.Visibility.Visible;
+					CollapseRecodingGadgetInstant();
                 }
                 else
                 {
