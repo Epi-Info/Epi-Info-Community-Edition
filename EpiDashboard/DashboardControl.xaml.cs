@@ -2893,7 +2893,7 @@ namespace EpiDashboard
             DoubleAnimation anim = new DoubleAnimation();
             anim.From = Canvas.GetRight(dataFilteringControl);
             anim.To = -10;
-			anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value) + 530;
+			//anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value) + 530;
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
@@ -2906,7 +2906,8 @@ namespace EpiDashboard
             DoubleAnimation anim = new DoubleAnimation();
             anim.BeginTime = new TimeSpan(0, 0, 0, 0, 350);
             anim.From = Canvas.GetRight(dataFilteringControl);
-			anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value); // + 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
+			anim.To = -540;
+			//anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value); // + 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
 			anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
@@ -2958,7 +2959,8 @@ namespace EpiDashboard
         {
             DoubleAnimation anim = new DoubleAnimation();
             anim.From = Canvas.GetLeft(variablesControl);
-			anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60) + 405;
+			anim.To = -20;
+			//anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60) + 405;
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
@@ -2970,7 +2972,8 @@ namespace EpiDashboard
             DoubleAnimation anim = new DoubleAnimation();
             anim.BeginTime = new TimeSpan(0, 0, 0, 0, 250);
             anim.From = Canvas.GetLeft(variablesControl);
-            anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
+			anim.To = -425;
+            //anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
@@ -3176,12 +3179,12 @@ namespace EpiDashboard
 
             if (dataFilteringControl != null && variablesControl != null)
             {
-                if (m_canvasTransform.ScaleX <= 1)
+                if (m_canvasTransform.ScaleX < 1)
                 {
-                    dataFilteringControl.Visibility = System.Windows.Visibility.Visible;
-                    variablesControl.Visibility = System.Windows.Visibility.Visible;
-					CollapseRecodingGadgetInstant();
-					CollapseFilterGadgetInstant();
+                    dataFilteringControl.Visibility = System.Windows.Visibility.Hidden;
+                    variablesControl.Visibility = System.Windows.Visibility.Hidden;
+					//CollapseRecodingGadgetInstant();
+					//CollapseFilterGadgetInstant();
                 }
                 else
                 {
