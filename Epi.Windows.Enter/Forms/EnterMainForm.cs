@@ -2298,11 +2298,8 @@ namespace Epi.Windows.Enter
             {
                 Epi.Data.IDbDriver db = Epi.Data.DBReadExecute.GetDataDriver(canvas.CurrentView.Project.FilePath);
 
-                DataTable data = db.GetTableData(View.TableName, "GlobalRecordId, UniqueKey");
+                DataTable data = db.GetTableData(View.TableName, "GlobalRecordId, UniqueKey, RecStatus");
                 data.TableName = this.View.TableName;
-
-                //DataTable data = db.Select(db.CreateQuery("SELECT * " + canvas.CurrentView.FromViewSQL));
-
                 foreach (Page page in this.View.Pages)
                 {
                     DataTable pageTable = db.GetTableData(page.TableName);
@@ -2407,71 +2404,65 @@ namespace Epi.Windows.Enter
                             background-color:#d2451e;
                             }
                             </style></head>");
+
                 sw.WriteLine("<h1>" + canvas.CurrentView.Name + "</h1><hr><body><table>");
-                foreach (DataColumn col in data.Columns)
-                {
-                    if (!col.ColumnName.ToLowerInvariant().Contains("globalrecordid"))
-                    {
-                        sw.WriteLine("<th>" + col.ColumnName + "</th>");
-                    }
-                }
+
                 foreach (DataRow row in data.Rows)
                 {
                     sw.WriteLine("<tr>");
+
                     for (int x = 0; x < data.Columns.Count; x++)
                     {
-                        if (!data.Columns[x].ColumnName.ToLowerInvariant().Contains("globalrecordid"))
+                        if (row[x] is byte[])
                         {
-                            if (row[x] is byte[])
-                            {
-                                string extension = GetImageExtension(new MemoryStream((byte[])row[x]));
-                                string imgFileName = Path.GetTempPath() + Guid.NewGuid().ToString("N") + "." + extension;
+                            string extension = GetImageExtension(new MemoryStream((byte[])row[x]));
+                            string imgFileName = Path.GetTempPath() + Guid.NewGuid().ToString("N") + "." + extension;
 
-                                FileStream imgStream = File.OpenWrite(imgFileName);
-                                BinaryWriter imgWriter = new BinaryWriter(imgStream);
-                                imgWriter.Write((byte[])row[x]);
-                                imgWriter.Close();
-                                imgStream.Close();
-                                sw.WriteLine("<td><img src=\"" + imgFileName + "\"/></td>");
+                            FileStream imgStream = File.OpenWrite(imgFileName);
+                            BinaryWriter imgWriter = new BinaryWriter(imgStream);
+                            imgWriter.Write((byte[])row[x]);
+                            imgWriter.Close();
+                            imgStream.Close();
+                            sw.WriteLine("<td><img src=\"" + imgFileName + "\"/></td>");
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(row[x].ToString()) && data.Columns[x].DataType.ToString().Equals("System.DateTime") && View.Fields.Contains(data.Columns[x].ColumnName) && View.Fields[data.Columns[x].ColumnName] is Epi.Fields.DateField)
+                            {
+                                DateTime dt = DateTime.Parse(row[x].ToString(), System.Globalization.CultureInfo.CurrentCulture);
+                                string dateValue = dt.ToString("d", System.Globalization.CultureInfo.CurrentCulture);
+                                sw.WriteLine("<td>" + dateValue + "</td>");
+                            }
+                            else if (!string.IsNullOrEmpty(row[x].ToString()) && data.Columns[x].DataType.ToString().Equals("System.DateTime") && View.Fields.Contains(data.Columns[x].ColumnName) && View.Fields[data.Columns[x].ColumnName] is Epi.Fields.TimeField)
+                            {
+                                DateTime dt = DateTime.Parse(row[x].ToString(), System.Globalization.CultureInfo.CurrentCulture);
+                                string dateValue = dt.ToString("T", System.Globalization.CultureInfo.CurrentCulture);
+                                sw.WriteLine("<td>" + dateValue + "</td>");
+                            }
+                            else if (View.Fields.Contains(data.Columns[x].ColumnName) && (View.Fields[data.Columns[x].ColumnName] is Epi.Fields.YesNoField || View.Fields[data.Columns[x].ColumnName] is Epi.Fields.CheckBoxField))
+                            {
+                                string value = row[x].ToString().ToLowerInvariant();
+                                if (value.Equals("true") || value.Equals("1"))
+                                {
+                                    value = config.Settings.RepresentationOfYes;
+                                }
+                                else if (value.Equals("false") || value.Equals("0"))
+                                {
+                                    value = config.Settings.RepresentationOfNo;
+                                }
+                                else if (string.IsNullOrEmpty(value))
+                                {
+                                    value = config.Settings.RepresentationOfMissing;
+                                }
+                                sw.WriteLine("<td>" + value + "</td>");
                             }
                             else
                             {
-                                if (!string.IsNullOrEmpty(row[x].ToString()) && data.Columns[x].DataType.ToString().Equals("System.DateTime") && View.Fields.Contains(data.Columns[x].ColumnName) && View.Fields[data.Columns[x].ColumnName] is Epi.Fields.DateField)
-                                {
-                                    DateTime dt = DateTime.Parse(row[x].ToString(), System.Globalization.CultureInfo.CurrentCulture);
-                                    string dateValue = dt.ToString("d", System.Globalization.CultureInfo.CurrentCulture);
-                                    sw.WriteLine("<td>" + dateValue + "</td>");
-                                }
-                                else if (!string.IsNullOrEmpty(row[x].ToString()) && data.Columns[x].DataType.ToString().Equals("System.DateTime") && View.Fields.Contains(data.Columns[x].ColumnName) && View.Fields[data.Columns[x].ColumnName] is Epi.Fields.TimeField)
-                                {
-                                    DateTime dt = DateTime.Parse(row[x].ToString(), System.Globalization.CultureInfo.CurrentCulture);
-                                    string dateValue = dt.ToString("T", System.Globalization.CultureInfo.CurrentCulture);
-                                    sw.WriteLine("<td>" + dateValue + "</td>");
-                                }
-                                else if (View.Fields.Contains(data.Columns[x].ColumnName) && (View.Fields[data.Columns[x].ColumnName] is Epi.Fields.YesNoField || View.Fields[data.Columns[x].ColumnName] is Epi.Fields.CheckBoxField))
-                                {
-                                    string value = row[x].ToString().ToLowerInvariant();
-                                    if (value.Equals("true") || value.Equals("1"))
-                                    {
-                                        value = config.Settings.RepresentationOfYes;
-                                    }
-                                    else if (value.Equals("false") || value.Equals("0"))
-                                    {
-                                        value = config.Settings.RepresentationOfNo;
-                                    }
-                                    else if (string.IsNullOrEmpty(value))
-                                    {
-                                        value = config.Settings.RepresentationOfMissing;
-                                    }
-                                    sw.WriteLine("<td>" + value + "</td>");
-                                }
-                                else
-                                {
-                                    sw.WriteLine("<td>" + row[x].ToString() + "</td>");
-                                }
+                                sw.WriteLine("<td>" + row[x].ToString() + "</td>");
                             }
                         }
                     }
+
                     sw.WriteLine("</tr>");
                 }
                 sw.WriteLine("</table></body></html>");
