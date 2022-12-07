@@ -179,13 +179,20 @@ namespace Epi.Windows
         /// <param name="filePath"></param>
         public static void OpenTextFile(string filePath)
         {
-            FileInfo fileInfo = new FileInfo(filePath);   
-			ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo("WordPad.exe");
-            startInfo.WorkingDirectory = fileInfo.Directory.FullName;
-            startInfo.Arguments = Util.InsertInDoubleQuotes(fileInfo.Name);
-            startInfo.Verb = "Open";
-			startInfo.WindowStyle = ProcessWindowStyle.Maximized;
-			System.Diagnostics.Process.Start(startInfo);
+            string newFilePath = "";
+
+            try
+            {
+                if (FixBrokenFilePath(filePath, out newFilePath))
+                {
+                    System.Diagnostics.Process.Start(newFilePath);
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(filePath);
+                }
+            }
+            catch { }
         }
 
         /// <summary>
