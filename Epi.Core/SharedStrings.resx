@@ -2300,9 +2300,6 @@ Do you wish to proceed with the import and overwrite these tables? This action c
   <data name="CNTXT_CMD_KMSURV" xml:space="preserve">
     <value>Kaplan Meier Survival</value>
   </data>
-  <data name="CNTXT_CMD_COXPH" xml:space="preserve">
-    <value>Cox Proportional Hazards</value>
-  </data>
   <data name="CNTXT_CMD_LINEARREGRESSION" xml:space="preserve">
     <value>Linear Regression</value>
   </data>
@@ -3310,5 +3307,8 @@ GlobalRecordId = [FKEY]</value>
   </data>
   <data name="INDETERMINEATE_DATE_VALUES_5" xml:space="preserve">
     <value>Indetermineate Date Values Found</value>
+  </data>
+  <data name="EXCEPTION_NOT_PROJECT_FILE" xml:space="preserve">
+    <value>The selected file is not an Epi Info project file.</value>
   </data>
 </root>

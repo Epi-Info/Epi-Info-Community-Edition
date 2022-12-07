@@ -19,7 +19,7 @@ namespace Epi {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class SharedStrings {
@@ -4186,6 +4186,15 @@ namespace Epi {
         public static string ERROR_VARIABLE_NOT_DEFINED {
             get {
                 return ResourceManager.GetString("ERROR_VARIABLE_NOT_DEFINED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected file is not an Epi Info project file..
+        /// </summary>
+        public static string EXCEPTION_NOT_PROJECT_FILE {
+            get {
+                return ResourceManager.GetString("EXCEPTION_NOT_PROJECT_FILE", resourceCulture);
             }
         }
         

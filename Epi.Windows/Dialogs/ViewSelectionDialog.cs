@@ -93,6 +93,7 @@ namespace Epi.Windows.Dialogs
                 openFileDialog.Multiselect = false;
                 openFileDialog.InitialDirectory = Configuration.GetNewInstance().Directories.Project;
                 DialogResult result = openFileDialog.ShowDialog();
+
                 if (result == DialogResult.OK)
                 {
                     if (openFileDialog.FileName.ToLowerInvariant().Trim().EndsWith(Epi.FileExtensions.EPI_PROJ))
@@ -106,7 +107,15 @@ namespace Epi.Windows.Dialogs
                                 throw new GeneralException("Project manager is not registered.");
                             }*/
 
-                            currentProject = new Project(openFileDialog.FileName);
+                            try
+                            {
+                                currentProject = new Project(openFileDialog.FileName);
+                            }
+                            catch 
+                            {
+                                throw new ApplicationException(SharedStrings.EXCEPTION_NOT_PROJECT_FILE);
+                            }
+                            
                             if (currentProject.CollectedData.FullName.Contains("MS Access"))
                             {
                                 string databaseFileName = currentProject.CollectedData.DataSource.Replace("Data Source=".ToLowerInvariant(), string.Empty);
@@ -150,7 +159,12 @@ namespace Epi.Windows.Dialogs
                 MsgBox.ShowError(string.Format(SharedStrings.ERROR_CRYPTO_KEYS, ex.Message));
                 return false;
             }
-			finally
+            catch (ApplicationException ex)
+            {
+                MsgBox.ShowInformation(string.Format(ex.Message));
+                return false;
+            }
+            finally
 			{
 			}
 
