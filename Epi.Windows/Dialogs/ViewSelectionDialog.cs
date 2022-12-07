@@ -111,8 +111,8 @@ namespace Epi.Windows.Dialogs
                             {
                                 currentProject = new Project(openFileDialog.FileName);
                             }
-                            catch 
-                            {
+                            catch (System.Xml.XmlException ex)
+                            {                         
                                 throw new ApplicationException(SharedStrings.EXCEPTION_NOT_PROJECT_FILE);
                             }
                             
