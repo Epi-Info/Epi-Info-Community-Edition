@@ -2959,7 +2959,7 @@ namespace EpiDashboard
         {
             DoubleAnimation anim = new DoubleAnimation();
             anim.From = Canvas.GetLeft(variablesControl);
-			anim.To = -20;
+			anim.To = -20 - ((scrollViewer.ActualWidth - Math.Min(scrollViewer.ActualWidth, scrollViewer.DesiredSize.Width)) / 2.0) * 1.07;
 			//anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60) + 405;
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
@@ -2972,7 +2972,7 @@ namespace EpiDashboard
             DoubleAnimation anim = new DoubleAnimation();
             anim.BeginTime = new TimeSpan(0, 0, 0, 0, 250);
             anim.From = Canvas.GetLeft(variablesControl);
-			anim.To = -425;
+			anim.To = -425 - ((scrollViewer.ActualWidth - Math.Min(scrollViewer.ActualWidth, scrollViewer.DesiredSize.Width)) / 2.0) * 1.07;
             //anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
@@ -2985,7 +2985,7 @@ namespace EpiDashboard
 			DoubleAnimation anim = new DoubleAnimation();
 			anim.BeginTime = new TimeSpan(0, 0, 0, 0, 0);
 			anim.From = Canvas.GetLeft(variablesControl);
-			anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
+			anim.To = -425 - ((scrollViewer.ActualWidth - Math.Min(scrollViewer.ActualWidth, scrollViewer.ActualWidth * (sliderZoom.Value / 100))) / 2.0) * 1.07;
 			anim.DecelerationRatio = 0.0;
 			anim.Duration = new Duration(TimeSpan.FromSeconds(0.0));
 			variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
@@ -3179,11 +3179,11 @@ namespace EpiDashboard
 
             if (dataFilteringControl != null && variablesControl != null)
             {
-                if (m_canvasTransform.ScaleX < 1)
+                if (m_canvasTransform.ScaleX <= 1)
                 {
-                    dataFilteringControl.Visibility = System.Windows.Visibility.Hidden;
-                    variablesControl.Visibility = System.Windows.Visibility.Hidden;
-					//CollapseRecodingGadgetInstant();
+                    dataFilteringControl.Visibility = System.Windows.Visibility.Visible;
+                    variablesControl.Visibility = System.Windows.Visibility.Visible;
+					CollapseRecodingGadgetInstant();
 					//CollapseFilterGadgetInstant();
                 }
                 else
