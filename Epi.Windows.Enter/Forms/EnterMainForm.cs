@@ -2407,6 +2407,11 @@ namespace Epi.Windows.Enter
 
                 sw.WriteLine("<h1>" + canvas.CurrentView.Name + "</h1><hr><body><table>");
 
+                foreach (DataColumn col in data.Columns)
+                {
+                    sw.WriteLine("<th>" + col.ColumnName + "</th>");
+                }
+
                 foreach (DataRow row in data.Rows)
                 {
                     sw.WriteLine("<tr>");
