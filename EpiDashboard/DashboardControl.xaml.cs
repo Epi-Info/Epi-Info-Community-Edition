@@ -2988,11 +2988,12 @@ namespace EpiDashboard
 			anim.BeginTime = new TimeSpan(0, 0, 0, 0, 0);
 			anim.From = Canvas.GetLeft(variablesControl);
 			anim.To = -425 - ((scrollViewer.ActualWidth - Math.Min(scrollViewer.ActualWidth, scrollViewer.ActualWidth * (sliderZoom.Value / 100))) / 2.0) * 1.07;
-			if (sliderZoom.Value < 90) anim.To -= 8;
+			if (sliderZoom.Value < 95) anim.To -= 4;
+			if (sliderZoom.Value < 90) anim.To -= 4;
 			if (sliderZoom.Value < 85) anim.To -= 8;
 			if (sliderZoom.Value < 80) anim.To -= 16;
-			if (sliderZoom.Value < 75) anim.To -= 16;
-			if (sliderZoom.Value < 70) anim.To -= 24;
+			if (sliderZoom.Value < 75) anim.To -= 20;
+			if (sliderZoom.Value < 70) anim.To -= 28;
 			if (sliderZoom.Value < 65) anim.To -= 40;
 			if (sliderZoom.Value < 60) anim.To -= 48;
 			if (sliderZoom.Value < 55) anim.To -= 64;
