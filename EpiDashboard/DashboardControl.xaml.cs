@@ -2889,8 +2889,9 @@ namespace EpiDashboard
         }
 
         void ExpandFilterGadget()
-        {
-            DoubleAnimation anim = new DoubleAnimation();
+		{
+			dataFilteringControl.Visibility = System.Windows.Visibility.Visible;
+			DoubleAnimation anim = new DoubleAnimation();
             anim.From = Canvas.GetRight(dataFilteringControl);
             anim.To = -10;
 			//anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value) + 530;
@@ -2913,6 +2914,8 @@ namespace EpiDashboard
             dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
             dataFilteringControl.SetCollapsed();
             this.isCreatingFilter = false;
+			if (sliderZoom.Value < 100)
+				dataFilteringControl.Visibility = System.Windows.Visibility.Hidden;
 		}
 
 		void CollapseFilterGadgetInstant()
@@ -2956,10 +2959,12 @@ namespace EpiDashboard
         }
 
         void ExpandRecodingGadget()
-        {
-            DoubleAnimation anim = new DoubleAnimation();
+		{
+			variablesControl.Visibility = System.Windows.Visibility.Visible;
+			DoubleAnimation anim = new DoubleAnimation();
             anim.From = Canvas.GetLeft(variablesControl);
-			anim.To = anim.From + 405;
+			anim.To = -20;
+			//anim.To = anim.From + 405;
 			//anim.To = -20 - ((scrollViewer.ActualWidth - Math.Min(scrollViewer.ActualWidth, scrollViewer.DesiredSize.Width)) / 2.0) * 1.07;
 			//anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60) + 405;
             anim.AccelerationRatio = 0.8;
@@ -2973,13 +2978,18 @@ namespace EpiDashboard
             DoubleAnimation anim = new DoubleAnimation();
             anim.BeginTime = new TimeSpan(0, 0, 0, 0, 250);
             anim.From = Canvas.GetLeft(variablesControl);
-			anim.To = anim.From - 405;
+			anim.To = -425;
+			//anim.To = anim.From - 405;
 			//anim.To = -425 - ((scrollViewer.ActualWidth - Math.Min(scrollViewer.ActualWidth, scrollViewer.DesiredSize.Width)) / 2.0) * 1.07;
             //anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
             this.isCreatingNewVariable = false;
+			if (sliderZoom.Value < 100)
+			{
+				variablesControl.Visibility = System.Windows.Visibility.Hidden;
+			}
 		}
 
 		void CollapseRecodingGadgetInstant()
@@ -3190,11 +3200,13 @@ namespace EpiDashboard
 
             if (dataFilteringControl != null && variablesControl != null)
             {
-                if (m_canvasTransform.ScaleX <= 1)
+                if (m_canvasTransform.ScaleX < 1)
                 {
-                    dataFilteringControl.Visibility = System.Windows.Visibility.Visible;
-                    variablesControl.Visibility = System.Windows.Visibility.Visible;
-					CollapseRecodingGadgetInstant();
+                    dataFilteringControl.Visibility = System.Windows.Visibility.Hidden;
+                    variablesControl.Visibility = System.Windows.Visibility.Hidden;
+					CollapseFilterGadget();
+					CollapseRecodingGadget();
+					//CollapseRecodingGadgetInstant();
 					//CollapseFilterGadgetInstant();
                 }
                 else
