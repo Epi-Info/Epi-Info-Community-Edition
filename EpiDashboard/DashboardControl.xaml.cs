@@ -2911,11 +2911,10 @@ namespace EpiDashboard
 			//anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value); // + 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
 			anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
+			anim.Completed += CollapseFilterGadgetCompleted;
+			dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
             dataFilteringControl.SetCollapsed();
             this.isCreatingFilter = false;
-			if (sliderZoom.Value < 100)
-				dataFilteringControl.Visibility = System.Windows.Visibility.Hidden;
 		}
 
 		void CollapseFilterGadgetInstant()
@@ -2984,12 +2983,21 @@ namespace EpiDashboard
             //anim.To = -425 * Math.Max(1.0, (100 / sliderZoom.Value)) - Math.Max(0.0, 100 - sliderZoom.Value) - 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
             anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+			anim.Completed += CollapseRecodingGadgetCompleted;
             variablesControl.BeginAnimation(Canvas.LeftProperty, anim);
             this.isCreatingNewVariable = false;
+		}
+
+		void CollapseRecodingGadgetCompleted(object sender, EventArgs e)
+		{
 			if (sliderZoom.Value < 100)
-			{
 				variablesControl.Visibility = System.Windows.Visibility.Hidden;
-			}
+		}
+
+		void CollapseFilterGadgetCompleted(object sender, EventArgs e)
+		{
+			if (sliderZoom.Value < 100)
+				dataFilteringControl.Visibility = System.Windows.Visibility.Hidden;
 		}
 
 		void CollapseRecodingGadgetInstant()
