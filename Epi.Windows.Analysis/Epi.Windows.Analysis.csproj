@@ -189,23 +189,33 @@
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System">
       <Name>System</Name>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Design">
       <Name>System.Design</Name>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Remoting">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
+      <Private>True</Private>
     </Reference>
     <ProjectReference Include="..\Epi.Core.Interpreter\Epi.Core.AnalysisInterpreter.csproj">
       <Project>{D8486FD0-2C53-4AED-92DB-347F081FE0AB}</Project>
