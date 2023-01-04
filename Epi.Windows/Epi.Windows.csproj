@@ -184,23 +184,38 @@
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0" />
     <Reference Include="System">
       <Name>System</Name>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Design" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Design">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Remoting">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

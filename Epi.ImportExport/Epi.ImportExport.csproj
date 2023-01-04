@@ -226,21 +226,32 @@
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
+      <Private>True</Private>
     </Reference>
     <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
       <Project>{EBD2B961-A952-4670-96CA-50BAA12C7F29}</Project>
