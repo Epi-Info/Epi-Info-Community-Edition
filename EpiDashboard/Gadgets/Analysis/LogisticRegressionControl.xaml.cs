@@ -652,6 +652,8 @@ namespace EpiDashboard
 				txtOddsHeader.Text = "Risk Ratio";
 				if (String.IsNullOrEmpty(Parameters.GadgetTitle))
 					headerPanel.Text = "Log-Binomial Regression";
+				else
+					headerPanel.Text = Parameters.GadgetTitle;
 			}
 			Parameters.GadgetTitle = headerPanel.Text;
             txtOddsHeader.Style = this.Resources["columnHeadingText"] as Style;
