@@ -735,7 +735,15 @@ namespace EpiDashboard
 
                 TextBlock txtOddsHeaderIOR = new TextBlock();
                 txtOddsHeaderIOR.Text = "Odds Ratio";
-                txtOddsHeaderIOR.Style = this.Resources["columnHeadingText"] as Style;
+				if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log"))
+				{
+					txtOddsHeaderIOR.Text = "Risk Ratio";
+				}
+				else if (cbxFieldLink.Text.Equals("Log"))
+				{
+					txtOddsHeaderIOR.Text = "Risk Ratio";
+				}
+				txtOddsHeaderIOR.Style = this.Resources["columnHeadingText"] as Style;
                 Grid.SetRow(txtOddsHeaderIOR, 0);
                 Grid.SetColumn(txtOddsHeaderIOR, 1);
                 grdIOR.Children.Add(txtOddsHeaderIOR);
