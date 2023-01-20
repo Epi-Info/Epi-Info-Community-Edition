@@ -1207,6 +1207,10 @@ namespace EpiDashboard
 			{
 				linkFunction = cbxFieldLink.SelectedItem.ToString();
 			}
+			else if (!String.IsNullOrEmpty(cbxFieldLink.Text))
+			{
+				linkFunction = cbxFieldLink.Text;
+			}
 
             if (checkboxNoIntercept.IsChecked == true)
             {
