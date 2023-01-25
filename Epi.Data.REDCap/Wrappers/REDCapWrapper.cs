@@ -165,8 +165,10 @@ namespace Epi.Data.REDCap.Wrappers
 					}
 				}
 			}
+			int dataTableRow = 0;
 			foreach (DataRow dr in dataTable.Rows)
 			{
+				dataTableRow++;
 				for (int i = 0; i < dataTable.Columns.Count; i++)
 				{
 					if (String.IsNullOrEmpty((string)dr[i]))
@@ -174,7 +176,15 @@ namespace Epi.Data.REDCap.Wrappers
 						dr[i] = null;
 					}
 				}
-				dataTableCloned.ImportRow(dr);
+				try
+				{
+					dataTableCloned.ImportRow(dr);
+				}
+				catch (ArgumentException ae)
+				{
+					Epi.Windows.MsgBox.ShowError("Unable to import row " + dataTableRow + ": " + ae.Message);
+					continue;
+				}
 			}
 			if (cloneAgain)
 			{
