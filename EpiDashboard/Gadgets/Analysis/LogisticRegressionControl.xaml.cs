@@ -647,7 +647,7 @@ namespace EpiDashboard
 				if (String.IsNullOrEmpty(Parameters.GadgetTitle) || Parameters.GadgetTitle.Equals("Logistic Regression"))
 					headerPanel.Text = "Log-Binomial Regression";
 			}
-			else if (cbxFieldLink.Text.Equals("Log") || Parameters.GadgetTitle.Equals("Logistic Regression"))
+			else if (cbxFieldLink.Text.Equals("Log"))
 			{
 				txtOddsHeader.Text = "Risk Ratio";
 				if (String.IsNullOrEmpty(Parameters.GadgetTitle))
