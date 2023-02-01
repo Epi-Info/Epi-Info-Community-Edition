@@ -107,11 +107,11 @@ namespace Epi.Statistics
                 double ucl = est + Z * Math.Sqrt(cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])]);
                 iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + ref1 + " vs " + otherValues1[2 * i + 1] +
                     " at " + lastVar2 + "=" + ref2 + "</strong></td>";
-                if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F4") + "</td>";
+                if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                 else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
-                if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F4") + "</td>";
+                if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
                 else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("0.##E+0") + "</td>";
-                if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F4") + "</td></tr>";
+                if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F6") + "</td></tr>";
                 else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("0.##E+0") + "</td></tr>";
             }
             for (int i = 0; i < otherValues1.Length / 2; i++)
@@ -125,11 +125,11 @@ namespace Epi.Statistics
                     double ucl = est + Z * Math.Sqrt(variance);
                     iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + otherValues1[2 * i + 1] + " vs " +
                         otherValues1[2 * j + 1] + " at " + lastVar2 + "=" + ref2 + "</strong></td>";
-                    if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F4") + "</td>";
+                    if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                     else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
-                    if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F4") + "</td>";
+                    if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
                     else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("0.##E+0") + "</td>";
-                    if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F4") + "</td></tr>";
+                    if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F6") + "</td></tr>";
                     else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("0.##E+0") + "</td></tr>";
                 }
             int[] interactionIndexes = getInteractionIndexes(interactions, iaTerms, bLabels);
@@ -148,11 +148,11 @@ namespace Epi.Statistics
                     betaStack.Push(est);
                     iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + ref1 + " vs " +
                         otherValues1[2 * i + 1] + " at " + lastVar2 + "=" + otherValues2[2 * k + 1] + "</strong></td>";
-                    if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F4") + "</td>";
+                    if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                     else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
-                    if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F4") + "</td>";
+                    if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
                     else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("0.##E+0") + "</td>";
-                    if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F4") + "</td></tr>";
+                    if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F6") + "</td></tr>";
                     else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("0.##E+0") + "</td></tr>";
                 }
                 double[] betas = betaStack.ToArray();
@@ -175,11 +175,11 @@ namespace Epi.Statistics
                         double ucl = est + Z * Math.Sqrt(variance);
                         iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + otherValues1[2 * i + 1] + " vs " +
                             otherValues1[2 * j + 1] + " at " + lastVar2 + "=" + otherValues2[2 * k + 1] + "</strong></td>";
-                        if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F4") + "</td>";
+                        if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                         else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
-                        if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F4") + "</td>";
+                        if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
                         else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("0.##E+0") + "</td>";
-                        if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F4") + "</td></tr>";
+                        if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F6") + "</td></tr>";
                         else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("0.##E+0") + "</td></tr>";
                     }
             }
@@ -205,11 +205,11 @@ namespace Epi.Statistics
             double lcl = est - Z * Math.Sqrt(variance);
             double ucl = est + Z * Math.Sqrt(variance);
             iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " at " + lastVar2 + "=" + ref2.ToString("F3") + "</strong></td>";
-            if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F4") + "</td>";
+            if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
             else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
-            if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F4") + "</td>";
+            if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
             else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("0.##E+0") + "</td>";
-            if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F4") + "</td></tr>";
+            if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F6") + "</td></tr>";
             else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("0.##E+0") + "</td></tr>";
 
             return iorOut + "</table>";
@@ -237,11 +237,11 @@ namespace Epi.Statistics
                 double ucl = est + Z * Math.Sqrt(variance);
                 iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + ref1 + " vs " + otherValues1[2 * i + 1] +
                     " at " + lastVar2 + "=" + ref2.ToString("F3") + "</strong></td>";
-                if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F4") + "</td>";
+                if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                 else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
-                if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F4") + "</td>";
+                if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
                 else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("0.##E+0") + "</td>";
-                if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F4") + "</td></tr>";
+                if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F6") + "</td></tr>";
                 else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("0.##E+0") + "</td></tr>";
             }
             for (int i = 0; i < otherValues1.Length / 2; i++)
@@ -262,11 +262,11 @@ namespace Epi.Statistics
                     double ucl = est + Z * Math.Sqrt(variance);
                     iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + otherValues1[2 * i + 1] + " vs " +
                         otherValues1[2 * j + 1] + " at " + lastVar2 + "=" + ref2.ToString("F3") + "</strong></td>";
-                    if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F4") + "</td>";
+                    if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                     else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
-                    if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F4") + "</td>";
+                    if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
                     else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("0.##E+0") + "</td>";
-                    if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F4") + "</td></tr>";
+                    if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F6") + "</td></tr>";
                     else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("0.##E+0") + "</td></tr>";
                 }
             return iorOut + "</table>";
@@ -287,11 +287,11 @@ namespace Epi.Statistics
             double lcl0 = est0 - Z * Math.Sqrt(variance0);
             double ucl0 = est0 + Z * Math.Sqrt(variance0);
             iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar2 + " at " + lastVar1 + "=" + ref1 + "</strong></td>";
-            if (Math.Exp(0) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est0).ToString("F4") + "</td>";
+            if (Math.Exp(0) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est0).ToString("F6") + "</td>";
             else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est0).ToString("0.##E+0") + "</td>";
-            if (Math.Exp(lcl0) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl0).ToString("F4") + "</td>";
+            if (Math.Exp(lcl0) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl0).ToString("F6") + "</td>";
             else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl0).ToString("0.##E+0") + "</td>";
-            if (Math.Exp(ucl0) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl0).ToString("F4") + "</td></tr>";
+            if (Math.Exp(ucl0) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl0).ToString("F6") + "</td></tr>";
             else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl0).ToString("0.##E+0") + "</td></tr>";
 
             for (int i = 0; i < otherValues1.Length / 2; i++)
@@ -303,11 +303,11 @@ namespace Epi.Statistics
                 double lcl = est - Z * Math.Sqrt(variance);
                 double ucl = est + Z * Math.Sqrt(variance);
                 iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar2 + " at " + lastVar1 + "=" + otherValues1[2 * i + 1] + "</strong></td>";
-                if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F4") + "</td>";
+                if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                 else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
-                if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F4") + "</td>";
+                if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
                 else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("0.##E+0") + "</td>";
-                if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F4") + "</td></tr>";
+                if (Math.Exp(ucl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("F6") + "</td></tr>";
                 else iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(ucl).ToString("0.##E+0") + "</td></tr>";
             }
             return iorOut + "</table>";
