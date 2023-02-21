@@ -1976,7 +1976,7 @@ namespace EpiDashboard
                         freqParameters.CustomFilter = string.Empty;
                     }
 
-                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(freqParameters /*, freqVar, weightVar, stratas, string.Empty, useAllPossibleValues, sortHighLow, includeMissing, false*/);
+                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(new EpiDashboard.FrequencyParameters(freqParameters) /*, freqVar, weightVar, stratas, string.Empty, useAllPossibleValues, sortHighLow, includeMissing, false*/);
 
                     if (stratifiedFrequencyTables == null || stratifiedFrequencyTables.Count == 0)
                     {
