@@ -45,7 +45,7 @@ namespace EpiDashboard
         /// Copy Constructor
         /// </summary>
         public FrequencyParameters(FrequencyParameters parameters)
-            : base()
+            : base(parameters)
         {
             GadgetTitle = parameters.GadgetTitle;
             GadgetDescription = parameters.GadgetDescription;
