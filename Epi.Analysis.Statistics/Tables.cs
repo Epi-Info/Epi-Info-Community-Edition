@@ -1147,7 +1147,8 @@ namespace Epi.Analysis.Statistics
             {
                 DataRow[] SortedRows = DT.Select(SelectedStatement, SelectOrder);
                 double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, true);
-                double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 3);
+				double tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, true);
+				double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 3);
                 double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
                 String disclaimer = "";
                 if (tableChiSq[1] == 1.0)
@@ -1162,7 +1163,12 @@ namespace Epi.Analysis.Statistics
                     pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">" + Math.Round(tableChiSq[0] * 10000) / 10000 + "</td><td class=\"stats\" align=\"center\">" + Math.Round(tableChiSqDF) + "</td><td class=\"stats\" align=\"center\">" + Math.Round(tableChiSqP * 10000) / 10000 + "</td></tr>");
                 else
                     pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">N/A</td><td class=\"stats\" align=\"center\">N/A</td><td class=\"stats\" align=\"center\">N/A</td></tr>");
-                pHTMLString.AppendLine("</table>");
+				if (!Double.IsNaN(tableFisherP))
+				{
+					pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">&nbsp;<td class=\"stats\" align=\"center\"></td>&nbsp;<td class=\"stats\" align=\"center\">&nbsp;</td></tr>");
+					pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">Fisher's Exact:<td class=\"stats\" align=\"center\"></td>&nbsp;<td class=\"stats\" align=\"center\">" + Math.Round(tableFisherP * 10000) / 10000 + "</td></tr>");
+				}
+				pHTMLString.AppendLine("</table>");
                 pHTMLString.AppendLine("<h4 align=\"center\">" + disclaimer + "</h4>");
             }
             pHTMLString.Append("<br clear=\"all\" />");
