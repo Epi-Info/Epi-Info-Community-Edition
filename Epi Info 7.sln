@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29102.190
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Windows.Menu", "Epi.Windows.Menu\Epi.Windows.Menu.csproj", "{532CF511-35F4-4EC9-B21B-E2B59BB2F796}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -1823,6 +1823,7 @@ Global
 		{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}.Linux|x86.ActiveCfg = Release|x86
 		{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}.Linux|x86.Build.0 = Release|x86
 		{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}.Release|Any CPU.ActiveCfg = Release|x86
+		{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}.Release|Any CPU.Build.0 = Release|x86
 		{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}.Release|ARM.ActiveCfg = Release|x86
 		{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}.Release|ARM64.ActiveCfg = Release|x86
 		{E37EE89F-6638-4E9F-A719-0D5FDCE88FAE}.Release|Mixed Platforms.ActiveCfg = Release|x86
@@ -1895,6 +1896,7 @@ Global
 		{05079D2E-76A7-418C-8192-6C7A6D956686}.Linux|x86.ActiveCfg = Release|x86
 		{05079D2E-76A7-418C-8192-6C7A6D956686}.Linux|x86.Build.0 = Release|x86
 		{05079D2E-76A7-418C-8192-6C7A6D956686}.Release|Any CPU.ActiveCfg = Release|x86
+		{05079D2E-76A7-418C-8192-6C7A6D956686}.Release|Any CPU.Build.0 = Release|x86
 		{05079D2E-76A7-418C-8192-6C7A6D956686}.Release|ARM.ActiveCfg = Release|x86
 		{05079D2E-76A7-418C-8192-6C7A6D956686}.Release|ARM64.ActiveCfg = Release|x86
 		{05079D2E-76A7-418C-8192-6C7A6D956686}.Release|Mixed Platforms.ActiveCfg = Release|x86
@@ -1967,6 +1969,7 @@ Global
 		{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}.Linux|x86.ActiveCfg = Release|x86
 		{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}.Linux|x86.Build.0 = Release|x86
 		{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}.Release|Any CPU.ActiveCfg = Release|x86
+		{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}.Release|Any CPU.Build.0 = Release|x86
 		{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}.Release|ARM.ActiveCfg = Release|x86
 		{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}.Release|ARM64.ActiveCfg = Release|x86
 		{B30FDF86-F0E4-46EC-9205-00C71E2C8C02}.Release|Mixed Platforms.ActiveCfg = Release|x86
@@ -2420,6 +2423,7 @@ Global
 		{A48397AE-92A5-4074-A2B8-FC0FABDAD9D9}.Linux|x86.ActiveCfg = Release|x86
 		{A48397AE-92A5-4074-A2B8-FC0FABDAD9D9}.Linux|x86.Build.0 = Release|x86
 		{A48397AE-92A5-4074-A2B8-FC0FABDAD9D9}.Release|Any CPU.ActiveCfg = Release|x86
+		{A48397AE-92A5-4074-A2B8-FC0FABDAD9D9}.Release|Any CPU.Build.0 = Release|x86
 		{A48397AE-92A5-4074-A2B8-FC0FABDAD9D9}.Release|ARM.ActiveCfg = Release|x86
 		{A48397AE-92A5-4074-A2B8-FC0FABDAD9D9}.Release|ARM64.ActiveCfg = Release|x86
 		{A48397AE-92A5-4074-A2B8-FC0FABDAD9D9}.Release|Mixed Platforms.ActiveCfg = Release|x86
@@ -2571,6 +2575,7 @@ Global
 		{95BD1D76-34F6-438E-9B29-3E42AC73253D}.Linux|x86.ActiveCfg = Release|x86
 		{95BD1D76-34F6-438E-9B29-3E42AC73253D}.Linux|x86.Build.0 = Release|x86
 		{95BD1D76-34F6-438E-9B29-3E42AC73253D}.Release|Any CPU.ActiveCfg = Release|x86
+		{95BD1D76-34F6-438E-9B29-3E42AC73253D}.Release|Any CPU.Build.0 = Release|x86
 		{95BD1D76-34F6-438E-9B29-3E42AC73253D}.Release|ARM.ActiveCfg = Release|x86
 		{95BD1D76-34F6-438E-9B29-3E42AC73253D}.Release|ARM64.ActiveCfg = Release|x86
 		{95BD1D76-34F6-438E-9B29-3E42AC73253D}.Release|Mixed Platforms.ActiveCfg = Release|x86
