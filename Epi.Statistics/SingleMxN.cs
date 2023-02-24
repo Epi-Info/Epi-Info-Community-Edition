@@ -2261,7 +2261,8 @@ namespace Epi.Statistics
 			if (classic)
 			{
 				System.Data.DataTable dt = new System.Data.DataTable();
-				for (int i = 0; i < SortedRows[0].ItemArray.Length - 1; i++)
+				dt.Columns.Add("Column0");
+				for (int i = 1; i < SortedRows[0].ItemArray.Length - 1; i++)
 					dt.Columns.Add("Column" + i, typeof(Int32));
 				System.Data.DataRow[] classicRows = new System.Data.DataRow[SortedRows.Length];
 				for (int i = 0; i < SortedRows.Length; i++)
