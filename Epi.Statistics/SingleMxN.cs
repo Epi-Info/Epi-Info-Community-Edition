@@ -2257,8 +2257,25 @@ namespace Epi.Statistics
         }
 
         public static double CalcFisher(System.Data.DataRow[] SortedRows, Boolean classic)
-        {
-            double fortranPRE = FEXACT(SortedRows);
+		{
+			if (classic)
+			{
+				System.Data.DataTable dt = new System.Data.DataTable();
+				for (int i = 0; i < SortedRows[0].ItemArray.Length - 1; i++)
+					dt.Columns.Add("Column" + i, typeof(Int32));
+				System.Data.DataRow[] classicRows = new System.Data.DataRow[SortedRows.Length];
+				for (int i = 0; i < SortedRows.Length; i++)
+				{
+					System.Data.DataRow dr = dt.NewRow();
+					dr[0] = SortedRows[i][0];
+					for (int j = 1; j < dr.ItemArray.Length; j++)
+						dr[j] = SortedRows[i][j + 1];
+					dt.Rows.Add(dr);
+					classicRows[i] = dr;
+				}
+				return FEXACT(classicRows);
+			}
+			double fortranPRE = FEXACT(SortedRows);
             return fortranPRE;
 /*
             REngine engine = REngine.GetInstance();
