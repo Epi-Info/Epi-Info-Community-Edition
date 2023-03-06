@@ -148,7 +148,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         }
                         else
                         {
-                            inputVariableList.Add(s, "Unsorted");
+                            inputVariableList.Add(s.TrimStart('[').TrimEnd(']'), "Unsorted");
                         }
                     }
                     else
