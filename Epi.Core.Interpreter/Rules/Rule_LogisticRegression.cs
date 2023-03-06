@@ -153,7 +153,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                     else
                     {
-                        inputVariableList.Add(s, "Term");
+                        inputVariableList.Add(s.Replace("[", "").Replace("]", ""), "Term");
                     }
                 }
 

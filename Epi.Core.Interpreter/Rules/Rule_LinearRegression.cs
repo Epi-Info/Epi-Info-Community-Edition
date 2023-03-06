@@ -218,7 +218,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                     else if (s.Contains("*"))
                     {
-                        inputVariableList.Add(s, "Term");
+                        inputVariableList.Add(s.Replace("[", "").Replace("]", ""), "Term");
                     }
                     else
                     {
