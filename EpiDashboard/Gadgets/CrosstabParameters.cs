@@ -17,7 +17,8 @@ namespace EpiDashboard
         public bool UsePromptsForColumnNames { get; set; } //EI-83
         public List<string> YesValues { get; set; }
         public List<string> NoValues { get; set; }
-        public bool HorizontalDisplayMode { get; set; }
+		public List<string> CollapseVariableNames { get; set; }
+		public bool HorizontalDisplayMode { get; set; }
         public string MaxColumnNameLength { get; set; }
         public bool ConditionalShading { get; set; }
         public SolidColorBrush LoColorFill { get; set; }
@@ -48,7 +49,8 @@ namespace EpiDashboard
             ShowPercents = true;
             YesValues = new List<string>();
             NoValues = new List<string>();
-            HorizontalDisplayMode = true;
+			CollapseVariableNames = new List<string>();
+			HorizontalDisplayMode = true;
             MaxColumnNameLength = "24";
             ConditionalShading = false;
             LoColorFill = new SolidColorBrush(Colors.White);

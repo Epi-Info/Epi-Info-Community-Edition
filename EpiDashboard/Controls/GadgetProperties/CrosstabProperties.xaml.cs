@@ -292,8 +292,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             //Variables settings
             Parameters.ColumnNames = new List<string>();
             Parameters.StrataVariableNames = new List<string>();
+			Parameters.CollapseVariableNames = new List<string>();
 
-            if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
+			if (cbxExposureField.SelectedIndex > -1 && !string.IsNullOrEmpty(cbxExposureField.SelectedItem.ToString()))
             {
                 if (Parameters.ColumnNames.Count > 0)
                 {
@@ -335,10 +336,19 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     Parameters.StrataVariableNames.Add(s.ToString());
                 }
-            }
+			}
 
-            //2x2 Value mapping settings
-            Parameters.NoValues.Clear();
+			if (lbxFieldCollapse.SelectedItems.Count > 0)
+			{
+				Parameters.CollapseVariableNames = new List<string>();
+				foreach (string s in lbxFieldCollapse.SelectedItems)
+				{
+					Parameters.CollapseVariableNames.Add(s.ToString());
+				}
+			}
+
+			//2x2 Value mapping settings
+			Parameters.NoValues.Clear();
             Parameters.YesValues.Clear();
             if (lbxYesValues.Items.Count > 0)
             {
@@ -425,9 +435,16 @@ namespace EpiDashboard.Controls.GadgetProperties
                     lbxFieldStrata.SelectedItems.Add(s.ToString());
                 }
             }
+			if (Parameters.CollapseVariableNames.Count > 0)
+			{
+				foreach (string s in Parameters.CollapseVariableNames)
+				{
+					lbxFieldCollapse.SelectedItems.Add(s.ToString());
+				}
+			}
 
-            //2 x 2 Value mapping settings
-            Update2x2ValueMappings();
+			//2 x 2 Value mapping settings
+			Update2x2ValueMappings();
             if (crosstabParameters.ColumnNames.Count > 0)
             {
                 //foreach (string s in yesValues)
