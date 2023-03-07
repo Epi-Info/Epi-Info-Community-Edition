@@ -70,9 +70,10 @@ namespace EpiDashboard.Controls.GadgetProperties
             List<string> fields = new List<string>();
             List<string> weightFields = new List<string>();
             List<string> strataItems = new List<string>();
-            
-            //Variable fields
-            fields.Add(String.Empty);
+			List<string> collapseItems = new List<string>();
+
+			//Variable fields
+			fields.Add(String.Empty);
             ColumnDataType columnDataType = ColumnDataType.Boolean | ColumnDataType.DateTime | ColumnDataType.Numeric | ColumnDataType.Text | ColumnDataType.UserDefined;
             foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
             {
@@ -108,19 +109,25 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             weightFields.Sort();
 
-            //Strata Fields 
+            //Strata and Collapse Fields 
             strataItems.Add(String.Empty);
-            columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
+			collapseItems.Add(String.Empty);
+			columnDataType = ColumnDataType.Numeric | ColumnDataType.Boolean | ColumnDataType.Text | ColumnDataType.UserDefined;
             foreach (string fieldName in DashboardHelper.GetFieldsAsList(columnDataType))
             {
                 if (DashboardHelper.IsUsingEpiProject)
                 {
-                    if (!(fieldName == "RecStatus" || fieldName == "FKEY" || fieldName == "GlobalRecordId")) strataItems.Add(fieldName);
+					if (!(fieldName == "RecStatus" || fieldName == "FKEY" || fieldName == "GlobalRecordId"))
+					{
+						strataItems.Add(fieldName);
+						collapseItems.Add(fieldName);
+					}
                 }
                 else
                 {
                     strataItems.Add(fieldName);
-                }
+					collapseItems.Add(fieldName);
+				}
             }
 
             if (DashboardHelper.IsUsingEpiProject)
@@ -131,7 +138,10 @@ namespace EpiDashboard.Controls.GadgetProperties
                 if (strataItems.Contains("RecStatus")) strataItems.Remove("RecStatus");
                 if (strataItems.Contains("FKEY")) strataItems.Remove("FKEY");
                 if (strataItems.Contains("GlobalRecordId")) strataItems.Remove("GlobalRecordId");
-            }
+				if (collapseItems.Contains("RecStatus")) collapseItems.Remove("RecStatus");
+				if (collapseItems.Contains("FKEY")) collapseItems.Remove("FKEY");
+				if (collapseItems.Contains("GlobalRecordId")) collapseItems.Remove("GlobalRecordId");
+			}
 
             List<string> allFieldNames = new List<string>();
             allFieldNames.AddRange(fields);
@@ -141,8 +151,9 @@ namespace EpiDashboard.Controls.GadgetProperties
             cbxOutcomeField.ItemsSource = fields;
             cbxFieldWeight.ItemsSource = weightFields;
             lbxFieldStrata.ItemsSource = strataItems;
+			lbxFieldCollapse.ItemsSource = collapseItems;
 
-            if (cbxExposureField.Items.Count > 0)
+			if (cbxExposureField.Items.Count > 0)
             {
                 cbxExposureField.SelectedIndex = -1;
                 cbxOutcomeField.SelectedIndex = -1;
@@ -709,9 +720,29 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
             if (clearLbx) lbxFieldStrata.SelectedItems.Clear();
-        }
+		}
 
-        private void cbxFieldWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void lbxFieldCollapse_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			bool clearLbx = false;
+			if (lbxFieldCollapse.SelectedItems.Count == 0)
+			{
+				clearLbx = true;
+			}
+			else
+			{
+				foreach (string s in lbxFieldCollapse.SelectedItems)
+				{
+					if (s == String.Empty)
+					{
+						clearLbx = true;
+					}
+				}
+			}
+			if (clearLbx) lbxFieldCollapse.SelectedItems.Clear();
+		}
+
+		private void cbxFieldWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //if (cbxFieldWeight.SelectedValue == String.Empty)
             //{

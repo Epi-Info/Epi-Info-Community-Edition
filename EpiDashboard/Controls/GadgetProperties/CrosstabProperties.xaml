@@ -79,6 +79,11 @@
                     <StackPanel x:Name="scrollViewerStrataProperties">
                         <ListBox SelectionMode="Extended" Name="lbxFieldStrata" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Left" VerticalAlignment="Stretch" SelectionChanged="lbxFieldStrata_SelectionChanged" Height="290"/>
                     </StackPanel>
+                    <StackPanel Height="12" />
+                    <TextBlock TextWrapping="Wrap" x:Name="tblockCollapseVariable">Collapse across:</TextBlock>
+                    <StackPanel x:Name="scrollViewerCollapseProperties">
+                        <ListBox SelectionMode="Extended" Name="lbxFieldCollapse" Style="{StaticResource PropertiesListBox}" HorizontalAlignment="Left" VerticalAlignment="Stretch" SelectionChanged="lbxFieldCollapse_SelectionChanged" Height="290"/>
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
