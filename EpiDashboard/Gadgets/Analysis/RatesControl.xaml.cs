@@ -258,8 +258,11 @@ namespace EpiDashboard
             dg.CellStyle = this.Resources["RateDataGridCellStyle"] as Style;
             dg.HeadersVisibility = DataGridHeadersVisibility.None;
             dg.RowStyle = this.Resources["RateRowStyle"] as Style;
-            
-            RatesParameters ListParameters = (this.Parameters) as RatesParameters;
+
+			StackPanel crosstabPanel = new StackPanel();
+			StackPanel groupPanel = new StackPanel();
+
+			RatesParameters ListParameters = (this.Parameters) as RatesParameters;
 
             FrameworkElementFactory datagridRowsPresenter = new FrameworkElementFactory(typeof(DataGridRowsPresenter));
             ItemsPanelTemplate itemsPanelTemplate = new ItemsPanelTemplate();
