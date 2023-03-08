@@ -259,9 +259,6 @@ namespace EpiDashboard
             dg.HeadersVisibility = DataGridHeadersVisibility.None;
             dg.RowStyle = this.Resources["RateRowStyle"] as Style;
 
-			StackPanel crosstabPanel = new StackPanel();
-			StackPanel groupPanel = new StackPanel();
-
 			RatesParameters ListParameters = (this.Parameters) as RatesParameters;
 
             FrameworkElementFactory datagridRowsPresenter = new FrameworkElementFactory(typeof(DataGridRowsPresenter));
@@ -285,8 +282,73 @@ namespace EpiDashboard
             }
 
             DataTable dataTable = dv.ToTable();
-            
-            if (dataTable.Rows.Count > ListParameters.MaxRows && ListParameters.MaxRows > 0) //Added condition for EI-336
+
+			StackPanel crosstabPanel = new StackPanel();
+			int columnCount = dataTable.Columns.Count;
+			Grid chiSquaregrid = new Grid();
+			chiSquaregrid.HorizontalAlignment = HorizontalAlignment.Center;
+			chiSquaregrid.Margin = new Thickness(0, 5, 0, 10);
+			chiSquaregrid.Visibility = System.Windows.Visibility.Collapsed;
+			chiSquaregrid.ColumnDefinitions.Add(new ColumnDefinition());
+			chiSquaregrid.ColumnDefinitions.Add(new ColumnDefinition());
+			chiSquaregrid.ColumnDefinitions.Add(new ColumnDefinition());
+			chiSquaregrid.RowDefinitions.Add(new RowDefinition());
+			chiSquaregrid.RowDefinitions.Add(new RowDefinition());
+			Grid grid = new Grid();
+			grid.Tag = "value";
+			grid.Style = this.Resources["genericOutputGrid"] as Style;
+			grid.Visibility = System.Windows.Visibility.Collapsed;
+			grid.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+			for (int i = 0; i < columnCount; i++)
+			{
+				ColumnDefinition column = new ColumnDefinition();
+				column.Width = GridLength.Auto;
+				grid.ColumnDefinitions.Add(column);
+			}
+			ColumnDefinition totalColumn = new ColumnDefinition();
+			totalColumn.Width = GridLength.Auto;
+			grid.ColumnDefinitions.Add(totalColumn);
+			ScrollViewer sv = new ScrollViewer();
+			sv.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+			sv.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+			sv.MaxHeight = System.Windows.SystemParameters.PrimaryScreenHeight - 320;
+			sv.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth - 300;
+			sv.Margin = (Thickness)this.Resources["expanderMargin"];
+			Grid gridOuter = new Grid();
+			gridOuter.ColumnDefinitions.Add(new ColumnDefinition());
+			gridOuter.ColumnDefinitions.Add(new ColumnDefinition());
+			gridOuter.RowDefinitions.Add(new RowDefinition());
+			gridOuter.RowDefinitions.Add(new RowDefinition());
+			Grid.SetColumn(grid, 1);
+			Grid.SetRow(grid, 1);
+			gridOuter.Children.Add(grid);
+			Canvas exposureCanvas = new Canvas();
+			Grid.SetColumn(exposureCanvas, 0);
+			Grid.SetRow(exposureCanvas, 1);
+			exposureCanvas.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+			exposureCanvas.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+			exposureCanvas.Width = 25;
+			Binding canvasHeightBinding = new Binding("Height");
+			canvasHeightBinding.Source = grid;
+			exposureCanvas.SetBinding(Grid.HeightProperty, canvasHeightBinding);
+			TextBlock tblock1 = new TextBlock();
+			tblock1.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+			tblock1.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+			tblock1.Margin = new Thickness(0, 0, -5, 0);
+			tblock1.FontWeight = FontWeights.Bold;
+			tblock1.FontSize = tblock1.FontSize + 2;
+			exposureCanvas.Children.Add(tblock1);
+			gridOuter.Children.Add(exposureCanvas);
+			TextBlock tblock2 = new TextBlock();
+			tblock2.Name = "tblockOutcomeGridHeader";
+			tblock2.FontWeight = FontWeights.Bold;
+			tblock2.FontSize = tblock1.FontSize + 2;
+			//tblock2.Text = crosstabParameters.CrosstabVariableName;
+			crosstabPanel.Children.Add(sv);
+			crosstabPanel.Children.Add(chiSquaregrid);
+			panelMain.Children.Add(crosstabPanel);
+
+			if (dataTable.Rows.Count > ListParameters.MaxRows && ListParameters.MaxRows > 0) //Added condition for EI-336
             {
                 dataTable = dataTable.AsEnumerable().Skip(0).Take(ListParameters.MaxRows).CopyToDataTable();
             }
