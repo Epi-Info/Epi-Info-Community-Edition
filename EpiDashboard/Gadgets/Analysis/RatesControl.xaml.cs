@@ -346,7 +346,6 @@ namespace EpiDashboard
 			//tblock2.Text = crosstabParameters.CrosstabVariableName;
 			crosstabPanel.Children.Add(sv);
 			crosstabPanel.Children.Add(chiSquaregrid);
-			panelMain.Children.Add(crosstabPanel);
 
 			if (dataTable.Rows.Count > ListParameters.MaxRows && ListParameters.MaxRows > 0) //Added condition for EI-336
             {
@@ -407,8 +406,9 @@ namespace EpiDashboard
             this.Height = dg.Height + 1024;
             dg.IsReadOnly = true;
             panelMain.Children.Add(dg);
-            
-        }
+			panelMain.Children.Add(crosstabPanel);
+
+		}
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
