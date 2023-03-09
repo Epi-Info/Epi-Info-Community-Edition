@@ -462,6 +462,8 @@ namespace EpiDashboard
                         outputRateTable.Columns.Add(((RatesParameters)Parameters).SecondaryGroupField);
                     }
 
+					outputRateTable.Columns.Add("False_Rate");
+
                     DataRow newRow = outputRateTable.NewRow();
 
                     groupFields.RemoveAll(string.IsNullOrWhiteSpace);
@@ -664,9 +666,12 @@ namespace EpiDashboard
             denomAggResult = AggResult(table, ratesParameters.DenominatorField, denomFilter, aggregateExpression, denomSelect, denomAggFxName, ratesParameters.DenomDistinct, columnNames, sort);
 
             double rate = (numerAggResult / denomAggResult) * ratesParameters.RateMultiplier;
+			double negative_rate = ((denomAggResult - numerAggResult) / denomAggResult) * ratesParameters.RateMultiplier;
             newRow = outputRateTable.NewRow();
             string formatedRate = rate.ToString("G4", CultureInfo.InvariantCulture);
-            newRow["Rate"] = formatedRate;
+			string formatedNegativeRate = negative_rate.ToString("G4", CultureInfo.InvariantCulture);
+			newRow["Rate"] = formatedRate;
+			newRow["False_Rate"] = formatedNegativeRate;
 
             string description = numerSelect.Replace("[","").Replace("]","");
             description = description.Replace("(", "").Replace(")", "");
