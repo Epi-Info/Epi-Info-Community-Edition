@@ -462,9 +462,10 @@ namespace EpiDashboard
                         outputRateTable.Columns.Add(((RatesParameters)Parameters).SecondaryGroupField);
                     }
 
-					outputRateTable.Columns.Add("False_Rate");
+					outputRateTable.Columns.Add("True_Count");
+					outputRateTable.Columns.Add("False_Count");
 
-                    DataRow newRow = outputRateTable.NewRow();
+					DataRow newRow = outputRateTable.NewRow();
 
                     groupFields.RemoveAll(string.IsNullOrWhiteSpace);
                     bool containsGroupField = groupFields.Count > 0;
@@ -666,14 +667,16 @@ namespace EpiDashboard
             denomAggResult = AggResult(table, ratesParameters.DenominatorField, denomFilter, aggregateExpression, denomSelect, denomAggFxName, ratesParameters.DenomDistinct, columnNames, sort);
 
             double rate = (numerAggResult / denomAggResult) * ratesParameters.RateMultiplier;
-			double negative_rate = ((denomAggResult - numerAggResult) / denomAggResult) * ratesParameters.RateMultiplier;
+			double negative_count = denomAggResult - numerAggResult;
             newRow = outputRateTable.NewRow();
             string formatedRate = rate.ToString("G4", CultureInfo.InvariantCulture);
-			string formatedNegativeRate = negative_rate.ToString("G4", CultureInfo.InvariantCulture);
+			string formatedPositiveCount = numerAggResult.ToString("G4", CultureInfo.InvariantCulture);
+			string formatedNegativeCount = negative_count.ToString("G4", CultureInfo.InvariantCulture);
 			newRow["Rate"] = formatedRate;
-			newRow["False_Rate"] = formatedNegativeRate;
+			newRow["True_Count"] = formatedPositiveCount;
+			newRow["False_Count"] = formatedNegativeCount;
 
-            string description = numerSelect.Replace("[","").Replace("]","");
+			string description = numerSelect.Replace("[","").Replace("]","");
             description = description.Replace("(", "").Replace(")", "");
             description = description.Replace("'", "");
             description = description.Replace("AND", "and");
