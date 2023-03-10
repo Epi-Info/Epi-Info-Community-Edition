@@ -282,8 +282,10 @@ namespace EpiDashboard
             }
 
             DataTable dataTable = dv.ToTable();
-            
-            if (dataTable.Rows.Count > ListParameters.MaxRows && ListParameters.MaxRows > 0) //Added condition for EI-336
+			dataTable.Columns.Remove("True_Count");
+			dataTable.Columns.Remove("False_Count");
+
+			if (dataTable.Rows.Count > ListParameters.MaxRows && ListParameters.MaxRows > 0) //Added condition for EI-336
             {
                 dataTable = dataTable.AsEnumerable().Skip(0).Take(ListParameters.MaxRows).CopyToDataTable();
             }
