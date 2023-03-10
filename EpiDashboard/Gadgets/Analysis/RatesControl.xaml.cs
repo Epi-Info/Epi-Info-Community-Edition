@@ -343,7 +343,26 @@ namespace EpiDashboard
 
             this.Height = dg.Height + 1024;
             dg.IsReadOnly = true;
+
+			DataTable tableForStats = dv.ToTable();
+			List<string> columnsToDrop = new List<string>();
+			foreach (DataColumn col in tableForStats.Columns)
+			{
+				if (!(col.ToString().Equals("Rate") || col.ToString().Equals("True_Count") || col.ToString().Equals("False_Count")))
+					columnsToDrop.Add(col.ToString());
+			}
+			foreach (string col in columnsToDrop)
+				tableForStats.Columns.Remove(col);
+			DataRow[] SortedRows = new DataRow[tableForStats.Rows.Count];
+			int rowcounter = 0;
+			foreach (DataRow dr in tableForStats.Rows)
+				SortedRows[rowcounter++] = dr;
+			double tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+
+			TextBox tb = new TextBox();
+			tb.Text = "Fisher's Exact: " + tableFisherP;
             panelMain.Children.Add(dg);
+			panelMain.Children.Add(tb);
             
         }
 
@@ -672,11 +691,9 @@ namespace EpiDashboard
 			double negative_count = denomAggResult - numerAggResult;
             newRow = outputRateTable.NewRow();
             string formatedRate = rate.ToString("G4", CultureInfo.InvariantCulture);
-			string formatedPositiveCount = numerAggResult.ToString("G4", CultureInfo.InvariantCulture);
-			string formatedNegativeCount = negative_count.ToString("G4", CultureInfo.InvariantCulture);
 			newRow["Rate"] = formatedRate;
-			newRow["True_Count"] = formatedPositiveCount;
-			newRow["False_Count"] = formatedNegativeCount;
+			newRow["True_Count"] = numerAggResult;
+			newRow["False_Count"] = negative_count;
 
 			string description = numerSelect.Replace("[","").Replace("]","");
             description = description.Replace("(", "").Replace(")", "");
