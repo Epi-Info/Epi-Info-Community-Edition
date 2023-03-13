@@ -358,13 +358,33 @@ namespace EpiDashboard
 			foreach (DataRow dr in tableForStats.Rows)
 				SortedRows[rowcounter++] = dr;
 			double tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+			double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, false);
+			double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
+			double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
 
+			TextBox tbchi = new TextBox();
+			tbchi.BorderThickness = new Thickness(0);
+			tbchi.Text = "Chi-Squared: " + Math.Round(10000 * tableChiSq[0]) / 10000 + "\tdf: " + tableChiSqDF + "\tp: " + Math.Round(10000 * tableChiSqP) / 10000;
 			TextBox tb = new TextBox();
-			tb.Text = "Fisher's Exact: " + tableFisherP;
-            panelMain.Children.Add(dg);
+			tb.BorderThickness = new Thickness(0);
+			tb.Text = "Fisher's Exact: " + Math.Round(10000 * tableFisherP) / 10000;
+			panelMain.Children.Add(dg);
+			panelMain.Children.Add(tbchi);
 			panelMain.Children.Add(tb);
-            
-        }
+			String disclaimer = "";
+			if (tableChiSq[1] == 5.0)
+				disclaimer = "An expected cell value is <5. X" + '\u00B2' + " may not be valid.";
+			if (tableChiSq[1] == 1.0)
+				disclaimer = "An expected cell value is <1. X" + '\u00B2' + " may not be valid.";
+			if (disclaimer.Length > 0)
+			{
+				TextBox tbdisclaim = new TextBox();
+				tbdisclaim.BorderThickness = new Thickness(0);
+				tbdisclaim.Text = disclaimer;
+				panelMain.Children.Add(tbdisclaim);
+			}
+
+		}
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -483,8 +503,8 @@ namespace EpiDashboard
                         outputRateTable.Columns.Add(((RatesParameters)Parameters).SecondaryGroupField);
                     }
 
-					outputRateTable.Columns.Add("True_Count");
-					outputRateTable.Columns.Add("False_Count");
+					outputRateTable.Columns.Add("True_Count", typeof(Double));
+					outputRateTable.Columns.Add("False_Count", typeof(Double));
 
 					DataRow newRow = outputRateTable.NewRow();
 
