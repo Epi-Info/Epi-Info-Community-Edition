@@ -362,12 +362,10 @@ namespace EpiDashboard
 			double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
 			double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
 
-			TextBox tbchi = new TextBox();
-			tbchi.BorderThickness = new Thickness(0);
-			tbchi.Text = "Chi-Squared: " + Math.Round(10000 * tableChiSq[0]) / 10000 + "\tdf: " + tableChiSqDF + "\tp: " + Math.Round(10000 * tableChiSqP) / 10000;
-			TextBox tb = new TextBox();
-			tb.BorderThickness = new Thickness(0);
-			tb.Text = "Fisher's Exact: " + Math.Round(10000 * tableFisherP) / 10000;
+			Label tbchi = new Label();
+			tbchi.Content = "Chi-Square: " + Math.Round(10000 * tableChiSq[0]) / 10000 + "\tdf: " + tableChiSqDF + "\tp: " + Math.Round(10000 * tableChiSqP) / 10000;
+			Label tb = new Label();
+			tb.Content = "Fisher's Exact: " + Math.Round(10000 * tableFisherP) / 10000;
 			panelMain.Children.Add(dg);
 			panelMain.Children.Add(tbchi);
 			panelMain.Children.Add(tb);
@@ -378,9 +376,8 @@ namespace EpiDashboard
 				disclaimer = "An expected cell value is <1. X" + '\u00B2' + " may not be valid.";
 			if (disclaimer.Length > 0)
 			{
-				TextBox tbdisclaim = new TextBox();
-				tbdisclaim.BorderThickness = new Thickness(0);
-				tbdisclaim.Text = disclaimer;
+				Label tbdisclaim = new Label();
+				tbdisclaim.Content = disclaimer;
 				panelMain.Children.Add(tbdisclaim);
 			}
 
