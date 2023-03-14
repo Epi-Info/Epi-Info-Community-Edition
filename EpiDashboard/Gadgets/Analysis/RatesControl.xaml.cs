@@ -282,8 +282,10 @@ namespace EpiDashboard
             }
 
             DataTable dataTable = dv.ToTable();
-            
-            if (dataTable.Rows.Count > ListParameters.MaxRows && ListParameters.MaxRows > 0) //Added condition for EI-336
+			dataTable.Columns.Remove("True_Count");
+			dataTable.Columns.Remove("False_Count");
+
+			if (dataTable.Rows.Count > ListParameters.MaxRows && ListParameters.MaxRows > 0) //Added condition for EI-336
             {
                 dataTable = dataTable.AsEnumerable().Skip(0).Take(ListParameters.MaxRows).CopyToDataTable();
             }
@@ -341,9 +343,45 @@ namespace EpiDashboard
 
             this.Height = dg.Height + 1024;
             dg.IsReadOnly = true;
-            panelMain.Children.Add(dg);
-            
-        }
+
+			DataTable tableForStats = dv.ToTable();
+			List<string> columnsToDrop = new List<string>();
+			foreach (DataColumn col in tableForStats.Columns)
+			{
+				if (!(col.ToString().Equals("Rate") || col.ToString().Equals("True_Count") || col.ToString().Equals("False_Count")))
+					columnsToDrop.Add(col.ToString());
+			}
+			foreach (string col in columnsToDrop)
+				tableForStats.Columns.Remove(col);
+			DataRow[] SortedRows = new DataRow[tableForStats.Rows.Count];
+			int rowcounter = 0;
+			foreach (DataRow dr in tableForStats.Rows)
+				SortedRows[rowcounter++] = dr;
+			double tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+			double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, false);
+			double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
+			double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
+
+			Label tbchi = new Label();
+			tbchi.Content = "Chi-Square: " + Math.Round(10000 * tableChiSq[0]) / 10000 + "\tdf: " + tableChiSqDF + "\tp: " + Math.Round(10000 * tableChiSqP) / 10000;
+			Label tb = new Label();
+			tb.Content = "Fisher's Exact: " + Math.Round(10000 * tableFisherP) / 10000;
+			panelMain.Children.Add(dg);
+			panelMain.Children.Add(tbchi);
+			panelMain.Children.Add(tb);
+			String disclaimer = "";
+			if (tableChiSq[1] == 5.0)
+				disclaimer = "An expected cell value is <5. X" + '\u00B2' + " may not be valid.";
+			if (tableChiSq[1] == 1.0)
+				disclaimer = "An expected cell value is <1. X" + '\u00B2' + " may not be valid.";
+			if (disclaimer.Length > 0)
+			{
+				Label tbdisclaim = new Label();
+				tbdisclaim.Content = disclaimer;
+				panelMain.Children.Add(tbdisclaim);
+			}
+
+		}
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -462,7 +500,10 @@ namespace EpiDashboard
                         outputRateTable.Columns.Add(((RatesParameters)Parameters).SecondaryGroupField);
                     }
 
-                    DataRow newRow = outputRateTable.NewRow();
+					outputRateTable.Columns.Add("True_Count", typeof(Double));
+					outputRateTable.Columns.Add("False_Count", typeof(Double));
+
+					DataRow newRow = outputRateTable.NewRow();
 
                     groupFields.RemoveAll(string.IsNullOrWhiteSpace);
                     bool containsGroupField = groupFields.Count > 0;
@@ -664,11 +705,14 @@ namespace EpiDashboard
             denomAggResult = AggResult(table, ratesParameters.DenominatorField, denomFilter, aggregateExpression, denomSelect, denomAggFxName, ratesParameters.DenomDistinct, columnNames, sort);
 
             double rate = (numerAggResult / denomAggResult) * ratesParameters.RateMultiplier;
+			double negative_count = denomAggResult - numerAggResult;
             newRow = outputRateTable.NewRow();
             string formatedRate = rate.ToString("G4", CultureInfo.InvariantCulture);
-            newRow["Rate"] = formatedRate;
+			newRow["Rate"] = formatedRate;
+			newRow["True_Count"] = numerAggResult;
+			newRow["False_Count"] = negative_count;
 
-            string description = numerSelect.Replace("[","").Replace("]","");
+			string description = numerSelect.Replace("[","").Replace("]","");
             description = description.Replace("(", "").Replace(")", "");
             description = description.Replace("'", "");
             description = description.Replace("AND", "and");
