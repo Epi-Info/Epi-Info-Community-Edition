@@ -40,8 +40,17 @@ namespace EpiDashboard.Controls.Charting
                         sName = s0.Label.Split('.')[1];
                         if (ColumnChartParameters.ShowLegendVarNames == false)
                         {
-                            int index = sName.IndexOf(" = ");
-                            s0.Label = sName.Substring(index + 3);
+							try
+							{
+								int index = sName.IndexOf(" = ");
+								s0.Label = sName.Substring(index + 3);
+							}
+							catch (Exception e)
+							{
+								int index = s0.Label.IndexOf(" = ");
+								sName = s0.Label.Substring(index + 3);
+								s0.Label = sName;
+							}
                         }
                         else
                         {
