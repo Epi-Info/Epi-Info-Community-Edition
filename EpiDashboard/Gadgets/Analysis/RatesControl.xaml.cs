@@ -357,7 +357,15 @@ namespace EpiDashboard
 			int rowcounter = 0;
 			foreach (DataRow dr in tableForStats.Rows)
 				SortedRows[rowcounter++] = dr;
-			double tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+			double tableFisherP = -1.0;
+			try
+			{
+				tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, false);
+			}
+			catch (Exception e)
+			{
+				//
+			}
 			double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, false);
 			double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 2);
 			double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
@@ -366,6 +374,8 @@ namespace EpiDashboard
 			tbchi.Content = "Chi-Square: " + Math.Round(10000 * tableChiSq[0]) / 10000 + "\tdf: " + tableChiSqDF + "\tp: " + Math.Round(10000 * tableChiSqP) / 10000;
 			Label tb = new Label();
 			tb.Content = "Fisher's Exact: " + Math.Round(10000 * tableFisherP) / 10000;
+			if (tableFisherP < 0.0)
+				tb.Content = "Fisher's Exact cannot be computed.";
 			panelMain.Children.Add(dg);
 			panelMain.Children.Add(tbchi);
 			panelMain.Children.Add(tb);
