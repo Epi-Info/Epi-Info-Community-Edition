@@ -104,13 +104,14 @@ namespace EpiDashboard
         private delegate void AddFreqGridDelegate(string strataVar, string value);
         private delegate void RenderFrequencyHeaderDelegate(string strataValue, string freqVar, double observationCount);
         private new delegate void AddGridFooterDelegate(string strataValue, int rowNumber, int totalRows);
-        #endregion // Delegates
+		private new delegate void AddGridFooterDelegateD(string strataValue, int rowNumber, double totalRows);
+		#endregion // Delegates
 
-        #region Constructors
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public FrequencyControl()
+		#region Constructors
+		/// <summary>
+		/// Default constructor
+		/// </summary>
+		public FrequencyControl()
         {
             InitializeComponent();
             Construct();
@@ -542,12 +543,131 @@ namespace EpiDashboard
                 Grid.SetColumn(tb, 6);
                 grid.Children.Add(tb);
             }
-        }
+		}
 
-        /// <summary>
-        /// Sets the gadget's state to 'finished' mode
-        /// </summary>
-        protected override void RenderFinish()
+		/// <summary>
+		/// Used to render the footer (last row) of a given frequency output grid
+		/// when the total > Int32.MaxValue
+		/// </summary>
+		/// <param name="strataValue">
+		/// The strata value to which this grid cell belongs; used to search the list of grids and 
+		/// return the proper System.Windows.Controls.Grid for text insertion.
+		/// </param>
+		/// <param name="footerRowIndex">The row index of the footer</param>
+		/// <param name="totalRows">The total number of rows in this grid</param>
+		private void RenderFrequencyFooterD(string strataValue, int footerRowIndex, double totalRows)
+		{
+			FrequencyParameters freqParameters = (FrequencyParameters)Parameters;
+
+			Grid grid = GetStrataGrid(strataValue);
+
+			RowDefinition rowDefTotals = new RowDefinition();
+			rowDefTotals.Height = new GridLength(26);
+
+			grid.RowDefinitions.Add(rowDefTotals);
+
+			if (freqParameters.DrawTotalRow == false)
+			{
+				rowDefTotals.Height = new GridLength(0);
+				return;
+			}
+
+			TextBlock txtValTotals = new TextBlock();
+			txtValTotals.Text = SharedStrings.TOTAL;
+			txtValTotals.Margin = new Thickness(4, 0, 4, 0);
+			txtValTotals.VerticalAlignment = VerticalAlignment.Center;
+			txtValTotals.FontWeight = FontWeights.Bold;
+			Grid.SetRow(txtValTotals, footerRowIndex);
+			Grid.SetColumn(txtValTotals, 0);
+			grid.Children.Add(txtValTotals);
+
+			TextBlock txtFreqTotals = new TextBlock();
+			txtFreqTotals.Text = totalRows.ToString();
+			txtFreqTotals.Margin = new Thickness(4, 0, 4, 0);
+			txtFreqTotals.VerticalAlignment = VerticalAlignment.Center;
+			txtFreqTotals.HorizontalAlignment = HorizontalAlignment.Right;
+			txtFreqTotals.FontWeight = FontWeights.Bold;
+			Grid.SetRow(txtFreqTotals, footerRowIndex);
+			Grid.SetColumn(txtFreqTotals, 1);
+			grid.Children.Add(txtFreqTotals);
+
+			TextBlock txtPctTotals = new TextBlock();
+			txtPctTotals.Text = (1).ToString("P");//SharedStrings.DASHBOARD_100_PERCENT_LABEL;
+			txtPctTotals.Margin = new Thickness(4, 0, 4, 0);
+			txtPctTotals.VerticalAlignment = VerticalAlignment.Center;
+			txtPctTotals.HorizontalAlignment = HorizontalAlignment.Right;
+			txtPctTotals.FontWeight = FontWeights.Bold;
+			Grid.SetRow(txtPctTotals, footerRowIndex);
+			Grid.SetColumn(txtPctTotals, 2);
+			grid.Children.Add(txtPctTotals);
+
+			TextBlock txtAccuTotals = new TextBlock();
+			txtAccuTotals.Text = (1).ToString("P");
+			txtAccuTotals.Margin = new Thickness(4, 0, 4, 0);
+			txtAccuTotals.VerticalAlignment = VerticalAlignment.Center;
+			txtAccuTotals.HorizontalAlignment = HorizontalAlignment.Right;
+			txtAccuTotals.FontWeight = FontWeights.Bold;
+			Grid.SetRow(txtAccuTotals, footerRowIndex);
+			Grid.SetColumn(txtAccuTotals, 3);
+			grid.Children.Add(txtAccuTotals);
+
+			TextBlock txtCILowerTotals = new TextBlock();
+			txtCILowerTotals.Text = StringLiterals.SPACE + StringLiterals.SPACE + StringLiterals.SPACE;
+			txtCILowerTotals.Margin = new Thickness(4, 0, 4, 0);
+			txtCILowerTotals.VerticalAlignment = VerticalAlignment.Center;
+			txtCILowerTotals.HorizontalAlignment = HorizontalAlignment.Right;
+			txtCILowerTotals.FontWeight = FontWeights.Bold;
+			Grid.SetRow(txtCILowerTotals, footerRowIndex);
+			Grid.SetColumn(txtCILowerTotals, 4);
+			grid.Children.Add(txtCILowerTotals);
+
+			TextBlock txtUpperTotals = new TextBlock();
+			txtUpperTotals.Text = StringLiterals.SPACE + StringLiterals.SPACE + StringLiterals.SPACE;
+			txtUpperTotals.Margin = new Thickness(4, 0, 4, 0);
+			txtUpperTotals.VerticalAlignment = VerticalAlignment.Center;
+			txtUpperTotals.HorizontalAlignment = HorizontalAlignment.Right;
+			txtUpperTotals.FontWeight = FontWeights.Bold;
+			Grid.SetRow(txtUpperTotals, footerRowIndex);
+			Grid.SetColumn(txtUpperTotals, 5);
+			grid.Children.Add(txtUpperTotals);
+
+			Rectangle rctTotalsBar = new Rectangle();
+			rctTotalsBar.Width = 0.1;// 100;
+			rctTotalsBar.Fill = this.Resources["frequencyPercentBarBrush"] as SolidColorBrush;
+			rctTotalsBar.Margin = new Thickness(2, 6, 2, 6);
+			rctTotalsBar.HorizontalAlignment = HorizontalAlignment.Left;
+			Grid.SetRow(rctTotalsBar, footerRowIndex);
+			Grid.SetColumn(rctTotalsBar, 6);
+			grid.Children.Add(rctTotalsBar);
+
+			DoubleAnimation daBar = new DoubleAnimation();
+			daBar.From = 1;
+
+			int maxWidth = 100;
+			int.TryParse(freqParameters.PercentBarWidth.ToString(), out maxWidth);
+
+			daBar.To = maxWidth;
+			daBar.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+			rctTotalsBar.BeginAnimation(Rectangle.WidthProperty, daBar);
+
+			if (freqParameters.PercentBarMode == "Bar and percent")
+			{
+				TextBlock tb = new TextBlock();
+				tb.Margin = new Thickness(maxWidth + 5, 0, 0, 0);
+				tb.Foreground = this.Resources["cellForeground"] as SolidColorBrush;
+				tb.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+				tb.Text = 1.ToString("P0");
+
+				Grid.SetRow(tb, footerRowIndex);
+				Grid.SetColumn(tb, 6);
+				grid.Children.Add(tb);
+			}
+		}
+
+		/// <summary>
+		/// Sets the gadget's state to 'finished' mode
+		/// </summary>
+		protected override void RenderFinish()
         {
             waitPanel.Visibility = System.Windows.Visibility.Collapsed;
 
@@ -2182,8 +2302,11 @@ namespace EpiDashboard
                                 rowCount++;
                             }
 
-                            this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, rowCount, (int)count);
-                            if (shouldDrawBorders) this.Dispatcher.BeginInvoke(drawBorders, strataValue);                            
+							if (count < Int32.MaxValue)
+									this.Dispatcher.BeginInvoke(new AddGridFooterDelegate(RenderFrequencyFooter), strataValue, rowCount, (int)count);
+								else
+									this.Dispatcher.BeginInvoke(new AddGridFooterDelegateD(RenderFrequencyFooterD), strataValue, rowCount, count);
+								if (shouldDrawBorders) this.Dispatcher.BeginInvoke(drawBorders, strataValue);                            
                         }
 
                         stratifiedFrequencyTables.Clear();
