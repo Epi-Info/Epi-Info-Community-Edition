@@ -673,7 +673,8 @@ namespace EpiDashboard
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN);
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LESS_THAN_OR_EQUAL);
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_GREATER_THAN_OR_EQUAL);
-                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+					cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+					cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
                 }
                 else if (field is CheckBoxField)
                 {
@@ -688,7 +689,8 @@ namespace EpiDashboard
                 else if (field is YesNoField)
                 {
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
-                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+					cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+					cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
 
                     cbxValue.Items.Add(config.Settings.RepresentationOfYes);
                     cbxValue.Items.Add(config.Settings.RepresentationOfNo);
@@ -699,7 +701,8 @@ namespace EpiDashboard
                 {
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_EQUAL_TO);
                     cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_LIKE);
-                    cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
+					cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_MISSING);
+					cbxOperator.Items.Add(SharedStrings.FRIENDLY_OPERATOR_NOT_MISSING);
                 }
                 else if (field is OptionField)
                 {
