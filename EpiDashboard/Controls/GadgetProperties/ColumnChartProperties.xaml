@@ -105,6 +105,9 @@
                         <CheckBox x:Name="checkboxSortStringValues" Style="{StaticResource PropertiesPanelCheckbox}" Margin="0,12,0,0" HorizontalAlignment="Left" IsChecked="False" >
                             <TextBlock TextWrapping="Wrap" x:Name="checkboxSortStringValuesTxt">Sort String Values</TextBlock>
                         </CheckBox>
+                        <CheckBox x:Name="checkboxShowAllStringValues" Style="{StaticResource PropertiesPanelCheckbox}" Margin="0,12,0,0" HorizontalAlignment="Left" IsChecked="False" >
+                            <TextBlock TextWrapping="Wrap" x:Name="checkboxShowAllStringValuesTxt">Show All String Values</TextBlock>
+                        </CheckBox>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

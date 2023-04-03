@@ -22,6 +22,7 @@ namespace EpiDashboard
         public string ChartStrataTitle { get; set; }
         public string YAxisStacked100Label { get; set; }
         public bool SortStringValues { get; set; }
+        public bool ShowAllStringValues { get; set; }
         #endregion  // Properties
 
         /// <summary>
@@ -90,7 +91,8 @@ namespace EpiDashboard
             XAxisFontSize = 12;
             XAxisLabelFontSize = 12;
             SortStringValues = false;
-         
+            ShowAllStringValues = false;
+
         }
 
         /// <summary>
@@ -168,6 +170,7 @@ namespace EpiDashboard
             XAxisFontSize = parameters.XAxisFontSize;
             XAxisLabelFontSize = parameters.XAxisLabelFontSize;
             SortStringValues = parameters.SortStringValues;
+            ShowAllStringValues = parameters.ShowAllStringValues;
         }
     }
 }

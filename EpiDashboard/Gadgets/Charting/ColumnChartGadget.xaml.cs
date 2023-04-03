@@ -494,6 +494,10 @@ namespace EpiDashboard.Gadgets.Charting
                         if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).SortStringValues = true; }
                         else { ((ColumnChartParameters)Parameters).SortStringValues = false; }
                         break;
+                    case "showAllStringValues":
+                        if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).ShowAllStringValues = true; }
+                        else { ((ColumnChartParameters)Parameters).ShowAllStringValues = false; }
+                        break;
                 }
                 }
             }
@@ -908,7 +912,11 @@ namespace EpiDashboard.Gadgets.Charting
                                     if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).SortStringValues = true; }
                                     else { ((ColumnChartParameters)Parameters).SortStringValues = false; }
                                     break;
-                            }
+                            case "showallstringvalues":
+                                if (child.InnerText.ToLowerInvariant().Equals("true")) { ((ColumnChartParameters)Parameters).ShowAllStringValues = true; }
+                                else { ((ColumnChartParameters)Parameters).ShowAllStringValues = false; }
+                                break;
+                        }
                         }
                     }
                 }
@@ -1282,9 +1290,14 @@ namespace EpiDashboard.Gadgets.Charting
                 sortStringValuesElement.InnerText = chtParameters.SortStringValues.ToString();
                 element.AppendChild(sortStringValuesElement);
 
-                //
-                //y2AxisLabel 
-                XmlElement y2AxisLabelElement = doc.CreateElement("y2AxisLabel");
+            //sortStringValues 
+            XmlElement showAllStringValuesElement = doc.CreateElement("showAllStringValues");
+            showAllStringValuesElement.InnerText = chtParameters.ShowAllStringValues.ToString();
+            element.AppendChild(showAllStringValuesElement);
+
+            //
+            //y2AxisLabel 
+            XmlElement y2AxisLabelElement = doc.CreateElement("y2AxisLabel");
                 y2AxisLabelElement.InnerText = chtParameters.Y2AxisLabel.ToString().Replace("<", "&lt;");
                 element.AppendChild(y2AxisLabelElement);
 
@@ -1572,6 +1585,40 @@ namespace EpiDashboard.Gadgets.Charting
                                 }
                                 parameters.CrosstabVariableName = string.Empty;
                                 Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTables = DashboardHelper.GenerateFrequencyTable(parameters);
+                                if (parameters.ShowAllStringValues)
+                                {
+                                    Dictionary<DataTable, List<DescriptiveStatistics>> stratifiedFrequencyTablesAll = DashboardHelper.GenerateFrequencyTable(chtParameters);
+                                    foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> tableKvp in stratifiedFrequencyTablesAll)
+                                {
+                                    string colValue = tableKvp.Key.TableName;
+                                    DataTable table = tableKvp.Key;
+                                    foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> stratKvp in stratifiedFrequencyTables)
+                                    {
+                                        string strataValue = stratKvp.Key.TableName;
+                                        DataTable strattable = stratKvp.Key;
+                                        foreach (DataRow datrow in table.Rows)
+                                        {
+                                            bool rowfound = false;
+                                            foreach (DataRow stratrow in strattable.Rows)
+                                            {
+                                                if (stratrow[0].Equals(datrow[0]))
+                                                {
+                                                    rowfound = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (!rowfound)
+                                            {
+                                                strattable.Rows.Add();
+                                                strattable.Rows[strattable.Rows.Count - 1][0] = datrow[0];
+                                                strattable.Rows[strattable.Rows.Count - 1][1] = 0;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                    break;
+                                }
+                                }
                                 GenerateColumnChartData(stratifiedFrequencyTables, strata);
                                 System.Threading.Thread.Sleep(100);
                             }

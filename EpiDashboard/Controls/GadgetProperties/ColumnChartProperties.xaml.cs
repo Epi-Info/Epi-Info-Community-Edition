@@ -131,6 +131,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             txtxAxisEndValue.Text = parameters.XAxisEnd.ToString();
 
             checkboxSortStringValues.IsChecked = Parameters.SortStringValues;
+            checkboxShowAllStringValues.IsChecked = Parameters.ShowAllStringValues;
 
             txtWidth.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
             txtHeight.PreviewKeyDown += new KeyEventHandler(txtInput_PositiveIntegerOnly_PreviewKeyDown);
@@ -840,6 +841,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             Parameters.XAxisEnd = txtxAxisEndValue.Text;
 
             Parameters.SortStringValues = (bool)checkboxSortStringValues.IsChecked;
+            Parameters.ShowAllStringValues = (bool)checkboxShowAllStringValues.IsChecked;
         }
 
         private List<string> GetPaletteColores()
@@ -913,6 +915,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             checkboxSortHighLow.IsChecked = Parameters.SortHighToLow;
             checkboxSortStringValues.IsChecked = Parameters.SortStringValues;
+            checkboxShowAllStringValues.IsChecked = Parameters.ShowAllStringValues;
 
             //Display settings
             scrollViewerProperties.MaxHeight = scrollViewerProperties.MaxHeight + (Math.Max(0, System.Windows.SystemParameters.PrimaryScreenHeight - 768.0));
