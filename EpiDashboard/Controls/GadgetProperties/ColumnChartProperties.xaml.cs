@@ -1886,7 +1886,12 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
         }
 
-      
-       
+        private void checkboxShowAllStringValues_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkboxShowAllStringValues.IsChecked == true)
+            {
+                checkboxSortStringValues.IsChecked = true;
+            }
+        }
     }
 }
