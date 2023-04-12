@@ -139,6 +139,20 @@ namespace Epi.Windows.ImportExport.Dialogs
                 }
             }
 
+            IDbDriver driver = sourceProject.CollectedData.GetDatabase();
+            DataTable dt = driver.GetTableData(formName, "*");
+            foreach (DataColumn datcol in dt.Columns)
+            {
+                if (datcol.ColumnName.Equals("FirstSaveLogonName", StringComparison.OrdinalIgnoreCase) ||
+                    datcol.ColumnName.Equals("LastSaveLogonName", StringComparison.OrdinalIgnoreCase) ||
+                    datcol.ColumnName.Equals("FirstSaveTime", StringComparison.OrdinalIgnoreCase) ||
+                    datcol.ColumnName.Equals("LastSaveTime", StringComparison.OrdinalIgnoreCase))
+                {
+                    fieldList.Add(datcol.ColumnName);
+                    //View v = new View((DataRow)datcol, sourceProject);
+                }
+            }
+
             fieldList.Sort();
 
             foreach (string s in fieldList)
@@ -312,62 +326,80 @@ namespace Epi.Windows.ImportExport.Dialogs
             {
                 View view = sourceProject.Views[formName];
                 string fieldName = cmbFieldName.SelectedItem.ToString();
-                Field field = view.Fields[fieldName];
-
-                txtFieldValue.Text = string.Empty;
-                cmbFieldValue.Text = string.Empty;
-                cmbFieldValue.Items.Clear();
-                cmbFieldValue.SelectedIndex = -1;
-
-                switch (field.FieldType)
+                Field field = null;
+                if (view.Fields.Names.Contains(fieldName))
                 {
-                    case MetaFieldType.Checkbox:
-                        cmbFieldOperator.Items.Add("is equal to");
-                        break;
-                    case MetaFieldType.Date:
-                    case MetaFieldType.DateTime:
-                    case MetaFieldType.Time:
-                        //cmbField1Operator.Items.Add("is not missing");
-                        //cmbField1Operator.Items.Add("is missing");
-                        cmbFieldOperator.Items.Add("is greater than");
-                        cmbFieldOperator.Items.Add("is greater than or equal to");
-                        cmbFieldOperator.Items.Add("is less than");
-                        cmbFieldOperator.Items.Add("is less than or equal to");
-                        cmbFieldOperator.Items.Add("is less than N days ago");
-                        //cmbFieldOperator.Items.Add("is today's date");
-                        break;
-                    case MetaFieldType.Number:
-                        //cmbField1Operator.Items.Add("is not missing");
-                        //cmbField1Operator.Items.Add("is missing");
-                        //cmbField1Operator.Items.Add("is not equal to");
-                        cmbFieldOperator.Items.Add("is equal to");
-                        cmbFieldOperator.Items.Add("is greater than");
-                        cmbFieldOperator.Items.Add("is greater than or equal to");
-                        cmbFieldOperator.Items.Add("is less than");
-                        cmbFieldOperator.Items.Add("is less than or equal to");
-                        break;
-                    case MetaFieldType.Text:
-                    case MetaFieldType.TextUppercase:
-                    case MetaFieldType.Multiline:
-                    case MetaFieldType.LegalValues:
-                    case MetaFieldType.CommentLegal:
-                    case MetaFieldType.Codes:
-                    case MetaFieldType.GUID:
-                    case MetaFieldType.PhoneNumber:
-                        //cmbField1Operator.Items.Add("is not missing");
-                        //cmbField1Operator.Items.Add("is missing");
-                        //cmbField1Operator.Items.Add("is not equal to");
-                        cmbFieldOperator.Items.Add("is equal to");                        
-                        break;
-                    case MetaFieldType.YesNo:
-                        cmbFieldOperator.Items.Add("is equal to");
-                        //cmbField1Operator.Items.Add("is not missing");
-                        //cmbField1Operator.Items.Add("is missing");
-                        break;
-                }
+                    field = view.Fields[fieldName];
 
-                selectedFieldType = field.FieldType;
-                selectedField = field;
+                    txtFieldValue.Text = string.Empty;
+                    cmbFieldValue.Text = string.Empty;
+                    cmbFieldValue.Items.Clear();
+                    cmbFieldValue.SelectedIndex = -1;
+
+                    switch (field.FieldType)
+                    {
+                        case MetaFieldType.Checkbox:
+                            cmbFieldOperator.Items.Add("is equal to");
+                            break;
+                        case MetaFieldType.Date:
+                        case MetaFieldType.DateTime:
+                        case MetaFieldType.Time:
+                            //cmbField1Operator.Items.Add("is not missing");
+                            //cmbField1Operator.Items.Add("is missing");
+                            cmbFieldOperator.Items.Add("is greater than");
+                            cmbFieldOperator.Items.Add("is greater than or equal to");
+                            cmbFieldOperator.Items.Add("is less than");
+                            cmbFieldOperator.Items.Add("is less than or equal to");
+                            cmbFieldOperator.Items.Add("is less than N days ago");
+                            //cmbFieldOperator.Items.Add("is today's date");
+                            break;
+                        case MetaFieldType.Number:
+                            //cmbField1Operator.Items.Add("is not missing");
+                            //cmbField1Operator.Items.Add("is missing");
+                            //cmbField1Operator.Items.Add("is not equal to");
+                            cmbFieldOperator.Items.Add("is equal to");
+                            cmbFieldOperator.Items.Add("is greater than");
+                            cmbFieldOperator.Items.Add("is greater than or equal to");
+                            cmbFieldOperator.Items.Add("is less than");
+                            cmbFieldOperator.Items.Add("is less than or equal to");
+                            break;
+                        case MetaFieldType.Text:
+                        case MetaFieldType.TextUppercase:
+                        case MetaFieldType.Multiline:
+                        case MetaFieldType.LegalValues:
+                        case MetaFieldType.CommentLegal:
+                        case MetaFieldType.Codes:
+                        case MetaFieldType.GUID:
+                        case MetaFieldType.PhoneNumber:
+                            //cmbField1Operator.Items.Add("is not missing");
+                            //cmbField1Operator.Items.Add("is missing");
+                            //cmbField1Operator.Items.Add("is not equal to");
+                            cmbFieldOperator.Items.Add("is equal to");
+                            break;
+                        case MetaFieldType.YesNo:
+                            cmbFieldOperator.Items.Add("is equal to");
+                            //cmbField1Operator.Items.Add("is not missing");
+                            //cmbField1Operator.Items.Add("is missing");
+                            break;
+                    }
+
+                    selectedFieldType = field.FieldType;
+                    selectedField = field;
+                }
+                else if (fieldName.Equals("FirstSaveLogonName") || fieldName.Equals("LastSaveLogonName"))
+                {
+                    cmbFieldOperator.Items.Add("is equal to");
+                    selectedFieldType = MetaFieldType.Text;
+                }
+                else if (fieldName.Equals("FirstSaveTime") || fieldName.Equals("LastSaveTime"))
+                {
+                    cmbFieldOperator.Items.Add("is greater than");
+                    cmbFieldOperator.Items.Add("is greater than or equal to");
+                    cmbFieldOperator.Items.Add("is less than");
+                    cmbFieldOperator.Items.Add("is less than or equal to");
+                    cmbFieldOperator.Items.Add("is less than N days ago");
+                    selectedFieldType = MetaFieldType.DateTime;
+                }
             }
         }
 
