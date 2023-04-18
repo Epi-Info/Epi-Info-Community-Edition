@@ -375,6 +375,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                             //cmbField1Operator.Items.Add("is missing");
                             //cmbField1Operator.Items.Add("is not equal to");
                             cmbFieldOperator.Items.Add("is equal to");
+                            cmbFieldOperator.Items.Add("is like");
                             break;
                         case MetaFieldType.YesNo:
                             cmbFieldOperator.Items.Add("is equal to");
@@ -389,6 +390,7 @@ namespace Epi.Windows.ImportExport.Dialogs
                 else if (fieldName.Equals("FirstSaveLogonName") || fieldName.Equals("LastSaveLogonName"))
                 {
                     cmbFieldOperator.Items.Add("is equal to");
+                    cmbFieldOperator.Items.Add("is like");
                     selectedFieldType = MetaFieldType.Text;
                 }
                 else if (fieldName.Equals("FirstSaveTime") || fieldName.Equals("LastSaveTime"))
@@ -698,6 +700,9 @@ namespace Epi.Windows.ImportExport.Dialogs
                     break;
                 case "is equal to":
                     op = " = ";
+                    break;
+                case "is like":
+                    op = " like ";
                     break;
                 case "is greater than":
                     op = " > ";
