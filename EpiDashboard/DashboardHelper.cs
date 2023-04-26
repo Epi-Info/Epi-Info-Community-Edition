@@ -2221,11 +2221,11 @@ namespace EpiDashboard
                 DataTable viewTable = new DataTable();
                 if (isRelatedView)
                 {
-                    viewTable = Database.GetTableData(vw.TableName, "GlobalRecordId");
+                    viewTable = Database.GetTableData(vw.TableName, "GlobalRecordId, FKEY");
                 }
                 else
                 {
-                    viewTable = Database.GetTableData(vw.TableName, "GlobalRecordId, UniqueKey, RECSTATUS");
+                    viewTable = Database.GetTableData(vw.TableName, "GlobalRecordId, FKEY, UniqueKey, RECSTATUS");
                 }
                 viewTable.TableName = vw.TableName;
 
