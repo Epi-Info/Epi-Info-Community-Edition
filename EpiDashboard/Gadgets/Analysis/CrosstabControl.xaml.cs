@@ -65,6 +65,7 @@ namespace EpiDashboard
         private delegate void AddFreqGridDelegate(string strataVar, string value, string crosstabVar, string groupReference, DataTable table);
         private delegate void RenderFrequencyHeaderDelegate(string strataValue, string freqVar, DataColumnCollection columns);
         //private delegate void AddGridRowDelegate(string strataValue, int height);
+        protected delegate void AddGridFooterDelegate(string strataValue, int rowNumber, double[] totalRows);
         private delegate void FillPercentsDelegate(Grid grid);
         private delegate void AddChiSquareDelegate(double tableChiSq, double tableChiSqDf, double tableChiSqP, double tableFisherP, string disclaimer, string value);
         private delegate void AddFisherDelegate(DataRow[] SortedRows, double tableFisherP, string value);
@@ -1189,7 +1190,7 @@ namespace EpiDashboard
 
                             rowCount = 1;
 
-                            int[] totals = new int[frequencies.Columns.Count - 1];
+                            double[] totals = new double[frequencies.Columns.Count - 1];
                             columnCount = 1;
 
                             DataRow[] SortedRows = new DataRow[frequencies.Rows.Count];
@@ -1238,7 +1239,7 @@ namespace EpiDashboard
                                     this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(displayValue, new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Left, TextAlignment.Left, rowCount, 0, System.Windows.Visibility.Visible), FontWeights.Normal, count);
 
 
-                                    int rowTotal = 0;
+                                    double rowTotal = 0;
                                     columnCount = 1;
 
                                     foreach (DataColumn column in frequencies.Columns)
@@ -1257,6 +1258,15 @@ namespace EpiDashboard
                                         {
                                             totals[columnCount - 2] = totals[columnCount - 2] + rowValue;
                                             rowTotal = rowTotal + rowValue;
+                                        }
+                                        else
+                                        {
+                                            double frowValue = 0;
+                                            if (double.TryParse(row[column.ColumnName].ToString(), out frowValue))
+                                            {
+                                                totals[columnCount - 2] = totals[columnCount - 2] + Math.Round(frowValue, 2);
+                                                rowTotal = rowTotal + Math.Round(frowValue, 2);
+                                            }
                                         }
                                     }
                                     this.Dispatcher.BeginInvoke(setText, strataValue, new TextBlockConfig(rowTotal.ToString(), new Thickness(4, 0, 4, 0), VerticalAlignment.Center, HorizontalAlignment.Right, TextAlignment.Right, rowCount, columnCount, System.Windows.Visibility.Visible), FontWeights.Bold, count);
@@ -2484,28 +2494,122 @@ namespace EpiDashboard
                         text_b.Text = tableFisherP.ToString("F4");
                 }
             }
-/*
-            grid.RowDefinitions.Add(new RowDefinition());
-            TextBlock txt1b = new TextBlock();
-            txt1b.Text = "Fisher's Exact";
-            txt1b.FontWeight = FontWeights.Bold;
-            txt1b.Margin = margin;
-            txt1b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            Grid.SetRow(txt1b, 2);
-            Grid.SetColumn(txt1b, 0);
-            grid.Children.Add(txt1b);
+            /*
+                        grid.RowDefinitions.Add(new RowDefinition());
+                        TextBlock txt1b = new TextBlock();
+                        txt1b.Text = "Fisher's Exact";
+                        txt1b.FontWeight = FontWeights.Bold;
+                        txt1b.Margin = margin;
+                        txt1b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                        Grid.SetRow(txt1b, 2);
+                        Grid.SetColumn(txt1b, 0);
+                        grid.Children.Add(txt1b);
 
-            TextBlock txt2b = new TextBlock();
-            txt2b.Text = tableFisherP.ToString("F4");
-            txt2b.Margin = margin;
-            txt2b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-            Grid.SetRow(txt2b, 2);
-            Grid.SetColumn(txt2b, 2);
-            grid.Children.Add(txt2b);
-*/
+                        TextBlock txt2b = new TextBlock();
+                        txt2b.Text = tableFisherP.ToString("F4");
+                        txt2b.Margin = margin;
+                        txt2b.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                        Grid.SetRow(txt2b, 2);
+                        Grid.SetColumn(txt2b, 2);
+                        grid.Children.Add(txt2b);
+            */
         }
 
         private void RenderFrequencyFooter(string strataValue, int footerRowIndex, int[] totalRows)
+        {
+            Grid grid = GetStrataGrid(strataValue);
+
+            if (grid.ColumnDefinitions.Count == 0)
+            {
+                return;
+            }
+
+            RowDefinition rowDefTotals = new RowDefinition();
+            rowDefTotals.Height = GridLength.Auto; //new GridLength(30);
+            grid.RowDefinitions.Add(rowDefTotals);
+
+            Rectangle rctHeader = new Rectangle();
+            rctHeader.Style = this.Resources["gridHeaderCellRectangle"] as Style;
+            Grid.SetRow(rctHeader, grid.RowDefinitions.Count - 1);
+            Grid.SetColumn(rctHeader, 0);
+            grid.Children.Add(rctHeader);
+
+            TextBlock txtValTotals = new TextBlock();
+            txtValTotals.Text = SharedStrings.TOTAL;
+            txtValTotals.Style = this.Resources["columnHeadingText"] as Style;
+            txtValTotals.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            Grid.SetRow(txtValTotals, footerRowIndex);
+            Grid.SetColumn(txtValTotals, 0);
+            grid.Children.Add(txtValTotals);
+
+            for (int i = 0; i < totalRows.Length; i++)
+            {
+                //if (i >= MaxColumns)
+                //{
+                //    break;
+                //}
+                TextBlock txtFreqTotals = new TextBlock();
+                txtFreqTotals.Text = totalRows[i].ToString();
+                txtFreqTotals.Margin = new Thickness(4, 0, 4, 0);
+                txtFreqTotals.VerticalAlignment = VerticalAlignment.Center;
+                txtFreqTotals.HorizontalAlignment = HorizontalAlignment.Right;
+                txtFreqTotals.FontWeight = FontWeights.Bold;
+
+                StackPanel panel = new StackPanel();
+                panel.Margin = new Thickness(2, 4, 2, 4);
+                panel.Children.Add(txtFreqTotals);
+
+                Grid.SetRow(panel, footerRowIndex);
+                Grid.SetColumn(panel, i + 1);
+                grid.Children.Add(panel);
+                //Grid.SetRow(txtFreqTotals, footerRowIndex);
+                //Grid.SetColumn(txtFreqTotals, i + 1);
+                //grid.Children.Add(txtFreqTotals);
+            }
+
+            int sumTotal = 0;
+            foreach (int n in totalRows)
+            {
+                sumTotal = sumTotal + n;
+            }
+
+            TextBlock txtOverallTotal = new TextBlock();
+            txtOverallTotal.Text = sumTotal.ToString();
+            txtOverallTotal.Margin = new Thickness(4, 0, 4, 0);
+            txtOverallTotal.VerticalAlignment = VerticalAlignment.Center;
+            txtOverallTotal.HorizontalAlignment = HorizontalAlignment.Right;
+            txtOverallTotal.FontWeight = FontWeights.Bold;
+
+            StackPanel panel2 = new StackPanel();
+            panel2.Margin = new Thickness(2, 4, 2, 4);
+            panel2.Children.Add(txtOverallTotal);
+
+            Grid.SetRow(panel2, footerRowIndex);
+            Grid.SetColumn(panel2, grid.ColumnDefinitions.Count - 1);
+            grid.Children.Add(panel2);
+
+            //Grid.SetRow(txtOverallTotal, footerRowIndex);
+            //Grid.SetColumn(txtOverallTotal, grid.ColumnDefinitions.Count - 1);
+            //grid.Children.Add(txtOverallTotal);            
+
+            //this.Dispatcher.BeginInvoke(new FillPercentsDelegate(FillInRowColumnPercents), grid);
+            FillInRowColumnPercents(grid);
+
+            if (grid.Parent is Grid)
+            {
+                Grid gridOuter = grid.Parent as Grid;
+                UIElement element = gridOuter.Children.Cast<UIElement>().First(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == 1);
+
+                if (element != null && element is TextBlock)
+                {
+                    double width = grid.ColumnDefinitions[0].ActualWidth;
+                    TextBlock tblockHeader = element as TextBlock;
+                    tblockHeader.Margin = new Thickness(width, 0, 0, 0);
+                }
+            }
+        }
+
+        private void RenderFrequencyFooter(string strataValue, int footerRowIndex, double[] totalRows)
         {
             Grid grid = GetStrataGrid(strataValue);
 
@@ -2557,8 +2661,8 @@ namespace EpiDashboard
                 //grid.Children.Add(txtFreqTotals);
             }
 
-            int sumTotal = 0;
-            foreach (int n in totalRows)
+            double sumTotal = 0;
+            foreach (double n in totalRows)
             {
                 sumTotal = sumTotal + n;
             }
