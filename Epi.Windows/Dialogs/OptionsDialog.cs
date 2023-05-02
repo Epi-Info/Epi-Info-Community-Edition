@@ -457,6 +457,7 @@ namespace Epi.Windows.Dialogs
             cbxShowPrompt.Checked = settings.ShowCompletePrompt;
             cbxSelectCriteria.Checked = settings.ShowSelection;
             cbxPercents.Checked = settings.ShowPercents;
+            cbxUseOptionsText.Checked = settings.UseOptionsText;
             cbxGraphics.Checked = settings.ShowGraphics;
             cbxHyperlinks.Checked = settings.ShowHyperlinks;
             cbxTablesOutput.Checked = settings.ShowTables;
@@ -710,6 +711,7 @@ namespace Epi.Windows.Dialogs
             settings.ShowCompletePrompt = cbxShowPrompt.Checked;
             settings.ShowSelection = cbxSelectCriteria.Checked;
             settings.ShowPercents = cbxPercents.Checked;
+            settings.UseOptionsText = cbxUseOptionsText.Checked;
             settings.ShowGraphics = cbxGraphics.Checked;
             settings.ShowTables = cbxTablesOutput.Checked;
             settings.ShowHyperlinks = cbxHyperlinks.Checked;

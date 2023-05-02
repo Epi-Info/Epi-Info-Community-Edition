@@ -66,6 +66,7 @@ namespace Epi.Windows.Dialogs
             this.cbxShowPrompt = new System.Windows.Forms.CheckBox();
             this.cbxTablesOutput = new System.Windows.Forms.CheckBox();
             this.cbxPercents = new System.Windows.Forms.CheckBox();
+            this.cbxUseOptionsText = new System.Windows.Forms.CheckBox();
             this.cbxGraphics = new System.Windows.Forms.CheckBox();
             this.cbxSelectCriteria = new System.Windows.Forms.CheckBox();
             this.cbxHyperlinks = new System.Windows.Forms.CheckBox();
@@ -399,6 +400,7 @@ namespace Epi.Windows.Dialogs
             this.gbxHTMLOutput.Controls.Add(this.cbxShowPrompt);
             this.gbxHTMLOutput.Controls.Add(this.cbxTablesOutput);
             this.gbxHTMLOutput.Controls.Add(this.cbxPercents);
+            this.gbxHTMLOutput.Controls.Add(this.cbxUseOptionsText);
             this.gbxHTMLOutput.Controls.Add(this.cbxGraphics);
             this.gbxHTMLOutput.Controls.Add(this.cbxSelectCriteria);
             this.gbxHTMLOutput.Controls.Add(this.cbxHyperlinks);
@@ -420,6 +422,11 @@ namespace Epi.Windows.Dialogs
             // 
             resources.ApplyResources(this.cbxPercents, "cbxPercents");
             this.cbxPercents.Name = "cbxPercents";
+            // 
+            // cbxUseOptionsText
+            // 
+            resources.ApplyResources(this.cbxUseOptionsText, "cbxUseOptionsText");
+            this.cbxUseOptionsText.Name = "cbxUseOptionsText";
             // 
             // cbxGraphics
             // 
@@ -957,6 +964,7 @@ namespace Epi.Windows.Dialogs
         private System.Windows.Forms.CheckBox cbxShowPrompt;
         private System.Windows.Forms.CheckBox cbxTablesOutput;
         private System.Windows.Forms.CheckBox cbxPercents;
+        private System.Windows.Forms.CheckBox cbxUseOptionsText;
         private System.Windows.Forms.CheckBox cbxGraphics;
         private System.Windows.Forms.CheckBox cbxSelectCriteria;
         private System.Windows.Forms.CheckBox cbxHyperlinks;

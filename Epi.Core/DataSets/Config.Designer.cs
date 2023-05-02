@@ -7205,7 +7205,9 @@ namespace Epi.DataSets {
             private global::System.Data.DataColumn columnShowHyperlinks;
             
             private global::System.Data.DataColumn columnShowPercents;
-            
+
+            private global::System.Data.DataColumn columnUseOptionsText;
+
             private global::System.Data.DataColumn columnShowSelection;
             
             private global::System.Data.DataColumn columnShowTables;
@@ -7546,7 +7548,17 @@ namespace Epi.DataSets {
                     return this.columnShowPercents;
                 }
             }
-            
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn UseOptionsTextColumn
+            {
+                get
+                {
+                    return this.columnUseOptionsText;
+                }
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn ShowSelectionColumn {
@@ -8372,6 +8384,7 @@ namespace Epi.DataSets {
                 this.columnShowGraphics = base.Columns["ShowGraphics"];
                 this.columnShowHyperlinks = base.Columns["ShowHyperlinks"];
                 this.columnShowPercents = base.Columns["ShowPercents"];
+                this.columnUseOptionsText = base.Columns["UseOptionsText"];
                 this.columnShowSelection = base.Columns["ShowSelection"];
                 this.columnShowTables = base.Columns["ShowTables"];
                 this.columnSnapToGrid = base.Columns["SnapToGrid"];
@@ -8489,6 +8502,8 @@ namespace Epi.DataSets {
                 base.Columns.Add(this.columnShowHyperlinks);
                 this.columnShowPercents = new global::System.Data.DataColumn("ShowPercents", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnShowPercents);
+                this.columnUseOptionsText = new global::System.Data.DataColumn("UseOptionsText", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUseOptionsText);
                 this.columnShowSelection = new global::System.Data.DataColumn("ShowSelection", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnShowSelection);
                 this.columnShowTables = new global::System.Data.DataColumn("ShowTables", typeof(bool), null, global::System.Data.MappingType.Element);
@@ -8654,6 +8669,7 @@ namespace Epi.DataSets {
                 this.columnShowGraphics.AllowDBNull = false;
                 this.columnShowHyperlinks.AllowDBNull = false;
                 this.columnShowPercents.AllowDBNull = false;
+                this.columnUseOptionsText.AllowDBNull = false;
                 this.columnShowSelection.AllowDBNull = false;
                 this.columnShowTables.AllowDBNull = false;
                 this.columnSnapToGrid.AllowDBNull = false;
@@ -10972,7 +10988,21 @@ namespace Epi.DataSets {
                     this[this.tableSettings.ShowPercentsColumn] = value;
                 }
             }
-            
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool UseOptionsText
+            {
+                get
+                {
+                    return ((bool)(this[this.tableSettings.UseOptionsTextColumn]));
+                }
+                set
+                {
+                    this[this.tableSettings.UseOptionsTextColumn] = value;
+                }
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool ShowSelection {

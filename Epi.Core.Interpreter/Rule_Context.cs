@@ -343,9 +343,10 @@ namespace Epi.Core.AnalysisInterpreter
                         View view = CurrentProject.Views[CurrentRead.Identifier];
 
                         OptionNameProvider OptionNames = new OptionNameProvider(CurrentProject.Metadata, CurrentRead.Identifier);
+                        Configuration config = Configuration.GetNewInstance();
                         foreach (Epi.Fields.Field field in view.Fields)
                         {
-                            if (field is Epi.Fields.OptionField)
+                            if (field is Epi.Fields.OptionField && config.Settings.UseOptionsText)
                             {
                                 string fieldName = ((Epi.INamedObject)field).Name;
                                 DataSet.Tables["output"].Columns[fieldName].ColumnName = "__temp__";

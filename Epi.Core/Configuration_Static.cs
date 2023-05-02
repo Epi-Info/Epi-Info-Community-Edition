@@ -700,6 +700,7 @@ namespace Epi
             row.ShowSelection = true;
             row.ShowGraphics = true;
             row.ShowPercents = true;
+            row.UseOptionsText = true;
             row.ShowHyperlinks = true;
             row.ShowTables = true;
             row.IncludeMissingValues = false;
