@@ -2298,7 +2298,7 @@ namespace Epi.Windows.Enter
             {
                 Epi.Data.IDbDriver db = Epi.Data.DBReadExecute.GetDataDriver(canvas.CurrentView.Project.FilePath);
 
-                DataTable data = db.GetTableData(View.TableName, "GlobalRecordId, UniqueKey, RecStatus");
+                DataTable data = db.GetTableData(View.TableName, "GlobalRecordId, UniqueKey, RecStatus, FKEY");
                 data.TableName = this.View.TableName;
                 foreach (Page page in this.View.Pages)
                 {
