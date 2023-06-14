@@ -1147,7 +1147,15 @@ namespace Epi.Analysis.Statistics
             {
                 DataRow[] SortedRows = DT.Select(SelectedStatement, SelectOrder);
                 double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, true);
-				double tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, true);
+                double tableFisherP = double.NaN;
+                try
+                {
+                    tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, true);
+                }
+                catch (Exception fex)
+                {
+                    //
+                }
 				double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 3);
                 double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
                 String disclaimer = "";
