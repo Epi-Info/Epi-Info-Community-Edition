@@ -297,6 +297,98 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             return result;
         }
 
+
+        /// <summary>
+        /// performs execution of retrieving the value of a variable or expression from the preceeding data row
+        /// </summary>
+        /// <returns>object</returns>
+        public object ExecuteOnPreceeding()
+        {
+            object result = null;
+
+            if (this.Id != null)
+            {
+                IVariable var;
+                DataType dataType = DataType.Unknown;
+                string dataValue = string.Empty;
+
+                if (this.Context.MemoryRegion.TryGetVariable(this.Id, out var))
+                {
+                    if (var.VarType == VariableType.Standard || var.VarType == VariableType.DataSource)
+                    {
+                        if (this.Context.PreceedingDataRow != null)
+                        {
+                            if (var.VarType == VariableType.Standard)
+                            {
+                                if (this.Context.Recodes.ContainsKey(var.Name))
+                                {
+                                    Epi.Core.AnalysisInterpreter.Rules.RecodeList RL = this.Context.Recodes[var.Name];
+                                    result = RL.GetRecode(this.Context.PreceedingDataRow[RL.SourceName]);
+                                }
+                                else
+                                {
+                                    //result = ParseDataStrings(this.Context.PreceedingDataRow[this.Id].ToString());
+                                    result = this.Context.PreceedingDataRow[this.Id];
+                                }
+                            }
+                            else
+                            {
+                                //result = ParseDataStrings(this.Context.PreceedingDataRow[this.Id].ToString());
+                                result = this.Context.PreceedingDataRow[this.Id];
+                            }
+
+                            if (result is System.DBNull)
+                            {
+                                result = "";
+                            }
+                        }
+                        else // there is NO preceeding row, return null
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        dataType = var.DataType;
+                        dataValue = var.Expression;
+                        result = ConvertEpiDataTypeToSystemObject(dataType, dataValue);
+                    }
+                }
+                else if (this.Context.PreceedingDataRow != null)
+                {
+
+                    if (this.Context.Recodes.ContainsKey(this.Id))
+                    {
+                        Epi.Core.AnalysisInterpreter.Rules.RecodeList RL = this.Context.Recodes[this.Id];
+                        result = RL.GetRecode(this.Context.PreceedingDataRow[RL.SourceName]);
+                    }
+                    else
+                    {
+                        result = this.Context.PreceedingDataRow[this.Id];
+                        if (result is System.DBNull)
+                        {
+                            result = null;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (value is AnalysisRule)
+                {
+                    result = ((AnalysisRule)value).Execute();
+                }
+                else
+                {
+                    result = value;
+                }
+
+            }
+
+
+            return result;
+        }
+
         private object ConvertEpiDataTypeToSystemObject(DataType dataType, string dataValue)
         {
             object result = null;

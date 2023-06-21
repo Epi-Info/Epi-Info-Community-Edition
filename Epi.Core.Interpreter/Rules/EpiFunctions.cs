@@ -149,6 +149,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     case "RECORDCOUNT":
                         functionCall = new Rule_RecordCount(pContext, T);
                         break;
+                    case "GROUPROWINDEX":
+                        functionCall = new Rule_GroupRowIndex(pContext, T);
+                        break;
+                    case "LAGVALUE":
+                        functionCall = new Rule_LagValue(pContext, T);
+                        break;
                     case "SECOND":
                         functionCall = new Rule_Second(pContext, T);
                         break;
@@ -252,6 +258,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         #endregion
 
         #region Public Methods
+
+        public string getFunctionName()
+        {
+            return functionName;
+        }
         /// <summary>
         /// Executes the reduction.
         /// </summary>

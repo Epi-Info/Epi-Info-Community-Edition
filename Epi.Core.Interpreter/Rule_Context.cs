@@ -13,6 +13,7 @@ using Epi.Fields;
 using VariableCollection = Epi.Collections.NamedObjectCollection<Epi.IVariable>;
 using Epi.Core.AnalysisInterpreter.Rules;
 using EpiInfo.Plugin;
+using System.Runtime.Remoting.Contexts;
 
 namespace Epi.Core.AnalysisInterpreter
 {
@@ -48,6 +49,7 @@ namespace Epi.Core.AnalysisInterpreter
         public List<Epi.Core.AnalysisInterpreter.AnalysisRule> SelectExpression = new List<Epi.Core.AnalysisInterpreter.AnalysisRule>();
         public StringBuilder SortExpression = new StringBuilder();
         public DataSet DataSet = new System.Data.DataSet();
+        public DataRow PreceedingDataRow;
         public DataRow CurrentDataRow;
         public IAnalysisCheckCode AnalysisCheckCodeInterface;
         public Epi.Project CurrentProject;
@@ -598,12 +600,41 @@ namespace Epi.Core.AnalysisInterpreter
             if (CurrentDataRow == null)
             {
                 result = GetOutput();
+                bool loopBackward = true;
 
-                for (int i = result.Count - 1; i > -1; i--)
+                if (mapDataDelegate.Target is Rule_Assign)
                 {
-                    CurrentDataRow = result[i];
-                    mapDataDelegate();
-                    affectedCount++;
+                    Rule_Assign ra0 = (Rule_Assign)mapDataDelegate.Target;
+                    if (ra0.getValue() is Rule_FunctionCall)
+                    {
+                        Rule_FunctionCall rv0 = (Rule_FunctionCall)ra0.getValue();
+                        string rv0FunctionName = rv0.getFunctionName();
+                        if (rv0FunctionName.Equals("GROUPROWINDEX") || rv0FunctionName.Equals("LAGVALUE"))
+                        {
+                            loopBackward = false;
+                        }
+                    }
+                }
+
+                if (loopBackward)
+                {
+                    for (int i = result.Count - 1; i > -1; i--)
+                    {
+                        PreceedingDataRow = CurrentDataRow;
+                        CurrentDataRow = result[i];
+                        mapDataDelegate();
+                        affectedCount++;
+                    }
+                }
+                else
+                {
+                    foreach (DataRow row in result)
+                    {
+                        PreceedingDataRow = CurrentDataRow;
+                        CurrentDataRow = row;
+                        mapDataDelegate();
+                        affectedCount++;
+                    }
                 }
 
                 CurrentDataRow = null;
@@ -631,6 +662,7 @@ namespace Epi.Core.AnalysisInterpreter
 
                 foreach (DataRow row in rows)
                 {
+                    PreceedingDataRow = CurrentDataRow;
                     CurrentDataRow = row;
 
                     if (ifClause.Execute().ToString().Equals("true", StringComparison.CurrentCultureIgnoreCase))

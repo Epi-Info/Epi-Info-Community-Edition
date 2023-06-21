@@ -47,6 +47,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     break;
             }
         }
+
+        public AnalysisRule getValue()
+        {
+            return this.value;
+        }
         /// <summary>
         /// peforms an assign rule by assigning an expression to a variable.  return the variable that was assigned
         /// </summary>
