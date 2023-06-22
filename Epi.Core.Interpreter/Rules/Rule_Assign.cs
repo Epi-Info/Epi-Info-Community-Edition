@@ -187,6 +187,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         private void AssignNonProjectDataFunction()
         {
+            if (value is Rule_FunctionCall)
+            {
+                if (((Rule_FunctionCall)value).getFunctionCall() is Rule_GroupRowIndex)
+                {
+                    ((Rule_GroupRowIndex)((Rule_FunctionCall)value).getFunctionCall()).setQualifiedId(this.QualifiedId);
+                }
+            }
             object result = this.value.Execute();
             if (Util.IsEmpty(result))
             {

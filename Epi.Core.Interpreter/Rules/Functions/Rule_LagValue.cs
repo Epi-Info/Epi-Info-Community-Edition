@@ -27,7 +27,6 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             object result = null;
             
-            object p1 = this.ParameterList[0].Execute().ToString();
             object p2 = ((Rule_Value)(this.ParameterList[0])).ExecuteOnPreceeding();
             if (p2 != null) {
                 result = p2.ToString();

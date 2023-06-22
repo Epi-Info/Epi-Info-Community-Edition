@@ -263,6 +263,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             return functionName;
         }
+        public AnalysisRule getFunctionCall()
+        {
+            return functionCall;
+        }
         /// <summary>
         /// Executes the reduction.
         /// </summary>

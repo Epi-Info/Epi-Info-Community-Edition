@@ -12,11 +12,16 @@ namespace Epi.Core.AnalysisInterpreter.Rules
     public partial class Rule_GroupRowIndex : AnalysisRule
     {
         private List<AnalysisRule> ParameterList = new List<AnalysisRule>();
+        private string qualifiedId;
 
         public Rule_GroupRowIndex(Rule_Context pContext, NonterminalToken pToken)
             : base(pContext)
         {
             this.ParameterList = AnalysisRule.GetFunctionParameters(pContext, pToken);
+        }
+        public void setQualifiedId(string qualifiedId)
+        {
+            this.qualifiedId = qualifiedId;
         }
 
         /// <summary>
@@ -33,8 +38,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 p2 = p2.ToString();
                 if (p1.Equals(p2))
                 {
-                    string assigningvariable = this.Context.VariableValueList.Keys.First();
-                    string p2result = this.Context.PreceedingDataRow[assigningvariable].ToString();
+                    string p2result = this.Context.PreceedingDataRow[qualifiedId].ToString();
                     int p2intresult;
                     if (int.TryParse(p2result, out p2intresult))
                     {
