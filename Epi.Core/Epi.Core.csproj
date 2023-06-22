@@ -775,6 +775,18 @@
     <None Include="Projects\Sample\Case Control DatabaseExample.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\Sample\DeathsReported _per_Region.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\DeathsReported _per_RegionV2.cvs7">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\MosquitoesPresentTrue_per_HouseInRegion.cvs7">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\Sample\MosquitoesPresentTrue_per_HouseInRegion.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\Sample\Sample.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
