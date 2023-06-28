@@ -775,6 +775,9 @@
     <None Include="Projects\Sample\Case Control DatabaseExample.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\Sample\DataSample.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\Sample\DeathsReported _per_Region.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
