@@ -1166,17 +1166,21 @@ namespace Epi.Analysis.Statistics
                 pHTMLString.Append("<br clear=\"all\" />");
                 pHTMLString.AppendLine("<br clear=\"all\" /><h4 align=\"center\"> Single Table Analysis </h4>");
                 pHTMLString.AppendLine("<table align=\"center\">");
-                pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">Chi-Squared<td class=\"stats\" align=\"center\">df</td><td class=\"stats\" align=\"center\">Probability</td></tr>");
+                pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">Chi-Squared</td><td class=\"stats\" align=\"center\">df</td><td class=\"stats\" align=\"center\">Probability</td></tr>");
                 if (!Double.IsNaN(tableChiSq[0]))
                     pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">" + Math.Round(tableChiSq[0] * 10000) / 10000 + "</td><td class=\"stats\" align=\"center\">" + Math.Round(tableChiSqDF) + "</td><td class=\"stats\" align=\"center\">" + Math.Round(tableChiSqP * 10000) / 10000 + "</td></tr>");
                 else
                     pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">N/A</td><td class=\"stats\" align=\"center\">N/A</td><td class=\"stats\" align=\"center\">N/A</td></tr>");
 				if (!Double.IsNaN(tableFisherP))
 				{
-					pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">&nbsp;<td class=\"stats\" align=\"center\"></td>&nbsp;<td class=\"stats\" align=\"center\">&nbsp;</td></tr>");
-					pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">Fisher's Exact:<td class=\"stats\" align=\"center\"></td>&nbsp;<td class=\"stats\" align=\"center\">" + Math.Round(tableFisherP * 10000) / 10000 + "</td></tr>");
+					pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">&nbsp</td>;<td class=\"stats\" align=\"center\">&nbsp;</td><td class=\"stats\" align=\"center\">&nbsp;</td></tr>");
+					pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">Fisher's Exact:</td><td class=\"stats\" align=\"center\">&nbsp;</td><td class=\"stats\" align=\"center\">" + Math.Round(tableFisherP * 10000) / 10000 + "</td></tr>");
 				}
-				pHTMLString.AppendLine("</table>");
+                else
+                {
+                    pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\" colspan=\"3\">Could not compute Fisher's Exact. Possibly too many iterations.</td></tr>");
+                }
+                pHTMLString.AppendLine("</table>");
                 pHTMLString.AppendLine("<h4 align=\"center\">" + disclaimer + "</h4>");
             }
             pHTMLString.Append("<br clear=\"all\" />");

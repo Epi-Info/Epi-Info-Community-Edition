@@ -240,6 +240,7 @@ namespace Epi.Statistics
                             int[] ifrq, double[] dlp, double[] dsp, double[] tm, int[] key2,
                             int[] iwk, double[] rwk)
         {
+            int goto300s = 0;
             int f5itp = 0;
 
             for (int i = 1; i <= 2 * ldkey; i++)
@@ -756,9 +757,12 @@ namespace Epi.Statistics
                 obs2 = obs - drn - dro;
                 obs3 = obs2;
             }
-            // Process node with new PASTP
-            // bool goto300 = true;
-            goto300:
+        // Process node with new PASTP
+        // bool goto300 = true;
+        goto300:
+            goto300s++;
+            if (goto300s > 1000000000)
+                throw new Exception();
             if (pastp <= obs3)
             {
                 pre = pre + ifreq * Math.Exp(pastp + drn);
