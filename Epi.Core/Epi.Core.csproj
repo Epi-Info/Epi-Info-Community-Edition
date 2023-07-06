@@ -1310,6 +1310,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Pages\Mosquito Net Description.xml" />
+    <Content Include="Templates\Pages\Symptoms 1.xml" />
+    <Content Include="Templates\Pages\Symptoms 2.xml" />
     <Content Include="Templates\Projects\AndroidSamsungGalaxyTab2_7.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
