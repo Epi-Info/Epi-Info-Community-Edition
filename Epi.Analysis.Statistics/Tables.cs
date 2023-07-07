@@ -30,6 +30,7 @@ namespace Epi.Analysis.Statistics
         private Configuration config = null;
 
         bool tablesShowStatistics = true;
+        bool tablesDoFisher = false;
 
         static private System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<object>> PermutationList;
         static private System.Collections.Generic.List<string> SelectClauses;
@@ -79,6 +80,10 @@ namespace Epi.Analysis.Statistics
                 if (this.Context.InputVariableList["STATISTICS"].Equals("NONE"))
                 {
                     tablesShowStatistics = false;
+                }
+                else if (this.Context.InputVariableList["STATISTICS"].Equals("FISHER"))
+                {
+                    tablesDoFisher = true;
                 }
             }
 
@@ -1148,13 +1153,18 @@ namespace Epi.Analysis.Statistics
                 DataRow[] SortedRows = DT.Select(SelectedStatement, SelectOrder);
                 double[] tableChiSq = Epi.Statistics.SingleMxN.CalcChiSq(SortedRows, true);
                 double tableFisherP = double.NaN;
-                try
+                bool fisherAttempted = false;
+                if (tablesDoFisher)
                 {
-                    tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, true);
-                }
-                catch (Exception fex)
-                {
-                    //
+                    fisherAttempted = true;
+                    try
+                    {
+                        tableFisherP = Epi.Statistics.SingleMxN.CalcFisher(SortedRows, true);
+                    }
+                    catch (Exception fex)
+                    {
+                        //
+                    }
                 }
 				double tableChiSqDF = (double)(SortedRows.Length - 1) * (SortedRows[0].ItemArray.Length - 3);
                 double tableChiSqP = Epi.Statistics.SharedResources.PValFromChiSq(tableChiSq[0], tableChiSqDF);
@@ -1176,7 +1186,7 @@ namespace Epi.Analysis.Statistics
 					pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">&nbsp</td>;<td class=\"stats\" align=\"center\">&nbsp;</td><td class=\"stats\" align=\"center\">&nbsp;</td></tr>");
 					pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\">Fisher's Exact:</td><td class=\"stats\" align=\"center\">&nbsp;</td><td class=\"stats\" align=\"center\">" + Math.Round(tableFisherP * 10000) / 10000 + "</td></tr>");
 				}
-                else
+                else if (fisherAttempted)
                 {
                     pHTMLString.AppendLine(" <tr><td class=\"stats\" align=\"center\" colspan=\"3\">Could not compute Fisher's Exact. Possibly too many iterations.</td></tr>");
                 }
