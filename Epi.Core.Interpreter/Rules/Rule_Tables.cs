@@ -56,6 +56,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string commandText = string.Empty;
 
         public bool tablesShowStatistics = true;
+        public bool tablesDoFisher = false;
 
         string parameter1 = null;
         string parameter2 = null;
@@ -180,6 +181,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     {
                         this.tablesShowStatistics = false;
                     }
+                    else if (this.GetCommandElement(pT.Tokens, 2).Equals("FISHER"))
+                    {
+                        this.tablesDoFisher = true;
+                    }
                     break;
                 case "OUTTABLE":
                     this.OutTable = this.GetCommandElement(pT.Tokens, 2).Trim(new char[] { '[', ']' });
@@ -250,6 +255,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     if (!tablesShowStatistics)
                     {
                         inputVariableList.Add("STATISTICS", "NONE");
+                    }
+                    else if (tablesDoFisher)
+                    {
+                        inputVariableList.Add("STATISTICS", "FISHER");
                     }
                     inputVariableList.Add("commandText", commandText);
                     if (!string.IsNullOrEmpty(PSUVar))

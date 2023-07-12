@@ -261,9 +261,6 @@
     <None Include="Framework.cd" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="grammar\EpiInfo.Analysis.Grammar.cgt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="grammar\EpiInfo.Analysis.Grammar.grm" />
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +279,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="grammar\EpiInfo.Analysis.Grammar.cgt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

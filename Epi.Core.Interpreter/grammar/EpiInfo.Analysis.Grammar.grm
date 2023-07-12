@@ -563,6 +563,7 @@ Comment_Chars             = ('***'{Valid Chars}*)
 <FreqOpt>   ::=  WEIGHTVAR '=' Identifier
 | STRATAVAR '=' <Freq_Variable_List> 
 | STATISTICS '=' NONE 
+| STATISTICS '=' FISHER 
 |NOWRAP
 |COLUMNSIZE '=' DecLiteral
 |PSUVAR '=' Identifier
