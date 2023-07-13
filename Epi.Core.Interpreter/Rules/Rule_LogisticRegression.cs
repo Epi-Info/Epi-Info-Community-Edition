@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using com.calitha.goldparser;
+using Epi.Analysis.Statistics;
 using EpiInfo.Plugin;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
@@ -17,6 +18,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         
         bool nointercept;
         string WeightVar;
+        bool LinkFunctionLog;
         string MatchVar;
         string OutTable;
         string pvalue;
@@ -27,6 +29,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             : base(pContext)
         {
             this.nointercept = false;
+            this.LinkFunctionLog = false;
             this.Identifier = this.GetCommandElement(pToken.Tokens, 1).Trim(new char[] {'[',']' });
             this.TermList = this.GetCommandElement(pToken.Tokens, 3);
             this.commandText = this.ExtractTokens(pToken.Tokens);
@@ -196,6 +199,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 AnalysisStatisticExecuteHost statisticHost = new AnalysisStatisticExecuteHost(this.Context, setProperties, DataSource, inputVariableList, this.Context.CurrentSelect.ToString(), this.Context.AnalysisInterpreterHost);
 
                 LogisticRegress = this.Context.GetStatistic("LogisticRegression", statisticHost);
+                ((LogisticRegression)LogisticRegress).setDoLogBinomial(this.LinkFunctionLog);
                 LogisticRegress.Execute();
 
                 this.HasRun = true;
@@ -350,6 +354,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     case "WEIGHTVAR":
                         TT2 = (TerminalToken)NT.Tokens[2];
                         this.WeightVar =  TT2.Text.Trim(new char[] { '[', ']' });
+                        break;
+                    case "LINKFUNCTION":
+                        TT2 = (TerminalToken)NT.Tokens[2];
+                        this.LinkFunctionLog = TT2.Text.Trim(new char[] { '[', ']' }).Equals("LOG");
                         break;
 
                     case "TITLETEXT":

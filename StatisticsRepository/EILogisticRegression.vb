@@ -491,7 +491,7 @@ Option Compare Text
 
         lstrError = String.Empty
 
-		mMatrixlikelihood = New EIMatrix()
+        mMatrixlikelihood = New EIMatrix()
         If Len(mstrWeightVar) > 0 Then
             lintweight = 1
         End If
@@ -558,7 +558,118 @@ Option Compare Text
             End If
 
         End If
-        
+
+        args.Add("HTMLRESULTS", logistic)
+
+        context.Display(args)
+
+    End Sub
+
+    Public Sub ExecuteLB()
+
+        CreateSettingsFromContext()
+
+        Dim logistic As String
+        Dim errorMessage As String
+        errorMessage = String.Empty
+
+        Dim args As Dictionary(Of String, String)
+        args = New Dictionary(Of String, String)
+
+        If GetRawData(errorMessage) = False Then
+            ReDim Results(1, 0)
+            Results(0, 0) = "ERROR"
+            Results(1, 0) = errorMessage
+            logistic = "<br clear=""all"" /><p align=""left""><b><tlt>" + errorMessage + "</tlt></b></p>"
+
+            args.Add("COMMANDNAME", "REGRESS")
+            args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+            args.Add("HTMLRESULTS", logistic)
+            context.Display(args)
+            Exit Sub
+        End If
+
+        args.Add("COMMANDNAME", "LOGISTIC")
+
+        args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
+
+        Dim lintConditional As Integer
+        Dim lintweight As Integer
+        Dim lstrError As String
+
+        Dim ldblFirstLikelihood As Double
+        Dim ldblScore As Double
+
+        lstrError = String.Empty
+
+        mMatrixlikelihood = New EIMatrix()
+        If Len(mstrWeightVar) > 0 Then
+            lintweight = 1
+        End If
+        If Len(mstrMatchVar) > 0 Then
+            lintConditional = 1
+        End If
+        mboolFirst = True
+
+        ' first calculate with intial estimate - Eric Fontaine 06/14/04
+        mMatrixlikelihood.MaximizeLikelihoodLB(0 + NumRows, 0 + NumColumns, DataArray, lintweight + lintConditional + 1, NumColumns - (lintweight + lintConditional + 1), 0 + mlngIter, mdblToler, mdblConv, False)
+
+        If mMatrixlikelihood.GetConvergence = True Then
+            'Check the error status and output the string
+            If (mMatrixlikelihood.getError(lstrError) = False) Then
+                logistic = CreateOutputStringLB(mMatrixlikelihood.getFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, mMatrixlikelihood.getScore)
+                'TODO: Re-enable later? 'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
+            Else
+                '            Err.Raise vbObjectError, , lstrError
+                ReDim Results(1, 0)
+                Results(0, 0) = "ERROR"
+                Results(1, 0) = lstrError
+                logistic = "<BR CLEAR=ALL><p align=""left""><b><tlt>" & lstrError & "</tlt></b></p>"
+
+                args.Add("HTMLRESULTS", logistic)
+                context.Display(args)
+                Exit Sub
+            End If
+        Else
+            ' if convergence with inital estimate fails, then
+            ' try with initial estimate of 0
+
+            ' remember these so we can calculate the score and
+            ' the likelihood ratio later...
+            ldblFirstLikelihood = mMatrixlikelihood.getFirstLikelihood
+            ldblScore = mMatrixlikelihood.getScore
+
+            mMatrixlikelihood = New EIMatrix
+            If Len(mstrWeightVar) > 0 Then
+                lintweight = 1
+            End If
+            If Len(mstrMatchVar) > 0 Then
+                lintConditional = 1
+            End If
+            mboolFirst = True
+
+            ' redo regression with inital estimate of 0
+            mMatrixlikelihood.MaximizeLikelihoodLB(0 + NumRows, 0 + NumColumns, DataArray, lintweight + lintConditional + 1, NumColumns - (lintweight + lintConditional + 1), 0 + mlngIter, mdblToler, mdblConv, True)
+
+            'Check the error status
+            If (mMatrixlikelihood.getError(lstrError) = False) Then
+                'output results
+                logistic = CreateOutputStringLB(ldblFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, ldblScore)
+                'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
+            Else
+                '            Err.Raise vbObjectError, , lstrError
+                ReDim Results(1, 0)
+                Results(0, 0) = "ERROR"
+                Results(1, 0) = lstrError
+                logistic = "<BR CLEAR=ALL><p align=""left""><b><tlt>" & lstrError & "</tlt></b></p>"
+
+                args.Add("HTMLRESULTS", logistic)
+                context.Display(args)
+                Exit Sub
+            End If
+
+        End If
+
         args.Add("HTMLRESULTS", logistic)
 
         context.Display(args)

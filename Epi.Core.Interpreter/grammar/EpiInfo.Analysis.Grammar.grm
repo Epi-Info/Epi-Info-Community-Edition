@@ -728,6 +728,7 @@ Comment_Chars             = ('***'{Valid Chars}*)
 
 <LogisticOpt>                       ::= <LogisticTitleOpt>
                                 | WEIGHTVAR '=' Identifier
+                                | LINKFUNCTION '=' LOG
                                 | <LogisticMatchOpt>
                                 | <LogisticPValPercentOpt>
                                 | <LogisticPValRealOpt>

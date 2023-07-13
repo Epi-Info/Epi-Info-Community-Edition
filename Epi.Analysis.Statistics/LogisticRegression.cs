@@ -10,6 +10,12 @@ namespace Epi.Analysis.Statistics
     public class LogisticRegression : IAnalysisStatistic
     {
         private StatisticsRepository.LogisticRegression LogisticRegress = new StatisticsRepository.LogisticRegression();
+        private bool doLogBinomial = false;
+
+        public void setDoLogBinomial(bool doLogBinomial)
+        {
+            this.doLogBinomial = doLogBinomial;
+        }
 
         public string Name { get { return "Epi.Analysis.Statistics.LogisticRegression"; } }
 
@@ -31,7 +37,14 @@ namespace Epi.Analysis.Statistics
         /// <returns>object</returns>
         public void Execute()
         {
-            LogisticRegress.Execute(); 
+            if (this.doLogBinomial)
+            {
+                LogisticRegress.ExecuteLB();
+            }
+            else
+            {
+                LogisticRegress.Execute();
+            } 
         }
     }
 }

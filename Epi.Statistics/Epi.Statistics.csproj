@@ -108,6 +108,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Centroid.cs" />
+    <Compile Include="LogBinomialInteraction.cs" />
     <Compile Include="LogisticInteraction.cs" />
     <Compile Include="pmccTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
