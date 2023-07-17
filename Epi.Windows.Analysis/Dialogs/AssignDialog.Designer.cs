@@ -91,6 +91,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.cOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tANToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tRUNCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gROUPROWINDEXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pFROMZToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zSCOREToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateFunctionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,6 +137,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.yesNoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trueFalseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onOff01ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lAGVALUEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lINEBREAKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sTRLENToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sUBSTRINGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -534,6 +536,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.nUMTODATEToolStripMenuItem,
             this.nUMTOTIMEToolStripMenuItem,
             this.rECORDCOUNTToolStripMenuItem,
+            this.gROUPROWINDEXToolStripMenuItem,
             this.rNDToolStripMenuItem,
             this.rOUNDToolStripMenuItem,
             this.sTEPToolStripMenuItem,
@@ -636,6 +639,12 @@ namespace Epi.Windows.Analysis.Dialogs
             this.tRUNCToolStripMenuItem.Name = "tRUNCToolStripMenuItem";
             resources.ApplyResources(this.tRUNCToolStripMenuItem, "tRUNCToolStripMenuItem");
             this.tRUNCToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
+            // 
+            // gROUPROWINDEXToolStripMenuItem
+            // 
+            this.gROUPROWINDEXToolStripMenuItem.Name = "gROUPROWINDEXToolStripMenuItem";
+            resources.ApplyResources(this.gROUPROWINDEXToolStripMenuItem, "gROUPROWINDEXToolStripMenuItem");
+            this.gROUPROWINDEXToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
             // 
             // pFROMZToolStripMenuItem
             // 
@@ -805,6 +814,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.textFunctionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fINDTEXTToolStripMenuItem,
             this.fORMATToolStripMenuItem,
+            this.lAGVALUEToolStripMenuItem,
             this.lINEBREAKToolStripMenuItem,
             this.sTRLENToolStripMenuItem,
             this.sUBSTRINGToolStripMenuItem,
@@ -952,6 +962,12 @@ namespace Epi.Windows.Analysis.Dialogs
             this.onOff01ToolStripMenuItem.Name = "onOff01ToolStripMenuItem";
             resources.ApplyResources(this.onOff01ToolStripMenuItem, "onOff01ToolStripMenuItem");
             this.onOff01ToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
+            // 
+            // lAGVALUEToolStripMenuItem
+            // 
+            this.lAGVALUEToolStripMenuItem.Name = "lAGVALUEToolStripMenuItem";
+            resources.ApplyResources(this.lAGVALUEToolStripMenuItem, "lAGVALUEToolStripMenuItem");
+            this.lAGVALUEToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
             // 
             // lINEBREAKToolStripMenuItem
             // 
@@ -1141,9 +1157,11 @@ namespace Epi.Windows.Analysis.Dialogs
         private System.Windows.Forms.ToolStripMenuItem trueFalseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem onOff01ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sTEPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gROUPROWINDEXToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pFROMZToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zSCOREToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cURRENTUSERToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lAGVALUEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lINEBREAKToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sTRLENToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rECORDCOUNTToolStripMenuItem;

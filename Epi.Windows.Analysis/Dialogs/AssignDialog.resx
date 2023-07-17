@@ -1696,7 +1696,16 @@
   <data name="tRUNCToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>TRUNC( &lt;variable&gt; )</value>
   </data>
-  <data name="pFROMZToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+	<data name="gROUPROWINDEXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+		<value>182, 22</value>
+	</data>
+	<data name="gROUPROWINDEXToolStripMenuItem.Text" xml:space="preserve">
+    <value>GROUPROWINDEX</value>
+  </data>
+	<data name="gROUPROWINDEXToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>GROUPROWINDEX( &lt;variable&gt; )</value>
+  </data>
+	<data name="pFROMZToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
   <data name="pFROMZToolStripMenuItem.Text" xml:space="preserve">
@@ -2083,6 +2092,15 @@
   <data name="fORMATToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>FORMAT( &lt;variable&gt; )</value>
   </data>
+	<data name="lAGVALUEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+		<value>182, 22</value>
+	</data>
+	<data name="lAGVALUEToolStripMenuItem.Text" xml:space="preserve">
+    <value>LAGVALUE</value>
+  </data>
+	<data name="lAGVALUEToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>LAGVALUE( &lt;variable&gt; )</value>
+  </data>
   <data name="lINEBREAKToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 22</value>
   </data>
@@ -2395,6 +2413,12 @@
   <data name="&gt;&gt;tRUNCToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+	<data name="&gt;&gt;gROUPROWINDEXToolStripMenuItem.Name" xml:space="preserve">
+    <value>gROUPROWINDEXToolStripMenuItem</value>
+  </data>
+	<data name="&gt;&gt;gROUPROWINDEXToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;pFROMZToolStripMenuItem.Name" xml:space="preserve">
     <value>pFROMZToolStripMenuItem</value>
   </data>
@@ -2663,6 +2687,12 @@
     <value>onOff01ToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;onOff01ToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+	<data name="&gt;&gt;lAGVALUEToolStripMenuItem.Name" xml:space="preserve">
+    <value>lAGVALUEToolStripMenuItem</value>
+  </data>
+	<data name="&gt;&gt;lAGVALUEToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lINEBREAKToolStripMenuItem.Name" xml:space="preserve">
