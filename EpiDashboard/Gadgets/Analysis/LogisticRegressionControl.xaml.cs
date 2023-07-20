@@ -435,9 +435,9 @@ namespace EpiDashboard
 												Double.TryParse(ratiorow.ci, out olducl);
 												if (!Double.IsNaN(oldor) && !Double.IsNaN(oldlcl) && !Double.IsNaN(olducl))
 												{
-													double newor = 1.0 / oldor;
-													double newlcl = 1.0 / olducl;
-													double newucl = 1.0 / oldlcl;
+													double newor = oldor;
+													double newlcl = oldlcl;
+													double newucl = olducl;
 													ratiorow.oddsRatio = newor.ToString("N4");
 													ratiorow.ninetyFivePercent = newlcl.ToString("N4");
 													ratiorow.ci = newucl.ToString("N4");

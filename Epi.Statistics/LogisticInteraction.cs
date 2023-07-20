@@ -102,7 +102,7 @@ namespace Epi.Statistics
             iorOut = iorOut + "<table><tr><td class=\"stats\" colspan=4 align=\"left\"><strong>Odds Ratios for " + lastVar1 + " * " + lastVar2 + " Interaction</strong></td></tr><tr><td class=\"stats\" align=\"left\"><strong>Label</strong></td><td class=\"stats\" align=\"center\"><strong>Estimate</strong></td><td class=\"stats\" colspan=2 align=\"center\"><strong>95% Confidence Limits</strong></td></tr>";
             for (int i = 0; i < otherValues1.Length / 2; i++)
             {
-                double est = -B[Int32.Parse(otherValues1[2 * i])];
+                double est = B[Int32.Parse(otherValues1[2 * i])];
                 double lcl = est - Z * Math.Sqrt(cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])]);
                 double ucl = est + Z * Math.Sqrt(cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])]);
                 iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + ref1 + " vs " + otherValues1[2 * i + 1] +
@@ -117,7 +117,7 @@ namespace Epi.Statistics
             for (int i = 0; i < otherValues1.Length / 2; i++)
                 for (int j = i + 1; j < otherValues1.Length / 2; j++)
                 {
-                    double est = B[Int32.Parse(otherValues1[2 * i])] - B[Int32.Parse(otherValues1[2 * j])];
+                    double est = -B[Int32.Parse(otherValues1[2 * i])] + B[Int32.Parse(otherValues1[2 * j])];
                     double variance = cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])] +
                         cm[Int32.Parse(otherValues1[2 * j]), Int32.Parse(otherValues1[2 * j])] -
                         2 * cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * j])];
@@ -139,7 +139,7 @@ namespace Epi.Statistics
                 Stack<double> betaStack = new Stack<double>();
                 for (int i = 0; i < otherValues1.Length / 2; i++)
                 {
-                    double est = -(B[Int32.Parse(otherValues1[2 * i])] + B[interactionIndexes[multiple * i + k]]);
+                    double est = (B[Int32.Parse(otherValues1[2 * i])] + B[interactionIndexes[multiple * i + k]]);
                     double variance = cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])] +
                         cm[interactionIndexes[multiple * i + k], interactionIndexes[multiple * i + k]] +
                         2 * cm[Int32.Parse(otherValues1[2 * i]), interactionIndexes[multiple * i + k]];
@@ -159,7 +159,7 @@ namespace Epi.Statistics
                 for (int i = 0; i < otherValues1.Length / 2; i++)
                     for (int j = i + 1; j < otherValues1.Length / 2; j++)
                     {
-                        double est = (B[Int32.Parse(otherValues1[2 * i])] + B[interactionIndexes[multiple * i + k]]) -
+                        double est = -(B[Int32.Parse(otherValues1[2 * i])] + B[interactionIndexes[multiple * i + k]]) +
                             (B[Int32.Parse(otherValues1[2 * j])] + B[interactionIndexes[multiple * j + k]]);
                         double variance = cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])] +
                             cm[interactionIndexes[multiple * i + k], interactionIndexes[multiple * i + k]] +
@@ -231,6 +231,7 @@ namespace Epi.Statistics
             for (int i = 0; i < otherValues1.Length / 2; i++)
             {
                 double est = -B[Int32.Parse(otherValues1[2 * i])] - ref2 * B[interactionIndexes[i]];
+                est *= -1.0;
                 double variance = cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])] + Math.Pow(ref2, 2.0) * cm[interactionIndexes[i], interactionIndexes[i]] +
                     2 * ref2 * cm[Int32.Parse(otherValues1[2 * i]), interactionIndexes[i]];
                 double lcl = est - Z * Math.Sqrt(variance);
@@ -248,6 +249,7 @@ namespace Epi.Statistics
                 for (int j = i + 1; j < otherValues1.Length / 2; j++)
                 {
                     double est = B[Int32.Parse(otherValues1[2 * i])] + ref2 * B[interactionIndexes[i]] - B[Int32.Parse(otherValues1[2 * j])] - ref2 * B[interactionIndexes[j]];
+                    est *= -1.0;
                     double variance = cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])] +
                         Math.Pow(ref2, 2.0) * cm[interactionIndexes[i], interactionIndexes[i]] + 
                         cm[Int32.Parse(otherValues1[2 * j]), Int32.Parse(otherValues1[2 * j])] +
