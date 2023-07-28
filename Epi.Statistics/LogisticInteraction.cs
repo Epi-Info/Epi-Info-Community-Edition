@@ -105,7 +105,7 @@ namespace Epi.Statistics
                 double est = B[Int32.Parse(otherValues1[2 * i])];
                 double lcl = est - Z * Math.Sqrt(cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])]);
                 double ucl = est + Z * Math.Sqrt(cm[Int32.Parse(otherValues1[2 * i]), Int32.Parse(otherValues1[2 * i])]);
-                iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + ref1 + " vs " + otherValues1[2 * i + 1] +
+                iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + otherValues1[2 * i + 1] + " vs " + ref1 +
                     " at " + lastVar2 + "=" + ref2 + "</strong></td>";
                 if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                 else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
@@ -146,8 +146,8 @@ namespace Epi.Statistics
                     double lcl = est - Z * Math.Sqrt(variance);
                     double ucl = est + Z * Math.Sqrt(variance);
                     betaStack.Push(est);
-                    iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + ref1 + " vs " +
-                        otherValues1[2 * i + 1] + " at " + lastVar2 + "=" + otherValues2[2 * k + 1] + "</strong></td>";
+                    iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + otherValues1[2 * i + 1] + " vs " +
+                        ref1 + " at " + lastVar2 + "=" + otherValues2[2 * k + 1] + "</strong></td>";
                     if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                     else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";
                     if (Math.Exp(lcl) < 1000) iorOut = iorOut + "<td class=\"stats\" align=\"center\">" + Math.Exp(lcl).ToString("F6") + "</td>";
@@ -236,7 +236,7 @@ namespace Epi.Statistics
                     2 * ref2 * cm[Int32.Parse(otherValues1[2 * i]), interactionIndexes[i]];
                 double lcl = est - Z * Math.Sqrt(variance);
                 double ucl = est + Z * Math.Sqrt(variance);
-                iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + ref1 + " vs " + otherValues1[2 * i + 1] +
+                iorOut = iorOut + "<tr><td class=\"stats\"><strong>" + lastVar1 + " " + otherValues1[2 * i + 1] + " vs " + ref1 +
                     " at " + lastVar2 + "=" + ref2.ToString("F3") + "</strong></td>";
                 if (Math.Exp(est) < 1000) iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("F6") + "</td>";
                 else iorOut = iorOut + "<td  class=\"stats\" align=\"center\">" + Math.Exp(est).ToString("0.##E+0") + "</td>";

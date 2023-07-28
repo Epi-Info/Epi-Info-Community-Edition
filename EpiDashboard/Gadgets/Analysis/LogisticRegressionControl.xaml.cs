@@ -397,57 +397,102 @@ namespace EpiDashboard
                         {
                             StatisticsRepository.LogisticRegression logisticRegression = new StatisticsRepository.LogisticRegression();
 
-							//                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
+                            //                            Array logRegressionResults = Epi.Statistics.SharedResources.LogRegressionWithR(regressTable);
 
-							if (inputVariableList.ContainsKey("Logit"))
-								results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
-							else if (inputVariableList.ContainsKey("Log"))
-							{
-								results.regressionResults = logisticRegression.LogBinomialRegression(inputVariableList, regressTable);
-								if (results.regressionResults.interactionOddsRatios != null)
-								{
-									for (int rri = 0; rri < results.regressionResults.interactionOddsRatios.Count; rri++)
-									{
-										StatisticsRepository.LogisticRegression.InteractionRow ratiorow =
-											results.regressionResults.interactionOddsRatios[rri];
-										if (ratiorow.interactionName.Contains(" vs "))
-										{
-											string[] namestrings = ratiorow.interactionName.Split();
-											int vsindex = 0;
-											foreach (string ns in namestrings)
-											{
-												if (ns.Equals("vs"))
-													break;
-												vsindex++;
-											}
-											if (vsindex > 0 && vsindex < namestrings.Length - 1)
-											{
-												string firstval = namestrings[vsindex + 1].ToString();
-												string secondval = namestrings[vsindex - 1].ToString();
-												namestrings[vsindex - 1] = firstval;
-												namestrings[vsindex + 1] = secondval;
-												ratiorow.interactionName = String.Join(" ", namestrings);
-												double oldor = Double.NaN;
-												double oldlcl = Double.NaN;
-												double olducl = Double.NaN;
-												Double.TryParse(ratiorow.oddsRatio, out oldor);
-												Double.TryParse(ratiorow.ninetyFivePercent, out oldlcl);
-												Double.TryParse(ratiorow.ci, out olducl);
-												if (!Double.IsNaN(oldor) && !Double.IsNaN(oldlcl) && !Double.IsNaN(olducl))
-												{
-													double newor = oldor;
-													double newlcl = oldlcl;
-													double newucl = olducl;
-													ratiorow.oddsRatio = newor.ToString("N4");
-													ratiorow.ninetyFivePercent = newlcl.ToString("N4");
-													ratiorow.ci = newucl.ToString("N4");
-													results.regressionResults.interactionOddsRatios[rri] = ratiorow;
-												}
-											}
-										}
-									}
-								}
-							}
+                            if (inputVariableList.ContainsKey("Logit"))
+                            {
+                                results.regressionResults = logisticRegression.LogisticRegression(inputVariableList, regressTable);
+                                if (results.regressionResults.interactionOddsRatios != null)
+                                {
+                                    for (int ori = 0; ori < results.regressionResults.interactionOddsRatios.Count; ori++)
+                                    {
+                                        StatisticsRepository.LogisticRegression.InteractionRow ratiorow =
+                                            results.regressionResults.interactionOddsRatios[ori];
+                                        if (ratiorow.interactionName.Contains(" vs "))
+                                        {
+                                            string[] namestrings = ratiorow.interactionName.Split();
+                                            int vsindex = 0;
+                                            foreach (string ns in namestrings)
+                                            {
+                                                if (ns.Equals("vs"))
+                                                    break;
+                                                vsindex++;
+                                            }
+                                            if (vsindex > 0 && vsindex < namestrings.Length - 1)
+                                            {
+                                                string firstval = namestrings[vsindex - 1].ToString();
+                                                string secondval = namestrings[vsindex + 1].ToString();
+                                                namestrings[vsindex - 1] = firstval;
+                                                namestrings[vsindex + 1] = secondval;
+                                                ratiorow.interactionName = String.Join(" ", namestrings);
+                                                double oldor = Double.NaN;
+                                                double oldlcl = Double.NaN;
+                                                double olducl = Double.NaN;
+                                                Double.TryParse(ratiorow.oddsRatio, out oldor);
+                                                Double.TryParse(ratiorow.ninetyFivePercent, out oldlcl);
+                                                Double.TryParse(ratiorow.ci, out olducl);
+                                                if (!Double.IsNaN(oldor) && !Double.IsNaN(oldlcl) && !Double.IsNaN(olducl))
+                                                {
+                                                    double newor = oldor;
+                                                    double newlcl = oldlcl;
+                                                    double newucl = olducl;
+                                                    ratiorow.oddsRatio = newor.ToString("N4");
+                                                    ratiorow.ninetyFivePercent = newlcl.ToString("N4");
+                                                    ratiorow.ci = newucl.ToString("N4");
+                                                    results.regressionResults.interactionOddsRatios[ori] = ratiorow;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else if (inputVariableList.ContainsKey("Log"))
+                            {
+                                results.regressionResults = logisticRegression.LogBinomialRegression(inputVariableList, regressTable);
+                                if (results.regressionResults.interactionOddsRatios != null)
+                                {
+                                    for (int rri = 0; rri < results.regressionResults.interactionOddsRatios.Count; rri++)
+                                    {
+                                        StatisticsRepository.LogisticRegression.InteractionRow ratiorow =
+                                            results.regressionResults.interactionOddsRatios[rri];
+                                        if (ratiorow.interactionName.Contains(" vs "))
+                                        {
+                                            string[] namestrings = ratiorow.interactionName.Split();
+                                            int vsindex = 0;
+                                            foreach (string ns in namestrings)
+                                            {
+                                                if (ns.Equals("vs"))
+                                                    break;
+                                                vsindex++;
+                                            }
+                                            if (vsindex > 0 && vsindex < namestrings.Length - 1)
+                                            {
+                                                string firstval = namestrings[vsindex - 1].ToString();
+                                                string secondval = namestrings[vsindex + 1].ToString();
+                                                namestrings[vsindex - 1] = firstval;
+                                                namestrings[vsindex + 1] = secondval;
+                                                ratiorow.interactionName = String.Join(" ", namestrings);
+                                                double oldor = Double.NaN;
+                                                double oldlcl = Double.NaN;
+                                                double olducl = Double.NaN;
+                                                Double.TryParse(ratiorow.oddsRatio, out oldor);
+                                                Double.TryParse(ratiorow.ninetyFivePercent, out oldlcl);
+                                                Double.TryParse(ratiorow.ci, out olducl);
+                                                if (!Double.IsNaN(oldor) && !Double.IsNaN(oldlcl) && !Double.IsNaN(olducl))
+                                                {
+                                                    double newor = oldor;
+                                                    double newlcl = oldlcl;
+                                                    double newucl = olducl;
+                                                    ratiorow.oddsRatio = newor.ToString("N4");
+                                                    ratiorow.ninetyFivePercent = newlcl.ToString("N4");
+                                                    ratiorow.ci = newucl.ToString("N4");
+                                                    results.regressionResults.interactionOddsRatios[rri] = ratiorow;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
 
 							results.casesIncluded = results.regressionResults.casesIncluded;
                             results.convergence = results.regressionResults.convergence;

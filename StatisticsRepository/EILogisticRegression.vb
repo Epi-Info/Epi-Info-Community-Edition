@@ -91,9 +91,9 @@ Option Compare Text
 
 		If mMatrixlikelihood.GetConvergence = True Then
 			If (mMatrixlikelihood.getError(lstrError) = False) Then
-				logistic = CreateOutputString(mMatrixlikelihood.getFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, mMatrixlikelihood.getScore)
-				'TODO: Re-enable later? 'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
-			Else
+                logistic = CreateOutputStringLB(mMatrixlikelihood.getFirstLikelihood, mMatrixlikelihood.getLastLikelihood, mMatrixlikelihood.getIters, mMatrixlikelihood.GetCoefficients, mMatrixlikelihood.GetInverseMatrix, mMatrixlikelihood.GetConvergence, mMatrixlikelihood.getScore)
+                'TODO: Re-enable later? 'Residuals(1 + lintweight + lintConditional, mMatrixlikelihood.GetCoefficients)
+            Else
 				'            Err.Raise vbObjectError, , lstrError
 				regressionResults.errorMessage = lstrError
 				Return regressionResults 'Exit Function
@@ -171,15 +171,15 @@ Option Compare Text
 		Dim lvarTests(3, 1) As Object
 		lvarTests = VB6.CopyArray(Results(1, 2))
 
-		regressionResults.scoreStatistic = lvarTests(1, 0)
-		regressionResults.scoreDF = lvarTests(2, 0)
-		regressionResults.scoreP = lvarTests(3, 0)
+        regressionResults.scoreStatistic = Double.NaN
+        regressionResults.scoreDF = Double.NaN
+        regressionResults.scoreP = Double.NaN
 
-		regressionResults.LRStatistic = lvarTests(1, 1)
-		regressionResults.LRDF = lvarTests(2, 1)
-		regressionResults.LRP = lvarTests(3, 1)
+        regressionResults.LRStatistic = Double.NaN
+        regressionResults.LRDF = Double.NaN
+        regressionResults.LRP = Double.NaN
 
-		Dim interactionindex As Int16
+        Dim interactionindex As Int16
 		interactionindex = logistic.IndexOf("Interaction</strong>")
 		If (interactionindex > 0) Then
 			regressionResults.interactionOddsRatios = New List(Of InteractionRow)
