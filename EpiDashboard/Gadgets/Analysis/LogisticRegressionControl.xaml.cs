@@ -688,15 +688,15 @@ namespace EpiDashboard
 				if (properties != null && properties.cbxFieldLink.SelectedValue.Equals("Log"))
 				{
 					txtFinalLogLabel.Text = "Final Log-Likelihood:";
-					results.finalLikelihood *= -0.5;
+					results.finalLikelihood *= 1.0; // This was multiplied by -0.5 until that became unnecessary on 7/28/2023
 					txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
 					grdParameters.Visibility = System.Windows.Visibility.Collapsed;
 				}
 				else if (cbxFieldLink.Text.Equals("Log"))
 				{
 					txtFinalLogLabel.Text = "Final Log-Likelihood:";
-					results.finalLikelihood *= -0.5;
-					txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
+					results.finalLikelihood *= 1.0; // This was multiplied by -0.5 until that became unnecessary on 7/28/2023
+                    txtFinalLog.Text = StringLiterals.SPACE + results.finalLikelihood.ToString("F4") + StringLiterals.SPACE;
 					grdParameters.Visibility = System.Windows.Visibility.Collapsed;
 				}
 
