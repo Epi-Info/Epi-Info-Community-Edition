@@ -166,7 +166,7 @@ errorOutput:
             llngDegrees = (UBound(ldblaB) + 1) + CShort(mboolIntercept)
             lstrTitle = "<tlt>Conditional Logistic Regression</tlt>"
         Else
-            lstrTitle = "<tlt>Lob-Binomial Regression</tlt>"
+            lstrTitle = "<tlt>Log-Binomial Regression</tlt>"
             llngDegrees = (UBound(ldblaB) + 1) + CShort(mboolIntercept)
         End If
 
