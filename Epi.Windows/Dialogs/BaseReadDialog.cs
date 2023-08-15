@@ -245,7 +245,9 @@ namespace Epi.Windows.Dialogs
                     cmbDataSourcePlugIns.Items.Add(new ComboBoxItem(null, "Epi Info 7 Project", null));
 
                     foreach (Epi.DataSets.Config.DataDriverRow row in config.DataDrivers)
-                    { 
+                    {
+                        if (row.DisplayName.Contains("JSON"))
+                            continue;
                         cmbDataSourcePlugIns.Items.Add(new ComboBoxItem(row.Type,row.DisplayName,null));
                     }
                 }

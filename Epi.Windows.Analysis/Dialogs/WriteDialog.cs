@@ -118,6 +118,8 @@ namespace Epi.Windows.Analysis.Dialogs
                 {
                     continue;
                 }
+                if (row.DisplayName.Contains("JSON"))
+                    continue;
 
                 cmbOutputFormat.Items.Add(new ComboBoxItem(row.Type, row.DisplayName, null));
             }
