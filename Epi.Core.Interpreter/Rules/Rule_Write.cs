@@ -36,6 +36,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         private string curFile;
         private int asciiRecordCount;
 
+        private string jsonstring;
+
         delegate void WriteMethodDelegate(List<string> pListFields, IDbDriver pOutput);
 
         public Rule_Write(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
@@ -303,7 +305,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
                 if (OutputDriver.GetType().Name.Equals("CsvFile", StringComparison.OrdinalIgnoreCase) || this.FileDataFormat.Equals("TEXT", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (!this.TableName.EndsWith(".txt") && !this.TableName.EndsWith(".csv") && !this.TableName.EndsWith("#csv") && !this.TableName.EndsWith("#txt"))
+                    if (!this.TableName.EndsWith(".txt") && !this.TableName.EndsWith(".csv") && !this.TableName.EndsWith(".json") && !this.TableName.EndsWith("#csv") && !this.TableName.EndsWith("#txt") && !this.TableName.EndsWith("#json"))
                     {
                         this.TableName = this.TableName + ".csv";
                     }
@@ -401,7 +403,66 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                          )
                     )
                     {
-                        OutputDriver.CreateTable(TableName, TableColumns);
+                        if (this.TableName.EndsWith("json"))
+                        {
+                            DataTable table = CurrentDataTable;
+                            try
+                            {
+                                asciiRecordCount = 0;
+                                int totalRows = 0;
+
+                                totalRows = table.Rows.Count;
+                                StringBuilder jsb = new StringBuilder("[");
+                                foreach (DataRow row in table.Rows)
+                                {
+                                    jsb.Append("\n    {");
+                                    for (int i = 0; i < table.Columns.Count; i++)
+                                    {
+                                        string rowValue = row[i].ToString().Replace("\r\n", " ");
+                                        if (rowValue.Contains(",") || rowValue.Contains("\""))
+                                        {
+                                            rowValue = rowValue.Replace("\"", "\"\"");
+                                            rowValue = Util.InsertIn(rowValue, "\"");
+                                        }
+                                        jsb.Append("\n        \"" + table.Columns[i].ColumnName + "\" : ");
+                                        if (table.Columns[i].DataType.FullName.Equals("System.String") ||
+                                            table.Columns[i].DataType.FullName.Equals("System.DateTime") ||
+                                            table.Columns[i].DataType.FullName.Equals("System.Date") ||
+                                            table.Columns[i].DataType.FullName.Equals("System.Time"))
+                                        {
+                                            jsb.Append("\"" + rowValue + "\",");
+                                        }
+                                        else if (table.Columns[i].DataType.FullName.Equals("System.Boolean"))
+                                        {
+                                            jsb.Append(rowValue.ToLower() + ",");
+                                        }
+                                        else
+                                        {
+                                            if (String.IsNullOrEmpty(rowValue))
+                                                rowValue = "null";
+                                            jsb.Append(rowValue + ",");
+                                        }
+                                    }
+                                    jsb.Remove(jsb.Length - 1, 1);
+                                    jsb.Append("\n    },");
+                                    asciiRecordCount++;
+                                    if (asciiRecordCount % 500 == 0)
+                                    {
+                                        //OnSetStatusMessageAndProgressCount(string.Format(SharedStrings.DASHBOARD_EXPORT_PROGRESS, asciiRecordCount.ToString(), totalRows.ToString()), (double)asciiRecordCount);
+                                    }
+                                }
+                                jsb.Remove(jsb.Length - 1, 1);
+                                jsb.Append("\n]");
+                                jsonstring = jsb.ToString();
+                                //System.IO.File.WriteAllText(fileName, jsonstring);
+                            }
+                            catch (Exception ex)
+                            {
+                                this.statusMessage = ex.ToString();
+                            }
+                        }
+                        else
+                            OutputDriver.CreateTable(TableName, TableColumns);
                     }
                     else
                     {
@@ -531,7 +592,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 //}
 
 
-                if (OutputDriver.GetType().Name.Equals("CsvFile", StringComparison.OrdinalIgnoreCase) || this.FileDataFormat.Equals("TEXT", StringComparison.OrdinalIgnoreCase))
+                if ((OutputDriver.GetType().Name.Equals("CsvFile", StringComparison.OrdinalIgnoreCase) && jsonstring is null) || this.FileDataFormat.Equals("TEXT", StringComparison.OrdinalIgnoreCase))
                 {
                     if (TableColumns.Count == 0)
                     {
@@ -591,6 +652,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 else if ((OutputDriver.GetType().Name.Equals("AccessDatabase", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Access2007Database", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("ExcelWorkbook", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Excel2007Workbook", StringComparison.OrdinalIgnoreCase)) && VariableList.Count > Max_Number_Columns)
                 {
                     this.PopulateTable(WideTableColumns);
+                }
+                else if (jsonstring != null)
+                {
+                    System.IO.File.WriteAllText(string.Format("{0}\\{1}", curFile, TableName.ToString().Replace("#", ".")), jsonstring);
+                    this.statusMessage = "Export completed successfully, ";
+                    this.statusMessage += CurrentDataTable.Rows.Count.ToString() + " records written.";
                 }
                 else
                 {

@@ -118,8 +118,6 @@ namespace Epi.Windows.Analysis.Dialogs
                 {
                     continue;
                 }
-                if (row.DisplayName.Contains("JSON"))
-                    continue;
 
                 cmbOutputFormat.Items.Add(new ComboBoxItem(row.Type, row.DisplayName, null));
             }
@@ -498,7 +496,10 @@ namespace Epi.Windows.Analysis.Dialogs
                         if (!cmbDataTable.Text.Contains("#"))
                         {
                             //cmbDataTable.Text = cmbDataTable.Text + "#txt";
-                            cmbDataTable.Text = cmbDataTable.Text + "#csv";
+                            if (cmbOutputFormat.Text.Contains("JSON"))
+                                cmbDataTable.Text += "#json";
+                            else
+                                cmbDataTable.Text = cmbDataTable.Text + "#csv";
                         }
                     }                 
 
