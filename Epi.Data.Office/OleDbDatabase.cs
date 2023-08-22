@@ -12,6 +12,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Epi;
 using Epi.Data;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Epi.Data.Office
 {
@@ -1179,6 +1181,20 @@ namespace Epi.Data.Office
                 }
                 Query query = this.CreateQuery(queryString);
 
+                if (tableName.EndsWith(".json"))
+                {
+                    string[] jsonsplit = connectionString.Split('=');
+                    string jsonpath = "";
+                    if (jsonsplit.Length > 1)
+                        jsonpath = jsonsplit[1];
+                    else
+                        jsonpath = jsonsplit[0];
+                    string jsonstring = File.ReadAllText(jsonpath + "\\" + tableName);
+                    // DataTable dt = JSONtoDataTable(jsonstring);
+                    DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(jsonstring);
+                    return dt;
+                }
+
                 DataTable returnTable = Select(query);
                 foreach (DataColumn column in returnTable.Columns)//EI-665
                 {
@@ -1189,6 +1205,47 @@ namespace Epi.Data.Office
             finally
             {
             }
+        }
+
+        public DataTable JSONtoDataTable(string jsonstring)
+        {
+            DataTable dt = new DataTable();
+            string smashedjson = Regex.Replace(jsonstring, "\\\\| |\n|\r|\t|\\[|\\]|\"", "");
+            string[] dicts = Regex.Split(smashedjson, "},{");
+            for (int i = 0; i < dicts.Length; i++)
+                dicts[i] = dicts[i].Replace("{", "").Replace("}", "");
+            var dtcolumns = Regex.Split(dicts[0], ",");
+            foreach (string dtcol in dtcolumns)
+            {
+                var colparts = Regex.Split(dtcol, ":");
+                dt.Columns.Add(colparts[0].Trim());
+            }
+            for (int i = 0; i < dicts.Length; i++)
+            {
+                DataRow row = dt.NewRow();
+                var rowitems = Regex.Split(dicts[i], ",");
+                for (int j = 0; j < rowitems.Length; j++)
+                {
+                    var itemparts = Regex.Split(rowitems[j], ":");
+                    if (int.TryParse(itemparts[1], out int tmp))
+                        row[j] = tmp;
+                    else if (float.TryParse(itemparts[1], out float tmpf))
+                    {
+                        row[j] = tmpf;
+                    }
+                    else if (bool.TryParse(itemparts[1], out bool tmpb))
+                    {
+                        row[j] = tmpb;
+                    }
+                    else
+                    {
+                        dt.Columns[j].DataType = typeof(string);
+                        row[j] = itemparts[1].Trim();
+                    }
+                }
+                dt.Rows.Add(row);
+            }
+            return dt;
         }
 
         /// <summary>
