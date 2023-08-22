@@ -320,6 +320,18 @@ namespace Epi.Core.AnalysisInterpreter
                                 Output.Load(EpiDataReader);
                             }
                         }
+                        else if (CurrentRead.Identifier.ToLowerInvariant().EndsWith(".json"))
+                        {
+                            string[] jsonsplit = CurrentRead.File.Split('=');
+                            string jsonpath = "";
+                            if (jsonsplit.Length > 2)
+                                jsonpath = jsonsplit[2].Split(';')[0];
+                            else
+                                jsonpath = jsonsplit[0];
+                            string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + CurrentRead.Identifier);
+                            // DataTable dt = JSONtoDataTable(jsonstring);
+                            Output = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(jsonstring);
+                        }
                         else
                         {
                             pSQL = CreateCurrentSQL();

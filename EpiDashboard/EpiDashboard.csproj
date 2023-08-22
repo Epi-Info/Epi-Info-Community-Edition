@@ -1658,6 +1658,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Resources\App.ico" />
     <Resource Include="Images\x.png" />
     <Resource Include="Images\x_over.png" />

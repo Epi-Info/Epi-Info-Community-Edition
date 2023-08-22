@@ -173,7 +173,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             string query = GetEpi7ProjectRecordCountQuery(tableName);
                             recordCount = (int)DBReadExecute.GetScalar(File, query);
                             outputTable = DBReadExecute.GetDataTable(File, "Select TOP 2 * From [" + Context.CurrentProject.Views[Identifier].TableName + "]");
-                            
+
                             foreach (Page page in Context.CurrentProject.Views[Identifier].Pages)
                             {
                                 outputTable = JoinTables(outputTable, DBReadExecute.GetDataTable(File, "Select TOP 2 * From [" + page.TableName + "]"));
@@ -185,6 +185,19 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         outputTable = DBReadExecute.GetDataTable(File, "Select TOP 2 * FROM " + identifierBuilder.ToString());
                         recordCount = (int)DBReadExecute.GetScalar(File, "SELECT COUNT(*) FROM " + identifierBuilder.ToString());
                     }
+                }
+                else if (Identifier.ToLowerInvariant().EndsWith(".json"))
+                {
+                    string[] jsonsplit = File.Split('=');
+                    string jsonpath = "";
+                    if (jsonsplit.Length > 2)
+                        jsonpath = jsonsplit[2].Split(';')[0];
+                    else
+                        jsonpath = jsonsplit[0];
+                    string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + Identifier);
+                    // DataTable dt = JSONtoDataTable(jsonstring);
+                    outputTable = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(jsonstring);
+                    recordCount = outputTable.Rows.Count;
                 }
                 else
                 {

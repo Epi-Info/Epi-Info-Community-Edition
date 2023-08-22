@@ -1181,7 +1181,7 @@ namespace Epi.Data.Office
                 }
                 Query query = this.CreateQuery(queryString);
 
-                if (tableName.EndsWith(".json"))
+                if (tableName.ToLowerInvariant().EndsWith(".json"))
                 {
                     string[] jsonsplit = connectionString.Split('=');
                     string jsonpath = "";

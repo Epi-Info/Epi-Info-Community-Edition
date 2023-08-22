@@ -193,8 +193,18 @@ namespace Epi.Windows.Analysis.Dialogs
                 }
 
                 List<string> tableNames = db.GetTableNames();
+                if (cmbDataSourcePlugIns.SelectedItem.ToString().Contains("JSON"))
+                {
+                    System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(db.DataSource);
+                    FileInfo[] jsonfiles = d.GetFiles("*.json");
+                    tableNames.Clear();
+                    foreach (FileInfo file in jsonfiles)
+                    {
+                        tableNames.Add(file.Name);
+                    }
+                }
 
-			    foreach (string tableName in tableNames)
+                foreach (string tableName in tableNames)
 			    {
                     ListViewItem newItem = new ListViewItem(new string[] { tableName, tableName});
 				    this.lvDataSourceObjects.Items.Add(newItem);
@@ -270,8 +280,6 @@ namespace Epi.Windows.Analysis.Dialogs
 
                     foreach (Epi.DataSets.Config.DataDriverRow row in config.DataDrivers)
                     {
-                        if (row.DisplayName.Contains("JSON"))
-                            continue;
                         cmbDataSourcePlugIns.Items.Add(new ComboBoxItem(row.Type,row.DisplayName,null));
                     }
                 }
