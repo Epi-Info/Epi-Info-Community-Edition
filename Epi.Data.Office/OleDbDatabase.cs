@@ -1185,7 +1185,16 @@ namespace Epi.Data.Office
                 {
                     string[] jsonsplit = connectionString.Split('=');
                     string jsonpath = "";
-                    if (jsonsplit.Length > 1)
+                    if (jsonsplit.Length > 2)
+                    {
+                        jsonpath = jsonsplit[2];
+                        if (jsonpath.ToLowerInvariant().EndsWith(";extended properties"))
+                        {
+                            int extpropindex = jsonpath.ToLowerInvariant().IndexOf(";extended properties");
+                            jsonpath = jsonpath.Substring(0, extpropindex);
+                        }
+                    }
+                    else if (jsonsplit.Length > 1)
                         jsonpath = jsonsplit[1];
                     else
                         jsonpath = jsonsplit[0];
