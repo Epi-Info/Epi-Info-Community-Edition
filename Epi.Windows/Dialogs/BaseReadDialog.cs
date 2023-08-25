@@ -376,7 +376,10 @@ namespace Epi.Windows.Dialogs
 
                 selectedDataProvider = selectedPlugIn.Key;
 
-                dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(selectedPlugIn.Key);
+                if (selectedPlugIn.Text.Contains("JSON"))
+                    dbFactory = DbDriverFactoryCreator.GetDbDriverFactory("Epi.Data.Office.JsonFileFactory, Epi.Data.Office");
+                else
+                    dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(selectedPlugIn.Key);
                 if (dbFactory.ArePrerequisitesMet())
                 {
 
