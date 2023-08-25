@@ -46,6 +46,7 @@ namespace EpiDashboard
         private bool loadingCombos = false;
         private bool IsReplace = false;
         private List<string> VariableList = new List<string>();
+        private bool appendfile;
         #endregion // Private Members
 
         #region Public Events
@@ -690,7 +691,10 @@ namespace EpiDashboard
                     {
                         csvExporter.AttachView(dashboardHelper.View);
                     }
-                    csvExporter.Export();
+                    if (appendfile)
+                        csvExporter.ExportAndAppend();
+                    else
+                        csvExporter.Export();
                 }
 
                 catch (Exception ex)
@@ -1390,6 +1394,7 @@ namespace EpiDashboard
         {
             if (!loadingCombos)
             {
+                appendfile = (bool)radAppend.IsChecked;
                 Export();
             }
         }

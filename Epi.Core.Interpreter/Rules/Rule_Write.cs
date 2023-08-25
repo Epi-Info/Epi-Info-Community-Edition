@@ -655,7 +655,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
                 else if (jsonstring != null)
                 {
-                    if (this.WriteMode.Equals("APPEND", StringComparison.OrdinalIgnoreCase))
+                    if (this.WriteMode.Equals("APPEND", StringComparison.OrdinalIgnoreCase) && File.Exists(curFile + "\\" + TableName.ToString().Replace("#", ".")))
                     {
                         string oldjsonstring = File.ReadAllText(curFile + "\\" + TableName.ToString().Replace("#", ".")).Replace("}\n]", "},");
                         System.IO.File.WriteAllText(string.Format("{0}\\{1}", curFile, TableName.ToString().Replace("#", ".")), oldjsonstring + jsonstring.Substring(1));
