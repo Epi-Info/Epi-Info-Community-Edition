@@ -655,7 +655,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
                 else if (jsonstring != null)
                 {
-                    System.IO.File.WriteAllText(string.Format("{0}\\{1}", curFile, TableName.ToString().Replace("#", ".")), jsonstring);
+                    if (this.WriteMode.Equals("APPEND", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string oldjsonstring = File.ReadAllText(curFile + "\\" + TableName.ToString().Replace("#", ".")).Replace("}\n]", "},");
+                        System.IO.File.WriteAllText(string.Format("{0}\\{1}", curFile, TableName.ToString().Replace("#", ".")), oldjsonstring + jsonstring.Substring(1));
+                    }
+                    else
+                        System.IO.File.WriteAllText(string.Format("{0}\\{1}", curFile, TableName.ToString().Replace("#", ".")), jsonstring);
                     this.statusMessage = "Export completed successfully, ";
                     this.statusMessage += CurrentDataTable.Rows.Count.ToString() + " records written.";
                 }

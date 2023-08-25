@@ -10,6 +10,7 @@ using Epi.Data;
 using Epi.Analysis;
 using Epi.Windows.Dialogs;
 using Epi.Windows.Analysis;
+using System.IO;
 
 namespace Epi.Windows.Analysis.Dialogs
 {
@@ -287,6 +288,9 @@ namespace Epi.Windows.Analysis.Dialogs
                     case "Epi.Data.Office.CsvFileFactory, Epi.Data.Office":
                         dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(Configuration.CsvDriver);
                         break;
+                    case "Epi.Data.Office.JsonFileFactory, Epi.Data.Office":
+                        dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(Configuration.JsonDriver);
+                        break;
                     case "Epi.Data.PostgreSQL.PostgreSQLDBFactory, Epi.Data.PostgreSQL":
                         dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(Configuration.PostgreSQLDriver);
                         break;
@@ -339,6 +343,16 @@ namespace Epi.Windows.Analysis.Dialogs
                 //this.txtDataSource.Text = db.ConnectionString;
 
                 System.Collections.Generic.List<string> tableNames = db.GetTableNames();
+                if (db.ConnectionDescription.Contains("JSON"))
+                {
+                    System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(db.DataSource);
+                    FileInfo[] jsonfiles = d.GetFiles("*.json");
+                    tableNames.Clear();
+                    foreach (FileInfo file in jsonfiles)
+                    {
+                        tableNames.Add(file.Name);
+                    }
+                }
 
                 foreach (string tableName in tableNames)
                 {
