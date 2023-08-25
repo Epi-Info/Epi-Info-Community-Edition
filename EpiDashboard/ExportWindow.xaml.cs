@@ -448,6 +448,16 @@ namespace EpiDashboard
                     if (!isFlatFile)
                     {
                         System.Collections.Generic.List<string> tableNames = db.GetTableNames();
+                        if (db.ConnectionDescription.Contains("JSON"))
+                        {
+                            System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(db.DataSource);
+                            FileInfo[] jsonfiles = d.GetFiles("*.json");
+                            tableNames.Clear();
+                            foreach (FileInfo file in jsonfiles)
+                            {
+                                tableNames.Add(file.Name);
+                            }
+                        }
                         string newtablename;
                         this.cmbDestinationTable.SelectedValuePath = "Key";
                         this.cmbDestinationTable.DisplayMemberPath = "Value";

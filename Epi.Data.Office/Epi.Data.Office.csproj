@@ -263,6 +263,8 @@
       <DependentUpon>AccessNewFileDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="JetQuery.cs" />
+    <Compile Include="JsonFile.cs" />
+    <Compile Include="JsonFile.IDataSource.cs" />
     <Compile Include="JsonFileFactory.cs" />
     <Compile Include="OleDbDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

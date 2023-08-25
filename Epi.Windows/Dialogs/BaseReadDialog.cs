@@ -173,7 +173,7 @@ namespace Epi.Windows.Dialogs
                 }
 
                 List<string> tableNames = db.GetTableNames();
-                if (cmbDataSourcePlugIns.SelectedItem.ToString().Contains("JSON"))
+                if (db.ConnectionDescription.Contains("JSON"))
                 {
                     System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(db.DataSource);
                     FileInfo[] jsonfiles = d.GetFiles("*.json");
@@ -376,10 +376,8 @@ namespace Epi.Windows.Dialogs
 
                 selectedDataProvider = selectedPlugIn.Key;
 
-                if (selectedPlugIn.Text.Contains("JSON"))
-                    dbFactory = DbDriverFactoryCreator.GetDbDriverFactory("Epi.Data.Office.JsonFileFactory, Epi.Data.Office");
-                else
-                    dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(selectedPlugIn.Key);
+                dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(selectedPlugIn.Key);
+
                 if (dbFactory.ArePrerequisitesMet())
                 {
 

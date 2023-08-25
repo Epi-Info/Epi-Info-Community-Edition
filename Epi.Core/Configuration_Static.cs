@@ -46,6 +46,8 @@ namespace Epi
 
         public const string CsvDriver = "Epi.Data.Office.CsvFileFactory, Epi.Data.Office";
 
+        public const string JsonDriver = "Epi.Data.Office.JsonFileFactory, Epi.Data.Office";
+
         /// <summary>
         /// Identifier for SharePoint driver that is built into Epi Info
         /// </summary>
@@ -832,7 +834,7 @@ namespace Epi
 			Config.DataDriverRow dataDriverRowJSON = configDataSet.DataDriver.NewDataDriverRow();
 			dataDriverRowJSON.DataDriversRow = parentDataDriversRow;
 			dataDriverRowJSON.DisplayName = "JSON File";
-			dataDriverRowJSON.Type = CsvDriver;
+			dataDriverRowJSON.Type = JsonDriver;
 			dataDriverRowJSON.DataProvider = true;
 			dataDriverRowJSON.MetadataProvider = false;
 			configDataSet.DataDriver.Rows.Add(dataDriverRowJSON);

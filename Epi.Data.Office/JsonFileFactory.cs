@@ -12,7 +12,7 @@ using System.Globalization;
 namespace Epi.Data.Office
 {
     /// <summary>
-    /// Concrete DBFactory for CSV File
+    /// Concrete DBFactory for JSON File
     /// </summary>
     public class JsonFileFactory : IDbDriverFactory
     {
@@ -39,7 +39,7 @@ namespace Epi.Data.Office
         /// <returns>Database driver.</returns>
         public IDbDriver CreateDatabaseObject(DbConnectionStringBuilder connectionStringBuilder)
         {
-            IDbDriver instance = new CsvFile();
+            IDbDriver instance = new JsonFile();
             instance.ConnectionString = connectionStringBuilder.ToString();
             return instance;
         }
