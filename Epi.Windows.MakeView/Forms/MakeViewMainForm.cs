@@ -1721,10 +1721,18 @@ namespace Epi.Windows.MakeView.Forms
                     string filePath = openFileDialog.FileName.Trim();
                     if (filePath.ToLowerInvariant().EndsWith(FileExtensions.EPI_PROJ))
                     {
-                        // This is an Epi 7 project. Open it.
-                        Project project = new Project(filePath);
+                        Project project = null;
 
-                        if (project.CollectedData.FullName.Contains("MS Access"))
+                        try
+						{
+							project = new Project(filePath);
+						}
+						catch (System.Xml.XmlException ex)
+						{
+							throw new ApplicationException(SharedStrings.EXCEPTION_NOT_PROJECT_FILE);
+						}
+
+						if (project.CollectedData.FullName.Contains("MS Access"))
                         {
                             string databaseFileName = project.CollectedData.DataSource.Replace("Data Source=".ToLowerInvariant(), string.Empty);
                             if (System.IO.File.Exists(databaseFileName) == false)
@@ -1741,6 +1749,11 @@ namespace Epi.Windows.MakeView.Forms
                 {
                     MsgBox.ShowError(string.Format(SharedStrings.ERROR_CRYPTO_KEYS, ex.Message));
                     return;
+                }
+                catch (ApplicationException appEx)
+                { 
+                    MsgBox.ShowInformation(appEx.Message);
+                    return; 
                 }
                 catch (Exception ex)
                 {
