@@ -15,16 +15,16 @@
             </Storyboard>
             <Storyboard x:Key="sbHideRightMenu">
                 <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="163" To="0"  Duration="0:0:0.2" />
-                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="50" To="0"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="80" To="0"  Duration="0:0:0.2" />
             </Storyboard>
 
             <Storyboard x:Key="showEpiResource">
-                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="0" To="50"  Duration="0:0:0.1" />
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="163" To="220"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="0" To="80"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="163" To="250"  Duration="0:0:0.1" />
             </Storyboard>
             <Storyboard x:Key="hideEpiResource">
-                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="50" To="0"  Duration="0:0:0.2" />
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="220" To="163"  Duration="0:0:0.3" />
+                <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="80" To="0"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="250" To="163"  Duration="0:0:0.3" />
             </Storyboard>
         </ResourceDictionary>
 
@@ -108,7 +108,15 @@
                             <TextBlock Background="#e6e7e8" Style="{StaticResource setting_buttons}">ACTIVEEPI.com</TextBlock>
 
                         </Button>
-                        <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="17" KeyUp="openEpi_Keydown" Click="openEpi_Click">
+                        <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="17" KeyUp="microbeTrace_Keydown" Click="microbeTrace_Click">
+                            <Button.ToolTip>
+                                <ToolTip Visibility="Hidden">MicrobeTrace</ToolTip>
+                            </Button.ToolTip>
+                            <StackPanel  >
+                                <TextBlock Background="#e6e7e8" Style="{StaticResource setting_buttons}" >MicrobeTrace</TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="18" KeyUp="openEpi_Keydown" Click="openEpi_Click">
                             <Button.ToolTip>
                                 <ToolTip Visibility="Hidden">OPENEPI.com</ToolTip>
                             </Button.ToolTip>
@@ -117,7 +125,7 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="18" KeyUp="epiInfoLogs_Keydown" Click="epi_InfoLogs_Click" >
+                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="19" KeyUp="epiInfoLogs_Keydown" Click="epi_InfoLogs_Click" >
                         <Button.ToolTip>
                             <ToolTip Visibility="Collapsed">EPI INFO™ LOGS</ToolTip>
                         </Button.ToolTip>

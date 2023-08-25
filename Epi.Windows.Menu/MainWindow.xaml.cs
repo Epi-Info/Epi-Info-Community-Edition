@@ -273,7 +273,13 @@ namespace Epi.Windows.Menu
             System.Diagnostics.Process.Start("http://openepi.com");
         }
 
-        private void epi_InfoLogs_Click(object sender, EventArgs e)
+		private void microbeTrace_Click(object sender, EventArgs e)
+		{
+			HideStoryBoard();
+			System.Diagnostics.Process.Start("https://microbetrace.cdc.gov/MicrobeTrace");
+		}
+
+		private void epi_InfoLogs_Click(object sender, EventArgs e)
         {
             HideStoryBoard();
             string logFilePath = Logger.GetLogFilePath();
@@ -535,7 +541,7 @@ namespace Epi.Windows.Menu
 
 
             }
-            else if (submenuEpiResoucesHeight == "50")
+            else if (submenuEpiResoucesHeight == "80")
             {
                 this.BeginStoryboard(FindResource("hideEpiResource") as Storyboard);
 
@@ -743,7 +749,7 @@ namespace Epi.Windows.Menu
 
 
                 }
-                else if (submenuEpiResoucesHeight == "50")
+                else if (submenuEpiResoucesHeight == "80")
                 {
                     this.BeginStoryboard(FindResource("hideEpiResource") as Storyboard);
 
@@ -770,8 +776,16 @@ namespace Epi.Windows.Menu
                 System.Diagnostics.Process.Start("http://openepi.com");
             }
         }
+		private void microbeTrace_Keydown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Space)
+			{
+				HideStoryBoard();
+				System.Diagnostics.Process.Start("https://microbetrace.cdc.gov/MicrobeTrace");
+			}
+		}
 
-        private void epiInfoLogs_Keydown(object sender, KeyEventArgs e)
+		private void epiInfoLogs_Keydown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
             {
