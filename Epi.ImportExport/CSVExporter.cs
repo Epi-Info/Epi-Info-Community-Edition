@@ -474,7 +474,14 @@ namespace Epi.ImportExport
 
             try
             {
-                sw = File.CreateText(fileName);
+                bool makinganewfile = false;
+                if (!File.Exists(fileName))
+                {
+                    makinganewfile= true;
+                    sw = File.CreateText(fileName);
+                }
+                else
+                    sw = File.AppendText(fileName);
 
                 if (ColumnSortOrder != ImportExport.ColumnSortOrder.None || !exportAllFields)
                 {
@@ -520,7 +527,8 @@ namespace Epi.ImportExport
                     wb.Add(dc.ColumnName);
                 }
 
-                sw.WriteLine(wb.ToString());
+                if (makinganewfile)
+                    sw.WriteLine(wb.ToString());
                 rowsExported = 0;
                 int totalRows = 0;
 

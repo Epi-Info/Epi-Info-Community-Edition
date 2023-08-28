@@ -638,10 +638,10 @@ namespace EpiDashboard
                     SetGadgetStatusHandler requestUpdateStatus = new SetGadgetStatusHandler(RequestUpdateStatusMessage);
                     CheckForCancellationHandler checkForCancellation = new CheckForCancellationHandler(IsCancelled);
 
-                    if (File.Exists(fileName))
-                    {
-                        File.Delete(fileName);
-                    }
+                    //if (File.Exists(fileName))
+                    //{
+                    //    File.Delete(fileName);
+                    //}
 
                     dashboardHelper.PopulateDataSet(); // the only reason to call this is to see if any new user-defined vars have been added and apply them.
                     List<Epi.Data.TableColumn> tcList = dashboardHelper.GetFieldsAsListOfEpiTableColumns(useTabOrder);
