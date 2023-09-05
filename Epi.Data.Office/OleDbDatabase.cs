@@ -14,6 +14,7 @@ using Epi;
 using Epi.Data;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Epi.Data.Office
 {
@@ -1200,6 +1201,8 @@ namespace Epi.Data.Office
                         jsonpath = jsonsplit[0];
                     string jsonstring = File.ReadAllText(jsonpath + "\\" + tableName);
                     // DataTable dt = JSONtoDataTable(jsonstring);
+                    if (jsonstring.First<char>() != '[' && jsonstring.Last<char>() != ']')
+                        jsonstring = "[" + jsonstring + "]";
                     DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(jsonstring);
                     return dt;
                 }
