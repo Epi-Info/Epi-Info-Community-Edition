@@ -517,7 +517,7 @@ namespace Epi.Windows.Dialogs
                 {
                     string jsonfiles = lvDataSourceObjects.SelectedItems[0].Text;
                     for (int jsoni = 1; jsoni < lvDataSourceObjects.SelectedItems.Count; jsoni++)
-                        jsonfiles = jsonfiles + "<json>" + lvDataSourceObjects.SelectedItems[jsoni].Text;
+                        jsonfiles = jsonfiles + "|json|" + lvDataSourceObjects.SelectedItems[jsoni].Text;
                     return jsonfiles;
                 }
                 if (string.IsNullOrEmpty(SQLQuery) && lvDataSourceObjects.SelectedItems.Count > 0)

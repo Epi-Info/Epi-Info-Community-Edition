@@ -1199,7 +1199,7 @@ namespace Epi.Data.Office
                         jsonpath = jsonsplit[1];
                     else
                         jsonpath = jsonsplit[0];
-                    string[] separator = new string[] { "<json>" };
+                    string[] separator = new string[] { "|json|" };
                     string[] tableNames = tableName.Split(separator, StringSplitOptions.None);
                     string jsonstring = File.ReadAllText(jsonpath + "\\" + tableNames[0]);
                     if (tableNames.Length > 1)
