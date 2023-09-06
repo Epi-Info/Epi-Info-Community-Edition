@@ -1199,7 +1199,21 @@ namespace Epi.Data.Office
                         jsonpath = jsonsplit[1];
                     else
                         jsonpath = jsonsplit[0];
-                    string jsonstring = File.ReadAllText(jsonpath + "\\" + tableName);
+                    string[] separator = new string[] { "<json>" };
+                    string[] tableNames = tableName.Split(separator, StringSplitOptions.None);
+                    string jsonstring = File.ReadAllText(jsonpath + "\\" + tableNames[0]);
+                    if (tableNames.Length > 1)
+                    {
+                        if (jsonstring.First<char>() == '[' && jsonstring.Last<char>() == ']')
+                            jsonstring = jsonstring.Substring(1, jsonstring.Length - 2);
+                    }
+                    for (int jsoni = 1; jsoni < tableNames.Length; jsoni++)
+                    {
+                        string morejsonstring = File.ReadAllText(jsonpath + "\\" + tableNames[jsoni]);
+                        if (morejsonstring.First<char>() == '[' && morejsonstring.Last<char>() == ']')
+                            morejsonstring = morejsonstring.Substring(1, morejsonstring.Length - 2);
+                        jsonstring = jsonstring + "," + morejsonstring;
+                    }
                     // DataTable dt = JSONtoDataTable(jsonstring);
                     if (jsonstring.First<char>() != '[' && jsonstring.Last<char>() != ']')
                         jsonstring = "[" + jsonstring + "]";

@@ -182,6 +182,7 @@ namespace Epi.Windows.Dialogs
                     {
                         tableNames.Add(file.Name);
                     }
+                    this.lvDataSourceObjects.MultiSelect = true;
                 }
 
                 foreach (string tableName in tableNames)
@@ -512,6 +513,13 @@ namespace Epi.Windows.Dialogs
         {
             get
             {
+                if (string.IsNullOrEmpty(SQLQuery) && lvDataSourceObjects.SelectedItems.Count > 1)
+                {
+                    string jsonfiles = lvDataSourceObjects.SelectedItems[0].Text;
+                    for (int jsoni = 1; jsoni < lvDataSourceObjects.SelectedItems.Count; jsoni++)
+                        jsonfiles = jsonfiles + "<json>" + lvDataSourceObjects.SelectedItems[jsoni].Text;
+                    return jsonfiles;
+                }
                 if (string.IsNullOrEmpty(SQLQuery) && lvDataSourceObjects.SelectedItems.Count > 0)
                 {
                     return lvDataSourceObjects.SelectedItems[0].Text;
@@ -673,6 +681,7 @@ namespace Epi.Windows.Dialogs
 
         private void btnFindDataSource_Click(object sender, System.EventArgs e)
         {
+            this.lvDataSourceObjects.MultiSelect = false;
             OpenSelectDataSourceDialog();
         }
 
