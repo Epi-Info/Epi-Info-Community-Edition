@@ -7,6 +7,7 @@ using System.Text;
 using com.calitha.goldparser;
 using Epi.Data;
 using System.Data;
+using System.Linq;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
@@ -196,6 +197,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         jsonpath = jsonsplit[0];
                     string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + Identifier);
                     // DataTable dt = JSONtoDataTable(jsonstring);
+                    if (jsonstring.First<char>() != '[' && jsonstring.Last<char>() != ']')
+                        jsonstring = "[" + jsonstring + "]";
                     outputTable = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(jsonstring);
                     recordCount = outputTable.Rows.Count;
                 }

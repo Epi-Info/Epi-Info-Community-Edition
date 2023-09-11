@@ -14,6 +14,7 @@ using VariableCollection = Epi.Collections.NamedObjectCollection<Epi.IVariable>;
 using Epi.Core.AnalysisInterpreter.Rules;
 using EpiInfo.Plugin;
 using System.Runtime.Remoting.Contexts;
+using System.Linq;
 
 namespace Epi.Core.AnalysisInterpreter
 {
@@ -330,6 +331,8 @@ namespace Epi.Core.AnalysisInterpreter
                                 jsonpath = jsonsplit[0];
                             string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + CurrentRead.Identifier);
                             // DataTable dt = JSONtoDataTable(jsonstring);
+                            if (jsonstring.First<char>() != '[' && jsonstring.Last<char>() != ']')
+                                jsonstring = "[" + jsonstring + "]";
                             Output = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(jsonstring);
                         }
                         else
