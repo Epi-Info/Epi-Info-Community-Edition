@@ -280,8 +280,8 @@ namespace Epi.Windows.Analysis.Dialogs
 
                     foreach (Epi.DataSets.Config.DataDriverRow row in config.DataDrivers)
                     {
-                        if (row.DisplayName.Contains("JSON"))
-                            continue;
+                        // if (row.DisplayName.Contains("JSON"))
+                        //    continue;
                         cmbDataSourcePlugIns.Items.Add(new ComboBoxItem(row.Type,row.DisplayName,null));
                     }
                 }
