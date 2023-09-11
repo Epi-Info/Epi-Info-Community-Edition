@@ -202,6 +202,7 @@ namespace Epi.Windows.Analysis.Dialogs
                     {
                         tableNames.Add(file.Name);
                     }
+                    this.lvDataSourceObjects.MultiSelect = true;
                 }
 
                 foreach (string tableName in tableNames)
@@ -564,6 +565,11 @@ namespace Epi.Windows.Analysis.Dialogs
             if (!(this.selectedDataSource is Epi.Data.Office.SharePointList))
             {
                 string Identifier = lvDataSourceObjects.SelectedItems[0].Text;
+                if (lvDataSourceObjects.SelectedItems.Count > 1)
+                {
+                    for (int jsoni = 1; jsoni < lvDataSourceObjects.SelectedItems.Count; jsoni++)
+                        Identifier += "|json|" + lvDataSourceObjects.SelectedItems[jsoni].Text;
+                }
                 sb.Append(this.FieldNameNeedsBrackets(Identifier) ? Util.InsertInSquareBrackets(Identifier) : Identifier);
             }
             else
@@ -760,6 +766,7 @@ namespace Epi.Windows.Analysis.Dialogs
 
         private void btnFindDataSource_Click(object sender, System.EventArgs e)
         {
+            this.lvDataSourceObjects.MultiSelect = false;
             OpenSelectDataSourceDialog();
         }
 

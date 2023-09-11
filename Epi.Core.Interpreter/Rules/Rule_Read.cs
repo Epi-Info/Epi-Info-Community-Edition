@@ -195,7 +195,21 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         jsonpath = jsonsplit[2].Split(';')[0];
                     else
                         jsonpath = jsonsplit[0];
-                    string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + Identifier);
+                    string[] separator = new string[] { "|json|" };
+                    string[] tableNames = Identifier.Split(separator, StringSplitOptions.None);
+                    string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + tableNames[0]);
+                    if (tableNames.Length > 1)
+                    {
+                        if (jsonstring.First<char>() == '[' && jsonstring.Last<char>() == ']')
+                            jsonstring = jsonstring.Substring(1, jsonstring.Length - 2);
+                    }
+                    for (int jsoni = 1; jsoni < tableNames.Length; jsoni++)
+                    {
+                        string morejsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + tableNames[jsoni]);
+                        if (morejsonstring.First<char>() == '[' && morejsonstring.Last<char>() == ']')
+                            morejsonstring = morejsonstring.Substring(1, morejsonstring.Length - 2);
+                        jsonstring = jsonstring + "," + morejsonstring;
+                    }
                     // DataTable dt = JSONtoDataTable(jsonstring);
                     if (jsonstring.First<char>() != '[' && jsonstring.Last<char>() != ']')
                         jsonstring = "[" + jsonstring + "]";
