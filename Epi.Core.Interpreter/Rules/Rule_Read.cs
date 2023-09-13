@@ -187,7 +187,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         recordCount = (int)DBReadExecute.GetScalar(File, "SELECT COUNT(*) FROM " + identifierBuilder.ToString());
                     }
                 }
-                else if (Identifier.ToLowerInvariant().EndsWith(".json"))
+                else if (Identifier.ToLowerInvariant().EndsWith(".json") || File.Contains("FMT=JSON"))
                 {
                     string[] jsonsplit = File.Split('=');
                     string jsonpath = "";

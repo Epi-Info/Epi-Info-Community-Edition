@@ -321,7 +321,7 @@ namespace Epi.Core.AnalysisInterpreter
                                 Output.Load(EpiDataReader);
                             }
                         }
-                        else if (CurrentRead.Identifier.ToLowerInvariant().EndsWith(".json"))
+                        else if (CurrentRead.Identifier.ToLowerInvariant().EndsWith(".json") || CurrentRead.File.Contains("FMT=JSON"))
                         {
                             string[] jsonsplit = CurrentRead.File.Split('=');
                             string jsonpath = "";

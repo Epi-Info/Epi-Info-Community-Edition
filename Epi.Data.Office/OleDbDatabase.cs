@@ -1182,7 +1182,7 @@ namespace Epi.Data.Office
                 }
                 Query query = this.CreateQuery(queryString);
 
-                if (tableName.ToLowerInvariant().EndsWith(".json"))
+                if (tableName.ToLowerInvariant().EndsWith(".json") || GetConnection().ConnectionString.Contains("FMT=JSON"))
                 {
                     string[] jsonsplit = connectionString.Split('=');
                     string jsonpath = "";

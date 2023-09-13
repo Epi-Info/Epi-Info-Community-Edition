@@ -54,7 +54,7 @@ namespace Epi.Data.Office
             }
             else
             {
-                oleDBCnnStrBuilder.Add("Extended Properties", "text;HDR=Yes;FMT=Delimited");
+                oleDBCnnStrBuilder.Add("Extended Properties", "text;HDR=No;FMT=JSON");
             }
             return new OleDbConnection(oleDBCnnStrBuilder.ToString());
         }
@@ -296,7 +296,7 @@ namespace Epi.Data.Office
             {
                 OleDbConnectionStringBuilder cnnBuilder = new OleDbConnectionStringBuilder(base.ConnectionString);
                 cnnBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
-                cnnBuilder.Add("Extended Properties", "text;HDR=Yes;FMT=Delimited");
+                cnnBuilder.Add("Extended Properties", "text;HDR=No;FMT=JSON");
                 return cnnBuilder.ToString();
             }
             set

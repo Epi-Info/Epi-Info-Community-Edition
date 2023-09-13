@@ -177,11 +177,17 @@ namespace Epi.Windows.Dialogs
                 {
                     System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(db.DataSource);
                     FileInfo[] jsonfiles = d.GetFiles("*.json");
+                    FileInfo[] txtfiles = d.GetFiles("*.txt");
                     tableNames.Clear();
                     foreach (FileInfo file in jsonfiles)
                     {
                         tableNames.Add(file.Name);
                     }
+                    foreach (FileInfo file in txtfiles)
+                    {
+                        tableNames.Add(file.Name);
+                    }
+                    tableNames.Sort();
                     this.lvDataSourceObjects.MultiSelect = true;
                 }
 
