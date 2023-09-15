@@ -16,6 +16,7 @@ using System.Security.Cryptography;
 using System.Xml;
 using System.Windows.Forms;
 using System.IO;
+using Epi;
 
 namespace SyncFile2CSV
 {
@@ -24,8 +25,8 @@ namespace SyncFile2CSV
     /// </summary>
     public partial class MainWindow : Window
     {
-    	private const string initVectorDroid = "00000000000000000000000000000000";
-		private const string saltDroid = "00000000000000000000";
+    	private string initVectorDroid = "00000000000000000000000000000000";
+		private string saltDroid = "00000000000000000000";
 
 		private string listSeparator = ",";
 		string pathCandidate = string.Empty;
@@ -34,7 +35,12 @@ namespace SyncFile2CSV
         {
             string[] args = Environment.GetCommandLineArgs();
 
-            InitializeComponent();
+			Configuration configuration = Configuration.CreateDefaultConfiguration();
+
+			initVectorDroid = configuration.InitVectorDroid;
+			saltDroid = configuration.SaltDroid;
+
+			InitializeComponent();
             listSeparator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
 
             if (args.Length > 1)
@@ -153,7 +159,7 @@ namespace SyncFile2CSV
             return columnName;
         }
 
-        public static string DecryptJava(string cipherText, string password)
+        public string DecryptJava(string cipherText, string password)
         {
             int _keyLengthInBits = 128;
 
@@ -197,7 +203,7 @@ namespace SyncFile2CSV
             {
                 xmlText = DecryptJava(encrypted, password);
             }
-            catch (Exception ex)
+            catch
             {
                 System.Windows.MessageBox.Show("Invalid password or sync file.");
                 return null;
@@ -320,9 +326,7 @@ namespace SyncFile2CSV
 
 		private void passwordBox1_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            run.IsEnabled = !fileName.Text.Equals(string.Empty) && !passwordBox1.Password.Equals(string.Empty);
+            run.IsEnabled = (!fileName.Text.Equals(string.Empty) || !folderPath.Text.Equals(string.Empty))  && !passwordBox1.Password.Equals(string.Empty);
         }
-
-
 	}
 }

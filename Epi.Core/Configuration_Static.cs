@@ -91,28 +91,43 @@ namespace Epi
         private const string saltValueAlt = "JrudNkxXEzUj3Ij9KhHfzlZyonwVW45b";
         private const string initVectorAlt = ":!0wn4f#;FHy>Yi;";
 
-        private const string initVectorDroid = "00000000000000000000000000000000";
-        private const string saltDroid = "00000000000000000000";
+		public string initVectorDroid = "00000000000000000000000000000000";
+		public string saltDroid = "00000000000000000000";
 
-        private const string passPhraseDebug = "80787d6053694493be171dd712e51c61";
-        private const string saltValueDebug = "476ba16073764022bc7f262c6d67ebef";
-        private const string initVectorDebug = "0f8f*d5bd&cb4~9f";
+		private const string passPhraseDebug = "80787d6053694493be171dd712e51c61";
+		private const string saltValueDebug = "476ba16073764022bc7f262c6d67ebef";
+		private const string initVectorDebug = "0f8f*d5bd&cb4~9f";
 
-        private const string saltValueAltDebug = "JrudNkxXEzUj3Ij9KhHfzlZyonwVW45b";
-        private const string initVectorAltDebug = ":!0wn4f#;FHy>Yi;";
+		private const string saltValueAltDebug = "JrudNkxXEzUj3Ij9KhHfzlZyonwVW45b";
+		private const string initVectorAltDebug = ":!0wn4f#;FHy>Yi;";
 
-        private const string initVectorDroidDebug = "00000000000000000000000000000000";
-        private const string saltDroidDebug = "00000000000000000000";
+		public string initVectorDroidDebug = "00000000000000000000000000000000";
+		public string saltDroidDebug = "00000000000000000000";
 
-        private static object syncLock = new object();
-        private static Configuration current;
-        private static FileSystemWatcher watcher;
-        private static IServiceProvider masterServiceProvider;
-        private static ExecutionEnvironment environment = ExecutionEnvironment.Unknown;
-        private static FileSystemEventHandler configUpdateCallback = new FileSystemEventHandler(OnConfigChanged);
+		private static object syncLock = new object();
+		private static Configuration current;
+		private static FileSystemWatcher watcher;
+		private static IServiceProvider masterServiceProvider;
+		private static ExecutionEnvironment environment = ExecutionEnvironment.Unknown;
+		private static FileSystemEventHandler configUpdateCallback = new FileSystemEventHandler(OnConfigChanged);
 
+		public string InitVectorDroid
+		{
+			get
+			{
+				return initVectorDroid;
+			}
+		}
 
-        public static bool IsRelease
+		public string SaltDroid
+		{
+			get
+			{
+				return saltDroid;
+			}
+		}
+
+		public static bool IsRelease
         {
             get 
             {
@@ -1377,7 +1392,7 @@ namespace Epi
             return k;
         }
 
-        public static string DecryptJava(string cipherText, string password)
+        public string DecryptJava(string cipherText, string password)
         {
             if (cipherText.Substring(0,5).Equals("APPLE"))
                 return DecryptString(cipherText.Substring(5), password);
@@ -1404,7 +1419,7 @@ namespace Epi
             return System.Text.Encoding.UTF8.GetString(plainTextBytes);
         }
 
-        private static byte[] HexStringToByteArray(string s)
+        private byte[] HexStringToByteArray(string s)
         {
             var r = new byte[s.Length / 2];
             for (int i = 0; i < s.Length; i += 2)
