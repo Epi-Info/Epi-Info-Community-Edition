@@ -545,6 +545,13 @@ namespace Epi.Data.Office
             {
                 list.Add(row["COLUMN_NAME"].ToString());
             }
+            if (this.ConnectionDescription.ToLowerInvariant().Contains("json"))
+            {
+                table = GetTableData(tableName);
+                list.Clear();
+                foreach (DataColumn jcol in table.Columns)
+                    list.Add(jcol.ColumnName);
+            }
             return list;
         }
 
@@ -1283,6 +1290,10 @@ namespace Epi.Data.Office
         {
             try
             {
+                if (GetConnection().ConnectionString.Contains("FMT=JSON"))
+                {
+                    return GetTableData(tableName);
+                }
                 string queryString = "select top 2 * from [" + tableName + "]";                
                 Query query = this.CreateQuery(queryString);
                 return Select(query);

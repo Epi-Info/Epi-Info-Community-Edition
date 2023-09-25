@@ -395,7 +395,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
 
                     if
-                    (
+                    (this.TableName.EndsWith("json") ||
                         (
                            (!(OutputDriver.GetType().Name.Equals("AccessDatabase", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Access2007Database", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("ExcelWorkbook", StringComparison.OrdinalIgnoreCase) || OutputDriver.GetType().Name.Equals("Excel2007Workbook", StringComparison.OrdinalIgnoreCase))
                             && VariableList.Count <= Max_Number_Columns)
@@ -422,7 +422,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                                         if (rowValue.Contains(",") || rowValue.Contains("\""))
                                         {
                                             rowValue = rowValue.Replace("\"", "\"\"");
-                                            rowValue = Util.InsertIn(rowValue, "\"");
+                                            //rowValue = Util.InsertIn(rowValue, "\"");
                                         }
                                         jsb.Append("\n        \"" + table.Columns[i].ColumnName + "\" : ");
                                         if (table.Columns[i].DataType.FullName.Equals("System.String") ||

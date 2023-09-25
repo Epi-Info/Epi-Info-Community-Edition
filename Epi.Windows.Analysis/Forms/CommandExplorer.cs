@@ -671,6 +671,15 @@ namespace Epi.Windows.Analysis.Forms
                     //Some dialogs may not generate a command. No need to process command if command text is empty.
                     if (!string.IsNullOrEmpty(dlg.CommandText))
                     {
+                        if (dlg.CommandText.ToUpperInvariant().StartsWith("RELATE") && dlg.CommandText.Contains("FMT=JSON"))
+                        {
+                            dlg.CommandText = dlg.CommandText.Replace(".json", "#json").Replace(".JSON", "#JSON").Replace(".txt", "#txt").Replace(".TXT", "#TXT");
+                            int fmtindex = dlg.CommandText.IndexOf("FMT=JSON") + 11;
+                            int filelength = dlg.CommandText.Substring(fmtindex).IndexOf(' ');
+                            string nameoffile = dlg.CommandText.Substring(fmtindex, filelength);
+                            if (!(nameoffile.StartsWith("[") && nameoffile.EndsWith("]")))
+                                dlg.CommandText = dlg.CommandText.Replace(nameoffile, "[" + nameoffile + "]");
+                        }
                         String csvFilePath = GetFilePathGivenCommand(dlg.CommandText);
 
                         if (System.IO.File.Exists(csvFilePath))

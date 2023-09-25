@@ -13,6 +13,7 @@ using Epi.Data;
 using Epi.Windows.Controls;
 using Epi.Windows.Dialogs;
 using Epi.Windows.Analysis;
+using System.IO;
 
 namespace Epi.Windows.Analysis.Dialogs
 {
@@ -90,8 +91,6 @@ namespace Epi.Windows.Analysis.Dialogs
 
                     foreach (Epi.DataSets.Config.DataDriverRow row in config.DataDrivers)
                     {
-                        if (row.DisplayName.Contains("JSON"))
-                            continue;
                         cmbDataFormats.Items.Add(new ComboBoxItem(row.Type, row.DisplayName, null));
                     }
                 }
@@ -198,6 +197,22 @@ namespace Epi.Windows.Analysis.Dialogs
                 this.txtDataSource.Text = db.ConnectionString;
 
                 List<string> tableNames = db.GetTableNames();
+                if (cmbDataFormats.SelectedItem.ToString().Contains("JSON"))
+                {
+                    System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(db.DataSource);
+                    FileInfo[] jsonfiles = d.GetFiles("*.json");
+                    FileInfo[] txtfiles = d.GetFiles("*.txt");
+                    tableNames.Clear();
+                    foreach (FileInfo file in jsonfiles)
+                    {
+                        tableNames.Add(file.Name);
+                    }
+                    foreach (FileInfo file in txtfiles)
+                    {
+                        tableNames.Add(file.Name);
+                    }
+                    tableNames.Sort();
+                }
 
                 lbxDataSourceObjects.DataSource = tableNames;
                 rbAll.Checked = true;

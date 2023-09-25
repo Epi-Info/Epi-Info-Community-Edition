@@ -129,7 +129,7 @@ namespace Epi.ImportExport
 						if (rowValue.Contains(",") || rowValue.Contains("\""))
 						{
 							rowValue = rowValue.Replace("\"", "\"\"");
-							rowValue = Util.InsertIn(rowValue, "\"");
+							//rowValue = Util.InsertIn(rowValue, "\"");
 						}
 						jsb.Append("\n        \"" + table.Columns[i].ColumnName + "\" : ");
 						if (table.Columns[i].DataType.FullName.Equals("System.String") ||

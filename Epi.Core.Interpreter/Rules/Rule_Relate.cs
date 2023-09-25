@@ -5,6 +5,7 @@ using com.calitha.goldparser;
 using System.Data;
 using Epi.Data;
 using EpiInfo.Plugin;
+using System.Linq;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
@@ -227,6 +228,36 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         private DataTable GetDataTable(string filePath, string identifier)
         {
             System.Data.DataTable table;
+            if (filePath.Contains("FMT=JSON"))
+            {
+                string jsonfilename = identifier.Replace("#json", ".json").Replace("#JSON", ".JSON").Replace("#txt", ".txt").Replace("#TXT", ".TXT");
+                string[] jsonsplit = filePath.Split('=');
+                string jsonpath = "";
+                if (jsonsplit.Length > 2)
+                    jsonpath = jsonsplit[2].Split(';')[0];
+                else
+                    jsonpath = jsonsplit[0];
+                string[] separator = new string[] { "|json|" };
+                string[] tableNames = jsonfilename.Split(separator, StringSplitOptions.None);
+                string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + tableNames[0]);
+                if (tableNames.Length > 1)
+                {
+                    if (jsonstring.First<char>() == '[' && jsonstring.Last<char>() == ']')
+                        jsonstring = jsonstring.Substring(1, jsonstring.Length - 2);
+                }
+                for (int jsoni = 1; jsoni < tableNames.Length; jsoni++)
+                {
+                    string morejsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + tableNames[jsoni]);
+                    if (morejsonstring.First<char>() == '[' && morejsonstring.Last<char>() == ']')
+                        morejsonstring = morejsonstring.Substring(1, morejsonstring.Length - 2);
+                    jsonstring = jsonstring + "," + morejsonstring;
+                }
+                // DataTable dt = JSONtoDataTable(jsonstring);
+                if (jsonstring.First<char>() != '[' && jsonstring.Last<char>() != ']')
+                    jsonstring = "[" + jsonstring + "]";
+                table = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(jsonstring);
+                return table;
+            }
 
             if (filePath.ToUpperInvariant().StartsWith("CONFIG:"))
             {
