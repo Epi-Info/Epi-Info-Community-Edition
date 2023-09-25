@@ -693,7 +693,7 @@ namespace Epi.Windows.Analysis.Forms
                             string line = reader.ReadLine();
                             reader.Close();                            
 
-                            if(line.ToUpper().Contains("SEP="))
+                            if(!dlg.CommandText.Contains("FMT=JSON") && line.ToUpper().Contains("SEP="))
                             {
                                 String message = String.Format(resources.GetString("DELIMITER_HEADER_WARNING"), line);
                                 MessageBox.Show(message);

@@ -1209,7 +1209,11 @@ namespace Epi.Data.Office
                     string[] separator = new string[] { "|json|" };
                     string[] tableNames = tableName.Split(separator, StringSplitOptions.None);
                     string jsonstring = File.ReadAllText(jsonpath + "\\" + tableNames[0]);
-                    if (tableNames.Length > 1)
+                    if (String.IsNullOrEmpty(jsonstring))
+                    {
+                        Epi.Windows.MsgBox.ShowInformation("File " + tableNames[0] + " is empty.");
+                    }
+                    else if (tableNames.Length > 1)
                     {
                         if (jsonstring.First<char>() == '[' && jsonstring.Last<char>() == ']')
                             jsonstring = jsonstring.Substring(1, jsonstring.Length - 2);
@@ -1217,11 +1221,22 @@ namespace Epi.Data.Office
                     for (int jsoni = 1; jsoni < tableNames.Length; jsoni++)
                     {
                         string morejsonstring = File.ReadAllText(jsonpath + "\\" + tableNames[jsoni]);
+                        if (String.IsNullOrEmpty(morejsonstring))
+                        {
+                            Epi.Windows.MsgBox.ShowInformation("File " + tableNames[jsoni] + " is empty.");
+                            continue;
+                        }
                         if (morejsonstring.First<char>() == '[' && morejsonstring.Last<char>() == ']')
                             morejsonstring = morejsonstring.Substring(1, morejsonstring.Length - 2);
-                        jsonstring = jsonstring + "," + morejsonstring;
+                        if (!String.IsNullOrEmpty(jsonstring))
+                            jsonstring += ",";
+                        jsonstring = jsonstring + morejsonstring;
                     }
                     // DataTable dt = JSONtoDataTable(jsonstring);
+                    if (String.IsNullOrEmpty(jsonstring))
+                    {
+                        jsonstring = "[]";
+                    }
                     if (jsonstring.First<char>() != '[' && jsonstring.Last<char>() != ']')
                         jsonstring = "[" + jsonstring + "]";
                     DataTable dt = Newtonsoft.Json.JsonConvert.DeserializeObject<DataTable>(jsonstring);
