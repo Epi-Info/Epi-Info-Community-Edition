@@ -1306,13 +1306,21 @@
     <Content Include="Templates\Fields\States.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Pages\Antibiotics.xml" />
-    <Content Include="Templates\Pages\Clinical Signs and Symptoms.xml" />
+    <Content Include="Templates\Pages\Antibiotics.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Pages\Clinical Signs and Symptoms.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Pages\Interview_Question.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Pages\Medical History I.xml" />
-    <Content Include="Templates\Pages\Medical History II.xml" />
+    <Content Include="Templates\Pages\Medical History I.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Pages\Medical History II.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Pages\Mosquito Net Description.xml" />
     <Content Include="Templates\Projects\AndroidSamsungGalaxyTab2_7.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
