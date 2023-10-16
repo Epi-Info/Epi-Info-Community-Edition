@@ -154,7 +154,7 @@ namespace Epi.Data.Office
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            if (connectionString.ToLowerInvariant().Contains("fmt=delimited"))
+            if (connectionString.ToLowerInvariant().Contains("fmt=json"))
             {
                 return true;
             }

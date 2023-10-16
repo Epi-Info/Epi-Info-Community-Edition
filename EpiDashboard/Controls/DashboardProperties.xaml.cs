@@ -84,10 +84,26 @@ namespace EpiDashboard.Controls
                 }
                 else
                 {
-                    txtStandalonePath.Text = DashboardHelper.Database.DataSource;
+                    txtStandalonePath.Text = DashboardHelper.Database.ConnectionString;
 
                     Epi.Data.IDbDriver database = Epi.Data.DBReadExecute.GetDataDriver(txtStandalonePath.Text);
                     List<string> tableNames = database.GetTableNames();
+                    if (DashboardHelper.Database.ConnectionString.Contains("FMT=JSON"))
+                    {
+                        tableNames.Clear();
+                        System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(DashboardHelper.Database.DataSource);
+                        FileInfo[] jsonfiles = d.GetFiles("*.json");
+                        FileInfo[] txtfiles = d.GetFiles("*.txt");
+                        foreach (FileInfo file in jsonfiles)
+                        {
+                            tableNames.Add(file.Name);
+                        }
+                        foreach (FileInfo file in txtfiles)
+                        {
+                            tableNames.Add(file.Name);
+                        }
+                        tableNames.Sort();
+                    }
                     cmbStandaloneFormName.Items.Clear();
                     cmbStandaloneFormName.Items.Add(""); 
                     foreach (string tableName in tableNames)

@@ -173,7 +173,7 @@ namespace Epi.Data.Office
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            if (connectionString.ToLowerInvariant().Contains(".mdb") || (connectionString.ToLowerInvariant().Contains("provider=microsoft.jet.oledb.4.0") && !connectionString.ToLowerInvariant().Contains("excel") && !connectionString.ToLowerInvariant().Contains("fmt=delimited")))
+            if (connectionString.ToLowerInvariant().Contains(".mdb") || (connectionString.ToLowerInvariant().Contains("provider=microsoft.jet.oledb.4.0") && !connectionString.ToLowerInvariant().Contains("excel") && !connectionString.ToLowerInvariant().Contains("fmt=delimited") && !connectionString.ToLowerInvariant().Contains("fmt=json")))
             {
                 return true;
             }
