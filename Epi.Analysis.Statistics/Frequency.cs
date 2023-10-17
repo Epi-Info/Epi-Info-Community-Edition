@@ -349,7 +349,7 @@ namespace Epi.Analysis.Statistics
 
                     if (config["include-missing"].ToUpperInvariant() == "FALSE")
                     {
-                        if (Key.Value.Rows[0][1].GetType() == typeof(string))
+                        if (Key.Value.Rows.Count > 0 && Key.Value.Rows[0]["value"].GetType() == typeof(string))
                             tempRows = Key.Value.Select(string.Format(" varname='{0}' and [value] is NOT NULL and [value] <> '' ", Key.Key), "value");
                         else
                             tempRows = Key.Value.Select(string.Format(" varname='{0}' and [value] is NOT NULL ", Key.Key), "value");
