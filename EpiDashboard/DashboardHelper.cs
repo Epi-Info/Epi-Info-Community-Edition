@@ -1436,7 +1436,9 @@ namespace EpiDashboard
             else
             {
                 string exMsg = string.Format(DashboardSharedStrings.ERROR_COLUMN_DOESNT_EXIST, columnName);
-                throw new ApplicationException(exMsg);
+                Epi.Windows.MsgBox.ShowException(new ApplicationException(exMsg + " This data set may not be compatible with this canvas."));
+                return null;
+                // throw new ApplicationException(exMsg);
             }
         }
 
