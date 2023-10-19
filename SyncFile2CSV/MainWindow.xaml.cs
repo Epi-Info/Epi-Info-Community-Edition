@@ -42,32 +42,42 @@ namespace SyncFile2CSV
 
 			InitializeComponent();
             listSeparator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
-
+                        
             if (args.Length > 1)
             {
-                if (args[1] != null)
-                {
-                    pathCandidate = args[1];
+				try
+				{
+					if (args[1] != null)
+					{
+						pathCandidate = args[1];
 
-                    if (System.IO.File.GetAttributes(pathCandidate) != System.IO.FileAttributes.Directory)
-                    {
-                        fileName.Text = pathCandidate;
-                    }
+						if (System.IO.File.GetAttributes(pathCandidate) != System.IO.FileAttributes.Directory)
+						{
+							fileName.Text = pathCandidate;
+						}
 
-                    if (System.IO.File.GetAttributes(pathCandidate) == System.IO.FileAttributes.Directory)
-                    {
-                        folderPath.Text = pathCandidate;
-                    }
-                }
+						if (System.IO.File.GetAttributes(pathCandidate) == System.IO.FileAttributes.Directory)
+						{
+							folderPath.Text = pathCandidate;
+						}
+					}
 
-                if (args[2] != null)
-                {
-                    passwordBox1.Password = args[2];
-                }
+					if (args[2] != null)
+					{
+						passwordBox1.Password = args[2];
+					}
 
-				run.IsEnabled = !passwordBox1.Password.Equals(string.Empty);
+					run.IsEnabled = !passwordBox1.Password.Equals(string.Empty);
 
-                Run();
+					Run();
+
+				}
+				catch (Exception runException)
+				{
+					WriteExceptionFile(runException.Message +
+					Environment.NewLine +
+					runException.StackTrace);
+				}
 
 				System.Windows.Forms.Application.Exit();
 			}
@@ -100,10 +110,19 @@ namespace SyncFile2CSV
 
 		private void run_Click(object sender, RoutedEventArgs e)
         {
-            Run();
+			try
+			{
+				Run();
+			}
+			catch (Exception runException)
+			{
+				WriteExceptionFile(runException.Message + 
+                Environment.NewLine + 
+                runException.StackTrace);
+			}
 		}
 
-        private void Run()
+		private void Run()
         {
 			if (fileName.Text != null && fileName.Text != string.Empty)
 			{
@@ -142,6 +161,30 @@ namespace SyncFile2CSV
 				}
 			}
 		}
+
+        private void WriteExceptionFile(string exceptionText)
+        {
+			if (folderPath.Text != null && folderPath.Text != string.Empty)
+			{
+				DirectoryInfo syncFileFolderDirectoryInfo = new DirectoryInfo(folderPath.Text);
+
+				string fileName = System.IO.Path.Combine
+                (
+                    syncFileFolderDirectoryInfo.FullName,
+                    "Exception" + DateTime.Now.ToString("yyyyMMddHHmmssfff")
+                );
+
+				string outputFileName = System.IO.Path.Combine
+				(
+					syncFileFolderDirectoryInfo.FullName,
+					fileName + ".txt"
+				);
+
+				File.AppendAllText(outputFileName, exceptionText, Encoding.UTF8);
+			}
+
+			return;
+        }
 
 		private string GetExcelColumnName(int columnNumber)
         {
@@ -203,10 +246,10 @@ namespace SyncFile2CSV
             {
                 xmlText = DecryptJava(encrypted, password);
             }
-            catch
+            catch(Exception ex)
             {
                 System.Windows.MessageBox.Show("Invalid password or sync file.");
-                return null;
+                throw (ex);
             }
             //string xmlText = System.IO.File.ReadAllText(filePath);
 

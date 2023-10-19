@@ -5,12 +5,12 @@
     <StackPanel Margin="0,0,-0,0">
         <Label Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" Content="Sync File:" />
         <StackPanel Orientation="Horizontal">
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="fileName" VerticalAlignment="Top" Width="650" IsReadOnly="True" TextChanged="fileName_TextChanged" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="fileName" VerticalAlignment="Top" Width="650" IsReadOnly="False" TextChanged="fileName_TextChanged" />
             <Button Content="Browse" Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="browseFiles_Click" />
         </StackPanel>
         <Label Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label_batch" VerticalAlignment="Top" Content="Syncs Files (batch):" />
         <StackPanel Orientation="Horizontal">
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="folderPath" VerticalAlignment="Top" Width="650" IsReadOnly="True" TextChanged="folderPath_TextChanged" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="folderPath" VerticalAlignment="Top" Width="650" IsReadOnly="False" TextChanged="folderPath_TextChanged" />
             <Button Content="Browse" Height="23" HorizontalAlignment="Left" Margin="12,0,0,0" Name="button_batch" VerticalAlignment="Top" Width="75" Click="folderPath_Click" />
         </StackPanel>
         <Label Content="Password:" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label2" VerticalAlignment="Top" />
