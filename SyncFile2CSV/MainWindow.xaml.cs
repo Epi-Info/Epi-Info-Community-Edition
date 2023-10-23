@@ -17,6 +17,7 @@ using System.Xml;
 using System.Windows.Forms;
 using System.IO;
 using Epi;
+using System.Xml.Linq;
 
 namespace SyncFile2CSV
 {
@@ -30,8 +31,10 @@ namespace SyncFile2CSV
 
 		private string listSeparator = ",";
 		string pathCandidate = string.Empty;
+		string xmlText;
+        string syncFileNameInProgress = string.Empty;
 
-        public MainWindow()
+		public MainWindow()
         {
             string[] args = Environment.GetCommandLineArgs();
 
@@ -164,24 +167,42 @@ namespace SyncFile2CSV
 
         private void WriteExceptionFile(string exceptionText)
         {
-			if (folderPath.Text != null && folderPath.Text != string.Empty)
-			{
-				DirectoryInfo syncFileFolderDirectoryInfo = new DirectoryInfo(folderPath.Text);
+            DirectoryInfo syncFileFolderDirectoryInfo = null;
 
-				string fileName = System.IO.Path.Combine
-                (
-                    syncFileFolderDirectoryInfo.FullName,
-                    "Exception" + DateTime.Now.ToString("yyyyMMddHHmmssfff")
-                );
+            if (folderPath.Text != null && folderPath.Text != string.Empty)
+            {
+                syncFileFolderDirectoryInfo = new DirectoryInfo(folderPath.Text);
+            }
 
-				string outputFileName = System.IO.Path.Combine
-				(
-					syncFileFolderDirectoryInfo.FullName,
-					fileName + ".txt"
-				);
-
-				File.AppendAllText(outputFileName, exceptionText, Encoding.UTF8);
+            if (syncFileFolderDirectoryInfo is null)
+            {
+                syncFileFolderDirectoryInfo = new DirectoryInfo(System.IO.Path.GetDirectoryName(fileName.Text));
 			}
+
+			string exceptionfileName = System.IO.Path.Combine
+            (
+                syncFileFolderDirectoryInfo.FullName,
+                "Exception" +
+				syncFileNameInProgress +
+                DateTime.Now.ToString("yyyyMMddHHmmssfff")
+            );
+
+			string outputFileName = System.IO.Path.Combine
+			(
+				syncFileFolderDirectoryInfo.FullName,
+				exceptionfileName + ".txt"
+			);
+
+			try
+			{
+				XDocument doc = XDocument.Parse(xmlText);
+				xmlText = doc.ToString();
+			}
+			catch { }
+
+			exceptionText = exceptionText + "\n\n" + xmlText;
+
+			File.AppendAllText(outputFileName, exceptionText, Encoding.UTF8);
 
 			return;
         }
@@ -237,9 +258,10 @@ namespace SyncFile2CSV
 
         private string ParseXML(string filePath)
         {
-            string xmlText;
 
-            string password = passwordBox1.Password;
+            syncFileNameInProgress = System.IO.Path.GetFileNameWithoutExtension(filePath);
+
+			string password = passwordBox1.Password;
             string encrypted = System.IO.File.ReadAllText(filePath);
 
             try
