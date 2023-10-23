@@ -163,6 +163,8 @@ namespace SyncFile2CSV
 				    }
 				}
 			}
+
+            messageOut.Text = "Done. Ready for review.";
 		}
 
         private void WriteExceptionFile(string exceptionText)
@@ -203,6 +205,8 @@ namespace SyncFile2CSV
 			exceptionText = exceptionText + "\n\n" + xmlText;
 
 			File.AppendAllText(outputFileName, exceptionText, Encoding.UTF8);
+
+            messageOut.Text = exceptionText;
 
 			return;
         }
@@ -382,16 +386,19 @@ namespace SyncFile2CSV
 		private void fileName_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			run.IsEnabled = !fileName.Text.Equals(string.Empty) && !passwordBox1.Password.Equals(string.Empty);
+            messageOut.Text = string.Empty;
 		}
 
 		private void folderPath_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			run.IsEnabled = !folderPath.Text.Equals(string.Empty) && !passwordBox1.Password.Equals(string.Empty);
+			messageOut.Text = string.Empty;
 		}
 
 		private void passwordBox1_PasswordChanged(object sender, RoutedEventArgs e)
         {
             run.IsEnabled = (!fileName.Text.Equals(string.Empty) || !folderPath.Text.Equals(string.Empty))  && !passwordBox1.Password.Equals(string.Empty);
-        }
+			messageOut.Text = string.Empty;
+		}
 	}
 }
