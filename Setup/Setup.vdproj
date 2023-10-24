@@ -12856,7 +12856,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1A47E6DB8D944D2297E230424A9E17F0"
             {
-            "Name" = "8:Epi Info 7.2.5.0"
+            "Name" = "8:Epi Info 7.2.6.0"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -12870,7 +12870,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7557E91898444B1285B8A5E6B94505A8"
             {
-            "Name" = "8:Epi Info 7.2.5.0"
+            "Name" = "8:Epi Info 7.2.6.0"
             "Arguments" = "8:"
             "Description" = "8:Launch Epi Info 7"
             "ShowCmd" = "3:1"
@@ -12884,7 +12884,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9D576297A31441CCA00503960807213D"
             {
-            "Name" = "8:Epi Info 7.2.5.0"
+            "Name" = "8:Epi Info 7.2.6.0"
             "Arguments" = "8:"
             "Description" = "8:Launch Epi Info 7"
             "ShowCmd" = "3:1"
