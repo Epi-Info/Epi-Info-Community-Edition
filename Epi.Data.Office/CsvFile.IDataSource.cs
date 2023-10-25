@@ -20,6 +20,21 @@ namespace Epi.Data.Office
             {
                 result = (System.Data.IDataReader)this.ExecuteReader(this.CreateQuery(pSQL));
             }
+            catch (ApplicationException apex)
+            {
+                Configuration config0 = Configuration.GetNewInstance();
+                string wd = config0.Directories.Working;
+                this.ConnectionString = this.ConnectionString.Replace("Data Source=", "Data Source=" + wd + "\\");
+                try
+                {
+                    result = (System.Data.IDataReader)this.ExecuteReader(this.CreateQuery(pSQL));
+                }
+                catch (Exception e)
+                {
+                    Logger.Log("Error ExcelWorkbook.IDataSource.GetDataTableReader:\n" + e.ToString());
+                }
+                return result;
+            }
             catch (Exception e)
             {
                 Logger.Log("Error ExcelWorkbook.IDataSource.GetDataTableReader:\n" + e.ToString());

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using EpiInfo.Plugin;
@@ -22,7 +23,18 @@ namespace Epi.Data.Office
             }
             catch (Exception e)
             {
-                Logger.Log("Error ExcelWorkbook.IDataSource.GetDataTableReader:\n" + e.ToString());
+                Configuration config0 = Configuration.GetNewInstance();
+                string wd = config0.Directories.Working;
+                this.ConnectionString = this.ConnectionString.Replace("Data Source=", "Data Source=" + wd + "\\");
+                try
+                {
+                    result = (System.Data.IDataReader)this.ExecuteReader(this.CreateQuery(pSQL));
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log("Error ExcelWorkbook.IDataSource.GetDataTableReader:\n" + ex.ToString());
+                }
+                return result;
             }
             return result;
         }

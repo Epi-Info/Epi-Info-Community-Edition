@@ -140,7 +140,17 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             }
             else
             {
-                Context.AddConnection("_DB", File);
+                try
+                {
+                    Context.AddConnection("_DB", File);
+                }
+                catch (System.IO.DirectoryNotFoundException dnfex)
+                {
+                    Configuration config0 = Configuration.GetNewInstance();
+                    string wd = config0.Directories.Working;
+                    File = wd + "\\" + File;
+                    Context.AddConnection("_DB", File);
+                }
                 Context.CurrentRead = this;
 
                 string[] identifiers = Identifier.Split('.');
@@ -195,6 +205,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         jsonpath = jsonsplit[2].Split(';')[0];
                     else
                         jsonpath = jsonsplit[0];
+                    if (!System.IO.Directory.Exists(jsonpath))
+                    {
+                        Configuration config0 = Configuration.GetNewInstance();
+                        string wd = config0.Directories.Working;
+                        jsonpath = Path.Combine(wd, jsonpath);
+                    }
                     string[] separator = new string[] { "|json|" };
                     string[] tableNames = Identifier.Split(separator, StringSplitOptions.None);
                     string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + tableNames[0]);

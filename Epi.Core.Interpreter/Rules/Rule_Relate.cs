@@ -6,6 +6,7 @@ using System.Data;
 using Epi.Data;
 using EpiInfo.Plugin;
 using System.Linq;
+using System.IO;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
@@ -237,6 +238,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     jsonpath = jsonsplit[2].Split(';')[0];
                 else
                     jsonpath = jsonsplit[0];
+                if (!System.IO.Directory.Exists(jsonpath))
+                {
+                    Configuration config0 = Configuration.GetNewInstance();
+                    string wd = config0.Directories.Working;
+                    jsonpath = Path.Combine(wd, jsonpath);
+                }
                 string[] separator = new string[] { "|json|" };
                 string[] tableNames = jsonfilename.Split(separator, StringSplitOptions.None);
                 string jsonstring = System.IO.File.ReadAllText(jsonpath + "\\" + tableNames[0]);

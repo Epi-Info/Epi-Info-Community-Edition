@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using System.Data.OleDb;
 //using ADOX;
 
 namespace Epi.Data
@@ -136,7 +137,26 @@ namespace Epi.Data
             {
                 IDbDriver driver = DataSource.CreateDatabaseObject(new System.Data.Common.DbConnectionStringBuilder());
                 driver.ConnectionString = connString;
-                retval = driver.ExecuteScalar(driver.CreateQuery(pSQL));
+                try
+                {
+                    retval = driver.ExecuteScalar(driver.CreateQuery(pSQL));
+                }
+                catch(OleDbException oledbex)
+                {
+                    Configuration config0 = Configuration.GetNewInstance();
+                    string wd = config0.Directories.Working;
+                    driver.ConnectionString = driver.ConnectionString.Replace("Data Source=", "Data Source=" + wd + "\\");
+                    retval = driver.ExecuteScalar(driver.CreateQuery(pSQL));
+                    return retval;
+                }
+                catch (ApplicationException apex)
+                {
+                    Configuration config0 = Configuration.GetNewInstance();
+                    string wd = config0.Directories.Working;
+                    driver.ConnectionString = driver.ConnectionString.Replace("Data Source=", "Data Source=" + wd + "\\");
+                    retval = driver.ExecuteScalar(driver.CreateQuery(pSQL));
+                    return retval;
+                }
             }
             return retval;
         }
