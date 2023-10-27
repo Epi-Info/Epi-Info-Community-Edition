@@ -32,6 +32,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 DateTime param1 = (DateTime)p1;
                 result = param1.Hour;
             }
+            else if (p1 is TimeSpan)
+            {
+                TimeSpan timeSpan = (TimeSpan)p1;
+                result = Math.Floor(timeSpan.TotalHours);
+            }
 
             return result;
         }
