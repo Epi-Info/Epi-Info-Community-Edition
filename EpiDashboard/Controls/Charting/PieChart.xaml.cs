@@ -256,6 +256,8 @@ namespace EpiDashboard.Controls.Charting
                 xyChart.Legend.BorderThickness = new Thickness(0);
             }
             tblockXAxisLabel.Text = ((EpiDashboard.GadgetParametersBase)(PieChartParameters)).ColumnNames[0].ToString();//EI-40
+            if (!string.IsNullOrEmpty(PieChartParameters.VariableLabel))
+                tblockXAxisLabel.Text = PieChartParameters.VariableLabel;
             xyChart.Legend.FontSize = PieChartParameters.LegendFontSize;
         }
 

@@ -493,6 +493,8 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             Parameters.ChartSubTitle = txtChartSubTitle.Text;
 
+            Parameters.VariableLabel = txtVariableLabel.Text;
+
 
             //Legend settings /////////////////////////////////
 
@@ -583,6 +585,7 @@ namespace EpiDashboard.Controls.GadgetProperties
 
             txtChartTitle.Text = Parameters.ChartTitle;
             txtChartSubTitle.Text = Parameters.ChartSubTitle;
+            txtVariableLabel.Text = Parameters.VariableLabel;
 
             //Display Legend settings
             checkboxShowLegend.IsChecked = Parameters.ShowLegend;

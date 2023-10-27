@@ -118,6 +118,7 @@ namespace EpiDashboard
         public double Y2LineThickness { get; set; }
 
         public string ChartTitle { get; set; }
+        public string VariableLabel { get; set; }
         public string ChartStrataTitle { get; set; }
         public string ChartSubTitle { get; set; }
 

@@ -272,6 +272,12 @@
                             <TextBox x:Name="txtChartSubTitle" Style="{StaticResource PropertiesSubtitleDescription}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
                         </StackPanel>
                     </WrapPanel>
+                    <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel>
+                            <TextBlock x:Name="tblockChartVariableLabel" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" Text="Variable label:" Margin="0,12,0,0"  />
+                            <TextBox x:Name="txtVariableLabel" Style="{StaticResource PropertiesChartTitle}" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
