@@ -52,6 +52,11 @@ namespace EpiDashboard.Controls
             }
         }
 
+        public void setIsOutputCollapsed(bool isOutputCollapsed)
+        {
+            this.isOutputCollapsed = isOutputCollapsed;
+        }
+
         public void HideButtons()
         {
             grdConfigure.Visibility = System.Windows.Visibility.Collapsed;

@@ -814,6 +814,9 @@ namespace EpiDashboard
                         {
                             IsCollapsed = true;
                             CollapseOutput();
+                            object el = this.FindName("headerPanel");
+                            Controls.GadgetHeaderPanel headerPanel = el as Controls.GadgetHeaderPanel;
+                            headerPanel.setIsOutputCollapsed(this.IsCollapsed);
                         }                        
                         break;
                 }
