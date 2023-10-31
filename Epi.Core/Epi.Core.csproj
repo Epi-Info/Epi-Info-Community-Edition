@@ -850,21 +850,51 @@
     <Content Include="Projects\H1N1ShortForm\H1N1ShortForm.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="pt-BR\Analysis.resources.dll" />
-    <Content Include="pt-BR\Enter.resources.dll" />
-    <Content Include="pt-BR\Epi.Core.resources.dll" />
-    <Content Include="pt-BR\Epi.Data.MySQL.resources.dll" />
-    <Content Include="pt-BR\Epi.Data.PostgreSQL.resources.dll" />
-    <Content Include="pt-BR\Epi.Data.SqlServer.resources.dll" />
-    <Content Include="pt-BR\Epi.ImportExport.resources.dll" />
-    <Content Include="pt-BR\Epi.Windows.Globalization.resources.dll" />
-    <Content Include="pt-BR\Epi.Windows.ImportExport.resources.dll" />
-    <Content Include="pt-BR\Epi.Windows.resources.dll" />
-    <Content Include="pt-BR\EpiDashboard.resources.dll" />
-    <Content Include="pt-BR\MakeView.resources.dll" />
-    <Content Include="pt-BR\Mapping.resources.dll" />
-    <Content Include="pt-BR\Menu.resources.dll" />
-    <Content Include="pt-BR\StatCalc.resources.dll" />
+    <Content Include="pt-BR\Analysis.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Enter.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Epi.Core.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Epi.Data.MySQL.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Epi.Data.PostgreSQL.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Epi.Data.SqlServer.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Epi.ImportExport.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Epi.Windows.Globalization.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Epi.Windows.ImportExport.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Epi.Windows.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\EpiDashboard.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\MakeView.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Mapping.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\Menu.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pt-BR\StatCalc.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\ImagesNotToBeDeployed\App.ico" />
     <None Include="Projects\Cholera\cb.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
