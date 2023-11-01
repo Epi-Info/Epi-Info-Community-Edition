@@ -374,6 +374,22 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
 
+            LineListControl llc = (LineListControl)this.Gadget;
+            StackPanel sp = llc.panelMain;
+            UIElementCollection uiec = sp.Children;
+            DataGrid uie = (DataGrid)uiec[0];
+            Dictionary<int, string> columnswithindexes = new Dictionary<int, string>();
+            foreach (System.Windows.Controls.DataGridTextColumn dgtc in uie.Columns)
+            {
+                if (dgtc.DisplayIndex == 0)
+                    continue;
+                columnswithindexes.Add(dgtc.DisplayIndex, dgtc.Header.ToString());
+            }
+            for (int i = 1; i < columnswithindexes.Count + 1; i++)
+            {
+                ColumnOrder.Add(columnswithindexes[i]);
+            }
+
             if (!String.IsNullOrEmpty(Parameters.Height.ToString()))
             {
                 txtMaxHeight.Text = Parameters.Height.ToString();
