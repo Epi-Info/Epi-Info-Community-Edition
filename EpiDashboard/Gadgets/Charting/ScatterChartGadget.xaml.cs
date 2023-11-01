@@ -546,7 +546,9 @@ namespace EpiDashboard.Gadgets.Charting
                 if (regresResults.variables != null)
                 {
                     decimal coefficient = Convert.ToDecimal(regresResults.variables[0].coefficient);
+                    decimal coefficientp = Convert.ToDecimal(regresResults.variables[0].P);
                     decimal constant = Convert.ToDecimal(regresResults.variables[1].coefficient);
+                    decimal r2 = Convert.ToDecimal(regresResults.correlationCoefficient);
 
                     NumericDataValue newMaxValue = new NumericDataValue();
                     newMaxValue.IndependentValue = maxValue.IndependentValue;
@@ -556,6 +558,7 @@ namespace EpiDashboard.Gadgets.Charting
                     newMinValue.DependentValue = (coefficient * minValue.IndependentValue) + constant;
 
                     tblockEquation.Text = "Y = (" + Math.Round(coefficient, 4).ToString() + ")X + " + Math.Round(constant, 4).ToString();
+                    tblockEquation.Text += "\nR\xB2 = " + Math.Round(r2, 4).ToString() + "; p = " + Math.Round(coefficientp, 4).ToString();
 
                     List<NumericDataValue> regresValues = new List<NumericDataValue>();
                     regresValues.Add(newMinValue);
