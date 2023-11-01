@@ -36,9 +36,11 @@ namespace EpiDashboard.Controls.GadgetProperties
             List<string> fields = new List<string>();
             List<FieldInfo> items = new List<FieldInfo>();
             List<string> crosstabFields = new List<string>();
+            List<string> weightFields = new List<string>();
             List<string> strataFields = new List<string>();
 
             crosstabFields.Add(string.Empty);
+            weightFields.Add(string.Empty);
             items.Add(new FieldInfo()
             {
                 Name = "",
@@ -57,13 +59,14 @@ namespace EpiDashboard.Controls.GadgetProperties
 
                 fields.Add(fieldName);
                 crosstabFields.Add(fieldName);
+                weightFields.Add(fieldName);
                 strataFields.Add(fieldName);
             }
             fields.Sort();
             crosstabFields.Sort();
 
             cbxFieldOutcome.ItemsSource = fields;
-            cbxFieldWeight.ItemsSource = fields;
+            cbxFieldWeight.ItemsSource = weightFields;
             cbxFieldMatch.ItemsSource = crosstabFields;
 //            lbxOtherFields.ItemsSource = strataFields;
             cbxFields.ItemsSource = fields;
