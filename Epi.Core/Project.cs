@@ -13,6 +13,7 @@ using Epi.Data;
 using Epi.Fields;
 using Epi.Resources;
 using Epi.Data.Services;
+using System.Linq;
 
 namespace Epi
 {
@@ -155,8 +156,25 @@ namespace Epi
             Construct(filePath);
         }
 
+        public bool IsShpFile(string input, IEnumerable<string> searchItems)
+        /// <summary>
+        /// Method <c>IsShpFile</c> allows user to check to see if prj file is ESRI SHP file.
+        /// </summary>        
+        {
+            try
+            {
+                return File.ReadLines(input).Any(x => searchItems.Any(y => x.Contains(y)));
+            }
+            
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         private void PreConstruct()
         {
+
             xmlDoc = new XmlDocument();
             metaDbInfo = new DbDriverInfo();
             collectedDataDbInfo = new DbDriverInfo();
@@ -171,69 +189,81 @@ namespace Epi
             {
                 filePath = Environment.ExpandEnvironmentVariables(filePath);
 
-                xmlDoc.Load(filePath);
-                ValidateXmlDoc();
+                // Guard clause: checks prj file to see if it is a component of an ESRI SHP file (has same suffix)
+                IEnumerable<string> searchItems = new[] { "GEOGCS[", "PROJCS[", "GEOCCS[" };
 
-                FileInfo fileInfo = new FileInfo(filePath);
-
-                if (string.IsNullOrEmpty(Location))
+                if (IsShpFile(filePath, searchItems) == true)
                 {
-                    Location = fileInfo.DirectoryName;
-                    Save();
+                    string prj_msg = "PRJ file is a component of a GIS SHP file used in mapping. It is not corrupted. Do not delete.";
+                    throw new ArgumentException(prj_msg);
                 }
                 else
                 {
-                    if (string.Compare(fileInfo.DirectoryName, Location, true) != 0)
+                    xmlDoc.Load(filePath);
+
+                    ValidateXmlDoc();
+
+                    FileInfo fileInfo = new FileInfo(filePath);
+
+                    if (string.IsNullOrEmpty(Location))
                     {
                         Location = fileInfo.DirectoryName;
                         Save();
                     }
-                }
-
-                string[] Driver = this.CollectedDataDriver.Split(',');
-
-                if (Driver[1].Trim().ToLowerInvariant() == Configuration.WebDriver.ToLowerInvariant())
-                {
-                    this.collectedData.IsWebMode = true;
-                    switch (Driver[0].Trim())
+                    else
                     {
-                        case "Epi.Data.MySQL.MySQLDBFactory":
-                            this.CollectedDataDriver = Configuration.MySQLDriver;
-                            break;
-                        case "Epi.Data.Office.AccessDBFactory":
-                            this.CollectedDataDriver = Configuration.AccessDriver;
-                            break;
-                        case "Epi.Data.SqlServer.SqlDBFactory":
-                        default:
-                            this.CollectedDataDriver = Configuration.SqlDriver;
-                            break;
+                        if (string.Compare(fileInfo.DirectoryName, Location, true) != 0)
+                        {
+                            Location = fileInfo.DirectoryName;
+                            Save();
+                        }
                     }
-                }
 
-                this.collectedDataDbInfo.DBCnnStringBuilder.ConnectionString = this.CollectedDataConnectionString;
-                collectedData.Initialize(this.collectedDataDbInfo, this.CollectedDataDriver, false);
+                    string[] Driver = this.CollectedDataDriver.Split(',');
 
-                if (MetadataSource == MetadataSource.Xml)
-                {
-                    metadata = new MetadataXmlProvider(this);
-                }
-                else
-                {
-                    if (_useMetaDataSet)
+                    if (Driver[1].Trim().ToLowerInvariant() == Configuration.WebDriver.ToLowerInvariant())
                     {
-                        metadata = new MetadataDataSet(this);
+                        this.collectedData.IsWebMode = true;
+                        switch (Driver[0].Trim())
+                        {
+                            case "Epi.Data.MySQL.MySQLDBFactory":
+                                this.CollectedDataDriver = Configuration.MySQLDriver;
+                                break;
+                            case "Epi.Data.Office.AccessDBFactory":
+                                this.CollectedDataDriver = Configuration.AccessDriver;
+                                break;
+                            case "Epi.Data.SqlServer.SqlDBFactory":
+                            default:
+                                this.CollectedDataDriver = Configuration.SqlDriver;
+                                break;
+                        }
+                    }
+
+                    this.collectedDataDbInfo.DBCnnStringBuilder.ConnectionString = this.CollectedDataConnectionString;
+                    collectedData.Initialize(this.collectedDataDbInfo, this.CollectedDataDriver, false);
+
+                    if (MetadataSource == MetadataSource.Xml)
+                    {
+                        metadata = new MetadataXmlProvider(this);
                     }
                     else
                     {
-                        metadata = new MetadataDbProvider(this);
-                        if (MetadataSource == MetadataSource.SameDb)
+                        if (_useMetaDataSet)
                         {
-                            metadata.AttachDbDriver(CollectedData.GetDbDriver());
+                            metadata = new MetadataDataSet(this);
                         }
                         else
                         {
-                            this.metaDbInfo.DBCnnStringBuilder.ConnectionString = this.MetadataConnectionString;
-                            metadata.Initialize(this.metaDbInfo, this.MetadataDriver, false);
+                            metadata = new MetadataDbProvider(this);
+                            if (MetadataSource == MetadataSource.SameDb)
+                            {
+                                metadata.AttachDbDriver(CollectedData.GetDbDriver());
+                            }
+                            else
+                            {
+                                this.metaDbInfo.DBCnnStringBuilder.ConnectionString = this.MetadataConnectionString;
+                                metadata.Initialize(this.metaDbInfo, this.MetadataDriver, false);
+                            }
                         }
                     }
                 }
