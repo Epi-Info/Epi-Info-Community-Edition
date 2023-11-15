@@ -37,7 +37,7 @@ namespace EpiDashboard.Controls.Charting
                 {
                     if (s0.Label != null)
                     {
-                        sName = s0.Label.Split('.')[1];
+                        sName = s0.Label.Split(new char[] { '.' }, 2)[1];
                         if (ColumnChartParameters.ShowLegendVarNames == false)
                         {
 							try
