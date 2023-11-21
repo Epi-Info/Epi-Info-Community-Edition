@@ -186,6 +186,9 @@ namespace Epi.Core.AnalysisInterpreter
                     case "<Assign_Statement>":
                         result = new Rule_Assign(context, nonterminal);
                         break;
+                    case "<Combine_Statement>":
+                        result = new Rule_Combine(context, nonterminal);
+                        break;
                     case "<Assign_DLL_Statement>":
                         result = new Rule_Assign_DLL_Statement(context, nonterminal);
                         break;

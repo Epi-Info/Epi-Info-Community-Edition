@@ -66,6 +66,7 @@ Comment_Chars             = ('***'{Valid Chars}*)
         | <Close_Out_Statement>
         | <Simple_CMD_Statement>
         | <CMD_Line_Statement>
+        | <Combine_Statement>
         | <CoxPH_Statement>
         | <Define_Variable_Statement>
         | <Define_Connection_Command>
@@ -337,6 +338,11 @@ Comment_Chars             = ('***'{Valid Chars}*)
 <Simple_Assign_Statement>                   ::= Identifier '=' <Expression>
 <Let_Statement>                         ::= LET Identifier '=' <Expression> 
 <Assign_DLL_Statement>                ::= ASSIGN <Qualified ID> '=' identifier'!'Identifier '(' <FunctionParameterList> ')'
+
+
+
+! -------------------------- COMBINE --------------------------------------------------
+<Combine_Statement>                      ::= COMBINE VALUE '=' <Qualified ID> <QualifiedIdList> 
 
 
 
