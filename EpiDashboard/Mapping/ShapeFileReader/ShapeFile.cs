@@ -214,7 +214,7 @@ namespace EpiDashboard.Mapping.ShapeFileReader
                     break;
                 default:
                     {
-                        string msg = String.Format( System.Globalization.CultureInfo.InvariantCulture, "ShapeType {0} is not supported.", ( int ) record.ShapeType );
+                        string msg = String.Format( System.Globalization.CultureInfo.InvariantCulture, "ShapeType {0} is not supported. Epi Info cannot handle ShapeTypes larger than 8. See User Guide for ways to work around this problem.", ( int ) record.ShapeType );
                         throw new NotSupportedException( msg );
                     }
             }
