@@ -141,6 +141,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 this.TermList = this.TermList.Replace("* ", "*");
                 terms = this.TermList.Split(' ');
 
+                StringBuilder sb = new StringBuilder();
+                bool isMultiWorded = false;
                 foreach (string s in terms)
                 {
                     if (!s.Contains("*"))
@@ -148,6 +150,24 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         if ((s.Contains("(") && s.Contains(")")))// || (view != null && view.Fields.Contains(s) && view.Fields[s] is Epi.Fields.YesNoField))
                         {
                             inputVariableList.Add(s.Replace("(", string.Empty).Replace(")", string.Empty), "Discrete");
+                        }
+                        else if (s.StartsWith("["))
+                        {
+                            isMultiWorded = true;
+                            sb.Append(s.TrimStart('['));
+                        }
+                        else if (s.EndsWith("]"))
+                        {
+                            sb.Append(" ");
+                            sb.Append(s.TrimEnd(']'));
+                            inputVariableList.Add(sb.ToString(), "Unsorted");
+                            isMultiWorded = false;
+                            sb = new StringBuilder();
+                        }
+                        else if (isMultiWorded)
+                        {
+                            sb.Append(" ");
+                            sb.Append(s);
                         }
                         else
                         {
