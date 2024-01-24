@@ -151,12 +151,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         {
                             inputVariableList.Add(s.Replace("(", string.Empty).Replace(")", string.Empty), "Discrete");
                         }
-                        else if (s.StartsWith("["))
+                        else if (s.StartsWith("[") && !s.EndsWith("]"))
                         {
                             isMultiWorded = true;
                             sb.Append(s.TrimStart('['));
                         }
-                        else if (s.EndsWith("]"))
+                        else if (s.EndsWith("]") && !s.StartsWith("["))
                         {
                             sb.Append(" ");
                             sb.Append(s.TrimEnd(']'));
