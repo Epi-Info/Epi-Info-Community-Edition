@@ -941,14 +941,24 @@ namespace EpiDashboard
 					try
 					{
 						useCRG = crosstabParameters.UseCRG;
-					}
+                        if (useCRG)
+                        {
+                            Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = DashboardHelper.GenerateFrequencyTable(new CrosstabParameters(crosstabParameters));
+                            foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> kvp in grpTables)
+                            {
+                                if (kvp.Key.Columns.Count != 3)
+                                    useCRG = false;
+                                break;
+                            }
+                        }
+                    }
 					catch (Exception crgex)
 					{
 
 					}
 					if (useCRG)
-					{
-						CRGFields.Add(crosstabParameters.ColumnNames[0]);
+                    {
+                        CRGFields.Add(crosstabParameters.ColumnNames[0]);
 					}
 
                     //if (GadgetOptions.MainVariableNames != null && GadgetOptions.MainVariableNames.Count > 0)
