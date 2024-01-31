@@ -941,13 +941,35 @@ namespace EpiDashboard
 					try
 					{
 						useCRG = crosstabParameters.UseCRG;
+                        this.Dispatcher.Invoke(() =>
+                        {
+                            object el = this.FindName("infoPanel");
+                            if (el != null && el is GadgetInfoPanel)
+                            {
+                                GadgetInfoPanel panel = el as GadgetInfoPanel;
+                                panel.Text = string.Empty;
+                                panel.Visibility = Visibility.Collapsed;
+                            }
+                        });
                         if (useCRG)
                         {
                             Dictionary<DataTable, List<DescriptiveStatistics>> grpTables = DashboardHelper.GenerateFrequencyTable(new CrosstabParameters(crosstabParameters));
                             foreach (KeyValuePair<DataTable, List<DescriptiveStatistics>> kvp in grpTables)
                             {
                                 if (kvp.Key.Columns.Count != 3)
+                                {
                                     useCRG = false;
+                                    this.Dispatcher.Invoke(() =>
+                                    {
+                                        object el = this.FindName("infoPanel");
+                                        if (el != null && el is GadgetInfoPanel)
+                                        {
+                                            GadgetInfoPanel panel = el as GadgetInfoPanel;
+                                            panel.Text = "Common Reference Value is only for binary Outcomes.\n";
+                                            panel.Visibility = Visibility.Visible;
+                                        }
+                                    });
+                                }
                                 break;
                             }
                         }

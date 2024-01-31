@@ -849,13 +849,20 @@ namespace EpiDashboard
                 if (this.DataFilters != null && this.DataFilters.Count > 0)
                 {
                     panel.MaxWidth = this.ActualWidth;
-                    panel.Text = string.Format(DashboardSharedStrings.GADGET_CUSTOM_FILTER, this.DataFilters.GenerateReadableDataFilterString());
+                    if (panel.Text.StartsWith("Common Reference Value"))
+                        panel.Text = panel.Text + string.Format(DashboardSharedStrings.GADGET_CUSTOM_FILTER, this.DataFilters.GenerateReadableDataFilterString());
+                    else
+                        panel.Text = string.Format(DashboardSharedStrings.GADGET_CUSTOM_FILTER, this.DataFilters.GenerateReadableDataFilterString());
                     panel.Visibility = System.Windows.Visibility.Visible;
                 }
-                else
+                else if (!panel.Text.StartsWith("Common Reference Value"))
                 {
                     panel.Text = string.Empty;
                     panel.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else
+                {
+                    panel.Text = panel.Text.TrimEnd('\n');
                 }
             }
         }
