@@ -220,7 +220,12 @@ namespace EpiDashboard.Dialogs
                     decimal decElse;
                     decimal decAssign;
                     bool success1 = Decimal.TryParse(this.txtElseValue.Text, out decElse);
-                    if (success1) elseValue = decElse;                    
+                    if (success1) elseValue = decElse;
+                    else if (this.txtElseValue.Text.StartsWith("varname(") && this.txtElseValue.Text.IndexOf(')') == this.txtElseValue.Text.Length - 1)
+                    {
+                        elseValue = this.txtElseValue.Text;
+                        success1 = true;
+                    }
                     bool success2 = Decimal.TryParse(this.txtAssignValue.Text, out decAssign);
                     if (success2) assignValue = decAssign;
                     else if (this.txtAssignValue.Text.StartsWith("varname(") && this.txtAssignValue.Text.IndexOf(')') == this.txtAssignValue.Text.Length - 1)

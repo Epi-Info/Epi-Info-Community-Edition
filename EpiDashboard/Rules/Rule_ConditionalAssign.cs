@@ -423,6 +423,7 @@ namespace EpiDashboard.Rules
 
             bool assigned = false;
             object methodAssignValue = assignValue;
+            object methodElseValue = elseValue;
             string[] splitstring = { "varname(" };
             string[] variablenames = ("" + assignValue).Split(splitstring, StringSplitOptions.None);
             if (variablenames.Length > 1)
@@ -433,6 +434,17 @@ namespace EpiDashboard.Rules
                     string varname = variablenames[i].Substring(0, parenindex);
                     string varval = "" + row[varname];
                     methodAssignValue = ((string)methodAssignValue).Replace("varname(" + varname + ")", (string)varval);
+                }
+            }
+            variablenames = ("" + elseValue).Split(splitstring, StringSplitOptions.None);
+            if (variablenames.Length > 1)
+            {
+                for (int i = 1; i < variablenames.Length; i++)
+                {
+                    int parenindex = variablenames[i].IndexOf(')');
+                    string varname = variablenames[i].Substring(0, parenindex);
+                    string varval = "" + row[varname];
+                    methodElseValue = ((string)methodElseValue).Replace("varname(" + varname + ")", (string)varval);
                 }
             }
 
@@ -451,7 +463,7 @@ namespace EpiDashboard.Rules
 
             if (elseValue != null && !assigned)
             {
-                row[destinationColumnName] = elseValue;
+                row[destinationColumnName] = methodElseValue;
             }
         }
         #endregion // IDashboardRule Members
