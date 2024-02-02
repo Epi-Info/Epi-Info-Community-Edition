@@ -402,6 +402,11 @@ namespace EpiDashboard.Rules
                             {
                                 this.elseValue = d;
                             }
+                            else if (strValue.StartsWith("varname(") && strValue.IndexOf(')') == strValue.Length - 1)
+                            {
+                                this.elseValue = strValue;
+                                success = true;
+                            }
                             //this.elseValue = decimal.Parse()
                         }
                         else
