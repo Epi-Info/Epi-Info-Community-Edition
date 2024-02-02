@@ -372,6 +372,10 @@ namespace EpiDashboard.Rules
                             {
                                 this.assignValue = d;
                             }
+                            else if (strValue.StartsWith("varname(") && strValue.IndexOf(')') == strValue.Length - 1)
+                            {
+                                this.assignValue = strValue;
+                            }
                             //this.elseValue = decimal.Parse()
                         }
                         else
@@ -418,6 +422,19 @@ namespace EpiDashboard.Rules
             // variable assignments is maintained across different types of created variables.
 
             bool assigned = false;
+            object methodAssignValue = assignValue;
+            string[] splitstring = { "varname(" };
+            string[] variablenames = ("" + assignValue).Split(splitstring, StringSplitOptions.None);
+            if (variablenames.Length > 1)
+            {
+                for (int i = 1; i < variablenames.Length; i++)
+                {
+                    int parenindex = variablenames[i].IndexOf(')');
+                    string varname = variablenames[i].Substring(0, parenindex);
+                    string varval = "" + row[varname];
+                    methodAssignValue = ((string)methodAssignValue).Replace("varname(" + varname + ")", (string)varval);
+                }
+            }
 
             row.AcceptChanges();
 
@@ -426,7 +443,7 @@ namespace EpiDashboard.Rules
                 DataRow assignRow = assignRowView.Row;
                 if (assignRow == row)
                 {
-                    assignRow[destinationColumnName] = assignValue;
+                    assignRow[destinationColumnName] = methodAssignValue;
                     assigned = true;
                     break;
                 }

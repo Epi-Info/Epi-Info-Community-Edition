@@ -223,6 +223,11 @@ namespace EpiDashboard.Dialogs
                     if (success1) elseValue = decElse;                    
                     bool success2 = Decimal.TryParse(this.txtAssignValue.Text, out decAssign);
                     if (success2) assignValue = decAssign;
+                    else if (this.txtAssignValue.Text.StartsWith("varname(") && this.txtAssignValue.Text.IndexOf(')') == this.txtAssignValue.Text.Length - 1)
+                    {
+                        assignValue = this.txtAssignValue.Text;
+                        success2 = true;
+                    }
 
                     if ((!success1 && checkboxUseElse.Checked) || !success2)
                     {
