@@ -1912,7 +1912,7 @@ namespace EpiDashboard
                                     if (groupValue.Equals(""))
                                         sdv.RowFilter = groupField + " is null";
                                     else
-                                        sdv.RowFilter = groupField + " = '" + groupValue + "'";
+                                        sdv.RowFilter = groupField + " = '" + groupValue.Replace("'", "''") + "'";
                                     DataTable sdvTable = sdv.ToTable();
                                     if (!Parameters.ColumnNames.Contains(groupField))
                                     {
@@ -1962,7 +1962,7 @@ namespace EpiDashboard
                                         if (groupValue.Equals(""))
                                             sdv.RowFilter = groupField + " is null";
                                         else
-                                            sdv.RowFilter = groupField + " = '" + groupValue + "'";
+                                            sdv.RowFilter = groupField + " = '" + groupValue.Replace("'", "''") + "'";
                                         DataTable sdvTable = sdv.ToTable();
                                         if (!Parameters.ColumnNames.Contains(groupField))
                                         {

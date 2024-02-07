@@ -1296,7 +1296,7 @@ namespace Epi.Data.Services
 			#endregion
 			
 			DataView dv = ReservedWordsDataTable.DefaultView;
-			dv.RowFilter = ReservedWordsDataTable.NameColumn.ColumnName + " = '" + word + "'";
+			dv.RowFilter = ReservedWordsDataTable.NameColumn.ColumnName + " = '" + word.Replace("'", "''") + "'";
 			return (dv.Count > 0);
 		}
 		#endregion Public Methods		
