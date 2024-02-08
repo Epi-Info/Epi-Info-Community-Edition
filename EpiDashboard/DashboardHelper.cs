@@ -2390,6 +2390,21 @@ namespace EpiDashboard
                         }
                     }
 
+                    AddSystemVariablesToTable(unfilteredTable);
+                    AddPermanentVariablesToTable(unfilteredTable);
+                    ds = new DataSet();
+                    ds.Tables.Add(unfilteredTable); //ds.Tables.Add(ConvertTableColumns(unfilteredTable));
+                    ds.Tables[0].CaseSensitive = true;
+                    mainTable = ds.Tables[0];
+                    stopwatch.Stop();
+
+                    ConstructTableColumnNames();
+
+                    if (UserVarsNeedUpdating)
+                    {
+                        ApplyDashboardRules(inputs);
+                    }
+
                     if (ConnectionsForRelate.Count > 0)
                     {
                         foreach (RelatedConnection conn in ConnectionsForRelate)
@@ -2416,21 +2431,6 @@ namespace EpiDashboard
 
                             RelateInto(unfilteredTable, relatedTable, conn.ParentKeyField, conn.ChildKeyField, conn.UseUnmatched, inputs);
                         }
-                    }
-
-                    AddSystemVariablesToTable(unfilteredTable);
-                    AddPermanentVariablesToTable(unfilteredTable);
-                    ds = new DataSet();
-                    ds.Tables.Add(unfilteredTable); //ds.Tables.Add(ConvertTableColumns(unfilteredTable));
-                    ds.Tables[0].CaseSensitive = true;
-                    mainTable = ds.Tables[0];
-                    stopwatch.Stop();
-
-                    ConstructTableColumnNames();
-
-                    if (UserVarsNeedUpdating)
-                    {
-                        ApplyDashboardRules(inputs);
                     }
 
                     #region Data Prep for values with spaces (Excel only)
