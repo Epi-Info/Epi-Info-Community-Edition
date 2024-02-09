@@ -112,6 +112,28 @@ namespace Epi.Data.Office
                         //Table exists
                         result = true;
                     }
+
+                    if (!result && (pTableName.ToLowerInvariant().EndsWith(".json") || GetConnection().ConnectionString.Contains("FMT=JSON")))
+                    {
+                        string[] jsonsplit = connString.Split('=');
+                        string jsonpath = "";
+                        if (jsonsplit.Length > 2)
+                        {
+                            jsonpath = jsonsplit[2];
+                            if (jsonpath.ToLowerInvariant().EndsWith(";extended properties"))
+                            {
+                                int extpropindex = jsonpath.ToLowerInvariant().IndexOf(";extended properties");
+                                jsonpath = jsonpath.Substring(0, extpropindex);
+                            }
+                        }
+                        else if (jsonsplit.Length > 1)
+                            jsonpath = jsonsplit[1];
+                        else
+                            jsonpath = jsonsplit[0];
+                        string[] separator = new string[] { "|json|" };
+                        string[] tableNames = pTableName.Split(separator, StringSplitOptions.None);
+                        result = System.IO.File.Exists(jsonpath + "\\" + tableNames[0]);
+                    }
                 }
                 catch (Exception ex)
                 {
