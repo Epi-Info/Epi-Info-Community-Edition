@@ -3821,7 +3821,14 @@ namespace Epi.Windows.MakeView.PresentationLogic
 
                 canvas.PagePanel.Controls.Add(control);
 
-                if (control is GroupBox == false)
+                RenderableField field = null;
+
+                if (control is IFieldControl)
+                {
+                    field = (RenderableField)((IFieldControl)control).Field;
+                }
+
+				if (field != null && field is GroupField == false)
                 {
                     control.BringToFront();
                 }
