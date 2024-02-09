@@ -124,6 +124,9 @@ namespace Epi.Data.Office
                         //Table exists
                         result = true;
                     }
+
+                    if (!result)
+                        result = driver.TableExists(pTableName);
                 }
                 catch (Exception ex)
                 {
