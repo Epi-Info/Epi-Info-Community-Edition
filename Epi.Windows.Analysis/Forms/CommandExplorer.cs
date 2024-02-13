@@ -827,10 +827,12 @@ namespace Epi.Windows.Analysis.Forms
             try
             {
                 Rule_Context Context = this.mainForm.EpiInterpreter.Context;
+                
                 if (Context.DataSet.Tables["output"] != null)
                 {
                     Context.ReadDataSource(Context.DataSet.Tables["output"]);
                 }
+
                 if (e.Node.Parent != null)
                 {
                     if (tvCommands.Nodes[0] == e.Node.Parent)
@@ -870,7 +872,7 @@ namespace Epi.Windows.Analysis.Forms
                                 DesignSelectIfCommand((SelectIfCommands)((TreeValueNode)e.Node).Value);
                                 break;
                             case CommandGroups.Statistics:
-                                if (Context.CurrentRead != null)
+                                if (Context.DataSet.Tables["Output"] != null)
                                 {
                                     DesignStatisticsCommand((StatisticsCommands)((TreeValueNode)e.Node).Value);
                                 }
