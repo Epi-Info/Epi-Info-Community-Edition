@@ -721,7 +721,7 @@ namespace Epi
             row.ShowHyperlinks = true;
             row.ShowTables = true;
             row.IncludeMissingValues = false;
-            row.SnapToGrid = true;
+            row.SnapToGrid = false;  // EI-1488
             row.EditorFontName = "Segoe UI";
             row.EditorFontSize = 10M;
             row.ControlFontName = "Segoe UI";
