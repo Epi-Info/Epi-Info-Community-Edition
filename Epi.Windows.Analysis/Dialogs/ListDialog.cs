@@ -205,9 +205,10 @@ namespace Epi.Windows.Analysis.Dialogs
 		private void LoadVariables()
 
 		{
-            VariableType scopeWord = VariableType.DataSource | VariableType.DataSourceRedefined | 
-                                     VariableType.Standard | VariableType.Global;
-            FillVariableCombo(cmbVar, scopeWord);
+			VariableType scopeWord = VariableType.DataSource | VariableType.DataSourceRedefined |
+									 VariableType.Standard | VariableType.Global | VariableType.Permanent;
+
+			FillVariableCombo(cmbVar, scopeWord);
             cmbVar.Items.Insert(0, "*");
 			cmbVar.SelectedIndex = 0;
 			//Data binding a combo box raises this event. Adding event handler here prevents this event being consumed prematurely

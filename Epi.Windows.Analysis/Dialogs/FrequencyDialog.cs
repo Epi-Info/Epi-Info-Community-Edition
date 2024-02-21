@@ -281,7 +281,7 @@ namespace Epi.Windows.Analysis.Dialogs
         private void FrequencyDialog_Load(object sender, EventArgs e)
         {
             VariableType scopeWord = VariableType.DataSource | VariableType.DataSourceRedefined | 
-                                     VariableType.Standard | VariableType.Global;
+                                     VariableType.Standard | VariableType.Global | VariableType.Permanent;
 
             FillVariableCombo(cmbVariables, scopeWord);
             cmbVariables.Items.Add("*");

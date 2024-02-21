@@ -175,9 +175,10 @@ namespace Epi.Windows.Analysis.Dialogs
         /// <param name="e">.NET supplied event args.</param>
         private void MeansDialog_Load(object sender, EventArgs e)
         {
-            VariableType scopeWord = VariableType.DataSource | VariableType.DataSourceRedefined |
-                                                    VariableType.Standard;
-            FillVariableCombo(cmbMeansOf, scopeWord);
+			VariableType scopeWord = VariableType.DataSource | VariableType.DataSourceRedefined |
+									 VariableType.Standard | VariableType.Global | VariableType.Permanent;
+
+			FillVariableCombo(cmbMeansOf, scopeWord);
             //cmbMeansOf.Items.Insert(0, "*");  //ToDo: uncomment this when multivariate (*) is working
             //cmbMeansOf.SelectedIndex = 0;     //      and set SelectedIndex = 0
             cmbMeansOf.SelectedIndex = -1;

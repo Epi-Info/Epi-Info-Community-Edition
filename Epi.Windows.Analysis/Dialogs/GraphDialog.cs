@@ -314,12 +314,10 @@ namespace Epi.Windows.Analysis.Dialogs
 		#region Private Methods
 		private void LoadVariables()
 		{
-            VariableType scopeWord = 
-                VariableType.DataSource | 
-                VariableType.DataSourceRedefined | 
-                VariableType.Standard;
+			VariableType scopeWord = VariableType.DataSource | VariableType.DataSourceRedefined |
+									 VariableType.Standard | VariableType.Global | VariableType.Permanent;
 
-            FillVariableCombo(comboBoxMainVariable, scopeWord);
+			FillVariableCombo(comboBoxMainVariable, scopeWord);
             comboBoxMainVariable.Items.Insert(0, "");
             comboBoxMainVariable.SelectedIndex = 0;
 

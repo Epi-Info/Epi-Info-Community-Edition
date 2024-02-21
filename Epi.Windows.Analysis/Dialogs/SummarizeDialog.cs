@@ -253,19 +253,20 @@ namespace Epi.Windows.Analysis.Dialogs
 		private void LoadVariables()
 		{
 			//First get the list of all variables
-            // DataTable variables = GetAllVariablesAsDataTable(true, true, false, false);
-            //DataTable variables = GetMemoryRegion().GetVariablesAsDataTable(
-            //                                        VariableType.DataSource |
-            //                                        VariableType.Standard);
-            ////Sort the data
-            //System.Data.DataView dv = variables.DefaultView;
-            //dv.Sort = ColumnNames.NAME;
-			
-            //cmbVar.DataSource = dv;
-            //cmbVar.DisplayMember = ColumnNames.NAME;
-            //cmbVar.ValueMember = ColumnNames.NAME;
-            VariableType scopeWord = VariableType.DataSource | VariableType.Standard;
-            FillVariableCombo(cmbVar, scopeWord);
+			// DataTable variables = GetAllVariablesAsDataTable(true, true, false, false);
+			//DataTable variables = GetMemoryRegion().GetVariablesAsDataTable(
+			//                                        VariableType.DataSource |
+			//                                        VariableType.Standard);
+			////Sort the data
+			//System.Data.DataView dv = variables.DefaultView;
+			//dv.Sort = ColumnNames.NAME;
+
+			//cmbVar.DataSource = dv;
+			//cmbVar.DisplayMember = ColumnNames.NAME;
+			//cmbVar.ValueMember = ColumnNames.NAME;
+			VariableType scopeWord = VariableType.DataSource | VariableType.DataSourceRedefined |
+									 VariableType.Standard | VariableType.Global | VariableType.Permanent;
+			FillVariableCombo(cmbVar, scopeWord);
             cmbVar.SelectedIndex = -1;
 
             FillVariableCombo(cmbGroupBy, scopeWord);
