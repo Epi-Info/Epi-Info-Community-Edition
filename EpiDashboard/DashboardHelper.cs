@@ -9713,12 +9713,12 @@ namespace EpiDashboard
                         {
                             grandMeanFilter = grandMeanFilter + " and " + safeCrosstabVar + " is not null";
 
-                            if (GetColumnType(freqVar).Equals("System.Byte") || GetColumnType(freqVar).Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32"))
+                            if (GetColumnType(freqVar).Equals("System.Byte") || GetColumnType(freqVar).Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32") || GetColumnType(freqVar).Equals("System.Int64"))
                             {
                                 DataTable copyOfTable = table.Clone();
                                 DataColumn dc = copyOfTable.Columns[freqVar];
 
-                                if (dc.DataType.ToString().Equals("System.Byte") || dc.DataType.ToString().Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32"))
+                                if (dc.DataType.ToString().Equals("System.Byte") || dc.DataType.ToString().Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32") || GetColumnType(freqVar).Equals("System.Int64"))
                                 {
                                     dc.DataType = typeof(decimal);
                                 }
@@ -10187,12 +10187,12 @@ namespace EpiDashboard
                         {
                             grandMeanFilter = grandMeanFilter + " and " + safeCrosstabVar + " is not null";
 
-                            if (GetColumnType(freqVar).Equals("System.Byte") || GetColumnType(freqVar).Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32"))
+                            if (GetColumnType(freqVar).Equals("System.Byte") || GetColumnType(freqVar).Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32") || GetColumnType(freqVar).Equals("System.Int64"))
                             {
                                 DataTable copyOfTable = table.Clone();
                                 DataColumn dc = copyOfTable.Columns[freqVar];
 
-                                if (dc.DataType.ToString().Equals("System.Byte") || dc.DataType.ToString().Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32"))
+                                if (dc.DataType.ToString().Equals("System.Byte") || dc.DataType.ToString().Equals("System.Int16") || GetColumnType(freqVar).Equals("System.Int32") || GetColumnType(freqVar).Equals("System.Int64"))
                                 {
                                     dc.DataType = typeof(decimal);
                                 }
