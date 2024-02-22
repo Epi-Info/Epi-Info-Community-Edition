@@ -979,7 +979,7 @@ namespace EpiDashboard.Rules
                     }                
                 }
             }
-            else if (sourceColumnType.Equals("System.Int32") || sourceColumnType.Equals("System.Int16") || sourceColumnType.Equals("System.Byte") || sourceColumnType.Equals("System.SByte"))
+            else if (sourceColumnType.Equals("System.Int32") || sourceColumnType.Equals("System.Int64") || sourceColumnType.Equals("System.Int16") || sourceColumnType.Equals("System.Byte") || sourceColumnType.Equals("System.SByte"))
             {
                 string recodedValue = string.Empty;
                 string value = row[this.SourceColumnName].ToString();
