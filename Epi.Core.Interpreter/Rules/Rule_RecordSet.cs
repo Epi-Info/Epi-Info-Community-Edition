@@ -31,32 +31,30 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         public override object Execute()
         {
-            this.Context.isReadMode = false;
-            this.Context.CurrentSelect.Length = 0;
-            this.Context.CurrentSelect.Append(this.SQL);
+			this.Context.isReadMode = false;
+			this.Context.CurrentSelect.Length = 0;
+			this.Context.CurrentSelect.Append(this.SQL);
 
+			this.Context.DataTableRefreshNeeded = true;
 
-            
-            this.Context.DataTableRefreshNeeded = true;
-            if (this.Context.CurrentRead != null)
-            {
-                this.Context.CurrentRead.IsEpi7ProjectRead = false;
-            }
+			if (this.Context.CurrentRead != null)
+			{
+				this.Context.CurrentRead.IsEpi7ProjectRead = false;
+			}
 
-            this.Context.SyncVariableAndOutputTable();
+			this.Context.MemoryRegion.RemoveVariablesInScope(VariableType.DataSource);
+			this.Context.SyncVariableAndOutputTable();
 
-            List<System.Data.DataRow> recordCount = this.Context.GetOutput();
+			List<System.Data.DataRow> recordCount = this.Context.GetOutput();
 
-            //string result = string.Format("number of records read {0}", recordCount.Count);
-            Dictionary<string, string> args = new Dictionary<string, string>();
-            args.Add("COMMANDNAME", "RecordSet");
-            args.Add("SQL", this.SQL);
-            args.Add("ROWCOUNT", recordCount.Count.ToString());
+			Dictionary<string, string> args = new Dictionary<string, string>();
+			args.Add("COMMANDNAME", "RecordSet");
+			args.Add("SQL", this.SQL);
+			args.Add("ROWCOUNT", recordCount.Count.ToString());
 
+			this.Context.AnalysisCheckCodeInterface.Display(args);
 
-            this.Context.AnalysisCheckCodeInterface.Display(args);
-
-            return null;
-        }
-    }
+			return null;
+		}
+	}
 }
