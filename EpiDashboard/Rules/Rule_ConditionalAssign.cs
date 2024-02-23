@@ -460,7 +460,15 @@ namespace EpiDashboard.Rules
                 DataRow assignRow = assignRowView.Row;
                 if (assignRow == row)
                 {
-                    assignRow[destinationColumnName] = methodAssignValue;
+                    try
+                    {
+                        assignRow[destinationColumnName] = methodAssignValue;
+                    }
+                    catch (Exception ex)
+                    {
+                        assigned = true;
+                        break;
+                    }
                     assigned = true;
                     break;
                 }
