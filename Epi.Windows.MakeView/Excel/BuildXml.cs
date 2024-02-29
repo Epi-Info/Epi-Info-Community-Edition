@@ -150,10 +150,50 @@ namespace Epi.Windows.MakeView.Excel
                 FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
                 FiledElement.Remove();
             }
-            
+
+            bool pageAlreadyAdded = false;
+            IEnumerable<XElement> PageElements = NewXmlDoc.Descendants("Page");
+            foreach (XElement pgel in PageElements)
+            {
+                string pgid = pgel.Attribute("PageId").Value.ToString();
+                if (pgid.Equals("" + NewPage.PageId))
+                {
+                    pageAlreadyAdded = true;
+                    IEnumerable<XElement> pgelDescendants = pgel.Descendants("Field");
+                    XElement lastField = pgelDescendants.Last<XElement>();
+                    for (int di = pgelDescendants.Count<XElement>() - 1; di >= 0; di--)
+                    {
+                        lastField = pgelDescendants.ElementAt(di);
+                        if (lastField.Attribute("Name").Value.StartsWith("Grp_"))
+                            break;
+                    }
+                    int highestposition = (int)lastField.Attribute("Position");
+                    float highesttoppositionpercentage = (float)lastField.Attribute("ControlTopPositionPercentage") + (float)lastField.Attribute("ControlHeightPercentage");
+                    int fieldLoops = -1;
+                    foreach (XElement fieldElement in PageElement.Descendants("Field"))
+                    {
+                        float currenttopposition = (float)fieldElement.Attribute("ControlTopPositionPercentage");
+                        float currentprompttopposition = (float)-1.0;
+                        if (!string.IsNullOrEmpty(fieldElement.Attribute("PromptTopPositionPercentage").Value))
+                            currentprompttopposition = (float)fieldElement.Attribute("PromptTopPositionPercentage");
+                        fieldElement.SetAttributeValue("Position", highestposition + 1);
+                        fieldElement.SetAttributeValue("ControlTopPositionPercentage", highesttoppositionpercentage + currenttopposition);
+                        if (currentprompttopposition >= 0.0)
+                            fieldElement.SetAttributeValue("PromptTopPositionPercentage", highesttoppositionpercentage + currentprompttopposition);
+                        if (fieldLoops > 0)
+                            fieldElement.SetAttributeValue("Position", highestposition + 1 + fieldLoops);
+                        pgel.Add(fieldElement);
+                        fieldLoops++;
+                    }
+                    PageElement = pgel;
+                    break;
+                }
+            }
+
             // Add page element to Xml
             XElement XmlElement = NewXmlDoc.XPathSelectElement("Template/Project/View");
-            XmlElement.Add(PageElement);
+            if (!pageAlreadyAdded)
+                XmlElement.Add(PageElement);
             return XmlElement;
         }
 

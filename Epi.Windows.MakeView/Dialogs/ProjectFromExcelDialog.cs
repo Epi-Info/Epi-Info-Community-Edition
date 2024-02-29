@@ -342,6 +342,13 @@ namespace Epi.Windows.MakeView.Dialogs
                 }
                 Page.PageName = "Page " + (row - 1).ToString();
                 Page.PageId = row - 1;
+                if (xlWorksheet.Cells[row, 11] != null && xlWorksheet.Cells[row, 11].Text != "")
+                {
+                    int pageidtmp = Page.PageId;
+                    bool pageidsuccess = Int32.TryParse(xlWorksheet.Cells[row, 11].Text, out pageidtmp);
+                    Page.PageId = pageidtmp;
+                    Page.PageName = "Page " + Page.PageId;
+                }
                 cardList.Add(Page);
 
             }
