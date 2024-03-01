@@ -173,13 +173,16 @@ namespace Epi.Windows.MakeView.Excel
                     foreach (XElement fieldElement in PageElement.Descendants("Field"))
                     {
                         float currenttopposition = (float)fieldElement.Attribute("ControlTopPositionPercentage");
+                        float currentcontrolheight = (float)fieldElement.Attribute("ControlHeightPercentage");
                         float currentprompttopposition = (float)-1.0;
                         if (!string.IsNullOrEmpty(fieldElement.Attribute("PromptTopPositionPercentage").Value))
                             currentprompttopposition = (float)fieldElement.Attribute("PromptTopPositionPercentage");
                         fieldElement.SetAttributeValue("Position", highestposition + 1);
-                        fieldElement.SetAttributeValue("ControlTopPositionPercentage", highesttoppositionpercentage + currenttopposition);
+                        fieldElement.SetAttributeValue("ControlTopPositionPercentage", Math.Min((549.0 / 780.0) * (highesttoppositionpercentage + currenttopposition), 0.999));
+                        if (fieldElement.Attribute("Name").Value.StartsWith("Grp_"))
+                            fieldElement.SetAttributeValue("ControlHeightPercentage", (549.0 / 780.0) * currentcontrolheight);
                         if (currentprompttopposition >= 0.0)
-                            fieldElement.SetAttributeValue("PromptTopPositionPercentage", highesttoppositionpercentage + currentprompttopposition);
+                            fieldElement.SetAttributeValue("PromptTopPositionPercentage", Math.Min((549.0 / 780.0) * (highesttoppositionpercentage + currentprompttopposition), 0.999));
                         if (fieldLoops > 0)
                             fieldElement.SetAttributeValue("Position", highestposition + 1 + fieldLoops);
                         pgel.Add(fieldElement);
@@ -194,6 +197,8 @@ namespace Epi.Windows.MakeView.Excel
             XElement XmlElement = NewXmlDoc.XPathSelectElement("Template/Project/View");
             if (!pageAlreadyAdded)
                 XmlElement.Add(PageElement);
+            else
+                XmlElement.SetAttributeValue("Orientation", "Portrait");
             return XmlElement;
         }
 
