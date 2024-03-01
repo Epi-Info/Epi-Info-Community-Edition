@@ -178,11 +178,11 @@ namespace Epi.Windows.MakeView.Excel
                         if (!string.IsNullOrEmpty(fieldElement.Attribute("PromptTopPositionPercentage").Value))
                             currentprompttopposition = (float)fieldElement.Attribute("PromptTopPositionPercentage");
                         fieldElement.SetAttributeValue("Position", highestposition + 1);
-                        fieldElement.SetAttributeValue("ControlTopPositionPercentage", Math.Min((549.0 / 780.0) * (highesttoppositionpercentage + currenttopposition), 0.999));
+                        fieldElement.SetAttributeValue("ControlTopPositionPercentage", Math.Min(highesttoppositionpercentage + (549.0 / 780.0) * currenttopposition, 0.999));
                         if (fieldElement.Attribute("Name").Value.StartsWith("Grp_"))
                             fieldElement.SetAttributeValue("ControlHeightPercentage", (549.0 / 780.0) * currentcontrolheight);
                         if (currentprompttopposition >= 0.0)
-                            fieldElement.SetAttributeValue("PromptTopPositionPercentage", Math.Min((549.0 / 780.0) * (highesttoppositionpercentage + currentprompttopposition), 0.999));
+                            fieldElement.SetAttributeValue("PromptTopPositionPercentage", Math.Min(highesttoppositionpercentage + (549.0 / 780.0) * currentprompttopposition, 0.999));
                         if (fieldLoops > 0)
                             fieldElement.SetAttributeValue("Position", highestposition + 1 + fieldLoops);
                         pgel.Add(fieldElement);
