@@ -91,6 +91,7 @@
     <EmbeddedResource Include="StatCalcSharedStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StatCalcSharedStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="StatCalc.resx" />
     <EmbeddedResource Include="StatCalcForm.resx" />

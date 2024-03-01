@@ -19,7 +19,7 @@ namespace StatCalc {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class StatCalcSharedStrings {
@@ -71,7 +71,8 @@ namespace StatCalc {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to COHORT OR
+        ///   Looks up a localized string similar to SAMPLE SIZE FOR
+        ///COHORT OR
         ///CROSS-SECTIONAL.
         /// </summary>
         public static string STATCALC_COHORT_CROSS {
@@ -120,7 +121,8 @@ namespace StatCalc {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to POPULATION SURVEY.
+        ///   Looks up a localized string similar to SAMPLE SIZE FOR
+        ///POPULATION SURVEY.
         /// </summary>
         public static string STATCALC_POPULATION_SURVEY {
             get {
@@ -138,7 +140,8 @@ namespace StatCalc {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UNMATCHED
+        ///   Looks up a localized string similar to SAMPLE SIZE FOR
+        ///UNMATCHED
         ///CASE-CONTROL.
         /// </summary>
         public static string STATCALC_UNMATCHED_CASE {

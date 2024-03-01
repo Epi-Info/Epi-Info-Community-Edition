@@ -122,7 +122,7 @@
 FOR TREND</value>
   </data>
   <data name="STATCALC_COHORT_CROSS" xml:space="preserve">
-    <value>COHORT OR
+    <value>SAMPLE SIZE FOR&#10;COHORT OR
 CROSS-SECTIONAL</value>
   </data>
   <data name="STATCALC_LANGUAGE" xml:space="preserve">
@@ -141,13 +141,13 @@ CASE CONTROL STUDY</value>
 (PROPORTION VS. STD.)</value>
   </data>
   <data name="STATCALC_POPULATION_SURVEY" xml:space="preserve">
-    <value>POPULATION SURVEY</value>
+    <value>SAMPLE SIZE FOR&#10;POPULATION SURVEY</value>
   </data>
   <data name="STATCALC_TABLES_22N" xml:space="preserve">
     <value>TABLES (2 x 2 x N)</value>
   </data>
   <data name="STATCALC_UNMATCHED_CASE" xml:space="preserve">
-    <value>UNMATCHED
+    <value>SAMPLE SIZE FOR&#10;UNMATCHED
 CASE-CONTROL</value>
   </data>
   <data name="STATCALC_VERSION" xml:space="preserve">
