@@ -1169,24 +1169,24 @@ namespace EpiDashboard
                 {
                     if (sliderZoom.Value == 100)
                     {
-                        Canvas.SetTop(dataFilteringControl, e.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (dataFilteringControl.ActualHeight / 2.0));
+                        Canvas.SetTop(dataFilteringControl, e.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (dataFilteringControl.ActualHeight * 0.0));
                     }
                     else
                     {
                         double factor = sliderZoom.Value / 100.0;
-                        Canvas.SetTop(dataFilteringControl, (e.VerticalOffset / factor) + (scrollViewer.ActualHeight / factor / 2.0) - (dataFilteringControl.ActualHeight / factor / 2.0));
+                        Canvas.SetTop(dataFilteringControl, (e.VerticalOffset / factor) + (scrollViewer.ActualHeight / factor / 2.0)); // - (dataFilteringControl.ActualHeight / factor / 2.0));
                     }
                 }
                 if (variablesControl != null)
                 {
                     if (sliderZoom.Value == 100)
                     {
-                        Canvas.SetTop(variablesControl, e.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (variablesControl.ActualHeight / 2.0));
+                        Canvas.SetTop(variablesControl, e.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (variablesControl.ActualHeight / 1.0));
                     }
                     else
                     {
                         double factor = sliderZoom.Value / 100.0;
-						Canvas.SetTop(variablesControl, (e.VerticalOffset / factor) + (scrollViewer.ActualHeight / factor / 2.0) - (variablesControl.ActualHeight / factor / 2.0));
+						Canvas.SetTop(variablesControl, (e.VerticalOffset / factor) + (scrollViewer.ActualHeight / factor / 2.0) - (variablesControl.ActualHeight / factor / 1.0));
 					}
                 }
 
@@ -2858,8 +2858,8 @@ namespace EpiDashboard
 
         void dataFilteringControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Canvas.SetRight(dataFilteringControl, -540);
-            Canvas.SetTop(dataFilteringControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (dataFilteringControl.ActualHeight / 2.0));
+            Canvas.SetLeft(dataFilteringControl, -540);
+            Canvas.SetTop(dataFilteringControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (dataFilteringControl.ActualHeight * 0.0));
         }
 
         void dataExportControl_Loaded(object sender, RoutedEventArgs e)
@@ -2892,12 +2892,12 @@ namespace EpiDashboard
 		{
 			dataFilteringControl.Visibility = System.Windows.Visibility.Visible;
 			DoubleAnimation anim = new DoubleAnimation();
-            anim.From = Canvas.GetRight(dataFilteringControl);
+            anim.From = Canvas.GetLeft(dataFilteringControl);
             anim.To = -10;
 			//anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value) + 530;
             anim.AccelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
+            dataFilteringControl.BeginAnimation(Canvas.LeftProperty, anim);
             dataFilteringControl.SetExpanded();
             this.isCreatingFilter = true;
         }
@@ -2906,13 +2906,13 @@ namespace EpiDashboard
         {
             DoubleAnimation anim = new DoubleAnimation();
             anim.BeginTime = new TimeSpan(0, 0, 0, 0, 350);
-            anim.From = Canvas.GetRight(dataFilteringControl);
+            anim.From = Canvas.GetLeft(dataFilteringControl);
 			anim.To = -540;
 			//anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value); // + 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
 			anim.DecelerationRatio = 0.8;
             anim.Duration = new Duration(TimeSpan.FromSeconds(0.5));
 			anim.Completed += CollapseFilterGadgetCompleted;
-			dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
+			dataFilteringControl.BeginAnimation(Canvas.LeftProperty, anim);
             dataFilteringControl.SetCollapsed();
             this.isCreatingFilter = false;
 		}
@@ -2921,11 +2921,11 @@ namespace EpiDashboard
 		{
 			DoubleAnimation anim = new DoubleAnimation();
 			anim.BeginTime = new TimeSpan(0, 0, 0, 0, 0);
-			anim.From = Canvas.GetRight(dataFilteringControl);
+			anim.From = Canvas.GetLeft(dataFilteringControl);
 			anim.To = -540 * Math.Max(1.0, (100 / sliderZoom.Value)) + Math.Max(0.0, 100 - sliderZoom.Value); // + 10.0 * Convert.ToDouble(sliderZoom.Value < 60);
 			anim.DecelerationRatio = 0.0;
 			anim.Duration = new Duration(TimeSpan.FromSeconds(0.0));
-			dataFilteringControl.BeginAnimation(Canvas.RightProperty, anim);
+			dataFilteringControl.BeginAnimation(Canvas.LeftProperty, anim);
 			dataFilteringControl.SetCollapsed();
 			this.isCreatingFilter = false;
 		}
@@ -2954,7 +2954,7 @@ namespace EpiDashboard
         void dataRecodingControl_Loaded(object sender, RoutedEventArgs e)
         {
             Canvas.SetLeft(variablesControl, -425);
-            Canvas.SetTop(variablesControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (variablesControl.ActualHeight / 2.0));
+            Canvas.SetTop(variablesControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (variablesControl.ActualHeight / 1.0));
         }
 
         void ExpandRecodingGadget()

@@ -37,7 +37,7 @@
 
                     <TextBlock x:Name="txtTitle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TextWrapping="Wrap" TextAlignment="Center" Text="Data Filters" FontWeight="Bold" >
                         <TextBlock.RenderTransform>
-                            <RotateTransform Angle="270" CenterX="80" CenterY="81" />
+                            <RotateTransform Angle="90" CenterX="256" CenterY="311" />
                         </TextBlock.RenderTransform>
                     </TextBlock>
 

@@ -401,7 +401,7 @@
             </ScrollViewer.ContextMenu>
 
 
-            <dashboard:DragCanvas x:Name="canvasMain" AllowDragging="True" AllowDragOutOfView="True" Width="Auto" Height="8000" MouseDown="canvasMain_MouseDown">
+            <dashboard:DragCanvas x:Name="canvasMain" AllowDragging="True" AllowDragOutOfView="True" Width="2000" Height="8000" MouseDown="canvasMain_MouseDown">
                 <dashboard:DragCanvas.LayoutTransform >
                     <ScaleTransform x:Name="m_canvasTransform"/>
                 </dashboard:DragCanvas.LayoutTransform >
