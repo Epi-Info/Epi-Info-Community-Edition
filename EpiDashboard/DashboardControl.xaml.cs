@@ -1181,12 +1181,12 @@ namespace EpiDashboard
                 {
                     if (sliderZoom.Value == 100)
                     {
-                        Canvas.SetTop(variablesControl, e.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (variablesControl.ActualHeight / 1.0));
+                        Canvas.SetTop(variablesControl, e.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - 1.1 * (variablesControl.ActualHeight / 1.0));
                     }
                     else
                     {
                         double factor = sliderZoom.Value / 100.0;
-						Canvas.SetTop(variablesControl, (e.VerticalOffset / factor) + (scrollViewer.ActualHeight / factor / 2.0) - (variablesControl.ActualHeight / factor / 1.0));
+						Canvas.SetTop(variablesControl, (e.VerticalOffset / factor) + (scrollViewer.ActualHeight / factor / 2.0) - 1.1 * (variablesControl.ActualHeight / factor / 1.0));
 					}
                 }
 
@@ -2954,7 +2954,7 @@ namespace EpiDashboard
         void dataRecodingControl_Loaded(object sender, RoutedEventArgs e)
         {
             Canvas.SetLeft(variablesControl, -425);
-            Canvas.SetTop(variablesControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - (variablesControl.ActualHeight / 1.0));
+            Canvas.SetTop(variablesControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - 1.1 * (variablesControl.ActualHeight / 1.0));
         }
 
         void ExpandRecodingGadget()
