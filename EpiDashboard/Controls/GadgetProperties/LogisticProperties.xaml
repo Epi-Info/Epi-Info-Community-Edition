@@ -141,7 +141,7 @@
                         <TextBlock x:Name="tblockDummyVariables" TextWrapping="Wrap" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" TextAlignment="Left" Text="Dummy variables:" Margin="0,5,0,0" />
                         <ListBox Height="40" Grid.Column="0" Grid.Row="8" x:Name="lbxDummyTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="216"  Margin="0,5,0,18.2" Grid.RowSpan="2" SelectionMode="Single" MouseDoubleClick="lbxDummyTerms_MouseDoubleClick" />
                         <TextBlock x:Name="tblockInteractionTerms" TextWrapping="Wrap" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" TextAlignment="Left" Text="Interaction terms:" Margin="0,5,0,0" />
-                        <ListBox Height="40" Grid.Column="1" Grid.Row="8" x:Name="lbxInteractionTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="360"  Margin="0.4,5,0,18.2" Grid.RowSpan="2" SelectionMode="Single" MouseDoubleClick="lbxInteractionTerms_MouseDoubleClick" />
+                        <ListBox Height="64" Grid.Column="1" Grid.Row="8" x:Name="lbxInteractionTerms" HorizontalAlignment="Left" SelectedIndex="0" Width="360"  Margin="0.4,5,0,18.2" Grid.RowSpan="2" SelectionMode="Single" MouseDoubleClick="lbxInteractionTerms_MouseDoubleClick" />
 
                         <CheckBox Grid.Column="0" Grid.Row="10" x:Name="checkboxNoIntercept" HorizontalAlignment="left">
                             <TextBlock TextWrapping="Wrap" x:Name="checkboxNoInterceptTxt">No intercept</TextBlock>
