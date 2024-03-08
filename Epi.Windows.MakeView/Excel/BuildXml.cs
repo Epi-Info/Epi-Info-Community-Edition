@@ -161,14 +161,20 @@ namespace Epi.Windows.MakeView.Excel
                     pageAlreadyAdded = true;
                     IEnumerable<XElement> pgelDescendants = pgel.Descendants("Field");
                     XElement lastField = pgelDescendants.Last<XElement>();
+                    int highestposition = (int)lastField.Attribute("Position");
+                    float highesttoppositionpercentage = (float)lastField.Attribute("ControlTopPositionPercentage") + (float)lastField.Attribute("ControlHeightPercentage");
                     for (int di = pgelDescendants.Count<XElement>() - 1; di >= 0; di--)
                     {
                         lastField = pgelDescendants.ElementAt(di);
                         if (lastField.Attribute("Name").Value.StartsWith("Grp_"))
                             break;
                     }
-                    int highestposition = (int)lastField.Attribute("Position");
-                    float highesttoppositionpercentage = (float)lastField.Attribute("ControlTopPositionPercentage") + (float)lastField.Attribute("ControlHeightPercentage");
+                    int highestgpposition = (int)lastField.Attribute("Position");
+                    float highestgptoppositionpercentage = (float)lastField.Attribute("ControlTopPositionPercentage") + (float)lastField.Attribute("ControlHeightPercentage");
+                    if (highestgpposition > highestposition)
+                        highestposition = highestgpposition;
+                    if (highestgptoppositionpercentage > highesttoppositionpercentage)
+                        highesttoppositionpercentage = highestgptoppositionpercentage;
                     int fieldLoops = -1;
                     foreach (XElement fieldElement in PageElement.Descendants("Field"))
                     {
