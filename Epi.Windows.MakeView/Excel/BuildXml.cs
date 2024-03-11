@@ -176,22 +176,38 @@ namespace Epi.Windows.MakeView.Excel
                     if (highestgptoppositionpercentage > highesttoppositionpercentage)
                         highesttoppositionpercentage = highestgptoppositionpercentage;
                     int fieldLoops = -1;
+                    bool checkboxesbegun = false;
                     foreach (XElement fieldElement in PageElement.Descendants("Field"))
                     {
+                        float positionadjustment = (float)549.0 / (float)780.0;
+                        float fieldTypeId = (float)fieldElement.Attribute("FieldTypeId");
+                        if (fieldTypeId == 1 || fieldTypeId == 2 || fieldTypeId == 5 || fieldTypeId == 7 || fieldTypeId == 8 || fieldTypeId == 11 ||
+                            fieldTypeId == 13 || fieldTypeId == 17 || fieldTypeId == 21 || (fieldTypeId == 10 && !checkboxesbegun))
+                            positionadjustment = (float)(256.0 / 780.0);
+                        else if (fieldTypeId == 10)
+                            positionadjustment = (float)(0.0 / 780.0);
+                        if (fieldTypeId == 10)
+                        {
+                            checkboxesbegun = true;
+                        }
+                        else
+                            checkboxesbegun = false;
                         float currenttopposition = (float)fieldElement.Attribute("ControlTopPositionPercentage");
                         float currentcontrolheight = (float)fieldElement.Attribute("ControlHeightPercentage");
                         float currentprompttopposition = (float)-1.0;
                         if (!string.IsNullOrEmpty(fieldElement.Attribute("PromptTopPositionPercentage").Value))
                             currentprompttopposition = (float)fieldElement.Attribute("PromptTopPositionPercentage");
                         fieldElement.SetAttributeValue("Position", highestposition + 1);
-                        fieldElement.SetAttributeValue("ControlTopPositionPercentage", Math.Min(highesttoppositionpercentage + (549.0 / 780.0) * currenttopposition, 0.999));
+                        fieldElement.SetAttributeValue("ControlTopPositionPercentage", Math.Min(highesttoppositionpercentage + positionadjustment * currenttopposition, 0.999));
                         if (fieldElement.Attribute("Name").Value.StartsWith("Grp_"))
                             fieldElement.SetAttributeValue("ControlHeightPercentage", (549.0 / 780.0) * currentcontrolheight);
                         if (currentprompttopposition >= 0.0)
-                            fieldElement.SetAttributeValue("PromptTopPositionPercentage", Math.Min(highesttoppositionpercentage + (549.0 / 780.0) * currentprompttopposition, 0.999));
+                            fieldElement.SetAttributeValue("PromptTopPositionPercentage", Math.Min(highesttoppositionpercentage + positionadjustment * currentprompttopposition, 0.999));
                         if (fieldLoops > 0)
                             fieldElement.SetAttributeValue("Position", highestposition + 1 + fieldLoops);
                         pgel.Add(fieldElement);
+                        if (fieldTypeId == 10)
+                            highesttoppositionpercentage = (float)fieldElement.Attribute("ControlTopPositionPercentage") + (float)0.032;// (float)fieldElement.Attribute("ControlHeightPercentage");
                         fieldLoops++;
                     }
                     PageElement = pgel;
