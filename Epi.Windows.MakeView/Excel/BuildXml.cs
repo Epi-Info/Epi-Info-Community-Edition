@@ -77,7 +77,7 @@ namespace Epi.Windows.MakeView.Excel
                 NewPage.Variable_Name = NewPage.Variable_Name + "_" + NewPage.PageName.Replace(" ", "");
                 NewPage.Question_Type = 2;
                 FiledElement = AddControlXml(NewPage);
-                FiledElement.SetAttributeValue("ControlTopPositionPercentage", 0.2);
+                FiledElement.SetAttributeValue("ControlTopPositionPercentage", 0.11);
                 PageElement.Add(FiledElement);
                 int count = 1;
                 var Variable_Name = NewPage.Variable_Name;
@@ -179,11 +179,12 @@ namespace Epi.Windows.MakeView.Excel
                     bool checkboxesbegun = false;
                     foreach (XElement fieldElement in PageElement.Descendants("Field"))
                     {
-                        float positionadjustment = (float)549.0 / (float)780.0;
+                        float positionadjustment = (float)1.0; // (float)549.0 / (float)780.0;
                         float fieldTypeId = (float)fieldElement.Attribute("FieldTypeId");
-                        if (fieldTypeId == 1 || fieldTypeId == 2 || fieldTypeId == 5 || fieldTypeId == 7 || fieldTypeId == 8 || fieldTypeId == 11 ||
-                            fieldTypeId == 13 || fieldTypeId == 17 || fieldTypeId == 21 || (fieldTypeId == 10 && !checkboxesbegun))
-                            positionadjustment = (float)(256.0 / 780.0);
+                        if (fieldTypeId == 10 && !checkboxesbegun)
+                            positionadjustment = (float)(549.0 / 780.0);
+                        else if (fieldTypeId == 2 && NewPage.Question_Type == 10)
+                            positionadjustment = (float)(549.0 / 780.0);
                         else if (fieldTypeId == 10)
                             positionadjustment = (float)(0.0 / 780.0);
                         if (fieldTypeId == 10)
@@ -385,11 +386,11 @@ namespace Epi.Windows.MakeView.Excel
                 FiledElement.SetAttributeValue("ControlWidthPercentage", "0.80");
                 FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.12, 0.03));
                 FiledElement.SetAttributeValue("ControlLeftPositionPercentage", "0.07 ");
-                FiledElement.SetAttributeValue("ControlTopPositionPercentage", "0.17");
+                FiledElement.SetAttributeValue("ControlTopPositionPercentage", "0.10");
             }
             else if (NewPage.Question_Type == 10) // CHECKBOX
             {
-                Double ControlTopPositionPercentage = 0.23 + (0.04 * NewPage.Counter);
+                Double ControlTopPositionPercentage = 0.14 + (0.04 * NewPage.Counter);
                 FiledElement.SetAttributeValue("ControlTopPositionPercentage", ControlTopPositionPercentage.ToString());
             }
 
