@@ -185,6 +185,8 @@ namespace Epi.Windows.MakeView.Excel
                             positionadjustment = (float)(549.0 / 780.0);
                         else if (fieldTypeId == 2 && NewPage.Question_Type == 10)
                             positionadjustment = (float)(549.0 / 780.0);
+                        else if (NewPage.Question_Type == 31 && fieldTypeId != 21)
+                            positionadjustment = (float)(549.0 / 780.0);
                         else if (fieldTypeId == 10)
                             positionadjustment = (float)(0.0 / 780.0);
                         if (fieldTypeId == 10)
