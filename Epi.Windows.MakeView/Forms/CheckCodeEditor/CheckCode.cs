@@ -356,7 +356,7 @@ namespace Epi.Windows.MakeView.Forms
             DockManager.Style = DockVisualStyle.VS2005;
             Configuration config = Configuration.GetNewInstance();
 
-            // EI-1489
+            // EI-1489 (see also: Configuration_Static.cs)
             bool validationEnabled = true;
 
             try

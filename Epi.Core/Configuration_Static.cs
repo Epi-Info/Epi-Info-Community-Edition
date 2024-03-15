@@ -767,7 +767,7 @@ namespace Epi
 
             row.DefaultDataFormatForRead = 3;
             row.FrameworkTcpPort = 11532;
-            row.IsVariableValidationEnable = false;
+            row.IsVariableValidationEnable = true; // EI-1489  (see also: CheckCode.cs in MakeView)
             row.AutoTouchKeyboard = false;
             row.SparseConnection = false;
             configDataSet.Settings.Rows.Add(row);
