@@ -7901,7 +7901,12 @@ namespace EpiDashboard
                     {
                         if (!TableColumnNames.ContainsKey(dc.ColumnName) && !dc.ColumnName.Equals("RECSTATUS"))
                         {
-                            if (dc.ColumnName.Equals("SYSTEMDATE") || dc.ColumnName.Equals("OldUniqueKey"))
+                            if (dc.ColumnName.Equals("SYSTEMDATE") ||
+                                dc.ColumnName.Equals("OldUniqueKey") ||
+                                dc.ColumnName.Equals("FirstSaveLogonName") ||
+                                dc.ColumnName.Equals("FirstSaveTime") ||
+                                dc.ColumnName.Equals("LastSaveLogonName") ||
+                                dc.ColumnName.Equals("LastSaveTime"))
                             {
                                 TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
                             }
