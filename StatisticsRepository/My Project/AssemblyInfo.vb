@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("ITSO")> 
 <Assembly: AssemblyProduct("StatisticsRepository")> 
-<Assembly: AssemblyCopyright("Copyright © ITSO 2010-2023")> 
+<Assembly: AssemblyCopyright("Copyright © ITSO 2010-2024")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("7.2.6.4")>
-<Assembly: AssemblyFileVersion("7.2.6.4")>
+<Assembly: AssemblyVersion("7.2.6.5")>
+<Assembly: AssemblyFileVersion("7.2.6.5")>
