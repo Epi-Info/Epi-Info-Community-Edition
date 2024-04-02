@@ -1554,7 +1554,7 @@
     <value>508, 290</value>
   </data>
   <data name="cbxStatistics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 24</value>
+    <value>108, 24</value>
   </data>
   <data name="cbxStatistics.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1573,6 +1573,36 @@
   </data>
   <data name="&gt;&gt;cbxStatistics.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+	<data name="cbxOneisyes.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+		<value>Right</value>
+	</data>
+	<data name="cbxOneisyes.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+		<value>System</value>
+	</data>
+	<data name="cbxOneisyes.Location" type="System.Drawing.Point, System.Drawing">
+		<value>618, 290</value>
+	</data>
+	<data name="cbxOneisyes.Size" type="System.Drawing.Size, System.Drawing">
+		<value>108, 24</value>
+	</data>
+	<data name="cbxOneisyes.TabIndex" type="System.Int32, mscorlib">
+		<value>6</value>
+	</data>
+	<data name="cbxOneisyes.Text" xml:space="preserve">
+    <value>1=Yes; 0=No</value>
+  </data>
+	<data name="&gt;&gt;cbxOneisyes.Name" xml:space="preserve">
+    <value>cbxOneisyes</value>
+  </data>
+	<data name="&gt;&gt;cbxOneisyes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+	<data name="&gt;&gt;cbxOneisyes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+	<data name="&gt;&gt;cbxOneisyes.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="btnHelp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>

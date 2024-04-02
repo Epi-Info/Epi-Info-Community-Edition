@@ -31,6 +31,7 @@ namespace Epi.Analysis.Statistics
 
         bool tablesShowStatistics = true;
         bool tablesDoFisher = false;
+        bool tablesRequestOneIsYes = false;
 
         static private System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<object>> PermutationList;
         static private System.Collections.Generic.List<string> SelectClauses;
@@ -87,7 +88,12 @@ namespace Epi.Analysis.Statistics
                 }
             }
 
-            this.commandText = this.Context.InputVariableList["commandText"];
+            if (this.Context.InputVariableList["commandText"].Contains("ONEISYES"))
+            {
+                tablesRequestOneIsYes = true;
+            }
+
+                this.commandText = this.Context.InputVariableList["commandText"];
             this.CurrentRead_Identifier = this.Context.InputVariableList["TableName"];
             this.commandText = this.Context.InputVariableList["CommandText"];
 
@@ -564,6 +570,7 @@ namespace Epi.Analysis.Statistics
 
 
             bool twobytwo = false;
+            bool oneisyes = false;
             double yy = 0; // yes/yes cell
             double yn = 0; // yes/no cell
             double ny = 0; // no/yes cell
@@ -659,6 +666,12 @@ namespace Epi.Analysis.Statistics
             if (DT.Columns.Count == 4 && ROWS.Length == 2 )
             {
                 twobytwo = true;
+                if (tablesRequestOneIsYes)
+                {
+                    if ((ROWS[0][0].ToString().Equals("0") && ROWS[1][0].ToString().Equals("1")) ||
+                        (ROWS[1][0].ToString().Equals("0") && ROWS[0][0].ToString().Equals("1")))
+                        oneisyes = true;
+                }
             }
 
             string SelectOrder = "";
@@ -667,12 +680,12 @@ namespace Epi.Analysis.Statistics
 
             if (DT.Columns.Count == 4 && ROWS.Length == 2)
             {
-                if ((this.Context.Columns[this.Outcome].DataType.ToString() == "System.Byte" && DT.Columns[2].ColumnName == "0" && DT.Columns[3].ColumnName == "1") || this.Context.Columns[this.Outcome].DataType.ToString() == "System.Boolean")
+                if (((this.Context.Columns[this.Outcome].DataType.ToString() == "System.Byte" || oneisyes) && DT.Columns[2].ColumnName == "0" && DT.Columns[3].ColumnName == "1") || this.Context.Columns[this.Outcome].DataType.ToString() == "System.Boolean")
                 {
                     SortedColumns = DT.Columns.Cast<DataColumn>().OrderByDescending(x => { return x.ColumnName; });                    
                 }
 
-                if ((this.Context.Columns[this.Exposure].DataType.ToString() == "System.Byte") || this.Context.Columns[this.Exposure].DataType.ToString() == "System.Boolean")
+                if ((this.Context.Columns[this.Exposure].DataType.ToString() == "System.Byte") || this.Context.Columns[this.Exposure].DataType.ToString() == "System.Boolean" || oneisyes)
                 {
                     SelectOrder = "__Values__ desc";
                 }

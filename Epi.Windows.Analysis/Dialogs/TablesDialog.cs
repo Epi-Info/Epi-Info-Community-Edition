@@ -157,6 +157,12 @@ namespace Epi.Windows.Analysis.Dialogs
                 sb.Append(StringLiterals.SPACE);
             }
 
+            if (cbxOneisyes.Checked)
+            {
+                sb.Append("ONEISYES");
+                sb.Append(StringLiterals.SPACE);
+            }
+
             CommandText = sb.ToString();
         }
         /// <summary>

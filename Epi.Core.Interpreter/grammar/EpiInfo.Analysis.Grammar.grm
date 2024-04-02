@@ -565,6 +565,7 @@ Comment_Chars             = ('***'{Valid Chars}*)
 | STATISTICS '=' NONE 
 | STATISTICS '=' FISHER 
 |NOWRAP
+|ONEISYES
 |COLUMNSIZE '=' DecLiteral
 |PSUVAR '=' Identifier
 | OUTTABLE '=' Identifier
