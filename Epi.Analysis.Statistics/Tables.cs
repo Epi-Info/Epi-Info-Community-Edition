@@ -669,7 +669,9 @@ namespace Epi.Analysis.Statistics
                 if (tablesRequestOneIsYes)
                 {
                     if ((ROWS[0][0].ToString().Equals("0") && ROWS[1][0].ToString().Equals("1")) ||
-                        (ROWS[1][0].ToString().Equals("0") && ROWS[0][0].ToString().Equals("1")))
+                        (ROWS[1][0].ToString().Equals("0") && ROWS[0][0].ToString().Equals("1")) ||
+                        (ROWS[0][0].ToString().Equals("False") && ROWS[1][0].ToString().Equals("True")) ||
+                        (ROWS[1][0].ToString().Equals("False") && ROWS[0][0].ToString().Equals("True")))
                         oneisyes = true;
                 }
             }
@@ -961,7 +963,8 @@ namespace Epi.Analysis.Statistics
             if (twobytwo && tablesShowStatistics)
             {
                 DataRow[] SortedRows = DT.Select(SelectedStatement, SelectOrder);
-                if (this.Context.Columns[this.Outcome].DataType == typeof(bool) || this.Context.Columns[this.Outcome].DataType == typeof(byte))
+                if (this.Context.Columns[this.Outcome].DataType == typeof(bool) || this.Context.Columns[this.Outcome].DataType == typeof(byte) ||
+                    (oneisyes && (this.Context.Columns[this.Outcome].DataType == typeof(Int64) || this.Context.Columns[this.Outcome].DataType == typeof(Int32))))
                 {
                     yy = double.Parse(SortedRows[0][3].ToString());
                     yn = double.Parse(SortedRows[0][2].ToString());
