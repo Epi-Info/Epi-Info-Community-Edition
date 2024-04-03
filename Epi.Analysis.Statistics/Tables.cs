@@ -964,7 +964,9 @@ namespace Epi.Analysis.Statistics
             {
                 DataRow[] SortedRows = DT.Select(SelectedStatement, SelectOrder);
                 if (this.Context.Columns[this.Outcome].DataType == typeof(bool) || this.Context.Columns[this.Outcome].DataType == typeof(byte) ||
-                    (oneisyes && (this.Context.Columns[this.Outcome].DataType == typeof(Int64) || this.Context.Columns[this.Outcome].DataType == typeof(Int32))))
+                    (oneisyes && (this.Context.Columns[this.Outcome].DataType == typeof(Int64) ||
+                    this.Context.Columns[this.Outcome].DataType == typeof(Int32) ||
+                    this.Context.Columns[this.Outcome].DataType == typeof(Double))))
                 {
                     yy = double.Parse(SortedRows[0][3].ToString());
                     yn = double.Parse(SortedRows[0][2].ToString());
