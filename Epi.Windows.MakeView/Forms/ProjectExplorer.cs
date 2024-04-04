@@ -1074,7 +1074,7 @@ namespace Epi.Windows.MakeView.Forms
                     (
                         this.projectTree.TopNode.Text,
                         string.Format(@"Quick saved: {0}", DateTime.Now.ToString("dddd, MMMM dd, yyyy h:mm:ss tt")),
-                        string.Format("{0} {1}", this.projectTree.TopNode.Text, DateTime.Now.ToString("yyyyMMddhmmsstt"))
+                        string.Format("{0} {1}", this.projectTree.TopNode.Text, DateTime.Now.ToString("yyyy-MM-dd@HH-mm-ss"))
                     );
                 this.mainForm.mediator.ProjectExplorer.UpdateTemplates();
             }
