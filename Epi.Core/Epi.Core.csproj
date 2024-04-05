@@ -1370,10 +1370,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\Pages\Mosquito Net Description.xml" />
-    <Content Include="Templates\Pages\Race and Ethnicity Horizontal.xml" />
-    <Content Include="Templates\Pages\Race and Ethnicity with Checkboxes and Write In.xml" />
-    <Content Include="Templates\Pages\Race and Ethnicity with Examples.xml" />
-    <Content Include="Templates\Pages\Race and Ethnicity.xml" />
+    <Content Include="Templates\Pages\Race and Ethnicity Horizontal.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Pages\Race and Ethnicity with Checkboxes and Write In.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Pages\Race and Ethnicity with Examples.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Pages\Race and Ethnicity.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Projects\AndroidSamsungGalaxyTab2_7.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
