@@ -489,6 +489,10 @@ namespace EpiDashboard.StatCalc
             }
             bool isControl = ((Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers != ModifierKeys.Shift) || e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Left || e.Key == Key.Right || e.Key == Key.Up || e.Key == Key.Tab || e.Key == Key.PageDown || e.Key == Key.PageUp || e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Home || e.Key == Key.End);
             e.Handled = !isControl && !isNumeric && !isNumPadNumeric;
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                System.Windows.Forms.SendKeys.Send("{TAB}");
+            }
         }
 
         private void CalculateSummary()
