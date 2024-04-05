@@ -37,6 +37,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.numericUpDownPrecision = new System.Windows.Forms.NumericUpDown();
             this.gbxHTMLOutput = new System.Windows.Forms.GroupBox();
             this.cbxShowPrompt = new System.Windows.Forms.CheckBox();
+            this.cbxUseOptionsText = new System.Windows.Forms.CheckBox();
             this.cbxTablesOutput = new System.Windows.Forms.CheckBox();
             this.cbxPercents = new System.Windows.Forms.CheckBox();
             this.cbxGraphics = new System.Windows.Forms.CheckBox();
@@ -202,6 +203,7 @@ namespace Epi.Windows.Analysis.Dialogs
             // gbxHTMLOutput
             // 
             this.gbxHTMLOutput.Controls.Add(this.cbxShowPrompt);
+            this.gbxHTMLOutput.Controls.Add(this.cbxUseOptionsText);
             this.gbxHTMLOutput.Controls.Add(this.cbxTablesOutput);
             this.gbxHTMLOutput.Controls.Add(this.cbxPercents);
             this.gbxHTMLOutput.Controls.Add(this.cbxGraphics);
@@ -216,6 +218,12 @@ namespace Epi.Windows.Analysis.Dialogs
             resources.ApplyResources(this.cbxShowPrompt, "cbxShowPrompt");
             this.cbxShowPrompt.Name = "cbxShowPrompt";
             this.cbxShowPrompt.CheckedChanged += new System.EventHandler(this.cbxShowPrompt_CheckedChanged);
+            // 
+            // cbxUseOptionsText
+            // 
+            resources.ApplyResources(this.cbxUseOptionsText, "cbxUseOptionsText");
+            this.cbxUseOptionsText.Name = "cbxUseOptionsText";
+            this.cbxUseOptionsText.CheckedChanged += new System.EventHandler(this.cbxUseOptionsText_CheckedChanged);
             // 
             // cbxTablesOutput
             // 
@@ -414,6 +422,7 @@ namespace Epi.Windows.Analysis.Dialogs
         private System.Windows.Forms.NumericUpDown numericUpDownPrecision;
         private System.Windows.Forms.GroupBox gbxHTMLOutput;
         private System.Windows.Forms.CheckBox cbxShowPrompt;
+        private System.Windows.Forms.CheckBox cbxUseOptionsText;
         private System.Windows.Forms.CheckBox cbxTablesOutput;
         private System.Windows.Forms.CheckBox cbxPercents;
         private System.Windows.Forms.CheckBox cbxGraphics;

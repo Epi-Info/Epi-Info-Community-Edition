@@ -526,6 +526,10 @@ namespace Epi
         /// </summary>
 		public const string SHOWPROMPTS = "SHOWPROMPTS";
         /// <summary>
+        /// Use options text command
+        /// </summary>
+		public const string USEOPTIONSTEXT = "USEOPTIONSTEXT";
+        /// <summary>
         /// SIN numeric function
         /// </summary>
         public const string SIN = "SIN";

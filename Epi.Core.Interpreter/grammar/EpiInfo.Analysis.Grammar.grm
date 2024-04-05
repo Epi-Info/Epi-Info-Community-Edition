@@ -928,6 +928,7 @@ Comment_Chars             = ('***'{Valid Chars}*)
         | FREQGRAPH '=' <OnOff>
         | HYPERLINKS '=' <OnOff>
         | SHOWPROMPTS '=' <OnOff>
+        | USEOPTIONSTEXT '=' <OnOff>
         | TABLES '=' <OnOff>
         | USEBROWSER '=' <OnOff>
 

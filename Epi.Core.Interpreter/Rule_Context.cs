@@ -1191,6 +1191,23 @@ namespace Epi.Core.AnalysisInterpreter
                         }
                         break;
 
+                    case "USEOPTIONSTEXT":// '=' <OnOff>
+                        switch (kvp.Value.ToUpperInvariant())
+                        {
+                            // <OnOff> ::= ON | OFF  | Boolean
+                            case "ON":
+                            case "TRUE":
+                            case "(+)":
+                                config.Settings.UseOptionsText = true;
+                                break;
+                            case "OFF":
+                            case "FALSE":
+                            case "(-)":
+                                config.Settings.UseOptionsText = false;
+                                break;
+                        }
+                        break;
+
                     case "TABLES":// '=' <OnOff>
                         switch (kvp.Value.ToUpperInvariant())
                         {

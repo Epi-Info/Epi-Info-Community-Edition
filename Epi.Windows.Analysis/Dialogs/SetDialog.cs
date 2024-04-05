@@ -98,6 +98,11 @@ namespace Epi.Windows.Analysis.Dialogs
                 kvPairs.Add(new KeyValuePair(CommandNames.SHOWPROMPTS,
                     Epi.Util.GetShortHand(cbxShowPrompt.Checked)));
             }
+            if ((cbxUseOptionsText.Checked != config.Settings.UseOptionsText) || (hasUseOptionsTextChanged))
+            {
+                kvPairs.Add(new KeyValuePair(CommandNames.USEOPTIONSTEXT,
+                    Epi.Util.GetShortHand(cbxUseOptionsText.Checked)));
+            }
             if ((cbxTablesOutput.Checked != config.Settings.ShowTables) || (hasShowTablesChanged))
             {
                 kvPairs.Add(new KeyValuePair(CommandNames.TABLES,
@@ -158,6 +163,7 @@ namespace Epi.Windows.Analysis.Dialogs
         private bool hasNoAsChanged;
         private bool hasMissingAsChanged;
         private bool hasShowPromptChanged;
+        private bool hasUseOptionsTextChanged;
         private bool hasShowGraphicChanged;
         private bool hasShowHyperlinkChanged;
         private bool hasShowSelectChanged;
@@ -197,6 +203,7 @@ namespace Epi.Windows.Analysis.Dialogs
 
             // HTML output options ...
             cbxShowPrompt.Checked = settings.ShowCompletePrompt;
+            cbxUseOptionsText.Checked = settings.UseOptionsText;
             cbxSelectCriteria.Checked = settings.ShowSelection;
             cbxPercents.Checked = settings.ShowPercents;
             cbxGraphics.Checked = settings.ShowGraphics;
@@ -237,7 +244,8 @@ namespace Epi.Windows.Analysis.Dialogs
 			hasShowHyperlinkChanged = changed;
 			hasShowPercentsChanged = changed;
 			hasShowPromptChanged = changed;
-			hasShowSelectChanged = changed;
+            hasUseOptionsTextChanged = changed;
+            hasShowSelectChanged = changed;
 			hasShowTablesChanged = changed; 
 			hasStatisticsLevelChanged = changed;
 			hasProcessRecordsChanged = changed;
@@ -406,14 +414,24 @@ namespace Epi.Windows.Analysis.Dialogs
 		private void cbxShowPrompt_CheckedChanged(object sender, System.EventArgs e)
 		{
             hasShowPromptChanged = true;
-		}
+        }
 
-		/// <summary>
-		/// Occurs when ShowSelectCriteria property changes.
-		/// </summary>
-		/// <param name="sender">Object that fired the event.</param>
-		/// <param name="e">.NET supplied event args.</param>
-		private void cbxSelectCriteria_CheckedChanged(object sender, System.EventArgs e)
+        /// <summary>
+        /// Occurs when UstOptionsText property changes.
+        /// </summary>
+        /// <param name="sender">Object that fired the event.</param>
+        /// <param name="e">.NET supplied event args.</param>
+        private void cbxUseOptionsText_CheckedChanged(object sender, System.EventArgs e)
+        {
+            hasUseOptionsTextChanged = true;
+        }
+
+        /// <summary>
+        /// Occurs when ShowSelectCriteria property changes.
+        /// </summary>
+        /// <param name="sender">Object that fired the event.</param>
+        /// <param name="e">.NET supplied event args.</param>
+        private void cbxSelectCriteria_CheckedChanged(object sender, System.EventArgs e)
 		{
             hasShowSelectChanged = true;
 		}
