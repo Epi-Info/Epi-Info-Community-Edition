@@ -64,6 +64,7 @@ namespace Epi.Windows.Controls
             this.MouseLeave += new System.EventHandler(this.DragableGroupBox_MouseLeave);
             base.DragOver   += new DragEventHandler(DragableGroupBox_DragOver);
         }
+
         #endregion
 
         #region Event Handlers
@@ -75,14 +76,33 @@ namespace Epi.Windows.Controls
         /// <param name="e">.NET supplied event parameters</param>
         private void DragableGroupBox_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (isMouseDown)
+            if (e.Y < Font.Height) // This was split to avoid expensive MeasureText calls.
             {
-                DataObject data = new DataObject("DragControl", this);
-                this.DoDragDrop(data, DragDropEffects.Move);
-                isMouseDown = false;
-                this.hasMoved = true;
-            }
-        }
+                Size size = TextRenderer.MeasureText(Text, this.Font);
+
+                if (e.X < size.Width)
+                {
+                    base.Cursor = Cursors.SizeAll;
+
+                    if (isMouseDown)
+                    {
+                        DataObject data = new DataObject("DragControl", this);
+                        this.DoDragDrop(data, DragDropEffects.Move);
+                        isMouseDown = false;
+                        this.hasMoved = true;
+                    }
+                }
+                else
+                {
+					base.Cursor = Cursors.Arrow;
+				}
+			}
+            else
+            {
+				base.Cursor = Cursors.Arrow;
+			}
+		}
+      
 
         /// <summary>
         /// Handles the mouse-down event of the group box
