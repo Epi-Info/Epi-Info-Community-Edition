@@ -2589,19 +2589,20 @@ namespace Epi.Windows.MakeView.PresentationLogic
                     ((MakeViewMainForm)this.Canvas.MainForm).EpiInterpreter.Context.UndefineVariable(nameBeforeEdit);
                 }
 
-                if (promptFontBeforeEdit != dialog.Field.PromptFont)
-                {
-                    if (dialog.Field is LabelField)
-                    {
-                        DefaultAutoSize(rightClickedControl);
-                    }
-                    else
-                    {
-                        DefaultPromptAlign();
-                    }
-                }
+				// [1507] The label or control should not be 'default aligned' automatically after changing the font of the field.
+				//if (promptFontBeforeEdit != dialog.Field.PromptFont)
+				//{
+				//    if (dialog.Field is LabelField)
+				//    {
+				//        DefaultAutoSize(rightClickedControl);
+				//    }
+				//    else
+				//    {
+				//        DefaultPromptAlign();
+				//    }
+				//}
 
-                PanelFieldUpdate(dialog.Field);
+				PanelFieldUpdate(dialog.Field);
 
                 if (dialog.Field is RelatedViewField)
                 {
