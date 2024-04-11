@@ -427,6 +427,7 @@ namespace Epi.Windows.Dialogs
             // 
             resources.ApplyResources(this.cbxUseOptionsText, "cbxUseOptionsText");
             this.cbxUseOptionsText.Name = "cbxUseOptionsText";
+            this.cbxUseOptionsText.Visible = false;
             // 
             // cbxGraphics
             // 
