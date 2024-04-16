@@ -7208,6 +7208,8 @@ namespace Epi.DataSets {
 
             private global::System.Data.DataColumn columnUseOptionsText;
 
+            private global::System.Data.DataColumn columnPythonPath;
+
             private global::System.Data.DataColumn columnShowSelection;
             
             private global::System.Data.DataColumn columnShowTables;
@@ -7556,6 +7558,16 @@ namespace Epi.DataSets {
                 get
                 {
                     return this.columnUseOptionsText;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn PythonPathColumn
+            {
+                get
+                {
+                    return this.columnPythonPath;
                 }
             }
 
@@ -8384,6 +8396,7 @@ namespace Epi.DataSets {
                 this.columnShowGraphics = base.Columns["ShowGraphics"];
                 this.columnShowHyperlinks = base.Columns["ShowHyperlinks"];
                 this.columnShowPercents = base.Columns["ShowPercents"];
+                this.columnPythonPath = base.Columns["PythonPath"];
                 this.columnUseOptionsText = base.Columns["UseOptionsText"];
                 this.columnShowSelection = base.Columns["ShowSelection"];
                 this.columnShowTables = base.Columns["ShowTables"];
@@ -8502,6 +8515,8 @@ namespace Epi.DataSets {
                 base.Columns.Add(this.columnShowHyperlinks);
                 this.columnShowPercents = new global::System.Data.DataColumn("ShowPercents", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnShowPercents);
+                this.columnPythonPath = new global::System.Data.DataColumn("PythonPath", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPythonPath);
                 this.columnUseOptionsText = new global::System.Data.DataColumn("UseOptionsText", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUseOptionsText);
                 this.columnShowSelection = new global::System.Data.DataColumn("ShowSelection", typeof(bool), null, global::System.Data.MappingType.Element);
@@ -11000,6 +11015,20 @@ namespace Epi.DataSets {
                 set
                 {
                     this[this.tableSettings.UseOptionsTextColumn] = value;
+                }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string PythonPath
+            {
+                get
+                {
+                    return ((string)(this[this.tableSettings.PythonPathColumn]));
+                }
+                set
+                {
+                    this[this.tableSettings.PythonPathColumn] = value;
                 }
             }
 

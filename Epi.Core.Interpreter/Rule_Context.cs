@@ -1209,6 +1209,7 @@ namespace Epi.Core.AnalysisInterpreter
                         break;
 
                     case "PYTHONPATH":// '=' String
+                        config.Settings.PythonPath = kvp.Value;
                         break;
 
                     case "TABLES":// '=' <OnOff>
