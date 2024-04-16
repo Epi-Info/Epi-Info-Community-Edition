@@ -8685,6 +8685,7 @@ namespace Epi.DataSets {
                 this.columnShowHyperlinks.AllowDBNull = false;
                 this.columnShowPercents.AllowDBNull = false;
                 this.columnUseOptionsText.AllowDBNull = false;
+                this.columnPythonPath.AllowDBNull = false;
                 this.columnShowSelection.AllowDBNull = false;
                 this.columnShowTables.AllowDBNull = false;
                 this.columnSnapToGrid.AllowDBNull = false;
