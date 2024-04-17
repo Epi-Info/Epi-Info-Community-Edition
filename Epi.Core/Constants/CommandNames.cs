@@ -530,6 +530,14 @@ namespace Epi
         /// </summary>
 		public const string USEOPTIONSTEXT = "USEOPTIONSTEXT";
         /// <summary>
+        /// Python path command
+        /// </summary>
+		public const string PYTHONPATH = "PYTHONPATH";
+        /// <summary>
+        /// Python command
+        /// </summary>
+		public const string PYTHON = "PYTHON";
+        /// <summary>
         /// SIN numeric function
         /// </summary>
         public const string SIN = "SIN";

@@ -197,6 +197,7 @@ Comment_Chars             = ('***'{Valid Chars}*)
         | <SQL_Execute_Command>
         | <RecordSet_Command>
         | <Subroutine_Statement>
+        | <Python_Statements>
         
 
 <Literal> ::=  <Number>
@@ -940,6 +941,14 @@ Comment_Chars             = ('***'{Valid Chars}*)
 <OnOff> ::= ON
        | OFF
        | Boolean
+
+<Python_Statements> ::= PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON
+
+<Python_Code> ::= <Python_Code> <Python_Code_Line>
+       | <Python_Code_Line>
+
+<Python_Code_Line> ::= String
+       | '\n'
 
 <DeletedOption> ::= <OnOff> 
             |Identifier
