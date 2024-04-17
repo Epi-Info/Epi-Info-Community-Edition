@@ -931,6 +931,7 @@ Comment_Chars             = ('***'{Valid Chars}*)
         | USEOPTIONSTEXT '=' <OnOff>
         | TABLES '=' <OnOff>
         | USEBROWSER '=' <OnOff>
+        | PYTHONPATH '=' String
 
 
 <SetList> ::= <SetList> <SetClause>

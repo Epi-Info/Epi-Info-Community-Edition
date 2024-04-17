@@ -1208,6 +1208,9 @@ namespace Epi.Core.AnalysisInterpreter
                         }
                         break;
 
+                    case "PYTHONPATH":// '=' String
+                        break;
+
                     case "TABLES":// '=' <OnOff>
                         switch (kvp.Value.ToUpperInvariant())
                         {
