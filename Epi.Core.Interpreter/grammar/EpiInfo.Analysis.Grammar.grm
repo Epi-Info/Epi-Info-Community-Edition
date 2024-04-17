@@ -948,7 +948,7 @@ Programming_Chars             = ('>>>'{Valid Chars}*)
 <Python_Code> ::= <Python_Code> <Python_Code_Line>
        | <Python_Code_Line>
 
-<Python_Code_Line> ::= String
+<Python_Code_Line> ::= Programming_Chars
        | '\n'
 
 <DeletedOption> ::= <OnOff> 
