@@ -50,7 +50,7 @@ ExcelRange              = {Letter} {Letter}? {Digit} {Digit}? {Digit}? {Digit}? 
 Percentage           = {Digit}* ('.'{Digit}*)?'%'
 !DefinePromptString         = '("'{String Chars}*'")'
 Comment_Chars             = ('***'{Valid Chars}*)
-Programming_Chars             = ('>>>'{Valid Chars}*)
+Programming_Chars             = ('>>> '{Valid Chars}*)
 
 !----------------------------------------------------------------------------------------------------------------------------
 !-------------------------------- RULES -------------------------------------------------------------------------------------
