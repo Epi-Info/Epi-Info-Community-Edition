@@ -384,7 +384,7 @@ namespace Epi.Core.AnalysisInterpreter
                         result = new Rule_Set(context, nonterminal);
                         break;
                     case "<Python_Statements>":
-                        result = null;
+                        result = new Rule_PythonCode(context, nonterminal);
                         break;
                     case "<Match_Row_All_Statement>":
                     case "<Match_Row_Except_Statement>":
