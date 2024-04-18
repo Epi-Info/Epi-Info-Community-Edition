@@ -110,6 +110,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     // strip ">>> " and append to this.pythonStatements
                     // (don't forget line feeds)
+                    if (!String.IsNullOrEmpty(this.pythonStatements))
+                        this.pythonStatements += "\n";
+                    this.pythonStatements += T.ToString().Replace(">>> ", String.Empty);
                 }
             }
         }
