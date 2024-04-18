@@ -19,6 +19,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string WeightVar = null;
         string commandText = string.Empty;
         string PSUVar = null;
+        string pythonPath = null;
+        string dictListName = null;
+        string pythonStatements = "";
 
         Dictionary<string, string> SetOptions = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
@@ -53,6 +56,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         case "<Python_Statements>":
                             break;
                         case "<Python_Code>":
+                            this.SetPythonStatements(NT);
                             break;
                         case "<Python_Code_Line>":
                             //this.SetFrequencyOption(NT);
@@ -67,10 +71,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         case "PYTHON":
                             break;
                         case "PYTHONPATH":
+                            this.pythonPath = this.GetCommandElement(pToken.Tokens, 3).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
                         case "DATASET":
+                            this.dictListName = this.GetCommandElement(pToken.Tokens, 6).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
                         case "END-PYTHON":
+                            // Execute here
                             break;
                         default:
                             break;
@@ -79,9 +86,37 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             }
         }
 
+        private void SetPythonStatements(NonterminalToken pToken)
+        {
+            //<FreqOpts> <FreqOpt> | <FreqOpt> 
+            foreach (Token T in pToken.Tokens)
+            {
+                if (T is NonterminalToken)
+                {
+                    NonterminalToken NT = (NonterminalToken)T;
+                    switch (NT.Symbol.ToString())
+                    {
+                        case "<Python_Code>":
+                            this.SetPythonStatements(NT);
+                            break;
+                        case "<Python_Code_Line>":
+                            this.SetPythonStatements(NT);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    // strip ">>> " and append to this.pythonStatements
+                    // (don't forget line feeds)
+                }
+            }
+        }
 
 
-        
+
+
 
         private void SetFrequencyOptions(NonterminalToken pToken)
         {
