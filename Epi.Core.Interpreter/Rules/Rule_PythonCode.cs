@@ -5,6 +5,8 @@ using com.calitha.goldparser;
 using Epi.Data;
 using System.Data;
 using System.Reflection;
+using System.Diagnostics;
+using System.IO;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
@@ -12,6 +14,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
     {
         bool HasRun = false;
         List<string> IdentifierList = null;
+
+        ProcessStartInfo processStartInfo = new ProcessStartInfo();
 
         bool isExceptionList = false;
         string commandText = string.Empty;
@@ -113,7 +117,30 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         public override object Execute()
         {
             object result = null;
-            return result; // Need to figure out what Execute should be. And also what to do with the tokens.
+            this.processStartInfo.FileName = this.pythonPath;
+            this.processStartInfo.Arguments = "-c \"" + this.pythonStatements.Replace("\"", "\\\"") + "\"";
+            this.processStartInfo.UseShellExecute = false;
+            this.processStartInfo.CreateNoWindow = true;
+            this.processStartInfo.RedirectStandardOutput = true;
+            this.processStartInfo.RedirectStandardError = true;
+
+            using (Process proc = Process.Start(this.processStartInfo))
+            {
+                using (StreamReader reader = proc.StandardOutput)
+                {
+                    string stderr = proc.StandardError.ReadToEnd();
+                    string res = reader.ReadToEnd();
+                    if (!String.IsNullOrEmpty(stderr))
+                    {
+                        Console.WriteLine(stderr);
+                    }
+                    if (!String.IsNullOrEmpty(res))
+                    {
+                        Console.WriteLine(res);
+                    }
+                }
+            }
+            return result; // Need to figure out what to return.
         }
     }
 }
