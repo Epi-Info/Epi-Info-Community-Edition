@@ -7,6 +7,8 @@ using System.Data;
 using System.Reflection;
 using System.Diagnostics;
 using System.IO;
+using Newtonsoft.Json;
+using System.IO.MemoryMappedFiles;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
@@ -117,12 +119,51 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         public override object Execute()
         {
             object result = null;
+
+
+            // Write working data to JSON file in TEMP folder and then read with Python
+            DataTable dt = this.Context.DataSet.Tables[2];
+            string dtjson = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+            string tempPath = System.IO.Path.GetTempPath();
+            System.IO.File.WriteAllText(tempPath + "WorkingEIDataJSON.json", dtjson);
+            string consumejson = "import json\n";
+            consumejson += this.dictListName + " = []\n";
+            // Python needs the slashes escaped
+            consumejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WorkingEIDataJSON.json\", \"r\") as f:\n";
+            consumejson += "    fread = f.read()\n";
+            consumejson += "    " + this.dictListName + " = json.loads(fread)\n";
+
+            // Here is where I tried to move an object from C# to Python environment
+            // using a Memory Mapped File. I don't think this is the way but am leaving
+            // the code in case I want to return to it.
+            // consumejson = "import mmap\n";
+            // consumejson += this.dictListName + " = []\n";
+            // consumejson += "mmap_object = mmap.mmap(-1, 0, \"jsonfile\")\n";
+            // consumejson += this.dictListName + " = mmap_object.read()\n";
+
             this.processStartInfo.FileName = this.pythonPath;
-            this.processStartInfo.Arguments = "-c \"" + this.pythonStatements.Replace("\"", "\\\"") + "\"";
+            this.processStartInfo.Arguments = "-c \"" + consumejson.Replace("\"", "\\\"") + this.pythonStatements.Replace("\"", "\\\"") + "\"";
             this.processStartInfo.UseShellExecute = false;
             this.processStartInfo.CreateNoWindow = true;
             this.processStartInfo.RedirectStandardOutput = true;
             this.processStartInfo.RedirectStandardError = true;
+            this.processStartInfo.RedirectStandardInput = true;
+            
+            // Here is where I tried to move an object from C# to Python environment
+            // using a Memory Mapped File. I don't think this is the way but am leaving
+            // the code in case I want to return to it.
+            // byte[] buffer = ASCIIEncoding.ASCII.GetBytes(dtjson);
+            // MemoryMappedFile mmf0 = MemoryMappedFile.CreateNew("jsonfile", 10000000);
+            // MemoryMappedViewAccessor accessor = mmf0.CreateViewAccessor();
+            // accessor.Write(54, (ushort)buffer.Length);
+            // accessor.WriteArray(54 + 2, buffer, 0, buffer.Length);
+            //
+            // MemoryMappedFile mmf = MemoryMappedFile.OpenExisting("jsonfile");
+            // MemoryMappedViewAccessor accessor2 = mmf0.CreateViewAccessor();
+            // ushort size = accessor2.ReadUInt16(54);
+            // byte[] buffer2 = new byte[size];
+            // accessor.ReadArray(54 + 2, buffer2, 0, buffer2.Length);
+            // string mmfout = ASCIIEncoding.ASCII.GetString(buffer2);
 
             using (Process proc = Process.Start(this.processStartInfo))
             {
@@ -140,6 +181,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                 }
             }
+
+            // More Memory Mapped File stuff to comment out
+            // mmf.Dispose();
+            // mmf0.Dispose();
+
             return result; // Need to figure out what to return.
         }
     }
