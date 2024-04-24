@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
 using System.IO.MemoryMappedFiles;
+using Epi.Analysis.Statistics;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
@@ -188,18 +189,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     }
                     if (!String.IsNullOrEmpty(res))
                     {
-                        dtjson = System.IO.File.ReadAllText(tempPath + "WrittenFromPythonEIDataJSON.json");
-                        dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(dtjson);
-                        dt.TableName = "Output";
-                        //this.Context.DataSet.Tables[2].Rows.Clear();
-                        //this.Context.DataSet.Tables[2].Columns.Clear();
-                        //foreach (DataColumn col in dt.Columns)
-                        //    this.Context.DataSet.Tables[2].Columns.Add(col);
-                        //foreach (DataRow row in dt.Rows)
-                        //    this.Context.DataSet.Tables[2].Rows.Add(row);
-                        this.Context.DataSet.Tables.Remove(this.Context.DataSet.Tables[2]);
-                        this.Context.DataSet.Tables.Add(dt);
-                        throw new GeneralException(res);
+                        result = res;
                     }
                 }
             }
@@ -208,7 +198,28 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             // mmf.Dispose();
             // mmf0.Dispose();
 
-            return result; // Need to figure out what to return.
+            dtjson = System.IO.File.ReadAllText(tempPath + "WrittenFromPythonEIDataJSON.json");
+            dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(dtjson);
+            dt.TableName = "Output";
+            //this.Context.DataSet.Tables[2].Rows.Clear();
+            //this.Context.DataSet.Tables[2].Columns.Clear();
+            //foreach (DataColumn col in dt.Columns)
+            //    this.Context.DataSet.Tables[2].Columns.Add(col);
+            //foreach (DataRow row in dt.Rows)
+            //    this.Context.DataSet.Tables[2].Rows.Add(row);
+            this.Context.DataSet.Tables.Remove(this.Context.DataSet.Tables[2]);
+            this.Context.DataSet.Tables.Add(dt);
+
+            if (result != null)
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("COMMANDNAME", "PYTHON");
+                args.Add("COMMANDTEXT", commandText.Trim());
+                args.Add("PYTHONRESULTS", result.ToString().Replace("\n", "<br>"));
+                this.Context.AnalysisCheckCodeInterface.Display(args);
+            }
+
+            return result; // No need to return anything. Nothing is expected.
         }
     }
 }
