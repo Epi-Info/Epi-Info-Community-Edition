@@ -133,6 +133,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             consumejson += "    fread = f.read()\n";
             consumejson += "    " + this.dictListName + " = json.loads(fread)\n";
 
+            // Write the Python data to JSON file in TEMP folder
+            string writejson = "\n";
+            writejson += "fwrite = json.dumps(" + this.dictListName + ", indent=2)\n";
+            writejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WrittenFromPythonEIDataJSON.json\", \"w\") as f:\n";
+            writejson += "    f.write(fwrite)\n";
+
             // Here is where I tried to move an object from C# to Python environment
             // using a Memory Mapped File. I don't think this is the way but am leaving
             // the code in case I want to return to it.
@@ -142,7 +148,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             // consumejson += this.dictListName + " = mmap_object.read()\n";
 
             this.processStartInfo.FileName = this.pythonPath;
-            this.processStartInfo.Arguments = "-c \"" + consumejson.Replace("\"", "\\\"") + this.pythonStatements.Replace("\"", "\\\"") + "\"";
+            this.processStartInfo.Arguments = "-c \"" +
+                consumejson.Replace("\"", "\\\"") +
+                this.pythonStatements.Replace("\"", "\\\"") +
+                writejson.Replace("\"", "\\\"") +
+                "\"";
             this.processStartInfo.UseShellExecute = false;
             this.processStartInfo.CreateNoWindow = true;
             this.processStartInfo.RedirectStandardOutput = true;
@@ -174,10 +184,22 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     if (!String.IsNullOrEmpty(stderr))
                     {
                         Console.WriteLine(stderr);
+                        throw new GeneralException(stderr);
                     }
                     if (!String.IsNullOrEmpty(res))
                     {
-                        Console.WriteLine(res);
+                        dtjson = System.IO.File.ReadAllText(tempPath + "WrittenFromPythonEIDataJSON.json");
+                        dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(dtjson);
+                        dt.TableName = "Output";
+                        //this.Context.DataSet.Tables[2].Rows.Clear();
+                        //this.Context.DataSet.Tables[2].Columns.Clear();
+                        //foreach (DataColumn col in dt.Columns)
+                        //    this.Context.DataSet.Tables[2].Columns.Add(col);
+                        //foreach (DataRow row in dt.Rows)
+                        //    this.Context.DataSet.Tables[2].Rows.Add(row);
+                        this.Context.DataSet.Tables.Remove(this.Context.DataSet.Tables[2]);
+                        this.Context.DataSet.Tables.Add(dt);
+                        throw new GeneralException(res);
                     }
                 }
             }
