@@ -215,7 +215,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args.Add("COMMANDNAME", "PYTHON");
                 args.Add("COMMANDTEXT", commandText.Trim());
-                args.Add("PYTHONRESULTS", result.ToString().Replace("\n", "<br>"));
+                args.Add("PYTHONRESULTS", result.ToString());
                 this.Context.AnalysisCheckCodeInterface.Display(args);
             }
 
