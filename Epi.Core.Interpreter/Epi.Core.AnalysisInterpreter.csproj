@@ -167,6 +167,7 @@
     <Compile Include="Rules\Functions\Rule_Year.cs" />
     <Compile Include="Rules\Functions\Rule_Years.cs" />
     <Compile Include="Rules\Rule_Call.cs" />
+    <Compile Include="Rules\Rule_RCode.cs" />
     <Compile Include="Rules\Rule_PythonCode.cs" />
     <Compile Include="Rules\Rule_Graph.cs" />
     <Compile Include="Rules\Rule_Define_Group.cs" />

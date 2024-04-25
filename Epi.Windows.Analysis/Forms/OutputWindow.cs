@@ -938,6 +938,11 @@ namespace Epi.Windows.Analysis.Forms
                         htmlBuilder.Append(pDisplayArgs["PYTHONRESULTS"]);
                         this.SendToOutput(pDisplayArgs["COMMANDTEXT"], htmlBuilder.ToString(), false);
                         break;
+                    case "R":
+                        htmlBuilder = new StringBuilder();
+                        htmlBuilder.Append(pDisplayArgs["RRESULTS"]);
+                        this.SendToOutput(pDisplayArgs["COMMANDTEXT"], htmlBuilder.ToString(), false);
+                        break;
 
                     case CommandNames.MEANS:
                         htmlBuilder = new StringBuilder();

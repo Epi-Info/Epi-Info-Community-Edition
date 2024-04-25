@@ -13,7 +13,7 @@ using Epi.Analysis.Statistics;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
-    public partial class Rule_PythonCode : AnalysisRule
+    public partial class Rule_RCode : AnalysisRule
     {
         bool HasRun = false;
         List<string> IdentifierList = null;
@@ -22,27 +22,28 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
         bool isExceptionList = false;
         string commandText = string.Empty;
-        string pythonPath = null;
+        string rPath = null;
         string dictListName = null;
-        string pythonStatements = "";
+        string rStatements = "";
         bool replaceData = false;
 
-        public Rule_PythonCode(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
+        public Rule_RCode(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
         {
             this.IdentifierList = new List<string>();
 
             /*Programming_Chars             = ('>>> '{Valid Chars}*)
             
-<Python_Statements> ::= PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON
-       | PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON <Python_End_Options>
 
-<Python_Code> ::= <Python_Code> <Python_Code_Line>
-       | <Python_Code_Line>
+<R_Statements> ::= R RPATH '=' String DATASET '=' String <R_Code> END-R
+       | R RPATH '=' String DATASET '=' String <R_Code> END-R <R_End_Options>
 
-<Python_Code_Line> ::= Programming_Chars
+<R_Code> ::= <R_Code> <R_Code_Line>
+       | <R_Code_Line>
+
+<R_Code_Line> ::= Programming_Chars
        | '\n'
 
-<Python_End_Options> ::= REPLACEDATA '=' YES
+<R_End_Options> ::= REPLACEDATA '=' YES
        | REPLACEDATA '=' NO
 */
 
@@ -54,15 +55,15 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     NonterminalToken NT = (NonterminalToken)T;
                     switch (NT.Symbol.ToString())
                     {
-                        case "<Python_Statements>":
+                        case "<R_Statements>":
                             break;
-                        case "<Python_Code>":
-                            this.SetPythonStatements(NT);
+                        case "<R_Code>":
+                            this.SetRStatements(NT);
                             break;
-                        case "<Python_Code_Line>":
+                        case "<R_Code_Line>":
                             //this.SetFrequencyOption(NT);
                             break;
-                        case "<Python_End_Options>":
+                        case "<R_End_Options>":
                             this.SetEndOption(NT);
                             break;
                     }
@@ -72,15 +73,15 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     TerminalToken TT = (TerminalToken)T;
                     switch (TT.Symbol.ToString())
                     {
-                        case "PYTHON":
+                        case "R":
                             break;
-                        case "PYTHONPATH":
-                            this.pythonPath = this.GetCommandElement(pToken.Tokens, 3).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
+                        case "RPATH":
+                            this.rPath = this.GetCommandElement(pToken.Tokens, 3).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
                         case "DATASET":
                             this.dictListName = this.GetCommandElement(pToken.Tokens, 6).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
-                        case "END-PYTHON":
+                        case "END-R":
                             // Execute here
                             break;
                         default:
@@ -112,7 +113,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             }
         }
 
-        private void SetPythonStatements(NonterminalToken pToken)
+        private void SetRStatements(NonterminalToken pToken)
         {
             foreach (Token T in pToken.Tokens)
             {
@@ -121,11 +122,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     NonterminalToken NT = (NonterminalToken)T;
                     switch (NT.Symbol.ToString())
                     {
-                        case "<Python_Code>":
-                            this.SetPythonStatements(NT);
+                        case "<R_Code>":
+                            this.SetRStatements(NT);
                             break;
-                        case "<Python_Code_Line>":
-                            this.SetPythonStatements(NT);
+                        case "<R_Code_Line>":
+                            this.SetRStatements(NT);
                             break;
                         default:
                             break;
@@ -133,17 +134,17 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 }
                 else
                 {
-                    // strip ">>> " and append to this.pythonStatements
+                    // strip ">>> " and append to this.rStatements
                     // (don't forget line feeds)
-                    if (!String.IsNullOrEmpty(this.pythonStatements))
-                        this.pythonStatements += "\n";
-                    this.pythonStatements += T.ToString().Replace(">>> ", String.Empty);
+                    if (!String.IsNullOrEmpty(this.rStatements))
+                        this.rStatements += "\n";
+                    this.rStatements += T.ToString().Replace(">>> ", String.Empty);
                 }
             }
         }
 
         /// <summary>
-        /// performs execution of Python code
+        /// performs execution of R code
         /// </summary>
         /// <returns>object</returns>
         public override object Execute()
@@ -151,24 +152,24 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             object result = null;
 
 
-            // Write working data to JSON file in TEMP folder and then read with Python
+            // Write working data to JSON file in TEMP folder and then read with R
             DataTable dt = this.Context.DataSet.Tables[2];
             string dtjson = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
             string tempPath = System.IO.Path.GetTempPath();
             System.IO.File.WriteAllText(tempPath + "WorkingEIDataJSON.json", dtjson);
             string consumejson = "import json\n";
             consumejson += this.dictListName + " = []\n";
-            // Python needs the slashes escaped
+            // R needs the slashes escaped
             consumejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WorkingEIDataJSON.json\", \"r\") as f:\n";
             consumejson += "    fread = f.read()\n";
             consumejson += "    " + this.dictListName + " = json.loads(fread)\n";
 
-            // Write the Python data to JSON file in TEMP folder
+            // Write the R data to JSON file in TEMP folder
             string writejson = "\n";
             if (this.replaceData)
             {
                 writejson += "fwrite = json.dumps(" + this.dictListName + ", indent=2)\n";
-                writejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WrittenFromPythonEIDataJSON.json\", \"w\") as f:\n";
+                writejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WrittenFromREIDataJSON.json\", \"w\") as f:\n";
                 writejson += "    f.write(fwrite)\n";
             }
             else
@@ -176,18 +177,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 writejson = "";
             }
 
-            // Here is where I tried to move an object from C# to Python environment
-            // using a Memory Mapped File. I don't think this is the way but am leaving
-            // the code in case I want to return to it.
-            // consumejson = "import mmap\n";
-            // consumejson += this.dictListName + " = []\n";
-            // consumejson += "mmap_object = mmap.mmap(-1, 0, \"jsonfile\")\n";
-            // consumejson += this.dictListName + " = mmap_object.read()\n";
-
-            this.processStartInfo.FileName = this.pythonPath;
+            this.processStartInfo.FileName = this.rPath;
             this.processStartInfo.Arguments = "-c \"" +
                 consumejson.Replace("\"", "\\\"") +
-                this.pythonStatements.Replace("\"", "\\\"") +
+                this.rStatements.Replace("\"", "\\\"") +
                 writejson.Replace("\"", "\\\"") +
                 "\"";
             this.processStartInfo.UseShellExecute = false;
@@ -195,22 +188,6 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             this.processStartInfo.RedirectStandardOutput = true;
             this.processStartInfo.RedirectStandardError = true;
             this.processStartInfo.RedirectStandardInput = true;
-            
-            // Here is where I tried to move an object from C# to Python environment
-            // using a Memory Mapped File. I don't think this is the way but am leaving
-            // the code in case I want to return to it.
-            // byte[] buffer = ASCIIEncoding.ASCII.GetBytes(dtjson);
-            // MemoryMappedFile mmf0 = MemoryMappedFile.CreateNew("jsonfile", 10000000);
-            // MemoryMappedViewAccessor accessor = mmf0.CreateViewAccessor();
-            // accessor.Write(54, (ushort)buffer.Length);
-            // accessor.WriteArray(54 + 2, buffer, 0, buffer.Length);
-            //
-            // MemoryMappedFile mmf = MemoryMappedFile.OpenExisting("jsonfile");
-            // MemoryMappedViewAccessor accessor2 = mmf0.CreateViewAccessor();
-            // ushort size = accessor2.ReadUInt16(54);
-            // byte[] buffer2 = new byte[size];
-            // accessor.ReadArray(54 + 2, buffer2, 0, buffer2.Length);
-            // string mmfout = ASCIIEncoding.ASCII.GetString(buffer2);
 
             using (Process proc = Process.Start(this.processStartInfo))
             {
@@ -236,7 +213,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             if (this.replaceData)
             {
-                dtjson = System.IO.File.ReadAllText(tempPath + "WrittenFromPythonEIDataJSON.json");
+                dtjson = System.IO.File.ReadAllText(tempPath + "WrittenFromREIDataJSON.json");
                 dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(dtjson);
                 dt.TableName = "Output";
                 //this.Context.DataSet.Tables[2].Rows.Clear();
@@ -252,28 +229,28 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             if (result != null)
             {
                 Dictionary<string, string> args = new Dictionary<string, string>();
-                args.Add("COMMANDNAME", "PYTHON");
+                args.Add("COMMANDNAME", "R");
                 if (this.replaceData)
-                    args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=YES");
+                    args.Add("COMMANDTEXT", "R REPLACEDATA=YES");
                 else
-                    args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=NO");
-                args.Add("PYTHONRESULTS", result.ToString());
+                    args.Add("COMMANDTEXT", "R REPLACEDATA=NO");
+                args.Add("RRESULTS", result.ToString());
                 this.Context.AnalysisCheckCodeInterface.Display(args);
             }
             else if (this.replaceData)
             {
                 Dictionary<string, string> args = new Dictionary<string, string>();
-                args.Add("COMMANDNAME", "PYTHON");
-                args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=YES");
-                args.Add("PYTHONRESULTS", "<br>");
+                args.Add("COMMANDNAME", "R");
+                args.Add("COMMANDTEXT", "R REPLACEDATA=YES");
+                args.Add("RRESULTS", "<br>");
                 this.Context.AnalysisCheckCodeInterface.Display(args);
             }
             else
             {
                 Dictionary<string, string> args = new Dictionary<string, string>();
-                args.Add("COMMANDNAME", "PYTHON");
-                args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=NO");
-                args.Add("PYTHONRESULTS", "<br>");
+                args.Add("COMMANDNAME", "R");
+                args.Add("COMMANDTEXT", "R REPLACEDATA=NO");
+                args.Add("RRESULTS", "<br>");
                 this.Context.AnalysisCheckCodeInterface.Display(args);
             }
 
