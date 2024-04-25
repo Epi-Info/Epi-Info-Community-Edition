@@ -944,12 +944,16 @@ Programming_Chars             = ('>>> '{Valid Chars}*)
        | Boolean
 
 <Python_Statements> ::= PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON
+       | PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON <Python_End_Options>
 
 <Python_Code> ::= <Python_Code> <Python_Code_Line>
        | <Python_Code_Line>
 
 <Python_Code_Line> ::= Programming_Chars
        | '\n'
+
+<Python_End_Options> ::= REPLACEDATA '=' YES
+       | REPLACEDATA '=' NO
 
 <DeletedOption> ::= <OnOff> 
             |Identifier

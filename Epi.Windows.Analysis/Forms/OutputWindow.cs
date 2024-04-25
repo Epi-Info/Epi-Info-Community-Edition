@@ -936,7 +936,7 @@ namespace Epi.Windows.Analysis.Forms
                     case "PYTHON":
                         htmlBuilder = new StringBuilder();
                         htmlBuilder.Append(pDisplayArgs["PYTHONRESULTS"]);
-                        this.SendToOutput(pDisplayArgs["COMMANDNAME"], htmlBuilder.ToString(), false);
+                        this.SendToOutput(pDisplayArgs["COMMANDTEXT"], htmlBuilder.ToString(), false);
                         break;
 
                     case CommandNames.MEANS:

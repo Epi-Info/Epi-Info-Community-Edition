@@ -25,6 +25,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         string pythonPath = null;
         string dictListName = null;
         string pythonStatements = "";
+        bool replaceData = false;
 
         public Rule_PythonCode(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
         {
@@ -57,6 +58,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         case "<Python_Code_Line>":
                             //this.SetFrequencyOption(NT);
                             break;
+                        case "<Python_End_Options>":
+                            this.SetEndOption(NT);
+                            break;
                     }
                 }
                 else
@@ -82,9 +86,30 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             }
         }
 
+        private void SetEndOption(NonterminalToken pToken)
+        {
+            foreach (Token T in pToken.Tokens)
+            {
+                if (T is NonterminalToken)
+                {
+                }
+                else
+                {
+                    TerminalToken TT = (TerminalToken)T;
+                    switch (TT.Symbol.ToString())
+                    {
+                        case "YES":
+                            this.replaceData = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
         private void SetPythonStatements(NonterminalToken pToken)
         {
-            //<FreqOpts> <FreqOpt> | <FreqOpt> 
             foreach (Token T in pToken.Tokens)
             {
                 if (T is NonterminalToken)
@@ -136,9 +161,16 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             // Write the Python data to JSON file in TEMP folder
             string writejson = "\n";
-            writejson += "fwrite = json.dumps(" + this.dictListName + ", indent=2)\n";
-            writejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WrittenFromPythonEIDataJSON.json\", \"w\") as f:\n";
-            writejson += "    f.write(fwrite)\n";
+            if (this.replaceData)
+            {
+                writejson += "fwrite = json.dumps(" + this.dictListName + ", indent=2)\n";
+                writejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WrittenFromPythonEIDataJSON.json\", \"w\") as f:\n";
+                writejson += "    f.write(fwrite)\n";
+            }
+            else
+            {
+                writejson = "";
+            }
 
             // Here is where I tried to move an object from C# to Python environment
             // using a Memory Mapped File. I don't think this is the way but am leaving
@@ -198,24 +230,46 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             // mmf.Dispose();
             // mmf0.Dispose();
 
-            dtjson = System.IO.File.ReadAllText(tempPath + "WrittenFromPythonEIDataJSON.json");
-            dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(dtjson);
-            dt.TableName = "Output";
-            //this.Context.DataSet.Tables[2].Rows.Clear();
-            //this.Context.DataSet.Tables[2].Columns.Clear();
-            //foreach (DataColumn col in dt.Columns)
-            //    this.Context.DataSet.Tables[2].Columns.Add(col);
-            //foreach (DataRow row in dt.Rows)
-            //    this.Context.DataSet.Tables[2].Rows.Add(row);
-            this.Context.DataSet.Tables.Remove(this.Context.DataSet.Tables[2]);
-            this.Context.DataSet.Tables.Add(dt);
+            if (this.replaceData)
+            {
+                dtjson = System.IO.File.ReadAllText(tempPath + "WrittenFromPythonEIDataJSON.json");
+                dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(dtjson);
+                dt.TableName = "Output";
+                //this.Context.DataSet.Tables[2].Rows.Clear();
+                //this.Context.DataSet.Tables[2].Columns.Clear();
+                //foreach (DataColumn col in dt.Columns)
+                //    this.Context.DataSet.Tables[2].Columns.Add(col);
+                //foreach (DataRow row in dt.Rows)
+                //    this.Context.DataSet.Tables[2].Rows.Add(row);
+                this.Context.DataSet.Tables.Remove(this.Context.DataSet.Tables[2]);
+                this.Context.DataSet.Tables.Add(dt);
+            }
 
             if (result != null)
             {
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args.Add("COMMANDNAME", "PYTHON");
-                args.Add("COMMANDTEXT", commandText.Trim());
+                if (this.replaceData)
+                    args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=YES");
+                else
+                    args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=NO");
                 args.Add("PYTHONRESULTS", result.ToString());
+                this.Context.AnalysisCheckCodeInterface.Display(args);
+            }
+            else if (this.replaceData)
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("COMMANDNAME", "PYTHON");
+                args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=YES");
+                args.Add("PYTHONRESULTS", "<br>");
+                this.Context.AnalysisCheckCodeInterface.Display(args);
+            }
+            else
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("COMMANDNAME", "PYTHON");
+                args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=NO");
+                args.Add("PYTHONRESULTS", "<br>");
                 this.Context.AnalysisCheckCodeInterface.Display(args);
             }
 
