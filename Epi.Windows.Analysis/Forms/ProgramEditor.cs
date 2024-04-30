@@ -671,7 +671,30 @@ namespace Epi.Windows.Analysis.Forms
 
 		private void txtTextArea_KeyPress(object sender, KeyPressEventArgs e)
 		{
+            try
+            {
+                if (e.KeyChar == '\r') 
+                {
+                    RichTextBox richTextBox = sender as RichTextBox;
 
+                    int returnLineIndex = richTextBox.GetLineFromCharIndex(richTextBox.SelectionStart) - 1;
+                    string returnLine = richTextBox.Lines[returnLineIndex];
+
+                    int indexLastFormat = 0;
+
+					foreach (char ch in returnLine)
+					{
+                        if (ch == ' ' || ch == '\t')
+                        {
+                            indexLastFormat++;
+                        }
+                        else break;
+					}
+
+					richTextBox.SelectedText = returnLine.Substring(0, indexLastFormat);
+				}
+			}
+            catch { }
 		}
 	}
 }
