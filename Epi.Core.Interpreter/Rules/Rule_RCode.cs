@@ -155,33 +155,37 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             // Write working data to JSON file in TEMP folder and then read with R
             DataTable dt = this.Context.DataSet.Tables[2];
             string dtjson = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
+
+            // This isn't used but keeping it for potentially making a data.frame
+            Dictionary<String, String> eicolumns = new Dictionary<String, String>();
+            foreach (DataColumn col in dt.Columns)
+            {
+                eicolumns[col.ColumnName] = col.DataType.ToString();
+            }
+
             string tempPath = System.IO.Path.GetTempPath();
             System.IO.File.WriteAllText(tempPath + "WorkingEIDataJSON.json", dtjson);
-            string consumejson = "import json\n";
-            consumejson += this.dictListName + " = []\n";
+            string consumejson = "library(\"rjson\")\n";
+            consumejson += this.dictListName + " <- fromJSON(file = \"";
             // R needs the slashes escaped
-            consumejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WorkingEIDataJSON.json\", \"r\") as f:\n";
-            consumejson += "    fread = f.read()\n";
-            consumejson += "    " + this.dictListName + " = json.loads(fread)\n";
+            consumejson += tempPath.Replace("\\", "\\\\") + "WorkingEIDataJSON.json\")\n";
 
             // Write the R data to JSON file in TEMP folder
             string writejson = "\n";
             if (this.replaceData)
             {
-                writejson += "fwrite = json.dumps(" + this.dictListName + ", indent=2)\n";
-                writejson += "with open(\"" + tempPath.Replace("\\", "\\\\") + "WrittenFromREIDataJSON.json\", \"w\") as f:\n";
-                writejson += "    f.write(fwrite)\n";
+                writejson += "write(toJSON(" + this.dictListName + "), \"" + tempPath.Replace("\\", "\\\\") + "WrittenFromREIDataJSON.json\")" + "\n";
             }
             else
             {
                 writejson = "";
             }
 
+            System.IO.File.WriteAllText(tempPath + "EpiInfoRCode.R", consumejson + this.rStatements + writejson);
+
             this.processStartInfo.FileName = this.rPath;
-            this.processStartInfo.Arguments = "-c \"" +
-                consumejson.Replace("\"", "\\\"") +
-                this.rStatements.Replace("\"", "\\\"") +
-                writejson.Replace("\"", "\\\"") +
+            this.processStartInfo.Arguments = "\"" +
+                tempPath + "EpiInfoRCode.R" +
                 "\"";
             this.processStartInfo.UseShellExecute = false;
             this.processStartInfo.CreateNoWindow = true;
@@ -214,7 +218,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             if (this.replaceData)
             {
                 dtjson = System.IO.File.ReadAllText(tempPath + "WrittenFromREIDataJSON.json");
-                dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(dtjson);
+                dt = (DataTable)JsonConvert.DeserializeObject<DataTable>(dtjson.Replace("{}", "null"));
                 dt.TableName = "Output";
                 //this.Context.DataSet.Tables[2].Rows.Clear();
                 //this.Context.DataSet.Tables[2].Columns.Clear();
