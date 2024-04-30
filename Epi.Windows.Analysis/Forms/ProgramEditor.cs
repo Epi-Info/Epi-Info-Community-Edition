@@ -669,7 +669,10 @@ namespace Epi.Windows.Analysis.Forms
             this.txtTextArea.SelectedText = "";
         }
 
+		private void txtTextArea_KeyPress(object sender, KeyPressEventArgs e)
+		{
 
-    }
+		}
+	}
 }
 
