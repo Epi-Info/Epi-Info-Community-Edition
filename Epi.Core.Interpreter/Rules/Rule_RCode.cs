@@ -78,7 +78,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         case "RPATH":
                             this.rPath = this.GetCommandElement(pToken.Tokens, 3).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
-                        case "DATASET":
+                        case "DATAFRAME":
                             this.dictListName = this.GetCommandElement(pToken.Tokens, 6).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
                         case "END-R":
@@ -156,21 +156,89 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             DataTable dt = this.Context.DataSet.Tables[2];
             string dtjson = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
 
-            // This isn't used but keeping it for potentially making a data.frame
+            // Make a data.frame instead of a list
             Dictionary<String, String> eicolumns = new Dictionary<String, String>();
+            string makedf = this.dictListName + " <- data.frame(";
+            bool firstcolumn = true;
             foreach (DataColumn col in dt.Columns)
             {
+                if (!firstcolumn)
+                {
+                    makedf += ", ";
+                }
+                makedf += col.ColumnName;
+                makedf += "=";
+                if (col.DataType.ToString().Contains("Int") || col.DataType.ToString().Contains("Byte"))
+                    makedf += "integer()";
+                else if (col.DataType.ToString().Contains("Boolean"))
+                    makedf += "logical()";
+                else if (col.DataType.ToString().Contains("Date"))
+                    makedf += "as.Date(character(), format=\"%m/%d/%Y\")";
+                else
+                    makedf += "character()";
                 eicolumns[col.ColumnName] = col.DataType.ToString();
+                firstcolumn = false;
+            }
+            makedf += ", stringsAsFactors=FALSE)\n";
+            int ndtrows = 0;
+            foreach (DataRow row in dt.Rows)
+            {
+                firstcolumn = true;
+                string cstring = "df0 <- data.frame(";
+                string namesstring = "names(df0) <- c(";
+                foreach (DataColumn col in dt.Columns)
+                {
+                    if (!firstcolumn)
+                    {
+                        cstring += ", ";
+                        namesstring += ", ";
+                    }
+                    namesstring += "\"" + col.ColumnName + "\"";
+                    if (col.DataType.ToString().Contains("Int") ||
+                        col.DataType.ToString().Contains("Byte") ||
+                        col.DataType.ToString().Contains("Float") ||
+                        col.DataType.ToString().Contains("Double"))
+                    {
+                        if (String.IsNullOrEmpty(row[col].ToString()))
+                            cstring += "NA";
+                        else
+                            cstring += row[col];
+                    }
+                    else if (col.DataType.ToString().Contains("Boolean"))
+                    {
+                        if ((bool)row[col] == true)
+                            cstring += "TRUE";
+                        else
+                            cstring += "FALSE";
+                    }
+                    else if (col.DataType.ToString().Contains("Date"))
+                    {
+                        cstring += "\"" + row[col] + "\"";
+                    }
+                    else
+                    {
+                        cstring += "\"" + row[col] + "\"";
+                    }
+                    firstcolumn = false;
+                }
+                cstring += ")\n";
+                namesstring += ")\n";
+                makedf += cstring + namesstring + this.dictListName + " <- rbind(" + this.dictListName + ", df0)\n";
+                ndtrows += 1;
             }
 
             string tempPath = System.IO.Path.GetTempPath();
-            System.IO.File.WriteAllText(tempPath + "WorkingEIDataJSON.json", dtjson);
-            string consumejson = "library(\"rjson\")\n";
-            consumejson += this.dictListName + " <- fromJSON(file = \"";
-            // R needs the slashes escaped
-            consumejson += tempPath.Replace("\\", "\\\\") + "WorkingEIDataJSON.json\")\n";
+
+            // Commenting this out because using hard-coded dataframes instead of JSON
+            //System.IO.File.WriteAllText(tempPath + "WorkingEIDataJSON.json", dtjson);
+            //string consumejson = "library(\"rjson\")\n";
+            //consumejson += this.dictListName + " <- fromJSON(file = \"";
+            //// R needs the slashes escaped
+            //consumejson += tempPath.Replace("\\", "\\\\") + "WorkingEIDataJSON.json\")\n";
 
             // Write the R data to JSON file in TEMP folder
+            // This doesn't work for R yet so make this.replaceData false
+            this.replaceData = false;
             string writejson = "\n";
             if (this.replaceData)
             {
@@ -181,7 +249,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 writejson = "";
             }
 
-            System.IO.File.WriteAllText(tempPath + "EpiInfoRCode.R", consumejson + this.rStatements + writejson);
+            System.IO.File.WriteAllText(tempPath + "EpiInfoRCode.R", makedf + this.rStatements + writejson);
 
             this.processStartInfo.FileName = this.rPath;
             this.processStartInfo.Arguments = "\"" +

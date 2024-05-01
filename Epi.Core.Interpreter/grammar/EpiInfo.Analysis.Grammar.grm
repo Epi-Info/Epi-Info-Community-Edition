@@ -956,8 +956,8 @@ Programming_Chars             = ('>>> '{Valid Chars}*)
 <Python_End_Options> ::= REPLACEDATA '=' YES
        | REPLACEDATA '=' NO
 
-<R_Statements> ::= R RPATH '=' String DATASET '=' String <R_Code> END-R
-       | R RPATH '=' String DATASET '=' String <R_Code> END-R <R_End_Options>
+<R_Statements> ::= R RPATH '=' String DATAFRAME '=' String <R_Code> END-R
+       | R RPATH '=' String DATAFRAME '=' String <R_Code> END-R <R_End_Options>
 
 <R_Code> ::= <R_Code> <R_Code_Line>
        | <R_Code_Line>
