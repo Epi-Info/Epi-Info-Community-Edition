@@ -248,7 +248,40 @@ namespace Epi.Windows.Menu
             }
         }
 
-        private void epiInfoQA_Click(object sender, EventArgs e)
+		private void SyncFile2CSV_Click(object sender, EventArgs e)
+		{
+            SyncFile2CSV();	
+		}
+
+		private void SyncFile2CSV()
+		{
+			HideStoryBoard();
+
+            try
+            {
+                string commandText = null;
+
+                commandText = Environment.CurrentDirectory + "\\SyncFile2CSV.exe";
+
+                if (!string.IsNullOrEmpty(commandText))
+                {
+                    System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                    proc.StartInfo.FileName = commandText;
+                    proc.StartInfo.UseShellExecute = true;
+                    proc.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                MsgBox.ShowException(ex);
+            }
+            finally
+            {
+                EndBusy();
+            }
+		}
+
+		private void epiInfoQA_Click(object sender, EventArgs e)
         {
             HideStoryBoard();
             System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/wiki/questions");
@@ -717,8 +750,15 @@ namespace Epi.Windows.Menu
                 }
             }
         }
+		private void SyncFile2CSV_Keydown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Space)
+			{
+                SyncFile2CSV();
+			}
+		}
 
-        private void epiInfoQA_Keydown(object sender, KeyEventArgs e)
+		private void epiInfoQA_Keydown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
             {

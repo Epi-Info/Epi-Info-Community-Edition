@@ -11,20 +11,20 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Storyboard x:Key="sbShowRightMenu" >
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="0" To="163"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="0" To="200"  Duration="0:0:0.1" />
             </Storyboard>
             <Storyboard x:Key="sbHideRightMenu">
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="163" To="0"  Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="200" To="0"  Duration="0:0:0.2" />
                 <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="80" To="0"  Duration="0:0:0.2" />
             </Storyboard>
 
             <Storyboard x:Key="showEpiResource">
                 <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="0" To="80"  Duration="0:0:0.1" />
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="163" To="250"  Duration="0:0:0.1" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="200" To="275"  Duration="0:0:0.1" />
             </Storyboard>
             <Storyboard x:Key="hideEpiResource">
                 <DoubleAnimation Storyboard.TargetName="submenuEpiResouces" Storyboard.TargetProperty="Height" From="80" To="0"  Duration="0:0:0.2" />
-                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="250" To="163"  Duration="0:0:0.3" />
+                <DoubleAnimation Storyboard.TargetName="pnlRightMenu" Storyboard.TargetProperty="Height" From="275" To="200"  Duration="0:0:0.3" />
             </Storyboard>
         </ResourceDictionary>
 
@@ -65,7 +65,15 @@
                             <TextBlock x:Name="txtHowToVideos" Style="{StaticResource setting_buttons}">x_HOW TO' VIDEOS</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="13" KeyUp="epiInfoQA_Keydown" Click="epiInfoQA_Click">
+                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="13" KeyUp="SyncFile2CSV_Keydown" Click="SyncFile2CSV_Click">
+                        <Button.ToolTip>
+                            <ToolTip Visibility="Hidden">This will open</ToolTip>
+                        </Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock x:Name="txtSyncFile2CSVs" Style="{StaticResource setting_buttons}">SYNCFILE2CSV</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="14" KeyUp="epiInfoQA_Keydown" Click="epiInfoQA_Click">
                         <Button.ToolTip>
                             <ToolTip Visibility="Hidden">EPI INFO™ Q&amp;A</ToolTip>
                         </Button.ToolTip>
@@ -73,7 +81,7 @@
                             <TextBlock x:Name="txtEpiInfoQA" Style="{StaticResource setting_buttons}">EPI INFO™ Q&amp;A</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="14" KeyUp="contactHelpDesk_Keydown" Click="contactHelpDesk_Click">
+                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="15" KeyUp="contactHelpDesk_Keydown" Click="contactHelpDesk_Click">
                         <Button.ToolTip>
                             <ToolTip Visibility="Hidden">CONTACT HELP DESK</ToolTip>
                         </Button.ToolTip>
@@ -81,7 +89,7 @@
                             <TextBlock x:Name="txtContactHelpDesk" Style="{StaticResource setting_buttons}">CONTACT HELP DESK</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="15" KeyUp="otherEpiResource_Keydown" Click="Other_EpiResource_Click">
+                    <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="16" KeyUp="otherEpiResource_Keydown" Click="Other_EpiResource_Click">
                         <Button.ToolTip>
                             <ToolTip Visibility="Hidden">OTHER EPI RESOURCES</ToolTip>
                         </Button.ToolTip>
