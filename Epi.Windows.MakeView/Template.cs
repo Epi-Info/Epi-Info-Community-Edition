@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -1747,9 +1748,20 @@ namespace Epi.Windows.MakeView
 
         private Page CreatePage(System.Xml.XmlReader reader, bool isnewview, out View view)
         {
-            Page newPage = new Page();
+			Page newPage = new Page();
 
-            if (reader.MoveToFirstAttribute())
+			if (pageIdViewNamePairs.Count == 0)
+			{
+				view = this.mediator.ProjectExplorer.currentPage.view;
+			}
+			else
+			{
+				view = mediator.Project.Views[pageIdViewNamePairs[newPage.Id]];
+			}
+
+            List<string> names = view.Pages.Select(page => page.Name).ToList();
+
+			if (reader.MoveToFirstAttribute())
             {
                 AddPageAttributeToPage(reader.Name, reader.Value, newPage);
 
@@ -1757,12 +1769,16 @@ namespace Epi.Windows.MakeView
                 {
                     if (reader.Name == "Name")
                     {
-                        if (!isnewview)
+                        if (names.Contains(reader.Value))
                         {
                             string _name;
+
                             ShowRenamePageDialog(reader.Value, out _name);
+
                             if (_name != string.Empty)
+                            {
                                 newPage.Name = _name;
+                            }
                             else
                             {
                                 view = null;
@@ -1777,14 +1793,7 @@ namespace Epi.Windows.MakeView
                 }
             }
 
-            if (pageIdViewNamePairs.Count == 0)
-            {
-                view = this.mediator.ProjectExplorer.currentPage.view;
-            }
-            else
-            {
-                view = mediator.Project.Views[pageIdViewNamePairs[newPage.Id]];
-            }
+
 
             newPage.Id = 0;
             newPage.view = view;
@@ -1793,7 +1802,6 @@ namespace Epi.Windows.MakeView
 
         private void ShowRenamePageDialog(string readervalue, out string newpagename)
         {
-            readervalue = "Page " + (view.Pages.Count + 1).ToString();
             Dialogs.RenamePageDialog dialog = new Dialogs.RenamePageDialog(mediator.Canvas.MainForm, view);
             dialog.PageName = readervalue;
             DialogResult result = dialog.ShowDialog();
