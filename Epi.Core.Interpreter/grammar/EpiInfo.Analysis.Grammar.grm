@@ -946,6 +946,10 @@ Programming_Chars             = ('>>> '{Valid Chars}*)
 
 <Python_Statements> ::= PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON
        | PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON <Python_End_Options>
+       | PYTHON PYTHONPATH '=' String DATASET '=' String PYTHONSCRIPT '=' String END-PYTHON
+       | PYTHON PYTHONPATH '=' String DATASET '=' String PYTHONSCRIPT '=' String END-PYTHON <Python_End_Options>
+       | PYTHON PYTHONPATH '=' String DATASET '=' String PYTHONSCRIPT '=' String <Python_Code> END-PYTHON
+       | PYTHON PYTHONPATH '=' String DATASET '=' String PYTHONSCRIPT '=' String <Python_Code> END-PYTHON <Python_End_Options>
 
 <Python_Code> ::= <Python_Code> <Python_Code_Line>
        | <Python_Code_Line>

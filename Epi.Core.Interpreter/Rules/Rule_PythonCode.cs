@@ -23,6 +23,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         bool isExceptionList = false;
         string commandText = string.Empty;
         string pythonPath = null;
+        string pythonScript = null;
         string dictListName = null;
         string pythonStatements = "";
         bool replaceData = false;
@@ -76,6 +77,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             break;
                         case "PYTHONPATH":
                             this.pythonPath = this.GetCommandElement(pToken.Tokens, 3).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
+                            break;
+                        case "PYTHONSCRIPT":
+                            this.pythonScript = this.GetCommandElement(pToken.Tokens, 9).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
                         case "DATASET":
                             this.dictListName = this.GetCommandElement(pToken.Tokens, 6).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
@@ -183,6 +187,14 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             // consumejson += this.dictListName + " = []\n";
             // consumejson += "mmap_object = mmap.mmap(-1, 0, \"jsonfile\")\n";
             // consumejson += this.dictListName + " = mmap_object.read()\n";
+
+            if (this.pythonScript != null)
+            {
+                if (!string.IsNullOrEmpty(this.pythonStatements))
+                    this.pythonStatements = System.IO.File.ReadAllText(this.pythonScript) + "\n" + this.pythonStatements + "\n";
+                else
+                    this.pythonStatements = System.IO.File.ReadAllText(this.pythonScript) + "\n";
+            }
 
             this.processStartInfo.FileName = this.pythonPath;
             this.processStartInfo.Arguments = "-c \"" +
