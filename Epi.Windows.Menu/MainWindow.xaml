@@ -70,7 +70,7 @@
                             <ToolTip Visibility="Hidden">This will open</ToolTip>
                         </Button.ToolTip>
                         <StackPanel>
-                            <TextBlock x:Name="txtSyncFile2CSVs" Style="{StaticResource setting_buttons}">SYNCFILE2CSV</TextBlock>
+                            <TextBlock x:Name="txtSyncFile2CSVs" Style="{StaticResource setting_buttons}">SYNC TO FILE</TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Style="{StaticResource buttonMenuItemsRight}" TabIndex="14" KeyUp="epiInfoQA_Keydown" Click="epiInfoQA_Click">
