@@ -233,7 +233,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     if (!String.IsNullOrEmpty(stderr))
                     {
                         Console.WriteLine(stderr);
-                        throw new GeneralException(stderr);
+                        if (String.IsNullOrEmpty(res))
+                            throw new GeneralException(stderr);
                     }
                     if (!String.IsNullOrEmpty(res))
                     {
