@@ -177,6 +177,8 @@ namespace Epi.Analysis.Dialogs
                         if (colprocessed.Contains(idendifier) == false)
                         {
                             colprocessed.Add(idendifier);
+                            if (displayIndex > 511)
+                                throw new Exception("Gridtable limited to 512 columns.");
                             dataGridView1.Columns[idendifier].DisplayIndex = displayIndex++;
                         }
                     }
@@ -230,6 +232,8 @@ namespace Epi.Analysis.Dialogs
             }
             catch (Exception ex)
             {
+                if (ex.Message.Equals("Gridtable limited to 512 columns."))
+                    throw ex;
                 throw new Exception("Please Update the List Variables");
             }
         }      
