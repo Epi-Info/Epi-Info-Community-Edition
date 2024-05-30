@@ -170,6 +170,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 makedf += "=";
                 if (col.DataType.ToString().Contains("Int") || col.DataType.ToString().Contains("Byte"))
                     makedf += "integer()";
+                else if (col.DataType.ToString().Contains("Double"))
+                    makedf += "double()";
                 else if (col.DataType.ToString().Contains("Boolean"))
                     makedf += "logical()";
                 else if (col.DataType.ToString().Contains("Date"))
