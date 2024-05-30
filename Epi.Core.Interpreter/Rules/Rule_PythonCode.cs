@@ -158,7 +158,22 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             // Write working data to JSON file in TEMP folder and then read with Python
             DataTable dt = this.Context.DataSet.Tables[2];
             string dtjson = JsonConvert.SerializeObject(dt, Newtonsoft.Json.Formatting.Indented);
-            string tempPath = System.IO.Path.GetTempPath();
+
+            // Get the data types as SQLite consumes them
+            string sqldatatypes = "\n" + "sqldatatypes = {}\n";
+            foreach (DataColumn col in dt.Columns)
+            {
+                if (col.DataType.ToString().Contains("Int") || col.DataType.ToString().Contains("Byte"))
+                    sqldatatypes = sqldatatypes + "sqldatatypes['" + col.ColumnName + "'] = 'INTEGER'\n";
+                else if (col.DataType.ToString().Contains("Double"))
+                    sqldatatypes = sqldatatypes + "sqldatatypes['" + col.ColumnName + "'] = 'REAL'\n";
+                else if (col.DataType.ToString().Contains("Boolean"))
+                    sqldatatypes = sqldatatypes + "sqldatatypes['" + col.ColumnName + "'] = 'INTEGER'\n";
+                else
+                    sqldatatypes = sqldatatypes + "sqldatatypes['" + col.ColumnName + "'] = 'TEXT'\n";
+            }
+
+                string tempPath = System.IO.Path.GetTempPath();
             System.IO.File.WriteAllText(tempPath + "WorkingEIDataJSON.json", dtjson);
             string consumejson = "import json\n";
             consumejson += this.dictListName + " = []\n";
@@ -199,6 +214,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             this.processStartInfo.FileName = this.pythonPath;
             this.processStartInfo.Arguments = "-c \"" +
                 consumejson.Replace("\"", "\\\"") +
+                sqldatatypes.Replace("\"", "\\\"") +
                 this.pythonStatements.Replace("\"", "\\\"") +
                 writejson.Replace("\"", "\\\"") +
                 "\"";
