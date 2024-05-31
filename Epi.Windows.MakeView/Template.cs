@@ -1756,7 +1756,14 @@ namespace Epi.Windows.MakeView
 			}
 			else
 			{
-				view = mediator.Project.Views[pageIdViewNamePairs[newPage.Id]];
+                try
+                {
+                    view = mediator.Project.Views[pageIdViewNamePairs[newPage.Id]];
+                }
+                catch (KeyNotFoundException knfe)
+                {
+                    view = mediator.Project.Views[pageIdViewNamePairs[newPage.Id + 1]];
+                }
 			}
 
             List<string> names = view.Pages.Select(page => page.Name).ToList();
