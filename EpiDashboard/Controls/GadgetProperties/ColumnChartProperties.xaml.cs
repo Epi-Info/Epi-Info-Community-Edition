@@ -708,6 +708,8 @@ namespace EpiDashboard.Controls.GadgetProperties
             if (!String.IsNullOrEmpty(txtYAxisLabelValue.Text))
             {
                 Parameters.YAxisLabel = txtYAxisLabelValue.Text;
+                if (!txtYAxisLabelValue.Text.Equals("Count"))
+                    Parameters.YAxisStacked100Label = txtYAxisLabelValue.Text;
             }
 
             if (!String.IsNullOrEmpty(txtYAxisFormatString.Text))
