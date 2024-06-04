@@ -158,7 +158,7 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="60" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Background="Transparent" Grid.Column="0" Margin="15 0 0 0" Orientation="Horizontal">
+                    <StackPanel Background="Transparent" Grid.Column="0" Margin="15,0,250,0" Orientation="Horizontal" Grid.ColumnSpan="2">
                         <Image ToolTip="Epi Info Logo" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="225" Margin="0 0 0 0">
                             <Image.Source>
                                 <BitmapImage UriSource="images/epi_info_logo_full.png"/>
@@ -167,16 +167,25 @@
 
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1">
-                        <Button Style="{StaticResource buttonMenuRight}" TabIndex="9" KeyUp="rightMenu_Keydown" Name="btnRightMenuHide"  Click="btnRightMenuHide_Click" Margin="0,15,0,0">
+                    <StackPanel Margin="159,0,0,0" Grid.Column="1">
+                        <Button Style="{StaticResource buttonMenuRight}" TabIndex="9" KeyUp="rightMenu_Keydown" Name="btnRightMenuHide"  Click="btnRightMenuHide_Click" Margin="0,15,0,0" Height="56" Width="134">
                             <Button.ToolTip >
                                 <ToolTip Visibility="Hidden">
                                     Additional Menu Items: Options, Contents, How to videos, Epi Info Q&amp;A, Contact Help Desk, Other Epi Resources, Epi Info Logs
                                 </ToolTip>
                             </Button.ToolTip>
-                            <StackPanel>
+
+                            <StackPanel Height="58" Width="38" HorizontalAlignment="Center">
                                 <Path Panel.ZIndex="1"  Margin="4 0 0 0" Cursor="Hand" Data="M15.8,20.4H34.2L25,29.6Z" Fill="White" Height="6" Stretch="Fill" Width="11"/>
-                                <Path Panel.ZIndex="0" Margin="4 0 0 0" Cursor="Hand" Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm0,27.6-9.2-9.2H34.2Z " Fill="#58595b" Height="25" Stretch="Fill" Width="25"/>
+                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Right">
+                                <TextBlock Margin="0 0 3 0" Style="{StaticResource sectionTitle}" FontWeight="Bold" FontSize="16">Options, Help, Tools</TextBlock>
+                                <!--<Path Data="M.789 4.836a1.03 1.03 0 0 1 1.03-1.029h10.363a1.03 1.03 0 1 1 0 2.059H1.818A1.03 1.03 0 0 1 .79 4.836zm12.422 4.347a1.03 1.03 0 0 1-1.03 1.029H1.819a1.03 1.03 0 0 1 0-2.059h10.364a1.03 1.03 0 0 1 1.029 1.03zm0 4.345a1.03 1.03 0 0 1-1.03 1.03H1.819a1.03 1.03 0 1 1 0-2.059h10.364a1.03 1.03 0 0 1 1.029 1.03z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>-->
+                                <Grid Width="36" Height="36">
+                                    <Path Width="18" Height="18" Stretch="Fill" Fill="#1d60ac" Data="F1 M 19,23L 27,23L 27,31L 19,31L 19,23 Z M 19,34L 27,34L 27,42L 19,42L 19,34 Z M 31,23L 57,23L 57,31L 31,31L 31,23 Z M 19,45L 27,45L 27,53L 19,53L 19,45 Z M 31,34L 57,34L 57,42L 31,42L 31,34 Z M 31,45L 57,45L 57,53L 31,53L 31,45 Z "/>
+                                    <Ellipse Stroke="#1d60ac"  Fill=" Transparent" StrokeThickness="3" />
+                                </Grid>
+
+                                </StackPanel>
                                 <TextBlock Foreground="White"  x:Name="txtMenuOptions" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200" ><Run Text="Additional Menu Options"/></TextBlock>
                             </StackPanel>
                         </Button>
@@ -204,6 +213,8 @@
                                             </ToolTip>
                                         </Button.ToolTip>
                                         <StackPanel HorizontalAlignment="Center" Margin="0 5 0 0">
+
+
                                             <Path Data="M25,2A23,23,0,1,0,48,25,23,23,0,0,0,25,2Zm14.23,32a2.59,2.59,0,0,1-2.59,2.59H13.36a2.59,2.59,0,0,1-2.59-2.59V15.95a2.59,2.59,0,0,1,2.59-2.59H36.64a2.59,2.59,0,0,1,2.59,2.59V34.05Z M13.36,21.12H25v2.59H13.36V21.12Z M13.36,15.95H25v2.59H13.36V15.95Z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>
                                             <TextBlock x:Name="txtlblCreateForms" Style="{StaticResource sectionTitle}" HorizontalAlignment="Center" FontWeight="Bold" ><Run Text="CREATE FORMS"/></TextBlock>
                                             <TextBlock x:Name="txtlblCreateFormsDescp" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200" ><Run Text="Create surveys or questionnaires with field validation and skip logic."/></TextBlock>
