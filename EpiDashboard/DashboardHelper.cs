@@ -634,7 +634,8 @@ namespace EpiDashboard
                                         else
                                         {
                                             // TODO: Notify user the connection was skipped
-                                            continue;
+                                            // zfj4: I don't know why there was a continue here. It was preventing Relate to Excel.
+                                            //continue;
                                         }
                                     }
 
