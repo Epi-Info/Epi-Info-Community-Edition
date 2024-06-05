@@ -2423,6 +2423,19 @@ namespace EpiDashboard
                                 }
 
                                 relatedTable.TableName = conn.view.TableName;
+                                foreach (DataColumn dc in relatedTable.Columns)
+                                {
+                                    if (!TableColumnNames.ContainsKey(dc.ColumnName) && !dc.ColumnName.Equals("RECSTATUS"))
+                                    {
+                                        if (conn.view.Fields.Contains(dc.ColumnName))
+                                        {
+                                            if (!FieldTable.Columns.Contains(dc.ColumnName))
+                                            {
+                                                TableColumnNames.Add(dc.ColumnName, dc.DataType.ToString());
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             else
                             {
