@@ -307,6 +307,7 @@ namespace Epi.Windows.Analysis.Dialogs
                         cmb.Items.Add(var.Name.ToString());
                     }
                 }
+                cmb.Sorted = true;
                 // TODO - will need to put variable type somewhere
                 //cmb.DataSource = GetDefinedVars().DefaultView;
                 //cmb.DisplayMember = ColumnNames.NAME;
