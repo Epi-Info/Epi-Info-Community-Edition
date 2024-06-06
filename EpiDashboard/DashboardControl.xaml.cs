@@ -2955,6 +2955,8 @@ namespace EpiDashboard
         {
             Canvas.SetLeft(variablesControl, -425);
             Canvas.SetTop(variablesControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - 1.1 * (variablesControl.ActualHeight / 1.0));
+            if (variablesControl.ActualHeight == 0.0)
+                Canvas.SetTop(variablesControl, scrollViewer.VerticalOffset + (scrollViewer.ActualHeight / 2.0) - 1.1 * (220.0 / 1.0));
         }
 
         void ExpandRecodingGadget()
