@@ -381,7 +381,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             {
                 DataGrid uie = (DataGrid)uiec[0];
                 Dictionary<int, string> columnswithindexes = new Dictionary<int, string>();
-                foreach (System.Windows.Controls.DataGridTextColumn dgtc in uie.Columns)
+                foreach (System.Windows.Controls.DataGridColumn dgtc in uie.Columns)
                 {
                     if (dgtc.DisplayIndex == 0)
                         continue;
