@@ -300,8 +300,8 @@
 
                     <WrapPanel ItemWidth="240" Orientation="Horizontal">
                         <StackPanel>
-                            <TextBlock x:Name="tblockComposition" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" Text="Composition:" Margin="0,12,0,0"  />
-                            <ComboBox x:Name="cmbComposition" Width="216" HorizontalAlignment="Left" Height="28" SelectedIndex="0" >
+                            <TextBlock x:Name="tblockComposition" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" Text="Composition:" Margin="0,12,0,0" />
+                            <ComboBox x:Name="cmbComposition" Width="216" HorizontalAlignment="Left" Height="28" SelectedIndex="1" IsEnabled="False" >
                                 <ComboBox.Items>
                                     <ComboBoxItem>Side-by-side</ComboBoxItem>
                                     <ComboBoxItem>Stacked</ComboBoxItem>

@@ -976,6 +976,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             checkboxAnnotationsY2.IsChecked = Parameters.Y2ShowAnnotations;
             checkboxGridLines.IsChecked = Parameters.ShowGridLines;
 
+            Parameters.Composition = CompositionKind.Stacked; // zfj4 set Composition to Stacked and disabled the cmb on 10jun2024
             cmbComposition.SelectedItem = Parameters.Composition;
             switch (Parameters.Composition)
             {
