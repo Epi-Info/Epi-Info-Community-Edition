@@ -679,6 +679,7 @@ namespace EpiDashboard
             messagePanel.MessagePanelType = Controls.MessagePanelType.StatusPanel;
             messagePanel.Text = string.Empty;
             messagePanel.Visibility = System.Windows.Visibility.Collapsed;
+            messagePanel2.Visibility = System.Windows.Visibility.Collapsed;
              
             HideConfigPanel();
             ShowHideOutputColumns();
