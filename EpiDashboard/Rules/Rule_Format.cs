@@ -33,7 +33,10 @@ namespace EpiDashboard.Rules
         NumericDecimal4 = 21,
         NumericDecimal5 = 22,
         MonthAndFourDigitYear = 23,
-        LongDate = 24
+        LongDate = 24,
+        NumericYear = 25,
+        NumericMonth = 26,
+        NumericDay = 27
     }
     
     public enum RuleExecutionLocation
@@ -88,6 +91,8 @@ namespace EpiDashboard.Rules
             this.suffix = string.Empty;
             this.dashboardHelper = dashboardHelper;
             this.destinationColumnType = "System.String";
+            if (formatType == FormatTypes.NumericYear || formatType == FormatTypes.NumericMonth || formatType == FormatTypes.NumericDay)
+                this.destinationColumnType = "System.Int32";
             Construct();
         }
 
@@ -207,6 +212,9 @@ namespace EpiDashboard.Rules
                 case FormatTypes.EpiWeek:
                     formatString = "epiweek"; // note: Special case scenario
                     break;
+                case FormatTypes.NumericDay:
+                    formatString = "{0:dd}";
+                    break;
                 case FormatTypes.Day:
                     formatString = "{0:dd}";
                     break;
@@ -216,6 +224,9 @@ namespace EpiDashboard.Rules
                 case FormatTypes.FullDayName:
                     formatString = "{0:dddd}";
                     break;
+                case FormatTypes.NumericYear:
+                    formatString = "{0:yyyy}";
+                    break;
                 case FormatTypes.FourDigitYear:
                     formatString = "{0:yyyy}";
                     break;
@@ -224,6 +235,9 @@ namespace EpiDashboard.Rules
                     break;
                 case FormatTypes.DayMonth:
                     formatString = "{0:M}";
+                    break;
+                case FormatTypes.NumericMonth:
+                    formatString = "{0:MM}";
                     break;
                 case FormatTypes.Month:
                     formatString = "{0:MM}";
@@ -525,6 +539,8 @@ namespace EpiDashboard.Rules
             {
                 value = string.Format(System.Globalization.CultureInfo.CurrentCulture, this.GetFormatString(), row[this.SourceColumnName]) + this.Suffix;
                 value = value.Trim();
+                if ((this.formatType == FormatTypes.NumericDay || this.formatType == FormatTypes.NumericMonth) && value[0] == '0')
+                    value = value.Trim('0');
             }
             else
             {

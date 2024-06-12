@@ -12,6 +12,7 @@ using Epi.Fields;
 using Epi.Windows;
 using Epi.Windows.Dialogs;
 using EpiDashboard.Rules;
+using static EpiDashboard.Mapping.ChoroplethLayerProvider;
 
 namespace EpiDashboard.Dialogs
 {
@@ -168,6 +169,9 @@ namespace EpiDashboard.Dialogs
                 case "the day":
                     formatType = FormatTypes.Day;
                     break;
+                case "the numeric day":
+                    formatType = FormatTypes.NumericDay;
+                    break;
                 case "the day name":
                     formatType = FormatTypes.FullDayName;
                     break;
@@ -176,6 +180,9 @@ namespace EpiDashboard.Dialogs
                     break;
                 case "the month":
                     formatType = FormatTypes.Month;
+                    break;
+                case "the numeric month":
+                    formatType = FormatTypes.NumericMonth;
                     break;
                 case "the month and four-digit year":
                     formatType = FormatTypes.MonthAndFourDigitYear;
@@ -201,6 +208,9 @@ namespace EpiDashboard.Dialogs
                 case "the two-digit year":
                     formatType = FormatTypes.TwoDigitYear;
                     break;
+                case "the numeric year":
+                    formatType = FormatTypes.NumericYear;
+                    break;
                 case "the RFC 1123 date":
                     formatType = FormatTypes.RFC1123;
                     break;
@@ -219,9 +229,11 @@ namespace EpiDashboard.Dialogs
         {
             cbxFormatOptions.Items.Clear();
             cbxFormatOptions.Items.Add("the day");
+            cbxFormatOptions.Items.Add("the numeric day");
             cbxFormatOptions.Items.Add("the day name");
             cbxFormatOptions.Items.Add("the abbreviated day name");
             cbxFormatOptions.Items.Add("the month");
+            cbxFormatOptions.Items.Add("the numeric month");
             cbxFormatOptions.Items.Add("the month and four-digit year");
             cbxFormatOptions.Items.Add("the month name");
             cbxFormatOptions.Items.Add("the abbreviated month name");
@@ -230,6 +242,7 @@ namespace EpiDashboard.Dialogs
             cbxFormatOptions.Items.Add("the epi week");
             cbxFormatOptions.Items.Add("the four-digit year");
             cbxFormatOptions.Items.Add("the two-digit year");
+            cbxFormatOptions.Items.Add("the numeric year");
             cbxFormatOptions.Items.Add("the hour");
             cbxFormatOptions.Items.Add("the RFC 1123 date");
             cbxFormatOptions.Items.Add("the sortable date");
@@ -282,6 +295,8 @@ namespace EpiDashboard.Dialogs
                     Rule_Format tempFormatRule = new Rule_Format(dashboardHelper, "temp", "temp", "temp", "temp", type);
                     string formatString = tempFormatRule.GetFormatString();
                     txtPreview.Text = string.Format(System.Globalization.CultureInfo.CurrentCulture, formatString, DateTime.Now);
+                    if ((type == FormatTypes.NumericDay || type == FormatTypes.NumericMonth) && txtPreview.Text[0] == '0')
+                        txtPreview.Text = txtPreview.Text.Trim('0');
                 }
                 else
                 {
