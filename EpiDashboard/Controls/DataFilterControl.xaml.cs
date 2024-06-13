@@ -317,7 +317,7 @@ namespace EpiDashboard.Controls
                                 string codeColumnName = ((TableBasedDropDownField)field).CodeColumnName.Trim();
                                 if (!string.IsNullOrEmpty(codeColumnName))
                                 {
-                                    string Key = row[0].ToString();
+                                    string Key = row[codeColumnName].ToString();
                                     if (!fieldValues.ContainsKey(Key))
                                     {
                                         fieldValues.Add(Key, Key);
