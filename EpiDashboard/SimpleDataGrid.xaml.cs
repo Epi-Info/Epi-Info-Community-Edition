@@ -130,7 +130,7 @@ namespace EpiDashboard
             dataRecodingControl.UserVariableChanged += new EventHandler(dataRecodingControl_RecodingRulesChanged);
             dataRecodingControl.Loaded += new RoutedEventHandler(dataRecodingControl_Loaded);
             grdMain.Children.Add(dataRecodingControl);
-            
+            dataRecodingControl.Visibility = Visibility.Collapsed;
             DragCanvas.SetCanBeDragged(dataRecodingControl, false);
         }
 
