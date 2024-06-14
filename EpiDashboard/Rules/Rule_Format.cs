@@ -539,7 +539,7 @@ namespace EpiDashboard.Rules
             {
                 value = string.Format(System.Globalization.CultureInfo.CurrentCulture, this.GetFormatString(), row[this.SourceColumnName]) + this.Suffix;
                 value = value.Trim();
-                if ((this.formatType == FormatTypes.NumericDay || this.formatType == FormatTypes.NumericMonth) && value[0] == '0')
+                if ((this.formatType == FormatTypes.NumericDay || this.formatType == FormatTypes.NumericMonth) && !String.IsNullOrEmpty(value) && value[0] == '0')
                     value = value.Trim('0');
             }
             else
