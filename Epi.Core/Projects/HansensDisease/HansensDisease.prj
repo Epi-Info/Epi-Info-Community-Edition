@@ -1,0 +1,7 @@
+<Project id="1e64799e-bb74-30bb-fc17-80f237334dd2" name="HansensDisease" location=".\Projects\HansensDisease" description="" schemaVersion="102" epiVersion="" createDate="06/17/2024 15:19:24" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="/CMip3j3HV8RumZ8DOXlLCsNfxtHVPMPzQ5QwP6y4R8HklzHp5WfrIeS2eZrTpV7Ya0Kw5Lh11840wRv+S6zeEpDeBqnJD0iXJ85/m1PDp6uExC+pRys37uy7IL3UHoLi4iqvzN2tWThAHdyZ0RMxI1jy2ApijC3/1Up4XL92bzKTNDQv43R2X4NZLo8mV+93UEYc2bJE7rCCyevCVnP6A==" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>

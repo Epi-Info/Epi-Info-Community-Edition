@@ -758,6 +758,9 @@
     <None Include="Projects\H1N1ShortForm\H1N1ShortForm.prj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\HansensDisease\HansensDisease.prj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\Rates\DeathsReported _per_Region.cvs7" />
     <None Include="Projects\Rates\DeathsReported _per_Region.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -848,6 +851,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Projects\H1N1ShortForm\H1N1ShortForm.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\HansensDisease\HansensDisease.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Projects\STEPS\STEPS_EI7.mdb">
