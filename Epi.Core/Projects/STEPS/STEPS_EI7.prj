@@ -1,0 +1,7 @@
+<Project id="54d638f4-d0ea-eb6b-ad57-c14ca1fdcded" name="STEPS_EI7" location=".\Projects\STEPS" description="" schemaVersion="102" epiVersion="" createDate="05/30/2024 11:50:02" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7csqJucXA0eUm4ILZ7oROEzp1Ny+zhOIqjHcRcm969nVWBbjHL4NxB/325m86VxHjmXan/d4nSyiROKIfPrJJNLcEZ9KekGE3bK9mqWHGJ+tEBtxUCjaalnT8zHOHAH6w=" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>
