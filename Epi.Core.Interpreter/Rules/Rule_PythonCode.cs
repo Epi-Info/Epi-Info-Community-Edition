@@ -165,7 +165,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 if (col.DataType.ToString().Contains("Int") || col.DataType.ToString().Contains("Byte"))
                     sqldatatypes = sqldatatypes + "sqldatatypes['" + col.ColumnName + "'] = 'INTEGER'\n";
-                else if (col.DataType.ToString().Contains("Double"))
+                else if (col.DataType.ToString().Contains("Double") || col.DataType.ToString().Contains("Single"))
                     sqldatatypes = sqldatatypes + "sqldatatypes['" + col.ColumnName + "'] = 'REAL'\n";
                 else if (col.DataType.ToString().Contains("Boolean"))
                     sqldatatypes = sqldatatypes + "sqldatatypes['" + col.ColumnName + "'] = 'INTEGER'\n";
