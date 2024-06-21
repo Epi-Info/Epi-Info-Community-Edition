@@ -167,30 +167,24 @@
 
                     </StackPanel>
 
-                    <StackPanel Margin="159,0,0,0" Grid.Column="1">
-                        <Button Style="{StaticResource buttonMenuRight}" TabIndex="9" KeyUp="rightMenu_Keydown" Name="btnRightMenuHide"  Click="btnRightMenuHide_Click" Margin="0,15,0,0" Height="56" Width="134">
+                    <StackPanel Grid.Column="1">
+                        <Button Style="{StaticResource buttonMenuRight}" TabIndex="9" KeyUp="rightMenu_Keydown" Name="btnRightMenuHide"  Click="btnRightMenuHide_Click" Margin="0,15,0,0">
                             <Button.ToolTip >
                                 <ToolTip Visibility="Hidden">
                                     Additional Menu Items: Options, Contents, How to videos, Epi Info Q&amp;A, Contact Help Desk, Other Epi Resources, Epi Info Logs
                                 </ToolTip>
                             </Button.ToolTip>
-
-                            <StackPanel Height="58" Width="38" HorizontalAlignment="Center">
+                            <StackPanel>
                                 <Path Panel.ZIndex="1"  Margin="4 0 0 0" Cursor="Hand" Data="M15.8,20.4H34.2L25,29.6Z" Fill="White" Height="6" Stretch="Fill" Width="11"/>
-                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Right">
-                                <TextBlock Margin="0 0 3 0" Style="{StaticResource sectionTitle}" FontWeight="Bold" FontSize="16">Options, Help, Tools</TextBlock>
-                                <!--<Path Data="M.789 4.836a1.03 1.03 0 0 1 1.03-1.029h10.363a1.03 1.03 0 1 1 0 2.059H1.818A1.03 1.03 0 0 1 .79 4.836zm12.422 4.347a1.03 1.03 0 0 1-1.03 1.029H1.819a1.03 1.03 0 0 1 0-2.059h10.364a1.03 1.03 0 0 1 1.029 1.03zm0 4.345a1.03 1.03 0 0 1-1.03 1.03H1.819a1.03 1.03 0 1 1 0-2.059h10.364a1.03 1.03 0 0 1 1.029 1.03z" Fill="#1d60ac" Height="35" Stretch="Fill" Width="35"/>-->
                                 <Grid Width="36" Height="36">
                                     <Path Width="18" Height="18" Stretch="Fill" Fill="#1d60ac" Data="F1 M 19,23L 27,23L 27,31L 19,31L 19,23 Z M 19,34L 27,34L 27,42L 19,42L 19,34 Z M 31,23L 57,23L 57,31L 31,31L 31,23 Z M 19,45L 27,45L 27,53L 19,53L 19,45 Z M 31,34L 57,34L 57,42L 31,42L 31,34 Z M 31,45L 57,45L 57,53L 31,53L 31,45 Z "/>
                                     <Ellipse Stroke="#1d60ac"  Fill=" Transparent" StrokeThickness="3" />
                                 </Grid>
-
-                                </StackPanel>
                                 <TextBlock Foreground="White"  x:Name="txtMenuOptions" Style="{StaticResource sectionDescp}" TextAlignment="Center" HorizontalAlignment="Center" Width="200" ><Run Text="Additional Menu Options"/></TextBlock>
                             </StackPanel>
                         </Button>
-
                     </StackPanel>
+
                 </Grid>
             </Border>
 
