@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -13,10 +12,12 @@ using Epi.Fields;
 using EpiInfo.Plugin;
 using Epi.Windows.Controls;
 using Epi.Windows.MakeView.PresentationLogic;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Epi.Windows.MakeView
 {
-  public  class Template
+    public class Template
     {
         GuiMediator mediator = null;
         ICommandContext context = null;
@@ -26,7 +27,7 @@ namespace Epi.Windows.MakeView
         Dictionary<int, string> pageIdViewNamePairs = new Dictionary<int, string>();
         Dictionary<int, string> viewIdViewNamePairs = new Dictionary<int, string>();
         List<string> _sourceTableNames = new List<string>();
-        Dictionary<int,string> _gridFieldIds = new Dictionary<int,string>();
+        Dictionary<int, string> _gridFieldIds = new Dictionary<int, string>();
         bool _fieldDrop = false;
         Point _fieldDropLocaton = new Point();
         int _dropOnNodePosition = -1;
@@ -216,7 +217,7 @@ namespace Epi.Windows.MakeView
             writer.WriteEndDocument();
             writer.Close();
         }
-        
+
         public void CreateProjectTemplate(string nameWithSubfolders, string templateDescription)
         {
             _templateLevel = Enums.TemplateLevel.Project;
@@ -310,7 +311,7 @@ namespace Epi.Windows.MakeView
             writer.WriteEndElement();
         }
         public void CreateEWEProjectTemplate(string nameWithSubfolders, string templateDescription, XmlWriter writer)
-            {
+        {
             writer.WriteStartElement("Template");
             writer.WriteAttributeString("Name", nameWithSubfolders);
             writer.WriteAttributeString("Description", templateDescription);
@@ -358,12 +359,12 @@ namespace Epi.Windows.MakeView
             writer.WriteEndElement();
 
             foreach (View view in mediator.Project.Views)
-                {
+            {
                 this.view = view;
                 CreateViewTemplate(nameWithSubfolders, writer);
-                }
-            writer.WriteEndElement();
             }
+            writer.WriteEndElement();
+        }
         public string CreateWebSurveyTemplate()
         {
             //StringWriter sw = new StringWriter();
@@ -394,22 +395,22 @@ namespace Epi.Windows.MakeView
             return sw.ToString();
         }
         public string CreateWebEnterTemplate()
-            {
+        {
 
             StringWriter sw = new StringWriter();
 
-            XmlWriter writer = XmlWriter.Create(sw);  
+            XmlWriter writer = XmlWriter.Create(sw);
             writer.WriteStartDocument();
             //writer.WriteStartElement("Template");
             //writer.WriteAttributeString("Level", "View");
             //writer.WriteStartElement("Project");
             CreateProjectTemplate("web", "dis", writer);
-           // writer.WriteEndElement();
+            // writer.WriteEndElement();
             AddCodeTableTemplates(writer);
-           // writer.WriteEndElement();
+            // writer.WriteEndElement();
             writer.Close();
             return sw.ToString();
-            }
+        }
         public void CreatePhoneTemplate(string path)
         {
             StringWriter sw = new StringWriter();
@@ -442,7 +443,7 @@ namespace Epi.Windows.MakeView
             writer.WriteEndElement();
             AddCodeTableTemplates(writer);
             AddGridColumnTemplate(writer);
-            writer.WriteEndElement(); 
+            writer.WriteEndElement();
             writer.Close();
         }
 
@@ -510,14 +511,14 @@ namespace Epi.Windows.MakeView
             {
                 currentFieldTypeId = (int)row["FieldTypeId"];
 
-                if (currentFieldTypeId == (int)MetaFieldType.Relate) 
+                if (currentFieldTypeId == (int)MetaFieldType.Relate)
                 {
                     if (_templateLevel == Enums.TemplateLevel.Field || _templateLevel == Enums.TemplateLevel.Page || _templateLevel == Enums.TemplateLevel.Form)
                     {
                         continue;
                     }
                 }
-                
+
                 writer.WriteStartElement("Field");
 
                 if (currentFieldTypeId == (int)MetaFieldType.Grid)
@@ -542,7 +543,7 @@ namespace Epi.Windows.MakeView
                         {
                             int relatedViewId = -1;
 
-                            if(int.TryParse(row["RelatedViewId"].ToString(), out relatedViewId))
+                            if (int.TryParse(row["RelatedViewId"].ToString(), out relatedViewId))
                             {
                                 View relateView = metadata.GetViewById(relatedViewId);
 
@@ -634,7 +635,7 @@ namespace Epi.Windows.MakeView
             subset.Append(fieldCode);
             string pageCheckCode = subset.ToString();
 
-            return pageCheckCode; 
+            return pageCheckCode;
         }
 
         string GetCheckCodeSubset(List<string> fieldNames, string checkCode)
@@ -675,7 +676,7 @@ namespace Epi.Windows.MakeView
                     fieldBlockPrefix = fieldBlockPrefix + "[";
                 }
 
-                foreach(string fieldName in fieldNames)
+                foreach (string fieldName in fieldNames)
                 {
                     if (candidate.StartsWith(fieldName))
                     {
@@ -685,7 +686,7 @@ namespace Epi.Windows.MakeView
                 }
             }
 
-            string[] fragments = new string[endFieldFragments.Count]; 
+            string[] fragments = new string[endFieldFragments.Count];
             endFieldFragments.CopyTo(fragments);
 
             for (int i = fragments.Length - 1; i >= 0; i--)
@@ -693,7 +694,7 @@ namespace Epi.Windows.MakeView
                 subset.Append(fragments[i]);
             }
 
-            string fieldBlocks = subset.ToString(); 
+            string fieldBlocks = subset.ToString();
             return fieldBlocks;
         }
 
@@ -705,7 +706,7 @@ namespace Epi.Windows.MakeView
             foreach (KeyValuePair<IFieldControl, Point> kvp in selectedFieldControls)
             {
                 if (fieldNames.Contains(kvp.Key.Field.Name) == false)
-                { 
+                {
                     fieldNames.Add(kvp.Key.Field.Name);
                 }
             }
@@ -733,7 +734,7 @@ namespace Epi.Windows.MakeView
 
             DataTable fieldsOnPageTable = page.GetMetadata().GetFieldsOnPageAsDataTable(page.Id);
             DataTable selectedFieldsTable = fieldsOnPageTable.Clone();
-            
+
             foreach (KeyValuePair<IFieldControl, Point> kvp in selectedFieldControls)
             {
                 int dim = ((Control)kvp.Key).Location.X;
@@ -747,7 +748,7 @@ namespace Epi.Windows.MakeView
 
                 dim = ((Control)kvp.Key).Location.Y + ((Control)kvp.Key).Height;
                 if (maxDown <= dim) maxDown = dim;
-                
+
                 if ((kvp.Key.Field is FieldWithSeparatePrompt && kvp.Key is DragableLabel) || kvp.Key.Field is FieldWithoutSeparatePrompt)
                 {
                     if ((kvp.Key.Field is ImageField) && messageBoxHasBeenDisplayed == false)
@@ -760,7 +761,7 @@ namespace Epi.Windows.MakeView
                     else
                     {
                         DataRow[] fieldCandidate = fieldsOnPageTable.Select("UniqueId = '" + kvp.Key.Field.UniqueId.ToString() + "'");
-                        
+
                         if (fieldCandidate.Length > 0)
                         {
                             double percentDifferenceTop = kvp.Value.Y / (double)mediator.Canvas.PagePanel.Height;
@@ -768,16 +769,16 @@ namespace Epi.Windows.MakeView
 
                             if (fieldCandidate[0]["PromptTopPositionPercentage"] != DBNull.Value)
                             {
-                                fieldCandidate[0]["ControlTopPositionPercentage"] = percentDifferenceTop 
-                                    + (double)fieldCandidate[0]["ControlTopPositionPercentage"] 
+                                fieldCandidate[0]["ControlTopPositionPercentage"] = percentDifferenceTop
+                                    + (double)fieldCandidate[0]["ControlTopPositionPercentage"]
                                     - (double)fieldCandidate[0]["PromptTopPositionPercentage"];
-                                
-                                fieldCandidate[0]["ControlLeftPositionPercentage"] = percentDifferenceLeft 
-                                    + (double)fieldCandidate[0]["ControlLeftPositionPercentage"] 
+
+                                fieldCandidate[0]["ControlLeftPositionPercentage"] = percentDifferenceLeft
+                                    + (double)fieldCandidate[0]["ControlLeftPositionPercentage"]
                                     - (double)fieldCandidate[0]["PromptLeftPositionPercentage"];
 
                                 fieldCandidate[0]["PromptTopPositionPercentage"] = percentDifferenceTop;
-                                
+
                                 fieldCandidate[0]["PromptLeftPositionPercentage"] = percentDifferenceLeft;
                             }
                             else
@@ -785,7 +786,7 @@ namespace Epi.Windows.MakeView
                                 fieldCandidate[0]["ControlTopPositionPercentage"] = percentDifferenceTop;
                                 fieldCandidate[0]["ControlLeftPositionPercentage"] = percentDifferenceLeft;
                             }
-                            
+
                             selectedFieldsTable.ImportRow(fieldCandidate[0]);
                         }
                     }
@@ -804,11 +805,11 @@ namespace Epi.Windows.MakeView
                 }
                 writer.WriteEndElement();
             }
-            
+
             writer.WriteEndElement();
             writer.WriteEndElement();
             writer.WriteEndElement();
-            
+
             AddCodeTableTemplates(selectedFieldControls, writer);
             AddGridColumnTemplate(selectedFieldControls, writer);
 
@@ -819,7 +820,7 @@ namespace Epi.Windows.MakeView
                 writer.WriteAttributeString("Height", (maxDown - minDown).ToString());
                 writer.WriteEndElement();
             }
-               
+
             writer.WriteEndElement();
             writer.Close();
         }
@@ -830,7 +831,7 @@ namespace Epi.Windows.MakeView
         }
 
         #endregion
-        
+
         #region Private Template Creation Methods
 
         private void AddGridColumnTemplate(SortedDictionary<IFieldControl, Point> selectedFieldControls, System.Xml.XmlWriter writer)
@@ -854,7 +855,7 @@ namespace Epi.Windows.MakeView
                                 if (column is TableBasedDropDownColumn)
                                 {
                                     if (column is DDLColumnOfCommentLegal || column is DDLColumnOfLegalValues)
-                                    InsertSourceTable(((TableBasedDropDownColumn)column).GetSourceData(), writer);
+                                        InsertSourceTable(((TableBasedDropDownColumn)column).GetSourceData(), writer);
                                 }
                             }
                         }
@@ -887,10 +888,10 @@ namespace Epi.Windows.MakeView
 
         private void AddGridColumnTemplate(System.Xml.XmlWriter writer)
         {
-            foreach (KeyValuePair<int,string> kvp in _gridFieldIds)
+            foreach (KeyValuePair<int, string> kvp in _gridFieldIds)
             {
                 DataTable gridTable = metadata.GetGridColumns(kvp.Key);
-                
+
                 if (gridTable != null)
                 {
                     gridTable.TableName = kvp.Value;
@@ -997,7 +998,7 @@ namespace Epi.Windows.MakeView
                     }
                     writer.WriteEndElement();
                 }
-                
+
                 writer.WriteEndElement();
             }
         }
@@ -1035,7 +1036,7 @@ namespace Epi.Windows.MakeView
             _fieldDrop = true;
 
             _fieldDropLocaton = location;
-            
+
             _templateLevel = GetTemplateLevel(node);
             CreateFromTemplate(templatePath);
         }
@@ -1046,7 +1047,7 @@ namespace Epi.Windows.MakeView
             _fieldDrop = true;
 
             _dropOnNodePosition = dropOnNodePosition;
-            
+
             _templateLevel = GetTemplateLevel(node);
             CreateFromTemplate(templatePath);
         }
@@ -1064,8 +1065,8 @@ namespace Epi.Windows.MakeView
             DataTable metadataSchema;
             _sourceTableRenames.Clear();
             pageIdViewNamePairs.Clear();
-            viewIdViewNamePairs.Clear();            
-            
+            viewIdViewNamePairs.Clear();
+
             using (XmlReader reader = XmlReader.Create(templatePath))
             {
                 while (reader.ReadToFollowing("View"))
@@ -1082,13 +1083,13 @@ namespace Epi.Windows.MakeView
                     } while (reader.ReadToNextSibling("View"));
                     break;
                 }
-                
+
                 while (reader.ReadToFollowing("SourceTable"))
                 {
                     do
                     {
                         CreateSourceTable(reader);
-                    
+
                     } while (reader.ReadToNextSibling("SourceTable"));
                     break;
                 }
@@ -1098,9 +1099,9 @@ namespace Epi.Windows.MakeView
 
             if (_templateLevel == Enums.TemplateLevel.Project || _templateLevel == Enums.TemplateLevel.Form)
             {
-                bool cancel; 
-                CreateViews(templatePath, out cancel, out isnewview);               
-                    isnewview = true;
+                bool cancel;
+                CreateViews(templatePath, out cancel, out isnewview);
+                isnewview = true;
                 if (cancel == true)
                     return;
             }
@@ -1108,7 +1109,7 @@ namespace Epi.Windows.MakeView
             {
                 ConcatCheckCode(templatePath);
             }
-            
+
             using (XmlReader reader = XmlReader.Create(templatePath))
             {
                 while (reader.ReadToFollowing("Page"))
@@ -1143,12 +1144,12 @@ namespace Epi.Windows.MakeView
                     {
                         page = mediator.ProjectExplorer.currentPage;
                     }
-                    
+
                     if (firstPageCreated == null)
                     {
                         firstPageCreated = page;
-                    }      
-                    
+                    }
+
                     metadataSchema = metadata.GetMetaFieldsSchema(mediator.ProjectExplorer.currentPage.GetView().Id);
 
                     int fieldIdFromTemplate = int.MinValue;
@@ -1157,14 +1158,14 @@ namespace Epi.Windows.MakeView
                     {
                         do
                         {
-                            
+
 
                             Field field = CreateFields(fieldSubtree, metadataSchema, page, out fieldIdFromTemplate);
-                            
+
                             if (field == null) continue;
 
-                           if (field.Id != fieldIdFromTemplate && !_templateFieldId_dbFieldId.ContainsKey(fieldIdFromTemplate))
-                                
+                            if (field.Id != fieldIdFromTemplate && !_templateFieldId_dbFieldId.ContainsKey(fieldIdFromTemplate))
+
                             {
                                 _templateFieldId_dbFieldId.Add(fieldIdFromTemplate, field.Id);
                             }
@@ -1185,7 +1186,7 @@ namespace Epi.Windows.MakeView
                         while (fieldSubtree.ReadToNextSibling("Field"));
                         break;
                     }
-                }               
+                }
             }
 
             CreateGridTables(templatePath);
@@ -1195,18 +1196,18 @@ namespace Epi.Windows.MakeView
 
             mediator.SetZeeOrderOfGroups();
             ArrayList controlArrayList = new ArrayList(mediator.SelectedFieldControls.Keys);
-            mediator.SelectedFieldControls.Clear(); 
+            mediator.SelectedFieldControls.Clear();
             mediator.Canvas.HideUpdateEnd();
 
             if (firstPageCreated != null)
             {
                 mediator.ProjectExplorer.currentPage = firstPageCreated;
-                mediator.ProjectExplorer.SelectPage( mediator.ProjectExplorer.currentPage);
+                mediator.ProjectExplorer.SelectPage(mediator.ProjectExplorer.currentPage);
                 mediator.LoadPage(mediator.ProjectExplorer.currentPage);
             }
             mediator.OnViewFieldTabsChanged();
         }
-        
+
         #endregion
 
         #region Private Field Creation Methods
@@ -1242,7 +1243,7 @@ namespace Epi.Windows.MakeView
                 foreach (string pair in sourceTableColumnName_targetFieldId)
                 {
                     if (String.IsNullOrEmpty(pair) == false)
-                    { 
+                    {
                         string sourceTableColumnName = pair.Substring(0, pair.IndexOf(':'));
                         int idTemplate = int.Parse(pair.Substring(pair.IndexOf(':') + 1));
 
@@ -1282,7 +1283,7 @@ namespace Epi.Windows.MakeView
                 }
             }
         }
-        
+
         private void AddViewAttributeToView(string name, string value, View newView)
         {
             switch (name)
@@ -1382,19 +1383,19 @@ namespace Epi.Windows.MakeView
 
                                 int fieldType = int.Parse((string)rowFromXml["FieldTypeId"]);
                                 int fieldId = int.Parse((string)rowFromXml["FieldId"]);
-                                
-                                if(_templateFieldId_dbFieldId.ContainsKey(fieldId))
+
+                                if (_templateFieldId_dbFieldId.ContainsKey(fieldId))
                                 {
                                     rowFromXml["FieldId"] = _templateFieldId_dbFieldId[fieldId];
                                 }
 
                                 string columnName = rowFromXml["Name"].ToString().ToLowerInvariant();
 
-                                if ((   columnName.Equals("uniquerowid") ||
+                                if ((columnName.Equals("uniquerowid") ||
                                         columnName.Equals("recstatus") ||
                                         columnName.Equals("fkey") ||
                                         columnName.Equals("globalrecordid")) == false)
-                                { 
+                                {
                                     mediator.Project.Metadata.AddGridColumn(rowFromXml);
                                 }
                             }
@@ -1439,7 +1440,7 @@ namespace Epi.Windows.MakeView
                         columnName = reader.Name.Replace("__space__", " ");
                         if (fromXml.Columns.Contains(columnName) == false)
                         {
-                            
+
                             fromXml.Columns.Add(columnName, System.Type.GetType("System.String"));
                             DataRow tempRow = fromXml.NewRow();
                             tempRow.ItemArray = rowFromXml.ItemArray;
@@ -1450,7 +1451,7 @@ namespace Epi.Windows.MakeView
 
                     fromXml.Rows.Add(rowFromXml);
                 }
-            } 
+            }
             while (reader.ReadToNextSibling("Item"));
 
             if (mediator.Project.Metadata.TableExists(codeTableName))
@@ -1465,8 +1466,8 @@ namespace Epi.Windows.MakeView
                     }
                     columnNames = (string[])names.ToArray(typeof(string));
 
-                    DialogResult replaceWithTemplate = MsgBox.ShowQuestion("A code table with the following name already exists in the database: " + existing + ".  Replace code table with the code table defined in the template?" );
-                    
+                    DialogResult replaceWithTemplate = MsgBox.ShowQuestion("A code table with the following name already exists in the database: " + existing + ".  Replace code table with the code table defined in the template?");
+
                     if (replaceWithTemplate == DialogResult.Yes)
                     {
                         mediator.Project.Metadata.DeleteCodeTable(codeTableName);
@@ -1637,7 +1638,7 @@ namespace Epi.Windows.MakeView
                     do
                     {
                         XmlReader viewSubTree = reader.ReadSubtree();
-                        
+
                         if (reader.HasAttributes)
                         {
                             if (reader.GetAttribute("ViewId") != null)
@@ -1748,27 +1749,9 @@ namespace Epi.Windows.MakeView
 
         private Page CreatePage(System.Xml.XmlReader reader, bool isnewview, out View view)
         {
-			Page newPage = new Page();
+            Page newPage = new Page();
 
-			if (pageIdViewNamePairs.Count == 0)
-			{
-				view = this.mediator.ProjectExplorer.currentPage.view;
-			}
-			else
-			{
-                try
-                {
-                    view = mediator.Project.Views[pageIdViewNamePairs[newPage.Id]];
-                }
-                catch (KeyNotFoundException knfe)
-                {
-                    view = mediator.Project.Views[pageIdViewNamePairs[newPage.Id + 1]];
-                }
-			}
-
-            List<string> names = view.Pages.Select(page => page.Name).ToList();
-
-			if (reader.MoveToFirstAttribute())
+            if (reader.MoveToFirstAttribute())
             {
                 AddPageAttributeToPage(reader.Name, reader.Value, newPage);
 
@@ -1776,11 +1759,22 @@ namespace Epi.Windows.MakeView
                 {
                     if (reader.Name == "Name")
                     {
-                        if (names.Contains(reader.Value))
+                        if (!isnewview)
                         {
-                            string _name;
+                            string _name = reader.Value;
+                            DialogResult result = new DialogResult();
 
-                            ShowRenamePageDialog(reader.Value, out _name);
+                            List<string> pageNames = this.mediator.ProjectExplorer.CurrentView.Pages.Select(o => o.Name).ToList();
+
+                            while (pageNames.Contains(_name))
+                            {
+                                result = ShowRenamePageDialog(reader.Value, out _name);
+
+                                if(result == DialogResult.Cancel)
+                                {  
+                                    break; 
+                                }
+                            }
 
                             if (_name != string.Empty)
                             {
@@ -1793,22 +1787,34 @@ namespace Epi.Windows.MakeView
                             }
                         }
                         else
+                        {
                             AddPageAttributeToPage(reader.Name, reader.Value, newPage);
+                        }
                     }
                     else
+                    {
                         AddPageAttributeToPage(reader.Name, reader.Value, newPage);
+                    }
                 }
             }
 
-
+            if (pageIdViewNamePairs.Count == 0)
+            {
+                view = this.mediator.ProjectExplorer.currentPage.view;
+            }
+            else
+            {
+                view = mediator.Project.Views[pageIdViewNamePairs[newPage.Id]];
+            }
 
             newPage.Id = 0;
             newPage.view = view;
             return newPage;
         }
 
-        private void ShowRenamePageDialog(string readervalue, out string newpagename)
+        private DialogResult ShowRenamePageDialog(string readervalue, out string newpagename)
         {
+            readervalue = "Page " + (view.Pages.Count + 1).ToString();
             Dialogs.RenamePageDialog dialog = new Dialogs.RenamePageDialog(mediator.Canvas.MainForm, view);
             dialog.PageName = readervalue;
             DialogResult result = dialog.ShowDialog();
@@ -1820,6 +1826,8 @@ namespace Epi.Windows.MakeView
             {
                 newpagename = "";
             }
+
+            return result;
         }
 
         private void CopyReaderValueToRow(System.Xml.XmlReader reader, DataTable metadataSchema, DataRow row)
@@ -1874,7 +1882,7 @@ namespace Epi.Windows.MakeView
                 row = metadataSchema.NewRow();
                 relatedViewName = string.Empty;
                 CopyReaderValueToRow(reader, metadataSchema, row);
-                
+
                 while (reader.MoveToNextAttribute())
                 {
                     CopyReaderValueToRow(reader, metadataSchema, row);
@@ -1899,7 +1907,7 @@ namespace Epi.Windows.MakeView
                 double promptLeftPercentage = row["PromptLeftPositionPercentage"] != DBNull.Value ? (double)row["PromptLeftPositionPercentage"] : double.NaN;
                 double promptTopPercentage = row["PromptTopPositionPercentage"] != DBNull.Value ? (double)row["PromptTopPositionPercentage"] : double.NaN;
 
-                if(_fieldDrop)
+                if (_fieldDrop)
                 {
                     double mouseOffsetOver = _fieldDropLocaton.X / (double)mediator.Canvas.PagePanel.Width;
                     double mouseOffsetDown = _fieldDropLocaton.Y / (double)mediator.Canvas.PagePanel.Height;
@@ -1910,7 +1918,7 @@ namespace Epi.Windows.MakeView
                     promptTopPercentage = promptTopPercentage + mouseOffsetDown;
                 }
 
-                ((RenderableField)field).PromptText = row["PromptText"] != DBNull.Value ? (string)row["PromptText"] : string.Empty; 
+                ((RenderableField)field).PromptText = row["PromptText"] != DBNull.Value ? (string)row["PromptText"] : string.Empty;
                 ((RenderableField)field).ControlFont = new System.Drawing.Font(row["ControlFontFamily"].ToString(), float.Parse(row["ControlFontSize"].ToString()), (FontStyle)System.Enum.Parse(typeof(FontStyle), row["ControlFontStyle"].ToString(), true));
                 ((RenderableField)field).HasTabStop = (bool)row["HasTabStop"];
                 ((RenderableField)field).TabIndex = double.Parse(row["TabIndex"].ToString());
@@ -1928,7 +1936,7 @@ namespace Epi.Windows.MakeView
                     string fontFamily = row["PromptFontFamily"].ToString();
                     float fontSize;
 
-                    if(float.TryParse(row["PromptFontSize"].ToString(), out fontSize))
+                    if (float.TryParse(row["PromptFontSize"].ToString(), out fontSize))
                     {
                         ((RenderableField)field).PromptFont = new System.Drawing.Font(fontFamily, fontSize, (FontStyle)System.Enum.Parse(typeof(FontStyle), row["PromptFontStyle"].ToString(), true));
                     }
@@ -1946,12 +1954,12 @@ namespace Epi.Windows.MakeView
                 {
                     ((InputFieldWithSeparatePrompt)field).PromptLeftPositionPercentage = promptLeftPercentage;
                     ((InputFieldWithSeparatePrompt)field).PromptTopPositionPercentage = promptTopPercentage;
-                    
+
                     ((InputFieldWithSeparatePrompt)field).ShouldRepeatLast = (bool)row["ShouldRepeatLast"];
                     ((InputFieldWithSeparatePrompt)field).IsRequired = (bool)row["IsRequired"];
                     ((InputFieldWithSeparatePrompt)field).IsReadOnly = (bool)row["IsReadOnly"];
 
-                    if (field is TextField && row.Table.Columns.Contains("IsEncrypted") && row["IsEncrypted"] != DBNull.Value )
+                    if (field is TextField && row.Table.Columns.Contains("IsEncrypted") && row["IsEncrypted"] != DBNull.Value)
                     {
                         ((TextField)field).IsEncrypted = (bool)row["IsEncrypted"];
                     }
@@ -1962,8 +1970,8 @@ namespace Epi.Windows.MakeView
                     ((GridField)field).PromptLeftPositionPercentage = promptLeftPercentage;
                     ((GridField)field).PromptTopPositionPercentage = promptTopPercentage;
                 }
-  
-  
+
+
                 if (field is ImageField)
                 {
                     ((ImageField)field).ShouldRetainImageSize = (bool)row["ShouldRetainImageSize"];
@@ -2021,7 +2029,7 @@ namespace Epi.Windows.MakeView
                 if (field is OptionField)
                 {
                     string list = ((string)row["List"]);
-                    
+
                     if (list.Contains("||"))
                     {
                         list = list.Substring(0, list.IndexOf("||"));
@@ -2085,7 +2093,7 @@ namespace Epi.Windows.MakeView
                 {
                     string codeTableName = string.Empty;
 
-                    if(row["SourceTableName"] != System.DBNull.Value)
+                    if (row["SourceTableName"] != System.DBNull.Value)
                     {
                         codeTableName = (string)row["SourceTableName"];
                     }
@@ -2096,7 +2104,7 @@ namespace Epi.Windows.MakeView
                     }
 
                     ((TableBasedDropDownField)field).SourceTableName = codeTableName;
-                        
+
                     if (row["CodeColumnName"] != System.DBNull.Value)
                     {
                         ((TableBasedDropDownField)field).CodeColumnName = (string)row["CodeColumnName"];
@@ -2120,7 +2128,7 @@ namespace Epi.Windows.MakeView
                 {
                     ((FieldWithSeparatePrompt)field).PromptLeftPositionPercentage = promptLeftPercentage;
                     ((FieldWithSeparatePrompt)field).PromptTopPositionPercentage = promptTopPercentage;
-                    
+
                     ((MirrorField)field).SourceFieldId = (int)row["SourceFieldId"];
                 }
 
@@ -2143,9 +2151,9 @@ namespace Epi.Windows.MakeView
                 }
 
                 string nameTemplate = field.Name;
-                
-                    mediator.PasteFromTemplate((RenderableField)field);
-                 
+
+                mediator.PasteFromTemplate((RenderableField)field);
+
                 if (field.Name != (string)row["Name"] && !_fieldRenames.ContainsKey((string)row["Name"]))
                 {
                     _fieldRenames.Add((string)row["Name"], field.Name);
@@ -2226,7 +2234,7 @@ namespace Epi.Windows.MakeView
 
         #endregion
     }
-    
+
     enum FieldRecordColumn
     {
         NameTemplate,
