@@ -10,7 +10,6 @@ using System.IO;
 using Newtonsoft.Json;
 using System.IO.MemoryMappedFiles;
 using Epi.Analysis.Statistics;
-using System.Threading;
 
 namespace Epi.Core.AnalysisInterpreter.Rules
 {
@@ -224,7 +223,7 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             this.processStartInfo.RedirectStandardOutput = true;
             this.processStartInfo.RedirectStandardError = true;
             this.processStartInfo.RedirectStandardInput = true;
-
+            
             // Here is where I tried to move an object from C# to Python environment
             // using a Memory Mapped File. I don't think this is the way but am leaving
             // the code in case I want to return to it.
@@ -243,63 +242,20 @@ namespace Epi.Core.AnalysisInterpreter.Rules
 
             using (Process proc = Process.Start(this.processStartInfo))
             {
-                StringBuilder output = new StringBuilder();
-                StringBuilder error = new StringBuilder();
-
-                using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
-                using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
+                using (StreamReader reader = proc.StandardOutput)
                 {
-                    proc.OutputDataReceived += (sender, e) =>
+                    string stderr = proc.StandardError.ReadToEnd();
+                    string res = reader.ReadToEnd();
+                    if (!String.IsNullOrEmpty(stderr))
                     {
-                        if (e.Data == null)
-                        {
-                            outputWaitHandle.Set();
-                        }
-                        else
-                        {
-                            output.AppendLine(e.Data);
-                        }
-                    };
-                    proc.ErrorDataReceived += (sender, e) =>
-                    {
-                        if (e.Data == null)
-                        {
-                            errorWaitHandle.Set();
-                        }
-                        else
-                        {
-                            error.AppendLine(e.Data);
-                        }
-                    };
-
-                    proc.Start();
-
-                    proc.BeginOutputReadLine();
-                    proc.BeginErrorReadLine();
-
-                    if (proc.WaitForExit(1000) &&
-                        outputWaitHandle.WaitOne(1000) &&
-                        errorWaitHandle.WaitOne(1000))
-                    {
-                        // Process completed. Check process.ExitCode here.
+                        Console.WriteLine(stderr);
+                        if (String.IsNullOrEmpty(res))
+                            throw new GeneralException(stderr);
                     }
-                    else
+                    if (!String.IsNullOrEmpty(res))
                     {
-                        // Timed out.
+                        result = res;
                     }
-                }
-                string stderr = error.ToString();
-                string res = output.ToString();
-
-                if (!String.IsNullOrEmpty(stderr))
-                {
-                    Console.WriteLine(stderr);
-                    if (String.IsNullOrEmpty(res))
-                        throw new GeneralException(stderr);
-                }
-                if (!String.IsNullOrEmpty(res))
-                {
-                    result = res;
                 }
             }
 
