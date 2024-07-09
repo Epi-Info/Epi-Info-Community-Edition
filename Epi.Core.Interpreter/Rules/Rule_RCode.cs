@@ -267,7 +267,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
             {
                 using (StreamReader reader = proc.StandardOutput)
                 {
-                    string stderr = proc.StandardError.ReadToEnd();
+                    string stderr = null;
+                    proc.StartInfo.RedirectStandardError = true;
+                    proc.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
+                    { stderr += e.Data + "\n"; });
+                    proc.BeginErrorReadLine();
                     string res = reader.ReadToEnd();
                     if (!String.IsNullOrEmpty(stderr))
                     {
