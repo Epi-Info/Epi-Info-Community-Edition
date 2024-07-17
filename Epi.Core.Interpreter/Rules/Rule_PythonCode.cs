@@ -82,6 +82,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                             this.pythonScript = this.GetCommandElement(pToken.Tokens, 9).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
                         case "DATASET":
+                            if (this.GetCommandElement(pToken.Tokens, 6).Equals("NONE"))
+                            {
+                                this.dictListName = null;
+                                break;
+                            }
                             this.dictListName = this.GetCommandElement(pToken.Tokens, 6).Trim(new char[] { '[', ']' }).Trim(new char[] { '"' });
                             break;
                         case "END-PYTHON":
@@ -152,6 +157,9 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
+            if (this.dictListName == null)
+                return ExecuteSansData();
+
             object result = null;
 
 
@@ -321,6 +329,87 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 Dictionary<string, string> args = new Dictionary<string, string>();
                 args.Add("COMMANDNAME", "PYTHON");
                 args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=YES");
+                args.Add("PYTHONRESULTS", "<br>");
+                this.Context.AnalysisCheckCodeInterface.Display(args);
+            }
+            else
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("COMMANDNAME", "PYTHON");
+                args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=NO");
+                args.Add("PYTHONRESULTS", "<br>");
+                this.Context.AnalysisCheckCodeInterface.Display(args);
+            }
+
+            return result; // No need to return anything. Nothing is expected.
+        }
+
+        /// <summary>
+        /// performs execution of Python code
+        /// </summary>
+        /// <returns>object</returns>
+        public object ExecuteSansData()
+        {
+            object result = null;
+
+
+            if (this.pythonScript != null)
+            {
+                if (!string.IsNullOrEmpty(this.pythonStatements))
+                    this.pythonStatements = System.IO.File.ReadAllText(this.pythonScript) + "\n" + this.pythonStatements + "\n";
+                else
+                    this.pythonStatements = System.IO.File.ReadAllText(this.pythonScript) + "\n";
+            }
+
+            this.processStartInfo.FileName = this.pythonPath;
+            this.processStartInfo.Arguments = "-c \"" +
+                this.pythonStatements.Replace("\"", "\\\"") +
+                "\"";
+            this.processStartInfo.UseShellExecute = false;
+            this.processStartInfo.CreateNoWindow = true;
+            this.processStartInfo.RedirectStandardOutput = true;
+            this.processStartInfo.RedirectStandardError = true;
+            this.processStartInfo.RedirectStandardInput = true;
+
+            using (Process proc = Process.Start(this.processStartInfo))
+            {
+                using (StreamReader reader = proc.StandardOutput)
+                {
+                    string stderr = null;
+                    proc.StartInfo.RedirectStandardError = true;
+                    proc.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
+                    { stderr += e.Data + "\n"; });
+                    proc.BeginErrorReadLine();
+                    string res = reader.ReadToEnd();
+                    if (!String.IsNullOrEmpty(stderr))
+                    {
+                        Console.WriteLine(stderr);
+                        if (String.IsNullOrEmpty(res))
+                            throw new GeneralException(stderr);
+                    }
+                    if (!String.IsNullOrEmpty(res))
+                    {
+                        result = res;
+                    }
+                }
+            }
+
+            if (result != null)
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("COMMANDNAME", "PYTHON");
+                if (this.replaceData)
+                    args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=NO");
+                else
+                    args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=NO");
+                args.Add("PYTHONRESULTS", result.ToString());
+                this.Context.AnalysisCheckCodeInterface.Display(args);
+            }
+            else if (this.replaceData)
+            {
+                Dictionary<string, string> args = new Dictionary<string, string>();
+                args.Add("COMMANDNAME", "PYTHON");
+                args.Add("COMMANDTEXT", "PYTHON REPLACEDATA=NO");
                 args.Add("PYTHONRESULTS", "<br>");
                 this.Context.AnalysisCheckCodeInterface.Display(args);
             }

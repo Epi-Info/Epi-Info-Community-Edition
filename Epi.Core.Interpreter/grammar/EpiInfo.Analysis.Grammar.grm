@@ -945,7 +945,9 @@ Programming_Chars             = ('>>> '{Valid Chars}*)
        | Boolean
 
 <Python_Statements> ::= PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON
+       | PYTHON PYTHONPATH '=' String DATASET '=' NONE <Python_Code> END-PYTHON
        | PYTHON PYTHONPATH '=' String DATASET '=' String <Python_Code> END-PYTHON <Python_End_Options>
+       | PYTHON PYTHONPATH '=' String DATASET '=' NONE <Python_Code> END-PYTHON <Python_End_Options>
        | PYTHON PYTHONPATH '=' String DATASET '=' String PYTHONSCRIPT '=' String END-PYTHON
        | PYTHON PYTHONPATH '=' String DATASET '=' String PYTHONSCRIPT '=' String END-PYTHON <Python_End_Options>
        | PYTHON PYTHONPATH '=' String DATASET '=' String PYTHONSCRIPT '=' String <Python_Code> END-PYTHON
