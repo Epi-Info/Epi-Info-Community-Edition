@@ -173,7 +173,30 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     sqldatatypes = sqldatatypes + "sqldatatypes['" + col.ColumnName + "'] = 'TEXT'\n";
             }
 
-                string tempPath = System.IO.Path.GetTempPath();
+            foreach (KeyValuePair<string, List<string>> grp in this.Context.GroupVariableList)
+            {
+                sqldatatypes = sqldatatypes + grp.Key + " = [";
+                foreach (string groupitem in grp.Value)
+                {
+                    sqldatatypes = sqldatatypes + "\"" + groupitem + "\", ";
+                }
+                sqldatatypes = sqldatatypes.Substring(0, sqldatatypes.Length - 2) + "]\n";
+            }
+
+            foreach (KeyValuePair<string, List<string>> grp in this.Context.GroupVariableList)
+            {
+                sqldatatypes = sqldatatypes + grp.Key + " = [";
+                foreach (string groupitem in grp.Value)
+                {
+                    if (this.Context.GroupVariableList.ContainsKey(groupitem))
+                        sqldatatypes = sqldatatypes + groupitem + ", ";
+                    else
+                        sqldatatypes = sqldatatypes + "\"" + groupitem + "\", ";
+                }
+                sqldatatypes = sqldatatypes.Substring(0, sqldatatypes.Length - 2) + "]\n";
+            }
+
+            string tempPath = System.IO.Path.GetTempPath();
             System.IO.File.WriteAllText(tempPath + "WorkingEIDataJSON.json", dtjson);
             string consumejson = "import json\n";
             consumejson += this.dictListName + " = []\n";
