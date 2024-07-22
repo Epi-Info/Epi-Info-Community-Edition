@@ -331,6 +331,14 @@ namespace Epi.Core.AnalysisInterpreter
                                 jsonpath = jsonsplit[2].Split(';')[0];
                             else
                                 jsonpath = jsonsplit[0];
+                            if (jsonpath.ToCharArray()[0] == '"')
+                            {
+                                int jlength = jsonpath.Length;
+                                if (jsonpath.ToCharArray()[jlength - 1] == '"')
+                                {
+                                    jsonpath = jsonpath.Substring(1, jlength - 2);
+                                }
+                            }
                             if (!System.IO.Directory.Exists(jsonpath))
                             {
                                 Configuration config0 = Configuration.GetNewInstance();
