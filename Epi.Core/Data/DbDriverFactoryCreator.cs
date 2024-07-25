@@ -91,8 +91,19 @@ namespace Epi.Data
 				{
 					throw new Exception("Can not load assembly for REDCap. " + ex.StackTrace);
 				}
-			}
-			else
+            }
+            else if (dataDriverType.Equals("Epi.Data.Office.SQLiteDBFactory, Epi.Data.Office"))
+            {
+                try
+                {
+                    typeFactory = Type.GetType(Configuration.SQLiteDriver);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Can not load assembly for REDCap. " + ex.StackTrace);
+                }
+            }
+            else
 			{
                 try
                 {

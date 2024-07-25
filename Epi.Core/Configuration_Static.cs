@@ -59,6 +59,11 @@ namespace Epi
         public const string MySQLDriver = "Epi.Data.MySQL.MySQLDBFactory, Epi.Data.MySQL";
 
         /// <summary>
+        /// Identifier for SQLite driver that is built into Epi Info
+        /// </summary>
+        public const string SQLiteDriver = "Epi.Data.Office.SQLiteDBFactory, Epi.Data.Office";
+
+        /// <summary>
         /// Identifier for MongoDB driver that is built into Epi Info
         /// </summary>
         public const string MongoDBDriver = "Epi.Data.MongoDB.MongoDBDBFactory, Epi.Data.MongoDB";
@@ -837,6 +842,15 @@ namespace Epi
             dataDriverRow2.DataProvider = true;
             dataDriverRow2.MetadataProvider = true;
             configDataSet.DataDriver.Rows.Add(dataDriverRow2);
+
+            // SQLite driver
+            Config.DataDriverRow dataDriverRowSQLite = configDataSet.DataDriver.NewDataDriverRow();
+            dataDriverRowSQLite.DataDriversRow = parentDataDriversRow;
+            dataDriverRowSQLite.DisplayName = "SQLite Database";
+            dataDriverRowSQLite.Type = SQLiteDriver;
+            dataDriverRowSQLite.DataProvider = true;
+            dataDriverRowSQLite.MetadataProvider = true;
+            configDataSet.DataDriver.Rows.Add(dataDriverRowSQLite);
 
             Config.DataDriverRow dataDriverRowCsv = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowCsv.DataDriversRow = parentDataDriversRow;

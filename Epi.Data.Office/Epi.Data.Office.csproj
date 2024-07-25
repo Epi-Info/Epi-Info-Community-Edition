@@ -194,6 +194,7 @@
     </Compile>
     <Compile Include="AccessDatabase.cs" />
     <Compile Include="AccessDatabase.IDataSource.cs" />
+    <Compile Include="SQLiteDBFactory.cs" />
     <Compile Include="AccessDBFactory.cs" />
     <Compile Include="Access2007Database.cs" />
     <Compile Include="Access2007Database.IDataSource.cs" />
