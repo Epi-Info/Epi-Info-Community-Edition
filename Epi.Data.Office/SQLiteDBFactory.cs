@@ -12,7 +12,7 @@ using System.Globalization;
 namespace Epi.Data.Office
 {   
     /// <summary>
-    /// Concrete DBFactory for MS Access 
+    /// Concrete DBFactory for SQLite 
     /// </summary>
     public class SQLiteDBFactory : IDbDriverFactory 
     {
@@ -63,7 +63,7 @@ namespace Epi.Data.Office
         /// <returns>Database driver.</returns>
         public IDbDriver CreateDatabaseObject(DbConnectionStringBuilder connectionStringBuilder)
         {
-            IDbDriver instance = new AccessDatabase();
+            IDbDriver instance = new Epi.Data.Office.SQLiteDatabase();
             instance.ConnectionString = connectionStringBuilder.ToString();
             return instance;
         }
@@ -149,7 +149,7 @@ namespace Epi.Data.Office
         {
             try
             {
-                OleDbConnectionStringBuilder oleDbCnnStringBuilder = new OleDbConnectionStringBuilder(AccessDatabase.BuildDefaultConnectionString(databaseName, projectName));
+                OleDbConnectionStringBuilder oleDbCnnStringBuilder = new OleDbConnectionStringBuilder(SQLiteDatabase.BuildDefaultConnectionString(databaseName, projectName));
                 oleDbCnnStringBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
                 return oleDbCnnStringBuilder;
             }
