@@ -30,6 +30,7 @@ namespace Epi.Data.Office
         public void CreatePhysicalDatabase(DbDriverInfo dbInfo)
         {
             string filepath = ((OleDbConnectionStringBuilder)dbInfo.DBCnnStringBuilder).DataSource;
+            string sqlpath = filepath.Replace(".mdb", ".db");
 
             //string filepath = dbInfo.DBName;
             if (!string.IsNullOrEmpty(filepath))
