@@ -8,6 +8,7 @@ using System.Data.OleDb;
 using Epi.Data;
 using Epi.Windows;
 using System.Globalization;
+using Microsoft.Data.Sqlite;
 
 namespace Epi.Data.Office
 {   
@@ -40,7 +41,17 @@ namespace Epi.Data.Office
                 {
                     ResourceLoader.ExtractAccess2003Template(filepath);
                     File.SetAttributes(filepath, FileAttributes.Normal);
-                    return;
+                    using (var connection = new SqliteConnection("Data Source=" + sqlpath))
+                    {
+                        connection.Open();
+                        var command = connection.CreateCommand();
+                        command.CommandText = "CREATE TABLE makeDBTable (GlobalRecordId TEXT);" +
+                            "INSERT INTO makeDBTable" +
+                            "VALUES (uuid());";
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                        return;
                 }
                 else if (filepath.EndsWith(".accdb", true, CultureInfo.InvariantCulture))
                 {
