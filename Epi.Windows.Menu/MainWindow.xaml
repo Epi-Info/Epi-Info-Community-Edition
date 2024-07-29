@@ -154,12 +154,15 @@
 
             <Border MouseDown="click_leftDown" Padding="0 0 0 10" DockPanel.Dock="Top" Panel.ZIndex="0" >
                 <Grid   Height="75" Margin="0 0 0 0">
+
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Background="Transparent" Grid.Column="0" Margin="15,0,250,0" Orientation="Horizontal" Grid.ColumnSpan="2">
-                        <Image ToolTip="Epi Info Logo" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="HighQuality" Width="225" Margin="0 0 0 0">
+
+                    <StackPanel Background="Transparent" Grid.Column="0" Margin="15,0,219,0" Orientation="Horizontal" Grid.ColumnSpan="2">
+                        <Image ToolTip="Epi Info Logo"  RenderOptions.BitmapScalingMode="HighQuality" Width="236" Margin="6 0 0 0">
                             <Image.Source>
                                 <BitmapImage UriSource="images/epi_info_logo_full.png"/>
                             </Image.Source>
@@ -167,14 +170,17 @@
 
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1">
-                        <Button Style="{StaticResource buttonMenuRight}" TabIndex="9" KeyUp="rightMenu_Keydown" Name="btnRightMenuHide"  Click="btnRightMenuHide_Click" Margin="0,15,0,0">
+                    <StackPanel Background="Transparent" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2">
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <Button Style="{StaticResource buttonMenuRight}" TabIndex="9" KeyUp="rightMenu_Keydown" Name="btnRightMenuHide"  Click="btnRightMenuHide_Click" Margin="0,15,0,0" Width="85">
                             <Button.ToolTip >
                                 <ToolTip Visibility="Hidden">
                                     Additional Menu Items: Options, Contents, How to videos, Epi Info Q&amp;A, Contact Help Desk, Other Epi Resources, Epi Info Logs
                                 </ToolTip>
                             </Button.ToolTip>
-                            <StackPanel>
+                            <StackPanel RenderTransformOrigin="-0.049,0.469" HorizontalAlignment="Center" Width="57">
                                 <Path Panel.ZIndex="1"  Margin="4 0 0 0" Cursor="Hand" Data="M15.8,20.4H34.2L25,29.6Z" Fill="White" Height="6" Stretch="Fill" Width="11"/>
                                 <Grid Width="36" Height="36">
                                     <Path Width="18" Height="18" Stretch="Fill" Fill="#1d60ac" Data="F1 M 19,23L 27,23L 27,31L 19,31L 19,23 Z M 19,34L 27,34L 27,42L 19,42L 19,34 Z M 31,23L 57,23L 57,31L 31,31L 31,23 Z M 19,45L 27,45L 27,53L 19,53L 19,45 Z M 31,34L 57,34L 57,42L 31,42L 31,34 Z M 31,45L 57,45L 57,53L 31,53L 31,45 Z "/>
