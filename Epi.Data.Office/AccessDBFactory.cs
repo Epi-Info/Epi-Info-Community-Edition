@@ -8,6 +8,7 @@ using System.Data.OleDb;
 using Epi.Data;
 using Epi.Windows;
 using System.Globalization;
+using Microsoft.Data.Sqlite;
 
 namespace Epi.Data.Office
 {   
@@ -30,6 +31,7 @@ namespace Epi.Data.Office
         public void CreatePhysicalDatabase(DbDriverInfo dbInfo)
         {
             string filepath = ((OleDbConnectionStringBuilder)dbInfo.DBCnnStringBuilder).DataSource;
+            string sqlpath = filepath.Replace(".mdb", ".db");
 
             //string filepath = dbInfo.DBName;
             if (!string.IsNullOrEmpty(filepath))
@@ -39,6 +41,7 @@ namespace Epi.Data.Office
                 {
                     ResourceLoader.ExtractAccess2003Template(filepath);
                     File.SetAttributes(filepath, FileAttributes.Normal);
+                    var connection = new SqliteConnection("Data Source=" + sqlpath);
                     return;
                 }
                 else if (filepath.EndsWith(".accdb", true, CultureInfo.InvariantCulture))
