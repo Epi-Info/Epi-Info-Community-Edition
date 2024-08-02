@@ -8,6 +8,7 @@ using System.Data.OleDb;
 using Epi.Data;
 using Epi.Windows;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace Epi.Data.Office
 {   
@@ -39,6 +40,38 @@ namespace Epi.Data.Office
                 {
                     ResourceLoader.ExtractAccess2003Template(filepath);
                     File.SetAttributes(filepath, FileAttributes.Normal);
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                    processStartInfo.FileName = "C:\\Users\\zfj4\\Desktop\\sqlite-tools-win-x64-3460000\\sqlite3";
+                    processStartInfo.Arguments = filepath.Replace(".mdb", ".db") +
+                        " \"CREATE TABLE makeDBTable (GlobalRecordId TEXT);" +
+                        "insert into makeDBTable SELECT substr(u,1,8)||'-'||substr(u,9,4)||'-4'||substr(u,13,3)||'-'||v||substr(u,17,3)||'-'||substr(u,21,12) from (SELECT upper(hex(randomblob(16))) as u, substr('89AB',abs(random()) % 4 + 1, 1) as v);\"";
+                    processStartInfo.UseShellExecute = false;
+                    processStartInfo.CreateNoWindow = true;
+                    processStartInfo.RedirectStandardOutput = true;
+                    processStartInfo.RedirectStandardError = true;
+                    processStartInfo.RedirectStandardInput = true;
+                    using (Process proc = Process.Start(processStartInfo))
+                    {
+                        using (StreamReader reader = proc.StandardOutput)
+                        {
+                            string stderr = null;
+                            proc.StartInfo.RedirectStandardError = true;
+                            proc.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
+                            { stderr += e.Data + "\n"; });
+                            proc.BeginErrorReadLine();
+                            string res = reader.ReadToEnd();
+                            if (!String.IsNullOrEmpty(stderr))
+                            {
+                                Console.WriteLine(stderr);
+                                if (String.IsNullOrEmpty(res))
+                                    throw new GeneralException(stderr);
+                            }
+                            if (!String.IsNullOrEmpty(res))
+                            {
+                                Console.WriteLine(res);
+                            }
+                        }
+                    }
                     return;
                 }
                 else if (filepath.EndsWith(".accdb", true, CultureInfo.InvariantCulture))
