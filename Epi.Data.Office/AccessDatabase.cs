@@ -10,6 +10,7 @@ using System.Text;
 using Epi.Data;
 using System.Globalization;
 using Epi.Data.Office.Forms;
+using System.Data.SQLite;
 
 namespace Epi.Data.Office
 {
@@ -136,10 +137,14 @@ namespace Epi.Data.Office
         public override void CreateTable(string tableName, List<TableColumn> columns)
         {
             StringBuilder sb = new StringBuilder();
+            StringBuilder sqlitesb = new StringBuilder();
 
             sb.Append("create table ");
             sb.Append(Util.InsertInSquareBrackets(tableName));
             sb.Append(" ( ");
+            sqlitesb.Append("create table ");
+            sqlitesb.Append(Util.InsertInSquareBrackets(tableName));
+            sqlitesb.Append(" ( ");
             foreach (TableColumn column in columns)
             {
                 if (column == null)
@@ -156,6 +161,7 @@ namespace Epi.Data.Office
                         sb.Append("]");
                         sb.Append(" ");
                         sb.Append(" COUNTER ");
+                        sqlitesb.Append(column.Name);
                     }
                     else
                     {
@@ -164,21 +170,26 @@ namespace Epi.Data.Office
                             sb.Append("[");
                             sb.Append(column.Name.Replace(".","_"));
                             sb.Append("]");
+                            sqlitesb.Append(column.Name.Replace(".", "_"));
                         }
                         else
                         {
                             sb.Append("[");
                             sb.Append(column.Name);
                             sb.Append("]");
+                            sqlitesb.Append(column.Name);
                         }                        
                         sb.Append(" ");
+                        sqlitesb.Append(" ");
                         if (GetDbSpecificColumnType(column.DataType).Equals("text") && column.Length.HasValue && column.Length.Value > 255)
                         {
                             sb.Append("memo");
+                            sqlitesb.Append("blob");
                         }
                         else
                         {
                             sb.Append(GetDbSpecificColumnType(column.DataType));
+                            sqlitesb.Append(GetDbSpecificColumnType(column.DataType));
                         }
                     }
                 }
@@ -188,6 +199,7 @@ namespace Epi.Data.Office
                     sb.Append("[");
                     sb.Append(column.Name);
                     sb.Append("] counter ");
+                    sqlitesb.Append(column.Name);
                 }
 
                 if (column.Length != null)
@@ -197,6 +209,9 @@ namespace Epi.Data.Office
                         sb.Append("(");
                         sb.Append(column.Length.Value.ToString());
                         sb.Append(") ");
+                        sqlitesb.Append("(");
+                        sqlitesb.Append(column.Length.Value.ToString());
+                        sqlitesb.Append(") ");
                     }
                 }
                 if (!column.AllowNull)
@@ -212,6 +227,7 @@ namespace Epi.Data.Office
                     sb.Append("_");
                     sb.Append(tableName);
                     sb.Append(" primary key ");
+                    sqlitesb.Append(" primary key ");
                 }
                 if (!string.IsNullOrEmpty(column.ForeignKeyColumnName) && !string.IsNullOrEmpty(column.ForeignKeyTableName))
                 {
@@ -226,11 +242,25 @@ namespace Epi.Data.Office
                     }
                 }
                 sb.Append(", ");
+                sqlitesb.Append(", ");
             }
             sb.Remove(sb.Length - 2, 2);
             sb.Append(") ");
+            sqlitesb.Remove(sqlitesb.Length - 2, 2);
+            sqlitesb.Append(") ");
 
             ExecuteNonQuery(CreateQuery(sb.ToString()));
+
+            string sourcestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+            string filestring = sourcestring.Substring(0, sourcestring.IndexOf(".mdb")) + ".db";
+            using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+            {
+                sqlite.Open();
+                SQLiteCommand cmd = sqlite.CreateCommand();
+                cmd.CommandText = sqlitesb.ToString();
+                cmd.ExecuteNonQuery();
+                sqlite.Close();
+            }
         }
         #endregion
 
