@@ -43,8 +43,11 @@ namespace Epi.Data.Office
                     ProcessStartInfo processStartInfo = new ProcessStartInfo();
                     processStartInfo.FileName = "C:\\Users\\zfj4\\Desktop\\sqlite-tools-win-x64-3460000\\sqlite3";
                     processStartInfo.Arguments = filepath.Replace(".mdb", ".db") +
-                        " \"CREATE TABLE makeDBTable (GlobalRecordId TEXT);" +
-                        "insert into makeDBTable SELECT substr(u,1,8)||'-'||substr(u,9,4)||'-4'||substr(u,13,3)||'-'||v||substr(u,17,3)||'-'||substr(u,21,12) from (SELECT upper(hex(randomblob(16))) as u, substr('89AB',abs(random()) % 4 + 1, 1) as v);\"";
+                        " \"DROP TABLE IF EXISTS makeDBTable;" +
+                        "CREATE TABLE makeDBTable (GlobalRecordId TEXT);" +
+                        "insert into makeDBTable " +
+                        "SELECT substr(u,1,8)||'-'||substr(u,9,4)||'-4'||substr(u,13,3)||'-'||v||substr(u,17,3)||'-'||substr(u,21,12) " +
+                        "from (SELECT upper(hex(randomblob(16))) as u, substr('89AB',abs(random()) % 4 + 1, 1) as v);\"";
                     processStartInfo.UseShellExecute = false;
                     processStartInfo.CreateNoWindow = true;
                     processStartInfo.RedirectStandardOutput = true;
