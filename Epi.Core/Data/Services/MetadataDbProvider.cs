@@ -5470,7 +5470,7 @@ namespace Epi.Data.Services
 
             try
             {
-                string queryString = "update metaPages set [Name] = @name, [Position] = @position, [CheckCodeBefore] = @CheckCodeBefore, [CheckCodeAfter] = @CheckCodeAfter, [BackgroundId] = @BackgroundId where [PageId] = @PageId";
+                string queryString = "update metaPages set [Name] = @Name, [Position] = @Position, [CheckCodeBefore] = @CheckCodeBefore, [CheckCodeAfter] = @CheckCodeAfter, [BackgroundId] = @BackgroundId where [PageId] = @PageId";
                 Query updateQuery = db.CreateQuery(queryString);
                 updateQuery.Parameters.Add(new QueryParameter("@Name", DbType.String, page.Name));
                 updateQuery.Parameters.Add(new QueryParameter("@Position", DbType.Int32, page.Position));

@@ -162,6 +162,7 @@ namespace Epi.Data.Office
                         sb.Append(" ");
                         sb.Append(" COUNTER ");
                         sqlitesb.Append(column.Name);
+                        sqlitesb.Append(" INTEGER PRIMARY KEY ");
                     }
                     else
                     {
@@ -200,6 +201,7 @@ namespace Epi.Data.Office
                     sb.Append(column.Name);
                     sb.Append("] counter ");
                     sqlitesb.Append(column.Name);
+                    sqlitesb.Append(" INTEGER PRIMARY KEY ");
                 }
 
                 if (column.Length != null)
@@ -227,7 +229,7 @@ namespace Epi.Data.Office
                     sb.Append("_");
                     sb.Append(tableName);
                     sb.Append(" primary key ");
-                    sqlitesb.Append(" primary key ");
+                    //sqlitesb.Append(" primary key ");
                 }
                 if (!string.IsNullOrEmpty(column.ForeignKeyColumnName) && !string.IsNullOrEmpty(column.ForeignKeyTableName))
                 {
@@ -253,14 +255,14 @@ namespace Epi.Data.Office
 
             string sourcestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
             string filestring = sourcestring.Substring(0, sourcestring.IndexOf(".mdb")) + ".db";
-            using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
-            {
-                sqlite.Open();
-                SQLiteCommand cmd = sqlite.CreateCommand();
-                cmd.CommandText = sqlitesb.ToString();
-                cmd.ExecuteNonQuery();
-                sqlite.Close();
-            }
+            //using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+            //{
+            //    sqlite.Open();
+            //    SQLiteCommand cmd = sqlite.CreateCommand();
+            //    cmd.CommandText = sqlitesb.ToString();
+            //    cmd.ExecuteNonQuery();
+            //    sqlite.Close();
+            //}
         }
         #endregion
 

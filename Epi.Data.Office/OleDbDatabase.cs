@@ -15,6 +15,7 @@ using Epi.Data;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Data.SQLite;
 
 namespace Epi.Data.Office
 {
@@ -1487,6 +1488,21 @@ namespace Epi.Data.Office
             {
                 OpenConnection(conn);
                 object obj = command.ExecuteNonQuery();
+                string sourcestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+                string filestring = sourcestring.Substring(0, sourcestring.IndexOf(".mdb")) + ".db";
+                //if (query.SqlStatement.StartsWith("create"))
+                //    return (int)obj;
+                using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+                {
+                    IDbCommand sqlcommand = GetCommand(query.SqlStatement.Replace("COUNTER", "INTEGER"), sqlite, new List<QueryParameter>());
+                    foreach (QueryParameter oparam in query.Parameters)
+                    {
+                        sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                    }
+                    sqlite.Open();
+                    sqlcommand.ExecuteNonQuery();
+                    sqlite.Close();
+                }
                 return (int)obj;
             }
             finally
