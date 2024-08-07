@@ -63,7 +63,7 @@ namespace Epi.Data.SQLite
         /// <returns>Database driver.</returns>
         public IDbDriver CreateDatabaseObject(DbConnectionStringBuilder connectionStringBuilder)
         {
-            IDbDriver instance = new SQLiteDatabase();
+            IDbDriver instance = new Epi.Data.SQLite.SQLiteDatabase();
             instance.ConnectionString = connectionStringBuilder.ToString();
             return instance;
         }
