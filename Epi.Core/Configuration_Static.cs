@@ -48,6 +48,8 @@ namespace Epi
 
         public const string JsonDriver = "Epi.Data.Office.JsonFileFactory, Epi.Data.Office";
 
+        public const string SQLiteDriver = "Epi.Data.SQLite.SQLiteDBFactory, Epi.Data.SQLite";
+
         /// <summary>
         /// Identifier for SharePoint driver that is built into Epi Info
         /// </summary>
@@ -837,6 +839,15 @@ namespace Epi
             dataDriverRow2.DataProvider = true;
             dataDriverRow2.MetadataProvider = true;
             configDataSet.DataDriver.Rows.Add(dataDriverRow2);
+
+            // SQLite driver
+            Config.DataDriverRow dataDriverSQLite = configDataSet.DataDriver.NewDataDriverRow();
+            dataDriverSQLite.DataDriversRow = parentDataDriversRow;
+            dataDriverRow2.DisplayName = "SQLite Database";
+            dataDriverSQLite.Type = SQLiteDriver;
+            dataDriverSQLite.DataProvider = true;
+            dataDriverSQLite.MetadataProvider = true;
+            configDataSet.DataDriver.Rows.Add(dataDriverSQLite);
 
             Config.DataDriverRow dataDriverRowCsv = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverRowCsv.DataDriversRow = parentDataDriversRow;
