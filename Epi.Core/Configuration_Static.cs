@@ -843,7 +843,7 @@ namespace Epi
             // SQLite driver
             Config.DataDriverRow dataDriverSQLite = configDataSet.DataDriver.NewDataDriverRow();
             dataDriverSQLite.DataDriversRow = parentDataDriversRow;
-            dataDriverRow2.DisplayName = "SQLite Database";
+            dataDriverSQLite.DisplayName = "SQLite Database";
             dataDriverSQLite.Type = SQLiteDriver;
             dataDriverSQLite.DataProvider = true;
             dataDriverSQLite.MetadataProvider = true;
