@@ -10,7 +10,7 @@ using Epi;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyCompany("Centers for Disease Control and Prevention")]
-[assembly: AssemblyProduct("Epi Info�")]
+[assembly: AssemblyProduct("Epi.Data.SQLite")]
 [assembly: AssemblyCopyright("� Centers for Disease Control and Prevention")]
 [assembly: AssemblyTrademark("Epi Info is a trademark of CDC")]
 [assembly: AssemblyCulture("")]
@@ -36,10 +36,10 @@ using Epi;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("7.2.*")]
-[assembly: AssemblyFileVersion("7.2.6.10")]
-[assembly: AssemblyInformationalVersion("7.2.6.10")]
-[assembly: SatelliteContractVersion("7.0.0.0")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0.0")]
+[assembly: SatelliteContractVersion("1.0.0.0")]
 [assembly: Epi.AssemblyReleaseDateAttribute("07/26/2024")]
 
 //

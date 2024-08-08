@@ -16,7 +16,7 @@ namespace Epi.Data.SQLite
         private static System.Resources.ResourceManager resourceMan;
         private static System.Globalization.CultureInfo resourceCulture;
 
-        const string RESOURCE_NAMESPACE_BASE = "Epi.Data.Office.Resources";
+        const string RESOURCE_NAMESPACE_BASE = "Epi.Data.SQLite.Resources";
         const string RESOURCE_ACCESS_2003 = RESOURCE_NAMESPACE_BASE + ".Access2003.mdb";
         const string RESOURCE_ACCESS_2007 = RESOURCE_NAMESPACE_BASE + ".Access2007.accdb";
 
