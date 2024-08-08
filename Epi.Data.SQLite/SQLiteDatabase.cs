@@ -373,13 +373,9 @@ namespace Epi.Data.SQLite
         {
             StringBuilder builder = new StringBuilder();
 
-            if (filePath.EndsWith(".mdb", true, System.Globalization.CultureInfo.InvariantCulture))
+            if (filePath.EndsWith(".db", true, System.Globalization.CultureInfo.InvariantCulture))
             {
-                builder.Append("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=");
-            }
-            else if (filePath.EndsWith(".accdb", true, System.Globalization.CultureInfo.InvariantCulture))
-            {
-                builder.Append("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=");
+                builder.Append("Provider=Epi.Data.SQLite.1.0.0.0;Data Source=");
             }
 
             builder.Append(EncodeOleDbConnectionStringValue(filePath));
@@ -415,7 +411,7 @@ namespace Epi.Data.SQLite
                 configProjectPath = configProjectPath + "\\";
             }
 
-            if (databaseName.EndsWith(".mdb"))
+            if (databaseName.EndsWith(".db"))
             {
                 if (!string.IsNullOrEmpty(projectName.Trim()))
                 {
@@ -430,11 +426,11 @@ namespace Epi.Data.SQLite
             {
                 if (!string.IsNullOrEmpty(projectName.Trim()))
                 {
-                    return BuildConnectionString(configProjectPath + projectName.Trim() + "\\" + databaseName + ".mdb", string.Empty);
+                    return BuildConnectionString(configProjectPath + projectName.Trim() + "\\" + databaseName + ".db", string.Empty);
                 }
                 else
                 {
-                    return BuildConnectionString(configProjectPath + databaseName + ".mdb", string.Empty);
+                    return BuildConnectionString(configProjectPath + databaseName + ".db", string.Empty);
                 }
             }
         }

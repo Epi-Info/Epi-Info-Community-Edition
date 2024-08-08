@@ -8,6 +8,7 @@ using System.Data.OleDb;
 using Epi.Data;
 using Epi.Windows;
 using System.Globalization;
+using System.Data.SQLite;
 
 namespace Epi.Data.SQLite
 {   
@@ -35,23 +36,23 @@ namespace Epi.Data.SQLite
             if (!string.IsNullOrEmpty(filepath))
             {
                 //TODO: refactor this, make one function for all: ExtractTemplate(FileType, FilePath) 
-                if (filepath.EndsWith(".mdb", true, CultureInfo.InvariantCulture))
+                if (filepath.EndsWith(".db", true, CultureInfo.InvariantCulture))
                 {
-                    ResourceLoader.ExtractAccess2003Template(filepath);
-                    File.SetAttributes(filepath, FileAttributes.Normal);
+                    using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filepath))
+                    {
+                        sqlite.Open();
+                        SQLiteCommand cmd = sqlite.CreateCommand();
+                        cmd.CommandText = "DROP TABLE IF EXISTS makeDBTable;";
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "CREATE TABLE makeDBTable (GlobalRecordId TEXT);";
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "insert into makeDBTable " +
+                            "SELECT substr(u,1,8)||'-'||substr(u,9,4)||'-4'||substr(u,13,3)||'-'||v||substr(u,17,3)||'-'||substr(u,21,12) " +
+                            "from (SELECT upper(hex(randomblob(16))) as u, substr('89AB',abs(random()) % 4 + 1, 1) as v);";
+                        cmd.ExecuteNonQuery();
+                        sqlite.Close();
+                    }
                     return;
-                }
-                else if (filepath.EndsWith(".accdb", true, CultureInfo.InvariantCulture))
-                {
-                    ResourceLoader.ExtractAccess2007Template(filepath);
-                    File.SetAttributes(filepath, FileAttributes.Normal);
-                    return;
-                }
-                else if (filepath.EndsWith(".xls", true, CultureInfo.InvariantCulture))
-                {
-                    //ResourceLoader.ExtractTemplate(filepath);
-                    //File.SetAttributes(filepath, FileAttributes.Normal);
-                    //return;
                 }
             }
         }
@@ -150,7 +151,7 @@ namespace Epi.Data.SQLite
             try
             {
                 OleDbConnectionStringBuilder oleDbCnnStringBuilder = new OleDbConnectionStringBuilder(SQLiteDatabase.BuildDefaultConnectionString(databaseName, projectName));
-                oleDbCnnStringBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
+                oleDbCnnStringBuilder.Provider = "Epi.Data.SQLite.1.0.0.0";
                 return oleDbCnnStringBuilder;
             }
             catch
