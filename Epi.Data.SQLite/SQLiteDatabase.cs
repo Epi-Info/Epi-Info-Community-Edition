@@ -136,10 +136,14 @@ namespace Epi.Data.SQLite
         public override void CreateTable(string tableName, List<TableColumn> columns)
         {
             StringBuilder sb = new StringBuilder();
+            StringBuilder sqlitesb = new StringBuilder();
 
             sb.Append("create table ");
             sb.Append(Util.InsertInSquareBrackets(tableName));
             sb.Append(" ( ");
+            sqlitesb.Append("create table ");
+            sqlitesb.Append(Util.InsertInSquareBrackets(tableName));
+            sqlitesb.Append(" ( ");
             foreach (TableColumn column in columns)
             {
                 if (column == null)
@@ -156,6 +160,11 @@ namespace Epi.Data.SQLite
                         sb.Append("]");
                         sb.Append(" ");
                         sb.Append(" COUNTER ");
+                        sqlitesb.Append("[");
+                        sqlitesb.Append(column.Name);
+                        sqlitesb.Append("]");
+                        sqlitesb.Append(" ");
+                        sqlitesb.Append(" INTEGER PRIMARY KEY ");
                     }
                     else
                     {
@@ -164,21 +173,30 @@ namespace Epi.Data.SQLite
                             sb.Append("[");
                             sb.Append(column.Name.Replace(".","_"));
                             sb.Append("]");
+                            sqlitesb.Append("[");
+                            sqlitesb.Append(column.Name.Replace(".", "_"));
+                            sqlitesb.Append("]");
                         }
                         else
                         {
                             sb.Append("[");
                             sb.Append(column.Name);
                             sb.Append("]");
+                            sqlitesb.Append("[");
+                            sqlitesb.Append(column.Name);
+                            sqlitesb.Append("]");
                         }                        
                         sb.Append(" ");
+                        sqlitesb.Append(" ");
                         if (GetDbSpecificColumnType(column.DataType).Equals("text") && column.Length.HasValue && column.Length.Value > 255)
                         {
                             sb.Append("memo");
+                            sqlitesb.Append("blob");
                         }
                         else
                         {
                             sb.Append(GetDbSpecificColumnType(column.DataType));
+                            sqlitesb.Append(GetDbSpecificColumnType(column.DataType));
                         }
                     }
                 }
@@ -188,6 +206,9 @@ namespace Epi.Data.SQLite
                     sb.Append("[");
                     sb.Append(column.Name);
                     sb.Append("] counter ");
+                    sqlitesb.Append("[");
+                    sqlitesb.Append(column.Name);
+                    sqlitesb.Append("] INTEGER PRIMARY KEY ");
                 }
 
                 if (column.Length != null)
@@ -197,13 +218,18 @@ namespace Epi.Data.SQLite
                         sb.Append("(");
                         sb.Append(column.Length.Value.ToString());
                         sb.Append(") ");
+                        sqlitesb.Append("(");
+                        sqlitesb.Append(column.Length.Value.ToString());
+                        sqlitesb.Append(") ");
                     }
                 }
                 if (!column.AllowNull)
                 {
                     sb.Append(" NOT ");
+                    sqlitesb.Append(" NOT ");
                 }
                 sb.Append(" null ");
+                sqlitesb.Append(" null ");
                 if (column.IsPrimaryKey)
                 {
                     sb.Append(" constraint");
@@ -212,6 +238,8 @@ namespace Epi.Data.SQLite
                     sb.Append("_");
                     sb.Append(tableName);
                     sb.Append(" primary key ");
+                    if (!column.IsIdentity)
+                        sqlitesb.Append(" primary key ");
                 }
                 if (!string.IsNullOrEmpty(column.ForeignKeyColumnName) && !string.IsNullOrEmpty(column.ForeignKeyTableName))
                 {
@@ -226,11 +254,14 @@ namespace Epi.Data.SQLite
                     }
                 }
                 sb.Append(", ");
+                sqlitesb.Append(", ");
             }
             sb.Remove(sb.Length - 2, 2);
             sb.Append(") ");
+            sqlitesb.Remove(sqlitesb.Length - 2, 2);
+            sqlitesb.Append(") ");
 
-            ExecuteNonQuery(CreateQuery(sb.ToString()));
+            ExecuteNonQuery(CreateQuery(sqlitesb.ToString()));
         }
         #endregion
 

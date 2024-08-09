@@ -15,6 +15,8 @@ using Epi.Data;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Data.SQLite;
+using System.Data.SqlClient;
 
 namespace Epi.Data.SQLite
 {
@@ -131,6 +133,29 @@ namespace Epi.Data.SQLite
                 throw new ArgumentNullException("dataTable");
             }
             #endregion Input Validation
+
+            try
+            {
+                string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+                using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+                {
+                    sqlite.Open();
+                    SQLiteCommand sqlite_command = sqlite.CreateCommand();
+                    sqlite_command.CommandText = selectQuery.SqlStatement;
+                    foreach (QueryParameter oparam in selectQuery.Parameters)
+                    {
+                        sqlite_command.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                    }
+                    SQLiteDataReader reader = sqlite_command.ExecuteReader();
+                    dataTable.Load(reader);
+                    sqlite.Close();
+                }
+                return dataTable;
+            }
+            catch (SQLiteException sqlex)
+            {
+                throw sqlex;
+            }
 
             IDbConnection connection = GetConnection();
 
@@ -635,9 +660,9 @@ namespace Epi.Data.SQLite
             
             try
             {
-                Select(this.CreateQuery("SELECT TOP 1 * FROM [" + tableName + "]"));
+                Select(this.CreateQuery("SELECT * FROM [" + tableName + "] LIMIT 1;"));
             }
-            catch (OleDbException)
+            catch (SQLiteException)
             {
                 return false; 
             }
@@ -665,6 +690,26 @@ namespace Epi.Data.SQLite
             if (string.IsNullOrEmpty(columnName))
             {
                 throw new ArgumentNullException("columnName");
+            }
+            string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+            using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+            {
+                sqlite.Open();
+                SQLiteCommand sqlite_command = sqlite.CreateCommand();
+                sqlite_command.CommandText = "SELECT " + columnName + " FROM " + tableName + " LIMIT 1;";
+                try
+                {
+                    SQLiteDataReader reader = sqlite_command.ExecuteReader();
+                    return true;
+                }
+                catch (SQLiteException sqle)
+                {
+                    return false;
+                }
+                finally
+                {
+                    sqlite.Close();
+                }
             }
             #endregion
             OleDbConnection conn = this.GetNativeConnection();
@@ -1449,19 +1494,34 @@ namespace Epi.Data.SQLite
             #endregion
 
             object result;
-            IDbConnection conn = GetConnection();
-            IDbCommand command = GetCommand(query.SqlStatement, conn, query.Parameters);
-
             try
             {
-                OpenConnection(conn);
-                result = command.ExecuteScalar();
+                string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+                using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+                {
+                    sqlite.Open();
+                    using (SQLiteCommand sqlite_command = sqlite.CreateCommand())
+                    {
+                        sqlite_command.CommandText = query.SqlStatement;
+                        foreach (QueryParameter oparam in query.Parameters)
+                        {
+                            sqlite_command.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                        }
+                        using (SQLiteDataReader reader = sqlite_command.ExecuteReader())
+                        {
+                            bool read = reader.Read();
+                            if (!read)
+                                return 0;
+                            result = reader.GetInt32(0);
+                        }
+                    }
+                    sqlite.Close();
+                }
             }
-            finally
+            catch (SQLiteException sqlex)
             {
-                CloseConnection(conn);
+                throw sqlex;
             }
-
             return result;
         }
 
@@ -1479,19 +1539,26 @@ namespace Epi.Data.SQLite
             }
             #endregion
 
-            //Logger.Log(query);
-            IDbConnection conn = this.GetConnection();
-            IDbCommand command = GetCommand(query.SqlStatement, conn, query.Parameters);
-
             try
             {
-                OpenConnection(conn);
-                object obj = command.ExecuteNonQuery();
-                return (int)obj;
+                int retint = 0;
+                string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+                using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+                {
+                    IDbCommand sqlcommand = GetCommand(query.SqlStatement.Replace("COUNTER", "INTEGER").Replace("GUID", "TEXT").Replace("MEMO", "BLOB").Replace("int IDENTITY(1,1)", "INTEGER"), sqlite, new List<QueryParameter>());
+                    foreach (QueryParameter oparam in query.Parameters)
+                    {
+                        sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                    }
+                    sqlite.Open();
+                    retint = sqlcommand.ExecuteNonQuery();
+                    sqlite.Close();
+                }
+                return retint;
             }
             finally
             {
-                CloseConnection(conn);
+                //CloseConnection(conn);
             }
         }
 
