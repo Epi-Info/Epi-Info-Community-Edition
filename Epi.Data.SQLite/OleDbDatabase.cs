@@ -148,9 +148,19 @@ namespace Epi.Data.SQLite
                     }
                     SQLiteDataReader reader = sqlite_command.ExecuteReader();
                     dataTable.Load(reader);
+                    DataTable dtClone = dataTable.Clone();
+                    foreach (DataColumn dc in dtClone.Columns)
+                    {
+                        if (dc.DataType == typeof(Int64))
+                        {
+                            dc.DataType = typeof(Int32);
+                        }
+                    }
+                    foreach (DataRow dr in dataTable.Rows)
+                        dtClone.ImportRow(dr);
                     sqlite.Close();
+                    return dtClone;
                 }
-                return dataTable;
             }
             catch (SQLiteException sqlex)
             {
