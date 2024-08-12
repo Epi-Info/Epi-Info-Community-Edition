@@ -376,7 +376,7 @@ namespace Epi.Windows.Dialogs
 
                 try
                 {
-                    if (!cbxCollectedDataDriver.SelectedValue.Equals(Configuration.AccessDriver))
+                    if (!cbxCollectedDataDriver.SelectedValue.Equals(Configuration.AccessDriver) && !cbxCollectedDataDriver.SelectedValue.Equals(Configuration.SQLiteDriver))
                     {
                         txtMetadata.Text = string.Empty;
                         btnBuildCollectedDataConnectionString.Enabled = true;
