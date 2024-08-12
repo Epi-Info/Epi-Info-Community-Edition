@@ -151,6 +151,8 @@ namespace Epi.Data.SQLite
             try
             {
                 OleDbConnectionStringBuilder oleDbCnnStringBuilder = new OleDbConnectionStringBuilder(SQLiteDatabase.BuildDefaultConnectionString(databaseName, projectName));
+                if (String.IsNullOrEmpty(projectName))
+                    oleDbCnnStringBuilder = new OleDbConnectionStringBuilder(SQLiteDatabase.BuildDefaultConnectionString(databaseName, databaseName));
                 oleDbCnnStringBuilder.Provider = "Epi.Data.SQLite.1.0.0.0";
                 return oleDbCnnStringBuilder;
             }
