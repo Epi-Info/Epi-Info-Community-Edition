@@ -5472,8 +5472,8 @@ namespace Epi.Data.Services
             {
                 string queryString = "update metaPages set [Name] = @name, [Position] = @position, [CheckCodeBefore] = @CheckCodeBefore, [CheckCodeAfter] = @CheckCodeAfter, [BackgroundId] = @BackgroundId where [PageId] = @PageId";
                 Query updateQuery = db.CreateQuery(queryString);
-                updateQuery.Parameters.Add(new QueryParameter("@Name", DbType.String, page.Name));
-                updateQuery.Parameters.Add(new QueryParameter("@Position", DbType.Int32, page.Position));
+                updateQuery.Parameters.Add(new QueryParameter("@name", DbType.String, page.Name));
+                updateQuery.Parameters.Add(new QueryParameter("@position", DbType.Int32, page.Position));
                 updateQuery.Parameters.Add(new QueryParameter("@CheckCodeBefore", DbType.String, page.CheckCodeBefore));
                 updateQuery.Parameters.Add(new QueryParameter("@CheckCodeAfter", DbType.String, page.CheckCodeAfter));
                 updateQuery.Parameters.Add(new QueryParameter("@BackgroundId", DbType.String, page.BackgroundId));

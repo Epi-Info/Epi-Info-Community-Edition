@@ -182,7 +182,10 @@ namespace Epi
             if (row[ColumnNames.NAME] != DBNull.Value)
                 this.Name = row[ColumnNames.NAME].ToString();
             this.Id = (int)row[ColumnNames.PAGE_ID];
-            this.Position = (short)row[ColumnNames.POSITION];
+            if (row[ColumnNames.POSITION].GetType() == typeof(Int32))
+                this.Position = (int)row[ColumnNames.POSITION];
+            else
+                this.Position = (short)row[ColumnNames.POSITION];
             this.CheckCodeBefore = row[ColumnNames.CHECK_CODE_BEFORE].ToString();
             this.CheckCodeAfter = row[ColumnNames.CHECK_CODE_AFTER].ToString();
             this.BackgroundId = (int)row[ColumnNames.BACKGROUND_ID];
