@@ -1537,16 +1537,16 @@ namespace Epi.Data.SQLite
                         {
                             sqlite_command.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
                         }
-                        using (SQLiteDataReader reader = sqlite_command.ExecuteReader())
-                        {
-                            bool read = reader.Read();
-                            if (!read)
-                                return 0;
-                            result = reader.GetInt32(0);
-                        }
+                        result = sqlite_command.ExecuteScalar();
+                        if (result.GetType() == typeof(Int64))
+                            result = Convert.ToInt32((Int64)result);
                     }
                     sqlite.Close();
                 }
+            }
+            catch (InvalidCastException)
+            {
+                return 0;
             }
             catch (SQLiteException sqlex)
             {
