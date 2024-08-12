@@ -1434,6 +1434,26 @@ namespace Epi.Data.SQLite
                 throw new ArgumentNullException("SelectQuery");
             }
 
+            try
+            {
+                string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+                SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring);
+                sqlite.Open();
+                SQLiteCommand sqlite_command = sqlite.CreateCommand();
+                sqlite_command.CommandText = selectQuery.SqlStatement;
+                foreach (QueryParameter oparam in selectQuery.Parameters)
+                {
+                    sqlite_command.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                }
+                SQLiteDataReader reader = sqlite_command.ExecuteReader();
+                IDataReader ireader = reader as IDataReader;
+                //sqlite.Close();
+                return ireader;
+            }
+            catch (SQLiteException sqlex)
+            {
+                throw sqlex;
+            }
             #endregion
 
             IDbCommand command = null;
