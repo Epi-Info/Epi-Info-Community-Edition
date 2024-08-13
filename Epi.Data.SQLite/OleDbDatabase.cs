@@ -1581,8 +1581,18 @@ namespace Epi.Data.SQLite
                         sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
                     }
                     sqlite.Open();
-                    retint = sqlcommand.ExecuteNonQuery();
-                    sqlite.Close();
+                    try
+                    {
+                        retint = sqlcommand.ExecuteNonQuery();
+                    }
+                    catch (SQLiteException sqlex)
+                    {
+                        throw sqlex;
+                    }
+                    finally
+                    {
+                        sqlite.Close();
+                    }
                 }
                 return retint;
             }
