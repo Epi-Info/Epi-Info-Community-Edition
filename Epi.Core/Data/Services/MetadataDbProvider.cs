@@ -1157,7 +1157,7 @@ namespace Epi.Data.Services
                     "order by F.[ControlTopPositionPercentage], F.[ControlLeftPositionPercentage]";
 
                 Query query = db.CreateQuery(queryString);
-                query.Parameters.Add(new QueryParameter("@viewID", DbType.Int32, view.Id));
+                query.Parameters.Add(new QueryParameter("@viewId", DbType.Int32, view.Id));
                 return db.Select(query);
             }
             finally
