@@ -146,20 +146,34 @@ namespace Epi.Data.SQLite
                     {
                         sqlite_command.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
                     }
-                    SQLiteDataReader reader = sqlite_command.ExecuteReader();
-                    dataTable.Load(reader);
-                    DataTable dtClone = dataTable.Clone();
-                    foreach (DataColumn dc in dtClone.Columns)
+                    try
                     {
-                        if (dc.DataType == typeof(Int64))
+                        SQLiteDataReader reader = sqlite_command.ExecuteReader();
+                        dataTable.Load(reader);
+                        DataTable dtClone = dataTable.Clone();
+                        foreach (DataColumn dc in dtClone.Columns)
                         {
-                            dc.DataType = typeof(Int32);
+                            if (dc.DataType == typeof(Int64))
+                            {
+                                dc.DataType = typeof(Int32);
+                            }
                         }
+                        foreach (DataRow dr in dataTable.Rows)
+                            dtClone.ImportRow(dr);
+                        return dtClone;
                     }
-                    foreach (DataRow dr in dataTable.Rows)
-                        dtClone.ImportRow(dr);
-                    sqlite.Close();
-                    return dtClone;
+                    catch (SQLiteException sqex)
+                    {
+                        throw sqex;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        sqlite.Close();
+                    }
                 }
             }
             catch (SQLiteException sqlex)
