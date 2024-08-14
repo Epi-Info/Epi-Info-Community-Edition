@@ -715,7 +715,10 @@ namespace Epi.Data.SQLite
             {
                 throw new ArgumentNullException("columnName");
             }
+            bool retval = false;
             string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+            if (filestring.EndsWith(";user id=admin"))
+                filestring = filestring.Replace(";user id=admin", "");
             using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
             {
                 sqlite.Open();
@@ -724,17 +727,20 @@ namespace Epi.Data.SQLite
                 try
                 {
                     SQLiteDataReader reader = sqlite_command.ExecuteReader();
-                    return true;
+                    while (reader.Read()) { }
+                    reader.Close();
+                    retval = true;
                 }
-                catch (SQLiteException sqle)
+                catch (SQLiteException)
                 {
-                    return false;
+                    retval = false;
                 }
                 finally
                 {
                     sqlite.Close();
                 }
             }
+            return retval;
             #endregion
             OleDbConnection conn = this.GetNativeConnection();
 
