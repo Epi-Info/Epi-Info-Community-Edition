@@ -1544,18 +1544,36 @@ namespace Epi.Data.SQLite
                 using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
                 {
                     sqlite.Open();
-                    using (SQLiteCommand sqlite_command = sqlite.CreateCommand())
+                    try
                     {
-                        sqlite_command.CommandText = query.SqlStatement;
-                        foreach (QueryParameter oparam in query.Parameters)
+                        using (SQLiteCommand sqlite_command = sqlite.CreateCommand())
                         {
-                            sqlite_command.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                            sqlite_command.CommandText = query.SqlStatement;
+                            foreach (QueryParameter oparam in query.Parameters)
+                            {
+                                sqlite_command.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                            }
+                            result = sqlite_command.ExecuteScalar();
+                            if (result.GetType() == typeof(Int64))
+                                result = Convert.ToInt32((Int64)result);
                         }
-                        result = sqlite_command.ExecuteScalar();
-                        if (result.GetType() == typeof(Int64))
-                            result = Convert.ToInt32((Int64)result);
                     }
-                    sqlite.Close();
+                    catch (InvalidCastException ivex)
+                    {
+                        throw ivex;
+                    }
+                    catch (SQLiteException sqex)
+                    {
+                        throw sqex;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        sqlite.Close();
+                    }
                 }
             }
             catch (InvalidCastException)
