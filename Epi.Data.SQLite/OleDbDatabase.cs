@@ -150,6 +150,7 @@ namespace Epi.Data.SQLite
                     {
                         SQLiteDataReader reader = sqlite_command.ExecuteReader();
                         dataTable.Load(reader);
+                        reader.Close();
                         DataTable dtClone = dataTable.Clone();
                         foreach (DataColumn dc in dtClone.Columns)
                         {
@@ -1613,7 +1614,8 @@ namespace Epi.Data.SQLite
                 string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
                 using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
                 {
-                    IDbCommand sqlcommand = GetCommand(query.SqlStatement.Replace("COUNTER", "INTEGER").Replace("GUID", "TEXT").Replace("MEMO", "BLOB").Replace("int IDENTITY(1,1)", "INTEGER"), sqlite, new List<QueryParameter>());
+                    IDbCommand sqlcommand = GetCommand(query.SqlStatement.Replace("COUNTER", "INTEGER").Replace("GUID", "TEXT").Replace(
+                        "MEMO", "TEXT").Replace("int IDENTITY(1,1)", "INTEGER"), sqlite, new List<QueryParameter>());
                     foreach (QueryParameter oparam in query.Parameters)
                     {
                         sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));

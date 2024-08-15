@@ -458,21 +458,21 @@ namespace Epi.Windows.Enter
 
                 query = db.CreateQuery
                     (
-                        "SELECT [metaPages.PageId] as PageId, [metaPages.ViewId] as ViewId, [metaViews.Name] as Name " +
+                        "SELECT metaPages.[PageId] as PageId, metaPages.[ViewId] as ViewId, metaViews.[Name] as Name " +
                         "FROM [metaPages] " +
                         "LEFT OUTER JOIN [metaViews] ON metaPages.ViewId = metaViews.ViewId " +
-                        "WHERE [metaPages.Position] = 0"
+                        "WHERE metaPages.[Position] = 0"
                     );
 
                 DataTable pageIds = db.Select(query);
 
                 query = db.CreateQuery
                     (
-                        "SELECT [metaFields.Name] as Name, [metaFields.PageId] as PageId, [metaFields.ViewId] as ViewId, [metaFields.TabIndex] as TabIndex " +
+                        "SELECT metaFields.[Name] as Name, metaFields.[PageId] as PageId, metaFields.[ViewId] as ViewId, metaFields.[TabIndex] as TabIndex " +
                         "FROM [metaFields] " +
                         "LEFT OUTER JOIN [metaPages] ON metaPages.ViewId = metaFields.ViewId " +
-                        "WHERE [metaFields.HasTabStop] = true AND [metaPages.Position] = 0 " +
-                        "ORDER BY [metaFields.ViewId], [metaFields.TabIndex]"
+                        "WHERE metaFields.[HasTabStop] = true AND metaPages.[Position] = 0 " +
+                        "ORDER BY metaFields.[ViewId], metaFields.[TabIndex]"
                     );
 
                 DataTable fields = db.Select(query);
@@ -640,21 +640,21 @@ namespace Epi.Windows.Enter
 
                 query = db.CreateQuery
                     (
-                        "SELECT [metaPages.PageId] as PageId, [metaPages.ViewId] as ViewId, [metaViews.Name] as Name " +
+                        "SELECT metaPages.[PageId] as PageId, metaPages.[ViewId] as ViewId, metaViews.[Name] as Name " +
                         "FROM [metaPages] " +
                         "LEFT OUTER JOIN [metaViews] ON metaPages.ViewId = metaViews.ViewId " +
-                        "WHERE [metaPages.Position] = 0"
+                        "WHERE metaPages.[Position] = 0"
                     );
 
                 DataTable pageIds = db.Select(query);
 
                 query = db.CreateQuery
                     (
-                        "SELECT [metaFields.Name] as Name, [metaFields.PageId] as PageId, [metaFields.ViewId] as ViewId, [metaFields.TabIndex] as TabIndex " +
+                        "SELECT metaFields.[Name] as Name, metaFields.[PageId] as PageId, metaFields.[ViewId] as ViewId, metaFields.[TabIndex] as TabIndex " +
                         "FROM [metaFields] " +
                         "LEFT OUTER JOIN [metaPages] ON metaPages.ViewId = metaFields.ViewId " +
-                        "WHERE [metaFields.HasTabStop] = true AND [metaPages.Position] = 0 " +
-                        "ORDER BY [metaFields.ViewId], [metaFields.TabIndex]"
+                        "WHERE metaFields.[HasTabStop] = true AND metaPages.[Position] = 0 " +
+                        "ORDER BY metaFields.[ViewId], metaFields.[TabIndex]"
                     );
 
                 DataTable fields = db.Select(query);
