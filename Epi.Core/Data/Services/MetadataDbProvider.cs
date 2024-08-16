@@ -9593,7 +9593,7 @@ namespace Epi.Data.Services
 
                 foreach (AppDataSet.LayerRenderTypesRow layerRenderType in AppData.Instance.LayerRenderTypesDataTable.Rows)
                 {
-                    query = db.CreateQuery("insert into metaLayerRenderTypes ([LayerRenderTypeId], [Name]) values (@LayerRenderTypeId, @Name)");
+                    query = db.CreateQuery($"insert into metaLayerRenderTypes ({db.InsertInEscape("LayerRenderTypeId")}, {db.InsertInEscape("Name")}) values (@LayerRenderTypeId, @Name)");
                     query.Parameters.Add(new QueryParameter("@LayerRenderTypeId", DbType.Int32, layerRenderType.LayerRenderTypeId));
                     query.Parameters.Add(new QueryParameter("@Name", DbType.String, layerRenderType.Name));
                     

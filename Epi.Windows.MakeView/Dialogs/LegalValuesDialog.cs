@@ -584,6 +584,9 @@ namespace Epi.Windows.MakeView.Dialogs
                 case "ACCESS":
                     display = ColumnNames.NAME;
                     break;
+                case "SQLite":
+                    display = ColumnNames.NAME;
+                    break;
                 case "SQLSERVER":
                     display = ColumnNames.SCHEMA_TABLE_NAME;
                     break;

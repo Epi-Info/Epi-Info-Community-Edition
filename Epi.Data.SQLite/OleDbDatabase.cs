@@ -852,7 +852,31 @@ namespace Epi.Data.SQLite
         /// <returns>DataTable with schema information</returns>
         public override DataSets.TableSchema.TablesDataTable GetTableSchema()
         {
-            OleDbConnection conn = this.GetNativeConnection();
+            string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+            using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+            {
+                sqlite.Open();
+                try
+                {
+                    DataTable table = sqlite.GetSchema("Tables");
+                    DataSets.TableSchema tableSchema = new Epi.DataSets.TableSchema();
+                    tableSchema.Merge(table);
+                    return tableSchema._Tables;
+                }
+                catch (SQLiteException sqex)
+                {
+                    throw sqex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    sqlite.Close();
+                }
+            }
+                OleDbConnection conn = this.GetNativeConnection();
 
             try
             {
