@@ -1698,6 +1698,10 @@ namespace Epi.Data.Services
                                         {
                                             typedField.CurrentRecordValueObject = null;
                                         }
+                                        else if (dbDriver.GetType().Name.Equals("SQLiteDatabase"))
+                                        {
+                                            typedField.CurrentRecordValueObject = DateTime.Parse(val.ToString());
+                                        }
                                         else
                                         {
                                             typedField.CurrentRecordValueObject = (DateTime)val;
