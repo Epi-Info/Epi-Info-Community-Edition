@@ -473,7 +473,7 @@ namespace Epi.Data.SQLite
                 }
                 else
                 {
-                    return "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ConnectionString + ";";
+                    return "Provider=Epi.Data.SQLite.1.0.0.0;Data Source=" + ConnectionString + ";";
                 }
             }
         }
@@ -814,6 +814,30 @@ namespace Epi.Data.SQLite
                 throw new ArgumentNullException("tableName");
             }
             #endregion
+            string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+            using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+            {
+                sqlite.Open();
+                try
+                {
+                    DataTable table = sqlite.GetSchema("Columns", new string[] { null, null, tableName, null });
+                    DataSets.TableSchema tableSchema = new Epi.DataSets.TableSchema();
+                    tableSchema.Merge(table);
+                    return table;
+                }
+                catch (SQLiteException sqex)
+                {
+                    throw sqex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    sqlite.Close();
+                }
+            }
 
             OleDbConnection conn = this.GetNativeConnection();
 

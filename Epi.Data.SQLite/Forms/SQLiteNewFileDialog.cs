@@ -44,7 +44,7 @@ namespace Epi.Data.SQLite.Forms
         protected void OnOkClick()
         {
             this.dbConnectionStringBuilder.DataSource = this.txtFileName.Text;
-            this.dbConnectionStringBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
+            this.dbConnectionStringBuilder.Provider = "Epi.Data.SQLite.1.0.0.0";
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

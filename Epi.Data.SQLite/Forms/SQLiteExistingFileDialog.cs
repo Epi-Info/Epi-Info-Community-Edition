@@ -53,7 +53,7 @@ namespace Epi.Data.SQLite.Forms
 
             if (this.txtFileName.Text.EndsWith(".db", true, System.Globalization.CultureInfo.InvariantCulture))
             {
-                this.dbConnectionStringBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
+                this.dbConnectionStringBuilder.Provider = "Epi.Data.SQLite.1.0.0.0";
             }
             this.dbConnectionStringBuilder.DataSource = this.txtFileName.Text;
             this.DialogResult = DialogResult.OK;

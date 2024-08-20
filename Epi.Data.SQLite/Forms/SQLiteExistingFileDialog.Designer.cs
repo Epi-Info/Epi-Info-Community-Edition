@@ -117,7 +117,7 @@ namespace Epi.Data.SQLite.Forms
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(246, 13);
             this.lblHeader.TabIndex = 20;
-            this.lblHeader.Text = "Enter information to open the Microsoft Access file.";
+            this.lblHeader.Text = "Enter information to open the SQLite database.";
             // 
             // AccessExistingFileDialog
             // 
@@ -137,7 +137,7 @@ namespace Epi.Data.SQLite.Forms
             this.MinimizeBox = false;
             this.Name = "AccessExistingFileDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Open Microsoft Access File";
+            this.Text = "Open SQLite Database";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -72,7 +72,7 @@ namespace Epi.Data.SQLite
             object[] paramObjects = new object[] 
                 {
                     OleConnectionString,
-                    "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\"" + dataSource_Temp + "\";Jet OLEDB:Engine Type=5"
+                    "Provider=Epi.Data.SQLite.1.0.0.0;Data Source=\"" + dataSource_Temp + "\";Jet OLEDB:Engine Type=5"
                 };
 
             try

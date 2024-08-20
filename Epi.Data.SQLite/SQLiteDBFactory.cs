@@ -85,7 +85,7 @@ namespace Epi.Data.SQLite
                 OleDbConnectionStringBuilder cnnBuilder = new OleDbConnectionStringBuilder();
                 cnnBuilder.DataSource = dbConnection.ConnectionString;
                 //ToDo: Change code to read the configuration file, need to add provider information into the configuration file. 
-                cnnBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";   //Zack: here just hard coded for debug  
+                cnnBuilder.Provider = "Epi.Data.SQLite.1.0.0.0";   //Zack: here just hard coded for debug  
                 instance = CreateDatabaseObject(cnnBuilder);
             }
             else
@@ -137,7 +137,7 @@ namespace Epi.Data.SQLite
         {
             OleDbConnectionStringBuilder cnnStringBuilder = new OleDbConnectionStringBuilder();
             cnnStringBuilder.DataSource = fileName;
-            cnnStringBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
+            cnnStringBuilder.Provider = "Epi.Data.SQLite.1.0.0.0";
             return cnnStringBuilder;
         }
 
