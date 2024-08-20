@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using EpiInfo.Plugin;
@@ -85,6 +86,34 @@ namespace Epi.Data.SQLite
             //System.Data.Common.DbDataAdapter Adapter = null;
             System.Data.DataTable DataTable = new System.Data.DataTable();
             bool result = false;
+            string filestring = pFileString.Substring(pFileString.IndexOf("Source=") + 7);
+            using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+            {
+                sqlite.Open();
+                try
+                {
+                    string[] srestrictions = new string[] { null, null, pTableName };
+                    DataTable = sqlite.GetSchema("Tables", srestrictions);
+                    DataSets.TableSchema tableSchema = new Epi.DataSets.TableSchema();
+                    if (DataTable.Rows.Count == 0)
+                        result = false;
+                    else
+                        result = true;
+                    return result;
+                }
+                catch (SQLiteException sqex)
+                {
+                    throw sqex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    sqlite.Close();
+                }
+            }
 
             string connString = pFileString;
 

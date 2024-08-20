@@ -584,6 +584,8 @@ namespace Epi.Data.SQLite
         /// <returns></returns>
         public override Query CreateQuery(string sqlStatement)
         {
+            if (sqlStatement.ToLowerInvariant().StartsWith("select top 2"))
+                sqlStatement = sqlStatement.Substring(0, 6) + sqlStatement.Substring(12) + " LIMIT 2";
             return new JetQuery(sqlStatement);
         }
 

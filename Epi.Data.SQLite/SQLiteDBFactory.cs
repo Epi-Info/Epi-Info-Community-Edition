@@ -176,7 +176,7 @@ namespace Epi.Data.SQLite
 
         public bool CanClaimConnectionString(string connectionString)
         {
-            if (connectionString.ToLowerInvariant().Contains(".mdb") || (connectionString.ToLowerInvariant().Contains("provider=microsoft.jet.oledb.4.0") && !connectionString.ToLowerInvariant().Contains("excel") && !connectionString.ToLowerInvariant().Contains("fmt=delimited") && !connectionString.ToLowerInvariant().Contains("fmt=json")))
+            if (connectionString.ToLowerInvariant().Contains(".db") || (connectionString.ToLowerInvariant().Contains("provider=epi.data.sqlite") && !connectionString.ToLowerInvariant().Contains("excel") && !connectionString.ToLowerInvariant().Contains("fmt=delimited") && !connectionString.ToLowerInvariant().Contains("fmt=json")))
             {
                 return true;
             }
