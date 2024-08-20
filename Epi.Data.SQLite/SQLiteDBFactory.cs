@@ -188,16 +188,16 @@ namespace Epi.Data.SQLite
 
         public string ConvertFileStringToConnectionString(string fileString)
         {
-            string SQLite = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0}";
+            string SQLite = "Provider=Epi.Data.SQLite.1.0.0.0;Data Source={0}";
             string result = string.Empty;
             string Test = fileString.Trim(new char[] { '\'' });
 
 
-            if (Test.ToLowerInvariant().EndsWith(".mdb") && !Test.ToLowerInvariant().Contains("provider=microsoft.jet.oledb.4.0"))
+            if (Test.ToLowerInvariant().EndsWith(".db") && !Test.ToLowerInvariant().Contains("provider=epi.data.sqlite"))
             {
                 result = string.Format(SQLite, Test);
             }
-            else if (Test.ToLowerInvariant().IndexOf("provider=microsoft.jet.oledb.4.0") > -1)
+            else if (Test.ToLowerInvariant().IndexOf("provider=epi.data.sqlite") > -1)
             {
                 result = Test;
             }

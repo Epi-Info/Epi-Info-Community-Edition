@@ -90,7 +90,7 @@ namespace Epi.Data.SQLite
         protected virtual OleDbConnection GetNativeConnection(string connectionString)
         {
             OleDbConnectionStringBuilder oleDBCnnStrBuilder = new OleDbConnectionStringBuilder(connectionString);
-            oleDBCnnStrBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
+            oleDBCnnStrBuilder.Provider = "Epi.Data.SQLite.1.0.0.0";
 
             return new OleDbConnection(oleDBCnnStrBuilder.ToString());
         }
@@ -1041,6 +1041,23 @@ namespace Epi.Data.SQLite
         /// <returns></returns>
         protected bool TestConnection(string connectionString)
         {
+            string filestring = connectionString.Substring(connectionString.IndexOf("Source=") + 7);
+            using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+            {
+                try
+                {
+                    sqlite.Open();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                finally
+                {
+                    sqlite.Close();
+                }
+                return true;
+            }
             IDbConnection testConnection = GetConnection(connectionString);
             try
             {
@@ -1050,7 +1067,7 @@ namespace Epi.Data.SQLite
             {
                 CloseConnection(testConnection);
             }
-            return true;
+            return false;
         }
 
         /// <summary>
