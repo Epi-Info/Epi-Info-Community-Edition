@@ -1696,7 +1696,10 @@ namespace Epi.Data.SQLite
                         "nvarchar", "TEXT"), sqlite, new List<QueryParameter>());
                     foreach (QueryParameter oparam in query.Parameters)
                     {
-                        sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                        if (oparam.DbType == DbType.Guid)
+                            sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value.ToString()));
+                        else
+                            sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
                     }
                     sqlite.Open();
                     try
