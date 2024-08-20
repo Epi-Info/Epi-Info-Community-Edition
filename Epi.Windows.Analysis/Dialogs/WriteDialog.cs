@@ -115,7 +115,7 @@ namespace Epi.Windows.Analysis.Dialogs
 
             foreach (Epi.DataSets.Config.DataDriverRow row in config.DataDrivers)
             {
-                if (row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver)
+                if (row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver || row.Type == Configuration.SQLiteDriver)
                 {
                     continue;
                 }

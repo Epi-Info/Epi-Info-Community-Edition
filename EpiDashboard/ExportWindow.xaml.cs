@@ -89,7 +89,7 @@ namespace EpiDashboard
 
             foreach (Epi.DataSets.Config.DataDriverRow row in dashboardHelper.Config.DataDrivers)
             {
-                if(row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver)
+                if(row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver || row.Type == Configuration.SQLiteDriver)
                 {
                     continue;
                 }
@@ -360,7 +360,7 @@ namespace EpiDashboard
                 string plugin = string.Empty;
                 foreach (Epi.DataSets.Config.DataDriverRow row in dashboardHelper.Config.DataDrivers)
                 {
-                    if (row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver)
+                    if (row.Type == Configuration.PostgreSQLDriver || row.Type == Configuration.MySQLDriver || row.Type == Configuration.SQLiteDriver)
                     {
                         continue;
                     }
