@@ -1986,7 +1986,14 @@ namespace Epi.Windows.MakeView
 
                     if (row["MaxLength"] != System.DBNull.Value)
                     {
-                        ((TextField)field).MaxLength = (int)(short)row["MaxLength"];
+                        try
+                        {
+                            ((TextField)field).MaxLength = (int)(short)row["MaxLength"];
+                        }
+                        catch (InvalidCastException)
+                        {
+                            ((TextField)field).MaxLength = (int)row["MaxLength"];
+                        }
                     }
                 }
 

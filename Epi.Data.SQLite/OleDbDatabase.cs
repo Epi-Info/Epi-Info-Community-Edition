@@ -268,27 +268,80 @@ namespace Epi.Data.SQLite
 
             #endregion Input Validation
 
-
-            IDbConnection connection = GetConnection();
-            OleDbDataAdapter adapter = new OleDbDataAdapter();
-
             if (insertQuery != null)
-            {                    
-                adapter.InsertCommand = (OleDbCommand)GetCommand(insertQuery.SqlStatement, connection, insertQuery.Parameters);
+            {
+                try
+                {
+                    int retint = 0;
+                    string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+                    using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+                    {
+                        foreach (DataRow dr in dataTable.Rows)
+                        {
+                            IDbCommand sqlcommand = GetCommand(insertQuery.SqlStatement, sqlite, new List<QueryParameter>());
+                            foreach (QueryParameter oparam in insertQuery.Parameters)
+                            {
+                                if (oparam.DbType == DbType.Guid)
+                                    sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, dr[oparam.Value.ToString()].ToString()));
+                                else
+                                    sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, dr[oparam.Value.ToString()]));
+                            }
+                            sqlite.Open();
+                            try
+                            {
+                                retint = sqlcommand.ExecuteNonQuery();
+                            }
+                            catch (SQLiteException sqlex)
+                            {
+                                throw sqlex;
+                            }
+                            finally
+                            {
+                                sqlite.Close();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new System.ApplicationException("Error updating data.", ex);
+                }
             }
-                
             if (updateQuery != null)
             {
-                adapter.UpdateCommand = (OleDbCommand)GetCommand(updateQuery.SqlStatement, connection, updateQuery.Parameters);
-            }
-
-            try
-            {
-                adapter.Update(dataTable);
-            }
-            catch (Exception ex)
-            {
-                throw new System.ApplicationException("Error updating data.", ex);
+                try
+                {
+                    int retint = 0;
+                    string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+                    using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
+                    {
+                        IDbCommand sqlcommand = GetCommand(updateQuery.SqlStatement, sqlite, new List<QueryParameter>());
+                        foreach (QueryParameter oparam in updateQuery.Parameters)
+                        {
+                            if (oparam.DbType == DbType.Guid)
+                                sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value.ToString()));
+                            else
+                                sqlcommand.Parameters.Add(new SQLiteParameter(oparam.ParameterName, oparam.Value));
+                        }
+                        sqlite.Open();
+                        try
+                        {
+                            retint = sqlcommand.ExecuteNonQuery();
+                        }
+                        catch (SQLiteException sqlex)
+                        {
+                            throw sqlex;
+                        }
+                        finally
+                        {
+                            sqlite.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new System.ApplicationException("Error updating data.", ex);
+                }
             }
         }
 
@@ -1693,7 +1746,7 @@ namespace Epi.Data.SQLite
                 {
                     IDbCommand sqlcommand = GetCommand(query.SqlStatement.Replace("COUNTER", "INTEGER").Replace("GUID", "TEXT").Replace(
                         "MEMO", "TEXT").Replace("DATETIME", "TEXT").Replace("datetime", "TEXT").Replace("int IDENTITY(1,1)", "INTEGER").Replace(
-                        "nvarchar", "TEXT"), sqlite, new List<QueryParameter>());
+                        "nvarchar", "TEXT").Replace("SHORT", "INTEGER"), sqlite, new List<QueryParameter>());
                     foreach (QueryParameter oparam in query.Parameters)
                     {
                         if (oparam.DbType == DbType.Guid)
