@@ -2935,6 +2935,7 @@ namespace EpiDashboard
                         case "datafilters":
                             this.DataFilters = new DataFilters(this.DashboardHelper);
                             this.DataFilters.CreateFromXml(child);
+                            this.Parameters.CustomFilter = this.DataFilters.GenerateDataFilterString(false);
                             break;
                     }
                 }
