@@ -752,6 +752,8 @@ namespace Epi.ImportExport.ProjectPackagers
                 dataReader = SourceProject.CollectedData.GetDatabase().GetTableDataReader(form.TableName, "UniqueKey");
             }
 
+            bool issqliterepo = (dataReader.GetType().Name.Equals("SQLiteDataReader"));
+
             using (IDataReader guidReader = dataReader)
             {
                 while (guidReader.Read())
@@ -771,12 +773,18 @@ namespace Epi.ImportExport.ProjectPackagers
                             firstSaveUserId = guidReader["FirstSaveLogonName"].ToString();
                             if (guidReader["FirstSaveTime"] != DBNull.Value)
                             {
-                                firstSaveTime = (DateTime)guidReader["FirstSaveTime"];
+                                if (issqliterepo)
+                                    firstSaveTime = DateTime.Parse(guidReader["FirstSaveTime"].ToString());
+                                else
+                                    firstSaveTime = (DateTime)guidReader["FirstSaveTime"];
                             }
                             lastSaveUserId = guidReader["LastSaveLogonName"].ToString();
                             if (guidReader["LastSaveTime"] != DBNull.Value)
                             {
-                                lastSaveTime = (DateTime)guidReader["LastSaveTime"];
+                                if (issqliterepo)
+                                    firstSaveTime = DateTime.Parse(guidReader["LastSaveTime"].ToString());
+                                else
+                                    lastSaveTime = (DateTime)guidReader["LastSaveTime"];
                             }
                         }
                         catch (IndexOutOfRangeException)
