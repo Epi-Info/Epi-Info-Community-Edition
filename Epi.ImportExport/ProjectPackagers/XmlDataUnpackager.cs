@@ -140,8 +140,11 @@ namespace Epi.ImportExport.ProjectPackagers
 
             using (Conn = DestinationProject.CollectedData.GetDatabase().GetConnection())
             {
-                Conn.Open();
-                CheckForProblems();
+                if (!Conn.ConnectionString.ToLowerInvariant().Contains("epi.data.sqlite"))
+                {
+                    Conn.Open();
+                    CheckForProblems();
+                }
 
                 foreach (XmlNode node in XmlDataPackage.ChildNodes)
                 {
@@ -420,7 +423,7 @@ namespace Epi.ImportExport.ProjectPackagers
         {
             if (records.Count == 0) { return; }
 
-            if (Conn.State != ConnectionState.Open) { Conn.Open(); }
+            if (!Conn.ConnectionString.ToLowerInvariant().Contains("epi.data.sqlite") && Conn.State != ConnectionState.Open) { Conn.Open(); }
 
             IDbDriver db = DestinationProject.CollectedData.GetDatabase();
 
@@ -1129,7 +1132,7 @@ namespace Epi.ImportExport.ProjectPackagers
             if (form == null) { throw new ArgumentNullException("form"); }
             #endregion // Input Validation
 
-            if (Conn.State != ConnectionState.Open)
+            if (!Conn.ConnectionString.ToLowerInvariant().Contains("epi.data.sqlite") && Conn.State != ConnectionState.Open)
             {
                 Conn.Open();
             }
