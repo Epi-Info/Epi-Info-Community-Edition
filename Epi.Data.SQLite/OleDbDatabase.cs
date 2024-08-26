@@ -1641,7 +1641,7 @@ namespace Epi.Data.SQLite
                 {
                     IDbCommand sqlcommand = GetCommand(query.SqlStatement.Replace("COUNTER", "INTEGER").Replace("GUID", "TEXT").Replace(
                         "MEMO", "TEXT").Replace("DATETIME", "TEXT").Replace("datetime", "TEXT").Replace("int IDENTITY(1,1)", "INTEGER").Replace(
-                        "nvarchar", "TEXT").Replace("SHORT", "INTEGER"), sqlite, new List<QueryParameter>());
+                        "nvarchar", "TEXT").Replace("SHORT", "INTEGER").Replace("byte", "INTEGER"), sqlite, new List<QueryParameter>());
                     foreach (QueryParameter oparam in query.Parameters)
                     {
                         if (oparam.DbType == DbType.Guid)
