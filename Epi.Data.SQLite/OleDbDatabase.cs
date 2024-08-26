@@ -191,59 +191,6 @@ namespace Epi.Data.SQLite
             {
                 throw sqlex;
             }
-
-            IDbConnection connection = GetConnection();
-
-            if (connection.ConnectionString.Contains("Provider=Microsoft.Jet.OLEDB.4.0"))
-            {
-                string newString = connection.ConnectionString.Replace("HDR=Yes", "HDR=Yes;IMEX=1");
-                connection.ConnectionString = newString;
-            }
-
-            OleDbDataAdapter adapter = new OleDbDataAdapter();
-            adapter.SelectCommand = (OleDbCommand)GetCommand(selectQuery.SqlStatement, connection, selectQuery.Parameters);
-
-            try
-            {
-                adapter.Fill(dataTable);
-                try
-                {
-                    adapter.FillSchema(dataTable, SchemaType.Source);
-                }
-                catch { }
-
-                return dataTable;
-            }
-            catch (OleDbException oleDbException)
-            {
-                Configuration config0 = Configuration.GetNewInstance();
-                string wd = config0.Directories.Working;
-                connection.ConnectionString = connection.ConnectionString.Replace("Data Source=", "Data Source=" + wd + "\\");
-                adapter.SelectCommand = (OleDbCommand)GetCommand(selectQuery.SqlStatement, connection, selectQuery.Parameters);
-                try
-                {
-                    adapter.Fill(dataTable);
-                    try
-                    {
-                        adapter.FillSchema(dataTable, SchemaType.Source);
-                    }
-                    catch { }
-
-                    return dataTable;
-                }
-                catch (OleDbException oleDbException2)
-                {
-                    throw oleDbException2;
-                }
-                catch (Exception ex)
-                {
-                    throw new System.ApplicationException(SharedStrings.ERROR_SELECT_QUERY_DATA_SOURCE, ex);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new System.ApplicationException(SharedStrings.ERROR_SELECT_QUERY_DATA_SOURCE, ex);
-            }
         }
 
         /// <summary>
@@ -891,18 +838,6 @@ namespace Epi.Data.SQLite
                     sqlite.Close();
                 }
             }
-
-            OleDbConnection conn = this.GetNativeConnection();
-
-            try
-            {
-                OpenConnection(conn);
-                return conn.GetSchema(collectionName, new string[] { null, null, tableName, null });
-            }
-            finally
-            {
-                CloseConnection(conn);
-            }
         }
 
         /// <summary>
@@ -954,20 +889,6 @@ namespace Epi.Data.SQLite
                 {
                     sqlite.Close();
                 }
-            }
-                OleDbConnection conn = this.GetNativeConnection();
-
-            try
-            {
-                OpenConnection(conn);
-                DataTable table = conn.GetSchema("Tables", new string[] { null, null, null, "Table" });
-                DataSets.TableSchema tableSchema = new Epi.DataSets.TableSchema();
-                tableSchema.Merge(table);
-                return tableSchema._Tables;
-            }
-            finally
-            {
-                CloseConnection(conn);
             }
         }
 
@@ -1135,16 +1056,6 @@ namespace Epi.Data.SQLite
                 }
                 return true;
             }
-            IDbConnection testConnection = GetConnection(connectionString);
-            try
-            {
-                OpenConnection(testConnection);
-            }
-            finally
-            {
-                CloseConnection(testConnection);
-            }
-            return false;
         }
 
         /// <summary>
@@ -1584,6 +1495,7 @@ namespace Epi.Data.SQLite
             {
                 throw new ArgumentNullException("SelectQuery");
             }
+            #endregion
 
             try
             {
@@ -1604,23 +1516,6 @@ namespace Epi.Data.SQLite
             catch (SQLiteException sqlex)
             {
                 throw sqlex;
-            }
-            #endregion
-
-            IDbCommand command = null;
-            IDbConnection connection = null;
-
-            try
-            {
-                connection = GetConnection();
-                OpenConnection(connection);
-                command = GetCommand(selectQuery.SqlStatement, connection, selectQuery.Parameters);
-
-                return command.ExecuteReader(commandBehavior);
-            }
-            catch (Exception ex)
-            {
-                throw new System.ApplicationException("Could not execute reader", ex);
             }
         }
 
