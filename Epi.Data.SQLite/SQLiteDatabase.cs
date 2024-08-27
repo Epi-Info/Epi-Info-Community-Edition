@@ -211,7 +211,7 @@ namespace Epi.Data.SQLite
                     sqlitesb.Append("] INTEGER PRIMARY KEY ");
                 }
 
-                if (column.Length != null)
+                if (column.Length != null && column.Name.ToLowerInvariant() != "uniquekey")
                 {
                     if (GetDbSpecificColumnType(column.DataType).Equals("text") && column.Length.HasValue && column.Length.Value <= 255 && column.Length.Value > 0)
                     {
