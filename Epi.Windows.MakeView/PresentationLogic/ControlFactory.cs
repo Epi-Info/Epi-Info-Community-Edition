@@ -634,7 +634,7 @@ namespace Epi.Windows.MakeView.PresentationLogic
             SetControlProperties(group, field, canvasSize);
             group.ForeColor = Color.Black;
             group.BackColor = field.BackgroundColor;
-            group.Text = field.PromptText;
+            group.Text = field.PromptText == ""? "blank prompt - click to drag" : field.PromptText;
             group.AutoSize = true;
             List<Control> controls = new List<Control>();
             controls.Add(group);
