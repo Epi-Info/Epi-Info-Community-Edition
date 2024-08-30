@@ -259,7 +259,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         {
             for (int i = 0; i < pToken.Tokens.Length; i++)
             {
-                if(pToken.Tokens[i] is TerminalToken)
+                if (pToken.Tokens[i].ToString().Equals("NOINTERCEPT"))
+                {
+                    this.nointercept = true;
+                    continue;
+                }
+                if (pToken.Tokens[i] is TerminalToken)
                 {
                     continue;
                 }
@@ -270,6 +275,12 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     case "WEIGHTVAR":
                         this.WeightVar = this.GetCommandElement(pToken.Tokens, 2);
+                        break;
+                    case "NOINTERCEPT":
+                        this.nointercept = true;
+                        break;
+                    case "PVALUE":
+                        // Still not activating this -zfj4 20240830
                         break;
                     case "<LogisticOpts>":                    
                     case "<LogisticOpt>":
