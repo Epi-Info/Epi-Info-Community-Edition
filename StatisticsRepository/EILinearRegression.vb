@@ -236,6 +236,12 @@ Option Compare Text
         ra2 = 1 - CInt(lintrowCount + CInt(mboolIntercept)) * sse / (df * ssy)
         mse = sse / df ' mean squared error
 
+        Dim tScore As Double
+        tScore = 1.9
+        While Epi.Statistics.SharedResources.PFromT(tScore, df) > 0.025
+            tScore = tScore + 0.000001
+        End While
+
         Dim dist As New statlib
         dist = New statlib()
 
@@ -259,7 +265,7 @@ Option Compare Text
         output2 = "<br clear=""all""><table align=""left"" cellspacing=""8""><tr><td class=""stats"" align=""left""><b><tlt>Correlation Coefficient: r^2=</tlt></b></td><td class=""stats"" align=""right"">" & VB6.Format(r2, "0.00") & "</td></table>"
 
         output2 = output2 & vbCrLf & "<br clear=""all""><br clear=""all"" /><table align=""left"" cellspacing=""8"">" & "<tr>" & "<td class=""stats""><b><tlt>Source</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>df</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Sum of Squares</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Mean Square</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>F-statistic</tlt></b> </td> </tr>" & "<tr>" & "<td class=""stats"" align=""left""><b><tlt>Regression</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT>" & CInt(lintrowCount + CInt(mboolIntercept)) - df & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(ssy - sse, "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format((ssy - sse) / CShort(NumColumns - lintweight - 1 + CShort(mboolIntercept)), "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(ftest, "0.000") & "</td></tr>" & "<tr>" & "<td class=""stats"" align=""left""><b><tlt>Residuals</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT>" & df & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(sse, "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(mse, "0.000") & "</td>" & "<TD class=""stats"">&nbsp;</td></tr>" & "<tr>" & "<td class=""stats"" align=""left""><b><tlt>Total</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT>" & lintrowCount + CShort(mboolIntercept) & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(ssy, "0.000") & "</td>" & "<TD class=""stats"">&nbsp;</td>" & "<TD class=""stats"">&nbsp;</td></tr></TABLE><BR CLEAR=ALL>"
-        output1 = output1 & vbCrLf & "<br clear=""all""><table align=""left"" cellspacing=""8"">" & "<tr><td class=""stats""><b><tlt>Variable</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Coefficient</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Std Error</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>F-test</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>P-Value</tlt></b></td></tr>"
+        output1 = output1 & vbCrLf & "<br clear=""all""><table align=""left"" cellspacing=""8"">" & "<tr><td class=""stats""><b><tlt>Variable</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Coefficient</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>95% LCL</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>95% UCL</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Std Error</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>F-test</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>P-Value</tlt></b></td></tr>"
 
 
 
@@ -298,7 +304,7 @@ Option Compare Text
         ReDim coeff(4, NumColumns - 2 - lintweight)
 
         For i = 0 To NumColumns - 1 - lintweight - 1
-            output1 = output1 & "<tr><td class=""stats"" align=""left""><b>" & mStrAMatrixLabels(i) & "</b></td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(B(i, 0), "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(stdb(i), "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(fvalue(i), "0.0000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(probf(i), "0.000000") & "</td></tr>"
+            output1 = output1 & "<tr><td class=""stats"" align=""left""><b>" & mStrAMatrixLabels(i) & "</b></td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(B(i, 0), "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(B(i, 0) - tScore * stdb(i), "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(B(i, 0) + tScore * stdb(i), "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(stdb(i), "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(fvalue(i), "0.0000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(probf(i), "0.000000") & "</td></tr>"
             coeff(0, i) = mStrAMatrixLabels(i)
             coeff(1, i) = B(i, 0)
             coeff(2, i) = stdb(i)
@@ -454,13 +460,13 @@ Option Compare Text
             regressionResults.pearsonCoefficientTP = dist.PfromT(regressionResults.pearsonCoefficientT, y.Length - 2) * 2
             output3 = String.Empty
             output3 = output3 & vbCrLf & "<br clear=""all""><table align=""left"" cellspacing=""8"">" & "<tr><td class=""stats""><b><tlt>Pearson's Coefficient</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>T-Test Value</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>P-Value</tlt></b></td></tr>"
-            output3 = output3 & "<tr><td class=""stats"" align=""left""><b>" & VB6.Format(regressionResults.pearsonCoefficient, "0.0000") & "</b></td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(regressionResults.pearsonCoefficientT, "0.0000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(regressionResults.pearsonCoefficientTP, "0.0000") & "</td></tr>"
+            output3 = output3 & "<tr><td class=""stats"" align=""center"">" & VB6.Format(regressionResults.pearsonCoefficient, "0.0000") & "</td>" & "<td class=""stats"" ALIGN=CENTER>" & VB6.Format(regressionResults.pearsonCoefficientT, "0.0000") & "</td>" & "<td class=""stats"" ALIGN=CENTER>" & VB6.Format(regressionResults.pearsonCoefficientTP, "0.0000") & "</td></tr>"
             output3 = output3 & "</TABLE><BR CLEAR=ALL>"
             output3 = output3 & vbCrLf & "<br clear=""all""><table align=""left"" cellspacing=""8"">" & "<tr><td class=""stats""><b><tlt>Spearman's Coefficient</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>T-Test Value</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>P-Value</tlt></b></td></tr>"
-            output3 = output3 & "<tr><td class=""stats"" align=""left""><b>" & VB6.Format(regressionResults.spearmanCoefficient, "0.0000") & "</b></td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(regressionResults.spearmanCoefficientT, "0.0000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(regressionResults.spearmanCoefficientTP, "0.0000") & "</td></tr>"
+            output3 = output3 & "<tr><td class=""stats"" align=""center"">" & VB6.Format(regressionResults.spearmanCoefficient, "0.0000") & "</td>" & "<td class=""stats"" ALIGN=CENTER>" & VB6.Format(regressionResults.spearmanCoefficientT, "0.0000") & "</td>" & "<td class=""stats"" ALIGN=CENTER>" & VB6.Format(regressionResults.spearmanCoefficientTP, "0.0000") & "</td></tr>"
             output3 = output3 & "</TABLE><BR CLEAR=ALL>"
 
-            output = output & output1 & output2 & output3
+            output = output & output3
         End If
 
         args.Add("COMMANDNAME", "REGRESS")
