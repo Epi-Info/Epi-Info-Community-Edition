@@ -313,6 +313,156 @@ Option Compare Text
         output1 = output1 & "</TABLE><BR CLEAR=ALL>"
         output = output & output1 & output2
 
+
+        If NumColumns + CShort(mboolIntercept) - lintweight = 2 And r2 >= 0.0 Then
+            Dim myComparer As New SpearmanComparer
+            Dim regressionResults As New LinearRegressionResults
+            Dim output3 As String
+            Dim rankArray As Array()
+            ReDim rankArray(y.Length)
+            For i = 0 To y.Length - 1
+                If lintweight = 0 Then
+                    rankArray(i) = {DataArray(i, 1), 0, DataArray(i, 0), CDbl(i + 1), CDbl(1)}
+                Else
+                    rankArray(i) = {DataArray(i, 2), 0, DataArray(i, 0), CDbl(i + 1), DataArray(i, 1)}
+                End If
+            Next i
+
+            Dim ties As Integer
+            Dim rankAvg As Double
+            Dim i0 As Integer
+            Dim i1 As Integer
+            For i = 0 To y.Length - 1
+                i0 = i + 1
+                ties = 1
+                rankAvg = rankArray(i)(3)
+                If i0 < y.Length Then
+                    While rankArray(i)(2) = rankArray(i0)(2)
+                        ties += 1
+                        rankAvg += rankArray(i0)(3)
+                        i0 += 1
+                        If i0 >= y.Length Then
+                            Exit While
+                        End If
+                    End While
+                End If
+                rankAvg /= CDbl(ties)
+                If ties > 1 Then
+                    For i1 = i To i + ties - 1
+                        rankArray(i1)(3) = rankAvg
+                    Next i1
+                End If
+                i += ties - 1
+            Next i
+
+            Array.Sort(rankArray, myComparer)
+            For i = 0 To y.Length - 1
+                rankArray(i)(1) = CDbl(i + 1)
+            Next i
+            For i = 0 To y.Length - 1
+                i0 = i + 1
+                ties = 1
+                rankAvg = rankArray(i)(1)
+                If i0 < y.Length Then
+                    While rankArray(i)(0) = rankArray(i0)(0)
+                        ties += 1
+                        rankAvg += rankArray(i0)(1)
+                        i0 += 1
+                        If i0 >= y.Length Then
+                            Exit While
+                        End If
+                    End While
+                End If
+                rankAvg /= CDbl(ties)
+                If ties > 1 Then
+                    For i1 = i To i + ties - 1
+                        rankArray(i1)(1) = rankAvg
+                    Next i1
+                End If
+                i += ties - 1
+            Next i
+
+            If lintweight = 0 Then
+                regressionResults.pearsonCoefficient = Math.Sqrt(r2)
+                If B(0, 0) < 0 Then
+                    regressionResults.pearsonCoefficient *= -1
+                End If
+
+                Dim yRankMean As Double
+                Dim xRankMean As Double
+                Dim sumWeights As Double
+                For i = 0 To y.Length - 1
+                    yRankMean += rankArray(i)(3) * rankArray(i)(4)
+                    xRankMean += rankArray(i)(1) * rankArray(i)(4)
+                    sumWeights += rankArray(i)(4)
+                Next i
+                yRankMean /= sumWeights
+                xRankMean /= sumWeights
+                Dim numerator As Double
+                Dim denominatorA As Double
+                Dim denominatorB As Double
+                For i = 0 To y.Length - 1
+                    numerator += rankArray(i)(4) * (rankArray(i)(1) - xRankMean) * (rankArray(i)(3) - yRankMean)
+                    denominatorA += rankArray(i)(4) * (rankArray(i)(1) - xRankMean) ^ 2.0
+                    denominatorB += rankArray(i)(4) * (rankArray(i)(3) - yRankMean) ^ 2.0
+                Next i
+                regressionResults.spearmanCoefficient = numerator / Math.Sqrt(denominatorA * denominatorB)
+                regressionResults.spearmanCoefficientT = Math.Sqrt(y.Length - 2) * Math.Sqrt(regressionResults.spearmanCoefficient ^ 2.0 / (1.0 - regressionResults.spearmanCoefficient ^ 2.0))
+                regressionResults.spearmanCoefficientTP = dist.PfromT(regressionResults.spearmanCoefficientT, y.Length - 2) * 2
+                Dim yMean As Double
+                Dim xMean As Double
+                sumWeights = CDbl(0)
+                For i = 0 To y.Length - 1
+                    yMean += DataArray(i, 0)
+                    xMean += DataArray(i, 1)
+                    sumWeights += 1.0
+                Next i
+                yMean /= sumWeights
+                xMean /= sumWeights
+                numerator = CDbl(0)
+                denominatorA = CDbl(0)
+                denominatorB = CDbl(0)
+                For i = 0 To y.Length - 1
+                    numerator += (DataArray(i, 1) - xMean) * (DataArray(i, 0) - yMean)
+                    denominatorA += (DataArray(i, 1) - xMean) ^ 2.0
+                    denominatorB += (DataArray(i, 0) - yMean) ^ 2.0
+                Next i
+                regressionResults.pearsonCoefficient = numerator / Math.Sqrt(denominatorA * denominatorB)
+            Else
+                Dim yMean As Double
+                Dim xMean As Double
+                Dim sumWeights As Double
+                For i = 0 To y.Length - 1
+                    yMean += DataArray(i, 0) * DataArray(i, 1)
+                    xMean += DataArray(i, 1) * DataArray(i, 2)
+                    sumWeights += DataArray(i, 1)
+                Next i
+                yMean /= sumWeights
+                xMean /= sumWeights
+                Dim numerator As Double
+                Dim denominatorA As Double
+                Dim denominatorB As Double
+                For i = 0 To y.Length - 1
+                    numerator += DataArray(i, 1) * (DataArray(i, 2) - xMean) * (DataArray(i, 0) - yMean)
+                    denominatorA += DataArray(i, 1) * (DataArray(i, 2) - xMean) ^ 2.0
+                    denominatorB += DataArray(i, 1) * (DataArray(i, 0) - yMean) ^ 2.0
+                Next i
+                regressionResults.pearsonCoefficient = numerator / Math.Sqrt(denominatorA * denominatorB)
+                regressionResults.spearmanCoefficient = 10.0
+            End If
+            regressionResults.pearsonCoefficientT = Math.Sqrt(y.Length - 2) * Math.Sqrt(regressionResults.pearsonCoefficient ^ 2.0 / (1.0 - regressionResults.pearsonCoefficient ^ 2.0))
+            regressionResults.pearsonCoefficientTP = dist.PfromT(regressionResults.pearsonCoefficientT, y.Length - 2) * 2
+            output3 = String.Empty
+            output3 = output3 & vbCrLf & "<br clear=""all""><table align=""left"" cellspacing=""8"">" & "<tr><td class=""stats""><b><tlt>Pearson's Coefficient</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>T-Test Value</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>P-Value</tlt></b></td></tr>"
+            output3 = output3 & "<tr><td class=""stats"" align=""left""><b>" & VB6.Format(regressionResults.pearsonCoefficient, "0.0000") & "</b></td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(regressionResults.pearsonCoefficientT, "0.0000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(regressionResults.pearsonCoefficientTP, "0.0000") & "</td></tr>"
+            output3 = output3 & "</TABLE><BR CLEAR=ALL>"
+            output3 = output3 & vbCrLf & "<br clear=""all""><table align=""left"" cellspacing=""8"">" & "<tr><td class=""stats""><b><tlt>Spearman's Coefficient</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>T-Test Value</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>P-Value</tlt></b></td></tr>"
+            output3 = output3 & "<tr><td class=""stats"" align=""left""><b>" & VB6.Format(regressionResults.spearmanCoefficient, "0.0000") & "</b></td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(regressionResults.spearmanCoefficientT, "0.0000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(regressionResults.spearmanCoefficientTP, "0.0000") & "</td></tr>"
+            output3 = output3 & "</TABLE><BR CLEAR=ALL>"
+
+            output = output & output1 & output2 & output3
+        End If
+
         args.Add("COMMANDNAME", "REGRESS")
 
         args.Add("COMMANDTEXT", context.SetProperties("CommandText"))
