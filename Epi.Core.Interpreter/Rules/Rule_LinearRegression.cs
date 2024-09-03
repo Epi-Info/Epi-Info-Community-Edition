@@ -264,6 +264,11 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     this.nointercept = true;
                     continue;
                 }
+                if (pToken.Tokens[i].ToString().Equals("PVALUE"))
+                {
+                    this.pvalue = pToken.Tokens[pToken.Tokens.Length - 1].ToString();
+                    continue;
+                }
                 if (pToken.Tokens[i] is TerminalToken)
                 {
                     continue;
@@ -281,7 +286,13 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                         break;
                     case "PVALUE":
                         // Still not activating this -zfj4 20240830
-                        break;
+                        for (int j = 0; j < T.Tokens.Length; j++)
+                        {
+                            string temp = this.ExtractTokens(T.Tokens);
+                            string[] tmp = temp.Split('=');
+                            this.pvalue = tmp[tmp.Length - 1].ToString();
+                        }
+                            break;
                     case "<LogisticOpts>":                    
                     case "<LogisticOpt>":
                         for (int j = 0; j < T.Tokens.Length; j++)

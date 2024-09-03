@@ -237,8 +237,8 @@ Option Compare Text
         mse = sse / df ' mean squared error
 
         Dim tScore As Double
-        tScore = 1.9
-        While Epi.Statistics.SharedResources.PFromT(tScore, df) > 0.025
+        tScore = 1.6
+        While Epi.Statistics.SharedResources.PFromT(tScore, df) > mdblC / 2.0
             tScore = tScore + 0.000001
         End While
 
@@ -265,7 +265,7 @@ Option Compare Text
         output2 = "<br clear=""all""><table align=""left"" cellspacing=""8""><tr><td class=""stats"" align=""left""><b><tlt>Correlation Coefficient: r^2=</tlt></b></td><td class=""stats"" align=""right"">" & VB6.Format(r2, "0.00") & "</td></table>"
 
         output2 = output2 & vbCrLf & "<br clear=""all""><br clear=""all"" /><table align=""left"" cellspacing=""8"">" & "<tr>" & "<td class=""stats""><b><tlt>Source</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>df</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Sum of Squares</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Mean Square</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>F-statistic</tlt></b> </td> </tr>" & "<tr>" & "<td class=""stats"" align=""left""><b><tlt>Regression</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT>" & CInt(lintrowCount + CInt(mboolIntercept)) - df & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(ssy - sse, "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format((ssy - sse) / CShort(NumColumns - lintweight - 1 + CShort(mboolIntercept)), "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(ftest, "0.000") & "</td></tr>" & "<tr>" & "<td class=""stats"" align=""left""><b><tlt>Residuals</tlt></b> </td>" & "<td class=""stats"" ALIGN=RIGHT>" & df & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(sse, "0.000") & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(mse, "0.000") & "</td>" & "<TD class=""stats"">&nbsp;</td></tr>" & "<tr>" & "<td class=""stats"" align=""left""><b><tlt>Total</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT>" & lintrowCount + CShort(mboolIntercept) & "</td>" & "<td class=""stats"" ALIGN=RIGHT>" & VB6.Format(ssy, "0.000") & "</td>" & "<TD class=""stats"">&nbsp;</td>" & "<TD class=""stats"">&nbsp;</td></tr></TABLE><BR CLEAR=ALL>"
-        output1 = output1 & vbCrLf & "<br clear=""all""><table align=""left"" cellspacing=""8"">" & "<tr><td class=""stats""><b><tlt>Variable</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Coefficient</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>95% LCL</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>95% UCL</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Std Error</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>F-test</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>P-Value</tlt></b></td></tr>"
+        output1 = output1 & vbCrLf & "<br clear=""all""><table align=""left"" cellspacing=""8"">" & "<tr><td class=""stats""><b><tlt>Variable</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Coefficient</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>" & mstrC & "% LCL</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>" & mstrC & "% UCL</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>Std Error</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>F-test</tlt></b></td>" & "<td class=""stats"" ALIGN=RIGHT><b><tlt>P-Value</tlt></b></td></tr>"
 
 
 
@@ -986,9 +986,9 @@ ERROR_PROC:
             Dim success As Boolean
             success = Double.TryParse(context.SetProperties("P"), mdblP)
             If success = True Then
-                mdblC = 1 - mdblP
+                mdblC = 1 - mdblP / 100
                 mdblP = dist.ZFROMP((1 - mdblP) * 0.5)
-                mstrC = Str(context.SetProperties("P") * 100)
+                mstrC = Str(context.SetProperties("P"))
             End If
         End If
         ReDim mstraTerms(0)
