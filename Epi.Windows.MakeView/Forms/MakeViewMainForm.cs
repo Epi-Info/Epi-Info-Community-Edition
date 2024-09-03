@@ -3055,6 +3055,42 @@ namespace Epi.Windows.MakeView.Forms
             }
         }
 
+        private void makeSQLiteProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.Filter = "SQLite Database File" + " (*.db)|*.db";
+            openFileDialog.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
+            DialogResult result = openFileDialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                FileInfo fi = new FileInfo(openFileDialog.FileName);
+                string projectName = fi.Directory.ToString() + "\\";
+                projectName = projectName + (fi.Name.Replace(fi.Extension, string.Empty)) + ".prj";
+
+                //project.Name = fi.Name.Substring(0, fi.Name.Length - 4);
+                //project.Location = directory; 
+
+                if (File.Exists(projectName))
+                {
+                    DialogResult overwriteResult = Epi.Windows.MsgBox.Show(string.Format(SharedStrings.PROJECT_ALREADY_EXISTS, projectName), SharedStrings.PROJECT_ALREADY_EXISTS_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (overwriteResult != System.Windows.Forms.DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+
+                if (Util.CreateProjectFileFromSQLiteDatabase(openFileDialog.FileName, true) != null)
+                {
+                    Epi.Windows.MsgBox.ShowInformation(SharedStrings.PROJECT_FILE_CREATED);
+                }
+                else
+                {
+                    Epi.Windows.MsgBox.ShowInformation(SharedStrings.PROJECT_FILE_NOT_CREATED);
+                }
+            }
+        }
+
         private void makeSQLProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Epi.Data.IDbDriverFactory dbFactory = Epi.Data.DbDriverFactoryCreator.GetDbDriverFactory(Configuration.SqlDriver);

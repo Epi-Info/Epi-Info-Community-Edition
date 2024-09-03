@@ -248,6 +248,73 @@ namespace Epi
         }
 
         /// <summary>
+        /// Creates a project file and project object for a SQLite database file.
+        /// </summary>
+        /// <param name="databaseFileName">The database file name.</param>
+        /// <param name="createPRJFile">Whether or not to create the PRJ file on disk.</param>
+        /// <returns>An Epi Info project object</returns>
+        public static Project CreateProjectFileFromSQLiteDatabase(string databaseFileName, bool createPRJFile)
+        {
+            if (IsDatabaseEpiProject(databaseFileName, false) == false)
+            {
+                return null;
+            }
+
+            Project project = new Project();
+
+            string fileName = databaseFileName;
+            string directory = Path.GetDirectoryName(fileName);
+
+            if (fileName.ToLowerInvariant().EndsWith(".db"))
+            {
+                DbDriverInfo collectedDataDBInfo = new DbDriverInfo();
+                IDbDriverFactory collectedDBFactory = DbDriverFactoryCreator.GetDbDriverFactory("Epi.Data.SQLite.SQLiteDBFactory, Epi.Data.SQLite");// GetSelectedCollectedDataDriver();
+                string GUID = System.Guid.NewGuid().ToString();
+                collectedDataDBInfo.DBCnnStringBuilder = collectedDBFactory.RequestDefaultConnection(GUID, GUID);
+
+                FileInfo fi = new FileInfo(fileName);
+
+                project.Name = fi.Name.Substring(0, fi.Name.Length - 3);
+                project.Location = directory;
+
+                if (collectedDataDBInfo.DBCnnStringBuilder.ContainsKey("Provider"))
+                {
+                    collectedDataDBInfo.DBCnnStringBuilder["Data Source"] = project.FilePath.Substring(0, project.FilePath.Length - 4) + ".db";
+                }
+
+                if (!Directory.Exists(project.Location))
+                {
+                    Directory.CreateDirectory(project.Location);
+                }
+
+                project.Id = project.GetProjectId();
+                project.Description = string.Empty;
+
+                project.CollectedDataDbInfo = collectedDataDBInfo;
+                project.CollectedDataDriver = "Epi.Data.SQLite.SQLiteDBFactory, Epi.Data.SQLite";
+                project.CollectedDataConnectionString = collectedDataDBInfo.DBCnnStringBuilder.ToString();
+
+                Logger.Log(DateTime.Now + ":  " + string.Format("Project [{0}] created in {1} by user [{2}].", project.Name, project.Location, System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString()));
+
+                project.MetadataSource = MetadataSource.SameDb;
+
+                if (createPRJFile)
+                {
+                    try
+                    {
+                        project.Save();
+                    }
+                    catch (UnauthorizedAccessException ex)
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            return project;
+        }
+
+        /// <summary>
         /// Creates a project file and project object for a given database.
         /// </summary>
         /// <param name="connectionString">The database file name or connection string.</param>

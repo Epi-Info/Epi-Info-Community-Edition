@@ -111,6 +111,7 @@ namespace Epi.Windows.MakeView.Forms
             this.Import6xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeAccessPRJToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.makeSQLitePRJToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeSQLPRJToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createDataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteDataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -707,6 +708,7 @@ namespace Epi.Windows.MakeView.Forms
             // 
             this.makeProjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.makeAccessPRJToolStripMenuItem,
+            this.makeSQLitePRJToolStripMenuItem,
             this.makeSQLPRJToolStripMenuItem});
             this.makeProjectToolStripMenuItem.Name = "makeProjectToolStripMenuItem";
             resources.ApplyResources(this.makeProjectToolStripMenuItem, "makeProjectToolStripMenuItem");
@@ -716,6 +718,12 @@ namespace Epi.Windows.MakeView.Forms
             this.makeAccessPRJToolStripMenuItem.Name = "makeAccessPRJToolStripMenuItem";
             resources.ApplyResources(this.makeAccessPRJToolStripMenuItem, "makeAccessPRJToolStripMenuItem");
             this.makeAccessPRJToolStripMenuItem.Click += new System.EventHandler(this.makeAccessProjectToolStripMenuItem_Click);
+            // 
+            // makeSQLitePRJToolStripMenuItem
+            // 
+            this.makeSQLitePRJToolStripMenuItem.Name = "makeSQLitePRJToolStripMenuItem";
+            resources.ApplyResources(this.makeSQLitePRJToolStripMenuItem, "makeSQLitePRJToolStripMenuItem");
+            this.makeSQLitePRJToolStripMenuItem.Click += new System.EventHandler(this.makeSQLiteProjectToolStripMenuItem_Click);
             // 
             // makeSQLPRJToolStripMenuItem
             // 
@@ -1123,6 +1131,7 @@ namespace Epi.Windows.MakeView.Forms
         private ToolStripMenuItem mnuImportTemplate;
         private ToolStripMenuItem makeProjectToolStripMenuItem;
         private ToolStripMenuItem makeAccessPRJToolStripMenuItem;
+        private ToolStripMenuItem makeSQLitePRJToolStripMenuItem;
         private ToolStripMenuItem makeSQLPRJToolStripMenuItem;
         private ToolStripMenuItem upgradeToolStripMenuItem;
         private ToolStripMenuItem Import35xToolStripMenuItem;

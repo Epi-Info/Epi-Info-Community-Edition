@@ -1772,6 +1772,12 @@
   <data name="makeAccessPRJToolStripMenuItem.Text" xml:space="preserve">
     <value>From Epi Info 7 project (MS Access)</value>
   </data>
+	<data name="makeSQLitePRJToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+		<value>261, 22</value>
+	</data>
+	<data name="makeSQLitePRJToolStripMenuItem.Text" xml:space="preserve">
+    <value>From Epi Info 7 project (SQLite)</value>
+  </data>
   <data name="makeSQLPRJToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 22</value>
   </data>
@@ -6591,6 +6597,12 @@
     <value>makeAccessPRJToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;makeAccessPRJToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+	<data name="&gt;&gt;makeSQLitePRJToolStripMenuItem.Name" xml:space="preserve">
+    <value>makeSQLitePRJToolStripMenuItem</value>
+  </data>
+	<data name="&gt;&gt;makeSQLitePRJToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;makeSQLPRJToolStripMenuItem.Name" xml:space="preserve">
