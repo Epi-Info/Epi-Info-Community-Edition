@@ -50,6 +50,8 @@ namespace Epi.Data.SQLite
                             "SELECT substr(u,1,8)||'-'||substr(u,9,4)||'-4'||substr(u,13,3)||'-'||v||substr(u,17,3)||'-'||substr(u,21,12) " +
                             "from (SELECT upper(hex(randomblob(16))) as u, substr('89AB',abs(random()) % 4 + 1, 1) as v);";
                         cmd.ExecuteNonQuery();
+                        cmd.CommandText = "DROP TABLE IF EXISTS makeDBTable;";
+                        cmd.ExecuteNonQuery();
                         sqlite.Close();
                     }
                     return;
