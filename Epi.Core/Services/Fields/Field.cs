@@ -205,6 +205,14 @@ namespace Epi.Fields
             {
                 uniqueId = (Guid)row["UniqueId"];
             }
+            else if (row["UniqueId"] is String)
+            {
+                Guid tryguid;
+                if (Guid.TryParse(row["UniqueId"].ToString(), out tryguid))
+                {
+                    uniqueId = tryguid;
+                }
+            }
         }
 
         public virtual void AssignMembers(Object field)
