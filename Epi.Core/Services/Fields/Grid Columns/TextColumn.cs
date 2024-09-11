@@ -32,7 +32,10 @@ namespace Epi.Fields
             : base(gridRow, grid)
         {
             construct();
-            this.size = (short)gridRow["Size"];
+            if (gridRow["Size"].GetType() == typeof(Int32))
+                this.size = (int)gridRow["Size"];
+            else
+                this.size = (short)gridRow["Size"];
         }
 
         private void construct()

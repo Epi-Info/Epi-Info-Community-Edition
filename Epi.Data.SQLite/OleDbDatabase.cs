@@ -1640,7 +1640,7 @@ namespace Epi.Data.SQLite
                 using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
                 {
                     IDbCommand sqlcommand = GetCommand(query.SqlStatement.Replace("COUNTER", "INTEGER").Replace("GUID", "TEXT").Replace(
-                        "MEMO", "TEXT").Replace("DATETIME", "TEXT").Replace("datetime", "TEXT").Replace("int IDENTITY(1,1)", "INTEGER").Replace(
+                        "MEMO", "TEXT").Replace("DATETIME", "TEXT").Replace("datetime", "TEXT").Replace("int IDENTITY(1,1)", "INTEGER").Replace("INT identity (1,1)", "INTEGER").Replace(
                         "nvarchar", "TEXT").Replace("SHORT", "INTEGER").Replace("byte", "INTEGER"), sqlite, new List<QueryParameter>());
                     foreach (QueryParameter oparam in query.Parameters)
                     {

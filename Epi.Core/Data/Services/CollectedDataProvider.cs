@@ -1610,6 +1610,31 @@ namespace Epi.Data.Services
                 foreach (GridField gridField in view.Fields.GridFields)
                 {
                     DataTable gridData = GetGridTableData(view, gridField);
+                    if (gridData.TableName.Equals("FROMSQLITE"))
+                    {
+                        List<string> yncolumns = new List<string>();
+                        foreach (GridColumnBase sdc in gridField.Columns)
+                        {
+                            if (sdc.GetType().Equals(typeof(Epi.Fields.YesNoColumn)))
+                            {
+                                yncolumns.Add(sdc.Name);
+                            }
+                        }
+                        if (yncolumns.Count > 0)
+                        {
+                            DataTable dtClone = gridData.Clone();
+                            foreach (DataColumn dc in dtClone.Columns)
+                            {
+                                if (yncolumns.Contains(dc.ColumnName))
+                                {
+                                    dc.DataType = typeof(Byte);
+                                }
+                            }
+                            foreach (DataRow dr in gridData.Rows)
+                                dtClone.ImportRow(dr);
+                            gridData = dtClone;
+                        }
+                    }
                     gridData.TableName = view.Name + gridField.Page.Id.ToString() + gridField.Name;
                     gridField.DataSource = gridData;
                 }
@@ -3677,6 +3702,12 @@ namespace Epi.Data.Services
             sbSelect.Append(dbDriver.InsertInEscape(ColumnNames.FOREIGN_KEY) + StringLiterals.EQUAL + "'" + view.CurrentGlobalRecordId + "'");
             // End From clause
             Data.Query selectQuery = dbDriver.CreateQuery(sbSelect.ToString());
+            if (dbDriver.GetType().ToString().Contains("SQLite"))
+            {
+                System.Data.DataTable sqliettable = dbDriver.Select(selectQuery);
+                sqliettable.TableName = "FROMSQLITE";
+                return sqliettable;
+            }
             return dbDriver.Select(selectQuery);
         }
         /// <summary>

@@ -70,8 +70,11 @@ namespace Epi.Fields
             {
                 this.isUniqueField = false;
             }
-            
-            this.position = (short)gridRow[ColumnNames.POSITION];
+
+            if (gridRow[ColumnNames.POSITION].GetType() == typeof(Int32))
+                this.position = (int)gridRow[ColumnNames.POSITION];
+            else
+                this.position = (short)gridRow[ColumnNames.POSITION];
             this.width = int.Parse(gridRow["Width"].ToString());
             this.grid = grid;
         }
