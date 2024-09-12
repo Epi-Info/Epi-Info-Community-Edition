@@ -392,6 +392,8 @@ namespace Epi.Enter.Forms
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Double, data));
                                             break;
                                         case MetaFieldType.RecStatus:
+                                        case MetaFieldType.Checkbox:
+                                        case MetaFieldType.YesNo:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));
                                             break;
                                         default:
@@ -462,6 +464,8 @@ namespace Epi.Enter.Forms
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Double, data));
                                             break;
                                         case MetaFieldType.RecStatus:
+                                        case MetaFieldType.Checkbox:
+                                        case MetaFieldType.YesNo:
                                             fieldValueParams.Add(new QueryParameter("@" + gridColumn.Name, DbType.Single, data));
                                             break;
                                         default:
