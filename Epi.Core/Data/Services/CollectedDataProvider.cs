@@ -3222,6 +3222,32 @@ namespace Epi.Data.Services
             }
 
             DataTable existingGridRowTablePostUpdate = GetGridTableData(view, field);
+            if (existingGridRowTablePostUpdate.TableName.Equals("FROMSQLITE"))
+            {
+                List<string> yncolumns = new List<string>();
+                foreach (GridColumnBase sdc in field.Columns)
+                {
+                    if (sdc.GetType().Equals(typeof(Epi.Fields.YesNoColumn)))
+                    {
+                        yncolumns.Add(sdc.Name);
+                    }
+                }
+                if (yncolumns.Count > 0)
+                {
+                    DataTable dtClone = existingGridRowTablePostUpdate.Clone();
+                    foreach (DataColumn dc in dtClone.Columns)
+                    {
+                        if (yncolumns.Contains(dc.ColumnName))
+                        {
+                            dc.DataType = typeof(Byte);
+                        }
+                    }
+                    foreach (DataRow dr in existingGridRowTablePostUpdate.Rows)
+                        dtClone.ImportRow(dr);
+                    existingGridRowTablePostUpdate = dtClone;
+                }
+                existingGridRowTablePostUpdate.TableName = view.Name + field.Page.Id.ToString() + field.Name;
+            }
             field.DataSource = existingGridRowTablePostUpdate;
 
             return iRowsAffected;

@@ -320,6 +320,31 @@ namespace Epi.Windows.Enter
                 if (Util.IsEmpty((gridField).DataSource))
                 {
                     DataTable dataTable = currentView.GetProject().CollectedData.GetGridTableData(currentView, gridField);
+                    if (dataTable.TableName.Equals("FROMSQLITE"))
+                    {
+                        List<string> yncolumns = new List<string>();
+                        foreach (GridColumnBase sdc in gridField.Columns)
+                        {
+                            if (sdc.GetType().Equals(typeof(Epi.Fields.YesNoColumn)))
+                            {
+                                yncolumns.Add(sdc.Name);
+                            }
+                        }
+                        if (yncolumns.Count > 0)
+                        {
+                            DataTable dtClone = dataTable.Clone();
+                            foreach (DataColumn dc in dtClone.Columns)
+                            {
+                                if (yncolumns.Contains(dc.ColumnName))
+                                {
+                                    dc.DataType = typeof(Byte);
+                                }
+                            }
+                            foreach (DataRow dr in dataTable.Rows)
+                                dtClone.ImportRow(dr);
+                            dataTable = dtClone;
+                        }
+                    }
                     dataTable.TableName = currentView.Name + gridField.Name;
                     gridField.DataSource = dataTable;
                 }
