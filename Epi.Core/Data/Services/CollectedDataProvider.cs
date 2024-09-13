@@ -3728,6 +3728,14 @@ namespace Epi.Data.Services
             sbSelect.Append(dbDriver.InsertInEscape(ColumnNames.FOREIGN_KEY) + StringLiterals.EQUAL + "'" + view.CurrentGlobalRecordId + "'");
             // End From clause
             Data.Query selectQuery = dbDriver.CreateQuery(sbSelect.ToString());
+            // John Copeland (ZFJ4):
+            // Temporarily naming the DataTable "FROMSQLITE" so
+            // the sending method can change any data for Yes/No
+            // fields from Int32 to Byte. Yes/No values are srored
+            // as Byte in MDB and SQL Server repositories. But
+            // SQLite does not have Byte type columns so Yes/No
+            // are stored as INTEGER when the repository is SQLite.
+            // This seems inelegant and inefficient but it does the job.
             if (dbDriver.GetType().ToString().Contains("SQLite"))
             {
                 System.Data.DataTable sqliettable = dbDriver.Select(selectQuery);

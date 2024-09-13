@@ -1639,6 +1639,11 @@ namespace Epi.Data.SQLite
                 string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
                 using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
                 {
+                    // John Copeland (ZFJ4):
+                    // SQLite has fewer data types than other repositories. Using
+                    // Replace(string, withstring) to edit CREATE and ALTER
+                    // statements written for MDB repositories.
+                    // This seems inelegant and inefficient but it does the job.
                     IDbCommand sqlcommand = GetCommand(query.SqlStatement.Replace("COUNTER", "INTEGER").Replace("GUID", "TEXT").Replace(
                         "MEMO", "TEXT").Replace("DATETIME", "TEXT").Replace("datetime", "TEXT").Replace("int IDENTITY(1,1)", "INTEGER").Replace("INT identity (1,1)", "INTEGER").Replace(
                         "nvarchar", "TEXT").Replace("SHORT", "INTEGER").Replace("byte", "INTEGER"), sqlite, new List<QueryParameter>());
