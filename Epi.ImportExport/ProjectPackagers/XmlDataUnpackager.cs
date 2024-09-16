@@ -779,7 +779,7 @@ namespace Epi.ImportExport.ProjectPackagers
         /// <param name="destinationGuids">A dictionary of GUIDs in the destination project; the key represents the GUID itself and the value (either true or false) represents whether or not to process that record</param>
         protected virtual void ImportGridRecordsToGridTable(GridField gridField, List<PackageFieldData> gridRecords, Dictionary<string, bool> destinationGuids)
         {
-            if (Conn.State != ConnectionState.Open) { Conn.Open(); }
+            if (Conn.State != ConnectionState.Open && !DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.sqlite")) { Conn.Open(); }
 
             IDbDriver db = DestinationProject.CollectedData.GetDatabase();
 
@@ -1082,7 +1082,7 @@ namespace Epi.ImportExport.ProjectPackagers
             if (gridField == null) { throw new ArgumentNullException("gridField"); }
             #endregion // Input Validation
 
-            if (Conn.State != ConnectionState.Open)
+            if (Conn.State != ConnectionState.Open && !DestinationProject.CollectedDataDriver.ToLowerInvariant().Contains("epi.data.sqlite"))
             {
                 Conn.Open();
             }

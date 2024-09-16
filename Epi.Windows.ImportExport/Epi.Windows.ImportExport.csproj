@@ -261,6 +261,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ImportEncryptedDataPackageDialog.resx">
       <DependentUpon>ImportEncryptedDataPackageDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\PackageAdvancedOptionsDialog.resx">
       <DependentUpon>PackageAdvancedOptionsDialog.cs</DependentUpon>
