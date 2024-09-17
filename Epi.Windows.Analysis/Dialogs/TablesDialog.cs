@@ -155,11 +155,20 @@ namespace Epi.Windows.Analysis.Dialogs
                 sb.Append(StringLiterals.EQUAL);
                 sb.Append("NONE");
                 sb.Append(StringLiterals.SPACE);
+                cbxShowFisher.Checked = false;
             }
 
             if (cbxOneisyes.Checked)
             {
                 sb.Append("ONEISYES");
+                sb.Append(StringLiterals.SPACE);
+            }
+
+            if (cbxShowFisher.Checked)
+            {
+                sb.Append("STATISTICS");
+                sb.Append(StringLiterals.EQUAL);
+                sb.Append("FISHER");
                 sb.Append(StringLiterals.SPACE);
             }
 
@@ -362,6 +371,19 @@ namespace Epi.Windows.Analysis.Dialogs
                 this.lblStratifyBy.Font = new Font(lblStratifyBy.Font, FontStyle.Regular);
             }
             CheckForInputSufficiency();
+        }
+
+        private void cbxStatistics_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxStatistics.Checked)
+            {
+                this.cbxShowFisher.Enabled = true;
+            }
+            else
+            {
+                this.cbxShowFisher.Checked = false;
+                this.cbxShowFisher.Enabled = false;
+            }
         }
     }
 }
