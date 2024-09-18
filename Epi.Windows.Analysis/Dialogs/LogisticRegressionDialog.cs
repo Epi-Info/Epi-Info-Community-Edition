@@ -57,6 +57,7 @@ namespace Epi.Windows.Analysis.Dialogs
                 this.btnModifyTerm.Click += new System.EventHandler(this.btnModifyTerm_Click);
                 this.btnSaveOnly.Click += new System.EventHandler(this.btnSaveOnly_Click);
             }
+            this.checkboxLogistic.Checked = true;
         }
 
         private void LinearRegressionDialog_Load( object sender, EventArgs e )
@@ -129,6 +130,12 @@ namespace Epi.Windows.Analysis.Dialogs
             if (checkboxNoIntercept.Checked == true)
             {
                 sb.Append(CommandNames.NOINTERCEPT);
+                sb.Append(StringLiterals.SPACE);
+            }
+
+            if (checkboxLogBinomial.Checked == true)
+            {
+                sb.Append("LINKFUNCTION=LOG");
                 sb.Append(StringLiterals.SPACE);
             }
 
@@ -370,6 +377,22 @@ namespace Epi.Windows.Analysis.Dialogs
                 cmbMatch.Text = "";
                 cmbMatch.SelectedIndex = -1;
             }
+        }
+
+        private void checkboxLogistic_CheckChanged(object sender, EventArgs e)
+        {
+            if (checkboxLogistic.Checked)
+                checkboxLogBinomial.Checked = false;
+            else
+                checkboxLogBinomial.Checked = true;
+        }
+
+        private void checkboxLogBinomial_CheckChanged(object sender, EventArgs e)
+        {
+            if (checkboxLogBinomial.Checked)
+                checkboxLogistic.Checked = false;
+            else
+                checkboxLogistic.Checked = true;
         }
 
 

@@ -1245,6 +1245,81 @@
   <data name="&gt;&gt;checkboxNoIntercept.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+	<data name="lblLinkFunction.Font" type="System.Drawing.Font, System.Drawing">
+		<value>Microsoft Sans Serif, 8.25pt</value>
+	</data>
+	<data name="lblLinkFunction.Location" type="System.Drawing.Point, System.Drawing">
+		<value>16, 238</value>
+	</data>
+	<data name="lblLinkFunction.Size" type="System.Drawing.Size, System.Drawing">
+		<value>244, 13</value>
+	</data>
+	<data name="lblLinkFunction.TabIndex" type="System.Int32, mscorlib">
+		<value>0</value>
+	</data>
+	<data name="lblLinkFunction.Text" xml:space="preserve">
+    <value>&amp;Link:</value>
+  </data>
+	<data name="&gt;&gt;lblLinkFunction.Name" xml:space="preserve">
+    <value>lblLinkFunction</value>
+  </data>
+	<data name="&gt;&gt;lblLinkFunction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+	<data name="&gt;&gt;lblLinkFunction.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+	<data name="&gt;&gt;lblLinkFunction.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+	<data name="checkboxLogistic.Location" type="System.Drawing.Point, System.Drawing">
+		<value>16, 253</value>
+	</data>
+	<data name="checkboxLogistic.Size" type="System.Drawing.Size, System.Drawing">
+		<value>244, 17</value>
+	</data>
+	<data name="checkboxLogistic.TabIndex" type="System.Int32, mscorlib">
+		<value>55</value>
+	</data>
+	<data name="checkboxLogistic.Text" xml:space="preserve">
+    <value>Logit (&amp;Odds Ratios)</value>
+  </data>
+	<data name="&gt;&gt;checkboxLogistic.Name" xml:space="preserve">
+    <value>checkboxLogistic</value>
+  </data>
+	<data name="&gt;&gt;checkboxLogistic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+	<data name="&gt;&gt;checkboxLogistic.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+	<data name="&gt;&gt;checkboxLogistic.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+	<data name="checkboxLogBinomial.Location" type="System.Drawing.Point, System.Drawing">
+		<value>16, 270</value>
+	</data>
+	<data name="checkboxLogBinomial.Size" type="System.Drawing.Size, System.Drawing">
+		<value>244, 17</value>
+	</data>
+	<data name="checkboxLogBinomial.TabIndex" type="System.Int32, mscorlib">
+		<value>55</value>
+	</data>
+	<data name="checkboxLogBinomial.Text" xml:space="preserve">
+    <value>Log (&amp;Risk Ratios)</value>
+  </data>
+	<data name="&gt;&gt;checkboxLogBinomial.Name" xml:space="preserve">
+    <value>checkboxLogBinomial</value>
+  </data>
+	<data name="&gt;&gt;checkboxLogBinomial.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+	<data name="&gt;&gt;checkboxLogBinomial.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+	<data name="&gt;&gt;checkboxLogBinomial.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="btnCancel.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>System</value>
   </data>

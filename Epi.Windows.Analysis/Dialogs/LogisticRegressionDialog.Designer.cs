@@ -48,6 +48,9 @@ namespace Epi.Windows.Analysis.Dialogs
             this.lblInteractionTerms = new System.Windows.Forms.Label();
             this.lbxInteractionTerms = new System.Windows.Forms.ListBox();
             this.checkboxNoIntercept = new System.Windows.Forms.CheckBox();
+            this.lblLinkFunction = new System.Windows.Forms.Label();
+            this.checkboxLogistic = new System.Windows.Forms.CheckBox();
+            this.checkboxLogBinomial = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cmbMatch = new System.Windows.Forms.ComboBox();
             this.lblMatch = new System.Windows.Forms.Label();
@@ -255,6 +258,26 @@ namespace Epi.Windows.Analysis.Dialogs
             this.checkboxNoIntercept.Name = "checkboxNoIntercept";
             this.checkboxNoIntercept.UseVisualStyleBackColor = true;
             // 
+            // lblLinkFunction
+            // 
+            this.lblLinkFunction.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            resources.ApplyResources(this.lblLinkFunction, "lblLinkFunction");
+            this.lblLinkFunction.Name = "lblLinkFunction";
+            // 
+            // checkboxLogistic
+            // 
+            resources.ApplyResources(this.checkboxLogistic, "checkboxLogistic");
+            this.checkboxLogistic.Name = "checkboxLogistic";
+            this.checkboxLogistic.UseVisualStyleBackColor = true;
+            this.checkboxLogistic.CheckedChanged += new System.EventHandler(this.checkboxLogistic_CheckChanged);
+            // 
+            // checkboxLogBinomial
+            // 
+            resources.ApplyResources(this.checkboxLogBinomial, "checkboxLogBinomial");
+            this.checkboxLogBinomial.Name = "checkboxLogBinomial";
+            this.checkboxLogBinomial.UseVisualStyleBackColor = true;
+            this.checkboxLogBinomial.CheckedChanged += new System.EventHandler(this.checkboxLogBinomial_CheckChanged);
+            // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -283,6 +306,9 @@ namespace Epi.Windows.Analysis.Dialogs
             this.Controls.Add(this.cmbMatch);
             this.Controls.Add(this.lblMatch);
             this.Controls.Add(this.checkboxNoIntercept);
+            this.Controls.Add(this.lblLinkFunction);
+            this.Controls.Add(this.checkboxLogistic);
+            this.Controls.Add(this.checkboxLogBinomial);
             this.Controls.Add(this.lbxInteractionTerms);
             this.Controls.Add(this.lblInteractionTerms);
             this.Controls.Add(this.lblDummyVar);
@@ -335,6 +361,9 @@ namespace Epi.Windows.Analysis.Dialogs
         private System.Windows.Forms.Label lblInteractionTerms;
         private System.Windows.Forms.ListBox lbxInteractionTerms;
         private System.Windows.Forms.CheckBox checkboxNoIntercept;
+        private System.Windows.Forms.Label lblLinkFunction;
+        private System.Windows.Forms.CheckBox checkboxLogistic;
+        private System.Windows.Forms.CheckBox checkboxLogBinomial;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox cmbMatch;
         private System.Windows.Forms.Label lblMatch;
