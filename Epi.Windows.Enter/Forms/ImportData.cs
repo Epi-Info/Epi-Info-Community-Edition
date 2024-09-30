@@ -784,6 +784,7 @@ namespace Epi.Enter.Forms
                                                 case MetaFieldType.Multiline:
                                                     fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.String, sourceReader[renderableField.Name]));
                                                     break;
+                                                case MetaFieldType.Option:
                                                 case MetaFieldType.Number:
                                                     fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.Double, sourceReader[renderableField.Name]));
                                                     break;
@@ -791,7 +792,6 @@ namespace Epi.Enter.Forms
                                                 case MetaFieldType.YesNo:
                                                     fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.Single, sourceReader[renderableField.Name]));
                                                     break;
-                                                case MetaFieldType.Option:
                                                 case MetaFieldType.Image:
                                                     this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), string.Format(SharedStrings.IMPORT_ERROR_FORM_FIELD_UNSUPPORTED, renderableField.Name));
                                                     continue;
@@ -911,6 +911,7 @@ namespace Epi.Enter.Forms
                                                 case MetaFieldType.Multiline:
                                                     fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.String, sourceReader[fieldName]));
                                                     break;
+                                                case MetaFieldType.Option:
                                                 case MetaFieldType.Number:
                                                     fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.Double, sourceReader[fieldName]));
                                                     break;
@@ -918,7 +919,6 @@ namespace Epi.Enter.Forms
                                                 case MetaFieldType.RecStatus:
                                                     fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.Single, sourceReader[fieldName]));
                                                     break;
-                                                case MetaFieldType.Option:
                                                 case MetaFieldType.Image:
                                                     this.BeginInvoke(new SetStatusDelegate(AddWarningMessage), string.Format(SharedStrings.IMPORT_ERROR_FORM_FIELD_UNSUPPORTED, fieldName));
                                                     continue;
