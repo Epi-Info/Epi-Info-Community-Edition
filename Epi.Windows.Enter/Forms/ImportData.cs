@@ -784,7 +784,7 @@ namespace Epi.Enter.Forms
                                                 case MetaFieldType.Multiline:
                                                     fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.String, sourceReader[renderableField.Name]));
                                                     break;
-                                                case MetaFieldType.Option:
+                                                case MetaFieldType.Option: // zfj4 moved this case from above Image to allow Options to import 2024-09-30
                                                 case MetaFieldType.Number:
                                                     fieldValueParams.Add(new QueryParameter("@" + renderableField.Name, DbType.Double, sourceReader[renderableField.Name]));
                                                     break;
@@ -911,7 +911,7 @@ namespace Epi.Enter.Forms
                                                 case MetaFieldType.Multiline:
                                                     fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.String, sourceReader[fieldName]));
                                                     break;
-                                                case MetaFieldType.Option:
+                                                case MetaFieldType.Option: // zfj4 moved this case from above Image to allow Options to import 2024-09-30
                                                 case MetaFieldType.Number:
                                                     fieldValueParams.Add(new QueryParameter("@" + fieldName, DbType.Double, sourceReader[fieldName]));
                                                     break;
