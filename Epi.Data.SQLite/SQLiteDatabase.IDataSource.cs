@@ -82,6 +82,8 @@ namespace Epi.Data.SQLite
         /// <returns></returns>
         public override bool CheckDatabaseTableExistance(string pFileString, string pTableName, bool pIsConnectionString = false)
         {
+            if (pFileString.ToLower().Contains("data source=\\\\"))
+                pFileString = pFileString.Replace("\\", "/");
             System.Data.Common.DbConnection Conn = null;
             //System.Data.Common.DbDataAdapter Adapter = null;
             System.Data.DataTable DataTable = new System.Data.DataTable();
