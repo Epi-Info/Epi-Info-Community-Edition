@@ -454,6 +454,8 @@ namespace Epi.Data.SQLite
             }
             set
             {
+                if (value.ToLower().Contains("data source=\\\\"))
+                    value = value.Replace("\\", "/");
                 this.connectionString = value;
                 ProcessConnectionString();
             }
