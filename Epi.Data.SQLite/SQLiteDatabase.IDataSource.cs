@@ -84,8 +84,6 @@ namespace Epi.Data.SQLite
         {
             if (pFileString.ToLower().Contains("data source=\\\\"))
                 pFileString = pFileString.Replace("\\", "/");
-            System.Data.Common.DbConnection Conn = null;
-            //System.Data.Common.DbDataAdapter Adapter = null;
             System.Data.DataTable DataTable = new System.Data.DataTable();
             bool result = false;
             string filestring = pFileString.Substring(pFileString.IndexOf("Source=") + 7);
@@ -116,45 +114,6 @@ namespace Epi.Data.SQLite
                     sqlite.Close();
                 }
             }
-
-            string connString = pFileString;
-
-            string[] restrictions = new string[] { null, null, pTableName };
-
-            if (DataSource != null)
-            {
-                IDbDriver driver = this;
-                driver.ConnectionString = connString;
-                Conn = (System.Data.Common.DbConnection)driver.GetConnection();
-                try
-                {
-                    Conn.Open();
-
-                    DataTable = Conn.GetSchema("Tables", restrictions);
-
-                    if (DataTable.Rows.Count == 0)
-                    {
-                        //Table does not exist
-                        result = false;
-                    }
-
-                    else
-                    {
-                        //Table exists
-                        result = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // do nothing
-                }
-                finally
-                {
-                    Conn.Close();
-                }
-            }
-
-            return result;
         }
         /// <summary>
         /// 

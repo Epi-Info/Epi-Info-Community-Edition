@@ -730,6 +730,7 @@ namespace Epi.Data.SQLite
             {
                 throw new ArgumentNullException("columnName");
             }
+            #endregion
             bool retval = false;
             string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
             if (filestring.EndsWith(";user id=admin"))
@@ -756,26 +757,6 @@ namespace Epi.Data.SQLite
                 }
             }
             return retval;
-            #endregion
-            OleDbConnection conn = this.GetNativeConnection();
-
-            try
-            {
-                OpenConnection(conn);
-
-                object[] objTable;
-                objTable = new object[] { null, null, tableName, null };
-                if (schemaCols == null || !IsBulkOperation)
-                {
-                    schemaCols = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, objTable);
-                }
-                bool exists = schemaCols.Select("COLUMN_NAME = '" + columnName.Replace("'", "''") + "'").Length > 0;
-                return exists;
-            }
-            finally
-            {
-                CloseConnection(conn);
-            }
         }
 
         /// <summary>

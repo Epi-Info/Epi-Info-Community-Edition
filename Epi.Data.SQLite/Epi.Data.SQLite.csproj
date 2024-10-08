@@ -211,28 +211,11 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="JetQuery.cs" />
     <Compile Include="SQLiteDatabase.cs" />
-    <Compile Include="AccessDatabase.cs" />
     <Compile Include="SQLiteDatabase.IDataSource.cs" />
-    <Compile Include="AccessDatabase.IDataSource.cs" />
     <Compile Include="SQLiteDBFactory.cs" />
-    <Compile Include="AccessDBFactory.cs" />
-    <Compile Include="CsvFile.IDataSource.cs" />
-    <Compile Include="CsvFileFactory.cs" />
-    <Compile Include="CsvFile.cs" />
-    <Compile Include="Excel2007Database.IDataSource.cs" />
-    <Compile Include="Excel2007WBFactory.cs" />
-    <Compile Include="Excel2007Workbook.cs" />
     <Compile Include="DbColumnType.cs" />
-    <Compile Include="ExcelDatabase.IDataSource.cs" />
-    <Compile Include="ExcelWBFactory.cs" />
-    <Compile Include="ExcelWorkbook.cs" />
-    <Compile Include="Forms\Access2007ExistingFileDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Access2007ExistingFileDialog.Designer.cs">
-      <DependentUpon>Access2007ExistingFileDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\SQLiteExistingFileDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -245,58 +228,6 @@
     <Compile Include="Forms\SQLiteNewFileDialog.Designer.cs">
       <DependentUpon>SQLiteNewFileDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CsvExistingFileDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CsvExistingFileDialog.Designer.cs">
-      <DependentUpon>CsvExistingFileDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Excel2007ExistingFileDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Excel2007ExistingFileDialog.Designer.cs">
-      <DependentUpon>Excel2007ExistingFileDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\JsonExistingFileDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\JsonExistingFileDialog.Designer.cs">
-      <DependentUpon>JsonExistingFileDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SharePointExistingListDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SharePointExistingListDialog.Designer.cs">
-      <DependentUpon>SharePointExistingListDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ExcelExistingFileDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ExcelExistingFileDialog.Designer.cs">
-      <DependentUpon>ExcelExistingFileDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ExcelNewFileDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ExcelNewFileDialog.Designer.cs">
-      <DependentUpon>ExcelNewFileDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AccessExistingFileDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AccessExistingFileDialog.Designer.cs">
-      <DependentUpon>AccessExistingFileDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AccessNewFileDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AccessNewFileDialog.Designer.cs">
-      <DependentUpon>AccessNewFileDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="JetQuery.cs" />
-    <Compile Include="JsonFile.cs" />
-    <Compile Include="JsonFile.IDataSource.cs" />
-    <Compile Include="JsonFileFactory.cs" />
     <Compile Include="OleDbDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -304,63 +235,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Resources\ResourceLoader.cs" />
-    <Compile Include="SharePointList.cs" />
-    <Compile Include="SharePointListFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\SQLiteExistingFileDialog.resx">
       <DependentUpon>SQLiteExistingFileDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AccessExistingFileDialog.resx">
-      <DependentUpon>AccessExistingFileDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SQLiteNewFileDialog.resx">
       <DependentUpon>SQLiteNewFileDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AccessNewFileDialog.resx">
-      <DependentUpon>AccessNewFileDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Forms\Access2007ExistingFileDialog.resx">
-      <DependentUpon>Access2007ExistingFileDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CsvExistingFileDialog.resx">
-      <DependentUpon>CsvExistingFileDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Excel2007ExistingFileDialog.resx">
-      <DependentUpon>Excel2007ExistingFileDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\JsonExistingFileDialog.resx">
-      <DependentUpon>JsonExistingFileDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Access2000.mdb">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Access2003.mdb">
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Forms\SharePointExistingListDialog.resx">
-      <DependentUpon>SharePointExistingListDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ExcelExistingFileDialog.resx">
-      <DependentUpon>ExcelExistingFileDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ExcelNewFileDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ExcelNewFileDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Access2007.accdb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
@@ -375,9 +259,6 @@
       <Project>{20C12C97-52CE-45C3-B563-3C15330C2A98}</Project>
       <Name>EpiInfo.Plugin</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="OfficeDriver.cd" />
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
@@ -407,6 +288,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
