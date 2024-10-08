@@ -82,7 +82,7 @@
                         <Label x:Name="tblockLinkFunction" Grid.Column="2" Grid.Row="2" Visibility="Visible">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockLinkFunctionTxt">Link:</TextBlock>
                         </Label>
-                        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cbxFieldLink" Width="108" HorizontalAlignment="Left" Height="28" Visibility="Visible" />
+                        <ComboBox Grid.Column="2" Grid.Row="3" x:Name="cbxFieldLink" Width="108" HorizontalAlignment="Left" Height="28" Visibility="Visible" SelectionChanged="cbxFieldLink_SelectionChanged" />
                         <Label x:Name="tblockIndependentVariables" Grid.Column="0" Grid.Row="2">
                             <TextBlock TextWrapping="Wrap" x:Name="tblockIndependentVariablesTxt">Independent Variables:</TextBlock>
                         </Label>

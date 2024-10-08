@@ -541,5 +541,18 @@ namespace EpiDashboard.Controls.GadgetProperties
             //    }
             //}
         }
+
+        private void cbxFieldLink_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbxFieldLink.SelectedItem.ToString().Equals("Log"))
+            {
+                cbxConf.SelectedIndex = 1;
+                cbxConf.IsEnabled = false;
+            }
+            else
+            {
+                cbxConf.IsEnabled = true;
+            }
+        }
     }
 }

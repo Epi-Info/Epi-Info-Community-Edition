@@ -382,17 +382,31 @@ namespace Epi.Windows.Analysis.Dialogs
         private void checkboxLogistic_CheckChanged(object sender, EventArgs e)
         {
             if (checkboxLogistic.Checked)
+            {
                 checkboxLogBinomial.Checked = false;
+                cmbConfLimits.Enabled = true;
+            }
             else
+            {
                 checkboxLogBinomial.Checked = true;
+                cmbConfLimits.SelectedIndex = 0;
+                cmbConfLimits.Enabled = false;
+            }
         }
 
         private void checkboxLogBinomial_CheckChanged(object sender, EventArgs e)
         {
             if (checkboxLogBinomial.Checked)
+            {
                 checkboxLogistic.Checked = false;
+                cmbConfLimits.SelectedIndex = 0;
+                cmbConfLimits.Enabled = false;
+            }
             else
+            {
                 checkboxLogistic.Checked = true;
+                cmbConfLimits.Enabled = true;
+            }
         }
 
 
