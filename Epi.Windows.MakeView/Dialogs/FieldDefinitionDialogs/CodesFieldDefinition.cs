@@ -134,7 +134,10 @@ namespace Epi.Windows.MakeView.Dialogs.FieldDefinitionDialogs
                     sb = sb.Remove(sb.Length - 1, 1);
                 }
 
-                field.AssociatedFieldInformation = sb.ToString();
+                if (sb != null && sb.Length > 0)
+                {
+                    field.AssociatedFieldInformation = sb.ToString();
+                }
 
                 if (string.IsNullOrEmpty(field.AssociatedFieldInformation))
                 {
