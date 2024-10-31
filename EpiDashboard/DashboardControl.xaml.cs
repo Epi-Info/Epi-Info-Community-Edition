@@ -2192,6 +2192,7 @@ namespace EpiDashboard
         void mnuStandardTextBox_Click(object sender, RoutedEventArgs e)
         {
             EpiDashboard.Gadgets.Reporting.StandardTextControl stc = new EpiDashboard.Gadgets.Reporting.StandardTextControl();
+            stc.GadgetDrag += new GadgetEventHandler(gadget_GadgetDrag);
             canvasMain.Children.Add(stc);
             Canvas.SetLeft(stc, mousePoint.X - 10);
             Canvas.SetTop(stc, mousePoint.Y - 10);
