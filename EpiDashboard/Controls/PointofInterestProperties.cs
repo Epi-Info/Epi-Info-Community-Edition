@@ -595,6 +595,8 @@ namespace EpiDashboard.Controls
             string svarname;
 
             this.datafilters = rowfiltercontrol.DataFilters;
+            dashboardHelper.SetDatafilters(this.datafilters);
+            return;
 
             List<string> sconditionval = datafilters.GetFilterConditionsAsList();
             string strreadablecondition = datafilters.GenerateReadableDataFilterString().Trim();
