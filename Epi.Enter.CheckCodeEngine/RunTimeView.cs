@@ -352,6 +352,11 @@ namespace Epi.EnterCheckCodeEngine
 
         private void ClickField(object sender, RunCheckCodeEventArgs e)
         {
+            if(this.mView.Fields.Contains(e.Parameter))
+            {
+                this.mCurrentField = this.mView.Fields[e.Parameter];
+            }
+
             if (this.mCurrentField is IFieldWithCheckCodeClick)
             {
                 this.ExecuteCheckCode("field", "click", this.mCurrentField.Name);

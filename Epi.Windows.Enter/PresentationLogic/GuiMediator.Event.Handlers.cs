@@ -625,7 +625,7 @@ namespace Epi.Windows.Enter.PresentationLogic
                     SetFieldData(fieldControl[index]);
                 }
 
-                this.EnterCheckCodeEngine.CheckCodeHandler(sender, new RunCheckCodeEventArgs(EventActionEnum.ClickField, ""));
+                this.EnterCheckCodeEngine.CheckCodeHandler(sender, new RunCheckCodeEventArgs(EventActionEnum.ClickField, field.Name));
             }
         }
 
