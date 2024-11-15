@@ -130,6 +130,7 @@ namespace Epi.Windows.MakeView.Dialogs
             // more OO solution
             switch (kindOfDatabase)
             {
+                case "SQLite":
                 case "ACCESS":
                     display = ColumnNames.NAME;
                     break;

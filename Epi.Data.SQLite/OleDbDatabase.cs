@@ -949,23 +949,32 @@ namespace Epi.Data.SQLite
         /// <returns>DataTable with schema information</returns>
         public override DataSets.TableColumnSchema.ColumnsDataTable GetTableColumnSchema(string tableName)
         {
-            OleDbConnection conn = this.GetNativeConnection();
-
-            try
+            string filestring = this.ConnectionString.Substring(this.ConnectionString.IndexOf("Source=") + 7);
+            using (SQLiteConnection sqlite = new SQLiteConnection("Data Source=" + filestring))
             {
-                OpenConnection(conn);
-                DataTable dt = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Columns, new object[] { null, null, tableName, null });
-                DataSets.TableColumnSchema schema = new Epi.DataSets.TableColumnSchema();
-                schema.Merge(dt);
-                return schema.Columns;
-            }
-            catch (Exception ex)
-            {
-                throw new GeneralException("Could not get table column schema for." + tableName, ex);
-            }
-            finally
-            {
-                CloseConnection(conn);
+                sqlite.Open();
+                try
+                {
+                    DataTable table = sqlite.GetSchema("Columns", new string[] { null, null, tableName });//, null });
+                    DataSets.TableSchema tableSchema = new Epi.DataSets.TableSchema();
+                    tableSchema.Merge(table);
+                    DataSets.TableColumnSchema tableColumnSchema = new Epi.DataSets.TableColumnSchema();
+                    table.Columns.Remove("DATA_TYPE");
+                    tableColumnSchema.Merge(table, false, MissingSchemaAction.Ignore);
+                    return tableColumnSchema.Columns;
+                }
+                catch (SQLiteException sqex)
+                {
+                    throw sqex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    sqlite.Close();
+                }
             }
         }
 
@@ -1385,52 +1394,6 @@ namespace Epi.Data.SQLite
             }
         }
 
-        public DataTable JSONtoDataTable(string jsonstring)
-        {
-            DataTable dt = new DataTable();
-            string smashedjson = Regex.Replace(jsonstring, "\\\\| |\n|\r|\t|\\[|\\]|\"", "");
-            string[] dicts = Regex.Split(smashedjson, "},{");
-            for (int i = 0; i < dicts.Length; i++)
-                dicts[i] = dicts[i].Replace("{", "").Replace("}", "");
-            var dtcolumns = Regex.Split(dicts[0], ",");
-            foreach (string dtcol in dtcolumns)
-            {
-                var colparts = Regex.Split(dtcol, ":");
-                dt.Columns.Add(colparts[0].Trim());
-            }
-            for (int i = 0; i < dicts.Length; i++)
-            {
-                DataRow row = dt.NewRow();
-                var rowitems = Regex.Split(dicts[i], ",");
-                for (int j = 0; j < rowitems.Length; j++)
-                {
-                    var itemparts = Regex.Split(rowitems[j], ":");
-                    if (int.TryParse(itemparts[1], out int tmp))
-                        row[j] = tmp;
-                    else if (float.TryParse(itemparts[1], out float tmpf))
-                    {
-                        row[j] = tmpf;
-                    }
-                    else if (bool.TryParse(itemparts[1], out bool tmpb))
-                    {
-                        row[j] = tmpb;
-                    }
-                    else
-                    {
-                        dt.Columns[j].DataType = typeof(string);
-                        row[j] = itemparts[1].Trim();
-                    }
-                }
-                dt.Rows.Add(row);
-            }
-            return dt;
-        }
-
-        /// <summary>
-        /// Returns contents of a table with only the top two rows.
-        /// </summary>
-        /// <param name="tableName">The name of the table to query</param>
-        /// <returns>DataTable</returns>
         public override DataTable GetTopTwoTable(string tableName)
         {
             try
