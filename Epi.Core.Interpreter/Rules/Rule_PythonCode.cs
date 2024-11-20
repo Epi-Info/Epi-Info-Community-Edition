@@ -188,7 +188,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                 {
                     sqldatatypes = sqldatatypes + "\"" + groupitem + "\", ";
                 }
-                sqldatatypes = sqldatatypes.Substring(0, sqldatatypes.Length - 2) + "]\n";
+                if (sqldatatypes.EndsWith(", "))
+                    sqldatatypes = sqldatatypes.Substring(0, sqldatatypes.Length - 2) + "]\n";
+                else
+                    sqldatatypes = sqldatatypes + "]\n";
             }
 
             foreach (KeyValuePair<string, List<string>> grp in this.Context.GroupVariableList)
@@ -201,7 +204,10 @@ namespace Epi.Core.AnalysisInterpreter.Rules
                     else
                         sqldatatypes = sqldatatypes + "\"" + groupitem + "\", ";
                 }
-                sqldatatypes = sqldatatypes.Substring(0, sqldatatypes.Length - 2) + "]\n";
+                if (sqldatatypes.EndsWith(", "))
+                    sqldatatypes = sqldatatypes.Substring(0, sqldatatypes.Length - 2) + "]\n";
+                else
+                    sqldatatypes = sqldatatypes + "]\n";
             }
 
             string tempPath = System.IO.Path.GetTempPath();
