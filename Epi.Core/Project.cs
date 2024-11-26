@@ -232,6 +232,9 @@ namespace Epi
                             case "Epi.Data.Office.AccessDBFactory":
                                 this.CollectedDataDriver = Configuration.AccessDriver;
                                 break;
+                            case "Epi.Data.SQLite.SQLiteDBFactory":
+                                this.CollectedDataDriver = Configuration.SQLiteDriver;
+                                break;
                             case "Epi.Data.SqlServer.SqlDBFactory":
                             default:
                                 this.CollectedDataDriver = Configuration.SqlDriver;
@@ -690,6 +693,8 @@ namespace Epi
                 }
                 if (this.CollectedDataDriver == "Epi.Data.Office.AccessDBFactory, Epi.Data.Office")
                     return this.SetOleDbDatabaseFilePath(collectedDataConnectionString);
+                else if (this.CollectedDataDriver == "Epi.Data.Office.AccessDBFactory, Epi.Data.Office")
+                    return this.SetSQLiteDatabaseFilePath(collectedDataConnectionString);
                 else
                     return collectedDataConnectionString;
 
@@ -1684,6 +1689,16 @@ namespace Epi
             System.Data.OleDb.OleDbConnectionStringBuilder connectionBuilder = new System.Data.OleDb.OleDbConnectionStringBuilder(pConnectionString);
 
             connectionBuilder.DataSource = this.FilePath.Replace(".prj", ".mdb");
+
+            return connectionBuilder.ToString();
+
+        }
+
+        private String SetSQLiteDatabaseFilePath(string pConnectionString)
+        {
+            System.Data.OleDb.OleDbConnectionStringBuilder connectionBuilder = new System.Data.OleDb.OleDbConnectionStringBuilder(pConnectionString);
+
+            connectionBuilder.DataSource = this.FilePath.Replace(".prj", ".db");
 
             return connectionBuilder.ToString();
 
