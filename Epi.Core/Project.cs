@@ -693,7 +693,7 @@ namespace Epi
                 }
                 if (this.CollectedDataDriver == "Epi.Data.Office.AccessDBFactory, Epi.Data.Office")
                     return this.SetOleDbDatabaseFilePath(collectedDataConnectionString);
-                else if (this.CollectedDataDriver == "Epi.Data.Office.AccessDBFactory, Epi.Data.Office")
+                else if (this.CollectedDataDriver == "Epi.Data.SQLite.SQLiteDBFactory, Epi.Data.SQLite")
                     return this.SetSQLiteDatabaseFilePath(collectedDataConnectionString);
                 else
                     return collectedDataConnectionString;
