@@ -276,6 +276,9 @@ namespace Epi.Windows.Analysis.Dialogs
                     case "Epi.Data.Office.AccessDBFactory, Epi.Data.Office":
                         dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(Configuration.AccessDriver);
                         break;
+                    case "SQLite.SQLiteDBFactory, Epi.Data.SQLite":
+                        dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(Configuration.SQLiteDriver);
+                        break;
                     case "Epi.Data.Office.ExcelWBFactory, Epi.Data.Office":
                          dbFactory = DbDriverFactoryCreator.GetDbDriverFactory(Configuration.ExcelDriver);
                         break;
