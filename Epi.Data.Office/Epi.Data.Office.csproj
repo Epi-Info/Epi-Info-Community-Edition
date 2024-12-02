@@ -192,22 +192,10 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="AccessDatabase.cs" />
-    <Compile Include="AccessDatabase.IDataSource.cs" />
-    <Compile Include="AccessDBFactory.cs" />
-    <Compile Include="Access2007Database.cs" />
-    <Compile Include="Access2007Database.IDataSource.cs" />
-    <Compile Include="Access2007DBFactory.cs" />
     <Compile Include="CsvFile.IDataSource.cs" />
     <Compile Include="CsvFileFactory.cs" />
     <Compile Include="CsvFile.cs" />
-    <Compile Include="Excel2007Database.IDataSource.cs" />
-    <Compile Include="Excel2007WBFactory.cs" />
-    <Compile Include="Excel2007Workbook.cs" />
     <Compile Include="DbColumnType.cs" />
-    <Compile Include="ExcelDatabase.IDataSource.cs" />
-    <Compile Include="ExcelWBFactory.cs" />
-    <Compile Include="ExcelWorkbook.cs" />
     <Compile Include="Forms\Access2007ExistingFileDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,10 +291,6 @@
     <EmbeddedResource Include="Forms\JsonExistingFileDialog.resx">
       <DependentUpon>JsonExistingFileDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Access2000.mdb">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Access2003.mdb">
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\SharePointExistingListDialog.resx">
@@ -321,7 +305,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>ExcelNewFileDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Access2007.accdb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.Core\Epi.Core.csproj">
@@ -368,6 +351,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

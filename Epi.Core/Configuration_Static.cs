@@ -764,7 +764,7 @@ namespace Epi
             #if LINUX_BUILD
             row.DefaultDataDriver = MySQLDriver;
             #else
-            row.DefaultDataDriver = AccessDriver;
+            row.DefaultDataDriver = SQLiteDriver;
             #endif
 
             row.DefaultDataFormatForRead = 3;
@@ -793,43 +793,6 @@ namespace Epi
 			dataDriverRowREDCap.DataProvider = true;
 			dataDriverRowREDCap.MetadataProvider = false;
 			configDataSet.DataDriver.Rows.Add(dataDriverRowREDCap);
-
-			// Access driver
-			Config.DataDriverRow dataDriverRow1 = configDataSet.DataDriver.NewDataDriverRow();
-            dataDriverRow1.DataDriversRow = parentDataDriversRow;
-            dataDriverRow1.DisplayName = "Microsoft Access 2002-2003 (.mdb)";
-            dataDriverRow1.Type = AccessDriver; 
-            dataDriverRow1.DataProvider = true;
-            dataDriverRow1.MetadataProvider = true;
-            configDataSet.DataDriver.Rows.Add(dataDriverRow1);
-
-            Config.DataDriverRow dataDriverRow3 = configDataSet.DataDriver.NewDataDriverRow();
-            dataDriverRow3.DataDriversRow = parentDataDriversRow;
-            dataDriverRow3.DisplayName = "Microsoft Access 2007 (.accdb)";
-            dataDriverRow3.Type = Access2007Driver;
-            dataDriverRow3.DataProvider = true;
-            dataDriverRow3.MetadataProvider = false;
-            configDataSet.DataDriver.Rows.Add(dataDriverRow3);
-
-            // Excel driver
-            Config.DataDriverRow dataDriverRowExcel = configDataSet.DataDriver.NewDataDriverRow();
-            dataDriverRowExcel.DataDriversRow = parentDataDriversRow;
-            // Excel Workbook (*.xlsx)
-            // Microsoft Excel 5.0/95 Workbook (*.xls)
-            // Excel 97 - Excel 2003 Workbook (*.xls)
-            dataDriverRowExcel.DisplayName = "Microsoft Excel 97-2003 Workbook (.xls)";
-            dataDriverRowExcel.Type = ExcelDriver;
-            dataDriverRowExcel.DataProvider = true;
-            dataDriverRowExcel.MetadataProvider = false;
-            configDataSet.DataDriver.Rows.Add(dataDriverRowExcel);
-
-            Config.DataDriverRow dataDriverRowExcel2007 = configDataSet.DataDriver.NewDataDriverRow();
-            dataDriverRowExcel2007.DataDriversRow = parentDataDriversRow;
-            dataDriverRowExcel2007.DisplayName = "Microsoft Excel 2007 Workbook (.xlsx)";
-            dataDriverRowExcel2007.Type = Excel2007Driver;
-            dataDriverRowExcel2007.DataProvider = true;
-            dataDriverRowExcel2007.MetadataProvider = false;
-            configDataSet.DataDriver.Rows.Add(dataDriverRowExcel2007);
 
             // SQL Server driver
             Config.DataDriverRow dataDriverRow2 = configDataSet.DataDriver.NewDataDriverRow();

@@ -110,7 +110,6 @@ namespace Epi.Windows.MakeView.Forms
             this.Import35xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Import6xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.makeAccessPRJToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeSQLitePRJToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeSQLPRJToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createDataTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -707,17 +706,10 @@ namespace Epi.Windows.MakeView.Forms
             // makeProjectToolStripMenuItem
             // 
             this.makeProjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.makeAccessPRJToolStripMenuItem,
             this.makeSQLitePRJToolStripMenuItem,
             this.makeSQLPRJToolStripMenuItem});
             this.makeProjectToolStripMenuItem.Name = "makeProjectToolStripMenuItem";
             resources.ApplyResources(this.makeProjectToolStripMenuItem, "makeProjectToolStripMenuItem");
-            // 
-            // makeAccessPRJToolStripMenuItem
-            // 
-            this.makeAccessPRJToolStripMenuItem.Name = "makeAccessPRJToolStripMenuItem";
-            resources.ApplyResources(this.makeAccessPRJToolStripMenuItem, "makeAccessPRJToolStripMenuItem");
-            this.makeAccessPRJToolStripMenuItem.Click += new System.EventHandler(this.makeAccessProjectToolStripMenuItem_Click);
             // 
             // makeSQLitePRJToolStripMenuItem
             // 
@@ -1130,7 +1122,6 @@ namespace Epi.Windows.MakeView.Forms
         private ToolStripMenuItem mnuPublishToWeb;
         private ToolStripMenuItem mnuImportTemplate;
         private ToolStripMenuItem makeProjectToolStripMenuItem;
-        private ToolStripMenuItem makeAccessPRJToolStripMenuItem;
         private ToolStripMenuItem makeSQLitePRJToolStripMenuItem;
         private ToolStripMenuItem makeSQLPRJToolStripMenuItem;
         private ToolStripMenuItem upgradeToolStripMenuItem;

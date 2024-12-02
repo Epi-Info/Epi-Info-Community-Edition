@@ -737,68 +737,7 @@
     <Content Include="FipsCrypto.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Projects\Cholera\Advanced Analysis.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\Case Studies English.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\Cholera_in_Rwenshama_2.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\Cholera_in_Rwenshama_2.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\albany_demogz.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\H1N1ShortForm\H1N1ShortForm.prj">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\HansensDisease\HansensDisease.prj">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Rates\DeathsReported _per_Region.cvs7" />
-    <None Include="Projects\Rates\DeathsReported _per_Region.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Rates\MosquitoesPresentTrue_per_HouseInRegion.cvs7">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Rates\MosquitoesPresentTrue_per_HouseInRegion.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Rates\Rates.docx" />
-    <None Include="Projects\Salmonellosis\Salmonellosis.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\Case Control DatabaseExample.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\DataSample.xls">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\DeathsReported _per_Region.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\DeathsReported _per_RegionV2.cvs7">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\MosquitoesPresentTrue_per_HouseInRegion.cvs7">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\MosquitoesPresentTrue_per_HouseInRegion.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\Sample.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\Uganda_Cholera.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Projects\EColi\EColi.db" />
     <Content Include="fr-FR\Analysis.resources.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -847,21 +786,6 @@
     <Content Include="MakeView.resources.dll" />
     <Content Include="Mapping.resources.dll" />
     <Content Include="Menu.resources.dll" />
-    <Content Include="Projects\Cholera\EpiChol.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Projects\H1N1ShortForm\H1N1ShortForm.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Projects\HansensDisease\HansensDisease.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Projects\STEPS\STEPS_EI7.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Projects\STEPS\Steps_EpiInfo.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="pt-BR\Analysis.resources.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -908,75 +832,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ImagesNotToBeDeployed\App.ico" />
-    <None Include="Projects\Cholera\cb.dbf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\cb.sbn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\cb.sbx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\cb.shp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\cb.shx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Cholera\CholeraRwenshama_Canvas1.cvs7">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.dbf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.shp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\Albany County Boundary_region.shx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.dbf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.shp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\ALBZCTA_region.shx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\AsthmaTable.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment_Canvas1.cvs7">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment_Canvas2.cvs7">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\CommunityHealthAssessment\CommunityHealthAssessment_Canvas3.cvs7">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\EColi\Under14_demo.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\STEPS\STEPS_EI7.prj">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Projects\Mumps\Mumps.db" />
+    <None Include="Projects\Salmonellosis\Salmonellosis.db" />
+    <None Include="Projects\Sample\Sample.db" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Resources\ImagesNotToBeDeployed\viaEmail.bmp" />
-    <None Include="Projects\Salmonellosis\Salmonellosis.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Epi.Web.Common.Message.OrganizationResponse.datasource" />
     <None Include="Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
@@ -1585,63 +1446,6 @@
     <None Include="Projects\EColi\EColi.map7">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Projects\EColi\EColi.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\HIV\HIV.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\JohnSnow\JohnSnow.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\KML_Example\ACS_11_1YR_HealthInsurance.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\KML_Example\Maryland_Counties.kml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Legionellosis\Legionellosis.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Lyme\Lyme.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Mumps\Mumps.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Nutrition\Nutrition.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\Case Control DatabaseExample.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\EARS.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\MXState.dbf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\MXState.shp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\MXState.shx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\Oswego.cvs7">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\Sample.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Sample\SampleSurveillance.cvs7">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Salmonellosis\SalmonellaTrainingCaseData_2013-06-17T20-04-48.edp7">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Salmonellosis\Salmonellosis.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Service References\SurveyManagerService\SurveyManagerService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1694,30 +1498,9 @@
     <Content Include="GoldParserEngine.dll" />
     <None Include="Resources\EpiInfoGrammar.txt" />
     <None Include="Resources\EpiInfo.Enter.Grammar.txt" />
-    <None Include="Projects\JohnSnow\JohnSnow.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <Content Include="Output\SilverlightApplication.xap">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Projects\EColi\EColi.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\HIV\HIV.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Legionellosis\Legionellosis.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Lyme\Lyme.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Mumps\Mumps.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Projects\Nutrition\Nutrition.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\ImagesNotToBeDeployed\AddLayer.bmp" />
     <None Include="Resources\ImagesNotToBeDeployed\addPage.bmp" />
     <None Include="Resources\ImagesNotToBeDeployed\arrow.bmp" />

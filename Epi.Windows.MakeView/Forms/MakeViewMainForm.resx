@@ -1766,12 +1766,6 @@
   <data name="upgradeToolStripMenuItem.Text" xml:space="preserve">
     <value>Upgrade Project</value>
   </data>
-  <data name="makeAccessPRJToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 22</value>
-  </data>
-  <data name="makeAccessPRJToolStripMenuItem.Text" xml:space="preserve">
-    <value>From Epi Info 7 project (MS Access)</value>
-  </data>
 	<data name="makeSQLitePRJToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
 		<value>261, 22</value>
 	</data>
@@ -6591,12 +6585,6 @@
     <value>makeProjectToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;makeProjectToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;makeAccessPRJToolStripMenuItem.Name" xml:space="preserve">
-    <value>makeAccessPRJToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;makeAccessPRJToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 	<data name="&gt;&gt;makeSQLitePRJToolStripMenuItem.Name" xml:space="preserve">

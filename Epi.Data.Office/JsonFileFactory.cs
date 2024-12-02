@@ -128,7 +128,7 @@ namespace Epi.Data.Office
             try
             {
 
-                OleDbConnectionStringBuilder oleDbCnnStringBuilder = new OleDbConnectionStringBuilder(AccessDatabase.BuildDefaultConnectionString(databaseName));
+                OleDbConnectionStringBuilder oleDbCnnStringBuilder = new OleDbConnectionStringBuilder(projectName + "\\" + databaseName);
                 oleDbCnnStringBuilder.Provider = "Microsoft.Jet.OLEDB.4.0";
                 oleDbCnnStringBuilder.Add("Extended Properties", "text;HDR=Yes;FMT=Delimited");
                 return oleDbCnnStringBuilder;
