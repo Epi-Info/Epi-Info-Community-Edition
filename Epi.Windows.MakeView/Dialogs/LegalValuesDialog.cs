@@ -491,9 +491,26 @@ namespace Epi.Windows.MakeView.Dialogs
             
             if (dgCodes.DataSource is DataTable)
             {
-                DataTable table = (DataTable)dgCodes.DataSource;
-                table.Rows.InsertAt(table.NewRow(), hti.RowIndex);
-                table.AcceptChanges();
+                try
+                {
+                    DataTable table = (DataTable)dgCodes.DataSource;
+                    table.Rows.InsertAt(table.NewRow(), hti.RowIndex);
+                    table.AcceptChanges();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message.Contains("nulls"))
+                    {
+                        DataTable table = (DataTable)dgCodes.DataSource;
+                        DataRow blankRow = table.NewRow();
+                        foreach (DataColumn c  in table.Columns)
+                        {
+                            blankRow[c.ColumnName] = " ";
+                        }
+                        table.Rows.InsertAt(blankRow, hti.RowIndex);
+                        table.AcceptChanges();
+                    }
+                }
             }
         }
 
