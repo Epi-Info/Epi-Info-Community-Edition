@@ -205,7 +205,7 @@ namespace EpiDashboard
 							denominator = DashboardHelper.DataSet.Tables[0].Select(gadgetFilter).Count();
                         }
                         
-                        if (!booleanResults)
+                        if (!booleanResults && !((CombinedFrequencyParameters)Parameters).RowsDenominator)
                         {
                             denominator = denominator * fields;
                         }
@@ -238,8 +238,13 @@ namespace EpiDashboard
 										upper = 0;
 										freq.ExactCI(Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]), (double)denominator, 95.0, ref lower, ref upper);
 										lower = 0;
-									}
-									else
+                                    }
+                                    else if (Convert.ToDouble(row[DashboardSharedStrings.COL_HEADER_FREQUENCY]) > (double)denominator)
+                                    {
+                                        upper = double.NaN;
+                                        lower = double.NaN;
+                                    }
+                                    else
 									{
 										if (denominator > 300)
 										{
@@ -736,6 +741,13 @@ namespace EpiDashboard
             customDescElement.InnerText = combFreqParameters.GadgetDescription.Replace("<", "&lt;");
             element.AppendChild(customDescElement);
 
+            if (combFreqParameters.RowsDenominator)
+            {
+                XmlElement rowsDenominatorElement = doc.CreateElement("rowsDenominator");
+                rowsDenominatorElement.InnerText = "True";
+                element.AppendChild(rowsDenominatorElement);
+            }
+
             SerializeAnchors(element);
 
             XmlElement groupItemElement = doc.CreateElement("groupFields");
@@ -805,6 +817,9 @@ namespace EpiDashboard
                                     break;
                             }
                         }
+                        break;
+                    case "rowsdenominator":
+                        ((CombinedFrequencyParameters)Parameters).RowsDenominator = true;
                         break;
                     case "truevalue":
                         //txtTrueValue.Text = child.InnerText;

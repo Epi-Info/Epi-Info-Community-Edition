@@ -13,6 +13,7 @@ namespace EpiDashboard
         public CombineModeTypes CombineMode { get; set; }
         public bool SortHighToLow { get; set; }
         public bool ShowDenominator { get; set; }
+        public bool RowsDenominator { get; set; }
         public string TrueValue { get; set; }
 
         public CombinedFrequencyParameters()
@@ -21,6 +22,7 @@ namespace EpiDashboard
             CombineMode = CombineModeTypes.Automatic;
             SortHighToLow = true;
             ShowDenominator = true;
+            RowsDenominator = false;
             TrueValue = String.Empty;
             GadgetTitle = DashboardSharedStrings.GADGET_CONFIG_TITLE_COMBINEDFEQ;
         }       

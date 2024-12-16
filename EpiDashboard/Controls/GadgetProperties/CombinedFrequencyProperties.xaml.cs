@@ -186,6 +186,7 @@ namespace EpiDashboard.Controls.GadgetProperties
             }
             ValidateInput();
             Parameters.TrueValue = txtTrueValue.Text;
+            Parameters.RowsDenominator = checkboxDenominatorRows.IsChecked.Value;
             Parameters.SortHighToLow = checkboxSortHighLow.IsChecked.Value;
             Parameters.ShowDenominator = checkboxShowDenominator.IsChecked.Value;
         }
@@ -220,6 +221,14 @@ namespace EpiDashboard.Controls.GadgetProperties
                     cmbCombineMode.SelectedIndex = 2;
                     break;
             }
+
+            checkboxDenominatorRowsAndCols.IsChecked = true;
+            checkboxDenominatorRows.IsChecked = false;
+            if (Parameters.RowsDenominator)
+            {
+                checkboxDenominatorRowsAndCols.IsChecked = false;
+                checkboxDenominatorRows.IsChecked = true;
+            }    
 
             if (String.IsNullOrEmpty(Parameters.TrueValue))
             {
@@ -294,12 +303,28 @@ namespace EpiDashboard.Controls.GadgetProperties
                 {
                     txtTrueValue.Visibility = System.Windows.Visibility.Visible;
                     tblockTrueValue.Visibility = System.Windows.Visibility.Visible;
+                    checkboxDenominatorRows.Visibility = System.Windows.Visibility.Collapsed;
+                    checkboxDenominatorRows.IsChecked = false;
+                    checkboxDenominatorRowsAndCols.Visibility = System.Windows.Visibility.Collapsed;
+                    checkboxDenominatorRowsAndCols.IsChecked = true;
+                }
+                else if (cmbCombineMode.SelectedIndex == 2)
+                {
+                    txtTrueValue.Visibility = System.Windows.Visibility.Collapsed;
+                    tblockTrueValue.Visibility = System.Windows.Visibility.Collapsed;
+                    checkboxDenominatorRows.Visibility = System.Windows.Visibility.Visible;
+                    checkboxDenominatorRowsAndCols.Visibility = System.Windows.Visibility.Visible;
+                    txtTrueValue.Text = string.Empty;
                 }
                 else
                 {
                     txtTrueValue.Visibility = System.Windows.Visibility.Collapsed;
                     tblockTrueValue.Visibility = System.Windows.Visibility.Collapsed;
+                    checkboxDenominatorRows.Visibility = System.Windows.Visibility.Collapsed;
                     txtTrueValue.Text = string.Empty;
+                    checkboxDenominatorRows.IsChecked = false;
+                    checkboxDenominatorRowsAndCols.Visibility = System.Windows.Visibility.Collapsed;
+                    checkboxDenominatorRowsAndCols.IsChecked = true;
                 }
             }
         }
@@ -321,6 +346,24 @@ namespace EpiDashboard.Controls.GadgetProperties
                 }
             }
             return isValid;
+        }
+
+        private void checkbox_DenominatorChanged(object sender, RoutedEventArgs e)
+        {
+            if (sender.Equals(checkboxDenominatorRows))
+            {
+                if (checkboxDenominatorRows.IsChecked.Value)
+                    checkboxDenominatorRowsAndCols.IsChecked = false;
+                else
+                    checkboxDenominatorRowsAndCols.IsChecked = true;
+            }
+            else
+            {
+                if (checkboxDenominatorRowsAndCols.IsChecked.Value)
+                    checkboxDenominatorRows.IsChecked = false;
+                else
+                    checkboxDenominatorRows.IsChecked = true;
+            }
         }
     }
 }

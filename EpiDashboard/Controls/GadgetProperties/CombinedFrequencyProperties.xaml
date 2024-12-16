@@ -117,6 +117,12 @@
                     </StackPanel>
                     <TextBlock x:Name="tblockTrueValue" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Center" Text="Value to treat as true:" Margin="0,12,0,0" Visibility="Hidden" />
                     <TextBox x:Name="txtTrueValue" Style="{StaticResource PropertiesTextBoxMed}" HorizontalAlignment="Left" Visibility="Hidden" />
+                    <CheckBox x:Name="checkboxDenominatorRows" Visibility="Hidden" Margin="0,8,0,0" Checked="checkbox_DenominatorChanged" Unchecked="checkbox_DenominatorChanged" >
+                        <TextBlock TextWrapping="Wrap" x:Name="checkboxDenominatorRowsTxt">Denominator is number of rows</TextBlock>
+                    </CheckBox>
+                    <CheckBox x:Name="checkboxDenominatorRowsAndCols" Visibility="Hidden" Margin="0,8,0,0" Checked="checkbox_DenominatorChanged" Unchecked="checkbox_DenominatorChanged" >
+                        <TextBlock TextWrapping="Wrap" x:Name="checkboxDenominatorRowsAndColsTxt">Denominator is number of rows times group fields</TextBlock>
+                    </CheckBox>
 
                     <Label x:Name="tblockSortingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">
                         <TextBlock TextWrapping="Wrap" x:Name="tblockSortingSubheaderTxt">Sorting</TextBlock>
