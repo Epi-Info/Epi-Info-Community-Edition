@@ -3760,6 +3760,8 @@ namespace Epi.Data.Services
         /// <returns>Table data contents.</returns>
         public System.Data.DataTable GetTableData(string tableName)
         {
+            if (dbDriver.ConnectionString.Contains("SQLite") && tableName.EndsWith(" "))
+                return dbDriver.GetTableData(tableName.TrimEnd());
             return dbDriver.GetTableData(tableName);
         }
         /// <summary>
