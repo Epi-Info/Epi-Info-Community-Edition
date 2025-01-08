@@ -1,0 +1,7 @@
+<Project id="f97dfe3f-37a9-87e7-b78e-c64ffcfacd8e" name="BeefPrevention" location="C:\Users\jca6\Desktop\Test Versions\2024.12.04.Epi.Info.7.2.6.19.dual.keys.en-US.es-ES.fr-FR.pt-BR\Epi Info 7\Projects\BeefPrevention" description="" schemaVersion="102" epiVersion="" createDate="12/05/2024 12:58:26" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="h4nWKffQO6m1c3n4l0Y4HXSWIvcqwTCJ+69vejxDug0fJ/10k77S/4WGQX6XjZbOCSQMFdPw2wbsWw1ceKW0mg7KbG0kzJRvScwSHx9LMyKbUBOnoLgBhLJwic5v7UUvddZ7fzvCVyRf/ziIgugfVd1AmqypPSN/icTvqvYKVaNMbu3FzQvX6X3zj5QepfPuYm3oMERKJEGjxJKA62GkTxhHcPEUU3ZQFsD5U8BgHZcbkbu2oQ3SBF0Ja7l6tjotJIENBneSrD3k9TYq7nT/SGiCtGrZG454rXnt+yJ6UKk=" dataDriver="Epi.Data.SQLite.SQLiteDBFactory, Epi.Data.SQLite" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>
