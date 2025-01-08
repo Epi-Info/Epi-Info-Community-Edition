@@ -1,0 +1,7 @@
+<Project id="5732b08d-5ceb-c6c0-0458-1e2e20e3dfbf" name="HuttYouthSurvey" location="C:\Users\jca6\Desktop\Test Versions\2024.11.8.Epi.Info.7.2.6.18.RELEASE.CANDIDATE.signed.dual.keys.en-US.es-ES.fr-FR.pt-BR\Epi Info 7\Projects\HuttYouthSurvey" description="" schemaVersion="102" epiVersion="" createDate="11/25/2024 07:52:42" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7csqJucXA0eUm4ILZ7oROEzp1Ny+zhOIqjHcRcm969nTW/aLp58orzIbhAOkZ4FxSXt+Ok0U+gmc4Soap87WhGoDEd1Ly+14gabAJPD8MlwS9jkreCPv75G8cUo1JXud1EtW1kEkW+BztpZ32aYCMAbIkbgewcyx19wjwgizmCDqlwqWuBRHiWbGcKEjghDSnbIX7otekDSuVVrqvyURGqU3PQU5SymWoScl2weF6GmB825zmSToQztRiD9uUOLp1/iMtJ9oFIerIj1QNHiBZ1" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>
