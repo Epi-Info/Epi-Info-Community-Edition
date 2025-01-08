@@ -309,7 +309,7 @@ namespace Epi.Windows.Menu
 		private void microbeTrace_Click(object sender, EventArgs e)
 		{
 			HideStoryBoard();
-			System.Diagnostics.Process.Start("https://microbetrace.cdc.gov/MicrobeTrace");
+			System.Diagnostics.Process.Start("https://github.com/CDCgov/MicrobeTrace/wiki");
 		}
 
 		private void epi_InfoLogs_Click(object sender, EventArgs e)
