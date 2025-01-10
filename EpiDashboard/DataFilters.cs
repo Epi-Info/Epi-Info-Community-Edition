@@ -415,6 +415,7 @@ namespace EpiDashboard
                     }
                     break;
                 case "System.Int16":
+                case "System.Int32":
                 case "System.Byte":
                     if (field != null && field is Epi.Fields.YesNoField)
                     {
