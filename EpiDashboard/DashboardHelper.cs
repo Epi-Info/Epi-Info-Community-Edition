@@ -2180,6 +2180,8 @@ namespace EpiDashboard
         {
             DataTable unfilteredTable = new DataTable();
 
+            List<string> stringsThatShouldBeDates = new List<string>();
+
             // Get the form's field count, adding base table fields plus GUID field for each page. If less than 255, use SQL relate; otherwise, >255 exceeds OLE field capacity and we need to use a less efficient method
             if (vw.Fields.DataFields.Count + vw.Pages.Count + 5 < 255 && vw.Pages.Count < 15)
             {
@@ -2216,6 +2218,16 @@ namespace EpiDashboard
                     if (unfilteredTable.Columns.Contains(pageGUIDName))
                     {
                         unfilteredTable.Columns.Remove(pageGUIDName);
+                    }
+                    if (db.ConnectionString.Contains("SQLite"))
+                    {
+                        foreach (RenderableField rf in page.Fields)
+                        {
+                            if (rf is DateTimeField && unfilteredTable.Columns.Contains(rf.Name))
+                            {
+                                stringsThatShouldBeDates.Add(rf.Name);
+                            }
+                        }
                     }
                 }
             }
@@ -2332,6 +2344,17 @@ namespace EpiDashboard
                 }
                 unfilteredTable = viewTable;
             }
+
+            if (stringsThatShouldBeDates.Count > 0)
+            {
+                DataTable copyOfUnfilteredTable = unfilteredTable.Copy();
+                copyOfUnfilteredTable.Rows.Clear();
+                foreach (string todate in stringsThatShouldBeDates)
+                {
+                    ConvertColumnToType(unfilteredTable, unfilteredTable.Columns[todate], GenericDbColumnType.DateTime);
+                }
+            }
+
             return unfilteredTable;
         }
 
