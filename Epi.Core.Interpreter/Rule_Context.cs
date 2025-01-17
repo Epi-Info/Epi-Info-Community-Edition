@@ -314,6 +314,28 @@ namespace Epi.Core.AnalysisInterpreter
                                 {
                                     Output = CurrentRead.JoinTables(Output, DBReadExecute.GetDataTable(CurrentRead.File, "Select * From [" + page.TableName + "]"));
                                 }
+
+                                if (ConnectionList["_DB"].ToString().Contains("SQLite"))
+                                {
+                                    FieldCollectionMaster fieldCollectionMaster = CurrentProject.Views[viewName].Fields;
+                                    List<string> stringsThatShouldBeDates = new List<string>();
+                                    foreach (Field rf in fieldCollectionMaster)
+                                    {
+                                        if (!(rf is RenderableField))
+                                            continue;
+                                        if (rf is DateTimeField && Output.Columns.Contains(rf.Name))
+                                        {
+                                            stringsThatShouldBeDates.Add(rf.Name);
+                                        }
+                                    }
+                                    if (stringsThatShouldBeDates.Count > 0)
+                                    {
+                                        foreach (string todate in stringsThatShouldBeDates)
+                                        {
+                                            ConvertColumnToType(Output, Output.Columns[todate], GenericDbColumnType.DateTime);
+                                        }
+                                    }
+                                }
                             }
                             else
                             {
@@ -538,6 +560,57 @@ namespace Epi.Core.AnalysisInterpreter
                 }
                 return result;
             }
+        }
+
+        /// <summary>
+        /// Converts a column from its current type to the new desired type
+        /// </summary>
+        /// <param name="dt">The table to use</param>
+        /// <param name="dc">The column to convert</param>
+        /// <param name="genericColumnType">The destination column type</param>
+        private void ConvertColumnToType(DataTable dt, DataColumn dc, GenericDbColumnType genericColumnType)
+        {
+            DataColumn convertedColumn = new DataColumn("_____" + dc.ColumnName + "_____5334");
+
+            switch (genericColumnType)
+            {
+                case GenericDbColumnType.String:
+                    convertedColumn.DataType = typeof(string);
+                    break;
+                case GenericDbColumnType.Int16:
+                    convertedColumn.DataType = typeof(Int16);
+                    break;
+                case GenericDbColumnType.Int32:
+                    convertedColumn.DataType = typeof(int);
+                    break;
+                case GenericDbColumnType.Double:
+                    convertedColumn.DataType = typeof(double);
+                    break;
+                case GenericDbColumnType.Single:
+                    convertedColumn.DataType = typeof(Single);
+                    break;
+                case GenericDbColumnType.Decimal:
+                    convertedColumn.DataType = typeof(decimal);
+                    break;
+                case GenericDbColumnType.DateTime:
+                case GenericDbColumnType.Date:
+                case GenericDbColumnType.Time:
+                    convertedColumn.DataType = typeof(DateTime);
+                    break;
+                default:
+                    throw new ApplicationException("Cannot convert column type.");
+            }
+
+            dt.Columns.Add(convertedColumn);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                row[convertedColumn.ColumnName] = row[dc.ColumnName];
+            }
+
+            convertedColumn.SetOrdinal(dc.Ordinal);
+            dt.Columns.Remove(dc);
+            convertedColumn.ColumnName = dc.ColumnName;
         }
 
         private string PrepareSelectExclusionString(List<string> pVariableList)

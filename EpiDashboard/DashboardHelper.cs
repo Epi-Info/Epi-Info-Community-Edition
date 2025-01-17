@@ -2347,8 +2347,6 @@ namespace EpiDashboard
 
             if (stringsThatShouldBeDates.Count > 0)
             {
-                DataTable copyOfUnfilteredTable = unfilteredTable.Copy();
-                copyOfUnfilteredTable.Rows.Clear();
                 foreach (string todate in stringsThatShouldBeDates)
                 {
                     ConvertColumnToType(unfilteredTable, unfilteredTable.Columns[todate], GenericDbColumnType.DateTime);
