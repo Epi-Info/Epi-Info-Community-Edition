@@ -2347,6 +2347,10 @@ namespace EpiDashboard
 
             if (stringsThatShouldBeDates.Count > 0)
             {
+                if (unfilteredTable.Columns.Contains("FirstSaveTime") && !stringsThatShouldBeDates.Contains("FirstSaveTime"))
+                    stringsThatShouldBeDates.Add("FirstSaveTime");
+                if (unfilteredTable.Columns.Contains("LastSaveTime") && !stringsThatShouldBeDates.Contains("LastSaveTime"))
+                    stringsThatShouldBeDates.Add("LastSaveTime");
                 foreach (string todate in stringsThatShouldBeDates)
                 {
                     ConvertColumnToType(unfilteredTable, unfilteredTable.Columns[todate], GenericDbColumnType.DateTime);
