@@ -330,6 +330,10 @@ namespace Epi.Core.AnalysisInterpreter
                                     }
                                     if (stringsThatShouldBeDates.Count > 0)
                                     {
+                                        if (Output.Columns.Contains("FirstSaveTime") && !stringsThatShouldBeDates.Contains("FirstSaveTime"))
+                                            stringsThatShouldBeDates.Add("FirstSaveTime");
+                                        if (Output.Columns.Contains("LastSaveTime") && !stringsThatShouldBeDates.Contains("LastSaveTime"))
+                                            stringsThatShouldBeDates.Add("LastSaveTime");
                                         foreach (string todate in stringsThatShouldBeDates)
                                         {
                                             ConvertColumnToType(Output, Output.Columns[todate], GenericDbColumnType.DateTime);
