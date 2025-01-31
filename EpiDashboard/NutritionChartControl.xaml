@@ -61,7 +61,7 @@
                                     <ComboBox x:Name="cbxPatientIdField" HorizontalAlignment="Left" SelectedIndex="0" Width="160" >                                        
                                     </ComboBox>
 
-                                    <TextBlock x:Name="txtGenderField" HorizontalAlignment="Left" TextAlignment="Center" Text="Gender field (must be coded M/F):" Margin="0,5,0,0"  />
+                                    <TextBlock x:Name="txtGenderField" HorizontalAlignment="Left" TextAlignment="Center" Text="Sex field (must be coded M/F):" Margin="0,5,0,0"  />
                                     <ComboBox x:Name="cbxGenderField" HorizontalAlignment="Left" SelectedIndex="0" Width="160" >
                                     </ComboBox>
 
