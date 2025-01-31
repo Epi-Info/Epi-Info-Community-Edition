@@ -8,11 +8,11 @@
     <relatedDataConnections />
     <dataFilters recordProcessScope="undeleted">
       <filterCondition>
-        <condition>([Gender] = 'Male')</condition>
-        <friendlyCondition>The value of [Gender] is equal to Male</friendlyCondition>
-        <columnName>[Gender]</columnName>
+        <condition>([Sex] = 'Male')</condition>
+        <friendlyCondition>The value of [Sex] is equal to Male</friendlyCondition>
+        <columnName>[Sex]</columnName>
         <columnType>System.String</columnType>
-        <rawColumnName>Gender</rawColumnName>
+        <rawColumnName>Sex</rawColumnName>
         <operand>=</operand>
         <friendlyOperand>is equal to</friendlyOperand>
         <value>'Male'</value>
@@ -111,7 +111,7 @@
         <listField>DOB</listField>
         <listField>Emergency</listField>
         <listField>Ethnicitygroup</listField>
-        <listField>Gender</listField>
+        <listField>Sex</listField>
         <listField>Grade</listField>
         <listField>HouseholdIncome</listField>
         <listField>IllHome</listField>

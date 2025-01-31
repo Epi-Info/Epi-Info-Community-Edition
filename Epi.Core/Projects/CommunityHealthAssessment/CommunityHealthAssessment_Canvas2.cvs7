@@ -94,7 +94,7 @@
     <frequencyGadget top="233" left="92" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="ba8c4349-bf14-47eb-9eb4-344398cd74b5" actualHeight="150">
       <dataFilters recordProcessScope="undeleted" />
       <mainVariables>
-        <mainVariable>Gender</mainVariable>
+        <mainVariable>Sex</mainVariable>
       </mainVariables>
       <allValues>False</allValues>
       <showListLabels>False</showListLabels>
@@ -183,9 +183,9 @@
       <dataFilters recordProcessScope="undeleted" />
       <mainVariables>
         <mainVariable>Asthma</mainVariable>
-        <mainVariable>Gender</mainVariable>
+        <mainVariable>Sex</mainVariable>
       </mainVariables>
-      <strataVariable>Gender</strataVariable>
+      <strataVariable>Sex</strataVariable>
       <allValues>False</allValues>
       <showListLabels>False</showListLabels>
       <sort />
@@ -198,7 +198,7 @@
       <rowsToDisplay />
       <percentBarWidth>100</percentBarWidth>
       <columnsToShow>1,2,3,4,5,6</columnsToShow>
-      <customHeading>E. Which gender has the highest frequency of asthma?</customHeading>
+      <customHeading>E. Which sex has the highest frequency of asthma?</customHeading>
       <customDescription>
       </customDescription>
       <customCaption>
@@ -727,7 +727,7 @@
     <meansGadget top="5870" left="92" collapsed="False" gadgetType="EpiDashboard.MeansControl" id="42070871-e64a-4c9d-b342-d49546c0a308" actualHeight="1386">
       <dataFilters recordProcessScope="undeleted" />
       <mainVariable>MissDays</mainVariable>
-      <strataVariable>Gender</strataVariable>
+      <strataVariable>Sex</strataVariable>
       <crosstabVariable>SchoolNum</crosstabVariable>
       <columnsToShow>1,2,3,4,5,6,7,8,9,10,11</columnsToShow>
       <precision>4</precision>

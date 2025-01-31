@@ -212,9 +212,9 @@
     <columnChartGadget top="1381" left="85" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.ColumnChartGadget" id="d594a55b-9f34-4c5d-a380-4fda5a5791c0" actualHeight="585.4">
       <dataFilters recordProcessScope="undeleted" />
       <mainVariable>MissDays</mainVariable>
-      <strataVariable>Gender</strataVariable>
+      <strataVariable>Sex</strataVariable>
       <secondYVarType>0</secondYVarType>
-      <secondYVar>Gender</secondYVar>
+      <secondYVar>Sex</secondYVar>
       <height>500</height>
       <width>800</width>
       <allValues>False</allValues>
@@ -270,7 +270,7 @@
       <xAxisLabelType>3</xAxisLabelType>
       <xAxisLabel>Missed Days</xAxisLabel>
       <xAxisAngle>0</xAxisAngle>
-      <chartTitle>Missed Days By Gender</chartTitle>
+      <chartTitle>Missed Days By Sex</chartTitle>
       <chartSubTitle>
       </chartSubTitle>
       <showLegend>True</showLegend>
@@ -287,9 +287,9 @@
     <LineChartGadget top="1977" left="85" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.LineChartGadget" id="7145b51b-8363-4b8a-9ee4-7abfe22c2189" actualHeight="585.4">
       <dataFilters recordProcessScope="undeleted" />
       <mainVariable>MissDays</mainVariable>
-      <strataVariable>Gender</strataVariable>
+      <strataVariable>Sex</strataVariable>
       <secondYVarType>0</secondYVarType>
-      <secondYVar>Gender</secondYVar>
+      <secondYVar>Sex</secondYVar>
       <height>500</height>
       <width>950</width>
       <allValues>False</allValues>
@@ -336,7 +336,7 @@
       <xAxisLabel>
       </xAxisLabel>
       <xAxisAngle>0</xAxisAngle>
-      <chartTitle>Missed Days By Gender</chartTitle>
+      <chartTitle>Missed Days By Sex</chartTitle>
       <chartSubTitle>
       </chartSubTitle>
       <showLegend>True</showLegend>
