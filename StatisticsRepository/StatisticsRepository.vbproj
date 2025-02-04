@@ -225,10 +225,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-</Project> points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
