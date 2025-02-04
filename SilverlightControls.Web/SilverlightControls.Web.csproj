@@ -14,10 +14,6 @@
     <RootNamespace>SilverlightControls.Web</RootNamespace>
     <AssemblyName>SilverlightControls.Web</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <SilverlightApplicationList>{F46FEDC6-DB3D-415D-A5F5-F03C1290B4EF}|..\SilverlightControls\SilverlightControls.csproj|ClientBin|False</SilverlightApplicationList>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
