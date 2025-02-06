@@ -1,0 +1,1147 @@
+﻿<DashboardCanvas>
+  <dashboardHelper>
+    <projectPath>C:\Users\jca6\Desktop\Test Versions\2025.1.31.Epi.Info.7.2.6.21.signed.dual.keys.en-US.es-ES.fr-FR.pt-BR\Epi Info 7\Projects\Salmonellosis\Salmonellosis.prj</projectPath>
+    <viewName>Survey_Final</viewName>
+    <useAdvancedDataFilterCondition>False</useAdvancedDataFilterCondition>
+    <advancedDataFilterCondition>
+    </advancedDataFilterCondition>
+    <ReportId>7de3d98f-29f7-4af3-a8bf-935ebf905033</ReportId>
+    <relatedDataConnections />
+    <dataFilters recordProcessScope="undeleted" />
+    <dashboardRules>
+      <rule ruleType="EpiDashboard.Rules.Rule_SimpleAssign">
+        <friendlyRule>Assign Age2 the difference in years between DOB and 05/05/2012</friendlyRule>
+        <assignmentType>3</assignmentType>
+        <destinationColumnName>Age2</destinationColumnName>
+        <destinationColumnType>System.Decimal</destinationColumnType>
+        <parameterList>
+          <parameter type="fieldName">DOB</parameter>
+          <parameter type="literal" unit="ticks">634717728000000000</parameter>
+        </parameterList>
+      </rule>
+      <rule ruleType="EpiDashboard.Rules.Rule_SimpleAssign">
+        <friendlyRule>Assign NumFoodsEaten the number of checked checkboxes in Group_PicnicFoodsEaten (group field)</friendlyRule>
+        <assignmentType>18</assignmentType>
+        <destinationColumnName>NumFoodsEaten</destinationColumnName>
+        <destinationColumnType>System.Decimal</destinationColumnType>
+        <parameterList>
+          <parameter type="fieldName">Group_PicnicFoodsEaten</parameter>
+        </parameterList>
+      </rule>
+      <rule ruleType="EpiDashboard.Rules.Rule_Recode">
+        <friendlyRule>Recode the values in Age2 to AgeGroup</friendlyRule>
+        <sourceColumnName>Age2</sourceColumnName>
+        <sourceColumnType>System.Decimal</sourceColumnType>
+        <destinationColumnName>AgeGroup</destinationColumnName>
+        <destinationColumnType>System.String</destinationColumnType>
+        <tableColumns>3</tableColumns>
+        <elseValue>
+        </elseValue>
+        <shouldUseWildcards>False</shouldUseWildcards>
+        <shouldMaintainSortOrder>True</shouldMaintainSortOrder>
+        <recodeTable>
+          <recodeTableRow>
+            <recodeTableData>LOVALUE</recodeTableData>
+            <recodeTableData>0</recodeTableData>
+            <recodeTableData>LOVALUE - &amp;lt;0</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>0</recodeTableData>
+            <recodeTableData>10</recodeTableData>
+            <recodeTableData>0 - &amp;lt;10</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>10</recodeTableData>
+            <recodeTableData>20</recodeTableData>
+            <recodeTableData>10 - &amp;lt;20</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>20</recodeTableData>
+            <recodeTableData>30</recodeTableData>
+            <recodeTableData>20 - &amp;lt;30</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>30</recodeTableData>
+            <recodeTableData>40</recodeTableData>
+            <recodeTableData>30 - &amp;lt;40</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>40</recodeTableData>
+            <recodeTableData>50</recodeTableData>
+            <recodeTableData>40 - &amp;lt;50</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>50</recodeTableData>
+            <recodeTableData>60</recodeTableData>
+            <recodeTableData>50 - &amp;lt;60</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>60</recodeTableData>
+            <recodeTableData>65</recodeTableData>
+            <recodeTableData>60 - &amp;lt;65</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>65</recodeTableData>
+            <recodeTableData>HIVALUE</recodeTableData>
+            <recodeTableData>65 - &amp;lt; HIVALUE</recodeTableData>
+          </recodeTableRow>
+        </recodeTable>
+      </rule>
+      <rule ruleType="EpiDashboard.Rules.Rule_Recode">
+        <friendlyRule>Recode the values in Age2 to IsAdult</friendlyRule>
+        <sourceColumnName>Age2</sourceColumnName>
+        <sourceColumnType>System.Decimal</sourceColumnType>
+        <destinationColumnName>IsAdult</destinationColumnName>
+        <destinationColumnType>System.Boolean</destinationColumnType>
+        <tableColumns>3</tableColumns>
+        <elseValue>
+        </elseValue>
+        <shouldUseWildcards>False</shouldUseWildcards>
+        <shouldMaintainSortOrder>True</shouldMaintainSortOrder>
+        <recodeTable>
+          <recodeTableRow>
+            <recodeTableData>18</recodeTableData>
+            <recodeTableData>HIVALUE</recodeTableData>
+            <recodeTableData>Yes</recodeTableData>
+          </recodeTableRow>
+          <recodeTableRow>
+            <recodeTableData>0</recodeTableData>
+            <recodeTableData>18</recodeTableData>
+            <recodeTableData>No</recodeTableData>
+          </recodeTableRow>
+        </recodeTable>
+      </rule>
+      <rule ruleType="EpiDashboard.Rules.Rule_ConditionalAssign">
+        <friendlyRule>Assign IsMaleOver50 the value True when the value of [Sex] is equal to Male and the value of [Age2] is greater than 50. Otherwise, assign IsMaleOver50 the value False.</friendlyRule>
+        <destinationColumnName>IsMaleOver50</destinationColumnName>
+        <destinationColumnType>System.Boolean</destinationColumnType>
+        <assignValue>True</assignValue>
+        <useElse>True</useElse>
+        <elseValue>False</elseValue>
+        <dataFilters recordProcessScope="undeleted">
+          <filterCondition>
+            <condition>([Sex] = 'Male')</condition>
+            <friendlyCondition>The value of [Sex] is equal to Male</friendlyCondition>
+            <columnName>[Sex]</columnName>
+            <columnType>System.String</columnType>
+            <rawColumnName>Sex</rawColumnName>
+            <operand>=</operand>
+            <friendlyOperand>is equal to</friendlyOperand>
+            <value>'Male'</value>
+            <friendlyValue>Male</friendlyValue>
+            <highValue>
+            </highValue>
+            <friendlyHighValue>
+            </friendlyHighValue>
+            <lowValue>
+            </lowValue>
+            <friendlyLowValue>
+            </friendlyLowValue>
+            <isBetween>false</isBetween>
+            <isEnabled>true</isEnabled>
+            <joinType>
+            </joinType>
+          </filterCondition>
+          <filterCondition>
+            <condition>([Age2] &amp;gt; 50)</condition>
+            <friendlyCondition>The value of [Age2] is greater than 50</friendlyCondition>
+            <columnName>[Age2]</columnName>
+            <columnType>System.Decimal</columnType>
+            <rawColumnName>Age2</rawColumnName>
+            <operand>&gt;</operand>
+            <friendlyOperand>is greater than</friendlyOperand>
+            <value>50</value>
+            <friendlyValue>50</friendlyValue>
+            <highValue>
+            </highValue>
+            <friendlyHighValue>
+            </friendlyHighValue>
+            <lowValue>
+            </lowValue>
+            <friendlyLowValue>
+            </friendlyLowValue>
+            <isBetween>false</isBetween>
+            <isEnabled>true</isEnabled>
+            <joinType>and</joinType>
+          </filterCondition>
+        </dataFilters>
+      </rule>
+      <rule ruleType="EpiDashboard.Rules.Rule_ConditionalAssign">
+        <friendlyRule>Assign ConsumedEggs the value True when the value of [ChefSalad] is equal to Yes or the value of [EggSaladSandwich] is equal to Yes. Otherwise, assign ConsumedEggs the value False.</friendlyRule>
+        <destinationColumnName>ConsumedEggs</destinationColumnName>
+        <destinationColumnType>System.Boolean</destinationColumnType>
+        <assignValue>True</assignValue>
+        <useElse>True</useElse>
+        <elseValue>False</elseValue>
+        <dataFilters recordProcessScope="undeleted">
+          <filterCondition>
+            <condition>([ChefSalad] = 1)</condition>
+            <friendlyCondition>The value of [ChefSalad] is equal to Yes</friendlyCondition>
+            <columnName>[ChefSalad]</columnName>
+            <columnType>System.Boolean</columnType>
+            <rawColumnName>ChefSalad</rawColumnName>
+            <operand>=</operand>
+            <friendlyOperand>is equal to</friendlyOperand>
+            <value>1</value>
+            <friendlyValue>Yes</friendlyValue>
+            <highValue>
+            </highValue>
+            <friendlyHighValue>
+            </friendlyHighValue>
+            <lowValue>
+            </lowValue>
+            <friendlyLowValue>
+            </friendlyLowValue>
+            <isBetween>false</isBetween>
+            <isEnabled>true</isEnabled>
+            <joinType>
+            </joinType>
+          </filterCondition>
+          <filterCondition>
+            <condition>([EggSaladSandwich] = 1)</condition>
+            <friendlyCondition>The value of [EggSaladSandwich] is equal to Yes</friendlyCondition>
+            <columnName>[EggSaladSandwich]</columnName>
+            <columnType>System.Boolean</columnType>
+            <rawColumnName>EggSaladSandwich</rawColumnName>
+            <operand>=</operand>
+            <friendlyOperand>is equal to</friendlyOperand>
+            <value>1</value>
+            <friendlyValue>Yes</friendlyValue>
+            <highValue>
+            </highValue>
+            <friendlyHighValue>
+            </friendlyHighValue>
+            <lowValue>
+            </lowValue>
+            <friendlyLowValue>
+            </friendlyLowValue>
+            <isBetween>false</isBetween>
+            <isEnabled>true</isEnabled>
+            <joinType>or</joinType>
+          </filterCondition>
+        </dataFilters>
+      </rule>
+      <rule ruleType="EpiDashboard.Rules.Rule_ConditionalAssign">
+        <friendlyRule>Assign ConsumedLettuce the value True when the value of [ChefSalad] is equal to Yes or the value of [CaesarSalad] is equal to Yes or the value of [GardenSalad] is equal to Yes. Otherwise, assign ConsumedLettuce the value False.</friendlyRule>
+        <destinationColumnName>ConsumedLettuce</destinationColumnName>
+        <destinationColumnType>System.Boolean</destinationColumnType>
+        <assignValue>True</assignValue>
+        <useElse>True</useElse>
+        <elseValue>False</elseValue>
+        <dataFilters recordProcessScope="undeleted">
+          <filterCondition>
+            <condition>([ChefSalad] = 1)</condition>
+            <friendlyCondition>The value of [ChefSalad] is equal to Yes</friendlyCondition>
+            <columnName>[ChefSalad]</columnName>
+            <columnType>System.Boolean</columnType>
+            <rawColumnName>ChefSalad</rawColumnName>
+            <operand>=</operand>
+            <friendlyOperand>is equal to</friendlyOperand>
+            <value>1</value>
+            <friendlyValue>Yes</friendlyValue>
+            <highValue>
+            </highValue>
+            <friendlyHighValue>
+            </friendlyHighValue>
+            <lowValue>
+            </lowValue>
+            <friendlyLowValue>
+            </friendlyLowValue>
+            <isBetween>false</isBetween>
+            <isEnabled>true</isEnabled>
+            <joinType>
+            </joinType>
+          </filterCondition>
+          <filterCondition>
+            <condition>([CaesarSalad] = 1)</condition>
+            <friendlyCondition>The value of [CaesarSalad] is equal to Yes</friendlyCondition>
+            <columnName>[CaesarSalad]</columnName>
+            <columnType>System.Boolean</columnType>
+            <rawColumnName>CaesarSalad</rawColumnName>
+            <operand>=</operand>
+            <friendlyOperand>is equal to</friendlyOperand>
+            <value>1</value>
+            <friendlyValue>Yes</friendlyValue>
+            <highValue>
+            </highValue>
+            <friendlyHighValue>
+            </friendlyHighValue>
+            <lowValue>
+            </lowValue>
+            <friendlyLowValue>
+            </friendlyLowValue>
+            <isBetween>false</isBetween>
+            <isEnabled>true</isEnabled>
+            <joinType>or</joinType>
+          </filterCondition>
+          <filterCondition>
+            <condition>([GardenSalad] = 1)</condition>
+            <friendlyCondition>The value of [GardenSalad] is equal to Yes</friendlyCondition>
+            <columnName>[GardenSalad]</columnName>
+            <columnType>System.Boolean</columnType>
+            <rawColumnName>GardenSalad</rawColumnName>
+            <operand>=</operand>
+            <friendlyOperand>is equal to</friendlyOperand>
+            <value>1</value>
+            <friendlyValue>Yes</friendlyValue>
+            <highValue>
+            </highValue>
+            <friendlyHighValue>
+            </friendlyHighValue>
+            <lowValue>
+            </lowValue>
+            <friendlyLowValue>
+            </friendlyLowValue>
+            <isBetween>false</isBetween>
+            <isEnabled>true</isEnabled>
+            <joinType>or</joinType>
+          </filterCondition>
+        </dataFilters>
+      </rule>
+    </dashboardRules>
+  </dashboardHelper>
+  <Gadgets>
+    <standardTextReportGadget top="23" left="107" id="366241a9-818d-4e58-8d5e-47af4a2af44c" width="583" height="52" collapsed="false" gadgetType="EpiDashboard.Gadgets.Reporting.StandardTextControl">
+      <text>Salmonellosis Outbreak Training Canvas</text>
+      <fontWeight>bold</fontWeight>
+      <fontSize>21</fontSize>
+      <fontStretch>Normal</fontStretch>
+      <fontStyle>Normal</fontStyle>
+      <fontFamily>Global User Interface</fontFamily>
+      <textDecorations>
+      </textDecorations>
+      <foregroundColor>
+        <red>0</red>
+        <green>128</green>
+        <blue>192</blue>
+      </foregroundColor>
+    </standardTextReportGadget>
+    <lineListGadget top="84" left="107" collapsed="False" gadgetType="EpiDashboard.LineListControl" id="3dbb1758-495a-415c-975e-aea57ac59a2c" actualHeight="536">
+      <dataFilters recordProcessScope="undeleted" />
+      <groupVariable>
+      </groupVariable>
+      <groupVariableSecondary>
+      </groupVariableSecondary>
+      <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <showLineColumn>True</showLineColumn>
+      <showColumnHeadings>True</showColumnHeadings>
+      <showNullLabels>True</showNullLabels>
+      <customHeading>Line List of Salmonella Cases</customHeading>
+      <customDescription>
+      </customDescription>
+      <maxRows>400</maxRows>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <maxWidth>800</maxWidth>
+      <maxHeight>500</maxHeight>
+      <listFields>
+        <listField>Age</listField>
+        <listField>County</listField>
+        <listField>DOB</listField>
+        <listField>Sex</listField>
+        <listField>Group_GeneralFoodHistory</listField>
+        <listField>Ill</listField>
+      </listFields>
+    </lineListGadget>
+    <frequencyGadget top="84" left="934" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="355e6ff7-a0f2-427d-a4a9-36de88dac603" actualHeight="326">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariables>
+        <mainVariable>Sex</mainVariable>
+      </mainVariables>
+      <strataVariable>Ill</strataVariable>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>True</includeMissing>
+      <useFieldPrompts>True</useFieldPrompts>
+      <drawBorders>True</drawBorders>
+      <drawHeaderRow>True</drawHeaderRow>
+      <drawTotalRow>True</drawTotalRow>
+      <precision>2</precision>
+      <rowsToDisplay />
+      <percentBarWidth>100</percentBarWidth>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <customHeading>Frequency of Cases /ILL x SEX</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+    </frequencyGadget>
+    <combinedFrequencyGadget top="432" left="941" collapsed="False" gadgetType="EpiDashboard.CombinedFrequencyControl" id="8c9b9e93-c437-4989-8d98-f2545a400d51" actualHeight="275.09">
+      <dataFilters recordProcessScope="undeleted" />
+      <combineMode>Automatic</combineMode>
+      <trueValue>
+      </trueValue>
+      <sort>hightolow</sort>
+      <showDenominator>True</showDenominator>
+      <customHeading>Combined Frequency/Symptoms</customHeading>
+      <customDescription>
+      </customDescription>
+      <groupFields>
+        <groupField>Group_Symptoms</groupField>
+      </groupFields>
+    </combinedFrequencyGadget>
+    <meansGadget top="630" left="107" collapsed="False" gadgetType="EpiDashboard.MeansControl" id="4fe6fb13-ea26-44e1-9b41-d814039922dc" actualHeight="850.88">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>Age2</mainVariable>
+      <crosstabVariable>Ill</crosstabVariable>
+      <columnsToShow>1,2,3,4,5,6,7,8,9,10,11</columnsToShow>
+      <precision>4</precision>
+      <showANOVA>True</showANOVA>
+      <customHeading>Means / Age2 Crosstabulated By Ill</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorTop>3dbb1758-495a-415c-975e-aea57ac59a2c</anchorTop>
+    </meansGadget>
+    <meansGadget top="1491" left="107" collapsed="False" gadgetType="EpiDashboard.MeansControl" id="64d9b9d2-54a9-4661-add3-953c6bd8c4e1" actualHeight="1744.56">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>Age2</mainVariable>
+      <strataVariable>Sex</strataVariable>
+      <crosstabVariable>Ill</crosstabVariable>
+      <columnsToShow>1,2,3,4,5,6,7,8,9,10,11</columnsToShow>
+      <precision>4</precision>
+      <showANOVA>True</showANOVA>
+      <customHeading>Means / Age2 Crosstabulated By Ill</customHeading>
+      <customDescription>Stratified by Sex</customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorTop>4fe6fb13-ea26-44e1-9b41-d814039922dc</anchorTop>
+    </meansGadget>
+    <frequencyGadget top="3245" left="107" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="26327f9f-87f0-40eb-92eb-0980394c7dad" actualHeight="482">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariables>
+        <mainVariable>Race</mainVariable>
+      </mainVariables>
+      <strataVariable>Sex</strataVariable>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>True</includeMissing>
+      <useFieldPrompts>True</useFieldPrompts>
+      <drawBorders>True</drawBorders>
+      <drawHeaderRow>True</drawHeaderRow>
+      <drawTotalRow>True</drawTotalRow>
+      <precision>2</precision>
+      <rowsToDisplay />
+      <percentBarWidth>100</percentBarWidth>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <customHeading>Frequency / RACE x SEX</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorTop>64d9b9d2-54a9-4661-add3-953c6bd8c4e1</anchorTop>
+    </frequencyGadget>
+    <frequencyGadget top="3737" left="107" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="544cd228-d3cd-42d5-9d15-a0b85fb7124b" actualHeight="342.8">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariables>
+        <mainVariable>Water</mainVariable>
+      </mainVariables>
+      <strataVariable>AteAt2</strataVariable>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>True</includeMissing>
+      <useFieldPrompts>True</useFieldPrompts>
+      <drawBorders>True</drawBorders>
+      <drawHeaderRow>True</drawHeaderRow>
+      <drawTotalRow>True</drawTotalRow>
+      <precision>2</precision>
+      <rowsToDisplay />
+      <percentBarWidth>100</percentBarWidth>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <customHeading>Frequency of Water</customHeading>
+      <customDescription>Stratified by Ate at 2pm?</customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorTop>26327f9f-87f0-40eb-92eb-0980394c7dad</anchorTop>
+    </frequencyGadget>
+    <crosstabGadget top="4090" left="107" collapsed="False" gadgetType="EpiDashboard.CrosstabControl" id="3b7f56af-9db5-4393-a3c5-1ecbe0d979d1" actualHeight="937.6">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>AttendeeType</mainVariable>
+      <crosstabVariable>Ill</crosstabVariable>
+      <checkCRG>False</checkCRG>
+      <strataVariable>Sex</strataVariable>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <allValues>False</allValues>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <includeMissing>False</includeMissing>
+      <showStrataSummaryOnly>False</showStrataSummaryOnly>
+      <displayChiSquare>True</displayChiSquare>
+      <treatOutcomeAsContinuous>False</treatOutcomeAsContinuous>
+      <smartTable>True</smartTable>
+      <customHeading>Crosstabulation of Attendee Type by Ill</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <layoutMode>vertical</layoutMode>
+      <rowColPercents>True</rowColPercents>
+      <showHeatMap>False</showHeatMap>
+      <breakType>0</breakType>
+      <break1>0</break1>
+      <break2>20</break2>
+      <break3>40</break3>
+      <break4>60</break4>
+      <break5>80</break5>
+      <startColor>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+      </startColor>
+      <endColor>
+        <red>255</red>
+        <green>99</green>
+        <blue>71</blue>
+      </endColor>
+      <OutcomeSwap>False</OutcomeSwap>
+      <ExposureSwap>False</ExposureSwap>
+      <anchorTop>544cd228-d3cd-42d5-9d15-a0b85fb7124b</anchorTop>
+    </crosstabGadget>
+    <crosstabGadget top="5038" left="107" collapsed="False" gadgetType="EpiDashboard.CrosstabControl" id="09aba38a-3663-49ee-959d-43e1d2caf2d3" actualHeight="4103.08">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>Group_PicnicFoodsEaten</mainVariable>
+      <crosstabVariable>Ill</crosstabVariable>
+      <checkCRG>False</checkCRG>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <allValues>False</allValues>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <includeMissing>False</includeMissing>
+      <showStrataSummaryOnly>False</showStrataSummaryOnly>
+      <displayChiSquare>True</displayChiSquare>
+      <treatOutcomeAsContinuous>False</treatOutcomeAsContinuous>
+      <smartTable>True</smartTable>
+      <customHeading>Crosstabulation Picnic Food Eaten</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <layoutMode>vertical</layoutMode>
+      <rowColPercents>True</rowColPercents>
+      <showHeatMap>False</showHeatMap>
+      <breakType>0</breakType>
+      <break1>0</break1>
+      <break2>20</break2>
+      <break3>40</break3>
+      <break4>60</break4>
+      <break5>80</break5>
+      <startColor>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+      </startColor>
+      <endColor>
+        <red>255</red>
+        <green>99</green>
+        <blue>71</blue>
+      </endColor>
+      <OutcomeSwap>False</OutcomeSwap>
+      <ExposureSwap>False</ExposureSwap>
+      <anchorTop>3b7f56af-9db5-4393-a3c5-1ecbe0d979d1</anchorTop>
+    </crosstabGadget>
+    <lineListGadget top="9151" left="107" collapsed="False" gadgetType="EpiDashboard.LineListControl" id="dd019998-a4e9-4068-bd14-7baedf917adb" actualHeight="567.48">
+      <dataFilters recordProcessScope="undeleted" />
+      <groupVariable>
+      </groupVariable>
+      <groupVariableSecondary>
+      </groupVariableSecondary>
+      <sortColumnsByTabOrder>False</sortColumnsByTabOrder>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <showLineColumn>True</showLineColumn>
+      <showColumnHeadings>True</showColumnHeadings>
+      <showNullLabels>True</showNullLabels>
+      <customHeading>Line List</customHeading>
+      <customDescription>
+      </customDescription>
+      <maxRows>50</maxRows>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <maxWidth>800</maxWidth>
+      <maxHeight>500</maxHeight>
+      <anchorTop>09aba38a-3663-49ee-959d-43e1d2caf2d3</anchorTop>
+      <listFields>
+        <listField>Group_FoodsEaten</listField>
+        <listField>NumFoodsEaten</listField>
+      </listFields>
+    </lineListGadget>
+    <columnChartGadget top="9151" left="919" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.ColumnChartGadget" id="2e12f0e2-c530-400a-9a12-2d5f22450cc4" actualHeight="585">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>Race</mainVariable>
+      <secondYVarType>0</secondYVarType>
+      <height>500</height>
+      <width>800</width>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>False</includeMissing>
+      <customHeading>Column Chart</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <useDiffBarColors>True</useDiffBarColors>
+      <useRefValues>True</useRefValues>
+      <showAnnotations>False</showAnnotations>
+      <y2showAnnotations>False</y2showAnnotations>
+      <showGridLines>True</showGridLines>
+      <composition>0</composition>
+      <barSpace>0</barSpace>
+      <orientation>0</orientation>
+      <palette>12</palette>
+      <paletteColor1>#FFDF191E</paletteColor1>
+      <paletteColor2>#FFF56F06</paletteColor2>
+      <paletteColor3>#FFFFCC00</paletteColor3>
+      <paletteColor4>#FFFFF600</paletteColor4>
+      <paletteColor5>#FFA8E319</paletteColor5>
+      <paletteColor6>#FF85BC00</paletteColor6>
+      <paletteColor7>#FF1CF1CE</paletteColor7>
+      <paletteColor8>#FF00BCE3</paletteColor8>
+      <paletteColor9>#FF0077E3</paletteColor9>
+      <paletteColor10>#FF4400E3</paletteColor10>
+      <paletteColor11>#FFA200E3</paletteColor11>
+      <paletteColor12>#FFEE66C4</paletteColor12>
+      <barType>2</barType>
+      <y2LineType>1</y2LineType>
+      <y2LineDashStyle>4</y2LineDashStyle>
+      <y2LineThickness>1</y2LineThickness>
+      <yAxisLabel>Total Cases</yAxisLabel>
+      <yAxisFormatString>
+      </yAxisFormatString>
+      <yAxisFrom>0</yAxisFrom>
+      <yAxisTo>0</yAxisTo>
+      <yAxisStep>0</yAxisStep>
+      <xAxisStartValue>
+      </xAxisStartValue>
+      <xAxisEndValue>
+      </xAxisEndValue>
+      <sortStringValues>False</sortStringValues>
+      <showAllStringValues>False</showAllStringValues>
+      <y2AxisLabel>
+      </y2AxisLabel>
+      <y2AxisLegendTitle>
+      </y2AxisLegendTitle>
+      <y2AxisFormatString>
+      </y2AxisFormatString>
+      <xAxisLabelType>0</xAxisLabelType>
+      <xAxisLabel>
+      </xAxisLabel>
+      <xAxisAngle>-90</xAxisAngle>
+      <chartTitle>Cases by Race</chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>False</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>False</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <yAxisLabelFontSize>12</yAxisLabelFontSize>
+      <xAxisLabelFontSize>12</xAxisLabelFontSize>
+      <yAxisFontSize>12</yAxisFontSize>
+      <xAxisFontSize>10</xAxisFontSize>
+      <legendDock>1</legendDock>
+      <anchorLeft>dd019998-a4e9-4068-bd14-7baedf917adb</anchorLeft>
+    </columnChartGadget>
+    <histogramChartGadget top="9728" left="107" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.HistogramChartGadget" id="78f3afa5-ca9e-4a83-978e-bf1806ab4fc6" actualHeight="585">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>OnsetDate</mainVariable>
+      <strataVariable>Status</strataVariable>
+      <secondYVarType>0</secondYVarType>
+      <secondYVar>Status</secondYVar>
+      <height>500</height>
+      <width>800</width>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>False</includeMissing>
+      <customHeading>Epi Curve Chart</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <useDiffBarColors>False</useDiffBarColors>
+      <useRefValues>True</useRefValues>
+      <showAnnotations>False</showAnnotations>
+      <y2showAnnotations>False</y2showAnnotations>
+      <showGridLines>True</showGridLines>
+      <composition>1</composition>
+      <barSpace>1</barSpace>
+      <orientation>0</orientation>
+      <palette>12</palette>
+      <paletteColor1>#FFDF191E</paletteColor1>
+      <paletteColor2>#FFF56F06</paletteColor2>
+      <paletteColor3>#FFFFCC00</paletteColor3>
+      <paletteColor4>#FFFFF600</paletteColor4>
+      <paletteColor5>#FFA8E319</paletteColor5>
+      <paletteColor6>#FF85BC00</paletteColor6>
+      <paletteColor7>#FF1CF1CE</paletteColor7>
+      <paletteColor8>#FF00BCE3</paletteColor8>
+      <paletteColor9>#FF0077E3</paletteColor9>
+      <paletteColor10>#FF4400E3</paletteColor10>
+      <paletteColor11>#FFA200E3</paletteColor11>
+      <paletteColor12>#FFEE66C4</paletteColor12>
+      <barType>0</barType>
+      <step>1</step>
+      <interval>day</interval>
+      <y2LineType>Polygon</y2LineType>
+      <y2LineDashStyle>Solid</y2LineDashStyle>
+      <y2LineThickness>2</y2LineThickness>
+      <yAxisLabel>Total Cases</yAxisLabel>
+      <yAxisLabelFontSize>12</yAxisLabelFontSize>
+      <xAxisLabelFontSize>12</xAxisLabelFontSize>
+      <yAxisFontSize>12</yAxisFontSize>
+      <xAxisFontSize>12</xAxisFontSize>
+      <yAxisFormatString>
+      </yAxisFormatString>
+      <y2AxisLabel>
+      </y2AxisLabel>
+      <y2AxisLegendTitle>
+      </y2AxisLegendTitle>
+      <y2AxisFormatString>
+      </y2AxisFormatString>
+      <xAxisLabelType>3</xAxisLabelType>
+      <xAxisLabel>Date of Onset</xAxisLabel>
+      <xAxisAngle>-45</xAxisAngle>
+      <chartTitle>Epi Curve by Case Status</chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>True</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>False</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <legendDock>1</legendDock>
+      <anchorTop>dd019998-a4e9-4068-bd14-7baedf917adb</anchorTop>
+    </histogramChartGadget>
+    <columnChartGadget top="9746" left="919" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.ColumnChartGadget" id="ea933e67-7a2a-4746-9c73-c8f57a26e243" actualHeight="556.6">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>NumFoodsEaten</mainVariable>
+      <strataVariable>Ill</strataVariable>
+      <secondYVarType>0</secondYVarType>
+      <secondYVar>Ill</secondYVar>
+      <height>500</height>
+      <width>800</width>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>False</includeMissing>
+      <customHeading>Number of Foods Eaten by Ill</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <useDiffBarColors>False</useDiffBarColors>
+      <useRefValues>True</useRefValues>
+      <showAnnotations>True</showAnnotations>
+      <y2showAnnotations>False</y2showAnnotations>
+      <showGridLines>True</showGridLines>
+      <composition>1</composition>
+      <barSpace>0</barSpace>
+      <orientation>0</orientation>
+      <palette>12</palette>
+      <paletteColor1>#FFDF191E</paletteColor1>
+      <paletteColor2>#FFF56F06</paletteColor2>
+      <paletteColor3>#FFFFCC00</paletteColor3>
+      <paletteColor4>#FFFFF600</paletteColor4>
+      <paletteColor5>#FFA8E319</paletteColor5>
+      <paletteColor6>#FF85BC00</paletteColor6>
+      <paletteColor7>#FF1CF1CE</paletteColor7>
+      <paletteColor8>#FF00BCE3</paletteColor8>
+      <paletteColor9>#FF0077E3</paletteColor9>
+      <paletteColor10>#FF4400E3</paletteColor10>
+      <paletteColor11>#FFA200E3</paletteColor11>
+      <paletteColor12>#FFEE66C4</paletteColor12>
+      <barType>2</barType>
+      <y2LineType>1</y2LineType>
+      <y2LineDashStyle>4</y2LineDashStyle>
+      <y2LineThickness>1</y2LineThickness>
+      <yAxisLabel>Count</yAxisLabel>
+      <yAxisFormatString>
+      </yAxisFormatString>
+      <yAxisFrom>0</yAxisFrom>
+      <yAxisTo>0</yAxisTo>
+      <yAxisStep>0</yAxisStep>
+      <xAxisStartValue>
+      </xAxisStartValue>
+      <xAxisEndValue>
+      </xAxisEndValue>
+      <sortStringValues>False</sortStringValues>
+      <showAllStringValues>False</showAllStringValues>
+      <y2AxisLabel>
+      </y2AxisLabel>
+      <y2AxisLegendTitle>
+      </y2AxisLegendTitle>
+      <y2AxisFormatString>
+      </y2AxisFormatString>
+      <xAxisLabelType>0</xAxisLabelType>
+      <xAxisLabel>
+      </xAxisLabel>
+      <xAxisAngle>0</xAxisAngle>
+      <chartTitle>
+      </chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>True</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>False</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <yAxisLabelFontSize>12</yAxisLabelFontSize>
+      <xAxisLabelFontSize>12</xAxisLabelFontSize>
+      <yAxisFontSize>12</yAxisFontSize>
+      <xAxisFontSize>12</xAxisFontSize>
+      <legendDock>1</legendDock>
+      <anchorTop>2e12f0e2-c530-400a-9a12-2d5f22450cc4</anchorTop>
+    </columnChartGadget>
+    <pieChartGadget top="10323" left="107" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.PieChartGadget" id="e163bd1e-d28d-48de-85ab-ad522841495d" actualHeight="575.08">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>Status</mainVariable>
+      <height>500</height>
+      <width>800</width>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>False</includeMissing>
+      <customHeading>Pie Chart/ Case Status</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <showAnnotations>True</showAnnotations>
+      <showAnnotationLabel>True</showAnnotationLabel>
+      <showAnnotationValue>True</showAnnotationValue>
+      <showAnnotationPercent>True</showAnnotationPercent>
+      <chartKind>0</chartKind>
+      <palette>12</palette>
+      <paletteColor1>#FFDF191E</paletteColor1>
+      <paletteColor2>#FFF56F06</paletteColor2>
+      <paletteColor3>#FFFFCC00</paletteColor3>
+      <paletteColor4>#FFFFF600</paletteColor4>
+      <paletteColor5>#FFA8E319</paletteColor5>
+      <paletteColor6>#FF85BC00</paletteColor6>
+      <paletteColor7>#FF1CF1CE</paletteColor7>
+      <paletteColor8>#FF00BCE3</paletteColor8>
+      <paletteColor9>#FF0077E3</paletteColor9>
+      <paletteColor10>#FF4400E3</paletteColor10>
+      <paletteColor11>#FFA200E3</paletteColor11>
+      <paletteColor12>#FFEE66C4</paletteColor12>
+      <annotationPercent>20</annotationPercent>
+      <chartTitle>
+      </chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>True</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>False</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <legendDock>1</legendDock>
+    </pieChartGadget>
+    <columnChartGadget top="10908" left="107" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.ColumnChartGadget" id="1c7867c8-50f5-4ed6-89c2-37097a7dc9b2" actualHeight="630.6">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>AttendeeType</mainVariable>
+      <secondYVarType>0</secondYVarType>
+      <height>500</height>
+      <width>800</width>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>False</includeMissing>
+      <customHeading>Column Chart</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <useDiffBarColors>False</useDiffBarColors>
+      <useRefValues>True</useRefValues>
+      <showAnnotations>False</showAnnotations>
+      <y2showAnnotations>False</y2showAnnotations>
+      <showGridLines>True</showGridLines>
+      <composition>0</composition>
+      <barSpace>0</barSpace>
+      <orientation>0</orientation>
+      <palette>3</palette>
+      <paletteColor1>#FF006E98</paletteColor1>
+      <paletteColor2>#FFDAA300</paletteColor2>
+      <paletteColor3>#FFC82900</paletteColor3>
+      <paletteColor4>#FF662D91</paletteColor4>
+      <paletteColor5>#FF598527</paletteColor5>
+      <paletteColor6>#FFD96600</paletteColor6>
+      <paletteColor7>#FF00948E</paletteColor7>
+      <paletteColor8>#FF961977</paletteColor8>
+      <paletteColor9>#FF888888</paletteColor9>
+      <paletteColor10>#FF278543</paletteColor10>
+      <paletteColor11>#FF5651B9</paletteColor11>
+      <paletteColor12>#FF603913</paletteColor12>
+      <barType>2</barType>
+      <y2LineType>1</y2LineType>
+      <y2LineDashStyle>4</y2LineDashStyle>
+      <y2LineThickness>1</y2LineThickness>
+      <yAxisLabel>Total Cases</yAxisLabel>
+      <yAxisFormatString>
+      </yAxisFormatString>
+      <yAxisFrom>0</yAxisFrom>
+      <yAxisTo>0</yAxisTo>
+      <yAxisStep>0</yAxisStep>
+      <xAxisStartValue>
+      </xAxisStartValue>
+      <xAxisEndValue>
+      </xAxisEndValue>
+      <sortStringValues>False</sortStringValues>
+      <showAllStringValues>False</showAllStringValues>
+      <y2AxisLabel>
+      </y2AxisLabel>
+      <y2AxisLegendTitle>
+      </y2AxisLegendTitle>
+      <y2AxisFormatString>
+      </y2AxisFormatString>
+      <xAxisLabelType>0</xAxisLabelType>
+      <xAxisLabel>
+      </xAxisLabel>
+      <xAxisAngle>0</xAxisAngle>
+      <chartTitle>Attendee Types</chartTitle>
+      <chartSubTitle>Salmonella Outbreak</chartSubTitle>
+      <showLegend>False</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>False</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <yAxisLabelFontSize>12</yAxisLabelFontSize>
+      <xAxisLabelFontSize>12</xAxisLabelFontSize>
+      <yAxisFontSize>12</yAxisFontSize>
+      <xAxisFontSize>12</xAxisFontSize>
+      <legendDock>1</legendDock>
+      <anchorTop>e163bd1e-d28d-48de-85ab-ad522841495d</anchorTop>
+    </columnChartGadget>
+    <columnChartGadget top="10908" left="985" collapsed="false" gadgetType="EpiDashboard.Gadgets.Charting.ColumnChartGadget" id="479a0e19-37f2-4dd4-b83a-d5b95c2e3deb" actualHeight="556.6">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>AgeGroup</mainVariable>
+      <secondYVarType>0</secondYVarType>
+      <height>500</height>
+      <width>800</width>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>False</includeMissing>
+      <customHeading>Column Chart - Agegroup</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <useDiffBarColors>False</useDiffBarColors>
+      <useRefValues>True</useRefValues>
+      <showAnnotations>False</showAnnotations>
+      <y2showAnnotations>False</y2showAnnotations>
+      <showGridLines>True</showGridLines>
+      <composition>0</composition>
+      <barSpace>0</barSpace>
+      <orientation>0</orientation>
+      <palette>12</palette>
+      <paletteColor1>#FFDF191E</paletteColor1>
+      <paletteColor2>#FFF56F06</paletteColor2>
+      <paletteColor3>#FFFFCC00</paletteColor3>
+      <paletteColor4>#FFFFF600</paletteColor4>
+      <paletteColor5>#FFA8E319</paletteColor5>
+      <paletteColor6>#FF85BC00</paletteColor6>
+      <paletteColor7>#FF1CF1CE</paletteColor7>
+      <paletteColor8>#FF00BCE3</paletteColor8>
+      <paletteColor9>#FF0077E3</paletteColor9>
+      <paletteColor10>#FF4400E3</paletteColor10>
+      <paletteColor11>#FFA200E3</paletteColor11>
+      <paletteColor12>#FFEE66C4</paletteColor12>
+      <barType>2</barType>
+      <y2LineType>1</y2LineType>
+      <y2LineDashStyle>4</y2LineDashStyle>
+      <y2LineThickness>1</y2LineThickness>
+      <yAxisLabel>Count</yAxisLabel>
+      <yAxisFormatString>
+      </yAxisFormatString>
+      <yAxisFrom>0</yAxisFrom>
+      <yAxisTo>0</yAxisTo>
+      <yAxisStep>0</yAxisStep>
+      <xAxisStartValue>
+      </xAxisStartValue>
+      <xAxisEndValue>
+      </xAxisEndValue>
+      <sortStringValues>False</sortStringValues>
+      <showAllStringValues>False</showAllStringValues>
+      <y2AxisLabel>
+      </y2AxisLabel>
+      <y2AxisLegendTitle>
+      </y2AxisLegendTitle>
+      <y2AxisFormatString>
+      </y2AxisFormatString>
+      <xAxisLabelType>0</xAxisLabelType>
+      <xAxisLabel>
+      </xAxisLabel>
+      <xAxisAngle>0</xAxisAngle>
+      <chartTitle>
+      </chartTitle>
+      <chartSubTitle>
+      </chartSubTitle>
+      <showLegend>False</showLegend>
+      <showLegendBorder>False</showLegendBorder>
+      <showLegendVarNames>False</showLegendVarNames>
+      <legendFontSize>12</legendFontSize>
+      <yAxisLabelFontSize>12</yAxisLabelFontSize>
+      <xAxisLabelFontSize>12</xAxisLabelFontSize>
+      <yAxisFontSize>12</yAxisFontSize>
+      <xAxisFontSize>12</xAxisFontSize>
+      <legendDock>1</legendDock>
+      <anchorLeft>1c7867c8-50f5-4ed6-89c2-37097a7dc9b2</anchorLeft>
+    </columnChartGadget>
+    <frequencyGadget top="11549" left="107" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="46c2a87b-b4cc-451c-853f-504c7f4418fb" actualHeight="150">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariables>
+        <mainVariable>IsAdult</mainVariable>
+      </mainVariables>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>True</includeMissing>
+      <useFieldPrompts>True</useFieldPrompts>
+      <drawBorders>True</drawBorders>
+      <drawHeaderRow>True</drawHeaderRow>
+      <drawTotalRow>True</drawTotalRow>
+      <precision>2</precision>
+      <rowsToDisplay />
+      <percentBarWidth>100</percentBarWidth>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <customHeading>Frequency/ Adult Cases</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorTop>1c7867c8-50f5-4ed6-89c2-37097a7dc9b2</anchorTop>
+    </frequencyGadget>
+    <frequencyGadget top="11549" left="628" collapsed="False" gadgetType="EpiDashboard.FrequencyControl" id="65b723fd-9303-4fe3-af62-c97cd998db7c" actualHeight="150">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariables>
+        <mainVariable>IsMaleOver50</mainVariable>
+      </mainVariables>
+      <allValues>False</allValues>
+      <showListLabels>False</showListLabels>
+      <sort />
+      <includeMissing>True</includeMissing>
+      <useFieldPrompts>True</useFieldPrompts>
+      <drawBorders>True</drawBorders>
+      <drawHeaderRow>True</drawHeaderRow>
+      <drawTotalRow>True</drawTotalRow>
+      <precision>2</precision>
+      <rowsToDisplay />
+      <percentBarWidth>100</percentBarWidth>
+      <columnsToShow>1,2,3,4,5,6</columnsToShow>
+      <customHeading>Frequency/ Over 50 years old males</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <anchorLeft>46c2a87b-b4cc-451c-853f-504c7f4418fb</anchorLeft>
+    </frequencyGadget>
+    <crosstabGadget top="11709" left="107" collapsed="False" gadgetType="EpiDashboard.CrosstabControl" id="e47f8c8e-5f02-492e-b1c3-ea293c66285f" actualHeight="303.6">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>ConsumedEggs</mainVariable>
+      <crosstabVariable>Ill</crosstabVariable>
+      <checkCRG>False</checkCRG>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <allValues>False</allValues>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <includeMissing>False</includeMissing>
+      <showStrataSummaryOnly>False</showStrataSummaryOnly>
+      <displayChiSquare>True</displayChiSquare>
+      <treatOutcomeAsContinuous>False</treatOutcomeAsContinuous>
+      <smartTable>True</smartTable>
+      <customHeading>Crosstabulation/ Consumed Eggs</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <layoutMode>vertical</layoutMode>
+      <rowColPercents>True</rowColPercents>
+      <showHeatMap>False</showHeatMap>
+      <breakType>0</breakType>
+      <break1>0</break1>
+      <break2>20</break2>
+      <break3>40</break3>
+      <break4>60</break4>
+      <break5>80</break5>
+      <startColor>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+      </startColor>
+      <endColor>
+        <red>255</red>
+        <green>99</green>
+        <blue>71</blue>
+      </endColor>
+      <OutcomeSwap>False</OutcomeSwap>
+      <ExposureSwap>False</ExposureSwap>
+      <anchorTop>46c2a87b-b4cc-451c-853f-504c7f4418fb</anchorTop>
+    </crosstabGadget>
+    <crosstabGadget top="12022" left="107" collapsed="False" gadgetType="EpiDashboard.CrosstabControl" id="9859a207-e1d1-4991-b2a8-e1651704decb" actualHeight="303.6">
+      <dataFilters recordProcessScope="undeleted" />
+      <mainVariable>ConsumedLettuce</mainVariable>
+      <crosstabVariable>Ill</crosstabVariable>
+      <checkCRG>False</checkCRG>
+      <maxColumnNameLength>24</maxColumnNameLength>
+      <allValues>False</allValues>
+      <usepromptsforcolumnnames>False</usepromptsforcolumnnames>
+      <showListLabels>False</showListLabels>
+      <includeMissing>False</includeMissing>
+      <showStrataSummaryOnly>False</showStrataSummaryOnly>
+      <displayChiSquare>True</displayChiSquare>
+      <treatOutcomeAsContinuous>False</treatOutcomeAsContinuous>
+      <smartTable>True</smartTable>
+      <customHeading>Crosstabulation/ Consumed Lettuce</customHeading>
+      <customDescription>
+      </customDescription>
+      <customCaption>
+      </customCaption>
+      <layoutMode>vertical</layoutMode>
+      <rowColPercents>True</rowColPercents>
+      <showHeatMap>False</showHeatMap>
+      <breakType>0</breakType>
+      <break1>0</break1>
+      <break2>20</break2>
+      <break3>40</break3>
+      <break4>60</break4>
+      <break5>80</break5>
+      <startColor>
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+      </startColor>
+      <endColor>
+        <red>255</red>
+        <green>99</green>
+        <blue>71</blue>
+      </endColor>
+      <OutcomeSwap>False</OutcomeSwap>
+      <ExposureSwap>False</ExposureSwap>
+      <anchorTop>e47f8c8e-5f02-492e-b1c3-ea293c66285f</anchorTop>
+    </crosstabGadget>
+  </Gadgets>
+  <OutputSettings>
+    <showCanvasSummaryInfo>False</showCanvasSummaryInfo>
+    <showGadgetHeadings>True</showGadgetHeadings>
+    <showGadgetSettings>False</showGadgetSettings>
+    <useAlternatingColors>False</useAlternatingColors>
+    <defaultChartWidth>800</defaultChartWidth>
+    <defaultChartHeight>500</defaultChartHeight>
+    <tableFontSize>13</tableFontSize>
+    <customHeading>Salmonellosis Outbreak Training Canvas</customHeading>
+    <customSummary>
+    </customSummary>
+    <customConclusion>
+    </customConclusion>
+    <customTableFontFamily>
+    </customTableFontFamily>
+    <canvasHeight>14000</canvasHeight>
+    <sortGadgets>True</sortGadgets>
+  </OutputSettings>
+  <CanvasSettings>
+    <editMode>True</editMode>
+    <layoutMode>free</layoutMode>
+  </CanvasSettings>
+</DashboardCanvas>

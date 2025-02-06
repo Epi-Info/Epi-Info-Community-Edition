@@ -780,6 +780,9 @@
     <None Include="Projects\Salmonellosis\Salmonellosis.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\Salmonellosis\TrainingCanvas.cvs7">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\Sample\Case Control DatabaseExample.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -864,6 +867,24 @@
     <None Include="Projects\HuttYouthSurvey\HuttYouthSurvey.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Projects\Salmonellosis\TraningCanvasOutput.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Salmonellosis\TraningCanvasOutput_12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Salmonellosis\TraningCanvasOutput_13.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Salmonellosis\TraningCanvasOutput_14.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Salmonellosis\TraningCanvasOutput_15.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Salmonellosis\TraningCanvasOutput_16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Projects\STEPS\STEPS_EI7.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
