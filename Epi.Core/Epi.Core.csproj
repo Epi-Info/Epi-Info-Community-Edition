@@ -766,6 +766,12 @@
     <None Include="Projects\HuttYouthSurvey\HuttYouthSurvey.prj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Projects\LandmineStudy\LandmineStudy.prj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Projects\LandmineStudy\WKCasualtyListReport.cvs7">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Projects\Rates\DeathsReported _per_Region.cvs7" />
     <None Include="Projects\Rates\DeathsReported _per_Region.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -867,6 +873,9 @@
     <None Include="Projects\HuttYouthSurvey\HuttYouthSurvey.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Projects\LandmineStudy\LandmineStudy.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Projects\Salmonellosis\TraningCanvasOutput.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

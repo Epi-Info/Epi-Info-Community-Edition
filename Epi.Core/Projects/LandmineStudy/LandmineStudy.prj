@@ -1,0 +1,7 @@
+<Project id="5b7381f3-eb39-2bfd-f066-ceeb5398a522" name="LandmineStudy" location="C:\Users\jca6\Desktop\Test Versions\2024.12.04.Epi.Info.7.2.6.19.dual.keys.en-US.es-ES.fr-FR.pt-BR\Epi Info 7\Projects\LandmineStudy" description="" schemaVersion="102" epiVersion="" createDate="08/15/2018 10:12:02" useMetadataDbForCollectedData="" useBackgroundOnAllPages="False">
+  <CollectedData>
+    <Database connectionString="zHDkaR2yI5Pbh2/LYHfZ7ljYKFwMFLb6TrxCvYEORi7csqJucXA0eUm4ILZ7oROE654W1J3voXmsRe8GylKMD+ZGw4k4olsUheWXaRNC1bFEg1U13uY+R3OLvMukBltH4+glWD3fmKvrk5wqognIihSLgT2X6Re0+JvSia8XhtsVO1o+ruB0mO1PvaV0PCqYUzoDukmX5tPk2IftNw4mrA==" dataDriver="Epi.Data.Office.AccessDBFactory, Epi.Data.Office" />
+  </CollectedData>
+  <Metadata source="2" />
+  <EnterMakeviewInterpreter source="Epi.Core.EnterInterpreter" />
+</Project>
