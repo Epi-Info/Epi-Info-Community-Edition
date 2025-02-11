@@ -3278,7 +3278,7 @@
                 "ScatterAssemblies"
                 {
                 }
-            "SourcePath" = "8:ZstdSharp.dll"
+            "SourcePath" = "8:..\\build\\Epi Info 7\\ZstdSharp.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
@@ -3364,7 +3364,7 @@
                 "ScatterAssemblies"
                 {
                 }
-            "SourcePath" = "8:System.Memory.dll"
+            "SourcePath" = "8:..\\build\\Epi Info 7\\System.Memory.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
@@ -4100,7 +4100,7 @@
                 "ScatterAssemblies"
                 {
                 }
-            "SourcePath" = "8:System.Memory.dll"
+            "SourcePath" = "8:..\\build\\Epi Info 7\\System.Memory.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
@@ -4528,7 +4528,7 @@
                 "ScatterAssemblies"
                 {
                 }
-            "SourcePath" = "8:System.Buffers.dll"
+            "SourcePath" = "8:..\\build\\Epi Info 7\\System.Buffers.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
@@ -6798,7 +6798,7 @@
                 "ScatterAssemblies"
                 {
                 }
-            "SourcePath" = "8:System.Buffers.dll"
+            "SourcePath" = "8:..\\build\\Epi Info 7\\System.Buffers.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
@@ -6824,7 +6824,7 @@
                 "ScatterAssemblies"
                 {
                 }
-            "SourcePath" = "8:ZstdSharp.dll"
+            "SourcePath" = "8:..\\build\\Epi Info 7\\ZstdSharp.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E7F22B0032DF43F3900910E3959CFFED"
