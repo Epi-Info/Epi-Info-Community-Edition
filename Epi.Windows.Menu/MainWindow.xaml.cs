@@ -2,22 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Automation;
-using System.Windows.Automation.Text;
 
 
 
@@ -27,7 +16,7 @@ namespace Epi.Windows.Menu
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow :System.Windows.Controls.UserControl
+    public partial class MainWindow : System.Windows.Controls.UserControl
     {
         MainForm mainform = null;
         public event EventHandler<RoutedEventArgs> Close;
@@ -56,9 +45,9 @@ namespace Epi.Windows.Menu
             }
 
             mainform = new MainForm();
-         
+
             #region Translation
-            
+
             txtlblCreateForms.Text = MenuSharedStrings.MENU_CREATE_FORMS;
             txtlblCreateFormsDescp.Text = MenuSharedStrings.MENU_CREATE_FORMS_DESCP;
             txtlblEnterData.Text = MenuSharedStrings.MENU_ENTER_DATA;
@@ -91,12 +80,12 @@ namespace Epi.Windows.Menu
 
         }
 
-       
-        
+
+
         #endregion
-        
+
         private void button_MouseOver(object sender, EventArgs e)
-        {         
+        {
         }
 
         private void enterData_Click(object sender, EventArgs e)
@@ -104,7 +93,7 @@ namespace Epi.Windows.Menu
             LoadModule("ENTER");
         }
 
-        private void createMaps_Click(object sender, EventArgs e) 
+        private void createMaps_Click(object sender, EventArgs e)
         {
             LoadModule("EPIMAP");
         }
@@ -126,20 +115,20 @@ namespace Epi.Windows.Menu
 
         private void createForms_Click(object sender, EventArgs e)
         {
-           
+
             LoadModule("MAKEVIEW");
 
-        
+
 
         }
 
-        
+
 
         private void createForms_hover(object sender, EventArgs e)
         {
 
             createFormsBox.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#f3f3f3"));
-           
+
         }
 
         private void createForms_Leave(object sender, EventArgs e)
@@ -248,14 +237,14 @@ namespace Epi.Windows.Menu
             }
         }
 
-		private void SyncFile2CSV_Click(object sender, EventArgs e)
-		{
-            SyncFile2CSV();	
-		}
+        private void SyncFile2CSV_Click(object sender, EventArgs e)
+        {
+            SyncFile2CSV();
+        }
 
-		private void SyncFile2CSV()
-		{
-			HideStoryBoard();
+        private void SyncFile2CSV()
+        {
+            HideStoryBoard();
 
             try
             {
@@ -279,9 +268,9 @@ namespace Epi.Windows.Menu
             {
                 EndBusy();
             }
-		}
+        }
 
-		private void epiInfoQA_Click(object sender, EventArgs e)
+        private void epiInfoQA_Click(object sender, EventArgs e)
         {
             HideStoryBoard();
             System.Diagnostics.Process.Start("https://epiinfo.atlassian.net/wiki/questions");
@@ -306,13 +295,13 @@ namespace Epi.Windows.Menu
             System.Diagnostics.Process.Start("http://openepi.com");
         }
 
-		private void microbeTrace_Click(object sender, EventArgs e)
-		{
-			HideStoryBoard();
-			System.Diagnostics.Process.Start("https://github.com/CDCgov/MicrobeTrace/wiki");
-		}
+        private void microbeTrace_Click(object sender, EventArgs e)
+        {
+            HideStoryBoard();
+            System.Diagnostics.Process.Start("https://github.com/CDCgov/MicrobeTrace/wiki");
+        }
 
-		private void epi_InfoLogs_Click(object sender, EventArgs e)
+        private void epi_InfoLogs_Click(object sender, EventArgs e)
         {
             HideStoryBoard();
             string logFilePath = Logger.GetLogFilePath();
@@ -355,19 +344,19 @@ namespace Epi.Windows.Menu
             if (manager != null)
             {
                 manager.UnloadAll();
-            }*/          
+            }*/
             //((System.Windows.Threading.DispatcherObject)(this.Parent)).Dispatcher.InvokeShutdown();   
             if (Close != null)
-                Close(this, new RoutedEventArgs());   
+                Close(this, new RoutedEventArgs());
         }
 
-       
+
         private void LoadModule(string moduleType)
         {
             HideStoryBoard();
             try
             {
-               // BeginBusy(SharedStrings.LOADING_MODULE);
+                // BeginBusy(SharedStrings.LOADING_MODULE);
 
                 string commandText = null;
 
@@ -427,7 +416,7 @@ namespace Epi.Windows.Menu
             }
         }
 
-      
+
 
         public void BeginBusy(string str)
         {
@@ -445,17 +434,17 @@ namespace Epi.Windows.Menu
 
         public void UpdateStatus(string str, bool shouldAddLogEntry, bool doEvents = false)
         {
-           // this.tsslMessage.Text = str;
+            // this.tsslMessage.Text = str;
             if (shouldAddLogEntry)
             {
                 Logger.Log(DateTime.Now + ":  " + str);
             }
             if (doEvents)
             {
-               // Application.do();
+                // Application.do();
             }
         }
-     
+
 
         private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -518,16 +507,16 @@ namespace Epi.Windows.Menu
 
         private void btnRightMenuHide_Click(object sender, RoutedEventArgs e)
         {
-           
+
             var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
 
             if (pnlRightMenuHeight == "0")
             {
                 this.BeginStoryboard(FindResource("sbShowRightMenu") as Storyboard);
-               
+
 
             }
-            else if (pnlRightMenuHeight == "163")
+            else if (pnlRightMenuHeight == "200")
             {
                 this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
 
@@ -541,27 +530,25 @@ namespace Epi.Windows.Menu
             //MessageBox.Show("Hide");
         }
 
-        private void HideStoryBoard() {
+        private void HideStoryBoard()
+        {
             var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
 
-            if (pnlRightMenuHeight == "163")
-                {
-                    this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-
-
-                }
-                else if (pnlRightMenuHeight == "220")
-                {
-                    this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-
-                }
-        
+            if (pnlRightMenuHeight == "200")
+            {
+                this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+            }
+            else if (pnlRightMenuHeight == "220")
+            {
+                this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
+            }
         }
 
-        private void tabEvent() { 
-        
+        private void tabEvent()
+        {
 
-        
+
+
         }
 
         private void Other_EpiResource_Click(object sender, EventArgs e)
@@ -571,15 +558,10 @@ namespace Epi.Windows.Menu
             if (submenuEpiResoucesHeight == "0")
             {
                 this.BeginStoryboard(FindResource("showEpiResource") as Storyboard);
-
-
             }
             else if (submenuEpiResoucesHeight == "80")
             {
                 this.BeginStoryboard(FindResource("hideEpiResource") as Storyboard);
-
-
-
             }
         }
 
@@ -587,16 +569,13 @@ namespace Epi.Windows.Menu
         {
             var pnlRightMenuHeight = pnlRightMenu.Height.ToString();
 
-            if (pnlRightMenuHeight == "163")
+            if (pnlRightMenuHeight == "200")
             {
                 this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-
-
             }
             else if (pnlRightMenuHeight == "220")
             {
                 this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-
             }
         }
 
@@ -608,13 +587,10 @@ namespace Epi.Windows.Menu
 
         private void createForms_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.Key == Key.Space)
             {
                 LoadModule("MAKEVIEW");
             }
-           
-
         }
 
         private void enterData_Keydown(object sender, KeyEventArgs e)
@@ -694,15 +670,13 @@ namespace Epi.Windows.Menu
                 {
                     this.BeginStoryboard(FindResource("sbShowRightMenu") as Storyboard);
                 }
-                else if (pnlRightMenuHeight == "163")
+                else if (pnlRightMenuHeight == "200")
                 {
                     this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-
                 }
                 else if (pnlRightMenuHeight == "220")
                 {
                     this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
-
                 }
             }
         }
@@ -750,15 +724,15 @@ namespace Epi.Windows.Menu
                 }
             }
         }
-		private void SyncFile2CSV_Keydown(object sender, KeyEventArgs e)
-		{
-			if (e.Key == Key.Space)
-			{
+        private void SyncFile2CSV_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
                 SyncFile2CSV();
-			}
-		}
+            }
+        }
 
-		private void epiInfoQA_Keydown(object sender, KeyEventArgs e)
+        private void epiInfoQA_Keydown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
             {
@@ -816,16 +790,16 @@ namespace Epi.Windows.Menu
                 System.Diagnostics.Process.Start("http://openepi.com");
             }
         }
-		private void microbeTrace_Keydown(object sender, KeyEventArgs e)
-		{
-			if (e.Key == Key.Space)
-			{
-				HideStoryBoard();
-				System.Diagnostics.Process.Start("https://microbetrace.cdc.gov/MicrobeTrace");
-			}
-		}
+        private void microbeTrace_Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                HideStoryBoard();
+                System.Diagnostics.Process.Start("https://microbetrace.cdc.gov/MicrobeTrace");
+            }
+        }
 
-		private void epiInfoLogs_Keydown(object sender, KeyEventArgs e)
+        private void epiInfoLogs_Keydown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
             {
@@ -845,25 +819,25 @@ namespace Epi.Windows.Menu
             }
         }
 
-       
-
-        
-        
 
 
-       
-        
-
-       
-      
-
-        
 
 
-       
-        
 
-       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -872,6 +846,6 @@ namespace Epi.Windows.Menu
         //    this.BeginStoryboard(FindResource("sbHideRightMenu") as Storyboard);
         //}
 
-           
+
     }
 }
