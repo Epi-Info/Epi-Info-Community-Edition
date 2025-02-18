@@ -319,6 +319,7 @@ namespace Epi.Core.AnalysisInterpreter
                                 {
                                     FieldCollectionMaster fieldCollectionMaster = CurrentProject.Views[viewName].Fields;
                                     List<string> stringsThatShouldBeDates = new List<string>();
+                                    List<string> nullsThatShouldBeZero = new List<string>();
                                     foreach (Field rf in fieldCollectionMaster)
                                     {
                                         if (!(rf is RenderableField))
@@ -326,6 +327,10 @@ namespace Epi.Core.AnalysisInterpreter
                                         if (rf is DateTimeField && Output.Columns.Contains(rf.Name))
                                         {
                                             stringsThatShouldBeDates.Add(rf.Name);
+                                        }
+                                        else if (rf is CheckBoxField && Output.Columns.Contains(rf.Name))
+                                        {
+                                            nullsThatShouldBeZero.Add(rf.Name);
                                         }
                                     }
                                     if (stringsThatShouldBeDates.Count > 0)
@@ -337,6 +342,17 @@ namespace Epi.Core.AnalysisInterpreter
                                         foreach (string todate in stringsThatShouldBeDates)
                                         {
                                             ConvertColumnToType(Output, Output.Columns[todate], GenericDbColumnType.DateTime);
+                                        }
+                                    }
+                                    if (nullsThatShouldBeZero.Count > 0)
+                                    {
+                                        foreach (DataRow row in Output.Rows)
+                                        {
+                                            foreach (string cbfield in nullsThatShouldBeZero)
+                                            {
+                                                if (row[cbfield] == DBNull.Value)
+                                                    row[cbfield] = false;
+                                            }
                                         }
                                     }
                                 }
