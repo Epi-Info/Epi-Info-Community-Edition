@@ -83,6 +83,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.nUMTODATEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nUMTOTIMEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rECORDCOUNTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gROUPROWINDEXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rNDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rOUNDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sTEPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,9 +92,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.cOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tANToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tRUNCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gROUPROWINDEXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pFROMZToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zSCOREToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dateFunctionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yEARSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mONTHSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -544,9 +542,7 @@ namespace Epi.Windows.Analysis.Dialogs
             this.sINToolStripMenuItem,
             this.cOSToolStripMenuItem,
             this.tANToolStripMenuItem,
-            this.tRUNCToolStripMenuItem,
-            this.pFROMZToolStripMenuItem,
-            this.zSCOREToolStripMenuItem});
+            this.tRUNCToolStripMenuItem});
             this.numericToolStripMenuItem.Name = "numericToolStripMenuItem";
             resources.ApplyResources(this.numericToolStripMenuItem, "numericToolStripMenuItem");
             // 
@@ -591,6 +587,12 @@ namespace Epi.Windows.Analysis.Dialogs
             this.rECORDCOUNTToolStripMenuItem.Name = "rECORDCOUNTToolStripMenuItem";
             resources.ApplyResources(this.rECORDCOUNTToolStripMenuItem, "rECORDCOUNTToolStripMenuItem");
             this.rECORDCOUNTToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
+            // 
+            // gROUPROWINDEXToolStripMenuItem
+            // 
+            this.gROUPROWINDEXToolStripMenuItem.Name = "gROUPROWINDEXToolStripMenuItem";
+            resources.ApplyResources(this.gROUPROWINDEXToolStripMenuItem, "gROUPROWINDEXToolStripMenuItem");
+            this.gROUPROWINDEXToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
             // 
             // rNDToolStripMenuItem
             // 
@@ -639,24 +641,6 @@ namespace Epi.Windows.Analysis.Dialogs
             this.tRUNCToolStripMenuItem.Name = "tRUNCToolStripMenuItem";
             resources.ApplyResources(this.tRUNCToolStripMenuItem, "tRUNCToolStripMenuItem");
             this.tRUNCToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
-            // 
-            // gROUPROWINDEXToolStripMenuItem
-            // 
-            this.gROUPROWINDEXToolStripMenuItem.Name = "gROUPROWINDEXToolStripMenuItem";
-            resources.ApplyResources(this.gROUPROWINDEXToolStripMenuItem, "gROUPROWINDEXToolStripMenuItem");
-            this.gROUPROWINDEXToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
-            // 
-            // pFROMZToolStripMenuItem
-            // 
-            this.pFROMZToolStripMenuItem.Name = "pFROMZToolStripMenuItem";
-            resources.ApplyResources(this.pFROMZToolStripMenuItem, "pFROMZToolStripMenuItem");
-            this.pFROMZToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
-            // 
-            // zSCOREToolStripMenuItem
-            // 
-            this.zSCOREToolStripMenuItem.Name = "zSCOREToolStripMenuItem";
-            resources.ApplyResources(this.zSCOREToolStripMenuItem, "zSCOREToolStripMenuItem");
-            this.zSCOREToolStripMenuItem.Click += new System.EventHandler(this.FXClickHandler);
             // 
             // dateFunctionsToolStripMenuItem
             // 
@@ -1158,8 +1142,6 @@ namespace Epi.Windows.Analysis.Dialogs
         private System.Windows.Forms.ToolStripMenuItem onOff01ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sTEPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gROUPROWINDEXToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pFROMZToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem zSCOREToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cURRENTUSERToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lAGVALUEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lINEBREAKToolStripMenuItem;

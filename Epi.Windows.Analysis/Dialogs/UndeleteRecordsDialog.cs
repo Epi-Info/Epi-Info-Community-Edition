@@ -484,14 +484,6 @@ namespace Epi.Windows.Analysis.Dialogs
             mnuNTT.ToolTipText = CommandNames.NUMTOTIME + SharedStrings.CNTXT_FXN_TMPLT_TIMEPARTS;
             mnuNTT.Click += new EventHandler(FXClickHandler);
 
-            ToolStripMenuItem mnuPFROMZ = new ToolStripMenuItem(CommandNames.PFROMZ);
-            mnuPFROMZ.ToolTipText = CommandNames.PFROMZ + SharedStrings.CNTXT_FXN_TMPLT_VARIABLE;
-            mnuPFROMZ.Click += new EventHandler(FXClickHandler);
-
-            ToolStripMenuItem mnuZSCORE = new ToolStripMenuItem(CommandNames.ZSCORE);
-            mnuZSCORE.ToolTipText = CommandNames.ZSCORE + SharedStrings.CNTXT_FXN_TMPLT_ZSCORE;
-            mnuZSCORE.Click += new EventHandler(FXClickHandler);
-
             ToolStripMenuItem mnuRECORDCOUNT = new ToolStripMenuItem(CommandNames.RECORDCOUNT);
             mnuRECORDCOUNT.ToolTipText = CommandNames.RECORDCOUNT;
             mnuRECORDCOUNT.Click += new EventHandler(FXClickHandler);
@@ -726,7 +718,7 @@ namespace Epi.Windows.Analysis.Dialogs
 
             mnuOperators.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuExponent, mnuMOD, mnuGT, mnuGTE, mnuEqual, mnuNE, mnuLT, mnuLTE, mnuLIKE });
             mnuBools.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuAND, mnuOR, mnuXOR, mnuNOT });
-            mnuNums.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuABS, mnuEXP, mnuLN, mnuLOG, mnuNTD, mnuNTT, mnuRECORDCOUNT, mnuRND, mnuROUND, mnuSTEP, mnuSIN, mnuCOS, mnuTAN, mnuTRUNC, mnuPFROMZ, mnuZSCORE });
+            mnuNums.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuABS, mnuEXP, mnuLN, mnuLOG, mnuNTD, mnuNTT, mnuRECORDCOUNT, mnuRND, mnuROUND, mnuSTEP, mnuSIN, mnuCOS, mnuTAN, mnuTRUNC });
             mnuDates.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuYRS, mnuMOS, mnuDYS, mnuYR, mnuMO, mnuDY });
             mnuSys.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuCurrUser, mnuEXISTS, mnuFILEDATE, mnuSYSTEMDATE, mnuSYSTEMTIME });
             mnuTimes.DropDown.Items.AddRange(new ToolStripMenuItem[] { mnuHOURS, mnuMINUTES, mnuSECONDS, mnuHOUR, mnuMINUTE, mnuSECOND });

@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABS
-        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAFsAQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        dQAAAk1TRnQBSQFMAgEBRgEAAUoBAAF0AQABEAEAAQ4BAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwAB/AMAAQEBAAEgBgAB/CEAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/
         FwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf8DAAH/AwAB/wMAAf+XAAH/AQABgAEAAf8BAAGA
         AQAB/wMAGf8DAAH/FwAl/wMAAf+XAAH/AQABgAEAAf8BAAGAAQAB/wMAGf8DAAH/FwAl/wMAAf+LAAH/
@@ -1511,16 +1511,16 @@
     <value>LIKE</value>
   </data>
   <data name="operatorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="operatorsToolStripMenuItem.Text" xml:space="preserve">
     <value>Operators</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="aNDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="aNDToolStripMenuItem.Text" xml:space="preserve">
     <value>AND</value>
@@ -1529,7 +1529,7 @@
     <value>AND</value>
   </data>
   <data name="oRToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="oRToolStripMenuItem.Text" xml:space="preserve">
     <value>OR</value>
@@ -1538,7 +1538,7 @@
     <value>OR</value>
   </data>
   <data name="xORToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="xORToolStripMenuItem.Text" xml:space="preserve">
     <value>XOR (exclusive OR)</value>
@@ -1547,7 +1547,7 @@
     <value>XOR</value>
   </data>
   <data name="nOTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="nOTToolStripMenuItem.Text" xml:space="preserve">
     <value>NOT</value>
@@ -1556,7 +1556,7 @@
     <value>NOT</value>
   </data>
   <data name="booleanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="booleanToolStripMenuItem.Text" xml:space="preserve">
     <value>Boolean Functions</value>
@@ -1623,6 +1623,15 @@
   </data>
   <data name="rECORDCOUNTToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>RECORDCOUNT</value>
+  </data>
+  <data name="gROUPROWINDEXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 22</value>
+  </data>
+  <data name="gROUPROWINDEXToolStripMenuItem.Text" xml:space="preserve">
+    <value>GROUPROWINDEX</value>
+  </data>
+  <data name="gROUPROWINDEXToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>GROUPROWINDEX( &lt;variable&gt; )</value>
   </data>
   <data name="rNDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
@@ -1696,41 +1705,14 @@
   <data name="tRUNCToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>TRUNC( &lt;variable&gt; )</value>
   </data>
-	<data name="gROUPROWINDEXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>182, 22</value>
-	</data>
-	<data name="gROUPROWINDEXToolStripMenuItem.Text" xml:space="preserve">
-    <value>GROUPROWINDEX</value>
-  </data>
-	<data name="gROUPROWINDEXToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>GROUPROWINDEX( &lt;variable&gt; )</value>
-  </data>
-	<data name="pFROMZToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 22</value>
-  </data>
-  <data name="pFROMZToolStripMenuItem.Text" xml:space="preserve">
-    <value>PFROMZ</value>
-  </data>
-  <data name="pFROMZToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>PFROMZ( &lt;variable&gt; )</value>
-  </data>
-  <data name="zSCOREToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 22</value>
-  </data>
-  <data name="zSCOREToolStripMenuItem.Text" xml:space="preserve">
-    <value>ZSCORE</value>
-  </data>
-  <data name="zSCOREToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>ZSCORE( &lt;reference&gt;, &lt;metric&gt;, &lt;measurement&gt;, &lt;co_metric&gt;, &lt;sex&gt; )</value>
-  </data>
   <data name="numericToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="numericToolStripMenuItem.Text" xml:space="preserve">
     <value>Numeric Functions</value>
   </data>
   <data name="yEARSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="yEARSToolStripMenuItem.Text" xml:space="preserve">
     <value>YEARS</value>
@@ -1739,7 +1721,7 @@
     <value>YEARS( &lt;start_date&gt;, &lt;end_date&gt; )</value>
   </data>
   <data name="mONTHSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="mONTHSToolStripMenuItem.Text" xml:space="preserve">
     <value>MONTHS</value>
@@ -1748,7 +1730,7 @@
     <value>MONTHS( &lt;start_date&gt;, &lt;end_date&gt; ) </value>
   </data>
   <data name="dAYSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="dAYSToolStripMenuItem.Text" xml:space="preserve">
     <value>DAYS</value>
@@ -1757,7 +1739,7 @@
     <value>DAYS( &lt;start_date&gt;, &lt;end_date&gt; )</value>
   </data>
   <data name="yEARToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="yEARToolStripMenuItem.Text" xml:space="preserve">
     <value>YEAR</value>
@@ -1766,7 +1748,7 @@
     <value>YEAR( &lt;date_time&gt; )</value>
   </data>
   <data name="mONTHToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="mONTHToolStripMenuItem.Text" xml:space="preserve">
     <value>MONTH</value>
@@ -1775,7 +1757,7 @@
     <value>MONTH( &lt;date_time&gt; )</value>
   </data>
   <data name="dAYToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="dAYToolStripMenuItem.Text" xml:space="preserve">
     <value>DAY</value>
@@ -1784,7 +1766,7 @@
     <value>DAY( &lt;date_time&gt; )</value>
   </data>
   <data name="EPIWEEKToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="EPIWEEKToolStripMenuItem.Text" xml:space="preserve">
     <value>EPIWEEK</value>
@@ -1793,13 +1775,13 @@
     <value>EPIWEEK( &lt;date_time&gt;, &lt;first_day_of_the_week&gt; )</value>
   </data>
   <data name="dateFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="dateFunctionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Date Functions</value>
   </data>
   <data name="cURRENTUSERToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="cURRENTUSERToolStripMenuItem.Text" xml:space="preserve">
     <value>CURRENTUSER</value>
@@ -1808,7 +1790,7 @@
     <value>CURRENTUSER( )</value>
   </data>
   <data name="eNVIRONToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="eNVIRONToolStripMenuItem.Text" xml:space="preserve">
     <value>ENVIRON</value>
@@ -1817,7 +1799,7 @@
     <value>ENVIRON( &lt;name_of_env_variable&gt; )</value>
   </data>
   <data name="eXISTSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="eXISTSToolStripMenuItem.Text" xml:space="preserve">
     <value>EXISTS</value>
@@ -1826,7 +1808,7 @@
     <value>EXISTS( &lt;filename&gt; )</value>
   </data>
   <data name="fILEDATEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="fILEDATEToolStripMenuItem.Text" xml:space="preserve">
     <value>FILEDATE</value>
@@ -1835,7 +1817,7 @@
     <value>FILEDATE( &lt;filename&gt; )</value>
   </data>
   <data name="sYSTEMDATEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="sYSTEMDATEToolStripMenuItem.Text" xml:space="preserve">
     <value>SYSTEMDATE</value>
@@ -1844,7 +1826,7 @@
     <value>SYSTEMDATE</value>
   </data>
   <data name="sYSTEMTIMEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="sYSTEMTIMEToolStripMenuItem.Text" xml:space="preserve">
     <value>SYSTEMTIME</value>
@@ -1853,7 +1835,7 @@
     <value>SYSTEMTIME</value>
   </data>
   <data name="systemFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="systemFunctionsToolStripMenuItem.Text" xml:space="preserve">
     <value>System Functions</value>
@@ -1913,13 +1895,13 @@
     <value>SECOND( &lt;date_time&gt; )</value>
   </data>
   <data name="timeFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="timeFunctionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Time Functions</value>
   </data>
   <data name="fINDTEXTToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="fINDTEXTToolStripMenuItem.Text" xml:space="preserve">
     <value>FINDTEXT</value>
@@ -1928,7 +1910,7 @@
     <value>FINDTEXT( &lt;letters_to_find&gt;, &lt;text_to_search&gt; )</value>
   </data>
   <data name="generalDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="generalDateToolStripMenuItem.Text" xml:space="preserve">
     <value>General Date</value>
@@ -1937,7 +1919,7 @@
     <value>FORMAT( &lt;variable&gt;, "General Date" )</value>
   </data>
   <data name="longDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="longDateToolStripMenuItem.Text" xml:space="preserve">
     <value>Long Date</value>
@@ -1946,7 +1928,7 @@
     <value>FORMAT( &lt;variable&gt;, "Long Date")</value>
   </data>
   <data name="mediumDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="mediumDateToolStripMenuItem.Text" xml:space="preserve">
     <value>Medium Date</value>
@@ -1955,7 +1937,7 @@
     <value>FORMAT( &lt;variable&gt;, "Medium Date" )</value>
   </data>
   <data name="shortDateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="shortDateToolStripMenuItem.Text" xml:space="preserve">
     <value>Short Date</value>
@@ -1964,7 +1946,7 @@
     <value>FORMAT( &lt;variable&gt;, "Short Date" )</value>
   </data>
   <data name="longTimeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="longTimeToolStripMenuItem.Text" xml:space="preserve">
     <value>Long Time</value>
@@ -1973,7 +1955,7 @@
     <value>FORMAT( &lt;variable&gt;, "Long Time" )</value>
   </data>
   <data name="mediumTimeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="mediumTimeToolStripMenuItem.Text" xml:space="preserve">
     <value>Medium Time</value>
@@ -1982,7 +1964,7 @@
     <value>FORMAT( &lt;variable&gt;, "Medium Time" )</value>
   </data>
   <data name="shortTimeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="shortTimeToolStripMenuItem.Text" xml:space="preserve">
     <value>Short Time</value>
@@ -2084,7 +2066,7 @@
     <value>Number Formats</value>
   </data>
   <data name="fORMATToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="fORMATToolStripMenuItem.Text" xml:space="preserve">
     <value>FORMAT</value>
@@ -2092,17 +2074,17 @@
   <data name="fORMATToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>FORMAT( &lt;variable&gt; )</value>
   </data>
-	<data name="lAGVALUEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>182, 22</value>
-	</data>
-	<data name="lAGVALUEToolStripMenuItem.Text" xml:space="preserve">
+  <data name="lAGVALUEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="lAGVALUEToolStripMenuItem.Text" xml:space="preserve">
     <value>LAGVALUE</value>
   </data>
-	<data name="lAGVALUEToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="lAGVALUEToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>LAGVALUE( &lt;variable&gt; )</value>
   </data>
   <data name="lINEBREAKToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="lINEBREAKToolStripMenuItem.Text" xml:space="preserve">
     <value>LINEBREAK</value>
@@ -2111,7 +2093,7 @@
     <value>LINEBREAK( )</value>
   </data>
   <data name="sTRLENToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="sTRLENToolStripMenuItem.Text" xml:space="preserve">
     <value>STRLEN</value>
@@ -2120,7 +2102,7 @@
     <value>STRLEN( &lt;variable&gt; )</value>
   </data>
   <data name="sUBSTRINGToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="sUBSTRINGToolStripMenuItem.Text" xml:space="preserve">
     <value>SUBSTRING</value>
@@ -2129,7 +2111,7 @@
     <value>SUBSTRING( &lt;variable&gt;, {&lt;first&gt;}, {&lt;length&gt;} )</value>
   </data>
   <data name="tXTTODATEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="tXTTODATEToolStripMenuItem.Text" xml:space="preserve">
     <value>TXTTODATE</value>
@@ -2138,7 +2120,7 @@
     <value>TXTTODATE( &lt;variable&gt; )</value>
   </data>
   <data name="tXTTONUMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="tXTTONUMToolStripMenuItem.Text" xml:space="preserve">
     <value>TXTTONUM</value>
@@ -2147,7 +2129,7 @@
     <value>TXTTONUM( &lt;variable&gt; )</value>
   </data>
   <data name="uPPERCASEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 22</value>
+    <value>137, 22</value>
   </data>
   <data name="uPPERCASEToolStripMenuItem.Text" xml:space="preserve">
     <value>UPPERCASE</value>
@@ -2156,13 +2138,13 @@
     <value>UPPERCASE( &lt;variable&gt; )</value>
   </data>
   <data name="textFunctionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="textFunctionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Text Functions</value>
   </data>
   <data name="cmsFunction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 164</value>
+    <value>181, 186</value>
   </data>
   <data name="&gt;&gt;cmsFunction.Name" xml:space="preserve">
     <value>cmsFunction</value>
@@ -2204,7 +2186,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>105</value>
+    <value>25</value>
   </metadata>
   <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
     <value>5, 13</value>
@@ -2365,6 +2347,12 @@
   <data name="&gt;&gt;rECORDCOUNTToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;gROUPROWINDEXToolStripMenuItem.Name" xml:space="preserve">
+    <value>gROUPROWINDEXToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;gROUPROWINDEXToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;rNDToolStripMenuItem.Name" xml:space="preserve">
     <value>rNDToolStripMenuItem</value>
   </data>
@@ -2411,24 +2399,6 @@
     <value>tRUNCToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tRUNCToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-	<data name="&gt;&gt;gROUPROWINDEXToolStripMenuItem.Name" xml:space="preserve">
-    <value>gROUPROWINDEXToolStripMenuItem</value>
-  </data>
-	<data name="&gt;&gt;gROUPROWINDEXToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pFROMZToolStripMenuItem.Name" xml:space="preserve">
-    <value>pFROMZToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;pFROMZToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;zSCOREToolStripMenuItem.Name" xml:space="preserve">
-    <value>zSCOREToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;zSCOREToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dateFunctionsToolStripMenuItem.Name" xml:space="preserve">
@@ -2689,10 +2659,10 @@
   <data name="&gt;&gt;onOff01ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-	<data name="&gt;&gt;lAGVALUEToolStripMenuItem.Name" xml:space="preserve">
+  <data name="&gt;&gt;lAGVALUEToolStripMenuItem.Name" xml:space="preserve">
     <value>lAGVALUEToolStripMenuItem</value>
   </data>
-	<data name="&gt;&gt;lAGVALUEToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;lAGVALUEToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lINEBREAKToolStripMenuItem.Name" xml:space="preserve">
@@ -2735,6 +2705,6 @@
     <value>AssignDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.2.6016.27991, Culture=neutral, PublicKeyToken=null</value>
+    <value>Epi.Windows.Analysis.Dialogs.CommandDesignDialog, Analysis, Version=7.2.9187.18819, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
