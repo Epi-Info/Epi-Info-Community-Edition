@@ -25,6 +25,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         /// <returns>Returns the absolute value of two numbers.</returns>
         public override object Execute()
         {
+            throw new GeneralException("ZSCORE is no longer supported by Epi Info.");
+
             object result = null;
 
             // example: ASSIGN BMIZ = ZSCORE("CDC 2000", "BMI", BMI, Age, Sex)

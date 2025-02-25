@@ -25,6 +25,8 @@ namespace Epi.Core.AnalysisInterpreter.Rules
         /// <returns>Returns the absolute value of two numbers.</returns>
         public override object Execute()
         {
+            throw new GeneralException("PFROMZ is no longer supported by Epi Info.");
+
             double result = 0.0;
             object p1= this.ParameterList[0].Execute();
             if (p1 != null)
