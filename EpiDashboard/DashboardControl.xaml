@@ -334,51 +334,7 @@
                         <Controls:GadgetMenuItem x:Name="mnuBinomial" Header="Binomial (Proportion vs. std.)" GadgetType="EpiDashboard.Gadgets.StatCalc.BinomialGadget" Click="mnuGadgetMenuItem_Click" />
                         <Controls:GadgetMenuItem x:Name="mnuMatchedPairCC" Header="Matched pair case control" GadgetType="EpiDashboard.Gadgets.StatCalc.MatchedPairCaseControlGadget" Click="mnuGadgetMenuItem_Click" />
                     </MenuItem>
-                    <MenuItem x:Name="mnuGrowthCharts">
-                        <MenuItem.Header>
-                            <TextBlock x:Name="tblockAddNutStatChart">Add <Run FontWeight="Bold">NutStat</Run> Growth Chart</TextBlock>
-                        </MenuItem.Header>
-                        <MenuItem x:Name="mnuNutStatCDCRecommended" Header="CDC Recommended Growth References" Visibility="Collapsed">
-                            <MenuItem x:Name="mnuCDCRecommendedBMI" Header="Body mass index (BMI) for age"/>
-                            <MenuItem x:Name="mnuCDCRecommendedHA" Header="Height for age"/>
-                            <MenuItem x:Name="mnuCDCRecommendedHCA" Header="Head circumference for age"/>
-                            <MenuItem x:Name="mnuCDCRecommendedLA" Header="Length for age"/>
-                            <MenuItem x:Name="mnuCDCRecommendedWA" Header="Weight for age"/>
-                            <MenuItem x:Name="mnuCDCRecommendedWH" Header="Weight for height"/>
-                            <MenuItem x:Name="mnuCDCRecommendedWL" Header="Weight for length"/>
-                        </MenuItem>
-                        <MenuItem x:Name="mnuNutStatCDC2000" Header="CDC 2000 Growth Reference">
-                            <MenuItem x:Name="mnuCDC2000BMI" Header="Body mass index (BMI) for age"/>
-                            <MenuItem x:Name="mnuCDC2000HA" Header="Height for age"/>
-                            <MenuItem x:Name="mnuCDC2000HCA" Header="Head circumference for age"/>
-                            <MenuItem x:Name="mnuCDC2000LA" Header="Length for age"/>
-                            <MenuItem x:Name="mnuCDC2000WA" Header="Weight for age"/>
-                            <MenuItem x:Name="mnuCDC2000WH" Header="Weight for height"/>
-                            <MenuItem x:Name="mnuCDC2000WL" Header="Weight for length"/>
-                        </MenuItem>
-                        <MenuItem x:Name="mnuNutStatWHOCGS" Header="WHO Child Growth Standards">
-                            <MenuItem x:Name="mnuWHOCGSBMI" Header="Body mass index (BMI) for age"/>
-                            <MenuItem x:Name="mnuWHOCGSHA" Header="Height for age"/>
-                            <MenuItem x:Name="mnuWHOCGSHCA" Header="Head circumference for age"/>
-                            <MenuItem x:Name="mnuWHOCGSMUACA" Header="Arm circumference for age"/>
-                            <MenuItem x:Name="mnuWHOCGSLA" Header="Length for age"/>
-                            <MenuItem x:Name="mnuWHOCGSWA" Header="Weight for age"/>
-                            <MenuItem x:Name="mnuWHOCGSWH" Header="Weight for height"/>
-                            <MenuItem x:Name="mnuWHOCGSWL" Header="Weight for length"/>
-                        </MenuItem>
-                        <MenuItem x:Name="mnuNutStatWHO2007" Header="WHO Reference 2007">
-                            <MenuItem x:Name="mnuWHO2007BMI" Header="Body mass index (BMI) for age"/>
-                            <MenuItem x:Name="mnuWHO2007HA" Header="Height for age"/>
-                            <MenuItem x:Name="mnuWHO2007WA" Header="Weight for age"/>
-                        </MenuItem>
-                        <MenuItem x:Name="mnuNutStatWHO1978" Header="CDC/WHO 1978">
-                            <MenuItem x:Name="mnuWHO1978HA" Header="Height for age"/>
-                            <MenuItem x:Name="mnuWHO1978LA" Header="Length for age"/>
-                            <MenuItem x:Name="mnuWHO1978WA" Header="Weight for age"/>
-                            <MenuItem x:Name="mnuWHO1978WH" Header="Weight for height"/>
-                            <MenuItem x:Name="mnuWHO1978WL" Header="Weight for length"/>
-                        </MenuItem>
-                    </MenuItem>
+
 
                     <MenuItem>
                         <MenuItem.Header>

@@ -210,33 +210,6 @@ namespace EpiDashboard
 
             #region Growth Chart Add Events
 
-            // CDC 2000 Reference menu options
-            mnuCDC2000BMI.Click += new RoutedEventHandler(mnuCDC2000BMI_Click);
-            mnuCDC2000HA.Click += new RoutedEventHandler(mnuCDC2000HA_Click);
-            mnuCDC2000HCA.Click += new RoutedEventHandler(mnuCDC2000HCA_Click);
-            mnuCDC2000LA.Click += new RoutedEventHandler(mnuCDC2000LA_Click);
-            mnuCDC2000WA.Click += new RoutedEventHandler(mnuCDC2000WA_Click);
-            mnuCDC2000WH.Click += new RoutedEventHandler(mnuCDC2000WH_Click);
-            mnuCDC2000WL.Click += new RoutedEventHandler(mnuCDC2000WL_Click);
-
-            mnuWHO1978HA.Click += new RoutedEventHandler(mnuWHO1978HA_Click);
-            mnuWHO1978LA.Click += new RoutedEventHandler(mnuWHO1978LA_Click);
-            mnuWHO1978WA.Click += new RoutedEventHandler(mnuWHO1978WA_Click);
-            mnuWHO1978WH.Click += new RoutedEventHandler(mnuWHO1978WH_Click);
-            mnuWHO1978WL.Click += new RoutedEventHandler(mnuWHO1978WL_Click);
-
-            mnuWHOCGSBMI.Click += new RoutedEventHandler(mnuWHOCGSBMI_Click);
-            mnuWHOCGSHA.Click += new RoutedEventHandler(mnuWHOCGSHA_Click);
-            mnuWHOCGSHCA.Click += new RoutedEventHandler(mnuWHOCGSHCA_Click);
-            mnuWHOCGSLA.Click += new RoutedEventHandler(mnuWHOCGSLA_Click);
-            mnuWHOCGSWA.Click += new RoutedEventHandler(mnuWHOCGSWA_Click);
-            mnuWHOCGSWH.Click += new RoutedEventHandler(mnuWHOCGSWH_Click);
-            mnuWHOCGSWL.Click += new RoutedEventHandler(mnuWHOCGSWL_Click);
-            mnuWHOCGSMUACA.Click += new RoutedEventHandler(mnuWHOCGSMUACA_Click);
-
-            mnuWHO2007BMI.Click += new RoutedEventHandler(mnuWHO2007BMI_Click);
-            mnuWHO2007HA.Click += new RoutedEventHandler(mnuWHO2007HA_Click);
-            mnuWHO2007WA.Click += new RoutedEventHandler(mnuWHO2007WA_Click);
 
             #endregion // Growth Chart Add Events
 
@@ -339,7 +312,6 @@ namespace EpiDashboard
             mnuExport.Header = DashboardSharedStrings.CMENU_EXPORT_DATA;
             mnuAddGadget.Header = DashboardSharedStrings.CMENU_ADD_ANALYSIS_GADGET;
             tblockAddStatCalcGadget.Text = DashboardSharedStrings.CMENU_ADD_STATCALC;
-            tblockAddNutStatChart.Text = DashboardSharedStrings.CMENU_ADD_NUTSTAT;
             tblockAddReportGadget.Text = DashboardSharedStrings.CMENU_ADD_REPORT_GADGET;
             mnuStandardTextBox.Header = DashboardSharedStrings.CMENU_ADD_SIMPLE_TEXT_GADGET;
             mnuStandardImageBox.Header = DashboardSharedStrings.CMENU_ADD_IMAGE_GADGET;
@@ -389,38 +361,6 @@ namespace EpiDashboard
             mnuPoisson.Header = SharedStrings.DASHBOARD_CONTEXTMENU_POISSON_RAREEVENTS;
             mnuBinomial.Header = SharedStrings.DASHBOARD_CONTEXTMENU_BINOMIAL_PROPORTION;
             mnuMatchedPairCC.Header = SharedStrings.DASHBOARD_MATCHED_PAIR_CASE_CONTROL;
-
-            mnuNutStatCDC2000.Header = DashboardSharedStrings.CMENU_CDC200_GROWTH_REFERENCE;
-            mnuCDC2000BMI.Header = DashboardSharedStrings.CMENU_CDC200_BODY_MASS_INDEX;
-            mnuCDC2000HA.Header = DashboardSharedStrings.CMENU_CDC200_HEIGHTS_FOR_AGE;
-            mnuCDC2000HCA.Header = DashboardSharedStrings.CMENU_CDC200_HEAD_CIRCUMFERENCEFORAGE;
-            mnuCDC2000LA.Header = DashboardSharedStrings.CMENU_CDC200_LENGTH_FOR_AGE;
-            mnuCDC2000WA.Header = DashboardSharedStrings.CMENU_CDC200_WEIGHT_FOR_AGE;
-            mnuCDC2000WH.Header = DashboardSharedStrings.CMENU_CDC200_WEIGHT_FOR_HEIGHT;
-            mnuCDC2000WL.Header = DashboardSharedStrings.CMENU_CDC200_WEIGHT_FOR_LENGTH;
-
-            mnuNutStatWHOCGS.Header = DashboardSharedStrings.CMENU_WHO_CHILD_GROWTH;
-            mnuWHOCGSBMI.Header = DashboardSharedStrings.CMENU_WHOCHILD_BODY_MASS_INDEX;
-            mnuWHOCGSHA.Header = DashboardSharedStrings.CMENU_WHOCHILD_HEIGHT_FOR_AGE;
-            mnuWHOCGSHCA.Header = DashboardSharedStrings.CMENU_WHOCHILD_HEAD_CIRCUMFERENCEFORAGE;
-            mnuWHOCGSMUACA.Header = DashboardSharedStrings.CMENU_WHOCHILD_ARM_CIRCUMFERENCEFORAGE;
-            mnuWHOCGSLA.Header = DashboardSharedStrings.CMENU_WHOCHILD_LENGTH_FORAGE;
-            mnuWHOCGSWA.Header = DashboardSharedStrings.CMENU_WHOCHILD_WEIGHT_FORAGE;
-            mnuWHOCGSWH.Header = DashboardSharedStrings.CMENU_WHOCHILD_WEIGHT_FOR_HEIGHT;
-            mnuWHOCGSWL.Header = DashboardSharedStrings.CMENU_WHOCHILD_WEIGHT_FOR_LENGTH;
-
-            mnuNutStatWHO2007.Header = DashboardSharedStrings.CMENU_WHO_REFERENCE_2007;
-            mnuWHO2007BMI.Header = DashboardSharedStrings.CMENU_WHOREF_BODY_MASS_INDEX;
-            mnuWHO2007HA.Header = DashboardSharedStrings.CMENU_WHOREF_HEIGHT_OFAGE;
-            mnuWHO2007WA.Header = DashboardSharedStrings.CMENU_WHOREF_WEIGHT_FORAGE;
-
-            mnuNutStatWHO1978.Header = DashboardSharedStrings.CMENU_CDCWHO_1978;
-            mnuWHO1978HA.Header = DashboardSharedStrings.CMENU_CDCWHO_HEIGHT_FORAGE;
-            mnuWHO1978LA.Header = DashboardSharedStrings.CMENU_CDCWHO_LENGTH_FORAGE;
-            mnuWHO1978WA.Header = DashboardSharedStrings.CMENU_CDCWHO_WEIGHT_FORAGE;
-            mnuWHO1978WH.Header = DashboardSharedStrings.CMENU_CDCWHO_WEIGHT_FORHEIGHT;
-            mnuWHO1978WL.Header = DashboardSharedStrings.CMENU_CDCWHO_WEIGHT_FORLENGTH;
-
 
             #endregion // Translation
         }
@@ -1965,7 +1905,6 @@ namespace EpiDashboard
         {
             mnuDataSource.IsEnabled = enabled;
             mnuAddGadget.IsEnabled = enabled;
-            mnuGrowthCharts.IsEnabled = enabled;
             mnuAddRelatedData.IsEnabled = enabled;
             mnuSave.IsEnabled = enabled;
             mnuSaveAs.IsEnabled = enabled;
