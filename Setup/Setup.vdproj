@@ -2314,13 +2314,13 @@
         "Entry"
         {
         "MsmKey" = "8:_C32E3A8655935BD1B3F5CB3B53490301"
-        "OwnerKey" = "8:_84ACA80BB4EB2EBAB338B157EA5D5699"
+        "OwnerKey" = "8:_F7B423D9154194753FA3011C25488FAD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_C32E3A8655935BD1B3F5CB3B53490301"
-        "OwnerKey" = "8:_F7B423D9154194753FA3011C25488FAD"
+        "OwnerKey" = "8:_84ACA80BB4EB2EBAB338B157EA5D5699"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2362,6 +2362,12 @@
         "Entry"
         {
         "MsmKey" = "8:_C89555E2868856DA2D6FEFE8610487E3"
+        "OwnerKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C89555E2868856DA2D6FEFE8610487E3"
         "OwnerKey" = "8:_F86BD3A9646872AB6C1015300D94217A"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2369,12 +2375,6 @@
         {
         "MsmKey" = "8:_C89555E2868856DA2D6FEFE8610487E3"
         "OwnerKey" = "8:_C16EE1EE3F654FD8A60982B2F862304D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C89555E2868856DA2D6FEFE8610487E3"
-        "OwnerKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3226,6 +3226,144 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_93BE30CFD2A0553B60A6CD7F4B48F893"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C16EE1EE3F654FD8A60982B2F862304D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C16EE1EE3F654FD8A60982B2F862304D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_93BE30CFD2A0553B60A6CD7F4B48F893"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_93BE30CFD2A0553B60A6CD7F4B48F893"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0173AD7DDB8E980C885D121EBEB9A33E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9597069562EE5476DE9EB52F249CCFD1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_057BFB864CDF3B51BF531D4AA4E539B6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EC3825BD1CF95EE490AD461896E7FC16"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A7DAB185EA711C9CD405E589D21112B9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_46D11BF3B8CF04EEFC70B9AC249EAA57"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_158CF77737F6EC4E841B025C15D2DABA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0549D8FEF3A4549429C804A64C6E7FCA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_07C8E8370F070F7703173FEEA7400EFC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5015417A38BCCDC0400D15CBB2681BFB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D13512BCCE9755381E5A46C876244678"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A5C14576AEAF004B0BFBCB4F59E1D2DB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0AC0F63A7D21FC7F679E7F9033F9CCA6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_38B885E1D8FE783B2E95E31BEA481E2B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_34EFECEDE9E1C109E291636446CCE330"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A4943AC0CF538D6580720ADED505AB1A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_84ACA80BB4EB2EBAB338B157EA5D5699"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FE346B20E1D047FCBA90301F449AE8D7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3251,6 +3389,24 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F9D6E2DE1C8C48DDBD329EB6BB010642"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F7B423D9154194753FA3011C25488FAD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C32E3A8655935BD1B3F5CB3B53490301"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F7227A334867D2073DE9ED1879CFDEAF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3383,18 +3539,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C300C467555F4177B1D7705712FF2987"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C16EE1EE3F654FD8A60982B2F862304D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C16EE1EE3F654FD8A60982B2F862304D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3575,6 +3719,18 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7A0260B7CE044338AFF5D570F0018E72"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_77BBC864AE53089FB0B7661509C7954D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2EA0AA856E0DE28A4CE5DC544CB4EC66"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3815,162 +3971,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1F287E63154CB0670F7710E5E84F7A50"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3811B4FD6C924B1BB4F4280000598EB0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_93BE30CFD2A0553B60A6CD7F4B48F893"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F7B423D9154194753FA3011C25488FAD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_93BE30CFD2A0553B60A6CD7F4B48F893"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_93BE30CFD2A0553B60A6CD7F4B48F893"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0173AD7DDB8E980C885D121EBEB9A33E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9597069562EE5476DE9EB52F249CCFD1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_057BFB864CDF3B51BF531D4AA4E539B6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EC3825BD1CF95EE490AD461896E7FC16"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A7DAB185EA711C9CD405E589D21112B9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_46D11BF3B8CF04EEFC70B9AC249EAA57"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_158CF77737F6EC4E841B025C15D2DABA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0549D8FEF3A4549429C804A64C6E7FCA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_07C8E8370F070F7703173FEEA7400EFC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5015417A38BCCDC0400D15CBB2681BFB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D13512BCCE9755381E5A46C876244678"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A5C14576AEAF004B0BFBCB4F59E1D2DB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0AC0F63A7D21FC7F679E7F9033F9CCA6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_38B885E1D8FE783B2E95E31BEA481E2B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_34EFECEDE9E1C109E291636446CCE330"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A4943AC0CF538D6580720ADED505AB1A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C32E3A8655935BD1B3F5CB3B53490301"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_77BBC864AE53089FB0B7661509C7954D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2EA0AA856E0DE28A4CE5DC544CB4EC66"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_84ACA80BB4EB2EBAB338B157EA5D5699"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F7227A334867D2073DE9ED1879CFDEAF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -4434,7 +4434,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows.ImportExport, Version=7.2.9203.30022, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows.ImportExport, Version=7.2.9204.20182, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_00995ADD69502E7F2EA3BFB85AAD332C"
@@ -4660,7 +4660,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Analysis.Statistics, Version=7.2.9203.30019, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Analysis.Statistics, Version=7.2.9204.20180, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_0612985128E99EC84BB0000CCAA70FF3"
@@ -5019,7 +5019,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnthStat, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnthStat, Version=7.2.9204.20178, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_0FF3EEE6B47A0095C5580F27D3B2AF5E"
@@ -5132,7 +5132,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows, Version=7.2.9203.30020, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows, Version=7.2.9204.20181, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_129D0CC087E7430E906481AED3235FD1"
@@ -5163,7 +5163,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows.ImportExport, Version=7.2.9203.30022, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows.ImportExport, Version=7.2.9204.20182, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_13C84E9B2AF345FAB2A875E7DC55949E"
@@ -5757,7 +5757,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DataUnpackager, Version=7.2.9203.30030, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:DataUnpackager, Version=7.2.9204.20184, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_29A2C0CDD3F44A05A89D718A02171092"
@@ -5788,7 +5788,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EpiDashboard, Version=7.2.9203.30028, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EpiDashboard, Version=7.2.9204.20190, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_2B3B6E4040774E6DA4E0B1AE3A8D8234"
@@ -6003,7 +6003,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Enter, Version=7.2.9203.30032, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Enter, Version=7.2.9204.20192, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_2EC5274174EE6B3FE143A996761EE981"
@@ -6289,7 +6289,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows, Version=7.2.9203.30020, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows, Version=7.2.9204.20181, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_3785EB27187C6926E3E6F17A6F9C8219"
@@ -6413,7 +6413,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MakeView, Version=7.2.9203.30028, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:MakeView, Version=7.2.9204.20187, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_3907D10E74BE4919A84DF0B7F8658CC7"
@@ -6444,7 +6444,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EpiDashboard, Version=7.2.9203.30028, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EpiDashboard, Version=7.2.9204.20190, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_3A7A41C67020A4E58BA89E758FB094F5"
@@ -6650,7 +6650,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.Office, Version=7.2.9203.30022, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.Office, Version=7.2.9204.20182, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_4135F7AC2AFA43138B345D6A60E9F1AB"
@@ -7191,7 +7191,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Enter, Version=7.2.9203.30032, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Enter, Version=7.2.9204.20192, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_50A4B87506994F9E9726D6E4F565D1B3"
@@ -7222,7 +7222,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core.EnterInterpreter, Version=7.2.9203.30018, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core.EnterInterpreter, Version=7.2.9204.20179, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5217FFCE019C4B24950989944C9F6ED9"
@@ -7517,7 +7517,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.Office, Version=7.2.9203.30022, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.Office, Version=7.2.9204.20182, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5BB1B47C4B32D378FAE8BB7F3440EB5B"
@@ -7568,7 +7568,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Menu, Version=7.2.9203.30034, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Menu, Version=7.2.9204.20193, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5D35726C17474758B15657FBA421C474"
@@ -7630,7 +7630,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EpiMenu.CommandPlugin, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EpiMenu.CommandPlugin, Version=7.2.9204.20177, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_5E9803585D124F989393001E76E1D04D"
@@ -7976,7 +7976,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Updater, Version=7.2.9203.30017, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Updater, Version=7.2.9204.20178, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_6C20F7312A94449BAE7548DBB9C96F1A"
@@ -8038,7 +8038,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DataPackager, Version=7.2.9203.30029, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:DataPackager, Version=7.2.9204.20184, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_6CCE1FDFC8554B4181CA50643280B26B"
@@ -8069,7 +8069,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.MySQL, Version=7.2.9203.30021, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.MySQL, Version=7.2.9204.20182, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_6D97434547D441F19D7BF3804112D9C4"
@@ -8233,7 +8233,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.SqlServer, Version=7.2.9203.30022, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.SqlServer, Version=7.2.9204.20182, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_751D185CD428438E8EB5648561F31D56"
@@ -8468,7 +8468,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Menu, Version=7.2.9203.30034, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Menu, Version=7.2.9204.20194, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_7BD9B957350C4E35AED14AB600DC6B63"
@@ -8865,7 +8865,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core, Version=7.2.9203.30015, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core, Version=7.2.9204.20176, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_868646E86BC848DB971E8030FA393F8E"
@@ -8927,7 +8927,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows.Globalization, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows.Globalization, Version=7.2.9204.20177, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_88475371CE134C019D6C99697D04AA65"
@@ -8978,7 +8978,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.ImportExport, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.ImportExport, Version=7.2.9204.20177, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_8C27A936015F6027A000EFA2F3D3B1C8"
@@ -9109,7 +9109,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EpiInfo, Version=7.2.9203.30017, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:EpiInfo, Version=7.2.9204.20177, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_915ABD8102174FCF9F2B1E3261E8499B"
@@ -9335,7 +9335,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core, Version=7.2.9203.30015, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core, Version=7.2.9204.20176, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_97360F0B17CC8647E7EE9533468A817A"
@@ -9539,7 +9539,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Config, Version=7.2.9203.30022, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Config, Version=7.2.9204.20183, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_9CC66FDE70104FAB874B556347EA4E58"
@@ -9803,7 +9803,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core.AnalysisInterpreter, Version=7.2.9203.30019, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core.AnalysisInterpreter, Version=7.2.9204.20180, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_AC3949912DB1499E92FFCCB5A400455C"
@@ -10029,7 +10029,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Core.AnalysisInterpreter, Version=7.2.9203.30019, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Core.AnalysisInterpreter, Version=7.2.9204.20180, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_B7BEACC06F7651FAA730B2D03BED1E79"
@@ -10060,7 +10060,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Analysis, Version=7.2.9203.30031, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Analysis, Version=7.2.9204.20187, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_B90F211487EC43F2B23EA1A3215933BC"
@@ -10333,7 +10333,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.ImportExport, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.ImportExport, Version=7.2.9204.20177, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_BECAE620BE8D4921A7858CD6AB8640D9"
@@ -10741,7 +10741,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Windows.Globalization, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Windows.Globalization, Version=7.2.9204.20177, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_C9141979916CCE7F04AD001823E0C91A"
@@ -10792,7 +10792,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Analysis.Statistics, Version=7.2.9203.30019, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Analysis.Statistics, Version=7.2.9204.20180, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_CA9FF27680BC469EAE3ACD87DDD9BEDA"
@@ -11313,7 +11313,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WebSurveyExporter, Version=7.2.9203.30026, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:WebSurveyExporter, Version=7.2.9204.20185, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_DA1A2CE8EFCC45548395F55F9D62EE8E"
@@ -11344,7 +11344,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Statistics, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Statistics, Version=7.2.9204.20177, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_DA1A89A4E283483E923413E52A5A5706"
@@ -11486,7 +11486,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Enter.CheckCodeEngine, Version=7.2.9203.30017, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Enter.CheckCodeEngine, Version=7.2.9204.20178, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_DF0E5E30C74F4165B553601CDFB4BCF0"
@@ -11701,7 +11701,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnthStat, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnthStat, Version=7.2.9204.20178, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_E5F1B08117B4461C9331114325F0320E"
@@ -11803,7 +11803,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnalysisDashboard, Version=7.2.9203.30032, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnalysisDashboard, Version=7.2.9204.20192, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_E8C5F87F6FF0418692FCEECA835F9403"
@@ -12078,7 +12078,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Data.MongoDB, Version=7.2.9203.30022, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Data.MongoDB, Version=7.2.9204.20182, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_F0C48A96B3424F95931FF3B776ADCFC0"
@@ -12129,7 +12129,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Statistics, Version=7.2.9203.30016, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Statistics, Version=7.2.9204.20177, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_F0FC635CF7ED5247AAC51239B97D7EE9"
@@ -12570,7 +12570,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Mapping, Version=7.2.9203.30032, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Mapping, Version=7.2.9204.20191, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_FD23A1D803C446728E8EEE4E3A1B5375"
@@ -12703,7 +12703,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Epi.Enter.CheckCodeEngine, Version=7.2.9203.30017, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Epi.Enter.CheckCodeEngine, Version=7.2.9204.20178, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_FFCD031834F22B654960CCEFEEB64A75"
@@ -13082,16 +13082,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Epi Info 7.2.6.0"
-        "ProductCode" = "8:{9084FA45-04FF-4456-B957-79A39A512F40}"
-        "PackageCode" = "8:{B78C2BF6-7478-4125-A7CF-E550A24EEF1F}"
+        "ProductName" = "8:Epi Info 7.2.7.0"
+        "ProductCode" = "8:{2ADD2BC9-A8FD-472F-BD44-65BFD5BDE1C7}"
+        "PackageCode" = "8:{303BA9A7-359B-4F14-B192-11374169EBF7}"
         "UpgradeCode" = "8:{749A989B-67BC-4041-A632-85D0ABC9FB54}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:7.2.6"
+        "ProductVersion" = "8:7.2.7"
         "Manufacturer" = "8:CDC"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
